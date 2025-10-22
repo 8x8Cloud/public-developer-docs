@@ -1,0 +1,57 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy_master:
+    runs-on: build8-linux-x64
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.17.0
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install packages
+        run: yarn
+
+      - name: Update reference pages
+        run: yarn reference
+
+      - name: Build Docusaurus
+        run: yarn build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Set Job Summary for deployment
+        if: always()
+        run: |
+          echo "### 🚀 Site Deployed: ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
