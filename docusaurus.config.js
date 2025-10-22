@@ -155,7 +155,8 @@ const config = {
       title: '8x8 Developer Portal',
       logo: {
         alt: '8x8',
-        src: 'img/8x8-logo.svg',
+        src: 'img/Logo8x8Light.svg',
+        srcDark: 'img/Logo8x8Dark.svg',
       },
       items: [
         {
