@@ -1,0 +1,71 @@
+---
+id: delete-a-specific-type-of-webhook-1
+title: "Delete a specific type of webhook"
+description: "Delete a specific type of webhook"
+sidebar_label: "Delete a specific type of webhook"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVm1v2zYQ/iuHw7C1hmw5awtk/jDMfQEWrF2LpO2wxd5KU2eLjUQq5MmJa+i/D0fJrh077dBP+5LI5N3xubfnbo2sFgFHl/gHzXLnrgKM35zhNEFXkVdsnD3LcITPqSAmUBAq0mZuNPCqInBzuGn14AQTrJRXJTF5sbhGq0rCEYZ6Ntba1ZbPMkzQWBxhpTjHBDMK2ptKnsER/ulqKOvA4KkqlCZY76o2cGM4B84JQj1T7bHJgHPFsHI13CjLwA7qQAN4uoKM5qouGDg3AUyABVlxiTJwVlNUydWSQLuyEu+yaHvpjCZwduaUz4xdDDBBT9e18ZThiH1NCQadU6lwtMZS3b4ku+AcR0+GCZbGbn4+knAwkxfP/r4c9/9S/U/D/k+TSX/wz/fT9aPkybD5DhOUQEqU2Bu7wKZJtoHrQtuPEl8K3CYHMSfsIIvZ+iLw/VcTJFuXUgbvn11ggu+fjeXvRfw+f4fTppmKtVA5GyiIgR+HQ/m3D+ScrmsKDKHWmigjybd2lsmyCKuqKoyOVZV+DKKxPoTkZh9Js1STlxpk076niuL1/Oti7e1d/5oEa18cPSerZoVEaHs3c64gZeUyZ67GNee/ksrIj5fKFCJ9TLhpEgysuA7PXLYrYSzTgjxu719RCGpxDKXAuVVSjTEyu31z0Eadapuj6FxEG0ZpGqKJgXZlyhQYd5ycqyLQF/zqymTHj+EBbGzLKxOfBfLj4clhJYzfnMEVrcA6hrmrbQbOg7FLVZgMo9KjY+UTXO01RS2lNYVgBFaUf/wV+fiKiD45VpkX5Jfkgbx3PgY6kK694VVkKlWZ30g+p1Ln+5pfpT5MsCTOXbYNTaRCIQFMVWXS5Un6mbFCus9qaWclpOvdfm9QIArmlkv3MxxJanCjlqSpKCTTKMA3Pl1IT3Vt03m2rTUxgR0TxAIm5ckfUEoPTm9P4eLVhcyDmIuKAygLvd44moSnURHeuiuyvR6omnOy3LU3tBEZTOzE9kCIXSu7ZWAAFq0Ac+9KIWIPug7sSvJQOc+qALjc+KqdtaR5cHp7Gkt6+uC+m4efX7MkdO7AWF3UGUVmn7uicDfGLiCPZQ/Gtm/7lrXCCD5IUzhvPkUnRhsf120Umw/ywM/Q6/3umHq9EZx3g0rMf9hKQTzMXSGPbIeWdMPnERQ9l+M7jg8mtt/vT+zZfDug7A8M2lNUi3i7SoIVcQJVQSoQLJy4Kzm7oVkwTPcG8N74PRQLwSws1NVgYmOXGDt3sXgMF5Fu4nR8fxK3hASlPNt6ORkMD2qoFZb6yZyuS7Icw9rNBKXjTOhmnSA/s/qAy3SlVNggFCYrlZH7eN4PdSVh+2Vz3yTI5Mvwei79bjTdZykNizRK9pXN+trZzAi0kIqJygUuld1B9184YM/3bbsx3XJaFcrYnSHUksOlNKcEUVanHYLABEd3yH7DEXK1txVME8xdYDG2Xs9UoHe+aBo5vq7JR0ZLcKm8aen9co2ZCfuz4A7u7bjGB+fd9vAQ/reb2dEod4fKriS6qqjlFyZ4JUS4P0dl2/qmiNy7cn0Dor2MNlPZOyJBxXy1IuNIwDvKB6uU8P92DD1/8fLF2xeYoLDy7rayIfvuQx44im29biUiuzfNFmrkbcHYNP8CsNg5Hg==
+sidebar_class_name: "delete api-method"
+info_path: connect/reference/voice-v-1-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete a specific type of webhook"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/subaccounts/{subAccountId}/webhooks/{webhook-type}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete a specific type of webhook
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"subAccountId","in":"path","description":"You must replace {subAccountId} with the subaccountid that you want to use. By default this is generated once you have completed the voice onboarding.","required":true,"schema":{"maxLength":50,"minLength":3,"pattern":"^[A-Za-z0-9\\-._&]{3,50}$","type":"string"}},{"name":"webhook-type","in":"path","description":"webhook type to delete","required":true,"schema":{"type":"string","enum":["VCS","VCA","VSS","VRU"]}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Request succeeded","content":{"application/json":{"schema":{"type":"object","properties":{"allOf":{"type":"object","properties":{"type":{"type":"string"},"url":{"type":"string"},"enabled":{"type":"boolean"},"httpAuthHeaderAvailable":{"type":"boolean"}}},"statusCode":{"type":"integer"},"statusMessage":{"type":"string"}},"example":{"subAccountId":"subAccountId","type":"VSS","url":"https://sample.com/test","enabled":false,"httpAuthHeaderAvailable":true,"statusCode":0,"statusMessage":"deleted"}}}}},"401":{"description":"API key not found or invalid"},"403":{"description":"Resource not accessible"},"404":{"description":"Resource not found"},"500":{"description":"Server error"}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,0 +1,2831 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Contact Center Chat Gateway",
+    "version": "1.0.0",
+    "contact": {
+      "email": "cc-cluj-carbon@8x8.com"
+    },
+    "description": "Integration with the 8x8 Contact Center (CC) Chat API"
+  },
+  "servers": [
+    {
+      "url": "https://api.8x8.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Info",
+      "description": "General information about the API."
+    },
+    {
+      "name": "WebHooks",
+      "description": "Enables webhook definitions that can be associated to channels."
+    },
+    {
+      "name": "JwkKeys",
+      "description": "An API that offers JWK public key access to customers."
+    },
+    {
+      "name": "Channels",
+      "description": "Enables ChatAPI channel registration and association with a webhook containing channel."
+    },
+    {
+      "name": "Conversations",
+      "description": "Provides Contact Center interaction capabilities."
+    },
+    {
+      "name": "Participants",
+      "description": "Enables participants access control."
+    },
+    {
+      "name": "Messages",
+      "description": "Allows adding and retrieving messages of a conversation."
+    },
+    {
+      "name": "Attachments",
+      "description": "Allows adding and retrieving attachments of a conversation."
+    }
+  ],
+  "paths": {
+    "/chat-gateway/v1/webhooks": {
+      "get": {
+        "tags": ["WebHooks"],
+        "summary": "Retrieves all customer webhooks based on the associated token information.",
+        "description": "Retrieves all customer webhooks based on the associated token information.",
+        "operationId": "getwebhooks-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageSizeFilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/PageIndexFilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/SortByOptional"
+          },
+          {
+            "$ref": "#/components/parameters/FilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebHooksV2ListResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "tags": ["WebHooks"],
+        "summary": "Creates a new customer webhook.",
+        "description": "Creates a new customer webhook.",
+        "operationId": "createwebhook-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebHookV2CreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "WebHook created successfully.",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebHookV2Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/webhooks/{webhookId}": {
+      "get": {
+        "tags": ["WebHooks"],
+        "summary": "Get webhook by Id.",
+        "description": "Retrieves the webhook by the provided Id.",
+        "operationId": "getwebhookbyid-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/WebHookUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebHookV2Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "put": {
+        "tags": ["WebHooks"],
+        "summary": "Updates the full webhook resource by Id.",
+        "description": "Updates the full webhook resource by Id.",
+        "operationId": "updatewebhook-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/WebHookUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebHookV2PutRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook successfully updated.",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebHookV2Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["WebHooks"],
+        "summary": "Deletes the webhook by Id.",
+        "description": "Deletes the webhook by Id.",
+        "operationId": "deletewebhookbyid-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/WebHookUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "A deleted resource."
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/webhooks/verify": {
+      "post": {
+        "tags": ["WebHooks"],
+        "summary": "The endpoint used to validate that the webhook is working and reachable.",
+        "description": "Validates the webhook URL endpoint from the connectivity point-of-view by sending a hello message and a 2xx success status code.",
+        "operationId": "verifywebhook-1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebHookV2VerifyRequest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Webhook validated successfully."
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/jwk/{jwkId}/public": {
+      "get": {
+        "tags": ["JwkKeys"],
+        "summary": "Returns the public JWK.",
+        "description": "Returns the public JWK that can be used to validate the message signature.",
+        "operationId": "getjwkpublickey-1",
+        "parameters": [
+          {
+            "name": "jwkId",
+            "in": "path",
+            "description": "JWK UUID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            },
+            "example": "EXaiWfZe20eSjklZ70074w"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": {
+                    "kty": "RSA",
+                    "e": "AQAB",
+                    "kid": "EXaiWfZe20eSjklZ70074w",
+                    "n": "obq8u-Yq9VgIqsfOFftSr-TINYrL8xNWhYhJjYtPp5DTQK3g1_ylCl6HMmRnEgb9wlkNfk9iazvkOU_XvyZSdfHNm173FlX3YgAPj_snUnCDO1Y0b0M4trK-iGUJP4A_tT4XauI1YJ96rEQAHzfOvsnnniFVqlK5pAMKWnVD4LhRbaEFLOnvMuNCiB13CPF7ZY4j7Aahf8KKdSiBJDw9um1lw5gfKe2j2DN7UOPm5Msz_is-C343xVaJ81d8W9ihDCX9JgaZEYciol-224n6F_gmUMWIfTTCRK3GC2_fnEXXWQbQvACA28Zf40h9iXiWiVdIXFGQgz2lQ7dg4ksUvw"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/channels": {
+      "get": {
+        "tags": ["Channels"],
+        "summary": "Retrieves all customer Chat API channels.",
+        "description": "Retrieves all customer Chat API channels based on the provided access token information.",
+        "operationId": "getchatapichannels-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageSizeFilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/PageIndexFilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/SortByOptional"
+          },
+          {
+            "$ref": "#/components/parameters/FilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelsV2ListResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Channels"],
+        "summary": "Creates a channel.",
+        "description": "Create a new channel for a customer.",
+        "operationId": "createchatapichannel-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelV2CreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Channel created successfully.",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelV2Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/channels/{channelId}": {
+      "get": {
+        "tags": ["Channels"],
+        "summary": "Get ChatAPI channel by Id.",
+        "description": "Retrieves ChatAPI channel by Id.",
+        "operationId": "getchatapichannel-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIChannelUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelV2Result"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Channels"],
+        "summary": "Update ChatAPI channel by Id.",
+        "description": "Update ChatAPI channel by Id.",
+        "operationId": "updatechatapichannel-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIChannelUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelV2PutRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Channel updated successfully.",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelV2Result"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Channels"],
+        "summary": "Delete ChatAPI channel by Id.",
+        "description": "Deletes ChatAPI channel by the provided Id.",
+        "operationId": "deletechatapichannelbyid-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIChannelUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted resource."
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/conversations": {
+      "get": {
+        "tags": ["Conversations"],
+        "summary": "Returns all conversations belonging to the customer.",
+        "description": "Returns a list of all conversations belonging to the customer that comply with the provided filters.",
+        "operationId": "getcctransactions-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageSizeFilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/PageIndexFilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/SortByOptional"
+          },
+          {
+            "$ref": "#/components/parameters/FilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationListResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Conversations"],
+        "summary": "Creates a new conversation.",
+        "description": "Creates a new transaction in the Contact Center and returns a conversation Id as an identifier that can be used later on to send messages to agent and also close the ongoing transaction.",
+        "operationId": "createcctransaction-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateTransactionRequestBody"
+        },
+        "responses": {
+          "202": {
+            "description": "Transaction accepted.",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ConversationIdentifierField"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/conversations/{conversationId}": {
+      "put": {
+        "tags": ["Conversations"],
+        "summary": "Update a conversation details.",
+        "description": "Update a conversation details.",
+        "operationId": "putcctransaction",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateTransactionRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the conversation details.",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Conversations"],
+        "summary": "Patch a conversation details.",
+        "description": "Patch a conversation details.",
+        "operationId": "patchcctransaction",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/PatchTransactionRequestBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the conversation details.",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Conversations"],
+        "summary": "Retrieves conversation details.",
+        "description": "Retrieves conversation details.",
+        "operationId": "getcctransaction-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the conversation details.",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/conversations/{conversationId}/interactions": {
+      "get": {
+        "tags": ["Conversations"],
+        "summary": "Returns all conversations belonging to the customer.",
+        "description": "Returns a list of all conversations belonging to the customer that comply with the provided filters.",
+        "operationId": "getccinteractions",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InteractionsListResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/conversations/{conversationId}/participants": {
+      "get": {
+        "tags": ["Participants"],
+        "summary": "Retrieve the conversation participants.",
+        "description": "Retrieves all the participants that joined during the lifespan of the conversation.",
+        "operationId": "getparticipantsforcctransaction-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Participants list",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationParticipants"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/conversations/{conversationId}/participants/user": {
+      "patch": {
+        "tags": ["Participants"],
+        "summary": "User leaves conversation.",
+        "description": "When user leave a conversation. It translates to a current interaction that is being terminated by the user.",
+        "operationId": "userparticipantleavecctransaction",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/PatchUserParticipantRequestBody"
+        },
+        "responses": {
+          "204": {
+            "description": "Confirms that the user left the interaction."
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "description": "Confirms that the user left the interaction."
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/conversations/{conversationId}/messages": {
+      "get": {
+        "tags": ["Messages"],
+        "summary": "Retrieves the conversation messages.",
+        "description": "Retrieves the conversation messages that took place during the lifespan of the conversation.",
+        "operationId": "getmessagesforcctransaction-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/PageSizeFilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/PageIndexFilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/SortByDateOptional"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Message list",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageListResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Messages"],
+        "summary": "Send a message.",
+        "description": "Send a message to a conversation represented by the provided ID.",
+        "operationId": "sendmessagetocctransaction-1",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/SendMessageToConversationRequest"
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted message."
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/conversations/{conversationId}/messages/{messageId}": {
+      "get": {
+        "tags": ["Messages"],
+        "summary": "Retrieves the conversation messages.",
+        "description": "Retrieves the conversation messages that took place during the lifespan of the conversation.",
+        "operationId": "getmessagebyidforcctransaction",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/MessageID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Message list",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/conversations/{conversationId}/attachments": {
+      "get": {
+        "tags": ["Attachments"],
+        "summary": "Get attachments in Conversation.",
+        "description": "Get all attachments added to the conversation along with their details.",
+        "operationId": "getconversationattachments",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/PageSizeFilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/PageIndexFilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/SortByOptional"
+          },
+          {
+            "$ref": "#/components/parameters/FilterOptional"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Attachments list",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentsResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Attachments"],
+        "summary": "Add an attachment.",
+        "description": "Add an attachment that you can later use as a reference when adding a message to the conversation.",
+        "operationId": "addconversationattachments",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/AttachmentUpload"
+        },
+        "responses": {
+          "200": {
+            "description": "Created attachment",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/conversations/{conversationId}/attachments/{attachmentId}": {
+      "get": {
+        "tags": ["Attachments"],
+        "summary": "Get an attachment from Conversation.",
+        "description": "Get an attachment from conversation along with their details.",
+        "operationId": "getconversationattachment",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/AttachmentID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Attachments list",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    },
+    "/chat-gateway/v1/conversations/{conversationId}/attachments/{attachmentId}/content": {
+      "get": {
+        "tags": ["Attachments"],
+        "summary": "Download attachment.",
+        "description": "Download attachment contents.",
+        "operationId": "downloadattachmentforchatapiconversation",
+        "security": [
+          {
+            "8x8ApiKey": ["Contact Center Chat Gateway"]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ChatAPIConversationUrlID"
+          },
+          {
+            "$ref": "#/components/parameters/AttachmentID"
+          },
+          {
+            "$ref": "#/components/parameters/TenantIdFilterOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Attachments content",
+            "headers": {
+              "Content-Disposition": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Content-Disposition response header is a header indicating if the content is expected to be displayed inline in the browser, that is, as a Web page or as part of a Web page, or as an attachment, that is downloaded and saved locally."
+              }
+            },
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "description": "Success",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenRequestResponse"
+          },
+          "404": {
+            "$ref": "#/components/responses/ResourceNotFoundResponse"
+          },
+          "500": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          },
+          "default": {
+            "$ref": "#/components/responses/GeneralErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "8x8ApiKey": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    },
+    "requestBodies": {
+      "AttachmentUpload": {
+        "description": "Defines the file upload request payload.",
+        "required": true,
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "attachment": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "CreateTransactionRequestBody": {
+        "description": "Defines the create transaction request payload.",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CreateTransactionRequest"
+            }
+          }
+        }
+      },
+      "UpdateTransactionRequestBody": {
+        "description": "Defines the update transaction request payload.",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateTransactionRequest"
+            }
+          }
+        }
+      },
+      "PatchTransactionRequestBody": {
+        "description": "Defines the update transaction request payload.",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/PatchTransactionRequest"
+            }
+          }
+        }
+      },
+      "PatchUserParticipantRequestBody": {
+        "description": "Patch request that can be used to remove the user from a conversation, terminating the interaction.",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/PatchUserParticipantRequest"
+            }
+          }
+        }
+      },
+      "SendMessageToConversationRequest": {
+        "description": "Defines the send message request payload.",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SendConversationMessagePayload"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "OldProblem": {
+        "description": "Old error code",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "example": "Internal server error."
+            }
+          }
+        }
+      },
+      "ValidationExceptionPayload": {
+        "description": "Contains a descriptive response for a bad request that is due to data validation.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/ValidationExceptionPayload"
+            }
+          }
+        }
+      },
+      "RequestValidationV2Problem": {
+        "description": "Contains a descriptive response for a bad request that is due to data validation.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/ConstraintViolationProblem"
+            }
+          }
+        }
+      },
+      "RequestOAuthProblem": {
+        "description": "Contains a descriptive response for a bad request that is due to data validation.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/OAuthConstraintViolationProblem"
+            }
+          }
+        }
+      },
+      "ForbiddenRequestResponse": {
+        "description": "Contains a descriptive response.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/ForbiddenViolationProblem"
+            }
+          }
+        }
+      },
+      "ResourceNotFoundResponse": {
+        "description": "Contains a descriptive information.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResourceNotFoundProblem"
+            }
+          }
+        }
+      },
+      "UnauthorizedResponse": {
+        "description": "Contains a description of the error.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/UnauthorizedProblem"
+            }
+          }
+        }
+      },
+      "GeneralErrorResponse": {
+        "description": "Contains a description of the error.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/GenericExceptionPayload"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "TenantIdFilterOptional": {
+        "name": "X-8x8-Tenant",
+        "in": "header",
+        "required": false,
+        "description": "Tenant ID, it is going to be mandatory if customer has more than one CC tenant in his organisation.",
+        "schema": {
+          "type": "string",
+          "format": "string"
+        },
+        "example": "TheTenant"
+      },
+      "PageSizeFilterOptional": {
+        "name": "size",
+        "in": "query",
+        "required": false,
+        "description": "Response page size.",
+        "schema": {
+          "type": "number",
+          "format": "int32",
+          "default": 20
+        },
+        "example": 100
+      },
+      "PageIndexFilterOptional": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "description": "Response page index.",
+        "schema": {
+          "type": "number",
+          "format": "int32",
+          "default": 0,
+          "example": 1
+        }
+      },
+      "SortByOptional": {
+        "name": "sort",
+        "in": "query",
+        "required": false,
+        "description": "Attribute on which sorting direction is applied.",
+        "schema": {
+          "type": "string",
+          "default": "id:asc",
+          "example": "id:asc"
+        }
+      },
+      "SortByDateOptional": {
+        "name": "sort",
+        "in": "query",
+        "required": false,
+        "description": "Attribute on which sorting direction is applied available only for createdDate field.",
+        "schema": {
+          "type": "string",
+          "default": "createdAt:desc",
+          "example": "createdAt:asc"
+        }
+      },
+      "FilterOptional": {
+        "name": "filter",
+        "in": "query",
+        "required": false,
+        "description": "Filter for a query in FIQL format.",
+        "schema": {
+          "type": "string",
+          "example": "name==Cosmin,(routingOption.id==11)"
+        }
+      },
+      "WebHookUrlID": {
+        "name": "webhookId",
+        "in": "path",
+        "required": true,
+        "description": "WebHook identifier.",
+        "schema": {
+          "type": "string",
+          "format": "string",
+          "example": "2"
+        }
+      },
+      "ChatAPIChannelUrlID": {
+        "name": "channelId",
+        "in": "path",
+        "required": true,
+        "description": "ChatAPI channel identifier.",
+        "schema": {
+          "type": "string",
+          "format": "string",
+          "example": "25"
+        }
+      },
+      "MessageID": {
+        "name": "messageId",
+        "in": "path",
+        "required": true,
+        "description": "Message identifier.",
+        "schema": {
+          "type": "string",
+          "format": "string",
+          "example": "125"
+        }
+      },
+      "ChatAPIConversationUrlID": {
+        "name": "conversationId",
+        "in": "path",
+        "required": true,
+        "description": "Conversation identifier.",
+        "schema": {
+          "type": "string",
+          "format": "string",
+          "example": "125"
+        }
+      },
+      "AttachmentID": {
+        "name": "attachmentId",
+        "in": "path",
+        "required": true,
+        "description": "Attachment ID",
+        "schema": {
+          "type": "string",
+          "format": "string",
+          "example": "T6c-pPJYJoeiTZOJ4RxEOzXMBcmxG8KES2TZkmvuukcUPxgdZrBKIRbVMwnTLmk0nIXxWSNoSnaeJOZ5BIXV4Q"
+        }
+      }
+    },
+    "schemas": {
+      "PageResult": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "object",
+            "properties": {
+              "size": {
+                "type": "number",
+                "format": "int32",
+                "description": "Page size of the response."
+              },
+              "number": {
+                "type": "number",
+                "format": "int32",
+                "description": "Page 0-based index of the response."
+              },
+              "totalElements": {
+                "type": "number",
+                "format": "int32",
+                "description": "Total number of items."
+              },
+              "totalPages": {
+                "type": "number",
+                "format": "int32",
+                "description": "Total number of pages."
+              }
+            }
+          }
+        }
+      },
+      "Links": {
+        "type": "object",
+        "properties": {
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ChannelIdentifierField": {
+        "type": "object",
+        "properties": {
+          "channelId": {
+            "type": "string",
+            "format": "string",
+            "description": "Channel ID for which the transaction will be created.",
+            "example": "25"
+          }
+        }
+      },
+      "AssignmentField": {
+        "type": "object",
+        "properties": {
+          "assignment": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "format": "string",
+                "x-extensible-enum": ["queue", "script"],
+                "default": "queue"
+              },
+              "id": {
+                "type": "string",
+                "format": "string",
+                "description": "Queue or Script identifier, depending of which type is being used.",
+                "example": "100"
+              }
+            }
+          }
+        }
+      },
+      "WebHookIdentifierField": {
+        "type": "object",
+        "properties": {
+          "webHookId": {
+            "type": "string",
+            "format": "string",
+            "example": "12"
+          }
+        }
+      },
+      "ChannelTypeField": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "x-extensible-enum": [
+              "SMS",
+              "ChatAPI",
+              "Facebook",
+              "Twitter",
+              "WhatsApp",
+              "WebChat"
+            ],
+            "example": "ChatAPI",
+            "description": "Channel type, in this version only ChatAPI channels can be created using the API, but other chat channels can be retrieved using the API",
+            "maxLength": 25
+          }
+        }
+      },
+      "ConversationIdentifierField": {
+        "type": "object",
+        "properties": {
+          "conversationId": {
+            "type": "string",
+            "format": "string",
+            "description": "Returns the conversation identifier.",
+            "example": "ID-0"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation date and time - iso8601",
+            "example": "2021-01-30T08:30:00Z"
+          }
+        }
+      },
+      "ConversationUserData": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "description": "The attached data which contains user details. The data fields include `name`, `userId`, `customerId`, `email`, `phone`, `company`, `caseId`, `language`, `ipaddress` and `timezoneOffset` are predefined; however, you can also add any metadata. Any information about the user can be attached to a Chat API conversation, and it will be shown to Contact Center agent as part of transaction details in the chat panel.  \nFor example: `{  name: John Doe, email: john.doe@email.com, language: en, additionalProperties: [ { key: myCustomProperty, value: customValue }, { key: anyKey, value: anyValue } ] }`",
+            "properties": {
+              "name": {
+                "type": "string",
+                "format": "string",
+                "description": "Sets the Contact Center user’s name. The Contact Center agent views this name in the chat conversation. For example: John Doe"
+              },
+              "userId": {
+                "type": "string",
+                "format": "string",
+                "description": "When using 8x8's native CRM, the userId could match a customerId in 8x8's CRM and that will trigger a screen pop for agent."
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "phone": {
+                "type": "string",
+                "format": "string"
+              },
+              "company": {
+                "type": "string",
+                "format": "string"
+              },
+              "caseId": {
+                "type": "string",
+                "format": "string"
+              },
+              "language": {
+                "$ref": "#/components/schemas/Language"
+              },
+              "additionalProperties": {
+                "type": "array",
+                "maxProperties": 30,
+                "items": {
+                  "$ref": "#/components/schemas/AdditionalPropertiesPayload"
+                }
+              }
+            }
+          }
+        }
+      },
+      "AttachmentsResult": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["data"],
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "properties": {
+                  "attachments": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AttachmentResult"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Links"
+          },
+          {
+            "$ref": "#/components/schemas/PageResult"
+          }
+        ]
+      },
+      "AttachmentResult": {
+        "type": "object",
+        "required": ["id", "filename", "size", "type", "createdAt"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "T6c-pPJYJoeiTZOJ4RxEOzXMBcmxG8KES2TZkmvuukcUPxgdZrBKIRbVMwnTLmk0nIXxWSNoSnaeJOZ5BIXV4Q"
+          },
+          "filename": {
+            "type": "string",
+            "example": "sample-doc.docx"
+          },
+          "sizeInBytes": {
+            "type": "number",
+            "format": "int64",
+            "example": 4166,
+            "description": "File size in bytes"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation date and time",
+            "example": "2021-01-30T08:30:00Z"
+          }
+        }
+      },
+      "MessageListResult": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["messages"],
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "properties": {
+                  "messages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MessageResult"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/PageResult"
+          }
+        ]
+      },
+      "ConversationParticipants": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["data"],
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "properties": {
+                  "participants": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ConversationParticipant"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Links"
+          },
+          {
+            "$ref": "#/components/schemas/PageResult"
+          }
+        ]
+      },
+      "ConversationParticipant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "string",
+            "description": "Participant identifier. (agentId, user, bot)"
+          },
+          "removed": {
+            "type": "boolean",
+            "description": "States if the participant is still part of the conversation or if he vas removed."
+          },
+          "type": {
+            "$ref": "#/components/schemas/AuthorType"
+          },
+          "language": {
+            "$ref": "#/components/schemas/Language"
+          }
+        }
+      },
+      "MessageResult": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["id", "text", "author"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "string",
+                "description": "ID of the message"
+              },
+              "text": {
+                "type": "string",
+                "format": "string",
+                "description": "The message written by the sender.",
+                "example": "Hello!"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Creation date and time - iso8601",
+                "example": "2021-01-30T08:30:00Z"
+              },
+              "author": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ConversationParticipant"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Attachments"
+          },
+          {
+            "$ref": "#/components/schemas/Cards"
+          }
+        ]
+      },
+      "WebHooksV2ListResult": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "properties": {
+                  "webhooks": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/WebHookV2Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Links"
+          },
+          {
+            "$ref": "#/components/schemas/PageResult"
+          }
+        ]
+      },
+      "ContentType": {
+        "type": "string",
+        "enum": [
+          "application/vnd.microsoft.card.adaptive",
+          "application/8x8.quick.replies"
+        ],
+        "default": "application/vnd.microsoft.card.adaptive",
+        "description": "Card content type."
+      },
+      "WebHookV2CreateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["name", "notificationVersion", "uri"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "format": "string",
+                "maxLength": 256
+              },
+              "uri": {
+                "type": "string",
+                "format": "uri",
+                "description": "The client URI used to send system events and messages."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/EventVersionIdentifierField"
+          }
+        ]
+      },
+      "WebHookV2PutRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["name", "notificationVersion", "uri"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "format": "string",
+                "maxLength": 256
+              },
+              "uri": {
+                "type": "string",
+                "format": "uri",
+                "description": "Absolute URI."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/EventVersionIdentifierField"
+          }
+        ]
+      },
+      "WebHookV2VerifyRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["version", "uri"],
+            "properties": {
+              "version": {
+                "type": "string",
+                "format": "string",
+                "example": "v2.0",
+                "description": "The notification version used for testing the URL"
+              },
+              "uri": {
+                "type": "string",
+                "format": "uri",
+                "example": "https:/test.8x8.com",
+                "description": "The URL to test."
+              }
+            }
+          }
+        ]
+      },
+      "WebHookV2Result": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "string",
+                "description": "WebHook identifier.",
+                "example": "12"
+              },
+              "name": {
+                "type": "string",
+                "format": "string",
+                "maxLength": 255
+              },
+              "uri": {
+                "type": "string",
+                "format": "uri",
+                "description": "Absolute URI."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/EventVersionIdentifierField"
+          }
+        ]
+      },
+      "ChannelsV2ListResult": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "properties": {
+                  "channels": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ChannelV2Result"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Links"
+          },
+          {
+            "$ref": "#/components/schemas/PageResult"
+          }
+        ]
+      },
+      "ChannelV2Result": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["id", "name", "routingOptions", "webHookId"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "string",
+                "description": "The Channel ID for which the transaction will be created.",
+                "example": "25"
+              },
+              "name": {
+                "type": "string",
+                "format": "string",
+                "description": "The channel name.",
+                "example": "Some channel name.",
+                "maxLength": 255
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/ChannelTypeField"
+          },
+          {
+            "$ref": "#/components/schemas/WebHookIdentifierField"
+          },
+          {
+            "$ref": "#/components/schemas/ChannelRoutingOptions"
+          }
+        ]
+      },
+      "ChannelV2CreateRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["name", "routingOptions", "webHookId"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "format": "string",
+                "description": "The channel name",
+                "maxLength": 255
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/ChannelTypeField"
+          },
+          {
+            "$ref": "#/components/schemas/WebHookIdentifierField"
+          },
+          {
+            "$ref": "#/components/schemas/ChannelRoutingOptions"
+          }
+        ]
+      },
+      "ChannelV2PutRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["name", "routingOptions", "webHookId"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "format": "string",
+                "description": "The channel name",
+                "maxLength": 255
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/ChannelTypeField"
+          },
+          {
+            "$ref": "#/components/schemas/WebHookIdentifierField"
+          },
+          {
+            "$ref": "#/components/schemas/ChannelRoutingOptions"
+          }
+        ]
+      },
+      "Language": {
+        "type": "string",
+        "format": "string",
+        "default": "en",
+        "description": "The language of the user. Based on this property the user is assigned to an agent who speaks their language.\n\nThe default value is English (`en`).  \n\nThe sender language can be one of the following:\n* `en` => English\n* `ru` => Русский\n* `de` => Deutsch\n* `ja` => 日本語\n* `es` => Español\n* `fr` => Français\n* `pt` => Português\n* `it` => Italiano\n* `pl` => Polski\n* `hr` => Hrvatski\n* `nl` => Dutch\n* `ar` => العرية\n* `da` => Dansk\n* `ko` => 한국\n* `no` => Norsk\n* `sv` => Svenska\n* `vi` => Tiếng Việt\n* `cy` => Cymraeg\n* `th` => ไทย\n* `zh-CN` => 简体中文\n* `zh-TW` => 中國傳統"
+      },
+      "ExternalAuthorType": {
+        "type": "string",
+        "x-extensible-enum": ["bot", "user"],
+        "default": "user"
+      },
+      "AuthorType": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ExternalAuthorType"
+          },
+          {
+            "type": "string",
+            "x-extensible-enum": ["system", "agent"]
+          }
+        ]
+      },
+      "CreateTransactionRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ChannelIdentifierField"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationUserData"
+          },
+          {
+            "$ref": "#/components/schemas/AssignmentField"
+          },
+          {
+            "type": "object",
+            "required": ["channelId", "user"],
+            "properties": {
+              "history": {
+                "type": "object",
+                "required": ["messages"],
+                "properties": {
+                  "messages": {
+                    "type": "array",
+                    "maxLength": 200,
+                    "items": {
+                      "$ref": "#/components/schemas/SendConversationMessagePayload"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PatchUserParticipantRequest": {
+        "type": "object",
+        "properties": {
+          "removed": {
+            "type": "boolean",
+            "description": "Setting the removed property to true will terminate the conversation as the user is no longer in it so he can not be served.",
+            "example": true
+          }
+        }
+      },
+      "PatchTransactionRequest": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/AssignmentField"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationUserData"
+          }
+        ]
+      },
+      "UpdateTransactionRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ChannelIdentifierField"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationUserData"
+          },
+          {
+            "$ref": "#/components/schemas/AssignmentField"
+          }
+        ]
+      },
+      "InteractionsListResult": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "properties": {
+                  "interactions": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/InteractionInfo"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Links"
+          },
+          {
+            "$ref": "#/components/schemas/PageResult"
+          }
+        ]
+      },
+      "ConversationListResult": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "properties": {
+                  "conversations": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ConversationResult"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Links"
+          },
+          {
+            "$ref": "#/components/schemas/PageResult"
+          }
+        ]
+      },
+      "ConversationResult": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ChannelIdentifierField"
+          },
+          {
+            "$ref": "#/components/schemas/AssignmentField"
+          },
+          {
+            "$ref": "#/components/schemas/ConversationUserData"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "vXg39aMTRlq4xCBFaUCTlA",
+                "description": "Conversation / Transaction identifier."
+              },
+              "state": {
+                "type": "string",
+                "enum": ["created", "active", "idle"],
+                "example": "idle",
+                "description": "Conversation state."
+              }
+            }
+          }
+        ]
+      },
+      "ChannelRoutingOptions": {
+        "type": "object",
+        "required": ["routingOptions"],
+        "properties": {
+          "routingOptions": {
+            "type": "object",
+            "required": ["type", "id"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["queue"],
+                "default": "queue"
+              },
+              "id": {
+                "type": "string",
+                "format": "string",
+                "example": "101",
+                "description": "Depending on the option used this would be Queue ID."
+              }
+            }
+          }
+        }
+      },
+      "InteractionInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "string",
+            "example": "int-170392a3b7d-5qyRMnJL6nw63SLHrfQirLO3C-chat-00-tenant01"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date",
+            "example": "2020-08-05T11:55:00.592Z"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date",
+            "example": "2020-08-05T11:55:00.592Z"
+          }
+        }
+      },
+      "Attachments": {
+        "type": "object",
+        "properties": {
+          "attachments": {
+            "description": "Id of an attachment uploaded using attachments path.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Cards": {
+        "type": "object",
+        "properties": {
+          "cards": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AdaptiveCards"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "AdaptiveCards": {
+        "type": "object",
+        "properties": {
+          "contentType": {
+            "$ref": "#/components/schemas/ContentType"
+          },
+          "content": {
+            "type": "object",
+            "description": " Any adaptive cards, of version 1.3 https://adaptivecards.io/schemas/adaptive-card.json\nhttps://adaptivecards.io/explorer/\n"
+          }
+        }
+      },
+      "SendConversationMessagePayload": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": ["text"],
+            "properties": {
+              "authorType": {
+                "$ref": "#/components/schemas/ExternalAuthorType"
+              },
+              "text": {
+                "type": "string",
+                "format": "string",
+                "example": "Hello!"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Attachments"
+          },
+          {
+            "$ref": "#/components/schemas/Cards"
+          }
+        ],
+        "example": {
+          "authorType": "user",
+          "text": "What would you like to do next?",
+          "attachments": [],
+          "cards": [
+            {
+              "contentType": "application/8x8.quick.replies",
+              "content": {
+                "options": [
+                  {
+                    "title": "option one",
+                    "data": {
+                      "postback": "1"
+                    }
+                  },
+                  {
+                    "title": "second option",
+                    "data": {
+                      "postback": "2"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "contentType": "application/vnd.microsoft.card.adaptive",
+              "content": {
+                "type": "AdaptiveCard",
+                "body": [
+                  {
+                    "type": "TextBlock",
+                    "size": "Medium",
+                    "weight": "Bolder",
+                    "text": "Example"
+                  }
+                ],
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.3"
+              }
+            }
+          ]
+        }
+      },
+      "AdditionalPropertiesPayload": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "format": "string",
+                "example": "customKey"
+              },
+              "value": {
+                "type": "string",
+                "format": "string",
+                "example": "customValue"
+              }
+            },
+            "example": {
+              "key": "senderName",
+              "value": "John Doe"
+            }
+          }
+        ]
+      },
+      "GenericExceptionPayload": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message.",
+            "example": "Internal error."
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Unique error code.",
+                  "example": "invalid_queue"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Free text error description.",
+                  "example": "Queue ID 112 is invalid."
+                }
+              }
+            }
+          }
+        }
+      },
+      "ValidationExceptionPayload": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GenericExceptionPayload"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "validations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "example": "webHookId",
+                      "description": "Invalid field name"
+                    },
+                    "value": {
+                      "type": "string",
+                      "example": "45",
+                      "description": "Submitted value"
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "Unique error code.",
+                      "example": "invalid_queue"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Free text error description.",
+                      "example": "Queue ID 112 is invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ConstraintViolationProblem": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "The error message.",
+            "example": "Constraint Violation"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "<<name>>: May not be empty."
+            }
+          },
+          "validations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "<<name>>: May not be empty."
+            }
+          }
+        }
+      },
+      "OAuthConstraintViolationProblem": {
+        "type": "object",
+        "properties": {
+          "ErrorCode": {
+            "type": "string",
+            "description": "OAuth error code.",
+            "example": "invalid_request"
+          },
+          "Error": {
+            "type": "string",
+            "description": "OAuth error message.",
+            "example": "Unsupported grant type : something"
+          }
+        }
+      },
+      "ForbiddenViolationProblem": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message.",
+            "example": "Access is denied."
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Access is denied"
+                },
+                "code": {
+                  "type": "string",
+                  "example": "access_denied"
+                }
+              }
+            }
+          },
+          "referenceId": {
+            "type": "string",
+            "example": "dacd0dd252723a2"
+          }
+        }
+      },
+      "UnauthorizedProblem": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Invalid Credentials"
+          },
+          "code": {
+            "type": "string",
+            "example": "KA:1234567"
+          }
+        }
+      },
+      "ResourceNotFoundProblem": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message.",
+            "example": "Resource of type <<resourceType>> with id <<resourceId>> was not found."
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "Tenant <<tenantId>> does not belong to customer <<customerId>>."
+            }
+          }
+        }
+      },
+      "EventVersionIdentifierField": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "$ref": "#/components/schemas/EventVersion"
+          }
+        }
+      },
+      "EventVersion": {
+        "type": "string",
+        "enum": ["Chat Gateway v1.0"],
+        "description": "Event API version.",
+        "default": "Chat Gateway v1.0"
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": false,
+    "samples-enabled": true
+  }
+}

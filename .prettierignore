@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+.yarn/
+.pnp.*
+
+# Build outputs
+build/
+.docusaurus/
+.cache-loader/
+
+# Generated documentation
+docs/*/reference/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Temporary files
+*.tmp
+*.temp

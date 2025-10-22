@@ -1,0 +1,464 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --doc-sidebar-width: 16.25rem !important;
+  --ifm-font-family-base: "Inter";
+  --ifm-color-primary: #cb2233;
+  --ifm-color-primary-dark: #b71f2e;
+  --ifm-color-primary-darker: #ad1d2b;
+  --ifm-color-primary-darkest: #8e1824;
+  --ifm-color-primary-light: #db293b;
+  --ifm-color-primary-lighter: #dd3445;
+  --ifm-color-primary-lightest: #e25261;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-hero-text-color: #bdc0c7;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme="dark"] {
+  --ifm-color-primary: #ffffff;
+  --ifm-color-primary-dark: #e6e6e6;
+  --ifm-color-primary-darker: #d9d9d9;
+  --ifm-color-primary-darkest: #b3b3b3;
+  --ifm-color-primary-light: #ffffff;
+  --ifm-color-primary-lighter: #ffffff;
+  --ifm-color-primary-lightest: #ffffff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Hide pagination from the bottom of each page */
+.pagination-nav {
+  display: none;
+}
+
+/* Fix anchor scrolling to account for sticky navbar */
+/* Add scroll padding to ensure anchors are visible below the navbar */
+html {
+  scroll-padding-top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Unified Card System */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  padding: 0;
+}
+
+/* Grid variants */
+@media (min-width: 768px) {
+  .cards-grid--3col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 997px) {
+  .cards-grid--3col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Base card styles */
+.card {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background-color: var(--ifm-card-background-color);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Clickable card (with description and link) */
+.card--clickable {
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card--clickable:hover {
+  text-decoration: none;
+  color: inherit;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(203, 34, 51, 0.15);
+  border-color: var(--ifm-color-primary);
+}
+
+/* Card title */
+.card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  color: var(--ifm-color-primary);
+}
+
+.card--list .card__title {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+/* Card description (for clickable cards) */
+.card__description {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--ifm-color-content-secondary);
+}
+
+/* Card list (for list cards) */
+.card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card__list li {
+  margin-bottom: 0.5rem;
+}
+
+.card__list li:last-child {
+  margin-bottom: 0;
+}
+
+.card__list a {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+}
+
+.card__list a:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+}
+
+/* Dark mode */
+[data-theme="dark"] .card {
+  background-color: var(--ifm-background-surface-color);
+}
+
+/* Sidebar menu styling */
+.menu .menu__list-item:not(:first-child) {
+  margin-top: 0.125rem;
+}
+
+.menu .menu__link {
+  line-height: 1.25rem;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--ifm-color-content-secondary);
+  font-weight: normal;
+}
+
+.menu .menu__link:hover {
+  color: var(--ifm-font-color-base);
+}
+
+.menu .menu__link--active {
+  color: var(--ifm-font-color-base);
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+/* Table of contents styling */
+.table-of-contents li {
+  position: relative;
+}
+
+.table-of-contents li .table-of-contents__link {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.table-of-contents li .table-of-contents__link:hover {
+  color: var(--ifm-font-color-base);
+}
+
+.table-of-contents li .table-of-contents__link--active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -17px;
+  height: 1rem;
+  width: 2px;
+  background-color: var(--ifm-menu-color-active);
+}
+
+.table-of-contents li ul .table-of-contents__link--active::before {
+  left: -33px;
+}
+
+.table-of-contents li .table-of-contents__link--active {
+  color: var(--ifm-font-color-base);
+}
+
+.table-of-contents li .table-of-contents__link--active code {
+  color: var(--ifm-font-color-base);
+}
+
+.container .row .col:nth-child(2).col--3 {
+  flex: 0 0 15rem;
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+.row {
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (min-width: 997px) {
+  nav.menu {
+    padding: 1rem 0.5rem 1rem 1rem;
+  }
+}
+
+/* Developer portal specific styles */
+.hero {
+  background: linear-gradient(135deg, #cb2233 0%, #8e1824 100%);
+  color: white;
+}
+
+.hero__title {
+  color: white;
+}
+
+.hero__subtitle {
+  color: var(--ifm-hero-text-color);
+}
+
+/* API section cards */
+.api-card {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.api-card:hover {
+  box-shadow: 0 4px 12px rgba(203, 34, 51, 0.1);
+}
+
+.api-card h3 {
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.api-card p {
+  color: var(--ifm-color-content-secondary);
+  margin-bottom: 1rem;
+}
+
+.api-card-link {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.api-card-link:hover {
+  text-decoration: underline;
+}
+
+/* API Method badges in sidebar and chip component */
+.api-method.get .menu__link::after,
+.api-method.post .menu__link::after,
+.api-method.put .menu__link::after,
+.api-method.patch .menu__link::after,
+.api-method.delete .menu__link::after,
+.api-method .api-method-chip {
+  margin-left: auto;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.api-method.get .menu__link::after {
+  content: "GET";
+}
+
+.api-method.get .menu__link::after,
+.api-method.get .api-method-chip {
+  background-color: #10b981;
+}
+
+.api-method.post .menu__link::after {
+  content: "POST";
+}
+
+.api-method.post .menu__link::after,
+.api-method.post .api-method-chip {
+  background-color: #3b82f6;
+}
+
+.api-method.put .menu__link::after {
+  content: "PUT";
+}
+
+.api-method.put .menu__link::after,
+.api-method.put .api-method-chip {
+  background-color: #f59e0b;
+}
+
+.api-method.patch .menu__link::after {
+  content: "PATCH";
+}
+
+.api-method.patch .menu__link::after,
+.api-method.patch .api-method-chip {
+  background-color: #8b5cf6;
+}
+
+.api-method.delete .menu__link::after {
+  content: "DELETE";
+}
+
+.api-method.delete .menu__link::after,
+.api-method.delete .api-method-chip {
+  background-color: #ef4444;
+}
+
+/* API Method chip component specific styling */
+.api-method-chip {
+  display: inline-block;
+  margin-left: 0;
+}
+
+/* Badge dark mode fix */
+[data-theme="dark"] .badge.badge--primary {
+  background-color: #059669;
+  color: white;
+}
+
+/* OpenAPI request button dark mode fix */
+[data-theme="dark"] .openapi-explorer__request-btn {
+  background-color: #059669;
+  color: white;
+  border-color: #059669;
+}
+
+[data-theme="dark"] .openapi-explorer__request-btn:hover {
+  background-color: #047857;
+  border-color: #047857;
+}
+
+/* Section Navigation - Horizontal tabs below navbar */
+.section-navigation {
+  width: 100%;
+  background-color: var(--ifm-navbar-background-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  z-index: 100;
+}
+
+.section-navigation__container {
+  max-width: var(--ifm-container-width-xl);
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+.section-navigation__tabs {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  height: 3rem;
+}
+
+.section-navigation__tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1.5rem;
+  color: var(--ifm-color-content-secondary);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.section-navigation__tab:hover {
+  color: var(--ifm-font-color-base);
+  background-color: var(--ifm-color-emphasis-100);
+  text-decoration: none;
+}
+
+.section-navigation__tab--active {
+  color: var(--ifm-color-primary);
+  border-bottom-color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.section-navigation__tab--active:hover {
+  color: var(--ifm-color-primary);
+  background-color: transparent;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .section-navigation {
+  border-bottom-color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme="dark"] .section-navigation__tab:hover {
+  background-color: var(--ifm-color-emphasis-200);
+}
+
+/* Mobile responsive */
+@media (max-width: 996px) {
+  .section-navigation {
+    position: relative;
+    top: 0;
+  }
+
+  .section-navigation__tabs {
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+
+  .section-navigation__tabs::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Opera */
+  }
+
+  .section-navigation__tab {
+    white-space: nowrap;
+    padding: 0 1rem;
+  }
+}
+
+/* Section Navigation Icons */
+.section-navigation__tab.icon-guides::before {
+  content: "📖";
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.section-navigation__tab.icon-references::before {
+  content: "💻";
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
