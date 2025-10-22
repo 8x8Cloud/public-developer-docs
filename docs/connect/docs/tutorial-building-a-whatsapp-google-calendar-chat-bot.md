@@ -17,7 +17,14 @@ There are two components to this project:
 
 Please see a demo video of the WhatsApp Chatbot below.
 
-[undefined](https://www.youtube.com/embed/Vv6ruAbdpgs?si=H9YyplFou8hIGlJr "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/Vv6ruAbdpgs?si=H9YyplFou8hIGlJr"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Automation Builder Workflow Steps
 
 Here is a visual overview of the complete automation builder workflow, we will cover each step in depth in the following section of the tutorial.

@@ -6,7 +6,13 @@ By integrating 8x8 Chat Apps product into FreshDesk Support you get the best of 
 
 ## Video Guide
 
-[undefined](https://www.youtube.com/embed/FtlzyUCvdbQ?si=NbvBX4oZdg0rbqzS "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/FtlzyUCvdbQ?si=NbvBX4oZdg0rbqzS"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
   
 
 ## Use cases

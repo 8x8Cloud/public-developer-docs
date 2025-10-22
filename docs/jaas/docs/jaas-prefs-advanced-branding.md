@@ -16,7 +16,14 @@ In case you setup an advanced branding URL, your global Branding configurator se
 
 Please see the video below for an example of **Advanced Branding** used to modify room properties based on the room name.
 
-[iframe](https://www.youtube.com/embed/4KsaxRo-l_s?si=LOOoitvkqD4-CHEa "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/4KsaxRo-l_s?si=LOOoitvkqD4-CHEa"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Branding data payload
 
 All the branding data fields are optional:

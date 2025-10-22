@@ -15,7 +15,14 @@ The diagram below explains how the flow will look like from using Okta together 
 
 This Video Demo shows the integration in action and explains a high level of the setup steps in this guide. We recommend referring to this text guide for the full setup.
 
-[iframe](https://www.youtube.com/embed/EZ-uKf--nPc?si=-YePWMizF8fJdgww "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/EZ-uKf--nPc?si=-YePWMizF8fJdgww"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Requirements
 
 * Okta Account (an Okta Dev Account is fine for testing).

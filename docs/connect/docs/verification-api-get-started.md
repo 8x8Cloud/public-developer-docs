@@ -28,7 +28,13 @@ This video shows:
 - This shows  Verif8 Logs the delivery status (Delivered/Read) of the OTP and the Conversion status (Non-Converted / Converted)
 
 
-[youtube.com](https://www.youtube.com/embed/NZnieeEofBs?si=cav-R03QIuWqDKdD "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/NZnieeEofBs?si=cav-R03QIuWqDKdD"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
   
 
 This shows the API Keys page on getting the API Key and Verif8 Subaccount.  

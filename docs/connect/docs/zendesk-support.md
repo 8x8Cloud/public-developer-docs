@@ -10,7 +10,14 @@ By integrating 8x8 Chat Apps product into Zendesk Support you get the best on bo
 
 To see the integration in action, please view this video.
 
-[undefined](https://www.youtube.com/embed/jYnGmSxDFLY?si=yjJzqyfO2iqHmzhA%22 "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/jYnGmSxDFLY?si=yjJzqyfO2iqHmzhA"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Some use cases
 
 * Send and receive notifications about ticket updates from different Chat apps channels(Whatsapp, Viber, Zalo, Line, 2-Way SMS and more)

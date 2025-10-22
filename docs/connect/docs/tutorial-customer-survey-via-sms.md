@@ -21,7 +21,14 @@ If you do not have an 8x8 account or virtual number, reach out to your 8x8 accou
 
 This is a accompanying video meant to show the SMS Customer Survey as a demo. 
 
-[iframe](https://www.youtube.com/embed/TbcB1i0noKc?si=jmzyvbs67PwYsOCc "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/TbcB1i0noKc?si=jmzyvbs67PwYsOCc"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Step 1: Setup the Automation Builder Workflow
 
 You can find an example Automation Workflow workflow below, which you can use to import into the Automation Builder UI in [Connect](https://connect.8x8.com/automation).

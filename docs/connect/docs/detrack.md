@@ -16,7 +16,13 @@ With this integration, we can leverage the Detrack event triggers and 8x8 API to
 
 This video demo will show how you can integrate 8x8's SMS API with Detrack in order to send SMS notifications.
 
-[undefined](https://www.youtube.com/embed/P6KdARiTcm8?si=BYVewXn3aP58tiiN "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/P6KdARiTcm8?si=BYVewXn3aP58tiiN"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
   
 
 ---

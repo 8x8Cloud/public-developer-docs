@@ -12,7 +12,14 @@ You'll find it conveniently located in the top left navigation menu, right after
 
 Below is a video guide that covers how to send an SMS message which serves to accompany the content presented on this documentation page.
 
-[undefined](https://www.youtube.com/embed/infb_4pahHo?si=ggHftxI_AM5Fq1N7 "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/infb_4pahHo?si=ggHftxI_AM5Fq1N7"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Sending SMS
 
 You can personalise, schedule and send up to a million SMS in one go. 

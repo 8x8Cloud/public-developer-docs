@@ -35,7 +35,14 @@ This section covers how to use a SIP device to connect to a JaaS call through SI
 
 This video will take you through a walkthrough of this section.
 
-[youtube.com](https://www.youtube.com/embed/25stELz48So?si=sudYwv5pYPbDkFCb "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/25stELz48So?si=sudYwv5pYPbDkFCb"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ### JaaS Room and PIN
 
 Create or Join a JaaS Room. Afterwards obtain the PIN from the **Triple Dot > Invite People Menu**.
@@ -89,7 +96,13 @@ This section outlines how to make a call via a softphone such as Bria to a JaaS 
 
 This video will take you through the steps mentioned in this section to connect a softphone to a JaaS room.
 
-[youtube.com](https://www.youtube.com/embed/JiLDsnUm2a4?si=uSxBDsi0zUUdcq0e "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/JiLDsnUm2a4?si=uSxBDsi0zUUdcq0e"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 ### JaaS PIN Code
 
 The first step is to obtain the **PIN Code** from the JaaS Room
@@ -168,13 +181,25 @@ If the call is connected via audio-only, then an audio-only participant will joi
 
 This Video will show how it is possible to call from a JaaS (Jitsi as a Service) Room out to a softphone in Video Mode.
 
-[youtube.com](https://www.youtube.com/embed/IM59n3vD_-Y?si=2TuxSDWcCIFiD93t)
+<iframe
+  src="https://www.youtube.com/embed/IM59n3vD_-Y?si=2TuxSDWcCIFiD93t"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 
 ### Audio Call
 
 This Video will show how it is possible to call from a JaaS (Jitsi as a Service) Room out to a softphone in Audio-Only Mode.
 
-[youtube.com](https://www.youtube.com/embed/XWayZ_BNP9Q?si=wTdinAUui-liCzW2)
+<iframe
+  src="https://www.youtube.com/embed/XWayZ_BNP9Q?si=wTdinAUui-liCzW2"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
   
 
 # Billing / Usage

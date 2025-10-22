@@ -9,14 +9,27 @@ A recording session is limited to a maximum of 6 hours. If there is a need for a
 
 This quick video demo will take you through how recording works within JaaS, including receiving the necessary webhooks for downloading the recordings and chat transcripts, viewing a sample recording file and viewing a chat transcript.
 
-[iframe](https://www.youtube.com/embed/OQEDpfyOBWI?si=t-Ewz46SEx9vIy1v "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/OQEDpfyOBWI?si=t-Ewz46SEx9vIy1v"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Recording File
 
 The Recording file will be available once you receive the **RECORDING_UPLOADED** webhook.
 
 The file will be saved as an **.mp4** file. The recording file will show the perspective of the participant who started the recording. 
 
-[iframe](https://www.youtube.com/embed/R0p6ppj-ebE?si=J_T-r_EFWe6uJ2Tn "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/R0p6ppj-ebE?si=J_T-r_EFWe6uJ2Tn"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 ## Chat Transcript
 
 The Chat Transcript will be available for download once you receive the **CHAT_UPLOADED** webhook.

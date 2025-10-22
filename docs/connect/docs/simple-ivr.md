@@ -10,7 +10,13 @@ Below is a sample of a simple IVR call scenario. The Callflow below demonstrates
 This video will show a demo of how the Advanced IVR menu will work, including showing webhooks and the Initial API Call.
 
 
-[youtube.com](https://www.youtube.com/embed/6UfWfvk8-jY?si=0Embr27hn_krsgKX "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/6UfWfvk8-jY?si=0Embr27hn_krsgKX"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 
 ## GitHub Repo with Sample Backend Code
 

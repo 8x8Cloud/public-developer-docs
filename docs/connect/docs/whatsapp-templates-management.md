@@ -6,7 +6,14 @@ This page will cover the options available within 8x8 Connect to manage your Wha
 
 This is a quick video guide that goes over the WhatsApp Template Page.
 
-[iframe](https://www.youtube.com/embed/MmshpMjE1rg?si=MQ62RQewQYGwz4rz "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/MmshpMjE1rg?si=MQ62RQewQYGwz4rz"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Viewing Templates
 
 To view your existing WhatsApp Templates, you can navigate to the following [page](https://connect.8x8.com/chat/templates) in 8x8 Connect which is under **Messaging Apps > WhatsApp Templates**

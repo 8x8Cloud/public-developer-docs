@@ -73,7 +73,14 @@ If you are already on a pain plan and would like access, please reach out to you
 
 This video will show a very quick peek at JaaS in 45 seconds.
 
-[iframe](https://www.youtube.com/embed/yhNP-rI_DTM "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/yhNP-rI_DTM"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 Video Credits to Matt Gardner (8x8 Director of Developer Relations)
 
 ## How to Integrate JaaS into your website?

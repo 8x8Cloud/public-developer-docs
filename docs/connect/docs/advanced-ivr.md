@@ -12,7 +12,13 @@ Initial setup should be completed as per the [Webhook Setup Guide](webhook setup
 This video will show a demo of how the Advanced IVR menu will work, including showing webhooks and the Initial API Call.
 
 
-[iframe](https://www.youtube.com/embed/PFNdAtqze_4?si=McsNYISF1SP3yeF2 "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/PFNdAtqze_4?si=McsNYISF1SP3yeF2"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 
 ## GitHub Repo with Sample Backend Code
 

@@ -8,7 +8,14 @@ Templates can have simple pre-filled messages beforehand or complex messages wit
 
 We have created a video guide below to accompany this documentation page which will take you through creating SMS Templates.
 
-[undefined](https://www.youtube.com/embed/BP2TErV3FEk?si=0Be9q1wIC1gp8Wbp "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/BP2TErV3FEk?si=0Be9q1wIC1gp8Wbp"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Creating Templates
 
 To create a template, go to the Templates page of the Connect Dashboard.

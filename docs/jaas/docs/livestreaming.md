@@ -29,7 +29,14 @@ These are the requirements to start using livestreaming:
 
 This is an accompany video guide which covers how to stream to YouTube using JaaS.
 
-[iframe](https://www.youtube.com/embed/XD15uvl_yp8?si=Tdo08IsohX04iCUB "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/XD15uvl_yp8?si=Tdo08IsohX04iCUB"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Livestream Menu
 
 To access the livestream menu within a JaaS call, go to the **Triple Dot Menu** and navigate to **Start live stream** option.
@@ -105,7 +112,13 @@ These are the requirements to start using livestreaming:
 
 This is an accompany video guide which covers how to stream to Twitch via RTMP.
 
-[iframe](https://www.youtube.com/embed/FwV4KP4H9Qc?si=-bTKRU5TLPjEn5Yr "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/FwV4KP4H9Qc?si=-bTKRU5TLPjEn5Yr"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 ## Livestream Menu
 
 First access the livestreaming menu from **Triple Dot Menu > Start Live Stream**

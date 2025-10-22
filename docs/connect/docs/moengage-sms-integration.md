@@ -14,7 +14,14 @@
 
 This is an accompanying video guide. It shows how the integration is setup and used in action.
 
-[iframe](https://www.youtube.com/embed/QhzQopj4NOk?si=ZyzU4FhwrOiO4YNt "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/QhzQopj4NOk?si=ZyzU4FhwrOiO4YNt"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Configure 8x8 as a Custom SMS Connector (Service Provider)
 
 This article helps you configure 8x8 as a Custom SMS Connector (Service Provider) on the MoEngage platform for businesses that use MoEngage for their communication campaign scheduling.

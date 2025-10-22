@@ -6,7 +6,14 @@ Contact Management is a feature inside Connect that allows you to manage your co
 
   
 
-[undefined](https://www.youtube.com/embed/hp3zm-iJ0pI?si=nDW3Q8jQQ8pliS-9 "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/hp3zm-iJ0pI?si=nDW3Q8jQQ8pliS-9"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 We have a video guide below to accompany this documentation page.
 
 ## Creating contacts

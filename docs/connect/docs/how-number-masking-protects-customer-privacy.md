@@ -32,7 +32,13 @@ In this section, we will see a few videos of number masking and how it can be us
 This video covers a common example of logistics/delivery where a business like a bank needs to deliver a card to their customer through a third-party courier. Number masking allows their third-party courier to contact customers to resolve last-mile delivery issues while maintaining the anonymity of the numbers.
 
 
-[iframe](https://www.youtube.com/embed/1n1QA4EjdbM?si=o134SMpP5xVXrS2D "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/1n1QA4EjdbM?si=o134SMpP5xVXrS2D"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 
 ### How to implement 8x8's Number Masking?
 

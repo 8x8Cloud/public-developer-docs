@@ -8,7 +8,14 @@ With 8x8 cloud communication platform, businesses and developers alike can incor
 
 Please see the companion video guide below to see a demonstration on how to setup MoEngage to send WhatsApp messages.
 
-[iframe](https://www.youtube.com/embed/qN3cvj75SPw?si=tXps9toD_9fGp6by "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/qN3cvj75SPw?si=tXps9toD_9fGp6by"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Sample use cases
 
 * **Promotional Offers**You can send coupons, discounts or sale alerts to customers via WhatsApp using MoEngage's segmentation and messaging tools.

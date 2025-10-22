@@ -16,7 +16,13 @@ Video Interaction simplifies the process of initiating video calls between custo
 
 For a overview of video interaction, please see this video which will take you through the major features of Video Interaction and an example of an outbound call to a customer.
 
-[undefined](https://www.youtube.com/embed/HvAA5xkh0mI?si=v-3wZH8Myws1YZhz "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/HvAA5xkh0mI?si=v-3wZH8Myws1YZhz"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
   
 
 ## API Docs

@@ -2,4 +2,10 @@
 
 Please check out the video tutorial below.
 
-[https://videos.8x8.com/watch/weMyX73M2yZ14j9rxvzJtg](https://videos.8x8.com/watch/weMyX73M2yZ14j9rxvzJtg "videos.8x8.com")
+<iframe
+  src="https://videos.8x8.com/watch/weMyX73M2yZ14j9rxvzJtg"
+  height="920px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>

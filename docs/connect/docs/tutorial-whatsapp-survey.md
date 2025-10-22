@@ -21,7 +21,14 @@ The default tutorial includes three questions, but you can customize it with you
 
 This is a accompanying video meant to show the WhatsApp Customer Survey as a demo.
 
-[iframe](https://www.youtube.com/embed/2MuSX20i9EA?si=UE8cEQhaz37wLt0a "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/2MuSX20i9EA?si=UE8cEQhaz37wLt0a"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Step 1: Setup the Automation Builder Workflow
 
 You can find an example Automation Workflow workflow below, which you can use to import into the Automation Builder UI in [Connect](https://connect.8x8.com/automation).

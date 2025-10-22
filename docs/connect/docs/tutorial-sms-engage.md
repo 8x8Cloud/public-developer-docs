@@ -12,7 +12,14 @@ In this tutorial, we will cover how to send a single SMS Engage: [Send SMS Engag
 
 This video below will take you through a demo of SMS Engage including: sending a survey via API, filling out a survey and viewing the responses on the Connect Dashboard.
 
-[iframe](https://www.youtube.com/embed/6NB0_7ZaepE?si=O_vGsatqoINr1rPI "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/6NB0_7ZaepE?si=O_vGsatqoINr1rPI"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Prerequisites
 
 * **8x8 Account** with an SMS Engage form created

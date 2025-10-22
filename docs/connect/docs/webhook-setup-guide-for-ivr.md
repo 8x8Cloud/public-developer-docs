@@ -18,7 +18,13 @@ Then we will need to setup two webhooks, **a VCA (Voice Call Action) Webhook** a
 This video guide corresponds to the information on this page but in video form. It should help to clarify how we expect the webhooks to be setup and also how the webhooks are expected to be used.
 
 
-[iframe](https://www.youtube.com/embed/aYERSDzKpCs?si=sIoBSy3BR2tqN1_l "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/aYERSDzKpCs?si=sIoBSy3BR2tqN1_l"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 
 ## VCA Webhook Setup
 

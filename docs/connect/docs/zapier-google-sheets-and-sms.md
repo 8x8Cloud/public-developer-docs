@@ -10,7 +10,13 @@
 
 Please see this accompanying Video Guide for Zapier to see this integration in action.
 
-[undefined](https://www.youtube.com/embed/PURTm8coTKU?si=HNCJLA5Kl-mnDiHO "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/PURTm8coTKU?si=HNCJLA5Kl-mnDiHO"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
   
 
 ## Tutorial

@@ -16,17 +16,36 @@ This guide will take you through the necessary configurations on Salesforce and 
 
 This Viber Integration video shows only what the integration looks like with just the Viber channel active through Chatapps API. It is the simpler scenario that this guide walks you through.
 
-[undefined](https://www.youtube.com/embed/58sc3zwv7BM?si=bUnUiFJoQ5KtH_hl "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/58sc3zwv7BM?si=bUnUiFJoQ5KtH_hl"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ### SMS + Viber Integration Video
 
 This video shows two channels working, SMS and Viber and is a bit more complex than setting up just one channel. It also shows assigning one agent to one number, taking care of agency use cases where you always want to tie a specific agent to a phone number.
 
-[undefined](https://www.youtube.com/embed/WxiNq4iqpf4?si=cuaIYaH3jw5YNhxz "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/WxiNq4iqpf4?si=cuaIYaH3jw5YNhxz"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 ### WhatsApp Integration Video
 
 This video shows the integration with Salesforce Chat and WhatsApp.
 
-[undefined](https://www.youtube.com/embed/BiRuvXWw4I8?si=K-aKFG8asTo-pAv4 "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/BiRuvXWw4I8?si=K-aKFG8asTo-pAv4"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 #### Prerequisites
 
 * 8x8 Connect Account

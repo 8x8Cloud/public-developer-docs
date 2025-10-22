@@ -10,5 +10,11 @@ The UI allows you to do similar tasks such as creating and managing complex busi
 
 **Note:** The Video Guide contains an older version of the Automation Builder UI. Some new steps have been added since publishing and some changes may have occured.
 
-[Automation Builder - Tutorial Video](https://videos.8x8.com/watch/aSMCfEDSEXzZUcWnoChUBE "videos.8x8.com")
+<iframe
+  src="https://videos.8x8.com/watch/aSMCfEDSEXzZUcWnoChUBE"
+  height="920px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
 

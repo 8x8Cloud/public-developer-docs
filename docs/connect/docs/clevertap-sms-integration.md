@@ -22,7 +22,14 @@ CleverTap supports any SMS provider via an HTTP integration. The SMS provider sh
 
 This video serves as a companion to this documentation page.
 
-[iframe](https://www.youtube.com/embed/xJbyrkfReNc?si=3FqfcpypISYaFx8V "youtube.com")
+<iframe
+  src="https://www.youtube.com/embed/xJbyrkfReNc?si=3FqfcpypISYaFx8V"
+  height="500px"
+  width="100%"
+  allow="picture-in-picture; web-share"
+  allowFullScreen>
+</iframe>
+
 ## Setup Clevertap's SMS generic integration
 
 In the CleverTap Dashboard, navigate to **Settings > Engage > Channels > SMS**
