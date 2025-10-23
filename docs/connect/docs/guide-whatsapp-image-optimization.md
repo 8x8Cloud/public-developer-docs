@@ -10,14 +10,14 @@ When sending WhatsApp messages with media content, the speed and reliability of 
 * [Supported formats](/connect/docs/supported-chat-apps-content-type#whatsapp): JPEG, **PNG (recommended)**
 * Recommended dimensions: 1200x630 pixels
 
-#### Performance Benchmarks
+## Performance Benchmarks
 
 ### Server Response Expectations
 
 * Ideal response time: below 2 seconds
 * Recommended server latency: Consistently under 2 seconds
 
-#### Troubleshooting Methodology
+## Troubleshooting Methodology
 
 ### Diagnostic Tools
 
@@ -43,7 +43,7 @@ After going through this guide, you should be able to repeat the test above and 
 
 ---
 
-#### Common Performance Bottlenecks
+## Common Performance Bottlenecks
 
 ### Image-Related Issues
 
@@ -69,7 +69,7 @@ After going through this guide, you should be able to repeat the test above and 
 
 ---
 
-#### Debugging Checklist
+## Debugging Checklist
 
 ### Quick Diagnostic Steps
 

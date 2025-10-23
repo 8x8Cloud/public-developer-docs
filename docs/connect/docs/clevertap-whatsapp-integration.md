@@ -23,7 +23,7 @@ CleverTap supports WhatsApp Business API integration.
 
 ## Setup
 
-## Setup WhatsApp Connect Provider
+### Setup WhatsApp Connect Provider
 
 In the CleverTap Dashboard, navigate to **Settings > Engage > Channels > WhatsApp > WhatsApp Connect Tab**
 
@@ -60,7 +60,7 @@ As well as a corresponding WhatsApp Message sent to your WhatsApp Account.
 
 ![](../images/df00240a3c28a189f881d98f0d665308ad2b1e88bfe737abf8829298ca174c3e-image.png)
 
-### Using Campaigns
+## Using Campaigns
 
 To use this new WhatsApp Provider in campaigns, select **WhatsApp** as a Messaging Channel when you create a new campaign.
 
@@ -72,6 +72,6 @@ In the next screen you should see the new WhatsApp Provider available as an opti
 
 Afterwards you can proceed to send WhatsApp messages in the campaign. For further details on how to send a campaign, please refer to [Clevertap's guide](https://docs.clevertap.com/docs/intro-to-campaigns).
 
-### Templates
+## Templates
 
 In order to send Template messages you will need to register your 8x8 WhatsApp Templates on Clevertap. Please see [Clevertap's guide](https://docs.clevertap.com/docs/generic-whatsapp#adding-message-template) for further details on how to add templates for a Generic WhatsApp Provider.

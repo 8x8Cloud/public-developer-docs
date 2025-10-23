@@ -76,9 +76,9 @@ This is the request body to send with the API request. It will make an outbound 
 
 ```
 
-## IVR Tree: Level 1
+### IVR Tree: Level 1
 
-### IVR Tree: Main Menu
+#### IVR Tree: Main Menu
 
 ![](../images/b5e73e6-image.png)
 
@@ -184,9 +184,9 @@ json_body = {
 
 Compared to the Simple IVR, notice the use of the **clientActionID** parameter in the callflows JSON. This parameter will also be passed by the VCA Webhook. This parameter is important to use in your server code to decide what IVR menu to play next for a user. It provides the context for where a user is in your IVR tree.
 
-## IVR Tree: Level 2
+### IVR Tree: Level 2
 
-### VCA Webhook Received
+#### VCA Webhook Received
 
 Here is what the VCA Webhooks will look like when the user responds with a DTMF input in the main menu. Notice the **dtmf** value indicating the user input and the **clientActionId** value indicating the value passed in the Callflows API Call that triggered this DTMF webhook.
 
@@ -231,7 +231,7 @@ VCA Webhook Example
 
 ```
 
-### IVR Tree: Reservations
+#### IVR Tree: Reservations
 
 ![](../images/8d0b3e3-image.png)
 
@@ -347,7 +347,7 @@ json_body = {
 
 ```
 
-### IVR Tree: Connect Call
+#### IVR Tree: Connect Call
 
 ![](../images/c797a80-image.png)
 
@@ -432,7 +432,7 @@ json_body = {
 
 ```
 
-### IVR Tree: Restaurant Hours
+#### IVR Tree: Restaurant Hours
 
 ![](../images/4086128-image.png)
 
@@ -444,7 +444,7 @@ Afterwards the call will hang up with the user without sending a VCA webhook. A 
 
 ### IVR Tree: Level 3
 
-### VCA Webhook Received
+#### VCA Webhook Received
 
 Just like the Level 2 IVR Menu, the server can expect a VCA webhook similar to this when the user responds to the Level 2 Menu with a DTMF Input. Again notice the **dtmf** value indicating the user input and the **clientActionId** value indicating the value passed in the Callflows API Call that triggered this DTMF webhook.
 
@@ -485,7 +485,7 @@ VCA Webhook from IVR Menu Level 2
 
 ```
 
-### IVR Tree: Book Table
+#### IVR Tree: Book Table
 
 ![](../images/f0c215c-image.png)
 
@@ -518,7 +518,7 @@ Here is the corresponding callflow that the server should respond with to trigge
 
 ```
 
-### IVR Tree: Reschedule Reservation
+#### IVR Tree: Reschedule Reservation
 
 ![](../images/1bd1439-image.png)
 
@@ -551,11 +551,11 @@ Here is the corresponding callflow that the server should respond with to trigge
 
 ```
 
-## Voice Session Summary Webhook
+### Voice Session Summary Webhook
 
 Upon termination of the session the session summary([VSS](/connect/reference/session-status)) will be returned via webhook. To learn more about the Voice Session Summary, please [click here](/connect/reference/session-status).
 
-## Glossary of Callflow Actions used in a successful Voice Messaging call scenario
+### Glossary of Callflow Actions used in a successful Voice Messaging call scenario
 
 * [`makecall`](/connect/docs/makecall)
 * [`sayAndCapture`](/connect/reference/call-flow-actions-sayandcapture)

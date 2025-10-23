@@ -5,7 +5,7 @@ This API allows customers to perform various levels of lookup on a given phone n
 - basic phone number type, country code
 - to more advanced MNP/HLR based data such as current/ported mobile operator, live presence and roaming status.
 
-# Server Regions
+## Server Regions
 
 To ensure the use of the correct data center region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each data center region.
 

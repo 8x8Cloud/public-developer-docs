@@ -1,6 +1,6 @@
 # Agent Management
 
-#### User types
+## User types
 
 ***Agent*** - the most basic role in the application where a user will receive a ticket and start conversing with their customer.
 
@@ -8,7 +8,7 @@
 
 ***Administrator*** - tickets will not be assigned to users with this permission, therefore they do not directly engage with customers. However they can view or access “All conversations” menu and assign tickets to any agents or supervisors. Like a supervisor, an administrator can set the application’s system configurations and manage agents
 
-#### Converse agent management page
+## Converse agent management page
 
 The converse agent management page shows you a list of agents, number of available slots to add more agents vs total number of agents that have been occupied. At a glance it also shows you the current available agents on your list vs. the ones that are offline. If you look at per agent on the list, you’ll be able to see the following:
 
@@ -19,7 +19,7 @@ The converse agent management page shows you a list of agents, number of availab
 
 ![1600](../images/78f23f7-Manage_agents.png "Manage agents.png")
   
-#### The converse agent management page allows users with administrator or supervisor level to do the following
+## The converse agent management page allows users with administrator or supervisor level to do the following
 
 * *Add new agents*
 * *Remove agents*

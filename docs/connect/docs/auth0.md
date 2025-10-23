@@ -2,25 +2,25 @@
 
 ## Auth0 integration
 
-## About Auth0
+### About Auth0
 
 [Auth0](https://auth0.com) is an identity management platform that let applications developers easily implement authentication and authorisation logic into their applications.  
 
 Coupled with 8x8 SMS connectivity, it allows developers to send one-time passwords via the Auth0 platform to their users all over the World.
 
-## Integrating Auth0 with 8x8 SMS API
+### Integrating Auth0 with 8x8 SMS API
 
 To leverage SMS API to send OTP codes to your users, you will be using the hook feature in Auth0.  
 
 More specifically, you will be using the "Send a phone message" hook and adapt it to send requests to 8x8 SMS API.
 
-### Prerequisites
+#### Prerequisites
 
 * [Auth0 account](https://auth0.com/signup?place=header&type=button&text=sign%20up)
 * [8x8 CPaaS subaccount](https://connect.8x8.com/messaging/api-keys)
 * [8x8 CPaaS apikey](https://connect.8x8.com/messaging/api-keys)
 
-### Steps
+#### Steps
 
 1. In your [Auth0 portal](https://manage.auth0.com/dashboard/), go to the Auth pipeline > Hooks section.
 2. Select "Create a hook" in the top right corner.
@@ -76,4 +76,4 @@ module.exports = function (recipient, text, context, cb) {
 16. Check 8x8 Connect logs and verify that you Auth0 submitted an SMS to the test number with your account.
 17. You're all set! You can now use this hook in your Auth pipeline!
 
-### Video steps
+#### Video steps

@@ -195,7 +195,7 @@ curl -X POST "https://chatapps.8x8.com/api/v1/subaccounts/$SUBACCOUNT_ID/message
 
 ---
 
-#### Automated Method
+## Automated Method
 
 ### 1. Setup
 
@@ -429,7 +429,7 @@ node generate-curl-scripts
 
 ---
 
-#### Tips & Best Practices
+## Tips & Best Practices
 
 * Always replace placeholders with real values before sending.
 * Test with a non-production recipient first.

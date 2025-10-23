@@ -30,13 +30,13 @@ In object-oriented programming, we use objects with attributes to organize our p
 
 **Let’s go over the different attributes of an SMS one by one!**
 
-## 1. Source: SMS senderID
+### 1. Source: SMS senderID
 
 * **What is a senderID?**
 
 Also called TPOA (Transmission Path Origin Address), this parameter carries the SMS sender’s number or designation. Depending on the local constraints enforced by the mobile operators, different types of senderIDs may or may not be available on mobile networks across the World.
 
-### **What types of senderIDs are available?**
+#### **What types of senderIDs are available?**
 
 #### A) Numeric SenderIDs
 
@@ -70,7 +70,7 @@ Also called TPOA (Transmission Path Origin Address), this parameter carries the 
 
 *To check the availability of a specific kind of senderID in a country or for a mobile network, please contact [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) to find out more.*
 
-##### 2. Destination: the recipient's phone number
+### 2. Destination: the recipient's phone number
 
 * The destination of an SMS is the phone number it’s being sent to.
 * 8x8 CpaaS enables sending SMS to mobile phone numbers in all the countries across the world.
@@ -78,22 +78,22 @@ Also called TPOA (Transmission Path Origin Address), this parameter carries the 
   * A destination phone number is made of an international prefix (ex: +65 for Singapore) and a local phone number (ex: 91046180) concatenated together (ex: +6591046180).
   * *Nb: 8x8 API accept both international and national formats (for national you have to specify the country in the dedicated country field in the API).*
 
-##### 3. clientMessageId: the SMS identification code
+### 3. clientMessageId: the SMS identification code
 
 * MessageIDs formats and rules will differ from one messaging provider to another but they will almost always be used to associate a specific single message with a unique reference that you can store retrieve information about this message later.
 * **What kind of messageids are being used on 8x8 CPaaS?**
 
-### A) 8x8 CPaaS messageids *(automatically generated)*
+#### A) 8x8 CPaaS messageids *(automatically generated)*
 
 * By default, for each message, 8x8 will generate a messageid also referred as UMID (unique message ID). These “internal” messageids allow 8x8 to manage the millions of messages that are processed every hour while helping you troubleshoot your integration and routing issues. 8x8 messageids / UMID are the universal message references when using 8x8.
 
-### B) clientMessageId *(personalized ids)*
+#### B) clientMessageId *(personalized ids)*
 
 * You have the ability to use your own messageids and that is the purpose of the clientMessageId parameter that you can find in the message object.
 
-#### 4. Text and encoding: the message contents
+### 4. Text and encoding: the message contents
 
-### A) The message text (what you send)
+#### A) The message text (what you send)
 
 * The message text is the content of your SMS that is being sent to your recipient.
 
@@ -125,7 +125,7 @@ Also called TPOA (Transmission Path Origin Address), this parameter carries the 
 
 * If you send a message with a length equal to x parts of message, you will be billed for x SMS.
 
-### B) The message encoding (which character set to use)
+#### B) The message encoding (which character set to use)
 
 **Which message encoding formats are supported?**  
 

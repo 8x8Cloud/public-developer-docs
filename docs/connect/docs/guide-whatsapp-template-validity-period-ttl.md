@@ -20,7 +20,7 @@ This guide shows you how to configure the validity period for your templates wit
 >
 >
 
-## TTL Defaults, Ranges, and Compatibility
+### TTL Defaults, Ranges, and Compatibility
 
 The ability to customize Time-To-Live (TTL), the specific ranges allowed, and the default behavior depend on the template type and potentially the API being used:
 
@@ -34,14 +34,14 @@ The ability to customize Time-To-Live (TTL), the specific ranges allowed, and th
 
 ---
 
-## Prerequisites
+### Prerequisites
 
 * Access to [Meta Business Suite](https://business.facebook.com/latest/settings/) with appropriate permissions for your WhatsApp Business Account.
 * An existing, approved **Utility** or **Authentication** WhatsApp template created via the 8x8 platform ([API](/connect/reference/add-whatsapp-template) or [Connect Portal](/connect/docs/whatsapp-templates-management#creating-templates)).
 
 ---
 
-## Configuring the Template Validity
+### Configuring the Template Validity
 
 1. Log in to [Meta Business Suite](https://business.facebook.com/latest/settings/).
 2. Navigate to **WhatsApp accounts** from the left-hand menu and select the relevant WhatsApp account.
@@ -68,7 +68,7 @@ The ability to customize Time-To-Live (TTL), the specific ranges allowed, and th
 
 ---
 
-## Important Considerations
+### Important Considerations
 
 * **Manage Fallbacks & User Preferences:** For the best user experience and to manage expectations, consider allowing users to select their preferred communication channel (e.g., WhatsApp, SMS, Email) during signup or within profile settings. If you *do* implement automated fallback channels, ensure your logic triggers them **only after** the specified validity period has passed (and no delivery status webhook received) to avoid sending duplicate messages across channels.
 * **Default TTL:** If not explicitly set, WhatsApp applies the default validity period listed in the table above.

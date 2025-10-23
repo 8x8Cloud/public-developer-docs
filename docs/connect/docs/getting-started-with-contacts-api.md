@@ -12,7 +12,7 @@ It will allow you to:
 
   and more just to name a few.
 
-# Server Regions
+## Server Regions
 
 To ensure the use of the correct data center region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each data center region.
 

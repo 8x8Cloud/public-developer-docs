@@ -42,7 +42,7 @@ The **HTTP Authorization** field is an **optional** parameter, in case your webh
 
 Webhooks can also be managed via API, [here](/connect/reference/get-webhooks-1) for ChatApps and [here](/connect/reference/get-webhooks-2) for SMS, and [here](/connect/reference/get-webhooks-information-1) for Voice.
 
-### IP Whitelisting
+## IP Whitelisting
 
 With 8x8, your communication is secure, even in the unlikely event that someone gets hold of your API key. That's because only authorised devices from your approved locations (whitelisted IPs) can access our platform.
 

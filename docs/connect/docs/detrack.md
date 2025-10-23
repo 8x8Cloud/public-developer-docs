@@ -24,7 +24,7 @@ This video demo will show how you can integrate 8x8's SMS API with Detrack in or
   
 ---
 
-## Integrating Detrack notifications with SMS
+### Integrating Detrack notifications with SMS
 
 1. From the Detrack Dashboard, Go to **Settings > Notifications**.
 
@@ -52,7 +52,7 @@ The steps to configure a Notification are continued in the following section bel
 
 ---
 
-## Configuring your Detrack Notifications
+### Configuring your Detrack Notifications
 
 1. From the **Add Notification** form, go to the **Trigger** tab.
 2. Select the Detrack **Job Type** i.e Job (Delivery + Collection) / Delivery / Collection. In this example we select a Job.
@@ -67,7 +67,7 @@ The steps to configure a Notification are continued in the following section bel
 
 ---
 
-## Customizing text / SMS notifications
+### Customizing text / SMS notifications
 
 1. Go to the **Text / SMS** tab.
 2. For the **Send Text / SMS to** option, select the field containing the mobile number that you wish to notify when the event is triggered. This field is **optional** – you can choose not to send any text by not selecting any field.

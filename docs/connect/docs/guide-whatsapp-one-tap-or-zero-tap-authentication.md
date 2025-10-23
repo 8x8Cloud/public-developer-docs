@@ -14,9 +14,9 @@ WhatsApp authentication templates can be configured to provide a more seamless a
 >
 >
 
-## Getting Started
+### Getting Started
 
-### When to Use Zero-tap/One-tap
+#### When to Use Zero-tap/One-tap
 
 Zero-tap and One-tap delivery methods are particularly beneficial when:
 
@@ -25,19 +25,19 @@ Zero-tap and One-tap delivery methods are particularly beneficial when:
 * You want to reduce friction in critical user journeys like registration or purchases
 * User experience and conversion speed are key priorities
 
-### Prerequisites
+#### Prerequisites
 
 * An approved WhatsApp authentication template, created via [API](/connect/reference/add-whatsapp-template) or [Connect Portal](/connect/docs/whatsapp-templates-management#creating-templates)
 * Access to Meta Business Suite with appropriate permissions
 * Android app package name and signature hash information
 
-### Before You Begin
+#### Before You Begin
 
 This guide covers template configuration in Meta Business Suite. However, to enable Zero-tap/One-tap functionality, you'll need to implement additional components in your Android app after completing this guide. Details about the implementation will be covered in the **Next Steps** section.
 
 ---
 
-#### Delivery Methods
+### Delivery Methods
 
 * **Zero-tap**: Code is automatically inserted without user interaction. Best for scenarios where users have explicitly agreed to automatic authentication.
 * **One-tap**: Users approve code insertion with a single tap. Provides additional security while maintaining convenience.
@@ -45,7 +45,7 @@ This guide covers template configuration in Meta Business Suite. However, to ena
 
 ---
 
-#### Configuring Your Template
+### Configuring Your Template
 
 1. Log in to [Meta Business Suite](https://business.facebook.com/latest/settings/)
 2. From the left panel, select "WhatsApp accounts" and choose your WhatsApp account
@@ -85,18 +85,18 @@ This guide covers template configuration in Meta Business Suite. However, to ena
 
 ---
 
-#### Implementation Guide
+### Implementation Guide
 
 The following sections contain technical details for Android app implementation and should be reviewed by your development team.
 
-### Testing Your Template
+#### Testing Your Template
 
 Before implementing in your own app, you can:
 
 * Use WhatsApp's official [sample OTP app](https://github.com/WhatsApp/WhatsApp-OTP-Sample-App) to validate your template configuration
 * Test with both Android and iOS devices
 
-### Next Steps
+#### Next Steps
 
 After validating your template configuration, you'll need to implement the required WhatsApp OTP handshake in your Android app. This security mechanism enables Zero-tap/One-tap functionality through either:
 
@@ -115,14 +115,14 @@ After validating your template configuration, you'll need to implement the requi
 >
 >
 
-### Troubleshooting
+#### Troubleshooting
 
 * Verify package name and signature hash match between template configuration and your Android app
 * Ensure [handshake](https://developers.facebook.com/docs/whatsapp/business-management-api/authentication-templates/autofill-button-authentication-templates#initiating-the-handshake) is initiated before sending the authentication message (within 10 minutes)
 * Check that the user has [WhatsApp installed](https://developers.facebook.com/docs/whatsapp/business-management-api/authentication-templates/autofill-button-authentication-templates#checking-if-whatsapp-is-installed) and is logged in
 * Confirm your app has the proper activity defined to receive the authentication code
 
-### Best Practices
+#### Best Practices
 
 * Clearly inform users about automatic code insertion in your message
 * Allow users to choose their preferred authentication method
@@ -131,6 +131,6 @@ See example below:
 
 ![](../images/df4d3135f65bdb880916d73f43b1743935066adf88eb9b75650d4198e4e65e9e-image.png)
 
-### Using the Template
+#### Using the Template
 
 You can send authentication messages using the same [Authentication template payload](/connect/reference/send-message) regardless of the delivery method chosen. The delivery method will be automatically determined based on the user's device type.

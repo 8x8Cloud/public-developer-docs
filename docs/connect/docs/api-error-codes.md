@@ -50,7 +50,7 @@ Example of error JSON object returned by the API
 
 The table below refers to the possible values of the "code" parameter, in the response body returned by the API as shown above. They can be used for additional clarity of what type of error was encountered.
 
-### SMS API, Messaging API
+#### SMS API, Messaging API
 
 | Code | Description |
 | --- | --- |
