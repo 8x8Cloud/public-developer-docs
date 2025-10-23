@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.1">
 <title data-rh="true">Sending Messages in Salesforce Flow Builder | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/salesforce-flowbuilder-8x8-messaging-integration"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Sending Messages in Salesforce Flow Builder | 8x8 Developer Portal"><meta data-rh="true" name="description" content="This guide will walk you through the entire process of connecting Salesforce to the 8x8 Business Messaging API (e.g. for WhatsApp) to send messages directly from your Salesforce environment from Flow Builder, by utilizing External Services. You can also follow the same invocable actions in Orchestrator, Einstein bots, or OmniStudio Assets."><meta data-rh="true" property="og:description" content="This guide will walk you through the entire process of connecting Salesforce to the 8x8 Business Messaging API (e.g. for WhatsApp) to send messages directly from your Salesforce environment from Flow Builder, by utilizing External Services. You can also follow the same invocable actions in Orchestrator, Einstein bots, or OmniStudio Assets."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/salesforce-flowbuilder-8x8-messaging-integration"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/salesforce-flowbuilder-8x8-messaging-integration" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/salesforce-flowbuilder-8x8-messaging-integration" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.ba9a136e.css">
-<script src="/assets/js/runtime~main.7c7d307e.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.f2886b90.js" defer="defer"></script>
 <script src="/assets/js/main.2b52ddc9.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -19,9 +19,9 @@
 <p>👍 <strong>Good to know</strong></p>
 <p>While this guide focuses on WhatsApp Authentication template, you can use the same approach for other WhatsApp templates, or other <a href="/connect/reference/list-of-supported-chatapps-channels">supported messaging apps</a> following their respective schema. For <strong>SMS</strong>, refer to <a href="https://8x8-enterprise-group.readme.io/connect/docs/salesforce-flowbuilder-8x8-sms-integration" target="_blank" rel="noopener noreferrer">this guide</a></p>
 </blockquote>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites-and-requirements">Prerequisites and Requirements<a href="#prerequisites-and-requirements" class="hash-link" aria-label="Direct link to Prerequisites and Requirements" title="Direct link to Prerequisites and Requirements" translate="no">​</a></h3>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites-and-requirements">Prerequisites and Requirements<a href="#prerequisites-and-requirements" class="hash-link" aria-label="Direct link to Prerequisites and Requirements" title="Direct link to Prerequisites and Requirements" translate="no">​</a></h2>
 <p>Before you begin, ensure your Salesforce environment and 8x8 account meet the following requirements.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="salesforce-platform-requirements"><strong>Salesforce Platform Requirements</strong><a href="#salesforce-platform-requirements" class="hash-link" aria-label="Direct link to salesforce-platform-requirements" title="Direct link to salesforce-platform-requirements" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="salesforce-platform-requirements"><strong>Salesforce Platform Requirements</strong><a href="#salesforce-platform-requirements" class="hash-link" aria-label="Direct link to salesforce-platform-requirements" title="Direct link to salesforce-platform-requirements" translate="no">​</a></h3>
 <ul>
 <li><strong>Salesforce Experience:</strong> <strong>Lightning Experience</strong>.</li>
 <li><strong>Required Editions:</strong> <strong>Enterprise</strong>, <strong>Performance</strong>, <strong>Unlimited</strong>, and <strong>Developer</strong> Editions.</li>
@@ -33,15 +33,15 @@
 </ul>
 </li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="8x8-account-requirements"><strong>8x8 Account Requirements</strong><a href="#8x8-account-requirements" class="hash-link" aria-label="Direct link to 8x8-account-requirements" title="Direct link to 8x8-account-requirements" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="8x8-account-requirements"><strong>8x8 Account Requirements</strong><a href="#8x8-account-requirements" class="hash-link" aria-label="Direct link to 8x8-account-requirements" title="Direct link to 8x8-account-requirements" translate="no">​</a></h3>
 <ul>
 <li><strong>8x8 Connect Account:</strong> An active account with access to the messaging channels you wish to use.</li>
 <li><strong>API Credentials:</strong> Your 8x8 Subaccount ID and your API Key (Bearer Token).</li>
 </ul>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="part-1-the-foundation---setting-up-authentication">Part 1: The Foundation - Setting Up Authentication<a href="#part-1-the-foundation---setting-up-authentication" class="hash-link" aria-label="Direct link to Part 1: The Foundation - Setting Up Authentication" title="Direct link to Part 1: The Foundation - Setting Up Authentication" translate="no">​</a></h3>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="part-1-the-foundation---setting-up-authentication">Part 1: The Foundation - Setting Up Authentication<a href="#part-1-the-foundation---setting-up-authentication" class="hash-link" aria-label="Direct link to Part 1: The Foundation - Setting Up Authentication" title="Direct link to Part 1: The Foundation - Setting Up Authentication" translate="no">​</a></h2>
 <p>First, we need to teach Salesforce how to securely authenticate with the 8x8 Messaging API. This involves creating a secure chain of credentials. A Named Credential specifies the callout endpoint&#x27;s URL and its required authentication parameters in one definition.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="step-11-create-the-external-credential"><strong>Step 1.1: Create the External Credential</strong><a href="#step-11-create-the-external-credential" class="hash-link" aria-label="Direct link to step-11-create-the-external-credential" title="Direct link to step-11-create-the-external-credential" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-11-create-the-external-credential"><strong>Step 1.1: Create the External Credential</strong><a href="#step-11-create-the-external-credential" class="hash-link" aria-label="Direct link to step-11-create-the-external-credential" title="Direct link to step-11-create-the-external-credential" translate="no">​</a></h3>
 <p>The External Credential is a secure vault that will hold your API key.</p>
 <ol>
 <li>Navigate to <strong>Setup</strong> ⚙️. In the Quick Find box, type <code>External Credentials</code> and select it.</li>
@@ -56,7 +56,7 @@
 <ol start="4">
 <li>Click <strong>Save</strong>.</li>
 </ol>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="step-12-create-the-principal">Step 1.2: Create the Principal<a href="#step-12-create-the-principal" class="hash-link" aria-label="Direct link to Step 1.2: Create the Principal" title="Direct link to Step 1.2: Create the Principal" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-12-create-the-principal">Step 1.2: Create the Principal<a href="#step-12-create-the-principal" class="hash-link" aria-label="Direct link to Step 1.2: Create the Principal" title="Direct link to Step 1.2: Create the Principal" translate="no">​</a></h3>
 <p>The Principal represents the specific identity and secret used for authentication.</p>
 <ol>
 <li>On the External Credential page you just saved, scroll down to <strong>Principals</strong> and click <strong>New</strong>.</li>
@@ -77,7 +77,7 @@
 <li>Click <strong>Save</strong>.</li>
 </ol>
 <p><img decoding="async" loading="lazy" alt="Create Principal" src="/assets/images/4eb73686c074945d9215cda505902cb164c71d6c36783e8c1f779021505a2da6-image-21437a2fb60e6961d4b1fc8fc870aa4b.png" width="1912" height="967" class="img_ev3q">Create Principal</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="step-13-create-the-named-credential">Step 1.3: Create the Named Credential<a href="#step-13-create-the-named-credential" class="hash-link" aria-label="Direct link to Step 1.3: Create the Named Credential" title="Direct link to Step 1.3: Create the Named Credential" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-13-create-the-named-credential">Step 1.3: Create the Named Credential<a href="#step-13-create-the-named-credential" class="hash-link" aria-label="Direct link to Step 1.3: Create the Named Credential" title="Direct link to Step 1.3: Create the Named Credential" translate="no">​</a></h3>
 <p>The Named Credential links the API&#x27;s address (URL) to the authentication secret you just stored.</p>
 <ol>
 <li>Navigate to <strong>Setup</strong> ⚙️. In the Quick Find box, type <code>Named Credentials</code> and select it.</li>
@@ -100,7 +100,7 @@
 </blockquote>
 <p><img decoding="async" loading="lazy" alt="Completed Named Credential and External Credential" src="/assets/images/1bf24d3598faff200155404c07a05b4a4f16433c996d8073e27e65c49512d90c-image-0e5a64390ed96a6da68b1f8c9c38a639.png" width="3578" height="1994" class="img_ev3q">Completed Named Credential and External Credential</p>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="part-2-defining-the-api-operations">Part 2: Defining the API Operations<a href="#part-2-defining-the-api-operations" class="hash-link" aria-label="Direct link to Part 2: Defining the API Operations" title="Direct link to Part 2: Defining the API Operations" translate="no">​</a></h3>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="part-2-defining-the-api-operations">Part 2: Defining the API Operations<a href="#part-2-defining-the-api-operations" class="hash-link" aria-label="Direct link to Part 2: Defining the API Operations" title="Direct link to Part 2: Defining the API Operations" translate="no">​</a></h2>
 <p>Next, we will use your OAS file to teach Salesforce about the specific 8x8 API calls.</p>
 <ol>
 <li>Navigate to <strong>Setup</strong> ⚙️. In the Quick Find box, type <code>External Services</code> and select it.</li>
@@ -120,9 +120,9 @@
 <p>Salesforce will now parse the file and make the <code>Send-Message</code> and <code>send-message-many</code> operations available as actions in Flow Builder.</p>
 <p><img decoding="async" loading="lazy" alt="External Services created for both API operations" src="/assets/images/0ec93a802335bbb2158049b935e607c88f91936d5af2f9ddbcf10ec18ecf622e-image-e8cb98ab9dc1a5ac9b82933d83ff68ff.png" width="3590" height="1996" class="img_ev3q">External Services created for both API operations</p>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="part-3-building-the-automation-in-flow-builder">Part 3: Building the Automation in Flow Builder<a href="#part-3-building-the-automation-in-flow-builder" class="hash-link" aria-label="Direct link to Part 3: Building the Automation in Flow Builder" title="Direct link to Part 3: Building the Automation in Flow Builder" translate="no">​</a></h3>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="part-3-building-the-automation-in-flow-builder">Part 3: Building the Automation in Flow Builder<a href="#part-3-building-the-automation-in-flow-builder" class="hash-link" aria-label="Direct link to Part 3: Building the Automation in Flow Builder" title="Direct link to Part 3: Building the Automation in Flow Builder" translate="no">​</a></h2>
 <p>This is where we build the logic to construct the message and send it. In this example we&#x27;ll be sending a <strong>WhatsApp Authentication template message</strong>.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="step-31-create-the-flow-and-key-variables">Step 3.1: Create the Flow and Key Variables<a href="#step-31-create-the-flow-and-key-variables" class="hash-link" aria-label="Direct link to Step 3.1: Create the Flow and Key Variables" title="Direct link to Step 3.1: Create the Flow and Key Variables" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-31-create-the-flow-and-key-variables">Step 3.1: Create the Flow and Key Variables<a href="#step-31-create-the-flow-and-key-variables" class="hash-link" aria-label="Direct link to Step 3.1: Create the Flow and Key Variables" title="Direct link to Step 3.1: Create the Flow and Key Variables" translate="no">​</a></h3>
 <ol>
 <li>Navigate to <strong>Setup</strong> ⚙️ &gt; <strong>Flows</strong> and click <strong>New Flow</strong>. Select <strong>Autolaunched Flow</strong>.</li>
 <li>From the toolbox on the left, create the following three variables by clicking <strong>New Resource</strong>. These will be used to build the complex request body.</li>
@@ -160,7 +160,7 @@
 </ul>
 </li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="step-32-first-assignment---set-core-message-properties">Step 3.2: First Assignment - Set Core Message Properties<a href="#step-32-first-assignment---set-core-message-properties" class="hash-link" aria-label="Direct link to Step 3.2: First Assignment - Set Core Message Properties" title="Direct link to Step 3.2: First Assignment - Set Core Message Properties" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-32-first-assignment---set-core-message-properties">Step 3.2: First Assignment - Set Core Message Properties<a href="#step-32-first-assignment---set-core-message-properties" class="hash-link" aria-label="Direct link to Step 3.2: First Assignment - Set Core Message Properties" title="Direct link to Step 3.2: First Assignment - Set Core Message Properties" translate="no">​</a></h3>
 <ol>
 <li>On the flow canvas, click the <code>+</code> icon after the Start element and add an <strong>Assignment</strong> element.</li>
 <li><strong>Label</strong>: <code>Set Core Message Body</code></li>
@@ -186,7 +186,7 @@
 <li><code>{!componentVariable.parameters}</code> | <strong><code>Add</code></strong> | <code>{!parameterVariable}</code></li>
 <li><code>{!messageBody.content.template.components}</code> | <strong><code>Add</code></strong> | <code>{!componentVariable}</code></li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="step-34-third-assignment---build-the-button-component">Step 3.4: Third Assignment - Build the &quot;Button&quot; Component<a href="#step-34-third-assignment---build-the-button-component" class="hash-link" aria-label="Direct link to Step 3.4: Third Assignment - Build the &quot;Button&quot; Component" title="Direct link to Step 3.4: Third Assignment - Build the &quot;Button&quot; Component" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-34-third-assignment---build-the-button-component">Step 3.4: Third Assignment - Build the &quot;Button&quot; Component<a href="#step-34-third-assignment---build-the-button-component" class="hash-link" aria-label="Direct link to Step 3.4: Third Assignment - Build the &quot;Button&quot; Component" title="Direct link to Step 3.4: Third Assignment - Build the &quot;Button&quot; Component" translate="no">​</a></h3>
 <ol>
 <li>Click the <code>+</code> again and add a final <strong>Assignment</strong> element.</li>
 <li><strong>Label</strong>: <code>Build and Add Button Component</code></li>
@@ -202,7 +202,7 @@
 <li><code>{!componentVariable.parameters}</code> | <strong><code>Add</code></strong> | <code>{!parameterVariable}</code></li>
 <li><code>{!messageBody.content.template.components}</code> | <strong><code>Add</code></strong> | <code>{!componentVariable}</code></li>
 </ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="step-35-the-action---make-the-api-call">Step 3.5: The Action - Make the API Call<a href="#step-35-the-action---make-the-api-call" class="hash-link" aria-label="Direct link to Step 3.5: The Action - Make the API Call" title="Direct link to Step 3.5: The Action - Make the API Call" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-35-the-action---make-the-api-call">Step 3.5: The Action - Make the API Call<a href="#step-35-the-action---make-the-api-call" class="hash-link" aria-label="Direct link to Step 3.5: The Action - Make the API Call" title="Direct link to Step 3.5: The Action - Make the API Call" translate="no">​</a></h3>
 <ol>
 <li>Click the final <code>+</code> and add an <strong>Action</strong> element.</li>
 <li>Search for your <code>CPaasMessagingApps</code> actions and select <strong>Send-Message</strong>.</li>
@@ -215,9 +215,9 @@
 </ul>
 <p><img decoding="async" loading="lazy" alt="image" src="/assets/images/78f3891d0fda10039d2fef49ae6397c9473b2892cc24657f628b3c1b572e001d-image-7d21f42d2cc1f9e4278234e15899b811.png" width="3600" height="1608" class="img_ev3q"></p>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="part-4-permissions-and-testing">Part 4: Permissions and Testing<a href="#part-4-permissions-and-testing" class="hash-link" aria-label="Direct link to Part 4: Permissions and Testing" title="Direct link to Part 4: Permissions and Testing" translate="no">​</a></h3>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="part-4-permissions-and-testing">Part 4: Permissions and Testing<a href="#part-4-permissions-and-testing" class="hash-link" aria-label="Direct link to Part 4: Permissions and Testing" title="Direct link to Part 4: Permissions and Testing" translate="no">​</a></h2>
 <p>This final step ensures your user can run the flow and execute the callout.</p>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="step-41-assign-permissions">Step 4.1: Assign Permissions<a href="#step-41-assign-permissions" class="hash-link" aria-label="Direct link to Step 4.1: Assign Permissions" title="Direct link to Step 4.1: Assign Permissions" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-41-assign-permissions">Step 4.1: Assign Permissions<a href="#step-41-assign-permissions" class="hash-link" aria-label="Direct link to Step 4.1: Assign Permissions" title="Direct link to Step 4.1: Assign Permissions" translate="no">​</a></h3>
 <ol>
 <li>Navigate to <strong>Setup</strong> ⚙️ &gt; <strong>Permission Sets</strong> and create a <strong>New</strong> Permission Set.</li>
 <li><strong>Label</strong>: <code>CPaaS API Access</code></li>
@@ -225,13 +225,13 @@
 <li>Click <strong>Edit</strong>. Add the <code>8x8 CPaaS Authentication : 8x8 API Key Principal</code> from the available list to the enabled list. Click <strong>Save</strong>.</li>
 <li><strong>Manage Assignments</strong> for the Permission Set and assign it to your user.</li>
 </ol>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="step-42-debug-the-flow">Step 4.2: Debug the Flow<a href="#step-42-debug-the-flow" class="hash-link" aria-label="Direct link to Step 4.2: Debug the Flow" title="Direct link to Step 4.2: Debug the Flow" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-42-debug-the-flow">Step 4.2: Debug the Flow<a href="#step-42-debug-the-flow" class="hash-link" aria-label="Direct link to Step 4.2: Debug the Flow" title="Direct link to Step 4.2: Debug the Flow" translate="no">​</a></h3>
 <ol>
 <li>Return to your saved Flow.</li>
 <li>Click the <strong>Debug</strong> button.</li>
 <li>Click <strong>Run</strong>.</li>
 <li>Check the debug log on the right for a success message (&quot;All done.&quot;) and check your phone for the WhatsApp message.</li>
 </ol>
-<p>You have now successfully built a low-code integration to send messages with the 8x8 Messaging API from Salesforce.</p></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/salesforce-flow-builder"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Salesforce Flow Builder</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/salesforce-flowbuilder-8x8-sms-integration"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Sending SMS in Salesforce Flow Builder</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#prerequisites-and-requirements" class="table-of-contents__link toc-highlight">Prerequisites and Requirements</a></li><li><a href="#part-1-the-foundation---setting-up-authentication" class="table-of-contents__link toc-highlight">Part 1: The Foundation - Setting Up Authentication</a></li><li><a href="#part-2-defining-the-api-operations" class="table-of-contents__link toc-highlight">Part 2: Defining the API Operations</a></li><li><a href="#part-3-building-the-automation-in-flow-builder" class="table-of-contents__link toc-highlight">Part 3: Building the Automation in Flow Builder</a></li><li><a href="#part-4-permissions-and-testing" class="table-of-contents__link toc-highlight">Part 4: Permissions and Testing</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a></div></div></div></footer></div>
+<p>You have now successfully built a low-code integration to send messages with the 8x8 Messaging API from Salesforce.</p></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/salesforce-flow-builder"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Salesforce Flow Builder</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/salesforce-flowbuilder-8x8-sms-integration"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Sending SMS in Salesforce Flow Builder</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#prerequisites-and-requirements" class="table-of-contents__link toc-highlight">Prerequisites and Requirements</a><ul><li><a href="#salesforce-platform-requirements" class="table-of-contents__link toc-highlight"><strong>Salesforce Platform Requirements</strong></a></li><li><a href="#8x8-account-requirements" class="table-of-contents__link toc-highlight"><strong>8x8 Account Requirements</strong></a></li></ul></li><li><a href="#part-1-the-foundation---setting-up-authentication" class="table-of-contents__link toc-highlight">Part 1: The Foundation - Setting Up Authentication</a><ul><li><a href="#step-11-create-the-external-credential" class="table-of-contents__link toc-highlight"><strong>Step 1.1: Create the External Credential</strong></a></li><li><a href="#step-12-create-the-principal" class="table-of-contents__link toc-highlight">Step 1.2: Create the Principal</a></li><li><a href="#step-13-create-the-named-credential" class="table-of-contents__link toc-highlight">Step 1.3: Create the Named Credential</a></li></ul></li><li><a href="#part-2-defining-the-api-operations" class="table-of-contents__link toc-highlight">Part 2: Defining the API Operations</a></li><li><a href="#part-3-building-the-automation-in-flow-builder" class="table-of-contents__link toc-highlight">Part 3: Building the Automation in Flow Builder</a><ul><li><a href="#step-31-create-the-flow-and-key-variables" class="table-of-contents__link toc-highlight">Step 3.1: Create the Flow and Key Variables</a></li><li><a href="#step-32-first-assignment---set-core-message-properties" class="table-of-contents__link toc-highlight">Step 3.2: First Assignment - Set Core Message Properties</a></li><li><a href="#step-34-third-assignment---build-the-button-component" class="table-of-contents__link toc-highlight">Step 3.4: Third Assignment - Build the &quot;Button&quot; Component</a></li><li><a href="#step-35-the-action---make-the-api-call" class="table-of-contents__link toc-highlight">Step 3.5: The Action - Make the API Call</a></li></ul></li><li><a href="#part-4-permissions-and-testing" class="table-of-contents__link toc-highlight">Part 4: Permissions and Testing</a><ul><li><a href="#step-41-assign-permissions" class="table-of-contents__link toc-highlight">Step 4.1: Assign Permissions</a></li><li><a href="#step-42-debug-the-flow" class="table-of-contents__link toc-highlight">Step 4.2: Debug the Flow</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a></div></div></div></footer></div>
 </body>
 </html>

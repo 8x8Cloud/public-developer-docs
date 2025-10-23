@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.1">
 <title data-rh="true">Single SMS | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/tutorial-single-sms"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Single SMS | 8x8 Developer Portal"><meta data-rh="true" name="description" content="Tutorial: Learn how to use API for sending single SMS"><meta data-rh="true" property="og:description" content="Tutorial: Learn how to use API for sending single SMS"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/tutorial-single-sms"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/tutorial-single-sms" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/tutorial-single-sms" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.ba9a136e.css">
-<script src="/assets/js/runtime~main.7c7d307e.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.f2886b90.js" defer="defer"></script>
 <script src="/assets/js/main.2b52ddc9.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -21,7 +21,7 @@
 <p>We also offer bulk methods that allow sending multiple SMS in one command - for more information, check the following methods in the documentation:</p>
 <p><a href="/connect/reference/send-sms-batch">Send SMS batch</a> and <a href="/connect/reference/send-sms-batch-compact">Send SMS batch (compact)</a></p>
 <p>If you follow the different steps of this tutorial, you will get to send an SMS directly from your command line utility using a simple curl command.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="index">Index<a href="#index" class="hash-link" aria-label="Direct link to Index" title="Direct link to Index" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="index">Index<a href="#index" class="hash-link" aria-label="Direct link to Index" title="Direct link to Index" translate="no">​</a></h3>
 <ul>
 <li>Learn how to use the method for sending single SMS</li>
 <li>Prerequisites</li>
@@ -42,7 +42,7 @@
 <p>For this, we are going to use an 8x8 account created with our email <a href="mailto:amazingdeveloperr@gmail.com" target="_blank" rel="noopener noreferrer">amazingdeveloperr@gmail.com</a> .</p>
 <p>We are going to use our subaccountid <code>riders_hq</code>.</p>
 <p>The apiKey for our account is <code>5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg</code>.</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites">Prerequisites<a href="#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites">Prerequisites<a href="#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites" translate="no">​</a></h3>
 <ul>
 <li>Command line interface compatible with CURL</li>
 <li>8x8 CPaaS account</li>
@@ -52,16 +52,16 @@
 <li>SMS Body</li>
 </ul>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="account-and-credentials">Account and credentials<a href="#account-and-credentials" class="hash-link" aria-label="Direct link to Account and credentials" title="Direct link to Account and credentials" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="account-and-credentials">Account and credentials<a href="#account-and-credentials" class="hash-link" aria-label="Direct link to Account and credentials" title="Direct link to Account and credentials" translate="no">​</a></h3>
 <p><em>You will need to sign-up to use the API. The following steps will guide you through this process and highlight the information to keep aside.</em></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="i-signing-up">I. Signing-up<a href="#i-signing-up" class="hash-link" aria-label="Direct link to I. Signing-up" title="Direct link to I. Signing-up" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="i-signing-up">I. Signing-up<a href="#i-signing-up" class="hash-link" aria-label="Direct link to I. Signing-up" title="Direct link to I. Signing-up" translate="no">​</a></h4>
 <ol>
 <li>Head to <a href="https://connect.8x8.com/login/signup" target="_blank" rel="noopener noreferrer">8x8 Connect sign-up page</a></li>
 <li>Enter your email and follow the instructions to define your password and finalize your account (by default, API password and account password are the same, you can modify this from your account settings)</li>
 <li>Confirm your email address by clicking on the validation link you received in the activation email to activate your account.</li>
 </ol>
 <p><img decoding="async" loading="lazy" alt="Signup 8x8 connect" src="/assets/images/1678cef-Signup_8x8_connect-66a4da7b2292329b0bfae2cc4391603f.png" title="Signup 8x8 connect.png" width="2408" height="745" class="img_ev3q"></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ii-finding-your-apikey-bearer-token-for-api-authentication">II. Finding your apiKey bearer token (for API authentication)<a href="#ii-finding-your-apikey-bearer-token-for-api-authentication" class="hash-link" aria-label="Direct link to II. Finding your apiKey bearer token (for API authentication)" title="Direct link to II. Finding your apiKey bearer token (for API authentication)" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="ii-finding-your-apikey-bearer-token-for-api-authentication">II. Finding your apiKey bearer token (for API authentication)<a href="#ii-finding-your-apikey-bearer-token-for-api-authentication" class="hash-link" aria-label="Direct link to II. Finding your apiKey bearer token (for API authentication)" title="Direct link to II. Finding your apiKey bearer token (for API authentication)" translate="no">​</a></h4>
 <ol>
 <li>Head to <a href="https://connect.8x8.com" target="_blank" rel="noopener noreferrer">8x8 Connect Login Page</a>.</li>
 <li>Click on LOG IN.</li>
@@ -70,7 +70,7 @@
 <li>Create an API key if empty and then keep the API Key value, here: <code>5DhZxZR*************9pYmg</code></li>
 </ol>
 <p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e168c88-API_2-88be78904b6a5b4dd18091965998037d.png" title="API 2.png" width="1453" height="850" class="img_ev3q"></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="iii-identifying-your-subaccountid">III. Identifying your Subaccountid<a href="#iii-identifying-your-subaccountid" class="hash-link" aria-label="Direct link to III. Identifying your Subaccountid" title="Direct link to III. Identifying your Subaccountid" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="iii-identifying-your-subaccountid">III. Identifying your Subaccountid<a href="#iii-identifying-your-subaccountid" class="hash-link" aria-label="Direct link to III. Identifying your Subaccountid" title="Direct link to III. Identifying your Subaccountid" translate="no">​</a></h4>
 <ol>
 <li>Head over to the pricing section and use the subaccountid list to retrieve the <code>subaccountid</code> that you want to use</li>
 <li>By default, your account comes with only one <code>subaccountid</code> for your high-quality service. It is designated by your <code>accountid</code> and the suffix <code>_hq</code>.</li>
@@ -79,7 +79,7 @@
 </ol>
 <p><img decoding="async" loading="lazy" alt="image" src="/assets/images/2c35b4c-API_3-25aa1e74c1acd868263165aa3cccedf2.png" title="API 3.png" width="1448" height="796" class="img_ev3q"></p>
 <hr>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="api-request">API Request<a href="#api-request" class="hash-link" aria-label="Direct link to API Request" title="Direct link to API Request" translate="no">​</a></h4>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="api-request">API Request<a href="#api-request" class="hash-link" aria-label="Direct link to API Request" title="Direct link to API Request" translate="no">​</a></h3>
 <p>The 8x8 SMS single method expects requests sent by developers to respect a specific format.</p>
 <p>In the following parts, we are going to go over the different elements of the request:</p>
 <ul>
@@ -137,7 +137,7 @@
 <li>In curl, we will have to indicate that we want to do a POST request to this URL by using the following command:</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">curl -X &quot;POST&quot; https://sms.8x8.com/api/v1/subaccounts/rider_hq/messages</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ii-preparing-the-request-authentication">II. Preparing the request authentication<a href="#ii-preparing-the-request-authentication" class="hash-link" aria-label="Direct link to II. Preparing the request authentication" title="Direct link to II. Preparing the request authentication" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="ii-preparing-the-request-authentication">II. Preparing the request authentication<a href="#ii-preparing-the-request-authentication" class="hash-link" aria-label="Direct link to II. Preparing the request authentication" title="Direct link to II. Preparing the request authentication" translate="no">​</a></h4>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="remarks-1">Remarks<a href="#remarks-1" class="hash-link" aria-label="Direct link to Remarks" title="Direct link to Remarks" translate="no">​</a></h4>
 <ul>
 <li>As explained in the <a href="/connect/docs/authentication">Authentication Docs</a>, the API authentication uses an apiKey bearer token method.</li>
@@ -152,7 +152,7 @@
 <li>We just have to replace our <code>{token}</code> placeholder by our apiKey</li>
 <li>The authorization header will then look like that: <code>-H &quot;Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg&quot;</code></li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="iii-preparing-the-request-data-payload">III. Preparing the request data payload<a href="#iii-preparing-the-request-data-payload" class="hash-link" aria-label="Direct link to III. Preparing the request data payload" title="Direct link to III. Preparing the request data payload" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="iii-preparing-the-request-data-payload">III. Preparing the request data payload<a href="#iii-preparing-the-request-data-payload" class="hash-link" aria-label="Direct link to III. Preparing the request data payload" title="Direct link to III. Preparing the request data payload" translate="no">​</a></h4>
 <ul>
 <li>The API expects to receive a structured request containing the SMS data in a specific format.</li>
 <li>As detailed in the documentation, the data that we have to submit should be a JSON object structured as follows:</li>
@@ -209,7 +209,7 @@
 <li>In curl, we will transmit the JSON data inline and indicate that the data payload is in JSON format using the following commands:</li>
 </ul>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">-H &quot;Content-Type: application/json&quot; </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">-d $&#x27;{ </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  &quot;source&quot;: &quot;MyBrand&quot;, </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  &quot;destination&quot;: &quot;+6512345678&quot;, </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  &quot;text&quot;: &quot;Bob, a special present for you from Santa&quot;, </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  &quot;encoding&quot;: &quot;AUTO&quot; </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="iv-putting-it-together-and-posting-the-curl-request">IV. Putting it together and posting the curl request<a href="#iv-putting-it-together-and-posting-the-curl-request" class="hash-link" aria-label="Direct link to IV. Putting it together and posting the curl request" title="Direct link to IV. Putting it together and posting the curl request" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="iv-putting-it-together-and-posting-the-curl-request">IV. Putting it together and posting the curl request<a href="#iv-putting-it-together-and-posting-the-curl-request" class="hash-link" aria-label="Direct link to IV. Putting it together and posting the curl request" title="Direct link to IV. Putting it together and posting the curl request" translate="no">​</a></h4>
 <ul>
 <li>If we wrap up all the elements prepared in the steps above, we should put together the 3 elements of our request: <strong>URL + Authentication + Data Payload</strong></li>
 <li>To send the API request to the SMS API endpoint with our message we should use the following command in our command line utility:</li>
@@ -219,7 +219,7 @@
 <li>And that’s it! Here is the result:</li>
 </ul>
 <p><img decoding="async" loading="lazy" alt="437" src="/assets/images/db2629f-Final_Image-fda02d498c6c5db40e926a9a986b6035.png" title="Final Image.png" width="437" height="860" class="img_ev3q"></p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="going-further">Going further<a href="#going-further" class="hash-link" aria-label="Direct link to Going further" title="Direct link to Going further" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="going-further">Going further<a href="#going-further" class="hash-link" aria-label="Direct link to Going further" title="Direct link to Going further" translate="no">​</a></h4>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="i-api-response">I. API response<a href="#i-api-response" class="hash-link" aria-label="Direct link to I. API response" title="Direct link to I. API response" translate="no">​</a></h4>
 <ul>
 <li>When sending the curl command above from your command line utility, you notice that the API sends back a response that shows up in your terminal, for example in this tutorial:</li>
@@ -243,6 +243,6 @@
 <li>A developer World without error would not be funny!</li>
 <li>If ever you send malformed requests to the API, it will let you know by using some specific error codes in the response.</li>
 <li>You can find the different codes and their meanings in the <a href="/connect/reference/delivery-receipts-error-codes">SMS Delivery receipts error codes</a> for delivery related errors as well as <a href="/connect/reference/api-error-codes">API Error codes</a> for error codes that apply to all 8x8 CPaaS APIs.</li>
-</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/send-sms-api-reference"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Send SMS API</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/tutorial-batch-sms"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Batch SMS</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#tutorial-learn-how-to-use-api-for-sending-single-sms" class="table-of-contents__link toc-highlight">Tutorial: Learn how to use API for sending single SMS</a><ul><li><a href="#introduction" class="table-of-contents__link toc-highlight"><strong>Introduction</strong></a></li></ul></li><li><a href="#index" class="table-of-contents__link toc-highlight">Index</a></li><li><a href="#prerequisites" class="table-of-contents__link toc-highlight">Prerequisites</a></li><li><a href="#account-and-credentials" class="table-of-contents__link toc-highlight">Account and credentials</a><ul><li><a href="#i-signing-up" class="table-of-contents__link toc-highlight">I. Signing-up</a></li><li><a href="#ii-finding-your-apikey-bearer-token-for-api-authentication" class="table-of-contents__link toc-highlight">II. Finding your apiKey bearer token (for API authentication)</a></li><li><a href="#iii-identifying-your-subaccountid" class="table-of-contents__link toc-highlight">III. Identifying your Subaccountid</a></li><li><a href="#ii-preparing-the-request-authentication" class="table-of-contents__link toc-highlight">II. Preparing the request authentication</a></li><li><a href="#iii-preparing-the-request-data-payload" class="table-of-contents__link toc-highlight">III. Preparing the request data payload</a></li><li><a href="#iv-putting-it-together-and-posting-the-curl-request" class="table-of-contents__link toc-highlight">IV. Putting it together and posting the curl request</a></li><li><a href="#going-further" class="table-of-contents__link toc-highlight">Going further</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a></div></div></div></footer></div>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/send-sms-api-reference"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Send SMS API</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/tutorial-batch-sms"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Batch SMS</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#tutorial-learn-how-to-use-api-for-sending-single-sms" class="table-of-contents__link toc-highlight">Tutorial: Learn how to use API for sending single SMS</a><ul><li><a href="#introduction" class="table-of-contents__link toc-highlight"><strong>Introduction</strong></a></li><li><a href="#index" class="table-of-contents__link toc-highlight">Index</a></li><li><a href="#prerequisites" class="table-of-contents__link toc-highlight">Prerequisites</a></li><li><a href="#account-and-credentials" class="table-of-contents__link toc-highlight">Account and credentials</a></li><li><a href="#api-request" class="table-of-contents__link toc-highlight">API Request</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a></div></div></div></footer></div>
 </body>
 </html>
