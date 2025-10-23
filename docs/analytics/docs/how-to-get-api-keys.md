@@ -33,11 +33,11 @@ This document will outline how to get API keys for each API and also what the ba
 
 If you do not have the API Keys option you do not have the correct permission/role.
 
-![](../images/API_Key_Generation.png "API Key Generation.png")
+![API Key Generation](../images/API_Key_Generation.png "API Key Generation.png")
 
 The list of available API keys and an option to create new keys will be presented:
 
-![](../images/API_Key_List.png "API Key List.png")
+![API Key List](../images/API_Key_List.png "API Key List.png")
 
 An App is a set of credentials that have access to a specific set of APIs. You can choose to create as many apps as you wish and each app can have access to as many or few APIs as appropriate.
 
@@ -48,7 +48,7 @@ To create an App:
 
 In this example a single App will have access to Analytics for Contact Center, Customer Experience Recent Calls and Customer Experience Post Call Survey APIs.
 
-![](../images/Create_AP_App.png "Create AP App.png")
+![Create AP App](../images/Create_AP_App.png "Create AP App.png")
 
 > 📘 **Modifying an existing App**
 >
@@ -60,7 +60,7 @@ Clicking the eyeball icon will display the Key and Secret onscreen.
 
 Clicking elsewhere on the row will bring a view of the App showing which APIs are enabled and allowing the secret/key to be revealed/copied individually
 
-![](../images/API_Key_Details.png "API Key Details.png")
+![API Key Details](../images/API_Key_Details.png "API Key Details.png")
 
 Clicking the eyeball icon beside the Key and or Secret will reveal the Key/Secret and allow them to be copied.  
 

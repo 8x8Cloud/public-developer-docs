@@ -27,15 +27,15 @@ There will be the following 3 charts available:
 
 - **SMS:** Shows the amount of SMS sent across the given time period for each of the days
 
-![](../images/798894f-image.png)
+![image](../images/798894f-image.png)
 
 - **Delivery Rate:**  Shows how the delivery rate changes across the given time period for each of the days
 
-![](../images/c2d578f-image.png)
+![image](../images/c2d578f-image.png)
 
 - **Cost:** Shows how the average cost of the SMS changes on a given day
 
-![](../images/82e3240-image.png)
+![image](../images/82e3240-image.png)
 
 ### Destination Countries
 
@@ -76,7 +76,7 @@ The SMS Messages section will allow you to filter your SMS sent by the following
 
 It will also feature a **Daily Report** Section where it will have the following stats about messages.
 
-![](../images/809a56f-image.png)
+![image](../images/809a56f-image.png)
 
 Here is a list of the columns in the **Daily Report** and their meaning.
 
@@ -96,11 +96,11 @@ Here is a list of the columns in the **Daily Report** and their meaning.
 
 You can choose to export the daily report immediately which will send a URL link to the specified email.
 
-![](../images/6fc0e2a-image.png)
+![image](../images/6fc0e2a-image.png)
 
 There is also the option to schedule an export to be sent periodically to the specified email.
 
-![](../images/120bef8-image.png)
+![image](../images/120bef8-image.png)
 
 ### SMS Conversions
 
@@ -108,11 +108,11 @@ This reports page allows you to see conversions relevant to the [Verification AP
 
 The main graph will show how many SMS have been sent using the service over time and what percentage have been successfully converted. This is useful for OTP use cases to track if there are any OTP conversion issues for example.
 
-![](../images/e875269-image.png)
+![image](../images/e875269-image.png)
 
 There is also a more detailed reports section on the same page which will show a detailed breakdown of the status of each verification attempt, conversion rate and cost. You can also export the report as a CSV file as well.
 
-![](../images/e40a2bd-image.png)
+![image](../images/e40a2bd-image.png)
 
 ### SMS Engage
 
@@ -122,7 +122,7 @@ This section will contain statistics on SMS Engage Surveys sent. Please see the 
 
 8x8 offers a URL Shortening service that can redirect from your chosen domain to our URL shortening domain. This feature allows us to offer click tracking. These Short URLs can be sent as part of SMS API messages or SMS Engage Surveys that you send with 8x8. The statistics for click tracking can been see in this section of the Reports.
 
-![](../images/651c46a-image.png)
+![image](../images/651c46a-image.png)
 
 For further details on how to set up Short URLs, reach out to your Account Manager.
 
@@ -132,7 +132,7 @@ For further details on how to set up Short URLs, reach out to your Account Manag
 
 Below is the SMS logs in the Connect Dashboard which shows a record of the SMS that were sent and received by this account.
 
-![](../images/19e01a8-image.png)
+![image](../images/19e01a8-image.png)
 
 The SMS Logs above shown shares information about individual SMS messages sent including:
 
@@ -149,7 +149,7 @@ The SMS Logs above shown shares information about individual SMS messages sent i
 
 Inside each SMS record, the following information is available:
 
-![](../images/96d4733-image.png)
+![image](../images/96d4733-image.png)
 
 This table shows a description of each of the fields in the SMS record.
 

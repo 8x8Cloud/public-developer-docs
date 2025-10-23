@@ -49,8 +49,8 @@ The url itself is your **Identity provider URL** while an XML key called **entit
 
 10. Log out of the customer portal and now try to log in using SSO.
 
-![](../images/89a5a75-screenshot-connect.8x8.com-2024.02.27-10_31_37.png)
-![](../images/f90b6cf-screenshot-connect.8x8.com-2024.02.27-10_32_32.png)
+![image](../images/89a5a75-screenshot-connect.8x8.com-2024.02.27-10_31_37.png)
+![image](../images/f90b6cf-screenshot-connect.8x8.com-2024.02.27-10_32_32.png)
 **Notes when logging in using SSO:**
 
 By default, all users without “admin”(administrator) access will be forced to login via SSO once it is configured. Forl users with “admin” access, they can choose to use the normal login using a username/password combination or via SSO.

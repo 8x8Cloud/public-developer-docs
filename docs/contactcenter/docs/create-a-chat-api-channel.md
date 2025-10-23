@@ -15,11 +15,11 @@ A Channel can be created either via UI or via API.
 1. Access [Configuration Manager](https://docs.8x8.com/8x8WebHelp/VCC/configuration-manager-general/content/cfgoverview.htm).
 2. Go to **Channels > Chat API**
 
-![](../images/Screenshot_2021-07-07_at_11.51.29.png "Screenshot 2021-07-07 at 11.51.29.png")
+![image](../images/Screenshot_2021-07-07_at_11.51.29.png "Screenshot 2021-07-07 at 11.51.29.png")
 
 3. Click **New Channel**
 
-![](../images/Screenshot_2021-07-07_at_11.52.01.png "Screenshot 2021-07-07 at 11.52.01.png")
+![image](../images/Screenshot_2021-07-07_at_11.52.01.png "Screenshot 2021-07-07 at 11.52.01.png")
 
 4. Complete the **Name**, **Webhook**, and **Queue** fields
 5. Click **Save**

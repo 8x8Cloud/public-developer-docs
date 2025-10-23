@@ -162,7 +162,7 @@ interfaceConfigOverwrite: {
 
 After the required setup, go to your JaaS meeting and then open **Triple Dot Menu > Invite People**. In the dialog box that opens, proceed to enter the SIP address in the **Invite your contacts** box. This should result in a dialog box showing that you have invited that SIP address.
 
-![](../images/ec0184f-sip_dial_out_1.gif)
+![sip dial out](../images/ec0184f-sip_dial_out_1.gif)
 The softphone connected to that SIP Address should ring as shown, when you pick up the call you will be connected to the JaaS Room. The softphone can choose to connect to the call over **audio-only** or **video+audio**.
 
 ![image](../images/346a89c-image.png)

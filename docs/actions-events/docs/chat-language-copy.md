@@ -108,7 +108,7 @@ chatApp.setVariables({"_VIP":"YES",
 
 Then inside the 8x8 script, you can use the variable like the below, to route to the queue you want them to go to
 
-![](../images/e5673df5d46fcce77ca354d0aec357279f965a271178f90a8d752f9fa9572392-VIP.png "Chat Gateway flow.jpg")
+![image](../images/e5673df5d46fcce77ca354d0aec357279f965a271178f90a8d752f9fa9572392-VIP.png "Chat Gateway flow.jpg")
   
 #### Important Notes
 

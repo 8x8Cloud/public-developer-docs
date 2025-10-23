@@ -31,7 +31,7 @@ The records listed in **Event Log** contain the following properties:
 
 You can search for a particular event in the search bar and use the located event to extract information for further review and analysis.
 
-![](../images/b7b5b45-Screenshot_2021-07-23_at_13.28.49.png "Screenshot 2021-07-23 at 13.28.49.png")
+![image](../images/b7b5b45-Screenshot_2021-07-23_at_13.28.49.png "Screenshot 2021-07-23 at 13.28.49.png")
 
 ### Filters
 

@@ -16,19 +16,19 @@ In the case of facing issues logging in, please try “Forgot Password” and fo
 
 From the home screen, an agent can place a call by clicking on the **"Start a Call"** button.
 
-![](../images/0ffff5851a00b396b69d2db18ff693f289cea8a4fd62c240d8c18613b8668290-Animation-ezgif.com-speed.gif)
+![image](../images/0ffff5851a00b396b69d2db18ff693f289cea8a4fd62c240d8c18613b8668290-Animation-ezgif.com-speed.gif)
 This will open a dialog box with two fields:
 
 - **Phone Number:** The customer phone number to send an SMS invite to.
 - **Enter a Call Reference:** This is so you can enter a unique string (such as "customer_call_2") which would be associated with this call. This used not only in the VI User Interface Call Log but also in the API when you want to later refer to a call.
 
-![](../images/974c40411373e4edc61bdca2417e6ffec00dfde0ceb169a93f0f4cdd7145b73e-Screenshot_2025-06-25_at_9.53.53_AM.png)
+![image](../images/974c40411373e4edc61bdca2417e6ffec00dfde0ceb169a93f0f4cdd7145b73e-Screenshot_2025-06-25_at_9.53.53_AM.png)
 Once the invitation is placed, the agent will see this pop up screen while they wait for the customer to accept the call.
 
-![](../images/523cb10ae9c03fb429c6849c5a323608813bed0179b82faac3c584f836177bcd-Screenshot_2025-06-25_at_9.59.59_AM.png)
+![image](../images/523cb10ae9c03fb429c6849c5a323608813bed0179b82faac3c584f836177bcd-Screenshot_2025-06-25_at_9.59.59_AM.png)
 When the customer opens the invitation link to the call, the pop up screen will be updated and the agent will be automatically connected to the call.
 
-![](../images/b8f48665f00bfd6de8fe5d40f90ca6f240b86a93eb819d7199e260d0c6846400-Screenshot_2025-06-25_at_10.29.08_AM.png)
+![image](../images/b8f48665f00bfd6de8fe5d40f90ca6f240b86a93eb819d7199e260d0c6846400-Screenshot_2025-06-25_at_10.29.08_AM.png)
 
 ## During a call
 
@@ -108,7 +108,7 @@ The available commands for both the customer and agent are:
 
 After a call ends, both the agent and the customer will be able to rate the call quality and add a comment. The agent will also be able to return to their Agent Dashboard.
 
-![](../images/b64db48c7c7c4e349565ec979c9fdc9b0d9923e7ffb061d19656d38086bf3e73-Screenshot_2025-07-03_at_5.40.08_PM.png)
+![image](../images/b64db48c7c7c4e349565ec979c9fdc9b0d9923e7ffb061d19656d38086bf3e73-Screenshot_2025-07-03_at_5.40.08_PM.png)
 
 ## Call Logs
 

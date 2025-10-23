@@ -24,11 +24,11 @@ There is setup work we need to do which is covered in the tutorial such as creat
 
 Visit the [Contacts](https://connect.8x8.com/messaging/contacts) page in Connect where we will create a new group. Once on this page below, click into "Contact Groups" and hit the red **Create Group** button.
 
-![](../images/2a52aeb-image.png)
+![image](../images/2a52aeb-image.png)
 
 We should be seeing the screen below, you can fill in any values for the Group Name and Description, but ensure that "Blacklisted" is checked since this controls whether the user is sent messages after being added to the group.
 
-![](../images/83ef638-image.png)
+![image](../images/83ef638-image.png)
 
 ## Get Opt Out group ID
 
@@ -40,9 +40,9 @@ The URL for the request should be similar to this format with account name and f
 https://contacts.8x8.com/api/v1/accounts/<Account Name>/groups?name=<full or partial group name>
 ```
 
-![](../images/77f1706-image.png)
+![image](../images/77f1706-image.png)
 
-![](../images/22c1d2e-image.png)
+![image](../images/22c1d2e-image.png)
 
 The response body will contain a JSON object, the first item in the array should contain your new group, note down the id which in this case is 11344 but may be different. Note down what your group id is for subsequent steps.
 
@@ -50,25 +50,25 @@ The response body will contain a JSON object, the first item in the array should
 
 First go to the Automation Builder page and select the blue button for "Create Custom Workflow"
 
-![](../images/ee8fa19-image.png)
+![image](../images/ee8fa19-image.png)
 
 ## Opt-Out Template
 
 From the pop up in the next page, select "Opt-Out"
 
-![](../images/048deb9-image.png)
+![image](../images/048deb9-image.png)
 
 ## Building the Workflow
 
 In the next page the workflow should be pre-populated with steps, click on the "Trigger" step which is the first step in the flow. Select the subaccount which has the Messaging Apps (Previously known as Chat Apps) number or account that you wish to associate with this opt-out flow. Once it is selected click "Update" to save it to the step.
 
-![](../images/a82702c-image.png)
+![image](../images/a82702c-image.png)
 
 ## Deciding the Keyword
 
 The keyword is controlled by the "Branch" Step in red, you can modify this if you wish to change the condition to trigger the opt out.
 
-![](../images/02922d4-image.png)
+![image](../images/02922d4-image.png)
 
 >
 > 📘 Note: The default workflow will try to detect the presence of "STOP" in every message and it is case sensitive.
@@ -80,7 +80,7 @@ Once the keyword for opt-out is decided the next step will show the HTTP Request
 
 Once that is done, you can move on to modifying the HTTP Request itself.
 
-![](../images/8e76b72-image.png)
+![image](../images/8e76b72-image.png)
 
 The values should mostly be in place, however you will need to replace the request body with the version below which has the Group ID that you saved earlier substituted.
 
@@ -98,11 +98,11 @@ Note as usual your API key can be obtained from the API Keys [section](https://c
 
 For Opt Out Messaging, the default message only mentions SMS, however the contact blacklist works across SMS and Messaging Apps (formerly Chat Apps) so you can replace the message with the channels that you use to communicate with the customer.
 
-![](../images/623e60c-image.png)
+![image](../images/623e60c-image.png)
 
 After saving these changes, the opt out flow can be enabled by enabling the button at the top left and saving. It will activate immediately and any message that contains the keyword will result in a user being added to the opt-out group.
 
-![](../images/6ab46c8-image.png)
+![image](../images/6ab46c8-image.png)
 
 ## Testing
 
@@ -112,7 +112,7 @@ Once the automation workflow is in place, you can test it by sending the opt-out
 
 In order to remove a customer from a blacklist, you can either manually remove them by visiting the Contact Groups [page](https://connect.8x8.com/messaging/contacts) by visiting their contact details and change their groups.
 
-![](../images/fff26d8-image.png)
+![image](../images/fff26d8-image.png)
 
 Another option is you can use the [API to remove a contact](/connect/reference/delete-contacts-from-group) from a group.
 

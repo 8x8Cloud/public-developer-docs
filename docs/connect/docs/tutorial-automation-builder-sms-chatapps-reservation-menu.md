@@ -28,23 +28,23 @@ The steps in the tutorial is tailored for our Chat Apps API and it is using What
 
 4b. **Chat App Message Step:**  Send a reply message if there is no response received from the original message sender and end the workflow instance.
 
-![](../images/696e2be-image.png)
+![image](../images/696e2be-image.png)
 
 ## Workflow Steps In-Depth
 
 ## 1. ChatApps Trigger
 
-![](../images/4883414-image.png)
+![image](../images/4883414-image.png)
 
-![](../images/b56b6c5-image.png)
+![image](../images/b56b6c5-image.png)
 
 The **ChatApps trigger** here is set to Chat Apps where you should have a subaccount with an already configured ChatApps channel. You should reach out to your respective account manager to complete the setup for your Chat Apps channel if you do not already have a functioning Chat Apps subaccount.
 
 ## 2. ChatApps Message Step
 
-![](../images/9f8a6a5-image.png)
+![image](../images/9f8a6a5-image.png)
 
-![](../images/72ee8f9-image.png)
+![image](../images/72ee8f9-image.png)
 
 In the **Chat Apps Message Step**, the **destination** property can be set to `{{data.payload.user.channelUserId}}` which refers to the original sender which you can use the subsequent Chat Apps Steps as well.
 
@@ -72,7 +72,8 @@ The **Message** property will either be automatically filled in if you chose to 
 
 ## 3. Wait for Reply Step
 
-![](../images/8f2479f-image.png)![](../images/4b3e879-image.png)
+![image](../images/8f2479f-image.png)
+![image](../images/4b3e879-image.png)
 
 In the **Wait for Reply Step**, the **Channel** property should be set to the channel you expect to receive a message in. In the example we are using WhatsApp.
 
@@ -82,9 +83,9 @@ The **From** property can be set to {{data.payload.user.channelUserId}} which wi
 
 ## 4. Branch Step (and 5a-c for Branch options)
 
-![](../images/bd9f581-image.png)
+![image](../images/bd9f581-image.png)
 
-![](../images/5111726-image.png)
+![image](../images/5111726-image.png)
 
 In the **Branch Step**, for **Please select a condition** property, set it to "Check if a value contains a string".
 
@@ -94,9 +95,9 @@ For the **keyword(s) to compare** property, add "Confirm", "Reschedule" and "Hel
 
 ## 4b. Chat Apps Message
 
-![](../images/1a907cc-image.png)
+![image](../images/1a907cc-image.png)
 
-![](../images/884f9c0-image.png)
+![image](../images/884f9c0-image.png)
 
 In the **Chat Apps Message Step**, set "Please select a new subaccount" to your subaccount that should already be configured for the Chat Apps channel that you would like to use.
 
@@ -112,9 +113,9 @@ Message can be set to a free form message with the following text by selecting "
 
 ## 6a. ChatApps Message Step (Confirm)
 
-![](../images/514e30a-image.png)
+![image](../images/514e30a-image.png)
 
-![](../images/43ea5f6-image.png)
+![image](../images/43ea5f6-image.png)
 
 In the **Chat Apps Message Step**, set "Please select a new subaccount" to your subaccount that should already be configured for the Chat Apps channel that you would like to use.
 
@@ -130,9 +131,9 @@ Message can be set to a free form message with the following text by selecting "
 
 ## 6b. ChatApps Message Step (Reschedule)
 
-![](../images/aa1e183-image.png)
+![image](../images/aa1e183-image.png)
 
-![](../images/6fd6ef8-image.png)
+![image](../images/6fd6ef8-image.png)
 
 In the **Chat Apps Message Step**, set "Please select a new subaccount" to your subaccount that should already be configured for the Chat Apps channel that you would like to use.
 
@@ -148,15 +149,15 @@ Message can be set to a free form message with the following text by selecting "
 
 ## 6c. Send to Converse
 
-![](../images/1df8b1d-image.png)
+![image](../images/1df8b1d-image.png)
 
 The Send to Converse step will send the conversation to [Converse](https://www.google.com/search?q=converse+8x8+docs&rlz=1C5GCEM_enSG1072SG1072&oq=converse+8x8+docs&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yDQgCEAAYhgMYgAQYigUyBggDEEUYQDIGCAQQRRhAMgYIBRBFGEAyBggGEEUYPDIGCAcQRRg80gEIMTY1MGowajSoAgCwAgA&sourceid=chrome&ie=UTF-8) for a live agent to take over. Converse should be configured for your account prior to using this option.
 
 ## 7c. HTTP Request
 
-![](../images/040d2ff-image.png)
+![image](../images/040d2ff-image.png)
 
-![](../images/9203c68-image.png)
+![image](../images/9203c68-image.png)
 
 Set the **URL** Property to the Endpoint that you would like to send a HTTP request to. Also modify it's method to the appropriate choice for your endpoint. In the example I use a free endpoint from <beeceptor.com>to do mock API testing and see requests come in.
 
@@ -177,7 +178,7 @@ If required you can also change the **Request Body** property, I set the value a
 
 In order to test the workflow, simply send a WhatsApp message to the WhatsApp account tied to your subaccount. In the example you can send any message to start
 
-![](../images/8404ac9-image.png)
+![image](../images/8404ac9-image.png)
 
 ### Tutorial JSON
 

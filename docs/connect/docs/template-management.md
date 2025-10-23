@@ -24,7 +24,7 @@ To create a template, go to the Templates page of the Connect Dashboard.
 
 Afterwards click **Create new template** which will pop up a dialog box.
 
-![](../images/2b2ed78-image.png)
+![image](../images/2b2ed78-image.png)
 
 **Name:** A template name which you can use to search for and identify the template.
 
@@ -52,8 +52,8 @@ How these are sent are covered in the Multi-Channel Sender Section.
 
 To delete a template, you can find a template in the list and then click the **Trash** icon, this will bring up a confirmation dialog to delete the template.
 
-![](../images/80d58c8-Screenshot_2023-10-10_at_1.45.10_PM.png)
-![Delete Template Dialog](../images/76866d9-image.png)Delete Template Dialog
+![image](../images/80d58c8-Screenshot_2023-10-10_at_1.45.10_PM.png)
+![Delete Template Dialog](../images/76866d9-image.png "Delete Template Dialog")
 
 #### Editing Templates
 
@@ -61,7 +61,5 @@ To edit existing templates, first find your template in the list either by the s
 
 When you have found your template you can click the Pencil Icon to edit and make any changes.
 
-![](../images/ccf666f-Screenshot_2023-10-10_at_1.48.28_PM.png)
-![Edit Template Dialog
-
-](../images/bfeca98-image.png)Edit Template Dialog
+![image](../images/ccf666f-Screenshot_2023-10-10_at_1.48.28_PM.png)
+![Edit Template Dialog](../images/bfeca98-image.png "Edit Template Dialog")

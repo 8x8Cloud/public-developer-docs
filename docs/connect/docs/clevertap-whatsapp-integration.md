@@ -58,17 +58,17 @@ If the message is sent successfully, you should see the following dialog:
 
 As well as a corresponding WhatsApp Message sent to your WhatsApp Account.
 
-![](../images/df00240a3c28a189f881d98f0d665308ad2b1e88bfe737abf8829298ca174c3e-image.png)
+![image](../images/df00240a3c28a189f881d98f0d665308ad2b1e88bfe737abf8829298ca174c3e-image.png)
 
 ## Using Campaigns
 
 To use this new WhatsApp Provider in campaigns, select **WhatsApp** as a Messaging Channel when you create a new campaign.
 
-![](../images/3a39d4e-image.png)
+![image](../images/3a39d4e-image.png)
 
 In the next screen you should see the new WhatsApp Provider available as an option
 
-![](../images/31546a3-image.png)
+![image](../images/31546a3-image.png)
 
 Afterwards you can proceed to send WhatsApp messages in the campaign. For further details on how to send a campaign, please refer to [Clevertap's guide](https://docs.clevertap.com/docs/intro-to-campaigns).
 

@@ -11,7 +11,7 @@ There are two components to this project:
 1. **Automation Builder workflow** which will be built on the [Connect](https://connect.8x8.com/) Dashboard. The workflow takes care of orchestrating responses through WhatsApp.
 2. **Backend Server** we have provided example server [code](https://github.com/EMChamp/8x8-google-calendar-wa-scheduler) in Python for the Scheduling service described in this diagram. The Backend Server API allows us to connect to the Google Calendar API and also run some scheduling logic based on the responses.
 
-![](../images/3d46132-image.png)
+![image](../images/3d46132-image.png)
 
 ## Demo Video
 
@@ -48,11 +48,11 @@ b. Send Goodbye message if flow is cancelled.
 d. Send Cancellation Message through WhatsApp.
 12. a/b/c. Send Confirmation message based on user's chosen timeslot.
 
-![](../images/77b8cc0-image.png)
+![image](../images/77b8cc0-image.png)
 
-![](../images/1dcaabf-image.png)
+![image](../images/1dcaabf-image.png)
 
-![](../images/e0744e4-image.png)
+![image](../images/e0744e4-image.png)
 
 ## Workflow Steps In-Depth
 
@@ -60,9 +60,9 @@ d. Send Cancellation Message through WhatsApp.
 
 This trigger is responsible for kicking off the workflow, by default it will be triggered when any inbound chat apps message is received on the WABA tied to the subaccount you select below.
 
-![](../images/4883414-image.png)
+![image](../images/4883414-image.png)
 
-![](../images/b56b6c5-image.png)
+![image](../images/b56b6c5-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -73,9 +73,9 @@ This trigger is responsible for kicking off the workflow, by default it will be 
 
 This Chat Apps Message Step introduces the main menu that will start off with a simple welcome message and then display a menu with 2 options for the customer to select from.
 
-![](../images/f0af7e5-image.png)
+![image](../images/f0af7e5-image.png)
 
-![](../images/9327f92-image.png)
+![image](../images/9327f92-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -88,7 +88,8 @@ This Chat Apps Message Step introduces the main menu that will start off with a 
 
 This step waits for a customer to reply to the main menu option list, their reply will be used in the following branch step.
 
-![](../images/8f2479f-image.png)![](../images/4b3e879-image.png)
+![image](../images/8f2479f-image.png)
+![image](../images/4b3e879-image.png)
 
 As configured this waits 5 minutes for a customer to reply to the main menu option message in the previous step, however you can change the timeout as desired.
 
@@ -102,9 +103,9 @@ As configured this waits 5 minutes for a customer to reply to the main menu opti
 
 In this step, we branch off two separate paths depending on the response from the WA user.
 
-![](../images/c548fe6-image.png)
+![image](../images/c548fe6-image.png)
 
-![](../images/fdd93b7-image.png)
+![image](../images/fdd93b7-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -116,9 +117,9 @@ In this step, we branch off two separate paths depending on the response from th
 
 In this Chat Apps message step we will send a very simple prompt to ask the user to input their email address.
 
-![](../images/6065d97-image.png)
+![image](../images/6065d97-image.png)
 
-![](../images/5cf7320-image.png)
+![image](../images/5cf7320-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -130,9 +131,9 @@ In this Chat Apps message step we will send a very simple prompt to ask the user
 
 This step is if the user chooses not to schedule a meeting in the main menu. In that case a cancellation message will be played for the user.
 
-![](../images/c7348d6-image.png)
+![image](../images/c7348d6-image.png)
 
-![](../images/b9ec4d8-image.png)
+![image](../images/b9ec4d8-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -144,7 +145,7 @@ This step is if the user chooses not to schedule a meeting in the main menu. In 
 
 In the wait for reply step, we will wait for the customer to enter their email address. We give them 1 minute to respond but you can change this value as needed.
 
-![](../images/933c523-image.png)
+![image](../images/933c523-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -156,7 +157,7 @@ In the wait for reply step, we will wait for the customer to enter their email a
 
 This is the first of our HTTP Request Steps that will be hitting our **/retrieve_meetings** endpoint that is part of our API. This endpoint will return possible meeting timeslots which can then be presented to the user in the subsequent Chat Apps Message Step.
 
-![](../images/e70ee19-image.png)
+![image](../images/e70ee19-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -166,7 +167,7 @@ This is the first of our HTTP Request Steps that will be hitting our **/retrieve
 
 The outputs of this step is how we save the values from the API response body to be presented to the user. The values match the response body JSON that we will specify in our code.
 
-![](../images/06d0917-image.png)
+![image](../images/06d0917-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -180,7 +181,7 @@ The outputs of this step is how we save the values from the API response body to
 
 ## 8) Chat Apps Message Step - Meeting Timeslots
 
-![](../images/bb9426a-image.png)
+![image](../images/bb9426a-image.png)
 
 | Field | Value |  |
 | --- | --- | --- |
@@ -191,13 +192,13 @@ The outputs of this step is how we save the values from the API response body to
 
 A bit of an explanation for the **message** field, the entire message is wrapped in curly brackets since we are using the output data.meetings as part of the string. This is combined with the rest of the string in order to produce a message which looks like this:
 
-![](../images/3ace9ed-image.png)
+![image](../images/3ace9ed-image.png)
 
 ## 9) Wait For Reply Step - Customer Chooses Timeslot
 
 This step will wait for a customer to choose from the options presented above.
 
-![](../images/d045c6b-image.png)
+![image](../images/d045c6b-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -209,9 +210,9 @@ This step will wait for a customer to choose from the options presented above.
 
 This step will branch based on the customer's input from the previous step. The following steps are HTTP Request steps that will decide what meeting timeslot is booked.
 
-![](../images/a9ad033-image.png)
+![image](../images/a9ad033-image.png)
 
-![](../images/cf0e856-image.png)
+![image](../images/cf0e856-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -223,11 +224,11 @@ This step will branch based on the customer's input from the previous step. The 
 
 These three HTTP Request Steps will be tied to the customer's input in the previous step.
 
-![](../images/7df91f8-image.png)
+![image](../images/7df91f8-image.png)
 
 The only difference between these fields will be the numbers used for the timeslot, so the backend server knows what the user chose. For example, we will use {{data.timeslot1_start}} for timeslot 1's start time and then {{data.timeslot2_start}} for timeslot 1's start time.
 
-![](../images/7a7c7c7-image.png)
+![image](../images/7a7c7c7-image.png)
 
 | Field | Value |  |
 | --- | --- | --- |
@@ -235,7 +236,7 @@ The only difference between these fields will be the numbers used for the timesl
 | Request Body | {<br>"start": "{{data.timeslotX_start}}",<br>"end": "{{data.timeslotX_end}}",<br>"customer_email": "{{data.waitforreply_9196_step_text}}"<br>}**Note:** Replace timeslotX with the timeslot option, such as timeslot1, timeslot2, timeslot3. |  |
 | Timeout | 20 Seconds |  |
 
-![](../images/b4cc48a-image.png)
+![image](../images/b4cc48a-image.png)
 
 For the output you can save the start_time and end_time for the following confirmation message. The values will be specify to JSON response body of the backend API code that we provide.
 
@@ -248,9 +249,9 @@ For the output you can save the start_time and end_time for the following confir
 
 This step is if the user chooses not to schedule a meeting in the main menu, in that case a cancellation message is played.
 
-![](../images/c7348d6-image.png)
+![image](../images/c7348d6-image.png)
 
-![](../images/b9ec4d8-image.png)
+![image](../images/b9ec4d8-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -262,9 +263,9 @@ This step is if the user chooses not to schedule a meeting in the main menu, in 
 
 This step sends a simple confirmation message through WhatsApp and ends the workflow. If a user sends another message after this workflow ends, then it will trigger a fresh workflow instances from the beginning.
 
-![](../images/ac714d3-image.png)
+![image](../images/ac714d3-image.png)
 
-![](../images/d9d84de-image.png)
+![image](../images/d9d84de-image.png)
 
 | Field | Value |
 | --- | --- |

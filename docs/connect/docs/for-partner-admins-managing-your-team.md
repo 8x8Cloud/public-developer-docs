@@ -16,11 +16,11 @@ Roles allow you to create templates of permissions that can be assigned to your 
     - Select the specific modules and sub-permissions this role should have. You can grant access to entire product areas or select granular permissions like 'View Logs' or 'View Reports'.
     - Click **Apply** and save the new role.
 
-![](../images/b5a6eb6e8d0a5dc2073ec28e272058bf4fedbab15a60434607486724eadb7811-Manage_users_1.png)
+![Manage users](../images/b5a6eb6e8d0a5dc2073ec28e272058bf4fedbab15a60434607486724eadb7811-Manage_users_1.png)
 
-![](../images/1583a6fb76f25243b351bad2b30de992674f275df0df5a3d46fb06fb2defd84f-Manage_roles_-__Create_a_role_Empty_state.png)
+![Manage roles - Create a role Empty state](../images/1583a6fb76f25243b351bad2b30de992674f275df0df5a3d46fb06fb2defd84f-Manage_roles_-__Create_a_role_Empty_state.png)
 
-![](../images/981294e834f351ddf2954b6fa7f5b89892aeff2124ac8e61fc99899e3819b1a3-Popover_window.png)
+![Popover window](../images/981294e834f351ddf2954b6fa7f5b89892aeff2124ac8e61fc99899e3819b1a3-Popover_window.png)
 
 1. **Editing a Role:** To modify an existing role, find it in the list and click the **edit icon**.
 
@@ -35,4 +35,4 @@ Once your roles are defined, you can manage your users' access.
     - **Assign a Role:** Apply a pre-defined role to grant them a standard set of permissions.
     - **Assign Customer Accounts:** Select the specific customer accounts that this user should be able to view.
 
-![](../images/ad89ff5348eb030f7ea2e19de8172b82ecaccac6b7a3eb8843e6fbd884519d9f-Manage_users.png)
+![Manage users](../images/ad89ff5348eb030f7ea2e19de8172b82ecaccac6b7a3eb8843e6fbd884519d9f-Manage_users.png)

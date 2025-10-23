@@ -33,7 +33,7 @@ The Data Request Token will the password
 
 Where encodedValue is base64encode(username:password)
 
-![](../images/a542cf0-CC-Request-Action-Token.png "CC-Request-Action-Token.png")
+![CC Request Action Token](../images/a542cf0-CC-Request-Action-Token.png "CC-Request-Action-Token.png")
 
 ## Working with Campaign Records
 

@@ -35,7 +35,7 @@ If you want to **send a text message**, your request will look like this:
 
 The user will receive this corresponding message:
 
-![](../images/b08b935-image.png)
+![image](../images/b08b935-image.png)
 
 ---
 
@@ -59,7 +59,7 @@ If you want to send an image with an optional `text`, your request will look lik
 
 The user will receive this corresponding message with the corresponding image from the URL that you specify.
 
-![](../images/c1ce5fe-image.png)
+![image](../images/c1ce5fe-image.png)
 
 ---
 
@@ -100,7 +100,7 @@ This template has a single parameter where you can specify the actual OTP code i
 
 The user will receive this corresponding message:
 
-![](../images/1d39cd5-image.png)
+![image](../images/1d39cd5-image.png)
 
 ---
 
@@ -146,7 +146,7 @@ The user will receive this corresponding message:
 
 This will result in the following message being sent with the appropriate verification code filled in as a parameter from your API call.
 
-![](../images/0336c16-image.png)
+![image](../images/0336c16-image.png)
 In addition, you can also specify a fallback to SMS option which will automatically deliver the message to the user via SMS, if the message cannot be delivered via WhatsApp (such as if the user does not have WhatsApp). It is possible to specify a different body message to fit within the character limit of the SMS message. Please see the section below for details on SMS fallback.
 
 ---
@@ -184,7 +184,7 @@ This template has 1 image header and a predefined text body.
 
 The user will receive this corresponding message. Note the text is decided in the template itself and you can have dynamic parameters in the text. The image URL itself is already dynamic.
 
-![](../images/f1a5c88-image.png)
+![image](../images/f1a5c88-image.png)
 
 ---
 
@@ -269,7 +269,7 @@ This template is a location template and it allows you to specify a set of coord
 
 The user will receive this corresponding message with a pin to indicate the user location which can open up a navigation app on their phone (such as Google Maps).
 
-![](../images/0360c89-image.png)
+![image](../images/0360c89-image.png)
 
 ---
 
@@ -326,7 +326,7 @@ Below is an example of a Dynamic CTA Button Message with 2 CTA buttons. Please n
 
 The corresponding message will appear as below where the text parameters specified above will be passed to the **"Check Out"** and **"Call Us"** Buttons
 
-![](../images/7037e2c-image.png)
+![image](../images/7037e2c-image.png)
 
 ---
 
@@ -425,10 +425,10 @@ This message type can support **up to 3 reply buttons**:
 
 The user will receive this corresponding message.
 
-![](../images/d20dff2-image.png)
+![image](../images/d20dff2-image.png)
 If the user clicks on each button, it will send the corresponding reply.
 
-![](../images/a5a2a99-image.png)
+![image](../images/a5a2a99-image.png)
 
 ---
 
@@ -496,13 +496,13 @@ If the user clicks on each button, it will send the corresponding reply.
 
 This will send the corresponding message.
 
-![](../images/db5a73e-image.png)
+![image](../images/db5a73e-image.png)
 If the customer selects the "Book Slot" option then they will be presented with the options for
 
-![](../images/74d42ab-image.png)
+![image](../images/74d42ab-image.png)
 After clicking "Send" then the user will send the corresponding reply.
 
-![](../images/917ad27-image.png)
+![image](../images/917ad27-image.png)
 
 ---
 
@@ -559,7 +559,7 @@ This type of message will feature a single item from a business catalog, it will
 
 Here is what the corresponding message will look like to the customer receiving the message:
 
-![](../images/62ac5b5-image.png)
+![image](../images/62ac5b5-image.png)
 
 ### Customer Flow
 
@@ -571,22 +571,22 @@ Once the customer clicks **View**, they will be taken to a page containing the f
 
 There is also an option to message the business for any questions or clarifications.
 
-![](../images/2e8a5c7-image.png)
+![image](../images/2e8a5c7-image.png)
 Additionally, the customer can choose to **Add to Cart**, which will add the item to a shopping cart.
 
-![](../images/7a9a7f4-image.png)
+![image](../images/7a9a7f4-image.png)
 Once the item is added you can view the cart which will take you to the **Place order** screen.
 
-![](../images/ffb3fe4-image.png)
+![image](../images/ffb3fe4-image.png)
 Selecting **Place Order** will send a message to the business with the cart items, so that the business can process the order.
 
-![](../images/15d6b91-image.png)
+![image](../images/15d6b91-image.png)
   
 At this point, WhatsApp leaves it to the business to define the next steps for this order, such as requesting address information for delivery or collecting payment information. It is possible for example to use webhooks or Automation Builder to listen for a cart message for a customer and then reply accordingly.
 
 Finally, the **View sent cart** option will allow the customer to confirm what items were purchased in the order.
 
-![](../images/ef9e62d-image.png)
+![image](../images/ef9e62d-image.png)
   
 ---
 
@@ -654,31 +654,31 @@ This option can send multiple product items from a business catalog to a custome
 
 Here is what the corresponding catalog message will look like.
 
-![](../images/a32565d-image.png)
+![image](../images/a32565d-image.png)
 
 ### Customer Flow
 
 After the customer clicks on **View Items**, it will appear as follows:
 
-![](../images/f874cb1-image.png)
+![image](../images/f874cb1-image.png)
   
 The customer can click on an individual item to bring up the single-item page
 
-![](../images/58ab049-image.png)
+![image](../images/58ab049-image.png)
 After selecting **Add to Cart**, the catalog message will now reflect items added to the cart and their amounts.
 
-![](../images/19c4d8e-image.png)
+![image](../images/19c4d8e-image.png)
 **View Cart** will give the option of seeing the items in the cart and then allowing the customer to **Place Order**.
 
-![](../images/3a25da3-image.png)
+![image](../images/3a25da3-image.png)
 After the customer selects **Place order**, this will send a message to the business containing information about the cart.
 
-![](../images/0e1f907-image.png)
+![image](../images/0e1f907-image.png)
 At this point, WhatsApp leaves it to the business to define the next steps for this order, such as requesting address information for delivery or collecting payment information. It is possible for example to use webhooks or Automation Builder to listen for a cart message for a customer and then reply accordingly.
 
 **View sent cart** would let the customer confirm the items sent in the cart.
 
-![](../images/733b6f7-image.png)
+![image](../images/733b6f7-image.png)
   
 #### Optional: Adding SMS Fallback
 
@@ -772,10 +772,10 @@ Below is an example of a batch of messages that are using a WhatsApp Template to
 
 The first recipient (**+6511111111**) will see this message as a PDF file was defined in their message object.
 
-![](../images/c3ec858-image.png)
+![image](../images/c3ec858-image.png)
 
 The second recipient (**+6522222222**) will see a different message as a different file was defined in their message object.
 
-![](../images/5f665a7-image.png)
+![image](../images/5f665a7-image.png)
 
 This example shows the flexibility of the messages array in that you can customize the message that you send for each recipient.

@@ -24,4 +24,4 @@ If you have not already done so, please visit the 8x8 website at [https://connec
 
 On the diagram below a simple number masking call diagram is shown for a call between a Passenger and Driver.
 
-![](../images/86b6f2e0eefaea5654fb0075877629e4cbc33624cf990b692f2d13072df6cd73-NumberMasking.png)
+![Number Masking](../images/86b6f2e0eefaea5654fb0075877629e4cbc33624cf990b692f2d13072df6cd73-NumberMasking.png)

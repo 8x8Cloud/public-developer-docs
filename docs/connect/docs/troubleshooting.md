@@ -14,7 +14,7 @@ Use the following [endpoint](/connect/reference/get-workflow-instances) to retri
 
 When calling this endpoint, you will receive a list of the most recent instances. Copy the **workflowId** from the instance you would like to check errors for which will be used in the next step.
 
-![](../images/13b1124-image.png)
+![image](../images/13b1124-image.png)
 
 ## 2. Retrieve errors from workflow instance
 
@@ -22,7 +22,7 @@ Once you have the most recently executed instance's workflowId, use this value i
 
 In this case, there is an error in the HTTP Step that tells us that it is preventing the workflow from being completed.
 
-![](../images/0e7a9e3-image.png)
+![image](../images/0e7a9e3-image.png)
 
 ## Common Errors
 

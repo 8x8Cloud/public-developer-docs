@@ -29,7 +29,7 @@
 
 The corresponding message the user will receive:
 
-![](../images/922cb3b165f5e7b3b750e82d80d1dbcd0d41f95d3cb74c097d1e050789d0d4cf-Text.png)
+![image](../images/922cb3b165f5e7b3b750e82d80d1dbcd0d41f95d3cb74c097d1e050789d0d4cf-Text.png)
 
 ---
 
@@ -59,7 +59,7 @@ The corresponding message the user will receive:
 
 The corresponding message the user will receive:
 
-![](../images/c5f9de293d906f4fe09f184f2519b58ff8e02f347fa4acbbca6b780366766422-Image_6.png)
+![image](../images/c5f9de293d906f4fe09f184f2519b58ff8e02f347fa4acbbca6b780366766422-Image_6.png)
   
 ---
 
@@ -81,7 +81,7 @@ The corresponding message the user will receive:
 
 The corresponding message the user will receive:
 
-![](../images/602dd6dd429b4863b5c199b6d2e49d8e05bc4765c2a8173fa9dea5f1cb1d4922-Video.png)
+![image](../images/602dd6dd429b4863b5c199b6d2e49d8e05bc4765c2a8173fa9dea5f1cb1d4922-Video.png)
   
 ---
 
@@ -123,7 +123,7 @@ The corresponding message the user will receive:
 
 The corresponding message the user will receive:
 
-![](../images/635d3e126566938536a5d8c5422384bafbf5b042bcf545aa09df5f48325294ec-File.png)
+![image](../images/635d3e126566938536a5d8c5422384bafbf5b042bcf545aa09df5f48325294ec-File.png)
   
 ---
 
@@ -141,7 +141,7 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 | **Open URL / Webview** | Opens browser or in-app webview (full/half/tall). | Secure checkout, product page, claim form, loyalty sign-in. | Seamless upsell without forcing an app download. |
 | **Create Calendar Event** | Pre-fills a calendar entry in the user’s default calendar. | Doctor appointments, flight reminders, webinar invites. | Cuts no-shows by embedding reminders directly in the calendar. |
 
-![](../images/2f3128a1c6a2038bda2b9f5d6c9b2ddcc6149da519ba6edfdbfced18cfd6ed7b-Appointment_confirm.png)
+![Appointment confirm](../images/2f3128a1c6a2038bda2b9f5d6c9b2ddcc6149da519ba6edfdbfced18cfd6ed7b-Appointment_confirm.png)
   
 #### Best practices
 

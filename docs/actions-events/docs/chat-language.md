@@ -136,10 +136,10 @@ Then, the full script will look like this
 
 When the query is routed through to an agent, they will be able to see the data that was passed into the webchat, in both the interaction panel
 
-![](../images/4ecdf7d0b8c0a0c8bbed9d94570493ba0c5a125d6c6d013e887ca87e5629e64d-Agent.png "Chat Gateway flow.jpg")
+![Chat Gateway flow](../images/4ecdf7d0b8c0a0c8bbed9d94570493ba0c5a125d6c6d013e887ca87e5629e64d-Agent.png "Chat Gateway flow.jpg")
 Here, it what the customer see's so the full conversation is in french
 
-![](../images/df3d03b1178d6797084eabe3944427d4ae8324ca6ee9016cf2ab398966fd2961-Customerchat.png "Chat Gateway flow.jpg")
+![Chat Gateway flow](../images/df3d03b1178d6797084eabe3944427d4ae8324ca6ee9016cf2ab398966fd2961-Customerchat.png "Chat Gateway flow.jpg")
 
 #### Important Notes
 

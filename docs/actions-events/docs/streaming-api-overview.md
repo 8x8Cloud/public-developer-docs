@@ -26,7 +26,7 @@ To either obtain an existing or generate a new authentication token:
 2. On the menu, pane go to **Integration** **> API Token**
 3. If no tokens are present, click the **New Token** box next to the **Data Request Token** field.
 
-![](../images/aa0e29a-api-token.png "api-token.png")
+![api token](../images/aa0e29a-api-token.png "api-token.png")
 
 4. Copy the generated **Data Request Token** to your clipboard for authentication use.
 
@@ -241,13 +241,13 @@ To access your tenant:
 
 The authentication window displays:
 
-![](../images/1a8c4c0-tenant-updates.png "tenant-updates.png")
+![tenant updates](../images/1a8c4c0-tenant-updates.png "tenant-updates.png")
 
 2. Enter your tenant **User Name** and your **Authentication Token** in the **Password** field and click **OK**.
 
 Following successful connection with the Tenant, the **Tenant Updates** screen displays:
 
-![](../images/2104f74-tenant-update-2.png "tenant-update-2.png")
+![tenant-update](../images/2104f74-tenant-update-2.png "tenant-update-2.png")
 
 The displayed **Tenant Updates** screen consists of the following information fields:
 

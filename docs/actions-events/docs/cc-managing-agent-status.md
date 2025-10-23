@@ -12,7 +12,7 @@ The username will be the "Username" value from this screen, it is generally the 
 
 Where encodedValue is base64encode(username:password)
 
-![](../images/841df98-CC-Request-Action-Token.png "CC-Request-Action-Token.png")
+![CC Request Action Token](../images/841df98-CC-Request-Action-Token.png "CC-Request-Action-Token.png")
 
 > 📘 If there are no token values
 >
@@ -131,7 +131,7 @@ curl --location --request GET 'https://{ccPlatform}.8x8.com/api/v{version}/tenan
 - Black lines indicate bidirectional
 - All other transitions are NOT supported via API
 
-![](../images/838a466-Agent_Status_API_Allowed_Transitions.jpg "Agent Status API Allowed Transitions.jpg")
+![Agent Status API Allowed Transitions](../images/838a466-Agent_Status_API_Allowed_Transitions.jpg "Agent Status API Allowed Transitions.jpg")
 
 [Agent status API Reference](/actions-events/reference/getagentsstatus) allows you to try out this API.
 

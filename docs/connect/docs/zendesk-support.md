@@ -39,21 +39,21 @@ In order to filter by the tickets sent by 8x8, you will need to create a **Zende
 
 The tag can be any value, however for this tutorial we are assuming you are using a tag called **ChatApps**. If you choose to use a different value, please note that the tutorial will show ChatApps where your tag would be instead.
 
-![](../images/1598547-image.png)
+![image](../images/1598547-image.png)
 
 ### Queue Setup
 
 Navigate to the **Settings** Page, then go to the Admin Center through the link.
 
-![](../images/1b0383f-image.png)
+![image](../images/1b0383f-image.png)
 
 Once on the **Admin Center** Page, go to **Objects and Rules** and then **Tickets**. In the **Tickets** menu, go to **Settings** check **Enable tags on tickets**.
 
-![](../images/6e90e08-image.png)
+![image](../images/6e90e08-image.png)
 
 Go to **Workspaces** > **Agent Tools** > **Views**. Click on **Add View**
 
-![](../images/4bc9529-image.png)
+![image](../images/4bc9529-image.png)
 
 Create the queue with the following conditions.
 
@@ -62,17 +62,17 @@ Create the queue with the following conditions.
 * **Tickets can meet any of these conditions to appear in the view**
   * Tags - Contains at Least one of the Following - ChatApps
 
-![](../images/f4765bf-image.png)
+![image](../images/f4765bf-image.png)
 
 ### Webhook Setup
 
 Once the queue is created, navigate back to the **Admin Center**. Then in the side menu go to **Apps and Integrations** > **Webhooks**, you can search for "webhook" on the left search bar to find this easier. Once on this page, click the **Create Webhook** button.
 
-![](../images/bb73177-image.png)
+![image](../images/bb73177-image.png)
 
 In the next screen, select **Trigger or Automation**
 
-![](../images/df021cd-image.png)
+![image](../images/df021cd-image.png)
 
 In the next screen, set the following fields:
 
@@ -89,14 +89,14 @@ In the next screen, set the following fields:
 
 You may test the webhook as well and ensure that it is returning a 200 Response Code.
 
-![](../images/5de820f-image.png)
+![image](../images/5de820f-image.png)
 
 After adding the webhook, return to the **Admin Center** again and navigate to **Objects and Rules** > **Business Rules** > **Triggers**.
 
-![](../images/f7d8102-image.png)
+![image](../images/f7d8102-image.png)
 On the **Triggers** page, click **Add Trigger**.
 
-![](../images/d9e7e60-image.png)
+![image](../images/d9e7e60-image.png)
 
 Configure the new trigger as follows:
 
@@ -141,8 +141,8 @@ Configure the new trigger as follows:
     }
     ```
 
-![](../images/0ee7fd6-image.png)
-![](../images/16f0838-image.png)
+![image](../images/0ee7fd6-image.png)
+![image](../images/16f0838-image.png)
 After creating trigger, create another trigger as follows.
 
 * **Trigger Name**: Any Value (We use Chatapps status changed)
@@ -172,19 +172,19 @@ After creating trigger, create another trigger as follows.
   }
   ```
 
-![](../images/5a39d8d-image.png)
+![image](../images/5a39d8d-image.png)
 
 ### Create Zendesk API Token
 
-In order to give 8x8 access to the Zendesk API, you will need to generate an API token. Return to the **Admin Center**, then in the sidebar navigate to **Apps and Integrations** > **APIs** > **Zendesk API**. In the next screen agree to the Zendesk Terms and Conditions and click **Get Started**.![](../images/dfc6015-image.png)
+In order to give 8x8 access to the Zendesk API, you will need to generate an API token. Return to the **Admin Center**, then in the sidebar navigate to **Apps and Integrations** > **APIs** > **Zendesk API**. In the next screen agree to the Zendesk Terms and Conditions and click **Get Started**.![image](../images/dfc6015-image.png)
 
 Once on this screen, check the button for **Token Access** to enable it. Afterwards click "**Add API Token**"
 
-![](../images/f10d84a-image.png)
+![image](../images/f10d84a-image.png)
 
 Once you are shown your API Tokens value, record it as you will need to send this information to our team to enable your Zendesk integration.
 
-![](../images/dbc00b4-image.png)
+![image](../images/dbc00b4-image.png)
 
 #### Send Information to 8x8 to Enable Zendesk Integration
 
@@ -212,25 +212,25 @@ Once your integration is setup properly, you should be able to receive a message
 
 Here is an example WhatsApp message that is sent to the WABA associated with an 8x8 Subaccount.
 
-![](../images/daa69a3-image.png)
+![image](../images/daa69a3-image.png)
 
 To check for the reply, you can view the tickets automatically generated from the view you created.
 
-![](../images/b46c8fb-image.png)
+![image](../images/b46c8fb-image.png)
 
 Here is what the ticket will look like once in a conversation. The messages from the Zendesk Agent are under "Customer Service Agent (Rommel Sunga) and then replies from the customer are under "Rommel Sunga".
 
-![](../images/f3c1d9a-image.png)
+![image](../images/f3c1d9a-image.png)
 
 The customer service agent can send replies as "Public Reply" and those messages will be sent to the customer.
 
-![](../images/4ee018b-image.png)
+![image](../images/4ee018b-image.png)
 
 This will show up as a reply on the customer's WhatsApp.
 
-![](../images/6a1f35b-image.png)
+![image](../images/6a1f35b-image.png)
 
-Once the issue is resolved, the agent can mark the ticket as solved.![](../images/16cde57-image.png)
+Once the issue is resolved, the agent can mark the ticket as solved.![image](../images/16cde57-image.png)
 
 > 📘 **Solved Tickets**
 >
@@ -242,12 +242,12 @@ Once the issue is resolved, the agent can mark the ticket as solved.![](../image
 
 New Message coming into a ticket after the ticket was solved.
 
-![](../images/4ae8825-image.png)
+![image](../images/4ae8825-image.png)
 
 The message comes in from the customer, but the ticket remains solved.
 
-![](../images/589a792-image.png)
+![image](../images/589a792-image.png)
 
 This example trigger will set all tickets tagged with ChatApps to pending for example, if a new reply comes in after they are solved.
 
-![](../images/e45e825-image.png)
+![image](../images/e45e825-image.png)

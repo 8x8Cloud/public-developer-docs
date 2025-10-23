@@ -58,13 +58,13 @@ To enable IP rate limiting to these endpoints for your service, you will need to
 
 Submit the request form on the [Help Center](https://support.wavecell.com/hc/en-us/requests/new?ticket_form_id=900000421766) portal. The content should be similar to the following screenshot. The customer support will help you create the IP rate limiting rule specifically to your `SubAccount` and its related endpoint.  
 
-![](../images/6127379-IP_rate_limiting.png "IP rate limiting.png")
+![IP rate limiting](../images/6127379-IP_rate_limiting.png "IP rate limiting.png")
 
 **Step 2:**  
 
 Fill up the `clientIp` field in the request with the origin client IP address and forward the request to 8x8 APIs.
 
-![](../images/05cddfc-clientip.png "clientip.png")
+![clientip](../images/05cddfc-clientip.png "clientip.png")
 
 **3.** Risk of IP spoofing vulnerability  
 

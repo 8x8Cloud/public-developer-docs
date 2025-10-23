@@ -14,7 +14,7 @@ Action Request Token will be the password.
 
 Where encodedValue is base64encode(username:password)
 
-![](../images/841df98-CC-Request-Action-Token.png "CC-Request-Action-Token.png")
+![CC Request Action Token](../images/841df98-CC-Request-Action-Token.png "CC-Request-Action-Token.png")
 
 ## Place Call For Agent
 

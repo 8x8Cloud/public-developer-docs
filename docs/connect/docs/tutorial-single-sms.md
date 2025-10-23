@@ -62,7 +62,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 2. Enter your email and follow the instructions to define your password and finalize your account (by default, API password and account password are the same, you can modify this from your account settings)
 3. Confirm your email address by clicking on the validation link you received in the activation email to activate your account.
 
-![](../images/1678cef-Signup_8x8_connect.png "Signup 8x8 connect.png")
+![Signup 8x8 connect](../images/1678cef-Signup_8x8_connect.png "Signup 8x8 connect.png")
 
 ### II. Finding your apiKey bearer token (for API authentication)
 
@@ -72,7 +72,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 4. Head over to the **side menu > API keys** section
 5. Create an API key if empty and then keep the API Key value, here: `5DhZxZR*************9pYmg`
 
-![](../images/e168c88-API_2.png "API 2.png")
+![image](../images/e168c88-API_2.png "API 2.png")
 
 ### III. Identifying your Subaccountid
 
@@ -81,7 +81,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 3. Note down this value, you will need it later.
 4. In that example, the `subaccountid` is `riders_hq`
 
-![](../images/2c35b4c-API_3.png "API 3.png")
+![image](../images/2c35b4c-API_3.png "API 3.png")
 
 ---
 
@@ -152,7 +152,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/rider_hq/messages
 * The API expects to receive a structured request containing the SMS data in a specific format.
 * As detailed in the documentation, the data that we have to submit should be a JSON object structured as follows:
 
-![](../images/8c2ed20-JSON_Object_Properties.png "JSON Object Properties.png")
+![image](../images/8c2ed20-JSON_Object_Properties.png "JSON Object Properties.png")
 
 #### Tutorial request data payload
 

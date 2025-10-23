@@ -24,7 +24,7 @@ Next, we need to create the webhook, so that data can be sent between 8x8 and th
 
 Go to Configuration Manager - Integration - webhook
 
-![](../images/14c401f-Webhook111.png)
+![image](../images/14c401f-Webhook111.png)
 
 Then select Add webhook and populate with the details
 
@@ -34,7 +34,7 @@ URL - this is the webhook of the application that you want to communicate with t
 
 Chat API Version - This needS to be Chat Gateway
 
-![](../images/42bf824-Webhook3.png)
+![image](../images/42bf824-Webhook3.png)
 
 Now you can create a channel
 
@@ -42,7 +42,7 @@ Now you can create a channel
 
 Go to Configuration Manager - Channel - Chat API
 
-![](../images/cfd6d87-ChatGatewayChannel.png)
+![image](../images/cfd6d87-ChatGatewayChannel.png)
 
 Select new channel, then populate the details
 
@@ -54,7 +54,7 @@ Webhook - select the webhook you have created in the step above, or a different 
 
 Queue - This is a queue that the channel will route to, however this can be changed in the conversation flow if needed
 
-![](../images/c093697-NewChannel1.png)
+![image](../images/c093697-NewChannel1.png)
 
 **Create conversation** [API](/actions-events/reference/createcctransaction-1)
 

@@ -22,7 +22,7 @@ It’s powered by Rich Communication Services (RCS), a protocol developed by Goo
 
 • Supports two-way conversations (ideal for updates, promotions, reminders, and support).
 
-![](../images/25348533873ca8cdf3c734bde3024e321448d9e5e8987ae4927f62b1c96768df-Rich-card.png)
+![image](../images/25348533873ca8cdf3c734bde3024e321448d9e5e8987ae4927f62b1c96768df-Rich-card.png)
 
 ---
 

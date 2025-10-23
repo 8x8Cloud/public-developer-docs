@@ -38,7 +38,7 @@ You must have at least one SMS Engage form created for you by 8x8. SMS Engage fo
 * If you want to get the data via **Webhooks**, simply provide us a specific url where we will post the data.
 * For more information on **how to create an SMS engage form** please contact your account manager or send an email to [8x8 Support](mailto:cpaas-support@8x8.com).
 
-![](../images/44b0744-sub-account_sliders_hq.png "sub-account_sliders_hq.png")
+![image](../images/44b0744-sub-account_sliders_hq.png "sub-account_sliders_hq.png")
 
 ---
 
@@ -128,7 +128,7 @@ Remember to replace the **,** and  values above. The **{{url}}** value does not 
 
 This should result in a SMS being sent similar to the one below with the URL replacing the {{url}} parameter's place in the SMS Body.
 
-![](../images/6f385ec-image.png)
+![image](../images/6f385ec-image.png)
 A successful request should return an 200 OK HTTP Response Code and the Response Body should appear as below:
 
 ```json

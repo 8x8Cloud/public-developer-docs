@@ -58,10 +58,10 @@ This video shows the integration with Salesforce Chat and WhatsApp.
 
 In Salesforce Setup Home, navigate to **Administration > Users > Queues**. We will need to set up a queue for the incoming chats. These chats will be rotated between the agents associated with this queue.
 
-![](../images/783a5f9-Screenshot_2023-10-09_at_11.02.30_AM.png)
+![image](../images/783a5f9-Screenshot_2023-10-09_at_11.02.30_AM.png)
 Make sure to add the Salesforce users that you would like to be part of handling the queue here.
 
-![](../images/f393d42-image1.png)
+![image](../images/f393d42-image1.png)
 
 ### Chat
 
@@ -144,11 +144,11 @@ This section gives a view of the two main objects associated with each chat sess
 
 Here is the Chat Transcript Object:
 
-![](../images/e187f25-image.png)
+![image](../images/e187f25-image.png)
 
 Here is the Chat Visitor Object:
 
-![](../images/48f744b-image.png)
+![image](../images/48f744b-image.png)
 
 #### Useful References
 

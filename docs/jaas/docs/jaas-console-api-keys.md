@@ -25,7 +25,7 @@ The API Key ID (kid) is composed of the AppID’s unique identifier and is used 
 
 The following screenshot shows a kid example:
 
-![](../images/b0ef366-api_keys_kid.png "api_keys_kid.png")
+![api keys](../images/b0ef366-api_keys_kid.png "api_keys_kid.png")
 
 Refer to [***The Jitsi JWT***](/jaas/docs/api-keys-jwt) for more details.
 
@@ -33,4 +33,4 @@ Refer to [***The Jitsi JWT***](/jaas/docs/api-keys-jwt) for more details.
 
 Please use the `JWT Generator` under **Generate a Jitsi JWT** subsection in order to create short-lived JWT's to be used in testing/development.
 
-![](../images/e0d8af2-api_keys_jwt.png "api_keys_jwt.png")
+![api keys jwt](../images/e0d8af2-api_keys_jwt.png "api_keys_jwt.png")

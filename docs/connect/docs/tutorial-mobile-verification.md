@@ -53,7 +53,7 @@ If you follow the different steps of this tutorial, you will get to generate a c
 3. Note down this value, you will need it later.
 4. In that example, the `subaccountid` is `riders_hq`
 
-![](../images/9c38989-API_3.png "API 3.png")
+![image](../images/9c38989-API_3.png "API 3.png")
 
 ---
 
@@ -164,7 +164,7 @@ curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions -
 
 * And that’s it! Here is the result on the destination device:
 
-![](../images/748c827-Iv_Curl.png "Iv Curl.png")
+![image](../images/748c827-Iv_Curl.png "Iv Curl.png")
 
 #### V. API response
 

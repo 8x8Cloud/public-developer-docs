@@ -16,7 +16,7 @@ A Webhook can be created either via UI or via API.
 ![3322](../images/Screenshot_2021-07-06_at_16.03.36.png "Screenshot 2021-07-06 at 16.03.36.png")
 3. Click **Add webhook**
 
-![](../images/Screenshot_2021-07-06_at_16.05.29.png "Screenshot 2021-07-06 at 16.05.29.png")
+![image](../images/Screenshot_2021-07-06_at_16.05.29.png "Screenshot 2021-07-06 at 16.05.29.png")
 
 3. Click **Save**
 

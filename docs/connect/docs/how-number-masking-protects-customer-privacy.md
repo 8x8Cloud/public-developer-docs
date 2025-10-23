@@ -34,7 +34,7 @@ This video covers a common example of logistics/delivery where a business like a
 
 As an example, let's take a look at the business case that is applicable for most ride-sharing businesses. When a business event takes place (read: the user has booked a ride) one Virtual Number is assigned for that booking. That Virtual Number is shown to both the rider and the driver, and if they want to engage in a phone call they can simply dial the Virtual number and get connected to the other user.
 
-![](../images/c0f23e2-Simplified_Booking_Record.png "Simplified Booking Record.png")
+![Simplified Booking Record](../images/c0f23e2-Simplified_Booking_Record.png "Simplified Booking Record.png")
 
 One Virtual Number can be associated with multiple business events (read: bookings). In the image above a simplified booking record is shown, that remains active for as long as the booking is not marked as completed. The [Get My Virtual Numbers](/connect/reference/number-health-service) API provides a detailed overview of the Virtual Numbers available in your account.
 

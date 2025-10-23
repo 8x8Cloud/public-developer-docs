@@ -28,7 +28,7 @@ To get started, create an iOS project using the following steps:
 4. Go to the **TARGETS > Project Name > General > Signing** menu and select **Automatically manage signing**
 5. Click **Enable Automatic** on the displayed pop-up window
 
-![](../images/378a054-1.png "xcode-code-signing.png")
+![xcode code signing](../images/378a054-1.png "xcode-code-signing.png")
 
 ## Integrate the Voice SDK
 
@@ -39,11 +39,11 @@ To integrate the Voice SDK:
 
 You should have the following contents from the extracted **`.zip`** file:
 
-![](../images/ab862ba-sdk-package-contents.png "sdk-package-contents.png")
+![sdk package contents](../images/ab862ba-sdk-package-contents.png "sdk-package-contents.png")
 
 3. Copy the **`Wavecell.xcframework`** bundle to the Frameworks folder as shown:
 
-![](../images/b63f1f8-copy-framework-to-xcode-project.png "copy-framework-to-xcode-project.png")
+![copy framework to xcode project](../images/b63f1f8-copy-framework-to-xcode-project.png "copy-framework-to-xcode-project.png")
 
 4. Go to the menu at **TARGETS > Project Name > General > Frameworks, Libraries, and Embedded Content**:
 

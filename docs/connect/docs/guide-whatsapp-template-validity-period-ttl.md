@@ -46,18 +46,18 @@ The ability to customize Time-To-Live (TTL), the specific ranges allowed, and th
 1. Log in to [Meta Business Suite](https://business.facebook.com/latest/settings/).
 2. Navigate to **WhatsApp accounts** from the left-hand menu and select the relevant WhatsApp account.
 
-![](../images/d884e58ee928e9d74b52b644d28a9109fc3e931a95335f57164c362e50948be7-image.png)
+![image](../images/d884e58ee928e9d74b52b644d28a9109fc3e931a95335f57164c362e50948be7-image.png)
 3. Click the **WhatsApp Manager** button, usually located on the right side of the screen.
 4. In the WhatsApp Manager interface, select **Message templates** from the left-hand navigation panel.  
 
-![](../images/f0e373550e092bdeb1785dc472836f74438411e34d860687b9a041ba16e2ae13-image.png)
+![image](../images/f0e373550e092bdeb1785dc472836f74438411e34d860687b9a041ba16e2ae13-image.png)
 5. Locate the specific **Utility** or **Authentication** template you wish to configure. Click on the template name or an associated 'Edit' button.  
 
-![](../images/7a1fae0359ae0a3ed2a7de28018abba9139a1fa3c929cb819c1189db8fbe4c52-image.png)
+![image](../images/7a1fae0359ae0a3ed2a7de28018abba9139a1fa3c929cb819c1189db8fbe4c52-image.png)
 6. On the template editing screen, scroll towards the bottom to find the **Message validity period**
 7. Adjust the value in the input field to your desired TTL. You can typically specify the duration in seconds, minutes, hours, or days.  
 
-![](../images/c2d8279519f731a7d15266581c48ccfe57e5184dc1fc24487d9754c832f379ff-image.png)
+![image](../images/c2d8279519f731a7d15266581c48ccfe57e5184dc1fc24487d9754c832f379ff-image.png)
 
 >
 > **Tip:** Consider the nature of your message. OTPs often require a short TTL (e.g., 5-15 minutes), while appointment reminders might allow for a longer TTL (e.g., several hours before you fall back to making a phone call).

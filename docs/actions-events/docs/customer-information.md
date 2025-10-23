@@ -96,10 +96,10 @@ Then, the full script will look like this
 
 When the query is routed through to an agent, they will be able to see the data that was passed into the webchat, in both the interaction panel -
   
-![](../images/e09dd32dd695c7ff0d8bfee637385855858337809466ace9222db2591c17f439-Interactionpanel.png "Chat Gateway flow.jpg")
+![image](../images/e09dd32dd695c7ff0d8bfee637385855858337809466ace9222db2591c17f439-Interactionpanel.png "Chat Gateway flow.jpg")
 Also the chat panel
 
-![](../images/18f28912a0053c2e9352348fee117bc8e54ea378b92c14fadcb0707fc085c395-Chatpanel.png "Chat Gateway flow.jpg")
+![image](../images/18f28912a0053c2e9352348fee117bc8e54ea378b92c14fadcb0707fc085c395-Chatpanel.png "Chat Gateway flow.jpg")
   
 #### Important Notes
 

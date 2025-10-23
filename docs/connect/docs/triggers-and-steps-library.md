@@ -43,7 +43,7 @@ ChatAppsMessage step allows you to send a message using 8x8 Chat Apps API.
 
 ![Example of Step](../images/258c034-image.png)Example of Step
 
-![](../images/63f27cb-image.png)
+![image](../images/63f27cb-image.png)
 ![Example of Step Properties](../images/4bd5833-image.png)Example of Step Properties
 
 | Property | Description | Example Value |
@@ -80,7 +80,7 @@ The example below shows the next steps after and before the branch to illustrate
   * If 1, chatappsmessage_0501 step is executed, delivering the message "Please enter your email address:"
   * If 2, chatappmessage_9836 step is executed, delivering the message "Goodbye".
 
-![](../images/d68b3c1-image.png)
+![image](../images/d68b3c1-image.png)
 
 ![Example of Step Properties
 
@@ -101,7 +101,7 @@ For example you may want to send a message asking a user to check their email fo
 
 ![Example of Step](../images/1538630-image.png)Example of Step
 
-![](../images/12f94c6-image.png)
+![image](../images/12f94c6-image.png)
 ![Example of Step Properties](../images/cb17e53-image.png)Example of Step Properties
 
 | Property | Description | Example |
@@ -206,7 +206,7 @@ Send an HTTP request to an endpoint. Useful for integrating with APIs.
 
 Skip to another step in the workflow definition. This is often useful to better organise your workflow definition.
 
-![](../images/519109a-image.png)
+![image](../images/519109a-image.png)
 
 | Property | Description | Example value |
 | --- | --- | --- |
@@ -216,7 +216,7 @@ Skip to another step in the workflow definition. This is often useful to better 
 
 Send the current conversation to [Converse](/connect/docs/converse-overview) for an agent to take over.
 
-![](../images/df2ca45-image.png)
+![image](../images/df2ca45-image.png)
 
 | Property | Description | Example Value |
 | --- | --- | --- |

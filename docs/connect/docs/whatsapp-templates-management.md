@@ -71,7 +71,7 @@ Once you submit the message for approval, you can use the existing template page
 
 Templates can be deleted via the delete option that pops up when mousing over the row of an individual template.
 
-![](../images/156ce08-image.png)
+![image](../images/156ce08-image.png)
 
 ## Editing Templates
 

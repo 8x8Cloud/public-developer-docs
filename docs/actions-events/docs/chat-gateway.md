@@ -62,7 +62,7 @@ The customer wants to speak to an agent
 
 The customer is then queue and connected with an agent with chat history and customer information provided from the 3rd party vendor
 
-![](../images/9673c4a-Chat_Gateway_flow.jpg "Chat Gateway flow.jpg")
+![Chat Gateway flow](../images/9673c4a-Chat_Gateway_flow.jpg "Chat Gateway flow.jpg")
 
 ## Example flow with 8x8 digital channels
 
@@ -76,4 +76,4 @@ During self serve, the bot recognises that the customer wants to speak to an age
 
 The customer is then queue and connected with an agent with chat history and customer information provided from the 3rd party vendor
 
-![](../images/5a322f6-Chat_Gateway_flow_1.jpg)
+![Chat Gateway flow](../images/5a322f6-Chat_Gateway_flow_1.jpg)

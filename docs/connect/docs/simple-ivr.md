@@ -26,13 +26,13 @@ Note: The code for the Simple IVR is under app\_simple\_ivr.py
 
 Below is a description of the IVR Tree that we will be building with this call scenario. There are 3 possible paths and only 1 level in this simple IVR Tree.
 
-![](../images/af71269-image.png)
+![image](../images/af71269-image.png)
 
 ## Webhooks and API Calls in Simple IVR Flow
 
 Below is a diagram of how the webhooks and API Calls from your server will work with the 8x8 Voice Platform to create this IVR.
 
-![](../images/b5b94b4-Callsflow_IVR_Diagrams.drawio_1.png)
+![Callsflow IVR Diagrams](../images/b5b94b4-Callsflow_IVR_Diagrams.drawio_1.png)
 
 ## Example of initial API call to place outbound call
 

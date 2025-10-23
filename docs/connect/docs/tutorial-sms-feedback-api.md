@@ -19,7 +19,7 @@ With 8x8 being aware of the conversion rate, it activates the Omni Shield for yo
 
 1. **Tracking the Results on [SMS API](/connect/reference/send-sms-single)**
 
-![](../images/401511f-Screenshot_2023-12-05_at_9.58.33_AM.png)
+![image](../images/401511f-Screenshot_2023-12-05_at_9.58.33_AM.png)
 
 2. **Sending the Outcome of OTP Conversion using [Feedback API](/connect/reference/api-sms-feedback)**
   1. Success Feedback is a POST request
@@ -31,10 +31,10 @@ With 8x8 being aware of the conversion rate, it activates the Omni Shield for yo
   >
   >
 
-![](../images/cadad9a-Success.png)
+![image](../images/cadad9a-Success.png)
 
 3. **Successful Post Request of Success Feedback API**
 
 Upon successfully pushing the Success Feedback API, it is normal for the HTTP 200 response to have no content returned.
 
-![](../images/ff90638-Screenshot_2023-12-05_at_10.11.39_AM.png)
+![image](../images/ff90638-Screenshot_2023-12-05_at_10.11.39_AM.png)

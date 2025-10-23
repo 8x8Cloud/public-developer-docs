@@ -77,9 +77,9 @@ By integrating 8x8 Chat Apps product into FreshDesk Support you get the best of 
 
 #### **5. Let’s configure the following fields:**
 
-![](../images/bb87138-Freshdesk_6.png "Freshdesk 6.png")
+![freshdesk](../images/bb87138-Freshdesk_6.png "Freshdesk 6.png")
 
-![](../images/b7dd8a1-Screenshot_2021-04-30_at_4.09.27_PM.png "Screenshot 2021-04-30 at 4.09.27 PM.png")
+![image](../images/b7dd8a1-Screenshot_2021-04-30_at_4.09.27_PM.png "Screenshot 2021-04-30 at 4.09.27 PM.png")
 
 **URL is the same as the above**
 
@@ -136,4 +136,4 @@ By integrating 8x8 Chat Apps product into FreshDesk Support you get the best of 
 
 You can modify the "text" field above to include any message and use any [FreshDesk ticket field](https://support.freshdesk.com/en/support/solutions/articles/52630-understanding-dynamic-content-and-placeholders).
 
-![](../images/5dd454a-FreshDesk-Closing_message.jpg "FreshDesk-Closing message.jpg")
+![FreshDesk-Closing message](../images/5dd454a-FreshDesk-Closing_message.jpg "FreshDesk-Closing message.jpg")

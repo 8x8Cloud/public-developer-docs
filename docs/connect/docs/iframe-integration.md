@@ -40,4 +40,4 @@ When doing so, agent won’t be able to generate new invite, hence this should b
 <iframe height="850px" width="90%" src="https://video-agent.8x8.com?mode=embedded&user=product@8x8.com&token=eyJiJIUzI1NiME5B87.qPWXyNNDHBx_LftaHarcSgm0c" allow="microphone; camera"></iframe>
 ```
 
-![](../images/4ba43d6-1580371132724.png)
+![image](../images/4ba43d6-1580371132724.png)

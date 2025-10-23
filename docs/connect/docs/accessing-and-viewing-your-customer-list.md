@@ -12,7 +12,7 @@ The **Partner Hub** in 8x8 Connect is your centralised portal for monitoring you
     - Remaining Credits
     - Assigned Users (from the partner organization)
 
-![](../images/aab83bcb12042396348f186904c8c6f5723fe6e679d85179a891a00fb0140f20-Manage_customers_1.png)
+![Manage customers](../images/aab83bcb12042396348f186904c8c6f5723fe6e679d85179a891a00fb0140f20-Manage_customers_1.png)
 
 1. **Find a Specific Customer:** Use the **search bar** at the top of the list to quickly find a specific account by their name or Account ID.
 
@@ -24,7 +24,7 @@ The **Partner Hub** in 8x8 Connect is your centralised portal for monitoring you
 
 After selecting a customer from the "Manage customers" list, you will be taken into their specific account view. The main content area will display an overview, and the navigation menu on the left will update to show the product modules available for that customer.
 
-![](../images/050fa707fde893e4dee4b59215cea9e8926cc8ea629a0a30f1883874a21a8e31-view-customer_non-admin-role.png)
+![view customer non admin role](../images/050fa707fde893e4dee4b59215cea9e8926cc8ea629a0a30f1883874a21a8e31-view-customer_non-admin-role.png)
 
 To view the detailed usage for a specific product, simply click on it in the left-hand menu:
 

@@ -134,4 +134,4 @@ Then, the full script will look like this
 
 Then, when this is ran, you can see how it looks on the chat widget, again the red arrow showing the primary and blue the secondary button. In this as well, the “buttonBorderRadius”a was set to “10px”, to make the buttons more rounded.
 
-![](../images/934851cd046dbd5390d60b3f93853c49f4cc3639351fc2043b7562f9efbcf0e8-Workboard.png "Chat Gateway flow.jpg")
+![Workboard](../images/934851cd046dbd5390d60b3f93853c49f4cc3639351fc2043b7562f9efbcf0e8-Workboard.png "Chat Gateway flow.jpg")

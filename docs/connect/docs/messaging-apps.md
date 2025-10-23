@@ -14,25 +14,25 @@ The **Dashboard** shows at a glance the current performance of your Messaging Ap
 
 This chart will show how many messages were delivered during the time range. This features a per day breakdown of the traffic on each day.
 
-![](../images/ee80ce5-image.png)
+![image](../images/ee80ce5-image.png)
 
 ## Message Delivered vs Undelivered
 
 This chart shows how many messages were delivered versus undelivered on each day. Useful in identifying spikes in traffic that were related to undelivered messages.
 
-![](../images/ae729bf-image.png)
+![image](../images/ae729bf-image.png)
 
 ## Delivery Rate
 
 This chart shows how the messages that have a "delivered" status on each day.
 
-![](../images/0711a1e-image.png)
+![image](../images/0711a1e-image.png)
 
 ## Received Messages
 
 Shows the incoming messages that were received across all channels.
 
-![](../images/a3abdc6-image.png)
+![image](../images/a3abdc6-image.png)
 
 ## WhatsApp Conversations
 
@@ -43,7 +43,7 @@ Shows the type of messages that were sent across WhatsApp including:
 * **Service** (User-Initiated)
 * **Marketing** (Special Offers, Sales, etc.)
 
-![](../images/4dd0844-image.png)
+![image](../images/4dd0844-image.png)
 
 ### Reports
 
@@ -64,7 +64,7 @@ The following sections will show how the report page differs based on the **Repo
 
 This report will show traffic by the type of channel (WhatsApp, Viber, LINE, etc.) that is being used. If you are using multiple channels this will allow you to filter out the volume of each channel.
 
-![](../images/111a5cc-image.png)
+![image](../images/111a5cc-image.png)
 
 **Daily Report:**
 
@@ -76,13 +76,13 @@ This section shows the type of messages per channel type and date. The available
 * **Read Rate:** The percentage of messages with a read receipt on each platform
 * **Delivery Rate:** The percentage of messages with a delivery receipt on each platform.
 
-![](../images/d243538-image.png)
+![image](../images/d243538-image.png)
 
 ### WhatsApp Conversations
 
 The WhatsApp Conversations Report will show the type of conversations you are having on WhatsApp.
 
-![](../images/d39b965-image.png)
+![image](../images/d39b965-image.png)
 
 **Daily Report:**
 
@@ -99,21 +99,21 @@ This gives insights into the following information for WhatsApp messages.
   * Service (User-Initiated)
   * Marketing (Special Offers, Sales, etc.)
 
-![](../images/2db042d-image.png)
+![image](../images/2db042d-image.png)
 
 #### Export
 
 The export feature gives the ability to export the information as a **CSV** file, then send the file as a link to your email.
 
-![](../images/ea9c1a0-image.png)
+![image](../images/ea9c1a0-image.png)
 
 By default the report is sent to the logged in connect user, however you can specify additional emails.
 
-![](../images/ed28626-image.png)
+![image](../images/ed28626-image.png)
 
 The resulting file will be a **CSV** file with the following format.
 
-![](../images/43f8923-image.png)
+![image](../images/43f8923-image.png)
 
 ##### Logs
 
@@ -134,17 +134,17 @@ The **messaging logs** section will allow you to see information about individua
 * **Country:** The destination country of the message.
 * **UMID:** Filter by a specific Unique Message ID.
 
-![](../images/2e8906b-image.png)
+![image](../images/2e8906b-image.png)
 
 #### Export
 
 Similar to the reports section, the messaging logs can be sent to an email address as a **CSV** file.
 
-![](../images/ea0080d-image.png)
+![image](../images/ea0080d-image.png)
 
 The email will contain logs for each of the subAccounts that are associated with this account.
 
-![](../images/f10bdc1-image.png)
+![image](../images/f10bdc1-image.png)
 
 Below is an example of a exported for WhatsApp and the information that is available.
 

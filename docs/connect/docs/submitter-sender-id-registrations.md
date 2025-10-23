@@ -12,8 +12,8 @@
 
 * Email Notification that Sender ID registration has been submitted and a ticket will be assigned
 
-![](../images/61247d3ec43d686b22228958974aa9880525459532c877970d13a8d3c74b39d6-unnamed_13.png)
+![image](../images/61247d3ec43d686b22228958974aa9880525459532c877970d13a8d3c74b39d6-unnamed_13.png)
 
 * Alternatively you can view the ticket via our support portal on 8x8 connect, <https://connect.8x8.com/support/tickets>
 
-![](../images/8a05452948dfb06b4d414f76d9911cbc6b88de9b74af835314e663a20a244609-Ticketconvo.png)
+![image](../images/8a05452948dfb06b4d414f76d9911cbc6b88de9b74af835314e663a20a244609-Ticketconvo.png)

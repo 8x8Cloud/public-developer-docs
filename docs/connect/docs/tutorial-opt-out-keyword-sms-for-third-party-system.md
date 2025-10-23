@@ -16,19 +16,19 @@ This tutorial will show you how to use Automation Builder to build an **opt-out 
 
 First go to the Automation Builder page ([https://connect.8x8.com/automation](https://connect.8x8.com/automation)) and select the blue button for "Create Custom Workflow"
 
-![](../images/d1aab65-image.png)
+![image](../images/d1aab65-image.png)
 
 ## Opt-Out Template
 
 From the pop up in the next page, select the "Opt-Out" template to use as our base.
 
-![](../images/a6beedd-image.png)
+![image](../images/a6beedd-image.png)
 
 ## Building the Workflow
 
 In the next page the workflow should be pre-populated with steps, click on the "Trigger" step which is the first step in the flow. Select the subaccount which has the shortcode number that you wish to associate with this opt-out flow. Once it is selected click "Update" to save it to the step.
 
-![](../images/03bccf8-image.png)
+![image](../images/03bccf8-image.png)
 
 ## Deciding the Keyword
 
@@ -46,7 +46,7 @@ The **keyword** is controlled by the "Branch" Step in red, in this example it is
 
 Once that is done, you can move on to modifying the HTTP Request itself. In the examples the URL and the headers should be substituted for the URL and headers (if required) of your server endpoint instead.
 
-![](../images/23bf390-image.png)
+![image](../images/23bf390-image.png)
 
 | Field | Value |
 | --- | --- |
@@ -60,7 +60,7 @@ Once that is done, you can move on to modifying the HTTP Request itself. In the 
 
 You can replace the message with a custom message to your users. Make sure to again select the correct subaccount for your short code that you want to send the SMS from.
 
-![](../images/fdb2a07-image.png)
+![image](../images/fdb2a07-image.png)
 
 | Field | Example Value |
 | --- | --- |
@@ -72,7 +72,7 @@ You can replace the message with a custom message to your users. Make sure to ag
 
 After saving these changes, the opt out flow can be enabled by enabling the button at the top left and saving. It will activate immediately and any message that contains the keyword will result in a user being added to the opt-out group.
 
-![](../images/3fd8cd6-image.png)
+![image](../images/3fd8cd6-image.png)
 
 ## Testing
 

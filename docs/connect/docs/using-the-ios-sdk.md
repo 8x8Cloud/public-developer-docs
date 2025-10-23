@@ -31,7 +31,7 @@ The Voice SDK is designed to fit the concept of account based applications where
 
 The SDK client initializes the Voice SDK once and then may have multiple activation/deactivation cycles following user login or logout.
 
-![](../images/5f322a6-mobile-wavecell-sdk-lifecycle-sequence-diagram-external.svg "mobile-wavecell-sdk-lifecycle-sequence-diagram-external.svg")
+![mobile wavecell sdk lifecycle sequence diagram external](../images/5f322a6-mobile-wavecell-sdk-lifecycle-sequence-diagram-external.svg "mobile-wavecell-sdk-lifecycle-sequence-diagram-external.svg")
 
 ## Configuration
 
