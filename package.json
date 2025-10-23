@@ -23,7 +23,7 @@
     "analyze-links": "node scripts/analyze-broken-links.js",
     "format:check": "prettier --check \"**/*.{js,jsx,json}\"",
     "format:write": "prettier --write \"**/*.{js,jsx,json}\"",
-    "lint:md": "markdownlint-cli2 \"docs/**/*.md\" \"docs/**/*.mdx\""
+    "lint:md": "markdownlint-cli2 --config md.markdownlint-cli2.jsonc && markdownlint-cli2 --config mdx.markdownlint-cli2.jsonc"
   },
   "dependencies": {
     "@docusaurus/core": "^3.9.1",

@@ -1,5 +1,4 @@
 ---
-title: 8x8 API License Agreement
 displayed_sidebar: null
 custom_edit_url: null
 ---

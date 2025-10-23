@@ -1,0 +1,7 @@
+{
+  "config": {
+    "extends": ".markdown-rules.json",
+    "MD033": false
+  },
+  "globs": ["docs/**/*.mdx"]
+}
