@@ -262,7 +262,7 @@ const sidebarConfig = [
         items: ['connect/docs/zapier-google-sheets-and-sms'],
       },
       'connect/docs/zendesk-support',
-      'connect/docs/zendesk-notifications-targets',
+      'connect/docs/zendesk-notifications-webhooks',
     ],
   },
   {

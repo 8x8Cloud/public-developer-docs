@@ -21,6 +21,12 @@ const VALIDATION_RULES = [
     message:
       'Files should not contain ref: links (legacy ReadMe format). Use standard markdown paths instead.',
   },
+  {
+    name: 'No developer.8x8.com URLs',
+    pattern: /\(https?:\/\/developer\.8x8\.com|href=["']https?:\/\/developer\.8x8\.com/gi,
+    message:
+      'Files should not contain absolute URLs to developer.8x8.com. Use relative paths instead.',
+  },
   // Add more rules here as needed:
   // {
   //   name: 'No hardcoded production URLs',

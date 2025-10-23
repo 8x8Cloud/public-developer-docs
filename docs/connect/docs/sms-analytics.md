@@ -104,7 +104,7 @@ There is also the option to schedule an export to be sent periodically to the sp
 
 ### SMS Conversions
 
-This reports page allows you to see conversions relevant to the [Verification API](https://developer.8x8.com/connect/reference/verification-api-get-started), specifically for SMS sent using the service.
+This reports page allows you to see conversions relevant to the [Verification API](/connect/docs/verification-api-get-started), specifically for SMS sent using the service.
 
 The main graph will show how many SMS have been sent using the service over time and what percentage have been successfully converted. This is useful for OTP use cases to track if there are any OTP conversion issues for example.
 

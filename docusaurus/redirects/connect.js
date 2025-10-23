@@ -13,6 +13,10 @@ const redirects = [
     from: '/connect/docs/endpoint-migration-reference',
     to: '/connect/docs/api-endpoint-migration-guide',
   },
+  {
+    from: '/connect/docs/zendesk-notifications-targets',
+    to: '/connect/docs/zendesk-notifications-webhooks',
+  },
   // reference -> reference
   {
     from: '/connect/reference',
@@ -85,10 +89,6 @@ const redirects = [
   {
     from: '/connect/reference/page',
     to: '/connect/reference/verification-api-get-started',
-  },
-  {
-    from: '/connect/reference/zendesk-notifications-targets',
-    to: '/connect/reference/zendesk-notifications-webhooks',
   },
   // reference -> docs
   {
