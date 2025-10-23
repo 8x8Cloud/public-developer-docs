@@ -1,7 +1,6 @@
 # Zalo Notification Service (ZNS)
 
 > ❗️
-> --
 >
 > Zalo Notification Service requires **templates** to be approved by the Zalo team.  
 >

@@ -24,7 +24,6 @@
 \*: This also applies to all Chromium based browsers such as Brave, (current) Edge, Opera, Vivaldi and others.
 
 > 📘
-> -
 >
 > For a better mobile experience (background support, Bluetooth support, etc.) we recommend using a native app instead. We provide a [native Android SDK](/jaas/docs/mobile-sdk-android).
 >
@@ -40,7 +39,6 @@
 | Edge | ✅ |  | Same support as Safari as they share the engine |
 
 > 📘
-> -
 >
 > On iOS all browsers share the same engine, Safari. As such all features and limitations on all iOS browsers are those of Safari.
 >
