@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[75779],{20098:e=>{e.exports=JSON.parse('{"to":"/production/actions-events/reference/getwebhooks-1"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[75779],{20098:e=>{e.exports=JSON.parse('{"to":"/actions-events/reference/getwebhooks-1"}')}}]);

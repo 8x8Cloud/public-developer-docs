@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[61044],{3503:e=>{e.exports=JSON.parse('{"to":"/production/contactcenter/reference/createchatapichannel"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[61044],{3503:e=>{e.exports=JSON.parse('{"to":"/contactcenter/reference/createchatapichannel"}')}}]);

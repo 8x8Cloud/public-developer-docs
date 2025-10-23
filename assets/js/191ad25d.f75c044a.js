@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[73170],{79446:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/whatsapp-template-change-webhook"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[73170],{79446:e=>{e.exports=JSON.parse('{"to":"/connect/docs/whatsapp-template-change-webhook"}')}}]);

@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[44856],{13653:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/supported-chat-apps-content-type"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[44856],{13653:e=>{e.exports=JSON.parse('{"to":"/connect/docs/supported-chat-apps-content-type"}')}}]);

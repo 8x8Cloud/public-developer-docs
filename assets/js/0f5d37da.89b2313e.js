@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[94409],{31137:e=>{e.exports=JSON.parse('{"to":"/production/connect/reference/get-workflow-instances"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[94409],{31137:e=>{e.exports=JSON.parse('{"to":"/connect/reference/get-workflow-instances"}')}}]);

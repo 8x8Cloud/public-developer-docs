@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[77877],{43767:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/webhook-object-structure"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[77877],{43767:e=>{e.exports=JSON.parse('{"to":"/connect/docs/webhook-object-structure"}')}}]);

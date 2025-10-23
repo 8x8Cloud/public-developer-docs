@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[7349],{43562:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/whatsapp-phone-number-quality-change-webhook"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[7349],{43562:e=>{e.exports=JSON.parse('{"to":"/connect/docs/whatsapp-phone-number-quality-change-webhook"}')}}]);

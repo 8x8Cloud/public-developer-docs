@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[83839],{29065:e=>{e.exports=JSON.parse('{"to":"/production/analytics/docs/introduction"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[83839],{29065:e=>{e.exports=JSON.parse('{"to":"/analytics/docs/introduction"}')}}]);

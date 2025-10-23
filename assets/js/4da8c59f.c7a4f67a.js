@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[52733],{71875:e=>{e.exports=JSON.parse('{"to":"/production/contactcenter/reference/createwebhook"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[52733],{71875:e=>{e.exports=JSON.parse('{"to":"/contactcenter/reference/createwebhook"}')}}]);

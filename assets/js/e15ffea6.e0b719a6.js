@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[20150],{63708:e=>{e.exports=JSON.parse('{"to":"/production/jaas/docs/jaas-onboarding"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[20150],{63708:e=>{e.exports=JSON.parse('{"to":"/jaas/docs/jaas-onboarding"}')}}]);

@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[78214],{22567:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/triggers-steps"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[78214],{22567:e=>{e.exports=JSON.parse('{"to":"/connect/docs/triggers-steps"}')}}]);

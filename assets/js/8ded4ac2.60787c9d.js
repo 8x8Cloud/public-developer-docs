@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[76814],{35897:e=>{e.exports=JSON.parse('{"to":"/production/connect/reference/http-request-trigger"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[76814],{35897:e=>{e.exports=JSON.parse('{"to":"/connect/reference/http-request-trigger"}')}}]);

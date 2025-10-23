@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[66683],{10914:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/how-number-masking-protects-customer-privacy"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[66683],{10914:e=>{e.exports=JSON.parse('{"to":"/connect/docs/how-number-masking-protects-customer-privacy"}')}}]);

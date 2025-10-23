@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[27576],{15184:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/inbound-chatapps-message"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[27576],{15184:e=>{e.exports=JSON.parse('{"to":"/connect/docs/inbound-chatapps-message"}')}}]);

@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[34608],{20691:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/voice-messaging"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[34608],{20691:e=>{e.exports=JSON.parse('{"to":"/connect/docs/voice-messaging"}')}}]);

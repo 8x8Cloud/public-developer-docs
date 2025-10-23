@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[45440],{63196:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/error-codes-number-masking"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[45440],{63196:e=>{e.exports=JSON.parse('{"to":"/connect/docs/error-codes-number-masking"}')}}]);

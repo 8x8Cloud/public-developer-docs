@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[90681],{56675:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/examples"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[90681],{56675:e=>{e.exports=JSON.parse('{"to":"/connect/docs/examples"}')}}]);

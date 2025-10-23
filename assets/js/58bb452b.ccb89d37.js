@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[55469],{46994:e=>{e.exports=JSON.parse('{"to":"/production/contactcenter/docs/api-key"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[55469],{46994:e=>{e.exports=JSON.parse('{"to":"/contactcenter/docs/api-key"}')}}]);

@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[38327],{16614:e=>{e.exports=JSON.parse('{"to":"/production/contactcenter/reference/getjwkpublickey"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[38327],{16614:e=>{e.exports=JSON.parse('{"to":"/contactcenter/reference/getjwkpublickey"}')}}]);

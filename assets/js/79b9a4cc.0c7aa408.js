@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[59989],{4338:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/delivery-receipts-error-codes"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[59989],{4338:e=>{e.exports=JSON.parse('{"to":"/connect/docs/delivery-receipts-error-codes"}')}}]);

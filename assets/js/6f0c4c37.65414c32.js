@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[20377],{20083:e=>{e.exports=JSON.parse('{"to":"/production/contactcenter/reference/createcctransaction"}')}}]);
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[20377],{20083:e=>{e.exports=JSON.parse('{"to":"/contactcenter/reference/createcctransaction"}')}}]);
