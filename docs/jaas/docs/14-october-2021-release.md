@@ -1,6 +1,5 @@
 ---
 id: 14-october-2021-release
-title: "14 October 2021 Release"
 ---
 
 # 14 October 2021 Release

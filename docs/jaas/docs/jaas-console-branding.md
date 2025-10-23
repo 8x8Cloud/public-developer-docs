@@ -14,15 +14,13 @@ Configuring and setting your enterprise logo or symbol enables you to have your 
 
 Using a clickable link on your logo that leads to your company website also further facilitates and enhances your brand identity.
 
-**Branding configurator**
-=========================
+## Branding configurator
 
 Branding configurator offers an interface for overwriting all the configurable UI elements on your meetings. The settings in branding configurator apply to all the meetings under your AppID.
 
 ![branding simple](../images/675cf05-branding_simple.png "branding_simple.png")
 
-**Advanced settings**
-=====================
+## Advanced settings
 
 Advanced branding settings allow you to configure your meetings UI on a per-room level. Setting advanced branding for your AppID will overwrite your **branding configurator** settings.
 

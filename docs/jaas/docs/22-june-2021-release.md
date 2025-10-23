@@ -1,6 +1,5 @@
 ---
 id: 22-june-2021-release
-title: "22 June 2021 Release"
 ---
 
 # 22 June 2021 Release

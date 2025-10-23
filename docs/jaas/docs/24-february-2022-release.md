@@ -1,6 +1,5 @@
 ---
 id: 24-february-2022-release
-title: "24 February 2022 Release"
 ---
 
 # 24 February 2022 Release

@@ -1,6 +1,5 @@
 ---
 id: 9-september-2021-release
-title: "9 September 2021 Release"
 ---
 
 # 9 September 2021 Release

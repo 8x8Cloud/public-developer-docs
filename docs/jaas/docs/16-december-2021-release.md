@@ -1,6 +1,5 @@
 ---
 id: 16-december-2021-release
-title: "16 December 2021 Release"
 ---
 
 # 16 December 2021 Release

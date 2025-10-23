@@ -294,8 +294,8 @@ The **Google Sheets Step** should have the following configuration.
 Within **Pipedream**, you should be able to see the HTTP responses sent by Automation Builder which may be useful in case any debugging is required.
 
 ![image](../images/f8264b4-Screenshot_2024-06-21_at_10.11.34_AM.png)
-Step 4: Send SMS
-================
+
+## Step 4: Send SMS
 
 After setting up the above, you should be able to send a SMS message to your Virtual Number tied to 8x8 and receive responses back prompting you to complete the survey as outlined below.
 
