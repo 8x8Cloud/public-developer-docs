@@ -86,6 +86,10 @@ const redirects = [
     from: '/connect/reference/page',
     to: '/connect/reference/verification-api-get-started',
   },
+  {
+    from: '/connect/reference/zendesk-notifications-targets',
+    to: '/connect/reference/zendesk-notifications-webhooks',
+  },
   // reference -> docs
   {
     from: '/connect/reference/api-error-codes',
