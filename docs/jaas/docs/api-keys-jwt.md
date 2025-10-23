@@ -97,11 +97,11 @@ This value is hardcoded in the body
 
 * #### **`send-groupchat`**
 
-      Whether the moderator can send group chat messages if [group chat requires permission](/jaas/docs/jaas-prefs-advanced-branding#groupchatrequirespermission).
+  Whether the moderator can send group chat messages if [group chat requires permission](/jaas/docs/jaas-prefs-advanced-branding#groupchatrequirespermission).
 
 * #### **`create-polls`**
 
-      Whether the moderator can create polls if [creating polls requires permission](/jaas/docs/jaas-prefs-advanced-branding#pollcreationrequirespermission).
+  Whether the moderator can create polls if [creating polls requires permission](/jaas/docs/jaas-prefs-advanced-branding#pollcreationrequirespermission).
 
   * #### **`room`**
   

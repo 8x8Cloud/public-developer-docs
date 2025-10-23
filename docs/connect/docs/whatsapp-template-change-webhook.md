@@ -4,7 +4,7 @@
 
 > 📘
 >
-> In case you're looking for delivery notifications for Chat Apps message, please refer to [Delivery receipts for outbound Chat Apps](#)
+> In case you're looking for delivery notifications for Chat Apps message, please refer to [Delivery receipts for outbound Chat Apps](/connect/docs/delivery-receipts-for-outbound-chatapps)
 >
 
 ### Requirements

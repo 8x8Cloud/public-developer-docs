@@ -47,7 +47,7 @@ and you can access this code in your workflow context by using **data.payload.st
 
 ## Scripting
 
-Automation service has rich support for scripting with JavaScript (supports most features of ECMAScript 2023) via input and output pipelines in the workflow context like member access operators (**data.member**, **data['test']['key']**), binary and tertiary operators like **x == y ? 1 : 0;** and the following functions we have defined for you.
+Automation service has rich support for scripting with JavaScript (supports most features of ECMAScript 2023) via input and output pipelines in the workflow context like member access operators (**data.member**, **data&lsqb;'test'&rsqb;&lsqb;'key'&rsqb;**), binary and tertiary operators like **x == y ? 1 : 0;** and the following functions we have defined for you.
 
 - Check country code of a phone number using **isCountryCode(phoneNumber, countryCode)**. For example, **isCountryCode('+6512345678', 'SG')** evaluates to **true**.
 

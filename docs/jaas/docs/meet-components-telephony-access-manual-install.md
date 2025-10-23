@@ -21,7 +21,7 @@ Edit the prosody configuration file by adding the VirtualHost "jigasi.meet.jitsi
 * Make sure to set the **enabled** field to **true**.
 * Update the **asap_accepted_audiences** by replacing `<your domain>` with your actual domain (e.g. meet.example.com).
 
-/etc/prosody/conf.avail/<your domain>.cfg.lua
+/etc/prosody/conf.avail/&lt;your domain&gt;.cfg.lua
 
 ```
 VirtualHost "jigasi.meet.jitsi"

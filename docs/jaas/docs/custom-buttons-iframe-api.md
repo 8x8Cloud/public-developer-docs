@@ -102,7 +102,7 @@ The important changes to the default iframe code are outlined below for convenie
 
 First we create a **div** for the buttons in the index.html.
 
-Buttons <div>
+Buttons &lt;div&gt;
 
 ```html
 <div id="button-container">

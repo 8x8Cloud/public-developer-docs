@@ -37,12 +37,9 @@ In the example above, we are creating the following logic:
 - branch2 will be selected if the source number has a US country code
 - branch3 will be selected otherwise
 
-| Property   | Description                                                                                                                                                                                                                                                                                                                                                                                                     | Type   |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| id         | Unique id of the step.                                                                                                                                                                                                                                                                                                                                                                                          | string |
-| stepType   | Step type.                                                                                                                                                                                                                                                                                                                                                                                                      | string |
-| inputs     | Wait step supports the following input parameters.<ul><br /><li> **minutes**: Number of minutes to wait before executing the next step.  </li></ul> <br />                                                                                                                                                                 | object |
-| selectNextStep | Step ids of the branches and the conditions.                                                                                                                                                                                                                                                                                   | string |
-
-‎
-‎
+| Property   | Description                                                                                                                      | Type   |
+|------------|----------------------------------------------------------------------------------------------------------------------------------|--------|
+| id         | Unique id of the step.                                                                                                           | string |
+| stepType   | Step type.                                                                                                                       | string |
+| inputs     | Wait step supports the following input parameters.<br> - **minutes**: Number of minutes to wait before executing the next step.  | object |
+| selectNextStep | Step ids of the branches and the conditions.                                                                                     | string |

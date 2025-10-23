@@ -114,32 +114,34 @@ Configure the new trigger as follows:
   
   **Please note you will need to substitute your subaccount in the URL.**
   * **JSON Body**
-  * ```json
-    {
-      "event": "newComment",
-      "ticketUrl": "{{ticket.link}}",
-      "ticketId": "{{ticket.id}}",
-      "ticketStatus": "{{ticket.status}}",
-      "ticketExternalId": "{{ticket.external_id}}",
-      "createdAt": "{{ticket.created_at_with_timestamp}}",
-      "updatedAt": "{{ticket.updated_at_with_timestamp}}",
-      "lastPublicComment": {
-        "authorName": "{{ticket.latest_public_comment.author.name}}",
-        "authorId": "{{ticket.latest_public_comment.author.id}}",
-        "authorExternalId": "{{ticket.latest_public_comment.author.external_id}}",
-        "createdAt": "{{ticket.latest_public_comment.created_at_with_time}}",
-        "text": "{{ticket.latest_public_comment.value}}",
-        "attachments":[
-          {% for attachment in ticket.latest_public_comment.attachments %}
-          { "fileName": "{{attachment.filename}}",
-          "url": "{{attachment.url}}" }
-          {% if forloop.last == false %},
-          {% endif %}
-          {% endfor %}
-        ]
-      }
+  *
+
+  ```json
+  {
+    "event": "newComment",
+    "ticketUrl": "{{ticket.link}}",
+    "ticketId": "{{ticket.id}}",
+    "ticketStatus": "{{ticket.status}}",
+    "ticketExternalId": "{{ticket.external_id}}",
+    "createdAt": "{{ticket.created_at_with_timestamp}}",
+    "updatedAt": "{{ticket.updated_at_with_timestamp}}",
+    "lastPublicComment": {
+      "authorName": "{{ticket.latest_public_comment.author.name}}",
+      "authorId": "{{ticket.latest_public_comment.author.id}}",
+      "authorExternalId": "{{ticket.latest_public_comment.author.external_id}}",
+      "createdAt": "{{ticket.latest_public_comment.created_at_with_time}}",
+      "text": "{{ticket.latest_public_comment.value}}",
+      "attachments":[
+        {% for attachment in ticket.latest_public_comment.attachments %}
+        { "fileName": "{{attachment.filename}}",
+        "url": "{{attachment.url}}" }
+        {% if forloop.last == false %},
+        {% endif %}
+        {% endfor %}
+      ]
     }
-    ```
+  }
+  ```
 
 ![image](../images/0ee7fd6-image.png)
 ![image](../images/16f0838-image.png)

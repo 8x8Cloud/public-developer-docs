@@ -192,7 +192,7 @@ curl --location --request PUT 'https://{ccPlatform}.8x8.com/api/v{version}/tenan
 }
 ```
 
-> 🚧 403 response code <API><Error>403 - Forbidden.</Error></API>
+> 🚧 403 response code &lt;API&gt;&lt;Error&gt;403 - Forbidden.&lt;/Error&gt;&lt;/API&gt;
 >
 > Historically this capability has only enabled on request. If you receive response code 403 then please contact 8x8 support and request that your "Agent Status API" is enabled in OPSCON.
 >

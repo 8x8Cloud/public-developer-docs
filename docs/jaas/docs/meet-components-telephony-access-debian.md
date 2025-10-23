@@ -18,9 +18,9 @@ Follow these steps if you did not opt in for telephony during the jitsi-meet ins
 
 ### 1. Jitsi-Meet Configuration
 
-Make sure the following properties exist in the **/etc/jitsi/meet/<your domain>-config.js** file:
+Make sure the following properties exist in the **/etc/jitsi/meet/&lt;your domain&gt;-config.js** file:
 
-/etc/jitsi/meet/<your domain>-config.js
+/etc/jitsi/meet/&lt;your domain&gt;-config.js
 
 ```
 dialInConfCodeUrl: 'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access',

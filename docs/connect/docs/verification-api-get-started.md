@@ -8,7 +8,7 @@ The most common use cases are:
 - User Identity Confirmation - During the login process, after successfully entering username and password, the application sends out a PIN to the customer’s phone number.
 - Fraud Prevention - Track malicious login attempts on your applications.
 
-This API offers two different ways of PIN delivery, that can be set up in the <channel> parameter of the Verify API:
+This API offers two different ways of PIN delivery, that can be set up in the &lt;channel&gt; parameter of the Verify API:
 
 - SMS - PIN is sent in a text message to the end user’s phone
 - Voice - PIN is delivered in a phone call to the end user’s phone
