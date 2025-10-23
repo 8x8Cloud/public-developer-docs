@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[64372],{72231:e=>{e.exports=JSON.parse('{"to":"/connect/docs/smpp-connection"}')}}]);

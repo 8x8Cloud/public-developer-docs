@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[13386],{45055:e=>{e.exports=JSON.parse('{"to":"/connect/reference/verification-api-get-started"}')}}]);

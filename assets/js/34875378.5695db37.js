@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[26380],{29793:e=>{e.exports=JSON.parse('{"to":"/analytics/reference/interactions"}')}}]);

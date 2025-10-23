@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[23388],{1117:e=>{e.exports=JSON.parse('{"to":"/connect/reference/send-message"}')}}]);

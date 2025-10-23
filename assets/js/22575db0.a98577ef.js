@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[36746],{90018:e=>{e.exports=JSON.parse('{"to":"/connect/docs/api-endpoint-migration-guide"}')}}]);

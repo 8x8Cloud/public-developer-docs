@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[38313],{66775:e=>{e.exports=JSON.parse('{"to":"/connect/reference/survey-send-many"}')}}]);

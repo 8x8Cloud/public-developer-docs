@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[63321],{53311:e=>{e.exports=JSON.parse('{"to":"/connect/docs/smpp-delivery-receipts"}')}}]);

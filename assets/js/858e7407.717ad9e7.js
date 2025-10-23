@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[67829],{27408:e=>{e.exports=JSON.parse('{"to":"/connect/docs/inbound-chatapps-message"}')}}]);

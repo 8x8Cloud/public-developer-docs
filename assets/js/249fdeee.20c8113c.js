@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[8431],{55698:e=>{e.exports=JSON.parse('{"to":"/contactcenter/docs/contact-center-chat"}')}}]);

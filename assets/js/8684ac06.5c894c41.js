@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[80031],{10562:e=>{e.exports=JSON.parse('{"to":"/actions-events/reference/getwebhooks-1"}')}}]);

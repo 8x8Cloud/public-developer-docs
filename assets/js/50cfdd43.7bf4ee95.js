@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[13736],{63259:e=>{e.exports=JSON.parse('{"to":"/connect/reference/get-all-definitions"}')}}]);

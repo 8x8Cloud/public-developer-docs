@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[10898],{81352:e=>{e.exports=JSON.parse('{"to":"/connect/docs/simple-ivr"}')}}]);

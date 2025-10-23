@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[4154],{17899:e=>{e.exports=JSON.parse('{"to":"/connect/reference/ivr-send-callflow"}')}}]);

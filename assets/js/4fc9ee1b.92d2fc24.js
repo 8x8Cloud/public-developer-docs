@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[77898],{55748:e=>{e.exports=JSON.parse('{"to":"/connect/docs/vi-introduction"}')}}]);
