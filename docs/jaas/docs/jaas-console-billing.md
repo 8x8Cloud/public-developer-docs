@@ -8,6 +8,4 @@ The **Billing** provides detailed billing information for your JaaS subscription
 
 Clicking **View** on an invoice line will take you to an example invoice. This will show a breakdown of that month's JaaS usage, including charges due to MAU, Overages and Addons usage.
 
-  
-
 ![](../images/d53a8f8-Screenshot_2024-06-14_at_10.56.54_AM.png)

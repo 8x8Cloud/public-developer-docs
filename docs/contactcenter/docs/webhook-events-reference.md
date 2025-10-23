@@ -1,6 +1,6 @@
 # Webhook Events Reference
 
-Webhook events are how 8x8 notifies bots or integrations when an event occurs such as when an agent sends a message. 
+Webhook events are how 8x8 notifies bots or integrations when an event occurs such as when an agent sends a message.
 
 Events are sent as **`POST`** calls to your webhook.
 

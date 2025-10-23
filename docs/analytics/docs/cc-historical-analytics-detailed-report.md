@@ -7,24 +7,24 @@ The common `historical-metrics` endpoint has a limitation where the JSON `/data`
 To overcome this limitation the `historical-metrics/detailed-report` endpoint is available to allow for consumers to access JSON format data for large result sets expected with detailed reports.
 
 > ❗️ **Requirement: for CSV/XLSX content**
-> 
+>
 > Leverage the `historical-metrics` endpoint. CSV/XLSX is not available via `historical-metrics/detailed-report`
-> 
-> 
+>
+>
 
 > ❗️**Strong Recommendation: for JSON content**
-> 
+>
 > Leverage the `historical-metrics/detailed-report` endpoint and the result set won't be limited to 10,000 records.
-> 
+>
 > This guarantees a full result set regardless of the size of the response.
-> 
-> 
+>
+>
 
 > 📘 **You will need a working API key to begin**
-> 
+>
 > [How to get API Keys](/analytics/docs/how-to-get-api-keys)
-> 
-> 
+>
+>
 
 The base URL is region specific, based on the location of your Contact Center tenant.
 
@@ -61,10 +61,10 @@ The following error messages could be returned when dealing with a multitenant c
 CC Historical Analytics allows the consumer to get a listing of the available reports including information about their options and available data.
 
 > 📘 **Available Detailed Reports**
-> 
+>
 > Currently `detailed-reports-interaction-details` and `detailed-reports-agent-status-change` are the available detailed interaction reports. For detailed Post-call survey reports, see the [Post Call Survey](/analytics/docs/customer-experience-post-call-survey) section.
-> 
-> 
+>
+>
 
 Additional information about each of the reports and detailed definitions of metrics can be found in the [Interaction Details report - Glossary](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/detailed-interaction-report.htm#Interaction-details-report-glossary) and [Agent Status Change Detail](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/agent-status-change-details.htm)
 
@@ -115,11 +115,11 @@ For detailed reports the response has a number of elements to guide the usage:
 
 * `type` each report type has a unique definition
 * `metrics` these are the available metrics for the report type. When creating a report. See the [Interaction Details report - Glossary](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/detailed-interaction-report.htm#Interaction-details-report-glossary) and [Agent Status Change Detail](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/agent-status-change-details.htm) for additional detail on the definition of the available metrics
-	+ if no metrics are specified: All metrics will be returned
-	+ if metrics are specified: ONLY the specified metrics will be returned
+  * if no metrics are specified: All metrics will be returned
+  * if metrics are specified: ONLY the specified metrics will be returned
 * `searchQuery` Provides information on the searchable fields and the operators for those searches. See [searchQuery](/analytics/docs/cc-historical-analytics-detailed-report#searchquery) below for more detailed description.
-	+ `fields` field name of searchable field
-	+ `operators` list of valid operators
+  * `fields` field name of searchable field
+  * `operators` list of valid operators
 
 Generic Example:
 
@@ -310,10 +310,10 @@ Generic Example:
 ## 4. Creating a report
 
 > 📘 **This sample is applicable to ALL detailed report types**
-> 
+>
 > The values in passed in will be specific to the report-type but the concepts are applicable to all detailed reports.
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -346,17 +346,17 @@ Generic Example:
 | searchQuery                                | ☐        | See [searchQuery](/analytics/docs/cc-historical-analytics-detailed-report#searchquery)                                                                                                                                                                                                                                                                                                                                                                                                         | true                                                                                                                                                                         |
 | includeParticipants                        | ☐        | Only valid for detailed-reports-interaction-details report type. Default is false. see [includeParticipants](/analytics/docs/cc-historical-analytics-detailed-report#includeparticipants)                                                                                                                                                                                                                                                                                                      | true                                                                                                                                                                         |
 | reportSettings.showOngoingInteractions     | ☐        | Allows interactions to be displayed that are not still ongoing and have partial data representing the current state of that interaction.                                                                                                                                                                                                                                                                                                                                                       | true                                                                                                                                                                         |
-| reportSettings.showInteractionsStateInTime | ☐        | This parameter can be combined with _showOngoingInteractions_ to show interactions as they were when providing a time range not up to the present, showing interactions in the ongoing state for when the time range ends.                                                                                                                                                                                                                                                                     | true                                                                                                                                                                         |
+| reportSettings.showInteractionsStateInTime | ☐        | This parameter can be combined with *showOngoingInteractions* to show interactions as they were when providing a time range not up to the present, showing interactions in the ongoing state for when the time range ends.                                                                                                                                                                                                                                                                     | true                                                                                                                                                                         |
 
 #### intraDayTimeRange
 
 This parameter is used to specify a time range filter which applies within each day of the report. If this parameter is not specified, data will be returned for the complete time frame described in the mandatory dateRange object.
 
 > 🚧 **intraDayTimeRange minimum size**
-> 
+>
 > The *end* must be 5 minutes after the start for detailed reports and 15 minutes after the start for summary reports.
-> 
-> 
+>
+>
 
 * *start*: the start time for the intraDayTimeRange. The format is hh:mm:ss
 * *end*: the end time for the intraDayTimeRange. The format is hh:mm:ss
@@ -377,34 +377,35 @@ If the requirement is to only see data between 8:30am and 5pm on each day the in
 can be omitted and all available metrics will be returned, or an array of `metrics` can be specified and only these metrics will be returned.
 
 > 📘 **Metrics Example**
-> 
+>
 > If the requirement is to only have a subset of the the available metrics for the report type, we specify the required metrics
-> 
+>
 > * if no metrics are specified (omitted entirely or empty array): All metrics will be returned
 > * if metrics are specified: ONLY the specified metrics will be returned
-> 
+>
 > [Interaction Details report - Glossary](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/Glossary-historical-reports.htm) and [Agent Status Change Detail](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/Glossary-historical-reports.htm) provide detail on the definitions of the available metrics
-> 
-> 
+>
+>
 
 multiple metrics
+
 ```json
 "metrics":  [
-	"agentNotes",
-	"caseNumber",
-	"channelId",
-	"creationTime",
-	"customerName",
-	"destination",
-	"direction",
-	"finishedTime",
-	"interactionId",
-	"interactionType",
-	"mediaType",
-	"queueName",
-	"transactionId",
-	"ivrTreatmentDuration",
-	"queueName"
+  "agentNotes",
+  "caseNumber",
+  "channelId",
+  "creationTime",
+  "customerName",
+  "destination",
+  "direction",
+  "finishedTime",
+  "interactionId",
+  "interactionType",
+  "mediaType",
+  "queueName",
+  "transactionId",
+  "ivrTreatmentDuration",
+  "queueName"
 ]
 
 ```
@@ -414,22 +415,23 @@ multiple metrics
 This parameter can be completely omitted Or an empty array can be passed to signify no filter.
 
 > 📘 **searchQuery logical operation.**
-> 
+>
 > The searchQuery object is an array which can include one or several objects, each acting as a filter containing the fields: field, operator, and value. If multiple filter objects are specified, the relation between them is logical AND
-> 
-> 
+>
+>
 
 > 📘 **searchQuery operators are type specific**
-> 
+>
 > * Numeric Fields ( durations like `busyDuration` and counts like `warmTransfersCompleted`:
-> 	+ `=, <, >, !=, >=, <=, is-empty, is-not-empty`
-> 	+ for durations (like `participantWrapUpDuration`, `ivrTreatmentDuration`) 1s => 1 second, 10m => 10 minutes, 3h => 3 hours, 7d => 7 days
+>   * `=, <, >, !=, >=, <=, is-empty, is-not-empty`
+>   * for durations (like `participantWrapUpDuration`, `ivrTreatmentDuration`) 1s => 1 second, 10m => 10 minutes, 3h => 3 hours, 7d => 7 days
 > * Id fields (like `interactionId`) and names (like `queueName`) `contains, is-empty, is-not-empty`
-> 
+>
 
 Sample Search Queries (click for details)
 
 no searchQueryagentNotes containsqueueName is one offilter queueName contains and ivrTreatmentDuration >= 10 seconds
+
 ```json
 "searchQuery": [
 ] 
@@ -462,13 +464,13 @@ no searchQueryagentNotes containsqueueName is one offilter queueName contains an
 "searchQuery":[
     {
         "field": "queueName",
-	      "operator": "contains",
-	      "value": "Sales"
+        "operator": "contains",
+        "value": "Sales"
     },
     {
         "field": "ivrTreatmentDuration",
-	      "operator": ">=",
-	      "value": "10s"
+        "operator": ">=",
+        "value": "10s"
     }
 ]
 
@@ -534,7 +536,7 @@ curl --location --request POST 'https://api.8x8.com/analytics/cc/v8/historical-m
 
 ```
 
-### Create Report Response:
+### Create Report Response
 
 For an accepted request to create a report the response will be 200 OK
 
@@ -548,17 +550,17 @@ For an accepted request to create a report the response will be 200 OK
 ```
 
 > 📘 **Successful Creation always results in DONE**
-> 
+>
 > There is no need to poll for status with detailed reports, this is a variation from summary reports.
-> 
-> 
+>
+>
 
 #### Body
 
 * **id**: this is the identifier for the generated report
 * **status**: this is the status of the request for a newly created report.
-	+ DONE : the report has been generated
-	+ FAILED : the report has failed to generate
+  * DONE : the report has been generated
+  * FAILED : the report has failed to generate
 
 ```json
 {
@@ -571,12 +573,12 @@ For an accepted request to create a report the response will be 200 OK
 ## 5. Accessing Report Data
 
 > 🚧 **Accessing the report Data**
-> 
+>
 > The data is available via JSON ONLY from `historical-metrics/detailed-reports`
-> 
+>
 > CSV/XLS responses are available from the `historical-metrics` endpoint use the [CC Historical Analytics Summary Report](/analytics/docs/cc-historical-analytics-summary-report) process for CSV/XLSX output of detailed reports
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -646,42 +648,42 @@ The body will be an array as shown below.
 * The array could be empty if there are no records in the result
 * If not empty the array will contain one or more objects as described here  
 
-- **total**: is `null` for detailed reports  
+* **total**: is `null` for detailed reports  
 
-- **items**: array of the dimensions and metrics being returned. There will be one object for each.  
+* **items**: array of the dimensions and metrics being returned. There will be one object for each.  
 
-- *key*: the value will be the name of the dimension/metric  
+* *key*: the value will be the name of the dimension/metric  
 
-- *label*: the value will be the human friendly name of the dimension/metric  
+* *label*: the value will be the human friendly name of the dimension/metric  
 
-- *value*: the value will be the value of the dimension/metric. The value could be a string, could represent an array of values (ex. *["Queued", "Handled" ]*) or an object.
+* *value*: the value will be the value of the dimension/metric. The value could be a string, could represent an array of values (ex. *["Queued", "Handled" ]*) or an object.
 
 The *finishedTime* metric has the following format:
 
 ```json
 {
-	"key": "finishedTime",
-	"label": "Finished Time",
-	"value": {
-		"value": "2023-07-03T16:02:59.857+03:00",
-		"ongoing": false
-	}
+  "key": "finishedTime",
+  "label": "Finished Time",
+  "value": {
+    "value": "2023-07-03T16:02:59.857+03:00",
+    "ongoing": false
+  }
 }
 
 ```
 
-The following duration metrics have the bellowed format : 
+The following duration metrics have the bellowed format :
 
 *queueWaitDuration, ivrTreatmentDuration, interactionDuration, customerJourneyDuration, participantOfferDuration, participantHandlingDuration, participantWrapUpDuration, participantProcessingDuration, participantBusyDuration, participantHoldDuration, participantLongestHoldDuration, participantMuteDuration, participantMuteHoldDuration*
 
 ```json
 {
-	"key": "interactionDuration",
-	"label": "Interaction Duration",
-	"value": {
-		"value": 32281,
-		"ongoing": false
-	}
+  "key": "interactionDuration",
+  "label": "Interaction Duration",
+  "value": {
+    "value": 32281,
+    "ongoing": false
+  }
 }
 
 ```
@@ -694,101 +696,101 @@ Sample example response:
 
 ```json
 [
-	{
-		"total": null,
-		"items": [
-			{
-				"key": "time",
-				"label": "Time",
-				"value": "2023-07-03T16:02:27.576+03:00"
-			},
-			{
-				"key": "agentNotes",
-				"label": "Agent Notes",
-				"value": null
-			},
-			{
-				"key": "creationTime",
-				"label": "Creation Time",
-				"value": "2023-07-03T16:02:27.576+03:00"
-			},
-			{
-				"key": "customerName",
-				"label": "Customer Name",
-				"value": null
-			},
-			{
-				"key": "destination",
-				"label": "Destination",
-				"value": "16693335195"
-			},
-			{
-				"key": "direction",
-				"label": "Direction",
-				"value": "OutboundDir"
-			},
-			{
-				"key": "dispositionAction",
-				"label": "Disposition Action",
-				"value": null
-			},
-			{
-				"key": "externalTransactionData",
-				"label": "External Transaction Data",
-				"value": null
-			},
-			{
-				"key": "finishedTime",
-				"label": "Finished Time",
-				"value": {
-					"value": "2023-07-03T16:02:59.857+03:00",
-					"ongoing": false
-				}
-			},
-			{
-				"key": "interactionDuration",
-				"label": "Interaction Duration",
-				"value": {
-					"value": 32281,
-					"ongoing": false
-				}
-			},
-			{
-				"key": "interactionId",
-				"label": "Interaction ID",
-				"value": "int-1891bd8e8f8-DcOBzKtHEIa7sb0WsK7VtUCdB-phone-01-analyticsna12manu01"
-			},
-			{
-				"key": "interactionLabels",
-				"label": "Labels",
-				"value": [
-					"Queued",
-					"Handled"
-				]
-			},
-			{
-				"key": "mediaType",
-				"label": "Media Type",
-				"value": "Phone"
-			},
-			{
-				"key": "participantBusyDuration",
-				"label": "Busy Duration",
-				"value": {
-					"value": 32277,
-					"ongoing": false
-				}
-			},
-			{
-				"key": "participantHandlingDuration",
-				"label": "Handling Duration",
-				"value": {
-					"value": 16347,
-					"ongoing": false
-				}
-			}
-		]
-	}
+  {
+    "total": null,
+    "items": [
+      {
+        "key": "time",
+        "label": "Time",
+        "value": "2023-07-03T16:02:27.576+03:00"
+      },
+      {
+        "key": "agentNotes",
+        "label": "Agent Notes",
+        "value": null
+      },
+      {
+        "key": "creationTime",
+        "label": "Creation Time",
+        "value": "2023-07-03T16:02:27.576+03:00"
+      },
+      {
+        "key": "customerName",
+        "label": "Customer Name",
+        "value": null
+      },
+      {
+        "key": "destination",
+        "label": "Destination",
+        "value": "16693335195"
+      },
+      {
+        "key": "direction",
+        "label": "Direction",
+        "value": "OutboundDir"
+      },
+      {
+        "key": "dispositionAction",
+        "label": "Disposition Action",
+        "value": null
+      },
+      {
+        "key": "externalTransactionData",
+        "label": "External Transaction Data",
+        "value": null
+      },
+      {
+        "key": "finishedTime",
+        "label": "Finished Time",
+        "value": {
+          "value": "2023-07-03T16:02:59.857+03:00",
+          "ongoing": false
+        }
+      },
+      {
+        "key": "interactionDuration",
+        "label": "Interaction Duration",
+        "value": {
+          "value": 32281,
+          "ongoing": false
+        }
+      },
+      {
+        "key": "interactionId",
+        "label": "Interaction ID",
+        "value": "int-1891bd8e8f8-DcOBzKtHEIa7sb0WsK7VtUCdB-phone-01-analyticsna12manu01"
+      },
+      {
+        "key": "interactionLabels",
+        "label": "Labels",
+        "value": [
+          "Queued",
+          "Handled"
+        ]
+      },
+      {
+        "key": "mediaType",
+        "label": "Media Type",
+        "value": "Phone"
+      },
+      {
+        "key": "participantBusyDuration",
+        "label": "Busy Duration",
+        "value": {
+          "value": 32277,
+          "ongoing": false
+        }
+      },
+      {
+        "key": "participantHandlingDuration",
+        "label": "Handling Duration",
+        "value": {
+          "value": 16347,
+          "ongoing": false
+        }
+      }
+    ]
+  }
 ]
 
 ```
@@ -830,753 +832,753 @@ Sample response when includeParticipants is true
 
 ```json
 [
-	{
-		"total": null,
-		"items": [
-			{
-				"key": "participants",
-				"label": "Participants",
-				"value": [
-					{
-						"participantAssignNumber": 1,
-						"participantType": "Agent",
-						"participantId": "agsN41dY9PQtyhLSd9_xqQeg",
-						"participantName": "Vlad Supervisor 2",
-						"participantOfferTime": "2022-09-14T23:58:31.347-07:00",
-						"participantOfferAction": "OfferTimeout",
-						"participantOfferActionTime": "2022-09-14T23:59:01.350-07:00",
-						"participantOfferDuration": {
-							"value": 2438,
-							"ongoing": false
-						},
-						"participantHandlingEndTime": "2023-07-03T16:02:46.364+03:00",
-						"participantHandlingDuration": {
-							"value": 16347,
-							"ongoing": false
-						},
-						"participantWrapUpEndTime": "2023-07-03T16:02:59.856+03:00",
-						"participantWrapUpDuration": {
-							"value": 13492,
-							"ongoing": false
-						},
-						"participantProcessingDuration": {
-							"value": 29839,
-							"ongoing": false
-						},
-						"participantBusyDuration": {
-							"value": 32277,
-							"ongoing": false
-						},
-						"warmTransfersCompleted": 0,
-						"blindTransferToAgent": 0,
-						"blindTransferToQueue": 0,
-						"consultationsEstablished": 0,
-						"conferencesEstablished": 0,
-						"participantHold": 0,
-						"participantHoldDuration": 0,
-						"participantLongestHoldDuration": 0,
-						"wrapUpCode": [],
-						"wrapUpCodeId": [],
-						"wrapUpCodeList": [],
-						"wrapUpCodeListId": [],
-						"wrapUpCodeText": [],
-						"wrapUpShortCode": []
-					},
-					{
-						"participantAssignNumber": 2,
-						"participantType": "Agent",
-						"participantId": "agsN41dY9PQtyhLSd9_xqQeg",
-						"participantName": "Vlad Supervisor 2",
-						"participantOfferTime": "2022-09-14T23:59:46.074-07:00",
-						"participantOfferAction": "Accepted",
-						"participantOfferActionTime": "2022-09-14T23:59:50.001-07:00",
-						"participantOfferDuration": {
-							"value": 2438,
-							"ongoing": false
-						},
-						"participantHandlingEndTime": "2023-07-03T16:02:46.364+03:00",
-						"participantHandlingDuration": {
-							"value": 16347,
-							"ongoing": false
-						},
-						"participantWrapUpEndTime": "2023-07-03T16:02:59.856+03:00",
-						"participantWrapUpDuration": {
-							"value": 13492,
-							"ongoing": false
-						},
-						"participantProcessingDuration": {
-							"value": 29839,
-							"ongoing": false
-						},
-						"participantBusyDuration": {
-							"value": 32277,
-							"ongoing": false
-						},
-						"warmTransfersCompleted": 0,
-						"blindTransferToAgent": 0,
-						"blindTransferToQueue": 0,
-						"consultationsEstablished": 0,
-						"conferencesEstablished": 0,
-						"participantHold": 0,
-						"participantHoldDuration": 0,
-						"participantLongestHoldDuration": 0,
-						"wrapUpCode": [],
-						"wrapUpCodeId": [],
-						"wrapUpCodeList": [],
-						"wrapUpCodeListId": [],
-						"wrapUpCodeText": [],
-						"wrapUpShortCode": []
-					}
-				]
-			},
-			{
-				"key": "time",
-				"label": "Time",
-				"value": "2022-09-14T23:58:31.234-07:00"
-			},
-			{
-				"key": "agentNotes",
-				"label": "Agent Notes",
-				"value": null
-			},
-			{
-				"key": "blindTransferToAgent",
-				"label": "Blind Transfer To Agent",
-				"value": "0"
-			},
-			{
-				"key": "blindTransferToQueue",
-				"label": "Blind Transfer To Queue",
-				"value": "0"
-			},
-			{
-				"key": "campaignId",
-				"label": "Campaign ID",
-				"value": null
-			},
-			{
-				"key": "campaignName",
-				"label": "Campaign Name",
-				"value": null
-			},
-			{
-				"key": "caseFollowUp",
-				"label": "Case Follow Up",
-				"value": null
-			},
-			{
-				"key": "caseNumber",
-				"label": "Case Number",
-				"value": "0"
-			},
-			{
-				"key": "channelId",
-				"label": "Channel ID",
-				"value": "roxana_chat_channel1"
-			},
-			{
-				"key": "conferencesEstablished",
-				"label": "Conferences Established",
-				"value": "0"
-			},
-			{
-				"key": "consultationsEstablished",
-				"label": "Consultations Established",
-				"value": "0"
-			},
-			{
-				"key": "creationTime",
-				"label": "Creation Time",
-				"value": "2022-09-14T23:58:31.234-07:00"
-			},
-			{
-				"key": "customerName",
-				"label": "Customer Name",
-				"value": null
-			},
-			{
-				"key": "destination",
-				"label": "Destination",
-				"value": null
-			},
-			{
-				"key": "direction",
-				"label": "Direction",
-				"value": "InboundDir"
-			},
-			{
-				"key": "dispositionAction",
-				"label": "Disposition Action",
-				"value": null
-			},
-			{
-				"key": "externalTransactionData",
-				"label": "External Transaction Data",
-				"value": null
-			},
-			{
-				"key": "finishedTime",
-				"label": "Finished Time",
-				"value": "2022-09-14T23:59:57.040-07:00"
-			},
-			{
-				"key": "interactionId",
-				"label": "Interaction ID",
-				"value": "int-1833ff122bc-9a3951e984fe40a6a010ed5802d3088f-chat-01-analyticsna12manu01"
-			},
-			{
-				"key": "interactionLabels",
-				"label": "Labels",
-				"value": [
-					"Queued",
-					"OfferingTimeout",
-					"Handled"
-				]
-			},
-			{
-				"key": "interactionType",
-				"label": "Type",
-				"value": null
-			},
-			{
-				"key": "ivrTreatmentDuration",
-				"label": "IVR Treatment Duration",
-				"value": null
-			},
-			{
-				"key": "mediaType",
-				"label": "Media Type",
-				"value": "Chat"
-			},
-			{
-				"key": "originalInteractionId",
-				"label": "Original Interaction ID",
-				"value": null
-			},
-			{
-				"key": "originalTransactionId",
-				"label": "Original Transaction ID",
-				"value": null
-			},
-			{
-				"key": "origination",
-				"label": "Origination",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneCode",
-				"label": "Outbound Phone Code",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneCodeId",
-				"label": "Outbound Phone Code ID",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneCodeList",
-				"label": "Outbound Phone Code List",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneCodeListId",
-				"label": "Outbound Phone Code List ID",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneCodeText",
-				"label": "Outbound Phone Code Text",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneShortCode",
-				"label": "Outbound Phone Short Code",
-				"value": null
-			},
-			{
-				"key": "participantAssignNumber",
-				"label": "Assign #",
-				"value": "2"
-			},
-			{
-				"key": "participantBusyDuration",
-				"label": "Busy Duration",
-				"value": "0:00:41"
-			},
-			{
-				"key": "participantHandlingDuration",
-				"label": "Handling Duration",
-				"value": "0:00:04"
-			},
-			{
-				"key": "participantHandlingEndTime",
-				"label": "Handling End Time",
-				"value": "2022-09-14T23:59:54.300-07:00"
-			},
-			{
-				"key": "participantHold",
-				"label": "Hold",
-				"value": "0"
-			},
-			{
-				"key": "participantHoldDuration",
-				"label": "Hold Duration",
-				"value": "0:00:00"
-			},
-			{
-				"key": "participantId",
-				"label": "Participant ID",
-				"value": [
-					"agsN41dY9PQtyhLSd9_xqQeg"
-				]
-			},
-			{
-				"key": "participantLongestHoldDuration",
-				"label": "Longest Hold Duration",
-				"value": "0:00:00"
-			},
-			{
-				"key": "participantName",
-				"label": "Participant",
-				"value": [
-					"Vlad Supervisor 2"
-				]
-			},
-			{
-				"key": "participantOfferAction",
-				"label": "Offer Action",
-				"value": [
-					"Accepted",
-					"OfferTimeout"
-				]
-			},
-			{
-				"key": "participantOfferActionTime",
-				"label": "Offer Action Time",
-				"value": "2022-09-14T23:59:01.350-07:00"
-			},
-			{
-				"key": "participantOfferDuration",
-				"label": "Offer Duration",
-				"value": "0:00:34"
-			},
-			{
-				"key": "participantOfferTime",
-				"label": "Offer Time",
-				"value": "2022-09-14T23:58:31.347-07:00"
-			},
-			{
-				"key": "participantProcessingDuration",
-				"label": "Processing Duration",
-				"value": "0:00:07"
-			},
-			{
-				"key": "participantType",
-				"label": "Participant Type",
-				"value": [
-					"Agent"
-				]
-			},
-			{
-				"key": "participantWrapUpDuration",
-				"label": "Wrap Up Duration",
-				"value": "0:00:03"
-			},
-			{
-				"key": "participantWrapUpEndTime",
-				"label": "Wrap Up End Time",
-				"value": "2022-09-14T23:59:57.039-07:00"
-			},
-			{
-				"key": "queueId",
-				"label": "Queue ID",
-				"value": "412"
-			},
-			{
-				"key": "queueName",
-				"label": "Queue Name",
-				"value": "roxana_chat_queue"
-			},
-			{
-				"key": "queueTime",
-				"label": "Queue Time",
-				"value": "2022-09-14T23:58:31.346-07:00"
-			},
-			{
-				"key": "queueWaitDuration",
-				"label": "Queue Wait Duration",
-				"value": "0:01:19"
-			},
-			{
-				"key": "recordId",
-				"label": "Record ID",
-				"value": null
-			},
-			{
-				"key": "transactionId",
-				"label": "Transaction ID",
-				"value": "1816"
-			},
-			{
-				"key": "warmTransfersCompleted",
-				"label": "Warm Transfers Completed",
-				"value": "0"
-			},
-			{
-				"key": "wrapUpCode",
-				"label": "Wrap Up Code",
-				"value": []
-			},
-			{
-				"key": "wrapUpCodeId",
-				"label": "Wrap Up Code ID",
-				"value": []
-			},
-			{
-				"key": "wrapUpCodeList",
-				"label": "Wrap Up Code List",
-				"value": []
-			},
-			{
-				"key": "wrapUpCodeListId",
-				"label": "Wrap Up Code List ID",
-				"value": []
-			},
-			{
-				"key": "wrapUpCodeText",
-				"label": "Wrap Up Code Text",
-				"value": []
-			},
-			{
-				"key": "wrapUpShortCode",
-				"label": "Wrap Up Short Code",
-				"value": []
-			}
-		]
-	},
-	{
-		"total": null,
-		"items": [
-			{
-				"key": "participants",
-				"label": "Participants",
-				"value": []
-			},
-			{
-				"key": "time",
-				"label": "Time",
-				"value": "2022-09-14T10:15:50.320-07:00"
-			},
-			{
-				"key": "agentNotes",
-				"label": "Agent Notes",
-				"value": null
-			},
-			{
-				"key": "blindTransferToAgent",
-				"label": "Blind Transfer To Agent",
-				"value": null
-			},
-			{
-				"key": "blindTransferToQueue",
-				"label": "Blind Transfer To Queue",
-				"value": null
-			},
-			{
-				"key": "campaignId",
-				"label": "Campaign ID",
-				"value": null
-			},
-			{
-				"key": "campaignName",
-				"label": "Campaign Name",
-				"value": null
-			},
-			{
-				"key": "caseFollowUp",
-				"label": "Case Follow Up",
-				"value": null
-			},
-			{
-				"key": "caseNumber",
-				"label": "Case Number",
-				"value": null
-			},
-			{
-				"key": "channelId",
-				"label": "Channel ID",
-				"value": "12029635128"
-			},
-			{
-				"key": "conferencesEstablished",
-				"label": "Conferences Established",
-				"value": null
-			},
-			{
-				"key": "consultationsEstablished",
-				"label": "Consultations Established",
-				"value": null
-			},
-			{
-				"key": "creationTime",
-				"label": "Creation Time",
-				"value": "2022-09-14T10:15:50.320-07:00"
-			},
-			{
-				"key": "customerName",
-				"label": "Customer Name",
-				"value": "Relative Ferdinand"
-			},
-			{
-				"key": "destination",
-				"label": "Destination",
-				"value": null
-			},
-			{
-				"key": "direction",
-				"label": "Direction",
-				"value": "InboundDir"
-			},
-			{
-				"key": "dispositionAction",
-				"label": "Disposition Action",
-				"value": null
-			},
-			{
-				"key": "externalTransactionData",
-				"label": "External Transaction Data",
-				"value": null
-			},
-			{
-				"key": "finishedTime",
-				"label": "Finished Time",
-				"value": "2022-09-14T10:16:55.513-07:00"
-			},
-			{
-				"key": "interactionId",
-				"label": "Interaction ID",
-				"value": "int-1833cfff2af-L7NxZXoe0ttnABJQ2innePQuP-phone-01-analyticsna12manu01"
-			},
-			{
-				"key": "interactionLabels",
-				"label": "Labels",
-				"value": [
-					"Queued",
-					"Dequeued"
-				]
-			},
-			{
-				"key": "interactionType",
-				"label": "Type",
-				"value": null
-			},
-			{
-				"key": "ivrTreatmentDuration",
-				"label": "IVR Treatment Duration",
-				"value": "0:00:05"
-			},
-			{
-				"key": "mediaType",
-				"label": "Media Type",
-				"value": "Phone"
-			},
-			{
-				"key": "originalInteractionId",
-				"label": "Original Interaction ID",
-				"value": null
-			},
-			{
-				"key": "originalTransactionId",
-				"label": "Original Transaction ID",
-				"value": null
-			},
-			{
-				"key": "origination",
-				"label": "Origination",
-				"value": "2068096167"
-			},
-			{
-				"key": "outboundPhoneCode",
-				"label": "Outbound Phone Code",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneCodeId",
-				"label": "Outbound Phone Code ID",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneCodeList",
-				"label": "Outbound Phone Code List",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneCodeListId",
-				"label": "Outbound Phone Code List ID",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneCodeText",
-				"label": "Outbound Phone Code Text",
-				"value": null
-			},
-			{
-				"key": "outboundPhoneShortCode",
-				"label": "Outbound Phone Short Code",
-				"value": null
-			},
-			{
-				"key": "participantAssignNumber",
-				"label": "Assign #",
-				"value": null
-			},
-			{
-				"key": "participantBusyDuration",
-				"label": "Busy Duration",
-				"value": null
-			},
-			{
-				"key": "participantHandlingDuration",
-				"label": "Handling Duration",
-				"value": null
-			},
-			{
-				"key": "participantHandlingEndTime",
-				"label": "Handling End Time",
-				"value": null
-			},
-			{
-				"key": "participantHold",
-				"label": "Hold",
-				"value": null
-			},
-			{
-				"key": "participantHoldDuration",
-				"label": "Hold Duration",
-				"value": null
-			},
-			{
-				"key": "participantId",
-				"label": "Participant ID",
-				"value": null
-			},
-			{
-				"key": "participantLongestHoldDuration",
-				"label": "Longest Hold Duration",
-				"value": null
-			},
-			{
-				"key": "participantName",
-				"label": "Participant",
-				"value": null
-			},
-			{
-				"key": "participantOfferAction",
-				"label": "Offer Action",
-				"value": null
-			},
-			{
-				"key": "participantOfferActionTime",
-				"label": "Offer Action Time",
-				"value": null
-			},
-			{
-				"key": "participantOfferDuration",
-				"label": "Offer Duration",
-				"value": null
-			},
-			{
-				"key": "participantOfferTime",
-				"label": "Offer Time",
-				"value": null
-			},
-			{
-				"key": "participantProcessingDuration",
-				"label": "Processing Duration",
-				"value": null
-			},
-			{
-				"key": "participantType",
-				"label": "Participant Type",
-				"value": null
-			},
-			{
-				"key": "participantWrapUpDuration",
-				"label": "Wrap Up Duration",
-				"value": null
-			},
-			{
-				"key": "participantWrapUpEndTime",
-				"label": "Wrap Up End Time",
-				"value": null
-			},
-			{
-				"key": "queueId",
-				"label": "Queue ID",
-				"value": "332"
-			},
-			{
-				"key": "queueName",
-				"label": "Queue Name",
-				"value": "CexInboundDemo"
-			},
-			{
-				"key": "queueTime",
-				"label": "Queue Time",
-				"value": "2022-09-14T10:15:55.443-07:00"
-			},
-			{
-				"key": "queueWaitDuration",
-				"label": "Queue Wait Duration",
-				"value": "0:01:00"
-			},
-			{
-				"key": "recordId",
-				"label": "Record ID",
-				"value": null
-			},
-			{
-				"key": "transactionId",
-				"label": "Transaction ID",
-				"value": "1807"
-			},
-			{
-				"key": "warmTransfersCompleted",
-				"label": "Warm Transfers Completed",
-				"value": null
-			},
-			{
-				"key": "wrapUpCode",
-				"label": "Wrap Up Code",
-				"value": null
-			},
-			{
-				"key": "wrapUpCodeId",
-				"label": "Wrap Up Code ID",
-				"value": null
-			},
-			{
-				"key": "wrapUpCodeList",
-				"label": "Wrap Up Code List",
-				"value": null
-			},
-			{
-				"key": "wrapUpCodeListId",
-				"label": "Wrap Up Code List ID",
-				"value": null
-			},
-			{
-				"key": "wrapUpCodeText",
-				"label": "Wrap Up Code Text",
-				"value": null
-			},
-			{
-				"key": "wrapUpShortCode",
-				"label": "Wrap Up Short Code",
-				"value": null
-			}
-		]
-	}
+  {
+    "total": null,
+    "items": [
+      {
+        "key": "participants",
+        "label": "Participants",
+        "value": [
+          {
+            "participantAssignNumber": 1,
+            "participantType": "Agent",
+            "participantId": "agsN41dY9PQtyhLSd9_xqQeg",
+            "participantName": "Vlad Supervisor 2",
+            "participantOfferTime": "2022-09-14T23:58:31.347-07:00",
+            "participantOfferAction": "OfferTimeout",
+            "participantOfferActionTime": "2022-09-14T23:59:01.350-07:00",
+            "participantOfferDuration": {
+              "value": 2438,
+              "ongoing": false
+            },
+            "participantHandlingEndTime": "2023-07-03T16:02:46.364+03:00",
+            "participantHandlingDuration": {
+              "value": 16347,
+              "ongoing": false
+            },
+            "participantWrapUpEndTime": "2023-07-03T16:02:59.856+03:00",
+            "participantWrapUpDuration": {
+              "value": 13492,
+              "ongoing": false
+            },
+            "participantProcessingDuration": {
+              "value": 29839,
+              "ongoing": false
+            },
+            "participantBusyDuration": {
+              "value": 32277,
+              "ongoing": false
+            },
+            "warmTransfersCompleted": 0,
+            "blindTransferToAgent": 0,
+            "blindTransferToQueue": 0,
+            "consultationsEstablished": 0,
+            "conferencesEstablished": 0,
+            "participantHold": 0,
+            "participantHoldDuration": 0,
+            "participantLongestHoldDuration": 0,
+            "wrapUpCode": [],
+            "wrapUpCodeId": [],
+            "wrapUpCodeList": [],
+            "wrapUpCodeListId": [],
+            "wrapUpCodeText": [],
+            "wrapUpShortCode": []
+          },
+          {
+            "participantAssignNumber": 2,
+            "participantType": "Agent",
+            "participantId": "agsN41dY9PQtyhLSd9_xqQeg",
+            "participantName": "Vlad Supervisor 2",
+            "participantOfferTime": "2022-09-14T23:59:46.074-07:00",
+            "participantOfferAction": "Accepted",
+            "participantOfferActionTime": "2022-09-14T23:59:50.001-07:00",
+            "participantOfferDuration": {
+              "value": 2438,
+              "ongoing": false
+            },
+            "participantHandlingEndTime": "2023-07-03T16:02:46.364+03:00",
+            "participantHandlingDuration": {
+              "value": 16347,
+              "ongoing": false
+            },
+            "participantWrapUpEndTime": "2023-07-03T16:02:59.856+03:00",
+            "participantWrapUpDuration": {
+              "value": 13492,
+              "ongoing": false
+            },
+            "participantProcessingDuration": {
+              "value": 29839,
+              "ongoing": false
+            },
+            "participantBusyDuration": {
+              "value": 32277,
+              "ongoing": false
+            },
+            "warmTransfersCompleted": 0,
+            "blindTransferToAgent": 0,
+            "blindTransferToQueue": 0,
+            "consultationsEstablished": 0,
+            "conferencesEstablished": 0,
+            "participantHold": 0,
+            "participantHoldDuration": 0,
+            "participantLongestHoldDuration": 0,
+            "wrapUpCode": [],
+            "wrapUpCodeId": [],
+            "wrapUpCodeList": [],
+            "wrapUpCodeListId": [],
+            "wrapUpCodeText": [],
+            "wrapUpShortCode": []
+          }
+        ]
+      },
+      {
+        "key": "time",
+        "label": "Time",
+        "value": "2022-09-14T23:58:31.234-07:00"
+      },
+      {
+        "key": "agentNotes",
+        "label": "Agent Notes",
+        "value": null
+      },
+      {
+        "key": "blindTransferToAgent",
+        "label": "Blind Transfer To Agent",
+        "value": "0"
+      },
+      {
+        "key": "blindTransferToQueue",
+        "label": "Blind Transfer To Queue",
+        "value": "0"
+      },
+      {
+        "key": "campaignId",
+        "label": "Campaign ID",
+        "value": null
+      },
+      {
+        "key": "campaignName",
+        "label": "Campaign Name",
+        "value": null
+      },
+      {
+        "key": "caseFollowUp",
+        "label": "Case Follow Up",
+        "value": null
+      },
+      {
+        "key": "caseNumber",
+        "label": "Case Number",
+        "value": "0"
+      },
+      {
+        "key": "channelId",
+        "label": "Channel ID",
+        "value": "roxana_chat_channel1"
+      },
+      {
+        "key": "conferencesEstablished",
+        "label": "Conferences Established",
+        "value": "0"
+      },
+      {
+        "key": "consultationsEstablished",
+        "label": "Consultations Established",
+        "value": "0"
+      },
+      {
+        "key": "creationTime",
+        "label": "Creation Time",
+        "value": "2022-09-14T23:58:31.234-07:00"
+      },
+      {
+        "key": "customerName",
+        "label": "Customer Name",
+        "value": null
+      },
+      {
+        "key": "destination",
+        "label": "Destination",
+        "value": null
+      },
+      {
+        "key": "direction",
+        "label": "Direction",
+        "value": "InboundDir"
+      },
+      {
+        "key": "dispositionAction",
+        "label": "Disposition Action",
+        "value": null
+      },
+      {
+        "key": "externalTransactionData",
+        "label": "External Transaction Data",
+        "value": null
+      },
+      {
+        "key": "finishedTime",
+        "label": "Finished Time",
+        "value": "2022-09-14T23:59:57.040-07:00"
+      },
+      {
+        "key": "interactionId",
+        "label": "Interaction ID",
+        "value": "int-1833ff122bc-9a3951e984fe40a6a010ed5802d3088f-chat-01-analyticsna12manu01"
+      },
+      {
+        "key": "interactionLabels",
+        "label": "Labels",
+        "value": [
+          "Queued",
+          "OfferingTimeout",
+          "Handled"
+        ]
+      },
+      {
+        "key": "interactionType",
+        "label": "Type",
+        "value": null
+      },
+      {
+        "key": "ivrTreatmentDuration",
+        "label": "IVR Treatment Duration",
+        "value": null
+      },
+      {
+        "key": "mediaType",
+        "label": "Media Type",
+        "value": "Chat"
+      },
+      {
+        "key": "originalInteractionId",
+        "label": "Original Interaction ID",
+        "value": null
+      },
+      {
+        "key": "originalTransactionId",
+        "label": "Original Transaction ID",
+        "value": null
+      },
+      {
+        "key": "origination",
+        "label": "Origination",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneCode",
+        "label": "Outbound Phone Code",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneCodeId",
+        "label": "Outbound Phone Code ID",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneCodeList",
+        "label": "Outbound Phone Code List",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneCodeListId",
+        "label": "Outbound Phone Code List ID",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneCodeText",
+        "label": "Outbound Phone Code Text",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneShortCode",
+        "label": "Outbound Phone Short Code",
+        "value": null
+      },
+      {
+        "key": "participantAssignNumber",
+        "label": "Assign #",
+        "value": "2"
+      },
+      {
+        "key": "participantBusyDuration",
+        "label": "Busy Duration",
+        "value": "0:00:41"
+      },
+      {
+        "key": "participantHandlingDuration",
+        "label": "Handling Duration",
+        "value": "0:00:04"
+      },
+      {
+        "key": "participantHandlingEndTime",
+        "label": "Handling End Time",
+        "value": "2022-09-14T23:59:54.300-07:00"
+      },
+      {
+        "key": "participantHold",
+        "label": "Hold",
+        "value": "0"
+      },
+      {
+        "key": "participantHoldDuration",
+        "label": "Hold Duration",
+        "value": "0:00:00"
+      },
+      {
+        "key": "participantId",
+        "label": "Participant ID",
+        "value": [
+          "agsN41dY9PQtyhLSd9_xqQeg"
+        ]
+      },
+      {
+        "key": "participantLongestHoldDuration",
+        "label": "Longest Hold Duration",
+        "value": "0:00:00"
+      },
+      {
+        "key": "participantName",
+        "label": "Participant",
+        "value": [
+          "Vlad Supervisor 2"
+        ]
+      },
+      {
+        "key": "participantOfferAction",
+        "label": "Offer Action",
+        "value": [
+          "Accepted",
+          "OfferTimeout"
+        ]
+      },
+      {
+        "key": "participantOfferActionTime",
+        "label": "Offer Action Time",
+        "value": "2022-09-14T23:59:01.350-07:00"
+      },
+      {
+        "key": "participantOfferDuration",
+        "label": "Offer Duration",
+        "value": "0:00:34"
+      },
+      {
+        "key": "participantOfferTime",
+        "label": "Offer Time",
+        "value": "2022-09-14T23:58:31.347-07:00"
+      },
+      {
+        "key": "participantProcessingDuration",
+        "label": "Processing Duration",
+        "value": "0:00:07"
+      },
+      {
+        "key": "participantType",
+        "label": "Participant Type",
+        "value": [
+          "Agent"
+        ]
+      },
+      {
+        "key": "participantWrapUpDuration",
+        "label": "Wrap Up Duration",
+        "value": "0:00:03"
+      },
+      {
+        "key": "participantWrapUpEndTime",
+        "label": "Wrap Up End Time",
+        "value": "2022-09-14T23:59:57.039-07:00"
+      },
+      {
+        "key": "queueId",
+        "label": "Queue ID",
+        "value": "412"
+      },
+      {
+        "key": "queueName",
+        "label": "Queue Name",
+        "value": "roxana_chat_queue"
+      },
+      {
+        "key": "queueTime",
+        "label": "Queue Time",
+        "value": "2022-09-14T23:58:31.346-07:00"
+      },
+      {
+        "key": "queueWaitDuration",
+        "label": "Queue Wait Duration",
+        "value": "0:01:19"
+      },
+      {
+        "key": "recordId",
+        "label": "Record ID",
+        "value": null
+      },
+      {
+        "key": "transactionId",
+        "label": "Transaction ID",
+        "value": "1816"
+      },
+      {
+        "key": "warmTransfersCompleted",
+        "label": "Warm Transfers Completed",
+        "value": "0"
+      },
+      {
+        "key": "wrapUpCode",
+        "label": "Wrap Up Code",
+        "value": []
+      },
+      {
+        "key": "wrapUpCodeId",
+        "label": "Wrap Up Code ID",
+        "value": []
+      },
+      {
+        "key": "wrapUpCodeList",
+        "label": "Wrap Up Code List",
+        "value": []
+      },
+      {
+        "key": "wrapUpCodeListId",
+        "label": "Wrap Up Code List ID",
+        "value": []
+      },
+      {
+        "key": "wrapUpCodeText",
+        "label": "Wrap Up Code Text",
+        "value": []
+      },
+      {
+        "key": "wrapUpShortCode",
+        "label": "Wrap Up Short Code",
+        "value": []
+      }
+    ]
+  },
+  {
+    "total": null,
+    "items": [
+      {
+        "key": "participants",
+        "label": "Participants",
+        "value": []
+      },
+      {
+        "key": "time",
+        "label": "Time",
+        "value": "2022-09-14T10:15:50.320-07:00"
+      },
+      {
+        "key": "agentNotes",
+        "label": "Agent Notes",
+        "value": null
+      },
+      {
+        "key": "blindTransferToAgent",
+        "label": "Blind Transfer To Agent",
+        "value": null
+      },
+      {
+        "key": "blindTransferToQueue",
+        "label": "Blind Transfer To Queue",
+        "value": null
+      },
+      {
+        "key": "campaignId",
+        "label": "Campaign ID",
+        "value": null
+      },
+      {
+        "key": "campaignName",
+        "label": "Campaign Name",
+        "value": null
+      },
+      {
+        "key": "caseFollowUp",
+        "label": "Case Follow Up",
+        "value": null
+      },
+      {
+        "key": "caseNumber",
+        "label": "Case Number",
+        "value": null
+      },
+      {
+        "key": "channelId",
+        "label": "Channel ID",
+        "value": "12029635128"
+      },
+      {
+        "key": "conferencesEstablished",
+        "label": "Conferences Established",
+        "value": null
+      },
+      {
+        "key": "consultationsEstablished",
+        "label": "Consultations Established",
+        "value": null
+      },
+      {
+        "key": "creationTime",
+        "label": "Creation Time",
+        "value": "2022-09-14T10:15:50.320-07:00"
+      },
+      {
+        "key": "customerName",
+        "label": "Customer Name",
+        "value": "Relative Ferdinand"
+      },
+      {
+        "key": "destination",
+        "label": "Destination",
+        "value": null
+      },
+      {
+        "key": "direction",
+        "label": "Direction",
+        "value": "InboundDir"
+      },
+      {
+        "key": "dispositionAction",
+        "label": "Disposition Action",
+        "value": null
+      },
+      {
+        "key": "externalTransactionData",
+        "label": "External Transaction Data",
+        "value": null
+      },
+      {
+        "key": "finishedTime",
+        "label": "Finished Time",
+        "value": "2022-09-14T10:16:55.513-07:00"
+      },
+      {
+        "key": "interactionId",
+        "label": "Interaction ID",
+        "value": "int-1833cfff2af-L7NxZXoe0ttnABJQ2innePQuP-phone-01-analyticsna12manu01"
+      },
+      {
+        "key": "interactionLabels",
+        "label": "Labels",
+        "value": [
+          "Queued",
+          "Dequeued"
+        ]
+      },
+      {
+        "key": "interactionType",
+        "label": "Type",
+        "value": null
+      },
+      {
+        "key": "ivrTreatmentDuration",
+        "label": "IVR Treatment Duration",
+        "value": "0:00:05"
+      },
+      {
+        "key": "mediaType",
+        "label": "Media Type",
+        "value": "Phone"
+      },
+      {
+        "key": "originalInteractionId",
+        "label": "Original Interaction ID",
+        "value": null
+      },
+      {
+        "key": "originalTransactionId",
+        "label": "Original Transaction ID",
+        "value": null
+      },
+      {
+        "key": "origination",
+        "label": "Origination",
+        "value": "2068096167"
+      },
+      {
+        "key": "outboundPhoneCode",
+        "label": "Outbound Phone Code",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneCodeId",
+        "label": "Outbound Phone Code ID",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneCodeList",
+        "label": "Outbound Phone Code List",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneCodeListId",
+        "label": "Outbound Phone Code List ID",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneCodeText",
+        "label": "Outbound Phone Code Text",
+        "value": null
+      },
+      {
+        "key": "outboundPhoneShortCode",
+        "label": "Outbound Phone Short Code",
+        "value": null
+      },
+      {
+        "key": "participantAssignNumber",
+        "label": "Assign #",
+        "value": null
+      },
+      {
+        "key": "participantBusyDuration",
+        "label": "Busy Duration",
+        "value": null
+      },
+      {
+        "key": "participantHandlingDuration",
+        "label": "Handling Duration",
+        "value": null
+      },
+      {
+        "key": "participantHandlingEndTime",
+        "label": "Handling End Time",
+        "value": null
+      },
+      {
+        "key": "participantHold",
+        "label": "Hold",
+        "value": null
+      },
+      {
+        "key": "participantHoldDuration",
+        "label": "Hold Duration",
+        "value": null
+      },
+      {
+        "key": "participantId",
+        "label": "Participant ID",
+        "value": null
+      },
+      {
+        "key": "participantLongestHoldDuration",
+        "label": "Longest Hold Duration",
+        "value": null
+      },
+      {
+        "key": "participantName",
+        "label": "Participant",
+        "value": null
+      },
+      {
+        "key": "participantOfferAction",
+        "label": "Offer Action",
+        "value": null
+      },
+      {
+        "key": "participantOfferActionTime",
+        "label": "Offer Action Time",
+        "value": null
+      },
+      {
+        "key": "participantOfferDuration",
+        "label": "Offer Duration",
+        "value": null
+      },
+      {
+        "key": "participantOfferTime",
+        "label": "Offer Time",
+        "value": null
+      },
+      {
+        "key": "participantProcessingDuration",
+        "label": "Processing Duration",
+        "value": null
+      },
+      {
+        "key": "participantType",
+        "label": "Participant Type",
+        "value": null
+      },
+      {
+        "key": "participantWrapUpDuration",
+        "label": "Wrap Up Duration",
+        "value": null
+      },
+      {
+        "key": "participantWrapUpEndTime",
+        "label": "Wrap Up End Time",
+        "value": null
+      },
+      {
+        "key": "queueId",
+        "label": "Queue ID",
+        "value": "332"
+      },
+      {
+        "key": "queueName",
+        "label": "Queue Name",
+        "value": "CexInboundDemo"
+      },
+      {
+        "key": "queueTime",
+        "label": "Queue Time",
+        "value": "2022-09-14T10:15:55.443-07:00"
+      },
+      {
+        "key": "queueWaitDuration",
+        "label": "Queue Wait Duration",
+        "value": "0:01:00"
+      },
+      {
+        "key": "recordId",
+        "label": "Record ID",
+        "value": null
+      },
+      {
+        "key": "transactionId",
+        "label": "Transaction ID",
+        "value": "1807"
+      },
+      {
+        "key": "warmTransfersCompleted",
+        "label": "Warm Transfers Completed",
+        "value": null
+      },
+      {
+        "key": "wrapUpCode",
+        "label": "Wrap Up Code",
+        "value": null
+      },
+      {
+        "key": "wrapUpCodeId",
+        "label": "Wrap Up Code ID",
+        "value": null
+      },
+      {
+        "key": "wrapUpCodeList",
+        "label": "Wrap Up Code List",
+        "value": null
+      },
+      {
+        "key": "wrapUpCodeListId",
+        "label": "Wrap Up Code List ID",
+        "value": null
+      },
+      {
+        "key": "wrapUpCodeText",
+        "label": "Wrap Up Code Text",
+        "value": null
+      },
+      {
+        "key": "wrapUpShortCode",
+        "label": "Wrap Up Short Code",
+        "value": null
+      }
+    ]
+  }
 ]
 
 ```

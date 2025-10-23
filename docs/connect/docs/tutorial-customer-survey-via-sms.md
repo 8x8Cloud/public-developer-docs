@@ -19,7 +19,7 @@ If you do not have an 8x8 account or virtual number, reach out to your 8x8 accou
 
 ## Video Demo
 
-This is a accompanying video meant to show the SMS Customer Survey as a demo. 
+This is a accompanying video meant to show the SMS Customer Survey as a demo.
 
 <iframe
   src="https://www.youtube.com/embed/TbcB1i0noKc?si=jmzyvbs67PwYsOCc"
@@ -36,12 +36,13 @@ You can find an example Automation Workflow workflow below, which you can use to
 While we will not explain the different components of the tutorial here, if you need a refresher please see our section on Automation Builder [Steps](triggers-and-steps-library) and [Triggers](triggers).
 
 > 📘 **Note**
-> 
+>
 > Please change the mobile number in the JSON below and the keywords as necessary.
-> 
-> 
+>
+>
 
 tutorial_sms_survey.json
+
 ```json
 {
   "definition": {
@@ -273,17 +274,16 @@ The  **HTTP Trigger** should have these following configurations:
 
 ![](../images/cc24cff-image.png)
   
-
 Within the **HTTP Trigger,** go to **Generate Test Event** and use the following JSON as the Test Event's input. This will allow us to correctly populate the values for the following Google Sheet step.
 
 ![](../images/e2dff8a-Screenshot_2024-06-20_at_5.28.36_PM.png)
 
 ```json
 {
-	"response1": "WhatsApp, SMS",
-	"response2": "10",
-	"response3": "No Issues!",
-	"mobileNumber": "+6599999999"
+  "response1": "WhatsApp, SMS",
+  "response2": "10",
+  "response3": "No Issues!",
+  "mobileNumber": "+6599999999"
 }
 
 ```
@@ -293,8 +293,6 @@ The **Google Sheets Step** should have the following configuration.
 ![](../images/5ab2223-Screenshot_2024-06-20_at_5.30.40_PM.png)
 Within **Pipedream**, you should be able to see the HTTP responses sent by Automation Builder which may be useful in case any debugging is required.
 
-  
-
 ![](../images/f8264b4-Screenshot_2024-06-21_at_10.11.34_AM.png)
 Step 4: Send SMS
 ================
@@ -303,14 +301,9 @@ After setting up the above, you should be able to send a SMS message to your Vir
 
 ![](../images/92a5216-image.png)
   
-
-  
-
 This should result in a row being added to your Google Sheet with the response.
 
 ![](../images/2f7c9aa-image.png)
-
-  
 
 ## Conclusion
 

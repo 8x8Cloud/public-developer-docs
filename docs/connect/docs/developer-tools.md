@@ -6,7 +6,7 @@
 
 This [page](https://connect.8x8.com/messaging/api-keys) allows to see, create and manage any API keys associated to your account.  
 
-API keys are used to authenticate with all 8x8 APIs, more information can be found [here](/connect/docs/authentication). 
+API keys are used to authenticate with all 8x8 APIs, more information can be found [here](/connect/docs/authentication).
 
 ## Webhooks
 
@@ -20,7 +20,7 @@ The webhook list will show you information such as:
 * **Type:** The type of webhook which relates to the API it is tied to (Chat Apps, SMS).
 * **URL:** The URL the webhooks are being sent.
 * **HTTP Authorization:** The HTTP Authorization (if any) that is being used. For now the HTTP Authorization is a string that is added to the header that your server can use to authenticate the webhook.
-	+ You can find more information on the parameter [here](/connect/reference/add-webhooks-2) under the **Body** Params Object.
+  * You can find more information on the parameter [here](/connect/reference/add-webhooks-2) under the **Body** Params Object.
 * ![](../images/040e6b5-image.png)
 * **Content Type (Deprecated):** No longer used in newer webhooks.
 * **Status:** Whether the webhook is enabled/disabled
@@ -30,8 +30,7 @@ When you click on the **Add webhook** button, you will see this pop up.
 
 ![](../images/387b93267655a4331902596fe3a1c8cd6130c015f46db87fb5946f659194290a-image.png)
   
-
-The popup above allows you to create new webhooks, it can be enabled for all sub-accounts or for a specific one only. 
+The popup above allows you to create new webhooks, it can be enabled for all sub-accounts or for a specific one only.
 
 You can then select if you want to setup this webhook for SMS, Messaging Apps, or Voice. If you select SMS you will receive both incoming SMS and SMS delivery information on this webhook.
 

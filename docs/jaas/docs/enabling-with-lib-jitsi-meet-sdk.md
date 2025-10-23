@@ -19,11 +19,9 @@ JitsiMeetJS.init(initOptions);
 
 ```
 
-  
-
 This will cause clients to start sending rtcstats data, however this will not send client logs as this functionality is tied to the jitsi-meet client.  
 
-Integrating application can send custom data points by using the following endpoint: 
+Integrating application can send custom data points by using the following endpoint:
 
 ```javascript
 JitsiMeetJS.rtcstats.sendStatsEntry(type: string, data: Object) :void

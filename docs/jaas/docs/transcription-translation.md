@@ -9,7 +9,7 @@ This documentation outlines the transcription and translation capabilities provi
 These are the requirements to start using these features:
 
 * Transcription and Translation are paid add-ons which **require a billing / payment method** to be added to your JaaS Account.
-* The current user's **JWT** should enable **transcription** to be able to use the feature. This will enable both transcription and translation. 
+* The current user's **JWT** should enable **transcription** to be able to use the feature. This will enable both transcription and translation.
 
 ```json
  "features": {
@@ -25,8 +25,6 @@ These are the requirements to start using these features:
 ## Video Demo
 
 This is a companion video demo of transcription and translation.
-
-  
 
 <iframe
   src="https://www.youtube.com/embed/dhNjDrNcB-U?si=w3WN43sTjQY_y9yv"

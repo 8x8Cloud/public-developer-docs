@@ -2,22 +2,19 @@
 
 ## Primary and secondary buttons
 
-You can change both the primary and secondary colours on the chat button, either globally across each of the parts of the widget, invitation/form/window or configure each one differently. 
+You can change both the primary and secondary colours on the chat button, either globally across each of the parts of the widget, invitation/form/window or configure each one differently.
 
 On the form below, there are just primary buttons (red arrow points to primary button)
 
 ![](../images/bd5743f2d960d8527e7b651e584b9afbed6285aafbfbe7f5e4912a285dfb3946-image.png)
   
-
 Then, for the web window, here you can see the primary buttons, but also the secondary buttons are both the quick replies, and cancel options. (Red arrow points to the primary button/blue to secondary button)
-
 
 ![](../images/119b36b205b29344f350cc515d8afb4a6f6cccd2036b13e92b663a84a7ff9d16-Button_theme.png "Chat Gateway flow.jpg")
   
-
 ## Button properties
 
-Below, is the table of configuration that you can use to change the button colours, the chat theme property is what is used to change the colour. 
+Below, is the table of configuration that you can use to change the button colours, the chat theme property is what is used to change the colour.
 
 | Chat Theme Property | Example value | Description |
 | --- | --- | --- |
@@ -33,8 +30,6 @@ Below, is the table of configuration that you can use to change the button colou
 | buttonSecondaryBackgroundColorActive | `#87CEEB` | Changes the secondary button background colour when it's active |
 | buttonSecondaryBackgroundColorDisabled | `#B0C4DE` | Changes the secondary button background colour when it's disabled |
 | buttonBorderRadius | `0px` | Changes the button rounding |
-
-  
 
 Here is an example of where the customer information is being set, for this example, the customer is already logged into the website, so we are passing in the information to the agent, to let them know the customer's name and email address, and also that they have already been verified
 
@@ -58,7 +53,7 @@ Here is an example of where the customer information is being set, for this exam
 
 ```
 
-To add this, you need to add it at the bottom of the script in this area here 
+To add this, you need to add it at the bottom of the script in this area here
 
 ```javascript
 "__8x8-chat-button-container-script_1333070733643e5b8fa7a791.52161248",
@@ -71,7 +66,7 @@ ADD THE THEMING CODE HERE
 
 ```
 
-Then, the full script will look like this 
+Then, the full script will look like this
 
 ```html
     <!-- Place this code snippet anywhere you want the button to appear in your page. If no button has been configured in the chat script, it will not show up nor take any space. -->
@@ -138,7 +133,5 @@ Then, the full script will look like this
 ### Images with buttons changed
 
 Then, when this is ran, you can see how it looks on the chat widget, again the red arrow showing the primary and blue the secondary button. In this as well, the “buttonBorderRadius”a was set to “10px”, to make the buttons more rounded.
-
-  
 
 ![](../images/934851cd046dbd5390d60b3f93853c49f4cc3639351fc2043b7562f9efbcf0e8-Workboard.png "Chat Gateway flow.jpg")

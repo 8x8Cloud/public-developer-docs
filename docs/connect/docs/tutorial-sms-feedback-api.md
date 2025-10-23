@@ -22,17 +22,14 @@ With 8x8 being aware of the conversion rate, it activates the Omni Shield for yo
 ![](../images/401511f-Screenshot_2023-12-05_at_9.58.33_AM.png)
 
 2. **Sending the Outcome of OTP Conversion using [Feedback API](/connect/reference/api-sms-feedback)**
-	1. Success Feedback is a POST request
-	2. There are four parameters three of which are mandatory— `subAccountId`, `umid`, and `outcome` (success or failure) which are highlighted in red. The optional Parameter is the `timestamp` which provides time (UTC) and date reference which allows 8x8 Omni Shield to work promptly.  
-	
-	  
-	
-	
-	> 📘 **Validity Period**
-	> 
-	> The Success Feedback API call should be made within 15 minutes of the original message being sent. If the API call is not made during this timeframe then the data we receive may not accurately reflect your real conversion rate.
-	> 
-	>
+  1. Success Feedback is a POST request
+  2. There are four parameters three of which are mandatory— `subAccountId`, `umid`, and `outcome` (success or failure) which are highlighted in red. The optional Parameter is the `timestamp` which provides time (UTC) and date reference which allows 8x8 Omni Shield to work promptly.  
+  
+  > 📘 **Validity Period**
+  >
+  > The Success Feedback API call should be made within 15 minutes of the original message being sent. If the API call is not made during this timeframe then the data we receive may not accurately reflect your real conversion rate.
+  >
+  >
 
 ![](../images/cadad9a-Success.png)
 
@@ -41,4 +38,3 @@ With 8x8 being aware of the conversion rate, it activates the Omni Shield for yo
 Upon successfully pushing the Success Feedback API, it is normal for the HTTP 200 response to have no content returned.
 
 ![](../images/ff90638-Screenshot_2023-12-05_at_10.11.39_AM.png)
-

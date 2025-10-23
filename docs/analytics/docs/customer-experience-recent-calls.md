@@ -1,30 +1,30 @@
 # Recent Calls
 
 > 🚧 **Analytics for Contact Center is the new home for detailed information.**
-> 
+>
 > Analytics for Contact Center Detailed Interactions is the new location for detailed transaction information, all future updates and improvements will be delivered there.
-> 
+>
 > If you are just beginning an integration we'd strongly advise to use ACC instead of Recent Calls, and if you've already integrated to Recent Calls we'd advise taking a look at some of the benefits to utilizing ACC.
-> 
+>
 > * ACC has information on all interaction media (not just voice)
 > * ACC has additional metrics not present in Recent Calls
 > * ACC will have additional metrics and functionality added
-> 
+>
 > There is no set timeline for Recent Calls to be deprecated, however we are planning to consolidate our Analytics portfolio and strongly recommend leveraging ACC APIs.
-> 
-> 
+>
+>
 
 The [Customer Experience Recent Calls API reference](/analytics/reference/recentcalldata) is available to try.
 
 > 📘 **You will need a working API key to begin**
-> 
-> [How to get API Keys](/analytics/docs/how-to-get-api-keys) 
-> 
+>
+> [How to get API Keys](/analytics/docs/how-to-get-api-keys)
+>
 > The `8x8-api-key` will be the `Key` generated. For Customer Experience the Secret from Admin Console is not required.
-> 
+>
 > Your `token` will be provided by [contacting 8x8](mailto:analytics.cex@8x8.com). Please include in the request your CC Tenant Name and Platform. [How to find my CC Tenant and Platform](https://support.8x8.com/cloud-contact-center/8x8-contact-center/administrators/How_to_identify_Contact_Centre_Tenant_Name_and_Cluster)
-> 
-> 
+>
+>
 
 ## Base URL
 
@@ -84,72 +84,72 @@ Use the following base URL during this process:
 For the time span of the report **either** `duration` OR `timeRange` must be used. If both are specified `duration` is used and `timeRange` is ignored.
 
 > 📘 **duration options definitions**
-> 
+>
 > * today : represents the time period 0000 to 2359 for the current date, dependent on the selected timezone
-> 	+ yesterday : represents the time period 0000 to 2359 for the previous date, dependent on the selected timezone
+>   * yesterday : represents the time period 0000 to 2359 for the previous date, dependent on the selected timezone
 > * week : the value represents the time period from the start of the current week (e.g., Monday 00:00) up until the 7th day in the date sequence. The week value is dependent on the selected timezone
 > * month : represents the time period from the first day of the current month concluding on the last day of the month. The month value is applicable for the selected timezone
 > * allhistory : the complete history available in the data repository
-> 
+>
 
 > 📘 **timeRange examples**
-> 
+>
 > Date and time (UTC): "Wednesday, October 12, 2022 1:21:45 PM" to Date and time (UTC): "Wednesday, October 12, 2022 6:21:45 PM"
-> 
+>
 > timeRange: "1665580905000-1665598905000"
-> 
+>
 > There should be no spaces only a dash between the two epochs
-> 
-> 
+>
+>
 
 #### Numeric Ranges
 
 > 📘 **numeric range filter format**
-> 
+>
 > Numeric range filters will all be in the following formats `"filterName": "range:X,Y"`  
-> 
+>
 > Where X is the lower limit and Y is the upper limit.  
-> 
+>
 > -1 is means Any Value.  
-> 
+>
 > Examples:  
-> 
+>
 > "range:1,2" => Greater than or equal to 1 and Less than or equal to 2  
-> 
+>
 > "range:2,-1" => Greater than or equal to 2  
-> 
+>
 > "range:5,5" => Equal to 5
-> 
-> 
+>
+>
 
 #### Duration Ranges
 
 > 📘 **duration range format**
-> 
+>
 > duration filters will all be in the following formats `"filterName": "period:X,Y"`
-> 
+>
 > * period is the measurement of the duration range  
-> 
-> - sec => seconds  
-> 
-> - min => minutes  
-> 
+>
+> * sec => seconds  
+>
+> * min => minutes  
+>
 > Where X is the lower limit and Y is the upper limit.  
-> 
+>
 > -1 is means Any Value.  
-> 
+>
 > Examples:  
-> 
+>
 > "sec:1,20" => Greater than or equal to 1 second and Less than or equal to 20 seconds  
-> 
+>
 > "sec:2,-1" => Greater than or equal to 2 seconds  
-> 
+>
 > "sec:5,5" => Equal to 5 seconds  
-> 
+>
 > "sec:0,-1" => Any number of seconds  
-> 
+>
 > "min:60,-1" => Greater than or equal to 60 minutes
-> 
+>
 
 #### Pagination
 
@@ -160,7 +160,7 @@ Within Customer Experience Analytics Recent Calls pagination is controlled by `p
 
 **Pagination Example**  
 
-With an initial input including 
+With an initial input including
 
 ```json
   "page": 1,
@@ -192,7 +192,7 @@ Note: data has been truncated to an empty array to limit the size of the example
 
 ```
 
-The request for the next page would include 
+The request for the next page would include
 
 ```json
 
@@ -206,6 +206,7 @@ Consumer would continue to walk through the pages until, either tracking the row
 ### Full Request Example
 
 duration exampletimeRange example
+
 ```bash
 curl --location --request POST 'https://api.8x8.com/customerexperience/v{version}/recentCallData/{region}' \
 --header '8x8-apikey:{api-key}' \

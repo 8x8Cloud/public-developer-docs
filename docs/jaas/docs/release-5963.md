@@ -20,26 +20,24 @@
 
 * **Desktop picker**: Prevented an error when the modal is closed before sources load.
 * **UI layout**:
-	+ Resolved overflow and padding issues on small screens.
-	+ Fixed tab content layout on the welcome page.
+  * Resolved overflow and padding issues on small screens.
+  * Fixed tab content layout on the welcome page.
 * **Bottom Toolbar**: Supporting 2 more custom buttons.
 * **Chat UI**: Reworked message structure and fixed emoji box behavior.
 * **Font/token system**: Fallback to original values when allTokens don’t provide data.
 * **Connection quality**:
-	+ Do not show red GSM bars on video codec changes or when call switches between P2P and video bridge mode.
-	+ Adds new BWE stat to local participant stats.
+  * Do not show red GSM bars on video codec changes or when call switches between P2P and video bridge mode.
+  * Adds new BWE stat to local participant stats.
 * **Polls**: Halted processing on malformed poll events, preventing crashes.
 * **Participant unmute**: Fixes a "participant unable to unmute" error on Firefox
 * **JWT**:
-	+ Allows feature evaluation even without a JWT.
-	+ Option added to require tenant matching in token contexts.
+  * Allows feature evaluation even without a JWT.
+  * Option added to require tenant matching in token contexts.
 
 **Language Support**
 
 * **Updated**: German, Latvian, Arabic translation
 * **Added**: Norwegian translation
-
-  
 
 ## Versions
 

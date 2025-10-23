@@ -1,6 +1,5 @@
 # Branches
 
-
 > 🚧 **[BETA]**
 >
 > This product is currently in early access. Please reach out to your account manager to get more information.
@@ -33,6 +32,7 @@ In the example above the next step will start with "id": "branch1",
 Inside each branch, you need to define a condition, for more detail, see the **Scripting** section below.
 
 In the example above, we are creating the following logic:
+
 - branch1 will be selected if the source number has a Singapore country code
 - branch2 will be selected if the source number has a US country code
 - branch3 will be selected otherwise
@@ -43,13 +43,6 @@ In the example above, we are creating the following logic:
 | stepType   | Step type.                                                                                                                                                                                                                                                                                                                                                                                                      | string |
 | inputs     | Wait step supports the following input parameters.<ul><br /><li> **minutes**: Number of minutes to wait before executing the next step.  </li></ul> <br />                                                                                                                                                                 | object |
 | selectNextStep | Step ids of the branches and the conditions.                                                                                                                                                                                                                                                                                   | string |
-
-
-
-
-
-
-
 
 ‎
 ‎

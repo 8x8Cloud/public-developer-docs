@@ -1,6 +1,6 @@
 # Check the webhook signatures
 
-## Verify the events sent to your webhook endpoints.
+## Verify the events sent to your webhook endpoints
 
 JaaS will sign each of the webhook events it sends to your endpoints by including a signature in each event’s `X-Jaas-Signature` header. This allows you to verify that the events were sent by JaaS, not by a third party. For this, you need to retrieve your endpoint’s secret from the Webhooks section in the JaaS Console. Select an endpoint that you want to obtain the secret for, then click the **`Reveal secret`** button.
 
@@ -12,7 +12,7 @@ The `X-Jaas-Signature` header included in each signed event contains a timestamp
 
 JaaS generates signatures using a hash-based message authentication code (HMAC) with SHA-256. To prevent downgrade attacks, you should ignore all schemes that are not `v1`.
 
-## Steps for verifying webhook event signatures.
+## Steps for verifying webhook event signatures
 
 1. Extract the timestamp and signatures from the header
 

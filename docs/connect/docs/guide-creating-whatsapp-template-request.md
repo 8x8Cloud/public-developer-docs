@@ -418,8 +418,8 @@ node generate-curl-scripts
 ### 3. Use the Generated Scripts
 
 * Edit the `.sh` file:
-	+ Replace `{{apiKey}}` with your API Key.
-	+ Replace placeholders (e.g., `{{recipientPhoneNumber}}`, `{{otpCode}}`) with real values.
+  * Replace `{{apiKey}}` with your API Key.
+  * Replace placeholders (e.g., `{{recipientPhoneNumber}}`, `{{otpCode}}`) with real values.
 * Run the script:
 
 ```bash

@@ -2,9 +2,7 @@
 
 ## Responding to Call Action Request
 
-
 To start your call flow you need to reply to the call action request with an HTTP 200 response code including a Call Action in the HTTP response body. The supported Call Actions are:
-
 
 * `makeCall` - Initiates an outgoing call to the desired destination. This function should be used to connect the first call with another party.
 * `say` - Generates and plays a TTS to the calling user.
@@ -12,15 +10,11 @@ To start your call flow you need to reply to the call action request with an HTT
 * `playFile` - Downloads the sound/voice file provided and plays it back in the currently active call.
 * `hangup` - Disconnects all active calls. This will terminate the session, triggering the session summary webhook.
 
-
 ## makeCall
-
 
 This function should be used to connect the first call with another party.
 
-
 The following is an example of the JSON response you would need to provide:
-
 
 ```json
 {
@@ -41,9 +35,6 @@ The following is an example of the JSON response you would need to provide:
 
 The action should contain the following parameters:
 
-
-
-
 | Name | Type | Description |
 | --- | --- | --- |
 | action | String | MakeCall – Action to Connect/Bridge call between two users |
@@ -51,15 +42,11 @@ The action should contain the following parameters:
 | source | String | Number of the calling party in E.164 format. This should be the Virtual Number allocated to your sub-account |
 | callRecording | Boolean | (Optional) Trigger to start recording the IVR session. Before using this option please reach out to your Account Manager since this option might include additional costs. Additionally please make sure that the Call Recording has been configured on your account. To configure call recording please take a look at [Call Recordings](/connect/reference/call-recordings) |
 
-
 ## say
-
 
 This action converts the given text in to a speech and plays it in the currently active call.
 
-
 The following is an example of the JSON response you would need to provide:
-
 
 ```json
 {
@@ -81,9 +68,6 @@ The following is an example of the JSON response you would need to provide:
 
 The action should contain the following parameters:
 
-
-
-
 | Name | Type | Description |
 | --- | --- | --- |
 | action | String | say – Text to speech function. |
@@ -92,17 +76,11 @@ The action should contain the following parameters:
 | repetition | Integer | Defines the number of times the text will be repeated during the call. Default repetition is 1. Max repetition is 3 |
 | speed | Float | Controls the speed of the speech. Maximum speed is 2.0 and minimum speed is 0.5. |
 
-
-  
-
 ## SayAndCapture
-
 
 This action plays a text to speech file in to the call and then captures user's DTMF input and reports back the DTMF via Voice Call Action (VCA) webhook.
 
-
 The following is an example of the JSON response you would need to provide:
-
 
 ```json
 {
@@ -131,9 +109,6 @@ The following is an example of the JSON response you would need to provide:
 
 The action should contain the following parameters:
 
-
-
-
 | Name | Type | Description |
 | --- | --- | --- |
 | action | String | SayAndCapture – Play a Text to speech voice file and prompting user to enter a DTMF. |
@@ -148,22 +123,16 @@ The action should contain the following parameters:
 | overallTimeout | Integer | The time allowed for the user to complete entering all digits in milliseconds. |
 | noOfTries | Integer | How many times the sayAndCapture will loop in case of failed inputs. |
 
-
 ## playFile
 
-
-Downloads the sound/voice file provided and plays it back in the currently active call. 
-
+Downloads the sound/voice file provided and plays it back in the currently active call.
 
 File type requirements:
-
 
 * Supported file types are .wav and mp3.
 * API only accepts file that is smaller than 5MB.
 
-
 The following is an example of the JSON response you would need to provide:
-
 
 ```json
 {
@@ -171,7 +140,7 @@ The following is an example of the JSON response you would need to provide:
   "callflow": [
     {
   "action": "playFile",
-	"params": {
+  "params": {
     "fileUrl": "https://sample-videos.com/audio/mp3/wave.mp3",  // mandatory
     "repetition": 1   //optional
       }
@@ -183,39 +152,30 @@ The following is an example of the JSON response you would need to provide:
 
 The action should contain the following parameters:
 
-
-
-
 | Name | Type | Description |
 | --- | --- | --- |
 | action | String | say – play a recorded file into a currently active call funtion |
 | fileUrl | String | The public link of the hosted voice file |
 | repetition | Integer | Defines the number of times the text will be repeated during the call. Default repetition is 1. Max repetition is 3 |
 
-
-
 > 📘Downloaded Voice files
-> 
+>
 > Downloaded voice files are cached for 1 hour for faster access, if used in consequent requests. If the file content is changed within 1 hour after the first request, make sure to change the file name for the changes to be reflected in the calls afterwards.
-> 
-> 
-
+>
+>
 
 ## hangup
 
-
 This action should be used to hang up the incoming call.
-
 
 The following is an example of the JSON response you would need to provide:
 
-
 ```json
 {
-	"clientActionId": "ivr1_level2",
-	"callflow": [ 
-		{
-  		"action": "hangup" 
+  "clientActionId": "ivr1_level2",
+  "callflow": [ 
+    {
+      "action": "hangup" 
     }
   ]
 }

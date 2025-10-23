@@ -3,10 +3,10 @@
 Customers looking to access data in JSON or CSV/XLSX from [CC Historical Analytics](/analytics/reference/cc-historical-report-create) can follow the this multi step process.
 
 > 📘 **You will need a working API key to begin**
-> 
+>
 > [How to get API Keys](/analytics/docs/how-to-get-api-keys)
-> 
-> 
+>
+>
 
 The base URL is region specific, based on the location of your Contact Center tenant.
 
@@ -30,12 +30,12 @@ The following steps will use the access_token as a Bearer Token form of authenti
 `Authorization` header being set to `Bearer access_token` (Space between Bearer and the access_token)
 
 > 📘 **JSON Examples shown, XML Also available**
-> 
+>
 > This guide shows all the examples in JSON. It is possible to retrieve responses in XML by specifying the following header
-> 
+>
 > `Accept: application/xml`
-> 
-> 
+>
+>
 
 ## 2 Multitenancy support
 
@@ -96,10 +96,10 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 The response shows each `report-type` that's available.
 
 > 📘 **Detailed Reports**
-> 
+>
 > This returns some "detailed" report types as well as the summary reports. Detailed reports have a different format described in the [CC Historical Analytics Detailed Report Guide](/analytics/docs/cc-historical-analytics-detailed-report)
-> 
-> 
+>
+>
 
 **Outputs For Next Step:**  
 
@@ -107,22 +107,22 @@ For the summary reports the response has a number of elements to guide the usage
 
 * `type` each report type has a unique definition
 * `groupBy` each report has one or more groupBy options. This specifies the grouping for the output
-	+ `name` this is the name to specify when creating a report with a specific grouping
-	+ `filters` these are the available filters for this report type for this particular grouping. The filters available vary depending on the type AND the grouping.
+  * `name` this is the name to specify when creating a report with a specific grouping
+  * `filters` these are the available filters for this report type for this particular grouping. The filters available vary depending on the type AND the grouping.
 * `metrics` these are the available metrics for the report type. When creating a report. See the [CC Historical Analytics Glossary](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/Glossary-historical-reports.htm) for additional detail on the definition of the available metrics
 * When running reports:
-	+ if no metrics are specified: All metrics will be returned
-	+ if metrics are specified: ONLY the specified metrics will be returned
+  * if no metrics are specified: All metrics will be returned
+  * if metrics are specified: ONLY the specified metrics will be returned
 
 The body will be an array as shown below.
 
 * The array will contain one or more objects as described here
 
-	+ **type**: this is the report type and name of the report
-	+ **groupBy**: array of options for grouping the report by various dimensions
-		- *name*: name of the grouping
-		- *filters*: array of the possible filtering options for this grouping for this report
-	+ **value**: array of the metrics available for this report
+  * **type**: this is the report type and name of the report
+  * **groupBy**: array of options for grouping the report by various dimensions
+    * *name*: name of the grouping
+    * *filters*: array of the possible filtering options for this grouping for this report
+  * **value**: array of the metrics available for this report
 
 ```json
 [
@@ -315,10 +315,10 @@ The result **will be different** for each report type.
 ## 4. Creating A Summary Report
 
 > 📘 **This sample is applicable to ALL summary report types**
-> 
+>
 > The values in passed in will be specific to the report-type but the concepts are applicable to all summary report types.
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -370,10 +370,10 @@ This parameter specifies how to aggregate the report data by time intervals. You
 This parameter is used to specify a time range filter which applies within each day of the report. If this parameter is not specified, data will be returned for the complete time frame described in the mandatory dateRange object.
 
 > 🚧 **intraDayTimeRange minimum size**
-> 
+>
 > The *end* must be 15 minutes after the start for summary reports and 5 minutes after the start for detailed reports.
-> 
-> 
+>
+>
 
 * *start*: the start time for the intraDayTimeRange. The format is hh:mm:ss
 * *end*: the end time for the intraDayTimeRange. The format is hh:mm:ss
@@ -504,7 +504,7 @@ curl --location --request POST 'https://api.8x8.com/analytics/cc/v8/historical-m
     },
     "granularity": "week", 
     "groupBy":{
-    	"name":"media-and-channel-and-queue",
+      "name":"media-and-channel-and-queue",
          "filters": [
              {
                 "name": "queue",  
@@ -538,7 +538,7 @@ curl --location --request POST 'https://api.8x8.com/analytics/cc/v8/historical-m
 
 ### Create Report Response
 
-For an accepted request to create a report the response will be 200 OK 
+For an accepted request to create a report the response will be 200 OK
 
 #### Headers
 
@@ -553,9 +553,9 @@ For an accepted request to create a report the response will be 200 OK
 
 * **id**: this is the identifier for the generated report
 * **status**: this is the status of the request to create the report
-	+ IN_PROGRESS : the report is being generated, usually the initial status
-	+ DONE : the report has been generated
-	+ FAILED : the report has failed to generate
+  * IN_PROGRESS : the report is being generated, usually the initial status
+  * DONE : the report has been generated
+  * FAILED : the report has failed to generate
 
 ```json
 {
@@ -596,13 +596,13 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 
 ### Report Status response
 
-This will be the same format as the response from creating the report. Recheck the status periodically until the status is `"DONE"`. 
+This will be the same format as the response from creating the report. Recheck the status periodically until the status is `"DONE"`.
 
 > 🚧 **Don't check status in a tight loop (please)**
-> 
+>
 > Leave some time between status checks, repeatedly requesting updates without taking a pause is more likely to slow the response than speed it up.
-> 
-> 
+>
+>
 
 #### Headers
 
@@ -620,9 +620,9 @@ The Link header WILL ONLY be present if the report staus is `"DONE"`
 
 * **id**: this is the identifier for the generated report
 * **status**: this is the status of the request to create the report
-	+ IN_PROGRESS : the report is being generated, usually the initial status
-	+ DONE : the report has been generated
-	+ FAILED : the report has failed to generate
+  * IN_PROGRESS : the report is being generated, usually the initial status
+  * DONE : the report has been generated
+  * FAILED : the report has failed to generate
 
 ```json
 {
@@ -635,18 +635,18 @@ The Link header WILL ONLY be present if the report staus is `"DONE"`
 ## 6a. Get Report Data (JSON)
 
 > 📘 **Accessing the report Data**
-> 
+>
 > The data is available via JSON or via CSV/XLSX. To access the data as JSON the data endpoint is used, for CSV/XLSX the download endpoint is used.
-> 
-> 
+>
+>
 
 > 🚧 **Data (JSON) results are capped at 10,000 records.**
-> 
+>
 > CSV/XLS will return all larger result sets.
-> 
+>
 > Detailed Reports have an alternative approach since larger result sets are expected.
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -705,15 +705,15 @@ The body will be an array as shown below.
 * The array could be empty if there are no records in the result
 * If not empty the array will contain one or more objects as described here  
 
-- **total**: if this represents a subtotal or grandtotal (only present if "includeGrandTotal": true, "includeSubTotal": true were requested)  
+* **total**: if this represents a subtotal or grandtotal (only present if "includeGrandTotal": true, "includeSubTotal": true were requested)  
 
-- **items**: array of the dimensions and metrics being returned. There will be one object for each.  
+* **items**: array of the dimensions and metrics being returned. There will be one object for each.  
 
-- *key*: the value will be the name of the dimension/metric  
+* *key*: the value will be the name of the dimension/metric  
 
-- *label*: the value will be the human friendly name of the dimension/metric  
+* *label*: the value will be the human friendly name of the dimension/metric  
 
-- *value*: the value will be the value of the dimension/metric. This is ALWAYS a string.
+* *value*: the value will be the value of the dimension/metric. This is ALWAYS a string.
 
 ```json
 [
@@ -825,10 +825,10 @@ The body will be an array as shown below.
 ```
 
 > 🚧 **Dimension values for `subtotal` and `grandtotal` items**
-> 
+>
 > Where a subtotal or grandtotal is summarizing multiple instances of a single dimension the value for that item will be `null` since there is no single correct value
-> 
-> 
+>
+>
 
 ```json
 {
@@ -881,14 +881,14 @@ The body will be an array as shown below.
 ## 6b. Get Report Download (CSV/XLSX)
 
 > 📘 **Accessing the report Data**
-> 
+>
 > The data is available via JSON or via CSV/XLSX. To access the data as JSON the data endpoint is used, for CSV/XLSX the download endpoint is used.
-> 
-> 
+>
+>
 
 > 📘 **There is no pagination the whole file will be returned.**
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -900,7 +900,6 @@ The body will be an array as shown below.
 | ------------- | -------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | Authorization | ✓        | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
 | Accept        | ✓        | Specify the download type <br /><br />- CSV `text/csv`<br />- XLSX `text/xlsx`                           | text\xlsx                            |
-
 
 #### Path
 

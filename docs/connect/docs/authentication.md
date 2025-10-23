@@ -30,7 +30,6 @@ If you have not created your account yet, please head to [8x8 Connect sign-up pa
 
 ![](../images/9f50dec-image.png)
 
-
 ## API Key Delete/Disable
 
 You can disable or even delete an API key if needed and create a new one. This may be useful if the API key has been compromised in some way or if you plan to regularly rotate the API key.

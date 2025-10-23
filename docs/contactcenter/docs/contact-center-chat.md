@@ -1,8 +1,8 @@
 # Contact Center Chat API
 
 > ❗️ **PLEASE NOTE - This API is going to be deprecated on 30th September 2023, it will no longer work after this date. Please use our [Chat Gateway](/actions-events/docs/chat-gateway) which offers all of the Chat API's functionalities as well as additional features.**
-> 
-> 
+>
+>
 
 ## Overview
 
@@ -24,6 +24,7 @@ The Chat API enables you to:
 * Achieve 2-way communication by using web API calls and callbacks to and from Contact Center.  
 
 You are able to forward customer messages and are notified when your agents reply to customers.
+
 * Route conversations straight into the preferred queue and let Contact Center handle the agent assignment based on availability and experience.
 
 Additional functions include:

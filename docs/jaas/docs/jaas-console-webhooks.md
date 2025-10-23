@@ -22,6 +22,6 @@ The following screenshot shows the completed webhook configuration:
 
 The webhook endpoint expects data through a POST request and confirms successful data receipt through the return of an **`2xx`** status code. If a successful status is not returned, follow up webhook delivery attempts are made with an exponential back off.
 
-The same event might occasionally be delivered more than once which guards against duplicated events using the **`idempotencyKey`**. 
+The same event might occasionally be delivered more than once which guards against duplicated events using the **`idempotencyKey`**.
 
 Event ordering is not guaranteed; therefore, ***PARTICIPANT_JOINED*** might be received prior to ***ROOM_CREATED***.

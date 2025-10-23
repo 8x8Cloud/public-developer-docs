@@ -61,7 +61,7 @@ If you follow the different steps of this tutorial, you will get to generate a c
 
 The 8x8 Mobile Verification - Code Generation method expects requests sent by developers to respect a specific format.  
 
-In the following parts, we are going to go over the different elements of the request: 
+In the following parts, we are going to go over the different elements of the request:
 
 * the URL format
 * the authentication
@@ -91,9 +91,10 @@ At the end of the section, we will generate a curl command to generate an SMS co
 | [https://verify.us.8x8.com](https://verify.us.8x8.com) | North America |
 | [https://verify.8x8.uk](https://verify.8x8.uk) | Europe |
 | [https://verify.8x8.id](https://verify.8x8.id) | Indonesia |
+
 * For more information on data center regions, please visit the following [page](/connect/docs/data-center-region).
 
-##### 
+#####
 
 ##### curl
 
@@ -184,13 +185,13 @@ curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions -
 
 * The API response is used to provide feedback about the expected result of the API request (sending an SMS) and various additional information.
 * If we take some time to analyze the different elements there, we can identify the following:
-	+ **uid**: this is the unique identifier set by the API to identify this request. It will be used to check its status and the codes provided.
-	+ **resourceUri**: it indicates the uniform resource identifier within 8x8 API
-	+ **destination**: this is the phone number to which the SMS was sent.
-	+ **status**: the status of the Mobile Verification request
-	+ **attempt**: this counter shows how many unsuccessful attempts have been made to verify this code
-	+ **expiresAt**: this is the timestamp that indicates when the code will expire
-	+ **retryAfter**: this timestamp indicates when the system will allow sending another SMS if a new request is sent
+  * **uid**: this is the unique identifier set by the API to identify this request. It will be used to check its status and the codes provided.
+  * **resourceUri**: it indicates the uniform resource identifier within 8x8 API
+  * **destination**: this is the phone number to which the SMS was sent.
+  * **status**: the status of the Mobile Verification request
+  * **attempt**: this counter shows how many unsuccessful attempts have been made to verify this code
+  * **expiresAt**: this is the timestamp that indicates when the code will expire
+  * **retryAfter**: this timestamp indicates when the system will allow sending another SMS if a new request is sent
 * For more information, check the dedicated section of the [API documentation](/sms/API-Reference/mobile-verification-api/send-otp), in the "Response" section
 
 ##### Part 2: Verifying a code received using the Mobile Verification API - Code Validation method
@@ -271,13 +272,13 @@ curl -X GET  'https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c113
 
 ```json
 {
-	"uid": "7c1137e8fb1ceb11827c00155dc319",
-	"resourceUri": "/api/v2/subaccounts/riders_hq/sessions/7c1137e8fb1ceb11827c00155dc319",
-	"destination": 6598765432,
-	"status": "VERIFIED",
-	"attempt": 0,
-	"expiresAt": "2020-11-02T13:19:56.70Z",
-	"nextSmsAfter": "2020-11-02T13:14:44.70Z"
+  "uid": "7c1137e8fb1ceb11827c00155dc319",
+  "resourceUri": "/api/v2/subaccounts/riders_hq/sessions/7c1137e8fb1ceb11827c00155dc319",
+  "destination": 6598765432,
+  "status": "VERIFIED",
+  "attempt": 0,
+  "expiresAt": "2020-11-02T13:19:56.70Z",
+  "nextSmsAfter": "2020-11-02T13:14:44.70Z"
 }
 
 ```

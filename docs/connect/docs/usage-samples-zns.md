@@ -2,16 +2,16 @@
 
 > ❗️
 > --
-> 
+>
 > Zalo Notification Service requires **templates** to be approved by the Zalo team.  
-> 
+>
 > Contact [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) or your account manager to submit new templates.
-> 
-> 
+>
+>
 
 > 👍Please see [Messaging API](/connect/reference/send-message) for the full API reference.
-> 
-> 
+>
+>
 
 ### Sending a notification message
 
@@ -128,7 +128,7 @@ If you want to add a fallback to SMS, add the following fields to the "`content`
 
 > 📘
 > -
-> 
+>
 > You may find out more about SenderID [here](/connect/docs/getting-started#1-source-sms-senderid)
-> 
+>
 >

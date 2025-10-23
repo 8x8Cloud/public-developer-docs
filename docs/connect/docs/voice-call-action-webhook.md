@@ -2,14 +2,12 @@
 
 Call action events prompt the customer to take an action to change the call flow. Your "Voice Call Action" (VCA) endpoint can be configured on the sub-account level with the IVR product[Webhooks](/connect/reference/create-a-new-voice-webhook).The structure of the Call Action event object is identical to that of [Call Status](/connect/reference/call-status) event. However the expected response is different.
 
-
 ## Call Action Request (IVR)
-
 
 8x8 platform will POST a JSON object to your URL.
 
-
 Sample of Call Action Event
+
 ```json
 {
   "namespace": "VOICE",
@@ -45,9 +43,6 @@ Sample of Call Action Event
 
 The JSON object will contain the following values:
 
-
-
-
 | Name | Type | Description |
 | --- | --- | --- |
 | namespace | String | 8x8's overall product namespace. For Voice products the value will be "VOICE" |
@@ -73,16 +68,14 @@ The JSON object will contain the following values:
 | timestamp | String | Timestamp of a call event |
 | clientActionId | String | clientActionId that was provided in the previous VCA callback. |
 
-
-
 > 🚧 **ClientActionId**
-> 
+>
 > `clientActionId` is only supported in Voice Call Action Webhook
-> 
-> 
-
+>
+>
 
 clientActionId in Voice Call Action Response
+
 ```json
 {
     "clientActionId": "ivr1_level2", // Optional. Only supported in Call Action Webhook.
@@ -99,7 +92,5 @@ clientActionId in Voice Call Action Response
 }
 
 ```
-
-
 
 ---

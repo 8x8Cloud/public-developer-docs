@@ -2,9 +2,9 @@
 
 ## Filtering by time
 
-Filtering by the date when objects where created or when objects were last updated can be done by using *createdTime* or *updatedTime* in the *filter* parameter. These parameters must be specified as unix timestamp in milliseconds. 
+Filtering by the date when objects where created or when objects were last updated can be done by using *createdTime* or *updatedTime* in the *filter* parameter. These parameters must be specified as unix timestamp in milliseconds.
 
-For example, getting all contact center recordings that were created from 2024-09-01 00:00:00 GMT to 2024-10-01 00:00:00 GMT would look like: 
+For example, getting all contact center recordings that were created from 2024-09-01 00:00:00 GMT to 2024-10-01 00:00:00 GMT would look like:
 
 filter=type==callcenterrecording;**createdTime**=ge=1725148800000;**createdTime**=le=1727740800000
 
@@ -107,14 +107,15 @@ filter=type==callrecording
 ### Work Call Recording Transcript
 
 > 🚧 **This is only available if the user has Conversation IQ.**
-> 
-> 
+>
+>
 
 filter=type==transcription;sourceObjectType==callrecordingchannel
 
 There will be 2 objects per call. the speaker tag will identify the party
 
 8x8 user(owner)External Party
+
 ```json
 "tags": [
   {
@@ -313,7 +314,7 @@ filter=type==postcallsurvey
 
 Voice comment left as part of post call survey.
 
-filter=type==voicecommentrecording 
+filter=type==voicecommentrecording
 
 ```json
 {

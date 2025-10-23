@@ -13,7 +13,7 @@ To use 8x8 inbound Messaging Apps capabilities, you need:
 >
 > You can configure your callback using [Webhook Configuration API](/connect/reference/webhooks-configuration-api)
 >
-> 
+>
 
 ### Inbound message flow example
 
@@ -29,9 +29,6 @@ In case of connection error/timeout or HTTP response code 4XX or 5XX, there will
 
 Request body description
 
-
-
-
 | Parameter name | Parameter type | Description |
 | --- | --- | --- |
 | namespace | string | A generic namespace for incoming webhook.<br>Equal to `Messaging Apps` for inbound Messaging Apps message. |
@@ -39,11 +36,7 @@ Request body description
 | description | string | Human-readable description of the incoming event |
 | payload | object | Inbound message information, see below. |
 
-
 Payload object description
-
-
-
 
 | Parameter name | Parameter type | Description |
 | --- | --- | --- |
@@ -55,7 +48,6 @@ Payload object description
 | type | string | Inbound message type. Possible values:<br>- `none`<br>- `text`<br>- `audio`<br>- `video`<br>- `image`<br>- `location`<br>- `file`<br>- `carousel`<br>- `list`<br>- `buttons`<br>- `template`<br>- `interactive` |
 | content | object | Message content |
 | replyToUmid | uuid | Optional context data, if this inbound message is referring to a previous inbound message (ex, quoted messages on WhatsApp). |
-
 
 User information object description
 
@@ -91,15 +83,11 @@ Location information object description
 
 Interactive information object description
 
-
-
-
 | Parameter name | Parameter type | Description |
 | --- | --- | --- |
 | type | string | Type of the message. Possible values:<br>- `button_reply`<br>- `list_reply` |
 | button\_reply | object | Button reply object. Sent when a customer clicks a button. |
 | list\_reply | object | List reply object. Sent when a customer selects an item from a list. |
-
 
 Button reply information object description
 

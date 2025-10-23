@@ -12,8 +12,9 @@ This section covers how to use a SIP device to connect to a JaaS call through SI
 
 - JaaS Account with a billing method added (to access Paid/Premium Features).
 - A SIP Device (Zoom is used as the example in this section of the tutorial)
-	- Note for Zoom, the host account that creates the Zoom room will need access to the [H.323 or SIP Room Connector](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063510) paid add-on.
+  - Note for Zoom, the host account that creates the Zoom room will need access to the [H.323 or SIP Room Connector](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063510) paid add-on.
 - Ensure that the [JWT](/jaas/docs/api-keys-jwt) that you generate for your user contains the user permissions for **sip-outbound-call**. Below is a snippet of the features with SIP outbound call enabled.
+
   ```javascript
   {
     ...
@@ -67,7 +68,7 @@ Start your Zoom Client and join a meeting room. Navigate to **Participants > Inv
 
 Enter the following into the IP address or URI field above based on the PIN Code you noted down early.
 
-For a combined **audio and video **experience: [pinCode@video.8x8.vc](mailto:pinCode@video.8x8.vc)  
+For a combined **audio and video**experience: [pinCode@video.8x8.vc](mailto:pinCode@video.8x8.vc)  
 For **audio** only: [pinCode@audio.8x8.vc](mailto:pinCode@audio.8x8.vc)
 
 For our example above it should be the following value, however you should substitute the PIN Code for your room.  
@@ -131,6 +132,7 @@ There are a few prerequisites before using this feature:
 - JaaS Account with a billing method added (to access Paid/Premium Features).
 - A SIP Softphone to receive the call (Bria is used in the tutorial).
 - Ensure that the [JWT](/jaas/docs/api-keys-jwt) that you generate for your user contains the user permissions for **sip-outbound-call**. Below is a snippet of the features with SIP outbound call enabled.
+
   ```
   {
     ...
@@ -146,11 +148,12 @@ There are a few prerequisites before using this feature:
   }
       
   ```
+
 - Add this line of code to your configuration to enable SIP Dial Out:
 
 ```javascript
 interfaceConfigOverwrite: {
-	ENABLE_DIAL_OUT: true
+  ENABLE_DIAL_OUT: true
 },
 ```
 
@@ -201,7 +204,6 @@ This Video will show how it is possible to call from a JaaS (Jitsi as a Service)
   allowFullScreen>
 </iframe>
   
-
 # Billing / Usage
 
 In order to see the usage and charges associated with SIP Dial In and Out in the JaaS Dashboard, please see:

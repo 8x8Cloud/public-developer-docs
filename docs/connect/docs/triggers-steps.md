@@ -1,8 +1,7 @@
 # Triggers & Steps
 
-
 > 🚧 **[BETA]**
-> 
+>
 > This product is currently in early access. Please reach out to your account manager to get more information.
 >
 >
@@ -32,21 +31,19 @@ curl --location -X POST 'https://automation.8x8.com/api/v1/accounts/:your_accoun
 One workflow definition can only have one trigger, defining a trigger is mandatory.
 You can create similar workflows with different triggers, if needed.
 
-
-
 Workflow definitions are collections of workflow steps. Every step must have an id and a step type. The id of the step must be unique within the workflow definition. Steps may have properties that can be set when you are creating a workflow definition (e.g. set a HTTP header for a HTTP request) or at runtime by the workflow using outputs (e.g. HTTP response code of a HTTP request).
 <br />
 
 **Here are the different Steps we support:**
+
 * **SMS**
 * **ChatAppsMessage**
 * **HttpRequest**
 * **Wait**
 * **If**
 * **WaitForReply**
-* ** VoiceMessage**
-* ** WaitForDTMF**
-
+* **VoiceMessage**
+* **WaitForDTMF**
 
 More details on each step:
 
@@ -80,7 +77,6 @@ More details on each step:
 | inputs     | Input parameters for SMS request:<ul><br /><li> **subAccountId**: Sub account id to send the message from.  </li><li> **source**: Source number (senderId).  </li><li> **destination**: MSISDN to send message to.  </li><li> **text**: Message body.  </li></ul> <br /> For information on all supported input options, refer to SMS documentation.                                                                                                                                                                     | object |
 | outputs    | Properties of the step to save to workflow execution context to use in other steps (Optional). Supported properties are:<ul><br /><li> **requestId**: Unique identifier of the HTTP request. </li><li> **umid**: Unique identifier of the message.  </li><li> **status**: Status of the message request. </li><li> **description**: Descriptive message on the status of the message. </li></ul> <br /> For information on all supported statuses please refer to our SMS documentation. | object |
 | nextStepId | Step id of the next step to execute (Optional). If a next step id is not specified, workflow will terminate after this step.                                                                                                                                                                                                                                                                                    | string |
-
 
 **Send a Chat Apps message** :
 
@@ -122,8 +118,6 @@ More details on each step:
 | outputs    | Properties of the step to save to workflow execution context to use in other steps (Optional). Supported properties are:<ul><br /><li> **requestId**: Unique identifier of the HTTP request. </li><li> **umid**: Unique identifier of the message.  </li><li> **status**: Status of the message request. </li><li> **description**: Descriptive message on the status of the message.  </li></ul> <br /> For information on all supported statuses please refer to our Chat Apps documentation. | object |
 | nextStepId | Step id of the next step to execute (Optional). If a next step id is not specified, workflow will terminate after this step.                                                                                                                                                                                                                                                                                    | string |
 
-
-
 **Make a HTTP request** :
 
 *HttpRequest* step allows you to make a custom HTTP request and consume its response. For HTTP requests with request data, automation currently supports application/json content type. Automation service will evaluate the dynamic request data at runtime, serialise the input body to json before sending the request.
@@ -164,7 +158,6 @@ More details on each step:
 | outputs    | Properties of the step to save to workflow execution context to use in other steps (Optional). Supported properties are:<ul><br /><li> **responseCode**: HTTP status code. </li><li> **reasonPhrase**: HTTP reason phrase. </li><li> **responseBody**: HTTP response body. </li></ul> <br /> | object |
 | nextStepId | Step id of the next step to execute (Optional). If a next step id is not specified, workflow will terminate after this step.                                                                                                                                                                                                                                                                                    | string |
 
-
 **Set a delay** :
 
 Wait step allows you to make the workflow wait for a specified period of time before executing the next step. For example, you might have a workflow triggered by an incoming message received outside of office hours and you may want to make the workflow wait till office hours to send an automatic reply.
@@ -187,20 +180,19 @@ Wait step allows you to make the workflow wait for a specified period of time be
 | inputs     | Wait step supports the following input parameters.<ul><br /><li> **duration**: time to wait before executing the next step (format: d.HH:mm:ss). </li></ul> <br />                                                                                                                                                                  | object |
 | nextStepId | Step id of the next step to execute (Optional). If a next step id is not specified, workflow will terminate after this step.                                                                                                                                                                                                                                                                                    | string |
 
-
-** If condition** :
+**If condition** :
 
 The **if** condition allows you to create multiple paths in a workflow. While you can use Branch step with just one branch to create an **if** condition, **If** step allows you to specify a conditional path more easily if you don't need complex branching.
 In the below example, the two new properties for **If** are **do** and **inputs.condition**. If the **inputs.condition** evaluates to **true**, all the steps specified inside do will be executed.
 
 ```json
 {
-		"id": "step1",
-		"stepType": "If",
-		"inputs": {
+    "id": "step1",
+    "stepType": "If",
+    "inputs": {
                 "condition": "{{!isTimeOfDayBetween(data.payload.status.timestamp, '08:00:00', '17:00:00', 'Singapore Standard Time')}}"
-		},
-		"do": [
+    },
+    "do": [
         [
             {
                 "stepType": "HttpRequest",
@@ -234,12 +226,10 @@ In the below example, the two new properties for **If** are **do** and **inputs.
 |------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
 | id         | Unique id of the step.                                                                                                                                                                                                                                                                                                                                                                                          | string |
 | stepType   | Step type.                                                                                                                                                                                                                                                                                                                                                                                                      | string |
-| inputs     | If step supports the following input parameters: <ul><br /><li> ** condition**: An expression that evaluates to **true** or **false**. </li></ul> <br />                                                                                                                                                                  | object |
+| inputs     | If step supports the following input parameters: <ul><br /><li> **condition**: An expression that evaluates to **true** or **false**. </li></ul> <br />                                                                                                                                                                  | object |
 | do | Sequence of steps to be executed if the condition in inputs evaluates to true.                                                                                                                                                                                                                                                                                   | string |
 
-
-
-** Wait for Reply ** :
+**Wait for Reply** :
 
 The WaitForReply step type allows your workflow to pause till you receive a reply from an end user. For example, you can create a workflow which sends a message to an end user, wait for their reply and act based on various scenarios based content of the reply, for example.
 
@@ -264,7 +254,6 @@ If you have a workflow that that is waiting for a reply from user and the user r
 }
 ```
 
-
 | Property   | Description                                                                                                                                                                                                                                                                                                                                                                                                     | Type   |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
 | id         | Unique id of the step.                                                                                                                                                                                                                                                                                                                                                                                          | string |
@@ -273,17 +262,14 @@ If you have a workflow that that is waiting for a reply from user and the user r
 | outputs | WaitForReply exposes the data in the reply in the in the property reply. You can save it to workflow context using step.reply and use it in a following step.                                                                                                                                                                                                                                                                                 | array |
 | selectNextStep | Step selector for various outcomes.                                                                                                                                                                                                                                                                                  | string |
 
-
-
-
-** Voice Message ** :
+**Voice Message** :
 
 The VoiceMessage step type allows your workflow to send a Voice Message using 8x8 Voice API. For example, you can create a workflow which sends a voice message reminder to an end user.
 
 As per the 8x8 Voice API, you can choose from 3 types of voice messages:
-- say: use text to speech to read your message to the end users
-- say&capture: use text to speech to read your message and allows to capture DTMF tone from the end users
-- playFile: play a recorded file to the end users
+* say: use text to speech to read your message to the end users
+* say&capture: use text to speech to read your message and allows to capture DTMF tone from the end users
+* playFile: play a recorded file to the end users
 
 ```json
 {
@@ -317,9 +303,7 @@ As per the 8x8 Voice API, you can choose from 3 types of voice messages:
 | outputs         | Output properties supported by VoiceMessage step:  <ul><br /><li> response: Response received from the voice API. Refer to voice [API documentation](/connect/reference/send-single-1) for the exact response. </li></ul> <br />                                                                                                                                                                                                                                                                         | object |
 | nextStepId | Step id of the next step to execute (Optional). If a next step id is not specified, workflow will terminate after this step.                                                                                                                                                                                                                                                                                  | string |
 
-
-
-** Wait For DTMF ** :
+**Wait For DTMF** :
 
 The WaitForDTMF step type allows your workflow to wait for a user input (DTMF tone) after a Voice message step using say&capture action. Hence the WaitForDTMF step should be preceded by a VoiceMessage step.
 

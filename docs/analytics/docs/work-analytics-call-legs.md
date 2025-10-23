@@ -1,19 +1,17 @@
 # Call Legs
 
 > 📘 **Updated Endpoint**
-> 
+>
 > The [Call Legs](/analytics/docs/work-analytics-call-legs) and [Call Detail Records](/analytics/docs/work-analytics-call-detail-records) are dedicated endpoints to replace the previous [Call Detail Record Legs](/analytics/docs/work-analytics-cdr-report) endpoint which served both purposes
-> 
-> 
+>
+>
 
 > 📘
 > -
-> 
+>
 > Note: This API provides access to data from the past 2 years only in accordance with Analytics for Work data compliance policies; queries spanning more than 2 years will return only the most recent 2 years of data, and queries outside this range will return no results
-> 
-> 
-
-  
+>
+>
 
 ## Call Legs Explained
 
@@ -21,7 +19,7 @@ A Call Record is a single record view of the overall call and metrics represente
 
 A Call Leg provides detailed metrics on an individual segment of a call within the call journey and is represented by a Call Leg ID combined with a Call ID.
 
-Example: A Call Record would be a single row representation of a call that follows the following path which would have multiple Call Legs to fully represent the journey. 
+Example: A Call Record would be a single row representation of a call that follows the following path which would have multiple Call Legs to fully represent the journey.
 
 * Inbound to an Auto Attendant
 * Transferred to Ring Group
@@ -31,12 +29,12 @@ Example: A Call Record would be a single row representation of a call that follo
 [8x8 Work Analytics Historical](/analytics/reference/authentication-1) access is via this multi step process. For any of the endpoints the same process is followed.
 
 > 📘 **You will need a working API key to begin**
-> 
+>
 > You can generate API credentials from [How to get API Keys](/analytics/docs/how-to-get-api-keys)
-> 
+>
 > The `8x8-api-key` will be the `Key` generated. For Work Analytics the Secret from Admin Console is not required.
-> 
-> 
+>
+>
 
 Use the following base URL during this process:
 
@@ -47,10 +45,10 @@ Use the following base URL during this process:
 You will use your API key combined with the user credentials of a user with permission and access to Work Analytics to authenticate, this user **does not need to be** the one who generated the API credentials
 
 > 🚧 **User must access Analytics at least once via browser**
-> 
+>
 > The users credentials will not be able to leverage the API until they have used Work Analytics via browser at least once
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -70,7 +68,7 @@ You will use your API key combined with the user credentials of a user with perm
 | username | ✓        | The 8x8 username of a user with Work Analytics access privileges   | [someuser@acme.fakeco](mailto:someuser@acme.fakeco) |
 | password | ✓        | The 8x8 password of the user with Work Analytics access privileges | Rrnp5QBW6dTbx^TP                                    |
 
-### Authentication Request:
+### Authentication Request
 
 ```bash
 curl --location --request POST 'https://api.8x8.com/analytics/work/v1/oauth/token' \
@@ -81,7 +79,7 @@ curl --location --request POST 'https://api.8x8.com/analytics/work/v1/oauth/toke
 
 ```
 
-### Authentication Response:
+### Authentication Response
 
 **Response**
 
@@ -159,8 +157,8 @@ As per the Open API specification guidelines, we have migrated the URLs for Call
 Try out the CDR Legs Request
 
 > 📘 **Jump in and try it out in the [CDR Legs Reference](/analytics/reference/call-detail-record-legs)**
-> 
-> 
+>
+>
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/work/v{version}/call-legs?pbxId={pbxId here}&startTime=2022-02-03 00:00:00&endTime=2022-02-03 10:00:00&timeZone=America/New_York&pageSize=50&isSimplified=false&isConnectTime=false' \
@@ -296,8 +294,8 @@ For details on call legs metrics please refer to[CDR Glossary and Details](https
 ```
 
 > 👍 **Follow the pagination steps below to retrieve subsequent pages.**
-> 
-> 
+>
+>
 
 #### Pagination
 
@@ -327,7 +325,7 @@ Note: data has been truncated to an empty array to limit the size of the example
 
 ```
 
-The request for the next page would include scrollId set as the value returned in the previous request `pageKey=50&scrollId=c3VwZXJ0ZW5hbnRjc21fMTYzNTU3MTA0ODQ4Nl8xXzE2NDM5MTIzNTI0NDE` 
+The request for the next page would include scrollId set as the value returned in the previous request `pageKey=50&scrollId=c3VwZXJ0ZW5hbnRjc21fMTYzNTU3MTA0ODQ4Nl8xXzE2NDM5MTIzNTI0NDE`
 
 The new result set would look as follows. The returned result set would only have 31 elements.
 

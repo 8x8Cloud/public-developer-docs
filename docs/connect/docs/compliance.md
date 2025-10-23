@@ -12,8 +12,6 @@ All RCS messaging must follow opt-in best practices:
 
 • For interactive flows, use suggested replies for opt-out (“Stop”, “Unsubscribe”).
 
-  
-
 ## Prohibited Content
 
 The RCS channel must not be used to transmit restricted or inappropriate content. The following examples represent, but do not fully encompass, the types of content that are not allowed::
@@ -70,8 +68,6 @@ Content, products or services that promote sales or consumption of tobacco, prod
 **Unauthorized content**  
 
 Content, products, or services that are unauthorized to use copyrighted or trademarked content, or other legally prohibited content.
-
-  
 
 ## Restricted Content
 

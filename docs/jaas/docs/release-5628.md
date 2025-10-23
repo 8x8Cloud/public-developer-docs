@@ -8,6 +8,7 @@
 * Adds support for features that depend on presence and moderator role (like follow-me) for visitors  
 
 Updates Albanian, German, Greek, Korean, Latvian, Turkish translations
+
 * Fixes Whiteboard disable button
 * Fixes the pre-join screen device check UI to properly indicate when device testing and status
 * Adapts toolbar and hangup visibility to mobile web
@@ -40,8 +41,6 @@ Updates Albanian, German, Greek, Korean, Latvian, Turkish translations
 * Adds the ability to completely disable E2EE
 * Adds a showRecordingLink config which allows to show the recording link when a recording starts (this is not by default anymore)
 * Adds the ability to disable the calendar integration from the Welcome page
-
-  
 
 ## Versions
 

@@ -14,13 +14,13 @@ Make enables you to instantly integrate 8x8 with over 1500+ apps, allowing you t
 * Send Bulk SMS
 * Send a single Messaging App message (WhatsApp, Viber, etc.)
 * Watch Outbound Messages Status
-	+ Triggers when an outbound message status has been changed
+  * Triggers when an outbound message status has been changed
 * Watch Messaging App Inbound Messages
-	+ Triggers when you have a new inbound Messaging App message
+  * Triggers when you have a new inbound Messaging App message
 * Watch SMS Inbound Messages
-	+ Triggers when you have a new inbound SMS message
+  * Triggers when you have a new inbound SMS message
 
 ### Other
 
 * Make an API Call
-	+ Performs an arbitrary authorized API call
+  * Performs an arbitrary authorized API call

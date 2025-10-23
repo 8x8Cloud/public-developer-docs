@@ -9,10 +9,10 @@
 This following section and it's pages will explain the analytics pages in depth.
 
 > 📘 **Voice Analytics**
-> 
+>
 > The voice analytics section is currently under development, and the corresponding documentation page will be added once it is finalized.
-> 
-> 
+>
+>
 
 ## Location of Analytics Sections
 

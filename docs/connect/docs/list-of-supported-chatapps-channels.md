@@ -11,7 +11,6 @@
 | LINE Official Notification | `LineNotification` | ✅        | ✅    | ✅         | ❌    |
 | Google RCS                 | `GoogleRCS`        | ✅        | ✅    | ✅         | ✅    |
 
-
 ### Supported channels and directions
 
 | Channel                    | Channel type value | Inbound Message | Outbound Message |

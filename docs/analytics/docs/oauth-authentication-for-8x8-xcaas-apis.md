@@ -14,10 +14,10 @@ A number of 8x8 XCaaS APIs use OAuth authentication. For these APIs the initial 
 * [Contact Center Chat](/actions-events/reference/createaccesstoken)
 
 > 📘 **You will need a working API key to begin**
-> 
+>
 > [How to get API Keys](/analytics/docs/how-to-get-api-keys)
-> 
-> 
+>
+>
 
 The URL for the OAuth Authentication is: `https://api.8x8.com/oauth/v2/token`
 
@@ -36,17 +36,15 @@ Using the key and secret from Admin Console as the username and password use Bas
 | Authorization | ✓        | [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) where username is the value of clientId and the password is the value of secret. <br />Example shows value for <br />clientId=myclientId<br />secret=nevertellanyone | Basic bXljbGllbnRJZDpuZXZlcnRlbGxhbnlvbmU= |
 | Content-Type  | ✓        | Specify form content type to pass the grant_type in the body                                                                                                                                                                                           | application/x-www-form-urlencoded          |
 
-
 #### Body
 
 > 📘 **Table contains the values for the x-www-form-urlencoded body**
-> 
-> 
+>
+>
 
 | Name       | Required | Description                  | Example            |
 | ---------- | -------- | ---------------------------- | ------------------ |
 | grant_type | ✓        | Must be `client_credentials` | client_credentials |
-
 
 ### Authentication Request
 
@@ -94,9 +92,9 @@ curl --location --request POST 'https://api.8x8.com/oauth/v2/token' \
 
 **issued_at** : Epoch time of when the token was issued  
 
-**expires_in**: Number of seconds before this `access_token` will expire. 
+**expires_in**: Number of seconds before this `access_token` will expire.
 
-If your use case will leverage the `access_token` for a period that could exceed the lifetime of the token ensure that your code either handles an error based on the token expiration OR requests a new token before the current token expires. We recommend against getting a new token for every request as this will result in added duration and processing on both sides. 
+If your use case will leverage the `access_token` for a period that could exceed the lifetime of the token ensure that your code either handles an error based on the token expiration OR requests a new token before the current token expires. We recommend against getting a new token for every request as this will result in added duration and processing on both sides.
 
 **access_token**: This is the token that will be passed into subsequent API calls as a Bearer Token. In the example above the `access_token` is `3yKcgVwWCJM14dXxKDBAEDGcythJ`
 
@@ -126,4 +124,3 @@ Adding or removing APIs from an existing API key will not be instantaneous as th
 | analytics product      | Work Analytics                                 | ❌    |
 | CE-PCS-Product         | Customer Experience Post Call Survey           | ❌    |
 | CE-RCS-Product         | Customer Experience Recent Calls               | ❌    |
-

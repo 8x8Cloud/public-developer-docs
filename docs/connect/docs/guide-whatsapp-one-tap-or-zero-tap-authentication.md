@@ -4,15 +4,15 @@
 
 WhatsApp authentication templates can be configured to provide a more seamless authentication experience on Android devices through Zero-tap (automatic code insertion) or One-tap (user confirms code insertion) methods. This guide explains how to modify your existing Copy Code authentication templates to enable these features.
 
-> 
+>
 > If you're new to WhatsApp as an authentication method for your app, we recommend starting with the standard 'copy code' delivery method and evaluating its performance. Consider implementing Zero-tap/One-tap delivery after you've established your baseline authentication flow and identified opportunities to reduce drop-off rates.
-> 
-> 
-> 
+>
+>
+>
 
 > ⚠️ **Important: Zero-tap and One-tap authentication methods only work on Android devices. Non-Android devices will automatically fall back to Copy Code button.**
-> 
-> 
+>
+>
 
 ## Getting Started
 
@@ -60,14 +60,14 @@ This guide covers template configuration in Meta Business Suite. However, to ena
 ![](../images/7a1fae0359ae0a3ed2a7de28018abba9139a1fa3c929cb819c1189db8fbe4c52-image.png)
 6. Choose your preferred Code Delivery method:
 
-	* Zero-tap autofill
-	* One-tap autofill
-	* Copy code (default)  
+  * Zero-tap autofill
+  * One-tap autofill
+  * Copy code (default)  
 
-> 
+>
 > Note: For Zero-tap authentication, ensure compliance with Meta's [best practices](https://business.facebook.com/business/help/285737223876109)
-> 
-> 
+>
+>
 >
 
 ![](../images/54f3382a0ac7e07d30796ad96d426b707e18914d5f45d4e8a54188502c2c2ad0-image.png)
@@ -102,18 +102,18 @@ After validating your template configuration, you'll need to implement the requi
 
 1. WhatsApp's OTP Android SDK (Recommended)
 
-	* Simpler implementation
-	* Available through Maven Central
-	* Handles most of the complexity for you
+  * Simpler implementation
+  * Available through Maven Central
+  * Handles most of the complexity for you
 2. Manual Implementation
 
-	* Implement custom Android activities and intent filters
-	* Handle the handshake process directly
-	* More flexibility but requires more code
+  * Implement custom Android activities and intent filters
+  * Handle the handshake process directly
+  * More flexibility but requires more code
 
 > 📘 **For technical implementation details and code examples for both approaches, refer to Meta's [OTP handshake documentation](https://developers.facebook.com/docs/whatsapp/business-management-api/authentication-templates/autofill-button-authentication-templates#handshake).**
-> 
-> 
+>
+>
 
 ### Troubleshooting
 
@@ -127,9 +127,10 @@ After validating your template configuration, you'll need to implement the requi
 * Clearly inform users about automatic code insertion in your message
 * Allow users to choose their preferred authentication method
 
-See example below: 
+See example below:
 
 ![](../images/df4d3135f65bdb880916d73f43b1743935066adf88eb9b75650d4198e4e65e9e-image.png)
+
 ### Using the Template
 
 You can send authentication messages using the same [Authentication template payload](/connect/reference/send-message) regardless of the delivery method chosen. The delivery method will be automatically determined based on the user's device type.

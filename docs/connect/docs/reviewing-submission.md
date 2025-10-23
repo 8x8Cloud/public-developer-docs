@@ -6,4 +6,3 @@
 * User can also go back to any one of the steps to make any relevant changes
 
 ![](../images/361e11fe248db2d55be159e81e61e4ca4f9e9377d8fa7e309105f8b2f7f8007b-unnamed_10.png)
-

@@ -5,9 +5,9 @@
 **New Features**
 
 * **Dynamic Branding**: Introduced several custom branding features:
-	+ Custom Participant Menu Buttons
-	+ Etherpad Base URL
-	+ People Search URL
+  * Custom Participant Menu Buttons
+  * Etherpad Base URL
+  * People Search URL
 * **Custom Notifications**: Allowed specifying actions in custom notifications to enhance interactivity and user engagement
 * **Visitor Renaming**: Renamed visitors/observers to viewers in the UI for better clarity
 * **Firefox**: AV1 and VP9 codec support on Firefox 136 and newer versions
@@ -19,10 +19,10 @@
 * **Breakout Rooms**: Fixed processing commands in breakout rooms, addressing issues with variable names and room transitions
 * **Config Whitelist**: Removed customToolbarButtons from the config whitelist to streamline configuration management
 * **Participant Management**: Various fixes related to AV moderation, participant permissions, and notifications:
-	+ Made notifications sticky when allowed to unmute
-	+ Offered choices to allow audio, video, or both for participants
-	+ Made audio the default option when both audio and video are allowed
-	+ Skipped local participant when muting all
+  * Made notifications sticky when allowed to unmute
+  * Offered choices to allow audio, video, or both for participants
+  * Made audio the default option when both audio and video are allowed
+  * Skipped local participant when muting all
 * **Logging**: Improved log collection and debugging
 * **Prejoin and Lobby**: Fixed issues related to pre-join and lobby states, enhancing user experience during initial conference stages
 * **Virtual Backgrounds**: Fixed handling of empty file lists for virtual backgrounds, ensuring better user experience
@@ -36,8 +36,6 @@
 * **Language Updates**: Updated translations for multiple languages, including Italian, Hindi, German, Norwegian Bokmal, Swedish, and Latvian.
 * **Dependency Updates**: Regular updates to lib-jitsi-meet and other dependencies to ensure compatibility and performance improvements
 * **Documentation**: Updated documentation for extra-large conference settings and other config options, providing clearer guidance for users and developers
-
-  
 
 ## Versions
 

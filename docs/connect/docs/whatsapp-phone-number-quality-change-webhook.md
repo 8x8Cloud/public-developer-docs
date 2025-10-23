@@ -41,15 +41,11 @@ Request body description
 
 `meta` object description
 
-
-
-
 | Parameter name | Parameter type | Description |
 | --- | --- | --- |
 | event | string | Messaging limit change or throughput change event.<br>Possible values are`DOWNGRADE`— Messaging limit has decreased.`FLAGGED` — Messaging quality will be decreased if the number continues to receive negative feedback.`ONBOARDING` — Phone number is still being registered.`THROUGHPUT_UPGRADE` — Throughput level has increased.`UNFLAGGED` — Business phone number is eligible to receive a messaging limit increase if it continues to receive positive feedback.`UPGRADE` — Messaging limit has increased. |
 | currentLimit | string | Indicates current messaging limit or throughput level.<br>Possible values are`TIER_50` — Indicates a messaging limit of 50.`TIER_250` — Indicates a messaging limit of 250.`TIER_1K` — Indicates a messaging limit of 1,000.`TIER_10K` — Indicates a messaging limit of 10,000.`TIER_100K` — Indicates a messaging limit of 100,000.`TIER_NOT_SET` — Indicates the business phone number has not been used to send a message yet.`TIER_UNLIMITED` — Indicates the business phone number has higher throughput. |
 | oldLimit | string | Old limit and only included for messaging limit changes. |
-
 
 ### Sample webhook
 

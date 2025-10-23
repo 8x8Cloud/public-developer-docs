@@ -1,10 +1,10 @@
 # CC Realtime Statistics
 
 > 📘 **You will need a working API key to begin**
-> 
+>
 > [How to get API Keys](/analytics/docs/how-to-get-api-keys)
-> 
-> 
+>
+>
 
 The base URL is region specific, based on the location of your Contact Center tenant.
 
@@ -41,25 +41,25 @@ The following error messages could be returned when dealing with a multitenant c
 Realtime data is available as follows definitions for metrics can be found in the [glossary](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/VCCAnalytics/Glossary.htm)
 
 * Queue Statistics
-	+ for multiple queues
-	+ for single queue
+  * for multiple queues
+  * for single queue
 * Agents Statistics
-	+ by Queue
-	+ by multiple Queues
-	+ by Group
+  * by Queue
+  * by multiple Queues
+  * by Group
 * Group Statistics
-	+ for multiple groups
-	+ for single group
+  * for multiple groups
+  * for single group
 
 ## 4. Accessing Realtime Queue Metrics
 
 > 📘 **Sample is for a multiple queues**
-> 
-> For a single queue add /{queue-id} to the url. 
-> 
+>
+> For a single queue add /{queue-id} to the url.
+>
 > See [additional endpoints](/analytics/docs/cc-realtime-statistics#additional-endpoints) for examples for the other endpoints
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -110,7 +110,7 @@ Summary metrics are over one of 3 provided ranges
 
 page starts with zero (0).
 
-The maximum page size is 1000 if you specify a `size` above 1000 you will receive 
+The maximum page size is 1000 if you specify a `size` above 1000 you will receive
 
 **400 Bad Request**
 
@@ -135,6 +135,7 @@ If a page beyond the end of the result set is specified the response will be as 
 HTTP STATUS : 400
 
 Beyond last page
+
 ```json
 {
     "message": "Bad request: Field 'page' must be greater than or equal to 0 and less than the total number of pages, which is 2 for this request"
@@ -147,6 +148,7 @@ Beyond last page
 In this example the data returned will only be for queue id is 103 and 170 and the only metrics returned will be handling.rt and metrics=entered.today
 
 queuesgroups
+
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues?page=0&size=100&queue-ids=101&queue-ids=107&metrics=handling.rt&metrics=entered.today' \
 --header 'Authorization: Bearer FnZGG0u5BpNwRkuwKuSmfG2JAG9w'
@@ -166,6 +168,7 @@ Note the response headers related to [pagination](/analytics/docs/cc-realtime-st
 #### Body
 
 queuesgroups
+
 ```json
 [
     {
@@ -237,12 +240,12 @@ queuesgroups
 ## Additional Endpoints
 
 > 📘 **Core Parameters and structure are common**
-> 
+>
 > The following examples don't show every parameter refer to [parameters](/analytics/docs/cc-realtime-statistics#parameters) above.
-> 
+>
 > Metrics, timezone etc. are all available on each endpoint
-> 
-> 
+>
+>
 
 The core parameters and structure are common to all of the following endpoints. Which allow for selecting specific queue, groups and agents. The available metrics for queues, groups, agents within queues and agents within groups vary.
 
@@ -416,8 +419,8 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 ### Agents within a Group of Queues
 
 > 🚧 **This endpoint ONLY returns information for agents/queues that have been had activity or a session in the current day.**
-> 
-> 
+>
+>
 
 `/realtime-metrics/agents-in-queue-groups`
 
@@ -528,7 +531,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v5/realtime-metr
 
 ```
 
-#### All Agents within a tenant Response examples:
+#### All Agents within a tenant Response examples
 
 With *summary=true* parameter response example:
 
@@ -1229,7 +1232,7 @@ When includeTotals is set to `true` an additional set of "total" metrics will be
 
 When passing multiple ids on endpoints with plural parameters such as agent-ids, queue-ids, group-ids.
 
-The parameters can be passed by repeating the parameter name: 
+The parameters can be passed by repeating the parameter name:
 
 * `agent-ids=123&agent-ids-765&agent-ids=963`
 

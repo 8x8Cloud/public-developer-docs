@@ -1,8 +1,8 @@
 # Message types and samples
 
 > 👍 **Please see [Messaging API](/connect/reference/send-message) for the full API reference.**
-> 
-> 
+>
+>
 
 ### Text Message
 
@@ -61,7 +61,6 @@ The corresponding message the user will receive:
 
 ![](../images/c5f9de293d906f4fe09f184f2519b58ff8e02f347fa4acbbca6b780366766422-Image_6.png)
   
-
 ---
 
 #### Video & text
@@ -84,7 +83,6 @@ The corresponding message the user will receive:
 
 ![](../images/602dd6dd429b4863b5c199b6d2e49d8e05bc4765c2a8173fa9dea5f1cb1d4922-Video.png)
   
-
 ---
 
 #### Audio & text
@@ -105,13 +103,9 @@ The corresponding message the user will receive:
 
 The corresponding message the user will receive:
 
-  
-
 ---
 
 #### File & text
-
-  
 
 ```json
 {
@@ -131,14 +125,11 @@ The corresponding message the user will receive:
 
 ![](../images/635d3e126566938536a5d8c5422384bafbf5b042bcf545aa09df5f48325294ec-File.png)
   
-
 ---
 
 ### Suggested Actions
 
 Suggestions in RCS Business Messaging provide interactive buttons, chips, or quick replies that guide users seamlessly through rich conversational experiences. By using suggestions, brands can streamline user journeys, enhance engagement, improve conversions, and gather immediate user feedback.
-
-  
 
 #### Available Suggestion Types
 
@@ -152,7 +143,6 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 
 ![](../images/2f3128a1c6a2038bda2b9f5d6c9b2ddcc6149da519ba6edfdbfced18cfd6ed7b-Appointment_confirm.png)
   
-
 #### Best practices
 
 * Limit to 4‑5 suggestions per message to avoid cognitive overload.
@@ -160,8 +150,6 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 * Always set postback data so downstream systems can act on replies.
 * Include capability fallback (SMS or URL) when the user’s client does not support a given action.
 * Instrument analytics to track tap‑through and optimise suggestion wording.
-
-  
 
 #### Implementation Example
 
@@ -230,8 +218,6 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 
 ```
 
-  
-
 ### Overview of file types and limits
 
 #### Supported **File** formats are
@@ -243,8 +229,6 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 | **Audio** | `.aac` (`audio/aac`), `.mp3` (`audio/mp3`, `audio/mpeg`, `audio/mpg`), `.mp4` (`audio/mp4`, `audio/mp4-latm`), `.3gp` (`audio/3gpp`), `.ogx` / `.ogg` (`application/ogg`, `audio/ogg`) | Media messages only |
 | **Documents** | `.pdf` (`application/pdf`) | Media messages (not rich cards) |
 | **File size cap** | Up to **100 MB** per attachment |  |
-
-  
 
 #### Limits
 

@@ -2,14 +2,9 @@
 
 This method provides insights about call details and will be sent to your "Voice Call Summary" (VCS) endpoint. Your "Voice Call Summary" (VCS) endpoint can be configured on the sub-account level with the Number Masking [Webhooks](/connect/reference/create-a-new-webhook).
 
-
 When receiving status updates for ongoing calls, the 8x8 platform will POST a JSON object to your "Voice Call Summary" (VCS) endpoint.
 
-
 The JSON object will contain the following values:
-
-
-
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -36,44 +31,40 @@ The JSON object will contain the following values:
 | sipCode | Integer | Final Sip status code for the call leg(s) defined by RFC 3261 |
 | timestamp | String | Timestamp of a call event |
 
-
 Additional parameters could be included depending on individual destination or account requirements.  
 
 Example of a JSON object sent to your handleURL:
 
-
 ```json
 {
-	"namespace": "VOICE",
-	"eventType": "CALL_STATUS",
-	"description": "Status update of a call",
-	"payload": {
-		"eventId": "eb0fc709-9693-11ea-454d-1705dde98182",
-		"callId": "a1d6a5e3-efec-11e9-b999-7d370b5f90d1",
-		"sessionId": "a1d6a5e2-efec-11e9-b999-efc71013a78f",
-		"subAccountId": "account_x",
-		"callStatus": "CALL_INITIATED",
-		"callDirection": "INBOUND | OUTBOUND",
-		"callType": "PSTN | VOIP",
-		"source": "+6283891703225",
-		"destination": "+622150996455",
-		"sourceFormat": "MSISDN",
-		"destinationFormat": "MSISDN",
-		"sourceCountryCode": "ID | Null",
-		"destinationCountryCode": "ID | Null",
-		"sourceRefId": "NumberRef1 | Null",
-		"destinationRefId": "vn-ref-1 | Null",
-		"callDuration": 10,
-		"eventData": " ",
-		"sipCode": 200,
-		"timestamp": "2019-10-16T08:12:01Z"
-	}
+  "namespace": "VOICE",
+  "eventType": "CALL_STATUS",
+  "description": "Status update of a call",
+  "payload": {
+    "eventId": "eb0fc709-9693-11ea-454d-1705dde98182",
+    "callId": "a1d6a5e3-efec-11e9-b999-7d370b5f90d1",
+    "sessionId": "a1d6a5e2-efec-11e9-b999-efc71013a78f",
+    "subAccountId": "account_x",
+    "callStatus": "CALL_INITIATED",
+    "callDirection": "INBOUND | OUTBOUND",
+    "callType": "PSTN | VOIP",
+    "source": "+6283891703225",
+    "destination": "+622150996455",
+    "sourceFormat": "MSISDN",
+    "destinationFormat": "MSISDN",
+    "sourceCountryCode": "ID | Null",
+    "destinationCountryCode": "ID | Null",
+    "sourceRefId": "NumberRef1 | Null",
+    "destinationRefId": "vn-ref-1 | Null",
+    "callDuration": 10,
+    "eventData": " ",
+    "sipCode": 200,
+    "timestamp": "2019-10-16T08:12:01Z"
+  }
 }
 
 ```
 
 ## Response
 
-
 Your endpoint should respond with 200 OK status.
-

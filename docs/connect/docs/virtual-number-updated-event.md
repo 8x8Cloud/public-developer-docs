@@ -2,13 +2,9 @@
 
 Notifies customers that a change in either Virtual Number or Virtual Number Health has occurred
 
-A webhook will be sent to your endpoint each time Virtual Numbers are updated in the Virtual Number pool associated with your subaccount. 
-
+A webhook will be sent to your endpoint each time Virtual Numbers are updated in the Virtual Number pool associated with your subaccount.
 
 The JSON object will contain the following values:
-
-
-
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -32,9 +28,7 @@ The JSON object will contain the following values:
 | numberHealthCheckEnabled | Boolean | Boolean check if Number Health services are enabled for this Virtual Number |
 | updateStatus | String | Update status for the given Virtual Number. Values indicate if the Virtual Number status has been changed in this event. Possible values are **"NO\_CHANGE"** and **"UPDATED"** |
 
-
 Example of a JSON object sent to your webhook:
-
 
 ```json
 {

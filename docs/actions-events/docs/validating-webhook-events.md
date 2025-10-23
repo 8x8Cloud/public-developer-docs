@@ -43,9 +43,11 @@ The Chat API signature consists of:
 The **`kid`** is the ID of the keys resource used to sign JWS
 
 You can use this kid to fetch the **[public key](/actions-events/reference/getjwkpublickey-1)** and use it to validate JWS
+
 * **`b64`**: The **`b64`** header parameter stores password hashes computed with encoding **[RFC 7797 Section 3](https://datatracker.ietf.org/doc/html/rfc7797#section-3)**)
 
 Because the payload is not encoded, this value is **false**
+
 * **crit**: the **`crit`** (Critical) header parameter **[RFC 7515 Section 4.1.11](https://datatracker.ietf.org/doc/html/rfc7515#section-4.1.11)**
 
 This list contains **`b64`** encoding. **[RFC 7797 Section 6](https://datatracker.ietf.org/doc/html/rfc7797#section-6)**
@@ -63,12 +65,11 @@ The unencoded detached payload is in JSON format containing the following proper
 | **`eid`** <br />string    | **Event ID** - this value can be fetched from the **x-8x8-event-id** header                                                                                                                                                                                   |
 | **`retry`** <br />long    | **Retry attempt** - this value can be fetched from the **x-8x8-retry** header                                                                                                                                                                                 |
 
-
 > 📘 **Note:**
-> 
+>
 > Since a signature is computed for this payload, the order of keys is of critical importance. Review and adhere to the following order.
-> 
-> 
+>
+>
 
 The keys are lexicographically ordered as follows:
 

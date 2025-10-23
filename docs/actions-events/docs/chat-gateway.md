@@ -20,6 +20,7 @@ The Chat Gateway enables you to:
 * Achieve 2-way communication by using web API calls and callbacks to and from Contact Center.  
 
 You are able to forward customer messages and are notified when your agents reply to customers.
+
 * Route conversations straight into the preferred queue and let Contact Center handle the agent assignment based on availability and experience.
 
 Additional functions include:  
@@ -27,19 +28,19 @@ Additional functions include:
 • Screen-pops with relevant CRM customer information
 
 ```
-•	Pass the context of the bot conversation to the agent
+•  Pass the context of the bot conversation to the agent
 
-•	Pass the full transcription of the bot conversation to the agent
+•  Pass the full transcription of the bot conversation to the agent
 
-•	Update CRM information while a customer is queuing
+•  Update CRM information while a customer is queuing
 
-•	Display of FAQs or prepared responses
+•  Display of FAQs or prepared responses
 
-•	Auto-translation of customer messages
+•  Auto-translation of customer messages
 
-•	Standardized transaction codes while wrapping up customer interactions
+•  Standardized transaction codes while wrapping up customer interactions
 
-•	Transfer chats to other queues or departments
+•  Transfer chats to other queues or departments
 
 ```
 

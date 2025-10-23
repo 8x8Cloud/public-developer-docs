@@ -4,14 +4,11 @@ Only agents with a **supervisor** or **administrator** role can access the confi
 
 ![1600](../images/e5e4956-Config.png "Config.png")
   
-
 **You can do the following from the configuration page such as**
 
 * Set number of hours a ticket will change its status from Resolved to Closed
 * Set number of hours a ticket will change its status from Pending to Closed
 * Set Maximum number of assigned tickets to an agent
-
-  
 
 ###### Editing Configurations
 

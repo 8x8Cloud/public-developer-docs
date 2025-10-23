@@ -6,7 +6,7 @@
 
 Using the webchat, you may have a customer that is comforable speaking in their own language, so we offer realtime translation on this chat, you can find more on this service [here](https://docs.8x8.com/8x8WebHelp/contact-center/agent-workspace/Content/aw/handle-multilingual-chats.htm)
 
-When using the webchat API, you can decide to set the language, other than it using the form or the customer browser language. 
+When using the webchat API, you can decide to set the language, other than it using the form or the customer browser language.
 
 The list of supported languages are:  
 
@@ -56,7 +56,7 @@ Traditional Chinese: zh-TW
 
 #### Script config
 
-Here is an example of where the language you to set for the customer is French. 
+Here is an example of where the language you to set for the customer is French.
 
 ```javascript
 function fn(chatApp) {
@@ -64,7 +64,7 @@ function fn(chatApp) {
 }
 ```
 
-To add this, you need to add it at the bottom of the script in this area here 
+To add this, you need to add it at the bottom of the script in this area here
 
 ```html
 })(  
@@ -73,7 +73,7 @@ To add this, you need to add it at the bottom of the script in this area here
     </script>
 ```
 
-Then, the full script will look like this 
+Then, the full script will look like this
 
 ```javascript
     <!-- Place this code snippet anywhere you want the button to appear in your page. If no button has been configured in the chat script, it will not show up nor take any space. -->
@@ -134,14 +134,13 @@ Then, the full script will look like this
 
 #### Agent view
 
-When the query is routed through to an agent, they will be able to see the data that was passed into the webchat, in both the interaction panel 
-
-  
+When the query is routed through to an agent, they will be able to see the data that was passed into the webchat, in both the interaction panel
 
 ![](../images/4ecdf7d0b8c0a0c8bbed9d94570493ba0c5a125d6c6d013e887ca87e5629e64d-Agent.png "Chat Gateway flow.jpg")
-Here, it what the customer see's so the full conversation is in french 
+Here, it what the customer see's so the full conversation is in french
 
 ![](../images/df3d03b1178d6797084eabe3944427d4ae8324ca6ee9016cf2ab398966fd2961-Customerchat.png "Chat Gateway flow.jpg")
+
 #### Important Notes
 
 * The chat language can be set at any time before starting a chat (when the customer enters a queue) and you can change it as many time as you want, only the last value will be considered.

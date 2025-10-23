@@ -11,15 +11,19 @@ This guide helps to style your products to fit within the 8x8 ecosystem allowing
 ## Areas of focus when building for 8x8
 
 ### Location
+
 Integrations can be deployed where needed the most but the primary location is the "meta data" panel. It's a place where supporting content or integrations live to help the user complete tasks.
 
 ### Style
+
 The 8x8 design system is called Oxygen. It contains specifications for a large range of web and mobile components with guidance on how to use each one.
 
 ### Accessibility
+
 Accessible products and integrations are important. Any 3rd party integration deployed inside an 8x8 product should be WCAG 2.1 AA compliant.
 
 ### Theme
+
 8x8 products support switching between dark and light mode so integrations must also support dark and light styles.
 
 ---
@@ -67,6 +71,7 @@ Oxygen is 8x8's design system. It's a comprehensive library of components and st
 The design system includes three main components:
 
 ### Color palette
+
 - Primary: `#0056e0`
 - Text: `#26252a`
 - Background: `#FFFFFF`
@@ -75,6 +80,7 @@ The design system includes three main components:
 - Error: `#CB2233`
 
 ### Typography
+
 8x8 use the font Inter which is available and easily embeddable from Google fonts. The typography library contains 9 type styles covering small text to headings:
 
 - `$label01`
@@ -83,6 +89,7 @@ The design system includes three main components:
 - `$heading02`
 
 ### Iconography
+
 A comprehensive icon library for consistent visual communication.
 
 ![Icon library](../images/icon-library.svg)
@@ -94,6 +101,7 @@ A comprehensive icon library for consistent visual communication.
 In 8x8 products users can choose whether to use view in light or dark mode by switching in the settings. Therefore it's important integrations have the support for both light and dark themes.
 
 ### Light mode
+
 - Primary button bg and form controls: `#0056e0`
 - Secondary button bg: `#26252a`
 - Destructive button and errors: `#CB2233`
@@ -104,6 +112,7 @@ In 8x8 products users can choose whether to use view in light or dark mode by sw
 - Secondary background color: `#F4F3EE`
 
 ### Dark mode
+
 - Primary button bg and form controls: `#246FE5`
 - Secondary button bg: `#E0E0E0`
 - Destructive button and errors: `#D83848`
@@ -182,8 +191,6 @@ A sample of our icon library
 
 ![](../images/primary-button-anatomy.svg)
 
-  
-
 **Secondary button**
 
 ![](../images/secondary-button-anatomy.svg)
@@ -192,26 +199,15 @@ A sample of our icon library
 
 ![](../images/destructive-button-anatomy.svg)
   
-
-  
-
-  
-
-  
-
-  
-
 **Text button**
 
 ![](../images/text-button.svg)
-
 
 ### Form elements
 
 **Text input**
 
 ![](../images/text-input-anatomy.svg)
-
 
 **Checkbox**
 
@@ -220,7 +216,6 @@ A sample of our icon library
 **Toggle**
 
 ![](../images/toggle-anatomy.svg)
-
 
 **Radio**
 
@@ -238,24 +233,13 @@ A sample of our icon library
 
 ![](../images/error.svg)
 
-
 **Info**
 
 ![](../images/info-notification.svg)
   
-
-  
-
-  
-
-  
-
-  
-
 **Warning**
 
 ![](../images/warning-notification.svg)
-
 
 ### Others
 
@@ -267,17 +251,14 @@ A sample of our icon library
 
 ![](../images/tags-anatomy.svg)
   
-
 **Loading**
 
 ![](../images/loading-anatomy.svg)
   
-
 **Badge**
 
 ![](../images/badges-anatomy.svg)
   
-
 ---
 
 ## Thank you

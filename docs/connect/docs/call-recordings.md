@@ -2,14 +2,12 @@
 
 Before you enable Call Recordings for Number Masking sessions it is required to set up the ["Recordings Push Configuration"](/connect/reference/create-a-new-recording-push-config) in order to define the endpoint to where the call recordings will be sent to. To set up the "Recordings Push Configuration" a POST request has to be sent to the following endpoint:
 
-
 ```
 POST https://voice.wavecell.com/api/v1/subaccounts/{{subAccountId}}/recording-push-config
 
 ```
 
 Where subAccountId is the id of your 8x8 subaccount. The following is an example of the request body you would need:
-
 
 ```json
 {
@@ -25,9 +23,6 @@ Where subAccountId is the id of your 8x8 subaccount. The following is an example
 
 The request should contain the following parameters:
 
-
-
-
 | Name | Type | Description |
 | --- | --- | --- |
 | protocol | String | 8x8 supports two protocols to send the Call Recordings. AWS "S3" and SFTP. |
@@ -37,9 +32,7 @@ The request should contain the following parameters:
 | password | String | The corresponding password for your Call Recordings endpoint. |
 | path | String | The remote directory to which you want the Call Recordings to be stored in. |
 
-
-Once the request has been processed, you will receive the following response, that will include all the details you have set for your "Recordings Push Configuration": 
-
+Once the request has been processed, you will receive the following response, that will include all the details you have set for your "Recordings Push Configuration":
 
 ```json
 {
@@ -58,9 +51,7 @@ Once the request has been processed, you will receive the following response, th
 
 ## Get Recordings information
 
-
 You can request the recording information for individual Number Masking sessions by sending a GET request to the following endpoint:
-
 
 ```
 GET https://voice.wavecell.com/api/v1/subaccounts/{{subAccountId}}/recordings/{{sessionId}}
@@ -68,7 +59,6 @@ GET https://voice.wavecell.com/api/v1/subaccounts/{{subAccountId}}/recordings/{{
 ```
 
 Where `subAccountId` is the id of your 8x8 subaccount and the `sessionId` is the Id of the Number Masking session that you want the recording information for. The following is an example of the request body you would need:
-
 
 ```json
 {
@@ -90,9 +80,6 @@ Where `subAccountId` is the id of your 8x8 subaccount and the `sessionId` is the
 
 The response will contain the following parameters:
 
-
-
-
 | Name | Type | Description |
 | --- | --- | --- |
 | recordingId | String | Unique Id for the requested Call Recording. |
@@ -102,15 +89,11 @@ The response will contain the following parameters:
 | externalFileUrl | String | The location where the call recording has been stored. |
 | startRecordingTime | Date&Time | Timestamp when the call recording has been started. |
 
-
 ## Voice Recording Uploaded Event
-
 
 An event is triggered each time a recording has been successfully uploaded to your file server (S3 or SFTP). This is an optional callback and it needs to be enabled on the account level. If you want to set up the callback endpoint, please take a look at [Create a new webhook](/connect/reference/create-a-new-webhook) and the webhook type "VRU".
 
-
 The following is an example of the callback that you would receive on your "VRU" callback endpoint:
-
 
 ```json
 {

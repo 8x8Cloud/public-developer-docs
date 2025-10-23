@@ -6,10 +6,10 @@ The following is an example of the JSON response you would need to provide:
 
 ```json
 {
-	"clientActionId": "NumberMaskingId1",
-	"callflow": [ 
-		{
-  		"action": "hangup" 
+  "clientActionId": "NumberMaskingId1",
+  "callflow": [ 
+    {
+      "action": "hangup" 
     }
   ]
 }

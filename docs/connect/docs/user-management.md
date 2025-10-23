@@ -3,6 +3,7 @@
 The user management feature allows you to manage users from adding, deleting, disabling and giving access to Connect menus and features.
 
 ## Inviting or adding a new user on Connect
+
 *(This assumes the user is already logged in and has "user management" access or with admin level privileges)*
 
 1. Go to the left navigation menu and click "Users". Alternatively, you can also click the "gear" icon on the top right menu just beside your profile icon and select "User management".

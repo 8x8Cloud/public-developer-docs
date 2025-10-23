@@ -1,20 +1,16 @@
 # API Error codes
 
-
 > ℹ️ **Troubleshooting tip**
-> 
+>
 > This page documents **platform level** API error codes returned in 8x8 API responses.  
-> 
+>
 > For delivery related errors coming back *after* we hand messages to suppliers, see the [Messaging Apps Delivery Receipt Error Codes](/connect/reference/delivery-error-codes)  reference and [SMS Delivery Receipt Error Codes](/connect/reference/delivery-receipts-error-codes)
-> 
-> 
-
+>
+>
 
 ## HTTP Error Codes
 
-
 8x8 API might return the following HTTP error codes:
-
 
 | Code | Description |
 | --- | --- |
@@ -31,17 +27,15 @@
 | 429 | **Too Many Requests**, The user has sent too many requests in a given amount of time ("rate limiting"). |
 | 500 | **Internal Server Error**, The server has encountered a situation it doesn't know how to handle. |
 
-
 All API responses with HTTP code 400 and above has the following properties:
-
 
 * `code` (integer) - Error code
 * `message` (string) - Human-readable error description
 * `errorId` (UUID) - Unique id of the error. You can use it as a reference when sending inquiries to 8x8 support.
 * `timestamp` (string, date-time) - Date and time of the error occurrence. Format: `yyyy-MM-ddTHH:mm:ss.ffZ`
 
-
 Example of error JSON object returned by the API
+
 ```json
 {
     "code": 1300,
@@ -54,12 +48,9 @@ Example of error JSON object returned by the API
 
 ## API Response Property Values
 
-
 The table below refers to the possible values of the "code" parameter, in the response body returned by the API as shown above. They can be used for additional clarity of what type of error was encountered.
 
-
 ### SMS API, Messaging API
-
 
 | Code | Description |
 | --- | --- |

@@ -10,17 +10,15 @@ We recommend to use the following method while opening the agent console in an i
 
 Your users must be logged in and identified, in your application, before opening the iframe.
 
-
-
-
 You can load the Agent Portal in an iframe using the following URL:
+
 ```
 https://video-agent.8x8.com/?user=product@8x8.com&token=eyJiJIUzI1NiME5B87.qPWXyNNDHBxLftaHarcSgm0c
 ```
+
 “User” is the login of the agent who is joining the call. This agent needs to be already existing in the Video Interaction directory.
 
 “token” is the auth_token that you have created previously.
-
 
 **Example:**
 

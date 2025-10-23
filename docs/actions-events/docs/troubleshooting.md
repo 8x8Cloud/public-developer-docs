@@ -37,16 +37,16 @@ You can search for a particular event in the search bar and use the located even
 
 You can filter using [properties](/actions-events/docs/troubleshooting#properties).
 
-To expand the filter view, click on **Advance filter**. Multiple filtering conditions can be applied using **logical operators** such as **`and`** and **`or`** to group them. 
+To expand the filter view, click on **Advance filter**. Multiple filtering conditions can be applied using **logical operators** such as **`and`** and **`or`** to group them.
 
 Conditions in filters are made of **relation operators** such as **`equals`**, **`not equal`**, **greater than**, **`greater than or equal to`**, **`less than`** or **`less than or equal to`**.
 
 > 📘 **Note:**
-> 
-> Record [**properties**](/actions-events/docs/troubleshooting#properties) contain different data types, so not all relation operators apply. 
-> 
+>
+> Record [**properties**](/actions-events/docs/troubleshooting#properties) contain different data types, so not all relation operators apply.
+>
 > For example:
-> 
+>
 > * **enums** - only equals or not equals
 > * **string** - only equals or not equals
 > * **number** - all relation operators

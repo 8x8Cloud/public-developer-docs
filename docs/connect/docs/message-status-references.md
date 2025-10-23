@@ -2,11 +2,7 @@
 
 8x8 API uses the following universal object for describing the message state across different APIs.
 
-
 Object structure
-
-
-
 
 | Parameter name | Type | Description                                                                                                                                                                                                            |
 | --- | --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -16,12 +12,9 @@ Object structure
 | errorCode | integer | Error code for the operation. This property is optional and set only for errors.                                                                                                                                       |
 | errorMessage | string | Description of the error.<br>This property is optional and set only for errors.                                                                                                                                        |
 
-
 #### State
 
-
 Possible values for `state`:
-
 
 * `queued`: The request is accepted and queued for processing.
 * `rejected`: The request has been rejected by 8x8
@@ -30,23 +23,19 @@ Possible values for `state`:
 * `undelivered`: We have received a delivery receipt from the operator that the message was not delivered.
 * `read`: The message was delivered and read.
 
-
 #### Detail
 
-
 Possible values for `details`:
-
 
 * `delivered_to_operator`: The message has been delivered to the operator. Associated with `delivered` state
 * `delivered_to_recipient`: The message has been delivered to the recipient. Associated with `delivered` state.
 * `rejected_by_operator`: The message has been rejected by the operator. Associated with `undelivered` status.
 * `undelivered_to_recipient`: The message has been delivered but rejected by the target device. Associated with `undelivered` state.
 
-
 ### Samples of the status object
 
-
 Message sent successfully
+
 ```
 "status": {
         "state": "queued",

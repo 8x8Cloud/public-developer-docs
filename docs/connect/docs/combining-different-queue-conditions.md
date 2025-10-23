@@ -13,4 +13,3 @@ Another example might be a combination of Country and Customer group (South Kore
 You can also combine all three conditions like the example below where Countries include the Philippines and Vietnam. Customer groups include the Small VIP group and CebuGrp. Finally, Channel condition includes WhatsApp and Viber.
 
 ![891](../images/98aaf41-Screenshot_2022-10-13_at_11.53.24_PM.png "Screenshot 2022-10-13 at 11.53.24 PM.png")
-

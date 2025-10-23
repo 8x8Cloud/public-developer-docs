@@ -28,10 +28,10 @@ There will be the following 3 charts available:
 - **SMS:** Shows the amount of SMS sent across the given time period for each of the days
 
 ![](../images/798894f-image.png)
-* **Delivery Rate:**  Shows how the delivery rate changes across the given time period for each of the days
+- **Delivery Rate:**  Shows how the delivery rate changes across the given time period for each of the days
 
 ![](../images/c2d578f-image.png)
-* **Cost:** Shows how the average cost of the SMS changes on a given day 
+- **Cost:** Shows how the average cost of the SMS changes on a given day
 
 ![](../images/82e3240-image.png)
 

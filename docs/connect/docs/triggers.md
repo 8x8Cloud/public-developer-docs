@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Triggers** are the initial entry point into your workflow definition. They define what event will start a workflow instance. 
+**Triggers** are the initial entry point into your workflow definition. They define what event will start a workflow instance.
 
 For example, if you would like to start your workflow when the number tied to your subaccount receives an SMS, you can choose a "Inbound SMS" trigger. Further types of triggers are defined below.
 

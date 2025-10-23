@@ -1,14 +1,12 @@
 # Post Call Survey
 
 > 📘 **Post-call survey reporting has moved under the umbrella of Contact Center reporting.**
-> 
+>
 > For general access and structure guidelines, please refer to the documentation on the [CC Historical Analytics Summary Reports](/analytics/docs/cc-historical-analytics-summary-report)  and the [CC Historical Analytics Detailed Reports](/analytics/docs/cc-historical-analytics-detailed-report).
-> 
+>
 > The [API specification](/analytics/reference/cc-historical-report-create) is also available.
-> 
-> 
-
-  
+>
+>
 
 ## Creating reports
 
@@ -25,8 +23,8 @@ Full details are available at the [`GET /report-types` endpoint](/analytics/refe
 Please see the corresponding documentation for the [CC Historical Analytics Summary Reports](/analytics/docs/cc-historical-analytics-summary-report)  and the [CC Historical Analytics Detailed Report](/analytics/docs/cc-historical-analytics-detailed-report) respectively for more specific documentation on how to create reports using these endpoints, and how to collect the data they specify.
 
 > ❗️ **Post-call survey data is only available in CC API version 7 or later**
-> 
-> 
+>
+>
 
 ## Fields and terms
 
@@ -42,14 +40,14 @@ Surveys go through many states as customers interact with them. We track those s
 | Completed | The user has completed the question interaction, or in the context of a survey, completed all questions and any final script segments |
 
 > 📘 **Agent-assisted surveys**
-> 
+>
 > For agent assisted surveys and standalone surveys (surveys with no IVR component), we are not able to offer metrics for `Offered` or `OptedIn`, because there was no IVR interaction, which is how we detect these states.
-> 
-> 
+>
+>
 
 ### Question metrics
 
-In the question-summary report, we collect data on how users specifically interact with individual questions. 
+In the question-summary report, we collect data on how users specifically interact with individual questions.
 
 | **Field name** | **Definition** |
 | --- | --- |

@@ -31,16 +31,12 @@ In case of connection error/timeout or HTTP response code 4XX or 5XX, there will
 
 Request body description
 
-
-
-
 | Parameter name | Parameter type | Description                                                                  |
 | --- | --- |------------------------------------------------------------------------------|
 | namespace | string | A generic namespace for incoming webhook.<br>Equal to `SMS` for inbound SMS. |
 | eventType | string | Webhook type. <br>Equals to `inbound_message_received` for inbound SMS.          |
 | description | string | Human-readable description of the incoming event                             |
 | payload | object | Inbound message information, see below.                                      |
-
 
 Payload object description
 
@@ -60,7 +56,7 @@ Payload object description
 >
 > If the request you receive has a different structure from described in this document, please contact our support to activate the latest format for your account.
 
-### Sample inbound SMS callback body:
+### Sample inbound SMS callback body
 
 ```json Inbound SMS webhook body
 {

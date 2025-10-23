@@ -16,11 +16,11 @@ The **alias** must be a single-level (no slash) string composed of legitimate, s
 
 ```
 
-> 
+>
 > The preceding steps result in the meeting *Invite more people* dialog which generates an invite link comprised of the **base**/**alias** pair(e.g. [https://application.com/meet/anInterestingMeeting](https://application.com/meet/anInterestingMeeting) for the values used above)
-> 
-> 
-> 
+>
+>
+>
 
 3. In your integrating application implement the logic that maps the resulting invite link (**base**/**alias**) to your application and handles the users that land on it.  
 

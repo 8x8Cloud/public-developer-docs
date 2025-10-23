@@ -5,10 +5,10 @@
 8x8 CPaaS (Communications Platform as a Service) offers a robust suite of APIs and tools for integrating voice, video, chat, WhatsApp (among other messaging apps channels) and SMS capabilities into your applications.
 
 > 📘 **Prerequisites**
-> 
+>
 > Ensure that you have your 8x8 account, subaccount and an API key. If there are any issues with your 8x8 credentials reach out to [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com)
-> 
-> 
+>
+>
 
 ## Video Demo
 

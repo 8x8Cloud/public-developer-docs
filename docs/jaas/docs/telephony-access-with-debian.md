@@ -21,6 +21,7 @@ Follow these steps if you did not opt in for telephony during the jitsi-meet ins
 Make sure the following properties exist in the **/etc/jitsi/meet/<your domain>-config.js** file:
 
 /etc/jitsi/meet/<your domain>-config.js
+
 ```
 dialInConfCodeUrl: 'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access',
 dialInNumbersUrl: 'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access/dids',
@@ -33,6 +34,7 @@ dialInNumbersUrl: 'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access/dids
 * Check the **asap_accepted_audiences** value to contain your actual domain (e.g. meet.example.com).
 
 /etc/prosody/conf.d/jaas.cfg.lua
+
 ```
 VirtualHost "jigasi.meet.jitsi"
     enabled = true

@@ -5,6 +5,7 @@
 JaaS allows meeting recording, but it only stores it for 24 hours. In order to preserve the recording, you must listen for ***RECORDING_UPLOADED*** event on a [webhook](/jaas/docs/webhooks-overview) and download the recording from the **`preAuthenticatedLink`** of the [payload](/jaas/docs/webhooks-payload#recording_uploaded). In normal cases the recording will be uploaded within a minute of the room ending.
 
 A recording session is limited to a maximum of 6 hours. If there is a need for a longer recording, simply start recording/streaming again using start recording event
+
 ## Video Demo
 
 This quick video demo will take you through how recording works within JaaS, including receiving the necessary webhooks for downloading the recordings and chat transcripts, viewing a sample recording file and viewing a chat transcript.
@@ -21,7 +22,7 @@ This quick video demo will take you through how recording works within JaaS, inc
 
 The Recording file will be available once you receive the **RECORDING_UPLOADED** webhook.
 
-The file will be saved as an **.mp4** file. The recording file will show the perspective of the participant who started the recording. 
+The file will be saved as an **.mp4** file. The recording file will show the perspective of the participant who started the recording.
 
 <iframe
   src="https://www.youtube.com/embed/R0p6ppj-ebE?si=J_T-r_EFWe6uJ2Tn"
@@ -37,6 +38,7 @@ The Chat Transcript will be available for download once you receive the **CHAT_U
 The file will be a JSON file, a sample of which is provided below. The **<app_id>** will be substituted with your JaaS App ID. The **messages** array will contain the message body that was sent under **content**.
 
 Chat Transcript from CHAT_UPLOADED Webhook
+
 ```json
 {
     "roomAddress": "[<app_id>]sampleappexplosivecertaintiesresultuneasily@conference.8x8.vc",
@@ -72,6 +74,7 @@ In order to match the participant with their message, you can use the **jid** fi
 In this case we can see the **participantFullJid** field matches the jid in the chat transcript so we can match this chat transcript message to this participant.
 
 PARTICIPANT_JOINED Webhook
+
 ```json
 {
     "appId": "<app_id>",

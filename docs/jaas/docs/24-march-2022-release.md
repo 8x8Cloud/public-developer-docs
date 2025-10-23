@@ -2,9 +2,7 @@
 
 ## Release Highlights
 
-
 **UX improvements**
-
 
 * Resizable filmstrip in stage view allowing to see the rest of the participants in a tile view layout
 * Tile view thumbnail space optimizations allowing to use available space more efficiently

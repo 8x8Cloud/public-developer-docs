@@ -1,9 +1,9 @@
 # CC Managing Campaign Status
 
 > 📘 **Prerequisites**
-> 
+>
 > * The Campaign MUST be configured as a Dynamic Campaign in Configuration Manager
-> 
+>
 
 ## Authentication
 
@@ -44,12 +44,12 @@ No other transitions are allowed, once a campaign is Stopped it cannot be restar
 ## Get Campaign Status
 
 > 🚧 **URLS vary in this section with an additional 't' in setting campaign status**
-> 
+>
 > For **Getting** the campaign status the url contains stats: /api/stats/campaigns/  
-> 
+>
 > For **Setting** the campaign status the url contains tstats: /api/**t**stats/campaigns/
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -112,12 +112,12 @@ curl --location --request GET 'https://vcc-{ccPlatform}.8x8.com/api/stats/campai
 ## Change Campaign Status
 
 > 🚧 **URLS vary in this section with an additional 't' in setting campaign status**
-> 
+>
 > For **Getting** the campaign status the url contains stats: /api/stats/campaigns/  
-> 
+>
 > For **Setting** the campaign status the url contains tstats: /api/**t**stats/campaigns/
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -149,7 +149,7 @@ curl --location --request POST 'https://vcc-{ccPlatform}.8x8.com/api/tstats/camp
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic {encodedValue}'
 --data-raw '{
-	"status": "RUNNING"
+  "status": "RUNNING"
 }'
 
 ```

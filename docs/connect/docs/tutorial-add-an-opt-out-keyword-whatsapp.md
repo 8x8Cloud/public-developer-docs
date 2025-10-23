@@ -118,6 +118,6 @@ In order to remove a customer from a blacklist, you can either manually remove t
 
 ![](../images/fff26d8-image.png)
 
-Another option is you can use the [API to remove a contact ](/connect/reference/delete-contacts-from-group)from a group.
+Another option is you can use the [API to remove a contact](/connect/reference/delete-contacts-from-group)from a group.
 
 In either case after removing the contact from the Opt-Out group, you can shortly begin sending messages to them again.

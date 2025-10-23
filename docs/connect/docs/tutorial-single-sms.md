@@ -89,7 +89,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 
 The 8x8 SMS single method expects requests sent by developers to respect a specific format.  
 
-In the following parts, we are going to go over the different elements of the request: 
+In the following parts, we are going to go over the different elements of the request:
 
 * the URL format
 * the authentication
@@ -119,6 +119,7 @@ At the end of the section, we will generate a curl command to send an SMS direct
 | [https://sms.us.8x8.com](https://sms.us.8x8.com) | North America          |
 | [https://sms.8x8.uk](https://sms.8x8.uk)         | Europe                 |
 | [https://sms.8x8.id](https://sms.8x8.id)         | Indonesia              |
+
 * For more information on data center regions, please visit the following [page](/connect/docs/data-center-region).
 
 ##### curl
@@ -157,25 +158,25 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/rider_hq/messages
 
 * The API expects to receive a structured request containing the SMS details and parameters. The format of the request is JSON and it can accept both optional and required parameters.
 * For simplicity sake, we are going to use only the most important of the parameters (the others are detailed in the documentation):
-	+ **Source**:
-		- this parameter defines the SMS SenderID, let’s use `"MyBrand"` 😎
-	+ **Destination**:
-		- this is the phone number that we want to reach. As mentioned in the introduction, we want to send a message to 12345678 and it is a phone number registered in Singapore, which uses the international prefix +65.
-		- For the destination parameter, we are going to use the value `"+6512345678"`
-	+ **Text**:
-		- This is the content of the message.
-		- To invoke a festive season feeling, let’s use the value: `“Bob, a special present for you from Santa.”`
-	+ **Encoding**:  
-	
-	- This parameter tells the destination handset which encoding to use to display the SMS. Our text only contains GSM7bit characters which is the most standard encoding but for the sake of safety let’s use `"AUTO"`  
-	
-	- it means that the API will automatically detect the characters used in the text and select the best encoding.  
-	
-	- It allows preventing the message from showing up as “ ⃞ ⃞ ⃞ ⃞, ⃞ ⃞ ⃞ ⃞” in the case where we would have used special characters or another alphabet.  
-	
-	-  
-	
-	Our final JSON object that we are going to send as the request data payload is then:
+  * **Source**:
+    * this parameter defines the SMS SenderID, let’s use `"MyBrand"` 😎
+  * **Destination**:
+    * this is the phone number that we want to reach. As mentioned in the introduction, we want to send a message to 12345678 and it is a phone number registered in Singapore, which uses the international prefix +65.
+    * For the destination parameter, we are going to use the value `"+6512345678"`
+  * **Text**:
+    * This is the content of the message.
+    * To invoke a festive season feeling, let’s use the value: `“Bob, a special present for you from Santa.”`
+  * **Encoding**:  
+  
+  * This parameter tells the destination handset which encoding to use to display the SMS. Our text only contains GSM7bit characters which is the most standard encoding but for the sake of safety let’s use `"AUTO"`  
+  
+  * it means that the API will automatically detect the characters used in the text and select the best encoding.  
+  
+  * It allows preventing the message from showing up as “ ⃞ ⃞ ⃞ ⃞, ⃞ ⃞ ⃞ ⃞” in the case where we would have used special characters or another alphabet.  
+  
+  *  
+  
+  Our final JSON object that we are going to send as the request data payload is then:
 
 ```json
 {
@@ -218,6 +219,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages \
 * And that’s it! Here is the result:
 
 ![437](../images/db2629f-Final_Image.png "Final Image.png")
+
 ### Going further
 
 #### I. API response
@@ -231,8 +233,8 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages \
   "destination":"6512345678",
   "encoding": "GSM7",
   "status":{
-	"code":"QUEUED",
-	"description":"SMS is accepted and queued for processing"
+  "code":"QUEUED",
+  "description":"SMS is accepted and queued for processing"
   }
 }
 
@@ -240,11 +242,11 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages \
 
 * The API response is used to provide feedback about the expected result of the API request (sending an SMS) and various additional information.
 * If we take some time to analyze the different elements there, we can identify the following:
-	+ **umid**: it stands for unique message id, it is the unique id associated with this SMS by the 8x8 CPaaS platform.
-	+ **clientmessageid**: here, it is null because no value has been specified in the request but you have the possibility to attribute your own custom ids to your messages.
-	+ **destination**: this is the phone number to which the SMS was sent.
-	+ **encoding**: this is the encoding used to send the message, it depends on the character set to use for the content. Here GSM7 is the standard when no UNICODE character is required.
-	+ **status**: this array contains 2 elements: the status of the message and the description of this status
+  * **umid**: it stands for unique message id, it is the unique id associated with this SMS by the 8x8 CPaaS platform.
+  * **clientmessageid**: here, it is null because no value has been specified in the request but you have the possibility to attribute your own custom ids to your messages.
+  * **destination**: this is the phone number to which the SMS was sent.
+  * **encoding**: this is the encoding used to send the message, it depends on the character set to use for the content. Here GSM7 is the standard when no UNICODE character is required.
+  * **status**: this array contains 2 elements: the status of the message and the description of this status
 * For more information, check the dedicated section of the [Send SMS](/connect/reference/send-sms), "Response" section in the right panel.
 
 #### II. API errors

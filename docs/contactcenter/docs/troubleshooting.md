@@ -1,8 +1,8 @@
 # Troubleshooting
 
 > ❗️ **PLEASE NOTE - This API is going to be deprecated on 30th September 2023, it will no longer work after this date. Please use our [Chat Gateway](/actions-events/docs/chat-gateway) which offers all of the Chat API's functionalities as well as additional features.**
-> 
-> 
+>
+>
 
 ## Event Log
 
@@ -31,7 +31,6 @@ The records listed in **Event Log** contain the following properties:
 | Duration        | 00m:00s:00ms                                                                                                                                                                                               | How long the request takes.                                                                                                                                                                                                                                                                                                                                                                                      |
 | Retry Attempts  | Number                                                                                                                                                                                                     | The number of Outbound requests that are unsuccessful. The number value indicates the attempted retry.                                                                                                                                                                                                                                                                                                           |
 
-
 ### Search
 
 You can search for a particular event in the search bar and use the located event to extract information for further review and analysis.
@@ -42,16 +41,16 @@ You can search for a particular event in the search bar and use the located even
 
 You can filter using [properties](#properties).
 
-To expand the filter view, click on **Advance filter**. Multiple filtering conditions can be applied using **logical operators** such as **`and`** and **`or`** to group them. 
+To expand the filter view, click on **Advance filter**. Multiple filtering conditions can be applied using **logical operators** such as **`and`** and **`or`** to group them.
 
 Conditions in filters are made of **relation operators** such as **`equals`**, **`not equal`**, **greater than**, **`greater than or equal to`**, **`less than`** or **`less than or equal to`**.
 
 > 📘Note:
-> 
-> Record [**properties**](#properties) contain different data types, so not all relation operators apply. 
-> 
+>
+> Record [**properties**](#properties) contain different data types, so not all relation operators apply.
+>
 > For example:
-> 
+>
 > * **enums** - only equals or not equals
 > * **string** - only equals or not equals
 > * **number** - all relation operators

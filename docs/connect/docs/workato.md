@@ -1,6 +1,6 @@
 # Workato
 
-[Workato](https://www.workato.com/) is an integrations platform that helps you connect and create automated workflows that connect apps to complete tasks composed of you based on a combination of apps, triggers, and actions. 
+[Workato](https://www.workato.com/) is an integrations platform that helps you connect and create automated workflows that connect apps to complete tasks composed of you based on a combination of apps, triggers, and actions.
 
 It is often used by B2B enterprises to connect or integrate different cloud services without requiring any programming skills.
 
@@ -34,6 +34,7 @@ It is often used by B2B enterprises to connect or integrate different cloud serv
 ## Setup your 8x8 SMS API
 
 ![550](../images/fa93954-workato_2.png "workato 2.png")
+
 1. On the next page, type and select “HTTP” in the field under App. Then, select “Send request” as your action and click **Next**.
 
 ![720](../images/acebc76-1.-Setting-up-API.gif "1.-Setting-up-API.gif")
@@ -48,13 +49,12 @@ It is often used by B2B enterprises to connect or integrate different cloud serv
 
 You can find your API Key on your [8x8 Connect](https://connect.8x8.com/messaging/api-keys) Create an API key if empty and then keep the API Key value, here: 5DhZxZRILVPKjXuFWsd7QGZ****\*\*****31n19pYmgAPI  
 
-  
-
 ![1453](../images/471869e-api_key_-_workato.png "api key - workato.png")
 
 ## Configure action
 
 ![504](../images/e74de3e-Screenshot_2021-01-09_at_12.26.14_AM.png "Screenshot 2021-01-09 at 12.26.14 AM.png")
+
 1. **Before clicking Finish**, you will first need to configure your action by clicking on “Configure action”.
 2. Select “POST” as your method and enter the request URL. The request URL can be found at the Customer Portal under Configuration > API Keys.
 

@@ -4,9 +4,9 @@
 
 ### Introduction
 
-There are occasions, where you might want to trigger the webchat yourself. 
+There are occasions, where you might want to trigger the webchat yourself.
 
-For example, an action has happened on your webpage, and you want to trigger a set invitation to bring the customer into your chat or where, you want to create your own button your website, and when a customer clicks on this you launch the webchat 
+For example, an action has happened on your webpage, and you want to trigger a set invitation to bring the customer into your chat or where, you want to create your own button your website, and when a customer clicks on this you launch the webchat
 
 #### Script config
 
@@ -18,16 +18,14 @@ function fn(chatApp) {
 }
 ```
 
-Here is an example of what to set when you want to launch the webchat 
+Here is an example of what to set when you want to launch the webchat
 
 ```javascript
 window.chatApp.startChat()
 
 ```
 
-  
-
-To add this, you need to add it at the bottom of the script in this area here 
+To add this, you need to add it at the bottom of the script in this area here
 
 ```html
 })(  
@@ -37,7 +35,7 @@ To add this, you need to add it at the bottom of the script in this area here
 
 ```
 
-Then, the full script will look like this 
+Then, the full script will look like this
 
 ```html
     <!-- Place this code snippet anywhere you want the button to appear in your page. If no button has been configured in the chat script, it will not show up nor take any space. -->

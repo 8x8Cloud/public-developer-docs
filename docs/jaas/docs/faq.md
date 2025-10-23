@@ -16,7 +16,7 @@ No. We handle that for you, which is one of the advantages of using JaaS vs. you
 
 ## Is there an API available to retrieve dial-in numbers and PIN codes? [dial-in / numbers / sip / pstn]
 
-JaaS provides the APIs to retrieve PIN codes and DIDs. Please see the [dial-in documentation](/jaas/docs/jaas-prefs-dial-in) for more information. 
+JaaS provides the APIs to retrieve PIN codes and DIDs. Please see the [dial-in documentation](/jaas/docs/jaas-prefs-dial-in) for more information.
 
 ```
 **For the Meeting ID - HTTP GET**
@@ -65,9 +65,9 @@ Yes. The same SDKs for meet.jit.si can be used. See the [Mobile SDK documentatio
 
 Yes.  
 
-We can offer customers on *paid plans* access to a completely separate staging (pre-production) environment. This will give you the ability to see and test against all in-development features and JaaS updates before they are rolled out to the JaaS production servers. 
+We can offer customers on *paid plans* access to a completely separate staging (pre-production) environment. This will give you the ability to see and test against all in-development features and JaaS updates before they are rolled out to the JaaS production servers.
 
-If you are already on a pain plan and would like access, please reach out to your 8x8 account manager or our sales team. [cpaas-sales@8x8.com](mailto:cpaas-sales@8x8.com) 
+If you are already on a pain plan and would like access, please reach out to your 8x8 account manager or our sales team. [cpaas-sales@8x8.com](mailto:cpaas-sales@8x8.com)
 
 ## Quick Peek at JaaS in 45 seconds
 
@@ -94,7 +94,7 @@ Spend 10 mins with Matt Gardner (8x8 Director of Developer Relations) in this [v
 **Jitsi** is a set of open-source projects that allows you to easily build and deploy secure videoconferencing solutions. Jitsi is perhaps best known for the Jitsi Meet video conferencing platform, meet.jit.si where a hosted instance of Jitsi Meet provides that community with totally free video conferences. It is the Jitsi Videobridge that powers all of Jitsi's multi-party video capabilities.
 
 * Unless you are only using the Jitsi branded meet.jit.si service you have to build and host Jitsi components yourself.
-	+ A self installed Jitsi does not come with everything out of the box. You will have to install and setup everything to do with call recording, break in/out PSTN calling for example.
+  * A self installed Jitsi does not come with everything out of the box. You will have to install and setup everything to do with call recording, break in/out PSTN calling for example.
 * 8x8 offers no commercial support, SLA or professional services for Self-hosted Jitsi deployments.
 
 **Jitsi As A Service** or **JaaS** is a fully managed hosted enterprise-ready version of Jitsi and it's components. It's a focused video meeting platform that allows developers, organisations, and businesses to easily build and deploy video solutions without having to worry about all the server infrastructure required for real-time video solutions. JaaS is built as part of 8x8's worldwide infrastructure with datacenters in multiple countries, all the servers and software are looked after and maintained by 8x8.
@@ -104,10 +104,10 @@ Spend 10 mins with Matt Gardner (8x8 Director of Developer Relations) in this [v
 ## Why should i consider using JaaS over Jitsi?
 
 * You do not need to host any Jitsi components yourself, making JaaS extremely quick to market with very low ongoing maintenance.
-	+ Your Devops team will thank you!
+  * Your Devops team will thank you!
 * 8x8 provides commercial Support and SLA for JaaS customers.
 * Call recording is all ready to go; as is Transcription, PSTN In/Out, SIP in/out and Streaming services to youTube or RTMP.
-	+ A few features do carry an extra cost, such as streaming and call recording. Learn more about [JaaS pricing here](https://jaas.8x8.vc/#/pricing).
+  * A few features do carry an extra cost, such as streaming and call recording. Learn more about [JaaS pricing here](https://jaas.8x8.vc/#/pricing).
 * No dev ops and no servers to worry about + GDPR, HIPAA, Industry leading SLA, webhooks, white-label branding are just some of the advantages of JaaS over a simple self-install of Jitsi.
 * You can check our [comparison chart here](https://jaas.8x8.vc/#/comparison).
 * [Meetings at your service!](https://www.8x8.com/products/apis/video)
@@ -130,7 +130,7 @@ In addition to the sales & solution engineering teams, the 8x8 support team is a
 You can cancel your subscription by going to the JaaS Console and visiting the [Billing](https://jaas.8x8.vc/#/billing) Section. Under that section there is a **Cancel Subscription** button that you can use.
 
 ![](../images/cdb2fb7-Screenshot_2024-06-28_at_9.29.55_AM.png)
-When you cancel your JaaS account, the cancellation will be processed at the end of the current billing cycle. However, you can still log in and access your data until the end of the current billing cycle. During this time, you have the option to revert the cancellation if you change your mind. 
+When you cancel your JaaS account, the cancellation will be processed at the end of the current billing cycle. However, you can still log in and access your data until the end of the current billing cycle. During this time, you have the option to revert the cancellation if you change your mind.
 
 If you do not revert the cancellation by the end of the billing cycle, your account and data will be permanently deleted. This approach ensures you get full value for your payment, as you pay at the beginning of the billing cycle and retain access and services until it concludes.
 
@@ -140,7 +140,7 @@ Yes, absolutely!
 
 This is an important question and one that a lot of companies wish they could answer as confidently as the JaaS team. We have a highly available, massively scaled, reliable global infrastructure which is run and maintained by some of the best real-time communications engineers in the world.
 
-This has made it even more important for us to focus on nurturing the relationships that we have with our customers and ensuring we continue to build strong partnerships as we aim to be a part of the journey for years to come. 
+This has made it even more important for us to focus on nurturing the relationships that we have with our customers and ensuring we continue to build strong partnerships as we aim to be a part of the journey for years to come.
 
 ## Where can i find information?
 
@@ -177,7 +177,7 @@ You can change the base URL for your meeting invites from the Branding section o
 
 #### lib-jitsi-meet vs IFrame API
 
-The difference between the iFrame and the **lib-Jitsi-Meet** library is not really one of features, the iFrame is all built on top of our lib-jitsi-meet library. The main consideration here as to which one you use is more about how much control over the UI you want in addition to how you build and maintain your own product. 
+The difference between the iFrame and the **lib-Jitsi-Meet** library is not really one of features, the iFrame is all built on top of our lib-jitsi-meet library. The main consideration here as to which one you use is more about how much control over the UI you want in addition to how you build and maintain your own product.
 
 **lib-Jitsi-meet**, often referred to as just '**LJM**' is a lower level API, it is the core library used by Jitsi Meet (and our iFrame API) which implements all the signalling, codec management and takes care of the WebRTC and real time media. This gives you a lot of flexibility and because it does not include any UI elements you have 100% control over what your users will see, how the video and buttons are rendered and what inUI interactions you present to them in your own applications.  
 
@@ -213,19 +213,19 @@ Find answers to questions about using and managing meetings in Jitsi.
 
 Yes. JaaS can send the audio captured from all participants in the room to an external speech-to-text service. Currently, only the Google Cloud Speech-to-Text API is supported. This service is charged separately.
 
-> 
+>
 > Note: All subscriptions support transcriptions as long as there is a valid credit card attached and the JWT token used as moderator has transcription enabled - see [API keys](/jaas/docs/jaas-console-api-keys).
-> 
-> 
-> 
+>
+>
+>
 
-Close Captioning can be enabled by each particpant whilst in the meeting. 
+Close Captioning can be enabled by each particpant whilst in the meeting.
 
 The transcript file is temporarily stored in the 8x8 cloud for 24 hours. At end of the meeting the transcript of the meeeting will be passed back using the TRANSCRIPTION_UPLOADED webhook event, which  
 
 includes a preAuthenicatedLink to the location of that file to eanble you to downloaded it.
 
-Once downloaded you can then store the transcript within your own data storage, for as long as you like. 
+Once downloaded you can then store the transcript within your own data storage, for as long as you like.
 
 The transcript is deleted from the 8x8 cloud when the 24 hours expires. Once deleted, it is impossible to restore and it absolutely not stored on any 8x8 server, anywhere.
 
@@ -251,16 +251,16 @@ At the moment, Whisper only supports English.
 
 Transcriptions can be programatically enabled by using this api command: [https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe-commands#setsubtitles](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe-commands#setsubtitles). Once you turn on the transcription through toggleSubtitles, you will start receiving frontend and backend events with transcription chunks.
 
-> 
-> 
-> > 
-> >  Note: When only one participant uses the toggleSubtitle command and that participant leaves the meeting, the new chunks are not sent. To continuously get the transcription, use the toggleSubtitle command from each participant.
-> > 
-> > 
-> > 
-> 
-> 
-> 
+>
+>
+> >
+> > Note: When only one participant uses the toggleSubtitle command and that participant leaves the meeting, the new chunks are not sent. To continuously get the transcription, use the toggleSubtitle command from each participant.
+> >
+> >
+> >
+>
+>
+>
 
 #### Does JaaS support a Waiting Lobby? [lobby / knocking / participant access control]
 
@@ -342,7 +342,7 @@ Alternatively users can select to store via Dropbox, only if enabled.
 
 Learn more about the [RECORDING_ENDED and RECORDING_UPLOADED webhooks here](/jaas/docs/webhooks-payload#recording_ended)
 
-Once downloaded you can store the call recording within your own data storage, for as long as you like. 
+Once downloaded you can store the call recording within your own data storage, for as long as you like.
 
 The call recording is deleted from the 8x8 cloud when the 24 hours expires. Once deleted, it is impossible to restore and it absolutely not stored on any 8x8 server, anywhere.
 
@@ -350,7 +350,7 @@ The call recording is deleted from the 8x8 cloud when the 24 hours expires. Once
 
 The [iFrame API](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe#creating-the-jitsi-meet-api-object) allows you to override the settings that are defined by [interface_config.js](https://github.com/jitsi/jitsi-meet/blob/master/interface_config.js) and [config.js](https://github.com/jitsi/jitsi-meet/blob/master/config.js). It also allows you to add jitsi actions to external buttons or processes (e.g. add a custom mute/unmute or chat button).
 
-Use the [lib-jitsi-meet API](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-ljm-api) for deeper, lower-level integrations — especially for clients coming from open-source. **Please note: we do not recommend this option, unless you have tried the IFrame and is not suitable for you**. It is harder to maintain in the longer term since it is more exposed to potential changes on lib-jitsi-meet.js hosted by JaaS. 
+Use the [lib-jitsi-meet API](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-ljm-api) for deeper, lower-level integrations — especially for clients coming from open-source. **Please note: we do not recommend this option, unless you have tried the IFrame and is not suitable for you**. It is harder to maintain in the longer term since it is more exposed to potential changes on lib-jitsi-meet.js hosted by JaaS.
 
 #### Is it possible to change the name of the meeting room inside the conference? [customisation / front-end / interface / name / subject]
 
@@ -368,7 +368,7 @@ You can also force it through the [config.js](https://github.com/jitsi/jitsi-mee
 
 #### Is it possible to remove the timer for the meeting? [customisation / front-end / interface / timer / clock]
 
-Yes. You can force it through the [config.js](https://github.com/jitsi/jitsi-meet/blob/1ab0f1993a682d315b9c416ccd955390202c7882/config.js#L637). You’ll find there the following setting: 
+Yes. You can force it through the [config.js](https://github.com/jitsi/jitsi-meet/blob/1ab0f1993a682d315b9c416ccd955390202c7882/config.js#L637). You’ll find there the following setting:
 
 ```
 hideConferenceTimer: true
@@ -382,7 +382,7 @@ The default camera resolution is 720p and JaaS users can increase it to up to 10
 
 To force the number of tiles showing up, you can change the number of columns available through [interface_config.js](https://github.com/jitsi/jitsi-meet/blob/f69a31d9c6109c6604de4f445d2e6412b63ccb62/interface_config.js#L241). By default, the number goes up to 5x5 but it can secretly be forced to go up to 7x5.
 
-#### Do I need to wait for a moderator? I see a dialog that tells me the conference has not started because no moderators have arrived yet.
+#### Do I need to wait for a moderator? I see a dialog that tells me the conference has not started because no moderators have arrived yet
 
 If you are seeing this message, you are most likely trying to create a meeting outside your AppId. Please make sure you prefix your room names with the AppId available in your JaaS console account. You can find your AppId in the [API keys](/jaas/docs/jaas-console-api-keys) section of the JaaS console.
 
@@ -444,9 +444,9 @@ If you you are not yet familiar with using configOverWrite and customising your 
 * The Breakout Room names are currently not editable.
 * Call recording *currently*, only works in the main room. Individual breakout rooms cannot be recorded.
 * In a password-protected meeting, participants will need to re-enter the password to get back into the main room.
-	+ Breakout Rooms can be individually password-protected
+  * Breakout Rooms can be individually password-protected
 * A Moderator can call all particpants back to the main room just by closing the breakout room.
-	+ To close a breakout room the Moderator cannot be in that room, i.e. the Moderator needs to be in a different breakout room or the main room.
+  * To close a breakout room the Moderator cannot be in that room, i.e. the Moderator needs to be in a different breakout room or the main room.
 * For the Moderator to perform an action on a participant (move/kick/mute) they must be in the same room as that participant.
 * It is possible to create Breakout rooms before other participants join the meeting, but participants can only be assigned after they join the meeting. This is because (amongst other things), guest users don’t exist in the Jitsi ecosystem until they join the meeting (since there’s no registration of any kind), so there’s no way of assigning them.
 
@@ -483,10 +483,10 @@ For a complete list of all possible values, please refer to :
 [interface_config.js](https://github.com/jitsi/jitsi-meet/blob/master/interface_config.js) for possible interfaceConfigOverwrite object values.
 
 > 📘 **Note**
-> 
+>
 > Note that not all options found in the two config files are overwritable.
-> 
-> 
+>
+>
 
 Please see below a snippet on how to use the config and interface config overwrites in your application:
 
@@ -629,7 +629,7 @@ If you have a use case that, absolutely 100%, requires an on premise installatio
 
 #### What data is stored on JaaS servers?
 
-In many respects Jitsi meetings are simply private by design. All Jitsi/JaaS meeting rooms are ephemeral: that is to say that they only exist whilst the meeting is live. 
+In many respects Jitsi meetings are simply private by design. All Jitsi/JaaS meeting rooms are ephemeral: that is to say that they only exist whilst the meeting is live.
 
 The room is created when the first participant joins and is completely destroyed when the last participant leaves. If someone joins the same room again, a brand new meeting room is created that uses the same name but there is absolutely no connection to any previous meeting that might have been held with the same name.
 
@@ -657,22 +657,22 @@ Here is a good overview of how Jitsi/JaaS is working for both 1:1 and 1:N calls 
 2. via the Jitsi Videobridge (JVB).
 
 > 📘 **Note**
-> 
+>
 > The operation of these rooms are completely transparent to the user.
-> 
-> 
+>
+>
 
 ### Peer-to-Peer (P2P)
 
-P2P mode is only used for 1:1 meetings. In this case, audio and video are encrypted using DTLS-SRTP all the way from the sender to the receiver, even if they traverse network components like TURN servers. It means it’s actually fully End to End Encrypted (E2EE) between those two participants. 
+P2P mode is only used for 1:1 meetings. In this case, audio and video are encrypted using DTLS-SRTP all the way from the sender to the receiver, even if they traverse network components like TURN servers. It means it’s actually fully End to End Encrypted (E2EE) between those two participants.
 
 > 📘 **Note**
-> 
+>
 > Optionally, you can disable P2P programmatically and force even 1:1 calls to go via the JVB should you wish. In that case 1:1 calls would then operate the same as the 1:N calls described below.
-> 
+>
 > You need to be aware that if you start a call recording on a 1-1 call then the call will automatically become a 1:N call, as described below.
-> 
-> 
+>
+>
 
 ### Multiparty calls, 1:N
 
@@ -682,7 +682,7 @@ This latter form of encryption for multi-party meetings is sometimes what other 
 
 All types of JaaS endpoints support the above scenarios by default.
 
-### E2EE for 1:N calls!
+### E2EE for 1:N calls
 
 First of all, “True” End to End Encryption (E2EE) is not enabled by default for 1:N calls. This is because most customers also want to support PSTN dial-in, call recording and similar features which by there own nature cannot be full E2EE. True E2EE can be easily enabled, that said Jitsi/JaaS offers *very strong protection* even if you don’t explicitly turn on E2EE.
 
@@ -691,14 +691,14 @@ When you explicitly enable the Jitsi E2EE feature it works in addition to DTLS-S
 It is very important to note that when packets are also E2EE, this second layer of encryption is *never* removed (nor can it be) at any point until it reaches the destination endpoint.
 
 > 📘 **Note**
-> 
+>
 > This extra layer of E2EE we currently only support on desktop endpoints, it will work in any browser that has support for WebRTC insertable streams. Today that means any browser which is based on Chromium 83 and above, i.e. Google Chrome, Microsoft Edge, Brave and Opera. The actual W3 spec can be found [here](https://www.w3.org/2019/09/18-mediaprocessing-harald-insertable-media-processing.pdf).
-> 
+>
 > Because of the extra resources required to support E2EE we currently also limit a true E2EE call to 20 participants.
-> 
+>
 > Because of how true E2EE works, this only works for 'on-net' meetings. i.e. If you add a PSTN participant or wish to record the call you cannot have true E2EE enabled for that call. This is true for any solution, not just Jitsi/JaaS.
-> 
-> 
+>
+>
 
 ### Summary
 
@@ -711,10 +711,10 @@ For some extra history, alongside the W3 spec for this is the IETF’s PERC work
 … and because Jitsi’s code is availability publicly as it's built from open-source, it ensures that claims of E2E encryption can be vetted and validated by any independent party. 🙂
 
 > 📘 **Note**
-> 
+>
 > The Jitsi & 8x8 team obviously want to offer this same extra/True E2EE ability for Mobile Jitsi/JaaS endpoints as well. We are actively working on this and hope to have support for it in production in the near future.
-> 
-> 
+>
+>
 
 In addition to the call encryption available in Jitsi itself we also have plenty of documentation available to cover 8x8 organisational practices, T&C, GDPR, HIPAA etc. etc.
 
@@ -732,7 +732,7 @@ Get information on the pricing plans and cost structure of JaaS.
 
 #### How does JaaS identify our Monthly Active Users (MAUs)? [billing / accounting / MAU]
 
-Each MAU represents a participant who has attended at least one meeting with at least another participant during your monthly billing cycle. To identify a MAU, JaaS installs an identifier on the local storage of a user's meeting device (e.g., laptop, tablet, phone). 
+Each MAU represents a participant who has attended at least one meeting with at least another participant during your monthly billing cycle. To identify a MAU, JaaS installs an identifier on the local storage of a user's meeting device (e.g., laptop, tablet, phone).
 
 For example, if you invite three persons to join the meeting, then this will add three MAUs as usage data to your account if each participant joins from a single device. However, if someone joins from a laptop, as well as a phone, then the usage recorded will increase to four MAUs, since we're counting both devices for that same user. In this example, you can have up to nine MAUs recorded for three users if they join from multiple devices.
 
@@ -752,7 +752,7 @@ Currently, the JaaS billing platform only supports payment via credit card.
 
 #### If we don't use all of our allocated users in one month, do we carry our unused amount over to the next month?
 
-No. There is no balance to carry forward. Customers pay for access to the JaaS service regardless of the number of allocated MAUs used during a month. 
+No. There is no balance to carry forward. Customers pay for access to the JaaS service regardless of the number of allocated MAUs used during a month.
 
 #### What happens if we go over the user count included in my plan?
 
@@ -760,7 +760,7 @@ You will be charged the overage rate of $0.99 per MAU. We recommend that you mon
 
 #### If I upgrade to a higher plan, does the change take effect immediately? What would be the result of the upgrade?
 
-Upgrading your plan takes effect immediately; once you get the upgrade confirmation, your account will have moved to the new plan. 
+Upgrading your plan takes effect immediately; once you get the upgrade confirmation, your account will have moved to the new plan.
 
 All JaaS plans are precomits, meaning that you pay the cost for the subscription upfront. Any additional charges or corrections will appear on your next invoice along with charges for the next month's subscription.
 
@@ -819,7 +819,7 @@ The number of users making calls is a factor that most businesses have some insi
 
 ### Summary
 
-JaaS is billed on a per MAU basis. 
+JaaS is billed on a per MAU basis.
 
 MAU stands for Monthly Active User.
 
@@ -862,7 +862,7 @@ After upgrading, you will not be billed immediately, but charges will be applied
 
 If you upgrade in the middle of your billing cycle, the cost of the new subscription plan will be prorated.
 
-### Example Scenario:
+### Example Scenario
 
 Customer is on a JaaS Basic plan with an allocation of 300 MAU/month and a billing cycle of March 8th - April 8th.  
 
@@ -902,27 +902,28 @@ For these examples, lets assume a rate of $0.25. Let's look at two extremes, a l
 
 * Alice is a user of your app, which is using JaaS. She works in the finance department at her company.
 * Alice makes 5 calls a day from her laptop, each call has 4 participants, including herself.
-	+ Each call is to other users inside the company. They all use your app/JaaS. In total, 100 calls per working month.
-	+ JaaS does not care how many minutes or hours those calls are.
+  * Each call is to other users inside the company. They all use your app/JaaS. In total, 100 calls per working month.
+  * JaaS does not care how many minutes or hours those calls are.
 * The monthly cost for Alice wold be just 1 MAU at only $0.25, despite all the calls she made.  
 
 This is because all the other people on all her calls are also users of your same app, each is therefore only counted once per month.
-	+ Each of those 4 persons are counted and charged at 1 MAU but its not on top of each other. i.e.
-		- Alice - 0.25
-		- Person 2 - 0.25
-		- Person 3 - 0.25
-		- Person 4 - 0.25
-	+ In the example we are only looking at Alices calls and cost.
+  + Each of those 4 persons are counted and charged at 1 MAU but its not on top of each other. i.e.
+    - Alice - 0.25
+    - Person 2 - 0.25
+    - Person 3 - 0.25
+    - Person 4 - 0.25
+  + In the example we are only looking at Alices calls and cost.
+
 * Alice could be classified as a light user, in terms of cost.
 
 ### Bob
 
 * Bob is another user at the same company, again using your app which is using JaaS. Bob works in the sales team.
 * Like Alice, Bob makes 5 calls a day, he also has 4 participants on each call including himself.
-	+ 60% of his monthly calls (60) are with internal users only.
-	+ Of the remaining 40 calls, each have 2 external customers (‘guests’) on the calls.
-	+ Half (20) of those calls are with his regular 5 customers.
-	+ JaaS does not care how many minutes or hours those calls are.
+  * 60% of his monthly calls (60) are with internal users only.
+  * Of the remaining 40 calls, each have 2 external customers (‘guests’) on the calls.
+  * Half (20) of those calls are with his regular 5 customers.
+  * JaaS does not care how many minutes or hours those calls are.
 * For all 60 internal calls per month, Bob is counted as only 1 MAU at $0.25. There are no additional MAU counts for other users added to bobs user cost.
 * For the 20 calls with his 5 regular customers (1 call each week per customer), the same 2 people from each customer attends these weekly calls. - counted as only 10 MAU
 * The last 20 calls are each with new potential customers, each call has 2 new people from the customer + Bob & his colleague - counted as 40 MAU, i.e. just the 2 new people per customer call.
@@ -942,11 +943,11 @@ Discover how Jitsi integrates with other tools and platforms.
 
 Yes. In addition to YouTube, you can define a custom RTMP streaming server. Learn more about [using a custom RTMP streaming server](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe-commands#startrecording).
 
-> 
+>
 > Note: Any plan can support recording and RTMP streaming as long as you have a valid credit card added on the account.
-> 
-> 
-> 
+>
+>
+>
 
 #### Is there integration with Slack?
 
@@ -959,6 +960,7 @@ By default, this bot creates meetings in the public Jitsi service at [https://me
 /jitsi server [https://example.com/mymeetingpath](https://example.com/mymeetingpath)
 
 this command to set up the server to point at the URL that you use for your JaaS deployment will then let the bot create meeting links for JaaS.
+
 ```
 
 The Jitsi Slack integration app is maintained by the Jitsi open source development team and operated by 8x8's JaaS team. For more information about this integration, see:  [https://jitsi.org/slack/](https://jitsi.org/slack/)

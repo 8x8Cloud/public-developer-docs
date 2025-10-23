@@ -1,10 +1,10 @@
 # Channel
 
 > ❗️ **PLEASE NOTE - This API is going to be deprecated on 30th September 2023, it will no longer work after this date. Please use our [Chat Gateway](/actions-events/docs/chat-gateway) which offers all of the Chat API's functionalities as well as additional features.**
-> 
-> 
+>
+>
 
-After creating a webhook you can then create a channel. The channel contains a webhook that passes the outbound messages and notifications. 
+After creating a webhook you can then create a channel. The channel contains a webhook that passes the outbound messages and notifications.
 
 The channel has a **[chat queue](https://support.8x8.com/cloud-contact-center/virtual-contact-center/administrators/how-to-create-inbound-queue-8x8-contact-center)** (ideally with an agent assigned), for routed inbound conversations.
 

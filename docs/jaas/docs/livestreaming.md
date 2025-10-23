@@ -23,6 +23,7 @@ These are the requirements to start using livestreaming:
     },
 
 ```
+
 * If you plan to stream to YouTube, you will need a YouTube account in order to start a Livestream on YouTube to send the RTMP stream to. If you are planning to stream on another platform, ensure that it supports an RTMP stream and has a stream key.
 
 ## Demo Video
@@ -43,7 +44,6 @@ To access the livestream menu within a JaaS call, go to the **Triple Dot Menu** 
 
 ![](../images/eb4ea0d-Screenshot_2024-06-18_at_11.03.38_AM.png)
   
-
 Once you open this menu item you should see this box. If you see the warning below, this is due to your YouTube/Google Account not having live streaming setup. You can either select a different account with live streaming set up or you can use the Live Stream Key covered in the section **Option 1) Streaming via Stream Key**.
 
 ![](../images/f66e2d2-Screenshot_2024-06-18_at_11.19.00_AM.png)
@@ -51,7 +51,6 @@ If you do have a Live stream setup you should see the box populated as below whe
 
 ![](../images/aec10fe-image.png)
   
-
 Regardless of whether you choose between a live stream or a Live stream key, the next sections will cover what you will need
 
 ## Streaming to YouTube
@@ -64,7 +63,7 @@ You can navigate to the **Stream** option to start a new stream immediately. Alt
 
 ![](../images/1ade968-image.png)
 
-Regardless once it is time to start your stream, you should see the page below, select yout stream settings. Either **create a new stream key** or **select an existing stream key**. 
+Regardless once it is time to start your stream, you should see the page below, select yout stream settings. Either **create a new stream key** or **select an existing stream key**.
 
 Ensure that you **copy your Stream Key** from this page.
 
@@ -87,7 +86,7 @@ If your stream is public, this stream should be visible from your YouTube channe
 
 ### Streaming to a Custom RTMP Endpoint (Twitch)
 
-This section will cover how it is possible to stream to a custom RTMP endpoint by using Twitch as an example. 
+This section will cover how it is possible to stream to a custom RTMP endpoint by using Twitch as an example.
 
 ## Prerequisites
 
@@ -106,6 +105,7 @@ These are the requirements to start using livestreaming:
     },
 
 ```
+
 * An **RTMP Endpoint**. If you plan to stream to Twitch you can follow the steps below to obtain your Twitch RTMP endpoint.
 
 ## Demo Video
@@ -129,12 +129,11 @@ First access the livestreaming menu from **Triple Dot Menu > Start Live Stream**
 
 ![](../images/3c92010-image.png)
   
-
-Now in the Live stream key, instead of a YouTube stream key as in the previous section, we will enter an **RTMP endpoint**. 
+Now in the Live stream key, instead of a YouTube stream key as in the previous section, we will enter an **RTMP endpoint**.
 
 Since we are using Twitch as an example, you can obtain the RTMP endpoint by visiting their [page](https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US) to find out the RTMP endpoint closest to you for the best performance. It should follow a format similar to **rtmp://{region}.contribute.live-video.net/app/{stream_key}**
 
-For **{region}** simply select the closest region on the page above. The **{stream_key}** can be obtained from Twitch under your **Creator Dashboard > Settings > Stream > Primary Stream Key**. 
+For **{region}** simply select the closest region on the page above. The **{stream_key}** can be obtained from Twitch under your **Creator Dashboard > Settings > Stream > Primary Stream Key**.
 
 ![](../images/6478422-image.png)
 
@@ -143,14 +142,13 @@ For **{region}** simply select the closest region on the page above. The **{stre
 Once you have the full RTMP endpoint simply enter it into the **Live stream key** field and hit **Start live stream**to begin the stream.
 
 > 📘 **Warnings**
-> 
+>
 > There may be some warnings displayed regarding the **Live Stream key** which you can ignore. It should work with a valid RTMP endpoint provided.
-> 
-> 
+>
+>
 
 ![](../images/54bcf1f-image.png)
   
-
 Afterwards your Livestream should be available on your Twitch page.
 
 ![](../images/0ff02e5-image.png)

@@ -26,7 +26,7 @@ A participant communicates in the conversation or is the one who sends and recei
 
 ## Routing Option
 
-A routing entity is a resource that defines the rules through which a conversation is routed to an agent. The agent can join the conversation and address the user's inquiry. 
+A routing entity is a resource that defines the rules through which a conversation is routed to an agent. The agent can join the conversation and address the user's inquiry.
 
 ## Attachment
 

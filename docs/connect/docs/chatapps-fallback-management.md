@@ -15,8 +15,8 @@ Fallback configurations can be set at the subaccount level (contact your account
 To define a fallback sequence, include the `channels` array in your message payload. Each channel object can specify:
 
 - **`channel`**: The messaging channel (e.g., `WhatsApp`, `Viber`, `SMS`).
-- **`fallbackAfter`** _(optional)_: Time in seconds to wait before triggering the next channel.
-- **`successStatus`** _(optional)_: The message status considered as successful delivery (`Accepted`, `Sent`, `Delivered`, `Read`).
+- **`fallbackAfter`** *(optional)*: Time in seconds to wait before triggering the next channel.
+- **`successStatus`** *(optional)*: The message status considered as successful delivery (`Accepted`, `Sent`, `Delivered`, `Read`).
 
 Example:
 
@@ -152,8 +152,8 @@ In this flow:
 - **Send WhatsApp Utility Template**: Dispatch the message via WhatsApp with a TTL of 10 minutes.
 - **Delivered within TTL?**: Check if the message was delivered within the TTL.
 
-	- **Yes**: If delivered, end the process.
-	- **No**: If not delivered, proceed to wait until TTL expires.
+  - **Yes**: If delivered, end the process.
+  - **No**: If not delivered, proceed to wait until TTL expires.
 - **Wait until TTL expires**: Hold until the TTL period concludes.
 - **Trigger SMS Fallback**: Send the message via SMS as a fallback.
 - **End**: Conclude the process.

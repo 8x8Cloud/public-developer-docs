@@ -2,7 +2,7 @@
 
 ## PSTN Dial In
 
-Jaas has capabilities for joining meetings using PSTN/Telephony (Telephone Dialing) audio. 
+Jaas has capabilities for joining meetings using PSTN/Telephony (Telephone Dialing) audio.
 
 ## Dial In from a JaaS Room
 
@@ -48,10 +48,9 @@ The **id** from the response is the **meeting's pin code**. You can do this upfr
 
 ## Retrieving DID List via API
 
-The list of DID can be fetched using this API: [[https://8x8.vc/v1/_jaas/vmms-conference-mapper/access/v1/dids](https://8x8.vc/v1/_jaas/vmms-conference-mapper/access/v1/dids)](https://8x8.vc/v1/_jaas/vmms-conference-mapper/access/v1/dids) We recommend using the API for fetching the DID for each invite, because we sometimes add new numbers in new countries.
+The list of DID can be fetched using this API: [[https://8x8.vc/v1/_jaas/vmms-conference-mapper/access/v1/dids](https://8x8.vc/v1/_jaas/vmms-conference-mapper/access/v1/dids)](<https://8x8.vc/v1/_jaas/vmms-conference-mapper/access/v1/dids>) We recommend using the API for fetching the DID for each invite, because we sometimes add new numbers in new countries.
 
 The API response will be a list of DIDs which can be shared to the person that should dial in.
-
 
 ```json
 [
@@ -91,11 +90,12 @@ There are a few prerequisites before using this feature:
 }
 
 ```
+
 * Add this line of code to your configuration to enable SIP Dial Out:
 
 ```javascript
 interfaceConfigOverwrite: {
-	ENABLE_DIAL_OUT: true
+  ENABLE_DIAL_OUT: true
 },
 
 ```
@@ -104,7 +104,7 @@ interfaceConfigOverwrite: {
 
 Simply enter a JaaS room and navigate to the **Triple Dot Menu > Invite People**
 
-Afterwards enter the number that you would like to dial in the **Invite your Contacts** box. 
+Afterwards enter the number that you would like to dial in the **Invite your Contacts** box.
 
 ![](../images/1a280a4-PSTN_Dial_Out.gif)
 This should dial the number and when the callee picks up, they will be added in audio-only mode to the JaaS Room.

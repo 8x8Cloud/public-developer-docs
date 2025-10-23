@@ -239,9 +239,6 @@ Session status indicates if a call is successfully accepted & created or not cre
 
 ### Status Code  and Status Message
 
-
-
-
 | Status Code | Message |
 | --- | --- |
 | 1 | Created  |
@@ -265,8 +262,6 @@ Session status indicates if a call is successfully accepted & created or not cre
 | -1018 | "Invalid Callflow: " or<br>"Execute Scenario cannot be processed together with other actions |
 | -1019 | Invalid Callflow Content: scenarioName is null or empty |
 | -9999 | An unknown error has occurred. |
-
-
 
 ***
 

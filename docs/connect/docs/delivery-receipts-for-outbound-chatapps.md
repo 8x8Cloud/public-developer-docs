@@ -26,16 +26,12 @@ If the chat app doesn't provide a read receipt promptly, either because the user
 
 Request body description
 
-
-
-
 | Parameter name | Parameter type | Description |
 | --- | --- | --- |
 | namespace | string | A generic namespace for incoming webhook.<br>Equal to `ChatApps` for delivery receipts. |
 | eventType | string | Webhook type.<br>Equals to `outbound_message_status_changed` for delivery receipts |
 | description | string | Human-readable description of the incoming event |
 | payload | object | Delivery receipt information, see below |
-
 
 Payload object description
 

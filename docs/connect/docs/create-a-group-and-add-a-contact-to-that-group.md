@@ -2,10 +2,10 @@
 
 > 👍
 > -
-> 
+>
 > Please see [Create a group](/connect/reference/create-group) for the full API reference
-> 
-> 
+>
+>
 
 [Create a group](/connect/reference/create-group)
 
@@ -46,7 +46,7 @@ POST **`https://contacts.8x8.com/api/v1/accounts/accountId/groups/{groupId}/cont
 
 Groupid is the id of the group you just created. For this example **8334** is the group id.  
 
-When you send a request, it should be an array of contact id like the one below: 
+When you send a request, it should be an array of contact id like the one below:
 
 ```json
 {

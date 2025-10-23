@@ -23,7 +23,6 @@ The SMS API enables 8x8 customers to both send and receive SMS messages through 
 - **Activity Retrieval:**  
   Retrieve detailed SMS activity logs for analysis and data reconciliation.
 
-
 > 📘 Downloading SMS APIs (OAS File)
 >
 > You can download the OAS File - **[Click Here](https://github.com/8x8Cloud/public-developer-docs/blob/master/docs_oas/connect/sms_api.json)**  

@@ -1,12 +1,12 @@
 # LINE Official Notification
 
 > 🚧 **LINE Official Notification requires your templates to be approved by LINE team before they can be sent. Reach out to [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) if you wish to submit new templates**
-> 
-> 
+>
+>
 
 > 👍 **LON uses [a different endpoint](https://chatapps.8x8.com/api/v1/subaccounts/%7BsubAccountId%7D/lon) compared to other Channels. Refer to [LON Send API](/connect/reference/send-lon-message) for the full API reference.**
-> 
-> 
+>
+>
 
 ### Sending an Event reminder notification
 

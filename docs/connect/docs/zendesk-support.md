@@ -2,7 +2,7 @@
 
 ## Zendesk Support
 
-[Zendesk](https://www.zendesk.com/) is a customer support system for tracking, prioritizing, and solving support tickets. 
+[Zendesk](https://www.zendesk.com/) is a customer support system for tracking, prioritizing, and solving support tickets.
 
 By integrating 8x8 Chat Apps product into Zendesk Support you get the best on both products, a simple and unique Chat Apps API with no deployment needed, as well as the best customer service front end, with advanced configurations available.
 
@@ -35,7 +35,7 @@ To see the integration in action, please view this video.
 
 ### Tag Setup
 
-In order to filter by the tickets sent by 8x8, you will need to create a **Zendesk Tag**. To create the tag, you can assign a new tag by clicking the "Tags" field of an existing ticket. This can be any ticket in the system, but you will need to assign it the tag you wish to use to create it in the system. The tag can be removed from the ticket afterwards. 
+In order to filter by the tickets sent by 8x8, you will need to create a **Zendesk Tag**. To create the tag, you can assign a new tag by clicking the "Tags" field of an existing ticket. This can be any ticket in the system, but you will need to assign it the tag you wish to use to create it in the system. The tag can be removed from the ticket afterwards.
 
 The tag can be any value, however for this tutorial we are assuming you are using a tag called **ChatApps**. If you choose to use a different value, please note that the tutorial will show ChatApps where your tag would be instead.
 
@@ -58,9 +58,9 @@ Go to **Workspaces** > **Agent Tools** > **Views**. Click on **Add View**
 Create the queue with the following conditions.
 
 * **Tickets must meet all of these conditions to appear in the view**
-	+ Status Category - Less Than - Solved
+  * Status Category - Less Than - Solved
 * **Tickets can meet any of these conditions to appear in the view**
-	+ Tags - Contains at Least one of the Following - ChatApps
+  * Tags - Contains at Least one of the Following - ChatApps
 
 ![](../images/f4765bf-image.png)
 
@@ -81,6 +81,7 @@ In the next screen, set the following fields:
 * **Endpoint URL:** [https://api.wavecell.com/webhook/zendesk/](https://api.wavecell.com/webhook/zendesk/)<Your 8x8 Subaccount>?accessKey= srCUHbcYumHyxLxWmQjYfKWeg0qiRsEXfTHz640tClF032XxFpgnyzge7O  
 
 **Please note you will need to substitute your 8x8 subaccount in the URL.**
+
 * **Request Method:** POST
 * **Request format:** JSON
 * **Authentication:** None
@@ -103,43 +104,43 @@ Configure the new trigger as follows:
 * **Description:** Any Value
 * **Category:** Add Category
 * **Category Name:** Any Value (We use Initial Category)
-* **Conditions:** 
-	+ Meet ALL of the following conditions:
-	+ Ticket > Tags - Contains at least one of the following - ChatApps
-	+ Ticket > Comment - Is - Public
+* **Conditions:**
+  * Meet ALL of the following conditions:
+  * Ticket > Tags - Contains at least one of the following - ChatApps
+  * Ticket > Comment - Is - Public
 * **Actions:**
-	+ Notify by > Active Webhook > (Choose the Webhook you had previously created)
-	+ **Endpoint:** https://api.wavecell.com/webhook/zendesk/<Insert your 8x8 Subaccount here>?accessKey=srCUHbcYumHyxLxWmQjYfKWeg0qiRsEXfTHz640tClF032XxFpgnyzge7O.  
-	
-	**Please note you will need to substitute your subaccount in the URL.**
-	+ **JSON Body**
-	+ ```
-	{
-	  "event": "newComment",
-	  "ticketUrl": "{{ticket.link}}",
-	  "ticketId": "{{ticket.id}}",
-	  "ticketStatus": "{{ticket.status}}", 
-	  "ticketExternalId": "{{ticket.external_id}}", 
-	  "createdAt": "{{ticket.created_at_with_timestamp}}", 
-	  "updatedAt": "{{ticket.updated_at_with_timestamp}}", 
-	  "lastPublicComment": {
-	    "authorName": "{{ticket.latest_public_comment.author.name}}",
-	    "authorId": "{{ticket.latest_public_comment.author.id}}",
-	    "authorExternalId": "{{ticket.latest_public_comment.author.external_id}}",
-	    "createdAt": "{{ticket.latest_public_comment.created_at_with_time}}",
-	    "text": "{{ticket.latest_public_comment.value}}", 
-	    "attachments":[
-	      {% for attachment in ticket.latest_public_comment.attachments %}
-	      { "fileName": "{{attachment.filename}}", 
-	      "url": "{{attachment.url}}" } 
-	      {% if forloop.last == false %},
-	      {% endif %}
-	      {% endfor %} 
-	    ]
-	  } 
-	}
-	
-	```
+  * Notify by > Active Webhook > (Choose the Webhook you had previously created)
+  * **Endpoint:** <https://api.wavecell.com/webhook/zendesk/><Insert your 8x8 Subaccount here>?accessKey=srCUHbcYumHyxLxWmQjYfKWeg0qiRsEXfTHz640tClF032XxFpgnyzge7O.  
+  
+  **Please note you will need to substitute your subaccount in the URL.**
+  * **JSON Body**
+  * ```
+  {
+    "event": "newComment",
+    "ticketUrl": "{{ticket.link}}",
+    "ticketId": "{{ticket.id}}",
+    "ticketStatus": "{{ticket.status}}",
+    "ticketExternalId": "{{ticket.external_id}}",
+    "createdAt": "{{ticket.created_at_with_timestamp}}",
+    "updatedAt": "{{ticket.updated_at_with_timestamp}}",
+    "lastPublicComment": {
+      "authorName": "{{ticket.latest_public_comment.author.name}}",
+      "authorId": "{{ticket.latest_public_comment.author.id}}",
+      "authorExternalId": "{{ticket.latest_public_comment.author.external_id}}",
+      "createdAt": "{{ticket.latest_public_comment.created_at_with_time}}",
+      "text": "{{ticket.latest_public_comment.value}}",
+      "attachments":[
+        {% for attachment in ticket.latest_public_comment.attachments %}
+        { "fileName": "{{attachment.filename}}",
+        "url": "{{attachment.url}}" }
+        {% if forloop.last == false %},
+        {% endif %}
+        {% endfor %}
+      ]
+    }
+  }
+  
+  ```
 
 ![](../images/0ee7fd6-image.png)
 ![](../images/16f0838-image.png)
@@ -149,29 +150,29 @@ After creating trigger, create another trigger as follows.
 * **Description:** Any Value
 * **Category:** Add Category
 * **Category Name:** Any Value (We use Initial Category)
-* **Conditions:** 
-	+ Meet ALL of the following conditions:
-	+ Ticket > Tags - Contains at least one of the following - ChatApps
-	+ Ticket > Ticket Status - Changed
+* **Conditions:**
+  * Meet ALL of the following conditions:
+  * Ticket > Tags - Contains at least one of the following - ChatApps
+  * Ticket > Ticket Status - Changed
 * **Actions:**
-	+ Notify by > Active Webhook > (Choose the Webhook you had previously created)
-	+ **Endpoint:** https://api.wavecell.com/webhook/zendesk/<Insert your 8x8 Subaccount here>?accessKey=srCUHbcYumHyxLxWmQjYfKWeg0qiRsEXfTHz640tClF032XxFpgnyzge7O.  
-	
-	**Please note you will need to substitute your subaccount in the URL.**
-	+ **JSON Body**
-	
-	```
-	{
-	"event": "statusChanged",
-	"ticketUrl": "{{ticket.link}}",
-	"ticketId": "{{ticket.id}}",
-	"ticketStatus": "{{ticket.status}}", 
-	"ticketExternalId": "{{ticket.external_id}}", 
-	"createdAt": "{{ticket.created_at_with_timestamp}}", 
-	"updatedAt": "{{ticket.updated_at_with_timestamp}}"
-	}
-	
-	```
+  * Notify by > Active Webhook > (Choose the Webhook you had previously created)
+  * **Endpoint:** <https://api.wavecell.com/webhook/zendesk/><Insert your 8x8 Subaccount here>?accessKey=srCUHbcYumHyxLxWmQjYfKWeg0qiRsEXfTHz640tClF032XxFpgnyzge7O.  
+  
+  **Please note you will need to substitute your subaccount in the URL.**
+  * **JSON Body**
+  
+  ```
+  {
+  "event": "statusChanged",
+  "ticketUrl": "{{ticket.link}}",
+  "ticketId": "{{ticket.id}}",
+  "ticketStatus": "{{ticket.status}}", 
+  "ticketExternalId": "{{ticket.external_id}}", 
+  "createdAt": "{{ticket.created_at_with_timestamp}}", 
+  "updatedAt": "{{ticket.updated_at_with_timestamp}}"
+  }
+  
+  ```
 
 ![](../images/5a39d8d-image.png)
 
@@ -187,8 +188,7 @@ Once you are shown your API Tokens value, record it as you will need to send thi
 
 ![](../images/dbc00b4-image.png)
 
-
-#### Send Information to 8x8 to Enable Zendesk Integration.
+#### Send Information to 8x8 to Enable Zendesk Integration
 
 After completing all of the steps above, the setup should be complete on your end. Now send an email to [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) with the title "Enable Zendesk Integration" and provide the following details:
 
@@ -235,12 +235,12 @@ This will show up as a reply on the customer's WhatsApp.
 Once the issue is resolved, the agent can mark the ticket as solved.![](../images/16cde57-image.png)
 
 > 📘 **Solved Tickets**
-> 
-> Note that by default, when a customer replies again to your WABA, their replies will go to the existing ticket unless the existing ticket even if it is solved. 
-> 
+>
+> Note that by default, when a customer replies again to your WABA, their replies will go to the existing ticket unless the existing ticket even if it is solved.
+>
 > You can choose an action as per your requirements, for example to mark the ticket as **Open or In Progress** when this occurs by creating a Triggers in the Zendesk Admin Center.
-> 
-> 
+>
+>
 
 New Message coming into a ticket after the ticket was solved.
 

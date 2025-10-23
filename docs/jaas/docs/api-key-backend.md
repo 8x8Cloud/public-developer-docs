@@ -18,4 +18,4 @@ Please check below jwt generation samples for various programming languages:
 
 ⚠️ **IMPORTANT NOTE**
 
-For your Node.js implementation, please make sure you are using the latest version of *node-jsonwebtoken* library, currently 9.0.0. Otherwise you risk being impacted by [this](https://nvd.nist.gov/vuln/detail/CVE-2022-23529) vulnerability. 
+For your Node.js implementation, please make sure you are using the latest version of *node-jsonwebtoken* library, currently 9.0.0. Otherwise you risk being impacted by [this](https://nvd.nist.gov/vuln/detail/CVE-2022-23529) vulnerability.

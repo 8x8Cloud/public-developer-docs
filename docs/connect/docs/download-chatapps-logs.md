@@ -11,5 +11,5 @@ Messaging Apps Reporting API allows you to retrieve your Messaging Apps activity
 > 👍
 >
 > Logs can be retrieved as far as 6 months in the past from the current date.
-> 
-> 
+>
+>

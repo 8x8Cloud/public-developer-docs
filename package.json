@@ -22,7 +22,8 @@
     "validate:openapi": "node scripts/validate-openapi.js",
     "analyze-links": "node scripts/analyze-broken-links.js",
     "format:check": "prettier --check \"**/*.{js,jsx,json}\"",
-    "format:write": "prettier --write \"**/*.{js,jsx,json}\""
+    "format:write": "prettier --write \"**/*.{js,jsx,json}\"",
+    "lint:md": "markdownlint-cli2 \"docs/**/*.md\" \"docs/**/*.mdx\""
   },
   "dependencies": {
     "@docusaurus/core": "^3.9.1",
@@ -44,6 +45,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.1",
     "@redocly/cli": "^2.7.0",
+    "markdownlint-cli2": "^0.18.1",
     "prettier": "^3.6.2"
   },
   "browserslist": {

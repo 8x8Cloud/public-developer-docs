@@ -79,6 +79,4 @@ After going through this guide, you should be able to repeat the test above and 
 * Validate image [format compatibility](/connect/docs/supported-chat-apps-content-type#whatsapp)
 * Confirm public accessibility without authentication
 
-  
-
 ---

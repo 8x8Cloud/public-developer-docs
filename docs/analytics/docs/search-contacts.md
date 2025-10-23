@@ -39,13 +39,13 @@ Construct your search query using the supported query parameters to filter and s
 [Contact Object Structure Guide](/analytics/docs/contact-object-structure-guide)
 
 > 📘 **Filtering**
-> 
+>
 > This API is designed with filtering capabilities by using Feed Item Query Language (FIQL) filter expressions.  
-> 
+>
 > FIQL introduces simple and composite operators which can be used to build basic and complex queries.  
-> 
+>
 > If the filter is not specified, All objects are returned.
-> 
+>
 > ***URL encoding notes (FIQL in query params)***
 >
 > When you pass FIQL in the filter query parameter, reserved characters are URL-encoded by clients/tools:
@@ -57,46 +57,46 @@ Construct your search query using the supported query parameters to filter and s
 > * %29 = )
 > * %3B = ;
 > * %40 = @
-> 
+>
 > Most clients encode automatically.
 >
 > ***FIQL Operators***:
-> 
+>
 > **Equality & Inequality**
-> 
+>
 > * `firstName==John` → Contacts with first name 'John'.
 > * `firstName!=John` → Contacts without the first name 'John'.
-> 
+>
 > **Comparisons**
-> 
+>
 > * `createdTimestamp>25 or createdTimestamp=gt=25` → Contacts created after timestamp 25.
 > * `createdTimestamp>=25 or createdTimestamp=ge=25` → Contacts created at or after timestamp 25.
 > * `createdTimestamp<25 or createdTimestamp=lt=25` → Contacts created before timestamp 25.
 > * `createdTimestamp<=25 or createdTimestamp=le=25` → Contacts created at or before timestamp 25.
-> 
+>
 > **Inclusion & Exclusion**
-> 
+>
 > * `pbxId=in=(US1,US2)` → Contacts with pbxId as 'US1' or 'US2'.
 > * `pbxId=out=(US1)` → Contacts excluding those with pbxId as 'US1'.
-> 
+>
 > **Logical Operators**
-> 
+>
 > * `firstName==John;lastName==Doe` → Contacts with first name 'John' AND last name 'Doe'.
 > * `firstName==John,lastName==Doe` → Contacts with first name 'John' OR last name 'Doe'.
-> 
+>
 > **Wildcards**
-> 
+>
 > * `firstName==Jo*` → Contacts with first names starting with 'Jo'.
 > * `firstName!=*ohn` → Contacts with first names not ending with 'ohn'.
-> 
+>
 > The primary sub-objects you can query are:
-> 
+>
 > * **tags**: Accessible using fields such as tag.id, tag.name, etc.
 > * **addresses**: Accessible using fields such as address.streetName , address.city , etc.
 > * **phones**: Accessible using fields such as phone.phone, phone.purposeType , etc.
 > * **emails**: Accessible using fields such as email.email , email.purposeType , email.primary, etc
 > * **extensions**: Accessible using fields such as extension.extension, extension.pbxName, extension.pbxId, etc
-> 
+>
 
 #### Pagination Parameters
 
@@ -115,11 +115,11 @@ This pagination method implies searching contacts within a key range(keyset) and
 
 * `useScrollId=true`
 * `scrollId=WyI3YzA4YW0M2RjYTg2YWRiMzg2MDBkNTZhZCJd`
-	+ Received in server response, for first request
-	+ You just need to pass it back as request parameter for the next request (a different value will be received for each request). This is empty for the first request.
+  * Received in server response, for first request
+  * You just need to pass it back as request parameter for the next request (a different value will be received for each request). This is empty for the first request.
 * `size=10&sort=id,ASC`
-	+ It is essential for sorting fields to contain "id" field
-	+ Additionally, you can also add sorting by other fields - ex "name"
+  * It is essential for sorting fields to contain "id" field
+  * Additionally, you can also add sorting by other fields - ex "name"
 
 ## 3. Example Usage
 
@@ -134,10 +134,10 @@ curl --location 'https://api.8x8.com/directory-contacts/api/v3/contacts?details=
 ```
 
 > 📘 **Request description**
-> 
+>
 > The request queries for contacts that are tagged as corporate and have the job title Agent, as well as a specific email [email.changed@8x8.com](mailto:email.changed@8x8.com). It asks for multiple details to be returned for each contact: TAG, ADDRESS, PHONE, EMAIL, and EXTENSION.
-> 
-> 
+>
+>
 
 #### Response
 
@@ -280,10 +280,10 @@ Authorization: Bearer {access_token}
 ```
 
 > 📘 **Note**
-> 
+>
 > The initial response includes a scrollId, which is necessary for subsequent paginated requests. This ID ensures that the subsequent requests fetch the next set of results in the sequence. Remember to use page=0 in conjunction with scrollId for keyset pagination.
-> 
-> 
+>
+>
 
 #### Subsequent Request with `scrollId`
 

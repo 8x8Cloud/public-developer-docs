@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Steps** make up a **workflow definition**. Each step has a unique id that identifies it within that workflow definition. This page aims to define each type of step and the properties that make up that step to better understand how they can be used as part of a workflow definition. 
+**Steps** make up a **workflow definition**. Each step has a unique id that identifies it within that workflow definition. This page aims to define each type of step and the properties that make up that step to better understand how they can be used as part of a workflow definition.
 
 Steps allow you to create custom workflow definitions that can perform different actions within that workflow instance.
 
@@ -57,7 +57,7 @@ ChatAppsMessage step allows you to send a message using 8x8 Chat Apps API.
 
 ## Wait
 
-Wait step allows you to make the workflow wait for a specified period of time before executing the next step. 
+Wait step allows you to make the workflow wait for a specified period of time before executing the next step.
 
 ![Step and Properties in UI  
 (Note: The duration is yet to be updated, that's why it shows 00:00:00 on the left)](../images/307f3e8-image.png)Step and Properties in UI  
@@ -73,13 +73,12 @@ Wait step allows you to make the workflow wait for a specified period of time be
 
 Allows you to create multiple paths in a workflow.
 
-The example below shows the next steps after and before the branch to illustrate it's use. 
+The example below shows the next steps after and before the branch to illustrate it's use.
 
 * The Wait For Reply Step (waitforreply_8622) just before this is waiting for a input from a user
 * The Branch Step (branch_8338) checks the value returned in the Wait For Reply Step
-	+ If 1, chatappsmessage_0501 step is executed, delivering the message "Please enter your email address:"
-	+ If 2, chatappmessage_9836 step is executed, delivering the message "Goodbye".
-
+  * If 1, chatappsmessage_0501 step is executed, delivering the message "Please enter your email address:"
+  * If 2, chatappmessage_9836 step is executed, delivering the message "Goodbye".
 
 ![](../images/d68b3c1-image.png)
 

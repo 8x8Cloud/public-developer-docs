@@ -2,35 +2,25 @@
 
 ## Introduction
 
-
 Although a simple phone conversation is hardly cutting-edge technology, it is nevertheless necessary for business-to-customer communication in today's world.
-
 
 Even more so today, because individuals keep the same phone number for extended periods of time, phone numbers are intrinsically tied to a user's identity. As a result, we're seeing a rise in the usage of phone numbers to authenticate a user's online identity.
 
-
-It has become a matter of great importance for most businesses to protect the customer's identity and privacy, especially if day-to-day business communication with their users is key to the company's success. 
-
+It has become a matter of great importance for most businesses to protect the customer's identity and privacy, especially if day-to-day business communication with their users is key to the company's success.
 
 Number Masking is ideal to help any company to achieve that goal of "**Privacy in business communication**". From our experience, Number Masking is especially effective for businesses that share customer's phone numbers with 3rd parties, which is common in the following industries:
-
 
 * Ride Sharing
 * Logistics / Delivery
 * E-commerce
 
-
 ## Overview Video
-
 
 In this section, we will see a few videos of number masking and how it can be used for certain use cases.
 
-
 ### Overview Video - Logistics / Delivery
 
-
 This video covers a common example of logistics/delivery where a business like a bank needs to deliver a card to their customer through a third-party courier. Number masking allows their third-party courier to contact customers to resolve last-mile delivery issues while maintaining the anonymity of the numbers.
-
 
 <iframe
   src="https://www.youtube.com/embed/1n1QA4EjdbM?si=o134SMpP5xVXrS2D"
@@ -42,24 +32,17 @@ This video covers a common example of logistics/delivery where a business like a
 
 ### How to implement 8x8's Number Masking?
 
-
-As an example, let's take a look at the business case that is applicable for most ride-sharing businesses. When a business event takes place (read: the user has booked a ride) one Virtual Number is assigned for that booking. That Virtual Number is shown to both the rider and the driver, and if they want to engage in a phone call they can simply dial the Virtual number and get connected to the other user. 
-
+As an example, let's take a look at the business case that is applicable for most ride-sharing businesses. When a business event takes place (read: the user has booked a ride) one Virtual Number is assigned for that booking. That Virtual Number is shown to both the rider and the driver, and if they want to engage in a phone call they can simply dial the Virtual number and get connected to the other user.
 
 ![](../images/c0f23e2-Simplified_Booking_Record.png "Simplified Booking Record.png")
 
-
 One Virtual Number can be associated with multiple business events (read: bookings). In the image above a simplified booking record is shown, that remains active for as long as the booking is not marked as completed. The [Get My Virtual Numbers](/connect/reference/number-health-service) API provides a detailed overview of the Virtual Numbers available in your account.
-
 
 There are a few things to consider when assigning a Virtual Number to a booking. The most important thing is to avoid conflicts. Because the Virtual Number will be utilized as a search parameter to identify the second user, assigning the same Virtual Number to the same driver/user at the same time would result in a conflict. Another factor to consider is the volume of incoming calls. Spreading the incoming calls over multiple Virtual Numbers in the Number Pool is a good idea. We can avoid having one Virtual Number overloaded with incoming calls this way.
 
-
 When a rider or driver initiates a call to the Virtual Number (assigned to their booking) 8x8's platform will deliver a [Call Action Request](/connect/docs/call-action-handling#call-action-request) to the Ride Sharing company's endpoint. The Call Action Request from 8x8 is an HTTP POST request that contains all of the call data for the incoming call. The [Create a new webhook](/connect/reference/create-a-new-webhook) API can be used to specify the endpoint to which the Voice Call Action webhook will be delivered. The Ride Sharing company's endpoint should respond to the Call Action Request with the "makeCall" [Call Actions](/connect/docs/call-action-handling#makecall) that contains the other user's phone number to establish the call between the rider and the driver.
 
-
 Once the Call Action is received, 8x8 will connect the second user, allowing the rider and the driver to communicate without having to share their real phone numbers.
-
 
 Here's a small web server solution that shows how the Ride Sharing company's business logic can be implemented:
 
@@ -121,13 +104,10 @@ if __name__ == '__main__':
 
 ```
 
-Each time a call is initiated to a Virtual Number, 8x8 will send a Call Action Request that includes details about the calling user and the called Virtual Number. With that "phone numbers pair" it should be easy to uniquely calculate the third phone number (the phone number of the second user). In the web server example from above, we do that by querying our "simplified database" and getting the booking record that was created when the booking was confirmed. 
+Each time a call is initiated to a Virtual Number, 8x8 will send a Call Action Request that includes details about the calling user and the called Virtual Number. With that "phone numbers pair" it should be easy to uniquely calculate the third phone number (the phone number of the second user). In the web server example from above, we do that by querying our "simplified database" and getting the booking record that was created when the booking was confirmed.
 
-
-The only thing remaining is to define the CallAction that includes the Virtual Number set as "source" and the second user's phone number set as "destination" and send it inside the Call Handle reply. Once that is completed 8x8's platform will establish the call between the rider and the driver. 
-
+The only thing remaining is to define the CallAction that includes the Virtual Number set as "source" and the second user's phone number set as "destination" and send it inside the Call Handle reply. Once that is completed 8x8's platform will establish the call between the rider and the driver.
 
 If one of the users does not answer the call, their phone will show a missed call entry. The number shown in the Missed Calls list will be the assigned Virtual Number. If the user dials that number again, they will be connected to the second user using the same process as before. This way, 8x8 Number Masking ensures that the user's identity and privacy are protected in all cases.
-
 
 Full details about individual call statuses will be sent by 8x8's platform as [Call Status](/connect/reference/call-status) and once the Number Masking session has been completed full session summary will be delivered as [Session Status](/connect/reference/vm-session-status)

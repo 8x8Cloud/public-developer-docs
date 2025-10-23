@@ -1,6 +1,6 @@
 # Channel
 
-After creating a webhook you can then create a channel. The channel contains a webhook that passes the outbound messages and notifications. 
+After creating a webhook you can then create a channel. The channel contains a webhook that passes the outbound messages and notifications.
 
 The channel has a **[chat queue](https://docs.8x8.com/8x8WebHelp/VCC/configuration-manager-unified-login/content/queuespageoverview.htm)** (ideally with an agent assigned), for routed inbound conversations.
 

@@ -5,10 +5,10 @@ This guide will walk you through the entire process of connecting Salesforce to 
 We will accomplish this using Salesforce's declarative tools, which allow you to build robust integrations without writing complex code.
 
 > 👍 **Good to know**
-> 
+>
 > While this guide focuses on WhatsApp Authentication template, you can use the same approach for other WhatsApp templates, or other [supported messaging apps](/connect/reference/list-of-supported-chatapps-channels) following their respective schema. For **SMS**, refer to [this guide](https://8x8-enterprise-group.readme.io/connect/docs/salesforce-flowbuilder-8x8-sms-integration)
-> 
-> 
+>
+>
 
 ### Prerequisites and Requirements
 
@@ -20,8 +20,8 @@ Before you begin, ensure your Salesforce environment and 8x8 account meet the fo
 * **Required Editions:** **Enterprise**, **Performance**, **Unlimited**, and **Developer** Editions.
 * **Feature Integration:** The actions created from an External Service can be used in declarative tools like **Flow Builder**, Orchestrator, Einstein bots, or Omnistudio.
 * **User Permissions Needed**:
-	+ To **define** an external service: The user needs **Modify All Data** OR **Modify Metadata Through Metadata API Functions** permissions.
-	+ To **invoke** an external service action from a flow: The user needs the **Run Flows** permission.
+  * To **define** an external service: The user needs **Modify All Data** OR **Modify Metadata Through Metadata API Functions** permissions.
+  * To **invoke** an external service action from a flow: The user needs the **Run Flows** permission.
 
 #### **8x8 Account Requirements**
 
@@ -41,9 +41,9 @@ The External Credential is a secure vault that will hold your API key.
 1. Navigate to **Setup** ⚙️. In the Quick Find box, type `External Credentials` and select it.
 2. Click **New**.
 3. Enter the following details:
-	* **Label**: `8x8 CPaaS Authentication`
-	* **Name**: `8x8_CPaaS_Authentication` (this will auto-populate)
-	* **Authentication Protocol**: Select `Custom`.
+  * **Label**: `8x8 CPaaS Authentication`
+  * **Name**: `8x8_CPaaS_Authentication` (this will auto-populate)
+  * **Authentication Protocol**: Select `Custom`.
 4. Click **Save**.
 
 #### Step 1.2: Create the Principal
@@ -52,11 +52,11 @@ The Principal represents the specific identity and secret used for authenticatio
 
 1. On the External Credential page you just saved, scroll down to **Principals** and click **New**.
 2. Enter the following details:
-	* **Principal Name**: `8x8 API Key Principal`
-	* **Sequence Number**: `1`
+  * **Principal Name**: `8x8 API Key Principal`
+  * **Sequence Number**: `1`
 3. Under **Authentication Parameters**, click **Add Parameter**.
-	* **Name**: `Authorization`
-	* **Value**: `Bearer YOUR_API_TOKEN` (Replace `YOUR_API_TOKEN` with the actual API key from [this page](https://8x8-enterprise-group.readme.io/connect/docs/authentication)).
+  * **Name**: `Authorization`
+  * **Value**: `Bearer YOUR_API_TOKEN` (Replace `YOUR_API_TOKEN` with the actual API key from [this page](https://8x8-enterprise-group.readme.io/connect/docs/authentication)).
 4. Click **Save**.
 
 ![Create Principal](../images/4eb73686c074945d9215cda505902cb164c71d6c36783e8c1f779021505a2da6-image.png)Create Principal
@@ -68,22 +68,20 @@ The Named Credential links the API's address (URL) to the authentication secret 
 1. Navigate to **Setup** ⚙️. In the Quick Find box, type `Named Credentials` and select it.
 2. Click **New**.
 3. Enter the following details:
-	* **Label**: `8x8 Messaging API`
-	* **Name**: `8x8_Messaging_API`
-	* **URL**: `https://chatapps.8x8.com` (Asia-Pacific deployment region; see full [list of regions](/connect/docs/data-center-region#api-endpoints-and-platform-region)
-	* **External Credential**: Select the `8x8 CPaaS Authentication` credential you created above.
-	* Ensure the **Generate Authorization Header** checkbox is checked.
+  * **Label**: `8x8 Messaging API`
+  * **Name**: `8x8_Messaging_API`
+  * **URL**: `https://chatapps.8x8.com` (Asia-Pacific deployment region; see full [list of regions](/connect/docs/data-center-region#api-endpoints-and-platform-region)
+  * **External Credential**: Select the `8x8 CPaaS Authentication` credential you created above.
+  * Ensure the **Generate Authorization Header** checkbox is checked.
 4. Click **Save**.
 
 > ℹ️ **Sending SMS**
-> 
+>
 > For SMS, use the corresponding [sms endpoint](/connect/docs/data-center-region#api-endpoints-and-platform-region) (default is sms.8x8.com) and the appropriate SMS OAS accordingly
-> 
-> 
+>
+>
 
 ![Completed Named Credential and External Credential](../images/1bf24d3598faff200155404c07a05b4a4f16433c996d8073e27e65c49512d90c-image.png)Completed Named Credential and External Credential
-
-  
 
 ---
 
@@ -95,9 +93,9 @@ Next, we will use your OAS file to teach Salesforce about the specific 8x8 API c
 2. Click **Add External Service**.
 3. Select **From API Specification**.
 4. Configure the service:
-	* **Service Name**: `CPaasMessagingApps`
-	* **Named Credential**: Select the **`8x8 Messaging API`** Named Credential you just created.
-	* **Service Schema**: Select **Upload from local** and upload the complete [OAS](https://8x8-enterprise-group.readme.io/connect/reference/messaging-apps-api-get-started)  `.json` file or select "Complete Schema" and paste the schema below (contains only send single and send batch API)
+  * **Service Name**: `CPaasMessagingApps`
+  * **Named Credential**: Select the **`8x8 Messaging API`** Named Credential you just created.
+  * **Service Schema**: Select **Upload from local** and upload the complete [OAS](https://8x8-enterprise-group.readme.io/connect/reference/messaging-apps-api-get-started)  `.json` file or select "Complete Schema" and paste the schema below (contains only send single and send batch API)
 
 ```
 {
@@ -635,8 +633,6 @@ Salesforce will now parse the file and make the `Send-Message` and `send-message
 
 ![External Services created for both API operations](../images/0ec93a802335bbb2158049b935e607c88f91936d5af2f9ddbcf10ec18ecf622e-image.png)External Services created for both API operations
 
-  
-
 ---
 
 ### Part 3: Building the Automation in Flow Builder
@@ -648,10 +644,10 @@ This is where we build the logic to construct the message and send it. In this e
 1. Navigate to **Setup** ⚙️ > **Flows** and click **New Flow**. Select **Autolaunched Flow**.
 2. From the toolbox on the left, create the following three variables by clicking **New Resource**. These will be used to build the complex request body.
 3. * **Variable 1: The Main Body**
-	* **Resource Type**: `Variable`
-	* **API Name**: `messageBody`
-	* **Data Type**: `Apex-Defined`
-	* **Apex Class**: Search for and select the auto-generated class for the request body. It will be named similar to `ExternalService__CPaaSMessagingApps_singlex2dmessagex2drequest`.
+  * **Resource Type**: `Variable`
+  * **API Name**: `messageBody`
+  * **Data Type**: `Apex-Defined`
+  * **Apex Class**: Search for and select the auto-generated class for the request body. It will be named similar to `ExternalService__CPaaSMessagingApps_singlex2dmessagex2drequest`.
 
 ![Configuring the first Variable **messageBody**](../images/6a74c3d142b83de8db2497f257f99a2781d99988844321a42c03bc83fe0de29c-image.png)Configuring the first Variable **messageBody**
 
@@ -659,55 +655,53 @@ Repeat the same steps for the rest of the variables as shown below
 
 * **Variable 2: A Single Component**
 
-	+ **Resource Type**: `Variable`
-	+ **API Name**: `componentVariable`
-	+ **Data Type**: `Apex-Defined`
-	+ **Apex Class**: Search for the auto-generated class for a component. It will be named similar to `ExternalService__CPaaSMessagingApps_content_template_components`.
+  * **Resource Type**: `Variable`
+  * **API Name**: `componentVariable`
+  * **Data Type**: `Apex-Defined`
+  * **Apex Class**: Search for the auto-generated class for a component. It will be named similar to `ExternalService__CPaaSMessagingApps_content_template_components`.
 * **Variable 3: A Single Parameter**
 
-	+ **Resource Type**: `Variable`
-	+ **API Name**: `parameterVariable`
-	+ **Data Type**: `Apex-Defined`
-	+ **Apex Class**: Search for the auto-generated class for a parameter. It will be named similar to `ExternalService__CPaaSMessagingApps_content_template_components_parameters`.
+  * **Resource Type**: `Variable`
+  * **API Name**: `parameterVariable`
+  * **Data Type**: `Apex-Defined`
+  * **Apex Class**: Search for the auto-generated class for a parameter. It will be named similar to `ExternalService__CPaaSMessagingApps_content_template_components_parameters`.
 
 #### Step 3.2: First Assignment - Set Core Message Properties
 
 1. On the flow canvas, click the `+` icon after the Start element and add an **Assignment** element.
 2. **Label**: `Set Core Message Body`
 3. Configure the following assignments:
-	* `{!messageBody.user.msisdn}` | `Equals` | `+6512345678` (A test phone number)
-	* `{!messageBody.type}` | `Equals` | `template`
-	* `{!messageBody.content.template.name}` | `Equals` | `your_authentication_template_name`
-	* `{!messageBody.content.template.language}` | `Equals` | `en_US`
+  * `{!messageBody.user.msisdn}` | `Equals` | `+6512345678` (A test phone number)
+  * `{!messageBody.type}` | `Equals` | `template`
+  * `{!messageBody.content.template.name}` | `Equals` | `your_authentication_template_name`
+  * `{!messageBody.content.template.language}` | `Equals` | `en_US`
 
 ![](../images/03372d5805bdfd5a67fd06319628e44910293d6295026235370add6628da1b05-image.png)
-
-  
 
 #### Step 3.3: Second Assignment - Build the "Body" Component
 
 1. Click the `+` on the canvas after the first assignment and add a new **Assignment** element.
 2. **Label**: `Build and Add Body Component`
 3. Configure the assignments to build the component from the inside out:
-	* `{!parameterVariable.type}` | `Equals` | `text`
-	* `{!parameterVariable.text}` | `Equals` | `123456` (Your sample OTP code)
-	* `{!componentVariable.type}` | `Equals` | `body`
-	* `{!componentVariable.parameters}` | **`Add`** | `{!parameterVariable}`
-	* `{!messageBody.content.template.components}` | **`Add`** | `{!componentVariable}`
+  * `{!parameterVariable.type}` | `Equals` | `text`
+  * `{!parameterVariable.text}` | `Equals` | `123456` (Your sample OTP code)
+  * `{!componentVariable.type}` | `Equals` | `body`
+  * `{!componentVariable.parameters}` | **`Add`** | `{!parameterVariable}`
+  * `{!messageBody.content.template.components}` | **`Add`** | `{!componentVariable}`
 
 #### Step 3.4: Third Assignment - Build the "Button" Component
 
 1. Click the `+` again and add a final **Assignment** element.
 2. **Label**: `Build and Add Button Component`
 3. This time, we must first clear our helper variable before reusing it. Configure as follows:
-	* `{!componentVariable.parameters}` | `Equals` | `{!$GlobalConstant.EmptyString}`
-	* `{!parameterVariable.type}` | `Equals` | `text`
-	* `{!parameterVariable.text}` | `Equals` | `123456`
-	* `{!componentVariable.type}` | `Equals` | `Button`
-	* `{!componentVariable.subType}` | `Equals` | `url`
-	* `{!componentVariable.index}` | `Equals` | `0`
-	* `{!componentVariable.parameters}` | **`Add`** | `{!parameterVariable}`
-	* `{!messageBody.content.template.components}` | **`Add`** | `{!componentVariable}`
+  * `{!componentVariable.parameters}` | `Equals` | `{!$GlobalConstant.EmptyString}`
+  * `{!parameterVariable.type}` | `Equals` | `text`
+  * `{!parameterVariable.text}` | `Equals` | `123456`
+  * `{!componentVariable.type}` | `Equals` | `Button`
+  * `{!componentVariable.subType}` | `Equals` | `url`
+  * `{!componentVariable.index}` | `Equals` | `0`
+  * `{!componentVariable.parameters}` | **`Add`** | `{!parameterVariable}`
+  * `{!messageBody.content.template.components}` | **`Add`** | `{!componentVariable}`
 
 #### Step 3.5: The Action - Make the API Call
 
@@ -715,12 +709,10 @@ Repeat the same steps for the rest of the variables as shown below
 2. Search for your `CPaasMessagingApps` actions and select **Send-Message**.
 3. **Label**: `Send WhatsApp Message`
 4. Configure the inputs:
-	* **subAccountId**: Enter your 8x8 Subaccount ID string here.
-	* **body**: Select your main variable, `{!messageBody}`.
+  * **subAccountId**: Enter your 8x8 Subaccount ID string here.
+  * **body**: Select your main variable, `{!messageBody}`.
 
 ![](../images/78f3891d0fda10039d2fef49ae6397c9473b2892cc24657f628b3c1b572e001d-image.png)
-
-  
 
 ---
 

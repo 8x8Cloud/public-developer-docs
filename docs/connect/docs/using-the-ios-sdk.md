@@ -3,22 +3,22 @@
 * [Overview](#overview)
 * [Lifecycle](#lifecycle)
 * [Configuration](#configuration)
-	+ [User account](#user-account)
-	+ [CallKit](#callkit)
+  * [User account](#user-account)
+  * [CallKit](#callkit)
 * [Authentication](#authentication)
 * [Callbacks](#callbacks)
-	+ [Log message](#log-message)
-	+ [Contact resolution](#contact-resolution)
-	+ [Audio session](#audio-session)
+  * [Log message](#log-message)
+  * [Contact resolution](#contact-resolution)
+  * [Audio session](#audio-session)
 * [Activation](#activation)
 * [Deactivation](#deactivation)
 * [Call](#call-features)
-	+ [Place an outgoing call](#place-an-outgoing-call)
-	+ [Receive an incoming call](#receive-an-incoming-call)
-	+ [Call observer protocols](#call-observer-protocols)
-	+ [Mute a call](#mute-a-call)
-	+ [Put a call on hold](#put-a-call-on-hold)
-	+ [Hang up a call](#hang-up-a-call)
+  * [Place an outgoing call](#place-an-outgoing-call)
+  * [Receive an incoming call](#receive-an-incoming-call)
+  * [Call observer protocols](#call-observer-protocols)
+  * [Mute a call](#mute-a-call)
+  * [Put a call on hold](#put-a-call-on-hold)
+  * [Hang up a call](#hang-up-a-call)
 * [Push notifications](#push-notifications)
 
 ## Overview
@@ -50,7 +50,7 @@ The configuration can be updated at any time after SDK initialization.
 struct Configuration: Hashable {
    var accountId: String
    var userId: String
-   // …	
+   // …  
    var displayName: String
    var phoneNumber: String?
    // …
@@ -72,7 +72,7 @@ The SDK client can use `CallKitOptions` to customize the CallKit configuration.
 ```swift
 struct CallKitOptions: Hashable {
    var localizedName: String
-   // …	
+   // …  
    var ringtoneSound: String?
    // …
    var iconFileName: String?
@@ -328,7 +328,7 @@ The **`VoiceCall`** object has the **`muted`** property which enables call mutin
 protocol VoiceCall: class {
 //…
    var muted: CallMutedState { get set }
-//…	
+//…  
 }
 
 ```

@@ -25,6 +25,7 @@ The CIDP Journey API solves critical business challenges:
 * **Comprehensive Metrics:** Access consolidated metrics like handling time, queue wait time, and outcomes across all  
 
 platforms
+
 * **Detailed Transition History:** Examine every state a customer interaction passed through
 
 Instead of working with disconnected reporting systems, organizations can now build comprehensive reports and dashboards  
@@ -70,12 +71,12 @@ endpoints:
 3. **Retrieve the data** - Once complete, access the data with pagination support
 
 > 🚧 **Data Processing Time Varies**
-> 
+>
 > Task completion time depends on the date range, filters, and current system load. Large date ranges may take longer to  
-> 
+>
 > process.
-> 
-> 
+>
+>
 
 ### Step 1: Create a Task
 
@@ -110,32 +111,32 @@ POST /api/v1/transitions
 | displayTimezone | ✓ | IANA timezone display name - the desired display timezone value for the time fields | `Europe/Bucharest` |
 
 > ⚠️ **Timerange Limit**
-> 
+>
 > **Note:** The maximum allowed timerange for any data retrieval request is **7 days**.
-> 
-> 
-> > 
-> > For optimal performance consider using a timerange of 1 day or less.   
-> > 
-> > 
-> > 
-> > 
-> 
-> 
+>
+>
+> >
+> > For optimal performance consider using a timerange of 1 day or less.
+> >
+> >
+> >
+> >
+>
+>
 
-> 
-> 
-> > 
+>
+>
+> >
 > > If you need to analyze data over a longer period, break your requests into multiple segments, each covering no more than 7 days.
-> > 
-> > 
+> >
+> >
 > > Currently, requests spanning more than 7 days will be rejected with a **maxInterval** error. We may extend this period in future releases.
-> > 
-> > 
-> > 
-> 
-> 
-> 
+> >
+> >
+> >
+>
+>
+>
 
 ```json
 {
@@ -225,12 +226,12 @@ Possible status values:
 * `FAILED` - Task failed to complete
 
 > 🚧 **Don't check status too frequently**
-> 
+>
 > Use a progressive polling strategy with increasing intervals (e.g., start at 5 seconds, then double each time up to a  
-> 
+>
 > reasonable maximum). This reduces load on the API while efficiently checking for completion.
-> 
-> 
+>
+>
 
 ### Step 3: Retrieve Data
 
@@ -335,6 +336,7 @@ GET /api/v1/transitions/{taskId}/data
 #### Example Transitions Endpoint Response
 
 lines
+
 ```json
 {
   "data": [
@@ -578,12 +580,12 @@ available for Sessions and Transitions endpoints.
 ```
 
 > 📘**Automatic Default Filtering**
-> 
+>
 > If no `pbxName` or `tenantId` filters are provided, the system automatically applies filters based on the authorized  
-> 
+>
 > PBXs and tenants for your API key.
-> 
-> 
+>
+>
 
 #### Pagination
 
@@ -606,6 +608,7 @@ GET /api/v1/sessions/{taskId}/data?limit=100
 Response with next page cursor:
 
 lines
+
 ```json
 {
   "data": [
@@ -626,6 +629,7 @@ GET /api/v1/sessions/{taskId}/data?limit=100&nextPageCursor=encoded-cursor-value
 Last page response:
 
 lines
+
 ```json
 {
   "data": [
@@ -643,7 +647,7 @@ The API supports sorting of results through two parameters:
 * `sortField`: Specifies which field to sort by (default: `TIME`)
 
 > ℹ️ **Note:** Currently, TIME is the only available sortField.
-> 
+>
 >
 * `sortDirection`: Specifies the sort order, either `asc` (ascending) or `desc` (descending) (default: `asc`)
 
@@ -932,7 +936,7 @@ For organizations with complex call flows that span multiple platforms (such as 
 
 agents and back-office teams), this API provides a complete view of the customer journey.
 
-#### Implementation Steps:
+#### Implementation Steps
 
 1. Create a sessions data task:
 
@@ -1016,7 +1020,7 @@ GET /api/v1/transitions/{taskId}/data?sortField=TIMESTAMP&sortDirection=ASC
 
 For organizations that want to understand how calls are being transferred between systems and analyze transfer patterns.
 
-#### Implementation Steps:
+#### Implementation Steps
 
 1. Create a transitions data task:
 
@@ -1062,7 +1066,7 @@ GET /api/v1/transitions/{taskId}/data?limit=100
 
 For analyzing queue performance across different platforms.
 
-#### Implementation Steps:
+#### Implementation Steps
 
 1. Create a sessions data task:
 

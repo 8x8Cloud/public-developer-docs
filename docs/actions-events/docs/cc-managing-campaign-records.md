@@ -3,10 +3,10 @@
 ## TODO
 
 > 📘 **Prerequisites**
-> 
+>
 > * The Campaign MUST be configured as a Dynamic Campaign
 > * Records MUST exist in the CC CRM to be added to a campaign.
-> 
+>
 
 ## Overview
 
@@ -172,34 +172,34 @@ curl --location --request GET 'https://vcc-{ccPlatform}.8x8.com/api/stats/campai
 
 ### View Campaign Record Response
 
-The success response code is HTTP 200. Each Record will have its own status and information. 
+The success response code is HTTP 200. Each Record will have its own status and information.
 
 ```json
 {
-	"records": {
-		"record": [
-			{
-				"campaign-name": "BOC Admin Demo",
-				"campaign-id": 1,
-				"record-id": 10000000,
-				"phone-list": "*Phone Number|5551234567",
-				"status": 3,
-				"status-code": 0,
-				"ext-trans-data": "",
-				"disposition-code": 1002
-			},
-			{
-				"campaign-name": "BOC Admin Demo",
-				"campaign-id": 1,
-				"record-id": 10000001,
-				"phone-list": "*Phone Number|5557654321",
-				"status": 3,
-				"status-code": 0,
-				"ext-trans-data": "",
-				"disposition-code": 1002
-			}
-		]
-	}
+  "records": {
+    "record": [
+      {
+        "campaign-name": "BOC Admin Demo",
+        "campaign-id": 1,
+        "record-id": 10000000,
+        "phone-list": "*Phone Number|5551234567",
+        "status": 3,
+        "status-code": 0,
+        "ext-trans-data": "",
+        "disposition-code": 1002
+      },
+      {
+        "campaign-name": "BOC Admin Demo",
+        "campaign-id": 1,
+        "record-id": 10000001,
+        "phone-list": "*Phone Number|5557654321",
+        "status": 3,
+        "status-code": 0,
+        "ext-trans-data": "",
+        "disposition-code": 1002
+      }
+    ]
+  }
 }
 
 ```

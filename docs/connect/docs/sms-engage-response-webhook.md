@@ -8,7 +8,6 @@
 >
 >
 
-
 ### Webhook Validity Period
 
 If we do not receive a response for the SMS engage survey promptly, our platform will continue checking for up to 48 hours. If the response is recorded after 48 hours, there will be no SMS engage response webhook sent.
@@ -16,7 +15,6 @@ If we do not receive a response for the SMS engage survey promptly, our platform
 ### Webhook format
 
 Request body description
-
 
 | Property name | Property type | Description |
 | --- | --- | --- |

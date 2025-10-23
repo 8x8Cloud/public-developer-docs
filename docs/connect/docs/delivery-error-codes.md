@@ -2,7 +2,7 @@
 
 > ℹ️ **Troubleshooting tip**
 >
-> The table below lists _delivery receipt_ error codes for Messaging Apps  
+> The table below lists *delivery receipt* error codes for Messaging Apps  
 > If you are debugging an error that appears in the JSON body of an 8x8 **API response** (for example `"code": 3038`), please see the [API Error Codes](/connect/reference/api-error-codes) reference instead.
 >
 
@@ -29,7 +29,6 @@ Possible error codes returned in the Messaging Apps delivery receipts include:
 | 43   | SpamFilter                                     | Message filtered by anti-spam reason                                                                      |
 | 46   | SubscriberNotReachable                         | Message sent to Channel, but user is not reachable for delivery                                           |
 | 61   | SessionExpired                                 | Message trashed by session expired reason                                                                 |
-
 
 ## WhatsApp Error Codes
 

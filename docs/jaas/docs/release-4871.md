@@ -31,10 +31,10 @@
 
 * Extends captureLargeVideoScreenshot for screenshare
 * Transcriptions API improvements
-	+ Extends the IFrame API to allow adding a transcriber in the room without the subtitles needing to be visible
-	+ Allows transcription chunk messages to be passed through the IFrame API if a transcriber is present
-	+ Adds an option to skip interim transcriptions
-	+ Adds transcribingStatusChanged event
+  * Extends the IFrame API to allow adding a transcriber in the room without the subtitles needing to be visible
+  * Allows transcription chunk messages to be passed through the IFrame API if a transcriber is present
+  * Adds an option to skip interim transcriptions
+  * Adds transcribingStatusChanged event
 * Removes enableLipSync config, which is not supported anymore
 * Adds "disableVirtualBackground" config
 

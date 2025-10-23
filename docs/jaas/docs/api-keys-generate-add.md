@@ -39,14 +39,14 @@ The key's randomart image is:
 
 ```
 
-You must then save the public key in **`PEM`** format using the **`openssl`** command. 
+You must then save the public key in **`PEM`** format using the **`openssl`** command.
 
 ```
 > openssl rsa -in \<filename\> -pubout -outform PEM -out \<filename\>.pub
 
 ```
 
-For example: 
+For example:
 
 ```
 dev\$openssl rsa -in jaasauth.key -pubout -outform PEM -out jaasauth.key.pub

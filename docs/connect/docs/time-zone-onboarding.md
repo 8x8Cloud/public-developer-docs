@@ -1,11 +1,9 @@
 # Time zone & Onboarding
 
-
 > 🚧 **[BETA]**
 >
 > This product is currently in early access. Please reach out to your account manager to get more information.
 >
-
 
 ## Time Zones
 
@@ -16,11 +14,7 @@ curl --location --request GET 'https://automation.8x8.com/api/v1/accounts/:accou
 --header 'Authorization: Bearer {apiKey}'
 ```
 
-
-
-
 If the request is successful, you will get the HTTP status code 200 with the following response body:
-
 
 ```json
 [

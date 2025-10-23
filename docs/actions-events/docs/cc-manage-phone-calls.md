@@ -145,11 +145,12 @@ Body is an array named "selections" which contains objects defining the Transact
 
 #### Transaction Code List and Item Assignment
 
-Up to six transaction codes can be assigned to a transaction. 
+Up to six transaction codes can be assigned to a transaction.
 
 Transaction Code Lists (TCL) are located in CC Configuration Manager "Transaction Codes". The TCL id and TCL item id are only visible/available via API.
 
 Single Item from Single ListTwo Items from Single ListTwo Items from Two Lists
+
 ```json
 {
   "selections": [
@@ -196,7 +197,7 @@ Single Item from Single ListTwo Items from Single ListTwo Items from Two Lists
 
 ```
 
-For a single Transaction Code List and Item the elements would be as follows 
+For a single Transaction Code List and Item the elements would be as follows
 
 | Name                    | Required | Description                   | Example |
 | ----------------------- | -------- | ----------------------------- | ------- |
@@ -206,6 +207,7 @@ For a single Transaction Code List and Item the elements would be as follows
 ### Set Transaction Codes Request
 
 Two items, from two lists
+
 ```bash
 curl --location --request PUT 'https://vcc-{ccPlatform}.8x8.com/api/v{version}/tenants/{tenantId}/calls/{interactionId}/agent/{agentId}/transaction-codes' \
 --header 'Authorization: Basic {encodedValue}' \
@@ -216,7 +218,7 @@ curl --location --request PUT 'https://vcc-{ccPlatform}.8x8.com/api/v{version}/t
       "id": 12,
       "codes":[
         {
-        	"id": 234
+          "id": 234
         }
       ]
     },
@@ -224,7 +226,7 @@ curl --location --request PUT 'https://vcc-{ccPlatform}.8x8.com/api/v{version}/t
       "id": 2281,
       "codes":[
         {
-        	"id": 7361
+          "id": 7361
         }
       ]
     }
@@ -344,7 +346,7 @@ Response Status will be 200 for successful requests.
 
 ```
 
-## Free agent lines.
+## Free agent lines
 
 Free up agent lines in preparation for the next call. This will end the agent involvement in all their calls. If a call is a conference or call was transferred it will not hang up for the other participants.
 
@@ -389,7 +391,7 @@ Response Status will be 200 for successful requests.
 
 ```
 
-## Free specific agent line.
+## Free specific agent line
 
 Free up agent lines in preparation for the next call. This will end the agent involvement in all their calls. If a call is a conference or call was transferred it will not hang up for the other participants.
 

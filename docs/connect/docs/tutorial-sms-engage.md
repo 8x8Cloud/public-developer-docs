@@ -23,9 +23,9 @@ This video below will take you through a demo of SMS Engage including: sending a
 ## Prerequisites
 
 * **8x8 Account** with an SMS Engage form created
-	+ If you do not have an SMS engage form, see the **SMS Engage Form** section below on how to obtain one.
+  * If you do not have an SMS engage form, see the **SMS Engage Form** section below on how to obtain one.
 * **8x8 API Key**
-	+ Please see [this](developer-tools) page on how to create API Keys if you do not have an existing one.
+  * Please see [this](developer-tools) page on how to create API Keys if you do not have an existing one.
 
 ---
 
@@ -34,7 +34,7 @@ This video below will take you through a demo of SMS Engage including: sending a
 You must have at least one SMS Engage form created for you by 8x8. SMS Engage forms are created based on your use-cases. Once they are created, 8x8 will provide you a **surveyId** and \*_url_ac\*.
 
 * Please note that the variable url is your default SMS Engage link which 8x8 has set up for you (e.g. [http://smstoweb.net?sid=1234](http://smstoweb.net?sid=1234)). The url is shortened once the message has been sent.
-	+ The shortened url is always **21 characters** in length.
+  * The shortened url is always **21 characters** in length.
 * If you want to get the data via **Webhooks**, simply provide us a specific url where we will post the data.
 * For more information on **how to create an SMS engage form** please contact your account manager or send an email to [8x8 Support](mailto:cpaas-support@8x8.com).
 
@@ -57,7 +57,7 @@ At the end of the section, we will generate a cURL command to send an SMS Engage
 ## Request URL
 
 * As detailed in the [Send SMS Engage survey](/connect/reference/survey-send) , the URL is defined by the following pattern: `https://sms.8x8.com/api/v1/subaccounts/{subAccountId}/surveys/{surveyId}/messages`
-	+ The **{subAccountID}** should be replaced by your own 8x8 Subaccount ID and the **{surveyId}** should be replaced by your Survey ID in a request.
+  * The **{subAccountID}** should be replaced by your own 8x8 Subaccount ID and the **{surveyId}** should be replaced by your Survey ID in a request.
 
 ## Authentication
 
@@ -162,7 +162,7 @@ At the end of the section, we will generate a cURL command to send an SMS Engage
 ## Request URL
 
 * As detailed in the [Send SMS Engage survey](/connect/reference/survey-send) , the URL is defined by the following pattern: `https://sms.8x8.com/api/v1/subaccounts/{subAccountId}/surveys/{surveyId}/messages/batch`
-	+ The **{subAccountID}** should be replaced by your own 8x8 Subaccount ID and the **{surveyId}** should be replaced by your Survey ID in a request.
+  * The **{subAccountID}** should be replaced by your own 8x8 Subaccount ID and the **{surveyId}** should be replaced by your Survey ID in a request.
 
 ## Authentication
 
@@ -287,6 +287,7 @@ This should result in a SMS being sent similar to the one below with the URL rep
 A successful request should return an 200 OK HTTP Response Code and the Response Body should appear as below.
 
 HTTP Response
+
 ```json
 {
     "batchId": "<batchUmid>",
@@ -335,7 +336,7 @@ Note that the **batchUmid**, **batchId**, **mobileNumber** and **umid's** values
 
 ### Survey Appearance
 
-The webpages for the surveys are built by the 8x8 team for each customer based on their inputs. A few example pages are included below as they would appear in a mobile browser. They can include both text box and multiple choice type of questions. 
+The webpages for the surveys are built by the 8x8 team for each customer based on their inputs. A few example pages are included below as they would appear in a mobile browser. They can include both text box and multiple choice type of questions.
 
 ![Survey Initial Page](../images/31dfa02-image.png)Survey Initial Page
 

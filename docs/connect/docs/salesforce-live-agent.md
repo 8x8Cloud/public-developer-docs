@@ -1,10 +1,10 @@
 # Salesforce Chat Configuration Guide
 
 > ❗️ **Salesforce Chat Deprecation**
-> 
+>
 > Salesforce has announced that Salesforce Chat will be retired on February 14, 2026. Read the announcement and affected Salesforce editions [here](https://help.salesforce.com/s/articleView?id=001790618&type=1).
-> 
-> 
+>
+>
 
 ## Introduction
 
@@ -62,6 +62,7 @@ In Salesforce Setup Home, navigate to **Administration > Users > Queues**. We wi
 Make sure to add the Salesforce users that you would like to be part of handling the queue here.
 
 ![](../images/f393d42-image1.png)
+
 ### Chat
 
 In Salesforce Setup Home, navigate to **Service > Chat > Chat Settings** and check the **Enable Chat** box
@@ -69,6 +70,7 @@ In Salesforce Setup Home, navigate to **Service > Chat > Chat Settings** and che
 Note down the **Chat API Endpoint** URL to send to 8x8’s Support Team. Our team only requires the domain, which is only the first portion of the URL highlighted in red below.
 
 ![](../images/0efaabe-image2.png)
+
 ### Chat Buttons and Invitations
 
 In the Chat Buttons and Invitations we want to create a new chat group
@@ -78,9 +80,9 @@ Below are the required settings. Settings outside of this are optional.
 
 **Type:** Chat Button  
 
-**Name:**   
+**Name:**
 
-**Developer Name:**   
+**Developer Name:**
 
 **Queue:** Choose the queue you created previously
 
@@ -95,11 +97,11 @@ In Salesforce Setup Home, navigate to **Service > Chat > Deployments**, create a
 ![](../images/f5aa937-image9.png)
 Below are the required settings. Settings outside of this are optional.
 
-**Chat Deployment Name:**   
+**Chat Deployment Name:**
 
-**Developer Name:**   
+**Developer Name:**
 
-**Chat Window Title:** 
+**Chat Window Title:**
 
 ![](../images/48bc801-image8.png)
 Note down the **OrganizationId** and the **DeploymentId** in the **Deployment Code** highlighted in red/blue to send to 8x8’s Support Team.

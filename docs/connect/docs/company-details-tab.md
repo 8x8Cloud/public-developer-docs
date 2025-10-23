@@ -13,9 +13,9 @@
 * For selected countries, Industry is a required field (this depends on the industry of your company)
 
 ![](../images/b578fa2bc67672c882ae69f5a649a9895fe9864739e4bdb0197d1e2577174ccf-1234.png)
+
 * Fill up relevant details
 * Click Save details when done
 * It is mandatory to include the company letter hand (sample of a letterhead is shown and is also reflected on how letter head is used in LOA generation)
 
 ![](../images/ef29a9813cbb411a8cfaf05c02d9f03b921ecebb831041b0b5335a1859fd43fa-12345.png)
-

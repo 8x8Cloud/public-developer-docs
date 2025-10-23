@@ -27,7 +27,6 @@ This page describes the supported messaging apps content types, along with their
 | Audio     | .aac, .m4a, .amr, .mp3, .ogg, .opus               | 16 MB         |
 | Video     | .mp4, .3gp                                        | 16 MB         |
 
-
 ### Character Limit
 
 | Component                                                        | Character Limit |
@@ -58,7 +57,6 @@ Supported **File** formats are:
 | **Documents**     | `.pdf` (`application/pdf`)                                                                                                                                                             | Media messages (not rich cards)          |
 | **File size cap** | Up to **100 MB** per attachment                                                                                                                                                        |                                          |
 
-
 ### Limits
 
 | Message element / field            | Limit                                |
@@ -75,7 +73,6 @@ Supported **File** formats are:
 | **Rich-card payload size**         | 250 KB                               |
 
 ***
-
 
 ## Viber
 

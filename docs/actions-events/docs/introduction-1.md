@@ -1,6 +1,6 @@
 # Introduction and Use Cases
 
-The webchat API, also known as Embedded Chat API, allows configuration via the webchat script that meet some of the following use cases. 
+The webchat API, also known as Embedded Chat API, allows configuration via the webchat script that meet some of the following use cases.
 
 ## Pass customer data into the webchat script from a website
 

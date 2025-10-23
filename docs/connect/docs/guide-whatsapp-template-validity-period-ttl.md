@@ -15,10 +15,10 @@ This guide shows you how to configure the validity period for your templates wit
 
 > 👍
 > -
-> 
+>
 > Refer to [Messaging Apps fallback management guide](/connect/reference/chatapps-fallback-management) to ensure your message delivery orchestration align with the WhatsApp template validity period, preventing duplicated messages
-> 
-> 
+>
+>
 
 ## TTL Defaults, Ranges, and Compatibility
 
@@ -59,10 +59,10 @@ The ability to customize Time-To-Live (TTL), the specific ranges allowed, and th
 
 ![](../images/c2d8279519f731a7d15266581c48ccfe57e5184dc1fc24487d9754c832f379ff-image.png)
 
-> 
+>
 > **Tip:** Consider the nature of your message. OTPs often require a short TTL (e.g., 5-15 minutes), while appointment reminders might allow for a longer TTL (e.g., several hours before you fall back to making a phone call).
-> 
-> 
+>
+>
 >
 8. After setting the desired validity period, ensure you save your changes by clicking **Submit**.
 

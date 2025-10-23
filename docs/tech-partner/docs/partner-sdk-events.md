@@ -38,8 +38,8 @@ See the table below for the list of events that are exposed:
 | mashell-voicemail-completed-cc-event-v1 | 1.0.0 | active | 6 May 2025 | - | - |
 | mashell-voicemail-terminated-cc-event-v1 | 1.0.0 | active | 6 May 2025 | - | - |
 
-> 
+>
 > Note: With an integration not all the events will be available, to know what events can be received for a specific integration use the `partnerSDK.system.getEvents()` method from the [SDK](https://www.npmjs.com/package/@8x8/pui-partner-comm#getevents) .
-> 
-> 
+>
+>
 >

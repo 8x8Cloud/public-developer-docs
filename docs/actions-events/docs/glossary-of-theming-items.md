@@ -34,7 +34,7 @@
 
 ### Messages
 
-Note, when when the message type shows as INCOMING, this is a message, that comes into the webchat, so sent by the agent or a chatbot. When the message shows as OUTGOING, this is a message that is sent by the person using the webchat, into an agent. 
+Note, when when the message type shows as INCOMING, this is a message, that comes into the webchat, so sent by the agent or a chatbot. When the message shows as OUTGOING, this is a message that is sent by the person using the webchat, into an agent.
 
 | Chat Theme Property | Example value | Description |
 | --- | --- | --- |

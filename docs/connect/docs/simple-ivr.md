@@ -1,14 +1,10 @@
 # Simple IVR
 
-
 Below is a sample of a simple IVR call scenario. The Callflow below demonstrates an example scenario where a callback is placed to a customer seeking technical support. Then in the same call the user has the ability to either contact a member of technical support, end the call or repeat the main menu.
-
 
 ## Demo Video
 
-
 This video will show a demo of how the Advanced IVR menu will work, including showing webhooks and the Initial API Call.
-
 
 <iframe
   src="https://www.youtube.com/embed/6UfWfvk8-jY?si=0Embr27hn_krsgKX"
@@ -20,46 +16,34 @@ This video will show a demo of how the Advanced IVR menu will work, including sh
 
 ## GitHub Repo with Sample Backend Code
 
-
 In order to make use of the Callflows API, you will need to setup not only Webhooks but a backend server to respond to those webhooks. We have provided a code sample of backend code in Python that processes the webhooks and responds to them to trigger actions in the IVR.
-
 
 Note: The code for the Simple IVR is under app\_simple\_ivr.py
 
-
 [GitHub Repo](https://github.com/EMChamp/8x8-advanced-ivr-callsflow-api)
-
 
 ## Diagram of Simple IVR Flow
 
-
 Below is a description of the IVR Tree that we will be building with this call scenario. There are 3 possible paths and only 1 level in this simple IVR Tree.
-
 
 ![](../images/af71269-image.png)
 
-
 ## Webhooks and API Calls in Simple IVR Flow
 
-
-Below is a diagram of how the webhooks and API Calls from your server will work with the 8x8 Voice Platform to create this IVR. 
-
+Below is a diagram of how the webhooks and API Calls from your server will work with the 8x8 Voice Platform to create this IVR.
 
 ![](../images/b5b94b4-Callsflow_IVR_Diagrams.drawio_1.png)
 
 ## Example of initial API call to place outbound call
 
-
 This is the URL to send the initial API request to.
-
 
 `POST voice.wavecell.com/api/v1/subaccounts/{sub-account-id}/callflows` - v1.2
 
-
 This is the request body to send the API request to as well. Note, you will need to replace the source with a 8x8 virtual number in your account and destination with a destination phone number to call.
 
-
 Sample of Simple IVR Request
+
 ```json
 {
     "callflow": [
@@ -92,14 +76,11 @@ Sample of Simple IVR Request
 
 ```
 
-### Example Response Body for an Callflows API request.
-
+### Example Response Body for an Callflows API request
 
 Below are examples of successful and failure responses to the API request above. Depending on the error the status message may change.
 
-
 **Success**
-
 
 ```json
 {
@@ -114,7 +95,6 @@ Below are examples of successful and failure responses to the API request above.
 
 **Failure**
 
-
 ```json
 {
     "sessionStatus": "NOT_CREATED",
@@ -127,16 +107,12 @@ Below are examples of successful and failure responses to the API request above.
 
 ### Explaining Session Status in Callflows Response Body
 
-
 Session status indicates if a call is successfully accepted & created or not created on the 8x8 platform. 8x8 returns two status:
-
 
 * `CREATED`- call is successfully created on the platform.
 * `NOT CREATED`- call is not successfully created on the platform and 8x8 returns `statusCode` and `statusMessage` to understand why the call was not accepted on the platform
 
-
 ### Status Code and Status Message
-
 
 | Status Code | Message                                                                                                                                                              |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -150,12 +126,9 @@ Session status indicates if a call is successfully accepted & created or not cre
 | -1009       | Invalid call flow entry provided. [Additional error details here].<br>Eg: Invalid call flow entry provided. $.callflow[0].params.text: is missing but it is required |
 | -9999       | An unknown error has occurred                                                                                                                                        |
 
-
 ## VCA Webhook Example
 
-
 Once the initial call is made and the user responds with a DTMF input, the server will be sent a [VCA](/connect/reference/voice-message-copy#voice-call-action) webhook which will contain the DTMF input as part of the response body:
-
 
 ```json
 {
@@ -187,14 +160,12 @@ Once the initial call is made and the user responds with a DTMF input, the serve
 
 This will allow your server to identify the DTMF input and reply with a callflow as the [VCA](/connect/reference/voice-message-copy#voice-call-action) webhook response. Below are examples of Callflow responses. Responding to the VCA webhook with one of these callflows below will trigger the corresponding action.
 
-
 ### DTMF Input 1 - Hangup
-
 
 Responding with the callflow below will immediately end the call.
 
-
 Digit 1
+
 ```json
 {
     "callflow": [
@@ -208,11 +179,10 @@ Digit 1
 
 ### DTMF Input 2 - Connect Call
 
-
 Responding with this callflow will connect the existing call to a different number.
 
-
 Digit 2
+
 ```json
 {
     "callflow": [
@@ -230,11 +200,10 @@ Digit 2
 
 ### DTMF Input Other - Repeat Menu
 
-
 Responding with this callflow will repeat the main menu.
 
-
 Any Other Digit
+
 ```json
 {
     "callflow": [
@@ -262,12 +231,9 @@ Any Other Digit
 
 ## Voice Session Summary Webhook
 
-
 Upon termination of the session the session summary([VSS](/connect/reference/session-status)) will be returned via webhook. To learn more about the Voice Session Summary, please [click here](/connect/reference/session-status).
 
-
 ## Glossary of Callflow Actions used in a successful Voice Messaging call scenario
-
 
 * [`makecall`](/connect/docs/makecall)
 * [`sayAndCapture`](/connect/reference/call-flow-actions-sayandcapture)

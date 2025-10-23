@@ -6,7 +6,7 @@ These guides provide step-by-step instructions to integrate 8x8 Messaging APIs (
 
 * **[Integrating 8x8 Messaging Apps (WhatsApp, Viber, etc.) with Salesforce](/connect/docs/salesforce-flowbuilder-8x8-messaging-integration)**
 
-	+ A comprehensive guide to integrating the 8x8 **Messaging API**. Learn the end-to-end process, focusing on how to handle **complex, nested JSON structures**, such as those used for **WhatsApp templates**.
+  * A comprehensive guide to integrating the 8x8 **Messaging API**. Learn the end-to-end process, focusing on how to handle **complex, nested JSON structures**, such as those used for **WhatsApp templates**.
 * **[Integrating 8x8 SMS API with Salesforce](/connect/docs/salesforce-flowbuilder-8x8-sms-integration)**
 
-	+ A comprehensive guide to integrating the 8x8 **SMS API**. Learn the end-to-end process, including how to handle the direct and simple structure required for sending **SMS**.
+  * A comprehensive guide to integrating the 8x8 **SMS API**. Learn the end-to-end process, including how to handle the direct and simple structure required for sending **SMS**.

@@ -40,7 +40,7 @@ Now you can create a channel
 
 **Create a channel** - [API method](/actions-events/reference/createchatapichannel-1)
 
-Go to Configuration Manager - Channel - Chat API 
+Go to Configuration Manager - Channel - Chat API
 
 ![](../images/cfd6d87-ChatGatewayChannel.png)
 
@@ -58,11 +58,11 @@ Queue - This is a queue that the channel will route to, however this can be chan
 
 **Create conversation** [API](/actions-events/reference/createcctransaction-1)
 
-When creating the conversation, the channnel ID and the API key which have been created earlier in the flow are needed. 
+When creating the conversation, the channnel ID and the API key which have been created earlier in the flow are needed.
 
 Information that can be passed across when creating the conversation
 
-**User object** 
+**User object**
 
 These allows you to give information about the customer to the agent and also populate the 8x8 Native CRM, in this example below
 
@@ -210,7 +210,7 @@ curl --request POST
 
 ```
 
-In the history in the user objects, you can also add 
+In the history in the user objects, you can also add
 
 **User object - History - attachments**
 
@@ -220,7 +220,7 @@ When adding the user history, attachments that have been sent between the bot an
 
 When adding the user history, adaptive cards that have been sent between the bot and customer can be added to the conversation. More information on adaptive cards can be found here - [MS Adaptive cards](https://learn.microsoft.com/en-us/adaptive-cards/)
 
-Once the conversation is created an activity will be sent for # **`QUEUED`** 
+Once the conversation is created an activity will be sent for # **`QUEUED`**
 
 ```
 {
@@ -239,7 +239,7 @@ When the conversation is queued, this information can still be updated and the q
 
 **Update conversation** [Update conversation](/actions-events/reference/putcctransaction)
 
-Once the conversation has reached an agent, the follow notification will be received from # **`AGENT JOINED`** 
+Once the conversation has reached an agent, the follow notification will be received from # **`AGENT JOINED`**
 
 ```
 {  
@@ -253,7 +253,7 @@ Once the conversation has reached an agent, the follow notification will be rece
 
 ```
 
-Then, when the agent is typing a message, the following activity will be sent # **`ACTIVITY`** 
+Then, when the agent is typing a message, the following activity will be sent # **`ACTIVITY`**
 
 ```
 {
@@ -277,7 +277,7 @@ Then, when the agent is typing a message, the following activity will be sent # 
 
 The conversation will then be ongoing between the agent and the customer.
 
-An agent sends a message, this will be received on the message activity with the conversationID # **`MESSAGE`** 
+An agent sends a message, this will be received on the message activity with the conversationID # **`MESSAGE`**
 
 ```
 {
@@ -293,7 +293,7 @@ An agent sends a message, this will be received on the message activity with the
 
 ```
 
-Then, a message can be sent back in, using the conversation ID, 
+Then, a message can be sent back in, using the conversation ID,
 
 ```
  "authorType": "user",
@@ -304,9 +304,9 @@ Then, a message can be sent back in, using the conversation ID,
 ## Note
 
 > 📘 **To enhance the experience of the customer, we recommend you leverage these Contact Center API's as well -**
-> 
-> [Real Time Statistics Reporting API](/analytics/docs/cc-realtime-statistics), to retrieve customer information, make routing decisions. 
-> 
->  [Tenant Schedule API](https://support.8x8.com/cloud-contact-center/8x8-contact-center/developers/what-is-the-8x8-contact-center-tenant-provisioning-api), to ensure the Contact Center is open and receiving queries before handing the query off to an agent.
-> 
+>
+> [Real Time Statistics Reporting API](/analytics/docs/cc-realtime-statistics), to retrieve customer information, make routing decisions.
+>
+> [Tenant Schedule API](https://support.8x8.com/cloud-contact-center/8x8-contact-center/developers/what-is-the-8x8-contact-center-tenant-provisioning-api), to ensure the Contact Center is open and receiving queries before handing the query off to an agent.
+>
 >

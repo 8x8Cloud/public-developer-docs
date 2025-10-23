@@ -4,6 +4,6 @@ You can contact the 8x8 JaaS Support Team either by clicking the **Contact suppo
 
 Complete the form with as much detail as possible so the JaaS team can address your issue or concern promptly.
 
-![1439](../images/d123c24-contact_support.png "contact_support.png") 
+![1439](../images/d123c24-contact_support.png "contact_support.png")
 
 ---

@@ -2,7 +2,6 @@
 
 ### Error Details and Error Code
 
-
 | Status Code | Message |
 | --- | --- |
 | -2001 | An internal error has occurred |

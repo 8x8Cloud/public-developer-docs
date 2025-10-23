@@ -2,7 +2,6 @@
 
 The 8x8 Number Lookup API uses the following **error codes:**
 
-
 | HTTP Status Code | Reason |
 | --- | --- |
 | 2000 | Internal error / Unknown provider error |

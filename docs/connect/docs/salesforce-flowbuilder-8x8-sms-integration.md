@@ -16,8 +16,8 @@ This guide utilizes Salesforce External Services. According to the official Sale
 * **Required Editions:** Available in **Enterprise**, **Performance**, **Unlimited**, and **Developer** Editions.
 * **Feature Integration**: The actions created from an External Service can be used in declarative tools like **Flow Builder**, Orchestrator, Einstein bots, or Omnistudio.
 * **User Permissions Needed**:
-	+ To **define** an external service: The user needs **Modify All Data** OR **Modify Metadata Through Metadata API Functions** permissions.
-	+ To **invoke** an external service action from a flow: The user needs the **Run Flows** permission.
+  * To **define** an external service: The user needs **Modify All Data** OR **Modify Metadata Through Metadata API Functions** permissions.
+  * To **invoke** an external service action from a flow: The user needs the **Run Flows** permission.
 
 #### **8x8 Account Requirements**
 
@@ -38,9 +38,9 @@ The External Credential is a secure vault for your API key.
 1. Navigate to **Setup** ⚙️. In the Quick Find box, type `External Credentials` and select it.
 2. Click **New**.
 3. Enter the following details:
-	* **Label**: `8x8 CPaaS Authentication`
-	* **Name**: `X8x8_CPaaS_Authentication`
-	* **Authentication Protocol**: Select `Custom`.
+  * **Label**: `8x8 CPaaS Authentication`
+  * **Name**: `X8x8_CPaaS_Authentication`
+  * **Authentication Protocol**: Select `Custom`.
 4. Click **Save**.
 
 #### **Step 1.2: Create the Principal**
@@ -49,16 +49,14 @@ The Principal holds the actual secret Bearer Token.
 
 1. On the External Credential page you just saved, scroll down to **Principals** and click **New**.
 2. Enter the following details:
-	* **Principal Name**: `8x8 API Key Principal`
-	* **Sequence Number**: `1`
+  * **Principal Name**: `8x8 API Key Principal`
+  * **Sequence Number**: `1`
 3. Under **Authentication Parameters**, click **Add Parameter**.
-	* **Name**: `Authorization`
-	* **Value**: `Bearer YOUR_API_TOKEN` (Replace with your actual API key).
+  * **Name**: `Authorization`
+  * **Value**: `Bearer YOUR_API_TOKEN` (Replace with your actual API key).
 4. Click **Save**.
 
 ![Create Principal](../images/12ff3d7e37a1acac54dda1ed67115f152e214b81055ff324617359dde97ebf0a-image.png)Create Principal
-
-  
 
 #### **Step 1.3: Create the Named Credential for SMS**
 
@@ -67,16 +65,14 @@ The Named Credential links the SMS API's specific address (URL) to the authentic
 1. Navigate to **Setup** ⚙️. In the Quick Find box, type `Named Credentials` and select it.
 2. Click **New**.
 3. Enter the following details:
-	* **Label**: `8x8 SMS API`
-	* **Name**: `X8x8_SMS_API`
-	* **URL**: `https://sms.8x8.com`
-	* **External Credential**: Select the `8x8 CPaaS Authentication` credential.
-	* Ensure the **Generate Authorization Header** checkbox is checked.
+  * **Label**: `8x8 SMS API`
+  * **Name**: `X8x8_SMS_API`
+  * **URL**: `https://sms.8x8.com`
+  * **External Credential**: Select the `8x8 CPaaS Authentication` credential.
+  * Ensure the **Generate Authorization Header** checkbox is checked.
 4. Click **Save**.
 
 ![Completed Named Credential and External Credential](../images/7408ec5b970f70c3eed0a9396213ffa13f68f3b06b41090d9d3e3af9c8f458f0-image.png)Completed Named Credential and External Credential
-
-  
 
 ---
 
@@ -88,13 +84,14 @@ Now, we will use your SMS OAS file to teach Salesforce about the specific API ca
 2. Click **Add External Service**.
 3. Select **From API Specification**.
 4. Configure the service:
-	* **Service Name**: `CPaaSSMS`
-	* **Named Credential**: Select the **`8x8 SMS API`** Named Credential you just created.
-	* **Service Schema**: Select **Complete JSON** and upload your SMS-specific [OAS](https://8x8-enterprise-group.readme.io/connect/reference/getting-started-with-sms-api) `.json` file.
-	* **Service Schema**:
-		+ Select Upload from local and upload the complete [OAS](https://8x8-enterprise-group.readme.io/connect/reference/getting-started-with-sms-api) `.json` file **or**
-		+ Select "Complete Schema" and paste the schema below (contains only send single SMS and send batch SMS)
-5. 
+  * **Service Name**: `CPaaSSMS`
+  * **Named Credential**: Select the **`8x8 SMS API`** Named Credential you just created.
+  * **Service Schema**: Select **Complete JSON** and upload your SMS-specific [OAS](https://8x8-enterprise-group.readme.io/connect/reference/getting-started-with-sms-api) `.json` file.
+  * **Service Schema**:
+    * Select Upload from local and upload the complete [OAS](https://8x8-enterprise-group.readme.io/connect/reference/getting-started-with-sms-api) `.json` file **or**
+    * Select "Complete Schema" and paste the schema below (contains only send single SMS and send batch SMS)
+5.
+
 ```json
 {
     "openapi": "3.0.1",
@@ -390,6 +387,7 @@ Now, we will use your SMS OAS file to teach Salesforce about the specific API ca
 }
 
 ```
+
 6. Click **Save & Next**,
 7. In **Select Operations** , select the Send-Many-Sms and Send-Sms-Single operations then **Next**, and **Finish**.
 
@@ -397,7 +395,6 @@ Salesforce will now parse the file and make the Send-Sms-Single and Send-Many-Sm
 
 ![](../images/78d972ceceddd9ae02eb9b596d255ce3e1ff3c8aca2619dadefb46a8842edbc9-image.png)
   
-
 ---
 
 ### Part 3: Building the SMS Flow
@@ -409,14 +406,12 @@ The body for an SMS message is much simpler than other channels, which makes the
 1. Navigate to **Setup** ⚙️ > **Flows** and click **New Flow**. Select **Autolaunched Flow**.
 2. From the toolbox on the left, create one variable by clicking **New Resource**.
 3. * **Variable: The SMS Body**
-	* **Resource Type**: `Variable`
-	* **API Name**: `smsBody`
-	* **Data Type**: `Apex-Defined`
-	* **Apex Class**: Search for and select the auto-generated class for the SMS request body. It will be named similar to `ExternalService__CPaaSSMS_SmsRequest`.
+  * **Resource Type**: `Variable`
+  * **API Name**: `smsBody`
+  * **Data Type**: `Apex-Defined`
+  * **Apex Class**: Search for and select the auto-generated class for the SMS request body. It will be named similar to `ExternalService__CPaaSSMS_SmsRequest`.
 
 ![Configuring the first Variable **smsBody**](../images/5a61363c1af70fd59d20755320e12d5f8b2ddc950b407d3df67a360f8083a0ab-image.png)Configuring the first Variable **smsBody**
-
-  
 
 #### **Step 3.2: Assignment - Set SMS Properties**
 
@@ -425,25 +420,22 @@ We only need one Assignment element to construct the SMS message.
 1. On the flow canvas, click the `+` icon after the Start element and add an **Assignment** element.
 2. **Label**: `Set SMS Body`
 3. Configure the following assignments.
-	* `{!smsBody.to}` | `Equals` | `+65xxxxxxxxxx` (The recipient's phone number)
-	* `{!smsBody.from}` | `Equals` | `8x8` (Your 8x8-registered SMS Sender ID or phone number)
-	* `{!smsBody.text}` | `Equals` | `This is an SMS message.`
+  * `{!smsBody.to}` | `Equals` | `+65xxxxxxxxxx` (The recipient's phone number)
+  * `{!smsBody.from}` | `Equals` | `8x8` (Your 8x8-registered SMS Sender ID or phone number)
+  * `{!smsBody.text}` | `Equals` | `This is an SMS message.`
 
 ![](../images/3dc7f853bd8a2e53f2db30df8e6a57b375c53a0dd1966872407c395801cae40d-image.png)
   
-
 #### **Step 3.3: The Action - Make the API Call**
 
 1. Click the final `+` and add an **Action** element.
 2. Search for your `SmsApi` actions and select the action for sending an SMS.
 3. **Label**: `Send SMS`
 4. Configure the inputs:
-	* **subAccountId**: Enter your 8x8 Subaccount ID string here.
-	* **body**: Select your main variable, `{!smsBody}`.
+  * **subAccountId**: Enter your 8x8 Subaccount ID string here.
+  * **body**: Select your main variable, `{!smsBody}`.
 
 ![](../images/c663e80783b989de121ce72d4b7b54804e7afa5f35868e42e2a32b1a9905a5b2-image.png)
-
-  
 
 ---
 

@@ -15,7 +15,7 @@ If you need to restrict inbound traffic to your webhook endpoint, please allow r
 | Europe          | 34.142.20.188, 34.142.64.178, 34.39.69.103, 34.39.114.155   |
 | North America   | 50.112.250.190, 100.21.170.42, 52.10.10.63                  |
 
-_This list was updated on: October 13th, 2025._
+*This list was updated on: October 13th, 2025.*
 
 ## Programmable Voice
 
@@ -26,4 +26,4 @@ The below IPs have to be whitelisted for Number Masking API, call handle, call s
 - 54.255.116.8
 - 52.74.232.241
 
-_This list was updated on: Oct 13, 2023._
+*This list was updated on: Oct 13, 2023.*

@@ -13,9 +13,9 @@ The default tutorial includes three questions, but you can customize it with you
 * An **8x8** account
 * A **WhatsApp Business API** account with 8x8
 * Access to **Google Sheets** and its API
-	+ You can also choose to substitute another sheet or survey tool.
+  * You can also choose to substitute another sheet or survey tool.
 * **Pipedream Account**
-	+ You can also choose to substitute a similar API connector tool like Zapier, Make or even your own API server.
+  * You can also choose to substitute a similar API connector tool like Zapier, Make or even your own API server.
 
 ## Video Demo
 
@@ -36,6 +36,7 @@ You can find an example Automation Workflow workflow below, which you can use to
 While we will not explain the different components of the tutorial here, if you need a refresher please see our section on Automation Builder [Steps](triggers-and-steps-library) and [Triggers](triggers).
 
 tutorial_wa_survey.json
+
 ```json
 {
   "definition": {
@@ -277,17 +278,16 @@ The  **HTTP Trigger** should have these following configurations:
 
 ![](../images/cc24cff-image.png)
   
-
 Within the **HTTP Trigger,** go to **Generate Test Event** and use the following JSON as the Test Event's input. This will allow us to correctly populate the values for the following Google Sheet step.
 
 ![](../images/e2dff8a-Screenshot_2024-06-20_at_5.28.36_PM.png)
 
 ```json
 {
-	"response1": "WhatsApp, SMS",
-	"response2": "10",
-	"response3": "No Issues!",
-	"mobileNumber": "+6599999999"
+  "response1": "WhatsApp, SMS",
+  "response2": "10",
+  "response3": "No Issues!",
+  "mobileNumber": "+6599999999"
 }
 
 ```
@@ -297,9 +297,8 @@ The **Google Sheets Step** should have the following configuration.
 ![](../images/5ab2223-Screenshot_2024-06-20_at_5.30.40_PM.png)
 Within **Pipedream**, you should be able to see the HTTP responses sent by Automation Builder which may be useful in case any debugging is required.
 
-  
-
 ![](../images/f8264b4-Screenshot_2024-06-21_at_10.11.34_AM.png)
+
 ## Step 4: Send WhatsApp Message
 
 After setting up the above, you should be able to send a the WhatsApp Trigger message to your WhatsApp Account and complete the survey as follows.

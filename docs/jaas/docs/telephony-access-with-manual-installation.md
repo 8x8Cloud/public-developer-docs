@@ -7,6 +7,7 @@
 Update the following urls in **config.js**:
 
 config.js
+
 ```
 dialInConfCodeUrl:  'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access',
 dialInNumbersUrl: 'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access/dids',
@@ -21,6 +22,7 @@ Edit the prosody configuration file by adding the VirtualHost "jigasi.meet.jitsi
 * Update the **asap_accepted_audiences** by replacing `<your domain>` with your actual domain (e.g. meet.example.com).
 
 /etc/prosody/conf.avail/<your domain>.cfg.lua
+
 ```
 VirtualHost "jigasi.meet.jitsi"
     enabled = true

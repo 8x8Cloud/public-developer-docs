@@ -79,13 +79,11 @@ Note: This step is only required for receiving incoming calls.
 
 ![](../images/4f16d2e-microphone-usage-policy-description.png "microphone-usage-policy-description.png")  
 
-  
-
 The **`NSMicrophoneUsageDescription`** property describes the reason your app needs to access the phone microphone. When the system prompts the user to allow access, this string is displayed as part of the alert. Therefore, it cannot be left empty.
 
 ## Build and run
 
-After you have completed the previous integration tasks, you can verify if your app can invoke functions from the **`Wavecell.xcframework`** by doing the following: 
+After you have completed the previous integration tasks, you can verify if your app can invoke functions from the **`Wavecell.xcframework`** by doing the following:
 
 1. Modify **`AppDelegate.swift`** by adding the following lines:
 
@@ -94,6 +92,7 @@ import Wavecell
 print("\(VoiceSDK.shared.version())")
 
 ```
+
 2. Build (**Cmd+B**) and Run (**Cmd+R**) the app project
 3. If successful, your Xcode console displays the following type of message:
 
@@ -129,10 +128,10 @@ with your Apple developer account:
 
 ![](../images/0088a27-download-voip-services-certificate.png "download-voip-services-certificate.png")
 
-2. Open the **`voip_services.cer`** file with the **Keychain Access** app on your computer. 
+2. Open the **`voip_services.cer`** file with the **Keychain Access** app on your computer.
 
 Select the **login** option if you are asked which keychain to add the certificate to.
-3. In the **Keychain Access** app, select the **Certificates** option in the bottom section of the left sidebar. 
+3. In the **Keychain Access** app, select the **Certificates** option in the bottom section of the left sidebar.
 
 You will now need to find the certificate you have created.
 4. Export your Certificate as a **`.p12`** file.
@@ -148,6 +147,7 @@ openssl rsa -in key.pem -out key.pem
 cat cert.pem key.pem > apns-voip-services.pem
 
 ```
+
 6. Register the Certificate (**`apns-voip-services.pem`** file) with your Wavecell developer account.
 
 ### Token-based

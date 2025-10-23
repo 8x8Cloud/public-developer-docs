@@ -64,9 +64,9 @@ scrollId=6bca6d01-774c-4115-8a03-eff95f430b06' \
 ```
 
 > 📘 **'scrollId' In Request**
-> 
+>
 > Above request retrieves page with scrollId in query parameter, if you want to get the first page don’t provide scrollId.
-> 
+>
 >
 
 #### Response
@@ -100,9 +100,9 @@ scrollId=6bca6d01-774c-4115-8a03-eff95f430b06' \
 ```
 
 > 📘 **'scrollId' In Response**
-> 
+>
 > When a user gets **scrollId null in response** it would mean there is **no more data to retrieve** for a given request. Thus, the **scrollId value equal to null in response** implies the **last page**.
-> 
+>
 >
 
 #### Response body fields description

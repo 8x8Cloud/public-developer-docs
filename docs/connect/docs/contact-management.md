@@ -4,8 +4,6 @@ Contact Management is a feature inside Connect that allows you to manage your co
 
 ## Video Guide
 
-  
-
 <iframe
   src="https://www.youtube.com/embed/hp3zm-iJ0pI?si=nDW3Q8jQQ8pliS-9"
   height="500px"
@@ -77,7 +75,7 @@ You can easily group your contacts by creating a new group. Once a group is crea
 
 3. Click "Save" and that's it, you're done creating your group.
 
-## Blacklisting your contacts.
+## Blacklisting your contacts
 
 Blacklisting is useful when you want to avoid sending messages to some of your customers. Usual use-case for this is customer subscriptions where some of your customers want to unsubscribe to your marketing messages.
 

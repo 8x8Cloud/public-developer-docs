@@ -19,7 +19,6 @@ We will be using the following terms in this document:
 - **Branch**, a step that allows you to define alternate paths for the workflow based on conditions.
 - **Workflow context**, data captured in a workflow instance which persists between steps.
 
-
 ## Use Cases
 
 The Automation API allows you to tackle many business processes, here are some examples of the most common use cases:
@@ -48,12 +47,12 @@ Automation API uses Bearer authentication scheme. All requests to automation ser
 
 Here is how you would likely interact with the Automation API:
 
-**WORKFLOW CREATION **
+**WORKFLOW CREATION**
 
 1) Create a new workflow definition, you are submitting your blueprint
    -> [/connect/reference/create-definition](/connect/reference/create-definition)
 
-**WORKFLOW DEFINITION MANAGEMENT **
+**WORKFLOW DEFINITION MANAGEMENT**
 
 2) Get your workflow definitions, to make sure your definition is there
    -> [/connect/reference/get-all-definitions](/connect/reference/get-all-definitions)
@@ -67,8 +66,7 @@ Here is how you would likely interact with the Automation API:
 5) If you want to delete your definition, you can use this
    -> [/connect/reference/delete-definitions](/connect/reference/delete-definitions)
 
-
-**WORKFLOW INSTANCE  MANAGEMENT **
+**WORKFLOW INSTANCE  MANAGEMENT**
 6) To test your workflow, you can trigger it manually
    -> [/connect/reference/start-workflow-instance](/connect/reference/start-workflow-instance)
 
@@ -81,7 +79,6 @@ Here is how you would likely interact with the Automation API:
 9) To get errors of a workflow instance
    -> [/connect/reference/get-instance-errors](/connect/reference/get-instance-errors)
 
-
 As you can see, only the step #1 is mandatory.
 If you know that your workflow is valid, and that you can test it without the API (by actually sending an incoming message for example), you only need to perform the first step (create a workflow definition).
 
@@ -92,6 +89,7 @@ The other items are here to help you manage your workflow definition, test them 
 Here is a simple example of a workflow definition.
 
 This definition contains the following attributes:
+
 - the trigger is any Inbound Chat Apps message on the subaccount Test_12345_ChatApps
 - there are no conditions, all instances will result in sending a Chat Apps message
 - the instance will send an auto reply message to any incoming Chat Apps message

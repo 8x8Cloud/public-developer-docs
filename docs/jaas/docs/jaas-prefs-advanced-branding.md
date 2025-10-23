@@ -12,6 +12,7 @@ This will result in the room from the **`conference`** query parameter having ap
 **Note:**
 
 In case you setup an advanced branding URL, your global Branding configurator settings will be ignored, even when your advanced branding endpoint fails to respond or errors out.
+
 ## Video Demo
 
 Please see the video below for an example of **Advanced Branding** used to modify room properties based on the room name.
@@ -31,41 +32,53 @@ All the branding data fields are optional:
 * #### **`backgroundColor`**
 
 (string): The background color
+
 * #### **`backgroundImageUrl`**
 
 (string): The URL for the background image
+
 * #### **`didPageUrl`**
 
 (string): The URL for a custom DID's page hosted by you
+
 * #### **`groupChatRequiresPermission`**
 
 (boolean): Whether participant can only send group chat message if [send-groupchat](/jaas/docs/api-keys-jwt#send-groupchat) feature is enabled in jwt
+
 * #### **`pollCreationRequiresPermission`**
 
 (boolean): Whether participant can only create polls if [create-polls](/jaas/docs/api-keys-jwt#create-polls) feature is enabled in jwt
+
 * #### **`inviteDomain`**
 
 (string): The base URL of the meeting invite link. For more details on custom invite links please check the  
 
 [configuring the invite link](/jaas/docs/iframe-api-invite) section
+
 * #### **`logoClickUrl`**
 
 (string): The URL which should open on clicking the logo image. Usually your Company's URL
+
 * #### **`logoImageUrl`**
 
 (string): The URL of the logo image for the meeting
+
 * #### **`avatarBackgrounds`**
 
 (Array[string]): Backgrounds list overwriting the default avatar backgrounds pool
+
 * #### **`premeetingBackground`**
 
 (string): Custom background for prejoin/lobby screens. It maps to the **`background`** css property of the premeeting screens container.
+
 * #### **`virtualBackgrounds`**
 
 (Array[string]): A list of images that can be used as video backgrounds. When this field is present, the default images will be replaced with those provided. (**NOTE**: Fetching the images must not be protected by CORS.)
+
 * ##### **`customIcons`**
 
 (Object): Object containing customized icons that should replace the default ones. The object keys need to be the exact same icon names used in here: [https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/icons/svg/index.ts](https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/icons/svg/index.ts). To avoid having the icons trimmed or displayed in an unexpected way, please provide svg files containing svg xml icons in the size that the default icons come in.
+
 * #### **`customTheme`**
 
 (Object): Object containing a theme's properties. It also supports partial overwrites of the main theme. For a list of all possible theme tokens and their current defaults, please check: [https://github.com/jitsi/jitsi-meet/tree/master/resources/custom-theme/custom-theme.json](https://github.com/jitsi/jitsi-meet/tree/master/resources/custom-theme/custom-theme.json) . For a short explanation on each of the tokens, please check: [https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/ui/Tokens.ts](https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/ui/Tokens.ts) .  
@@ -73,6 +86,7 @@ All the branding data fields are optional:
 **Note:**
 
 This is work in progress so many of the various tokens are not yet applied in code or they are partially applied.
+
 * #### **`labels`**
 
 (Object): An object containing a mapping between the language and the link that contains a json with the translation labels to be overwritten. For the shape of the json check [https://github.com/jitsi/jitsi-meet/blob/master/lang/main.json](https://github.com/jitsi/jitsi-meet/blob/master/lang/main.json). For a list of supported languages check [https://github.com/jitsi/jitsi-meet/blob/master/lang/languages.json](https://github.com/jitsi/jitsi-meet/blob/master/lang/languages.json).

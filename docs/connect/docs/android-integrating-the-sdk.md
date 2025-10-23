@@ -29,17 +29,17 @@ Complete the following steps to setup your Android studio development environmen
 
 3. In the **Configure Your Project** window:
 
-	* Enter the name of your app and your **Package name**.
-	* Enter the location of where your project will be saved
-	* Select either **Kotlin** or **Java** as the language
-	* Select **API 26: Android 8.0 (Oreo)** as the **Minimum SDK** and click **Finish**.
+  * Enter the name of your app and your **Package name**.
+  * Enter the location of where your project will be saved
+  * Select either **Kotlin** or **Java** as the language
+  * Select **API 26: Android 8.0 (Oreo)** as the **Minimum SDK** and click **Finish**.
 
 ![850](../images/7777878-android_studio_3.png "3.png")Android Studio 3
 
-> 
+>
 > **Note::** The Voice SDK APIs expose Kotlin [coroutine](https://kotlinlang.org/docs/coroutines-guide.html) APIs such as [Flows](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) and `suspend` functions. The easiest way to consume such APIs from Java is to use [RxJava](https://github.com/ReactiveX/RxJava) in conjunction with [coroutine to Rx extensions](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-rx3/).
-> 
-> 
+>
+>
 >
 
 ### **Add the Voice SDK as a dependency**

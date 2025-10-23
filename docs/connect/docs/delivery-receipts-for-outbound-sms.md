@@ -22,16 +22,12 @@ If we do not receive a delivery receipt from the SMS carrier promptly, our platf
 
 Request body description
 
-
-
-
 | Parameter name | Parameter type | Description                                                                          |
 | --- | --- |--------------------------------------------------------------------------------------|
 | namespace | string | A generic namespace for incoming webhook.<br>Equal to `SMS` for delivery receipts.   |
 | eventType | string | Webhook type. <br>Equals to `outbound_message_status_changed` for delivery receipts. |
 | description | string | Human-readable description of the incoming event                                     |
 | payload | object | Delivery receipt information, see below.                                             |
-
 
 Payload object description
 

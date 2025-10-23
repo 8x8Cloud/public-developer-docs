@@ -1,8 +1,8 @@
 # Conversation
 
 > ❗️ **PLEASE NOTE - This API is going to be deprecated on 30th September 2023, it will no longer work after this date. Please use our [Chat Gateway](/actions-events/docs/chat-gateway) which offers all of the Chat API's functionalities as well as additional features.**
-> 
-> 
+>
+>
 
 After you have created:
 
@@ -32,7 +32,7 @@ Any new message added to the conversation using [**send a message**](/contactcen
 
 If the agent ends the interaction, you receive an [**`AGENT_LEFT`**](/contactcenter/docs/webhook-events-reference#agent_left) event notification.
 
-You need to prompt the conversation ending from your bot or integration by calling the [**customers leaves conversation**](/contactcenter/reference/customerparticipantleavecctransaction) API. This frees the agent to take on other assignments. 
+You need to prompt the conversation ending from your bot or integration by calling the [**customers leaves conversation**](/contactcenter/reference/customerparticipantleavecctransaction) API. This frees the agent to take on other assignments.
 
 You receive an [**`AGENT_LEFT`**](/contactcenter/docs/webhook-events-reference#agent_left) event.
 

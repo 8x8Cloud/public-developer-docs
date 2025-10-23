@@ -18,7 +18,6 @@ Please see this accompanying Video Guide for Zapier to see this integration in a
   allowFullScreen>
 </iframe>
   
-
 ## Tutorial
 
 ## Google Sheet Setup

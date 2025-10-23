@@ -52,31 +52,31 @@ For the **Select a existing template or compose a new message** property, if you
 
 The **Message** property will either be automatically filled in if you chose to use a template, if you do not wish to use a template, you can simply enter a freeform message body and it will be sent to the user. For the purposes of this tutorial it is fine to use a free form message body which can be copied below.
 
-> 
+>
 > Hello, this is a reminder about your scheduled appointment tomorrow.
-> 
-> 
+>
+>
 > Choose from the following options:
-> 
-> 
+>
+>
 > Click Confirm to confirm your appointment.
-> 
-> 
+>
+>
 > Click Reschedule to be shared a link to reschedule your appointment.
-> 
-> 
+>
+>
 > Click Help to be chat with an agent for further assistance.
-> 
-> 
-> 
+>
+>
+>
 
 ## 3. Wait for Reply Step
 
 ![](../images/8f2479f-image.png)![](../images/4b3e879-image.png)
 
-In the **Wait for Reply Step**, the **Channel** property should be set to the channel you expect to receive a message in. In the example we are using WhatsApp. 
+In the **Wait for Reply Step**, the **Channel** property should be set to the channel you expect to receive a message in. In the example we are using WhatsApp.
 
-The **From** property can be set to {{data.payload.user.channelUserId}} which will refer to the original sender. 
+The **From** property can be set to {{data.payload.user.channelUserId}} which will refer to the original sender.
 
 **Timeout** can be set to an appropriate value for your use case.
 
@@ -104,11 +104,11 @@ In the **Chat Apps Message Step**, set "Please select a new subaccount" to your 
 
 Message can be set to a free form message with the following text by selecting "Compose Message"
 
-> 
+>
 > No Response within the allowed time, goodbye.
-> 
-> 
-> 
+>
+>
+>
 
 ## 6a. ChatApps Message Step (Confirm)
 
@@ -122,11 +122,11 @@ In the **Chat Apps Message Step**, set "Please select a new subaccount" to your 
 
 Message can be set to a free form message with the following text by selecting "Compose Message"
 
-> 
+>
 > Thank you for confirming, our system has been updated.
-> 
-> 
-> 
+>
+>
+>
 
 ## 6b. ChatApps Message Step (Reschedule)
 
@@ -140,11 +140,11 @@ In the **Chat Apps Message Step**, set "Please select a new subaccount" to your 
 
 Message can be set to a free form message with the following text by selecting "Compose Message"
 
-> 
+>
 > Please visit [https://example.com](https://example.com) to reschedule your appointment.
-> 
-> 
-> 
+>
+>
+>
 
 ## 6c. Send to Converse
 
@@ -166,7 +166,7 @@ If required you can also change the **Request Body** property, I set the value a
 
 ```
 {
-	"data": "payload"
+  "data": "payload"
 }
 
 ```

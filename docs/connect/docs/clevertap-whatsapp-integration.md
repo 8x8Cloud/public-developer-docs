@@ -40,7 +40,6 @@ Click on the **Provider Configuration** button to set up a new provider. In the 
 | Request Type | POST |
 | HTTP End Point | [https://chatapps.8x8.com/api/v1/subaccounts/{{subaccountid}}/partners/clevertap/wa](https://chatapps.8x8.com/api/v1/subaccounts/%7B%7Bsubaccountid%7D%7D/partners/clevertap/wa) |
 
-
 After entering the values, ensure that you copy the value for the **Delivery Report Callback URL** and the **Inbound Message Callback URL** and send an email to [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) with a request to enable the Clevertap integration for WhatsApp for your 8x8 account.
 
 ![Provider Details](../images/9121be5-image.png)Provider Details
@@ -53,8 +52,6 @@ Follow the directions in the dialog box to send the test WhatsApp message. This 
 
 ![](../images/e3b50b48ef3b2a45cfd8fe83db12220e8bfd9ff0e6eba865ef50f51b006de666-image.png)
 
-  
-
 If the message is sent successfully, you should see the following dialog:
 
 ![](../images/b66aa37-image.png)
@@ -63,13 +60,9 @@ As well as a corresponding WhatsApp Message sent to your WhatsApp Account.
 
 ![](../images/df00240a3c28a189f881d98f0d665308ad2b1e88bfe737abf8829298ca174c3e-image.png)
 
-  
-
 ### Using Campaigns
 
 To use this new WhatsApp Provider in campaigns, select **WhatsApp** as a Messaging Channel when you create a new campaign.
-
-  
 
 ![](../images/3a39d4e-image.png)
 

@@ -25,10 +25,10 @@
 
 > 📘
 > -
-> 
+>
 > For a better mobile experience (background support, Bluetooth support, etc.) we recommend using a native app instead. We provide a [native Android SDK](/jaas/docs/mobile-sdk-android).
-> 
-> 
+>
+>
 
 ## iOS
 
@@ -41,9 +41,9 @@
 
 > 📘
 > -
-> 
+>
 > On iOS all browsers share the same engine, Safari. As such all features and limitations on all iOS browsers are those of Safari.
-> 
+>
 > For a better mobile experience (background support, CallKit integration, etc.) we recommend using a native app instead. We provide a [native iOS SDK](/jaas/docs/mobile-sdk-ios).
-> 
+>
 >

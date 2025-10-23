@@ -26,7 +26,7 @@ In this case, there is an error in the HTTP Step that tells us that it is preven
 
 ## Common Errors
 
-This is a list of commonly encountered error messages and general recommendations on how the issue may be resolved. 
+This is a list of commonly encountered error messages and general recommendations on how the issue may be resolved.
 
 If you are unable to resolve the error, please send an email with the error details to [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com)
 

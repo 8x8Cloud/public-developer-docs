@@ -7,9 +7,9 @@ To use the mobile SDKs you need to set the following fields in **`JitsiMeetConfe
 * Set the **`serverURL`** to **`“https://8x8.vc”`**
 * Set **`token`** to your generated and signed JWT
 * Set **`roomName`** to **`“\<AppID\>/\<room\>”`** with the following details:
-	+ The rooms must be defined in the namespace of your AppID
-	+ The **AppID** can be retrieved from the [API Key](/jaas/docs/jaas-console-api-keys) page
-	+ The room should be a single-level (no slash) string composed of legitimate, safe URL characters.
+  * The rooms must be defined in the namespace of your AppID
+  * The **AppID** can be retrieved from the [API Key](/jaas/docs/jaas-console-api-keys) page
+  * The room should be a single-level (no slash) string composed of legitimate, safe URL characters.
 
 You can find sample code for both Android and iOS at [**https://github.com/jitsi/jitsi-meet-sdk-samples**](https://github.com/jitsi/jitsi-meet-sdk-samples) which includes:
 

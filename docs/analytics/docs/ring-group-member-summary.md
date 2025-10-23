@@ -1,27 +1,25 @@
 # Ring Group Member Summary
 
 > 📘 **Updated Endpoint**
-> 
+>
 > The [Ring Group Member Summary](/analytics/docs/ring-group-member-summary) and [Ring Group Summary](/analytics/docs/wa-ring-group-summary) are dedicated endpoints to replace the previous [Ring Group & Ring Group Member Summary](/analytics/docs/work-analytics-ring-group-summary) endpoint which served both purposes
-> 
-> 
+>
+>
 
 > 📘
 > -
-> 
+>
 > Note: This API provides access to data from the past 2 years only in accordance with Analytics for Work data compliance policies; queries spanning more than 2 years will return only the most recent 2 years of data, and queries outside this range will return no results
-> 
-> 
-
-  
+>
+>
 
 > 📘 **You will need a working API key to begin**
-> 
+>
 > You can generate API credentials from [How to get API Keys](/analytics/docs/how-to-get-api-keys)
-> 
+>
 > The `8x8-api-key` will be the `Key` generated. For Work Analytics the Secret from Admin Console is not required.
-> 
-> 
+>
+>
 
 Use the following base URL during this process:
 
@@ -32,10 +30,10 @@ Use the following base URL during this process:
 You will use your API key combined with the user credentials of a user with permission and access to Work Analytics to authenticate, this user **does not need to be** the one who generated the API credentials
 
 > 🚧 **User must access Analytics at least once via browser**
-> 
+>
 > The users credentials will not be able to leverage the API until they have used Work Analytics via browser at least once
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -55,7 +53,7 @@ You will use your API key combined with the user credentials of a user with perm
 | username | ✓        | The 8x8 username of a user with Work Analytics access privileges   | [someuser@acme.fakeco](mailto:someuser@acme.fakeco) |
 | password | ✓        | The 8x8 password of the user with Work Analytics access privileges | Rrnp5QBW6dTbx^TP                                    |
 
-### Authentication Request:
+### Authentication Request
 
 ```bash
 curl --location --request POST 'https://api.8x8.com/analytics/work/v1/oauth/token' \
@@ -66,7 +64,7 @@ curl --location --request POST 'https://api.8x8.com/analytics/work/v1/oauth/toke
 
 ```
 
-### Authentication Response:
+### Authentication Response
 
 **Response**
 
@@ -94,10 +92,10 @@ The following steps will use the access_token as a Bearer Token form of authenti
 This will return a summary each member of each Ring Group in the specified PBXs for the duration specified.
 
 > 📘 **Ring Group Member Summary Reference**
-> 
+>
 > You can check out [Ring Group Member Summary Reference](/analytics/docs/ring-group-member-summary) but you won't be able to try it yet.
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -135,10 +133,10 @@ As per the Open API specification guidelines, we have migrated the URLs for Ring
 | v2/rgsum?extId={extId} | v2/rgsum-members?extId={extId} |
 
 > 📘 **Try out the Ring Group Member Summary**
-> 
+>
 > How does average talk time compare across users? Lets find out @ [Ring Group Member Summary Reference](/analytics/docs/ring-group-member-summary)
-> 
-> 
+>
+>
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/work/v{version}/rgsum-members?pbxId={pbxId here}&startTime=2022-01-03 00:00:00&endTime=2022-05-03 10:00:00&timeZone=America/New_York&extId={extId here}' \
@@ -152,8 +150,8 @@ curl --location --request GET 'https://api.8x8.com/analytics/work/v{version}/rgs
 For details on the company summary metrics please refer to [Ring Group Member Summary Glossary](https://docs.8x8.com/8x8WebHelp/8x8analytics-virtual-office/Content/VOA/ring-group-summary.htm#Glossary)
 
 > 📘 **Durations are in milliseconds**
-> 
-> 
+>
+>
 
 ```json
 [

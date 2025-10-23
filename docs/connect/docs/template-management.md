@@ -1,6 +1,6 @@
 # SMS Template Management
 
-Templates is a feature within 8x8's Platform that will allow you to create message templates for later use, this page specifically covers SMS templates, although there are separate templates for our Messaging Apps functionality. 
+Templates is a feature within 8x8's Platform that will allow you to create message templates for later use, this page specifically covers SMS templates, although there are separate templates for our Messaging Apps functionality.
 
 Templates can have simple pre-filled messages beforehand or complex messages with parameters that can be customized to every message recipient.
 

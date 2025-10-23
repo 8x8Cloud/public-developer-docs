@@ -17,4 +17,3 @@ A full list of **Domains, Ports and Static IPs** is maintained and documented he
 [Whitelisting, ports/static IP ranges](https://go.8x8.vc/ranges)  
 
 [Whitelisting, domains](https://go.8x8.vc/domains)
-

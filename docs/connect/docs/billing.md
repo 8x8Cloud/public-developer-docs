@@ -48,7 +48,6 @@ The following table clarifies which common user actions will trigger a billable 
 ** • Non-conversational agents are billed per message, not per conversation, even if replies occur.  
 • Billing data for conversational agents (e.g., logs and reports) may be delayed by up to 48 hours to ensure all messages in the session are accounted for before billing is finalised.
 
-
 **Important Billing Considerations**
 
 The RCS billing models described on this page represent the standard framework. However, the global messaging ecosystem is complex. Specific billing rules, rates, and the implementation of conversational sessions can sometimes vary depending on the destination country and the recipient's mobile network operator (MNO).

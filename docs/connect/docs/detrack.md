@@ -8,8 +8,6 @@
 
 With this integration, we can leverage the Detrack event triggers and 8x8 API to send SMS when an event occurs.
 
-  
-
 ---
 
 ## Video Demo
@@ -24,10 +22,7 @@ This video demo will show how you can integrate 8x8's SMS API with Detrack in or
   allowFullScreen>
 </iframe>
   
-
 ---
-
-  
 
 ## Integrating Detrack notifications with SMS
 
@@ -35,7 +30,7 @@ This video demo will show how you can integrate 8x8's SMS API with Detrack in or
 
 ![Navigate to Detrack Notifications](../images/9917b14-image.png)
 
-2. Go to **Text / SMS settings** tab and fill out the following **required** values. 
+2. Go to **Text / SMS settings** tab and fill out the following **required** values.
 
 | Field | Value |
 | --- | --- |
@@ -57,8 +52,6 @@ The steps to configure a Notification are continued in the following section bel
 
 ---
 
-  
-
 ## Configuring your Detrack Notifications
 
 1. From the **Add Notification** form, go to the **Trigger** tab.
@@ -67,14 +60,12 @@ The steps to configure a Notification are continued in the following section bel
 4. Select the **Group** that you wish to filter. If no Group is selected, then notifications are sent for all jobs regardless of Group.
 5. If the **Failed** event is selected, you will be able to select a failed Reason to filter. If no Reason is selected, then notifications will be sent for all failed jobs regardless of Reason.
 6. If the **Pre-job** event is selected, you will be able to select which day and what time to send notifications.
-	* For the **Pre-job Sending Date** option, you can select up to 5 days prior to the scheduled date to send the notification.
-	* For the **Pre-job Sending Time** option, you can select the time of the selected day (above) to send the notification.
+  * For the **Pre-job Sending Date** option, you can select up to 5 days prior to the scheduled date to send the notification.
+  * For the **Pre-job Sending Time** option, you can select the time of the selected day (above) to send the notification.
 
 ![Trigger](../images/0109a34-image.png)
 
 ---
-
-  
 
 ## Customizing text / SMS notifications
 

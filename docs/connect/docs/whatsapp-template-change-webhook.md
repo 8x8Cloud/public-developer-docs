@@ -5,7 +5,7 @@
 > 📘
 >
 > In case you're looking for delivery notifications for Chat Apps message, please refer to [Delivery receipts for outbound Chat Apps](#)
-> 
+>
 
 ### Requirements
 
@@ -26,7 +26,6 @@ In case of connection error/timeout or HTTP response code 4XX or 5XX, there will
 
 Request body description
 
-
 | Parameter name | Parameter type | Description                                                                                                           |
 | --- | --- |-----------------------------------------------------------------------------------------------------------------------|
 | eventId | string | Unique event identifier.                                                                                              |
@@ -36,7 +35,6 @@ Request body description
 | accountId | string | AccountId which the event is associated with.                                                                         |
 | eventType | string | Webhook type.<br>Possible values are `template_category_update`, `template_status_update`, `template_quality_update`. |
 | eventDetails | object | Event related information, see below.                                                                                 |
-
 
 `eventDetails` object description
 
@@ -49,9 +47,6 @@ Request body description
 
 `meta` object description
 
-
-
-
 | Parameter name       | Parameter type | Description                                                                                                                                                                                                                                                                                                  | Applicable for eventType   |
 |----------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
 | previousCategory     | string         | Previous category for template.                                                                                                                                                                                                                                                                              | `template_category_update` |
@@ -62,7 +57,6 @@ Request body description
 | reason               | string         | Template rejection reason.<br>Possible values: `ABUSIVE_CONTENT`, `INCORRECT_CATEGORY`, `INVALID_FORMAT`, `SCAM`, `NONE`.`NONE` is also the default, set when template is approved.                                                                                                                          | `template_status_update`   |
 | disableInfo          | object         | Provided when template is scheduled to be disabled. Contains `disableDate`.                                                                                                                                                                                                                                  | `template_status_update`   |
 | otherInfo            | object         | Provided for pause or unpause event. Contains two properties `title` and `description`.  <br/>  <br/>- `title` to indicate the event. Possible values: `FIRST_PAUSE`, `SECOND_PAUSE`, `RATE_LIMITING_PAUSE`, `UNPAUSE`, `DISABLED`.<br/>- `description` to describe why the template was paused or unpaused. | `template_status_update`   |
-
 
 ### Sample template update webhook
 

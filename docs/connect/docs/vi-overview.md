@@ -2,7 +2,6 @@
 
 ![](../images/449d08f-image.png)
 
-
 ## Introduction
 
 Video Interaction simplifies the process of initiating video calls between customers and agents with minimal setup required. Most importantly, it eliminates the need for customers to download any additional apps; they can access the service directly from their smartphones. Here's how it works:
@@ -24,7 +23,6 @@ For a overview of video interaction, please see this video which will take you t
   allowFullScreen>
 </iframe>
   
-
 ## API Docs
 
 For detailed information on Video Interaction's supporting API, please refer to this [link](https://8x8-enterprise-group.readme.io/connect/reference/vi-introduction).

@@ -2,8 +2,6 @@
 
 ## RCS Business Messaging Agent Launch Process
 
-  
-
 **Agent Creation & Brand Profiling**
 
 Begin by submitting your agent details to 8x8 using the RCS Agent Request Form. This information should include:  
@@ -16,8 +14,6 @@ Begin by submitting your agent details to 8x8 using the RCS Agent Request Form. 
 
 8x8 will utilise this information to create your RCS agent profile. Once created, thoroughly review the agent’s display features and functionality to ensure alignment with your brand identity and messaging objectives.
 
-  
-
 **Agent & Brand Verification**
 
 After approving the agent profile, 8x8 will initiate the verification process, which involves:  
@@ -27,8 +23,6 @@ After approving the agent profile, 8x8 will initiate the verification process, w
 • Compliance Review: Ensuring adherence to RCS messaging guidelines, including opt-in/opt-out processes and content standards.
 
 This verification is conducted in collaboration with authorised vetting partners and may require additional information depending on regional regulations.
-
-  
 
 **Platform Review & Launch Authorisation**
 
@@ -40,8 +34,6 @@ Upon successful verification, 8x8 will submit your agent for review to Google an
 
 Approval timelines may vary based on the complexity of the use case and regional considerations.
 
-  
-
 **Agent Preview & Testing**
 
 Before full deployment, it’s essential to test the agent’s functionality. This can be achieved by:  
@@ -51,8 +43,6 @@ Before full deployment, it’s essential to test the agent’s functionality. Th
 • Preview Submission: Providing a demonstration (e.g., video walkthrough) of the agent’s interactions, including opt-in and opt-out processes.
 
 These steps ensure the agent operates as intended and complies with all necessary guidelines.
-
-  
 
 **Go-Live & Monitoring**
 

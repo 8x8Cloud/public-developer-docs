@@ -1,18 +1,18 @@
 # Usage samples
 
 > ❗️ **Customer Service Window**
-> 
+>
 > WhatsApp only allows freeform text messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
-> 
+>
 > This customer service window lasts 24 hours, and lasts 72 hours if the customer service window is initiated via a [click-to-whatsapp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp).  
-> 
+>
 > Outside of the customer service window, only pre-approved WhatsApp templates can be sent to users.
-> 
-> 
+>
+>
 
 > 👍 **Please see [Messaging API](/connect/reference/send-message) for the full API reference.**
-> 
-> 
+>
+>
 
 ## Freeform messages
 
@@ -203,7 +203,7 @@ This template message allows you to send a document. In this example below we us
       "language": "en",
       "name": "<insertTemplateName>",
       "components": [
-				{
+        {
           "type": "header",
           "parameters": [
             {
@@ -222,14 +222,12 @@ This template message allows you to send a document. In this example below we us
 The user will receive this corresponding message with a download link to the PDF document.
 
 > 📘 **Note**
-> 
+>
 > The text and buttons are part of the original template and are NOT defined in the request body above. They are optional and you can omit them from the template.
-> 
-> 
+>
+>
 
 ![Sending an Example PDF File](../images/bb76bc5-image.png)Sending an Example PDF File
-
-  
 
 ---
 
@@ -364,8 +362,6 @@ Below is an example of a Coupon Code Template Message with 1 copy code button. Y
 }
 
 ```
-
-  
 
 ---
 
@@ -513,22 +509,22 @@ After clicking "Send" then the user will send the corresponding reply.
 ### WhatsApp Commerce
 
 > 👍 **Pre-requisite: You should have a catalog [created](https://www.facebook.com/business/help/1275400645914358?id=725943027795860) and [connected](https://www.facebook.com/business/help/158662536425974) to your WhatsApp Business Account (WABA)**
-> 
-> 
+>
+>
 
 ## Interactive message with a single product item from a business catalog
 
-This type of message will feature a single item from a business catalog, it will pull information from the catalog to generate the message. 
+This type of message will feature a single item from a business catalog, it will pull information from the catalog to generate the message.
 
 > ❗️ **Customer Service Window**
-> 
+>
 > WhatsApp only allows catalog messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
-> 
+>
 > This customer service window lasts 24 hours, and lasts 72 hours if the customer service window is initiated via a [click-to-whatsapp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp).  
-> 
+>
 > Outside of the customer service window, only pre-approved WhatsApp templates can be sent to users.
-> 
-> 
+>
+>
 
 ```json
 {
@@ -556,16 +552,14 @@ This type of message will feature a single item from a business catalog, it will
 ```
 
 > 📘 **Business Catalog Values**
-> 
+>
 > The value for  which is your **Catalog ID** and  which is your **Business ID** can be found from your Catalog in the Meta Commerce Manager.
-> 
-> 
+>
+>
 
 Here is what the corresponding message will look like to the customer receiving the message:
 
 ![](../images/62ac5b5-image.png)
-
-  
 
 ### Customer Flow
 
@@ -580,8 +574,6 @@ There is also an option to message the business for any questions or clarificati
 ![](../images/2e8a5c7-image.png)
 Additionally, the customer can choose to **Add to Cart**, which will add the item to a shopping cart.
 
-  
-
 ![](../images/7a9a7f4-image.png)
 Once the item is added you can view the cart which will take you to the **Place order** screen.
 
@@ -590,14 +582,12 @@ Selecting **Place Order** will send a message to the business with the cart item
 
 ![](../images/15d6b91-image.png)
   
-
 At this point, WhatsApp leaves it to the business to define the next steps for this order, such as requesting address information for delivery or collecting payment information. It is possible for example to use webhooks or Automation Builder to listen for a cart message for a customer and then reply accordingly.
 
 Finally, the **View sent cart** option will allow the customer to confirm what items were purchased in the order.
 
 ![](../images/ef9e62d-image.png)
   
-
 ---
 
 #### Interactive message with a list of product items from a business catalog
@@ -605,14 +595,14 @@ Finally, the **View sent cart** option will allow the customer to confirm what i
 This option can send multiple product items from a business catalog to a customer. This may be useful if there is a collection of items (ex. pants, shirts, hats) that the business is looking to send to a customer.
 
 > ❗️ **Customer Service Window**
-> 
+>
 > WhatsaApp only allows catalog messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
-> 
+>
 > This customer service window lasts 24 hours, and lasts 72 hours if the customer service window is initiated via a [click-to-whatsapp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp).  
-> 
+>
 > Outside of the customer service window, only pre-approved WhatsApp templates can be sent to users.
-> 
-> 
+>
+>
 
 ```json
 {
@@ -643,7 +633,7 @@ This option can send multiple product items from a business catalog to a custome
                 "text": "8x8 Limited Edition Items"
             },
             "footer": {
-                "text": "This collection contains only the finest from 8x8.	"
+                "text": "This collection contains only the finest from 8x8.  "
             },
             "header": {
                 "type": "text",
@@ -657,21 +647,21 @@ This option can send multiple product items from a business catalog to a custome
 ```
 
 > 📘 **Business Catalog Values**
-> 
+>
 > The value for  which is your **Catalog ID** and  which is your **Business ID** can be found from your Catalog in the Meta Commerce Manager. The second set of 's can be found from each individual item in the catalog as their **Content ID**.
-> 
-> 
+>
+>
 
 Here is what the corresponding catalog message will look like.
 
 ![](../images/a32565d-image.png)
+
 ### Customer Flow
 
 After the customer clicks on **View Items**, it will appear as follows:
 
 ![](../images/f874cb1-image.png)
   
-
 The customer can click on an individual item to bring up the single-item page
 
 ![](../images/58ab049-image.png)
@@ -690,9 +680,6 @@ At this point, WhatsApp leaves it to the business to define the next steps for t
 
 ![](../images/733b6f7-image.png)
   
-
-  
-
 #### Optional: Adding SMS Fallback
 
 If you want to add a fallback to SMS, add the following fields to the "`content`" object in your existing JSON payload. The **fallbackText** will be used instead of the WhatsApp Template Body.
@@ -709,10 +696,10 @@ If you want to add a fallback to SMS, add the following fields to the "`content`
 ```
 
 > 📘 **Note**
-> 
+>
 > You may find out more about SenderID [here](/connect/docs/getting-started#1-source-sms-senderid)
-> 
-> 
+>
+>
 
 #### Send Message in Batch
 
@@ -778,10 +765,10 @@ Below is an example of a batch of messages that are using a WhatsApp Template to
 ```
 
 > 📘 **Different Files / Messages**
-> 
+>
 > Note that we are sending two different whatsapp messages with different files attached. These messages are being sent to two different recipients.
-> 
-> 
+>
+>
 
 The first recipient (**+6511111111**) will see this message as a PDF file was defined in their message object.
 

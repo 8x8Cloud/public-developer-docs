@@ -26,7 +26,7 @@ Then, search for URL, and type in your SMS API endpoint, as shown. Your endpoint
 ![248](../images/6ce5b30-Apple_Short_6.jpg "Apple Short 6.jpg")
 ![248](../images/f520c6a-Apple_Short_7.jpg "Apple Short 7.jpg")
 ![248](../images/a37d4b2-apple_short_8.jpg "apple short 8.jpg")
-Add Headers as follows: 
+Add Headers as follows:
 
 ```
 Authorization | Bearer {api key}

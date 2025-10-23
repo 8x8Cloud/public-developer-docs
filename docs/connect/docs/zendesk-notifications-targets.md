@@ -2,7 +2,7 @@
 
 ## Zendesk Support
 
-[Zendesk](https://www.zendesk.com/) is a customer support system for tracking, prioritizing, and solving support tickets. 
+[Zendesk](https://www.zendesk.com/) is a customer support system for tracking, prioritizing, and solving support tickets.
 
 With this integration, we can leverage the Zendesk triggers system and 8x8 API to send SMS when an event occurs on Zendesk.
 
@@ -48,9 +48,8 @@ With this integration, we can leverage the Zendesk triggers system and 8x8 API t
 
 ```
 
-  
-
 12. If the Webhook works as expected, you should get a code \*\*HTTP/1.1 200 OK as a response from 8x8 API\*\*, telling you that the request was correctly formatted, authenticated and the SMS is accepted and queued for processing.
+
 ```json
 {
   "umid": "bda3d56d-1424-e711-813c-06ed3428fe67",
@@ -85,8 +84,6 @@ With this integration, we can leverage the Zendesk triggers system and 8x8 API t
 }
 
 ```
-
-  
 
 10. Replace JSON fixed parameters using Zendesk available placeholders like so:
 

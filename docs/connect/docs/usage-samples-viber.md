@@ -1,8 +1,8 @@
 # Viber
 
 > 👍 **Please see [Messaging API](/connect/reference/send-message) for the full API reference.**
-> 
-> 
+>
+>
 
 ### Sending a Text Message
 
@@ -94,8 +94,6 @@ The corresponding message the user will receive:
 
 The corresponding message the user will receive:
 
-  
-
 ![Viber Rich Media: Text + Image + Button](../images/73fbe38850ffd0e3a157db293591b2a04b6ff8b35ea07712820ef447cffa62e8-Viber_Text__Image__Button.png)Viber Rich Media: Text + Image + Button
 
 ---
@@ -104,7 +102,7 @@ The corresponding message the user will receive:
 
 Refer to [Supported Content Types](/connect/reference/supported-chat-apps-content-type) for more info on supported file formats and size limits.
 
-##### Sample Request:
+##### Sample Request
 
 ```json
 {
@@ -133,8 +131,6 @@ The corresponding message the user will receive:
 #### Text + Video
 
 Refer to [Supported Content Types](/connect/reference/supported-chat-apps-content-type) for more info on supported file formats and size limits.
-
-  
 
 ```
 {
@@ -196,7 +192,7 @@ The corresponding message the user will receive:
 
 Refer to [Supported Content Types](/connect/reference/supported-chat-apps-content-type) for more info on supported file formats and size limits.
 
-##### Sample Request:
+##### Sample Request
 
 ```json
 {
@@ -263,24 +259,22 @@ The corresponding message the user will receive:
 ```
 
 > 📘 **Button Object**
-> 
+>
 > The button attribute is required but it will not show up in the message if the caption and action fields are blank.
-> 
+>
 > This implementation has been updated. Please refer to [Text+Image](/connect/docs/usage-samples-viber#text--image) for latest API request format
-> 
-> 
+>
+>
 
 > 🚧 **Deprecated**
-> 
+>
 > This API request format has been updated. Please refer to [Text+Image](/connect/docs/usage-samples-viber#text--image) for the latest latest API request format
-> 
-> 
+>
+>
 
 The corresponding message the user will receive:
 
 ![Viber Rich Media message: Text and Image](../images/bd07ae3-a955628-TextImage.png)Viber Rich Media message: Text and Image
-
-  
 
 ### Optional: Adding SMS Fallback
 
@@ -299,7 +293,7 @@ If you want to add a fallback to SMS, add the following fields to the "`content`
 
 > 📘
 > -
-> 
+>
 > You may find out more about SenderID [here](/connect/docs/getting-started#1-source-sms-senderid)
-> 
+>
 >

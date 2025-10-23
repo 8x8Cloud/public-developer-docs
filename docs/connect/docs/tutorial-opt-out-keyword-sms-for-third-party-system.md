@@ -2,7 +2,7 @@
 
 ## Overview
 
-This tutorial will show you how to use Automation Builder to build an **opt-out flow** for SMS. 
+This tutorial will show you how to use Automation Builder to build an **opt-out flow** for SMS.
 
 **This workflow in automation builder will perform these steps:**
 
@@ -39,8 +39,8 @@ The **keyword** is controlled by the "Branch" Step in red, in this example it is
 ![Opt Out Flow Part 2 of 2](../images/b1fcb73-image.png)Opt Out Flow Part 2 of 2
 
 > 📘 **The branch step has a limit of 5 choices in the Automation Builder UI. You can create additional workflows with additional choices if you need them at the top level of your menu. Another option is to look into the Automation Builder API to build this workflow instead which can support more than 5 choices.**
-> 
-> 
+>
+>
 
 ## Add Contact to Opt Out Group
 
@@ -61,8 +61,6 @@ Once that is done, you can move on to modifying the HTTP Request itself. In the 
 You can replace the message with a custom message to your users. Make sure to again select the correct subaccount for your short code that you want to send the SMS from.
 
 ![](../images/fdb2a07-image.png)
-
-  
 
 | Field | Example Value |
 | --- | --- |

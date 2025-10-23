@@ -24,7 +24,6 @@ The **Partner Hub** in 8x8 Connect is your centralised portal for monitoring you
 
 After selecting a customer from the "Manage customers" list, you will be taken into their specific account view. The main content area will display an overview, and the navigation menu on the left will update to show the product modules available for that customer.
 
-
 ![](../images/050fa707fde893e4dee4b59215cea9e8926cc8ea629a0a30f1883874a21a8e31-view-customer_non-admin-role.png)
 
 To view the detailed usage for a specific product, simply click on it in the left-hand menu:

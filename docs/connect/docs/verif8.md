@@ -4,7 +4,7 @@
 
 Verif8 is designed as a turnkey, self-service solution for sending One-Time Passwords (OTPs). It centralizes the entire OTP lifecycle - Sender ID management, OTP generation, multi-channel delivery, and validation - into a single platform with a simplified onboarding process.
 
-### Core Attributes:
+### Core Attributes
 
 * No documentation or registration required
 * Pre-approved templates mean no moderation delays
@@ -15,16 +15,16 @@ Verif8 is designed as a turnkey, self-service solution for sending One-Time Pass
 
 1. Out-of-the-box Localisation
 
-	* Supports multiple languages
-	* Pre-built templates ensure consistency and compliance
+  * Supports multiple languages
+  * Pre-built templates ensure consistency and compliance
 2. Multi-Channel OTP Delivery via SMS and Viber
 3. Insightful Analytics: Dashboards for tracking delivery success, conversion rates, and performance
 4. Analytics & Logs  
 
 A dedicated dashboard (shown on page 14) includes:
 
-	* Conversion rate, delivery metrics
-	* Logs showing OTP status, costs, delivery channels
+  * Conversion rate, delivery metrics
+  * Logs showing OTP status, costs, delivery channels
 
 Verif8 subaccounts, which you can identify by their '_verif8' suffix, are purpose-built and can only be used with our Verification API. These subaccounts cannot interact with other APIs in the 8x8 Connect platform, including the SMS API, and are not compatible with Campaign Manager. This specialization allows us to optimize the verification experience by pre-configuring templates, sender IDs, and routing rules specifically for verification use cases.
 
@@ -80,36 +80,7 @@ You'll notice that Message Body and Brand name (SMS SenderID) are no longer requ
 
 ![](../images/d1b4d9c99643a6acbb6f4ca8da933c04bd049ead1608a48223e833cc7543aac3-OTP_dashboard_empty_1.png)
   
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-You will be able to find your API keys for your Verif8 sub-account from the "API Keys" post your Verif8 onboarding. 
+You will be able to find your API keys for your Verif8 sub-account from the "API Keys" post your Verif8 onboarding.
 
 ### Integrate the Verification API into your authentication flow
 

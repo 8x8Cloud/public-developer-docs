@@ -18,7 +18,6 @@ The sheet should have **Phone Number** in Cell A1 and **Message** in Cell B1 to 
 
 ![Add phone number and message columns](../images/ccee37d-image.png)Add phone number and message columns
 
-
 ### Create a New Scenario
 
 The create button is located on the top right from the Dashboard.
@@ -60,7 +59,6 @@ When you connect for the first time to 8x8, you will be prompted for an 8x8 API 
 ### Enable your Make.com Scenario
 
 Turn on Scheduling on the Bottom Left and select your desired frequency, by default, it will check every 15 minutes.
-
 
 ![](../images/e4c1986-image.png)
 

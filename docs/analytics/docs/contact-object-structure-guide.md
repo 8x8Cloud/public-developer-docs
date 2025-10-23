@@ -3,30 +3,30 @@
 This section is dedicated to the Contact object structure, which is a central element in contact management. This guide will help you understand the detailed structure of the Contact object used across various endpoints, such as contact details retrieval, updates, and listings.
 
 > 📘 **Contact Types**
-> 
+>
 > In our system, contacts are categorized as follows:
-> 
+>
 > * **Corporate** or **Service**
-> 
-> 
-> > 
+>
+>
+> >
 > > These are pre-configured or system-generated contacts that are essential for the functioning of various services or corporate operations.
-> > 
-> > 
-> > 
-> 
+> >
+> >
+> >
+>
 > * **Company**
-> 
-> 
-> > 
+>
+>
+> >
 > > These are user-defined or manually added contacts that represent individuals or company entities outside of the core system functionalities.
-> > 
-> > 
-> > 
-> 
+> >
+> >
+> >
+>
 > This API allows modifications to company contacts only. You can create, update or delete company contacts as needed. Please note that modifications to other types of contacts are not supported
-> 
-> 
+>
+>
 
 ## Contact JSON Object Structure
 
@@ -135,12 +135,12 @@ Below is the detailed JSON structure of the Contact object. This structure is ut
 ```
 
 > 🚧 **Legacy Field Usage**
-> 
+>
 > In the latest version of our application, we have retained certain fields from the previous system iteration, such as **subscriptionId** and **contactRecordId**, for archival and reference purposes. These fields are crucial in preserving historical data linkages and ensuring continuity.
-> 
+>
 > **We advise against using these legacy fields for current decision-making or feature development**
-> 
-> 
+>
+>
 
 ## Detailed Field Descriptions
 
@@ -214,10 +214,10 @@ Below is the detailed JSON structure of the Contact object. This structure is ut
 | value | string | The value assigned to the tag | value1 | Max 254 chars |
 
 > 📘 **Mandatory Attributes**
-> 
+>
 > Fields marked with an asterisk (\*) are mandatory for creating a contact. These attributes are essential and a contact cannot exist without them.
-> 
-> 
+>
+>
 
 ### Extensions
 
@@ -237,10 +237,10 @@ Below is the detailed JSON structure of the Contact object. This structure is ut
 | subscriptionType | string | Type of subscription | UE | Read Only |
 
 > 🚧 **Extensions Operational Restrictions**
-> 
+>
 > Considered system-generated resources, we restrict modifications to extensions to maintain system integrity.
-> 
-> 
+>
+>
 
 ### Visibility Flags Information
 

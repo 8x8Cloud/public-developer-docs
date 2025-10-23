@@ -10,7 +10,6 @@ The diagram below explains how the flow will look like from using Okta together 
 
 ![](../images/be14419-image.png)
 
-
 ## Video Demo
 
 This Video Demo shows the integration in action and explains a high level of the setup steps in this guide. We recommend referring to this text guide for the full setup.
@@ -37,6 +36,7 @@ This Video Demo shows the integration in action and explains a high level of the
 We will need an example endpoint for Okta to send it's HTTP request to. We have provided some example Node.js server code below for you to use:
 
 server.js
+
 ```javascript
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -151,6 +151,7 @@ Please note it requires parameters set in a **config.js** file as below. All val
 Here is the example **config.js** file for reference where the values should be replaced.
 
 config.js
+
 ```
 // config.js
 module.exports = {
@@ -165,6 +166,7 @@ module.exports = {
 Here is the example package.json for your Node.js application. It includes the packages axios, body-parser and expressed used in the backend server code.
 
 package.json
+
 ```json
 {
   "name": "okta_inline_hook_integration",
@@ -190,6 +192,7 @@ package.json
 After placing this code in the same directory, you can run the following commands to start the server.
 
 Shell - Install Packages and Start Server
+
 ```bash
 npm install
 npm start
@@ -199,6 +202,7 @@ npm start
 The output should appear as follows.
 
 Shell - Start Server Ouptut
+
 ```bash
 > okta_inline_hook_integration@1.0.0 start
 > node server.js
@@ -217,7 +221,6 @@ Go to **Workflow > Inline Hooks** on the Okta Dashboard. Select **Add Inline Hoo
 
 ![](../images/982f180-image.png)
 
-
 ## Adding Inline Hook as Authenticators
 
 In the **Create Inline Hook** page, fill in the following values.
@@ -229,11 +232,7 @@ In the **Create Inline Hook** page, fill in the following values.
 | **Authentication Field** | Will be sent as part of the request header. Authentication Field is for your backend to authenticate the webhook from Okta. It can be any value<br>Refer to Okta's [page](https://developer.okta.com/docs/reference/hooks-best-practices/) on authentication and Inline Hooks for reference. | Authentication |
 | **Authentication Secret (Used with Authentication Field)** | Will be sent as part of the request header. This should be the value your backend uses to authenticate | secretvalue |
 
-  
-
 ![](../images/58d0026-image.png)
-
-  
 
 After entering the values, click **Save**.
 
@@ -254,6 +253,7 @@ Click **View Response** to send the example Inline hook to your server. You shou
 From our example Node.js server you should see the following output, showing the API request sent from Okta and also the output of the API call to 8x8's SMS API.
 
 Server Code Output
+
 ```text
 Received request body: {
   eventId: '3IPD5oQfQdOttCCjUWMk3Q',
@@ -318,13 +318,9 @@ Click **Add Rule** on the **Security - Authentication Policies** page.
 
 ![](../images/c22d8d7-image.png)
 
-  
-
 In the **Edit Rule** page, the only change we will make is for AND Authentication methods where we should include the **Phone - SMS** method along with any other methods we wish to offer the user authenticating into Okta.
 
 ![](../images/c32a99f-image.png)
-
-  
 
 ## Add to Application
 
@@ -340,7 +336,7 @@ When attempting to login to the application that you have configured above, you 
 
 ![](../images/b65f2ca-image.png)
 ![](../images/75cc45b-image.png)
-Again the code should be sent to your phone via SMS, follow the prompts to finish logging into application. 
+Again the code should be sent to your phone via SMS, follow the prompts to finish logging into application.
 
 ![](../images/c3a7e16-image.png)
 For subsequent sign-ins to the application it should utilize SMS as a verification method.

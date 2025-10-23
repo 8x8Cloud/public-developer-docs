@@ -50,11 +50,11 @@ lifecycleScope.launch {
 
 The Voice SDK sends log information to the application.
 
-> 
+>
 > **Note:** References to Voice in this document pertain to the **`voice`** object.
-> 
-> 
-> 
+>
+>
+>
 
 ## Register and Activate a Voice User
 
@@ -72,17 +72,17 @@ val userConfiguration = userConfiguration {
 
 ```
 
-> 
+>
 > **Note:**
-> 
-> 
+>
+>
 > **\*`msisdn`** is optional.  
->   
 > 
+>
 > \*The **`deviceId`** is the device unique identifier, preferably FirebaseInstanceId. Please refer to [Work with instance IDs and GUIDs](https://developer.android.com/training/articles/user-data-ids#instance-ids-guids) for more information.
-> 
-> 
-> 
+>
+>
+>
 
 The Voice SDK also requires application information in the setup. Use the following for application data:
 
@@ -95,11 +95,11 @@ val sessionConfiguration = sessionConfiguration {
 
 ```
 
-> 
-> **Note:** The Voice URL is provided by the console when you request access to the Voice SDK. 
-> 
-> 
-> 
+>
+> **Note:** The Voice URL is provided by the console when you request access to the Voice SDK.
+>
+>
+>
 
 Once you have the configurations ready, use them to activate the Voice SDK. For example:
 
@@ -126,11 +126,11 @@ voice.isActivated()
 
 ```
 
-> 
+>
 > **Note:** Use the result of this function to determine whether or not the user requires activation.
-> 
-> 
-> 
+>
+>
+>
 
 ## SDK state
 
@@ -163,11 +163,11 @@ when(val voiceCallResult = voice.placeCall(contact)) {
 
 ```
 
-> 
+>
 > **Note:** When the necessary [Permissions](#request-runtime-permissions) are not provided, placing a call will fail with a `PermissionNotGranted` exception.
-> 
-> 
-> 
+>
+>
+>
 
 ## Mid-call features
 
@@ -243,11 +243,11 @@ voice.callActions.collect {  callAction ->
 
 ```
 
-> 
+>
 > **Note:** Start the collection before the `receiveCall` in order to present your notification or view.
-> 
-> 
-> 
+>
+>
+>
 
 Once the notification is ready, use the following:
 
@@ -310,11 +310,11 @@ voice.toggleAudioOption()
 
 ```
 
-> 
+>
 > **Note:** **`audioOption`** is of the type **`VoiceCallAudioOption`** which consists of the values of **`BLUETOOTH`**, **`SPEAKER`**, and **`EARPIECE`**.
-> 
-> 
-> 
+>
+>
+>
 
 ## Update push notification token and phone number
 
@@ -448,11 +448,11 @@ In order to persist data, it is recommended that the Voice SDK is excluded from 
 
 ```
 
-> 
+>
 > **Note:** The approaches must be combined for devices that are targeting API 31+ but have the minimum SDK set to a lower value.
-> 
-> 
+>
+>
 > **Note:** If you have `android:allowBackup="false"`, you do not need to add this file nor add the `fullBackupContent` and/or `dataExtractionRules` attribute(s).
-> 
-> 
+>
+>
 >

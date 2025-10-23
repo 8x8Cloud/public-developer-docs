@@ -24,4 +24,3 @@ View Sender ID registration by:
 LOA (Sort by the registration status of the LOA)
 
 ![](../images/bb3ebb967667fb19202b5bb4bd65f2c8c1b8d9c5c914d25f9b3b7a9bb8451afd-Sender_ID_Dashboard.png)
-

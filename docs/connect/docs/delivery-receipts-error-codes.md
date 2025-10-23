@@ -2,7 +2,7 @@
 
 > ℹ️ **Troubleshooting tip**
 >
-> The table below lists _delivery receipt_ error codes for SMS  
+> The table below lists *delivery receipt* error codes for SMS  
 > If you are debugging an error that appears in the JSON body of an 8x8 **API response** (for example `"code": 1200`), please see the [API Error Codes](/connect/reference/api-error-codes) reference instead.
 >
 >

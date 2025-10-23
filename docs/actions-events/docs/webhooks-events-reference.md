@@ -1,6 +1,6 @@
 # Webhooks Events Reference
 
-Webhook events are how 8x8 notifies bots or integrations when an event occurs such as when an agent sends a message. 
+Webhook events are how 8x8 notifies bots or integrations when an event occurs such as when an agent sends a message.
 
 Events are sent as **`POST`** calls to your webhook.
 
@@ -96,7 +96,7 @@ The **`MEMBERS_CHANGED`** event is sent whenever members other than the bot join
 
 Agent joined event notification indicates that the agent has seen the messages that were added to the conversation, prior to the integration, and has observed any follow-up messages.
 
-The **`id`** attribute provides information about the agent handling the interaction or the user. 
+The **`id`** attribute provides information about the agent handling the interaction or the user.
 
 ```json
 {

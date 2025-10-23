@@ -20,8 +20,6 @@ To view your existing WhatsApp Templates, you can navigate to the following [pag
 
 ![](../images/5c50b3d-image.png)
 
-  
-
 The page has the ability to filter by the following options:
 
 | Column | Description |
@@ -47,8 +45,8 @@ When focusing on the Message Templates themselves, they will contain the followi
 WhatsApp Templates can be created using the **Create new template** button in the WhatsApp templates page above. The button will generate this pop up which will ask you to fill in details about the type of WhatsApp template that you would like to submit to WhatsApp for approval.
 
 > 📘WhatsApp ultimately approves these templates and will reject any templates that violate their policies. Please see WhatsApp's Business Messaging Policy [page](https://business.whatsapp.com/policy) for details.
-> 
-> 
+>
+>
 
 ![](../images/619ec84-image.png)
 
@@ -75,12 +73,9 @@ Templates can be deleted via the delete option that pops up when mousing over th
 
 ![](../images/156ce08-image.png)
 
-
 ## Editing Templates
 
 It is not possible to edit WhatsApp Templates. You can create new templates to submit for approval from WhatsApp and use those instead.
-
-  
 
 ## Managing Templates via API
 

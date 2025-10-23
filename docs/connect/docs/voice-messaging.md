@@ -24,4 +24,4 @@ Our documentation is based on the use cases
 
 >
 > ❗️ Virtual numbers need to be purchased either through your account manager or by dropping a support email to [support@cpaas.8x8.com](mailto:support@cpaas.8x8.com)
-> 
+>

@@ -16,7 +16,6 @@ This API offers two different ways of PIN delivery, that can be set up in the <c
 
 The general workflow is shown in the following sequence diagram:
 
-
 ![](../images/1c6b334-914f66a-Verify-Diagram.jpg "Verify-Diagram.jpg")
 
 ### Demo Video of 8x8 Verif8 Service and 8x8 Verification API
@@ -27,7 +26,6 @@ This video shows:
 - The Verif8 dashboard upon onboarding can be shown using the Dry-run account.
 - This shows  Verif8 Logs the delivery status (Delivered/Read) of the OTP and the Conversion status (Non-Converted / Converted)
 
-
 <iframe
   src="https://www.youtube.com/embed/NZnieeEofBs?si=cav-R03QIuWqDKdD"
   height="500px"
@@ -36,7 +34,6 @@ This video shows:
   allowFullScreen>
 </iframe>
   
-
 This shows the API Keys page on getting the API Key and Verif8 Subaccount.  
 The Verif8 dashboard upon onboarding can be shown using the Dry-run account.  
 This shows  Verif8 Logs the delivery status (Delivered/Read) of the OTP and the Conversion status (Non-Converted / Converted)

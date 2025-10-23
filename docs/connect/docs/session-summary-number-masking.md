@@ -6,17 +6,11 @@ This method allows you to review the "Voice Session Summary" status and individu
 
 This can be used alongside or instead of the [Call Status](/connect/reference/call-status), to simplify your monitoring.
 
-
 ## Request
-
 
  When the session has ended, 8x8 platform will POST a JSON object to your URL.
 
-
 The JSON object will contain the following values:
-
-
-
 
 | Name | Type | Description                                                                                                                                                                                |
 | --- | --- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -55,11 +49,10 @@ The JSON object will contain the following values:
 | packetLossRate | Float | The packet loss rate reflects the reliability of a communication network path.                                                                                                             |
 | jitter | Integer | Jitter reflects any time delay in sending data packets over your call connection.                                                                                                          |
 
-
 Example of a JSON object sent to your "Voice Session Summary" endpoint:
 
-
 Session Summary (Success)Session Summary (Failure)
+
 ```
 Success 
 
@@ -171,11 +164,7 @@ Failure
 
 ## Session statuses
 
-
 Here is the list of all possible session statuses:
-
-
-
 
 | CallA Status | CallB Status | Status | Comment |
 | --- | --- | --- | --- |
@@ -188,22 +177,13 @@ Here is the list of all possible session statuses:
 | ERROR | NULL | ERROR | It indicates that the inbound leg had an error while processing the call. This can happen when the Voice Call Action webhook fails or when there is no call coverage to the target country. Additional error details are provided when this happens. |
 | COMPLETED | ERROR | ERROR | It indicates that the outbound leg had an error while processing the call. Additional error details are provided when this happens. |
 
-
 ## Response
-
 
 Your endpoint should respond with 200 OK status
 
-
-
-
 ---
 
-
 ### Error Details and Error Code
-
-
-
 
 | -2004 | No coverage available for requested area |
 | --- | --- |

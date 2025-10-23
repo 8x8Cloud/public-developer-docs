@@ -9,9 +9,9 @@
 * Enables transcriptions for visitors/observers in a large meeting
 * Adds "recorder follows me" option to moderator controls
 * Accessibility:
-	+ Adds aria-live to the notification component
-	+ Adds keyboard navigation to the toolbar
-	+ Adds focus and blur handle to the toolbar
+  * Adds aria-live to the notification component
+  * Adds keyboard navigation to the toolbar
+  * Adds focus and blur handle to the toolbar
 * Scales display name size showing on top of videos based on the screen size
 * Hides the display name label over screen sharing in stage view when the toolbar is hidden
 * Fixes local video "flip mode" between stage and tile view
@@ -27,9 +27,9 @@
 * Optimizes initial ICE connection time, gaining a nice performance boost
 * Fixes a rare case of the main room getting destroyed when all participants move to a breakout room
 * A number of improvements around polls including:
-	+ Improves polls message validation
-	+ Prevents creation of too many polls
-	+ Discards extremely large payloads
+  * Improves polls message validation
+  * Prevents creation of too many polls
+  * Discards extremely large payloads
 * Improves handling of transcriptions/subtitles
 * Adds notification when a transcriber fails and leaves the call
 * Fixes freezes on Firefox: [https://bugzilla.mozilla.org/show_bug.cgi?id=1917800](https://bugzilla.mozilla.org/show_bug.cgi?id=1917800)

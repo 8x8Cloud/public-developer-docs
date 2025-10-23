@@ -10,9 +10,6 @@ When the session has ended, 8x8 platform will POST a JSON object to your URL.
 
 The JSON object will contain the following values:
 
-
-
-
 | Name | Type | Description |
 | --- | --- | --- |
 | namespace | String | 8x8's overall product namespace. For Voice products, the value will be "VOICE" |
@@ -48,7 +45,6 @@ The JSON object will contain the following values:
 | mos | Float | Mean Opinion Score (MOS) is a numerical measure of the human-judged overall quality of the call leg |
 | packetLossRate | Float | The packet loss rate reflects the reliability of a communication network path. |
 | jitter | Integer | Jitter reflects any time delay in sending data packets over your call connection. |
-
 
 Example of a JSON object sent to your "Voice Session Summary" endpoint:
 

@@ -4,9 +4,7 @@
 
 ### Introduction
 
-  
-
-Variables can be sent into the widget for a number of reasons. The first is so they can be used to update data in the 8x8 Native CRM, for example sending in an email address create a record and execute a screen pop. Also you can set custom variables, which can then be used for routed within the 8x8 script. 
+Variables can be sent into the widget for a number of reasons. The first is so they can be used to update data in the 8x8 Native CRM, for example sending in an email address create a record and execute a screen pop. Also you can set custom variables, which can then be used for routed within the 8x8 script.
 
 CRM variables:  
 
@@ -24,7 +22,7 @@ CRM variables:
 
 #### Script config
 
-Here is an example, where we are setting a variable to show the customer is a VIP, so inside the scripting they can go to that queue, and also setting the email address to it can create a screen pop for the agent. 
+Here is an example, where we are setting a variable to show the customer is a VIP, so inside the scripting they can go to that queue, and also setting the email address to it can create a screen pop for the agent.
 
 ```javascript
 // set variables
@@ -33,7 +31,7 @@ chatApp.setVariables({"_VIP":"YES",
                       "$emailAddress": "testemail@example.com"}
 ```
 
-To add this, you need to add it at the bottom of the script in this area here 
+To add this, you need to add it at the bottom of the script in this area here
 
 ```html
 })(
@@ -43,7 +41,7 @@ To add this, you need to add it at the bottom of the script in this area here
 
 ```
 
-Then, the full script will look like this 
+Then, the full script will look like this
 
 ```javascript
     <!-- Place this code snippet anywhere you want the button to appear in your page. If no button has been configured in the chat script, it will not show up nor take any space. -->
@@ -110,11 +108,8 @@ chatApp.setVariables({"_VIP":"YES",
 
 Then inside the 8x8 script, you can use the variable like the below, to route to the queue you want them to go to
 
-  
-
 ![](../images/e5673df5d46fcce77ca354d0aec357279f965a271178f90a8d752f9fa9572392-VIP.png "Chat Gateway flow.jpg")
   
-
 #### Important Notes
 
 * Language $language is the only CRM variable that will not be sent back in CM to use inside chat script testVariable node but will actually take effect immediately and change the chat language; also it will set the default language option value in pre-chat language question drop-down select (if pre-chat and language question set).

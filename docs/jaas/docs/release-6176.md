@@ -6,14 +6,14 @@
 
 * **File Sharing Support**: Users are now able to share files in the chat
 * **Webinars and large meetings**
-	+ **Viewers List**: Viewers are now listed in the participants pane
-	+ **Viewers queue**: Add leave meeting button in the pre-meeting page for improved user experience
-	+ **Viewer Controls**: Viewers are able to see shared files and download them
-	+ **Auto-viewer Detection**: Automatically assume viewer mode when conference requires token but user has none
+  * **Viewers List**: Viewers are now listed in the participants pane
+  * **Viewers queue**: Add leave meeting button in the pre-meeting page for improved user experience
+  * **Viewer Controls**: Viewers are able to see shared files and download them
+  * **Auto-viewer Detection**: Automatically assume viewer mode when conference requires token but user has none
 * **Desktop Sharing Moderation**: Desktop sharing added to moderation controls, allowing moderators to enable/disable screen sharing for users
 * **Closed Captions**: New closed captions UX allowing users to check past conversation at any time
 * **Chat & Communication**
-	+ **Resizable Chat Panel**: Make chat panel resizable for better UX
+  * **Resizable Chat Panel**: Make chat panel resizable for better UX
 * **Filmstrip**: Add always visible resize bar and initial width configuration
 * **Avatar Updates**: Show first and last name letters rather than first and second name
 * **Video Frame Processing**: Improved aspect ratio handling and video processing
@@ -30,8 +30,6 @@
 
 * **Language Updates**: Updates for Italian, German, Latvian, Chinese (CN & TW) translations
 * **Accessibility**: Fix English apostrophes and improve German dynamic participants count
-
-  
 
 #### Versions
 

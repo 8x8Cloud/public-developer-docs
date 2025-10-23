@@ -39,7 +39,6 @@ Where encodedValue is base64encode(username:password)
 | version    | ✓        | The API version. The current version is 1 resulting in. v1                                                                                                                                                                                                 | v1         |
 | tenantId   | ✓        | The CC Tenant name of the tenant to list agent status for. Tenant name is generally the same as the username above. It can be located in CC Configuration Manager @ Home :: Profile :: Tenant Name                                                         | acmecorp01 |
 
-
 ### All Agents Status Request
 
 ```curl
@@ -104,7 +103,6 @@ To request status for an individual agent simply append the appropriate agentId 
 | version    | ✓        | The API version. The current version is 1 resulting in. v1                                                                                                                                                                                                 | v1                       |
 | tenantId   | ✓        | The CC Tenant name of the tenant to list agent status for. Tenant name is generally the same as the username above. It can be located in CC Configuration Manager @ Home :: Profile :: Tenant Name                                                         | acmecorp01               |
 | agentId    | ✓        | The agentId of the agent to set the status for. This can be found in CC Configuration Manager "Users" add the "Internal Id" column, or in the "General" section of the user as "Internal Id"                                                               | ag64oyEUb_Sk6bxVB9P5yaaa |
-
 
 ### Single Agent Status Request
 
@@ -288,7 +286,7 @@ Response Status is `207` and the individual status of each agent status change i
 
 ## References
 
-### Status Values that can be changed as explained in the diagram form the beginning of this documentation:
+### Status Values that can be changed as explained in the diagram form the beginning of this documentation
 
 | Status | Label         | Description                                                                                                            |
 | :----- | :------------ | :--------------------------------------------------------------------------------------------------------------------- |
@@ -297,7 +295,7 @@ Response Status is `207` and the individual status of each agent status change i
 | 4      | WAIT_TRANSACT | Available                                                                                                              |
 | 5      | WORK_OFFLINE  | Working offline                                                                                                        |
 
-### Status Values that can be returned by the GET operations but cannot be ammended by the SET operation:
+### Status Values that can be returned by the GET operations but cannot be ammended by the SET operation
 
 | Status | Label            | Description                                                                          |
 | :----- | :--------------- | :----------------------------------------------------------------------------------- |

@@ -13,7 +13,7 @@ You can access 8x8 Connect from [this](https://connect.8x8.com/video) link. When
 The Dashboard gives an overview of Video Interaction calls across all of your agents.
 
 ![](../images/f8c40120028b148e26be696d9b1363eac1b589dd13b2eec517514129ae59e122-annotely_image_2.png)
-In the screen you can select a date range from the dropdown menu in the top-right corner to view its corresponding metrics such as: 
+In the screen you can select a date range from the dropdown menu in the top-right corner to view its corresponding metrics such as:
 
 1. **Calls Made:** # of calls made by agents over this date range.
 2. **Total Call Duration:** Duration of calls across all agents in this date range.
@@ -76,4 +76,3 @@ You can view all agents performance at a glance or filter by a specific agent to
 The incoming calls screen gives insights into the customer experience when it comes to waiting time in the queue for incoming calls. This includes measurements about the current status of the queue and the averaging wait for each customer over a given time period.
 
 ![](../images/814d7e67749708f1d089f1e9656f7765a42e0b918f8245b227ab17974d6b051f-Screenshot_2025-07-03_at_5.01.27_PM.png)
-

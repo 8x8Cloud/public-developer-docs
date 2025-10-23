@@ -26,8 +26,6 @@ It’s powered by Rich Communication Services (RCS), a protocol developed by Goo
 
 ---
 
-  
-
 **Key Terms:**
 
 **RCS Sender Agent** - An RCS agent or RCS Sender Agent is a digital identity that represents a brand in a customer's Rich Communication Services (RCS) messaging experience. RCS agents use the RCS Business Messaging (RBM) API to communicate with users through messages, events, and requests.  

@@ -13,20 +13,20 @@ Below are a few statistics of interest to get you started (see screenshot below)
 * **Number of meetings**: Number of meetings that match your filter selection.
 * **Number of sessions**: Specifies the number of sessions that match the filters. A session should not be confused with a unique participant; rather, it denotes a distinctive engagement in a meeting. For example: if a participant rejoins a meeting 10 times, 10 unique sessions will be generated.
 * **Meetings table**: Lists the meetings that match the filters.
-	+ `Meeting Name`: Meeting name part of the url, without the tenant. If the url was [https://8x8.vc/randomtenant/randommeetingname](https://8x8.vc/randomtenant/randommeetingname) then only randommeetingname would be displayed here.
-	+ `Start time`: UTC +0 date/time at which the first participant joined the meeting.
-	+ `Session count`: The total number of sessions created during the meeting.
-	+ `Duration in minutes`: Calculated as the time elapsed since the first participant joined until the last participant left.
-	+ `Shard Count`: The total number of shards that were involved in the meeting. If a participant joins from the US and another from Asia, we connect them to localized instances of our servers in order to achieve better performance.
-	+ `Meeting ID`: Serves as the unique identifier for a meeting.  
-	
-	Meetings sharing the same name can be repeatedly joined. This identifier is used to differentiate between various occurrences of a meeting with identical names.  
-	
-	For example, upon a participant joining a meeting named randommeetinganame, an ID is generated for that specific instance.  
-	
-	Once all participants leave, the meeting ends.  
-	
-	If a participant subsequently joins the same meeting the next day, a new ID will be generated for that instance.  
+  * `Meeting Name`: Meeting name part of the url, without the tenant. If the url was [https://8x8.vc/randomtenant/randommeetingname](https://8x8.vc/randomtenant/randommeetingname) then only randommeetingname would be displayed here.
+  * `Start time`: UTC +0 date/time at which the first participant joined the meeting.
+  * `Session count`: The total number of sessions created during the meeting.
+  * `Duration in minutes`: Calculated as the time elapsed since the first participant joined until the last participant left.
+  * `Shard Count`: The total number of shards that were involved in the meeting. If a participant joins from the US and another from Asia, we connect them to localized instances of our servers in order to achieve better performance.
+  * `Meeting ID`: Serves as the unique identifier for a meeting.  
+  
+  Meetings sharing the same name can be repeatedly joined. This identifier is used to differentiate between various occurrences of a meeting with identical names.  
+  
+  For example, upon a participant joining a meeting named randommeetinganame, an ID is generated for that specific instance.  
+  
+  Once all participants leave, the meeting ends.  
+  
+  If a participant subsequently joins the same meeting the next day, a new ID will be generated for that instance.  
 
 ## Meetings Details Dashboard
 
@@ -67,15 +67,17 @@ This table presents aggregates about WebRTC PeerConnections.
 * **Session ID**: The participant session ID from which the peer connection was created. A single session can have multiple peer connections.
 * **Relay**: Whether or not this peer connection used a relay server to establish connection. If a relay is used, it could mean that network conditions are not optimal and in some cases this could affect overall meeting quality.
 * **P2P**: Peer connections may take the form of either P2P (peer to peer) or JVB (Jitsi Video Bridge).
-	+ **P2P connections**: Direct links are established between two participants, without our SFU (Selective Forward Unit) servers. This means that media, audio and video, flows directly between the two participants. Such connections are initiated when there are two participants in the meeting.
-	+ **JVB connections**: Involve the use of a Jitsi Video Bridge, which functions as our SFU server, positioned in the middle. The switch to JVB occurs automatically when the number of participants in a meeting exceeds two. This ensures optimal connectivity and efficient handling of media streams in scenarios with multiple participants.
+  * **P2P connections**: Direct links are established between two participants, without our SFU (Selective Forward Unit) servers. This means that media, audio and video, flows directly between the two participants. Such connections are initiated when there are two participants in the meeting.
+  * **JVB connections**: Involve the use of a Jitsi Video Bridge, which functions as our SFU server, positioned in the middle. The switch to JVB occurs automatically when the number of participants in a meeting exceeds two. This ensures optimal connectivity and efficient handling of media streams in scenarios with multiple participants.
 * **AVG RTT**: This aggregate metric represents the average time in seconds that it takes for a packet to travel from its source to the destination and back. The average is done across all the media flowing through this peer connection. The lower the average RTT, the faster and more responsive the network. For example if the value is greater than 0.150 (150 milliseconds) participants might experience delay in audio or video.
 * **Sent packet loss pct**: Sent Packet Loss Percentage measures the proportion of transmitted data packets that fail to reach their destination. This aggregate provides insights into the reliability and integrity of data transmission and can be used for assessing the quality and stability of network connections. A higher Sent Packet Loss Percentage may indicate potential issues such as network congestion, bandwidth limitations, or other factors impacting the flow of data.  
 
 Values above 5% could mean that participants which were receiving data transmitted over this peer connection experienced poor quality at some point.
+
 * **Recv packet loss pct**: Received Packet Loss Percentage is similar to Send Packet loss pct, but for the received packets.  
 
 To clarify, a high percentage of sent packet loss may not be perceptible to the participant sending the packets; however, those receiving the packets may experience diminished audio/video quality. Conversely, when the received packet loss percentage is high, it directly influences the perceived quality of the media on the peer connection where it was recorded.
+
 * **Connection failed**: Indicates whether the WebRTC peer connection failed or not. It serves as a binary metric, providing information on whether attempts to establish a connection between peers using WebRTC were successful or unsuccessful. This could be due to various reasons, such as network issues, incompatible configurations, or other factors.
 * **ICE Reconnects**: This is the number of times an ICE (Interactive Connectivity Establishment) reconnection has occurred. This metric serves as a numerical representation of instances where the connectivity establishment process needed to be rerun. A non-zero value for ICE Reconnects indicates that the system encountered challenges somewhere along its lifetime, which most likely manifested as audio/video disruptions. Typically, the primary factor in such instances is a disruption in the network.
 * **Peer Connection Duration (ms)**: The measured lifetime of a peer connection, in milliseconds.
@@ -92,9 +94,9 @@ While the Peer Connections table provides an aggregated overview of all active t
 * **PeerConnection ID**: The ID number of the peer connection that this track belongs to. It should map to an entry in the Peer Connection table.
 * **SSRC**: Synchronization Source, a unique identifier within the context of a WebRTC environment. SSRC is used to distinguish and synchronize different streams of media, such as audio or video, within a communication session.
 * **Media Type**:
-	+ `audio`: Microphone input
-	+ `video`: Camera
-	+ `video/screen`: Screen sharing track
+  * `audio`: Microphone input
+  * `video`: Camera
+  * `video/screen`: Screen sharing track
 * **Direction**: Whether this track was media being transmitted, or being received.
 * **P2P**: This track belonged to a Peer Connection which was P2P: 1 = TRUE, 0 = FALSE
 * **Packets Lost Pct**: The proportion of data packets at the track level that fail to reach their destination, for example the packets lost for an individual sent audio stream.

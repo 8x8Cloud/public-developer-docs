@@ -12,7 +12,7 @@ The JaaS webhook requests have the following payload structure types:
 
 The following shows the object structure per event type:
 
-## **_ROOM_CREATED_**
+## ***ROOM_CREATED***
 
 The webhook is called when a conference is created.
 
@@ -39,7 +39,7 @@ For example:
 }
 ```
 
-## **_PARTICIPANT_LEFT_**
+## ***PARTICIPANT_LEFT***
 
 The webhook is called when a participant left the meeting.
 
@@ -82,7 +82,7 @@ For example:
 }
 ```
 
-## **_PARTICIPANT_LEFT_LOBBY_**
+## ***PARTICIPANT_LEFT_LOBBY***
 
 The webhook is called when a participant leaves the lobby.
 
@@ -123,7 +123,7 @@ For example:
 }
 ```
 
-## **_TRANSCRIPTION_UPLOADED_**
+## ***TRANSCRIPTION_UPLOADED***
 
 The webhook is called when the meeting ends.
 
@@ -146,7 +146,7 @@ For example:
 }
 ```
 
-## **_CHAT_UPLOADED_**
+## ***CHAT_UPLOADED***
 
 The webhook is called when the meeting ends.
 
@@ -169,7 +169,7 @@ For example:
 }
 ```
 
-## **_ROOM_DESTROYED_**
+## ***ROOM_DESTROYED***
 
 The webhook is called when the room is destroyed.
 
@@ -196,7 +196,7 @@ For example:
 }
 ```
 
-## **_PARTICIPANT_JOINED_**
+## ***PARTICIPANT_JOINED***
 
 The webhook is called when a participant joined the meeting.
 
@@ -237,7 +237,7 @@ For example:
 }
 ```
 
-## **_PARTICIPANT_JOINED_LOBBY_**
+## ***PARTICIPANT_JOINED_LOBBY***
 
 The webhook is called when a participant joins the lobby.
 
@@ -276,7 +276,7 @@ For example:
 }
 ```
 
-## **_RECORDING_STARTED_**
+## ***RECORDING_STARTED***
 
 The webhook is called when recording is started.
 
@@ -300,7 +300,7 @@ For example:
 }
 ```
 
-## **_RECORDING_ENDED_**
+## ***RECORDING_ENDED***
 
 The webhook is called when recording is ended.
 
@@ -324,7 +324,7 @@ For example:
 }
 ```
 
-## **_RECORDING_UPLOADED_**
+## ***RECORDING_UPLOADED***
 
 The webhook is called when the meeting ends.
 
@@ -375,7 +375,7 @@ For example:
 }
 ```
 
-## **_LIVE_STREAM_STARTED_**
+## ***LIVE_STREAM_STARTED***
 
 The webhook is called when a live stream is started.
 
@@ -398,7 +398,7 @@ For example:
 }
 ```
 
-## **_LIVE_STREAM_ENDED_**
+## ***LIVE_STREAM_ENDED***
 
 The webhook is called when a live stream has ended.
 
@@ -420,7 +420,7 @@ For example:
 }
 ```
 
-## **_SETTINGS_PROVISIONING_**
+## ***SETTINGS_PROVISIONING***
 
 Before every meeting the registered `URL` will be called using a `POST` request with payload:
 
@@ -454,7 +454,7 @@ Before every meeting the registered `URL` will be called using a `POST` request 
 - **`visitorsEnabled`** (boolean (optional)): whether the visitor functionality is enabled. The feature is disabled by default.
 - **`hideDisplayName`** (string (optional)): **`GUEST`** : when specified, it will hide the participant names for non-moderators.
 
-## **_SIP_CALL_IN_STARTED_**
+## ***SIP_CALL_IN_STARTED***
 
 The webhook is called when a sip call-in is started.
 
@@ -483,7 +483,7 @@ For example:
 }
 ```
 
-## **_SIP_CALL_IN_ENDED_**
+## ***SIP_CALL_IN_ENDED***
 
 The webhook is called when a sip call-in is ended.
 
@@ -508,7 +508,7 @@ For example:
 }
 ```
 
-## **_SIP_CALL_OUT_STARTED_**
+## ***SIP_CALL_OUT_STARTED***
 
 The webhook is called when a sip call-out is started.
 
@@ -537,7 +537,7 @@ For example:
 }
 ```
 
-## **_SIP_CALL_OUT_ENDED_**
+## ***SIP_CALL_OUT_ENDED***
 
 The webhook is called when a sip call-out is ended.
 
@@ -562,7 +562,7 @@ For example:
 }
 ```
 
-## **_FEEDBACK_**
+## ***FEEDBACK***
 
 The webhook is called when a feedback is submitted.
 
@@ -589,7 +589,7 @@ For example:
 }
 ```
 
-## **_DIAL_IN_STARTED_**
+## ***DIAL_IN_STARTED***
 
 - **`direction`** (string: **`in`**): the direction of the call
 - **`nick`** (string): phone number that identifies the caller
@@ -616,7 +616,7 @@ For example:
 }
 ```
 
-## **_DIAL_IN_ENDED_**
+## ***DIAL_IN_ENDED***
 
 - **`participantJid`** (string): unique id of the dial participant
 - **`participantId`** (string): The participant's universal unique identifier used across the whole infrastructure (jitsi meet, events, webhooks)
@@ -639,7 +639,7 @@ For example:
 }
 ```
 
-## **_DIAL_OUT_STARTED_**
+## ***DIAL_OUT_STARTED***
 
 - **`direction`** (string: **`out`**): the direction of the call
 - **`nick`** (string): phone number that identifies the caller
@@ -666,7 +666,7 @@ For example:
 }
 ```
 
-## **_DIAL_OUT_ENDED_**
+## ***DIAL_OUT_ENDED***
 
 - **`participantJid`** (string): unique id of the dial participant
 - **`participantId`** (string): The participant's universal unique identifier used across the whole infrastructure (jitsi meet, events, webhooks)
@@ -689,7 +689,7 @@ For example:
 }
 ```
 
-## **_USAGE_**
+## ***USAGE***
 
 - The event happens when each participant joins the meeting. When the first participant joins, MAU notifications are not invoked until the next participants join.
 - **`data`** (list) the list contains information about the user that joined. When the second participant joins, the list will have the first two participants. After that, the list will contain only the current participant that joined the meeting.
@@ -723,7 +723,7 @@ For example:
 }
 ```
 
-## **_SPEAKER_STATS_**
+## ***SPEAKER_STATS***
 
 - **`data`** (map): map between a participant unique identifier (full jid) and the speaker extra information.
 - **`name`** (string): The full name of the user
@@ -759,7 +759,7 @@ For example:
 }
 ```
 
-## **_POLL_CREATED_**
+## ***POLL_CREATED***
 
 - **`data`** (map): Poll data
 - **`question`** (string): Question that was asked
@@ -808,7 +808,7 @@ For example:
 }
 ```
 
-## **_POLL_ANSWER_**
+## ***POLL_ANSWER***
 
 - **`data`** (map): Poll Answer data
 - **`answers`** (list): List of possible answer values
@@ -856,7 +856,7 @@ For example:
 }
 ```
 
-## **_REACTIONS_**
+## ***REACTIONS***
 
 - **`participantId`** (string): The **`userId`** from the jwt
 - **`participantJid`** (string): The participant’s unique identifier on the **`xmpp`** server
@@ -885,7 +885,7 @@ For example:
 }
 ```
 
-## **_AGGREGATED_REACTIONS_**
+## ***AGGREGATED_REACTIONS***
 
 - All the reactions that happened during the meeting. Will be delivered only after the ROOM_DESTROYED event.
 - **`participantId`** (string): The **`userId`** from the jwt
@@ -927,7 +927,7 @@ For example:
 }
 ```
 
-## **_SCREEN_SHARING_HISTORY_**
+## ***SCREEN_SHARING_HISTORY***
 
 - During a recording if there is a screen sharing session at a given interval screenshots will be taken and delivered after the ROOM_DESTROYED event. The default screenshot capture mode is during recordings. To enable screenshots during any screen sharing session, the config needs to be overwritten to `mode: 'always`. More information [here](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-configuration/#screenshotcapture).
 - **`preAuthenticatedLink`** (string): The pre-authenticated download URL for the screenshots. The URL link is valid for 24 hours. This will return a list containing short lived pre-authentication URL links for every screenshot.
@@ -952,7 +952,7 @@ For example:
 }
 ```
 
-## **_VIDEO_SEGMENT_UPLOADED_**
+## ***VIDEO_SEGMENT_UPLOADED***
 
 - Webhook containing 90 seconds segment that is taken from the recording. Note that they will be delivered after the RECORDING_UPLOADED event. The algorithm for determining from where to extract a segment is the following: the recording is divided into 10 min intervals and for every interval, a random point will be chosen. The algorithm will change in the future.
 - **`preAuthenticatedLink`** (string): The pre-authenticated download URL for the segment. The URL link is valid for 24 hours.
@@ -979,7 +979,7 @@ For example:
 }
 ```
 
-## **_ROLE_CHANGED_**
+## ***ROLE_CHANGED***
 
 This webhook is called when a non-moderator participant is given moderator rights.
 
@@ -1009,7 +1009,7 @@ For example:
 }
 ```
 
-## **_RTCSTATS_UPLOADED_**
+## ***RTCSTATS_UPLOADED***
 
 This webhook is called when a participant leaves the meeting and the statistics server uploads the associated stats file.
 
@@ -1083,7 +1083,7 @@ decompress(baseStats, newStats) {
 },
 ```
 
-## **_TRANSCRIPTION_CHUNK_RECEIVED_**
+## ***TRANSCRIPTION_CHUNK_RECEIVED***
 
 The webhook is called when a final transcription phrase is available during the meeting.
 
@@ -1091,11 +1091,11 @@ The webhook is called when a final transcription phrase is available during the 
 - **`language`** (string): The language used for the transcription.
 - **`messageID`** (string): The unique id of the message.
 - **`participant`** (object): The participant data.
-	- **`id`** (string): The Jitsi id of the participant.
-	- **`name`** (string): The name of the participant.
-	- **`userId`** (string): The userId from the JWT.
-	- **`email`** (string): The email address of the participant.
-	- **`avatarUrl`** (string): The avatar of the participant.
+  - **`id`** (string): The Jitsi id of the participant.
+  - **`name`** (string): The name of the participant.
+  - **`userId`** (string): The userId from the JWT.
+  - **`email`** (string): The email address of the participant.
+  - **`avatarUrl`** (string): The avatar of the participant.
 
 For example:
 
@@ -1123,7 +1123,7 @@ For example:
 }
 ```
 
-## **_DOCUMENT_ADDED_**
+## ***DOCUMENT_ADDED***
 
 The webhook is called when a new file/document has been added.
 
@@ -1158,7 +1158,7 @@ For example:
 }
 ```
 
-## **_DOCUMENT_DELETED_**
+## ***DOCUMENT_DELETED***
 
 The webhook is called when a file/document has been deleted.
 

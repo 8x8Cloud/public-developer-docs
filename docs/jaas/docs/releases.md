@@ -3,6 +3,7 @@
 Jitsi as a Service is by default using the latest release. To have full control over which release is being used in your app, you can pin a certain release. That version will be used until it is unpinned or deprecated.
 
 ![2928](../images/36ac722-JaaS_Releases_UI_1.png "JaaS Releases UI (1).png")
+
 ## Concepts
 
 The **pinned release version** is what is currently used in your app and the one you have pinned your tenancy to. You can unpin it anytime to use the latest GA version.
@@ -21,6 +22,6 @@ We typically **deprecate** release versions that are over 3 months old. If your 
 
 When using the JaaS Releases functionality, we recommend checking out the release notes (from the Details view) to get ready for the upcoming features and fixes that will affect your app.
 
-You can test a release version without pinning it, by using the `release` config option. Click the "Test this release" link to find the exact snippet you need to use to test the specific release. 
+You can test a release version without pinning it, by using the `release` config option. Click the "Test this release" link to find the exact snippet you need to use to test the specific release.
 
 If you choose to stick to a version, you can pin it to make certain that no future releases impact your application. It will take approximately 2 minutes until the changes are applied. The rooms that already exist may take up to 10 minutes after the call has ended to switch to a new release version.

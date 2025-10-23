@@ -22,7 +22,6 @@ Roles allow you to create templates of permissions that can be assigned to your 
 
 ![](../images/981294e834f351ddf2954b6fa7f5b89892aeff2124ac8e61fc99899e3819b1a3-Popover_window.png)
 
-
 1. **Editing a Role:** To modify an existing role, find it in the list and click the **edit icon**.
 
 <br />
@@ -37,4 +36,3 @@ Once your roles are defined, you can manage your users' access.
     - **Assign Customer Accounts:** Select the specific customer accounts that this user should be able to view.
 
 ![](../images/ad89ff5348eb030f7ea2e19de8172b82ecaccac6b7a3eb8843e6fbd884519d9f-Manage_users.png)
-

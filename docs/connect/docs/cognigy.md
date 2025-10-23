@@ -21,23 +21,23 @@ This document will outline the pre-requisites, and how to install and use 8x8 Se
 
 This node enables you to send outbound SMS messages to enhance customer engagement and deliver timely notifications. Configure it with your 8x8 Connect credentials, define message content, and specify recipient numbers for personalized communication.
 
-### Important requirement:
+### Important requirement
 
 This Extension needs a Connection to be defined and passed to the Nodes. The Connection must have the following keys:
 
 * API Key
-	+ key: **apiKey**
-	+ value: Your 8x8-Connect API Key
+  * key: **apiKey**
+  * value: Your 8x8-Connect API Key
 * Subaccount Id
-	+ key: **subAccountId**
-	+ value Your Subaccount Id
+  * key: **subAccountId**
+  * value Your Subaccount Id
 
-### Setup Steps:
+### Setup Steps
 
 1. In your flow, click the (+) icon to add a node. Select Extensions, scroll to the right and select **8x8**
-2. In the dropdown list, select **Send SMS** 
+2. In the dropdown list, select **Send SMS**
 
-	1. ![](../images/3890d4e-image.png)
+  1. ![](../images/3890d4e-image.png)
 3. Click on the Send SMS node.
 4. In the Edit Node section on the right, click on the (+) icon under **8x8 SMS Connection**.
 5. Set up the node connection with apiKey and subAccountId from your [8x8 Connect](https://connect.8x8.com/) account.  
@@ -60,9 +60,9 @@ This Flow Node sends an SMS message to a provided destination, while the result 
 
 ```
 
-### Exit Points:
+### Exit Points
 
-The node will confirm successful message dispatch or failure, allowing for appropriate flow actions. 
+The node will confirm successful message dispatch or failure, allowing for appropriate flow actions.
 
 * SMS Success
 * SMS Error

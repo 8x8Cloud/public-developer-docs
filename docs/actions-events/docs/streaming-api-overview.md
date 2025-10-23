@@ -10,7 +10,7 @@ SAPI is intended to be used in a Server to Server or Cloud to Cloud approach and
 
 ## Overview
 
-The SAPI enables you to receive streaming event update information for a Contact Center tenant. You will receive notifications for both agent status and provisioning as well as interactions that occur within your tenant. There is no filter capability all events for all event types are delivered. 
+The SAPI enables you to receive streaming event update information for a Contact Center tenant. You will receive notifications for both agent status and provisioning as well as interactions that occur within your tenant. There is no filter capability all events for all event types are delivered.
 
 SAPI provides data for real-time events via server push notifications. It uses a Websocket protocol-based event stream and does not use HTTP. Therefore, in order to communicate via WebSocket protocol, you need to maintain a WebSocket connection to the CC platform.
 
@@ -18,7 +18,7 @@ SAPI provides data for real-time events via server push notifications. It uses a
 
 ### Authentication
 
-In order to subscribe to SAPI events, you must first obtain an authentication token that has been issued for your tenant. This token is a single string that combines your username and password. 
+In order to subscribe to SAPI events, you must first obtain an authentication token that has been issued for your tenant. This token is a single string that combines your username and password.
 
 To either obtain an existing or generate a new authentication token:
 
@@ -63,9 +63,9 @@ Please review the following details before you begin using SAPI:
 * Only three SAPI clients per tenant can be connected at a given time.
 * If you wish to make more than one distinct connection/subscription you MUST use a unique subscriptionId for each connection. (Max 3 concurrent subscriptions)
 * A subscription is valid for 60 minutes after which it will be disconnected.
-	+ On disconnect the subscription will cache up to 2 hours of data, reconnecting using the same subscriptionId will deliver all the cached events.
-	+ Consumers should reconnect using the same subscriptionId to continue the stream.
-	+ If a consumer subscribes with the same subscriptionId more than 2 hours after disconnecting this is treated as a new subscription and no cached events are delivered.
+  * On disconnect the subscription will cache up to 2 hours of data, reconnecting using the same subscriptionId will deliver all the cached events.
+  * Consumers should reconnect using the same subscriptionId to continue the stream.
+  * If a consumer subscribes with the same subscriptionId more than 2 hours after disconnecting this is treated as a new subscription and no cached events are delivered.
 
 ## Event Reference
 
@@ -74,10 +74,10 @@ Please review the following details before you begin using SAPI:
 The following table lists the SAPI Event Type with the corresponding Call State ID and definition:
 
 > 📘 **callState ID will only be available for Call/Interaction events.**
-> 
+>
 > Property `callState` is not present in event types indicated by callState ID **`NA`**.
-> 
-> 
+>
+>
 
 | **Event Type**                     | **callState ID**                  | **Definition**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | ---------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -223,9 +223,9 @@ A sample client written in Java is available. This is provided as is as an examp
 
 You can receive SAPI event notifications by installing and using the SAPI sample client. The SAPI sample client downloadable [.zip](https://github.com/8x8/files/raw/master/vcc-sapiclient.zip) is provided as a reference implementation only. Please validate this code meets your requirements before using it.
 
-The SAPI sample client is a Java-based command-line utility that facilitates connection to the SAPI endpoint. 
+The SAPI sample client is a Java-based command-line utility that facilitates connection to the SAPI endpoint.
 
-**Note:** SAPI Status codes are displayed as numbers that correspond to the manually selected status code. Agent status codes do not come up with the same status ID number in SAPI if you have more than one status code list. For example, the status code for when one agent is on lunch break may be represented as a different lunch break status code in another different list on the same tenant. 
+**Note:** SAPI Status codes are displayed as numbers that correspond to the manually selected status code. Agent status codes do not come up with the same status ID number in SAPI if you have more than one status code list. For example, the status code for when one agent is on lunch break may be represented as a different lunch break status code in another different list on the same tenant.
 
 ### Browser Test Tool
 

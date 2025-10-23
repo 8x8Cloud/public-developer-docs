@@ -1,6 +1,6 @@
 # Tutorial: Building a WhatsApp + Google Calendar Chat Bot
 
-This tutorial will show you how to build a WhatsApp + Google Calendar chat bot using 8x8 Automation Builder. The resulting chat bot will allow customers to send a message to a WhatsApp Business Account tied to your 8x8 subaccount and schedule an appointment on Google Calendar. 
+This tutorial will show you how to build a WhatsApp + Google Calendar chat bot using 8x8 Automation Builder. The resulting chat bot will allow customers to send a message to a WhatsApp Business Account tied to your 8x8 subaccount and schedule an appointment on Google Calendar.
 
 The concepts in this guide are useful as a stepping stone to understand how Automation Builder can be used with other systems that expose APIs to create richer experiences with the 8x8 Chat Apps API.
 
@@ -277,6 +277,7 @@ This step sends a simple confirmation message through WhatsApp and ends the work
 If you would like to skip building the steps manually above, we have provided an example JSON file to get you started which you can import into Automation Builder. Note that you will have to modify values in the steps according to your specific backend system and also your 8x8 subaccount.
 
 Automation Builder JSON
+
 ```json
 {
   "definition": {
@@ -685,7 +686,7 @@ This is the API code, it exposes two endpoints:
 * The **/create_meeting** endpoint which will gather information about which meeting timeslot to book.
 * The **/retrieve_meetings** endpoint which will return available timeslots from a user's google calendar.
 
-In this example, we hardcode the Google Calendar that we want to book meetings to in our config file. Also note, that this tutorial assumes that you have access rights to the Google Calendar API for that user. 
+In this example, we hardcode the Google Calendar that we want to book meetings to in our config file. Also note, that this tutorial assumes that you have access rights to the Google Calendar API for that user.
 
 ## Code Explanation - Retrieve Events
 
@@ -696,6 +697,7 @@ Please note it requires the use of credentials for the Google Calendar API in li
 Also please note, the code uses the Singapore timezone by default in line 93 which should be changed according to your google calendar user's timezone.
 
 Retrieve Events
+
 ```python
 from __future__ import print_function
 
@@ -856,6 +858,7 @@ This code is responsible for creating events once the customer has decided which
 Please note it requires the use of credentials for the Google Calendar API as mentioned in the section above.
 
 Create Event
+
 ```python
 # Refer to the Python quickstart on how to setup the environment:
 # https://developers.google.com/calendar/quickstart/python

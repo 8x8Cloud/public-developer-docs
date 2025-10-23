@@ -18,7 +18,7 @@ The external account SMS routing via SMPP is provided by default, but it can be 
 2. Define the account type as Routing , the channel as Mobile (SMS) and the delivery mode as Bulk delivery.
 
 ![1152](../images/a3d8152-1596705622439.png "1596705622439.png")
-3. Define the connection settings. To enter the connection settings specific to sending SMS messages.   
+3. Define the connection settings. To enter the connection settings specific to sending SMS messages.
 Please enter the following details:
 
 * SMPP connection mode: **Transceiver**
@@ -35,19 +35,7 @@ The **Enable TLS over SMPP** option allows you to encrypt SMPP traffic, use **27
 
 5. Define the SMPP channel settings. You can learn more in the [SMS encoding and formats section](https://docs.adobe.com/content/help/en/campaign-standard/using/administrating/configuring-channels/configuring-sms-channel.html#sms-encoding-and-formats).  
 
-  
-  
-
-  
-  
-
 Enable the **Store incoming MO in the database** if you want all incoming SMS to be stored in the inSMS table. For more information on how to retrieve your incoming SMS, refer to this [section](https://docs.adobe.com/content/help/en/campaign-standard/using/communication-channels/sms-messages/managing-incoming-sms.html#storing-incoming-sms).  
-
-  
-  
-
-  
-  
 
 The **Enable Real-time KPI updates during SR processing** option allows the **Delivered or Bounces + Errors KPIs** to be updated in real time after sending your delivery. These KPIs can be found in the **Deployment** window and are directly recalculated from the SR (Status Report) received from 8x8.  
 

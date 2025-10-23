@@ -14,7 +14,6 @@ By integrating 8x8 Chat Apps product into FreshDesk Support you get the best of 
   allowFullScreen>
 </iframe>
   
-
 ## Use cases
 
 * Receive and send Chat Apps message for FreshDesk support.
@@ -45,16 +44,18 @@ By integrating 8x8 Chat Apps product into FreshDesk Support you get the best of 
 
 ---
 
-#### 3. Let’s configure the following fields:
+#### 3. Let’s configure the following fields
 
 ![](../images/fac82d0-Freshdesk_3.png "Freshdesk 3.png")
 
 ![](../images/e5dc813-Freshdesk_Config_1.png "Freshdesk 4.png")
+
 * Your URL should be:  
 
 `https://chatapps.8x8.com/webhook/freshdesk/{ChanelId}?accessKey={accessKey}`
-	+ {ChanelId} and {accessKey} will be sent to you.
-	+ For example: `https://chatapps.8x8.com/webhook/freshdesk/1234-abcd-1234-abcd?accessKey=123456789`
+  + {ChanelId} and {accessKey} will be sent to you.
+  + For example: `https://chatapps.8x8.com/webhook/freshdesk/1234-abcd-1234-abcd?accessKey=123456789`
+
 * Your JSON content should be:
 
 ```json
@@ -92,42 +93,32 @@ By integrating 8x8 Chat Apps product into FreshDesk Support you get the best of 
 
 ```
 
-  
-
 ---
 
-#### 6. Once this is done, you will need to send to 8x8 the following information:
+#### 6. Once this is done, you will need to send to 8x8 the following information
 
 * **URL**, the path to customer Freshdesk API:https://{YOUR_SUBDOMAIN}.freshdesk.com/api/v2
 * **ApiToken**, your Freshdesk ApiToken, of an admin user.
 * **TicketTag**, which will be added to tickets created by 8x8 (Chat Apps, for instance)
 * **DefaultTicketSubject**, ticket subject which will be used for a new ticket starting from an incoming message
 
-  
-
-  
-
-  
-
-  
-
 > 📘 **Optional Step**
-> 
+>
 > If you would like to send an automatic message to your users, when closing a ticket, you can use the instructions below to set it up.
-> 
-> 
+>
+>
 
  **Automatic Closing Message**
 
 * Create a new Automation rule under "Ticket Updates" Category
 * Set the correct tag and rules (tag should be consistent to what you used in other rules)
 * Select Trigger webhook - POST on `https://chatapps.8x8.com/api/v1/subaccounts/{{subaccountid}}/messages`
-	+ please replace {{subaccountid}} with your `subaccountId`which can be found in [8x8 Connect](https://connect.8x8.com/messaging/api-keys)
+  * please replace {{subaccountid}} with your `subaccountId`which can be found in [8x8 Connect](https://connect.8x8.com/messaging/api-keys)
 * custom header: `{"Authorization": "Bearer YprcJ**\*\***\*\*\*\***\*\***","Content-Type": "application/json"}`  
 
 *8x8 Bearer token can be found in the API Keys section of your [8x8 connect](https://connect.8x8.com) account*
 
-**Your JSON advance body:** 
+**Your JSON advance body:**
 
 ```json
 {
@@ -142,6 +133,6 @@ By integrating 8x8 Chat Apps product into FreshDesk Support you get the best of 
 
 ```
 
-You can modify the "text" field above to include any message and use any [FreshDesk ticket field](https://support.freshdesk.com/en/support/solutions/articles/52630-understanding-dynamic-content-and-placeholders). 
+You can modify the "text" field above to include any message and use any [FreshDesk ticket field](https://support.freshdesk.com/en/support/solutions/articles/52630-understanding-dynamic-content-and-placeholders).
 
 ![](../images/5dd454a-FreshDesk-Closing_message.jpg "FreshDesk-Closing message.jpg")

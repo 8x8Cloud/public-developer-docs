@@ -231,6 +231,7 @@ Provide the complete set of fields for the resource. Any fields not included in 
 A successful creation will yield a 200 status code and a response body with the details of the updated contact.
 
 I'm A tab
+
 ```json
 {
    "id": "c3697cef-5e57-41cc-8720-6db6e8e2a977",
@@ -290,8 +291,6 @@ I'm A tab
 
 ```
 
-  
-
 ### Non-updatable Fields
 
 The fields in the table below are read only and should not be included in any PUT request.
@@ -327,10 +326,10 @@ No request body is needed for a delete operation.
 A successful deletion will yield a 200 status code. The response body will typically be empty, indicating that the contact has been successfully removed from the system.
 
 > ⚠️ **Important: Deleting a Contact**
-> 
+>
 > Deleting a contact is a permanent action and cannot be undone. Please confirm the contact ID before proceeding with this operation to avoid unintended deletions.
-> 
-> 
+>
+>
 
 ## 5. Contact Search for Retrieval and Queries
 

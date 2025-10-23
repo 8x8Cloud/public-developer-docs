@@ -72,9 +72,9 @@ Here are the following options available to the agent:
 8. **Turn on/off Agent's Camera:** Enable/Disable the agent's camera.
 9. **Take Screenshot:** Takes a screenshot of the agent's video view and allow annotation.
 10. **Take Photo**: Takes photo using guest's camera.
- 1. The video stream will be paused as the guest's camera is required for photo taking.
- 2. Video stream will resume once the photo has been taken.
- 3. Annotation isn't available.
+1. The video stream will be paused as the guest's camera is required for photo taking.
+2. Video stream will resume once the photo has been taken.
+3. Annotation isn't available.
 11. **Virtual Background Settings:** Change the Agent's Virtual Background Settings such as the image to use, blur, etc.
 12. **Open Chat:** Open's the Chat Window Between the Agent and the Customer, supports text-only messaging.
 13. **End Call:** Terminate and leave the call.

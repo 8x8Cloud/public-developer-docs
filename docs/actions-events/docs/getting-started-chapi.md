@@ -5,10 +5,10 @@ Chapi is what we call our Chat API. It allows you to send and fetch messages fro
 ## Getting Prepared for Beta Access
 
 > 🚧 **Get your API Key (beta) — Skip this if you've already got one!**
-> 
+>
 > There's one prerequisite before you're able to use these APIs, and that's getting your API Key. You can generate your API key in the Admin Console. [Here's how](/actions-events/docs/chat-api-key)
-> 
-> 
+>
+>
 
 ## 1. Get Messages from a Room
 
@@ -22,12 +22,12 @@ curl --request GET \
 ```
 
 > 📘 **Did you get an error?**
-> 
+>
 > If you see `{"fault":{"faultstring":"Invalid access token","detail":{"errorcode":"oauth.v2.InvalidAccessToken"}}}` You'll want to make sure you replace the api key (`test_key_kjdfidj238jf9123df221`) with your own.
-> 
-> 
+>
+>
 
-Awesome! You should have received a JSON payload with something like the following: 
+Awesome! You should have received a JSON payload with something like the following:
 
 ```json
 [

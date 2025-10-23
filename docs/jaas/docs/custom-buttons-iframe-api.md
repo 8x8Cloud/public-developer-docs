@@ -19,12 +19,13 @@ In this tutorial, we will explore how to add custom buttons to the Jitsi Meet if
 The code below shows an example of a modified Iframe API code where there are buttons for Mute Camera and Mute Microphone that are separated from the JaaS Iframe interface.
 
 > 📘 **Placeholders**
-> 
+>
 > Replace **{jaas_application_id}** and **{jaas_room_name}** in server.js below with the appropriate values from your application. Appropriate default values can be found by signing into your JaaS console at [https://jaas.8x8.vc/#/](https://jaas.8x8.vc/#/) and copying values from the Iframe code example.
-> 
-> 
+>
+>
 
 index.html
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -102,10 +103,11 @@ The important changes to the default iframe code are outlined below for convenie
 First we create a **div** for the buttons in the index.html.
 
 Buttons <div>
+
 ```html
 <div id="button-container">
   <button id="mute-mic">Toggle Mute Mic</button>
-	<button id="mute-camera">Toggle Mute Camera</button>
+  <button id="mute-camera">Toggle Mute Camera</button>
 </div>
 
 ```
@@ -113,6 +115,7 @@ Buttons <div>
 Second we listen for the local participant to join the JaaS room before loading the buttons, otherwise it may show in the prejoin lobby.
 
 Load Buttons on Room Join
+
 ```javascript
 api.addEventListener('videoConferenceJoined', () => {
   document.getElementById('button-container').style.display = 'flex'; // Show buttons when local participant joins
@@ -123,6 +126,7 @@ api.addEventListener('videoConferenceJoined', () => {
 Third we add the functionality to those buttons by adding **onclick()** events and calling the appropriate Iframe API methods, in this case toggleAudio and toggleVideo.
 
 onClick Event
+
 ```
 document.getElementById('mute-mic').onclick = () => api.executeCommand('toggleAudio');
 document.getElementById('mute-camera').onclick = () => api.executeCommand('toggleVideo');
@@ -136,6 +140,7 @@ Through this code the buttons are able to call functionality from the Iframe API
 While the backend server does not have any influence on the custom buttons, we include a sample Node.js backend for convenience. This can be replaced with any backend of your choice.
 
 server.js
+
 ```
 const express = require('express');
 const app = express();
@@ -157,6 +162,7 @@ app.listen(PORT, () => {
 To run the application use the following lines of code:
 
 Run Server Commands
+
 ```
 npm init -y
 npm install express
@@ -164,7 +170,7 @@ node server.js
 
 ```
 
-We should see following application hosted at **https://localhost:3000**
+We should see following application hosted at **<https://localhost:3000>**
 
 ![](../images/99dd03d-custom_buttons.gif)
 When the **Toggle Mute Mic** button is clicked, our local participant's mic icon toggles on the top right. When the **Toggle Mute Camera** button is clicked then the video feed is toggled on off, signified by the black screen appearing momentarily.

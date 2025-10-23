@@ -27,13 +27,13 @@ While in version V1 your conversation was virtualized and you had to keep track 
 As **[conversation API](/contactcenter/reference/getcctransactions)** became more robust, now besides creating a conversation and adding messages to it, you will also be able to:
 
 * retrieve details about the conversation like
-	+ Channel ID
-	+ Start time
-	+ Customer information (name, email, phone etc)
-	+ List of interaction
-		- You can use **[All interactions API](https://support.8x8.com/cloud-contact-center/virtual-contact-center/developers/8x8-contact-center-statistics-reporting-api#List_all_interactions)** to see statistics regarding each interaction
+  * Channel ID
+  * Start time
+  * Customer information (name, email, phone etc)
+  * List of interaction
+    * You can use **[All interactions API](https://support.8x8.com/cloud-contact-center/virtual-contact-center/developers/8x8-contact-center-statistics-reporting-api#List_all_interactions)** to see statistics regarding each interaction
 * Retrieve participants list
-	+ See what participants were involved in conversations (customer, bot agent) and details about them
+  * See what participants were involved in conversations (customer, bot agent) and details about them
 * Retrieve the list of messages within a conversation
 
 ### Security

@@ -21,7 +21,7 @@ The code will contain the following parts:
 
 ## Setup
 
-First create a new directory somewhere on your computer for the sample code. 
+First create a new directory somewhere on your computer for the sample code.
 
 ```bash
 mkdir jaas_transcription_app
@@ -48,6 +48,7 @@ Once you have a endpoint, you can set it up in the [webhook](jaas-console-webhoo
 The backend component will both serve the web page and also serve as an endpoint to send the jaas webhook to.
 
 server.js
+
 ```
 const express = require('express');
 const path = require('path');
@@ -81,12 +82,13 @@ Our frontend uses the JaaS Iframe from the [sample](jaas-console-my-sample-app) 
 Ensure to replace the **JWT**, **magic cookie** and **room name** in the HTML below with unique value from your sample app from the JaaS console. You will need to generate a JWT for the user from your application w/ transcription. If you do not have a backend server already setup, you can generate a JWT from the JaaS Console's [API Keys section](https://jaas.8x8.vc/#/apikeys).
 
 > 📘 **Transcription Feature**
-> 
+>
 > Transcription is a **premium** feature so you will need to add a payment method to your JaaS account to enable it.
-> 
-> 
+>
+>
 
 public/index.html
+
 ```html
 <!DOCTYPE html>
 <html>

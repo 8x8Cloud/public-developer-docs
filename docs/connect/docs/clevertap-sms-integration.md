@@ -66,7 +66,7 @@ Navigate to the Authentication section and fill in the following field.
 
 For headers, fill in the following key value pairs.
 
-**Authorization:** Bearer 
+**Authorization:** Bearer
 
 You can find or generate your API Keys in your 8x8 [Customer Portal](https://connect.8x8.com) under API Keys.
 

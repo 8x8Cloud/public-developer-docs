@@ -60,7 +60,6 @@ To track the delivery of your WhatsApp Messages inside MoEngage, you would need 
 
 ![](../images/a9bfdfa-image.png)
   
-
 ### Configuring Whatsapp templates
 
 As of October 2023, MoEngage does not retrieve your Whatsapp templates automatically. You will need to set up the approved Whatsapp templates verbatim in MoEngage.

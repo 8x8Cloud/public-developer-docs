@@ -1,8 +1,8 @@
 # Key Elements
 
 > ❗️ **PLEASE NOTE - This API is going to be deprecated on 30th September 2023, it will no longer work after this date. Please use our [Chat Gateway](/actions-events/docs/chat-gateway) which offers all of the Chat API's functionalities as well as additional features.**
-> 
-> 
+>
+>
 
 Before getting started using the Chat API, we recommend familiarizing yourself with the concepts and chat elements that you will be working with and are referenced in the following diagram:
 

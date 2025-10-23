@@ -3,12 +3,12 @@
 Customers looking to download content in bulk from [Cloud Storage Service](/analytics/reference/searchobject) can follow the this multi step process. Use cases include downloading 8x8 Work Call Recordings, Meeting Recordings, Contact Center Recordings or any of the other data types in the Cloud Storage Service.
 
 > 📘 **You will need a working API key to begin**
-> 
+>
 > [How to get API Keys](/analytics/docs/how-to-get-api-keys)
-> 
+>
 > To create a "Call Recording & Storage" API Keys, the user must first have the 'Cloud Storage API' assignment. This assignment must be granted by the Super Admin.
-> 
-> 
+>
+>
 
 For interacting with Cloud Storage Service `https://api.8x8.com/storage/{region}/v{version}/`
 
@@ -52,6 +52,7 @@ The following steps will use the access_token as a Bearer Token form of authenti
 ### My Regions Request
 
 genericus-eastuk
+
 ```bash
 curl --location --request GET 'https://api.8x8.com/storage/{region}/v3/regions' \
 --header 'Accept: application/json' \
@@ -88,22 +89,22 @@ curl --location --request GET 'https://api.8x8.com/storage/uk/v3/regions' \
 * region
 
 > 📘 **Only one region at a time can be searched.**
-> 
+>
 > If you have multiple regions and your use case spans regions. If you want to download all recordings for a specific date then steps 3 - 5 need to be performed per region
-> 
-> 
+>
+>
 
 ## 3. Find Objects
 
 > 🚧 **Only objects with a state of AVAILABLE are returned unless other object states are specifically requested.**
-> 
+>
 > To return objects in multiple states specify this in the filter.  
-> 
+>
 > Example to return all objects that are REVOKED and AVAILABLE the filter should include `(objectState==AVAILABLE,objectState==REVOKED)`  
-> 
+>
 > In FIQL ; = AND and , = OR
-> 
-> 
+>
+>
 
 ### Parameters
 
@@ -150,12 +151,12 @@ curl --location --request GET 'https://api.8x8.com/storage/{region}/v3/objects?f
 ### Find Objects Response
 
 > 🚧 **TAGS SHORTENED TO KEEP SAMPLE SHORT**
-> 
+>
 > NOTE TAGS HAVE BEEN SHORTENED FOR SIMPLICITY, SEE [Cloud Storage Service Objects](/analytics/docs/cloud-storage-service-objects) for details on additional object types.
-> 
-> 
+>
+>
 
-**Response:** 
+**Response:**
 
 ```json
 {
@@ -418,9 +419,9 @@ Example file names within zip file:
 * int-1819420cbe2-sHtEBArUkmmtmyczfbcDGWMwl-phone-00-supertenantcsm01.mp3
 
 > 🚧 **The meta data and content type vary for each object type**
-> 
+>
 > The Zip file will contain the contents of the objects and the file names within the zip file will be the objectName. It is possible to request objects of multiple types in a single download so the content type/file type need not be the same.  
-> 
+>
 > Example: If you downloaded a callrecording and the transcript of the call then the content would be two files, one with mp3 content and one with json content.
-> 
+>
 >

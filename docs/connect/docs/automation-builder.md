@@ -17,4 +17,3 @@ The UI allows you to do similar tasks such as creating and managing complex busi
   allow="picture-in-picture; web-share"
   allowFullScreen>
 </iframe>
-
