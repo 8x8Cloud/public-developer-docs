@@ -16,7 +16,7 @@ SAPI provides data for real-time events via server push notifications. It uses a
 
 ## Accessing the API
 
-## Authentication
+### Authentication
 
 In order to subscribe to SAPI events, you must first obtain an authentication token that has been issued for your tenant. This token is a single string that combines your username and password. 
 
@@ -32,13 +32,13 @@ To either obtain an existing or generate a new authentication token:
 
 **Note**: The generated authentication token for your tenant can be used for your SAPI as well as other 8x8 API requests. It does not expire nor have a time limit unless you decide to change it. If you already have a token and you click on the **New Token** button, your existing authentication token becomes invalid **for all use cases**. You should save a copy in a safe storage location for future reference.
 
-## Subscribing to SAPI
+### Subscribing to SAPI
 
-### URL Format
+#### URL Format
 
 wss://vcc-`{cluster}`.8x8.com/api/streaming/v`{version}`/clientconnect/subscribe/TenantUpdates-`{tenant}`-`{subscriptionId}`?desiredOutputType=`{outputType}`&tenantId=`{tenantId}`&subsId=`{subscriptionId}`
 
-### Parameters
+#### Parameters
 
 #### Path
 
@@ -56,7 +56,7 @@ wss://vcc-`{cluster}`.8x8.com/api/streaming/v`{version}`/clientconnect/subscribe
 | subscriptionId    | ✓        | As specified in the `Path` above.                                                                                                                                                                  | real-time-monitor |
 | desiredOutputType |          | This controls the output format of the stream. Options are: JSON, XML, NEWLINE_JSON and NEWLINE_XML. The NEWLINE variants will emit a newline after each event in the specified format             | NEWLINE_JSON      |
 
-##### Connection Lifecycle Information
+### Connection Lifecycle Information
 
 Please review the following details before you begin using SAPI:
 
@@ -67,9 +67,9 @@ Please review the following details before you begin using SAPI:
 	+ Consumers should reconnect using the same subscriptionId to continue the stream.
 	+ If a consumer subscribes with the same subscriptionId more than 2 hours after disconnecting this is treated as a new subscription and no cached events are delivered.
 
-###### Event Reference
+## Event Reference
 
-##### Event types / call state
+### Event types / call state
 
 The following table lists the SAPI Event Type with the corresponding Call State ID and definition:
 
@@ -97,11 +97,11 @@ The following table lists the SAPI Event Type with the corresponding Call State 
 | **`InteractionDeassigned`**        | **`CS_DISCONNECTED`**             | Indicates the reassigning of a phone call from an available agent. This can occur if the agent has not accepted the offered phone call on preview mode and then the call times out.                                                                                                                                                                                                                                                                                                                                                                                            |
 | **`InteractionParticipantChange`** | **`CS_DISCONNECTED`**             | When two phone lines are joined or when a supervisor joins an ongoing call.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
-##### Event Sequence Examples
+### Event Sequence Examples
 
 This section describes example call flow scenarios with the **`EventTypes`** and **`callStates`** that are encountered.
 
-### Inbound call
+#### Inbound call
 
 | **Action**                                                                           | **EventType**                   | **callState**         |
 | ------------------------------------------------------------------------------------ | ------------------------------- | --------------------- |
@@ -114,7 +114,7 @@ This section describes example call flow scenarios with the **`EventTypes`** and
 | 7. The customer ends the call.                                                       | **`InteractionDeassigned`**     | **`CS_DISCONNECTED`** |
 | 8. The agent ends the call.                                                          | **`InteractionDeassigned`**     | **`CS_DISCONNECTED`** |
 
-### Outbound call without queue
+#### Outbound call without queue
 
 | **Action**                                                                                                                          | **EventType**                     | **callState**         |
 | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | --------------------- |
@@ -126,7 +126,7 @@ This section describes example call flow scenarios with the **`EventTypes`** and
 | 6. The conclusion of the phone call wrap up process.                                                                                | **`InteractionEndPostProcess`**   | **`CS_DISCONNECTED`** |
 | 7. The phone call has been reassigned from an agent.                                                                                | **`InteractionDeAssigned`**       | **`CS_DISCONNECTED`** |
 
-### Outbound call with queue
+#### Outbound call with queue
 
 | **Action**                                                                                                                                                                      | **EventType**                     | **callState**         |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | --------------------- |
@@ -138,7 +138,7 @@ This section describes example call flow scenarios with the **`EventTypes`** and
 | 6. The start of call wrap-up for the concluded phone call.                                                                                                                      | **`InteractionEndPostProcess`**   | **`CS_DISCONNECTED`** |
 | 7. The phone call has been reassigned from an available agent. This can occur if the agent has not accepted the offered phone call on preview mode and then the call times out. | **`InteractionDeAssigned`**       | **`CS_DISCONNECTED`** |
 
-### Outbound conference call (with queue)
+#### Outbound conference call (with queue)
 
 | **Action**                                                                                         | **EventType**                      | **CallState**               |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------- | --------------------------- |
@@ -168,7 +168,7 @@ This section describes example call flow scenarios with the **`EventTypes`** and
 | 24. The phone call has been reassigned from an agent.                                              | **`InteractionDeassigned`**        | **`CS_DISCONNECTED`**       |
 | 25.The agent leaves the conference call scenario. `"hangupInitiator": "AGENT"`                     | **`InteractionDeleted`**           | **`CEC_DISCONNECT_NORMAL`** |
 
-#### Transfer of call to another agent (inbound or outbound call)
+### Transfer of call to another agent (inbound or outbound call)
 
 | **Action**                                                                                | **EventType**                      | **callState**         |
 | ----------------------------------------------------------------------------------------- | ---------------------------------- | --------------------- |
@@ -199,7 +199,7 @@ This section describes example call flow scenarios with the **`EventTypes`** and
 | 25. The reassigning of a phone call from an available agent.                              | **`InteractionDeassigned`**        | **`CS_DISCONNECTED`** |
 | 26. The phone call has concluded.                                                         | **`InteractionDeleted`**           | **`CUSTOMER`**        |
 
-#### Transfer of a call to an inbound queue
+### Transfer of a call to an inbound queue
 
 | **Action**                                                                               | **EventType**                     | **callState**         |
 | ---------------------------------------------------------------------------------------- | --------------------------------- | --------------------- |
@@ -215,9 +215,9 @@ This section describes example call flow scenarios with the **`EventTypes`** and
 | 10. The call has been deassigned.                                                        | **`InteractionDeassigned`**       | **`CS_DISCONNECTED`** |
 | 11. The phone call has concluded. `"hangupInitiator": "AGENT"`                           | **`InteractionDeleted`**          | **`CS_DISCONNECTED`** |
 
-##### Samples and Test Tool
+## Samples and Test Tool
 
-#### The SAPI Sample client
+### The SAPI Sample client
 
 A sample client written in Java is available. This is provided as is as an example of how to consume the SAPI API.
 
@@ -227,7 +227,7 @@ The SAPI sample client is a Java-based command-line utility that facilitates con
 
 **Note:** SAPI Status codes are displayed as numbers that correspond to the manually selected status code. Agent status codes do not come up with the same status ID number in SAPI if you have more than one status code list. For example, the status code for when one agent is on lunch break may be represented as a different lunch break status code in another different list on the same tenant. 
 
-#### Browser Test Tool
+### Browser Test Tool
 
 In the SAPI web client, the SAPI query URL in the browser field is constructed as follows:
 
@@ -257,7 +257,7 @@ The displayed **Tenant Updates** screen consists of the following information fi
 * **Subscribe** - initiates a subscription to events for the next 60 minutes.
 * **Unsubscribe** - disconnects the client from the SAPI server and starts storing messages for possible reconnection.
 
-### Sample Events
+#### Sample Events
 
 #### Heartbeat
 

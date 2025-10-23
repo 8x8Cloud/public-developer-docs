@@ -2,7 +2,7 @@
 
 ## Set chat variables
 
-## Introduction
+### Introduction
 
   
 
@@ -22,7 +22,7 @@ CRM variables:
 
 '$emailBody'
 
-### Script config
+#### Script config
 
 Here is an example, where we are setting a variable to show the customer is a VIP, so inside the scripting they can go to that queue, and also setting the email address to it can create a screen pop for the agent. 
 
@@ -45,8 +45,7 @@ To add this, you need to add it at the bottom of the script in this area here
 
 Then, the full script will look like this 
 
-JavaScript
-```html
+```javascript
     <!-- Place this code snippet anywhere you want the button to appear in your page. If no button has been configured in the chat script, it will not show up nor take any space. -->
     <div id="__8x8-chat-button-container-script_1333070733643e5b8fa7a791.52161248"></div>
 
@@ -107,7 +106,7 @@ chatApp.setVariables({"_VIP":"YES",
 
 ```
 
-### 8x8 script
+#### 8x8 script
 
 Then inside the 8x8 script, you can use the variable like the below, to route to the queue you want them to go to
 
@@ -116,7 +115,7 @@ Then inside the 8x8 script, you can use the variable like the below, to route to
 ![](../images/e5673df5d46fcce77ca354d0aec357279f965a271178f90a8d752f9fa9572392-VIP.png "Chat Gateway flow.jpg")
   
 
-### Important Notes
+#### Important Notes
 
 * Language $language is the only CRM variable that will not be sent back in CM to use inside chat script testVariable node but will actually take effect immediately and change the chat language; also it will set the default language option value in pre-chat language question drop-down select (if pre-chat and language question set).
 * If no pre-chat form/no language question is set then the only effect is the language change for the available next steps (chat window, offline form).
@@ -124,7 +123,7 @@ Then inside the 8x8 script, you can use the variable like the below, to route to
 * The variables key:value pair is limited to 255 characters for the key and the value each. Any key:pair bigger than the specified value will be ignored.
 * The variable key that is not a string and does not match the pattern *(any alphanumeric characters plus underscore _, any digit 1-9, a hyphen -)* will be ignored and a warning is shown in the console.
 
-### Troubleshooting
+#### Troubleshooting
 
 * Make sure that, when passing the variables the correct format and type string is adhered to and it is a key-value object.
 * If the message *"Customer variable: provided variable [variableKey] does not match the expected pattern or its chars exceeded the max length of 255. It will be discarded"*, it means that the set custom variable key value is of a format or pattern unsupported by the embedded chat. Only custom variables prefixed with _ and that match the pattern *(any alphanumeric characters plus underscore _, any digit 1-9, a hyphen -)* are accepted.

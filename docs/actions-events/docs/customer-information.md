@@ -1,15 +1,14 @@
 # Customer information
 
-*Customer Information*
-======================
+## Customer Information
 
   
 
-## Introduction
+### Introduction
 
 Using this option, customer specific information can be sent from a website, into the webchat widget, which can then be forwarded onto an agent, but also it can be sent into ICA as well.
 
-### Script config
+#### Script config
 
 Here is an example of where the customer information is being set, for this example, the customer is already logged into the website, so we are passing in the information to the agent, to let them know the customer's name and email address, and also that they have already been verified
 
@@ -100,7 +99,7 @@ Then, the full script will look like this
 
 ```
 
-### Agent view
+#### Agent view
 
 When the query is routed through to an agent, they will be able to see the data that was passed into the webchat, in both the interaction panel -
   
@@ -113,7 +112,7 @@ Also the chat panel
 ![](../images/18f28912a0053c2e9352348fee117bc8e54ea378b92c14fadcb0707fc085c395-Chatpanel.png "Chat Gateway flow.jpg")
   
 
-### Important Notes
+#### Important Notes
 
 * The customer information can be set on any myProxy lifecycle subscriber hook, but it will only be actually sent to the server when the customer is added to a queue.
 * Only primitive data types (strings, numbers and booleans) are allowed as values. Trying to set the customer information with non-primitive data types (e.g., objects, arrays and functions) will result in console warnings, and their values will be discarded.

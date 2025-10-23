@@ -39,25 +39,25 @@ Where encodedValue is base64encode(username:password)
 
 ## Add Records to Campaign
 
-## Parameters
+### Parameters
 
 **Method: POST**
 
-### Headers
+#### Headers
 
 | Name          | Required | Description                                                                                                                                                                          | Example                                    |
 | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
 | Authorization | ✓        | [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) where username is the value of username and the password is the value of **Action Request Token**. | Basic bXljbGllbnRJZDpuZXZlcnRlbGxhbnlvbmU= |
 | Content-Type  | ✓        | Set content type for body to application/json                                                                                                                                        | application/json                           |
 
-### Path
+#### Path
 
 | Name       | Required | Description                                                                                                                                                                                                                                                              | Example |
 | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
 | ccPlatform | ✓        | Contact Center platform can be found in the url when accessing CC Configuration Manager.<br />North America starts NA<br />Europe starts EU<br />Canada starts CA<br />Asia Pacific starts AP<br />Australia starts AU<br />Bell Canada starts BC<br />Sandbox starts SB | na12    |
 | campaignId | ✓        | The id of the campaign to get the status for. Can be located in CC Configuration Manager "Campaigns" and adding the "Campaign ID" column, or within a specific campaign as part of "Properties", "General Properties"                                                    | 125     |
 
-### Body
+#### Body
 
 Body is an unnamed array of customer records. See [Add Campaign Record Request](/actions-events/docs/cc-managing-campaign-records#add-campaign-record-request) for a full example.
 
@@ -68,7 +68,7 @@ Customer Record:
 | customer-id        | ✓        | customer-id is the ACCOUNTNUM of the customer from the CC CRM. <br /> This can be found in the Agent Workspace OR via the CC CRM API. | 10003629                   |
 | schedule-date-time | ☐        | Optional, scheduled/desired time for call which will influence the time the record is processed. ISO8601 datetime format.             | "2022-08-29T09:00:00.000Z" |
 
-#### Add Campaign Record Request
+### Add Campaign Record Request
 
 ```bash
 curl --location --request POST 'https://vcc-{ccPlatform}.8x8.com/api/tstats/campaigns/{campaignId}/customers' \
@@ -85,7 +85,7 @@ curl --location --request POST 'https://vcc-{ccPlatform}.8x8.com/api/tstats/camp
 
 ```
 
-#### Add Campaign Record Response (showing additional responses)
+### Add Campaign Record Response (showing additional responses)
 
 Response is HTTP 207 Multi-Status response. Each Customer has it's own status represented.
 
@@ -143,26 +143,26 @@ Response is HTTP 207 Multi-Status response. Each Customer has it's own status re
 
 ```
 
-##### View Records in Campaign
+## View Records in Campaign
 
-#### Parameters
+### Parameters
 
 **Method: GET**
 
-### Headers
+#### Headers
 
 | Name          | Required | Description                                                                                                                                                                        | Example                                    |
 | ------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
 | Authorization | ✓        | [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) where username is the value of username and the password is the value of **Data Request Token**. | Basic bXljbGllbnRJZDpuZXZlcnRlbGxhbnlvbmU= |
 
-### Path
+#### Path
 
 | Name       | Required | Description                                                                                                                                                                                                                                                               | Example |
 | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | ccPlatform | ✓        | Contact Center platform can be found in the url when accessing CC Configuration Manager. <br />North America starts NA<br />Europe starts EU<br />Canada starts CA<br />Asia Pacific starts AP<br />Australia starts AU<br />Bell Canada starts BC<br />Sandbox starts SB | na12    |
 | campaignId | ✓        | The id of the campaign to get the status for. Can be located in CC Configuration Manager "Campaigns" and adding the "Campaign ID" column, or within a specific campaign as part of "Properties", "General Properties"                                                     | 125     |
 
-#### View Campaign Records Request
+### View Campaign Records Request
 
 ```bash
 curl --location --request GET 'https://vcc-{ccPlatform}.8x8.com/api/stats/campaigns/{campaignId}/records.json' \
@@ -170,7 +170,7 @@ curl --location --request GET 'https://vcc-{ccPlatform}.8x8.com/api/stats/campai
 
 ```
 
-#### View Campaign Record Response
+### View Campaign Record Response
 
 The success response code is HTTP 200. Each Record will have its own status and information. 
 
@@ -238,19 +238,19 @@ The success response code is HTTP 200. Each Record will have its own status and 
 
 1002 = Scheduled Call Back
 
-##### Delete Record from Campaign
+## Delete Record from Campaign
 
-#### Parameters
+### Parameters
 
 **Method: DELETE**
 
-### Headers
+#### Headers
 
 | Name          | Required | Description                                                                                                                                                                        | Example                                    |
 | ------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
 | Authorization | ✓        | [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) where username is the value of username and the password is the value of **Data Request Token**. | Basic bXljbGllbnRJZDpuZXZlcnRlbGxhbnlvbmU= |
 
-### Path
+#### Path
 
 | Name       | Required | Description                                                                                                                                                                                                                                                               | Example  |
 | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
@@ -258,7 +258,7 @@ The success response code is HTTP 200. Each Record will have its own status and 
 | campaignId | ✓        | The id of the campaign to get the status for. Can be located in CC Configuration Manager "Campaigns" and adding the "Campaign ID" column, or within a specific campaign as part of "Properties", "General Properties"                                                     | 125      |
 | customerId | ✓        | customer-id is the ACCOUNTNUM of the customer from the CC CRM. <br /> This can be found in the Agent Workspace OR via the CC CRM API.                                                                                                                                     | 10003629 |
 
-#### Delete Campaign Record Request
+### Delete Campaign Record Request
 
 ```bash
 curl --location --request DELETE 'https://vcc-{ccPlatform}.8x8.com/api/tstats/campaigns/{campaignId}/customers/{customerId}' \
@@ -266,6 +266,6 @@ curl --location --request DELETE 'https://vcc-{ccPlatform}.8x8.com/api/tstats/ca
 
 ```
 
-#### Delete Campaign Record Response
+### Delete Campaign Record Response
 
 The success response code is HTTP 204 (No Content)

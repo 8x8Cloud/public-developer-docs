@@ -25,7 +25,7 @@ Where encodedValue is base64encode(username:password)
 
 ## Working with Campaign Status
 
-## Status Assignment
+### Status Assignment
 
 **RUNNING** - Change status to Running from one of the allowed initial states  
 
@@ -35,13 +35,13 @@ Where encodedValue is base64encode(username:password)
 
 **STOPPED** - Change status to Stopped from one of the allowed initial states. **Stopped is a FINAL STATE**
 
-## Allowed Campaign Status Changes
+### Allowed Campaign Status Changes
 
 No other transitions are allowed, once a campaign is Stopped it cannot be restarted.
 
 ![1621](../images/8962ed0-Campaign_Manager_state_machine.jpg "Campaign Manager state machine.jpg")Allowed Campaign State Transitions
 
-### Get Campaign Status
+## Get Campaign Status
 
 > 🚧 **URLS vary in this section with an additional 't' in setting campaign status**
 > 
@@ -51,24 +51,24 @@ No other transitions are allowed, once a campaign is Stopped it cannot be restar
 > 
 > 
 
-## Parameters
+### Parameters
 
 **Method: GET**
 
-### Headers
+#### Headers
 
 | Name          | Required | Description                                                                                                                                                                        | Example                                    |
 | ------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
 | Authorization | ✓        | [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) where username is the value of username and the password is the value of **Data Request Token**. | Basic bXljbGllbnRJZDpuZXZlcnRlbGxhbnlvbmU= |
 
-### Path
+#### Path
 
 | Name       | Required | Description                                                                                                                                                                                                                                                               | Example |
 | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | ccPlatform | ✓        | Contact Center platform can be found in the url when accessing CC Configuration Manager. <br />North America starts NA<br />Europe starts EU<br />Canada starts CA<br />Asia Pacific starts AP<br />Australia starts AU<br />Bell Canada starts BC<br />Sandbox starts SB | na12    |
 | campaignId | ✓        | The id of the campaign to get the status for. Can be located in CC Configuration Manager "Campaigns" and adding the "Campaign ID" column, or within a specific campaign as part of "Properties", "General Properties"                                                     | 125     |
 
-#### Campaign Status Request
+### Campaign Status Request
 
 ```bash
 curl --location --request GET 'https://vcc-{ccPlatform}.8x8.com/api/stats/campaigns/{campaignId}.json' \
@@ -76,7 +76,7 @@ curl --location --request GET 'https://vcc-{ccPlatform}.8x8.com/api/stats/campai
 
 ```
 
-#### Campaign Status Response
+### Campaign Status Response
 
 ```json
 {
@@ -109,7 +109,7 @@ curl --location --request GET 'https://vcc-{ccPlatform}.8x8.com/api/stats/campai
 
 ```
 
-##### Change Campaign Status
+## Change Campaign Status
 
 > 🚧 **URLS vary in this section with an additional 't' in setting campaign status**
 > 
@@ -119,30 +119,30 @@ curl --location --request GET 'https://vcc-{ccPlatform}.8x8.com/api/stats/campai
 > 
 > 
 
-#### Parameters
+### Parameters
 
 **Method: POST**
 
-### Headers
+#### Headers
 
 | Name          | Required | Description                                                                                                                                                                        | Example                                    |
 | ------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
 | Authorization | ✓        | [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) where username is the value of username and the password is the value of **Data Request Token**. | Basic bXljbGllbnRJZDpuZXZlcnRlbGxhbnlvbmU= |
 
-### Path
+#### Path
 
 | Name       | Required | Description                                                                                                                                                                                                                                                               | Example |
 | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | ccPlatform | ✓        | Contact Center platform can be found in the url when accessing CC Configuration Manager. <br />North America starts NA<br />Europe starts EU<br />Canada starts CA<br />Asia Pacific starts AP<br />Australia starts AU<br />Bell Canada starts BC<br />Sandbox starts SB | na12    |
 | campaignId | ✓        | The id of the campaign to get the status for. Can be located in CC Configuration Manager "Campaigns" and adding the "Campaign ID" column, or within a specific campaign as part of "Properties", "General Properties"                                                     | 125     |
 
-### Body
+#### Body
 
 | Name   | Required | Description                                                                                                                                                                                                                                                                                                                | Example |
 | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | status | ✓        | The status to change the campaign state to: See [Status Assignment](/actions-events/docs/cc-managing-campaign-status#status-assignment) and [Allowed Campaign Status Changes](/actions-events/docs/cc-managing-campaign-status#allowed-campaign-status-changes) <br />- RUNNING<br />- PAUSED<br />- PURGED<br />- STOPPED | RUNNING |
 
-#### Change Campaign Status Request
+### Change Campaign Status Request
 
 ```bash
 curl --location --request POST 'https://vcc-{ccPlatform}.8x8.com/api/tstats/campaigns/{campaignId}' \
@@ -154,7 +154,7 @@ curl --location --request POST 'https://vcc-{ccPlatform}.8x8.com/api/tstats/camp
 
 ```
 
-#### Change Campaign Status Response
+### Change Campaign Status Response
 
 ```json
 {
@@ -163,9 +163,9 @@ curl --location --request POST 'https://vcc-{ccPlatform}.8x8.com/api/tstats/camp
 
 ```
 
-##### References
+## References
 
-#### Campaign Status List
+### Campaign Status List
 
 | Campaign Status ID | Description                                                                                                                                           |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |

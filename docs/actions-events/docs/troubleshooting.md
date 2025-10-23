@@ -27,13 +27,13 @@ The records listed in **Event Log** contain the following properties:
 | Duration        | 00m:00s:00ms                                                                                                                                                                          | How long the request takes.                                                                                                                                                                                                                                                                                                                                                                                      |
 | Retry Attempts  | Number                                                                                                                                                                                | The number of Outbound requests that are unsuccessful. The number value indicates the attempted retry.                                                                                                                                                                                                                                                                                                           |
 
-## Search
+### Search
 
 You can search for a particular event in the search bar and use the located event to extract information for further review and analysis.
 
 ![](../images/b7b5b45-Screenshot_2021-07-23_at_13.28.49.png "Screenshot 2021-07-23 at 13.28.49.png")
 
-## Filters
+### Filters
 
 You can filter using [properties](/actions-events/docs/troubleshooting#properties).
 

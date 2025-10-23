@@ -31,7 +31,7 @@ The JWS is as specified according to [RFC 7515](https://datatracker.ietf.org/doc
 * [Data to be Signed](/actions-events/docs/validating-webhook-events#data-to-be-signed) (not present if detached)
 * The JWS signature value
 
-### JOSE Header
+#### JOSE Header
 
 The JOSE Header describes the cryptographic operations applied to JWS.
 
@@ -50,7 +50,7 @@ Because the payload is not encoded, this value is **false**
 
 This list contains **`b64`** encoding. **[RFC 7797 Section 6](https://datatracker.ietf.org/doc/html/rfc7797#section-6)**
 
-### Data to be signed
+#### Data to be signed
 
 The unencoded detached payload is in JSON format containing the following properties:
 
@@ -110,7 +110,7 @@ curl --request POST \
 
 ```
 
-#### Signature validation
+## Signature validation
 
 To validate a signature:
 
