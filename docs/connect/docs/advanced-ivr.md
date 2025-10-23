@@ -28,7 +28,7 @@ Below is a diagram showing how the IVR Tree that we will build. It has potential
 
 **Note:** What is not pictured is that any response that is not valid results in an error message and the call ending. This is done to simplify the diagram.
 
-![](../images/1c2f7f7-image.png)
+![image](../images/1c2f7f7-image.png)
 
 The colors correspond to the different levels of the IVR Tree which shows how many DTMF inputs a user will need to provide before reaching the corresponding menu item.
 
@@ -36,7 +36,7 @@ The colors correspond to the different levels of the IVR Tree which shows how ma
 
 The basic flow of Webhooks and API Calls will be similar to the Simple IVR tutorial, your server will have to respond to multiple VCA Webhooks as the user goes deeper into the IVR tree, so that Callflows API can play the correct IVR Tree menu back to the user.
 
-![](../images/22ac2f8-image.png)
+![image](../images/22ac2f8-image.png)
 
 ## IVR Callflows
 
@@ -80,7 +80,7 @@ This is the request body to send with the API request. It will make an outbound 
 
 #### IVR Tree: Main Menu
 
-![](../images/b5e73e6-image.png)
+![image](../images/b5e73e6-image.png)
 
 When the user responds to the initial DTMF input, they have a choice between 3 options. The table below shows the three menus and messages that are played for a user for a given DTMF input.
 
@@ -93,7 +93,7 @@ The code below the table shows the JSON that should be returned by your server t
 | 3 | Restaurant Hours | Our restaurant hours are between 9AM and 9PM every day of the week. |
 | Other | Invalid | Invalid input, please call again. |
 
-![](../images/6e80452-Callsflow_IVR_Diagrams-Advanced_IVR.drawio.png)
+![Callsflow IVR Diagrams - Advanced IVR](../images/6e80452-Callsflow_IVR_Diagrams-Advanced_IVR.drawio.png)
 
 Reservations
 
@@ -233,7 +233,7 @@ VCA Webhook Example
 
 #### IVR Tree: Reservations
 
-![](../images/8d0b3e3-image.png)
+![image](../images/8d0b3e3-image.png)
 
 Note: DTMF Input 3 goes back to main menu
 
@@ -349,7 +349,7 @@ json_body = {
 
 #### IVR Tree: Connect Call
 
-![](../images/c797a80-image.png)
+![image](../images/c797a80-image.png)
 
 Note: DTMF Input 2 Goes back to the main menu.
 
@@ -434,7 +434,7 @@ json_body = {
 
 #### IVR Tree: Restaurant Hours
 
-![](../images/4086128-image.png)
+![image](../images/4086128-image.png)
 
 This option will play a message for a user with restaurant hours:
 
@@ -487,7 +487,7 @@ VCA Webhook from IVR Menu Level 2
 
 #### IVR Tree: Book Table
 
-![](../images/f0c215c-image.png)
+![image](../images/f0c215c-image.png)
 
 This table shows the possible messages that will be played depending on the user's DTMF input. After the message is played the call will end.
 
@@ -520,7 +520,7 @@ Here is the corresponding callflow that the server should respond with to trigge
 
 #### IVR Tree: Reschedule Reservation
 
-![](../images/1bd1439-image.png)
+![image](../images/1bd1439-image.png)
 
 This table shows the possible messages that will be played depending on the user's DTMF input. After the message is played the call will end.
 

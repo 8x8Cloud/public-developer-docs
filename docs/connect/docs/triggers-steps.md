@@ -267,6 +267,7 @@ If you have a workflow that that is waiting for a reply from user and the user r
 The VoiceMessage step type allows your workflow to send a Voice Message using 8x8 Voice API. For example, you can create a workflow which sends a voice message reminder to an end user.
 
 As per the 8x8 Voice API, you can choose from 3 types of voice messages:
+
 * say: use text to speech to read your message to the end users
 * say&capture: use text to speech to read your message and allows to capture DTMF tone from the end users
 * playFile: play a recorded file to the end users

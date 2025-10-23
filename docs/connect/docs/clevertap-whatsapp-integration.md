@@ -27,7 +27,7 @@ CleverTap supports WhatsApp Business API integration.
 
 In the CleverTap Dashboard, navigate to **Settings > Engage > Channels > WhatsApp > WhatsApp Connect Tab**
 
-![](../images/e085d19-image.png)
+![image](../images/e085d19-image.png)
 
 Click on the **Provider Configuration** button to set up a new provider. In the Setup Tab, enter the following values:
 
@@ -50,11 +50,11 @@ After inputting the values above, click **Send Test WhatsApp** to test the integ
 
 Follow the directions in the dialog box to send the test WhatsApp message. This WhatsApp message should be sent to your test WhatsApp Number which can be your personal WhatsApp Account for example.
 
-![](../images/e3b50b48ef3b2a45cfd8fe83db12220e8bfd9ff0e6eba865ef50f51b006de666-image.png)
+![image](../images/e3b50b48ef3b2a45cfd8fe83db12220e8bfd9ff0e6eba865ef50f51b006de666-image.png)
 
 If the message is sent successfully, you should see the following dialog:
 
-![](../images/b66aa37-image.png)
+![image](../images/b66aa37-image.png)
 
 As well as a corresponding WhatsApp Message sent to your WhatsApp Account.
 

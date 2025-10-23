@@ -34,7 +34,7 @@ This video serves as a companion to this documentation page.
 
 In the CleverTap Dashboard, navigate to **Settings > Engage > Channels > SMS**
 
-![](../images/9e087ea-image.png)
+![image](../images/9e087ea-image.png)
 
 ## Setup
 
@@ -52,7 +52,7 @@ In the **Setup** Tab, enter the following:
 
 Replace **`{subAccountId}`** above with the subaccountID you would like to use. You can find your subAccountID in your 8x8 [Customer Portal](https://connect.8x8.com) under API Keys.
 
-![](../images/5af06c8-image.png)
+![image](../images/5af06c8-image.png)
 
 ## Authentication
 
@@ -60,7 +60,7 @@ Navigate to the Authentication section and fill in the following field.
 
 **Type:** No Authentication
 
-![](../images/27528c3-image.png)
+![image](../images/27528c3-image.png)
 
 ## Headers
 
@@ -72,7 +72,7 @@ You can find or generate your API Keys in your 8x8 [Customer Portal](https://con
 
 **Content-Type:** application/json
 
-![](../images/cc9b53d-image.png)
+![image](../images/cc9b53d-image.png)
 
 ## Parameters
 
@@ -97,7 +97,7 @@ You will need to use a Sender ID or Virtual Number that is registered to your 8x
 
 **Batch:** Unchecked
 
-![](../images/af0a5ab-image.png)
+![image](../images/af0a5ab-image.png)
 
 ## Other Parameters
 
@@ -107,7 +107,7 @@ These can be left unchecked/checked depending on your desired settings in Clever
 
 **Mark as default:** Unchecked or Checked, depending on your preference.
 
-![](../images/94ec801-image.png)
+![image](../images/94ec801-image.png)
 
 ## Testing SMS and Saving Channel Settings
 

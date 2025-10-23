@@ -172,7 +172,7 @@ node server.js
 
 We should see following application hosted at **<https://localhost:3000>**
 
-![](../images/99dd03d-custom_buttons.gif)
+![custom buttons](../images/99dd03d-custom_buttons.gif)
 When the **Toggle Mute Mic** button is clicked, our local participant's mic icon toggles on the top right. When the **Toggle Mute Camera** button is clicked then the video feed is toggled on off, signified by the black screen appearing momentarily.
 
 ## Conclusion

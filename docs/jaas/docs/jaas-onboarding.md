@@ -4,7 +4,7 @@ Jitsi as a Service (JaaS) enables you to develop and integrate Jitsi Meetings fu
 
 As shown in the following diagram, the JaaS Developer Console enables you to configure and incorporate the powerful [IFrame](/jaas/docs/iframe-api-overview) and [Mobile SDK](/jaas/docs/mobile-sdk-overview) Jitsi components to further facilitate and enhance your meetings:
 
-![](../images/88ecb45-jaas_architecture.png "jaas_architecture.png")
+![jaas architecture](../images/88ecb45-jaas_architecture.png "jaas_architecture.png")
 
 Your JaaS account provides an isolated context referred to as a tenant - this is where your meetings take place and where you create your meeting room. The tenant defines the root level for the meeting room namespaces you create and use. All JaaS Meeting rooms are prefixed with the tenant ID. Refer to [*Integrate JaaS using the Jitsi IFrame API*](iframe-api-overview) for more information.
 

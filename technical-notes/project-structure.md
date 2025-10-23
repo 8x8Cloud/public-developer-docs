@@ -173,7 +173,7 @@ scripts/
 ```
 
 **Available via yarn commands:**
-- `yarn analyze-links` - Run link analysis
+- `yarn validate:links` - Run link analysis
 - `yarn validate:content` - Validate content quality
 - `yarn validate:sidebar` - Validate sidebar structure
 - `yarn validate:openapi [folder]` - Validate OpenAPI specs
@@ -436,7 +436,7 @@ Project introduction visible on GitHub. Includes:
 
 ### Content Quality
 - Run `yarn validate:content` before committing
-- Check for broken links with `yarn analyze-links`
+- Check for broken links with `yarn validate:links`
 - Validate OpenAPI specs with `yarn validate:oas`
 - Format code with `yarn format:write`
 

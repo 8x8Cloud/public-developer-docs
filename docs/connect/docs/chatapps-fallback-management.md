@@ -144,7 +144,7 @@ Consider a scenario where you send a delivery notification via a WhatsApp Utilit
 
 Here's a simplified flow diagram illustrating this process:
 
-![](../images/94d6af03e9b289df4b5ff226567a0f0531ab415307923da0181e7b67895fa836-image.png)
+![image](../images/94d6af03e9b289df4b5ff226567a0f0531ab415307923da0181e7b67895fa836-image.png)
 
 In this flow:
 

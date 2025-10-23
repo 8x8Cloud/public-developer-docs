@@ -19,7 +19,7 @@ Using a clickable link on your logo that leads to your company website also furt
 
 Branding configurator offers an interface for overwriting all the configurable UI elements on your meetings. The settings in branding configurator apply to all the meetings under your AppID.
 
-![](../images/675cf05-branding_simple.png "branding_simple.png")
+![branding simple](../images/675cf05-branding_simple.png "branding_simple.png")
 
 **Advanced settings**
 =====================
@@ -28,4 +28,4 @@ Advanced branding settings allow you to configure your meetings UI on a per-room
 
 Please refer to the [Advanced Branding section](jaas-prefs-advanced-branding) for details on advanced branding and on how to set it up.
 
-![](../images/48f912e-branding_advanced.png "branding_advanced.png")
+![branding advanced](../images/48f912e-branding_advanced.png "branding_advanced.png")

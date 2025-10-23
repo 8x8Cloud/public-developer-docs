@@ -676,7 +676,7 @@ Repeat the same steps for the rest of the variables as shown below
   * `{!messageBody.content.template.name}` | `Equals` | `your_authentication_template_name`
   * `{!messageBody.content.template.language}` | `Equals` | `en_US`
 
-![](../images/03372d5805bdfd5a67fd06319628e44910293d6295026235370add6628da1b05-image.png)
+![image](../images/03372d5805bdfd5a67fd06319628e44910293d6295026235370add6628da1b05-image.png)
 
 #### Step 3.3: Second Assignment - Build the "Body" Component
 
@@ -712,7 +712,7 @@ Repeat the same steps for the rest of the variables as shown below
   * **subAccountId**: Enter your 8x8 Subaccount ID string here.
   * **body**: Select your main variable, `{!messageBody}`.
 
-![](../images/78f3891d0fda10039d2fef49ae6397c9473b2892cc24657f628b3c1b572e001d-image.png)
+![image](../images/78f3891d0fda10039d2fef49ae6397c9473b2892cc24657f628b3c1b572e001d-image.png)
 
 ---
 

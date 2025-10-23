@@ -12,13 +12,13 @@ You can optionally configure an **Authorization** header to be sent with each we
 
 The following screenshot shows a ***PARTICIPANT_JOINED*** action event configuration with an endpoint URL of **`https://postb.in/b/1600147371176-9105843019206`**:
 
-![](../images/275be1d-add_webhooks.png "add_webhooks.png")
+![add webhooks](../images/275be1d-add_webhooks.png "add_webhooks.png")
 
 You can later edit the current endpoint by selecting it from the list, or add more endpoints for other significant meeting events.
 
 The following screenshot shows the completed webhook configuration:
 
-![](../images/5dd032a-webhook_added.png "webhook_added.png")
+![webhook added](../images/5dd032a-webhook_added.png "webhook_added.png")
 
 The webhook endpoint expects data through a POST request and confirms successful data receipt through the return of an **`2xx`** status code. If a successful status is not returned, follow up webhook delivery attempts are made with an exponential back off.
 

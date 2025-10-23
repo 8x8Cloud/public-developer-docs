@@ -13,6 +13,6 @@
 * Company name (sort in ascending order [a-z] or in descending order [z-a] of the company name)
 * Last Updated Date sort in ascending order [earliest date - latest date] or in descending order [latest date - earlier date]
 
-![](../images/d13757f656b51b403abedd876d19866b641a57c5601aa6c1b792ba6a07079a79-Sender_Drafts.png)
+![image](../images/d13757f656b51b403abedd876d19866b641a57c5601aa6c1b792ba6a07079a79-Sender_Drafts.png)
 
 ---

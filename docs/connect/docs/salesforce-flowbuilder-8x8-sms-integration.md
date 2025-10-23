@@ -393,7 +393,7 @@ Now, we will use your SMS OAS file to teach Salesforce about the specific API ca
 
 Salesforce will now parse the file and make the Send-Sms-Single and Send-Many-Sms operations available as **actions** in Flow Builder.
 
-![](../images/78d972ceceddd9ae02eb9b596d255ce3e1ff3c8aca2619dadefb46a8842edbc9-image.png)
+![image](../images/78d972ceceddd9ae02eb9b596d255ce3e1ff3c8aca2619dadefb46a8842edbc9-image.png)
   
 ---
 
@@ -424,7 +424,7 @@ We only need one Assignment element to construct the SMS message.
   * `{!smsBody.from}` | `Equals` | `8x8` (Your 8x8-registered SMS Sender ID or phone number)
   * `{!smsBody.text}` | `Equals` | `This is an SMS message.`
 
-![](../images/3dc7f853bd8a2e53f2db30df8e6a57b375c53a0dd1966872407c395801cae40d-image.png)
+![image](../images/3dc7f853bd8a2e53f2db30df8e6a57b375c53a0dd1966872407c395801cae40d-image.png)
   
 #### **Step 3.3: The Action - Make the API Call**
 
@@ -432,10 +432,11 @@ We only need one Assignment element to construct the SMS message.
 2. Search for your `SmsApi` actions and select the action for sending an SMS.
 3. **Label**: `Send SMS`
 4. Configure the inputs:
-  * **subAccountId**: Enter your 8x8 Subaccount ID string here.
-  * **body**: Select your main variable, `{!smsBody}`.
 
-![](../images/c663e80783b989de121ce72d4b7b54804e7afa5f35868e42e2a32b1a9905a5b2-image.png)
+* **subAccountId**: Enter your 8x8 Subaccount ID string here.
+* **body**: Select your main variable, `{!smsBody}`.
+
+![image](../images/c663e80783b989de121ce72d4b7b54804e7afa5f35868e42e2a32b1a9905a5b2-image.png)
 
 ---
 

@@ -77,7 +77,7 @@ val userConfiguration = userConfiguration {
 >
 >
 > **\*`msisdn`** is optional.  
-> 
+>
 >
 > \*The **`deviceId`** is the device unique identifier, preferably FirebaseInstanceId. Please refer to [Work with instance IDs and GUIDs](https://developer.android.com/training/articles/user-data-ids#instance-ids-guids) for more information.
 >

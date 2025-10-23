@@ -25,7 +25,7 @@ Main Voice IVR features are:
 
 On the diagram below a simple inbound IVR flow diagram is shown:
 
-![](../images/e1df0d53239a21206560481ead93b15d57b4fb7cf914657191b36cfee46c7a30-IVR_Diagram_for_Public_Docsedited.png)
+![IVR Diagram for Public Docsedited](../images/e1df0d53239a21206560481ead93b15d57b4fb7cf914657191b36cfee46c7a30-IVR_Diagram_for_Public_Docsedited.png)
 
 ## Prerequisites
 

@@ -816,7 +816,7 @@ yarn validate:sidebar
 yarn validate:openapi [folder]         # Custom validation with filtering
 
 # Check for broken links and anchors
-yarn analyze-links
+yarn validate:links
 
 # Format code files
 yarn format:check                      # Check formatting

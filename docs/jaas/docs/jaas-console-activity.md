@@ -10,8 +10,8 @@ The identifier can be removed by deleting the associated JaaS app.
 
 The following screenshot shows the MAU according to the user's subscription plan along with a plot of cumulative usage for the current month:
 
-![](../images/105cbe5-image.png)
+![image](../images/105cbe5-image.png)
 
 Clicking **details** on the same line as **Addons usage** will show you a breakdown of any additional charges incurred for your addons.
 
-![](../images/4da375d-image.png)
+![image](../images/4da375d-image.png)

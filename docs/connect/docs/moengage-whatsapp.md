@@ -58,7 +58,7 @@ To configure a Sender from 8x8 on the MoEngage Dashboard, go to Settings->WhatsA
 
 To track the delivery of your WhatsApp Messages inside MoEngage, you would need to copy MoEngage Delivery Tracking URL and share it with [our support team](mailto:cpaas-support@8x8.com) for us to configure it for you. You should be able to see the URL as shown below:
 
-![](../images/a9bfdfa-image.png)
+![image](../images/a9bfdfa-image.png)
   
 ### Configuring Whatsapp templates
 

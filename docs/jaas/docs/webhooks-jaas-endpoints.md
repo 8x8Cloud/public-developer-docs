@@ -6,7 +6,7 @@ The endpoints require a JWT that contains the claim: `admin: true`. The JWT toke
 
 JWT payload example:
 
-```
+```json
 {
   "aud": "jitsi",
   "exp": 1696284052,
@@ -24,13 +24,12 @@ JWT payload example:
 
  Path Variables:
 
-  + ***appId***: application Id
-  + ***userId***: user id to ban
-  
+* ***appId***: application Id
+* ***userId***: user id to ban
   
   Request example:
 
-```
+```bash
 curl -X POST "https://8x8.vc/v1/_jaas/jaccess/v1/access-management/vpaas-magic-cookie-1d2e6a201d594c8f87a630e3f71826d3/ban/user/userIdValue" -H "accept: */*" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6InZwYWFzLW1hZ2ljLWNvb2tpZS0xZDJlNmEyMDFkNTk0YzhmODdhNjMwZTNmNzE4MjZkMy9lZDg1YjYiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJqaXRzaSIsImV4cCI6MTY1MDMyNTUwNiwiaXNzIjoiY2hhdCIsImFkbWluIjp0cnVlLCJuYmYiOjE1OTYxOTc2NTIsInN1YiI6InZwYWFzLW1hZ2ljLWNvb2tpZS0xZDJlNmEyMDFkNTk0YzhmODdhNjMwZTNmNzE4MjZkMyJ9.iw0rbDonLpNAfY8681VtzM0fLhKH5pPjraaR5Yb6yEgGW2ghkfExJ7ldKnhvFJOQ-YrahQhWhUbr-j8OKkggZum_YLY_AOk5qos-CGLMjM1Q_OQ94-EATi6e3Ca0rkfhm4qmgx7B_I0dqCro_F2F5ABoMOdkqPRwWF5NAC5-O317wrAR69Hi6RzWwXvzhZ75BJkZRQ7bqJEz62L_gcl3u9_g6aziRsLzJMg7-mK7LVTRThOBeHGhl07OnPx79Xu65LumDecqdlyyaTYPEHUsfRdOxxUCwpopQHWHVfEqESMH0p1fUK-P3Yl8mAEBmCVuLAIYtq6R8Ejsps5zlAIcDA"
 
 ```
@@ -41,16 +40,15 @@ curl -X POST "https://8x8.vc/v1/_jaas/jaccess/v1/access-management/vpaas-magic-c
 
  Path Variables:
 
-  + ***appId***: application Id
-  
+* ***appId***: application Id
   
   Body (JSON)
-  + ***jwt***: jwt to ban
-  
+
+* ***jwt***: jwt to ban
   
   Request example:
 
-```
+```bash
 curl -X POST "https://8x8.vc/v1/_jaas/jaccess/v1/access-management/vpaas-magic-cookie-1d2e6a201d594c8f87a630e3f71826d3/ban/jwt" -H "accept: */*" -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6InZwYWFzLW1hZ2ljLWNvb2tpZS0xZDJlNmEyMDFkNTk0YzhmODdhNjMwZTNmNzE4MjZkMy9lZDg1YjYiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJqaXRzaSIsImV4cCI6MTY1MDMyNTUwNiwiaXNzIjoiY2hhdCIsImFkbWluIjp0cnVlLCJuYmYiOjE1OTYxOTc2NTIsInN1YiI6InZwYWFzLW1hZ2ljLWNvb2tpZS0xZDJlNmEyMDFkNTk0YzhmODdhNjMwZTNmNzE4MjZkMyJ9.iw0rbDonLpNAfY8681VtzM0fLhKH5pPjraaR5Yb6yEgGW2ghkfExJ7ldKnhvFJOQ-YrahQhWhUbr-j8OKkggZum_YLY_AOk5qos-CGLMjM1Q_OQ94-EATi6e3Ca0rkfhm4qmgx7B_I0dqCro_F2F5ABoMOdkqPRwWF5NAC5-O317wrAR69Hi6RzWwXvzhZ75BJkZRQ7bqJEz62L_gcl3u9_g6aziRsLzJMg7-mK7LVTRThOBeHGhl07OnPx79Xu65LumDecqdlyyaTYPEHUsfRdOxxUCwpopQHWHVfEqESMH0p1fUK-P3Yl8mAEBmCVuLAIYtq6R8Ejsps5zlAIcDA"}"
 
 ```
@@ -63,9 +61,8 @@ curl -X POST "https://8x8.vc/v1/_jaas/jaccess/v1/access-management/vpaas-magic-c
 
  Body (JSON):
 
-  + **`action`** (string): Must have `DESTROY` value
-  + **`conferenceFullName`** (string): The full name of the conference that is constructed using the following rule: [roomName@conference.appId.8x8.vc](mailto:roomName@conference.appId.8x8.vc) 
-  
+* **`action`** (string): Must have `DESTROY` value
+* **`conferenceFullName`** (string): The full name of the conference that is constructed using the following rule: [roomName@conference.appId.8x8.vc](mailto:roomName@conference.appId.8x8.vc)
   
   Note: The appId part from the conferenceFullName must be the same as the `sub` claim from the admin JWT.JSON
 
@@ -104,9 +101,9 @@ Request type: POST
 
 Body (JSON):
 
-  + **`action`** (string): Must have `DIAL_OUT_PARTICIPANT` value
-  + **`conferenceFullName`** (string): The full name of the conference that is constructed using the following rule: [roomName@conference.appId.8x8.vc](mailto:roomName@conference.appId.8x8.vc)
-  + **`phoneNo`** (string): The phone number that will be called from the meeting.Note: 
+* **`action`** (string): Must have `DIAL_OUT_PARTICIPANT` value
+* **`conferenceFullName`** (string): The full name of the conference that is constructed using the following rule: [roomName@conference.appId.8x8.vc](mailto:roomName@conference.appId.8x8.vc)
+* **`phoneNo`** (string): The phone number that will be called from the meeting.Note:
 
   1. The appId part from the conferenceFullName must be the same as the `sub` claim from the admin JWT.
   2. When the API is called if there aren't any participants in the room, the outbound call is not performed until the first participant joins.
@@ -149,9 +146,9 @@ Request type: POST
 
 Body (JSON):
 
-  + **`action`** (string): Must have `HANG_UP_CALL` value
-  + **`conferenceFullName`** (string): The full name of the conference that is constructed using the following rule: [roomName@conference.appId.8x8.vc](mailto:roomName@conference.appId.8x8.vc)
-  + **`phoneNo`** (string): The phone number corresponding to the call that will be canceled or terminated.Note:
+* **`action`** (string): Must have `HANG_UP_CALL` value
+* **`conferenceFullName`** (string): The full name of the conference that is constructed using the following rule: [roomName@conference.appId.8x8.vc](mailto:roomName@conference.appId.8x8.vc)
+* **`phoneNo`** (string): The phone number corresponding to the call that will be canceled or terminated.Note:
 
   1. The appId part from the conferenceFullName must be the same as the `sub` claim from the admin JWT.
   2. If the participant corresponding to the phone number is in the room, calling the endpoint will kick the participant, but if the participant did not receive the call yet, it is canceled.
@@ -193,9 +190,9 @@ Request type: POST
 
 Body (JSON):
 
-  + **`action`** (string): Must have `KICK_PARTICIPANT` value
-  + **`conferenceFullName`** (string): The full name of the conference that is constructed using the following rule: [roomName@conference.appId.8x8.vc](mailto:roomName@conference.appId.8x8.vc)
-  + **`participantId`** (string): The participant's universal unique identifier used across the whole infrastructure (jitsi meet, events, webhooks)Note:
+* **`action`** (string): Must have `KICK_PARTICIPANT` value
+* **`conferenceFullName`** (string): The full name of the conference that is constructed using the following rule: [roomName@conference.appId.8x8.vc](mailto:roomName@conference.appId.8x8.vc)
+* **`participantId`** (string): The participant's universal unique identifier used across the whole infrastructure (jitsi meet, events, webhooks)Note:
 
   1. The appId part from the conferenceFullName must be the same as the `sub` claim from the admin JWT.
   2. If the participant corresponding to the participantId is present in the meeting, calling the endpoint will kick them from the meeting. Additionally, a notification message will be shown on their interface upon being removed.

@@ -206,7 +206,7 @@ Ensure your changes meet all content standards:
 ```bash
 yarn validate:content
 yarn build
-yarn analyze-links
+yarn validate:links
 ```
 
 ### CI/CD Integration
@@ -377,7 +377,7 @@ The content validation script is integrated into the GitHub Actions workflow at 
   run: yarn validate:content
 
 - name: Check for broken links
-  run: yarn analyze-links
+  run: yarn validate:links
 
 - name: Build Docusaurus
   run: yarn build
@@ -436,8 +436,8 @@ node scripts/validate-content.js    # Run directly
 
 **Solution:** Content validation only checks configured rules. Also run:
 ```bash
-yarn analyze-links  # Check for broken links
-yarn build          # Full Docusaurus validation
+yarn validate:links  # Check for broken links
+yarn build           # Full Docusaurus validation
 ```
 
 ### False Positives

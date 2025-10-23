@@ -6,7 +6,7 @@ The **meetings overview dashboard** is a fairly straightforward presentation of 
 
 Below are a few statistics of interest to get you started (see screenshot below):
 
-![](../images/72d87ab-image.png)
+![image](../images/72d87ab-image.png)
 
 * **Browser Distribution chart**: Displays what types of browsers users have been using in order to connect to meetings. This could help you determine which platform needs more focus.
 * **Region Distribution chart**: Plots the distribution of datacenter regions to which users connect. While we don’t support more granular location information at this point, this can be used to estimate the region where most users are located.
@@ -32,7 +32,7 @@ Below are a few statistics of interest to get you started (see screenshot below)
 
 Right-click on any meeting in the meetings overview table and click Open meeting details to see that meeting's details.
 
-![](../images/aff30fd-image.png)
+![image](../images/aff30fd-image.png)
 
 The meetings details dashboard provides you with information about audio and video performance, along with other important insights. It is subdivided into three main sections:
 
@@ -40,11 +40,11 @@ The meetings details dashboard provides you with information about audio and vid
 * **Peer Connections**
 * **Media Tracks**
 
-![](../images/357f5b1-image.png)
+![image](../images/357f5b1-image.png)
 
 ### Participant sessions
 
-![](../images/0d9400b-image.png)
+![image](../images/0d9400b-image.png)
 
 * **Session ID**: A distinctive identifier assigned to each participant session for reference.
 * **Endpoint ID**: A unique identifier utilized within the ecosystem to distinguish and track participants, especially useful for cross-referencing interactions in logs. For instance, client logs document participant interactions with their corresponding endpoint IDs.
@@ -59,7 +59,7 @@ The meetings details dashboard provides you with information about audio and vid
 
 ### Peer Connections
 
-![](../images/f308da5-image.png)
+![image](../images/f308da5-image.png)
 
 This table presents aggregates about WebRTC PeerConnections.
 
@@ -85,7 +85,7 @@ To clarify, a high percentage of sent packet loss may not be perceptible to the 
 
 ### Media Tracks
 
-![](../images/c84f957-image.png)
+![image](../images/c84f957-image.png)
 
 Media transmitted via WebRTC Peer Connections is organized into units referred to as tracks, each of which can be categorized as either audio, camera video, or screen share video.
 

@@ -41,7 +41,7 @@ For the webhook component of this demo, you will need to expose an endpoint to t
 
 Once you have a endpoint, you can set it up in the [webhook](jaas-console-webhooks) section of the JaaS Console. Ensure your webhook subscribes to the TRANSCRIPTION_CHUNK_RECEIVED event.
 
-![](../images/30a4fbc-Screenshot_2024-07-16_at_6.40.30_PM.png)
+![image](../images/30a4fbc-Screenshot_2024-07-16_at_6.40.30_PM.png)
 
 ### Backend Code
 
@@ -49,7 +49,7 @@ The backend component will both serve the web page and also serve as an endpoint
 
 server.js
 
-```
+```javascript
 const express = require('express');
 const path = require('path');
 
@@ -138,30 +138,30 @@ public/index.html
 
 You should now be able to run the nodejs server which by default runs on port 3000. The port number can be modified if needed.
 
-```
+```bash
 node server.js
 
 ```
 
 You should see the following output
 
-```
+```text
 Server is running on http://localhost:3000/jaas_test
 
 ```
 
 Now go to the URL printed above and join the JaaS room. **Unmute** and enable transcription by selecting the **Subtitles** menu item from the menu bar. Now the transcription should be displayed below when you speak.
 
-![](../images/c652253-Transcription_Test.gif)
+![Transcription Test](../images/c652253-Transcription_Test.gif)
 
 ### Receiving Iframe Events
 
 As you speak into the microphone, you should be able to see logs printed out in the console of your browser.
 
-![](../images/a5661e7-Screenshot_2024-07-16_at_6.32.00_PM.png)
+![image](../images/a5661e7-Screenshot_2024-07-16_at_6.32.00_PM.png)
 Here is a close up of the transcription event. You should see a property called **stable** which will contain the text of the transcription chunk event.
 
-![](../images/7be0326-image.png)
+![image](../images/7be0326-image.png)
 
 ### Receiving Webhook Events
 

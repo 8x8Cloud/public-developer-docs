@@ -15,7 +15,7 @@ This document will outline the pre-requisites, and how to install and use 8x8 Se
 2. On the left menu, click on **Manage**, then **Extensions**
 3. In the Marketplace section, select 8x8 and on the right panel that pops up, select **Install**
 
-![](../images/34b84d1-Screenshot_2024-03-20_at_12.44.33_PM.png)
+![image](../images/34b84d1-Screenshot_2024-03-20_at_12.44.33_PM.png)
 
 ## Node: Send SMS
 
@@ -36,8 +36,7 @@ This Extension needs a Connection to be defined and passed to the Nodes. The Con
 
 1. In your flow, click the (+) icon to add a node. Select Extensions, scroll to the right and select **8x8**
 2. In the dropdown list, select **Send SMS**
-
-  1. ![](../images/3890d4e-image.png)
+  ![image](../images/3890d4e-image.png)
 3. Click on the Send SMS node.
 4. In the Edit Node section on the right, click on the (+) icon under **8x8 SMS Connection**.
 5. Set up the node connection with apiKey and subAccountId from your [8x8 Connect](https://connect.8x8.com/) account.  

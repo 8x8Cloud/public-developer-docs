@@ -129,7 +129,7 @@ In addition to the sales & solution engineering teams, the 8x8 support team is a
 
 You can cancel your subscription by going to the JaaS Console and visiting the [Billing](https://jaas.8x8.vc/#/billing) Section. Under that section there is a **Cancel Subscription** button that you can use.
 
-![](../images/cdb2fb7-Screenshot_2024-06-28_at_9.29.55_AM.png)
+![image](../images/cdb2fb7-Screenshot_2024-06-28_at_9.29.55_AM.png)
 When you cancel your JaaS account, the cancellation will be processed at the end of the current billing cycle. However, you can still log in and access your data until the end of the current billing cycle. During this time, you have the option to revert the cancellation if you change your mind.
 
 If you do not revert the cancellation by the end of the billing cycle, your account and data will be permanently deleted. This approach ensures you get full value for your payment, as you pay at the beginning of the billing cycle and retain access and services until it concludes.
@@ -907,12 +907,13 @@ For these examples, lets assume a rate of $0.25. Let's look at two extremes, a l
 * The monthly cost for Alice wold be just 1 MAU at only $0.25, despite all the calls she made.  
 
 This is because all the other people on all her calls are also users of your same app, each is therefore only counted once per month.
-  + Each of those 4 persons are counted and charged at 1 MAU but its not on top of each other. i.e.
-    - Alice - 0.25
-    - Person 2 - 0.25
-    - Person 3 - 0.25
-    - Person 4 - 0.25
-  + In the example we are only looking at Alices calls and cost.
+
+* Each of those 4 persons are counted and charged at 1 MAU but its not on top of each other. i.e.
+  * Alice - 0.25
+  * Person 2 - 0.25
+  * Person 3 - 0.25
+  * Person 4 - 0.25
+* In the example we are only looking at Alices calls and cost.
 
 * Alice could be classified as a light user, in terms of cost.
 

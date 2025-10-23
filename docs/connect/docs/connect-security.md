@@ -13,24 +13,24 @@ SSO is only available to enterprise customers. If you want to check your account
 1. Login to the customer portal with an admin role
 2. Click the upper-right gear icon and select “User management”
 
-![](../images/16dee2b-user_management.png)
+![user management](../images/16dee2b-user_management.png)
 3. Once you are inside the user management page, click the “Configure Single Sign-On” button.
 
-![](../images/5550d7f-image.png)
+![image](../images/5550d7f-image.png)
 4. An overlay SSO configuration page will appear where you will need to fill different information needed.
 
-![](../images/c69c76a-image.png)
+![image](../images/c69c76a-image.png)
 5. Login to your SSO application that you are using and go to your identity provider SAML settings. Copy the url we’ve generated for you and paste it into the Single Sign-On URL
 
 ![As an example, here I pasted the value under OKTA SAML settings](../images/b27d35a-image.png)As an example, here I pasted the value under OKTA SAML settings
 
 6. Next copy the identity provider url which is basically your SAML endpoint from your SSO application. Paste it on the “Identity Provider URL” input field.
 
-![](../images/c8582f3-image.png)
+![image](../images/c8582f3-image.png)
 
 7. Next copy the provider issuer id or “entity id” from your SSO application and paste it on the “Identity Provider Issuer” input field.
 
-![](../images/a7ca0ec-image.png)
+![image](../images/a7ca0ec-image.png)
 
 Most SSO applications generate and provide these information. On OKTA they are provided by clicking Identity provider metadata
 
@@ -42,10 +42,10 @@ The url itself is your **Identity provider URL** while an XML key called **entit
 
 8. Most SSO apps provide x509 certificates, just copy the contents of this certificate which looks something like this image below and paste it on the “Key x509 certificate” text area field.
 
-![](../images/47302e9-image.png)
+![image](../images/47302e9-image.png)
 9. Once everything has been filled up, click “Save”
 
-![](../images/70fcf0c-image.png)
+![image](../images/70fcf0c-image.png)
 
 10. Log out of the customer portal and now try to log in using SSO.
 

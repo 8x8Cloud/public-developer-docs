@@ -18,4 +18,4 @@ This following section and it's pages will explain the analytics pages in depth.
 
 These sections are located on the sidebar of connect under these tabs:
 
-![](../images/5a13179-image.png)
+![image](../images/5a13179-image.png)

@@ -42,14 +42,14 @@ This is an accompany video guide which covers how to stream to YouTube using Jaa
 
 To access the livestream menu within a JaaS call, go to the **Triple Dot Menu** and navigate to **Start live stream** option.
 
-![](../images/eb4ea0d-Screenshot_2024-06-18_at_11.03.38_AM.png)
+![image](../images/eb4ea0d-Screenshot_2024-06-18_at_11.03.38_AM.png)
   
 Once you open this menu item you should see this box. If you see the warning below, this is due to your YouTube/Google Account not having live streaming setup. You can either select a different account with live streaming set up or you can use the Live Stream Key covered in the section **Option 1) Streaming via Stream Key**.
 
-![](../images/f66e2d2-Screenshot_2024-06-18_at_11.19.00_AM.png)
+![image](../images/f66e2d2-Screenshot_2024-06-18_at_11.19.00_AM.png)
 If you do have a Live stream setup you should see the box populated as below where it will allow you to select a live stream.
 
-![](../images/aec10fe-image.png)
+![image](../images/aec10fe-image.png)
   
 Regardless of whether you choose between a live stream or a Live stream key, the next sections will cover what you will need
 
@@ -57,32 +57,32 @@ Regardless of whether you choose between a live stream or a Live stream key, the
 
 Once you are logged into your YouTube account, navigate to the **Create > Go Live** option.
 
-![](../images/45b60f2-image.png)
+![image](../images/45b60f2-image.png)
 
 You can navigate to the **Stream** option to start a new stream immediately. Alternatively you can schedule a stream at a later date/time.
 
-![](../images/1ade968-image.png)
+![image](../images/1ade968-image.png)
 
 Regardless once it is time to start your stream, you should see the page below, select yout stream settings. Either **create a new stream key** or **select an existing stream key**.
 
 Ensure that you **copy your Stream Key** from this page.
 
-![](../images/bc8ebe0-Screenshot_2024-06-18_at_11.11.38_AM.png)
+![image](../images/bc8ebe0-Screenshot_2024-06-18_at_11.11.38_AM.png)
 Once you obtain the stream key, paste it into the **Live stream key** text box and click **Start Live Stream**.
 
-![](../images/f864f3c-image.png)
+![image](../images/f864f3c-image.png)
 This should result in a few dialog boxes being shown confirming that the livestream and also a red globe indicator at the top of the JaaS Room indicating the livestream is active.
 
-![](../images/5eccdbc-image.png)
-![](../images/9dd7c97-image.png)
+![image](../images/5eccdbc-image.png)
+![image](../images/9dd7c97-image.png)
 
 ### Viewing the YouTube Livestream
 
 From YouTube Studio when you are logged in as a YouTube Channel Owner / Manager you should be able to see a preview of the stream from the same page.
 
-![](../images/dfbcd01-image.png)
+![image](../images/dfbcd01-image.png)
 
-If your stream is public, this stream should be visible from your YouTube channel at this point for your regular YouTube viewers.![](../images/078fb1b-image.png)
+If your stream is public, this stream should be visible from your YouTube channel at this point for your regular YouTube viewers.![image](../images/078fb1b-image.png)
 
 ## Streaming to a Custom RTMP Endpoint (Twitch)
 
@@ -124,11 +124,11 @@ This is an accompany video guide which covers how to stream to Twitch via RTMP.
 
 First access the livestreaming menu from **Triple Dot Menu > Start Live Stream**
 
-![](../images/eb4ea0d-Screenshot_2024-06-18_at_11.03.38_AM.png)
+![image](../images/eb4ea0d-Screenshot_2024-06-18_at_11.03.38_AM.png)
 
 ### Input Livestream RTMP Endpoint
 
-![](../images/3c92010-image.png)
+![image](../images/3c92010-image.png)
   
 Now in the Live stream key, instead of a YouTube stream key as in the previous section, we will enter an **RTMP endpoint**.
 
@@ -136,7 +136,7 @@ Since we are using Twitch as an example, you can obtain the RTMP endpoint by vis
 
 For **{region}** simply select the closest region on the page above. The **{stream_key}** can be obtained from Twitch under your **Creator Dashboard > Settings > Stream > Primary Stream Key**.
 
-![](../images/6478422-image.png)
+![image](../images/6478422-image.png)
 
 ### Starting Livestream on Twitch
 
@@ -148,11 +148,11 @@ Once you have the full RTMP endpoint simply enter it into the **Live stream key*
 >
 >
 
-![](../images/54bcf1f-image.png)
+![image](../images/54bcf1f-image.png)
   
 Afterwards your Livestream should be available on your Twitch page.
 
-![](../images/0ff02e5-image.png)
+![image](../images/0ff02e5-image.png)
 
 ### Live streaming FAQ
 

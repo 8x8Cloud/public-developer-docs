@@ -8,13 +8,13 @@ Jaas has capabilities for joining meetings using PSTN/Telephony (Telephone Diali
 
 First enter a JaaS Room and then obtain a DID to call into. Open the **Triple Dot Menu > Invite People**, The DID for your detected country should be shown in the pop up box. If you need to obtain a different countries DID you can click **More Numbers**.
 
-![](../images/aa9c432-did_list.gif)
+![did list](../images/aa9c432-did_list.gif)
 Note the **PIN Code** shared as well which will be used in the next step.
 
-![](../images/115a848-image.png)
+![image](../images/115a848-image.png)
 Share the **Dial-in Phone Number and PIN Code** to the person you would like to invite to the JaaS room. They should dial the DID and they will be asked to key in the PIN code for the meeting from the previous step.
 
-![](../images/c4e5797-image.png)
+![image](../images/c4e5797-image.png)
 
 Once they enter the PIN Code, they should be connected via Audio to the JaaS Room.
 
@@ -106,7 +106,7 @@ Simply enter a JaaS room and navigate to the **Triple Dot Menu > Invite People**
 
 Afterwards enter the number that you would like to dial in the **Invite your Contacts** box.
 
-![](../images/1a280a4-PSTN_Dial_Out.gif)
+![PSTN Dial Out](../images/1a280a4-PSTN_Dial_Out.gif)
 This should dial the number and when the callee picks up, they will be added in audio-only mode to the JaaS Room.
 
 ## Billing / Usage

@@ -12,7 +12,7 @@ Below is a sample of a Voice Message call scenario. When the API call is made, t
 
 ## Diagram of Callflow
 
-![](../images/ebfb77e-image.png)
+![image](../images/ebfb77e-image.png)
 
 ***
 

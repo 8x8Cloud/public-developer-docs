@@ -52,7 +52,7 @@ Create or Join a JaaS Room. Afterwards obtain the PIN from the **Triple Dot > In
 
 The PIN should be available from the popup below.
 
-![](../images/fc0f4ae-image.png)
+![image](../images/fc0f4ae-image.png)
 Note down the PIN for this room which will be used when connecting through Zoom in the next step.
 
 #### Connecting Through Zoom
@@ -74,7 +74,7 @@ For **audio** only: [pinCode@audio.8x8.vc](mailto:pinCode@audio.8x8.vc)
 For our example above it should be the following value, however you should substitute the PIN Code for your room.  
 [2407322930@video.8x8.vc](mailto:2407322930@video.8x8.vc)
 
-![](../images/2ba5e2a-image.png)
+![image](../images/2ba5e2a-image.png)
 
 After inputting the PIN Code, hit the **Call** button. You should see the SIP call connect successfully and then a participant named **VIMS** join the Zoom Room. Admit the participant in the Zoom Room.
 
@@ -109,18 +109,18 @@ This video will take you through the steps mentioned in this section to connect 
 
 The first step is to obtain the **PIN Code** from the JaaS Room
 
-![](../images/8a47e6a-Jun-10-2024_17-18-03.gif)
+![image](../images/8a47e6a-Jun-10-2024_17-18-03.gif)
 The **PIN Code** will be available from the "Invite more people" popup.
 
-![](../images/fc0f4ae-image.png)
+![image](../images/fc0f4ae-image.png)
 
 Dial in to the JaaS room using Bria with the SIP address [pinCode@audio.8x8.vc](mailto:pinCode@audio.8x8.vc) where pinCode is replaced by your JaaS Room's pin code.
 
 In our example above the SIP address is [2407322930@audio.8x8.vc](mailto:2407322930@audio.8x8.vc), however your PIN Code will be different.
 
-![](../images/2d14170-image.png)
+![image](../images/2d14170-image.png)
 
-![](../images/4f2d5af-image.png)
+![image](../images/4f2d5af-image.png)
 
 ## SIP Dial Out
 
@@ -134,7 +134,7 @@ There are a few prerequisites before using this feature:
 - A SIP Softphone to receive the call (Bria is used in the tutorial).
 - Ensure that the [JWT](/jaas/docs/api-keys-jwt) that you generate for your user contains the user permissions for **sip-outbound-call**. Below is a snippet of the features with SIP outbound call enabled.
 
-  ```
+  ```json
   {
     ...
     "context": {
@@ -165,19 +165,19 @@ After the required setup, go to your JaaS meeting and then open **Triple Dot Men
 ![](../images/ec0184f-sip_dial_out_1.gif)
 The softphone connected to that SIP Address should ring as shown, when you pick up the call you will be connected to the JaaS Room. The softphone can choose to connect to the call over **audio-only** or **video+audio**.
 
-![](../images/346a89c-image.png)
+![image](../images/346a89c-image.png)
 
 ### Connected Call - Video Mode
 
 If the call is connected through video, both the softphone participant and the JaaS participant can see each other on their respective screens.
 
-![](../images/a33679c-image.png)
+![image](../images/a33679c-image.png)
 
 ### Connected Call - Audio-Only Mode
 
 If the call is connected via audio-only, then an audio-only participant will join the JaaS room to represent the softphone. Both the JaaS participant and the softphone participant will be able to hear and speak to each other.
 
-![](../images/d1e3c7e-image.png)
+![image](../images/d1e3c7e-image.png)
 
 ### Video Walkthrough
 

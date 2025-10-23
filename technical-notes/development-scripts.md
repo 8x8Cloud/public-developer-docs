@@ -224,6 +224,31 @@ yarn validate:openapi contactcenter       # Validate only contactcenter/ folder
 
 ---
 
+### `yarn validate:links` - Validate Internal Links and Anchors
+
+Analyzes and reports broken internal links and anchors in the documentation.
+
+```bash
+yarn validate:links
+```
+
+**What it does:**
+- Runs production build process to identify broken links
+- Reports broken internal documentation links
+- Reports broken heading anchors
+- Groups issues by source page for easier fixing
+- Returns exit code 1 if issues are found (suitable for CI/CD)
+
+**When to use:**
+- During development to understand scope of broken link issues
+- Before committing changes to validate documentation integrity
+- In code review to communicate which broken links were fixed
+- As part of CI/CD pipeline to prevent broken links from being merged
+
+**For detailed usage, configuration, troubleshooting, and examples, see:** [Analyze Broken Links](analyze-broken-links.md)
+
+---
+
 ### `yarn docusaurus` - Direct CLI Access
 
 Provides direct access to Docusaurus CLI for advanced operations.

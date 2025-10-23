@@ -22,7 +22,8 @@
 then the user needs to toggle on the `Sender ID does not include company/brand name  
 
 user needs to upload one of the following documents for the Philippines
-  + IP rights to the Brand Name
-  + Corporate Secretary’s Certificate
+
+* IP rights to the Brand Name
+* Corporate Secretary’s Certificate
 
 ![](../images/9e6971d24e8a12533016ee847097a3d695be35e1633716349d1397e805fe3c93-unnamed_9.png)

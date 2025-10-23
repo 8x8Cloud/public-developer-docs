@@ -24,21 +24,21 @@ Zapier allows you to instantly connect 8x8 with 5,000+ apps to automate your wor
 
 1. Login to your Zapier Account and create a new Zap by clicking "Make a Zap".
 
-![](../images/bfc0880-Zapier_1.png "Zapier 1.png")
+![zapier](../images/bfc0880-Zapier_1.png "Zapier 1.png")
 
 2. Whether you want to use 8x8 app as a trigger or action, search "8x8" from the list of apps.
 
-![](../images/aec0076-ZApier.png "ZApier.png")
+![zapier](../images/aec0076-ZApier.png "ZApier.png")
 
-![](../images/c94cf46-zapier_2.png "zapier 2.png")
+![zapier](../images/c94cf46-zapier_2.png "zapier 2.png")
 
 3. Click **continue**.
 
-![](../images/9b3873e-Zapier_3.png "Zapier 3.png")
+![zapier](../images/9b3873e-Zapier_3.png "Zapier 3.png")
 
 4. You will be prompted to `Choose account`, click **Sign in to 8x8**.
 
-![](../images/2df6dc0-zapier_4.png "zapier 4.png")
+![zapier](../images/2df6dc0-zapier_4.png "zapier 4.png")
 
 5. You will be asked to enter your 8x8 **apiKey** and **subaccountID**. Assuming you have successfully logged into [8x8's Connect Portal](https://connect.8x8.com/)
 6. If you entered them correctly, you’ll get sent back to your Zap where you will now have your 8x8 Connect account successfully connected!

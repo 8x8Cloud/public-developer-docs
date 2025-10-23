@@ -283,7 +283,7 @@ Remember to replace the  **,** **,** and  values above. The **{{url}}** value do
 
 This should result in a SMS being sent similar to the one below with the URL replacing the {{url}} parameter's place in the SMS Body.
 
-![](../images/5ece359-image.png)
+![image](../images/5ece359-image.png)
 A successful request should return an 200 OK HTTP Response Code and the Response Body should appear as below.
 
 HTTP Response
@@ -362,11 +362,11 @@ For a given time period, reports will include the following information
 | Average Click Time | The average time between when an SMS message was sent and the time the survey URL was clicked. |
 | Average Response Time | The average time between when an SMS message was sent and the time a completed survey response was submitted. |
 
-![](../images/ada5457-image.png)
+![image](../images/ada5457-image.png)
 
 For each survey response, clicking **View response** in the associated row will bring up the actual responses from the customer.
 
-![](../images/acf5739-image.png)
+![image](../images/acf5739-image.png)
 The **Export** button on the same page will give you the option to email a CSV file of the responses in the survey.
 
-![](../images/58580f0-Screenshot_2024-06-25_at_5.57.53_AM.png)
+![image](../images/58580f0-Screenshot_2024-06-25_at_5.57.53_AM.png)

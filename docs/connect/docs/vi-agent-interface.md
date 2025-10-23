@@ -120,13 +120,13 @@ The agent can view details of previous calls in the call log menu including:
 - **Call Duration**: Length of the call
 - **Date**: When the call was placed
 
-![](../images/c5f73e1-image.png)Opening each individual Call Log will reveal further detail about that call:
+![image](../images/c5f73e1-image.png)Opening each individual Call Log will reveal further detail about that call:
 
 - **Location of the Customer**: Available only if gathered during the call
 - **Chat Logs**: Messages sent in the chat window between the agent and customer.
 - **Invite Again**: The option to send another invitation to the customer.
 
-![](../images/8e71bea-image.png)
+![image](../images/8e71bea-image.png)
 
 ## Iframe Integration
 

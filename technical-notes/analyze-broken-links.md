@@ -4,7 +4,7 @@ A build-time validation tool that analyzes and reports broken internal links and
 
 ## Overview
 
-The `yarn analyze-links` script runs the production build process and parses its output to identify:
+The `yarn validate:links` script runs the production build process and parses its output to identify:
 
 1. **Broken links** - Internal documentation links that point to non-existent pages
 2. **Broken anchors** - Links to heading anchors that don't exist on their target pages
@@ -14,7 +14,7 @@ The script provides a structured report showing which links are broken, how many
 ## Usage
 
 ```bash
-yarn analyze-links
+yarn validate:links
 ```
 
 **What it does:**
@@ -158,7 +158,7 @@ The script generates a structured report grouped by source page, showing all bro
 Run this script to understand the scope of broken link issues in your branch:
 
 ```bash
-yarn analyze-links
+yarn validate:links
 ```
 
 ### Before Committing
@@ -167,7 +167,7 @@ Use alongside `yarn build` to validate documentation integrity:
 
 ```bash
 yarn build
-yarn analyze-links
+yarn validate:links
 ```
 
 ### In Code Review
@@ -176,7 +176,7 @@ Generate reports to communicate which broken links were fixed or introduced:
 
 ```bash
 # After fixes
-yarn analyze-links > broken-links-report.txt
+yarn validate:links > broken-links-report.txt
 ```
 
 ### CI/CD Integration
@@ -185,14 +185,14 @@ Add to automated workflows to prevent broken links from being merged:
 
 ```bash
 # In your CI pipeline - will fail the build if broken links are found
-yarn analyze-links
+yarn validate:links
 ```
 
 **GitHub Actions example:**
 
 ```yaml
 - name: Check for broken links
-  run: yarn analyze-links
+  run: yarn validate:links
 ```
 
 **Managing known issues in CI:**
@@ -218,7 +218,7 @@ This allows you to:
 The report sorts pages by issue count, so the first items are the most important to fix:
 
 ```bash
-yarn analyze-links | head -n 30
+yarn validate:links | head -n 30
 ```
 
 ### Filtering Results
@@ -227,7 +227,7 @@ Use the ignore lists to focus on specific categories:
 
 1. Edit `scripts/analyze-broken-links.js`
 2. Add patterns to relevant ignore arrays
-3. Run `yarn analyze-links` again
+3. Run `yarn validate:links` again
 
 ### Fixing Broken Links and Anchors
 
@@ -318,7 +318,7 @@ This script:
 
 ### Script doesn't run
 
-**Symptom:** `yarn analyze-links` command not found
+**Symptom:** `yarn validate:links` command not found
 
 **Solution:**
 ```bash
@@ -350,5 +350,5 @@ yarn build 2>&1 | grep -A 5 "Exhaustive list"
 
 **Solution:**
 ```bash
-NODE_OPTIONS="--max-old-space-size=4096" yarn analyze-links
+NODE_OPTIONS="--max-old-space-size=4096" yarn validate:links
 ```

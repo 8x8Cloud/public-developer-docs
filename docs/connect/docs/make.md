@@ -22,54 +22,54 @@ The sheet should have **Phone Number** in Cell A1 and **Message** in Cell B1 to 
 
 The create button is located on the top right from the Dashboard.
 
-![](../images/7eb5a7f-image.png)
+![image](../images/7eb5a7f-image.png)
 
 ### Add a Trigger
 
 The trigger is the first action in a scenario, here we will select **"Google Sheets"**
 
-![](../images/0b29c8b-image.png)
+![image](../images/0b29c8b-image.png)
 In the list of triggers/actions for Google Sheets, select **"Watch new rows"**
 
-![](../images/692f4de-image.png)
+![image](../images/692f4de-image.png)
 Then you will want to add a new connection.
 
-![](../images/528ce92-image.png)
+![image](../images/528ce92-image.png)
 This will prompt you to connect your Google account and then specify the information about your Google Sheet.
 
-![](../images/fc6bf87-image.png)
+![image](../images/fc6bf87-image.png)
 It will then prompt you to decide which row to start watching, in this example our Google Sheet is blank so we will select 2 since our new data should start at row 2.
 
-![](../images/fe57623-image.png)
+![image](../images/fe57623-image.png)
 After that, we will select the "Add another module" Option and select 8x8 from the list.
 
-![](../images/af9ab56-image.png)
-![](../images/cf8f086-image.png)
+![image](../images/af9ab56-image.png)
+![image](../images/cf8f086-image.png)
 Afterwards, you can specify the following fields which are required:
 
 * **Subaccount:** Enter in your 8x8 subaccount
 * **Destination:** Select the output that contains the Phone Number in the Google Sheet
 * **Text:** Select the output that contains the Message in the Google Sheet
 
-![](../images/96ef468-image.png)
+![image](../images/96ef468-image.png)
 When you connect for the first time to 8x8, you will be prompted for an 8x8 API Key which can be obtained from the 8x8 Connect Dashboard under the API Keys section.
 
-![](../images/25f944f-image.png)
+![image](../images/25f944f-image.png)
 
 ### Enable your Make.com Scenario
 
 Turn on Scheduling on the Bottom Left and select your desired frequency, by default, it will check every 15 minutes.
 
-![](../images/e4c1986-image.png)
+![image](../images/e4c1986-image.png)
 
 ### Add a Row and Receive an SMS
 
 Once you add a row to your Google Sheet, this should trigger Make.com to send you an SMS at the specified phone number. This may not be immediate as it needs to wait for the scheduled interval.
 
-![](../images/73d092f-image.png)
+![image](../images/73d092f-image.png)
 This should result in an SMS being sent to the destination specified.
 
-![](../images/264e5dd-image.png)
+![image](../images/264e5dd-image.png)
 
 ## Potential Future Use Cases
 
@@ -86,4 +86,4 @@ Here are the list of supported modules for Make.com:
 * Send a Single Chat App Message
 * Make an API Call
 
-![](../images/d29f4aa-image.png)
+![image](../images/d29f4aa-image.png)

@@ -46,20 +46,20 @@ Also called TPOA (Transmission Path Origin Address), this parameter carries the 
 
 ##### Short-code
 
-  + Example: *123*
-  + 3 to 7 digits in length according to the countries
-  + They are digit sequences shorter than telephone numbers that have been designated to be memorable.
-  + They are usually used for SMS notifications or value added service based on 2-Way SMS interactions (polls, challenges, information requests, unsubscriptions, etc.).##### Local long-code
+* Example: *123*
+* 3 to 7 digits in length according to the countries
+* They are digit sequences shorter than telephone numbers that have been designated to be memorable.
+* They are usually used for SMS notifications or value added service based on 2-Way SMS interactions (polls, challenges, information requests, unsubscriptions, etc.).##### Local long-code
 
-  + Ex: *91046180* (Local to Singapore)
-  + Their format varies according to the countries, but are usually between 7 and 12 digits in length.
-  + They are digit sequences that represent telephone numbers without the international prefix.
-  + They are usually used in the cases when the senderID must be identified as an active phone number that can be called and messaged (ex: sending SMS notifications with the support phone number of your company).##### International long-code
+* Ex: *91046180* (Local to Singapore)
+* Their format varies according to the countries, but are usually between 7 and 12 digits in length.
+* They are digit sequences that represent telephone numbers without the international prefix.
+* They are usually used in the cases when the senderID must be identified as an active phone number that can be called and messaged (ex: sending SMS notifications with the support phone number of your company).##### International long-code
 
-  + Ex: *+6591056180* (Singaporean international long code)
-  + They can be made of up to 15 digits and should start by a “+” sign.
-  + They are telephone number in the international format (starting with the international prefix and followed by the local long code stripped from its leading 0).
-  + They have the same purpose as the local long-code but can be used in an international context and the replies will be routed back correctly to the telephone number even from a different country.
+* Ex: *+6591056180* (Singaporean international long code)
+* They can be made of up to 15 digits and should start by a “+” sign.
+* They are telephone number in the international format (starting with the international prefix and followed by the local long code stripped from its leading 0).
+* They have the same purpose as the local long-code but can be used in an international context and the replies will be routed back correctly to the telephone number even from a different country.
 
 #### B) Alphanumeric SenderIDs
 

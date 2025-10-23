@@ -284,7 +284,7 @@ Run comprehensive validation:
 yarn validate:content
 yarn validate:oas
 yarn build
-yarn analyze-links
+yarn validate:links
 ```
 
 ### CI/CD Integration
@@ -570,7 +570,7 @@ OpenAPI validation only checks specification validity. Build failures may be due
 Run additional validation:
 ```bash
 yarn validate:content  # Check markdown content
-yarn analyze-links     # Check for broken links
+yarn validate:links    # Check for broken links
 yarn build             # Full Docusaurus validation
 ```
 

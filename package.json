@@ -16,14 +16,16 @@
     "reference:clean": "find docs -type d -name 'reference' -exec rm -rf {} +",
     "reference:generate": "docusaurus gen-api-docs all",
     "reference": "yarn reference:clean && yarn reference:generate",
-    "validate:sidebar": "node scripts/validate-sidebar.js",
+    "lint:md": "markdownlint-cli2 --config md.markdownlint-cli2.jsonc",
+    "lint:mdx": "markdownlint-cli2 --config mdx.markdownlint-cli2.jsonc",
     "validate:content": "node scripts/validate-content.js",
+    "validate:links": "node scripts/analyze-broken-links.js",
+    "validate:md": "yarn lint:md && yarn lint:mdx",
     "validate:oas": "redocly lint \"docs_oas/**/*.{json,yaml,yml}\"",
     "validate:openapi": "node scripts/validate-openapi.js",
-    "analyze-links": "node scripts/analyze-broken-links.js",
+    "validate:sidebar": "node scripts/validate-sidebar.js",
     "format:check": "prettier --check \"**/*.{js,jsx,json}\"",
-    "format:write": "prettier --write \"**/*.{js,jsx,json}\"",
-    "lint:md": "markdownlint-cli2 --config md.markdownlint-cli2.jsonc && markdownlint-cli2 --config mdx.markdownlint-cli2.jsonc"
+    "format:write": "prettier --write \"**/*.{js,jsx,json}\""
   },
   "dependencies": {
     "@docusaurus/core": "^3.9.1",

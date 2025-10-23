@@ -6,11 +6,11 @@ You can change both the primary and secondary colours on the chat button, either
 
 On the form below, there are just primary buttons (red arrow points to primary button)
 
-![](../images/bd5743f2d960d8527e7b651e584b9afbed6285aafbfbe7f5e4912a285dfb3946-image.png)
+![image](../images/bd5743f2d960d8527e7b651e584b9afbed6285aafbfbe7f5e4912a285dfb3946-image.png)
   
 Then, for the web window, here you can see the primary buttons, but also the secondary buttons are both the quick replies, and cancel options. (Red arrow points to the primary button/blue to secondary button)
 
-![](../images/119b36b205b29344f350cc515d8afb4a6f6cccd2036b13e92b663a84a7ff9d16-Button_theme.png "Chat Gateway flow.jpg")
+![Chat Gateway flow](../images/119b36b205b29344f350cc515d8afb4a6f6cccd2036b13e92b663a84a7ff9d16-Button_theme.png "Chat Gateway flow.jpg")
   
 ## Button properties
 

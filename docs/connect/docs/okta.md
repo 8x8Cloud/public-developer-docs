@@ -8,7 +8,7 @@ For Okta's own guide on bringing your own telephony provider, refer to Okta's re
 
 The diagram below explains how the flow will look like from using Okta together with the Node.js server we will be building in this tutorial to send OTPs via 8x8 SMS API.
 
-![](../images/be14419-image.png)
+![image](../images/be14419-image.png)
 
 ## Video Demo
 
@@ -219,7 +219,7 @@ For production, however, this should be running behind a proper web server setup
 
 Go to **Workflow > Inline Hooks** on the Okta Dashboard. Select **Add Inline Hook** and **Telephony**.
 
-![](../images/982f180-image.png)
+![image](../images/982f180-image.png)
 
 ## Adding Inline Hook as Authenticators
 
@@ -232,7 +232,7 @@ In the **Create Inline Hook** page, fill in the following values.
 | **Authentication Field** | Will be sent as part of the request header. Authentication Field is for your backend to authenticate the webhook from Okta. It can be any value<br>Refer to Okta's [page](https://developer.okta.com/docs/reference/hooks-best-practices/) on authentication and Inline Hooks for reference. | Authentication |
 | **Authentication Secret (Used with Authentication Field)** | Will be sent as part of the request header. This should be the value your backend uses to authenticate | secretvalue |
 
-![](../images/58d0026-image.png)
+![image](../images/58d0026-image.png)
 
 After entering the values, click **Save**.
 
@@ -240,15 +240,15 @@ After entering the values, click **Save**.
 
 In the next page you should see the following confirming a few of the values from setting up the Inline Hook. Select an Okta user to preview from your organization in **data.userProfile** and select anything for the **requestType**, we use MFA enrollment.
 
-![](../images/8ddc288-image.png)
+![image](../images/8ddc288-image.png)
 
 Afterwards click **Generate Request** in Step 2 on this page, it will generate an example JSON that will be sent to your endpoint so that you know what format to expect from Okta. If needed, change any of the JSON Values such as the **messageProfile.phoneNumber** field which we use in our tutorial code to send an OTP.
 
-![](../images/a9782e8-image.png)
+![image](../images/a9782e8-image.png)
 
 Click **View Response** to send the example Inline hook to your server. You should see the JSON response below from the server upon a successful request.
 
-![](../images/9a461a8-image.png)
+![image](../images/9a461a8-image.png)
 
 From our example Node.js server you should see the following output, showing the API request sent from Okta and also the output of the API call to 8x8's SMS API.
 
@@ -297,7 +297,7 @@ OTP sent successfully: {
 
 The SMS should also be delivered to your phone.
 
-![](../images/a7da876-image.png)
+![image](../images/a7da876-image.png)
 This demonstrates the inline hook is now successfully working. Now you can attach the Okta inline hook to any action that would trigger the inline hook in Okta.
 
 ### Using the Inline Hook
@@ -308,7 +308,7 @@ Now that the Inline Hook has been added, in order to require it for signing into
 
 Ensure that in the **Security - Authenticators** page that Phone is added as an Authenticator option.
 
-![](../images/7a5bf0e-image.png)
+![image](../images/7a5bf0e-image.png)
 
  If it is not already on the list then click **Add Authenticator** to add it.
 
@@ -316,29 +316,29 @@ Ensure that in the **Security - Authenticators** page that Phone is added as an 
 
 Click **Add Rule** on the **Security - Authentication Policies** page.
 
-![](../images/c22d8d7-image.png)
+![image](../images/c22d8d7-image.png)
 
 In the **Edit Rule** page, the only change we will make is for AND Authentication methods where we should include the **Phone - SMS** method along with any other methods we wish to offer the user authenticating into Okta.
 
-![](../images/c32a99f-image.png)
+![image](../images/c32a99f-image.png)
 
 ## Add to Application
 
 After creating the Policy, add it to one of your Applications.
 
-![Okta Policy List](../images/37a551d-image.png)Okta Policy List
+![Okta Policy List](../images/37a551d-image.png "Okta Policy List")
 
-![Inline Hook Rule - After Adding Okta Dashboard to the rule.](../images/2959b4b-image.png)Inline Hook Rule - After Adding Okta Dashboard to the rule.
+![Inline Hook Rule - After Adding Okta Dashboard to the rule.](../images/2959b4b-image.png "Inline Hook Rule - After Adding Okta Dashboard to the rule.")
 
 ## Signing In
 
 When attempting to login to the application that you have configured above, you should receive the following screen prompting you to register for Phone Verification.
 
-![](../images/b65f2ca-image.png)
-![](../images/75cc45b-image.png)
+![image](../images/b65f2ca-image.png)
+![image](../images/75cc45b-image.png)
 Again the code should be sent to your phone via SMS, follow the prompts to finish logging into application.
 
-![](../images/c3a7e16-image.png)
+![image](../images/c3a7e16-image.png)
 For subsequent sign-ins to the application it should utilize SMS as a verification method.
 
 ### Conclusion

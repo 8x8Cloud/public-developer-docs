@@ -114,33 +114,32 @@ Configure the new trigger as follows:
   
   **Please note you will need to substitute your subaccount in the URL.**
   * **JSON Body**
-  * ```
-  {
-    "event": "newComment",
-    "ticketUrl": "{{ticket.link}}",
-    "ticketId": "{{ticket.id}}",
-    "ticketStatus": "{{ticket.status}}",
-    "ticketExternalId": "{{ticket.external_id}}",
-    "createdAt": "{{ticket.created_at_with_timestamp}}",
-    "updatedAt": "{{ticket.updated_at_with_timestamp}}",
-    "lastPublicComment": {
-      "authorName": "{{ticket.latest_public_comment.author.name}}",
-      "authorId": "{{ticket.latest_public_comment.author.id}}",
-      "authorExternalId": "{{ticket.latest_public_comment.author.external_id}}",
-      "createdAt": "{{ticket.latest_public_comment.created_at_with_time}}",
-      "text": "{{ticket.latest_public_comment.value}}",
-      "attachments":[
-        {% for attachment in ticket.latest_public_comment.attachments %}
-        { "fileName": "{{attachment.filename}}",
-        "url": "{{attachment.url}}" }
-        {% if forloop.last == false %},
-        {% endif %}
-        {% endfor %}
-      ]
+  * ```json
+    {
+      "event": "newComment",
+      "ticketUrl": "{{ticket.link}}",
+      "ticketId": "{{ticket.id}}",
+      "ticketStatus": "{{ticket.status}}",
+      "ticketExternalId": "{{ticket.external_id}}",
+      "createdAt": "{{ticket.created_at_with_timestamp}}",
+      "updatedAt": "{{ticket.updated_at_with_timestamp}}",
+      "lastPublicComment": {
+        "authorName": "{{ticket.latest_public_comment.author.name}}",
+        "authorId": "{{ticket.latest_public_comment.author.id}}",
+        "authorExternalId": "{{ticket.latest_public_comment.author.external_id}}",
+        "createdAt": "{{ticket.latest_public_comment.created_at_with_time}}",
+        "text": "{{ticket.latest_public_comment.value}}",
+        "attachments":[
+          {% for attachment in ticket.latest_public_comment.attachments %}
+          { "fileName": "{{attachment.filename}}",
+          "url": "{{attachment.url}}" }
+          {% if forloop.last == false %},
+          {% endif %}
+          {% endfor %}
+        ]
+      }
     }
-  }
-  
-  ```
+    ```
 
 ![](../images/0ee7fd6-image.png)
 ![](../images/16f0838-image.png)
@@ -161,7 +160,7 @@ After creating trigger, create another trigger as follows.
   **Please note you will need to substitute your subaccount in the URL.**
   * **JSON Body**
   
-  ```
+  ```json
   {
   "event": "statusChanged",
   "ticketUrl": "{{ticket.link}}",
@@ -171,7 +170,6 @@ After creating trigger, create another trigger as follows.
   "createdAt": "{{ticket.created_at_with_timestamp}}", 
   "updatedAt": "{{ticket.updated_at_with_timestamp}}"
   }
-  
   ```
 
 ![](../images/5a39d8d-image.png)

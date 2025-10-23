@@ -4,7 +4,7 @@
 
 The dashboard will contain the information about the SMS that you have sent using 8x8. Below is a view of the entire dashboard page, in the following sections we will break down each section's contents.
 
-![](../images/a4f73c0-image.png)
+![image](../images/a4f73c0-image.png)
 
 ### Statistics
 
@@ -19,7 +19,7 @@ The Dashboard for SMS will show you the following statistics over the given time
 
 Below is a screenshot of the statistics section in the Dashboard.
 
-![](../images/6f0a45a-image.png)
+![image](../images/6f0a45a-image.png)
 
 ### Charts
 
@@ -28,9 +28,11 @@ There will be the following 3 charts available:
 - **SMS:** Shows the amount of SMS sent across the given time period for each of the days
 
 ![](../images/798894f-image.png)
+
 - **Delivery Rate:**  Shows how the delivery rate changes across the given time period for each of the days
 
 ![](../images/c2d578f-image.png)
+
 - **Cost:** Shows how the average cost of the SMS changes on a given day
 
 ![](../images/82e3240-image.png)
@@ -39,17 +41,17 @@ There will be the following 3 charts available:
 
 This section will break down the amount of SMS sent to each country as well as the SMS operator responsible for sending the message.
 
-![](https://files.readme.io/252ab64-image.png)
+![image](../images/252ab64-image.png)
 
 ### Campaigns
 
 This area will show the amount of SMS campaigns sent and a link to view the individual details of each campaign.
 
-![](https://files.readme.io/cf721b7-image.png)
+![image](../images/cf721b7-image.png)
 
 Clicking on the campaigns link will take you to the Campaigns tab of the Dashboard which will contain information about individual campaigns sent.
 
-![](https://files.readme.io/1850087-image.png)
+![image](../images/1850087-image.png)
 
 ## Reports
 
@@ -68,13 +70,13 @@ The SMS Messages section will allow you to filter your SMS sent by the following
 | Operator   | Filter by the SMS Operator of the Handset that the SMS is delivered to |
 | Date Range | Filter by the date range the SMS was sent.                             |
 
-![](https://files.readme.io/fd68aae-image.png)
+![image](../images/fd68aae-image.png)
 
 #### Daily Report
 
 It will also feature a **Daily Report** Section where it will have the following stats about messages.
 
-![](https://files.readme.io/809a56f-image.png)
+![](../images/809a56f-image.png)
 
 Here is a list of the columns in the **Daily Report** and their meaning.
 
@@ -106,11 +108,11 @@ This reports page allows you to see conversions relevant to the [Verification AP
 
 The main graph will show how many SMS have been sent using the service over time and what percentage have been successfully converted. This is useful for OTP use cases to track if there are any OTP conversion issues for example.
 
-![](https://files.readme.io/e875269-image.png)
+![](../images/e875269-image.png)
 
 There is also a more detailed reports section on the same page which will show a detailed breakdown of the status of each verification attempt, conversion rate and cost. You can also export the report as a CSV file as well.
 
-![](https://files.readme.io/e40a2bd-image.png)
+![](../images/e40a2bd-image.png)
 
 ### SMS Engage
 

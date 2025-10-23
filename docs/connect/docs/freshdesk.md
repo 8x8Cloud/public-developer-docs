@@ -34,27 +34,28 @@ By integrating 8x8 Chat Apps product into FreshDesk Support you get the best of 
 
 #### 1. Let’s setup the first Automation, go to Settings, then Automations (under Productivity)
 
-![](../images/9371e52-Freshdesk_1.png "Freshdesk 1.png")
+![freshdesk-1](../images/9371e52-Freshdesk_1.png "Freshdesk 1.png")
 
 ---
 
 #### 2. Under Ticket Updates, let’s create a new rule called "ChatApps new public comment"
 
-![](../images/a44c114-Freshdesk_2.png "Freshdesk 2.png")
+![freshdesk-2](../images/a44c114-Freshdesk_2.png "Freshdesk 2.png")
 
 ---
 
 #### 3. Let’s configure the following fields
 
-![](../images/fac82d0-Freshdesk_3.png "Freshdesk 3.png")
+![freshdesk-3](../images/fac82d0-Freshdesk_3.png "Freshdesk 3.png")
 
-![](../images/e5dc813-Freshdesk_Config_1.png "Freshdesk 4.png")
+![freshdesk-4](../images/e5dc813-Freshdesk_Config_1.png "Freshdesk 4.png")
 
 * Your URL should be:  
 
 `https://chatapps.8x8.com/webhook/freshdesk/{ChanelId}?accessKey={accessKey}`
-  + {ChanelId} and {accessKey} will be sent to you.
-  + For example: `https://chatapps.8x8.com/webhook/freshdesk/1234-abcd-1234-abcd?accessKey=123456789`
+
+* {ChanelId} and {accessKey} will be sent to you.
+* For example: `https://chatapps.8x8.com/webhook/freshdesk/1234-abcd-1234-abcd?accessKey=123456789`
 
 * Your JSON content should be:
 
@@ -70,7 +71,7 @@ By integrating 8x8 Chat Apps product into FreshDesk Support you get the best of 
 
 #### 4. Under Ticket Updates again, let’s create another rule called **ChatApps status changed**
 
-![](../images/f5616ff-Freshdesk_5.png "Freshdesk 5.png")
+![freshdesk-5](../images/f5616ff-Freshdesk_5.png "Freshdesk 5.png")
 
 ---
 

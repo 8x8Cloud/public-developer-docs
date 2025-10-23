@@ -1,6 +1,6 @@
 # Overview
 
-![](../images/449d08f-image.png)
+![image](../images/449d08f-image.png)
 
 ## Introduction
 

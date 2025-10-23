@@ -50,14 +50,14 @@ This guide covers template configuration in Meta Business Suite. However, to ena
 1. Log in to [Meta Business Suite](https://business.facebook.com/latest/settings/)
 2. From the left panel, select "WhatsApp accounts" and choose your WhatsApp account
 
-![](../images/d884e58ee928e9d74b52b644d28a9109fc3e931a95335f57164c362e50948be7-image.png)
+![image](../images/d884e58ee928e9d74b52b644d28a9109fc3e931a95335f57164c362e50948be7-image.png)
 3. Click "WhatsApp Manager" on the right side of the screen
 4. In WhatsApp Manager, select "Manage templates" from the left panel
 
-![](../images/f0e373550e092bdeb1785dc472836f74438411e34d860687b9a041ba16e2ae13-image.png)
+![image](../images/f0e373550e092bdeb1785dc472836f74438411e34d860687b9a041ba16e2ae13-image.png)
 5. Locate and click on your approved authentication template that was created via 8x8 platform, then select "Edit template". If you don't see one, please follow the [guide](/connect/docs/whatsapp-templates-management#creating-templates) and ensure you meet all other pre-requisites mentioned at the beginning of this guide.
 
-![](../images/7a1fae0359ae0a3ed2a7de28018abba9139a1fa3c929cb819c1189db8fbe4c52-image.png)
+![image](../images/7a1fae0359ae0a3ed2a7de28018abba9139a1fa3c929cb819c1189db8fbe4c52-image.png)
 6. Choose your preferred Code Delivery method:
 
   * Zero-tap autofill
@@ -70,16 +70,16 @@ This guide covers template configuration in Meta Business Suite. However, to ena
 >
 >
 
-![](../images/54f3382a0ac7e07d30796ad96d426b707e18914d5f45d4e8a54188502c2c2ad0-image.png)
+![image](../images/54f3382a0ac7e07d30796ad96d426b707e18914d5f45d4e8a54188502c2c2ad0-image.png)
 7. Enter your Android app information:
 
 * Package name
 * App signature hash
 
-![](../images/c37eaf2b7d1375c66a1aa82499f3081840c0c6878fa9cd538b1b3e6b25ce751d-image.png)
+![image](../images/c37eaf2b7d1375c66a1aa82499f3081840c0c6878fa9cd538b1b3e6b25ce751d-image.png)
 8. **Optional**: Adjust the message validity period (time-to-live) at the bottom of the page. This ensures the WhatsApp message doesn't get sent beyond the validity period, which allows you to orchestrate alternative channels such as SMS OTP or Voice OTP
 
-![](../images/c2d8279519f731a7d15266581c48ccfe57e5184dc1fc24487d9754c832f379ff-image.png)
+![image](../images/c2d8279519f731a7d15266581c48ccfe57e5184dc1fc24487d9754c832f379ff-image.png)
 
 9. Click Submit to save your changes
 
@@ -129,7 +129,7 @@ After validating your template configuration, you'll need to implement the requi
 
 See example below:
 
-![](../images/df4d3135f65bdb880916d73f43b1743935066adf88eb9b75650d4198e4e65e9e-image.png)
+![image](../images/df4d3135f65bdb880916d73f43b1743935066adf88eb9b75650d4198e4e65e9e-image.png)
 
 #### Using the Template
 

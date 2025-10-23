@@ -17,7 +17,7 @@ The Connect Portal allows you to specify IP addresses to whitelist. Please see t
 * **Collect User Opt In / Opt Out:** Enable customers to opt-in/opt-out of receiving messaging content.
 
   * Optionally, you can consider implementing double opt in where the user must first input their phone number in your registration form, then they will receive an SMS to that phone number which they must respond to in order to complete the opt-in process.
-  * ![](../images/daaa325-image.png)
+  * ![image](../images/daaa325-image.png)
 * **Reconfirm number:** Customer phone numbers may change, making it important to verify their current contact information periodically (example: reconfirm SMS phone number every 3/6/12 months).
 * **2FA For 8x8 Connect Dashboard:** The 8x8 Connect Dashboard allows you to create/retrieve your API keys as well as send SMS directly from the Dashboard. We would recommend to use the 2FA feature of the Connect Dashboard to prevent fraudulent user access.
 
@@ -34,7 +34,7 @@ The Connect Portal allows you to specify IP addresses to whitelist. Please see t
   
     1. Use the **Support** tab from the **Connect** Dashboard to Raise a Request.
     2. Select **"General Query"** for the Request Type
-    3. Ask for "MSISDN Rate Limiting" in **Subject** and specify the details such as how many SMS messages to allow in what time period in the **Additional Comments** section.![](../images/f35ec7d-image.png)
+    3. Ask for "MSISDN Rate Limiting" in **Subject** and specify the details such as how many SMS messages to allow in what time period in the **Additional Comments** section.![image](../images/f35ec7d-image.png)
 * **Exponential Delays:** Implement exponential delays between failed OTP requests for the same phone number.
 
   * By Implementing an exponential delay, it makes it more difficult to exploit a user registration page for example to send a mass amount of fraudulent SMS OTPs from that page.

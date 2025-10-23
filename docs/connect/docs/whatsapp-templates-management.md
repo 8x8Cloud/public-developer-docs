@@ -18,7 +18,7 @@ This is a quick video guide that goes over the WhatsApp Template Page.
 
 To view your existing WhatsApp Templates, you can navigate to the following [page](https://connect.8x8.com/chat/templates) in 8x8 Connect which is under **Messaging Apps > WhatsApp Templates**
 
-![](../images/5c50b3d-image.png)
+![image](../images/5c50b3d-image.png)
 
 The page has the ability to filter by the following options:
 
@@ -48,7 +48,7 @@ WhatsApp Templates can be created using the **Create new template** button in th
 >
 >
 
-![](../images/619ec84-image.png)
+![image](../images/619ec84-image.png)
 
 The fields that are available are:
 
