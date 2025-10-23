@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-connect/docs/sms-analytics" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">SMS Analytics | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="robots" content="noindex, nofollow"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/production/connect/docs/sms-analytics"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SMS Analytics | 8x8 Developer Portal"><meta data-rh="true" name="description" content="Dashboard"><meta data-rh="true" property="og:description" content="Dashboard"><link data-rh="true" rel="icon" href="/production/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/production/connect/docs/sms-analytics"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/production/connect/docs/sms-analytics" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/production/connect/docs/sms-analytics" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/production/assets/css/styles.b6175562.css">
+<script src="/production/assets/js/runtime~main.c1f2bdea.js" defer="defer"></script>
+<script src="/production/assets/js/main.22009996.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/production/img/Logo8x8Light.svg"><link rel="preload" as="image" href="/production/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/production/"><div class="navbar__logo"><img src="/production/img/Logo8x8Light.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/production/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">8x8 Developer Portal</b></a><a class="navbar__item navbar__link" href="/production/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/production/analytics">Analytics</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/production/connect">Connect CPaaS</a><a class="navbar__item navbar__link" href="/production/jaas">JaaS</a><a class="navbar__item navbar__link" href="/production/tech-partner">Tech Partners</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides section-navigation__tab--active" href="/production/connect/docs">Guides</a><a class="section-navigation__tab icon-references" href="/production/connect/reference">API Reference</a><a class="section-navigation__tab" href="/production/contactcenter">Contact Center</a><a href="https://support.cpaas.8x8.com/hc/en-us" target="_blank" rel="noopener noreferrer" class="section-navigation__tab">Support</a><a href="https://8x8cpaas.canny.io/" target="_blank" rel="noopener noreferrer" class="section-navigation__tab">Feedback</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/connect/docs/getting-started"><span title="API Information" class="categoryLinkLabel_W154">API Information</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/connect/docs/send-sms-api-reference"><span title="SMS" class="categoryLinkLabel_W154">SMS</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/connect/docs/usage-samples-whatsapp"><span title="Messaging Apps" class="categoryLinkLabel_W154">Messaging Apps</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/production/connect/docs/connect-overview"><span title="Connect Portal" class="categoryLinkLabel_W154">Connect Portal</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/production/connect/docs/connect-overview"><span title="Overview" class="linkLabel_WmDU">Overview</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/production/connect/docs/sender"><span title="Multi-channel Sender" class="categoryLinkLabel_W154">Multi-channel Sender</span></a><button aria-label="Expand sidebar category &#x27;Multi-channel Sender&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/production/connect/docs/sender-id-self-registration-module"><span title="Sender ID Self Registration" class="categoryLinkLabel_W154">Sender ID Self Registration</span></a><button aria-label="Expand sidebar category &#x27;Sender ID Self Registration&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/production/connect/docs/verif8"><span title="Verif8" class="linkLabel_WmDU">Verif8</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/production/connect/docs/analytics"><span title="Analytics" class="categoryLinkLabel_W154">Analytics</span></a><button aria-label="Collapse sidebar category &#x27;Analytics&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/production/connect/docs/sms-analytics"><span title="SMS Analytics" class="linkLabel_WmDU">SMS Analytics</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/production/connect/docs/messaging-apps"><span title="Messaging Apps Analytics" class="linkLabel_WmDU">Messaging Apps Analytics</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/production/connect/docs/video-interaction-analytics"><span title="Video Interaction Analytics" class="linkLabel_WmDU">Video Interaction Analytics</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/production/connect/docs/contact-management"><span title="Contact Management" class="linkLabel_WmDU">Contact Management</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/production/connect/docs/templates"><span title="Templates" class="categoryLinkLabel_W154">Templates</span></a><button aria-label="Expand sidebar category &#x27;Templates&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/production/connect/docs/automation-builder"><span title="Automation Builder" class="categoryLinkLabel_W154">Automation Builder</span></a><button aria-label="Expand sidebar category &#x27;Automation Builder&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/production/connect/docs/user-management"><span title="User management" class="linkLabel_WmDU">User management</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/production/connect/docs/connect-security"><span title="Security (SSO)" class="linkLabel_WmDU">Security (SSO)</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/production/connect/docs/authentication"><span title="Authentication - API Keys" class="linkLabel_WmDU">Authentication - API Keys</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/production/connect/docs/developer-tools"><span title="Developer Tools" class="linkLabel_WmDU">Developer Tools</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/production/connect/docs/data-center-region"><span title="Platform Deployment Regions" class="linkLabel_WmDU">Platform Deployment Regions</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/connect/docs/creating-a-contact"><span title="Contacts API Tutorials" class="categoryLinkLabel_W154">Contacts API Tutorials</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/connect/docs/adobe-campaigns"><span title="Integrations" class="categoryLinkLabel_W154">Integrations</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/connect/docs/overview"><span title="Voice SDK" class="categoryLinkLabel_W154">Voice SDK</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/connect/docs/converse-overview"><span title="Converse" class="categoryLinkLabel_W154">Converse</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/connect/docs/vi-overview"><span title="Video Interaction" class="categoryLinkLabel_W154">Video Interaction</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/connect/docs/accessing-and-viewing-your-customer-list"><span title="Partner Hub" class="categoryLinkLabel_W154">Partner Hub</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>SMS Analytics</h1></header>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="dashboard">Dashboard<a href="#dashboard" class="hash-link" aria-label="Direct link to Dashboard" title="Direct link to Dashboard" translate="no">​</a></h2>
+<p>The dashboard will contain the information about the SMS that you have sent using 8x8. Below is a view of the entire dashboard page, in the following sections we will break down each section&#x27;s contents.</p>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/a4f73c0-image-f5669946c2498e010515770d77ef2b9e.png" width="1903" height="1289" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="statistics">Statistics<a href="#statistics" class="hash-link" aria-label="Direct link to Statistics" title="Direct link to Statistics" translate="no">​</a></h3>
+<p>The Dashboard for SMS will show you the following statistics over the given time period which is set to the current week.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Column</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td style="text-align:left">Total SMS</td><td style="text-align:left">The total amount of SMS sent in the given time period.</td></tr><tr><td style="text-align:left">Delivery Rate</td><td style="text-align:left">Percentage of SMS delivered in the given time period.</td></tr><tr><td style="text-align:left">Total Cost</td><td style="text-align:left">How much the SMS cost during this time period.</td></tr><tr><td style="text-align:left">Destination Countries</td><td style="text-align:left">The number of different countries the SMS messages were sent to.</td></tr></tbody></table>
+<p>Below is a screenshot of the statistics section in the Dashboard.</p>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/6f0a45a-image-17acde95e74118bb0d4edd288c7f7198.png" width="1690" height="380" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="charts">Charts<a href="#charts" class="hash-link" aria-label="Direct link to Charts" title="Direct link to Charts" translate="no">​</a></h3>
+<p>There will be the following 3 charts available:</p>
+<ul>
+<li><strong>SMS:</strong> Shows the amount of SMS sent across the given time period for each of the days</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/798894f-image-249a65979b75ed3bf0fad61f9c8034de.png" width="972" height="460" class="img_ev3q"></p>
+<ul>
+<li><strong>Delivery Rate:</strong>  Shows how the delivery rate changes across the given time period for each of the days</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/c2d578f-image-98e15e930e89966b2ee36ae9dd81760f.png" width="1092" height="456" class="img_ev3q"></p>
+<ul>
+<li><strong>Cost:</strong> Shows how the average cost of the SMS changes on a given day</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/82e3240-image-ceb3fc921ee296e85c5f45f144fe7004.png" width="1145" height="473" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="destination-countries">Destination Countries<a href="#destination-countries" class="hash-link" aria-label="Direct link to Destination Countries" title="Direct link to Destination Countries" translate="no">​</a></h3>
+<p>This section will break down the amount of SMS sent to each country as well as the SMS operator responsible for sending the message.</p>
+<p><img decoding="async" loading="lazy" src="https://files.readme.io/252ab64-image.png" alt="" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="campaigns">Campaigns<a href="#campaigns" class="hash-link" aria-label="Direct link to Campaigns" title="Direct link to Campaigns" translate="no">​</a></h3>
+<p>This area will show the amount of SMS campaigns sent and a link to view the individual details of each campaign.</p>
+<p><img decoding="async" loading="lazy" src="https://files.readme.io/cf721b7-image.png" alt="" class="img_ev3q"></p>
+<p>Clicking on the campaigns link will take you to the Campaigns tab of the Dashboard which will contain information about individual campaigns sent.</p>
+<p><img decoding="async" loading="lazy" src="https://files.readme.io/1850087-image.png" alt="" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="reports">Reports<a href="#reports" class="hash-link" aria-label="Direct link to Reports" title="Direct link to Reports" translate="no">​</a></h2>
+<p>The Reports page for SMS will show a further breakdown as compared to the dashboard and allow you to further filter the data. You will also be able to export the information as CSV file from the page to import the data into your own analytics systems.</p>
+<p>Besides containing statistics for messages sent via the SMS API, it also contains information relevant for the <strong>Verification API, SMS Engage</strong> and <strong>Short URLs</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sms-messages">SMS Messages<a href="#sms-messages" class="hash-link" aria-label="Direct link to SMS Messages" title="Direct link to SMS Messages" translate="no">​</a></h3>
+<p>The SMS Messages section will allow you to filter your SMS sent by the following options</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Column</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td style="text-align:left">Subaccount</td><td style="text-align:left">Filter by the 8x8 Subaccount used</td></tr><tr><td style="text-align:left">Country</td><td style="text-align:left">Filter by the Country the SMS is delivered to.</td></tr><tr><td style="text-align:left">Operator</td><td style="text-align:left">Filter by the SMS Operator of the Handset that the SMS is delivered to</td></tr><tr><td style="text-align:left">Date Range</td><td style="text-align:left">Filter by the date range the SMS was sent.</td></tr></tbody></table>
+<p><img decoding="async" loading="lazy" src="https://files.readme.io/fd68aae-image.png" alt="" class="img_ev3q"></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="daily-report">Daily Report<a href="#daily-report" class="hash-link" aria-label="Direct link to Daily Report" title="Direct link to Daily Report" translate="no">​</a></h4>
+<p>It will also feature a <strong>Daily Report</strong> Section where it will have the following stats about messages.</p>
+<p><img decoding="async" loading="lazy" src="https://files.readme.io/809a56f-image.png" alt="" class="img_ev3q"></p>
+<p>Here is a list of the columns in the <strong>Daily Report</strong> and their meaning.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Column</th><th>Description</th></tr></thead><tbody><tr><td>Total</td><td>Total amount of messages sent/received in the time period.</td></tr><tr><td>Sent</td><td>Total amount of messages sent in the time period.</td></tr><tr><td>Total Chargeable</td><td>Total messages charged by 8x8 in the time period.</td></tr><tr><td>Delivered</td><td>This means the message has been &quot;delivered to the handset&quot;. If the status is not available from the operators, this means that 8x8 has received the confirmation from the carrier that the message has been &quot;delivered to the carrier&quot;.</td></tr><tr><td>Undelivered</td><td>We have received confirmation that the message was not delivered. This can be due to various reasons such as:<br>1. Mobile handset is unavailable (e.g. mobile is switched off or on roaming mode)<br>2. Filtered out by the operator</td></tr><tr><td>Rejected</td><td>The message has not been accepted by our platform. This can be due to some errors such as incorrect mobile numbers or insufficient credit. You will not be charged for rejected messages.</td></tr><tr><td>Received</td><td>The message has been received by our platform and it is currently being processed before being sent to the carrier.</td></tr><tr><td>Delivery Rate</td><td>Percentage of SMS messages with a status of delivered.</td></tr><tr><td>Cost</td><td>Cost of Each Message.</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="export">Export<a href="#export" class="hash-link" aria-label="Direct link to Export" title="Direct link to Export" translate="no">​</a></h4>
+<p>You can choose to export the daily report immediately which will send a URL link to the specified email.</p>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/6fc0e2a-image-2e8a9139035f29ba5276cf4cc2bf0bc7.png" width="778" height="273" class="img_ev3q"></p>
+<p>There is also the option to schedule an export to be sent periodically to the specified email.</p>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/120bef8-image-4fdc794e58e1a958839251cd0d57dc1d.png" width="690" height="411" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sms-conversions">SMS Conversions<a href="#sms-conversions" class="hash-link" aria-label="Direct link to SMS Conversions" title="Direct link to SMS Conversions" translate="no">​</a></h3>
+<p>This reports page allows you to see conversions relevant to the <a href="https://developer.8x8.com/connect/reference/verification-api-get-started" target="_blank" rel="noopener noreferrer">Verification API</a>, specifically for SMS sent using the service.</p>
+<p>The main graph will show how many SMS have been sent using the service over time and what percentage have been successfully converted. This is useful for OTP use cases to track if there are any OTP conversion issues for example.</p>
+<p><img decoding="async" loading="lazy" src="https://files.readme.io/e875269-image.png" alt="" class="img_ev3q"></p>
+<p>There is also a more detailed reports section on the same page which will show a detailed breakdown of the status of each verification attempt, conversion rate and cost. You can also export the report as a CSV file as well.</p>
+<p><img decoding="async" loading="lazy" src="https://files.readme.io/e40a2bd-image.png" alt="" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sms-engage">SMS Engage<a href="#sms-engage" class="hash-link" aria-label="Direct link to SMS Engage" title="Direct link to SMS Engage" translate="no">​</a></h3>
+<p>This section will contain statistics on SMS Engage Surveys sent. Please see the <a href="/production/connect/docs/tutorial-sms-engage">section</a> on SMS Engage for more details.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="short-urls">Short URLs<a href="#short-urls" class="hash-link" aria-label="Direct link to Short URLs" title="Direct link to Short URLs" translate="no">​</a></h3>
+<p>8x8 offers a URL Shortening service that can redirect from your chosen domain to our URL shortening domain. This feature allows us to offer click tracking. These Short URLs can be sent as part of SMS API messages or SMS Engage Surveys that you send with 8x8. The statistics for click tracking can been see in this section of the Reports.</p>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/651c46a-image-7322eab530ae7bd3a2e7f601f5e30079.png" width="3462" height="1872" class="img_ev3q"></p>
+<p>For further details on how to set up Short URLs, reach out to your Account Manager.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="logs">Logs<a href="#logs" class="hash-link" aria-label="Direct link to Logs" title="Direct link to Logs" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sms-message-list">SMS Message List<a href="#sms-message-list" class="hash-link" aria-label="Direct link to SMS Message List" title="Direct link to SMS Message List" translate="no">​</a></h3>
+<p>Below is the SMS logs in the Connect Dashboard which shows a record of the SMS that were sent and received by this account.</p>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/19e01a8-image-fdefcb7721bbedfd7fa3c24cc517bcfb.png" width="1256" height="1836" class="img_ev3q"></p>
+<p>The SMS Logs above shown shares information about individual SMS messages sent including:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Column</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td style="text-align:left">Subaccount</td><td style="text-align:left">8x8 subaccount used to send/receive the SMS message.</td></tr><tr><td style="text-align:left">Date sent/received</td><td style="text-align:left">When the SMS was sent/received.</td></tr><tr><td style="text-align:left">Destination</td><td style="text-align:left">Virtual Number or Mobile Number that received the message.</td></tr><tr><td style="text-align:left">Source</td><td style="text-align:left">Sender ID or Mobile Number used to send the message</td></tr><tr><td style="text-align:left">Cost</td><td style="text-align:left">Cost of sending the message.</td></tr><tr><td style="text-align:left">Status</td><td style="text-align:left">Shows whether the SMS was sent successfully or other potential statuses including unsuccessful sends.</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="individual-sms-record">Individual SMS Record<a href="#individual-sms-record" class="hash-link" aria-label="Direct link to Individual SMS Record" title="Direct link to Individual SMS Record" translate="no">​</a></h3>
+<p>Inside each SMS record, the following information is available:</p>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/96d4733-image-e342f708d45e57c36e7da140552acb3d.png" width="1021" height="366" class="img_ev3q"></p>
+<p>This table shows a description of each of the fields in the SMS record.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Column</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td style="text-align:left">Message ID</td><td style="text-align:left">Uniquely identifies the message in the system.</td></tr><tr><td style="text-align:left">Country</td><td style="text-align:left">The country the message was delivered.</td></tr><tr><td style="text-align:left">Operator</td><td style="text-align:left">SMS Operator handling the message.</td></tr><tr><td style="text-align:left">Cost</td><td style="text-align:left">Same as above, cost of sending the message.</td></tr><tr><td style="text-align:left">Date sent</td><td style="text-align:left">Same as above, the date the message was sent.</td></tr><tr><td style="text-align:left">Client Batch ID</td><td style="text-align:left">An optional parameter that can be used in an API call to identify a message with a unique string.</td></tr><tr><td style="text-align:left">Client Message ID</td><td style="text-align:left">An optional parameter that can be used in an API call to identify a batch of message with a unique string.</td></tr><tr><td style="text-align:left">From</td><td style="text-align:left">Same as Source, Sender ID or Mobile Number used to send the message.</td></tr><tr><td style="text-align:left">Message</td><td style="text-align:left">The message body/content.</td></tr><tr><td style="text-align:left">To</td><td style="text-align:left">Same as Destination,  Virtual Number or Mobile Number that received the message.</td></tr><tr><td style="text-align:left">Source (Different from Source in Main Column)</td><td style="text-align:left">Method the message was sent. Most commonly this is the HTTP API meaning API request to our SMS API.</td></tr><tr><td style="text-align:left">Encoding Type</td><td style="text-align:left">The SMS encoding usually depends on the characters sent as part of the SMS. Either GSM7 or UCS2.</td></tr></tbody></table></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/production/connect/docs/analytics"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Analytics</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/production/connect/docs/messaging-apps"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Messaging Apps Analytics</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#dashboard" class="table-of-contents__link toc-highlight">Dashboard</a><ul><li><a href="#statistics" class="table-of-contents__link toc-highlight">Statistics</a></li><li><a href="#charts" class="table-of-contents__link toc-highlight">Charts</a></li><li><a href="#destination-countries" class="table-of-contents__link toc-highlight">Destination Countries</a></li><li><a href="#campaigns" class="table-of-contents__link toc-highlight">Campaigns</a></li></ul></li><li><a href="#reports" class="table-of-contents__link toc-highlight">Reports</a><ul><li><a href="#sms-messages" class="table-of-contents__link toc-highlight">SMS Messages</a></li><li><a href="#sms-conversions" class="table-of-contents__link toc-highlight">SMS Conversions</a></li><li><a href="#sms-engage" class="table-of-contents__link toc-highlight">SMS Engage</a></li><li><a href="#short-urls" class="table-of-contents__link toc-highlight">Short URLs</a></li></ul></li><li><a href="#logs" class="table-of-contents__link toc-highlight">Logs</a><ul><li><a href="#sms-message-list" class="table-of-contents__link toc-highlight">SMS Message List</a></li><li><a href="#individual-sms-record" class="table-of-contents__link toc-highlight">Individual SMS Record</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a></div></div></div></footer></div>
+</body>
+</html>

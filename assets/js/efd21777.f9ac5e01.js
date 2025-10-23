@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[34902],{27035:e=>{e.exports=JSON.parse('{"to":"/production/analytics/reference/evaluations"}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[89783],{71901:e=>{e.exports=JSON.parse('{"to":"/production/contactcenter/reference/getcctransactions"}')}}]);

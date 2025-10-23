@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[58359],{34951:e=>{e.exports=JSON.parse('{"to":"/production/connect/docs/delivery-receipts-for-outbound-sms"}')}}]);

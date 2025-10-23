@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-actions-events/docs/cc-managing-agent-status" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">CC Managing Agent Status | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="robots" content="noindex, nofollow"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/production/actions-events/docs/cc-managing-agent-status"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="CC Managing Agent Status | 8x8 Developer Portal"><meta data-rh="true" name="description" content="This guide describes how to manage agent status via API"><meta data-rh="true" property="og:description" content="This guide describes how to manage agent status via API"><link data-rh="true" rel="icon" href="/production/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/production/actions-events/docs/cc-managing-agent-status"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/production/actions-events/docs/cc-managing-agent-status" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/production/actions-events/docs/cc-managing-agent-status" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/production/assets/css/styles.b6175562.css">
+<script src="/production/assets/js/runtime~main.c1f2bdea.js" defer="defer"></script>
+<script src="/production/assets/js/main.22009996.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/production/img/Logo8x8Light.svg"><link rel="preload" as="image" href="/production/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/production/"><div class="navbar__logo"><img src="/production/img/Logo8x8Light.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/production/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">8x8 Developer Portal</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/production/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/production/analytics">Analytics</a><a class="navbar__item navbar__link" href="/production/connect">Connect CPaaS</a><a class="navbar__item navbar__link" href="/production/jaas">JaaS</a><a class="navbar__item navbar__link" href="/production/tech-partner">Tech Partners</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides section-navigation__tab--active" href="/production/actions-events/docs">Guides</a><a class="section-navigation__tab icon-references" href="/production/actions-events/reference">API Reference</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/actions-events/docs/introduction"><span title="Actions &amp; Events" class="categoryLinkLabel_W154">Actions &amp; Events</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/actions-events/docs/getting-started-chapi"><span title="CHAPI - Work Chat API" class="categoryLinkLabel_W154">CHAPI - Work Chat API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/actions-events/docs/chat-gateway"><span title="CC Chat Gateway" class="categoryLinkLabel_W154">CC Chat Gateway</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/actions-events/docs/cc-managing-campaign-status"><span title="Contact Center Dynamic Campaigns API" class="categoryLinkLabel_W154">Contact Center Dynamic Campaigns API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/production/actions-events/docs/cc-managing-agent-status"><span title="Contact Center Agent Status" class="categoryLinkLabel_W154">Contact Center Agent Status</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/production/actions-events/docs/cc-managing-agent-status"><span title="CC Managing Agent Status" class="linkLabel_WmDU">CC Managing Agent Status</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/actions-events/docs/cc-manage-phone-calls"><span title="Contact Center Phone Call API" class="categoryLinkLabel_W154">Contact Center Phone Call API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/actions-events/docs/streaming-api-overview"><span title="Contact Center - Streaming Event API" class="categoryLinkLabel_W154">Contact Center - Streaming Event API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/actions-events/docs/introduction-1"><span title="Webchat API v2" class="categoryLinkLabel_W154">Webchat API v2</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/production/actions-events/docs/webhooks-2"><span title="Contact Centre Data Augmentation" class="categoryLinkLabel_W154">Contact Centre Data Augmentation</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>CC Managing Agent Status</h1></header>
+<p>This guide describes how to manage agent status via API</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="authentication">Authentication<a href="#authentication" class="hash-link" aria-label="Direct link to Authentication" title="Direct link to Authentication" translate="no">​</a></h2>
+<p>CC Campaign APIs leverage the credentials from the Integration &gt;&gt; API Token area in Configuration Manager.<br>
+These APIs use Basic Authentication.<br>
+The username will be the &quot;Username&quot; value from this screen, it is generally the tenant name</p>
+<p><code>Authorization :Basic encodedValue</code></p>
+<p>Where encodedValue is base64encode(username:password)</p>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/841df98-CC-Request-Action-Token-7b92159ef1baa913c91419cbab6f1f93.png" title="CC-Request-Action-Token.png" width="847" height="278" class="img_ev3q"></p>
+<blockquote>
+<p>📘 If there are no token values</p>
+<p>If the token values are empty you can generate the token by clicking on &#x27;New Token&#x27;. Once a token is generated, if you would like to generate a new one, please be aware that once a new token is generated, the old one will not work anymore for anybody.</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="get-status-for-all-agents">Get Status for all agents<a href="#get-status-for-all-agents" class="hash-link" aria-label="Direct link to Get Status for all agents" title="Direct link to Get Status for all agents" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="parameters">Parameters<a href="#parameters" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h3>
+<p><strong>Method: GET</strong></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="headers">Headers<a href="#headers" class="hash-link" aria-label="Direct link to Headers" title="Direct link to Headers" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Name</th><th style="text-align:left">Required</th><th style="text-align:left">Description</th><th style="text-align:left">Example</th></tr></thead><tbody><tr><td style="text-align:left">Authorization</td><td style="text-align:left">✓</td><td style="text-align:left"><a href="https://en.wikipedia.org/wiki/Basic_access_authentication" target="_blank" rel="noopener noreferrer">Basic Authentication</a> where username is the value of username and the password is the value of <strong>Action Request Token</strong></td><td style="text-align:left">Basic bXljbGllbnRJZDpuZXZlcnRlbGxhbnlvbmU=</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="path">Path<a href="#path" class="hash-link" aria-label="Direct link to Path" title="Direct link to Path" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Required</th><th>Description</th><th>Example</th></tr></thead><tbody><tr><td>ccPlatform</td><td>✓</td><td>Contact Center platform can be found in the url when accessing CC Configuration Manager.<br>North America starts NA<br>Europe starts EU<br>Canada starts CA<br>Asia Pacific starts AP<br>Australia starts AU<br>Bell Canada starts BC<br>Sandbox starts SB</td><td>na12</td></tr><tr><td>version</td><td>✓</td><td>The API version. The current version is 1 resulting in. v1</td><td>v1</td></tr><tr><td>tenantId</td><td>✓</td><td>The CC Tenant name of the tenant to list agent status for. Tenant name is generally the same as the username above. It can be located in CC Configuration Manager @ Home :: Profile :: Tenant Name</td><td>acmecorp01</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="all-agents-status-request">All Agents Status Request<a href="#all-agents-status-request" class="hash-link" aria-label="Direct link to All Agents Status Request" title="Direct link to All Agents Status Request" translate="no">​</a></h3>
+<div class="language-curl codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-curl codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">curl --location --request GET &#x27;https://{ccPlatform}.8x8.com/api/v{version}/tenants/{tenantId}/agentstatus/agents&#x27; \</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--header &#x27;Authorization: Basic {encodedValue}&#x27;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="all-agent-status-response">All Agent Status Response<a href="#all-agent-status-response" class="hash-link" aria-label="Direct link to All Agent Status Response" title="Direct link to All Agent Status Response" translate="no">​</a></h3>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;data&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;ag0VYyLh0YTsymdbtYIaaaa&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;name&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Ilya Workshard&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;ag0XgxWZr7TzqWFhxboBGj1g&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;status-code-list-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">-1</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;status-code-item-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;name&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Jane Smith&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;ag1LmqEeEYRoOti9KjIi_Dng&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;name&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Paul Neverhere&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;ag64oyEUb_Sk6bxVB9P5ye5w&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">5</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;status-code-list-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">801</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;status-code-item-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1726</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;status-code-item-short-code&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Train&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;name&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Padma Othertask&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-sub-status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;none&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="get-status-for-single-agent">Get Status for single agent<a href="#get-status-for-single-agent" class="hash-link" aria-label="Direct link to Get Status for single agent" title="Direct link to Get Status for single agent" translate="no">​</a></h2>
+<p>To request status for an individual agent simply append the appropriate agentId <code>/agents/agentId</code></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="parameters-1">Parameters<a href="#parameters-1" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h3>
+<p><strong>Method: GET</strong></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="headers-1">Headers<a href="#headers-1" class="hash-link" aria-label="Direct link to Headers" title="Direct link to Headers" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Name</th><th style="text-align:left">Required</th><th style="text-align:left">Description</th><th style="text-align:left">Example</th></tr></thead><tbody><tr><td style="text-align:left">Authorization</td><td style="text-align:left">✓</td><td style="text-align:left"><a href="https://en.wikipedia.org/wiki/Basic_access_authentication" target="_blank" rel="noopener noreferrer">Basic Authentication</a> where username is the value of username and the password is the value of <strong>Action Request Token</strong></td><td style="text-align:left">Basic bXljbGllbnRJZDpuZXZlcnRlbGxhbnlvbmU=</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="path-1">Path<a href="#path-1" class="hash-link" aria-label="Direct link to Path" title="Direct link to Path" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Required</th><th>Description</th><th>Example</th></tr></thead><tbody><tr><td>ccPlatform</td><td>✓</td><td>Contact Center platform can be found in the url when accessing CC Configuration Manager.<br>North America starts NA<br>Europe starts EU<br>Canada starts CA<br>Asia Pacific starts AP<br>Australia starts AU<br>Bell Canada starts BC<br>Sandbox starts SB</td><td>na12</td></tr><tr><td>version</td><td>✓</td><td>The API version. The current version is 1 resulting in. v1</td><td>v1</td></tr><tr><td>tenantId</td><td>✓</td><td>The CC Tenant name of the tenant to list agent status for. Tenant name is generally the same as the username above. It can be located in CC Configuration Manager @ Home :: Profile :: Tenant Name</td><td>acmecorp01</td></tr><tr><td>agentId</td><td>✓</td><td>The agentId of the agent to set the status for. This can be found in CC Configuration Manager &quot;Users&quot; add the &quot;Internal Id&quot; column, or in the &quot;General&quot; section of the user as &quot;Internal Id&quot;</td><td>ag64oyEUb_Sk6bxVB9P5yaaa</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="single-agent-status-request">Single Agent Status Request<a href="#single-agent-status-request" class="hash-link" aria-label="Direct link to Single Agent Status Request" title="Direct link to Single Agent Status Request" translate="no">​</a></h3>
+<div class="language-curl codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-curl codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">curl --location --request GET &#x27;https://{ccPlatform}.8x8.com/api/v{version}/tenants/{tenantId}/agentstatus/agents/{agentId}&#x27; \</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--header &#x27;Authorization: Basic {encodedValue}&#x27;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="single-agent-status-response">Single Agent Status Response<a href="#single-agent-status-response" class="hash-link" aria-label="Direct link to Single Agent Status Response" title="Direct link to Single Agent Status Response" translate="no">​</a></h3>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;agent-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;ag64oyEUb_Sk6bxVB9P5yaaa&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;agent-status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">5</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status-code-list-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">801</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status-code-item-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1726</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status-code-item-short-code&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Train&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;name&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Padma Othertask&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;agent-sub-status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;none&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="allowed-status-transitions">Allowed Status Transitions<a href="#allowed-status-transitions" class="hash-link" aria-label="Direct link to Allowed Status Transitions" title="Direct link to Allowed Status Transitions" translate="no">​</a></h2>
+<ul>
+<li>Red lines indicate single direction (not reversible via API)</li>
+<li>Black lines indicate bidirectional</li>
+<li>All other transitions are NOT supported via API</li>
+</ul>
+<p><img decoding="async" loading="lazy" src="/production/assets/images/838a466-Agent_Status_API_Allowed_Transitions-7fdce81ba2e48069ac64616bdf0dde62.jpg" title="Agent Status API Allowed Transitions.jpg" width="1787" height="874" class="img_ev3q"></p>
+<p><a href="/production/actions-events/reference/getagentsstatus">Agent status API Reference</a> allows you to try out this API.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="set-status-for-a-single-agent">Set Status for a single agent<a href="#set-status-for-a-single-agent" class="hash-link" aria-label="Direct link to Set Status for a single agent" title="Direct link to Set Status for a single agent" translate="no">​</a></h2>
+<p>The status can only be set to and from the statuses defined in <a href="/production/actions-events/docs/cc-managing-agent-status#allowed-status-transitions">allowed status change diagram</a></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="parameters-2">Parameters<a href="#parameters-2" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h3>
+<p><strong>Method: PUT</strong></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="headers-2">Headers<a href="#headers-2" class="hash-link" aria-label="Direct link to Headers" title="Direct link to Headers" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Name</th><th style="text-align:left">Required</th><th style="text-align:left">Description</th><th style="text-align:left">Example</th></tr></thead><tbody><tr><td style="text-align:left">Authorization</td><td style="text-align:left">✓</td><td style="text-align:left"><a href="https://en.wikipedia.org/wiki/Basic_access_authentication" target="_blank" rel="noopener noreferrer">Basic Authentication</a> where username is the value of username and the password is the value of <strong>Action Request Token</strong></td><td style="text-align:left">Basic bXljbGllbnRJZDpuZXZlcnRlbGxhbnlvbmU=</td></tr><tr><td style="text-align:left">Content-Type</td><td style="text-align:left">✓</td><td style="text-align:left">Set the content type to application/json</td><td style="text-align:left">application/json</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="path-2">Path<a href="#path-2" class="hash-link" aria-label="Direct link to Path" title="Direct link to Path" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Required</th><th>Description</th><th>Example</th></tr></thead><tbody><tr><td>ccPlatform</td><td>✓</td><td>Contact Center platform can be found in the url when accessing CC Configuration Manager.<br>North America starts NA<br>Europe starts EU<br>Canada starts CA<br>Asia Pacific starts AP<br>Australia starts AU<br>Bell Canada starts BC<br>Sandbox starts SB</td><td>na12</td></tr><tr><td>version</td><td>✓</td><td>The API version. The current version is 1 resulting in. v1</td><td>v1</td></tr><tr><td>tenantID</td><td>✓</td><td>The CC Tenant name of the tenant to list agent status for. Tenant name is generally the same as the username above. It can be located in CC Configuration Manager @ Home :: Profile :: Tenant Name</td><td>acmecorp01</td></tr><tr><td>agentId</td><td>✓</td><td>The agentId of the agent to set the status for. This can be found in CC Configuration Manager &quot;Users&quot; add the &quot;Internal Id&quot; column, or in the &quot;General&quot; section of the user as &quot;Internal Id&quot;</td><td>ag0VYyLh0YTsymdbtYIaaaa</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="body">Body<a href="#body" class="hash-link" aria-label="Direct link to Body" title="Direct link to Body" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Name</th><th style="text-align:left">Required</th><th style="text-align:left">Description</th><th style="text-align:left">Example</th></tr></thead><tbody><tr><td style="text-align:left">agent-status</td><td style="text-align:left">✓</td><td style="text-align:left">The status to assign to the agent. See <a href="/production/actions-events/docs/cc-managing-agent-status#status-values">Status Values</a></td><td style="text-align:left">5</td></tr><tr><td style="text-align:left">status-code-list-id</td><td style="text-align:left">✓</td><td style="text-align:left">Status Code List Id is the id of the list. See <a href="/production/actions-events/docs/cc-managing-agent-status#status-code-lists-and-items">Status Code Lists and Items</a></td><td style="text-align:left">801</td></tr><tr><td style="text-align:left">status-code-item-id</td><td style="text-align:left">✓</td><td style="text-align:left">The id of the item within the status code list. See <a href="/production/actions-events/docs/cc-managing-agent-status#status-code-lists-and-items">Status Code Lists and Items</a></td><td style="text-align:left">1722</td></tr><tr><td style="text-align:left">status-code-item-short-code</td><td style="text-align:left">✓</td><td style="text-align:left">Short Text associated to the item within the status code list. See <a href="/production/actions-events/docs/cc-managing-agent-status#status-code-lists-and-items">Status Code Lists and Items</a></td><td style="text-align:left">Meet</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="set-single-agent-status-request">Set Single Agent Status Request<a href="#set-single-agent-status-request" class="hash-link" aria-label="Direct link to Set Single Agent Status Request" title="Direct link to Set Single Agent Status Request" translate="no">​</a></h3>
+<div class="language-curl codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-curl codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">curl --location --request PUT &#x27;https://{ccPlatform}.8x8.com/api/v{version}/tenants/{tenantId}/agentstatus/agents/{agentId}&#x27; \</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--header &#x27;Authorization: Basic {encodedValue}&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--header &#x27;Content-Type: application/json&#x27; \</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--data-raw &#x27;{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;agent-status&quot;: 5,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;status-code-list-id&quot;: 801,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;status-code-item-id&quot;: 1722,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;status-code-item-short-code&quot;: &quot;Meet&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}&#x27;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="set-single-agent-status-response">Set Single Agent Status Response<a href="#set-single-agent-status-response" class="hash-link" aria-label="Direct link to Set Single Agent Status Response" title="Direct link to Set Single Agent Status Response" translate="no">​</a></h3>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;reason&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;OK&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;change-status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">200</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Agent status change successful&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<blockquote>
+<p>🚧 403 response code <api><error>403 - Forbidden.</error></api></p>
+<p>Historically this capability has only enabled on request. If you receive response code 403 then please contact 8x8 support and request that your &quot;Agent Status API&quot; is enabled in OPSCON.</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="set-status-for-agents-in-bulk">Set Status for Agents in bulk<a href="#set-status-for-agents-in-bulk" class="hash-link" aria-label="Direct link to Set Status for Agents in bulk" title="Direct link to Set Status for Agents in bulk" translate="no">​</a></h2>
+<p>To set the status of multiple agents in a single request.</p>
+<ul>
+<li>The requested status can be different for each agent.</li>
+<li>Each agent request is independent and some requests can succeed and others fail within a single request. The outcome is delivered via a HTTP 207 Multi-Status response.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="parameters-3">Parameters<a href="#parameters-3" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h3>
+<p><strong>Method: PUT</strong></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="headers-3">Headers<a href="#headers-3" class="hash-link" aria-label="Direct link to Headers" title="Direct link to Headers" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Name</th><th style="text-align:left">Required</th><th style="text-align:left">Description</th><th style="text-align:left">Example</th></tr></thead><tbody><tr><td style="text-align:left">Authorization</td><td style="text-align:left">✓</td><td style="text-align:left"><a href="https://en.wikipedia.org/wiki/Basic_access_authentication" target="_blank" rel="noopener noreferrer">Basic Authentication</a> where username is the value of username and the password is the value of <strong>Action Request Token.</strong></td><td style="text-align:left">Basic bXljbGllbnRJZDpuZXZlcnRlbGxhbnlvbmU=</td></tr><tr><td style="text-align:left">Content-Type</td><td style="text-align:left">✓</td><td style="text-align:left">Set the content type to application/json</td><td style="text-align:left">application/json</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="path-3">Path<a href="#path-3" class="hash-link" aria-label="Direct link to Path" title="Direct link to Path" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Required</th><th>Description</th><th>Example</th></tr></thead><tbody><tr><td>ccPlatform</td><td>✓</td><td>Contact Center platform can be found in the url when accessing CC Configuration Manager.<br>North America starts NA<br>Europe starts EU<br>Canada starts CA<br>Asia Pacific starts AP<br>Australia starts AU<br>Bell Canada starts BC<br>Sandbox starts SB</td><td>na12</td></tr><tr><td>version</td><td>✓</td><td>The API version. The current version is 1 resulting in. v1</td><td>v1</td></tr><tr><td>tenantId</td><td>✓</td><td>The CC Tenant name of the tenant to list agent status for. Tenant name is generally the same as the username above. It can be located in CC Configuration Manager @ Home :: Profile :: Tenant Name</td><td>acmecorp01</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="body-1">Body<a href="#body-1" class="hash-link" aria-label="Direct link to Body" title="Direct link to Body" translate="no">​</a></h4>
+<p>The body will contain an array of agents, each entry in the array will have the following:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Name</th><th style="text-align:left">Required</th><th style="text-align:left">Description</th><th style="text-align:left">Example</th></tr></thead><tbody><tr><td style="text-align:left">agents.agent-id</td><td style="text-align:left">✓</td><td style="text-align:left">The agentId of the agent to set the status for. This can be found in CC Configuration Manager &quot;Users&quot; add the &quot;Internal Id&quot; column, or in the &quot;General&quot; section of the user as &quot;Internal Id&quot;</td><td style="text-align:left">ag64oyEUb_Sk6bxVB9P5yaaa</td></tr><tr><td style="text-align:left">agents.agent-status</td><td style="text-align:left"></td><td style="text-align:left">The status to assign to the agent. See <a href="/production/actions-events/docs/cc-managing-agent-status#status-values">Status Values</a></td><td style="text-align:left">5</td></tr><tr><td style="text-align:left">agents.status-code-list-id</td><td style="text-align:left">✓</td><td style="text-align:left">Status Code List Id is the id of the list. See <a href="/production/actions-events/docs/cc-managing-agent-status#status-code-lists-and-items">Status Code Lists and Items</a></td><td style="text-align:left">801</td></tr><tr><td style="text-align:left">agents.status-code-item-id</td><td style="text-align:left">✓</td><td style="text-align:left">The id of the item within the status code list. See <a href="/production/actions-events/docs/cc-managing-agent-status#status-code-lists-and-items">Status Code Lists and Items</a></td><td style="text-align:left">1722</td></tr><tr><td style="text-align:left">agents.status-code-item-short-code</td><td style="text-align:left">✓</td><td style="text-align:left">Short Text associated to the item within the status code list. See <a href="/production/actions-events/docs/cc-managing-agent-status#status-code-lists-and-items">Status Code Lists and Items</a></td><td style="text-align:left">Meet</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="set-bulk-status-request">Set Bulk Status Request<a href="#set-bulk-status-request" class="hash-link" aria-label="Direct link to Set Bulk Status Request" title="Direct link to Set Bulk Status Request" translate="no">​</a></h3>
+<div class="language-curl codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-curl codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">curl --location --request PUT &#x27;https://&lt;&lt;ccPlatform&gt;&gt;.8x8.com/api/v1/tenants/&lt;&lt;tenantId&gt;&gt;/agentstatus/agents/bulk&#x27; \</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--header &#x27;Authorization: Basic &lt;&lt;encodedValue&gt;&gt;&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--header &#x27;Content-Type: application/json&#x27; \</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--data-raw &#x27;{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;agents&quot;: [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;agent-id&quot;: &quot;ag64oyEUb_Sk6bxVB9P5yaaa&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;agent-status&quot;: 3,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;status-code-list-id&quot;: 801,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;status-code-item-id&quot;: 1725,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;status-code-item-short-code&quot;: &quot;Lunch&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    },</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;agent-id&quot;: &quot;agAQDqmvKiRbG4ekigNSmbbb&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;agent-status&quot;: 3,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;status-code-list-id&quot;: 801,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;status-code-item-id&quot;: 1725,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;status-code-item-short-code&quot;: &quot;Lunch&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">]</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}&#x27;</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="set-bulk-status-response">Set Bulk Status Response<a href="#set-bulk-status-response" class="hash-link" aria-label="Direct link to Set Bulk Status Response" title="Direct link to Set Bulk Status Response" translate="no">​</a></h3>
+<p>Response Status is <code>207</code> and the individual status of each agent status change is contained in the body of the response</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;data&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;ag64oyEUb_Sk6bxVB9P5yaaa&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;reason&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;OK&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;change-status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">200</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Agent status change successful&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;agent-id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;agAQDqmvKiRbG4ekigNSmbbb&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;reason&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;OK&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;change-status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">200</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Agent status change successful&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="references">References<a href="#references" class="hash-link" aria-label="Direct link to References" title="Direct link to References" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="status-values-that-can-be-changed-as-explained-in-the-diagram-form-the-beginning-of-this-documentation">Status Values that can be changed as explained in the diagram form the beginning of this documentation<a href="#status-values-that-can-be-changed-as-explained-in-the-diagram-form-the-beginning-of-this-documentation" class="hash-link" aria-label="Direct link to Status Values that can be changed as explained in the diagram form the beginning of this documentation" title="Direct link to Status Values that can be changed as explained in the diagram form the beginning of this documentation" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Status</th><th style="text-align:left">Label</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td style="text-align:left">1</td><td style="text-align:left">LOGGED_OUT</td><td style="text-align:left">Currently logged out (and has previously logged in at least one time)</td></tr><tr><td style="text-align:left">3</td><td style="text-align:left">ON_BREAK</td><td style="text-align:left">On break status, could be manually selected or automatically on break based on initial login or missing a transaction.</td></tr><tr><td style="text-align:left">4</td><td style="text-align:left">WAIT_TRANSACT</td><td style="text-align:left">Available</td></tr><tr><td style="text-align:left">5</td><td style="text-align:left">WORK_OFFLINE</td><td style="text-align:left">Working offline</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="status-values-that-can-be-returned-by-the-get-operations-but-cannot-be-ammended-by-the-set-operation">Status Values that can be returned by the GET operations but cannot be ammended by the SET operation<a href="#status-values-that-can-be-returned-by-the-get-operations-but-cannot-be-ammended-by-the-set-operation" class="hash-link" aria-label="Direct link to Status Values that can be returned by the GET operations but cannot be ammended by the SET operation" title="Direct link to Status Values that can be returned by the GET operations but cannot be ammended by the SET operation" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Status</th><th style="text-align:left">Label</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td style="text-align:left">0</td><td style="text-align:left">UNKNOWN</td><td style="text-align:left">Generally the Agent has never logged in</td></tr><tr><td style="text-align:left">2</td><td style="text-align:left">LOGGED_IN</td><td style="text-align:left"></td></tr><tr><td style="text-align:left">6</td><td style="text-align:left">TRANSACT_OFFERED</td><td style="text-align:left"></td></tr><tr><td style="text-align:left">7</td><td style="text-align:left">PROCESS_TRANSACT</td><td style="text-align:left"></td></tr><tr><td style="text-align:left">8</td><td style="text-align:left">POST_PROCESS</td><td style="text-align:left"></td></tr><tr><td style="text-align:left">9</td><td style="text-align:left">BUSY</td><td style="text-align:left"></td></tr><tr><td style="text-align:left">10</td><td style="text-align:left">DIRECT_CALL</td><td style="text-align:left">Note: If a direct call is also marking the agent Busy then the status will be 9 BUSY</td></tr><tr><td style="text-align:left">11</td><td style="text-align:left">ON_EMAIL</td><td style="text-align:left"></td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="status-code-lists-and-items">Status Code Lists and Items<a href="#status-code-lists-and-items" class="hash-link" aria-label="Direct link to Status Code Lists and Items" title="Direct link to Status Code Lists and Items" translate="no">​</a></h3>
+<p>Status Code Lists are assigned to Agent Groups via CC Configuration Manager.<br>
+These lists allow for a specific reason for the status to be selected by the agent or in this case assigned via the API.</p>
+<p><strong>status-code-list-id</strong> this is the id of the list itself: This can be identified either by using the <a href="#get-status-for-all-agents">Get Agent Status</a> or via the stats API.</p>
+<p><strong>status-code-item-id</strong> this is the id of the list itself: This can be identified either by using the <a href="#get-status-for-all-agents">Get Agent Status</a> to return the values for an agent in a known state or via the stats API.</p>
+<p><strong>status-code-item-short-code</strong>  This can be found in CC Configuration Manager under: Status Codes, by selecting the required Status Code List, then under &quot;Codes&quot; referencing the &quot;Short Codes&quot; column, or by using the <a href="#get-status-for-all-agents">Get Agent Status</a> to return the values for an agent in a known state or via the stats API.</p></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/production/actions-events/docs/cc-managing-campaign-records"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">CC Managing Campaign Records</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/production/actions-events/docs/cc-manage-phone-calls"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">CC Manage Phone Calls</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#authentication" class="table-of-contents__link toc-highlight">Authentication</a></li><li><a href="#get-status-for-all-agents" class="table-of-contents__link toc-highlight">Get Status for all agents</a><ul><li><a href="#parameters" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#all-agents-status-request" class="table-of-contents__link toc-highlight">All Agents Status Request</a></li><li><a href="#all-agent-status-response" class="table-of-contents__link toc-highlight">All Agent Status Response</a></li></ul></li><li><a href="#get-status-for-single-agent" class="table-of-contents__link toc-highlight">Get Status for single agent</a><ul><li><a href="#parameters-1" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#single-agent-status-request" class="table-of-contents__link toc-highlight">Single Agent Status Request</a></li><li><a href="#single-agent-status-response" class="table-of-contents__link toc-highlight">Single Agent Status Response</a></li></ul></li><li><a href="#allowed-status-transitions" class="table-of-contents__link toc-highlight">Allowed Status Transitions</a></li><li><a href="#set-status-for-a-single-agent" class="table-of-contents__link toc-highlight">Set Status for a single agent</a><ul><li><a href="#parameters-2" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#set-single-agent-status-request" class="table-of-contents__link toc-highlight">Set Single Agent Status Request</a></li><li><a href="#set-single-agent-status-response" class="table-of-contents__link toc-highlight">Set Single Agent Status Response</a></li></ul></li><li><a href="#set-status-for-agents-in-bulk" class="table-of-contents__link toc-highlight">Set Status for Agents in bulk</a><ul><li><a href="#parameters-3" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#set-bulk-status-request" class="table-of-contents__link toc-highlight">Set Bulk Status Request</a></li><li><a href="#set-bulk-status-response" class="table-of-contents__link toc-highlight">Set Bulk Status Response</a></li></ul></li><li><a href="#references" class="table-of-contents__link toc-highlight">References</a><ul><li><a href="#status-values-that-can-be-changed-as-explained-in-the-diagram-form-the-beginning-of-this-documentation" class="table-of-contents__link toc-highlight">Status Values that can be changed as explained in the diagram form the beginning of this documentation</a></li><li><a href="#status-values-that-can-be-returned-by-the-get-operations-but-cannot-be-ammended-by-the-set-operation" class="table-of-contents__link toc-highlight">Status Values that can be returned by the GET operations but cannot be ammended by the SET operation</a></li><li><a href="#status-code-lists-and-items" class="table-of-contents__link toc-highlight">Status Code Lists and Items</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a></div></div></div></footer></div>
+</body>
+</html>
