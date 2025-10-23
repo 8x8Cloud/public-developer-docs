@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.1">
 <title data-rh="true">Salesforce Chat Configuration Guide | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/salesforce-live-agent"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Salesforce Chat Configuration Guide | 8x8 Developer Portal"><meta data-rh="true" name="description" content="❗️ Salesforce Chat Deprecation"><meta data-rh="true" property="og:description" content="❗️ Salesforce Chat Deprecation"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/salesforce-live-agent"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/salesforce-live-agent" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/salesforce-live-agent" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.ba9a136e.css">
-<script src="/assets/js/runtime~main.1d2ac8e2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7c7d307e.js" defer="defer"></script>
 <script src="/assets/js/main.2b52ddc9.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -41,34 +41,34 @@
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="salesforce-integration-steps">Salesforce Integration Steps<a href="#salesforce-integration-steps" class="hash-link" aria-label="Direct link to Salesforce Integration Steps" title="Direct link to Salesforce Integration Steps" translate="no">​</a></h4>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="queues">Queues<a href="#queues" class="hash-link" aria-label="Direct link to Queues" title="Direct link to Queues" translate="no">​</a></h3>
 <p>In Salesforce Setup Home, navigate to <strong>Administration &gt; Users &gt; Queues</strong>. We will need to set up a queue for the incoming chats. These chats will be rotated between the agents associated with this queue.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/783a5f9-Screenshot_2023-10-09_at_11.02.30_AM-a9fe6c08eec51a3fb634ee314ad159c1.png" width="2322" height="1844" class="img_ev3q">
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/783a5f9-Screenshot_2023-10-09_at_11.02.30_AM-a9fe6c08eec51a3fb634ee314ad159c1.png" width="2322" height="1844" class="img_ev3q">
 Make sure to add the Salesforce users that you would like to be part of handling the queue here.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/f393d42-image1-63d322a7f87f6a39bc0259cba3ad3354.png" width="1999" height="691" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f393d42-image1-63d322a7f87f6a39bc0259cba3ad3354.png" width="1999" height="691" class="img_ev3q"></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="chat">Chat<a href="#chat" class="hash-link" aria-label="Direct link to Chat" title="Direct link to Chat" translate="no">​</a></h3>
 <p>In Salesforce Setup Home, navigate to <strong>Service &gt; Chat &gt; Chat Settings</strong> and check the <strong>Enable Chat</strong> box</p>
 <p>Note down the <strong>Chat API Endpoint</strong> URL to send to 8x8’s Support Team. Our team only requires the domain, which is only the first portion of the URL highlighted in red below.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/0efaabe-image2-94f09ed58c357b9e2c00d55f633c8606.png" width="708" height="426" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/0efaabe-image2-94f09ed58c357b9e2c00d55f633c8606.png" width="708" height="426" class="img_ev3q"></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="chat-buttons-and-invitations">Chat Buttons and Invitations<a href="#chat-buttons-and-invitations" class="hash-link" aria-label="Direct link to Chat Buttons and Invitations" title="Direct link to Chat Buttons and Invitations" translate="no">​</a></h3>
 <p>In the Chat Buttons and Invitations we want to create a new chat group</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/b12bfb9-image4-4ee23ac515f5e6c99c10c464c52f118d.png" width="1702" height="570" class="img_ev3q">
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b12bfb9-image4-4ee23ac515f5e6c99c10c464c52f118d.png" width="1702" height="570" class="img_ev3q">
 Below are the required settings. Settings outside of this are optional.</p>
 <p><strong>Type:</strong> Chat Button</p>
 <p><strong>Name:</strong></p>
 <p><strong>Developer Name:</strong></p>
 <p><strong>Queue:</strong> Choose the queue you created previously</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/e4b0c57-image6-759cd4b366330646cee009a0a9c76b49.png" width="1968" height="1056" class="img_ev3q">
-<img decoding="async" loading="lazy" src="/assets/images/2959ebc-image7-3075e4cec60fb343b7f21a2d00b80acc.png" width="632" height="139" class="img_ev3q">
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e4b0c57-image6-759cd4b366330646cee009a0a9c76b49.png" width="1968" height="1056" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="image" src="/assets/images/2959ebc-image7-3075e4cec60fb343b7f21a2d00b80acc.png" width="632" height="139" class="img_ev3q">
 Note down the <strong>ButtonId</strong> in the <strong>Chat Button Code</strong> highlighted in red to send to 8x8’s Support Team.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="chat-deployments">Chat Deployments<a href="#chat-deployments" class="hash-link" aria-label="Direct link to Chat Deployments" title="Direct link to Chat Deployments" translate="no">​</a></h3>
 <p>In Salesforce Setup Home, navigate to <strong>Service &gt; Chat &gt; Deployments</strong>, create a new deployment.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/f5aa937-image9-64961aeae232748cbb1acc96ccda4341.png" width="1999" height="516" class="img_ev3q">
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f5aa937-image9-64961aeae232748cbb1acc96ccda4341.png" width="1999" height="516" class="img_ev3q">
 Below are the required settings. Settings outside of this are optional.</p>
 <p><strong>Chat Deployment Name:</strong></p>
 <p><strong>Developer Name:</strong></p>
 <p><strong>Chat Window Title:</strong></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/48bc801-image8-68a7697828fe323f7da69f35600e707a.png" width="1999" height="874" class="img_ev3q">
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/48bc801-image8-68a7697828fe323f7da69f35600e707a.png" width="1999" height="874" class="img_ev3q">
 Note down the <strong>OrganizationId</strong> and the <strong>DeploymentId</strong> in the <strong>Deployment Code</strong> highlighted in red/blue to send to 8x8’s Support Team.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/0f7d3db-image3-d212700d06b20da098636f40f7a2a235.png" width="961" height="446" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/0f7d3db-image3-d212700d06b20da098636f40f7a2a235.png" width="961" height="446" class="img_ev3q"></p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="8x8-support-team-configuration">8x8 Support Team Configuration<a href="#8x8-support-team-configuration" class="hash-link" aria-label="Direct link to 8x8 Support Team Configuration" title="Direct link to 8x8 Support Team Configuration" translate="no">​</a></h4>
 <p>Once you have configured these settings, send an email to <a href="mailto:cpaas-support@8x8.com" target="_blank" rel="noopener noreferrer">cpaas-support@8x8.com</a> with the following information that can be collected from the steps above:</p>
 <p><strong>ButtonId</strong> - (Example: 835j000000YBZO)</p>
@@ -113,9 +113,9 @@ Note down the <strong>OrganizationId</strong> and the <strong>DeploymentId</stro
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="salesforce-chat-transcript-object--chat-visitor-object-example">Salesforce Chat Transcript Object &amp; Chat Visitor Object Example<a href="#salesforce-chat-transcript-object--chat-visitor-object-example" class="hash-link" aria-label="Direct link to Salesforce Chat Transcript Object &amp; Chat Visitor Object Example" title="Direct link to Salesforce Chat Transcript Object &amp; Chat Visitor Object Example" translate="no">​</a></h3>
 <p>This section gives a view of the two main objects associated with each chat session and what the agent will see when viewing them.</p>
 <p>Here is the Chat Transcript Object:</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/e187f25-image-32e084052ad0559a5dbeb79b285ce1ee.png" width="1447" height="417" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e187f25-image-32e084052ad0559a5dbeb79b285ce1ee.png" width="1447" height="417" class="img_ev3q"></p>
 <p>Here is the Chat Visitor Object:</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/48f744b-image-1f41422c3838cf925a36b596d3737f89.png" width="939" height="1647" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/48f744b-image-1f41422c3838cf925a36b596d3737f89.png" width="939" height="1647" class="img_ev3q"></p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="useful-references">Useful References<a href="#useful-references" class="hash-link" aria-label="Direct link to Useful References" title="Direct link to Useful References" translate="no">​</a></h4>
 <p><a href="https://help.salesforce.com/s/articleView?id=sf.live_agent_intro_lightning.htm&amp;type=5" target="_blank" rel="noopener noreferrer">Salesforce Chat Setup Guide</a></p></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/okta"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Okta - Bring Your Own Telephony (BYOT)</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/salesforce-flow-builder"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Salesforce Flow Builder</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#introduction" class="table-of-contents__link toc-highlight">Introduction</a></li><li><a href="#video-demo--guide" class="table-of-contents__link toc-highlight">Video Demo / Guide</a><ul><li><a href="#viber-integration-video" class="table-of-contents__link toc-highlight">Viber Integration Video</a></li><li><a href="#sms--viber-integration-video" class="table-of-contents__link toc-highlight">SMS + Viber Integration Video</a></li><li><a href="#queues" class="table-of-contents__link toc-highlight">Queues</a></li><li><a href="#chat" class="table-of-contents__link toc-highlight">Chat</a></li><li><a href="#chat-buttons-and-invitations" class="table-of-contents__link toc-highlight">Chat Buttons and Invitations</a></li><li><a href="#chat-deployments" class="table-of-contents__link toc-highlight">Chat Deployments</a></li><li><a href="#salesforce-chat-transcript-object--chat-visitor-object-example" class="table-of-contents__link toc-highlight">Salesforce Chat Transcript Object &amp; Chat Visitor Object Example</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a></div></div></div></footer></div>
 </body>

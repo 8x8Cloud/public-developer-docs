@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.1">
 <title data-rh="true">Tutorial: Building a WhatsApp + Google Calendar Chat Bot | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/tutorial-building-a-whatsapp-google-calendar-chat-bot"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Tutorial: Building a WhatsApp + Google Calendar Chat Bot | 8x8 Developer Portal"><meta data-rh="true" name="description" content="This tutorial will show you how to build a WhatsApp + Google Calendar chat bot using 8x8 Automation Builder. The resulting chat bot will allow customers to send a message to a WhatsApp Business Account tied to your 8x8 subaccount and schedule an appointment on Google Calendar."><meta data-rh="true" property="og:description" content="This tutorial will show you how to build a WhatsApp + Google Calendar chat bot using 8x8 Automation Builder. The resulting chat bot will allow customers to send a message to a WhatsApp Business Account tied to your 8x8 subaccount and schedule an appointment on Google Calendar."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/tutorial-building-a-whatsapp-google-calendar-chat-bot"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/tutorial-building-a-whatsapp-google-calendar-chat-bot" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/tutorial-building-a-whatsapp-google-calendar-chat-bot" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.ba9a136e.css">
-<script src="/assets/js/runtime~main.1d2ac8e2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7c7d307e.js" defer="defer"></script>
 <script src="/assets/js/main.2b52ddc9.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -21,7 +21,7 @@
 <li><strong>Automation Builder workflow</strong> which will be built on the <a href="https://connect.8x8.com/" target="_blank" rel="noopener noreferrer">Connect</a> Dashboard. The workflow takes care of orchestrating responses through WhatsApp.</li>
 <li><strong>Backend Server</strong> we have provided example server <a href="https://github.com/EMChamp/8x8-google-calendar-wa-scheduler" target="_blank" rel="noopener noreferrer">code</a> in Python for the Scheduling service described in this diagram. The Backend Server API allows us to connect to the Google Calendar API and also run some scheduling logic based on the responses.</li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/3d46132-image-f90231c7e5edce37f07577f3a6a76301.png" width="8270" height="5320" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/3d46132-image-f90231c7e5edce37f07577f3a6a76301.png" width="8270" height="5320" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="demo-video">Demo Video<a href="#demo-video" class="hash-link" aria-label="Direct link to Demo Video" title="Direct link to Demo Video" translate="no">​</a></h2>
 <p>Please see a demo video of the WhatsApp Chatbot below.</p>
 <iframe src="https://www.youtube.com/embed/Vv6ruAbdpgs?si=H9YyplFou8hIGlJr" height="500px" width="100%" allow="picture-in-picture; web-share" allowfullscreen="">
@@ -45,14 +45,14 @@
 11. a/b/c. Send API request to book timeslot based on user&#x27;s chosen timeslot.</p>
 <p>d. Send Cancellation Message through WhatsApp.
 12. a/b/c. Send Confirmation message based on user&#x27;s chosen timeslot.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/77b8cc0-image-bb135fe2fb5b72f7c3e2cd5c65e9a568.png" width="357" height="1003" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/1dcaabf-image-c93c8e30d592f1527770e684edddc0cb.png" width="622" height="1679" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/e0744e4-image-f6e8c77057b1dccebab79dbdbaf5118b.png" width="1212" height="1080" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/77b8cc0-image-bb135fe2fb5b72f7c3e2cd5c65e9a568.png" width="357" height="1003" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/1dcaabf-image-c93c8e30d592f1527770e684edddc0cb.png" width="622" height="1679" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e0744e4-image-f6e8c77057b1dccebab79dbdbaf5118b.png" width="1212" height="1080" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="workflow-steps-in-depth">Workflow Steps In-Depth<a href="#workflow-steps-in-depth" class="hash-link" aria-label="Direct link to Workflow Steps In-Depth" title="Direct link to Workflow Steps In-Depth" translate="no">​</a></h2>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-chat-apps-trigger">1) Chat Apps Trigger<a href="#1-chat-apps-trigger" class="hash-link" aria-label="Direct link to 1) Chat Apps Trigger" title="Direct link to 1) Chat Apps Trigger" translate="no">​</a></h2>
 <p>This trigger is responsible for kicking off the workflow, by default it will be triggered when any inbound chat apps message is received on the WABA tied to the subaccount you select below.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/4883414-image-87a9a2d1280487a8d0bb5f048f5c9b90.png" width="220" height="136" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/b56b6c5-image-24e9ca4aa1f81abad0c8c5dee522d3fe.png" width="439" height="511" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/4883414-image-87a9a2d1280487a8d0bb5f048f5c9b90.png" width="220" height="136" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b56b6c5-image-24e9ca4aa1f81abad0c8c5dee522d3fe.png" width="439" height="511" class="img_ev3q"></p>
 
 
 
@@ -73,8 +73,8 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Trigger</td><td>Inbound Chat Apps</td></tr><tr><td>Please select a new subaccount</td><td>Select the subaccount with the WABA you would like to send from.</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-chat-apps-message-step---main-menu">2) Chat Apps Message Step - Main Menu<a href="#2-chat-apps-message-step---main-menu" class="hash-link" aria-label="Direct link to 2) Chat Apps Message Step - Main Menu" title="Direct link to 2) Chat Apps Message Step - Main Menu" translate="no">​</a></h2>
 <p>This Chat Apps Message Step introduces the main menu that will start off with a simple welcome message and then display a menu with 2 options for the customer to select from.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/f0af7e5-image-fccf29db41ce50fcc50307dc3442ac7a.png" width="468" height="312" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/9327f92-image-fca7bfcf90ff837c998db95495c30692.png" width="434" height="961" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f0af7e5-image-fccf29db41ce50fcc50307dc3442ac7a.png" width="468" height="312" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/9327f92-image-fca7bfcf90ff837c998db95495c30692.png" width="434" height="961" class="img_ev3q"></p>
 
 
 
@@ -103,7 +103,8 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Step Name</td><td>This is autofilled, the step name can optionally be changed for easier readability.<strong>Note:</strong>  For the sake of brevity, we will ignore the Step Name field for subsequent steps in this tutorial as the recommendation is the same for all steps.</td></tr><tr><td>Please select a new subaccount</td><td>Select the subaccount with the WABA you would like to send from.</td></tr><tr><td>Destination</td><td><code>{{data.payload.user.channelUserId}}</code><strong>Note:</strong> This allows us to reply to the user who sent the WhatsApp message, which is what we want in a chatbot scenario.</td></tr><tr><td>Select an existing template or compose a new message</td><td>Welcome to 8x8&#x27;s WhatsApp - Google Calendar Demo. This demo will schedule a Google Calendar event with one of our specialists through WhatsApp.<br>Please choose from the following options:<br>1. Schedule a 1 hour meeting<br>2. Exit</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-wait-for-reply-step---reply-to-main-menu">3) Wait for Reply Step - Reply to Main Menu<a href="#3-wait-for-reply-step---reply-to-main-menu" class="hash-link" aria-label="Direct link to 3) Wait for Reply Step - Reply to Main Menu" title="Direct link to 3) Wait for Reply Step - Reply to Main Menu" translate="no">​</a></h2>
 <p>This step waits for a customer to reply to the main menu option list, their reply will be used in the following branch step.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/8f2479f-image-c9ff0a349b8245e991bf3669e8b31ab9.png" width="260" height="193" class="img_ev3q"><img decoding="async" loading="lazy" src="/assets/images/4b3e879-image-83542fddd38324294083f3ec5dcb3798.png" width="432" height="573" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/8f2479f-image-c9ff0a349b8245e991bf3669e8b31ab9.png" width="260" height="193" class="img_ev3q">
+<img decoding="async" loading="lazy" alt="image" src="/assets/images/4b3e879-image-83542fddd38324294083f3ec5dcb3798.png" width="432" height="573" class="img_ev3q"></p>
 <p>As configured this waits 5 minutes for a customer to reply to the main menu option message in the previous step, however you can change the timeout as desired.</p>
 
 
@@ -129,8 +130,8 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>From</td><td><code>{{data.payload.user.channelUserId}}</code></td></tr><tr><td>Please select a channel</td><td>WhatsApp</td></tr><tr><td>Timeout</td><td>5 minutes</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-branch-step">4) Branch Step<a href="#4-branch-step" class="hash-link" aria-label="Direct link to 4) Branch Step" title="Direct link to 4) Branch Step" translate="no">​</a></h2>
 <p>In this step, we branch off two separate paths depending on the response from the WA user.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/c548fe6-image-87d978d0a32b03b1ba6dc29c882bcb9c.png" width="1266" height="814" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/fdd93b7-image-414f73a380ad666424f69732249c4c79.png" width="618" height="726" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c548fe6-image-87d978d0a32b03b1ba6dc29c882bcb9c.png" width="1266" height="814" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/fdd93b7-image-414f73a380ad666424f69732249c4c79.png" width="618" height="726" class="img_ev3q"></p>
 
 
 
@@ -155,8 +156,8 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Please select a condition</td><td>Check if a value contains a string</td></tr><tr><td>Value to Check</td><td>{{data.waitforreply_XXXX_step_text}}<br>Note: Replace XXXX with the number identifier for your previous waitforreply step, this will be auto generated by the system and will be different for your specific workflow.</td></tr><tr><td>Keywords to Compare</td><td>1, 2</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="5a-chat-apps-message---enter-email-address">5a) Chat Apps Message - Enter Email Address<a href="#5a-chat-apps-message---enter-email-address" class="hash-link" aria-label="Direct link to 5a) Chat Apps Message - Enter Email Address" title="Direct link to 5a) Chat Apps Message - Enter Email Address" translate="no">​</a></h2>
 <p>In this Chat Apps message step we will send a very simple prompt to ask the user to input their email address.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/6065d97-image-713e9678acdd9a9d88db7ab7e3c6c49d.png" width="313" height="257" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/5cf7320-image-957e2e72e0010f919a3310209ef77f23.png" width="598" height="744" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/6065d97-image-713e9678acdd9a9d88db7ab7e3c6c49d.png" width="313" height="257" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5cf7320-image-957e2e72e0010f919a3310209ef77f23.png" width="598" height="744" class="img_ev3q"></p>
 
 
 
@@ -181,8 +182,8 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Destination</td><td>{{data.payload.user.channelUserId}}</td></tr><tr><td>Select an existing template or compose a new message</td><td>Check Compose Message</td></tr><tr><td>Message</td><td>Please enter your email addres</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="5b-chat-apps-message---cancellation-message">5b) Chat Apps Message - Cancellation Message<a href="#5b-chat-apps-message---cancellation-message" class="hash-link" aria-label="Direct link to 5b) Chat Apps Message - Cancellation Message" title="Direct link to 5b) Chat Apps Message - Cancellation Message" translate="no">​</a></h2>
 <p>This step is if the user chooses not to schedule a meeting in the main menu. In that case a cancellation message will be played for the user.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/c7348d6-image-c2dc162e0436afc83e334ca07055c617.png" width="287" height="190" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/b9ec4d8-image-1a40ae2091934f7b2140a77330c58067.png" width="412" height="772" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c7348d6-image-c2dc162e0436afc83e334ca07055c617.png" width="287" height="190" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b9ec4d8-image-1a40ae2091934f7b2140a77330c58067.png" width="412" height="772" class="img_ev3q"></p>
 
 
 
@@ -207,7 +208,7 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Please select a new subaccount</td><td>Select the subaccount with the WABA you would like to send from.</td></tr><tr><td>Destination</td><td>{{data.payload.user.channelUserId}}</td></tr><tr><td>Message</td><td>Goodbye!</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="6-wait-for-reply---email-address">6) Wait for Reply - Email Address<a href="#6-wait-for-reply---email-address" class="hash-link" aria-label="Direct link to 6) Wait for Reply - Email Address" title="Direct link to 6) Wait for Reply - Email Address" translate="no">​</a></h2>
 <p>In the wait for reply step, we will wait for the customer to enter their email address. We give them 1 minute to respond but you can change this value as needed.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/933c523-image-2f113dd6fb9a3787b54dc249e46dc5e6.png" width="622" height="728" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/933c523-image-2f113dd6fb9a3787b54dc249e46dc5e6.png" width="622" height="728" class="img_ev3q"></p>
 
 
 
@@ -232,7 +233,7 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>From</td><td>{{data.payload.user.channelUserId}}</td></tr><tr><td>Please select a channel</td><td>WhatsApp</td></tr><tr><td>Timeout</td><td>1 Minute</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="7-http-request-step---check-for-available-time-slots">7) HTTP Request Step - Check for available time slots<a href="#7-http-request-step---check-for-available-time-slots" class="hash-link" aria-label="Direct link to 7) HTTP Request Step - Check for available time slots" title="Direct link to 7) HTTP Request Step - Check for available time slots" translate="no">​</a></h2>
 <p>This is the first of our HTTP Request Steps that will be hitting our <strong>/retrieve_meetings</strong> endpoint that is part of our API. This endpoint will return possible meeting timeslots which can then be presented to the user in the subsequent Chat Apps Message Step.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/e70ee19-image-12a510da3b4c0d6fd8e76b43f89c434e.png" width="510" height="838" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e70ee19-image-12a510da3b4c0d6fd8e76b43f89c434e.png" width="510" height="838" class="img_ev3q"></p>
 
 
 
@@ -256,7 +257,7 @@
 
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>URL</td><td>This should be your server&#x27;s publically accessible URL</td></tr><tr><td>Header</td><td>content-type: application/json</td></tr><tr><td>Request Body</td><td>{}</td></tr></tbody></table>
 <p>The outputs of this step is how we save the values from the API response body to be presented to the user. The values match the response body JSON that we will specify in our code.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/06d0917-image-78ecbd78fd2f09a2a1eed7de6c2a1045.png" width="470" height="782" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/06d0917-image-78ecbd78fd2f09a2a1eed7de6c2a1045.png" width="470" height="782" class="img_ev3q"></p>
 
 
 
@@ -296,7 +297,7 @@
 
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>meetings</td><td>{{step.responseBody.date_options}}</td></tr><tr><td>timeslot1_start</td><td>{{step.responseBody.timeslot1_start}}</td></tr><tr><td>timeslot1_end</td><td>{{step.responseBody.timeslot1_end}}</td></tr><tr><td>timeslot2_start</td><td>{{step.responseBody.timeslot2_start}}</td></tr><tr><td>timeslot2_end</td><td>{{step.responseBody.timeslot2_end}}</td></tr><tr><td>timeslot3_start</td><td>{{step.responseBody.timeslot3_start}}</td></tr><tr><td>customer_email</td><td>{{data.waitforreply_9196_step_text}}</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="8-chat-apps-message-step---meeting-timeslots">8) Chat Apps Message Step - Meeting Timeslots<a href="#8-chat-apps-message-step---meeting-timeslots" class="hash-link" aria-label="Direct link to 8) Chat Apps Message Step - Meeting Timeslots" title="Direct link to 8) Chat Apps Message Step - Meeting Timeslots" translate="no">​</a></h2>
-<p><img decoding="async" loading="lazy" src="/assets/images/bb9426a-image-32eb2d797817ff635a0c654b780d538d.png" width="488" height="824" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/bb9426a-image-32eb2d797817ff635a0c654b780d538d.png" width="488" height="824" class="img_ev3q"></p>
 
 
 
@@ -329,10 +330,10 @@
 
 <table><thead><tr><th>Field</th><th>Value</th><th></th></tr></thead><tbody><tr><td>Please select a new subaccount</td><td>Select the subaccount with the WABA you would like to send from.</td><td></td></tr><tr><td>Destination</td><td>{{data.payload.user.channelUserId}}</td><td></td></tr><tr><td>Select an existing template or compose a new message</td><td>Compose Message</td><td></td></tr><tr><td>Message</td><td>{{&#x27;Here are the available timeslots. Please enter the number for the option you would like to book. \n&#x27;+ data.meetings + &#x27;\nOption 4: Exit Scheduling&#x27;}}</td><td></td></tr></tbody></table>
 <p>A bit of an explanation for the <strong>message</strong> field, the entire message is wrapped in curly brackets since we are using the output data.meetings as part of the string. This is combined with the rest of the string in order to produce a message which looks like this:</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/3ace9ed-image-8591ab5a43eb94d6f152540133cdfab4.png" width="994" height="406" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/3ace9ed-image-8591ab5a43eb94d6f152540133cdfab4.png" width="994" height="406" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="9-wait-for-reply-step---customer-chooses-timeslot">9) Wait For Reply Step - Customer Chooses Timeslot<a href="#9-wait-for-reply-step---customer-chooses-timeslot" class="hash-link" aria-label="Direct link to 9) Wait For Reply Step - Customer Chooses Timeslot" title="Direct link to 9) Wait For Reply Step - Customer Chooses Timeslot" translate="no">​</a></h2>
 <p>This step will wait for a customer to choose from the options presented above.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/d045c6b-image-85b38951a73d5d292bcc90e9dbbf0e11.png" width="292" height="384" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/d045c6b-image-85b38951a73d5d292bcc90e9dbbf0e11.png" width="292" height="384" class="img_ev3q"></p>
 
 
 
@@ -357,8 +358,8 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>From</td><td>{{data.payload.user.channelUserId}}</td></tr><tr><td>Please select a Channel</td><td>WhatsApp</td></tr><tr><td>Timeout</td><td>1 Minute</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="10-branch-step---branch-based-on-chosen-timeslot">10) Branch Step - Branch based on Chosen Timeslot<a href="#10-branch-step---branch-based-on-chosen-timeslot" class="hash-link" aria-label="Direct link to 10) Branch Step - Branch based on Chosen Timeslot" title="Direct link to 10) Branch Step - Branch based on Chosen Timeslot" translate="no">​</a></h2>
 <p>This step will branch based on the customer&#x27;s input from the previous step. The following steps are HTTP Request steps that will decide what meeting timeslot is booked.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/a9ad033-image-0799e8f7571d2418077959100c40565d.png" width="1404" height="499" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/cf0e856-image-a89c41d73e143b09eea8f16727be95a9.png" width="404" height="732" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/a9ad033-image-0799e8f7571d2418077959100c40565d.png" width="1404" height="499" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/cf0e856-image-a89c41d73e143b09eea8f16727be95a9.png" width="404" height="732" class="img_ev3q"></p>
 
 
 
@@ -383,9 +384,9 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Please select a condition</td><td>Check if a value contains a string</td></tr><tr><td>Value to Check</td><td>{{data.waitforreply_XXXX_step_text}}</td></tr><tr><td>Keyword(s) to compare</td><td>1,2,3,4</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="11abc-http-request-step---reserve-calendar-timeslot-based-on-the-users-input">11a,b,c) HTTP Request Step - Reserve Calendar Timeslot Based on the User&#x27;s Input<a href="#11abc-http-request-step---reserve-calendar-timeslot-based-on-the-users-input" class="hash-link" aria-label="Direct link to 11a,b,c) HTTP Request Step - Reserve Calendar Timeslot Based on the User&#x27;s Input" title="Direct link to 11a,b,c) HTTP Request Step - Reserve Calendar Timeslot Based on the User&#x27;s Input" translate="no">​</a></h2>
 <p>These three HTTP Request Steps will be tied to the customer&#x27;s input in the previous step.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/7df91f8-image-753b0b3b175117fb31126b398d522a8e.png" width="709" height="383" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/7df91f8-image-753b0b3b175117fb31126b398d522a8e.png" width="709" height="383" class="img_ev3q"></p>
 <p>The only difference between these fields will be the numbers used for the timeslot, so the backend server knows what the user chose. For example, we will use {{data.timeslot1_start}} for timeslot 1&#x27;s start time and then {{data.timeslot2_start}} for timeslot 1&#x27;s start time.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/7a7c7c7-image-e68df79c789eafbca51ede07ed954974.png" width="415" height="805" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/7a7c7c7-image-e68df79c789eafbca51ede07ed954974.png" width="415" height="805" class="img_ev3q"></p>
 
 
 
@@ -412,7 +413,7 @@
 
 
 <table><thead><tr><th>Field</th><th>Value</th><th></th></tr></thead><tbody><tr><td>URL</td><td>Your Backend Server&#x27;s URL</td><td></td></tr><tr><td>Request Body</td><td>{<br>&quot;start&quot;: &quot;{{data.timeslotX_start}}&quot;,<br>&quot;end&quot;: &quot;{{data.timeslotX_end}}&quot;,<br>&quot;customer_email&quot;: &quot;{{data.waitforreply_9196_step_text}}&quot;<br>}<strong>Note:</strong> Replace timeslotX with the timeslot option, such as timeslot1, timeslot2, timeslot3.</td><td></td></tr><tr><td>Timeout</td><td>20 Seconds</td><td></td></tr></tbody></table>
-<p><img decoding="async" loading="lazy" src="/assets/images/b4cc48a-image-e7c89860afdca69058f6f64380d42f3a.png" width="404" height="234" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b4cc48a-image-e7c89860afdca69058f6f64380d42f3a.png" width="404" height="234" class="img_ev3q"></p>
 <p>For the output you can save the start_time and end_time for the following confirmation message. The values will be specify to JSON response body of the backend API code that we provide.</p>
 
 
@@ -434,8 +435,8 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>start_time</td><td>{{step.responseBody.start.dateTime}}</td></tr><tr><td>end_time</td><td>{{step.responseBody.end.dateTime}}</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="11d-chat-message-step---cancellation-message">11d) Chat Message Step - Cancellation message<a href="#11d-chat-message-step---cancellation-message" class="hash-link" aria-label="Direct link to 11d) Chat Message Step - Cancellation message" title="Direct link to 11d) Chat Message Step - Cancellation message" translate="no">​</a></h2>
 <p>This step is if the user chooses not to schedule a meeting in the main menu, in that case a cancellation message is played.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/c7348d6-image-c2dc162e0436afc83e334ca07055c617.png" width="287" height="190" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/b9ec4d8-image-1a40ae2091934f7b2140a77330c58067.png" width="412" height="772" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c7348d6-image-c2dc162e0436afc83e334ca07055c617.png" width="287" height="190" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b9ec4d8-image-1a40ae2091934f7b2140a77330c58067.png" width="412" height="772" class="img_ev3q"></p>
 
 
 
@@ -460,8 +461,8 @@
 <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Please select a new subaccount</td><td>Select the subaccount with the WABA you would like to send from.</td></tr><tr><td>Destination</td><td>{{data.payload.user.channelUserId}}</td></tr><tr><td>Message</td><td>Goodbye!</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="12abc-chat-apps-message---calendar-invite-confirmation-message">12a,b,c) Chat Apps Message - Calendar Invite Confirmation Message<a href="#12abc-chat-apps-message---calendar-invite-confirmation-message" class="hash-link" aria-label="Direct link to 12a,b,c) Chat Apps Message - Calendar Invite Confirmation Message" title="Direct link to 12a,b,c) Chat Apps Message - Calendar Invite Confirmation Message" translate="no">​</a></h2>
 <p>This step sends a simple confirmation message through WhatsApp and ends the workflow. If a user sends another message after this workflow ends, then it will trigger a fresh workflow instances from the beginning.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/ac714d3-image-0ab83af76e19faddd5c3179c963b20f1.png" width="754" height="218" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/d9d84de-image-91a5e7d06ea77780096d6e24e6322fde.png" width="403" height="798" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/ac714d3-image-0ab83af76e19faddd5c3179c963b20f1.png" width="754" height="218" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/d9d84de-image-91a5e7d06ea77780096d6e24e6322fde.png" width="403" height="798" class="img_ev3q"></p>
 
 
 

@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.1">
 <title data-rh="true">iOS - Integrating the SDK | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/ios-integrating-the-sdk"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="iOS - Integrating the SDK | 8x8 Developer Portal"><meta data-rh="true" name="description" content="The following sections describe installation and setup of the Voice SDK:"><meta data-rh="true" property="og:description" content="The following sections describe installation and setup of the Voice SDK:"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/ios-integrating-the-sdk"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/ios-integrating-the-sdk" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/ios-integrating-the-sdk" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.ba9a136e.css">
-<script src="/assets/js/runtime~main.1d2ac8e2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7c7d307e.js" defer="defer"></script>
 <script src="/assets/js/main.2b52ddc9.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -39,7 +39,7 @@
 <li>Go to the <strong>TARGETS &gt; Project Name &gt; General &gt; Signing</strong> menu and select <strong>Automatically manage signing</strong></li>
 <li>Click <strong>Enable Automatic</strong> on the displayed pop-up window</li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/378a054-1-38c1c005457be6025518237e0298f663.png" title="xcode-code-signing.png" width="938" height="279" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="xcode code signing" src="/assets/images/378a054-1-38c1c005457be6025518237e0298f663.png" title="xcode-code-signing.png" width="938" height="279" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="integrate-the-voice-sdk">Integrate the Voice SDK<a href="#integrate-the-voice-sdk" class="hash-link" aria-label="Direct link to Integrate the Voice SDK" title="Direct link to Integrate the Voice SDK" translate="no">​</a></h2>
 <p>To integrate the Voice SDK:</p>
 <ol>
@@ -47,35 +47,35 @@
 <li>Unzip the downloaded Voice SDK package.</li>
 </ol>
 <p>You should have the following contents from the extracted <strong><code>.zip</code></strong> file:</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/ab862ba-sdk-package-contents-ce9f21ed7195709d811aba5325ed8a10.png" title="sdk-package-contents.png" width="1409" height="256" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="sdk package contents" src="/assets/images/ab862ba-sdk-package-contents-ce9f21ed7195709d811aba5325ed8a10.png" title="sdk-package-contents.png" width="1409" height="256" class="img_ev3q"></p>
 <ol start="3">
 <li>Copy the <strong><code>Wavecell.xcframework</code></strong> bundle to the Frameworks folder as shown:</li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/b63f1f8-copy-framework-to-xcode-project-9a4c5ff781e182f45ede1c308ed27198.png" title="copy-framework-to-xcode-project.png" width="1188" height="276" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="copy framework to xcode project" src="/assets/images/b63f1f8-copy-framework-to-xcode-project-9a4c5ff781e182f45ede1c308ed27198.png" title="copy-framework-to-xcode-project.png" width="1188" height="276" class="img_ev3q"></p>
 <ol start="4">
 <li>Go to the menu at <strong>TARGETS &gt; Project Name &gt; General &gt; Frameworks, Libraries, and Embedded Content</strong>:</li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/f03284b-embedding-framework-sdk-project-ba8b0828fcb6761945483d1894fb8842.png" title="embedding-framework-sdk-project.png" width="932" height="271" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="embedding framework sdk project" src="/assets/images/f03284b-embedding-framework-sdk-project-ba8b0828fcb6761945483d1894fb8842.png" title="embedding-framework-sdk-project.png" width="932" height="271" class="img_ev3q"></p>
 <ol start="5">
 <li>Drag the <strong><code>Wavecell.xcframework</code></strong> bundle from the <strong><code>Frameworks</code></strong> folder into the <strong><code>Frameworks, Libraries, and Embedded Content</code></strong> section.</li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/40e0d75-embedded-framework-xcode-project-096ac8f88e005524288ab8c731401269.png" title="embedded-framework-xcode-project.png" width="1451" height="405" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="embedded framework xcode project" src="/assets/images/40e0d75-embedded-framework-xcode-project-096ac8f88e005524288ab8c731401269.png" title="embedded-framework-xcode-project.png" width="1451" height="405" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="enable-voip-capabilities">Enable VoIP capabilities<a href="#enable-voip-capabilities" class="hash-link" aria-label="Direct link to Enable VoIP capabilities" title="Direct link to Enable VoIP capabilities" translate="no">​</a></h2>
 <p>To enable VoIP capabilities:</p>
 <ol>
 <li>Go to <strong>TARGETS &gt; Project Name &gt; Signing &amp; Capabilities</strong> and then add <strong>Background Modes</strong>.</li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/d8e4003-xcode-project-capabilities-background-modes-e4d0ecf3587fde0733ac4aeadca13a2c.png" title="xcode-project-capabilities-background-modes.png" width="940" height="281" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="xcode project capabilities background modes" src="/assets/images/d8e4003-xcode-project-capabilities-background-modes-e4d0ecf3587fde0733ac4aeadca13a2c.png" title="xcode-project-capabilities-background-modes.png" width="940" height="281" class="img_ev3q"></p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">You can also enable Audio, AirPlay Voice over IP and other attributes while in this directory.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
 <ol start="2">
 <li>Go to <strong>TARGETS &gt; Project Name &gt; Info</strong> and add your privacy description for push notification usage.</li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/e3da9bc-xcode-project-capabilities-push-notifications-7a306f0fa2919d46dca0def061f5b83b.png" title="xcode-project-capabilities-push-notifications.png" width="936" height="280" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="xcode project capabilities push notifications" src="/assets/images/e3da9bc-xcode-project-capabilities-push-notifications-7a306f0fa2919d46dca0def061f5b83b.png" title="xcode-project-capabilities-push-notifications.png" width="936" height="280" class="img_ev3q"></p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Note: This step is only required for receiving incoming calls.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
 <ol start="3">
 <li>Go to <strong>TARGETS &gt; Project Name &gt; Info</strong> and add your privacy description for microphone usage.</li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/4f16d2e-microphone-usage-policy-description-b1d1e6dc3e6dab1aac03ca85d57cde09.png" title="microphone-usage-policy-description.png" width="932" height="251" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="microphone usage policy description" src="/assets/images/4f16d2e-microphone-usage-policy-description-b1d1e6dc3e6dab1aac03ca85d57cde09.png" title="microphone-usage-policy-description.png" width="932" height="251" class="img_ev3q"></p>
 <p>The <strong><code>NSMicrophoneUsageDescription</code></strong> property describes the reason your app needs to access the phone microphone. When the system prompts the user to allow access, this string is displayed as part of the alert. Therefore, it cannot be left empty.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="build-and-run">Build and run<a href="#build-and-run" class="hash-link" aria-label="Direct link to Build and run" title="Direct link to Build and run" translate="no">​</a></h2>
 <p>After you have completed the previous integration tasks, you can verify if your app can invoke functions from the <strong><code>Wavecell.xcframework</code></strong> by doing the following:</p>
@@ -88,7 +88,7 @@
 <li>If successful, your Xcode console displays the following type of message:</li>
 </ol>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">0.1.0b50-r629e3e4</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
-<p><img decoding="async" loading="lazy" src="/assets/images/cadf8f6-print-wavecell-sdk-version-from-xcode-project-b4abb3597961a0ce38bb8293549a2423.png" title="print-wavecell-sdk-version-from-xcode-project.png" width="1962" height="856" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="wavecell sdk version from xcode project" src="/assets/images/cadf8f6-print-wavecell-sdk-version-from-xcode-project-b4abb3597961a0ce38bb8293549a2423.png" title="print-wavecell-sdk-version-from-xcode-project.png" width="1962" height="856" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="push-notification-setup">Push notification setup<a href="#push-notification-setup" class="hash-link" aria-label="Direct link to Push notification setup" title="Direct link to Push notification setup" translate="no">​</a></h2>
 <p>The 8x8 backend solution includes the notification server. The notification server establishes secure connection with APNS in order to send push notifications to your application.</p>
 <p>There are two types of secure connections:</p>
@@ -97,15 +97,15 @@
 <li><a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns" target="_blank" rel="noopener noreferrer">token-based</a></li>
 </ul>
 <p>The backend supports both types of secure connections.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/77df3b8-apn-provider-connection-types-793630e9bf4b8c1bf18161509767bfdb.png" title="apn-provider-connection-types.png" width="1464" height="493" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="apn provider connection types" src="/assets/images/77df3b8-apn-provider-connection-types-793630e9bf4b8c1bf18161509767bfdb.png" title="apn-provider-connection-types.png" width="1464" height="493" class="img_ev3q"></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="certificate-based">Certificate-based<a href="#certificate-based" class="hash-link" aria-label="Direct link to Certificate-based" title="Direct link to Certificate-based" translate="no">​</a></h3>
 <p>For the certificate-based type of connection, generate <a href="https://help.apple.com/developer-account/#/dev9249db258" target="_blank" rel="noopener noreferrer">VoIP Service Certificate</a></p>
 <p>with your Apple developer account:</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/bc2a5f2-request-voip-services-certificate-22dc2269076cb53fa0f0a5817fc0a8a1.png" title="request-voip-services-certificate.png" width="1904" height="475" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="request voip services certificate" src="/assets/images/bc2a5f2-request-voip-services-certificate-22dc2269076cb53fa0f0a5817fc0a8a1.png" title="request-voip-services-certificate.png" width="1904" height="475" class="img_ev3q"></p>
 <ol>
 <li>When the <strong><code>certificate</code></strong> is ready, click <strong>Download</strong> and save it to your local drive (<strong><code>voip_services.cer</code></strong> file).</li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/0088a27-download-voip-services-certificate-641962bf06d6669f024a59c0445b2628.png" title="download-voip-services-certificate.png" width="1918" height="498" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="download voip services certificate" src="/assets/images/0088a27-download-voip-services-certificate-641962bf06d6669f024a59c0445b2628.png" title="download-voip-services-certificate.png" width="1918" height="498" class="img_ev3q"></p>
 <ol start="2">
 <li>Open the <strong><code>voip_services.cer</code></strong> file with the <strong>Keychain Access</strong> app on your computer.</li>
 </ol>
@@ -113,7 +113,7 @@
 3. In the <strong>Keychain Access</strong> app, select the <strong>Certificates</strong> option in the bottom section of the left sidebar.</p>
 <p>You will now need to find the certificate you have created.
 4. Export your Certificate as a <strong><code>.p12</code></strong> file.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/b2ba882-export-voip-services-certificate-fa3fa89ca1f584bf790adbea499df69c.png" title="export-voip-services-certificate.png" width="1918" height="708" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="export voip services certificate" src="/assets/images/b2ba882-export-voip-services-certificate-fa3fa89ca1f584bf790adbea499df69c.png" title="export-voip-services-certificate.png" width="1918" height="708" class="img_ev3q"></p>
 <ol start="5">
 <li>Convert the <strong><code>.p12</code></strong> file to a <strong><code>.pem</code></strong> file using the Terminal <strong><code>openssl</code></strong> command:</li>
 </ol>

@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.1">
 <title data-rh="true">CC Managing Agent Status | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/actions-events/docs/cc-managing-agent-status"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="CC Managing Agent Status | 8x8 Developer Portal"><meta data-rh="true" name="description" content="This guide describes how to manage agent status via API"><meta data-rh="true" property="og:description" content="This guide describes how to manage agent status via API"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/actions-events/docs/cc-managing-agent-status"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/actions-events/docs/cc-managing-agent-status" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/actions-events/docs/cc-managing-agent-status" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.ba9a136e.css">
-<script src="/assets/js/runtime~main.1d2ac8e2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7c7d307e.js" defer="defer"></script>
 <script src="/assets/js/main.2b52ddc9.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -20,7 +20,7 @@ These APIs use Basic Authentication.<br>
 The username will be the &quot;Username&quot; value from this screen, it is generally the tenant name</p>
 <p><code>Authorization :Basic encodedValue</code></p>
 <p>Where encodedValue is base64encode(username:password)</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/841df98-CC-Request-Action-Token-7b92159ef1baa913c91419cbab6f1f93.png" title="CC-Request-Action-Token.png" width="847" height="278" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="CC Request Action Token" src="/assets/images/841df98-CC-Request-Action-Token-7b92159ef1baa913c91419cbab6f1f93.png" title="CC-Request-Action-Token.png" width="847" height="278" class="img_ev3q"></p>
 <blockquote>
 <p>📘 If there are no token values</p>
 <p>If the token values are empty you can generate the token by clicking on &#x27;New Token&#x27;. Once a token is generated, if you would like to generate a new one, please be aware that once a new token is generated, the old one will not work anymore for anybody.</p>
@@ -152,7 +152,7 @@ The username will be the &quot;Username&quot; value from this screen, it is gene
 <li>Black lines indicate bidirectional</li>
 <li>All other transitions are NOT supported via API</li>
 </ul>
-<p><img decoding="async" loading="lazy" src="/assets/images/838a466-Agent_Status_API_Allowed_Transitions-7fdce81ba2e48069ac64616bdf0dde62.jpg" title="Agent Status API Allowed Transitions.jpg" width="1787" height="874" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Agent Status API Allowed Transitions" src="/assets/images/838a466-Agent_Status_API_Allowed_Transitions-7fdce81ba2e48069ac64616bdf0dde62.jpg" title="Agent Status API Allowed Transitions.jpg" width="1787" height="874" class="img_ev3q"></p>
 <p><a href="/actions-events/reference/getagentsstatus">Agent status API Reference</a> allows you to try out this API.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="set-status-for-a-single-agent">Set Status for a single agent<a href="#set-status-for-a-single-agent" class="hash-link" aria-label="Direct link to Set Status for a single agent" title="Direct link to Set Status for a single agent" translate="no">​</a></h2>
 <p>The status can only be set to and from the statuses defined in <a href="/actions-events/docs/cc-managing-agent-status#allowed-status-transitions">allowed status change diagram</a></p>

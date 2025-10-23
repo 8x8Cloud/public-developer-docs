@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.1">
 <title data-rh="true">Mobile Verification | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/tutorial-mobile-verification"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Mobile Verification | 8x8 Developer Portal"><meta data-rh="true" name="description" content="Tutorial: Learn how to use API for Mobile Verification Code Generation &amp; Validation"><meta data-rh="true" property="og:description" content="Tutorial: Learn how to use API for Mobile Verification Code Generation &amp; Validation"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/tutorial-mobile-verification"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/tutorial-mobile-verification" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/tutorial-mobile-verification" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.ba9a136e.css">
-<script src="/assets/js/runtime~main.1d2ac8e2.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7c7d307e.js" defer="defer"></script>
 <script src="/assets/js/main.2b52ddc9.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -38,7 +38,7 @@
 <li>Enter your email and follow the instructions to define your password and finalize your account (by default, API password and account password are the same, you can modify this from your account settings)</li>
 <li>Confirm your email address by clicking on the validation link you received in the activation email to activate your account.</li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/45380f8-Signup_8x8_connect-66a4da7b2292329b0bfae2cc4391603f.png" title="Signup 8x8 connect.png" width="2408" height="745" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Signup 8x8 connect" src="/assets/images/45380f8-Signup_8x8_connect-66a4da7b2292329b0bfae2cc4391603f.png" title="Signup 8x8 connect.png" width="2408" height="745" class="img_ev3q"></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="ii-finding-your-apikey-token-for-api-authentication">II. Finding your apiKey token (for API authentication)<a href="#ii-finding-your-apikey-token-for-api-authentication" class="hash-link" aria-label="Direct link to II. Finding your apiKey token (for API authentication)" title="Direct link to II. Finding your apiKey token (for API authentication)" translate="no">​</a></h3>
 <ol>
 <li>Head to <a href="https://connect.8x8.com" target="_blank" rel="noopener noreferrer">8x8 Connect Login Page</a>.</li>
@@ -47,7 +47,7 @@
 <li>Head over to the <strong>side menu &gt; API keys</strong> section</li>
 <li>Create an API key if empty and then keep the API Key value, here: <code>5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg</code></li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/441a309-API_2-88be78904b6a5b4dd18091965998037d.png" title="API 2.png" width="1453" height="850" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/441a309-API_2-88be78904b6a5b4dd18091965998037d.png" title="API 2.png" width="1453" height="850" class="img_ev3q"></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="iii-identifying-your-subaccountid">III. Identifying your Subaccountid<a href="#iii-identifying-your-subaccountid" class="hash-link" aria-label="Direct link to III. Identifying your Subaccountid" title="Direct link to III. Identifying your Subaccountid" translate="no">​</a></h3>
 <ol>
 <li>Head over to the pricing section and use the subaccountid list to retrieve the <code>subaccountid</code> that you want to use</li>
@@ -55,7 +55,7 @@
 <li>Note down this value, you will need it later.</li>
 <li>In that example, the <code>subaccountid</code> is <code>riders_hq</code></li>
 </ol>
-<p><img decoding="async" loading="lazy" src="/assets/images/9c38989-API_3-25aa1e74c1acd868263165aa3cccedf2.png" title="API 3.png" width="1448" height="796" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/9c38989-API_3-25aa1e74c1acd868263165aa3cccedf2.png" title="API 3.png" width="1448" height="796" class="img_ev3q"></p>
 <hr>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="part-1-generating-and-sending-a-code-using-the-mobile-verification-api---code-generation-method">Part 1: Generating and sending a code using the Mobile Verification API - Code Generation method<a href="#part-1-generating-and-sending-a-code-using-the-mobile-verification-api---code-generation-method" class="hash-link" aria-label="Direct link to Part 1: Generating and sending a code using the Mobile Verification API - Code Generation method" title="Direct link to Part 1: Generating and sending a code using the Mobile Verification API - Code Generation method" translate="no">​</a></h4>
 <p>The 8x8 Mobile Verification - Code Generation method expects requests sent by developers to respect a specific format.</p>
@@ -156,7 +156,7 @@
 <ul>
 <li>And that’s it! Here is the result on the destination device:</li>
 </ul>
-<p><img decoding="async" loading="lazy" src="/assets/images/748c827-Iv_Curl-5979d5f3fa27efddbaa42ad48eb3892c.png" title="Iv Curl.png" width="335" height="719" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/748c827-Iv_Curl-5979d5f3fa27efddbaa42ad48eb3892c.png" title="Iv Curl.png" width="335" height="719" class="img_ev3q"></p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="v-api-response">V. API response<a href="#v-api-response" class="hash-link" aria-label="Direct link to V. API response" title="Direct link to V. API response" translate="no">​</a></h4>
 <ul>
 <li>When sending the curl command above from your command line utility, you notice that the 8x8 API sends back a response that shows up in your terminal, for example in this tutorial:</li>
