@@ -148,7 +148,7 @@ A successful creation will yield a 200 status code and a response body with the 
 
 ```
 
-#### 3. Modify Contact
+## 3. Modify Contact
 
 After creating a contact, you may need to update its information. To modify an existing contact, use a `PUT` request to the Contact API with the updated details.
 
@@ -301,7 +301,7 @@ The fields in the table below are read only and should not be included in any PU
 | createdTimestamp | Timestamp when the contact was created |
 | updatedTimestamp | Timestamp when the contact was last updated |
 
-#### 4. Delete Contact
+## 4. Delete Contact
 
 To remove a contact from our system, use the DELETE request with the specific contact's ID. This action is irreversible, so ensure that the contact is indeed meant to be deleted.
 
@@ -332,13 +332,13 @@ A successful deletion will yield a 200 status code. The response body will typic
 > 
 > 
 
-#### 5. Contact Search for Retrieval and Queries
+## 5. Contact Search for Retrieval and Queries
 
 While the ContactApp Product excels in managing contact details, for retrieving or searching for specific contacts, it's recommended to utilize the dedicated `Contact Search` API Key within the same service. This feature is specifically optimized for efficient and precise querying of contact data.
 
  For detailed instructions on how to use this functionality, please refer to the documentation [here](/analytics/docs/contact-search).
 
-#### Rate Limiting
+## Rate Limiting
 
 The Contact Search and Contact Management APIs are limited to **60 requests per minute**, in a rolling window, across all the keys under your customer account.
 

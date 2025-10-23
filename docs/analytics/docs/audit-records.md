@@ -12,15 +12,15 @@ The Audit records API currently supports following HTTP methods:
 
 * **GET** is supported to retrieve audit records.
 
-## 1. Get Audits
+### 1. Get Audits
 
 This GET method paginates the audit records using scrollId. It provides an option to filter based on given query parameters. The sorting by attributes is not supported.
 
-### Base URL
+#### Base URL
 
 * [https://api.8x8.com/administration/audit/v1/audits](https://api.8x8.com/administration/audit/v1/audits)
 
-### Parameters
+#### Parameters
 
 **Method: GET**
 
@@ -45,7 +45,7 @@ This GET method paginates the audit records using scrollId. It provides an optio
 | size        | ☐        | Maximum number of items per page. It must be greater than zero. Default value is 20, maximum is 100.                                                                                                                   | 1                                      |
 | scrollId    | ☐        | The scrollId parameter returned from your previous call. You can include this parameter in your next or subsequent calls to retrieve the next page of records. To retrieve the first page no need to provide scrollId. | 012345677-89abb-cdef-0123-456789abcdef |
 
-### Full Request Example
+#### Full Request Example
 
 ```bash
 curl --location 'https://api.8x8.com/administration/audit/v1/audits?
@@ -67,9 +67,9 @@ scrollId=6bca6d01-774c-4115-8a03-eff95f430b06' \
 > 
 > Above request retrieves page with scrollId in query parameter, if you want to get the first page don’t provide scrollId.
 > 
-> 
+>
 
-### Response
+#### Response
 
 ```json
 {
@@ -103,9 +103,9 @@ scrollId=6bca6d01-774c-4115-8a03-eff95f430b06' \
 > 
 > When a user gets **scrollId null in response** it would mean there is **no more data to retrieve** for a given request. Thus, the **scrollId value equal to null in response** implies the **last page**.
 > 
-> 
+>
 
-### Response body fields description
+#### Response body fields description
 
 | Name            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

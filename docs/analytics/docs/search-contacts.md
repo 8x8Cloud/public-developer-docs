@@ -121,7 +121,7 @@ This pagination method implies searching contacts within a key range(keyset) and
 	+ It is essential for sorting fields to contain "id" field
 	+ Additionally, you can also add sorting by other fields - ex "name"
 
-##### 3. Example Usage
+## 3. Example Usage
 
 ### Without Pagination
 
@@ -310,7 +310,7 @@ Authorization: Bearer {access_token}
 
 ```
 
-##### Rate Limiting
+## Rate Limiting
 
 The Contact Search and Contact Management APIs are limited to **60 requests per minute**, in a rolling window, across all the keys under your customer account.
 

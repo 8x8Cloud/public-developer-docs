@@ -52,17 +52,17 @@ CC Historical Analytics allows the consumer to get a listing of the available re
 
 Additional information about each of the reports and detailed definitions of metrics can be found in the [CC Historical Analytics Glossary](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/Glossary-historical-reports.htm)
 
-## Parameters
+### Parameters
 
 **Method: GET**
 
-### Headers
+#### Headers
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
 
-### Path
+#### Path
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
@@ -71,7 +71,7 @@ Additional information about each of the reports and detailed definitions of met
 
 [API reference](/analytics/reference/cc-historical-analytics-report-types)
 
-#### Report Types Request
+### Report Types Request
 
 The definition of a single report can also be retrieved by adding the `report-type` to the path
 
@@ -91,7 +91,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 
 ```
 
-#### Report Types Response
+### Report Types Response
 
 The response shows each `report-type` that's available.
 
@@ -312,7 +312,7 @@ The result **will be different** for each report type.
 
 ```
 
-##### 4. Creating A Summary Report
+## 4. Creating A Summary Report
 
 > 📘 **This sample is applicable to ALL summary report types**
 > 
@@ -320,25 +320,25 @@ The result **will be different** for each report type.
 > 
 > 
 
-#### Parameters
+### Parameters
 
 **Method:** POST
 
-### Headers
+#### Headers
 
 | Name          | Required | Description                                                                                              | Example                              |
 | ------------- | -------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | Authorization | ✓        | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
 | Content-Type  | ✓        | Set Content-Type to application/json                                                                     | application/json                     |
 
-### Path
+#### Path
 
 | Name        | Required | Description                                                                              | Example                     |
 | ----------- | -------- | ---------------------------------------------------------------------------------------- | --------------------------- |
 | version     | ✓        | The current version is `v8`                                                              | v8                          |
 | report-type | ☐        | Specific report type to get information on. Omit this parameter to get all report types. | agent-status-by-status-code |
 
-### Body
+#### Body
 
 | Name                    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Example                                                                                                                                                                        |
 | ----------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -485,7 +485,7 @@ If the requirement is to only have a subset of the the available metrics for the
 
 [API reference](/analytics/reference/cc-historical-report-create)
 
-##### Create Report Request
+### Create Report Request
 
 In this example we are running the report from 3rd August to 2nd September, we are only interested in the periods between 8:30am and 5pm on each day and we are grouping the data by media, channel and queue at a weekly granularity.  
 
@@ -536,11 +536,11 @@ curl --location --request POST 'https://api.8x8.com/analytics/cc/v8/historical-m
 
 ```
 
-##### Create Report Response
+### Create Report Response
 
 For an accepted request to create a report the response will be 200 OK 
 
-### Headers
+#### Headers
 
 * Link => The Link header will provide details on how to check the status of the create request
 
@@ -549,7 +549,7 @@ For an accepted request to create a report the response will be 200 OK
 
 ```
 
-### Body
+#### Body
 
 * **id**: this is the identifier for the generated report
 * **status**: this is the status of the request to create the report
@@ -565,19 +565,19 @@ For an accepted request to create a report the response will be 200 OK
 
 ```
 
-#### 5. Get Report Status
+## 5. Get Report Status
 
-#### Parameters
+### Parameters
 
 **Method:** GET
 
-### Headers
+#### Headers
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
 
-### Path
+#### Path
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
@@ -586,7 +586,7 @@ For an accepted request to create a report the response will be 200 OK
 
 [API reference](/analytics/reference/cc-historical-report-status-by-id)
 
-#### Report Status Request
+### Report Status Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-metrics/2710192/status' \
@@ -594,7 +594,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 
 ```
 
-#### Report Status response
+### Report Status response
 
 This will be the same format as the response from creating the report. Recheck the status periodically until the status is `"DONE"`. 
 
@@ -604,7 +604,7 @@ This will be the same format as the response from creating the report. Recheck t
 > 
 > 
 
-### Headers
+#### Headers
 
 The Link header WILL ONLY be present if the report staus is `"DONE"`
 
@@ -616,7 +616,7 @@ The Link header WILL ONLY be present if the report staus is `"DONE"`
 
 ```
 
-### Body
+#### Body
 
 * **id**: this is the identifier for the generated report
 * **status**: this is the status of the request to create the report
@@ -632,7 +632,7 @@ The Link header WILL ONLY be present if the report staus is `"DONE"`
 
 ```
 
-#### 6a. Get Report Data (JSON)
+## 6a. Get Report Data (JSON)
 
 > 📘 **Accessing the report Data**
 > 
@@ -648,24 +648,24 @@ The Link header WILL ONLY be present if the report staus is `"DONE"`
 > 
 > 
 
-#### Parameters
+### Parameters
 
 **Method:** GET
 
-### Headers
+#### Headers
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
 
-### Path
+#### Path
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | version | ✓ | The current version is `v8` | v8 |
 | report-id | ✓ | report id returned in the create report request. | 2710192 |
 
-### Query
+#### Query
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
@@ -674,7 +674,7 @@ The Link header WILL ONLY be present if the report staus is `"DONE"`
 
 [API reference](/analytics/reference/cc-historical-report-data-by-id)
 
-#### Report Data (JSON) Request
+### Report Data (JSON) Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-metrics/2710192/data?page=0&size=100' \
@@ -682,9 +682,9 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 
 ```
 
-#### Report Data (JSON) Response
+### Report Data (JSON) Response
 
-### Headers
+#### Headers
 
 * Link => The Link header will provide a link to the next page in the data if there are additional pages. **Will not be present if there are no more pages.**
 
@@ -698,7 +698,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 * **X-Total-Pages**: total number of pages for the report, 1 if only one page.
 * **X-Total-Elements**: total number of elements for the report
 
-### Body
+#### Body
 
 The body will be an array as shown below.
 
@@ -878,7 +878,7 @@ The body will be an array as shown below.
 
 ```
 
-#### 6b. Get Report Download (CSV/XLSX)
+## 6b. Get Report Download (CSV/XLSX)
 
 > 📘 **Accessing the report Data**
 > 
@@ -890,11 +890,11 @@ The body will be an array as shown below.
 > 
 > 
 
-#### Parameters
+### Parameters
 
 **Method:** GET
 
-### Headers
+#### Headers
 
 | Name          | Required | Description                                                                                              | Example                              |
 | ------------- | -------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------ |
@@ -902,7 +902,7 @@ The body will be an array as shown below.
 | Accept        | ✓        | Specify the download type <br /><br />- CSV `text/csv`<br />- XLSX `text/xlsx`                           | text\xlsx                            |
 
 
-### Path
+#### Path
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
@@ -911,7 +911,7 @@ The body will be an array as shown below.
 
 [API reference](/analytics/reference/cc-historical-report-download-by-id)
 
-#### Report Download (CSV/XLSX) Request
+### Report Download (CSV/XLSX) Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-metrics/2710192/download' \
@@ -920,31 +920,31 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 
 ```
 
-#### Report Download (CSV/XLSX) Response
+### Report Download (CSV/XLSX) Response
 
-### Headers
+#### Headers
 
 * Content-Disposition => will contain information about the file generated, the filename will reflect the title input in the report creation with the xlsx or csv type extension added.  
 
 Example: `attachment; filename="Weeky Queue Report for OPS.xlsx"`
 
-### Body
+#### Body
 
 The file content is returned in the body.
 
-#### 7. Access Report Links
+## 7. Access Report Links
 
-#### Parameters
+### Parameters
 
 **Method:** GET
 
-### Headers
+#### Headers
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
 
-### Path
+#### Path
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
@@ -953,7 +953,7 @@ The file content is returned in the body.
 
 [API reference](/analytics/reference/cc-historical-report-links-by-id)
 
-#### Report Links Request
+### Report Links Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-metrics/2710192/links' \
@@ -961,9 +961,9 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 
 ```
 
-#### Report Links Response
+### Report Links Response
 
-### Body
+#### Body
 
 The body will be an array as shown below.
 

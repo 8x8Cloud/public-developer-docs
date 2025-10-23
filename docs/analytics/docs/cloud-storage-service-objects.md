@@ -14,7 +14,7 @@ filter=type==callcenterrecording;**updatedTime**=ge=1725148800000;**updatedTime*
 
 ## Work - Unified Communications
 
-## Work Call Recording
+### Work Call Recording
 
 filter=type==callrecording
 
@@ -104,7 +104,7 @@ filter=type==callrecording
 
 ```
 
-## Work Call Recording Transcript
+### Work Call Recording Transcript
 
 > 🚧 **This is only available if the user has Conversation IQ.**
 > 
@@ -135,19 +135,19 @@ There will be 2 objects per call. the speaker tag will identify the party
 
 ```
 
-## Work Voicemail file
+### Work Voicemail file
 
 filter=type==voicemail
 
-### 8x8 Contact Center
+## 8x8 Contact Center
 
-## Contact Center Call Recording
+### Contact Center Call Recording
 
 Call Recording for Contact Center calls. Stereo recordings.
 
 filter=type==callcenterrecording
 
-## Contact Center Call Recording Transcript
+### Contact Center Call Recording Transcript
 
 filter=type==transcription;sourceObjectType==callcenterrecording
 
@@ -265,7 +265,7 @@ filter=type==transcription;sourceObjectType==callcenterrecording
 
 ```
 
-## Post Call Survey
+### Post Call Survey
 
 The result of the post call survey. Note this data is also available in Post Call Survey API.
 
@@ -309,7 +309,7 @@ filter=type==postcallsurvey
 
 ```
 
-## Post Call Survey Voice Comment Recording
+### Post Call Survey Voice Comment Recording
 
 Voice comment left as part of post call survey.
 
@@ -361,7 +361,7 @@ filter=type==voicecommentrecording
 
 ```
 
-## Post Call Survey Voice Comment Recording Transcription
+### Post Call Survey Voice Comment Recording Transcription
 
 filter=type==transcription;sourceObjectType==voicecommentrecording
 
@@ -431,7 +431,7 @@ filter=type==transcription;sourceObjectType==voicecommentrecording
 
 ```
 
-## CC Voicemail Recording
+### CC Voicemail Recording
 
 filter=type==callcentervoicemail
 
@@ -557,7 +557,7 @@ filter=type==callcentervoicemail
 
 ```
 
-## CC Voicemail Recording Transcript
+### CC Voicemail Recording Transcript
 
 filter=type==transcription;sourceObjectType==callcentervoicemail
 
@@ -703,7 +703,7 @@ filter=type==transcription;sourceObjectType==callcentervoicemail
 
 ```
 
-## CC Screen Recording
+### CC Screen Recording
 
 filter=type==screenrecording
 
@@ -765,7 +765,7 @@ filter=type==screenrecording
 
 ```
 
-## CC Agent Notes
+### CC Agent Notes
 
 Notes added to transactions by agents. Object contains text.
 
@@ -805,7 +805,7 @@ filter=type==agentnotes
 
 ```
 
-## AI/ML Sentiment Analysis Scores
+### AI/ML Sentiment Analysis Scores
 
 Getting sentiment scores from AI/ML sentiment analysis.
 
@@ -857,7 +857,7 @@ filter=type==sentimentScore
 
 ```
 
-## AI/ML summary
+### AI/ML summary
 
 Getting an AI/ML generated summary from a transcript (voice or digital)
 

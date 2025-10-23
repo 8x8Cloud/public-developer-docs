@@ -89,7 +89,7 @@ The following steps will use the access_token as a Bearer Token form of authenti
 
 `Authorization` header being set to `Bearer access_token` (Space between Bearer and the access_token)
 
-#### 2. Run Ring Group Summary
+## 2. Run Ring Group Summary
 
 This will return a summary for all of the Ring Groups in the specified PBXs for the duration specified.
 

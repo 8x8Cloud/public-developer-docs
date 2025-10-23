@@ -50,25 +50,25 @@ You will use your API key combined with the user credentials of a user with perm
 > 
 > 
 
-## Parameters
+### Parameters
 
 **Method: POST**
 
-### Headers
+#### Headers
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | 8x8-apikey | ✓ | The 8x8-api key provided | test_key_kjdfidj238jf9123df221 |
 | Content-Type | ✓ | Set content type to form-urlencoded | application/x-www-form-urlencoded |
 
-### Body
+#### Body
 
 | Name     | Required | Description                                                        | Example                                             |
 |----------|----------|--------------------------------------------------------------------|-----------------------------------------------------|
 | username | ✓        | The 8x8 username of a user with Work Analytics access privileges   | [someuser@acme.fakeco](mailto:someuser@acme.fakeco) |
 | password | ✓        | The 8x8 password of the user with Work Analytics access privileges | Rrnp5QBW6dTbx^TP                                    |
 
-#### Authentication Request:
+### Authentication Request:
 
 ```bash
 curl --location --request POST 'https://api.8x8.com/analytics/work/v1/oauth/token' \
@@ -79,7 +79,7 @@ curl --location --request POST 'https://api.8x8.com/analytics/work/v1/oauth/toke
 
 ```
 
-#### Authentication Response:
+### Authentication Response:
 
 **Response**
 
@@ -102,25 +102,25 @@ The following steps will use the access_token as a Bearer Token form of authenti
 
 `Authorization` header being set to `Bearer access_token` (Space between Bearer and the access_token)
 
-##### 2. Run Report
+## 2. Run Report
 
-#### Parameters
+### Parameters
 
 **Method:** GET
 
-### Headers
+#### Headers
 
 | Name          | Required | Description                                                                                                 | Example                                         |
 |---------------|----------|-------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
 | Authorization | ✓        | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer eyJhbGciOiJSUzI1NiJ9.yyyyyyy.zzzzzzzzzzz |
 
-### Path
+#### Path
 
 | Name    | Required | Description                                 | Example |
 |---------|----------|---------------------------------------------|---------|
 | version | ✓        | The current version for /call-records is v2 | v2      |
 
-### Query
+#### Query
 
 | Name      | Required | Description                                                                                                                                                                                                                   | Example              |
 |-----------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
@@ -131,7 +131,7 @@ The following steps will use the access_token as a Bearer Token form of authenti
 | pageSize  | ✓        | Number of records to return in pages See [Pagination](/analytics/docs/work-analytics-cdr-report#pagination). Must be                                                                                              | 50                   |
 | scrollId  | ☐/✓      | Not required for initial page required on subsequent pages. See [Pagination](/analytics/docs/work-analytics-cdr-report#pagination)                                                                                |                      |
 
-#### Call Records Request
+### Call Records Request
 
 As per the Open API specification guidelines, we have migrated the URLs for Call Record Report as give in the below table
 
@@ -152,7 +152,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/work/v{version}/cal
 
 ```
 
-#### Call Records Response
+### Call Records Response
 
 For details on call-records metrics please refer to[CDR Glossary and Details](https://docs.8x8.com/8x8WebHelp/8x8analytics-virtual-office/Content/VOA/call-detail-record.htm)
 

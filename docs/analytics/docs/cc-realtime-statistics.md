@@ -61,24 +61,24 @@ Realtime data is available as follows definitions for metrics can be found in th
 > 
 > 
 
-## Parameters
+### Parameters
 
 **Method:** GET
 
-### Headers
+#### Headers
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
 
-### Path
+#### Path
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | version | ✓ | The current version is `v<\<versionCCARealtime\>>` | v5 |
 | queue-id | ☐ | If a queue id is specified as a path parameter this limits the response to a single queue and queue-ids query parameter is ignored. Sample /queues/{queue-id} | /103 |
 
-### Query
+#### Query
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
@@ -142,7 +142,7 @@ Beyond last page
 
 ```
 
-##### Realtime Data Request
+### Realtime Data Request
 
 In this example the data returned will only be for queue id is 103 and 170 and the only metrics returned will be handling.rt and metrics=entered.today
 
@@ -159,11 +159,11 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/vv<\<versionCCAR
 
 ```
 
-##### Realtime Data Response
+### Realtime Data Response
 
 Note the response headers related to [pagination](/analytics/docs/cc-realtime-statistics#pagination) above.
 
-### Body
+#### Body
 
 queuesgroups
 ```json
@@ -234,7 +234,7 @@ queuesgroups
 
 ```
 
-#### Additional Endpoints
+## Additional Endpoints
 
 > 📘 **Core Parameters and structure are common**
 > 
@@ -246,17 +246,17 @@ queuesgroups
 
 The core parameters and structure are common to all of the following endpoints. Which allow for selecting specific queue, groups and agents. The available metrics for queues, groups, agents within queues and agents within groups vary.
 
-#### Single Queue
+### Single Queue
 
 `/realtime-metrics/queues/{queue-id}`
 
-### Path Parameter
+#### Path Parameter
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | queue-id | ✓ | Single queue id to return data for | 103 |
 
-### Single Queue Request
+#### Single Queue Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/101?&metrics=handling.rt&metrics=entered.today' \
@@ -264,7 +264,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-### Single Queue Response
+#### Single Queue Response
 
 ```json
 [
@@ -286,17 +286,17 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-#### Agents within a Queue
+### Agents within a Queue
 
 `/realtime-metrics/queues/{queue-id}/agents`
 
-### Path Parameter
+#### Path Parameter
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | queue-id | ✓ | Single queue id to return agents for | 103 |
 
-### Query Parameter
+#### Query Parameter
 
 `agent-ids` can be passed similarly to queue-ids in the prior example.
 
@@ -304,7 +304,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 | --- | --- | --- | --- |
 | agent-ids | ☐ | When not passed all agents are returned. Specifies the agent-ids of the agents to be returned. For multiple agents add multiple times. `&agent-ids=agfAl1ZjIyQ8ecpoCB9KUbbb&agent-ids=agk4tyf8vnSMWki8r4e0dfff`. Only valid agent-ids can be passed. Passing an invalid agent-id will result in a failure. | 103 |
 
-### Agents within a Queue Request
+#### Agents within a Queue Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/{queue-id}/agents?page=0&size=100&agent-ids={agent-id1}&agent-ids={agent-id2}&metrics=status.rt,statusCode.rt,timeOnStatus.rt,lastLogin.rt' \
@@ -312,7 +312,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-### Agents within a Queue Response
+#### Agents within a Queue Response
 
 ```json
 [
@@ -364,18 +364,18 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-#### Single Agent within a Queue
+### Single Agent within a Queue
 
 `/realtime-metrics/queues/{queue-id}/agents/{agent-id}`
 
-### Path Parameters
+#### Path Parameters
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | queue-id | ✓ | A queue the agent is a member of | 103 |
 | agent-id | ✓ | The agent requested within the queue | agAD21EBR1RhuV2TNDivaaa |
 
-### Single Agent within a Queue Request
+#### Single Agent within a Queue Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/{queue-id}/agents/{agent-id}?metrics=status.rt,statusCode.rt,timeOnStatus.rt,lastLogin.rt' \
@@ -383,7 +383,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-### Single Agent within a Queue Response
+#### Single Agent within a Queue Response
 
 ```json
 [
@@ -413,7 +413,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-#### Agents within a Group of Queues
+### Agents within a Group of Queues
 
 > 🚧 **This endpoint ONLY returns information for agents/queues that have been had activity or a session in the current day.**
 > 
@@ -421,7 +421,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 `/realtime-metrics/agents-in-queue-groups`
 
-### Query Parameter
+#### Query Parameter
 
 `queue-ids` can be passed similarly to queue-ids in the prior example.
 
@@ -431,7 +431,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 Sample request limited to two queues and just three of the available metrics (Two agent related and one queue related)
 
-### Agents within a Queue Request
+#### Agents within a Queue Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/agents-in-queue-groups?metrics=status.rt,timeOnStatus.rt,accepted.today.inQueue&queue-ids={queue-id-1}&queue-ids={queue-id-2}&page=0&size=100' \
@@ -441,7 +441,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 The response contains two sections. First section is an array of agents, where for each agent the response contains a collection of the agent specific metrics. The second section is an array of queues where for each queue the response contains a collection of agents and a collection of queue specific metrics for each agent. Each agent will have in the response the agent ID and agent name.
 
-### Agents within a Queue Response
+#### Agents within a Queue Response
 
 ```json
 {
@@ -498,13 +498,13 @@ The response contains two sections. First section is an array of agents, where f
 
 ```
 
-#### All agents at once within a tenant
+### All agents at once within a tenant
 
 Retrieve all agents with all specified metrics values within a tenant. The *summary* parameter can be used to get only agent details without the metrics, in this case the *agent-ids*, *group-ids* and *metrics* parameters will be ignored.
 
 `/realtime-metrics/agents`
 
-### Query Parameter
+#### Query Parameter
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
@@ -512,7 +512,7 @@ Retrieve all agents with all specified metrics values within a tenant. The *summ
 | group-ids | ☐ | Optional set of group identifiers. Only metrics for these groups will be returned. | 103 |
 | summary | ☐ | Returns a summary (id, name, group id, group name) of all agents. If this parameter is set as TRUE, agent-ids, group-ids and metrics parameters will be ignored. If this parameter is not set as TRUE, `metrics` parameter needs to be provided. | true |
 
-### Request with a specified list of metrics, agent-ids and group-ids
+#### Request with a specified list of metrics, agent-ids and group-ids
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v5/realtime-metrics/agents?metrics=status.rt,timeOnStatus.rt,accepted.today.inQueue&agent-ids={agent-id-1}&agent-ids={agent-id-2}&group-ids={group-id-1}&group-ids={group-id-2}&page=0&size=100' \
@@ -520,7 +520,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v5/realtime-metr
 
 ```
 
-### Request with a summary parameter set to True
+#### Request with a summary parameter set to True
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v5/realtime-metrics/agents?summary=true&page=0&size=100' \
@@ -528,7 +528,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v5/realtime-metr
 
 ```
 
-### All Agents within a tenant Response examples:
+#### All Agents within a tenant Response examples:
 
 With *summary=true* parameter response example:
 
@@ -618,17 +618,17 @@ With *summary=false* (or missing parameter) response example:
 
 ```
 
-#### Groups
+### Groups
 
 `/realtime-metrics/groups`
 
-### Query Parameter
+#### Query Parameter
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | group-ids | ✓ | When not passed all groups are returned. Specifies the group-ids of the groups to be returned. For multiple groups add multiple times. `&group-ids=102&group-ids=1023`. Only valid group-ids can be passed. Passing an invalid group-id will result in a failure. | 103 |
 
-### Groups Request
+#### Groups Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/groups?size=100&page=0&group-ids=102&group-ids=1023&metrics=availableIdle.rt&metrics=enabled.rt' \
@@ -636,7 +636,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-### Groups Response
+#### Groups Response
 
 ```json
 [
@@ -672,17 +672,17 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-#### Single Group
+### Single Group
 
 `/realtime-metrics/groups/{group-id}`
 
-### Path Parameter
+#### Path Parameter
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | group-id | ✓ | Group Id of the requested group | 103 |
 
-### Single Group Request
+#### Single Group Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/groups/{group-id}?metrics=availableIdle.rt&metrics=enabled.rt' \
@@ -690,7 +690,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-### Groups Response
+#### Groups Response
 
 ```json
 [
@@ -712,23 +712,23 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-#### Agents within a Group
+### Agents within a Group
 
 `/realtime-metrics/groups/{group-id}/agents`
 
-### Path Parameter
+#### Path Parameter
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | group-id | ✓ | Group Id of the requested group | 103 |
 
-### Query Parameter
+#### Query Parameter
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | agent-ids | ☐ | When not passed all agents are returned. Specifies the agent-ids of the agents to be returned. For multiple agents add multiple times. `&agent-ids=agfAl1ZjIyQ8ecpoCB9KUbbb&agent-ids=agk4tyf8vnSMWki8r4e0dfff`. Only valid agent-ids can be passed. Passing an invalid agent-id will result in a failure. | agk4tyf8vnSMWki8r4e0dfff |
 
-### Agents within a Group Request
+#### Agents within a Group Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/groups/{group-id}/agents?page=0&size=100&agent-ids={agent-id1}&agent-ids={agent-id2}&metrics=offered.today&metrics=status.rt' \
@@ -736,7 +736,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-### Agents within a Group Response
+#### Agents within a Group Response
 
 ```json
 [
@@ -772,18 +772,18 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-#### Single Agent within a Group
+### Single Agent within a Group
 
 `/realtime-metrics/groups/{group-id}/agents/{agent-id}`
 
-### Path Parameter
+#### Path Parameter
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | group-id | ✓ | Group Id of the requested group | 103 |
 | agent-id | ✓ | AgentId of the requested agent | agAD21EBR1RhuV2TNDivaaa |
 
-### Single Agent within a Group Request
+#### Single Agent within a Group Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/groups/{group-id}/agents/{agent-id}?metrics=offered.today&metrics=status.rt' \
@@ -791,7 +791,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-### Single Agent within a Group Response
+#### Single Agent within a Group Response
 
 ```json
 [
@@ -813,7 +813,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 
 ```
 
-#### Additional Information
+## Additional Information
 
 #### includeTotals
 

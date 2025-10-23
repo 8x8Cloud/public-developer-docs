@@ -25,7 +25,7 @@ The URL for the OAuth Authentication is: `https://api.8x8.com/oauth/v2/token`
 
 Using the key and secret from Admin Console as the username and password use Basic Authentication.
 
-## Parameters
+### Parameters
 
 **Method: POST**
 
@@ -48,7 +48,7 @@ Using the key and secret from Admin Console as the username and password use Bas
 | grant_type | ✓        | Must be `client_credentials` | client_credentials |
 
 
-##### Authentication Request
+### Authentication Request
 
 ```bash
 curl --location --request POST 'https://api.8x8.com/oauth/v2/token' \
@@ -58,7 +58,7 @@ curl --location --request POST 'https://api.8x8.com/oauth/v2/token' \
 
 ```
 
-##### Authentication Response
+### Authentication Response
 
 **Response**
 
@@ -90,7 +90,7 @@ curl --location --request POST 'https://api.8x8.com/oauth/v2/token' \
 
 ```
 
-###### Outputs that are used in the subsequent API
+## Outputs that are used in the subsequent API
 
 **issued_at** : Epoch time of when the token was issued  
 
@@ -114,7 +114,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v5/realtime-metr
 
 Adding or removing APIs from an existing API key will not be instantaneous as there is some replication delay for cached objects.
 
-###### List of APIs and whether they use this OAuth process
+## List of APIs and whether they use this OAuth process
 
 | API Product Name       | API Description                                | OAuth |
 | ---------------------- | ---------------------------------------------- | ----- |

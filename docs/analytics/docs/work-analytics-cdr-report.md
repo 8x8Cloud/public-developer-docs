@@ -52,25 +52,25 @@ You will use your API key combined with the user credentials of a user with perm
 > 
 > 
 
-## Parameters
+### Parameters
 
 **Method: POST**
 
-### Headers
+#### Headers
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | 8x8-apikey | ✓ | The 8x8-api key provided | test_key_kjdfidj238jf9123df221 |
 | Content-Type | ✓ | Set content type to form-urlencoded | application/x-www-form-urlencoded |
 
-### Body
+#### Body
 
 | Name     | Required | Description                                                        | Example                                             |
 |----------|----------|--------------------------------------------------------------------|-----------------------------------------------------|
 | username | ✓        | The 8x8 username of a user with Work Analytics access privileges   | [someuser@acme.fakeco](mailto:someuser@acme.fakeco) |
 | password | ✓        | The 8x8 password of the user with Work Analytics access privileges | Rrnp5QBW6dTbx^TP                                    |
 
-#### Authentication Request:
+### Authentication Request:
 
 ```bash
 curl --location --request POST 'https://api.8x8.com/analytics/work/v1/oauth/token' \
@@ -81,7 +81,7 @@ curl --location --request POST 'https://api.8x8.com/analytics/work/v1/oauth/toke
 
 ```
 
-#### Authentication Response:
+### Authentication Response:
 
 **Response**
 
@@ -105,26 +105,26 @@ The following steps will use the access_token as a Bearer Token form of authenti
 
 `Authorization` header being set to `Bearer access_token` (Space between Bearer and the access_token)
 
-##### 2. Run Report
+## 2. Run Report
 
-#### Parameters
+### Parameters
 
 **Method:** GET
 
-### Headers
+#### Headers
 
 | Name          | Required | Description                                                                                                 | Example                                         |
 |---------------|----------|-------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
 | 8x8-apikey    | ✓        | The 8x8-api key provided                                                                                    | test_key_kjdfidj238jf9123df221                |
 | Authorization | ✓        | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer eyJhbGciOiJSUzI1NiJ9.yyyyyyy.zzzzzzzzzzz |
 
-### Path
+#### Path
 
 | Name    | Required | Description                       | Example |
 |---------|----------|-----------------------------------|---------|
 | version | ✓        | The current version for cdr is v1 | v1      |
 
-### Query
+#### Query
 
 | Name                                                                                        | Required | Description                                                                                                                                                                                                                                                                                                                               | Example             |
 |---------------------------------------------------------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
@@ -138,7 +138,7 @@ The following steps will use the access_token as a Bearer Token form of authenti
 | isConnectTime                                                                               | ☐        | This parameter allows you to get your results based on either connect time or disconnect time of each call leg. It is not compatible with isCallRecord. Default is false. See [isConnectTime explained](/analytics/docs/work-analytics-cdr-report#isconnecttime-explained) for more details.                                              | false               |
 | isSimplified                                                                                | ☐        | Only valid for Call Legs (isCallRecord = false).Default is false. When true: Child calls are not returned. For example, child calls are the ones the service makes to one or more agents when a call comes into a call queue or a ring group. Some call legs are omitted. For example, the removal of CallForking and CallRecording legs. | false    |
 
-### isConnectTime explained
+#### isConnectTime explained
 
 This looks at the timing of call legs and as such is not valid when isCallRecord is `true`
 
@@ -150,7 +150,7 @@ if `true` will use the 'connected_time' of the call leg to filter data and retur
 
 **connected_time** is when the **call leg** transitioned from alerting to connected.
 
-#### Call Records Request
+### Call Records Request
 
 > 📘 **Try out the CDR Records Request**
 > 
@@ -165,7 +165,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/work/v{version}/cdr
 
 ```
 
-#### Call Records Response
+### Call Records Response
 
 This sample response is for isCallRecord=true
 
@@ -267,7 +267,7 @@ For details on cdr metrics please refer to[CDR Glossary and Details](https://doc
 
 ```
 
-#### Call Legs Request
+### Call Legs Request
 
 ```bash
 curl --location --request GET 'https://api.8x8.com/analytics/work/v{version}/cdr?pbxId={pbxId here}&startTime=2022-02-03 00:00:00&endTime=2022-02-03 10:00:00&timeZone=America/New_York&pageSize=50&isCallRecord=false&isSimplified=false&isConnectTime=false' \
@@ -276,7 +276,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/work/v{version}/cdr
 
 ```
 
-#### Call Legs Response
+### Call Legs Response
 
 > 📘 **Try out the CDR Legs Request**
 > 

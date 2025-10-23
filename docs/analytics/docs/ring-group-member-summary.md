@@ -37,7 +37,7 @@ You will use your API key combined with the user credentials of a user with perm
 > 
 > 
 
-## Parameters
+### Parameters
 
 **Method: POST**
 
@@ -89,7 +89,7 @@ The following steps will use the access_token as a Bearer Token form of authenti
 
 `Authorization` header being set to `Bearer access_token` (Space between Bearer and the access_token)
 
-#### 2. Run Ring Group Member Summary
+## 2. Run Ring Group Member Summary
 
 This will return a summary each member of each Ring Group in the specified PBXs for the duration specified.
 

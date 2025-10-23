@@ -93,7 +93,7 @@ curl --location --request GET 'https://api.8x8.com/storage/uk/v3/regions' \
 > 
 > 
 
-#### 3. Find Objects
+## 3. Find Objects
 
 > 🚧 **Only objects with a state of AVAILABLE are returned unless other object states are specifically requested.**
 > 
@@ -264,7 +264,7 @@ The request for the next page would be `pageKey=200&limit=100` the pageKey has b
 
 Note: the `lastPage` is now true indicating that there are no more records and the `pageSize` is 45 which is less than the requested `limit` of 100, be aware the pageKey HAS INCREMENTED and should NOT be used to determine if the last page has been reached.
 
-#### 4. Create Bulk Download
+## 4. Create Bulk Download
 
 ### Parameters
 
@@ -327,7 +327,7 @@ Assuming success, the return will give information on the zipName of the downloa
 * status
 * zipName
 
-#### 5. Check Download Status
+## 5. Check Download Status
 
 Check for the download status until the status equals DONE (or an error status..), most use cases are not time critical so leave a sensible delay between polling ( 15-30 seconds perhaps)
 
@@ -373,7 +373,7 @@ curl --location --request GET 'https://api.8x8.com/storage/{region}/v3/bulk/down
 * status
 * zipName
 
-#### 6. Download Zip File
+## 6. Download Zip File
 
 Once the status is `DONE` then we can download the content
 

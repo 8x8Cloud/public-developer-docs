@@ -68,17 +68,17 @@ CC Historical Analytics allows the consumer to get a listing of the available re
 
 Additional information about each of the reports and detailed definitions of metrics can be found in the [Interaction Details report - Glossary](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/detailed-interaction-report.htm#Interaction-details-report-glossary) and [Agent Status Change Detail](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/agent-status-change-details.htm)
 
-## Parameters
+### Parameters
 
 **Method: GET**
 
-### Headers
+#### Headers
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
 
-### Path
+#### Path
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
@@ -87,7 +87,7 @@ Additional information about each of the reports and detailed definitions of met
 
 [API reference](/analytics/reference/cc-historical-analytics-report-types)
 
-#### Report Types Request
+### Report Types Request
 
 The response shows each `report-type` that's available.
 
@@ -105,7 +105,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 
 ```
 
-#### Report Types Response
+### Report Types Response
 
 The response shows each `report-type` that's available.
 
@@ -307,7 +307,7 @@ Generic Example:
 
 ```
 
-##### 4. Creating a report
+## 4. Creating a report
 
 > 📘 **This sample is applicable to ALL detailed report types**
 > 
@@ -315,23 +315,23 @@ Generic Example:
 > 
 > 
 
-#### Parameters
+### Parameters
 
 **Method:** POST
 
-### Headers
+#### Headers
 
 | Name          | Required | Description                                                                                              | Example                              |
 | ------------- | -------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | Authorization | ✓        | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
 
-### Path
+#### Path
 
 | Name    | Required | Description                 | Example |
 | ------- | -------- | --------------------------- | ------- |
 | version | ✓        | The current version is `v8` | v8      |
 
-### Body
+#### Body
 
 | Name                                       | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example                                                                                                                                                                      |
 | ------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -474,7 +474,7 @@ no searchQueryagentNotes containsqueueName is one offilter queueName contains an
 
 ```
 
-##### Create Report Request
+### Create Report Request
 
 In this example we are running the report from 3rd August to 2nd September, we are only interested in the periods between 8:30am and 5pm on each day.  
 
@@ -534,11 +534,11 @@ curl --location --request POST 'https://api.8x8.com/analytics/cc/v8/historical-m
 
 ```
 
-##### Create Report Response:
+### Create Report Response:
 
 For an accepted request to create a report the response will be 200 OK
 
-### Headers
+#### Headers
 
 * **Link**: The Link header will provide details on how to access the data
 
@@ -553,7 +553,7 @@ For an accepted request to create a report the response will be 200 OK
 > 
 > 
 
-### Body
+#### Body
 
 * **id**: this is the identifier for the generated report
 * **status**: this is the status of the request for a newly created report.
@@ -568,7 +568,7 @@ For an accepted request to create a report the response will be 200 OK
 
 ```
 
-#### 5. Accessing Report Data
+## 5. Accessing Report Data
 
 > 🚧 **Accessing the report Data**
 > 
@@ -578,31 +578,31 @@ For an accepted request to create a report the response will be 200 OK
 > 
 > 
 
-#### Parameters
+### Parameters
 
 **Method:** GET
 
-### Headers
+#### Headers
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
 
-### Path
+#### Path
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | version | ✓ | The current version is `v8` | v8 |
 | report-id | ✓ | Report id to get data for | 2853641 |
 
-### Query
+#### Query
 
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | size | ☐ | The number of records to return in each page. Default is 100. Maximum is 1000 | 100 |
 | lastDocumentId | ☐/✓ | This MUST BE OMITTED in the request for the initial page. Then the value MUST BE PASSED in subsequent requests See [Headers & Pagination](/analytics/docs/cc-historical-analytics-detailed-report#headers--pagination) for more information | agent-status-by-status-code |
 
-#### Report Data Request
+### Report Data Request
 
 First PageSubsequent Page
 
@@ -618,9 +618,9 @@ curl --location --request GET 'api.8x8.com/analytics/cc/v8/historical-metrics/de
 
 ```
 
-#### Report Data Response
+### Report Data Response
 
-### Headers & Pagination
+#### Headers & Pagination
 
 * **Link**: The Link header will provide a link to the next page in the data if there are additional pages by using the lastDocumentId to index into the result set `[https://api.8x8.com/analytics/cc/v<<versionCCAHistorical](https://api.8x8.com/analytics/cc/v<<versionCCAHistorical)>/historical-metrics/detailed-reports/2710192/data?size=3&lastDocumentId=eyJzZWFyY2hBZnRlciI6WzE2NDQ0NzA0MzQ5NzIsOTQ1MDExNzMwMjhdfQ%3D%3D>; rel="next"`
 * **X-Page-Size**: size of the requested pages
@@ -639,7 +639,7 @@ When the last page is reached:
 * `Link` Header will not be present
 * `Last-Document-Id` Header will not be present
 
-### Body
+#### Body
 
 The body will be an array as shown below.
 
