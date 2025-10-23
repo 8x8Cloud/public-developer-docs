@@ -47,11 +47,11 @@ You should have the following contents from the extracted **`.zip`** file:
 
 4. Go to the menu at **TARGETS > Project Name > General > Frameworks, Libraries, and Embedded Content**:
 
-![](../images/f03284b-embedding-framework-sdk-project.png "embedding-framework-sdk-project.png")
+![embedding framework sdk project](../images/f03284b-embedding-framework-sdk-project.png "embedding-framework-sdk-project.png")
 
 5. Drag the **`Wavecell.xcframework`** bundle from the **`Frameworks`** folder into the **`Frameworks, Libraries, and Embedded Content`** section.
 
-![](../images/40e0d75-embedded-framework-xcode-project.png "embedded-framework-xcode-project.png")
+![embedded framework xcode project](../images/40e0d75-embedded-framework-xcode-project.png "embedded-framework-xcode-project.png")
 
 ## Enable VoIP capabilities
 
@@ -59,7 +59,7 @@ To enable VoIP capabilities:
 
 1. Go to **TARGETS > Project Name > Signing & Capabilities** and then add **Background Modes**.
 
-![](../images/d8e4003-xcode-project-capabilities-background-modes.png "xcode-project-capabilities-background-modes.png")
+![xcode project capabilities background modes](../images/d8e4003-xcode-project-capabilities-background-modes.png "xcode-project-capabilities-background-modes.png")
 
 ```
 You can also enable Audio, AirPlay Voice over IP and other attributes while in this directory.
@@ -68,7 +68,7 @@ You can also enable Audio, AirPlay Voice over IP and other attributes while in t
 
 2. Go to **TARGETS > Project Name > Info** and add your privacy description for push notification usage.
 
-![](../images/e3da9bc-xcode-project-capabilities-push-notifications.png "xcode-project-capabilities-push-notifications.png")
+![xcode project capabilities push notifications](../images/e3da9bc-xcode-project-capabilities-push-notifications.png "xcode-project-capabilities-push-notifications.png")
 
 ```
 Note: This step is only required for receiving incoming calls.
@@ -77,7 +77,7 @@ Note: This step is only required for receiving incoming calls.
 
 3. Go to **TARGETS > Project Name > Info** and add your privacy description for microphone usage.
 
-![](../images/4f16d2e-microphone-usage-policy-description.png "microphone-usage-policy-description.png")  
+![microphone usage policy description](../images/4f16d2e-microphone-usage-policy-description.png "microphone-usage-policy-description.png")  
 
 The **`NSMicrophoneUsageDescription`** property describes the reason your app needs to access the phone microphone. When the system prompts the user to allow access, this string is displayed as part of the alert. Therefore, it cannot be left empty.
 
@@ -101,7 +101,7 @@ print("\(VoiceSDK.shared.version())")
 
 ```
 
-![](../images/cadf8f6-print-wavecell-sdk-version-from-xcode-project.png "print-wavecell-sdk-version-from-xcode-project.png")
+![wavecell sdk version from xcode project](../images/cadf8f6-print-wavecell-sdk-version-from-xcode-project.png "print-wavecell-sdk-version-from-xcode-project.png")
 
 ## Push notification setup
 
@@ -114,7 +114,7 @@ There are two types of secure connections:
 
 The backend supports both types of secure connections.
 
-![](../images/77df3b8-apn-provider-connection-types.png "apn-provider-connection-types.png")
+![apn provider connection types](../images/77df3b8-apn-provider-connection-types.png "apn-provider-connection-types.png")
 
 ### Certificate-based
 
@@ -122,11 +122,11 @@ For the certificate-based type of connection, generate [VoIP Service Certificate
 
 with your Apple developer account:
 
-![](../images/bc2a5f2-request-voip-services-certificate.png "request-voip-services-certificate.png")
+![request voip services certificate](../images/bc2a5f2-request-voip-services-certificate.png "request-voip-services-certificate.png")
 
 1. When the **`certificate`** is ready, click **Download** and save it to your local drive (**`voip_services.cer`** file).
 
-![](../images/0088a27-download-voip-services-certificate.png "download-voip-services-certificate.png")
+![download voip services certificate](../images/0088a27-download-voip-services-certificate.png "download-voip-services-certificate.png")
 
 2. Open the **`voip_services.cer`** file with the **Keychain Access** app on your computer.
 
@@ -136,7 +136,7 @@ Select the **login** option if you are asked which keychain to add the certifica
 You will now need to find the certificate you have created.
 4. Export your Certificate as a **`.p12`** file.
 
-![](../images/b2ba882-export-voip-services-certificate.png "export-voip-services-certificate.png")
+![export voip services certificate](../images/b2ba882-export-voip-services-certificate.png "export-voip-services-certificate.png")
 
 5. Convert the **`.p12`** file to a **`.pem`** file using the Terminal **`openssl`** command:
 

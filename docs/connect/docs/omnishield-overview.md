@@ -17,7 +17,7 @@ Omni Shield Consists of two primary components:
 
 The diagram below adds more context into how Omni Shield fits within the context of sending SMS traffic:
 
-![](../images/bc73c12-Omnishield.drawio_5.png)
+![Omnishield](../images/bc73c12-Omnishield.drawio_5.png)
 
 ## Recommendations To Mitigate SMS Fraud Attacks
 

@@ -34,7 +34,7 @@ If you follow the different steps of this tutorial, you will get to generate a c
 2. Enter your email and follow the instructions to define your password and finalize your account (by default, API password and account password are the same, you can modify this from your account settings)
 3. Confirm your email address by clicking on the validation link you received in the activation email to activate your account.
 
-![](../images/45380f8-Signup_8x8_connect.png "Signup 8x8 connect.png")
+![Signup 8x8 connect](../images/45380f8-Signup_8x8_connect.png "Signup 8x8 connect.png")
 
 ### II. Finding your apiKey token (for API authentication)
 
@@ -44,7 +44,7 @@ If you follow the different steps of this tutorial, you will get to generate a c
 4. Head over to the **side menu > API keys** section
 5. Create an API key if empty and then keep the API Key value, here: `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`
 
-![](../images/441a309-API_2.png "API 2.png")
+![image](../images/441a309-API_2.png "API 2.png")
 
 ### III. Identifying your Subaccountid
 

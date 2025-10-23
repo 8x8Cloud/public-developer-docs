@@ -58,7 +58,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 2. Enter your email and follow the instructions to define your password and finalize your account (by default, API password and account password are the same, you can modify this from your account settings)
 3. Confirm your email address by clicking on the validation link you received in the activation email to activate your account.
 
-![](../images/09a33d5-Signup_8x8_connect.png "Signup 8x8 connect.png")
+![Signup 8x8 connect](../images/09a33d5-Signup_8x8_connect.png "Signup 8x8 connect.png")
 
 ### II. Finding your apiKey bearer token (for API authentication)
 
@@ -68,7 +68,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 4. Head over to the **side menu > API keys** section
 5. Create an API key if empty and then keep the API Key value, here:  `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`
 
-![](../images/689017a-API_2.png "API 2.png")
+![image](../images/689017a-API_2.png "API 2.png")
 
 ### III. Identifying your Subaccountid
 
@@ -77,7 +77,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 3. Note down this value, you will need it later.
 4. In that example, the `subaccountid` is `riders_hq`
 
-![](../images/b0ec3e5-API_3.png "API 3.png")
+![image](../images/b0ec3e5-API_3.png "API 3.png")
 
 ---
 
@@ -148,7 +148,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages/batch
 * The API expects to receive a structured request containing the SMS data in a specific format.
 * As detailed in the documentation, the data that we have to submit should be a JSON object structured as follow:
 
-![](../images/c1568db-API_4.bmp "API 4.bmp")
+![image](../images/c1568db-API_4.bmp "API 4.bmp")
 
 #### Tutorial request data payload
 
@@ -229,7 +229,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/amazing_hq/messages/batch
 
 * And that’s it! Here is the result:
 
-![](../images/cc6dccb-API_5.bmp "API 5.bmp")
+![image](../images/cc6dccb-API_5.bmp "API 5.bmp")
 
 ### Going further
 

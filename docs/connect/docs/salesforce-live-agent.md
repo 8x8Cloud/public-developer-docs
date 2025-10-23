@@ -69,13 +69,13 @@ In Salesforce Setup Home, navigate to **Service > Chat > Chat Settings** and che
 
 Note down the **Chat API Endpoint** URL to send to 8x8’s Support Team. Our team only requires the domain, which is only the first portion of the URL highlighted in red below.
 
-![](../images/0efaabe-image2.png)
+![image](../images/0efaabe-image2.png)
 
 ### Chat Buttons and Invitations
 
 In the Chat Buttons and Invitations we want to create a new chat group
 
-![](../images/b12bfb9-image4.png)
+![image](../images/b12bfb9-image4.png)
 Below are the required settings. Settings outside of this are optional.
 
 **Type:** Chat Button  
@@ -86,15 +86,15 @@ Below are the required settings. Settings outside of this are optional.
 
 **Queue:** Choose the queue you created previously
 
-![](../images/e4b0c57-image6.png)
-![](../images/2959ebc-image7.png)
+![image](../images/e4b0c57-image6.png)
+![image](../images/2959ebc-image7.png)
 Note down the **ButtonId** in the **Chat Button Code** highlighted in red to send to 8x8’s Support Team.
 
 ### Chat Deployments
 
 In Salesforce Setup Home, navigate to **Service > Chat > Deployments**, create a new deployment.
 
-![](../images/f5aa937-image9.png)
+![image](../images/f5aa937-image9.png)
 Below are the required settings. Settings outside of this are optional.
 
 **Chat Deployment Name:**
@@ -103,10 +103,10 @@ Below are the required settings. Settings outside of this are optional.
 
 **Chat Window Title:**
 
-![](../images/48bc801-image8.png)
+![image](../images/48bc801-image8.png)
 Note down the **OrganizationId** and the **DeploymentId** in the **Deployment Code** highlighted in red/blue to send to 8x8’s Support Team.
 
-![](../images/0f7d3db-image3.png)
+![image](../images/0f7d3db-image3.png)
 
 #### 8x8 Support Team Configuration
 
