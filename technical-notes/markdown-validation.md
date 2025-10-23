@@ -54,7 +54,9 @@ Configuration specific to regular `.md` files:
 Configuration specific to `.mdx` files:
 - Extends the base `.markdown-rules.json` configuration
 - Disables MD033 completely to allow all JSX/React components
+- Disables MD041 to allow MDX files without top-level heading
 - Targets `docs/**/*.mdx` files
+- Excludes auto-generated API reference documentation
 
 **Location:** [`mdx.markdownlint-cli2.jsonc`](../mdx.markdownlint-cli2.jsonc)
 
@@ -63,11 +65,23 @@ Configuration specific to `.mdx` files:
 {
   "config": {
     "extends": ".markdown-rules.json",
-    "MD033": false  // Allows all inline HTML/JSX
+    "MD033": false,  // Allows all inline HTML/JSX
+    "MD041": false   // Allows files without top-level heading
   },
-  "globs": ["docs/**/*.mdx"]
+  "globs": ["docs/**/*.mdx"],
+  "ignores": ["**/reference/**"]  // Excludes auto-generated API docs
 }
 ```
+
+**Why Ignore Reference Folders?**
+
+The `reference/` folders contain auto-generated API documentation created by `yarn reference:generate` from OpenAPI specifications. These files:
+- Are programmatically generated from `docs_oas/` specifications
+- Have a different structure than hand-written documentation
+- Should not be manually edited or linted
+- Are regenerated whenever OpenAPI specs change
+
+By excluding them from validation, we focus linting on hand-written documentation where style consistency matters most.
 
 ## How the Extends Mechanism Works
 
@@ -95,6 +109,51 @@ This approach ensures consistency while allowing file-type-specific customizatio
   - **MDX files**: Unrestricted (allows JSX components)
 
 **Note:** Rule configurations are subject to change based on project needs and evolving best practices.
+
+## Ignoring Files and Folders
+
+Both configuration files support an `ignores` property to exclude specific paths from validation.
+
+### Why Use Ignores?
+
+- **Auto-generated content** - Files created by build tools (e.g., API reference docs)
+- **Third-party content** - Imported documentation that doesn't follow project standards
+- **Build artifacts** - Temporary or output directories
+- **Performance** - Ignored patterns are applied before file enumeration for faster validation
+
+### Ignore Pattern Syntax
+
+The `ignores` property accepts an array of glob patterns:
+
+```jsonc
+{
+  "ignores": [
+    "**/reference/**",      // All files under any reference/ folder
+    "docs/legacy/**",        // Specific legacy documentation folder
+    "**/node_modules/**",    // Node modules (usually already gitignored)
+    "build/**"              // Build output directory
+  ]
+}
+```
+
+**Pattern Examples:**
+- `**/folder/**` - Matches `folder/` at any depth
+- `docs/specific/path/**` - Matches a specific path
+- `*.tmp.md` - Matches files with specific extension pattern
+
+### Current Ignore Configurations
+
+**MDX Files:** `**/reference/**`
+- Excludes auto-generated API reference documentation
+- These files are created by `yarn reference:generate` from OpenAPI specs
+- Should not be manually edited or linted
+
+**Markdown Files:** None currently
+- All `.md` files in `docs/` are hand-written and should follow style guidelines
+
+### Performance Note
+
+According to markdownlint-cli2 documentation, the `ignores` property has the best performance when applied at the repository root level because patterns are applied before file enumeration. This is more efficient than scanning all files first and then filtering them out.
 
 ## Running Validation
 
@@ -170,6 +229,24 @@ Configuration file should be one of the supported names (e.g., '.markdownlint-cl
 1. Edit [`mdx.markdownlint-cli2.jsonc`](../mdx.markdownlint-cli2.jsonc)
 2. Add or modify the rule in the `config` section
 3. This overrides the base configuration for MDX files only
+
+### Excluding Files from Validation
+
+**To exclude specific files or folders:**
+1. Edit the appropriate configuration file:
+   - [`md.markdownlint-cli2.jsonc`](../md.markdownlint-cli2.jsonc) for `.md` files
+   - [`mdx.markdownlint-cli2.jsonc`](../mdx.markdownlint-cli2.jsonc) for `.mdx` files
+2. Add or modify the `ignores` property with glob patterns
+3. Patterns are applied before file enumeration for best performance
+
+**Example:**
+```jsonc
+{
+  "config": { /* ... */ },
+  "globs": ["docs/**/*.mdx"],
+  "ignores": ["**/reference/**", "docs/legacy/**"]
+}
+```
 
 ### Common Errors and Solutions
 

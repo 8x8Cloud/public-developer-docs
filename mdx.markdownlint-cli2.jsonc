@@ -1,7 +1,9 @@
 {
   "config": {
     "extends": ".markdown-rules.json",
-    "MD033": false
+    "MD033": false,
+    "MD041": false
   },
-  "globs": ["docs/**/*.mdx"]
+  "globs": ["docs/**/*.mdx"],
+  "ignores": ["**/reference/**"]
 }
