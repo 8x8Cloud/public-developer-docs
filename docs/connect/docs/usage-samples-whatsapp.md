@@ -16,7 +16,7 @@
 
 ## Freeform messages
 
-## Text message
+### Text message
 
 If you want to **send a text message**, your request will look like this:
 
@@ -39,7 +39,7 @@ The user will receive this corresponding message:
 
 ---
 
-## Text message with an image
+### Text message with an image
 
 If you want to send an image with an optional `text`, your request will look like this:
 
@@ -63,9 +63,9 @@ The user will receive this corresponding message with the corresponding image fr
 
 ---
 
-### Template Messages
+## Template Messages
 
-## Template message with text only
+### Template message with text only
 
 Depending on the use case and content, your template submitted can be categorised as a Marketing or Utility template.
 
@@ -104,7 +104,7 @@ The user will receive this corresponding message:
 
 ---
 
-## Authentication template message
+### Authentication template message
 
 ```json
  {
@@ -151,7 +151,7 @@ In addition, you can also specify a fallback to SMS option which will automatica
 
 ---
 
-## Template message with image
+### Template message with image
 
 This template has 1 image header and a predefined text body.
 
@@ -188,7 +188,7 @@ The user will receive this corresponding message. Note the text is decided in th
 
 ---
 
-## Template message with Document
+### Template message with Document
 
 This template message allows you to send a document. In this example below we use a **PDF** although any valid [MIME-type document](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) should be supported.
 
@@ -231,7 +231,7 @@ The user will receive this corresponding message with a download link to the PDF
 
 ---
 
-## Template message with Location
+### Template message with Location
 
 This template is a location template and it allows you to specify a set of coordinates as well as a name for a location that will be sent to the recipient.
 
@@ -273,7 +273,7 @@ The user will receive this corresponding message with a pin to indicate the user
 
 ---
 
-## Template message with a dynamic call-to-action (CTA) button
+### Template message with a dynamic call-to-action (CTA) button
 
 Below is an example of a Dynamic CTA Button Message with 2 CTA buttons. Please note the number of buttons may change depending on the template you use.
 
@@ -330,7 +330,7 @@ The corresponding message will appear as below where the text parameters specifi
 
 ---
 
-## Template message with Coupon Code
+### Template message with Coupon Code
 
 Below is an example of a Coupon Code Template Message with 1 copy code button. You can use copy code button in conjunction to other marketing related templates, for example CTA button and Coupon Code button.
 
@@ -365,9 +365,9 @@ Below is an example of a Coupon Code Template Message with 1 copy code button. Y
 
 ---
 
-### Interactive messages
+## Interactive messages
 
-## Interactive message with reply buttons
+### Interactive message with reply buttons
 
 These types of messages do not require to be submitted for template approval, similar to freeform messages. They can be sent in an ongoing conversation via our [Automation Builder](/connect/docs/automation-builder) or any third-party workflow/chatbot builder.
 
@@ -432,7 +432,7 @@ If the user clicks on each button, it will send the corresponding reply.
 
 ---
 
-## Interactive message with a list of menu options
+### Interactive message with a list of menu options
 
 ```json
 {
@@ -506,13 +506,13 @@ After clicking "Send" then the user will send the corresponding reply.
 
 ---
 
-### WhatsApp Commerce
+## WhatsApp Commerce
 
 > 👍 **Pre-requisite: You should have a catalog [created](https://www.facebook.com/business/help/1275400645914358?id=725943027795860) and [connected](https://www.facebook.com/business/help/158662536425974) to your WhatsApp Business Account (WABA)**
 >
 >
 
-## Interactive message with a single product item from a business catalog
+### Interactive message with a single product item from a business catalog
 
 This type of message will feature a single item from a business catalog, it will pull information from the catalog to generate the message.
 
@@ -561,7 +561,7 @@ Here is what the corresponding message will look like to the customer receiving 
 
 ![image](../images/62ac5b5-image.png)
 
-### Customer Flow
+#### Customer Flow
 
 Once the customer clicks **View**, they will be taken to a page containing the following information pulled from the business catalog.
 
@@ -590,7 +590,7 @@ Finally, the **View sent cart** option will allow the customer to confirm what i
   
 ---
 
-#### Interactive message with a list of product items from a business catalog
+### Interactive message with a list of product items from a business catalog
 
 This option can send multiple product items from a business catalog to a customer. This may be useful if there is a collection of items (ex. pants, shirts, hats) that the business is looking to send to a customer.
 
@@ -656,7 +656,7 @@ Here is what the corresponding catalog message will look like.
 
 ![image](../images/a32565d-image.png)
 
-### Customer Flow
+#### Customer Flow
 
 After the customer clicks on **View Items**, it will appear as follows:
 
@@ -680,7 +680,7 @@ At this point, WhatsApp leaves it to the business to define the next steps for t
 
 ![image](../images/733b6f7-image.png)
   
-#### Optional: Adding SMS Fallback
+## Optional: Adding SMS Fallback
 
 If you want to add a fallback to SMS, add the following fields to the "`content`" object in your existing JSON payload. The **fallbackText** will be used instead of the WhatsApp Template Body.
 
@@ -701,11 +701,11 @@ If you want to add a fallback to SMS, add the following fields to the "`content`
 >
 >
 
-#### Send Message in Batch
+## Send Message in Batch
 
 Besides using the Messaging Apps API to send messages individually, you can also send multiple messages with a [single API call](/connect/reference/send-message-many) by defining a **messages** array as in the examples below.
 
-#### Batch WhatsApp template message with Documents
+### Batch WhatsApp template message with Documents
 
 Below is an example of a batch of messages that are using a WhatsApp Template to send documents to different users.
 

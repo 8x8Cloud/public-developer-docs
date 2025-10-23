@@ -20,7 +20,7 @@ Please see this accompanying Video Guide for Zapier to see this integration in a
   
 ## Tutorial
 
-## Google Sheet Setup
+### Google Sheet Setup
 
 This tutorial will show you how to integrate Google Sheets with 8x8's SMS API. When a record is added to the Google Sheet spreadsheet, it will trigger a corresponding SMS which can use data from the record as part of the destination and message that sent.
 
@@ -30,13 +30,13 @@ The sheet should have **Phone Number** in Cell A1 and **Message** in Cell B1 to 
 
 ![image](../images/691cca3-image.png)
 
-## Create a new Zap
+### Create a new Zap
 
 From your Zapier dashboard, create a new Zap. The name of the Zap can be configured to any value.
 
 ![image](../images/c125dd7-image.png)
 
-## Add new trigger
+### Add new trigger
 
 Add a new trigger for a new spreadsheet row.
 
@@ -45,7 +45,7 @@ You will be asked to connect your Google Sheets account to Zapier.
 
 ![image](../images/d990a83-image.png)
 
-## Test Trigger
+### Test Trigger
 
 You will need to add a new row to your Google Sheet and then click **"Test Trigger"**
 
@@ -54,7 +54,7 @@ This should result in a successful test where it finds the spreadsheet row.
 
 ![image](../images/ba647c3-image.png)
 
-## Send Single SMS
+### Send Single SMS
 
 Now create a new step using the 8x8 action.
 

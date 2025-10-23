@@ -22,7 +22,7 @@ Steps allow you to create custom workflow definitions that can perform different
 
 ## Step Descriptions
 
-## SMS Message
+### SMS Message
 
 SMS step allows you to send a message to a recipient as a SMS using the 8x8 SMS API.
 
@@ -37,7 +37,7 @@ SMS step allows you to send a message to a recipient as a SMS using the 8x8 SMS 
 | Sender ID | Either the SMS Sender ID or the Virtual Number that the message will be sent from and the user will see. | 44703492340 (Number that is tied to the subaccount123) |
 | Destination | The Phone Number that you would like to send the SMS to. | `{{data.payload.source}}` (If the workflow was triggered by an inbound message, this variable would refer to the sender of that inbound message). |
 
-## ChatApps Message
+### ChatApps Message
 
 ChatAppsMessage step allows you to send a message using 8x8 Chat Apps API.
 
@@ -55,7 +55,7 @@ ChatAppsMessage step allows you to send a message using 8x8 Chat Apps API.
 | Message | A Preview of the message that will be sent to a customer. | Hi `{{1}}`, good news, your package has been shipped!  |
 | Parameters | Variables that can be inputted into a message template that will replace the placeholders. | If the variable is `{{1}}` and the value is "Hello", `{{1}}` will be replaced by "Bob".**Example Template:**<br>Hi `{{1}}`, good news, your package has been shipped!**Replaced Message:**<br>Hi Bob, good news, your package has been shipped! |
 
-## Wait
+### Wait
 
 Wait step allows you to make the workflow wait for a specified period of time before executing the next step.
 
@@ -69,7 +69,7 @@ Wait step allows you to make the workflow wait for a specified period of time be
 | Step Name | Unique name that identifies a step. | wait_6686 |
 | Duration | Duration to wait before proceeding onto the next step | 5 hours |
 
-## Branch
+### Branch
 
 Allows you to create multiple paths in a workflow.
 
@@ -93,7 +93,7 @@ The example below shows the next steps after and before the branch to illustrate
 | Value to check | This allows you to refer to a previous step in the workflow definition and the value it contains.  | Use the value a user inputted in a Wait For Reply Step as part of the branch logic |
 | Keywords to Compare | Fixed values to check the property "Value to Check" against. | You can add 1, 2, 3 as values to compare to create a menu such as the following:<br>1) Enter 1 to reserve a table<br>2) Enter 2 for restaurant hours<br>3) Enter 3 for location |
 
-## Wait For Reply
+### Wait For Reply
 
 The WaitForReply step type allows your workflow to pause till you receive a reply from an end user.
 
@@ -109,11 +109,11 @@ For example you may want to send a message asking a user to check their email fo
 | Step Name | Unique name that identifies a step. | waitforreply_8622 |
 | From | Define which phone number or channel source to wait for a reply from. | `{{data.payload.user.channelUserId}}` |
 
-## Voice Message
+### Voice Message
 
 The Voice message has 3 possible actions which will change the properties available. There are also generic properties that are required by all 3 possible actions.
 
-### Voice Message Step and Generic Properties Image
+#### Voice Message Step and Generic Properties Image
 
 ![Example of Step
 
@@ -124,7 +124,7 @@ for all actions](../images/2f29d51-image.png)Example of required properties
 
 for all actions
 
-### Generic Properties required for all actions
+#### Generic Properties required for all actions
 
 | Property | Description | Example Value |
 | --- | --- | --- |
@@ -134,11 +134,11 @@ for all actions
 | Source | The Phone Number to place the call from | +6512345678 |
 | Destination | The Phone Number to call | A Phone Number such as +6512345678. Or a variable such as `{{data.PhoneNumber}}` if the workflow is triggered by a HTTP trigger for exmaple. |
 
-### "Text to Speech" Action Properties Image
+#### "Text to Speech" Action Properties Image
 
 ![Example of Step Propertie](../images/5cf1f95-image.png)Example of Step Propertie
 
-### "Text to Speech" Action-specific Properties
+#### "Text to Speech" Action-specific Properties
 
 | Property | Description | Example Value |
 | --- | --- | --- |
@@ -147,22 +147,22 @@ for all actions
 | Speed | How fast to playback the message | 1 for default speed, 2 for 200% speed. |
 | Repetition | How many times to play the message | 1 for playing the message once. |
 
-### "Play an Audio File" Action Image
+#### "Play an Audio File" Action Image
 
 ![Example of Properties for Play an Audio File](../images/4676b33-image.png)Example of Properties for Play an Audio File
 
-### "Play an Audio File" Action Properties
+#### "Play an Audio File" Action Properties
 
 | Property | Description | Example Value |
 | --- | --- | --- |
 | Repetition | How many times to play the message | "1" to play the message once |
 | Audio URL | Publicly accessible URL of the audio file to play | [https://filestorage.com/file1.mp3](https://filestorage.com/file1.mp3) |
 
-### "Message with DTMF" Properties Image
+#### "Message with DTMF" Properties Image
 
 ![Example of Message with DTMF Properties](../images/6c2efd1-image.png)Example of Message with DTMF Properties
 
-### "Message with DTMF" Action Properties
+#### "Message with DTMF" Action Properties
 
 | Property | Description | Example Value |
 | --- | --- | --- |
@@ -180,7 +180,7 @@ for all actions
 | End Message | Message to play after collecting a DTMF input | "Thank you for your response" to play that message at the end of DTMF collection. |
 | DTMF Inputs | Branching paths based on DTMF input. You can create multiple inputs for as many paths as you would like to support. | Paths:<br>1 for office hours<br>2 for office location |
 
-#### HTTP Request
+### HTTP Request
 
 Send an HTTP request to an endpoint. Useful for integrating with APIs.
 
@@ -202,7 +202,7 @@ Send an HTTP request to an endpoint. Useful for integrating with APIs.
 | Request Body | The request body to send as part of the request. The format should match the Content-Type header that you supply as part of the request. | For example if the endpoint you are sending expects JSON, you should specific the content type appropriately in the header and then send JSON in the request body such as:<br>{<br>"values": [<br>[<br>"`{{data.PhoneNumber}}`",<br>"`{{data.Name}}`"<br>]<br>]<br>} |
 | Timeout | Timeout for the HTTP request | "30 seconds" to wait 30 seconds before timing out |
 
-#### Jump To
+### Jump To
 
 Skip to another step in the workflow definition. This is often useful to better organise your workflow definition.
 
@@ -212,7 +212,7 @@ Skip to another step in the workflow definition. This is often useful to better 
 | --- | --- | --- |
 | Select a step | This should refer to a step within the same workflow definition that you would like to execute after this jump step. | "chatappsmessage_6359" |
 
-#### Send to Converse
+### Send to Converse
 
 Send the current conversation to [Converse](/connect/docs/converse-overview) for an agent to take over.
 

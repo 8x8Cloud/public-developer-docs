@@ -10,11 +10,11 @@ We will accomplish this using Salesforce's declarative tools, which allow you to
 >
 >
 
-### Prerequisites and Requirements
+## Prerequisites and Requirements
 
 Before you begin, ensure your Salesforce environment and 8x8 account meet the following requirements.
 
-#### **Salesforce Platform Requirements**
+### **Salesforce Platform Requirements**
 
 * **Salesforce Experience:** **Lightning Experience**.
 * **Required Editions:** **Enterprise**, **Performance**, **Unlimited**, and **Developer** Editions.
@@ -23,18 +23,18 @@ Before you begin, ensure your Salesforce environment and 8x8 account meet the fo
   * To **define** an external service: The user needs **Modify All Data** OR **Modify Metadata Through Metadata API Functions** permissions.
   * To **invoke** an external service action from a flow: The user needs the **Run Flows** permission.
 
-#### **8x8 Account Requirements**
+### **8x8 Account Requirements**
 
 * **8x8 Connect Account:** An active account with access to the messaging channels you wish to use.
 * **API Credentials:** Your 8x8 Subaccount ID and your API Key (Bearer Token).
 
 ---
 
-### Part 1: The Foundation - Setting Up Authentication
+## Part 1: The Foundation - Setting Up Authentication
 
 First, we need to teach Salesforce how to securely authenticate with the 8x8 Messaging API. This involves creating a secure chain of credentials. A Named Credential specifies the callout endpoint's URL and its required authentication parameters in one definition.
 
-#### **Step 1.1: Create the External Credential**
+### **Step 1.1: Create the External Credential**
 
 The External Credential is a secure vault that will hold your API key.
 
@@ -46,7 +46,7 @@ The External Credential is a secure vault that will hold your API key.
   * **Authentication Protocol**: Select `Custom`.
 4. Click **Save**.
 
-#### Step 1.2: Create the Principal
+### Step 1.2: Create the Principal
 
 The Principal represents the specific identity and secret used for authentication.
 
@@ -61,7 +61,7 @@ The Principal represents the specific identity and secret used for authenticatio
 
 ![Create Principal](../images/4eb73686c074945d9215cda505902cb164c71d6c36783e8c1f779021505a2da6-image.png)Create Principal
 
-#### Step 1.3: Create the Named Credential
+### Step 1.3: Create the Named Credential
 
 The Named Credential links the API's address (URL) to the authentication secret you just stored.
 
@@ -85,7 +85,7 @@ The Named Credential links the API's address (URL) to the authentication secret 
 
 ---
 
-### Part 2: Defining the API Operations
+## Part 2: Defining the API Operations
 
 Next, we will use your OAS file to teach Salesforce about the specific 8x8 API calls.
 
@@ -635,11 +635,11 @@ Salesforce will now parse the file and make the `Send-Message` and `send-message
 
 ---
 
-### Part 3: Building the Automation in Flow Builder
+## Part 3: Building the Automation in Flow Builder
 
 This is where we build the logic to construct the message and send it. In this example we'll be sending a **WhatsApp Authentication template message**.
 
-#### Step 3.1: Create the Flow and Key Variables
+### Step 3.1: Create the Flow and Key Variables
 
 1. Navigate to **Setup** ⚙️ > **Flows** and click **New Flow**. Select **Autolaunched Flow**.
 2. From the toolbox on the left, create the following three variables by clicking **New Resource**. These will be used to build the complex request body.
@@ -666,7 +666,7 @@ Repeat the same steps for the rest of the variables as shown below
   * **Data Type**: `Apex-Defined`
   * **Apex Class**: Search for the auto-generated class for a parameter. It will be named similar to `ExternalService__CPaaSMessagingApps_content_template_components_parameters`.
 
-#### Step 3.2: First Assignment - Set Core Message Properties
+### Step 3.2: First Assignment - Set Core Message Properties
 
 1. On the flow canvas, click the `+` icon after the Start element and add an **Assignment** element.
 2. **Label**: `Set Core Message Body`
@@ -689,7 +689,7 @@ Repeat the same steps for the rest of the variables as shown below
   * `{!componentVariable.parameters}` | **`Add`** | `{!parameterVariable}`
   * `{!messageBody.content.template.components}` | **`Add`** | `{!componentVariable}`
 
-#### Step 3.4: Third Assignment - Build the "Button" Component
+### Step 3.4: Third Assignment - Build the "Button" Component
 
 1. Click the `+` again and add a final **Assignment** element.
 2. **Label**: `Build and Add Button Component`
@@ -703,7 +703,7 @@ Repeat the same steps for the rest of the variables as shown below
   * `{!componentVariable.parameters}` | **`Add`** | `{!parameterVariable}`
   * `{!messageBody.content.template.components}` | **`Add`** | `{!componentVariable}`
 
-#### Step 3.5: The Action - Make the API Call
+### Step 3.5: The Action - Make the API Call
 
 1. Click the final `+` and add an **Action** element.
 2. Search for your `CPaasMessagingApps` actions and select **Send-Message**.
@@ -716,11 +716,11 @@ Repeat the same steps for the rest of the variables as shown below
 
 ---
 
-### Part 4: Permissions and Testing
+## Part 4: Permissions and Testing
 
 This final step ensures your user can run the flow and execute the callout.
 
-#### Step 4.1: Assign Permissions
+### Step 4.1: Assign Permissions
 
 1. Navigate to **Setup** ⚙️ > **Permission Sets** and create a **New** Permission Set.
 2. **Label**: `CPaaS API Access`
@@ -728,7 +728,7 @@ This final step ensures your user can run the flow and execute the callout.
 4. Click **Edit**. Add the `8x8 CPaaS Authentication : 8x8 API Key Principal` from the available list to the enabled list. Click **Save**.
 5. **Manage Assignments** for the Permission Set and assign it to your user.
 
-#### Step 4.2: Debug the Flow
+### Step 4.2: Debug the Flow
 
 1. Return to your saved Flow.
 2. Click the **Debug** button.

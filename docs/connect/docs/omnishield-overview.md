@@ -19,13 +19,13 @@ The diagram below adds more context into how Omni Shield fits within the context
 
 ![Omnishield](../images/bc73c12-Omnishield.drawio_5.png)
 
-## Recommendations To Mitigate SMS Fraud Attacks
+### Recommendations To Mitigate SMS Fraud Attacks
 
 While Omni Shield can help prevent fraud attacks, we believe in a shared responsibility model between 8x8 and you as a customer.
 
 Please see the following [page](/connect/docs/recommendations-to-mitigate-sms-fraud-attacks) for recommendations that should be implemented on your end to mitigate fraud attacks.
 
-## Glossary
+### Glossary
 
 **Operator Share**: A metric based on the known distribution of mobile subscribers across different carriers within a country. Each mobile operator typically maintains a relatively stable percentage of the total mobile market in their country. For example, if an operator normally handles 30% of a country's mobile traffic but suddenly accounts for 60% of your application's traffic, this deviation from the expected operator share may indicate an AIT attack.
 
@@ -37,7 +37,7 @@ Please see the following [page](/connect/docs/recommendations-to-mitigate-sms-fr
 
 **PNI (Phone Number Intelligence)**: 8x8 collects OTP Conversion history of a number and also checks to see if the number is flagged as suspicious by 3rd party.
 
-## Managing Traffic Suspensions
+### Managing Traffic Suspensions
 
 When Omni Shield detects suspicious patterns indicating an AIT attack targeting a specific operator, you can temporarily suspend message delivery to prevent further fraudulent activity. This immediate response helps protect against mounting costs while minimizing disruption to legitimate users.
 
@@ -48,7 +48,7 @@ Key Suspension Guidelines:
 * Before lifting a suspension, verify the fraud source has been removed and traffic patterns have normalized
 * Remove the suspension promptly once resolved to restore service to legitimate users
 
-## FAQ
+### FAQ
 
 | Question | Answer |
 | --- | --- |

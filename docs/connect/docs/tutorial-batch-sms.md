@@ -2,7 +2,7 @@
 
 ## Tutorial: Learn how to use API for batch SMS
 
-## Introduction
+### Introduction
 
 8x8 offers different API methods that allow you to send SMS programmatically.  
 
@@ -12,7 +12,7 @@ You can also send a single SMS in one command - for more information, check the 
 
 If you follow the different steps of this tutorial, you will get to send a batch of SMS directly from your command line utility using a simple curl command.
 
-## Index
+### Index
 
 * Learn how to use the method for sending batch SMS
 * Prerequisites
@@ -37,7 +37,7 @@ We are going to use our subaccountid `riders_hq`.
 
 The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 
-## Prerequisites
+### Prerequisites
 
 * Command line interface compatible with CURL
 * 8x8 CPaaS account
@@ -48,11 +48,11 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 
 ---
 
-## Account and credentials
+### Account and credentials
 
 *You will need to sign-up to use the API. The following steps will guide you through this process and highlight the information to keep aside.*
 
-### I. Signing-up
+#### I. Signing-up
 
 1. Head to [8x8 Connect sign-up page](https://connect.8x8.com/login/signup)
 2. Enter your email and follow the instructions to define your password and finalize your account (by default, API password and account password are the same, you can modify this from your account settings)
@@ -60,7 +60,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 
 ![Signup 8x8 connect](../images/09a33d5-Signup_8x8_connect.png "Signup 8x8 connect.png")
 
-### II. Finding your apiKey bearer token (for API authentication)
+#### II. Finding your apiKey bearer token (for API authentication)
 
 1. Head to <https://connect.8x8.com> .
 2. Click on LOG IN.
@@ -70,7 +70,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 
 ![image](../images/689017a-API_2.png "API 2.png")
 
-### III. Identifying your Subaccountid
+#### III. Identifying your Subaccountid
 
 1. Head over to the pricing section and use the subaccountid list to retrieve the `subaccountid` that you want to use
 2. By default, your account comes with only one `subaccountid` for your high-quality service. It is designated by your `accountid` and the suffix `_hq`.
@@ -81,7 +81,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 
 ---
 
-#### API Request
+### API Request
 
 The 8x8 SMS batch method expects requests sent by developers to respect a specific format.  
 
@@ -127,7 +127,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages/batch
 
 ```
 
-### II. Preparing the request authentication
+#### II. Preparing the request authentication
 
 #### Remarks
 
@@ -143,7 +143,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages/batch
 * We just have to replace our `{token}` placeholder by our apiKey
 * The authorization header will then look like that: `-H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg"`
 
-### III. Preparing the request data payload
+#### III. Preparing the request data payload
 
 * The API expects to receive a structured request containing the SMS data in a specific format.
 * As detailed in the documentation, the data that we have to submit should be a JSON object structured as follow:
@@ -213,7 +213,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages/batch
 
 ```
 
-### IV. Putting it together and posting the curl request
+#### IV. Putting it together and posting the curl request
 
 * If we wrap up all the elements prepared in the steps above, we should put together the 3 elements of our request: **URL + Authentication + Data Payload**
 * To send the API request to 8x8 API batch endpoint with our message we should use the following command in our command line utility:
@@ -231,7 +231,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/amazing_hq/messages/batch
 
 ![image](../images/cc6dccb-API_5.bmp "API 5.bmp")
 
-### Going further
+#### Going further
 
 #### I. API response
 

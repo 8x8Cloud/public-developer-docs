@@ -30,13 +30,13 @@ To ensure the use of the correct data center region, it is necessary to modify t
 | Singapore (default) | smpp.8x8.com |
 | Europe | smpp.8x8.uk |
 
-## Username and Password
+### Username and Password
 
 Your sub-account Id (username) will be provided by your account manager. Due to the sensitivity and resource requirements of SMPP, you are required to have a dedicated account manager for SMPP connectivity. Please contact us if you have not been allocated to someone directly.
 
-## Binding
+### Binding
 
-### SMPP Connection
+#### SMPP Connection
 
 You can connect to 8x8 SMPP servers using `bind_receiver` and `bind_transmitter` or `bind_transceiver`. Typically we provide one account id with multiple sub-account ids; for different routing, products or services.
 
@@ -49,11 +49,11 @@ You can connect to 8x8 SMPP servers using `bind_receiver` and `bind_transmitter`
 
 For relaying DLR back to your platform, 8x8 servers will send back `deliver_sm` to any bind connected with the same `systemId` of the originating `submit_sm` PDU. This includes if you are sending from multiple sites; we will send to any active bind.
 
-### Throughput
+#### Throughput
 
 Throughput is tailored to each customer’s requirement during our onboarding process. In most cases for each bind connected to 8x8 SMPP servers, you will be able to submit a maximum of 50 messages per second. You can check with your account manager about specific requirements.
 
-### PDUs
+#### PDUs
 
 The following PDUs are supported by 8x8 SMPP servers:
 

@@ -6,6 +6,8 @@
 >
 >
 
+## Triggers
+
 Here are the different triggers we support, at the moment:
 
 **inbound_sms** : meaning when you receive a new incoming SMS on the specified subaccount.
@@ -30,6 +32,8 @@ curl --location -X POST 'https://automation.8x8.com/api/v1/accounts/:your_accoun
 
 One workflow definition can only have one trigger, defining a trigger is mandatory.
 You can create similar workflows with different triggers, if needed.
+
+## Steps
 
 Workflow definitions are collections of workflow steps. Every step must have an id and a step type. The id of the step must be unique within the workflow definition. Steps may have properties that can be set when you are creating a workflow definition (e.g. set a HTTP header for a HTTP request) or at runtime by the workflow using outputs (e.g. HTTP response code of a HTTP request).
 <br />

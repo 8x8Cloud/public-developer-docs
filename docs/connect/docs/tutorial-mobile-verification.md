@@ -2,7 +2,7 @@
 
 ## Tutorial: Learn how to use API for Mobile Verification Code Generation & Validation
 
-## Introduction
+### Introduction
 
 One of the most common use cases for SMS is about conveying a one-time password (OTP) to an end user's mobile phone.
 
@@ -12,7 +12,7 @@ In this tutorial, we are going to cover the following two methods: [Mobile Verif
 
 If you follow the different steps of this tutorial, you will get to generate a code and verify it directly from your command line utility using a simple curl command.
 
-## Prerequisites
+### Prerequisites
 
 * Command line interface compatible with CURL
 * 8x8 CPaaS account
@@ -24,11 +24,11 @@ If you follow the different steps of this tutorial, you will get to generate a c
 
 ---
 
-## Account and credentials
+### Account and credentials
 
 *You will need to sign up to use the API. The following steps will guide you through this process and highlight the information to keep aside.*
 
-### I. Signing-up
+#### I. Signing-up
 
 1. Head to [8x8 Connect sign-up page](https://connect.8x8.com/login/signup)
 2. Enter your email and follow the instructions to define your password and finalize your account (by default, API password and account password are the same, you can modify this from your account settings)
@@ -36,7 +36,7 @@ If you follow the different steps of this tutorial, you will get to generate a c
 
 ![Signup 8x8 connect](../images/45380f8-Signup_8x8_connect.png "Signup 8x8 connect.png")
 
-### II. Finding your apiKey token (for API authentication)
+#### II. Finding your apiKey token (for API authentication)
 
 1. Head to [8x8 Connect Login Page](https://connect.8x8.com).
 2. Click on LOG IN.
@@ -46,7 +46,7 @@ If you follow the different steps of this tutorial, you will get to generate a c
 
 ![image](../images/441a309-API_2.png "API 2.png")
 
-### III. Identifying your Subaccountid
+#### III. Identifying your Subaccountid
 
 1. Head over to the pricing section and use the subaccountid list to retrieve the `subaccountid` that you want to use
 2. By default, your account comes with only one `subaccountid` for your high-quality service. It is designated by your `accountid` and the suffix `_hq`.
@@ -57,7 +57,7 @@ If you follow the different steps of this tutorial, you will get to generate a c
 
 ---
 
-#### Part 1: Generating and sending a code using the Mobile Verification API - Code Generation method
+### Part 1: Generating and sending a code using the Mobile Verification API - Code Generation method
 
 The 8x8 Mobile Verification - Code Generation method expects requests sent by developers to respect a specific format.  
 
@@ -108,7 +108,7 @@ curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions
 * The `-i` flag (case-sensitive) will allow to print the request and response body and headers
 * The `-X` flag is used to specify the HTTP method to use for the request (POST, HEAD, PUT, GET, DELETE...) - Here we are using a POST request.
 
-### II. Preparing the request authentication
+#### II. Preparing the request authentication
 
 #### Remarks
 
@@ -124,7 +124,7 @@ curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions
 * We just have to replace our `{token}` placeholder by our apiKey
 * The authorization header will then look like that: `-H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg"`
 
-### III. Preparing the request data payload
+#### III. Preparing the request data payload
 
 * The API expects to receive a structured request containing the SMS data in a specific format.
 * As detailed in the [documentation](/sms/API-Reference/mobile-verification-api/send-otp), the data that we have to submit should be a JSON object containing at least a **destination** field. Let's keep it simple and add a brand name as well as a country code since our destination phone number is in the national format (as opposed to the international format):
@@ -152,7 +152,7 @@ curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions
 
 ```
 
-### IV. Putting it together and posting the curl request
+#### IV. Putting it together and posting the curl request
 
 * If we wrap up all the elements prepared in the steps above, we should put together the 3 elements of our request: **URL + Authentication + Data Payload**
 * To send the API request to 8x8 Mobile Verification - Code Generation endpoint we should use the following command in our command line utility:
@@ -194,7 +194,7 @@ curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions -
   * **retryAfter**: this timestamp indicates when the system will allow sending another SMS if a new request is sent
 * For more information, check the dedicated section of the [API documentation](/sms/API-Reference/mobile-verification-api/send-otp), in the "Response" section
 
-##### Part 2: Verifying a code received using the Mobile Verification API - Code Validation method
+### Part 2: Verifying a code received using the Mobile Verification API - Code Validation method
 
 So our user received successfully his SMS containing the code required to verify his mobile phone number (*see [Part 1 - IV]*).
 
@@ -205,7 +205,7 @@ Here below are the elements from the part 1 that are going to be used in this pa
 * **sessionId** = *7c1137e8fb1ceb11827c00155dc319db*
 * **code** = *5612*
 
-### Request URL
+#### Request URL
 
 According to the [documentation](/sms/API-Reference/mobile-verification-api/verify-otp), the 8x8 Mobile Verification - Code Validation method is much simpler to use: it simply expects a **GET request** sent to a URL built using 2 different parameters:
 
@@ -227,7 +227,7 @@ curl -i -X "GET" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c
 
 ```
 
-### II. Preparing the request authentication
+#### II. Preparing the request authentication
 
 #### Remarks
 
@@ -243,7 +243,7 @@ curl -i -X "GET" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c
 * We just have to replace our `{token}` placeholder by our apiKey
 * The authorization header will then look like that: `-H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg"`
 
-### III. Preparing the request data payload
+#### III. Preparing the request data payload
 
 #### Remarks
 
@@ -258,7 +258,7 @@ curl -i -X "GET" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c
 
 ➡ We will have to append the following query string to our URL: `?code=5612`
 
-### IV. Putting it together and posting the curl request
+#### IV. Putting it together and posting the curl request
 
 * If we wrap up all the elements prepared in the steps above, we should put together the 3 elements of our request: **URL + Query string appended + Authentication**
 * To send the API request to 8x8 Mobile Verification - Code Validation endpoint we should use the following command in our command line utility:

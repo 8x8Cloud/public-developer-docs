@@ -54,12 +54,12 @@ In the following section, we are going to go over the different elements of the 
 
 At the end of the section, we will generate a cURL command to send an SMS Engage directly from the command line.
 
-## Request URL
+### Request URL
 
 * As detailed in the [Send SMS Engage survey](/connect/reference/survey-send) , the URL is defined by the following pattern: `https://sms.8x8.com/api/v1/subaccounts/{subAccountId}/surveys/{surveyId}/messages`
   * The **{subAccountID}** should be replaced by your own 8x8 Subaccount ID and the **{surveyId}** should be replaced by your Survey ID in a request.
 
-## Authentication
+### Authentication
 
 Use your **API Key** in the **Authorization** header of your HTTP request, this is denoted with the  variable below.
 
@@ -70,7 +70,7 @@ curl --location 'https://sms.8x8.com/api/v1/subaccounts/<subaccount>/surveys/<su
 
 ```
 
-## Data payload
+### Data payload
 
 The API expects to receive a structured request containing the SMS data in a specific format. As detailed in the documentation, the data that we have to submit should be a JSON object.
 
@@ -98,7 +98,7 @@ The JSON parameters are explained in the table below:
 | templateVariables | Variables or pre-defined fields used inside the templateBody. Your url should have the value or link set for you by 8x8. | "templateVariables": {<br>"firstName": "James",<br>"order_nr": "ABC1000"<br>}, |
 | Source | The Sender ID or Virtual Number to send the SMS from. | Acme |
 
-## Sending the API Request
+### Sending the API Request
 
 Now that the API request is setup correctly you need, let’s try this by using cURL. If you are running **Mac OS**, **cURL** is already installed. Just run the **Terminal** app (Located under Applications->Utilities).
 
@@ -147,7 +147,7 @@ A successful request should return an 200 OK HTTP Response Code and the Response
 
 Note that **mobileNumber** and **umid's** values will be replaced with your request's unique values.
 
-### Send Batch SMS Engage Survey
+## Send Batch SMS Engage Survey
 
 Now that we have covered how to send a Single SMS Engage Survey, there may also be times that it is appropriate to send multiple SMS Engage Surveys in a single API request. For those use cases, we can use the [SMS Engage Batch API Endpoint](survey-send-many).
 
@@ -159,12 +159,12 @@ In the following section, we are going to go over the different elements of the 
 
 At the end of the section, we will generate a cURL command to send an SMS Engage directly from the command line.
 
-## Request URL
+### Request URL
 
 * As detailed in the [Send SMS Engage survey](/connect/reference/survey-send) , the URL is defined by the following pattern: `https://sms.8x8.com/api/v1/subaccounts/{subAccountId}/surveys/{surveyId}/messages/batch`
   * The **{subAccountID}** should be replaced by your own 8x8 Subaccount ID and the **{surveyId}** should be replaced by your Survey ID in a request.
 
-## Authentication
+### Authentication
 
 Use your **API Key** in the **Authorization** header of your HTTP request, this is denoted with the  variable below.
 
@@ -175,7 +175,7 @@ curl --location 'https://sms.8x8.com/api/v1/subaccounts/<subaccount>/surveys/<su
 
 ```
 
-## Data payload
+### Data payload
 
 The API expects to receive a structured request containing the SMS data in a specific format. As detailed in the documentation, the data that we have to submit should be a JSON object.
 
@@ -228,7 +228,7 @@ The JSON parameters are explained in the table below:
 | clientBatchId | Custom string to associate with this batch of messages. | MyBatch001 |
 | includeMessagesInResponse | Whether to include the details of each individual message in the HTTP Response. | True |
 
-## Sending the API Request
+### Sending the API Request
 
 Now that the API request is setup correctly you need, let’s try this by using cURL. If you are running **Mac OS**, **cURL** is already installed. Just run the **Terminal** app (Located under Applications->Utilities).
 
@@ -334,7 +334,7 @@ You should receive multiple messages in the **messages** array assuming you set 
 
 Note that the **batchUmid**, **batchId**, **mobileNumber** and **umid's** values will be replaced with your request's unique values.
 
-### Survey Appearance
+## Survey Appearance
 
 The webpages for the surveys are built by the 8x8 team for each customer based on their inputs. A few example pages are included below as they would appear in a mobile browser. They can include both text box and multiple choice type of questions.
 
@@ -346,7 +346,7 @@ The webpages for the surveys are built by the 8x8 team for each customer based o
 
 The web pages are only **examples**, a survey webpage will be built by 8x8 as part of onboarding to SMS Engage that can be customised in terms of appearance and questions. please contact your account manager or send an email to [8x8 Support](mailto:cpaas-support@8x8.com).
 
-### Reports
+## Reports
 
 Reports related to SMS engage, you can check the Reports section of the Connect Dashboard.
 

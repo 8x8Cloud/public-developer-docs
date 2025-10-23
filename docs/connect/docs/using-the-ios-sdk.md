@@ -168,7 +168,7 @@ var audioSessionActivated: CurrentValueSubject<Bool, Never> { get }
 
 ```
 
-#### Activation
+## Activation
 
 To activate the **`VoiceSDK`**, the client invokes the **`activate`** function:
 
@@ -219,7 +219,7 @@ func handleStateChanged(_ state: VoiceSDK.State) {
 
 ```
 
-#### Deactivation
+## Deactivation
 
 To deactivate the **`VoiceSDK`** client, invoke the **`deactivate`** function:
 
@@ -242,7 +242,7 @@ sdk.deactivate { result in
 
 Upon successful completion, the `VoiceSDK` object transitions to an **`.inactive`** state.
 
-#### Call features
+## Call features
 
 * [Place an outgoing call](#place-an-outgoing-call)
 * [Receive an incoming call](#receive-an-incoming-call)
@@ -400,7 +400,7 @@ On completion the call transitions to the **`disconnected`** state.
 
 Additionally, the Voice SDK removes the call from the **`calls`** list.
 
-#### Push Notifications
+## Push Notifications
 
 The Voice SDK handles **PushKit** notifications internally.
 

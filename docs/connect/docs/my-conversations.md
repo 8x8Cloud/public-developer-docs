@@ -1,6 +1,6 @@
 # My Conversations
 
-#### Understanding ticket statuses
+### Understanding ticket statuses
 
 There are six standard statuses that can be applied to a ticket. The ticket status can be assigned manually by an agent/manager OR automatically by the system:
 

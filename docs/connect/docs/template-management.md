@@ -48,14 +48,14 @@ This is a **dynamic** message type with a parameters *`{{FirstName}}`* and *`{{d
 
 How these are sent are covered in the Multi-Channel Sender Section.
 
-#### Deleting Templates
+## Deleting Templates
 
 To delete a template, you can find a template in the list and then click the **Trash** icon, this will bring up a confirmation dialog to delete the template.
 
 ![image](../images/80d58c8-Screenshot_2023-10-10_at_1.45.10_PM.png)
 ![Delete Template Dialog](../images/76866d9-image.png "Delete Template Dialog")
 
-#### Editing Templates
+## Editing Templates
 
 To edit existing templates, first find your template in the list either by the search functionality or by manually scrolling.
 

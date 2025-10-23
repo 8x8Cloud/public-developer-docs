@@ -10,31 +10,31 @@ The **Dashboard** shows at a glance the current performance of your Messaging Ap
 * **Messaging Apps Channel:** Filter by the Messaging Channel (WhatsApp, Viber, etc.).
 * **Date Range:** Filter by a date range such as today, last 7 days, last 14 days, last 30 days.
 
-## Message Delivered
+### Message Delivered
 
 This chart will show how many messages were delivered during the time range. This features a per day breakdown of the traffic on each day.
 
 ![image](../images/ee80ce5-image.png)
 
-## Message Delivered vs Undelivered
+### Message Delivered vs Undelivered
 
 This chart shows how many messages were delivered versus undelivered on each day. Useful in identifying spikes in traffic that were related to undelivered messages.
 
 ![image](../images/ae729bf-image.png)
 
-## Delivery Rate
+### Delivery Rate
 
 This chart shows how the messages that have a "delivered" status on each day.
 
 ![image](../images/0711a1e-image.png)
 
-## Received Messages
+### Received Messages
 
 Shows the incoming messages that were received across all channels.
 
 ![image](../images/a3abdc6-image.png)
 
-## WhatsApp Conversations
+### WhatsApp Conversations
 
 Shows the type of messages that were sent across WhatsApp including:
 
@@ -45,11 +45,11 @@ Shows the type of messages that were sent across WhatsApp including:
 
 ![image](../images/4dd0844-image.png)
 
-### Reports
+## Reports
 
 The **Reports** page for Messaging Apps will show a further breakdown as compared to the dashboard and allow you to further filter the data. You will also be able to export the information as csv file from the page to import the data into your own analytics systems.
 
-## Reports Chart
+### Reports Chart
 
 This chart shows how many messages were sent across each channel, with the additional filters available:
 
@@ -60,7 +60,7 @@ This chart shows how many messages were sent across each channel, with the addit
 
 The following sections will show how the report page differs based on the **Report Type**.
 
-### By Channel
+#### By Channel
 
 This report will show traffic by the type of channel (WhatsApp, Viber, LINE, etc.) that is being used. If you are using multiple channels this will allow you to filter out the volume of each channel.
 
@@ -78,7 +78,7 @@ This section shows the type of messages per channel type and date. The available
 
 ![image](../images/d243538-image.png)
 
-### WhatsApp Conversations
+#### WhatsApp Conversations
 
 The WhatsApp Conversations Report will show the type of conversations you are having on WhatsApp.
 
@@ -101,7 +101,7 @@ This gives insights into the following information for WhatsApp messages.
 
 ![image](../images/2db042d-image.png)
 
-#### Export
+### Export
 
 The export feature gives the ability to export the information as a **CSV** file, then send the file as a link to your email.
 
@@ -115,7 +115,7 @@ The resulting file will be a **CSV** file with the following format.
 
 ![image](../images/43f8923-image.png)
 
-##### Logs
+## Logs
 
 The **messaging logs** section will allow you to see information about individual messages. By default this will cover all of the messages across all channels, however you can use the following filters to specify messages.
 
@@ -136,7 +136,7 @@ The **messaging logs** section will allow you to see information about individua
 
 ![image](../images/2e8906b-image.png)
 
-#### Export
+### Export
 
 Similar to the reports section, the messaging logs can be sent to an email address as a **CSV** file.
 

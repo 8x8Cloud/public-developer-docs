@@ -4,11 +4,11 @@ This guide will walk you through the entire process of connecting Salesforce to 
 
 We will accomplish this using Salesforce's declarative tools, which allow you to build robust integrations without writing complex code.
 
-### Prerequisites and Requirements
+## Prerequisites and Requirements
 
 Before you begin, ensure your Salesforce environment and 8x8 account meet the following requirements.
 
-#### **Salesforce Platform Requirements**
+### **Salesforce Platform Requirements**
 
 This guide utilizes Salesforce External Services. According to the official Salesforce documentation, the compatibility and permissions for this feature are as follows:
 
@@ -19,7 +19,7 @@ This guide utilizes Salesforce External Services. According to the official Sale
   * To **define** an external service: The user needs **Modify All Data** OR **Modify Metadata Through Metadata API Functions** permissions.
   * To **invoke** an external service action from a flow: The user needs the **Run Flows** permission.
 
-#### **8x8 Account Requirements**
+### **8x8 Account Requirements**
 
 * **8x8 Connect Account:** An active account with SMS services enabled.
 * **API Credentials:** Your 8x8 Subaccount ID and your API Key (Bearer Token), which you can generate from your 8x8 Connect customer portal.
@@ -27,11 +27,11 @@ This guide utilizes Salesforce External Services. According to the official Sale
 
 ---
 
-### Part 1: The Foundation - Setting Up Authentication
+## Part 1: The Foundation - Setting Up Authentication
 
 First, we need to securely store your 8x8 API credentials in Salesforce.
 
-#### **Step 1.1: Create the External Credential**
+### **Step 1.1: Create the External Credential**
 
 The External Credential is a secure vault for your API key.
 
@@ -43,7 +43,7 @@ The External Credential is a secure vault for your API key.
   * **Authentication Protocol**: Select `Custom`.
 4. Click **Save**.
 
-#### **Step 1.2: Create the Principal**
+### **Step 1.2: Create the Principal**
 
 The Principal holds the actual secret Bearer Token.
 
@@ -58,7 +58,7 @@ The Principal holds the actual secret Bearer Token.
 
 ![Create Principal](../images/12ff3d7e37a1acac54dda1ed67115f152e214b81055ff324617359dde97ebf0a-image.png)Create Principal
 
-#### **Step 1.3: Create the Named Credential for SMS**
+### **Step 1.3: Create the Named Credential for SMS**
 
 The Named Credential links the SMS API's specific address (URL) to the authentication secret.
 
@@ -76,7 +76,7 @@ The Named Credential links the SMS API's specific address (URL) to the authentic
 
 ---
 
-### Part 2: Defining the SMS API Operations
+## Part 2: Defining the SMS API Operations
 
 Now, we will use your SMS OAS file to teach Salesforce about the specific API call to send an SMS.
 
@@ -397,11 +397,11 @@ Salesforce will now parse the file and make the Send-Sms-Single and Send-Many-Sm
   
 ---
 
-### Part 3: Building the SMS Flow
+## Part 3: Building the SMS Flow
 
 The body for an SMS message is much simpler than other channels, which makes the Flow easier to build.
 
-#### **Step 3.1: Create the Flow and Body Variable**
+### **Step 3.1: Create the Flow and Body Variable**
 
 1. Navigate to **Setup** ⚙️ > **Flows** and click **New Flow**. Select **Autolaunched Flow**.
 2. From the toolbox on the left, create one variable by clicking **New Resource**.
@@ -413,7 +413,7 @@ The body for an SMS message is much simpler than other channels, which makes the
 
 ![Configuring the first Variable **smsBody**](../images/5a61363c1af70fd59d20755320e12d5f8b2ddc950b407d3df67a360f8083a0ab-image.png)Configuring the first Variable **smsBody**
 
-#### **Step 3.2: Assignment - Set SMS Properties**
+### **Step 3.2: Assignment - Set SMS Properties**
 
 We only need one Assignment element to construct the SMS message.
 
@@ -426,7 +426,7 @@ We only need one Assignment element to construct the SMS message.
 
 ![image](../images/3dc7f853bd8a2e53f2db30df8e6a57b375c53a0dd1966872407c395801cae40d-image.png)
   
-#### **Step 3.3: The Action - Make the API Call**
+### **Step 3.3: The Action - Make the API Call**
 
 1. Click the final `+` and add an **Action** element.
 2. Search for your `SmsApi` actions and select the action for sending an SMS.
@@ -440,11 +440,11 @@ We only need one Assignment element to construct the SMS message.
 
 ---
 
-### Part 4: Permissions and Testing
+## Part 4: Permissions and Testing
 
 This final step ensures your user can run the flow and execute the callout.
 
-#### **Step 4.1: Assign Permissions**
+### **Step 4.1: Assign Permissions**
 
 1. Navigate to **Setup** ⚙️ > **Permission Sets** and create a **New** Permission Set.
 2. **Label**: `CPaaS API Access`
@@ -452,7 +452,7 @@ This final step ensures your user can run the flow and execute the callout.
 4. Click **Edit**. Add the `8x8 CPaaS Authentication : 8x8 API Key Principal` from the available list to the enabled list. Click **Save**.
 5. **Manage Assignments** for the Permission Set and assign it to your user.
 
-#### **Step 4.2: Debug the Flow**
+### **Step 4.2: Debug the Flow**
 
 1. Return to your saved Flow.
 2. Click the **Debug** button.

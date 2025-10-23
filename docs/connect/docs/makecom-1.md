@@ -6,9 +6,9 @@
 
 Make enables you to instantly integrate 8x8 with over 1500+ apps, allowing you to automate tasks and unlock productivity enhancements.
 
-## Supported Modules
+### Supported Modules
 
-### Messages
+#### Messages
 
 * Send a Single SMS
 * Send Bulk SMS
@@ -20,7 +20,7 @@ Make enables you to instantly integrate 8x8 with over 1500+ apps, allowing you t
 * Watch SMS Inbound Messages
   * Triggers when you have a new inbound SMS message
 
-### Other
+#### Other
 
 * Make an API Call
   * Performs an arbitrary authorized API call

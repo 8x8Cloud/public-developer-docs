@@ -35,6 +35,7 @@ This video shows two channels working, SMS and Viber and is a bit more complex t
   allow="picture-in-picture; web-share"
   allowFullScreen>
 </iframe>
+
 ### WhatsApp Integration Video
 
 This video shows the integration with Salesforce Chat and WhatsApp.
@@ -46,13 +47,14 @@ This video shows the integration with Salesforce Chat and WhatsApp.
   allow="picture-in-picture; web-share"
   allowFullScreen>
 </iframe>
-#### Prerequisites
+
+### Prerequisites
 
 * 8x8 Connect Account
 * Salesforce Service Cloud Lightning account
 * Salesforce license with Chat (formerly known as Live Agent)
 
-#### Salesforce Integration Steps
+## Salesforce Integration Steps
 
 ### Queues
 
@@ -108,7 +110,7 @@ Note down the **OrganizationId** and the **DeploymentId** in the **Deployment Co
 
 ![image](../images/0f7d3db-image3.png)
 
-#### 8x8 Support Team Configuration
+## 8x8 Support Team Configuration
 
 Once you have configured these settings, send an email to [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) with the following information that can be collected from the steps above:
 
@@ -126,7 +128,7 @@ Once you have configured these settings, send an email to [cpaas-support@8x8.com
 
 **For Viber Support:** In addition to providing the above information, ask the support team to provision a new Viber account and assign it to your 8x8 sub account that you plan to use with this integration.
 
-#### FAQ and Known Limitations
+## FAQ and Known Limitations
 
 This section is intended to answer frequently asked questions (FAQ) about the integration and also share any known limitations of the integration.
 
@@ -150,6 +152,6 @@ Here is the Chat Visitor Object:
 
 ![image](../images/48f744b-image.png)
 
-#### Useful References
+### Useful References
 
 [Salesforce Chat Setup Guide](https://help.salesforce.com/s/articleView?id=sf.live_agent_intro_lightning.htm&type=5)

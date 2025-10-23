@@ -4,7 +4,7 @@
 >
 >
 
-### Text Message
+## Text Message
 
 **Content:** Text only  
 
@@ -12,7 +12,7 @@
 
 **Use Cases:** OTP codes, simple alerts
 
-#### Payload sample
+### Payload sample
 
 ```json
 {
@@ -33,7 +33,7 @@ The corresponding message the user will receive:
 
 ---
 
-### Sending a Rich Media Message
+## Sending a Rich Media Message
 
 * Media Types Supported: Images, videos, documents
 * File formats: .ogx, .pdf, .aac, .mp3, .mpeg, .mp3, .mp4, .mp4, .3gp, .jpeg, .jpg, .gif, .png, .h263, .m4v, .mp4, .mp4, .mpeg, .webm
@@ -41,7 +41,7 @@ The corresponding message the user will receive:
 * File Size Limits: 100MB
 * File URL limit: 2,048 characters
 
-#### Image & text
+### Image & text
 
 ```json
 {
@@ -63,7 +63,7 @@ The corresponding message the user will receive:
   
 ---
 
-#### Video & text
+### Video & text
 
 ```
 {
@@ -85,7 +85,7 @@ The corresponding message the user will receive:
   
 ---
 
-#### Audio & text
+### Audio & text
 
 ```
 {
@@ -105,7 +105,7 @@ The corresponding message the user will receive:
 
 ---
 
-#### File & text
+### File & text
 
 ```json
 {
@@ -127,11 +127,11 @@ The corresponding message the user will receive:
   
 ---
 
-### Suggested Actions
+## Suggested Actions
 
 Suggestions in RCS Business Messaging provide interactive buttons, chips, or quick replies that guide users seamlessly through rich conversational experiences. By using suggestions, brands can streamline user journeys, enhance engagement, improve conversions, and gather immediate user feedback.
 
-#### Available Suggestion Types
+### Available Suggestion Types
 
 | Suggestion type | One-line description | Typical brand use cases | Core benefit |
 | --- | --- | --- | --- |
@@ -143,7 +143,7 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 
 ![Appointment confirm](../images/2f3128a1c6a2038bda2b9f5d6c9b2ddcc6149da519ba6edfdbfced18cfd6ed7b-Appointment_confirm.png)
   
-#### Best practices
+### Best practices
 
 * Limit to 4‑5 suggestions per message to avoid cognitive overload.
 * Use clear, action‑oriented labels (e.g. “Track Order” instead of “Order”).
@@ -151,7 +151,7 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 * Include capability fallback (SMS or URL) when the user’s client does not support a given action.
 * Instrument analytics to track tap‑through and optimise suggestion wording.
 
-#### Implementation Example
+### Implementation Example
 
 ```json
 "user": {
@@ -218,9 +218,9 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 
 ```
 
-### Overview of file types and limits
+## Overview of file types and limits
 
-#### Supported **File** formats are
+### Supported **File** formats are
 
 | Category | Extensions / MIME types | Notes |
 | --- | --- | --- |
@@ -230,7 +230,7 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 | **Documents** | `.pdf` (`application/pdf`) | Media messages (not rich cards) |
 | **File size cap** | Up to **100 MB** per attachment |  |
 
-#### Limits
+### Limits
 
 | Message element / field | Limit |
 | --- | --- |

@@ -8,11 +8,11 @@
 >
 >
 
-### Webhook Validity Period
+## Webhook Validity Period
 
 If we do not receive a response for the SMS engage survey promptly, our platform will continue checking for up to 48 hours. If the response is recorded after 48 hours, there will be no SMS engage response webhook sent.
 
-### Webhook format
+## Webhook format
 
 Request body description
 
@@ -25,14 +25,14 @@ Request body description
 | templateVariables | array of objects | Names and values of the variables used to send the SMS Engage |
 | answers | array of objects | Answers or responses submitted by the client based on the corresponding questions. |
 
-#### Template variable object
+### Template variable object
 
 | Property name | Property type | Description             |
 | :------------ | :------------ | :---------------------- |
 | name          | string        | Template variable name  |
 | value         | string        | Template variable value |
 
-#### Answer object
+### Answer object
 
 | Property name | Property type | Description         |
 | :------------ | :------------ | :------------------ |
@@ -41,7 +41,7 @@ Request body description
 | question      | string        | Question text       |
 | answer        | string        | Answer text         |
 
-### Sample of SMS Engage webhook
+## Sample of SMS Engage webhook
 
 ```json
 {

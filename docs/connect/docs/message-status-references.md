@@ -12,7 +12,7 @@ Object structure
 | errorCode | integer | Error code for the operation. This property is optional and set only for errors.                                                                                                                                       |
 | errorMessage | string | Description of the error.<br>This property is optional and set only for errors.                                                                                                                                        |
 
-#### State
+### State
 
 Possible values for `state`:
 
@@ -23,7 +23,7 @@ Possible values for `state`:
 * `undelivered`: We have received a delivery receipt from the operator that the message was not delivered.
 * `read`: The message was delivered and read.
 
-#### Detail
+### Detail
 
 Possible values for `details`:
 

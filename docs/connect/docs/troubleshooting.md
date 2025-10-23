@@ -8,7 +8,7 @@ Troubleshooting a workflow is currently done via the Automation Builder API. Spe
 
 These steps are assuming you would like to retrieve the most recently executed instance of a workflow to see the errors, although you can easily modify them to retrieve errors for a previous instance.
 
-## 1. Get list of workflow instances
+### 1. Get list of workflow instances
 
 Use the following [endpoint](/connect/reference/get-workflow-instances) to retrieve a list of workflow instances currently active and choose the most recently ran instance.
 
@@ -16,7 +16,7 @@ When calling this endpoint, you will receive a list of the most recent instances
 
 ![image](../images/13b1124-image.png)
 
-## 2. Retrieve errors from workflow instance
+### 2. Retrieve errors from workflow instance
 
 Once you have the most recently executed instance's workflowId, use this value in this [endpoint](/connect/reference/get-instance-errors) to retrieve any errors associated with that workflowId.
 
@@ -24,7 +24,7 @@ In this case, there is an error in the HTTP Step that tells us that it is preven
 
 ![image](../images/0e7a9e3-image.png)
 
-## Common Errors
+### Common Errors
 
 This is a list of commonly encountered error messages and general recommendations on how the issue may be resolved.
 

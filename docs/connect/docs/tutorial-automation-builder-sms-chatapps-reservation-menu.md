@@ -32,7 +32,7 @@ The steps in the tutorial is tailored for our Chat Apps API and it is using What
 
 ## Workflow Steps In-Depth
 
-## 1. ChatApps Trigger
+### 1. ChatApps Trigger
 
 ![image](../images/4883414-image.png)
 
@@ -40,7 +40,7 @@ The steps in the tutorial is tailored for our Chat Apps API and it is using What
 
 The **ChatApps trigger** here is set to Chat Apps where you should have a subaccount with an already configured ChatApps channel. You should reach out to your respective account manager to complete the setup for your Chat Apps channel if you do not already have a functioning Chat Apps subaccount.
 
-## 2. ChatApps Message Step
+### 2. ChatApps Message Step
 
 ![image](../images/9f8a6a5-image.png)
 
@@ -70,7 +70,7 @@ The **Message** property will either be automatically filled in if you chose to 
 >
 >
 
-## 3. Wait for Reply Step
+### 3. Wait for Reply Step
 
 ![image](../images/8f2479f-image.png)
 ![image](../images/4b3e879-image.png)
@@ -81,7 +81,7 @@ The **From** property can be set to {{data.payload.user.channelUserId}} which wi
 
 **Timeout** can be set to an appropriate value for your use case.
 
-## 4. Branch Step (and 5a-c for Branch options)
+### 4. Branch Step (and 5a-c for Branch options)
 
 ![image](../images/bd9f581-image.png)
 
@@ -93,7 +93,7 @@ The **Value to check** property can be set to {{data.waitforreply_9959_step_text
 
 For the **keyword(s) to compare** property, add "Confirm", "Reschedule" and "Help" to add three options to the branch.
 
-## 4b. Chat Apps Message
+### 4b. Chat Apps Message
 
 ![image](../images/1a907cc-image.png)
 
@@ -111,7 +111,7 @@ Message can be set to a free form message with the following text by selecting "
 >
 >
 
-## 6a. ChatApps Message Step (Confirm)
+### 6a. ChatApps Message Step (Confirm)
 
 ![image](../images/514e30a-image.png)
 
@@ -129,7 +129,7 @@ Message can be set to a free form message with the following text by selecting "
 >
 >
 
-## 6b. ChatApps Message Step (Reschedule)
+### 6b. ChatApps Message Step (Reschedule)
 
 ![image](../images/aa1e183-image.png)
 
@@ -147,13 +147,13 @@ Message can be set to a free form message with the following text by selecting "
 >
 >
 
-## 6c. Send to Converse
+### 6c. Send to Converse
 
 ![image](../images/1df8b1d-image.png)
 
 The Send to Converse step will send the conversation to [Converse](https://www.google.com/search?q=converse+8x8+docs&rlz=1C5GCEM_enSG1072SG1072&oq=converse+8x8+docs&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yDQgCEAAYhgMYgAQYigUyBggDEEUYQDIGCAQQRRhAMgYIBRBFGEAyBggGEEUYPDIGCAcQRRg80gEIMTY1MGowajSoAgCwAgA&sourceid=chrome&ie=UTF-8) for a live agent to take over. Converse should be configured for your account prior to using this option.
 
-## 7c. HTTP Request
+### 7c. HTTP Request
 
 ![image](../images/040d2ff-image.png)
 
@@ -174,13 +174,13 @@ If required you can also change the **Request Body** property, I set the value a
 
 **Timeout** property can be set to any appropriate value, I would recommend above 20 seconds to ensure the server has appropriate time to respond.
 
-### Testing the Workflow
+## Testing the Workflow
 
 In order to test the workflow, simply send a WhatsApp message to the WhatsApp account tied to your subaccount. In the example you can send any message to start
 
 ![image](../images/8404ac9-image.png)
 
-### Tutorial JSON
+## Tutorial JSON
 
 Automation Builder UI features a function to import workflow definitions for easy versioning and sharing. If you would like to import the example for this tutorial, save the text below as a file such as tutorial_automation_builder.json and import it from the Automation Builder UI.
 

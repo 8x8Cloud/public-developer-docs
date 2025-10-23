@@ -4,9 +4,9 @@
 >
 >
 
-### Sending a Text Message
+## Sending a Text Message
 
-#### Text only
+### Text only
 
 ```json
 {
@@ -27,9 +27,9 @@ The corresponding message the user will receive:
 
 ---
 
-### Sending a Rich Media Message
+## Sending a Rich Media Message
 
-#### Image only
+### Image only
 
 ```json
 {
@@ -50,7 +50,7 @@ The corresponding message the user will receive:
 
 ---
 
-#### Text + Image
+### Text + Image
 
 ```
 {
@@ -72,7 +72,7 @@ The corresponding message the user will receive:
 
 ---
 
-#### Text + Image + Button
+### Text + Image + Button
 
 ```
 {
@@ -98,7 +98,7 @@ The corresponding message the user will receive:
 
 ---
 
-#### Video only
+### Video only
 
 Refer to [Supported Content Types](/connect/reference/supported-chat-apps-content-type) for more info on supported file formats and size limits.
 
@@ -128,7 +128,7 @@ The corresponding message the user will receive:
 
 ---
 
-#### Text + Video
+### Text + Video
 
 Refer to [Supported Content Types](/connect/reference/supported-chat-apps-content-type) for more info on supported file formats and size limits.
 
@@ -157,7 +157,7 @@ The corresponding message the user will receive:
 
 ---
 
-#### Text + Video + Button
+### Text + Video + Button
 
 ```
 {
@@ -188,7 +188,7 @@ The corresponding message the user will receive:
 
 ---
 
-#### File only
+### File only
 
 Refer to [Supported Content Types](/connect/reference/supported-chat-apps-content-type) for more info on supported file formats and size limits.
 
@@ -213,7 +213,7 @@ The corresponding message the user will receive:
 
 ---
 
-#### Text + Button
+### Text + Button
 
 ```json
 {
@@ -238,7 +238,7 @@ The corresponding message the user will receive:
 
 ---
 
-#### Text + Image (deprecated)
+### Text + Image (deprecated)
 
 ```json
 {
@@ -276,7 +276,7 @@ The corresponding message the user will receive:
 
 ![Viber Rich Media message: Text and Image](../images/bd07ae3-a955628-TextImage.png)Viber Rich Media message: Text and Image
 
-### Optional: Adding SMS Fallback
+## Optional: Adding SMS Fallback
 
 If you want to add a fallback to SMS, add the following fields to the "`content`" object in your existing JSON payload:
 

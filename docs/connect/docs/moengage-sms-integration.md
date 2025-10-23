@@ -26,7 +26,7 @@ This is an accompanying video guide. It shows how the integration is setup and u
 
 This article helps you configure 8x8 as a Custom SMS Connector (Service Provider) on the MoEngage platform for businesses that use MoEngage for their communication campaign scheduling.
 
-## Requirements
+### Requirements
 
 Before proceeding, ensure that you have the following parameters to make calls to the 8x8 SMS API. Both parameters below can be found in your 8x8 Connect Portal in the [API Keys section](https://connect.8x8.com/messaging/api-keys).
 
@@ -35,7 +35,7 @@ Before proceeding, ensure that you have the following parameters to make calls t
 | **API Key**    | Used to authenticate with 8x8's APIs. Please see [this](/connect/docs/authentication) page for details.                                                                           |
 | **Subaccount** | Your 8x8 subaccount. Your 8x8 account should have a subaccount created for it by default. You can request a new subaccount from our support team at [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com). |
 
-### Configure in Revamped UI
+## Configure in Revamped UI
 
 Log in to the MoEngage Dashboard and follow these steps:
 

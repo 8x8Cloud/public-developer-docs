@@ -46,9 +46,11 @@ c. Add contacts from your contact list
 d. Add group from your contact groups
 
 ![image](../images/2c313bbcee997b80238468b9a40c9d5b4279d308ea0f5fc29009b9890ce90ac8-image.png)
+
 3. **You can upload your contact list** by either clicking the "Drag & drop to upload" icon or simply dragging and dropping your file directly. For best results, we recommend using a .csv file formatted according to our default layout (you can find a sample file in this step for reference).
 
 ![image](../images/67f54a21a935357bf6353f5147d16013907f08de8d0ed2ae7d59d253e2f32cb3-image.png)
+
 4. **Once you've uploaded your contacts, you can easily adjust the column labels to match your data.**  
 
 You'll find standard options like `Mobile`, `FirstName`, `LastName`, and `ClientmessageId` ready for selection. Need something more specific? Just type in a custom field name and press Enter to create and then select it..
@@ -57,6 +59,7 @@ You'll find standard options like `Mobile`, `FirstName`, `LastName`, and `Client
 Creating a custom field *(From the screenshot below, the user typed and entered a new field called `Nickname`)*
 
 ![image](../images/6c59216592bcb63a8fad8188ae46adacd87e459852fbd22e32fb800702eeca4a-image.png)
+
 5. **Click "Process contacts" to review your contact list.** On this screen, you can verify all the fields you've selected, check country destinations, and see the total valid numbers, as well as any duplicates. If you want specific contacts to receive the same message multiple times, you can choose to "include duplicates."  
 
 **Handling Mixed Country Codes in Destination Lists**  
@@ -64,6 +67,7 @@ Creating a custom field *(From the screenshot below, the user typed and entered 
 If your destination list has phone numbers with different country codes than your current selection for local numbers, a notification will pop up under the Destinations card. You'll get an option to force apply the selected country code to all numbers.
 
 ![image](../images/356bb136d539d20151ddfabfc89edad27e74a005b673860505332ccc3da7ee3f-image.png)
+
 6. **Next, click "Compose a message" to start writing your message.**  
 
 Before crafting your message, always enter your Sender ID. We'll automatically save it for you, so next time, just search and pick it from the dropdown list.

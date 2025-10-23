@@ -31,7 +31,7 @@ This Video Demo shows the integration in action and explains a high level of the
 
 ## Setup
 
-## Setup Backend Code
+### Setup Backend Code
 
 We will need an example endpoint for Okta to send it's HTTP request to. We have provided some example Node.js server code below for you to use:
 
@@ -215,13 +215,13 @@ The server should be exposed to the public internet so that Okta can send a webh
 
 For production, however, this should be running behind a proper web server setup.
 
-## Create Inline Hook
+### Create Inline Hook
 
 Go to **Workflow > Inline Hooks** on the Okta Dashboard. Select **Add Inline Hook** and **Telephony**.
 
 ![image](../images/982f180-image.png)
 
-## Adding Inline Hook as Authenticators
+### Adding Inline Hook as Authenticators
 
 In the **Create Inline Hook** page, fill in the following values.
 
@@ -236,7 +236,7 @@ In the **Create Inline Hook** page, fill in the following values.
 
 After entering the values, click **Save**.
 
-## Preview the Telephony Inline Hook
+### Preview the Telephony Inline Hook
 
 In the next page you should see the following confirming a few of the values from setting up the Inline Hook. Select an Okta user to preview from your organization in **data.userProfile** and select anything for the **requestType**, we use MFA enrollment.
 
@@ -300,11 +300,11 @@ The SMS should also be delivered to your phone.
 ![image](../images/a7da876-image.png)
 This demonstrates the inline hook is now successfully working. Now you can attach the Okta inline hook to any action that would trigger the inline hook in Okta.
 
-### Using the Inline Hook
+## Using the Inline Hook
 
 Now that the Inline Hook has been added, in order to require it for signing into your Okta organization.
 
-## Add Authenticator
+### Add Authenticator
 
 Ensure that in the **Security - Authenticators** page that Phone is added as an Authenticator option.
 
@@ -312,7 +312,7 @@ Ensure that in the **Security - Authenticators** page that Phone is added as an 
 
  If it is not already on the list then click **Add Authenticator** to add it.
 
-## Create new Authentication Policy Rule
+### Create new Authentication Policy Rule
 
 Click **Add Rule** on the **Security - Authentication Policies** page.
 
@@ -322,7 +322,7 @@ In the **Edit Rule** page, the only change we will make is for AND Authenticatio
 
 ![image](../images/c32a99f-image.png)
 
-## Add to Application
+### Add to Application
 
 After creating the Policy, add it to one of your Applications.
 
@@ -330,7 +330,7 @@ After creating the Policy, add it to one of your Applications.
 
 ![Inline Hook Rule - After Adding Okta Dashboard to the rule.](../images/2959b4b-image.png "Inline Hook Rule - After Adding Okta Dashboard to the rule.")
 
-## Signing In
+### Signing In
 
 When attempting to login to the application that you have configured above, you should receive the following screen prompting you to register for Phone Verification.
 
@@ -341,6 +341,6 @@ Again the code should be sent to your phone via SMS, follow the prompts to finis
 ![image](../images/c3a7e16-image.png)
 For subsequent sign-ins to the application it should utilize SMS as a verification method.
 
-### Conclusion
+## Conclusion
 
 In this tutorial we have shown how to create a Telephony Inline Hook that makes use of 8x8's SMS API to send OTPs via SMS. With this integration, you can leverage the ability of 8x8's SMS API to send an OTP while integrating with Okta.

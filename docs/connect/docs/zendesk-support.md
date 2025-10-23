@@ -6,7 +6,7 @@
 
 By integrating 8x8 Chat Apps product into Zendesk Support you get the best on both products, a simple and unique Chat Apps API with no deployment needed, as well as the best customer service front end, with advanced configurations available.
 
-## Video Demo
+### Video Demo
 
 To see the integration in action, please view this video.
 
@@ -18,22 +18,22 @@ To see the integration in action, please view this video.
   allowFullScreen>
 </iframe>
 
-## Some use cases
+### Some use cases
 
 * Send and receive notifications about ticket updates from different Chat apps channels(Whatsapp, Viber, Zalo, Line, 2-Way SMS and more)
 
-## Product scope
+### Product scope
 
 * Zendesk Support
 
-## What you'll need
+### What you'll need
 
 * A 8x8 account with Chat Apps enabled
 * Your Zendesk Support account with Team Plan
 
-## Setting up Zendesk for the Integration
+### Setting up Zendesk for the Integration
 
-### Tag Setup
+#### Tag Setup
 
 In order to filter by the tickets sent by 8x8, you will need to create a **Zendesk Tag**. To create the tag, you can assign a new tag by clicking the "Tags" field of an existing ticket. This can be any ticket in the system, but you will need to assign it the tag you wish to use to create it in the system. The tag can be removed from the ticket afterwards.
 
@@ -41,7 +41,7 @@ The tag can be any value, however for this tutorial we are assuming you are usin
 
 ![image](../images/1598547-image.png)
 
-### Queue Setup
+#### Queue Setup
 
 Navigate to the **Settings** Page, then go to the Admin Center through the link.
 
@@ -64,7 +64,7 @@ Create the queue with the following conditions.
 
 ![image](../images/f4765bf-image.png)
 
-### Webhook Setup
+#### Webhook Setup
 
 Once the queue is created, navigate back to the **Admin Center**. Then in the side menu go to **Apps and Integrations** > **Webhooks**, you can search for "webhook" on the left search bar to find this easier. Once on this page, click the **Create Webhook** button.
 
@@ -174,7 +174,7 @@ After creating trigger, create another trigger as follows.
 
 ![image](../images/5a39d8d-image.png)
 
-### Create Zendesk API Token
+#### Create Zendesk API Token
 
 In order to give 8x8 access to the Zendesk API, you will need to generate an API token. Return to the **Admin Center**, then in the sidebar navigate to **Apps and Integrations** > **APIs** > **Zendesk API**. In the next screen agree to the Zendesk Terms and Conditions and click **Get Started**.![image](../images/dfc6015-image.png)
 
@@ -186,7 +186,7 @@ Once you are shown your API Tokens value, record it as you will need to send thi
 
 ![image](../images/dbc00b4-image.png)
 
-#### Send Information to 8x8 to Enable Zendesk Integration
+### Send Information to 8x8 to Enable Zendesk Integration
 
 After completing all of the steps above, the setup should be complete on your end. Now send an email to [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) with the title "Enable Zendesk Integration" and provide the following details:
 
@@ -206,7 +206,7 @@ e. DefaultTicketSubject, the subject which will be used for new ticket when the 
 
 from the image, not from the text message.
 
-#### Using the Integration
+### Using the Integration
 
 Once your integration is setup properly, you should be able to receive a message in your ChatApps channel and a ticket with your tag will automatically generated on Zendesk.
 

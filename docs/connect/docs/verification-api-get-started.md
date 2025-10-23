@@ -18,7 +18,7 @@ The general workflow is shown in the following sequence diagram:
 
 ![Verify Diagram](../images/1c6b334-914f66a-Verify-Diagram.jpg "Verify-Diagram.jpg")
 
-### Demo Video of 8x8 Verif8 Service and 8x8 Verification API
+#### Demo Video of 8x8 Verif8 Service and 8x8 Verification API
 
 This video shows:
 

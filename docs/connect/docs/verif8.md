@@ -32,7 +32,7 @@ For example, if your application needs to send both verification codes and marke
 * Use your Verif8 subaccount (ending in '_verif8') for all verification-related communication
 * Use your standard 8x8 Connect subaccount for marketing messages and other communication types
 
-#### Pricing
+## Pricing
 
 Each verification attempt through Verif8 involves two potential cost components:
 
@@ -48,7 +48,7 @@ The conversion fee is what makes Verif8 unique - it's only charged when a verifi
 
 For a complete breakdown of message fees for each country and channel, please visit the 8x8 Connect Pricing page in your dashboard.
 
-#### Prerequisites
+## Prerequisites
 
 * Command line interface compatible with CURL
 * 8x8 CPaaS account
@@ -60,7 +60,7 @@ You'll notice that Message Body and Brand name (SMS SenderID) are no longer requ
 
 ---
 
-#### Account and credentials
+## Account and credentials
 
 *You will need to sign up to use the API. The following steps will guide you through this process and highlight the information to keep aside.*
 

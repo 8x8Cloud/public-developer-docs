@@ -16,7 +16,7 @@ For example, if you would like to start your workflow when the number tied to yo
 
 ## Trigger Descriptions
 
-## Inbound SMS
+### Inbound SMS
 
 Below is an example of a SMS trigger step setup as part of the workflow. It is the first part of a workflow and the next step is a branch. This means when this subaccount receives an SMS, it will send it to the branch step.
 
@@ -30,7 +30,7 @@ This may be useful to use when you want to trigger an event such as sending a re
 | --- | --- |
 | Please select a new subaccount | Select the subaccount that should trigger this workflow when it receives an inbound SMS |
 
-## Inbound Chat Apps
+### Inbound Chat Apps
 
 ![Inbound Chat Apps as part of a workflow
 
@@ -46,7 +46,7 @@ This may be useful to use when you want to trigger an event such as sending a re
 | --- | --- |
 | Please select a new subaccount | Select the subaccount that should trigger this workflow when it receives an inbound Chat apps message. |
 
-## HTTP Request (Webhooks)
+### HTTP Request (Webhooks)
 
 ![HTTP Trigger as part of a Workflow](../images/0d426e5-image.png)HTTP Trigger as part of a Workflow
 

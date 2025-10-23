@@ -38,7 +38,7 @@ All closed tickets will be added automatically to the agent’s Closed conversat
 
 ![1600](../images/b2d1f21-closed.png "closed.png")
   
-#### Adding notes
+## Adding notes
 
 There are two types of notes that you can add during a conversation, these notes can only be read by agents regardless of their role. Notes are useful where the next agent can review previous issues regarding the ticket or the customer. It will help resolve tickets faster.
 
