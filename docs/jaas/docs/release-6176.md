@@ -31,7 +31,7 @@
 * **Language Updates**: Updates for Italian, German, Latvian, Chinese (CN & TW) translations
 * **Accessibility**: Fix English apostrophes and improve German dynamic participants count
 
-#### Versions
+## Versions
 
 **Release version**
 

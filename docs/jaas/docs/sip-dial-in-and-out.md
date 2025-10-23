@@ -1,14 +1,14 @@
 # SIP Dial In/Out
 
-# Introduction
+## Introduction
 
 JaaS **SIP Dial In/Out** feature allows users to connect with participants on traditional phone networks, extending the flexibility and reach of Jitsi conferences. This feature is particularly useful for hybrid meetings involving both online and phone participants.
 
-# SIP Dial In
+## SIP Dial In
 
 This section covers how to use a SIP device to connect to a JaaS call through SIP. We use Zoom as an example of a typical SIP Device.
 
-## Prerequisites
+### Prerequisites
 
 - JaaS Account with a billing method added (to access Paid/Premium Features).
 - A SIP Device (Zoom is used as the example in this section of the tutorial)
@@ -30,9 +30,9 @@ This section covers how to use a SIP device to connect to a JaaS call through SI
   }
   ```
 
-## SIP Dial In - Video Call
+### SIP Dial In - Video Call
 
-### Video Walkthrough
+#### Video Walkthrough
 
 This video will take you through a walkthrough of this section.
 
@@ -44,7 +44,7 @@ This video will take you through a walkthrough of this section.
   allowFullScreen>
 </iframe>
 
-### JaaS Room and PIN
+#### JaaS Room and PIN
 
 Create or Join a JaaS Room. Afterwards obtain the PIN from the **Triple Dot > Invite People Menu**.
 
@@ -55,7 +55,7 @@ The PIN should be available from the popup below.
 ![](../images/fc0f4ae-image.png)
 Note down the PIN for this room which will be used when connecting through Zoom in the next step.
 
-### Connecting Through Zoom
+#### Connecting Through Zoom
 
 Start your Zoom Client and join a meeting room. Navigate to **Participants > Invite > Room System > Call Out** as shown below.
 
@@ -89,11 +89,11 @@ On the JaaS Room you should see a participant named **Zoom#########** join the r
 
 After completing these steps, congratulations you have now successfully connected Zoom to JaaS via SIP with video/audio enabled.
 
-## SIP Dial In - Audio Call
+### SIP Dial In - Audio Call
 
 This section outlines how to make a call via a softphone such as Bria to a JaaS room for an audio only call.
 
-### Video Walkthrough
+#### Video Walkthrough
 
 This video will take you through the steps mentioned in this section to connect a softphone to a JaaS room.
 
@@ -104,7 +104,8 @@ This video will take you through the steps mentioned in this section to connect 
   allow="picture-in-picture; web-share"
   allowFullScreen>
 </iframe>
-### JaaS PIN Code
+
+#### JaaS PIN Code
 
 The first step is to obtain the **PIN Code** from the JaaS Room
 
@@ -121,11 +122,11 @@ In our example above the SIP address is [2407322930@audio.8x8.vc](mailto:2407322
 
 ![](../images/4f2d5af-image.png)
 
-#### SIP Dial Out
+## SIP Dial Out
 
 From the JaaS room, it is possible to dial out to a SIP Address such as a softphone to invite them to join the room.
 
-## Prerequisites
+### Prerequisites
 
 There are a few prerequisites before using this feature:
 
@@ -157,7 +158,7 @@ interfaceConfigOverwrite: {
 },
 ```
 
-## Making a Call
+### Making a Call
 
 After the required setup, go to your JaaS meeting and then open **Triple Dot Menu > Invite People**. In the dialog box that opens, proceed to enter the SIP address in the **Invite your contacts** box. This should result in a dialog box showing that you have invited that SIP address.
 
@@ -166,21 +167,21 @@ The softphone connected to that SIP Address should ring as shown, when you pick 
 
 ![](../images/346a89c-image.png)
 
-## Connected Call - Video Mode
+### Connected Call - Video Mode
 
 If the call is connected through video, both the softphone participant and the JaaS participant can see each other on their respective screens.
 
 ![](../images/a33679c-image.png)
 
-## Connected Call - Audio-Only Mode
+### Connected Call - Audio-Only Mode
 
 If the call is connected via audio-only, then an audio-only participant will join the JaaS room to represent the softphone. Both the JaaS participant and the softphone participant will be able to hear and speak to each other.
 
 ![](../images/d1e3c7e-image.png)
 
-## Video Walkthrough
+### Video Walkthrough
 
-### Video Call
+#### Video Call
 
 This Video will show how it is possible to call from a JaaS (Jitsi as a Service) Room out to a softphone in Video Mode.
 
@@ -192,7 +193,7 @@ This Video will show how it is possible to call from a JaaS (Jitsi as a Service)
   allowFullScreen>
 </iframe>
 
-### Audio Call
+#### Audio Call
 
 This Video will show how it is possible to call from a JaaS (Jitsi as a Service) Room out to a softphone in Audio-Only Mode.
 
@@ -204,7 +205,7 @@ This Video will show how it is possible to call from a JaaS (Jitsi as a Service)
   allowFullScreen>
 </iframe>
   
-# Billing / Usage
+## Billing / Usage
 
 In order to see the usage and charges associated with SIP Dial In and Out in the JaaS Dashboard, please see:
 

@@ -6,7 +6,7 @@ The livestreaming feature in JaaS allows users to broadcast their video conferen
 
 ## How to Livestream to YouTube
 
-## Prerequisites
+### Prerequisites
 
 These are the requirements to start using livestreaming:
 
@@ -26,7 +26,7 @@ These are the requirements to start using livestreaming:
 
 * If you plan to stream to YouTube, you will need a YouTube account in order to start a Livestream on YouTube to send the RTMP stream to. If you are planning to stream on another platform, ensure that it supports an RTMP stream and has a stream key.
 
-## Demo Video
+### Demo Video
 
 This is an accompany video guide which covers how to stream to YouTube using JaaS.
 
@@ -38,7 +38,7 @@ This is an accompany video guide which covers how to stream to YouTube using Jaa
   allowFullScreen>
 </iframe>
 
-## Livestream Menu
+### Livestream Menu
 
 To access the livestream menu within a JaaS call, go to the **Triple Dot Menu** and navigate to **Start live stream** option.
 
@@ -53,7 +53,7 @@ If you do have a Live stream setup you should see the box populated as below whe
   
 Regardless of whether you choose between a live stream or a Live stream key, the next sections will cover what you will need
 
-## Streaming to YouTube
+### Streaming to YouTube
 
 Once you are logged into your YouTube account, navigate to the **Create > Go Live** option.
 
@@ -76,7 +76,7 @@ This should result in a few dialog boxes being shown confirming that the livestr
 ![](../images/5eccdbc-image.png)
 ![](../images/9dd7c97-image.png)
 
-## Viewing the YouTube Livestream
+### Viewing the YouTube Livestream
 
 From YouTube Studio when you are logged in as a YouTube Channel Owner / Manager you should be able to see a preview of the stream from the same page.
 
@@ -84,11 +84,11 @@ From YouTube Studio when you are logged in as a YouTube Channel Owner / Manager 
 
 If your stream is public, this stream should be visible from your YouTube channel at this point for your regular YouTube viewers.![](../images/078fb1b-image.png)
 
-### Streaming to a Custom RTMP Endpoint (Twitch)
+## Streaming to a Custom RTMP Endpoint (Twitch)
 
 This section will cover how it is possible to stream to a custom RTMP endpoint by using Twitch as an example.
 
-## Prerequisites
+### Prerequisites
 
 These are the requirements to start using livestreaming:
 
@@ -108,7 +108,7 @@ These are the requirements to start using livestreaming:
 
 * An **RTMP Endpoint**. If you plan to stream to Twitch you can follow the steps below to obtain your Twitch RTMP endpoint.
 
-## Demo Video
+### Demo Video
 
 This is an accompany video guide which covers how to stream to Twitch via RTMP.
 
@@ -119,13 +119,14 @@ This is an accompany video guide which covers how to stream to Twitch via RTMP.
   allow="picture-in-picture; web-share"
   allowFullScreen>
 </iframe>
-## Livestream Menu
+
+### Livestream Menu
 
 First access the livestreaming menu from **Triple Dot Menu > Start Live Stream**
 
 ![](../images/eb4ea0d-Screenshot_2024-06-18_at_11.03.38_AM.png)
 
-## Input Livestream RTMP Endpoint
+### Input Livestream RTMP Endpoint
 
 ![](../images/3c92010-image.png)
   
@@ -137,7 +138,7 @@ For **{region}** simply select the closest region on the page above. The **{stre
 
 ![](../images/6478422-image.png)
 
-## Starting Livestream on Twitch
+### Starting Livestream on Twitch
 
 Once you have the full RTMP endpoint simply enter it into the **Live stream key** field and hit **Start live stream**to begin the stream.
 
@@ -153,7 +154,7 @@ Afterwards your Livestream should be available on your Twitch page.
 
 ![](../images/0ff02e5-image.png)
 
-## Live streaming FAQ
+### Live streaming FAQ
 
 | Question | Answer |
 | --- | --- |

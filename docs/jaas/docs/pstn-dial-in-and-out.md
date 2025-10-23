@@ -4,7 +4,7 @@
 
 Jaas has capabilities for joining meetings using PSTN/Telephony (Telephone Dialing) audio.
 
-## Dial In from a JaaS Room
+### Dial In from a JaaS Room
 
 First enter a JaaS Room and then obtain a DID to call into. Open the **Triple Dot Menu > Invite People**, The DID for your detected country should be shown in the pop up box. If you need to obtain a different countries DID you can click **More Numbers**.
 
@@ -18,11 +18,11 @@ Share the **Dial-in Phone Number and PIN Code** to the person you would like to 
 
 Once they enter the PIN Code, they should be connected via Audio to the JaaS Room.
 
-### API Usage
+## API Usage
 
 There may be cases when you wish to programmatically send out the PIN Code and DID List. The following two sections will take you through how to obtain these via API.
 
-## Retrieving Meeting ID and PIN Code via API
+### Retrieving Meeting ID and PIN Code via API
 
 You can get the meeting id using following API. Please replace **{Meeting-Name}** with the meeting you want to use. **{App-Id}** should be replaced with your Jaas app id.  
 
@@ -46,7 +46,7 @@ The API response will contain the following information.
 
 The **id** from the response is the **meeting's pin code**. You can do this upfront so you can properly edit your invites.
 
-## Retrieving DID List via API
+### Retrieving DID List via API
 
 The list of DID can be fetched using this API: [[https://8x8.vc/v1/_jaas/vmms-conference-mapper/access/v1/dids](https://8x8.vc/v1/_jaas/vmms-conference-mapper/access/v1/dids)](<https://8x8.vc/v1/_jaas/vmms-conference-mapper/access/v1/dids>) We recommend using the API for fetching the DID for each invite, because we sometimes add new numbers in new countries.
 
@@ -64,11 +64,11 @@ The API response will be a list of DIDs which can be shared to the person that s
 
 ```
 
-### PSTN Dial Out
+## PSTN Dial Out
 
 JaaS will also allow you to dial a phone number directly from a JaaS room to invite them to join in audio-only mode.
 
-## Prerequisites
+### Prerequisites
 
 There are a few prerequisites before using this feature:
 
@@ -100,7 +100,7 @@ interfaceConfigOverwrite: {
 
 ```
 
-## Dial Out from a JaaS Room
+### Dial Out from a JaaS Room
 
 Simply enter a JaaS room and navigate to the **Triple Dot Menu > Invite People**
 
@@ -109,7 +109,7 @@ Afterwards enter the number that you would like to dial in the **Invite your Con
 ![](../images/1a280a4-PSTN_Dial_Out.gif)
 This should dial the number and when the callee picks up, they will be added in audio-only mode to the JaaS Room.
 
-### Billing / Usage
+## Billing / Usage
 
 In order to see the usage and charges associated with PSTN Dial In and Out in the JaaS Dashboard, please see:
 

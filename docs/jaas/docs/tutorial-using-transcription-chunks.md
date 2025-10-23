@@ -19,7 +19,7 @@ The code will contain the following parts:
 * Backend Server written in NodeJS
 * Webpage written in HTML and JavaScript, using the JaaS Iframe as a base.
 
-## Setup
+### Setup
 
 First create a new directory somewhere on your computer for the sample code.
 
@@ -43,7 +43,7 @@ Once you have a endpoint, you can set it up in the [webhook](jaas-console-webhoo
 
 ![](../images/30a4fbc-Screenshot_2024-07-16_at_6.40.30_PM.png)
 
-## Backend Code
+### Backend Code
 
 The backend component will both serve the web page and also serve as an endpoint to send the jaas webhook to.
 
@@ -75,7 +75,7 @@ app.listen(port, () => {
 
 ```
 
-## Frontend Code
+### Frontend Code
 
 Our frontend uses the JaaS Iframe from the [sample](jaas-console-my-sample-app) app that you can get from your [JaaS console](https://jaas.8x8.vc/#/) with a few modifications. Create a new **public** directory and place this **index.html** file inside of it.
 
@@ -134,7 +134,7 @@ public/index.html
 
 ```
 
-## Running Sample App
+### Running Sample App
 
 You should now be able to run the nodejs server which by default runs on port 3000. The port number can be modified if needed.
 
@@ -154,7 +154,7 @@ Now go to the URL printed above and join the JaaS room. **Unmute** and enable tr
 
 ![](../images/c652253-Transcription_Test.gif)
 
-## Receiving Iframe Events
+### Receiving Iframe Events
 
 As you speak into the microphone, you should be able to see logs printed out in the console of your browser.
 
@@ -163,7 +163,7 @@ Here is a close up of the transcription event. You should see a property called 
 
 ![](../images/7be0326-image.png)
 
-## Receiving Webhook Events
+### Receiving Webhook Events
 
 Similarly for the webhook, as you speak into the microphone, you should see some webhooks sent to your server in real time. Here's an example of such a webhook below.
 
@@ -194,7 +194,7 @@ Similarly for the webhook, as you speak into the microphone, you should see some
 
 The **data.final** field will contain the string that represents the transcription. This webhook should be sent shortly after you speak into the microphone.
 
-### Conclusion
+## Conclusion
 
 In this tutorial we explain how to receive the webhook and iframe events. From there you can use the data you receive in real time to enable your app to respond in real time. A few ideas are below.
 

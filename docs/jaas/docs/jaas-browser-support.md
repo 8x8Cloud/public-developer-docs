@@ -14,7 +14,7 @@
 
 ## Mobile
 
-## Android
+### Android
 
 | Browser | Support | Versions | Notes |
 | --- | --- | --- | --- |
@@ -30,7 +30,7 @@
 >
 >
 
-## iOS
+### iOS
 
 | Browser | Support | Versions | Notes |
 | --- | --- | --- | --- |

@@ -4,11 +4,11 @@
 
 In order to function properly, the 8x8 Meet and Jitsi as a Service clients require access to certain domains and IP addresses. If your users have strict firewall rules, you should make sure that they whitelist the following domains and IP ranges.
 
-## Domains
+### Domains
 
 This is the list of domains that 8x8 Meet and Jitsi as a Service clients will attempt to access during their normal operation. They should be whitelisted for HTTPS (TCP port 443). Separated by category, they are:
 
-### Core Operation
+#### Core Operation
 
 It is absolutely necessary that these domains are added to HTTPS (TCP port 443) whitelists. Users will be unable to use the meetings products if they are not.
 
@@ -19,7 +19,7 @@ It is absolutely necessary that these domains are added to HTTPS (TCP port 443) 
 * `https://jitsi.net`
 * `https://*.jitsi.net`
 
-### Auxiliary Functionality
+#### Auxiliary Functionality
 
 Inability to access domains on this list will disrupt some features in the product, but users should still be able to conduct basic meetings.
 
@@ -36,7 +36,7 @@ Inability to access domains on this list will disrupt some features in the produ
 * `https://*.live.com`
 * `https://*.microsoftonline-p.com`
 
-### Analytics
+#### Analytics
 
 The following domains are used by tools that help us analyze user activity, improve the Meet products, and debug user problems. Inability to access these domains will result in no perceptible changes to end users, but it will hamper our ability to diagnose issues and improve the product.
 
@@ -47,11 +47,11 @@ The following domains are used by tools that help us analyze user activity, impr
 * `https://*.google.com`
 * `https://*.googleusercontent.com`
 
-#### IP Addresses
+### IP Addresses
 
 To provide core service, we also require full IP connectivity (TCP and UDP) to the following IP blocks and port ranges.
 
-### Cloudflare
+#### Cloudflare
 
 For complete access to all JaaS services, the cloudflare IP ranges should also be included in any allow lists. The latest version of this list can be found here: [https://www.cloudflare.com/ips/](https://www.cloudflare.com/ips/)
 
@@ -103,7 +103,7 @@ For complete access to all JaaS services, the cloudflare IP ranges should also b
 
 2c0f:f248::/32
 
-### Video Bridges
+#### Video Bridges
 
 JVB video bridges require TCP port 443 and UDP port 10000:
 
@@ -116,7 +116,7 @@ JVB video bridges require TCP port 443 and UDP port 10000:
 * USA West (Phoenix): 158.101.40.0/25, 129.146.204.128/27, 129.146.205.0/27, 129.146.205.96/27, 129.146.206.64/27
 * UK (London): 152.67.144.0/24
 
-### TURN Relay Servers
+#### TURN Relay Servers
 
 TURN servers require TCP port 443, UDP port 443 and UDP ports 49152-65535.
 
@@ -131,7 +131,7 @@ TURN servers require TCP port 443, UDP port 443 and UDP ports 49152-65535.
 * USA East (Ashburn): 193.122.177.113, 193.122.167.175, 129.80.169.133, 129.153.0.67
 * USA West (Phoenix): 129.146.227.2, 129.146.219.44, 144.24.35.218, 144.24.7.53
 
-### Jitsi as a Service Webhook Origins
+#### Jitsi as a Service Webhook Origins
 
 Webhook responses will come on TCP from these IPs:
 
@@ -139,7 +139,7 @@ Webhook responses will come on TCP from these IPs:
 * 52.10.206.157
 * 35.162.88.192
 
-### Copy/Paste
+#### Copy/Paste
 
 For ease of use, here are all IPs and ranges for copy-paste:
 

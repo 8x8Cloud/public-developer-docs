@@ -6,7 +6,7 @@ For each user endpoint you enable for a meeting, you must generate a JWT token a
 
 The JWT token is passed as a parameter to either the IFrame or Mobile SDK as described in the following sections.
 
-## The Jitsi JWT
+### The Jitsi JWT
 
 The header of the JWT contains 3 claims:
 

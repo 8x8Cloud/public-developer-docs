@@ -10,19 +10,19 @@ This guide helps to style your products to fit within the 8x8 ecosystem allowing
 
 ## Areas of focus when building for 8x8
 
-### Location
+#### Location
 
 Integrations can be deployed where needed the most but the primary location is the "meta data" panel. It's a place where supporting content or integrations live to help the user complete tasks.
 
-### Style
+#### Style
 
 The 8x8 design system is called Oxygen. It contains specifications for a large range of web and mobile components with guidance on how to use each one.
 
-### Accessibility
+#### Accessibility
 
 Accessible products and integrations are important. Any 3rd party integration deployed inside an 8x8 product should be WCAG 2.1 AA compliant.
 
-### Theme
+#### Theme
 
 8x8 products support switching between dark and light mode so integrations must also support dark and light styles.
 
@@ -50,7 +50,7 @@ If your integration supports notifications then here's an explanation of how the
 
 Notifications float in the top right corner of the UI. The user can dismiss or action them once they've seen it.
 
-### Types of notifications
+#### Types of notifications
 
 ![image](../images/Notification.svg)
 The success message is shown when a task has been completed successfully
@@ -70,7 +70,7 @@ Oxygen is 8x8's design system. It's a comprehensive library of components and st
 
 The design system includes three main components:
 
-### Color palette
+#### Color palette
 
 - Primary: `#0056e0`
 - Text: `#26252a`
@@ -79,7 +79,7 @@ The design system includes three main components:
 - Warning: `#F8AE1A`
 - Error: `#CB2233`
 
-### Typography
+#### Typography
 
 8x8 use the font Inter which is available and easily embeddable from Google fonts. The typography library contains 9 type styles covering small text to headings:
 
@@ -88,7 +88,7 @@ The design system includes three main components:
 - `$heading01`
 - `$heading02`
 
-### Iconography
+#### Iconography
 
 A comprehensive icon library for consistent visual communication.
 
@@ -100,7 +100,7 @@ A comprehensive icon library for consistent visual communication.
 
 In 8x8 products users can choose whether to use view in light or dark mode by switching in the settings. Therefore it's important integrations have the support for both light and dark themes.
 
-### Light mode
+#### Light mode
 
 - Primary button bg and form controls: `#0056e0`
 - Secondary button bg: `#26252a`
@@ -111,7 +111,7 @@ In 8x8 products users can choose whether to use view in light or dark mode by sw
 - Background color: `#FFFFFF`
 - Secondary background color: `#F4F3EE`
 
-### Dark mode
+#### Dark mode
 
 - Primary button bg and form controls: `#246FE5`
 - Secondary button bg: `#E0E0E0`
@@ -144,7 +144,7 @@ Common styles and components to get you started. For anything extra please reach
 
 ---
 
-### Typography
+#### Typography
 
 **Inter**: [https://fonts.google.com/specimen/Inter](https://fonts.google.com/specimen/Inter)
 
@@ -162,7 +162,7 @@ Common styles and components to get you started. For anything extra please reach
 
 ---
 
-### Color Palette
+#### Color Palette
 
 | Light mode | Dark mode |
 |------------|-----------|
@@ -177,7 +177,7 @@ Common styles and components to get you started. For anything extra please reach
 
 ---
 
-### Iconography
+#### Iconography
 
 A sample of our icon library
 
@@ -185,7 +185,7 @@ A sample of our icon library
 
 ---
 
-### Buttons
+#### Buttons
 
 **Primary button**
 
@@ -203,7 +203,7 @@ A sample of our icon library
 
 ![](../images/text-button.svg)
 
-### Form elements
+#### Form elements
 
 **Text input**
 
@@ -223,7 +223,7 @@ A sample of our icon library
 
 ---
 
-### Inline notifications
+#### Inline notifications
 
 **Success**
 
@@ -241,7 +241,7 @@ A sample of our icon library
 
 ![](../images/warning-notification.svg)
 
-### Others
+#### Others
 
 **Tabs**
 

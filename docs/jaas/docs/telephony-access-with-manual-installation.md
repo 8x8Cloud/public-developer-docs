@@ -2,7 +2,7 @@
 
 ## Steps
 
-## 1. Jitsi-Meet Configuration
+### 1. Jitsi-Meet Configuration
 
 Update the following urls in **config.js**:
 
@@ -14,7 +14,7 @@ dialInNumbersUrl: 'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access/dids
 
 ```
 
-## 2. Prosody Configuration
+### 2. Prosody Configuration
 
 Edit the prosody configuration file by adding the VirtualHost "jigasi.meet.jitsi":
 
@@ -42,7 +42,7 @@ VirtualHost "jigasi.meet.jitsi"
 * Run **`ln -s /etc/prosody/conf.avail/jaas.cfg.lua /etc/prosody/conf.d/jaas.cfg.lua`**
 * Restart prosody: **`service prosody restart`**
 
-### Password protected rooms
+## Password protected rooms
 
 * Skip instructions if using clean install of stable release [2.0.7648](https://github.com/jitsi/jitsi-meet/releases/tag/stable%2Fjitsi-meet_7648) or newer
 * Make sure `muc_password_check` module is enabled under `jigasi.meet.jitsi` virtual host in prosody config.

@@ -31,6 +31,7 @@ The file will be saved as an **.mp4** file. The recording file will show the per
   allow="picture-in-picture; web-share"
   allowFullScreen>
 </iframe>
+
 ## Chat Transcript
 
 The Chat Transcript will be available for download once you receive the **CHAT_UPLOADED** webhook.
@@ -67,7 +68,7 @@ Chat Transcript from CHAT_UPLOADED Webhook
 
 ```
 
-## Match Chat Transcript Message to Participant
+### Match Chat Transcript Message to Participant
 
 In order to match the participant with their message, you can use the **jid** field insisde the **messages** array to match the participant to the **participantFullJid** field from the **PARTICIPANT_JOINED** webhook event.
 

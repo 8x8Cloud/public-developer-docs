@@ -13,11 +13,11 @@
 
 ## Accessing the Whiteboard
 
-## Start or Join a Meeting
+### Start or Join a Meeting
 
 Begin by starting a new meeting or joining an existing one on the JaaS platform.
 
-## Open the Whiteboard
+### Open the Whiteboard
 
 In the meeting interface, click on the **More Actions / Triple Dot Menu** Icon in the toolbar and then the **Show Whiteboard** option.
 
@@ -26,7 +26,7 @@ This will open a new whiteboard session for the current participant.
 
 ![](../images/15345a2-Open_Whiteboard_2.gif)
 
-### Whiteboard Tools
+## Whiteboard Tools
 
 There are several tools available including:
 
@@ -62,26 +62,26 @@ There are several tools available including:
 
 ![](../images/1538fd0-Text_Tool.gif)
 
-### Real Time Collaboration
+## Real Time Collaboration
 
 All participants in the call can open the whiteboard and collaborate on a diagram in real time. This includes resizing and editing the shapes others draw as well as adding your own shapes. The changes will be reflected on real time on other participants screens.
 
 ![The GIF shows two separate participants connected to the same room. They are able to use the whiteboard feature simultaneously and see each other's changes in real-time.](../images/9481db9-Real_Time_Collaboration.gif)The GIF shows two separate participants connected to the same room. They are able to use the whiteboard feature simultaneously and see each other's changes in real-time.
 
-### Saving the Diagram
+## Saving the Diagram
 
 The whiteboard allows you to save either the entire diagram or a partial diagram through the **Save Button**. You can use the **Arrow Tool** to select only a portion of the diagram to save as an image. The image can be downloaded to your browser as either a **.png** or .**svg** file.
 
 ![](../images/6e1cce1-Save_Tool.gif)
 
-### Known Limitations
+## Known Limitations
 
 Here are some of the known limitations of the Whiteboard feature.
 
 * The **maximum number of participants** in a meeting that can collaborate on a whiteboard is **25**.
 * You can only save the whiteboard in **PNG** or **SVG** format, and you **cannot reuse it in another meeting**.
 
-### FAQ
+## FAQ
 
 Here are some commnly asked questions with the Whiteboarding feature.
 

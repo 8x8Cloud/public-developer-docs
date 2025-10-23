@@ -42,7 +42,7 @@ The meetings details dashboard provides you with information about audio and vid
 
 ![](../images/357f5b1-image.png)
 
-## Participant sessions
+### Participant sessions
 
 ![](../images/0d9400b-image.png)
 
@@ -57,7 +57,7 @@ The meetings details dashboard provides you with information about audio and vid
 * **Speaker time ms**: The duration, in milliseconds, during which the participant served as the dominant speaker.
 * **Session duration, start time, end time**: Indicators of the temporal aspects of the specific session, including its overall duration, start time, and end time.
 
-## Peer Connections
+### Peer Connections
 
 ![](../images/f308da5-image.png)
 
@@ -83,7 +83,7 @@ To clarify, a high percentage of sent packet loss may not be perceptible to the 
 * **Peer Connection Duration (ms)**: The measured lifetime of a peer connection, in milliseconds.
 * **Packets recv and Packets sent**: Total number of packets which flowed through the peer connection.
 
-## Media Tracks
+### Media Tracks
 
 ![](../images/c84f957-image.png)
 
@@ -104,7 +104,7 @@ While the Peer Connections table provides an aggregated overview of all active t
 
 Concealed packets are those that were lost during transmission but successfully reconstructed to maintain a continuous and smooth media playback experience. Usually this correlates with packet loss metrics and has the same causes.
 
-### Glossary
+## Glossary
 
 * **WebRTC**: Web Real-Time Communication. A free, open-source project that enables real-time communication over the internet through web browsers. It includes protocols, application programming interfaces (APIs), and communication protocols for creating interactive audio, video, and data-sharing applications.
 * **Peer Connection**: In WebRTC, a Peer Connection refers to the direct connection established between two devices (peers) for real-time communication. It enables the exchange of audio, video, and data directly between users without the need for intermediaries.
