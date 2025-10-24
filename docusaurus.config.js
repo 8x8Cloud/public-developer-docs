@@ -136,21 +136,27 @@ const config = {
   ].filter(Boolean),
 
   themeConfig: {
+    colorMode: {
+      respectPrefersColorScheme: true,
+    },
     docs: {
       sidebar: {
         hideable: true,
         autoCollapseCategories: true,
       },
     },
-    // Configure scroll behavior for anchor links
-    // This ensures proper scrolling to anchors on page load and navigation
-    tableOfContents: {
-      minHeadingLevel: 2,
-      maxHeadingLevel: 3,
+    footer: {
+      style: 'dark',
+      copyright: `© ${new Date().getFullYear()} by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a>`,
     },
-    colorMode: {
-      respectPrefersColorScheme: true,
-    },
+    metadata: [
+      {
+        name: 'keywords',
+        content:
+          'docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations',
+      },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
     navbar: {
       title: '8x8 Developer Portal',
       logo: {
@@ -191,13 +197,13 @@ const config = {
         },
       ],
     },
-    footer: {
-      style: 'dark',
-      copyright: `© ${new Date().getFullYear()} by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a>`,
-    },
     prism: {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
+    },
+    tableOfContents: {
+      minHeadingLevel: 2,
+      maxHeadingLevel: 3,
     },
   },
 
