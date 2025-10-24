@@ -1,7 +1,5 @@
 # Getting Started
 
-## Getting started
-
 In object-oriented programming, we use objects with attributes to organize our programs and build our applications. 8x8 SMS API uses the same organization and the SMS you send are also objects with their set of attributes.
 
 **Let’s have a closer look to understand better how it works:**

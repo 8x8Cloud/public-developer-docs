@@ -1,14 +1,12 @@
 # Trigger webchat
 
-## Trigger webchat
-
-### Introduction
+## Introduction
 
 There are occasions, where you might want to trigger the webchat yourself.
 
 For example, an action has happened on your webpage, and you want to trigger a set invitation to bring the customer into your chat or where, you want to create your own button your website, and when a customer clicks on this you launch the webchat
 
-#### Script config
+### Script config
 
 Here is an example of what to set when you want to launch the invitation
 

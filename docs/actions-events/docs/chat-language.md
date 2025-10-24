@@ -1,8 +1,6 @@
 # Chat Language
 
-## Chat language
-
-### Introduction
+## Introduction
 
 Using the webchat, you may have a customer that is comforable speaking in their own language, so we offer realtime translation on this chat, you can find more on this service [here](https://docs.8x8.com/8x8WebHelp/contact-center/agent-workspace/Content/aw/handle-multilingual-chats.htm)
 
@@ -54,7 +52,7 @@ Simplified Chinese: zh-CN
 
 Traditional Chinese: zh-TW
 
-#### Script config
+### Script config
 
 Here is an example of where the language you to set for the customer is French.
 
@@ -132,7 +130,7 @@ Then, the full script will look like this
 
 ```
 
-#### Agent view
+### Agent view
 
 When the query is routed through to an agent, they will be able to see the data that was passed into the webchat, in both the interaction panel
 
@@ -141,7 +139,7 @@ Here, it what the customer see's so the full conversation is in french
 
 ![Chat Gateway flow](../images/df3d03b1178d6797084eabe3944427d4ae8324ca6ee9016cf2ab398966fd2961-Customerchat.png "Chat Gateway flow.jpg")
 
-#### Important Notes
+### Important Notes
 
 * The chat language can be set at any time before starting a chat (when the customer enters a queue) and you can change it as many time as you want, only the last value will be considered.
 * Same elements that are translated with pre-chat form set language or default browser/tenant language will be translated here as well.
