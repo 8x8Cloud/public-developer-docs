@@ -8,28 +8,25 @@
 :root {
   --doc-sidebar-width: 16.25rem !important;
   --ifm-font-family-base: "Inter";
-  --ifm-color-primary: #cb2233;
-  --ifm-color-primary-dark: #b71f2e;
-  --ifm-color-primary-darker: #ad1d2b;
-  --ifm-color-primary-darkest: #8e1824;
-  --ifm-color-primary-light: #db293b;
-  --ifm-color-primary-lighter: #dd3445;
-  --ifm-color-primary-lightest: #e25261;
+  --ifm-color-primary: #0056E0;
+  --ifm-color-primary-dark: #0045B3;
+  --ifm-color-primary-darker: #0045B3;
+  --ifm-color-primary-darkest: #003486;
+  --ifm-color-primary-light: #246FE5;
+  --ifm-color-primary-lighter: #4687ED;
+  --ifm-color-primary-lightest: #99BBF3;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
   --ifm-hero-text-color: #bdc0c7;
 }
 
+.footer--dark {
+  --ifm-footer-background-color: #242526;
+}
+
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
-  --ifm-color-primary: #ffffff;
-  --ifm-color-primary-dark: #e6e6e6;
-  --ifm-color-primary-darker: #d9d9d9;
-  --ifm-color-primary-darkest: #b3b3b3;
-  --ifm-color-primary-light: #ffffff;
-  --ifm-color-primary-lighter: #ffffff;
-  --ifm-color-primary-lightest: #ffffff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
@@ -92,7 +89,7 @@ html {
   text-decoration: none;
   color: inherit;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(203, 34, 51, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 86, 224, 0.15);
   border-color: var(--ifm-color-primary);
 }
 
@@ -234,7 +231,7 @@ html {
 
 /* Developer portal specific styles */
 .hero {
-  background: linear-gradient(135deg, #cb2233 0%, #8e1824 100%);
+  background: linear-gradient(135deg, #0056E0 0%, #003486 100%);
   color: white;
 }
 
@@ -256,7 +253,7 @@ html {
 }
 
 .api-card:hover {
-  box-shadow: 0 4px 12px rgba(203, 34, 51, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 86, 224, 0.1);
 }
 
 .api-card h3 {
