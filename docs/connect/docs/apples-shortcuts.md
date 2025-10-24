@@ -28,7 +28,7 @@ Then, search for URL, and type in your SMS API endpoint, as shown. Your endpoint
 ![248](../images/a37d4b2-apple_short_8.jpg "apple short 8.jpg")
 Add Headers as follows:
 
-```
+```text
 Authorization | Bearer {api key}
 Content-type | application/JSON
 
@@ -37,7 +37,7 @@ Content-type | application/JSON
 ![248](../images/ca69630-apple_short_9.jpg "apple short 9.jpg")
 3. Add a request body by selecting JSON. Fill out the following fields in your request body:
 
-```
+```text
 Destination – The mobile number you are sending the SMS to
 Source – Your Sender ID
 Text – Your text message content
@@ -60,7 +60,7 @@ For the SMS API endpoint, it should follow the following format: `https://sms.8x
 
 Your headers should be as follows:
 
-```
+```text
 Authorization | Bearer {api key}
 Content-type | application/json
 

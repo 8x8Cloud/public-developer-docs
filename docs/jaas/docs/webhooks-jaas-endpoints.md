@@ -122,7 +122,7 @@ Body (JSON):
 
  Request example:
 
-```
+```bash
   curl -X 'POST' \
     'https://8x8.vc/v1/_jaas/conference-commands/v1/meeting' \
     -H 'accept: */*' \
@@ -166,7 +166,7 @@ Body (JSON):
 
  Request example:
 
-```
+```bash
   curl -X 'POST' \
     'https://8x8.vc/v1/_jaas/conference-commands/v1/meeting' \
     -H 'accept: */*' \
@@ -210,7 +210,7 @@ Body (JSON):
 
  Request example:
 
-```
+```bash
   curl -X 'POST' \
     'https://8x8.vc/v1/_jaas/conference-commands/v1/meeting' \
     -H 'accept: */*' \

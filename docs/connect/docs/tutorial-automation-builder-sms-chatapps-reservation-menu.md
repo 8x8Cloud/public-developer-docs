@@ -165,7 +165,7 @@ The **Header** and **Query** properties can also be modified as needed. I set 1 
 
 If required you can also change the **Request Body** property, I set the value as below but it is not necessary.
 
-```
+```json
 {
   "data": "payload"
 }
@@ -184,7 +184,7 @@ In order to test the workflow, simply send a WhatsApp message to the WhatsApp ac
 
 Automation Builder UI features a function to import workflow definitions for easy versioning and sharing. If you would like to import the example for this tutorial, save the text below as a file such as tutorial_automation_builder.json and import it from the Automation Builder UI.
 
-```
+```json
 {
   "definition": {
     "id": "3ca6c9ce-603e-4015-9aab-29047b327e7f",

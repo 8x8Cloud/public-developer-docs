@@ -10,7 +10,7 @@ The API will also return the `Retry-After` HTTP header with the value indicating
 
 Retry-After header example
 
-```
+```text
 Retry-After: 1
 
 ```

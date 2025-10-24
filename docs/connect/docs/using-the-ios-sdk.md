@@ -294,7 +294,7 @@ class MyVoiceSDKClient: CallSetObserverProtocol {
 
 ```
 
-```
+```swift
 let client = MyVoiceSDKClient(...)
 //…
 sdk.addObserver(client)
@@ -354,7 +354,7 @@ protocol VoiceCall: class {
 
 ```
 
-```
+```swift
 call.hold { status in
    switch status {
    //

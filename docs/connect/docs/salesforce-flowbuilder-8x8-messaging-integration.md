@@ -97,7 +97,7 @@ Next, we will use your OAS file to teach Salesforce about the specific 8x8 API c
   * **Named Credential**: Select the **`8x8 Messaging API`** Named Credential you just created.
   * **Service Schema**: Select **Upload from local** and upload the complete [OAS](https://8x8-enterprise-group.readme.io/connect/reference/messaging-apps-api-get-started)  `.json` file or select "Complete Schema" and paste the schema below (contains only send single and send batch API)
 
-```
+```json
 {
     "openapi": "3.0.0",
     "info": {

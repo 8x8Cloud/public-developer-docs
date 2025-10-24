@@ -9,7 +9,7 @@ To implement a functional invite flow, perform the following steps:
 
 The **alias** must be a single-level (no slash) string composed of legitimate, safe URL characters. (You can make it identical to the meeting room name as well). This definition is described in the [iFrame documentation](https://github.com/jitsi/jitsi-meet/blob/master/config.js) as the *brandingRoomAlias* property. An example code block is as follows:
 
-```
+```json
   configOverwrite: {
        brandingRoomAlias: 'anInterestingMeeting'
   }

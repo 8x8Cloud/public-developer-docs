@@ -234,7 +234,7 @@ curl --location --request POST 'https://api.8x8.com/customerexperience/v{version
 
 ```
 
-```
+```bash
 curl --location --request POST 'https://api.8x8.com/customerexperience/v{version}/recentCallData/{region}' \
 --header '8x8-apikey:{api-key}' \
 --header 'token:{token}' \

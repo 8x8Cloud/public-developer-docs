@@ -127,7 +127,7 @@ Third we add the functionality to those buttons by adding **onclick()** events a
 
 onClick Event
 
-```
+```javascript
 document.getElementById('mute-mic').onclick = () => api.executeCommand('toggleAudio');
 document.getElementById('mute-camera').onclick = () => api.executeCommand('toggleVideo');
 
@@ -141,7 +141,7 @@ While the backend server does not have any influence on the custom buttons, we i
 
 server.js
 
-```
+```javascript
 const express = require('express');
 const app = express();
 const PORT = 3000;
@@ -163,7 +163,7 @@ To run the application use the following lines of code:
 
 Run Server Commands
 
-```
+```bash
 npm init -y
 npm install express
 node server.js

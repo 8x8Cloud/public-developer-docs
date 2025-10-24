@@ -27,7 +27,7 @@ Additional functions include:
 
 • Screen-pops with relevant CRM customer information
 
-```
+```text
 •  Pass the context of the bot conversation to the agent
 
 •  Pass the full transcription of the bot conversation to the agent

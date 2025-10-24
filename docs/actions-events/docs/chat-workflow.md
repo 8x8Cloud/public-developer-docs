@@ -74,7 +74,7 @@ Email - email address of the customer (this can be used to screen pop the custom
 
 Phone - phone number of the customer
 
-```
+```json
 {
      "user": {
           "language": "en",
@@ -92,7 +92,7 @@ This allows extra information to be passed across to the agent, specifically cus
 
 In the example below, the bot is telling the agent that the customer is authenticated, they were asking about their balance and it's regarding their credit account
 
-```
+```json
 {
     "additionalProperties": [
         {
@@ -118,7 +118,7 @@ This allows the content of the conversation that has happened between the bot an
 
 In the example below, it shows the conversation between the agent and bot regarding a balance which will be presented to the agent
 
-```
+```json
 {
      "history": {
           "messages": [
@@ -146,7 +146,7 @@ In the example below, it shows the conversation between the agent and bot regard
 
 Example JSON of the user objects together
 
-```
+```text
 curl --request POST  
      --url [https://api.8x8.com/chat-gateway/v1/conversations](https://api.8x8.com/chat-gateway/v1/conversations)  
      --header 'accept: application/hal+json'  
@@ -222,7 +222,7 @@ When adding the user history, adaptive cards that have been sent between the bot
 
 Once the conversation is created an activity will be sent for # **`QUEUED`**
 
-```
+```json
 {
   "eventType": "QUEUED",
   "conversationId": "ID-0",
@@ -241,7 +241,7 @@ When the conversation is queued, this information can still be updated and the q
 
 Once the conversation has reached an agent, the follow notification will be received from # **`AGENT JOINED`**
 
-```
+```json
 {  
   "eventType": "AGENT_JOINED",  
   "messageType": "SYSTEM",  
@@ -255,7 +255,7 @@ Once the conversation has reached an agent, the follow notification will be rece
 
 Then, when the agent is typing a message, the following activity will be sent # **`ACTIVITY`**
 
-```
+```json
 {
   "eventType": "ACTIVITY",
   "conversationId": "ID-0",
@@ -279,7 +279,7 @@ The conversation will then be ongoing between the agent and the customer.
 
 An agent sends a message, this will be received on the message activity with the conversationID # **`MESSAGE`**
 
-```
+```json
 {
   "eventType": "MESSAGE",
   "conversationId": "ID-0",
@@ -295,7 +295,7 @@ An agent sends a message, this will be received on the message activity with the
 
 Then, a message can be sent back in, using the conversation ID,
 
-```
+```json
  "authorType": "user",
  "text": "Hello, I'm sending a message"
 

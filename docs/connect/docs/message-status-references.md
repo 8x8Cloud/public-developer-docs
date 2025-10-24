@@ -36,7 +36,7 @@ Possible values for `details`:
 
 Message sent successfully
 
-```
+```json
 "status": {
         "state": "queued",
         "timestamp": "2020-12-22T01:24:30.6030893Z"

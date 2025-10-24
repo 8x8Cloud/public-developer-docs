@@ -75,7 +75,7 @@ There are a few prerequisites before using this feature:
 * JaaS Account with a billing method added (to access Paid/Premium Features).
 * Ensure that the [JWT](/jaas/docs/api-keys-jwt) that you generate for your user contains the user permissions for **outbound-call**. Below is a snippet of the features with outbound call enabled.
 
-```
+```json
 {
   ...
   "context": {

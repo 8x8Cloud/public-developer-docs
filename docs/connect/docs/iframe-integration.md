@@ -12,7 +12,7 @@ Your users must be logged in and identified, in your application, before opening
 
 You can load the Agent Portal in an iframe using the following URL:
 
-```
+```text
 https://video-agent.8x8.com/?user=product@8x8.com&token=eyJiJIUzI1NiME5B87.qPWXyNNDHBxLftaHarcSgm0c
 ```
 

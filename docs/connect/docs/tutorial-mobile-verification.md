@@ -157,7 +157,7 @@ curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions
 * If we wrap up all the elements prepared in the steps above, we should put together the 3 elements of our request: **URL + Authentication + Data Payload**
 * To send the API request to 8x8 Mobile Verification - Code Generation endpoint we should use the following command in our command line utility:
 
-```
+```bash
 curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions -H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg" -H "Content-Type: application/json" -d $'{ "destination": "6598765432", "country": "SG"}'
 
 ```
@@ -263,7 +263,7 @@ curl -i -X "GET" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c
 * If we wrap up all the elements prepared in the steps above, we should put together the 3 elements of our request: **URL + Query string appended + Authentication**
 * To send the API request to 8x8 Mobile Verification - Code Validation endpoint we should use the following command in our command line utility:
 
-```
+```bash
 curl -X GET  'https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c1137e8fb1ceb11827c00155dc319?code=5612' -H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg"
 
 ```

@@ -84,7 +84,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 
 ```
 
-```
+```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-metrics/report-types/agent-status-by-status-code' \
      --header 'Accept: application/json;charset=UTF-8' \
      --header 'Authorization: Bearer {access_token}' 
@@ -423,7 +423,7 @@ no filtersingle queuefilter on multiple queuesfilter on multiple queues and mult
 
 ```
 
-```
+```json
   "filters": [
        {
           "name": "queue",  
@@ -433,7 +433,7 @@ no filtersingle queuefilter on multiple queuesfilter on multiple queues and mult
 
 ```
 
-```
+```json
   "filters": [
        {
           "name": "queue",  
@@ -443,7 +443,7 @@ no filtersingle queuefilter on multiple queuesfilter on multiple queues and mult
 
 ```
 
-```
+```json
   "filters": [
        {
           "name": "queue",  
@@ -544,7 +544,7 @@ For an accepted request to create a report the response will be 200 OK
 
 * Link => The Link header will provide details on how to check the status of the create request
 
-```
+```text
 [https://api.8x8.com/analytics/cc/v<<versionCCAHistorical](https://api.8x8.com/analytics/cc/v<<versionCCAHistorical)>/historical-metrics/2710192/status; rel="status">
 
 ```
@@ -610,7 +610,7 @@ The Link header WILL ONLY be present if the report staus is `"DONE"`
 
 * Link => The Link header will provide details on how access the data and download for the report
 
-```
+```text
 [https://api.8x8.com/analytics/cc/v<<versionCCAHistorical](https://api.8x8.com/analytics/cc/v<<versionCCAHistorical)>/historical-metrics/2710663/data?page=0&size=100>; rel="data",
 [https://api.8x8.com/analytics/cc/v<<versionCCAHistorical](https://api.8x8.com/analytics/cc/v<<versionCCAHistorical)>/historical-metrics/2710663/download>; rel="download"
 
@@ -688,7 +688,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 
 * Link => The Link header will provide a link to the next page in the data if there are additional pages. **Will not be present if there are no more pages.**
 
-```
+```text
 [https://api.8x8.com/analytics/cc/v<<versionCCAHistorical](https://api.8x8.com/analytics/cc/v<<versionCCAHistorical)>/historical-metrics/2710663/data?page=1&size=100>; rel="next"
 
 ```

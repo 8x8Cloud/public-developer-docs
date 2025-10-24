@@ -82,14 +82,14 @@ endpoints:
 
 #### Sessions Endpoint
 
-```
+```text
 POST /api/v1/sessions
 
 ```
 
 #### Transitions Endpoint
 
-```
+```text
 POST /api/v1/transitions
 
 ```
@@ -185,14 +185,14 @@ This request is typically sent as the body of a `POST` request to either `/api/v
 
 #### Sessions Endpoint
 
-```
+```text
 GET /api/v1/sessions/{taskId}/status
 
 ```
 
 #### Transitions Endpoint
 
-```
+```text
 GET /api/v1/transitions/{taskId}/status
 
 ```
@@ -237,14 +237,14 @@ Possible status values:
 
 #### Sessions Endpoint
 
-```
+```text
 GET /api/v1/sessions/{taskId}/data
 
 ```
 
 #### Transitions Endpoint
 
-```
+```text
 GET /api/v1/transitions/{taskId}/data
 
 ```
@@ -334,8 +334,6 @@ GET /api/v1/transitions/{taskId}/data
 ```
 
 #### Example Transitions Endpoint Response
-
-lines
 
 ```json
 {
@@ -600,14 +598,12 @@ The API uses cursor-based pagination to efficiently navigate through large resul
 
 Initial request:
 
-```
+```text
 GET /api/v1/sessions/{taskId}/data?limit=100
 
 ```
 
 Response with next page cursor:
-
-lines
 
 ```json
 {
@@ -621,14 +617,12 @@ lines
 
 Next page request:
 
-```
+```text
 GET /api/v1/sessions/{taskId}/data?limit=100&nextPageCursor=encoded-cursor-value
 
 ```
 
 Last page response:
-
-lines
 
 ```json
 {
@@ -653,7 +647,7 @@ The API supports sorting of results through two parameters:
 
 Example:
 
-```
+```text
 GET /api/v1/sessions/{taskId}/data?sortField=time&sortDirection=DESC
 
 ```
@@ -940,7 +934,7 @@ agents and back-office teams), this API provides a complete view of the customer
 
 1. Create a sessions data task:
 
-```
+```text
 POST /api/v1/sessions
 
 ```
@@ -966,21 +960,21 @@ POST /api/v1/sessions
 
 2. Check task status until completed:
 
-```
+```text
 GET /api/v1/sessions/{taskId}/status
 
 ```
 
 3. Retrieve session data:
 
-```
+```text
 GET /api/v1/sessions/{taskId}/data?limit=50
 
 ```
 
 4. For detailed journey analysis, retrieve transition data:
 
-```
+```text
 POST /api/v1/transitions
 
 ```
@@ -1006,12 +1000,12 @@ POST /api/v1/transitions
 
 5. Check task status and retrieve transition data:
 
-```
+```text
 GET /api/v1/transitions/{taskId}/status
 
 ```
 
-```
+```text
 GET /api/v1/transitions/{taskId}/data?sortField=TIMESTAMP&sortDirection=ASC
 
 ```
@@ -1024,7 +1018,7 @@ For organizations that want to understand how calls are being transferred betwee
 
 1. Create a transitions data task:
 
-```
+```text
 POST /api/v1/transitions
 
 ```
@@ -1050,14 +1044,14 @@ POST /api/v1/transitions
 
 2. Check task status:
 
-```
+```text
 GET /api/v1/transitions/{taskId}/status
 
 ```
 
 3. Retrieve transition data to analyze all transfers:
 
-```
+```text
 GET /api/v1/transitions/{taskId}/data?limit=100
 
 ```
@@ -1070,7 +1064,7 @@ For analyzing queue performance across different platforms.
 
 1. Create a sessions data task:
 
-```
+```text
 POST /api/v1/sessions
 
 ```
@@ -1098,14 +1092,14 @@ POST /api/v1/sessions
 
 2. Check task status
 
-```
+```text
 GET /api/v1/sessions/{taskId}/status
 
 ```
 
 3. Retrieve session data:
 
-```
+```text
 GET /api/v1/sessions/{taskId}/data?limit=100
 
 ```

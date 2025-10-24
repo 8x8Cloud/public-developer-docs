@@ -18,7 +18,7 @@ No. We handle that for you, which is one of the advantages of using JaaS vs. you
 
 JaaS provides the APIs to retrieve PIN codes and DIDs. Please see the [dial-in documentation](/jaas/docs/jaas-prefs-dial-in) for more information.
 
-```
+```text
 **For the Meeting ID - HTTP GET**
 https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access?conference=  
 **YOUR_MEETING_NAME**@conference.**YOUR_VPAAS_MAGIC_COOKIE**.8x8.vc
@@ -356,7 +356,7 @@ Use the [lib-jitsi-meet API](https://jitsi.github.io/handbook/docs/dev-guide/dev
 
 Yes. The meeting room is called “subject” in the jitsi world, and you can remove the subject by manipulating the information you send to jitsi using the API and configOverwrite. All you have to do to hide it is to provide a blank space for the subject:
 
-```
+```javascript
 api = new JitsiMeetExternalAPI(domain, {..., configOverwrite: {...,  
 **subject: ' '**, ...}, ...})
 
@@ -370,7 +370,7 @@ You can also force it through the [config.js](https://github.com/jitsi/jitsi-mee
 
 Yes. You can force it through the [config.js](https://github.com/jitsi/jitsi-meet/blob/1ab0f1993a682d315b9c416ccd955390202c7882/config.js#L637). You’ll find there the following setting:
 
-```
+```javascript
 hideConferenceTimer: true
 ```
 
@@ -490,7 +490,7 @@ For a complete list of all possible values, please refer to :
 
 Please see below a snippet on how to use the config and interface config overwrites in your application:
 
-```
+```javascript
 const domain = '8x8.vc';
 const options = {
     ...
@@ -962,7 +962,7 @@ By default, this bot creates meetings in the public Jitsi service at [https://me
 
 this command to set up the server to point at the URL that you use for your JaaS deployment will then let the bot create meeting links for JaaS.
 
-```
+```text
 
 The Jitsi Slack integration app is maintained by the Jitsi open source development team and operated by 8x8's JaaS team. For more information about this integration, see:  [https://jitsi.org/slack/](https://jitsi.org/slack/)
 

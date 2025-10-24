@@ -67,7 +67,7 @@ curl --location --request GET 'https://api.8x8.com/storage/us-east/v3/regions' \
 
 ```
 
-```
+```bash
 curl --location --request GET 'https://api.8x8.com/storage/uk/v3/regions' \
 --header 'Accept: application/json' \
 --header 'Authorization: Bearer {access_token}'
@@ -76,7 +76,7 @@ curl --location --request GET 'https://api.8x8.com/storage/uk/v3/regions' \
 
 ### Regions Response
 
-```
+```json
 [
     "us-east",
     "uk"

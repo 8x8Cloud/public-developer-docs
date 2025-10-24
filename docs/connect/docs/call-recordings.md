@@ -2,7 +2,7 @@
 
 Before you enable Call Recordings for Number Masking sessions it is required to set up the ["Recordings Push Configuration"](/connect/reference/create-a-new-recording-push-config) in order to define the endpoint to where the call recordings will be sent to. To set up the "Recordings Push Configuration" a POST request has to be sent to the following endpoint:
 
-```
+```text
 POST https://voice.wavecell.com/api/v1/subaccounts/{{subAccountId}}/recording-push-config
 
 ```
@@ -53,7 +53,7 @@ Once the request has been processed, you will receive the following response, th
 
 You can request the recording information for individual Number Masking sessions by sending a GET request to the following endpoint:
 
-```
+```text
 GET https://voice.wavecell.com/api/v1/subaccounts/{{subAccountId}}/recordings/{{sessionId}}
 
 ```

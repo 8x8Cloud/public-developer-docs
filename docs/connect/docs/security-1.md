@@ -70,14 +70,14 @@ Fill up the `clientIp` field in the request with the origin client IP address an
 
 Please be aware that one of the common attacks to circumvent IP rate limiting is IP spoofing. Normally, an attacker sends a large amount of traffic by rotating different proxies to hide its actual origin IP. Hence, to fetch the actual origin client IP, you will need to look up the `X-Forwarded-For` header in the HTTP request if it is tunneled by a proxy. The `X-Forwarded-For` contains a list of IPs that includes proxy IP and actual origin IP addresses with the following format:
 
-```
+```text
 X-Forwarded-For: <client>, <proxy1>, <proxy2>
 
 ```
 
 **Examples:**
 
-```
+```text
 X-Forwarded-For: 2001:db8:85a3:8d3:1319:8a2e:370:7348
 X-Forwarded-For: 203.0.113.195
 X-Forwarded-For: 203.0.113.195, 70.41.3.18, 150.172.238.178

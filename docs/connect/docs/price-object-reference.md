@@ -20,7 +20,7 @@ Object structure
 Examples of price object:
 SMS PriceChatApps Price
 
-```
+```json
 {
   "price": {
       "total": 0.0375,
@@ -31,7 +31,7 @@ SMS PriceChatApps Price
 
 ```
 
-```
+```json
 {
   "price": {
       "total": 0.0375,

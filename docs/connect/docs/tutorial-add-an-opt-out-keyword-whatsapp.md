@@ -36,7 +36,7 @@ Once the group is created, we will need to find the Group ID. The Group ID can b
 
 The URL for the request should be similar to this format with account name and full or partial group name substituted with your values.
 
-```
+```text
 https://contacts.8x8.com/api/v1/accounts/<Account Name>/groups?name=<full or partial group name>
 ```
 

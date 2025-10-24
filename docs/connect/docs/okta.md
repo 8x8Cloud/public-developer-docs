@@ -152,7 +152,7 @@ Here is the example **config.js** file for reference where the values should be 
 
 config.js
 
-```
+```javascript
 // config.js
 module.exports = {
     apiKey: 'your_8x8_api_key',

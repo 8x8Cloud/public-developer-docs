@@ -8,14 +8,14 @@ A JaaS API key is a Public Key consisting of a 4096 bits RSA SSH Key Pair in **`
 
 Open a terminal window, then use the **`ssh-keygen`** command:
 
-```
+```bash
 > ssh-keygen -t rsa -b 4096 -m PEM -f \<filename\>
 
 ```
 
 The following shows an example output after running the **`keygen`** command:
 
-```
+```bash
 dev\$ssh-keygen -t rsa -b 4096 -m PEM -f jaasauth.key
 Generating public/private rsa key pair.
 Enter passphrase (empty for no passphrase): 
@@ -41,14 +41,14 @@ The key's randomart image is:
 
 You must then save the public key in **`PEM`** format using the **`openssl`** command.
 
-```
+```bash
 > openssl rsa -in \<filename\> -pubout -outform PEM -out \<filename\>.pub
 
 ```
 
 For example:
 
-```
+```bash
 dev\$openssl rsa -in jaasauth.key -pubout -outform PEM -out jaasauth.key.pub
 writing RSA key
 
@@ -56,7 +56,7 @@ writing RSA key
 
 The following is an example of a saved JaaS API (Public) key file:
 
-```
+```bash
 dev\$cat jaasauth.key.pub
 -----BEGIN PUBLIC KEY-----
 MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA1DJxsTKt2lBSl0n4WaqO

@@ -65,7 +65,7 @@ The corresponding message the user will receive:
 
 ### Video & text
 
-```
+```json
 {
     "user": {
         "msisdn": "+10000000000"
@@ -87,7 +87,7 @@ The corresponding message the user will receive:
 
 ### Audio & text
 
-```
+```json
 {
     "user": {
         "msisdn": "+10000000000" 

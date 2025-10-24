@@ -22,7 +22,7 @@ Make sure the following properties exist in the **/etc/jitsi/meet/&lt;your domai
 
 /etc/jitsi/meet/&lt;your domain&gt;-config.js
 
-```
+```javascript
 dialInConfCodeUrl: 'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access',
 dialInNumbersUrl: 'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access/dids',
 
@@ -35,7 +35,7 @@ dialInNumbersUrl: 'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access/dids
 
 /etc/prosody/conf.d/jaas.cfg.lua
 
-```
+```javascript
 VirtualHost "jigasi.meet.jitsi"
     enabled = true
     modules_enabled = {

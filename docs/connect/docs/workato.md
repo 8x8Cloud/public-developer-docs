@@ -41,7 +41,7 @@ It is often used by B2B enterprises to connect or integrate different cloud serv
 2. You will be asked to create a new connection and the authentication type. Name your connection, and select “Header auth” as your authentication type.
 3. Enter the following header details in the space provided under “Header authorization”:
 
-```
+```text
  Authorization: Bearer <Your API key*>
  Content-Type: application/JSON
 

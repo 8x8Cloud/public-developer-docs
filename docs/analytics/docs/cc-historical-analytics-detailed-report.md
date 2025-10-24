@@ -99,7 +99,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-me
 
 ```
 
-```
+```bash
 curl --location --request GET 'https://api.8x8.com/analytics/cc/v8/historical-metrics/report-types/detailed-reports-interaction-details' \
      --header 'Authorization: Bearer {access_token}' 
 
@@ -438,7 +438,7 @@ no searchQueryagentNotes containsqueueName is one offilter queueName contains an
 
 ```
 
-```
+```json
 "searchQuery": [
     {
         "field": "agentNotes",
@@ -449,7 +449,7 @@ no searchQueryagentNotes containsqueueName is one offilter queueName contains an
 
 ```
 
-```
+```json
 "searchQuery": [
     {
         "field": "queueName",
@@ -460,7 +460,7 @@ no searchQueryagentNotes containsqueueName is one offilter queueName contains an
 
 ```
 
-```
+```json
 "searchQuery":[
     {
         "field": "queueName",
@@ -544,7 +544,7 @@ For an accepted request to create a report the response will be 200 OK
 
 * **Link**: The Link header will provide details on how to access the data
 
-```
+```text
 [https://api.8x8.com/analytics/cc/v<<versionCCAHistorical](https://api.8x8.com/analytics/cc/v<<versionCCAHistorical)>/historical-metrics/detailed-reports/2853641/data?size=100>; rel="data"`
 
 ```
@@ -614,7 +614,7 @@ curl --location --request GET 'api.8x8.com/analytics/cc/v8/historical-metrics/de
 
 ```
 
-```
+```bash
 curl --location --request GET 'api.8x8.com/analytics/cc/v8/historical-metrics/detailed-reports/2853641/data?size=100&lastDocumentId=eyJzZWFyY2hBZnRlciI6WzE2NDQ0NzA0MzQ5NzIsOTQ1MDExNzMwMjhdfQ%3D%3D' \
 --header 'Authorization: Bearer access_token'
 

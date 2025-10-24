@@ -52,7 +52,7 @@ The corresponding message the user will receive:
 
 ### Text + Image
 
-```
+```json
 {
   "user": {
     "msisdn": "+650000000"
@@ -74,7 +74,7 @@ The corresponding message the user will receive:
 
 ### Text + Image + Button
 
-```
+```json
 {
   "user": {
     "msisdn": "+65000000"
@@ -132,7 +132,7 @@ The corresponding message the user will receive:
 
 Refer to [Supported Content Types](/connect/reference/supported-chat-apps-content-type) for more info on supported file formats and size limits.
 
-```
+```json
 {
   "user": {
     "msisdn": "+6500000"
@@ -159,7 +159,7 @@ The corresponding message the user will receive:
 
 ### Text + Video + Button
 
-```
+```json
 {
     "user": {
         "msisdn": "+6500000000"

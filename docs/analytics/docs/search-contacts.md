@@ -258,7 +258,7 @@ curl --location 'https://api.8x8.com/directory-contacts/api/v3/contacts?details=
 
 When you first request a paginated response, you don't have a scrollId yet. The initial request is sent without it:
 
-```
+```text
 GET https://api.8x8.com/directoryContacts/api/v3/contacts?size=10&sort=id,ASC&useScrollId=true
 Authorization: Bearer {access_token}
 
@@ -289,7 +289,7 @@ Authorization: Bearer {access_token}
 
 For the next set of results, you'll use the scrollId provided in the initial response:
 
-```
+```text
 GET https://api.8x8.com/directoryContacts/api/v3/contacts?page=0&size=10&sort=id,ASC&useScrollId=true&scrollId=WyI2ODA1MDUyZDc1ZjY0N2E5OTQxYzdiYTJjNDU5ODc5OSJd
 Authorization: Bearer {access_token}
 

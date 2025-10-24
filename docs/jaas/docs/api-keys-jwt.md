@@ -24,7 +24,7 @@ The JWT type
 
 For example:
 
-```
+```json
 {
   "alg": "RS256",
   "kid": "vpaas-magic-cookie-1fc542a3e4414a44b2611668195e2bfe/4f4910",
@@ -130,7 +130,7 @@ The time before which the JWT must not be accepted for processing
 
 For example:
 
-```
+```json
 {
   "aud": "jitsi",
   "context": {

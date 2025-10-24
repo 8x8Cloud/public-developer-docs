@@ -53,7 +53,7 @@ Example of a JSON object sent to your "Voice Session Summary" endpoint:
 
 Session Summary (Success)Session Summary (Failure)
 
-```
+```json
 Success 
 
 {
@@ -119,7 +119,7 @@ Success
 
 ```
 
-```
+```json
 Failure
 {
   "payload": {

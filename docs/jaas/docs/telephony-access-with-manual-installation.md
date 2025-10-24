@@ -8,7 +8,7 @@ Update the following urls in **config.js**:
 
 config.js
 
-```
+```javascript
 dialInConfCodeUrl:  'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access',
 dialInNumbersUrl: 'https://8x8.vc/v1/_jaas/vmms-conference-mapper/v1/access/dids',
 
@@ -23,7 +23,7 @@ Edit the prosody configuration file by adding the VirtualHost "jigasi.meet.jitsi
 
 /etc/prosody/conf.avail/&lt;your domain&gt;.cfg.lua
 
-```
+```javascript
 VirtualHost "jigasi.meet.jitsi"
     enabled = true
     modules_enabled = {
@@ -48,7 +48,7 @@ VirtualHost "jigasi.meet.jitsi"
 * Make sure `muc_password_check` module is enabled under `jigasi.meet.jitsi` virtual host in prosody config.
 * Make sure the nginx config contains `/_api/room-info` endpoints:
 
-```
+```javascript
     location = /_api/room-info {
         proxy_pass http://prosody/room-info?prefix=$prefix&$args;
         proxy_http_version 1.1;

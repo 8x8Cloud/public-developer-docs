@@ -61,7 +61,7 @@ To enable VoIP capabilities:
 
 ![xcode project capabilities background modes](../images/d8e4003-xcode-project-capabilities-background-modes.png "xcode-project-capabilities-background-modes.png")
 
-```
+```text
 You can also enable Audio, AirPlay Voice over IP and other attributes while in this directory.
 
 ```
@@ -70,7 +70,7 @@ You can also enable Audio, AirPlay Voice over IP and other attributes while in t
 
 ![xcode project capabilities push notifications](../images/e3da9bc-xcode-project-capabilities-push-notifications.png "xcode-project-capabilities-push-notifications.png")
 
-```
+```text
 Note: This step is only required for receiving incoming calls.
 
 ```
@@ -96,7 +96,7 @@ print("\(VoiceSDK.shared.version())")
 2. Build (**Cmd+B**) and Run (**Cmd+R**) the app project
 3. If successful, your Xcode console displays the following type of message:
 
-```
+```text
 0.1.0b50-r629e3e4
 
 ```
@@ -140,7 +140,7 @@ You will now need to find the certificate you have created.
 
 5. Convert the **`.p12`** file to a **`.pem`** file using the Terminal **`openssl`** command:
 
-```
+```bash
 openssl pkcs12 -in PATH_TO_YOUR_P12 -nokeys -out cert.pem -nodes
 openssl pkcs12 -in PATH_TO_YOUR_P12 -nocerts -out key.pem -nodes
 openssl rsa -in key.pem -out key.pem
