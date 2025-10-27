@@ -14,7 +14,6 @@ This guide shows you how to configure the validity period for your templates wit
 ---
 
 > 👍
-> -
 >
 > Refer to [Messaging Apps fallback management guide](/connect/reference/chatapps-fallback-management) to ensure your message delivery orchestration align with the WhatsApp template validity period, preventing duplicated messages
 >

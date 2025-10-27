@@ -29,7 +29,6 @@ Below is a more detailed description of the parameters in the SMS request body (
 Valid examples: `+12025550308`, `12025550308`
 
 > 👍
-> -
 >
 > We also accept national formats (for national you have to specify the `country` in the dedicated field).
 >
@@ -102,7 +101,6 @@ Example: `2016-11-07T19:20:30+08:00`
 * If included in the request, the webhook URL in the request will be used instead of your default account webhook
 
 > 👍
-> -
 >
 > We strongly recommend to set a default webhook (a.k.a callback URL) for your account using a [Webhooks Configuration API](/connect/reference/webhooks-configuration-api)
 >

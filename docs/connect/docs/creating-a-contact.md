@@ -1,7 +1,6 @@
 # Creating a contact
 
 > 👍
-> -
 >
 > Please see [Create contact](/connect/reference/create-contact) for the full API reference
 >

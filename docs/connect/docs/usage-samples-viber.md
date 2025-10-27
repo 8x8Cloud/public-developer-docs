@@ -292,7 +292,6 @@ If you want to add a fallback to SMS, add the following fields to the "`content`
 ```
 
 > 📘
-> -
 >
 > You may find out more about SenderID [here](/connect/docs/getting-started#1-source-sms-senderid)
 >

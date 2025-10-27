@@ -11,7 +11,6 @@ Object structure
 | currency | string\* | Currency code of price information expressed in [ISO 4217 format](https://en.wikipedia.org/wiki/ISO_4217). |
 
 > 🚧
-> -
 >
 > Please note that the Price object is optional and might not be included in the Delivery Receipts callback. When a message was not sent successfully, you will still receive Delivery Receipts with Failed/Undelivered status without incurring any charges. Hence, the price information is not available for the Delivery Receipts.
 >

@@ -39,7 +39,6 @@ If this doesn't return an error, you are all set and can focus on using the new 
 If you get an error like this, then you need to migrate from the old version:
 
 > 🚧
-> -
 >
 > Unable to setup the webhook of the new format, while the webhook with an old format exists for this subaccount. Please delete the current webhook first and try again. Existing webhook details: Type = MO, SubAccountId: mySubAccountId_hq, Version = V1, Url = [http://example.com](http://example.com)
 >

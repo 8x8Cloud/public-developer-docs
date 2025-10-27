@@ -7,7 +7,6 @@
 >
 
 > 📘
-> -
 >
 > Note: This API provides access to data from the past 2 years only in accordance with Analytics for Work data compliance policies; queries spanning more than 2 years will return only the most recent 2 years of data, and queries outside this range will return no results
 >

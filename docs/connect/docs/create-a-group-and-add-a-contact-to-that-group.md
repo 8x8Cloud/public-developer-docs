@@ -1,7 +1,6 @@
 # Create a group and add a contact to that group
 
 > 👍
-> -
 >
 > Please see [Create a group](/connect/reference/create-group) for the full API reference
 >
