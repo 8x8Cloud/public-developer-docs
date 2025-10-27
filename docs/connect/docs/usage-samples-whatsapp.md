@@ -147,6 +147,7 @@ The user will receive this corresponding message:
 This will result in the following message being sent with the appropriate verification code filled in as a parameter from your API call.
 
 ![image](../images/0336c16-image.png)
+
 In addition, you can also specify a fallback to SMS option which will automatically deliver the message to the user via SMS, if the message cannot be delivered via WhatsApp (such as if the user does not have WhatsApp). It is possible to specify a different body message to fit within the character limit of the SMS message. Please see the section below for details on SMS fallback.
 
 ---
@@ -227,7 +228,7 @@ The user will receive this corresponding message with a download link to the PDF
 >
 >
 
-![Sending an Example PDF File](../images/bb76bc5-image.png)Sending an Example PDF File
+![Sending an Example PDF File](../images/bb76bc5-image.png)
 
 ---
 
@@ -572,12 +573,15 @@ Once the customer clicks **View**, they will be taken to a page containing the f
 There is also an option to message the business for any questions or clarifications.
 
 ![image](../images/2e8a5c7-image.png)
+
 Additionally, the customer can choose to **Add to Cart**, which will add the item to a shopping cart.
 
 ![image](../images/7a9a7f4-image.png)
+
 Once the item is added you can view the cart which will take you to the **Place order** screen.
 
 ![image](../images/ffb3fe4-image.png)
+
 Selecting **Place Order** will send a message to the business with the cart items, so that the business can process the order.
 
 ![image](../images/15d6b91-image.png)
@@ -665,15 +669,19 @@ After the customer clicks on **View Items**, it will appear as follows:
 The customer can click on an individual item to bring up the single-item page
 
 ![image](../images/58ab049-image.png)
+
 After selecting **Add to Cart**, the catalog message will now reflect items added to the cart and their amounts.
 
 ![image](../images/19c4d8e-image.png)
+
 **View Cart** will give the option of seeing the items in the cart and then allowing the customer to **Place Order**.
 
 ![image](../images/3a25da3-image.png)
+
 After the customer selects **Place order**, this will send a message to the business containing information about the cart.
 
 ![image](../images/0e1f907-image.png)
+
 At this point, WhatsApp leaves it to the business to define the next steps for this order, such as requesting address information for delivery or collecting payment information. It is possible for example to use webhooks or Automation Builder to listen for a cart message for a customer and then reply accordingly.
 
 **View sent cart** would let the customer confirm the items sent in the cart.

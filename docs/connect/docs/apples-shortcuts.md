@@ -21,11 +21,13 @@ Then, search for URL, and type in your SMS API endpoint, as shown. Your endpoint
 
 ![248](../images/765ae74-Apple_short_4.jpg "Apple short 4.jpg")
 ![248](../images/1200905-Apple_Short_5.jpg "Apple Short 5.jpg")
+
 2. Add another action by searching for “Get Contents of URL”. Under Advanced, select POST as your Method.
 
 ![248](../images/6ce5b30-Apple_Short_6.jpg "Apple Short 6.jpg")
 ![248](../images/f520c6a-Apple_Short_7.jpg "Apple Short 7.jpg")
 ![248](../images/a37d4b2-apple_short_8.jpg "apple short 8.jpg")
+
 Add Headers as follows:
 
 ```text
@@ -35,6 +37,7 @@ Content-type | application/JSON
 ```
 
 ![248](../images/ca69630-apple_short_9.jpg "apple short 9.jpg")
+
 3. Add a request body by selecting JSON. Fill out the following fields in your request body:
 
 ```text
@@ -45,6 +48,7 @@ Text – Your text message content
 ```
 
 ![248](../images/6a96419-Apple_short_10.jpg "Apple short 10.jpg")
+
 4. Now run it by clicking on the play sign on the bottom right. You should receive an SMS (if you use your own mobile phone) and see a JSON response.
 
 ![248](../images/4aad756-Apple_short_11.jpg "Apple short 11.jpg")

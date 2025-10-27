@@ -34,9 +34,9 @@ In the next page the workflow should be pre-populated with steps, click on the "
 
 The **keyword** is controlled by the "Branch" Step in red, in this example it is set to **STOP** but you can modify this if you wish to change the condition to trigger the opt out.
 
-![Opt Out Flow Part 1 of 2](../images/83371bc-image.png)Opt Out Flow Part 1 of 2
+![Opt Out Flow Part 1 of 2](../images/83371bc-image.png)
 
-![Opt Out Flow Part 2 of 2](../images/b1fcb73-image.png)Opt Out Flow Part 2 of 2
+![Opt Out Flow Part 2 of 2](../images/b1fcb73-image.png)
 
 > 📘 **The branch step has a limit of 5 choices in the Automation Builder UI. You can create additional workflows with additional choices if you need them at the top level of your menu. Another option is to look into the Automation Builder API to build this workflow instead which can support more than 5 choices.**
 >

@@ -15,6 +15,7 @@ Here is what the SMS Link will look like for the customer.
 Upon clicking the link, the customer will first be taken to a room lobby where they can fill out their display name for the agent to see.
 
 ![image](../images/6bd65ebe90144539d0cd7fa3e7584d816c8f14fadf17cdf356acab069ec3d1c3-4e74a25-image.png)
+
 Here is what the call screen looks like once the customer joins and the relevant buttons explained below.
 
 ![Annotation user interface](../images/bc98b647114fed68c452b29dfc297c1e110a767249d38c0bec2c933354f3eb87-photo_6262264954581271633_y.jpg)

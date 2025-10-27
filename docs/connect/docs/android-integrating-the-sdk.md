@@ -21,11 +21,11 @@ Complete the following steps to setup your Android studio development environmen
 
 1. Open **Android Studio** and click **Start a new Android Studio project**.
 
-![850](../images/1156f59-1.png "1.png")Android Studio 1
+![850](../images/1156f59-1.png "1.png")
 
 2. In the **Select a Project Template** window, select a template of your choice and click **Next**.
 
-![850](../images/2e283f2-2.png "2.png")Android Studio 2
+![850](../images/2e283f2-2.png "2.png")
 
 3. In the **Configure Your Project** window:
 
@@ -34,7 +34,7 @@ Complete the following steps to setup your Android studio development environmen
   * Select either **Kotlin** or **Java** as the language
   * Select **API 26: Android 8.0 (Oreo)** as the **Minimum SDK** and click **Finish**.
 
-![850](../images/7777878-android_studio_3.png "3.png")Android Studio 3
+![850](../images/7777878-android_studio_3.png "3.png")
 
 >
 > **Note::** The Voice SDK APIs expose Kotlin [coroutine](https://kotlinlang.org/docs/coroutines-guide.html) APIs such as [Flows](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) and `suspend` functions. The easiest way to consume such APIs from Java is to use [RxJava](https://github.com/ReactiveX/RxJava) in conjunction with [coroutine to Rx extensions](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-rx3/).
@@ -48,7 +48,7 @@ Confirm you have the latest dependency version:
 
 1. Add the following to your **top-level** **`build.gradle`** file:
 
-![820](../images/85448b2-4.png "4.png")Android Studio 4
+![820](../images/85448b2-4.png "4.png")
 
 ```java
 allprojects {
@@ -64,7 +64,7 @@ allprojects {
 
 2. Add the Wavecell dependency as well as **`sourceCompatibility`** in your **app-level** **`build.gradle`** file:
 
-![818](../images/c84201a-5.png "5.png")Android Studio 5
+![818](../images/c84201a-5.png "5.png")
 
 ```java
 android {

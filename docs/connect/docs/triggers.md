@@ -22,9 +22,13 @@ Below is an example of a SMS trigger step setup as part of the workflow. It is t
 
 This may be useful to use when you want to trigger an event such as sending a reply to an inbound SMS to that subaccount.
 
-![Inbound SMS as part of a Workflow Definition](../images/63acb16-image.png)Inbound SMS Trigger as part of a Workflow Definition
+![Inbound SMS as part of a Workflow Definition](../images/63acb16-image.png)
 
-![Inbound SMS Trigger Properties](../images/fddc703-image.png)Inbound SMS Trigger Properties
+Inbound SMS Trigger as part of a Workflow Definition
+
+![Inbound SMS Trigger Properties](../images/fddc703-image.png)
+
+Inbound SMS Trigger Properties
 
 | Property | Description |
 | --- | --- |
@@ -32,11 +36,13 @@ This may be useful to use when you want to trigger an event such as sending a re
 
 ### Inbound Chat Apps
 
-![Inbound Chat Apps as part of a workflow
+![Inbound Chat Apps as part of a workflow](../images/9c9c941-image.png)
 
-](../images/9c9c941-image.png)Inbound Chat Apps Trigger as part of a workflow
+Inbound Chat Apps Trigger as part of a workflow
 
-![Inbound Chat Apps Properties](../images/6d2840d-image.png)Inbound Chat Apps Trigger Properties
+![Inbound Chat Apps Properties](../images/6d2840d-image.png)
+
+Inbound Chat Apps Trigger Properties
 
 Similar to the Inbound SMS Trigger, this is triggered when a message is sent to the subaccount. However it is triggered off of a Chat Apps message such as an incoming WhatsApp/Viber message to a WhatsApp/Viber account tied to the subaccount.
 
@@ -48,9 +54,13 @@ This may be useful to use when you want to trigger an event such as sending a re
 
 ### HTTP Request (Webhooks)
 
-![HTTP Trigger as part of a Workflow](../images/0d426e5-image.png)HTTP Trigger as part of a Workflow
+![HTTP Trigger as part of a Workflow](../images/0d426e5-image.png)
 
-![HTTP Trigger Properties](../images/280dec0-image.png)HTTP Trigger Properties
+HTTP Trigger as part of a Workflow
+
+![HTTP Trigger Properties](../images/280dec0-image.png)
+
+HTTP Trigger Properties
 
 | Property | Description | Example |
 | --- | --- | --- |

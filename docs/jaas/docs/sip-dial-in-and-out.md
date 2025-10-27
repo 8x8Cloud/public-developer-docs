@@ -53,6 +53,7 @@ Create or Join a JaaS Room. Afterwards obtain the PIN from the **Triple Dot > In
 The PIN should be available from the popup below.
 
 ![image](../images/fc0f4ae-image.png)
+
 Note down the PIN for this room which will be used when connecting through Zoom in the next step.
 
 #### Connecting Through Zoom
@@ -163,6 +164,7 @@ interfaceConfigOverwrite: {
 After the required setup, go to your JaaS meeting and then open **Triple Dot Menu > Invite People**. In the dialog box that opens, proceed to enter the SIP address in the **Invite your contacts** box. This should result in a dialog box showing that you have invited that SIP address.
 
 ![sip dial out](../images/ec0184f-sip_dial_out_1.gif)
+
 The softphone connected to that SIP Address should ring as shown, when you pick up the call you will be connected to the JaaS Room. The softphone can choose to connect to the call over **audio-only** or **video+audio**.
 
 ![image](../images/346a89c-image.png)

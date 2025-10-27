@@ -38,13 +38,11 @@ Message body types can either be **static** or **dynamic**.
 
 This is a **static** message type with a fixed message that cannot be modified or changed.
 
-![Static Message Body](../images/bca3573-image.png)Static Message Body
+![Static Message Body](../images/bca3573-image.png)
 
 This is a **dynamic** message type with a parameters *`{{FirstName}}`* and *`{{date}}`* that are designed to be overwritten with actual values when sent through 8x8.
 
-![Dynamic Message Body
-
-](../images/fe532b8-image.png)Dynamic Message Body
+![Dynamic Message Body](../images/fe532b8-image.png)
 
 How these are sent are covered in the Multi-Channel Sender Section.
 

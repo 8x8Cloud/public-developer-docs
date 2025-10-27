@@ -48,4 +48,6 @@ This sample API request shows the full capability of LON message, with all the c
 
 The corresponding LON message received by the customer would look like:
 
-![Sample LON message with all components included](../images/85b76de-LON_Event_Reminder.png)Sample LON message with all components included
+![Sample LON message with all components included](../images/85b76de-LON_Event_Reminder.png)
+
+Sample LON message with all components included

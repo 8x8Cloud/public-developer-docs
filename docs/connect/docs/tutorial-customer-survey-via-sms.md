@@ -270,6 +270,7 @@ Here is an example table that you can be copy/pasted to your Google Sheet.
 Setup a new workflow with an **HTTP Trigger** followed by a **Google Sheets: Add Single Row Step**
 
 ![image](../images/b4333bb-image.png)
+
 The  **HTTP Trigger** should have these following configurations:
 
 ![image](../images/cc24cff-image.png)
@@ -291,6 +292,7 @@ Within the **HTTP Trigger,** go to **Generate Test Event** and use the following
 The **Google Sheets Step** should have the following configuration.
 
 ![image](../images/5ab2223-Screenshot_2024-06-20_at_5.30.40_PM.png)
+
 Within **Pipedream**, you should be able to see the HTTP responses sent by Automation Builder which may be useful in case any debugging is required.
 
 ![image](../images/f8264b4-Screenshot_2024-06-21_at_10.11.34_AM.png)

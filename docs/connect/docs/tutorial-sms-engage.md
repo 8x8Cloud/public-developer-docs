@@ -129,6 +129,7 @@ Remember to replace the **,** and  values above. The **{{url}}** value does not 
 This should result in a SMS being sent similar to the one below with the URL replacing the {{url}} parameter's place in the SMS Body.
 
 ![image](../images/6f385ec-image.png)
+
 A successful request should return an 200 OK HTTP Response Code and the Response Body should appear as below:
 
 ```json
@@ -284,6 +285,7 @@ Remember to replace the  **,** **,** and  values above. The **{{url}}** value do
 This should result in a SMS being sent similar to the one below with the URL replacing the {{url}} parameter's place in the SMS Body.
 
 ![image](../images/5ece359-image.png)
+
 A successful request should return an 200 OK HTTP Response Code and the Response Body should appear as below.
 
 HTTP Response
@@ -367,6 +369,7 @@ For a given time period, reports will include the following information
 For each survey response, clicking **View response** in the associated row will bring up the actual responses from the customer.
 
 ![image](../images/acf5739-image.png)
+
 The **Export** button on the same page will give you the option to email a CSV file of the responses in the survey.
 
 ![image](../images/58580f0-Screenshot_2024-06-25_at_5.57.53_AM.png)

@@ -113,10 +113,10 @@ These can be left unchecked/checked depending on your desired settings in Clever
 
 Before leaving, you can send a test SMS using the Send test SMS link at the bottom of the page.
 
-![Send SMS Test](../images/538c55d-image.png)Send SMS Test
+![Send SMS Test](../images/538c55d-image.png)
 
-![Successful Confirmation Dialog](../images/247285f-image.png)Successful Confirmation Dialog
+![Successful Confirmation Dialog](../images/247285f-image.png)
 
-![SMS Received on Mobile](../images/2458f78-image.png)SMS Received on Mobile
+![SMS Received on Mobile](../images/2458f78-image.png)
 
 Once the test is successful you can hit save to use 8x8 as an SMS Provider.

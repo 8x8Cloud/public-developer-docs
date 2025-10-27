@@ -94,6 +94,7 @@ You may test the webhook as well and ensure that it is returning a 200 Response 
 After adding the webhook, return to the **Admin Center** again and navigate to **Objects and Rules** > **Business Rules** > **Triggers**.
 
 ![image](../images/f7d8102-image.png)
+
 On the **Triggers** page, click **Add Trigger**.
 
 ![image](../images/d9e7e60-image.png)

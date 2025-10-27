@@ -26,9 +26,9 @@ Steps allow you to create custom workflow definitions that can perform different
 
 SMS step allows you to send a message to a recipient as a SMS using the 8x8 SMS API.
 
-![Example of Step](../images/31e3b54-image.png)Example of Step
+![Example of Step](../images/31e3b54-image.png)
 
-![Example of Step Properties](../images/0eccbeb-image.png)Example of Step Properties
+![Example of Step Properties](../images/0eccbeb-image.png)
 
 | Property | Description | Example Value |
 | --- | --- | --- |
@@ -41,10 +41,10 @@ SMS step allows you to send a message to a recipient as a SMS using the 8x8 SMS 
 
 ChatAppsMessage step allows you to send a message using 8x8 Chat Apps API.
 
-![Example of Step](../images/258c034-image.png)Example of Step
+![Example of Step](../images/258c034-image.png)
 
 ![image](../images/63f27cb-image.png)
-![Example of Step Properties](../images/4bd5833-image.png)Example of Step Properties
+![Example of Step Properties](../images/4bd5833-image.png)
 
 | Property | Description | Example Value |
 | --- | --- | --- |
@@ -60,7 +60,7 @@ ChatAppsMessage step allows you to send a message using 8x8 Chat Apps API.
 Wait step allows you to make the workflow wait for a specified period of time before executing the next step.
 
 ![Step and Properties in UI  
-(Note: The duration is yet to be updated, that's why it shows 00:00:00 on the left)](../images/307f3e8-image.png)Step and Properties in UI  
+(Note: The duration is yet to be updated, that's why it shows 00:00:00 on the left)](../images/307f3e8-image.png)  
 
 (Note: The duration is yet to be updated, that's why it shows 00:00:00 on the left)
 
@@ -82,9 +82,7 @@ The example below shows the next steps after and before the branch to illustrate
 
 ![image](../images/d68b3c1-image.png)
 
-![Example of Step Properties
-
-](../images/f66d1d4-image.png)Example of Step Properties
+![Example of Step Properties](../images/f66d1d4-image.png)
 
 | Property | Description | Example Value |
 | --- | --- | --- |
@@ -99,10 +97,10 @@ The WaitForReply step type allows your workflow to pause till you receive a repl
 
 For example you may want to send a message asking a user to check their email for an OTP, then use Wait for Reply to wait for the user to input the OTP before proceeding to the next step.
 
-![Example of Step](../images/1538630-image.png)Example of Step
+![Example of Step](../images/1538630-image.png)
 
 ![image](../images/12f94c6-image.png)
-![Example of Step Properties](../images/cb17e53-image.png)Example of Step Properties
+![Example of Step Properties](../images/cb17e53-image.png)
 
 | Property | Description | Example |
 | --- | --- | --- |
@@ -120,7 +118,7 @@ The Voice message has 3 possible actions which will change the properties availa
 Example of Step Properties for](../images/b9d5d26-image.png)Example of Steps
 
 ![Example of required properties  
-for all actions](../images/2f29d51-image.png)Example of required properties  
+for all actions](../images/2f29d51-image.png)  
 
 for all actions
 
@@ -136,7 +134,7 @@ for all actions
 
 #### "Text to Speech" Action Properties Image
 
-![Example of Step Propertie](../images/5cf1f95-image.png)Example of Step Propertie
+![Example of Step Propertie](../images/5cf1f95-image.png)
 
 #### "Text to Speech" Action-specific Properties
 
@@ -149,7 +147,7 @@ for all actions
 
 #### "Play an Audio File" Action Image
 
-![Example of Properties for Play an Audio File](../images/4676b33-image.png)Example of Properties for Play an Audio File
+![Example of Properties for Play an Audio File](../images/4676b33-image.png)
 
 #### "Play an Audio File" Action Properties
 
@@ -160,7 +158,7 @@ for all actions
 
 #### "Message with DTMF" Properties Image
 
-![Example of Message with DTMF Properties](../images/6c2efd1-image.png)Example of Message with DTMF Properties
+![Example of Message with DTMF Properties](../images/6c2efd1-image.png)
 
 #### "Message with DTMF" Action Properties
 
@@ -184,13 +182,13 @@ for all actions
 
 Send an HTTP request to an endpoint. Useful for integrating with APIs.
 
-![Example of Step](../images/b6a4526-image.png)Example of Step
+![Example of Step](../images/b6a4526-image.png)
 
-![Example of Step Properties](../images/cee058e-image.png)Example of Step Properties
+![Example of Step Properties](../images/cee058e-image.png)
 
-![Example of "Output" Property](../images/040240f-image.png)Example of "Output" Property
+![Example of "Output" Property](../images/040240f-image.png)
 
-![Example of Query Preoperty](../images/04c4c20-image.png)Example of Query Preoperty
+![Example of Query Preoperty](../images/04c4c20-image.png)
 
 | Property | Description | Example Value |
 | --- | --- | --- |

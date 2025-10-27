@@ -47,6 +47,7 @@ To access the livestream menu within a JaaS call, go to the **Triple Dot Menu** 
 Once you open this menu item you should see this box. If you see the warning below, this is due to your YouTube/Google Account not having live streaming setup. You can either select a different account with live streaming set up or you can use the Live Stream Key covered in the section **Option 1) Streaming via Stream Key**.
 
 ![image](../images/f66e2d2-Screenshot_2024-06-18_at_11.19.00_AM.png)
+
 If you do have a Live stream setup you should see the box populated as below where it will allow you to select a live stream.
 
 ![image](../images/aec10fe-image.png)
@@ -71,6 +72,7 @@ Ensure that you **copy your Stream Key** from this page.
 Once you obtain the stream key, paste it into the **Live stream key** text box and click **Start Live Stream**.
 
 ![image](../images/f864f3c-image.png)
+
 This should result in a few dialog boxes being shown confirming that the livestream and also a red globe indicator at the top of the JaaS Room indicating the livestream is active.
 
 ![image](../images/5eccdbc-image.png)

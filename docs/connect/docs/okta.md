@@ -298,6 +298,7 @@ OTP sent successfully: {
 The SMS should also be delivered to your phone.
 
 ![image](../images/a7da876-image.png)
+
 This demonstrates the inline hook is now successfully working. Now you can attach the Okta inline hook to any action that would trigger the inline hook in Okta.
 
 ## Using the Inline Hook
@@ -336,9 +337,11 @@ When attempting to login to the application that you have configured above, you 
 
 ![image](../images/b65f2ca-image.png)
 ![image](../images/75cc45b-image.png)
+
 Again the code should be sent to your phone via SMS, follow the prompts to finish logging into application.
 
 ![image](../images/c3a7e16-image.png)
+
 For subsequent sign-ins to the application it should utilize SMS as a verification method.
 
 ## Conclusion

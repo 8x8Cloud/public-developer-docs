@@ -148,6 +148,6 @@ The email will contain logs for each of the subAccounts that are associated with
 
 Below is an example of a exported for WhatsApp and the information that is available.
 
-![WhatsApp Export Columns 1/2](../images/1f4fcad-image.png)WhatsApp Export Columns 1/2
+![WhatsApp Export Columns 1/2](../images/1f4fcad-image.png)
 
-![WhatsApp Export Columns 2/2](../images/7610a02-image.png)WhatsApp Export Columns 2/2
+![WhatsApp Export Columns 2/2](../images/7610a02-image.png)

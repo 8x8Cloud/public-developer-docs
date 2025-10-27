@@ -16,7 +16,9 @@ Before we start on the Make.com scenario, create a new Google Sheet in your Goog
 
 The sheet should have **Phone Number** in Cell A1 and **Message** in Cell B1 to serve as headers.
 
-![Add phone number and message columns](../images/ccee37d-image.png)Add phone number and message columns
+![Add phone number and message columns](../images/ccee37d-image.png)
+
+Add phone number and message columns
 
 ### Create a New Scenario
 
@@ -29,18 +31,23 @@ The create button is located on the top right from the Dashboard.
 The trigger is the first action in a scenario, here we will select **"Google Sheets"**
 
 ![image](../images/0b29c8b-image.png)
+
 In the list of triggers/actions for Google Sheets, select **"Watch new rows"**
 
 ![image](../images/692f4de-image.png)
+
 Then you will want to add a new connection.
 
 ![image](../images/528ce92-image.png)
+
 This will prompt you to connect your Google account and then specify the information about your Google Sheet.
 
 ![image](../images/fc6bf87-image.png)
+
 It will then prompt you to decide which row to start watching, in this example our Google Sheet is blank so we will select 2 since our new data should start at row 2.
 
 ![image](../images/fe57623-image.png)
+
 After that, we will select the "Add another module" Option and select 8x8 from the list.
 
 ![image](../images/af9ab56-image.png)
@@ -52,6 +59,7 @@ Afterwards, you can specify the following fields which are required:
 * **Text:** Select the output that contains the Message in the Google Sheet
 
 ![image](../images/96ef468-image.png)
+
 When you connect for the first time to 8x8, you will be prompted for an 8x8 API Key which can be obtained from the 8x8 Connect Dashboard under the API Keys section.
 
 ![image](../images/25f944f-image.png)
@@ -67,6 +75,7 @@ Turn on Scheduling on the Bottom Left and select your desired frequency, by defa
 Once you add a row to your Google Sheet, this should trigger Make.com to send you an SMS at the specified phone number. This may not be immediate as it needs to wait for the scheduled interval.
 
 ![image](../images/73d092f-image.png)
+
 This should result in an SMS being sent to the destination specified.
 
 ![image](../images/264e5dd-image.png)

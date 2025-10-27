@@ -29,6 +29,7 @@ It is often used by B2B enterprises to connect or integrate different cloud serv
 1. Log into your Workato account. Once you are at the dashboard, click Recipes on the menu, and create a new recipe. Select an app and trigger event. The app in our case is Gmail, and our trigger event is “New email” since we want an SMS to be sent with every new email.
 
 ![550](../images/85f13fa-Workato1.png "Workato1.png")
+
 2. Next, you will need to link the trigger to a Gmail account. Either choose your account from the drop-down menu or link a new account. After creating the trigger, you may label it for future use.
 
 ## Setup your 8x8 SMS API
@@ -38,6 +39,7 @@ It is often used by B2B enterprises to connect or integrate different cloud serv
 1. On the next page, type and select “HTTP” in the field under App. Then, select “Send request” as your action and click **Next**.
 
 ![720](../images/acebc76-1.-Setting-up-API.gif "1.-Setting-up-API.gif")
+
 2. You will be asked to create a new connection and the authentication type. Name your connection, and select “Header auth” as your authentication type.
 3. Enter the following header details in the space provided under “Header authorization”:
 
@@ -59,6 +61,7 @@ You can find your API Key on your [8x8 Connect](https://connect.8x8.com/messagin
 2. Select “POST” as your method and enter the request URL. The request URL can be found at the Customer Portal under Configuration > API Keys.
 
 ![720](../images/89bcf5a-workato_gif.gif "workato gif.gif")
+
 3. Using the default request content type, JSON copies the JSON text, again from your API Keys. You can use your mobile number as a test. Now click Send request, and Apply configuration, and you should receive a text message
 
 If everything went well, just click finish, and you’ve made your first integration recipe!

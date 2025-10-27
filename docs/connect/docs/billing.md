@@ -27,6 +27,7 @@ In the context of Conversational billing, a conversation refers to a 24-hour win
 • All messages exchanged during that 24-hour period
 
 ![diagram](../images/e0304fb6b81fb3f81739894fe3da7e155ee540376571f6089e31c9037cfcb964-Diagram.png)
+
 **What Initiates a Billable P2A Conversation?**  
 It is important to understand which user (P2A) interactions are considered billable "messages" that start the 24-hour conversational session. Not all user actions from an RCS message are billable. A conversation is only initiated when the user sends a message back to the agent. Actions like opening a web page or dialing a number do not count as messages and are not billable.
 

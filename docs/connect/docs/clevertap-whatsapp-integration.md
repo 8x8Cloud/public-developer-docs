@@ -42,9 +42,9 @@ Click on the **Provider Configuration** button to set up a new provider. In the 
 
 After entering the values, ensure that you copy the value for the **Delivery Report Callback URL** and the **Inbound Message Callback URL** and send an email to [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) with a request to enable the Clevertap integration for WhatsApp for your 8x8 account.
 
-![Provider Details](../images/9121be5-image.png)Provider Details
+![Provider Details](../images/9121be5-image.png)
 
-![Request Body and Headers](../images/78598fc-image.png)Request Body and Headers
+![Request Body and Headers](../images/78598fc-image.png)
 
 After inputting the values above, click **Send Test WhatsApp** to test the integration by sending a WhatsApp message.
 

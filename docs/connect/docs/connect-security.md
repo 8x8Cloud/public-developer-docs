@@ -14,6 +14,7 @@ SSO is only available to enterprise customers. If you want to check your account
 2. Click the upper-right gear icon and select “User management”
 
 ![user management](../images/16dee2b-user_management.png)
+
 3. Once you are inside the user management page, click the “Configure Single Sign-On” button.
 
 ![image](../images/5550d7f-image.png)

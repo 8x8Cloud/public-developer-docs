@@ -51,8 +51,6 @@ The JSON object will contain the following values:
 
 Example of a JSON object sent to your "Voice Session Summary" endpoint:
 
-Session Summary (Success)Session Summary (Failure)
-
 ```json
 Success 
 

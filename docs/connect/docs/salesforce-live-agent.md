@@ -90,6 +90,7 @@ Below are the required settings. Settings outside of this are optional.
 
 ![image](../images/e4b0c57-image6.png)
 ![image](../images/2959ebc-image7.png)
+
 Note down the **ButtonId** in the **Chat Button Code** highlighted in red to send to 8x8’s Support Team.
 
 ### Chat Deployments
