@@ -33,6 +33,7 @@ You can personalise, schedule and send up to a million SMS in one go.
 *(After you sign up, a sub-account is created and pre-selected for you. You may change this if you have different sub-accounts, which can be created by submitting a request to [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com))*
 
 ![image](../images/dfe5fa25287b3266ab2045d35686ff46e061095ee608e3a599b72e3e0fc35070-image.png)
+
 2. **Click "Add recipients and you will be redirected to Recipients page to enter your destination number(s).**  
 
 There are four(4) ways you can do this.  
@@ -122,7 +123,50 @@ You'll also need to decide when to send your message: **"Send message now"** is 
 >
 >
 
+### **Advanced SMS campaign settings - Control send speed to match your capacity**
+
+This feature gives you greater control over your SMS campaigns by helping you manage the delivery speed of your messages. It's designed to prevent a sudden flood of customer responses that could overwhelm your support team. By using this throttling mechanism, you can ensure a steady and manageable flow of customer engagement.
+
+To control the send rate, you must enable the **Limit sending speed over time** toggle in the "Confirm and save" page during SMS campaign creation for both "Send Now" or "Schedule for later" campaigns.
+
+![image](../images/217aa6dc3c9048438dea8ff9dc6dd64c120b977bda88499bf43750a422cf13a0-image.png)
+
+Once enabled, you can configure the following fields:
+
+![image](../images/a85a1ad210091241039eb1316672b2ca43d1ccb06b0ee0b8b51947a96913c0d3-image.png)
+
+* **Number of messages**: Set the maximum number of messages to be sent within a specific time unit.
+* **Time Unit**: Choose from a dropdown menu with options: Minute, Hour, or Day. This selection determines the rate at which messages are sent.
+* **Delivery Window**: Set a Start Time and End Time to define the hours when messages will be sent. This is useful if you don’t want to disturb your audience during the night or if you want to send messages during a specific time window for optimal conversions. The start and end times will be set according to the time zone of the capital city of your recipients’ countries.
+
+![image](../images/19bd70a581f69d25ee5d3c161c5b9eb63ba8407351fe94bac5b964dc7aab0cbf-image.png)
+
+* **Days**: The system defaults to 5 days starting from the campaign creation or scheduled date. You can select or deselect days within this dynamic five-day window. The maximum duration for message throttling is a **120-hour (5-day) delivery window.**
+
+> 📘 Message sending limits
+>
+> If your configured send rate won't reach all recipients within the 120-hour delivery window, a validation error will appear, and the "Submit" button will be disabled.
+>
+> For example, if you set a rate of **2 messages per day for 3 days to a list of 10 recipients**, only **6 messages** will be sent, meaning your campaign will be incomplete. To fix this, you can increase the number of messages, change the time unit, extend the delivery window, or reduce the total number of recipients (e.g. split the campaign into multiple smaller ones)
+>
+> ![image](../images/f68778518a3dd935cbb2219811bfe6d22749c34359e00488594ef428945e7d59-image.png)
+
 8. Click "Send" to process and send your message. If you need to re-enter all the fields, simply click "Cancel".
 9. After submitting, you'll be redirected to the list of Campaigns where you can see the last campaign created and its status right at the top of the list.
 
 ![image](../images/15f931d33ee5e5f9a0b2ba13f75864118443158285a399af387c9360cb74abbe-image.png)
+
+> 📘 Campaign status with controlled sending speed over time
+>
+> After you submit a campaign that has limited sending speed over time (see above feature), it's added to the Campaign list with a "Processing" status.
+>
+> The campaign details page may show an empty state if messages haven't started sending yet. Once messages begin to send, a partial state will be displayed, including a "Delivery in progress" note and a "Partial" cost label showing the running cost.
+>
+> ![image](../images/1574fe0500622dd4e842408fa17ca9c722f1e217ada93c37e93192fe5dd94888-image.png)
+
+>
+> ![image](../images/f6264d6559c46e65b8d77c73ee2a338c96154c4421877bf655726b1c580c59d8-image.png)
+
+>
+> **Message Status Update Timing**  
+> All messages campaigns will have their status updated every **5 mins for their first day**. After that, on the second and succeeding days, status will only be updated once a day at 18:00 UTC (2:00 AM Singapore Time).
