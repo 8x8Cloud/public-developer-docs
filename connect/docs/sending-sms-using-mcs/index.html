@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.9.1">
 <title data-rh="true">Sending SMS using Multi-Channel Sender (MCS) | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/sending-sms-using-mcs"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Sending SMS using Multi-Channel Sender (MCS) | 8x8 Developer Portal"><meta data-rh="true" name="description" content="Multi-channel Sender"><meta data-rh="true" property="og:description" content="Multi-channel Sender"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/sending-sms-using-mcs"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/sending-sms-using-mcs" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/sending-sms-using-mcs" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.900654b1.css">
-<script src="/assets/js/runtime~main.93573aa3.js" defer="defer"></script>
-<script src="/assets/js/main.ca66fadf.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.a5e96e3d.js" defer="defer"></script>
+<script src="/assets/js/main.b8d59b6b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -29,8 +29,10 @@
 <li><strong>Select &quot;SMS&quot; as your channel and select your subaccount.</strong></li>
 </ol>
 <p><em>(After you sign up, a sub-account is created and pre-selected for you. You may change this if you have different sub-accounts, which can be created by submitting a request to <a href="mailto:cpaas-support@8x8.com" target="_blank" rel="noopener noreferrer">cpaas-support@8x8.com</a>)</em></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/dfe5fa25287b3266ab2045d35686ff46e061095ee608e3a599b72e3e0fc35070-image-6caba26f3dee69b28e559fb657aa3584.png" width="1013" height="497" class="img_ev3q">
-2. <strong>Click &quot;Add recipients and you will be redirected to Recipients page to enter your destination number(s).</strong></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/dfe5fa25287b3266ab2045d35686ff46e061095ee608e3a599b72e3e0fc35070-image-6caba26f3dee69b28e559fb657aa3584.png" width="1013" height="497" class="img_ev3q"></p>
+<ol start="2">
+<li><strong>Click &quot;Add recipients and you will be redirected to Recipients page to enter your destination number(s).</strong></li>
+</ol>
 <p>There are four(4) ways you can do this.</p>
 <p>a. Upload a file</p>
 <p>b. Type a mobile number</p>
@@ -94,10 +96,44 @@ Creating a custom field <em>(From the screenshot below, the user typed and enter
 <p>❗️ <strong>Scheduled messages</strong></p>
 <p><em>Keep in mind you can only cancel scheduled messages <strong>up to 3 minutes before their send time</strong>. Messages cannot be cancelled if this deadline is missed.</em></p>
 </blockquote>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="advanced-sms-campaign-settings---control-send-speed-to-match-your-capacity"><strong>Advanced SMS campaign settings - Control send speed to match your capacity</strong><a href="#advanced-sms-campaign-settings---control-send-speed-to-match-your-capacity" class="hash-link" aria-label="Direct link to advanced-sms-campaign-settings---control-send-speed-to-match-your-capacity" title="Direct link to advanced-sms-campaign-settings---control-send-speed-to-match-your-capacity" translate="no">​</a></h3>
+<p>This feature gives you greater control over your SMS campaigns by helping you manage the delivery speed of your messages. It&#x27;s designed to prevent a sudden flood of customer responses that could overwhelm your support team. By using this throttling mechanism, you can ensure a steady and manageable flow of customer engagement.</p>
+<p>To control the send rate, you must enable the <strong>Limit sending speed over time</strong> toggle in the &quot;Confirm and save&quot; page during SMS campaign creation for both &quot;Send Now&quot; or &quot;Schedule for later&quot; campaigns.</p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/217aa6dc3c9048438dea8ff9dc6dd64c120b977bda88499bf43750a422cf13a0-image-69f9032b05701ee9f88100a55669440c.png" width="549" height="262" class="img_ev3q"></p>
+<p>Once enabled, you can configure the following fields:</p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/a85a1ad210091241039eb1316672b2ca43d1ccb06b0ee0b8b51947a96913c0d3-image-ee7b1ffabd3e7911eb685de9d998ff2d.png" width="551" height="432" class="img_ev3q"></p>
+<ul>
+<li><strong>Number of messages</strong>: Set the maximum number of messages to be sent within a specific time unit.</li>
+<li><strong>Time Unit</strong>: Choose from a dropdown menu with options: Minute, Hour, or Day. This selection determines the rate at which messages are sent.</li>
+<li><strong>Delivery Window</strong>: Set a Start Time and End Time to define the hours when messages will be sent. This is useful if you don’t want to disturb your audience during the night or if you want to send messages during a specific time window for optimal conversions. The start and end times will be set according to the time zone of the capital city of your recipients’ countries.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/19bd70a581f69d25ee5d3c161c5b9eb63ba8407351fe94bac5b964dc7aab0cbf-image-71400caf1107572028251b84566b0ce1.png" width="572" height="545" class="img_ev3q"></p>
+<ul>
+<li><strong>Days</strong>: The system defaults to 5 days starting from the campaign creation or scheduled date. You can select or deselect days within this dynamic five-day window. The maximum duration for message throttling is a <strong>120-hour (5-day) delivery window.</strong></li>
+</ul>
+<blockquote>
+<p>📘 Message sending limits</p>
+<p>If your configured send rate won&#x27;t reach all recipients within the 120-hour delivery window, a validation error will appear, and the &quot;Submit&quot; button will be disabled.</p>
+<p>For example, if you set a rate of <strong>2 messages per day for 3 days to a list of 10 recipients</strong>, only <strong>6 messages</strong> will be sent, meaning your campaign will be incomplete. To fix this, you can increase the number of messages, change the time unit, extend the delivery window, or reduce the total number of recipients (e.g. split the campaign into multiple smaller ones)</p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f68778518a3dd935cbb2219811bfe6d22749c34359e00488594ef428945e7d59-image-ec66ae976661887a928c91f9dac71465.png" width="417" height="138" class="img_ev3q"></p>
+</blockquote>
 <ol start="8">
 <li>Click &quot;Send&quot; to process and send your message. If you need to re-enter all the fields, simply click &quot;Cancel&quot;.</li>
 <li>After submitting, you&#x27;ll be redirected to the list of Campaigns where you can see the last campaign created and its status right at the top of the list.</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/15f931d33ee5e5f9a0b2ba13f75864118443158285a399af387c9360cb74abbe-image-2f8582f7eb48cdc8160162e477012f67.png" width="1216" height="956" class="img_ev3q"></p></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/sender"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Multi-channel Sender (MCS)</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/sending-chat-apps-using-mcs"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Sending WhatsApp messages using MCS</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#multi-channel-sender" class="table-of-contents__link toc-highlight">Multi-channel Sender</a></li><li><a href="#video-guide" class="table-of-contents__link toc-highlight">Video Guide</a></li><li><a href="#sending-sms" class="table-of-contents__link toc-highlight">Sending SMS</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a></div></div></div></footer></div>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/15f931d33ee5e5f9a0b2ba13f75864118443158285a399af387c9360cb74abbe-image-2f8582f7eb48cdc8160162e477012f67.png" width="1216" height="956" class="img_ev3q"></p>
+<blockquote>
+<p>📘 Campaign status with controlled sending speed over time</p>
+<p>After you submit a campaign that has limited sending speed over time (see above feature), it&#x27;s added to the Campaign list with a &quot;Processing&quot; status.</p>
+<p>The campaign details page may show an empty state if messages haven&#x27;t started sending yet. Once messages begin to send, a partial state will be displayed, including a &quot;Delivery in progress&quot; note and a &quot;Partial&quot; cost label showing the running cost.</p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/1574fe0500622dd4e842408fa17ca9c722f1e217ada93c37e93192fe5dd94888-image-3b538ee3f6a72a0693199f889b8f673b.png" width="528" height="287" class="img_ev3q"></p>
+</blockquote>
+<blockquote>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f6264d6559c46e65b8d77c73ee2a338c96154c4421877bf655726b1c580c59d8-image-cf5ee082785230501a8e6edc666d4f5e.png" width="1006" height="401" class="img_ev3q"></p>
+</blockquote>
+<blockquote>
+<p><strong>Message Status Update Timing</strong><br>
+All messages campaigns will have their status updated every <strong>5 mins for their first day</strong>. After that, on the second and succeeding days, status will only be updated once a day at 18:00 UTC (2:00 AM Singapore Time).</p>
+</blockquote></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/sender"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Multi-channel Sender (MCS)</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/sending-chat-apps-using-mcs"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Sending WhatsApp messages using MCS</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#multi-channel-sender" class="table-of-contents__link toc-highlight">Multi-channel Sender</a></li><li><a href="#video-guide" class="table-of-contents__link toc-highlight">Video Guide</a></li><li><a href="#sending-sms" class="table-of-contents__link toc-highlight">Sending SMS</a><ul><li><a href="#advanced-sms-campaign-settings---control-send-speed-to-match-your-capacity" class="table-of-contents__link toc-highlight"><strong>Advanced SMS campaign settings - Control send speed to match your capacity</strong></a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a></div></div></div></footer></div>
 </body>
 </html>
