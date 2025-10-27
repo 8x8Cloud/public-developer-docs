@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.1">
 <title data-rh="true">Android - Integrating the SDK | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/android-integrating-the-sdk"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Android - Integrating the SDK | 8x8 Developer Portal"><meta data-rh="true" name="description" content="SDK Setup"><meta data-rh="true" property="og:description" content="SDK Setup"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/android-integrating-the-sdk"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/android-integrating-the-sdk" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/android-integrating-the-sdk" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.900654b1.css">
-<script src="/assets/js/runtime~main.cb17f94c.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ab55fb91.js" defer="defer"></script>
 <script src="/assets/js/main.ca66fadf.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -32,11 +32,11 @@
 <ol>
 <li>Open <strong>Android Studio</strong> and click <strong>Start a new Android Studio project</strong>.</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="850" src="/assets/images/1156f59-1-1708e5e626c66f1c6ae0da4730894c6d.png" title="1.png" width="850" height="525" class="img_ev3q">Android Studio 1</p>
+<p><img decoding="async" loading="lazy" alt="850" src="/assets/images/1156f59-1-1708e5e626c66f1c6ae0da4730894c6d.png" title="1.png" width="850" height="525" class="img_ev3q"></p>
 <ol start="2">
 <li>In the <strong>Select a Project Template</strong> window, select a template of your choice and click <strong>Next</strong>.</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="850" src="/assets/images/2e283f2-2-97546d4f9f94fed8f261b2f74f42cdfe.png" title="2.png" width="850" height="634" class="img_ev3q">Android Studio 2</p>
+<p><img decoding="async" loading="lazy" alt="850" src="/assets/images/2e283f2-2-97546d4f9f94fed8f261b2f74f42cdfe.png" title="2.png" width="850" height="634" class="img_ev3q"></p>
 <ol start="3">
 <li>In the <strong>Configure Your Project</strong> window:</li>
 </ol>
@@ -46,7 +46,7 @@
 <li>Select either <strong>Kotlin</strong> or <strong>Java</strong> as the language</li>
 <li>Select <strong>API 26: Android 8.0 (Oreo)</strong> as the <strong>Minimum SDK</strong> and click <strong>Finish</strong>.</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="850" src="/assets/images/7777878-android_studio_3-eac4b565824fe9e2f60f832d207b8989.png" title="3.png" width="815" height="596" class="img_ev3q">Android Studio 3</p>
+<p><img decoding="async" loading="lazy" alt="850" src="/assets/images/7777878-android_studio_3-eac4b565824fe9e2f60f832d207b8989.png" title="3.png" width="815" height="596" class="img_ev3q"></p>
 <blockquote>
 <p><strong>Note::</strong> The Voice SDK APIs expose Kotlin <a href="https://kotlinlang.org/docs/coroutines-guide.html" target="_blank" rel="noopener noreferrer">coroutine</a> APIs such as <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/" target="_blank" rel="noopener noreferrer">Flows</a> and <code>suspend</code> functions. The easiest way to consume such APIs from Java is to use <a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="noopener noreferrer">RxJava</a> in conjunction with <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-rx3/" target="_blank" rel="noopener noreferrer">coroutine to Rx extensions</a>.</p>
 </blockquote>
@@ -55,12 +55,12 @@
 <ol>
 <li>Add the following to your <strong>top-level</strong> <strong><code>build.gradle</code></strong> file:</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="820" src="/assets/images/85448b2-4-3a3f265314254aa76b623832267a9272.png" title="4.png" width="820" height="896" class="img_ev3q">Android Studio 4</p>
+<p><img decoding="async" loading="lazy" alt="820" src="/assets/images/85448b2-4-3a3f265314254aa76b623832267a9272.png" title="4.png" width="820" height="896" class="img_ev3q"></p>
 <div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">allprojects {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    repositories {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        maven {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            url &quot;https://github.com/8x8Cloud/voice-sdk-android/raw/master/releases/&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
 <ol start="2">
 <li>Add the Wavecell dependency as well as <strong><code>sourceCompatibility</code></strong> in your <strong>app-level</strong> <strong><code>build.gradle</code></strong> file:</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="818" src="/assets/images/c84201a-5-ec129dcd445fdd8f9792563dac2825fb.png" title="5.png" width="818" height="888" class="img_ev3q">Android Studio 5</p>
+<p><img decoding="async" loading="lazy" alt="818" src="/assets/images/c84201a-5-ec129dcd445fdd8f9792563dac2825fb.png" title="5.png" width="818" height="888" class="img_ev3q"></p>
 <div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">android {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   compileOptions {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      sourceCompatibility JavaVersion.VERSION_1_8</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      targetCompatibility JavaVersion.VERSION_1_8</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">dependencies {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   implementation &quot;com.eght:wavecell-voice-sdk:[LATEST_VERSION]&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
 <ol start="3">
 <li>Click on <strong>File</strong> &gt; <strong>Sync Project with Gradle Files</strong>.</li>

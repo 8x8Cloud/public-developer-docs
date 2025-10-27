@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.1">
 <title data-rh="true">Tutorial: Google Sheets and SMS | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/make"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Tutorial: Google Sheets and SMS | 8x8 Developer Portal"><meta data-rh="true" name="description" content="Requirements"><meta data-rh="true" property="og:description" content="Requirements"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/make"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/make" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/make" hreflang="x-default"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.900654b1.css">
-<script src="/assets/js/runtime~main.cb17f94c.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ab55fb91.js" defer="defer"></script>
 <script src="/assets/js/main.ca66fadf.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -24,22 +24,23 @@
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="google-sheet-setup">Google Sheet Setup<a href="#google-sheet-setup" class="hash-link" aria-label="Direct link to Google Sheet Setup" title="Direct link to Google Sheet Setup" translate="no">​</a></h3>
 <p>Before we start on the Make.com scenario, create a new Google Sheet in your Google Account that you can access with the following format. This will be used later to add new rows and trigger the Make.com Scenario.</p>
 <p>The sheet should have <strong>Phone Number</strong> in Cell A1 and <strong>Message</strong> in Cell B1 to serve as headers.</p>
-<p><img decoding="async" loading="lazy" alt="Add phone number and message columns" src="/assets/images/ccee37d-image-2e3d75f5e403d6e04e8073a2408cc3ed.png" width="309" height="179" class="img_ev3q">Add phone number and message columns</p>
+<p><img decoding="async" loading="lazy" alt="Add phone number and message columns" src="/assets/images/ccee37d-image-2e3d75f5e403d6e04e8073a2408cc3ed.png" width="309" height="179" class="img_ev3q"></p>
+<p>Add phone number and message columns</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="create-a-new-scenario">Create a New Scenario<a href="#create-a-new-scenario" class="hash-link" aria-label="Direct link to Create a New Scenario" title="Direct link to Create a New Scenario" translate="no">​</a></h3>
 <p>The create button is located on the top right from the Dashboard.</p>
 <p><img decoding="async" loading="lazy" alt="image" src="/assets/images/7eb5a7f-image-5418e58014c7b58637d11f4f709efc36.png" width="1773" height="647" class="img_ev3q"></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="add-a-trigger">Add a Trigger<a href="#add-a-trigger" class="hash-link" aria-label="Direct link to Add a Trigger" title="Direct link to Add a Trigger" translate="no">​</a></h3>
 <p>The trigger is the first action in a scenario, here we will select <strong>&quot;Google Sheets&quot;</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/0b29c8b-image-96d1e55ccf74baab440a87710d58fa02.png" width="782" height="947" class="img_ev3q">
-In the list of triggers/actions for Google Sheets, select <strong>&quot;Watch new rows&quot;</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/692f4de-image-0b06782ba70324a9beb1bcac0373d9f5.png" width="884" height="881" class="img_ev3q">
-Then you will want to add a new connection.</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/528ce92-image-6f0b3d167ed98008e083705dea040c05.png" width="781" height="405" class="img_ev3q">
-This will prompt you to connect your Google account and then specify the information about your Google Sheet.</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/fc6bf87-image-08dde938aff597a1ba24ffd07be8290c.png" width="490" height="961" class="img_ev3q">
-It will then prompt you to decide which row to start watching, in this example our Google Sheet is blank so we will select 2 since our new data should start at row 2.</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/fe57623-image-9475e166f1614a46cb7aeb7d0398c1df.png" width="468" height="335" class="img_ev3q">
-After that, we will select the &quot;Add another module&quot; Option and select 8x8 from the list.</p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/0b29c8b-image-96d1e55ccf74baab440a87710d58fa02.png" width="782" height="947" class="img_ev3q"></p>
+<p>In the list of triggers/actions for Google Sheets, select <strong>&quot;Watch new rows&quot;</strong></p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/692f4de-image-0b06782ba70324a9beb1bcac0373d9f5.png" width="884" height="881" class="img_ev3q"></p>
+<p>Then you will want to add a new connection.</p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/528ce92-image-6f0b3d167ed98008e083705dea040c05.png" width="781" height="405" class="img_ev3q"></p>
+<p>This will prompt you to connect your Google account and then specify the information about your Google Sheet.</p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/fc6bf87-image-08dde938aff597a1ba24ffd07be8290c.png" width="490" height="961" class="img_ev3q"></p>
+<p>It will then prompt you to decide which row to start watching, in this example our Google Sheet is blank so we will select 2 since our new data should start at row 2.</p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/fe57623-image-9475e166f1614a46cb7aeb7d0398c1df.png" width="468" height="335" class="img_ev3q"></p>
+<p>After that, we will select the &quot;Add another module&quot; Option and select 8x8 from the list.</p>
 <p><img decoding="async" loading="lazy" alt="image" src="/assets/images/af9ab56-image-3125111c1e153015ff6a72be22d570dd.png" width="434" height="312" class="img_ev3q">
 <img decoding="async" loading="lazy" alt="image" src="/assets/images/cf8f086-image-06d7402f0690b76e204056efa097a77e.png" width="1006" height="349" class="img_ev3q">
 Afterwards, you can specify the following fields which are required:</p>
@@ -48,16 +49,16 @@ Afterwards, you can specify the following fields which are required:</p>
 <li><strong>Destination:</strong> Select the output that contains the Phone Number in the Google Sheet</li>
 <li><strong>Text:</strong> Select the output that contains the Message in the Google Sheet</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/96ef468-image-ec7497afd459cfc8a75a9f2527b8466c.png" width="465" height="1485" class="img_ev3q">
-When you connect for the first time to 8x8, you will be prompted for an 8x8 API Key which can be obtained from the 8x8 Connect Dashboard under the API Keys section.</p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/96ef468-image-ec7497afd459cfc8a75a9f2527b8466c.png" width="465" height="1485" class="img_ev3q"></p>
+<p>When you connect for the first time to 8x8, you will be prompted for an 8x8 API Key which can be obtained from the 8x8 Connect Dashboard under the API Keys section.</p>
 <p><img decoding="async" loading="lazy" alt="image" src="/assets/images/25f944f-image-2f4663f224714611b96ce1d9511f2fec.png" width="453" height="359" class="img_ev3q"></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="enable-your-makecom-scenario">Enable your Make.com Scenario<a href="#enable-your-makecom-scenario" class="hash-link" aria-label="Direct link to Enable your Make.com Scenario" title="Direct link to Enable your Make.com Scenario" translate="no">​</a></h3>
 <p>Turn on Scheduling on the Bottom Left and select your desired frequency, by default, it will check every 15 minutes.</p>
 <p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e4c1986-image-a50de8d1a94d67c065664fa811376e0e.png" width="776" height="275" class="img_ev3q"></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="add-a-row-and-receive-an-sms">Add a Row and Receive an SMS<a href="#add-a-row-and-receive-an-sms" class="hash-link" aria-label="Direct link to Add a Row and Receive an SMS" title="Direct link to Add a Row and Receive an SMS" translate="no">​</a></h3>
 <p>Once you add a row to your Google Sheet, this should trigger Make.com to send you an SMS at the specified phone number. This may not be immediate as it needs to wait for the scheduled interval.</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/73d092f-image-d58b0013b489028cd0f461e9de5b0ea6.png" width="445" height="99" class="img_ev3q">
-This should result in an SMS being sent to the destination specified.</p>
+<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/73d092f-image-d58b0013b489028cd0f461e9de5b0ea6.png" width="445" height="99" class="img_ev3q"></p>
+<p>This should result in an SMS being sent to the destination specified.</p>
 <p><img decoding="async" loading="lazy" alt="image" src="/assets/images/264e5dd-image-f7362db5907a811cd797efc513c31398.png" width="605" height="209" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="potential-future-use-cases">Potential Future Use Cases<a href="#potential-future-use-cases" class="hash-link" aria-label="Direct link to Potential Future Use Cases" title="Direct link to Potential Future Use Cases" translate="no">​</a></h2>
 <p>Make.com is not limited to using 8x8 with Google Sheets of course. There may be other modules connecting to other apps that would be useful.</p>
