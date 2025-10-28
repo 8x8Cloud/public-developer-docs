@@ -116,6 +116,8 @@ const config = {
     ],
     // Custom plugin for client-side redirects (React Router level)
     path.resolve(__dirname, 'docusaurus/plugins/client-side-redirects'),
+    // Custom plugin for Amplitude analytics (production-only page view tracking)
+    path.resolve(__dirname, 'docusaurus/plugins/amplitude-analytics'),
   ],
 
   staticDirectories: [path.resolve(__dirname, 'docusaurus/static')],
