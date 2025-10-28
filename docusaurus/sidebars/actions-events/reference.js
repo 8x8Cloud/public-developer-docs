@@ -105,6 +105,10 @@ const sidebarConfig = [
             type: 'doc',
             id: 'actions-events/reference/getccinteractions',
           },
+          {
+            type: 'doc',
+            id: "actions-events/reference/createpostagentassignment",
+          }
         ],
       },
       {
@@ -164,6 +168,25 @@ const sidebarConfig = [
           },
         ],
       },
+      {
+        type: "category",
+        label: "Cards",
+        collapsed: true,
+        items: [
+          {
+            type: "doc",
+            id: "actions-events/reference/getcardsforcctransaction",
+          },
+          {
+            type: "doc",
+            id: "actions-events/reference/updatecardactionsubmit",
+          },
+          {
+            type: "doc",
+            id: "actions-events/reference/updatecardactionexecute",
+          },
+        ],
+      }
     ],
   },
   {

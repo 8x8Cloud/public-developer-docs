@@ -258,6 +258,12 @@ const sidebar: SidebarsConfig = {
           label: "Returns all conversations belonging to the customer.",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "actions-events/reference/createpostagentassignment",
+          label: "Creates a post agent assignment for a conversation.",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -323,36 +329,6 @@ const sidebar: SidebarsConfig = {
           id: "actions-events/reference/gethealth",
           label: "Returns the health of the service",
           className: "api-method get",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Agent status",
-      items: [
-        {
-          type: "doc",
-          id: "actions-events/reference/getagentsstatus",
-          label: "Obtain the status for tenant agents. Agents can be filtered by group. Pagination is currently not available.",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "actions-events/reference/setagentsstatuses",
-          label: "The bulk operation for setting the status for multiple agents.",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "actions-events/reference/getagentstatus",
-          label: "Obtains the status for a specific agent.",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "actions-events/reference/setagentstatus",
-          label: "Sets the agent status for a specific agent.",
-          className: "api-method put",
         },
       ],
     },
@@ -425,6 +401,36 @@ const sidebar: SidebarsConfig = {
           id: "actions-events/reference/downloadattachmentforchatapiconversation",
           label: "Download attachment.",
           className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Agent status",
+      items: [
+        {
+          type: "doc",
+          id: "actions-events/reference/getagentsstatus",
+          label: "Obtain the status for tenant agents. Agents can be filtered by group. Pagination is currently not available.",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/setagentsstatuses",
+          label: "The bulk operation for setting the status for multiple agents.",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/getagentstatus",
+          label: "Obtains the status for a specific agent.",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/setagentstatus",
+          label: "Sets the agent status for a specific agent.",
+          className: "api-method put",
         },
       ],
     },
@@ -593,6 +599,30 @@ const sidebar: SidebarsConfig = {
           id: "actions-events/reference/getcustomerdidunreadfaxlist",
           label: "Get customer's current unread fax list by DID",
           className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Cards",
+      items: [
+        {
+          type: "doc",
+          id: "actions-events/reference/getcardsforcctransaction",
+          label: "Retrieves the list of conversation message cards.",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/updatecardactionsubmit",
+          label: "Sends the adaptive card action submit.",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/updatecardactionexecute",
+          label: "Sends the adaptive card action execute.",
+          className: "api-method put",
         },
       ],
     },
