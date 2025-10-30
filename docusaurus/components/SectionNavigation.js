@@ -8,7 +8,6 @@ const TAB_LABELS = {
   GUIDES: 'Guides',
   API_REFERENCE: 'API Reference',
   SUPPORT: 'Support',
-  CONTACT_CENTER: 'Contact Center',
   CHANGELOG: 'Changelog',
 };
 
@@ -59,10 +58,6 @@ const BASE_SECTION_NAV_CONFIG = {
         label: TAB_LABELS.API_REFERENCE,
         path: '/connect/reference',
         iconClass: ICON_CLASSES.REFERENCES,
-      },
-      {
-        label: TAB_LABELS.CONTACT_CENTER,
-        path: '/contactcenter',
       },
       {
         label: TAB_LABELS.SUPPORT,
