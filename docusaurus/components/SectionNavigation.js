@@ -8,7 +8,6 @@ const TAB_LABELS = {
   GUIDES: 'Guides',
   API_REFERENCE: 'API Reference',
   SUPPORT: 'Support',
-  FEEDBACK: 'Feedback',
   CONTACT_CENTER: 'Contact Center',
   CHANGELOG: 'Changelog',
 };
@@ -68,10 +67,6 @@ const BASE_SECTION_NAV_CONFIG = {
       {
         label: TAB_LABELS.SUPPORT,
         path: 'https://support.cpaas.8x8.com/hc/en-us',
-      },
-      {
-        label: TAB_LABELS.FEEDBACK,
-        path: 'https://8x8cpaas.canny.io/',
       },
     ],
   },
