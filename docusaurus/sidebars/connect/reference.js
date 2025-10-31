@@ -123,6 +123,10 @@ const sidebarConfig = [
           {
             type: 'doc',
             id: 'connect/docs/sms-engage-response-webhook',
+          }, 
+          {
+            type: 'doc',
+            id: 'connect/docs/short-url-clicks',
           },
         ],
       },
