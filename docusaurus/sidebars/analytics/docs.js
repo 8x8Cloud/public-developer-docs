@@ -57,12 +57,6 @@ const sidebarConfig = [
   },
   {
     type: 'category',
-    label: 'Customer Experience',
-    collapsed: true,
-    items: ['analytics/docs/customer-experience-recent-calls'],
-  },
-  {
-    type: 'category',
     label: 'Cloud Storage Service',
     collapsed: true,
     items: [

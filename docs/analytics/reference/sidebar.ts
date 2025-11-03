@@ -436,30 +436,6 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Customer Experience Data",
-      items: [
-        {
-          type: "doc",
-          id: "analytics/reference/recentcalldata",
-          label: "Get Customer Experience Data",
-          className: "api-method post",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Obtain Call Survey Data",
-      items: [
-        {
-          type: "doc",
-          id: "analytics/reference/postcallsurvey",
-          label: "Get Post Call Survey Data",
-          className: "api-method post",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Queue Agent Activity",
       items: [
         {

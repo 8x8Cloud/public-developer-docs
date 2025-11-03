@@ -122,5 +122,3 @@ Adding or removing APIs from an existing API key will not be instantaneous as th
 | vcc                    | Contact Center Chat                            | ✔️    |
 | Chat                   | CHAPI Work Chat                                | ❌    |
 | analytics product      | Work Analytics                                 | ❌    |
-| CE-PCS-Product         | Customer Experience Post Call Survey           | ❌    |
-| CE-RCS-Product         | Customer Experience Recent Calls               | ❌    |

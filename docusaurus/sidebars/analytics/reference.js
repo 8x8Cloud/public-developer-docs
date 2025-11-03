@@ -102,32 +102,6 @@ const sidebarConfig = [
   },
   {
     type: 'category',
-    label: '8x8 Contact Center Customer Experience',
-    collapsed: true,
-    items: [
-      {
-        type: 'category',
-        label: 'Customer Experience Data',
-        collapsed: true,
-        items: ['analytics/reference/recentcalldata'],
-      },
-    ],
-  },
-  {
-    type: 'category',
-    label: '8x8 Contact Center Post Call Survey',
-    collapsed: true,
-    items: [
-      {
-        type: 'category',
-        label: 'Obtain Call Survey Data',
-        collapsed: true,
-        items: ['analytics/reference/postcallsurvey'],
-      },
-    ],
-  },
-  {
-    type: 'category',
     label: 'Cloud Storage Service Public API',
     collapsed: true,
     items: [
