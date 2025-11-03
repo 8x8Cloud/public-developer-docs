@@ -44,7 +44,7 @@ The basic flow of Webhooks and API Calls will be similar to the Simple IVR tutor
 
 The initial API call to place the outbound call is here:
 
-`/POST voice.wavecell.com/api/v1/subaccounts/{sub-account-id}/callflows` - v1.2
+`/POST voice.8x8.com/api/v1/subaccounts/{sub-account-id}/callflows`
 
 This is the request body to send with the API request. It will make an outbound call, play a message and then capture a DTMF input from a user.
 
@@ -99,7 +99,7 @@ Reservations
 
 ```json
 {
-        "clientActionId": "reservations",
+        "clientActionId": "ivr-1-stage-1",
         "callflow": [
             {
             "action": "sayAndCapture",
@@ -224,8 +224,8 @@ VCA Webhook Example
       "dtmf": "1",    
     },
     "sipCode": 200,
-    "timestamp": "2024-05-16T04:12:11.217Z"
-    "clientActionId": "reservations"
+    "timestamp": "2024-05-16T04:12:11.217Z",
+    "clientActionId": "ivr-1-stage-2"
   }
 }
 
@@ -476,7 +476,7 @@ VCA Webhook from IVR Menu Level 2
     "dtmf": "3",
     "sipCode": 200,
     "timestamp": "2023-12-15T06:10:14.562Z",
-    "clientActionId": "reservations"
+    "clientActionId": "ivr-1-stage-3"
   },
   "namespace": "VOICE",
   "eventType": "CALL_ACTION",

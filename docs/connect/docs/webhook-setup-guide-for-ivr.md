@@ -24,7 +24,7 @@ This video guide corresponds to the information on this page but in video form. 
 
 This is the URL to send a POST request to in order to create a new VCA webhook.
 
-`/POST https://voice.wavecell.com/api/v1/subaccounts/{{subaccount_id}}/webhooks`
+`/POST https://voice.8x8.com/api/v1/subaccounts/{{subaccount_id}}/webhooks`
 
 Below is the request body to send to this URL to create the VCA Webhook.
 
@@ -47,7 +47,7 @@ Please ensure to substitute the following variables above in the URL and the req
 
 This is the URL to send a POST request to in order to create a new VCA webhook.
 
-`/POST https://voice.wavecell.com/api/v1/subaccounts/{{subaccount_id}}/webhooks`
+`/POST https://voice.8x8.com/api/v1/subaccounts/{{subaccount_id}}/webhooks`
 
 Below is the request body to send to this URL to create the VCA Webhook.
 
@@ -70,7 +70,7 @@ Please ensure to substitute the following variables above in the URL and the req
 
 In order to ensure your webhooks are setup properly, you can use the API endpoint below to get a list of your currently active webhooks.
 
-`/GET https://voice.wavecell.com/api/v1/subaccounts/{{subaccount_id}}/webhooks`
+`/GET https://voice.8x8.com/api/v1/subaccounts/{{subaccount_id}}/webhooks`
 
 There is no request body required, the response should be similar to the text below.
 
@@ -104,8 +104,8 @@ You should see two different webhooks configured, one of type VSS and one of typ
 
 In order to delete a VCA webhook, you can send a DELETE request to the following URL.
 
-`/DELETE https://voice.wavecell.com/api/v1/subaccounts/{{subaccount_id}}/webhooks/VCA`
+`/DELETE https://voice.8x8.com/api/v1/subaccounts/{{subaccount_id}}/webhooks/VCA`
 
 Similarly, in order to delete a VSS webhook, you can send a DELETE request to the following URL.
 
-`/DELETE https://voice.wavecell.com/api/v1/subaccounts/{{subaccount_id}}/webhooks/VSS`
+`/DELETE https://voice.8x8.com/api/v1/subaccounts/{{subaccount_id}}/webhooks/VSS`

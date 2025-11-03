@@ -38,7 +38,7 @@ Below is a diagram of how the webhooks and API Calls from your server will work 
 
 This is the URL to send the initial API request to.
 
-`POST voice.wavecell.com/api/v1/subaccounts/{sub-account-id}/callflows` - v1.2
+`POST voice.8x8.com/api/v1/subaccounts/{sub-account-id}/callflows`
 
 This is the request body to send the API request to as well. Note, you will need to replace the source with a 8x8 virtual number in your account and destination with a destination phone number to call.
 

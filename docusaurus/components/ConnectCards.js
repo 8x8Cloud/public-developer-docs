@@ -52,7 +52,7 @@ const cards = [
     ],
   },
   {
-    title: 'Voice V1 API',
+    title: 'Voice API',
     items: [
       {
         label: 'Getting started with Voice API',

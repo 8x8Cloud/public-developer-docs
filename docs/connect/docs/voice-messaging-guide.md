@@ -22,7 +22,7 @@ Below is a sample of a Voice Message call scenario. When the API call is made, t
 - [x] [`say`](/connect/reference/call-flow-actions-say)  [`playFile`](/connect/reference/call-flow-actions-playfile)
 - [x] [`hangup`](/connect/docs/hangup)
 
-`POST voice.wavecell.com/api/v1/subaccounts/{sub-account-id}/callflows`
+`POST voice.8x8.com/api/v1/subaccounts/{sub-account-id}/callflows`
 
 ```json Sample Voice Messaging Request \[TTS]
 {
@@ -143,7 +143,7 @@ Below is a sample of a Voice Message call scenario. When the API call is made, t
 
 This is the URL to send a the API request to.
 
-`/POST voice.wavecell.com/api/v1/subaccounts/{sub-account-id}/callflows`
+`/POST voice.8x8.com/api/v1/subaccounts/{sub-account-id}/callflows`
 
 This is the request body to send the API request to as well.
 

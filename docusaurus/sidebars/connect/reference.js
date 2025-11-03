@@ -333,7 +333,7 @@ const sidebarConfig = [
   },
   {
     type: 'category',
-    label: 'Voice V1 API',
+    label: 'Voice API',
     collapsed: true,
     items: [
       {
