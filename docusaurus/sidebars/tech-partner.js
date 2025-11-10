@@ -13,6 +13,14 @@ const sidebarConfig = [
       'tech-partner/docs/partner-sdk-overview',
       {
         type: 'category',
+        label: 'Maestro SDK',
+        collapsed: true,
+        items: [
+              'tech-partner/docs/partner-sdk-maestro-sdk-overview',
+        ],
+      },
+      {
+        type: 'category',
         label: 'events',
         link: {
           type: 'doc',
