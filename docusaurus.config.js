@@ -29,6 +29,7 @@ const config = {
   }),
 
   markdown: {
+    mermaid: true,
     format: 'detect',
     hooks: {
       onBrokenMarkdownLinks: 'warn',
@@ -124,6 +125,7 @@ const config = {
 
   themes: [
     'docusaurus-theme-openapi-docs',
+    '@docusaurus/theme-mermaid',
     !isPrBuild && [
       require.resolve('@easyops-cn/docusaurus-search-local'),
       {
