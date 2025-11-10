@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[28162],{35083:(e,r,o)=>{o.r(r),o.d(r,{default:()=>c});o(96540);var t=o(56347),d=o(74848);function c(e){const{redirectTarget:r}=e,o=r?.to;return o?(0,d.jsx)(t.rd,{to:o}):(console.error("RedirectComponent: No redirect target provided",e),(0,d.jsx)(t.rd,{to:"/"}))}}}]);

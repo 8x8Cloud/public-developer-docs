@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[46008],{45711:e=>{e.exports=JSON.parse('{"to":"/connect/docs/messaging-apps-api-get-started"}')}}]);

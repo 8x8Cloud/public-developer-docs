@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[98483],{87825:e=>{e.exports=JSON.parse('{"to":"/analytics/docs/work-analytics-cdr-report"}')}}]);

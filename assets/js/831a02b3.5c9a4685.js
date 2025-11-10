@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[67665],{92199:e=>{e.exports=JSON.parse('{"to":"/contactcenter/docs/conversation"}')}}]);

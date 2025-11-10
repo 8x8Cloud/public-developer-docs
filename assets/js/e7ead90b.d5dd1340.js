@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[90734],{33851:e=>{e.exports=JSON.parse('{"to":"/actions-events/reference/getmessagesusingget-1"}')}}]);

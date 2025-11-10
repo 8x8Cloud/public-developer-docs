@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[35704],{92202:e=>{e.exports=JSON.parse('{"to":"/tech-partner/docs/getting-started"}')}}]);

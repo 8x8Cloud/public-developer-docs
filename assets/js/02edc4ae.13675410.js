@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[2637],{85661:e=>{e.exports=JSON.parse('{"to":"/connect/reference/getting-started-with-sms-api"}')}}]);

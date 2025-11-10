@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[4392],{80082:e=>{e.exports=JSON.parse('{"to":"/actions-events/docs/introduction"}')}}]);

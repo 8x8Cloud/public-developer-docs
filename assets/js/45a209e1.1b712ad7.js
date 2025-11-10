@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[40032],{79735:e=>{e.exports=JSON.parse('{"to":"/contactcenter/reference/createaccesstoken"}')}}]);

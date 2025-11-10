@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[63297],{22644:o=>{o.exports=JSON.parse('{"to":"/connect/docs/webhooks-configuration-api"}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_8x8_developer_docs=self.webpackChunk_8x8_developer_docs||[]).push([[74862],{35045:e=>{e.exports=JSON.parse('{"to":"/analytics/reference/cc-historical-report-create"}')}}]);
