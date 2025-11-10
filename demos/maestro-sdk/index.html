@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaestroSDK Demo - Standalone</title>
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+    <div class="maestro-sdk-demo">
+        <div class="demo-container">
+            <div class="demo-column demo-left">
+                <div class="demo-section-title">Sent Events</div>
+                <button class="demo-clear-btn" onclick="MaestroSDKDemo.clearSentEvents()">Clear Sent Events</button>
+                <div class="demo-events" id="sentEvents"></div>
+            </div>
+            <div class="demo-column demo-center">
+                <div class="demo-button-bar">
+                    <input type="text" id="phoneInput" placeholder="Enter phone number" maxlength="15" />
+                    <button onclick="MaestroSDKDemo.sendPhoneEvent('click2dial')">Click2Dial</button>
+                </div>
+                <div class="demo-iframe-wrapper">
+                    <iframe id="mapanelFrame" class="demo-iframe" allow="microphone" scrolling="no" src="https://cloud8.8x8.com/mashell/public/index.html?env=embeddable&nextgen=true"></iframe>
+                </div>
+            </div>
+            <div class="demo-column demo-right">
+                <div class="demo-section-title">Received Events</div>
+                <button class="demo-clear-btn" onclick="MaestroSDKDemo.clearReceivedEvents()">Clear Received Events</button>
+                <div class="demo-events" id="receivedEvents"></div>
+            </div>
+        </div>
+    </div>
+    <script src="demo.js"></script>
+</body>
+</html>
