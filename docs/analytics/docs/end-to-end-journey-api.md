@@ -156,16 +156,22 @@ Retrieves journey data based on the specified criteria.
           }
         }
       ],
-      "channel": {
-        "id": "441122334455",
-        "name": "Support Line"
-      },
       "contact": {
         "name": "+443335565567",
         "phoneNumber": "+449988776655",
         "email": "john.doe@8x8.com"
       },
-      "direction": ["Outbound"],
+      "entryPoint": {
+        "type": "cc-channel",
+        "id": "channel-123",
+        "name": "Support Line",
+        "phoneNumber": null,
+        "extension": null,
+        "email": null,
+        "pbx": "mainPbx",
+        "tenantId": "8x8"
+      },
+      "direction": "Outbound",
       "transfersCompleted": 0,
       "forwardedToQueue": 0,
       "forwardedToRingGroup": 0,
@@ -312,19 +318,21 @@ Filters allow you to narrow down the data returned by the API based on specific 
 
 ### Journey Filters
 
-| Filter Name         | Description                 | Example Values                     |
-|---------------------|-----------------------------| ---------------------------------- |
-| `agents.group.id`   | Filter by agent group IDs   | `["group1", "group2"]`             |
-| `agents.group.name` | Filter by agent group names | `["Team A", "Team B"]`             |
-| `agents.name`       | Filter by agent names       | `["John Doe", "Jane Smith"]`       |
-| `interactions.id`   | Filter by interaction ID    | `["interaction-123"]`              |
-| `mediaTypes`        | Filter by media types       | `["phone", "chat", "email"]`       |
-| `pbxNames`          | Filter by PBX names         | `["pbx1", "pbx2"]`                 |
-| `queues.name`       | Filter by queue names       | `["support", "sales"]`             |
-| `ringGroups.name`   | Filter by ring group names  | `["group1", "group2"]`             |
-| `journeyId`         | Filter by journey ID        | `["journey-123"]`                  |
-| `tenantIds`         | Filter by tenant IDs        | `["tenant1", "tenant2"]`           |
-| `wrapUpCodes`       | Filter by wrap-up codes     | `["Service Call", "Support Call"]` |
+| Filter Name              | Description                       | Example Values                         |
+|--------------------------|-----------------------------------|----------------------------------------|
+| `agents.group.id`        | Filter by agent group IDs         | `["group1", "group2"]`                 |
+| `agents.group.name`      | Filter by agent group names       | `["Team A", "Team B"]`                 |
+| `agents.name`            | Filter by agent names             | `["John Doe", "Jane Smith"]`           |
+| `interactions.id`        | Filter by interaction ID          | `["interaction-123"]`                  |
+| `mediaTypes`             | Filter by media types             | `["phone", "chat", "email"]`           |
+| `pbxNames`               | Filter by PBX names               | `["pbx1", "pbx2"]`                     |
+| `queues.name`            | Filter by queue names             | `["support", "sales"]`                 |
+| `ringGroups.name`        | Filter by ring group names        | `["group1", "group2"]`                 |
+| `journeyId`              | Filter by journey ID              | `["journey-123"]`                      |
+| `tenantIds`              | Filter by tenant IDs              | `["tenant1", "tenant2"]`               |
+| `entryPoint.type`        | Filter by entry point type        | `["cc-channel", "ring-group", "call-queue", "auto-attendant", "user"]` |
+| `entryPoint.phoneNumber` | Filter by entry point phoneNumber | `["053244122"]`                         |
+| `wrapUpCodes`            | Filter by wrap-up codes           | `["Service Call", "Support Call"]`     |
 
 ### Transition Filters
 
@@ -465,10 +473,10 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 | `time`                          | ISO8601 date   | When the journey occurred                                                                                                                                                                                                                                                        |
 | `journeyId`                     | string         | The journeyId field returned by the Journeys Endpoint uniquely identifies and aggregates all interactions associated with a particular customer journey across all platforms. Use this journeyId to correlate and analyze comprehensive interaction data for a specific journey. |
 | `interactions`                  | Interaction\[] | Array of interaction objects representing the interactions belonging to the journey. These interactions can originate from CC, UC or Engage platforms.                                                                                                                           |
-| `agents`                        | Agent\[]       | Array of agent objects involved in the journey                                                                                                                                                                                                                                   |
-| `channel`                       | Channel        | Channel object containing ID and name of the initial CC channel                                                                                                                                                                                                                  |
-| `contact`                       | Contact        | Contact object containing name, phone number, and email                                                                                                                                                                                                                          |
-| `transfersCompleted`            | int            | Number of warm & blind transfers during the journey                                                                                                                                                                                                                              |
+| `agents`                        | Agent\[]       | Array of agent objects involved in handling the journey                                                                                                                                                                                                                                   |
+| `contact`                       | Contact        | Contact object containing name, phone number, and email who interacts with the organization. As an example for inbound phone interactions this is the caller, and for outbound ones this is the callee.                                                                                                                                                                                                                         |
+| `entryPoint`                    | entryPoint     | entryPoint object is populated only for inbound journeys and identifies where the interaction first enters the organization (e.g. a contact center channel, or a unified communication ring group). For outbound journeys this object is `null`.                                                                                                                                                    |
+| `transfersCompleted`            | int            | Number of warm & cold transfers during the journey                                                                                                                                                                                                                              |
 | `forwardedToQueue`              | int            | Number of automated forwards to a CC or UC queue during the journey                                                                                                                                                                                                              |
 | `forwardedToRingGroup`          | int            | Number of automated forwards to a Ring Group during the journey                                                                                                                                                                                                                  |
 | `forwardedToScript`             | int            | Number of automated forwards to a UC AA + CC script/IVR                                                                                                                                                                                                                          |
@@ -523,15 +531,6 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 }
 ```
 
-**Channel Object:**
-
-```json
-{
-  "id": "string",
-  "name": "string"
-}
-```
-
 **Queue Object:**
 
 ```json
@@ -547,6 +546,33 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
   "name": "string"
 }
 ```
+
+**entryPoint Object:**
+
+The entryPoint object is populated only for inbound journeys and identifies where the interaction first enters the organization (e.g. a contact center channel, or a unified communication ring group).
+
+```json
+{
+  "type": "string",
+  "id": "string",
+  "name": "string",
+  "phoneNumber": "string",
+  "extension": "string",
+  "email": "string",
+  "pbx": "string",
+  "tenantId": "string"
+}
+```
+
+**entryPoint Type Values:**
+
+The `type` field in the entryPoint object is an enum that identifies the type of entry point. It can have one of the following values:
+
+- **cc-channel**: The inbound interaction enters through a contact center channel (e.g. Customer Support, Sales Queue, Email Support, etc.)
+- **call-queue**: The inbound interaction enters through a unified communication call queue
+- **ring-group**: The inbound interaction enters through a ring group
+- **auto-attendant**: The inbound interaction enters through a unified communication auto-attendant
+- **user**: The inbound interaction targets a unified communication user directly, bypassing contact center channels
 
 ### Transition Data Model
 
@@ -573,31 +599,25 @@ the exact journey path. Journeys are identified with the *journeyId*. Each trans
 
 A journey can progress through multiple transition states:
 
-- **STARTED**: A customer has initiated an interaction using a Contact Center channel.
+- **STARTED**: An interaction with a customer has started. Information about the customer is included in the `contact` object of the journey.
 - **IN_SCRIPT**: The customer is interacting with a script like an IVR script or an auto-attendant.
-- **WAITING**: The customer is waiting to be handled by an agent (e.g. waiting in a queue or while the phones in a ring group are being ringed etc.).
+- **WAITING**: The customer is waiting to be handled by an agent (e.g. waiting in a queue or while the phones in a ring group are ringing etc.).
 - **TALKING**: An agent is interacting with the customer.
 - **HOLD**: An agent has put the call on hold (e.g. while the agent is preparing a transfer).
-- **OUTBOUND_CALL_INITIATED**: Outbound call has been initiated
-- **TRANSFER**: The customer interaction is transferred to another destination. Destinations can be *another agent*, *queue/ring group* or *another phone number*. The properties *agents*, *queue*, *ringGroup* and *externalNumber* contain the destination of the transfer. The properties *previousAgents*, *previousQueue* and *previousRingGroup* contain the origin of the transfer.
-- **FINISHED**: The customer interaction has ended.
+- **FORWARD**: The customer interaction is routed by the system to another destination. Destinations can be an *agent*, a *queue/ring group* or a *phone number*. The properties *agents*, *queue*, *ringGroup* and *externalNumber* contain the destination of the forward. The properties *previousAgents*, *previousQueue* and *previousRingGroup* contain the origin of the forward.
+- **TRANSFER**: The customer interaction is transferred by an agent handling the customer to another destination. Destinations can be another *agent*, a *queue/ring group* or another *phone number*. The properties *agents*, *queue*, *ringGroup* and *externalNumber* contain the destination of the transfer. The properties *previousAgents*, *previousQueue* and *previousRingGroup* contain the origin of the transfer.
+- **FINISHED**: The customer journey has ended.
 
 ### Journey Outcomes
 
-The `outcome` field in the Journeys API response summarizes the result of a customer journey. The outcome is determined by analyzing all underlying interaction outcomes and the total handling duration, using the following logic:
-
-- **Handled**: The journey is considered handled if any interaction outcome is `Handled` or `Accepted`, or if the total handling duration is greater than zero.
-- **Abandoned**: The journey is considered abandoned if any interaction outcome is `Abandoned` and the total handling duration is zero.
-- **EndedInScript**: The journey ended in an IVR or script if any interaction outcome is `EndedInScript`.
-- **Other**: If none of the above apply, but at least one interaction outcome matches a known outcome type, the journey is marked as `Other`.
-- **UnknownOutcome**: If no known outcome is found, the journey is marked as `UnknownOutcome`.
+The `outcome` field in the Journeys API response summarizes the result of a customer journey.
 
 #### Possible Outcome Values
 
 | Value            | Description                                                                             |
 | ---------------- | --------------------------------------------------------------------------------------- |
 | `Handled`        | The journey was successfully handled by an agent or user.                               |
-| `Abandoned`      | The journey was abandoned by the customer before being handled.                         |
+| `Abandoned`      | The journey was abandoned by the customer before being handled by an agent or user.                         |
 | `EndedInScript`  | The journey ended in an IVR script or auto-attendant without reaching an agent or user. |
 | `Other`          | The journey ended with an outcome not covered by the above categories.                  |
 | `UnknownOutcome` | The outcome could not be determined from the available data.                            |
