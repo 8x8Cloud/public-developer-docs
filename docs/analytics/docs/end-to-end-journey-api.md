@@ -36,10 +36,10 @@ x-api-key: your-api-key-value
 
 ## Base URLs
 
-| Region        | Base URL                              |
-| ------------- | ------------------------------------- |
-| United States | `https://api.8x8.com/cidp/journey`    |
-| Europe        | `https://api-eu.8x8.com/cidp/journey` |
+| Region        | Base URL                                  |
+| ------------- |-------------------------------------------|
+| United States | `https://api.8x8.com/cidp/journey/api`    |
+| Europe        | `https://api-eu.8x8.com/cidp/journey/api` |
 
 ## API Endpoints Overview
 
