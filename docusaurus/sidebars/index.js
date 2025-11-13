@@ -35,4 +35,4 @@ const index = {
   sidebarTechPartner,
 };
 
-module.exports = index;
+export default index;

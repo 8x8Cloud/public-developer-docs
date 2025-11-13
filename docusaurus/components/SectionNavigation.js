@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useLocation } from '@docusaurus/router';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import sidebars from '@site/docusaurus/sidebars';
 
 // Constants for tab labels
 const TAB_LABELS = {
@@ -17,6 +18,45 @@ const ICON_CLASSES = {
   REFERENCES: 'icon-references',
 };
 
+// Helper function to recursively search for a doc ID in a sidebar structure
+function findDocInSidebar(items, docId) {
+  if (!items || !Array.isArray(items)) {
+    return false;
+  }
+
+  for (const item of items) {
+    // Handle simple string doc IDs (e.g., 'connect/docs/getting-started')
+    if (typeof item === 'string' && item === docId) {
+      return true;
+    }
+    // Handle object doc IDs (e.g., {type: 'doc', id: 'connect/docs/getting-started'})
+    if (item.type === 'doc' && item.id === docId) {
+      return true;
+    }
+    // Handle category with link (e.g., {type: 'category', link: {type: 'doc', id: '...'}, items: [...]})
+    if (item.type === 'category' && item.link?.type === 'doc' && item.link?.id === docId) {
+      return true;
+    }
+    // Recursively search category items
+    if (item.type === 'category' && item.items) {
+      if (findDocInSidebar(item.items, docId)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+// Function to find which sidebar contains a given doc ID
+function findSidebarForDoc(docId) {
+  for (const [sidebarName, sidebarItems] of Object.entries(sidebars)) {
+    if (findDocInSidebar(sidebarItems, docId)) {
+      return sidebarName;
+    }
+  }
+  return null;
+}
+
 // Base configuration for section navigation (without baseUrl)
 const BASE_SECTION_NAV_CONFIG = {
   'actions-events': {
@@ -25,11 +65,13 @@ const BASE_SECTION_NAV_CONFIG = {
         label: TAB_LABELS.GUIDES,
         path: '/actions-events/docs',
         iconClass: ICON_CLASSES.GUIDES,
+        sidebar: 'sidebarActionsEventsDocs',
       },
       {
         label: TAB_LABELS.API_REFERENCE,
         path: '/actions-events/reference',
         iconClass: ICON_CLASSES.REFERENCES,
+        sidebar: 'sidebarActionsEventsReference',
       },
     ],
   },
@@ -39,11 +81,13 @@ const BASE_SECTION_NAV_CONFIG = {
         label: TAB_LABELS.GUIDES,
         path: '/analytics/docs',
         iconClass: ICON_CLASSES.GUIDES,
+        sidebar: 'sidebarAnalyticsDocs',
       },
       {
         label: TAB_LABELS.API_REFERENCE,
         path: '/analytics/reference',
         iconClass: ICON_CLASSES.REFERENCES,
+        sidebar: 'sidebarAnalyticsReference',
       },
     ],
   },
@@ -53,15 +97,18 @@ const BASE_SECTION_NAV_CONFIG = {
         label: TAB_LABELS.GUIDES,
         path: '/connect/docs',
         iconClass: ICON_CLASSES.GUIDES,
+        sidebar: 'sidebarConnectDocs',
       },
       {
         label: TAB_LABELS.API_REFERENCE,
         path: '/connect/reference',
         iconClass: ICON_CLASSES.REFERENCES,
+        sidebar: 'sidebarConnectReference',
       },
       {
         label: TAB_LABELS.SUPPORT,
         path: 'https://support.cpaas.8x8.com/hc/en-us',
+        // No sidebar property for external links
       },
     ],
   },
@@ -71,15 +118,18 @@ const BASE_SECTION_NAV_CONFIG = {
         label: TAB_LABELS.GUIDES,
         path: '/contactcenter/docs',
         iconClass: ICON_CLASSES.GUIDES,
+        sidebar: 'sidebarContactCenterDocs',
       },
       {
         label: TAB_LABELS.API_REFERENCE,
         path: '/contactcenter/reference',
         iconClass: ICON_CLASSES.REFERENCES,
+        sidebar: 'sidebarContactCenterReference',
       },
       {
         label: TAB_LABELS.CHANGELOG,
         path: '/contactcenter/changelog',
+        // No sidebar property for changelog
       },
     ],
   },
@@ -146,17 +196,36 @@ export default function SectionNavigation() {
     return null;
   }
 
-  // Determine active tab based on current path
+  // Determine active tab based on sidebar membership
   const getActiveTab = () => {
-    // Check if we're in docs vs reference
-    if (pathname.includes('/reference/') || pathname.includes('/reference')) {
-      return config.tabs.findIndex(tab => tab.path.includes('/reference'));
+    // Extract doc ID from pathname
+    // Remove baseUrl and convert path to doc ID format
+    // Example: /connect/docs/getting-started-with-sms-api -> connect/docs/getting-started-with-sms-api
+    let relativePath = normalizedBaseUrl
+      ? pathname.replace(normalizedBaseUrl, '')
+      : pathname;
+
+    // Remove leading slash
+    relativePath = relativePath.replace(/^\//, '');
+
+    // Remove trailing slash
+    relativePath = relativePath.replace(/\/$/, '');
+
+    // The doc ID is the path without extension
+    const docId = relativePath;
+
+    // Find which sidebar contains this doc
+    const sidebarName = findSidebarForDoc(docId);
+
+    if (sidebarName) {
+      // Find the tab that has this sidebar
+      const tabIndex = config.tabs.findIndex(tab => tab.sidebar === sidebarName);
+      // Return the tab index, or -1 if not found (no highlight)
+      return tabIndex !== -1 ? tabIndex : -1;
     }
-    if (pathname.includes('/docs/') || pathname.includes('/docs')) {
-      return config.tabs.findIndex(tab => tab.path.includes('/docs'));
-    }
-    // Default to first tab
-    return 0;
+
+    // If no sidebar is detected, don't highlight any tab
+    return -1;
   };
 
   const activeTabIndex = getActiveTab();
