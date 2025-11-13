@@ -1,4 +1,4 @@
-# Okta - (BYOT) Bring Your Own Telephony Guide
+# Okta - Bring Your Own Telephony (BYOT) via SMS
 
 ## Overview
 
@@ -35,9 +35,7 @@ This Video Demo shows the integration in action and explains a high level of the
 
 We will need an example endpoint for Okta to send it's HTTP request to. We have provided some example Node.js server code below for you to use:
 
-server.js
-
-```javascript
+```javascript server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
@@ -134,25 +132,22 @@ app.post('/telephony-hook', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
 ```
 
 The code takes as input a inline hook from Okta which is simply an HTTPS request. Then it will extract the phone number and message from the request body and use that information to send an API call to 8x8's SMS API to send an OTP to the destination number. It will return either success or error information to Okta as a final step.
 
 Please note it requires parameters set in a **config.js** file as below. All values should be replaced and set with the corresponding values unique to your 8x8 Account and Okta Inline Hook configuration. The apiKey, subaccount and sender can be found in 8x8 Connect under [API Keys](https://connect.8x8.com/messaging/api-keys) and [Numbers](https://connect.8x8.com/messaging/virtual-numbers).
 
-| Key | Value |
-| --- | --- |
-| apiKey | Your 8x8 API Key. |
-| subaccount | Your 8x8 Subaccount. |
-| sender | Your 8x8 SMS Sender ID or Virtual Number |
-| authKey | Should be set to the same value as the Authentication Secret from the Inline Hook guide setup below. Used by your server to authenticate the request from Okta. |
+| Key        | Value                                                                                                                                                           |
+| :--------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| apiKey     | Your 8x8 API Key.                                                                                                                                               |
+| subaccount | Your 8x8 Subaccount.                                                                                                                                            |
+| sender     | Your 8x8 SMS Sender ID or Virtual Number                                                                                                                        |
+| authKey    | Should be set to the same value as the Authentication Secret from the Inline Hook guide setup below. Used by your server to authenticate the request from Okta. |
 
 Here is the example **config.js** file for reference where the values should be replaced.
 
-config.js
-
-```javascript
+```json config.js
 // config.js
 module.exports = {
     apiKey: 'your_8x8_api_key',
@@ -165,9 +160,7 @@ module.exports = {
 
 Here is the example package.json for your Node.js application. It includes the packages axios, body-parser and expressed used in the backend server code.
 
-package.json
-
-```json
+```json package.json
 {
   "name": "okta_inline_hook_integration",
   "version": "1.0.0",
@@ -191,24 +184,18 @@ package.json
 
 After placing this code in the same directory, you can run the following commands to start the server.
 
-Shell - Install Packages and Start Server
-
-```bash
+```bash Shell - Install Packages and Start Server
 npm install
 npm start
-
 ```
 
 The output should appear as follows.
 
-Shell - Start Server Ouptut
-
-```bash
+```bash Shell - Start Server Ouptut
 > okta_inline_hook_integration@1.0.0 start
 > node server.js
 
 Server is running on port 3000
-
 ```
 
 The server should be exposed to the public internet so that Okta can send a webhook. The exact method is left to you but some options may include ngrok and localtunnel if you are running on your local laptop/desktop dev environment.
@@ -226,13 +213,17 @@ Go to **Workflow > Inline Hooks** on the Okta Dashboard. Select **Add Inline Hoo
 In the **Create Inline Hook** page, fill in the following values.
 
 | Field | Description | Example Value |
-| --- | --- | --- |
+|-------|-------------|---------------|
 | **Name** | Can be any value. We use "8x8 - SMS Authentication" | 8x8 - SMS Authentication |
-| **URL** | Should be set to the URL of your backend server that you send the code.<br>For this tutorial we host it locally and use ngrok to expose it for demo purposes. In production you will need a hosting solution. | [https://example.com/endpoint](https://example.com/endpoint) |
-| **Authentication Field** | Will be sent as part of the request header. Authentication Field is for your backend to authenticate the webhook from Okta. It can be any value<br>Refer to Okta's [page](https://developer.okta.com/docs/reference/hooks-best-practices/) on authentication and Inline Hooks for reference. | Authentication |
+| **URL** | Should be set to the URL of your backend server that you send the code.<br/><br/>For this tutorial we host it locally and use ngrok to expose it for demo purposes. In production you will need a hosting solution. | <https://example.com/endpoint> |
+| **Authentication Field** | Will be sent as part of the request header. Authentication Field is for your backend to authenticate the webhook from Okta. It can be any value<br/><br/>Refer to Okta's [page](https://developer.okta.com/docs/reference/hooks-best-practices/) on authentication and Inline Hooks for reference. | Authentication |
 | **Authentication Secret (Used with Authentication Field)** | Will be sent as part of the request header. This should be the value your backend uses to authenticate | secretvalue |
 
+<br />
+
 ![image](../images/58d0026-image.png)
+
+<br />
 
 After entering the values, click **Save**.
 
@@ -252,9 +243,7 @@ Click **View Response** to send the example Inline hook to your server. You shou
 
 From our example Node.js server you should see the following output, showing the API request sent from Okta and also the output of the API call to 8x8's SMS API.
 
-Server Code Output
-
-```text
+```text Server Code Output
 Received request body: {
   eventId: '3IPD5oQfQdOttCCjUWMk3Q',
   eventTime: '2024-08-07T22:15:30.000Z',
@@ -292,7 +281,6 @@ OTP sent successfully: {
     description: 'SMS is accepted and queued for processing'
   }
 }
-
 ```
 
 The SMS should also be delivered to your phone.
@@ -311,7 +299,7 @@ Ensure that in the **Security - Authenticators** page that Phone is added as an 
 
 ![image](../images/7a5bf0e-image.png)
 
- If it is not already on the list then click **Add Authenticator** to add it.
+If it is not already on the list then click **Add Authenticator** to add it.
 
 ### Create new Authentication Policy Rule
 
@@ -336,6 +324,7 @@ After creating the Policy, add it to one of your Applications.
 When attempting to login to the application that you have configured above, you should receive the following screen prompting you to register for Phone Verification.
 
 ![image](../images/b65f2ca-image.png)
+
 ![image](../images/75cc45b-image.png)
 
 Again the code should be sent to your phone via SMS, follow the prompts to finish logging into application.

@@ -238,9 +238,23 @@ const sidebarConfig = [
       {
         type: 'category',
         label: 'Okta - Bring Your Own Telephony (BYOT)',
-        link: { type: 'doc', id: 'connect/docs/okta' },
+        link: {
+          type: 'doc',
+          id: 'connect/docs/okta-bring-your-own-telephony-byot',
+        },
         collapsed: true,
-        items: [],
+        items: [
+          {
+            type: 'doc',
+            id: 'connect/docs/okta',
+            label: 'Okta - Bring Your Own Telephony (BYOT) via SMS',
+          },
+          {
+            type: 'doc',
+            id: 'connect/docs/okta-bring-your-own-telephony-byot-via-voice-otp',
+            label: 'Okta - Bring Your Own Telephony (BYOT) via Voice',
+          },
+        ],
       },
       'connect/docs/salesforce-live-agent',
       {
