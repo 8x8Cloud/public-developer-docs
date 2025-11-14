@@ -263,6 +263,7 @@
 
   --ifm-hero-text-color: #bdc0c7;
 
+  --ifm-background-color: var(--ui06);
   --ifm-global-radius: 6px;
   --ifm-badge-color: var(--text-color07);
 
@@ -592,6 +593,7 @@ html {
   font-size: var(--body01-font-size);
   line-height: var(--body01-line-height);
   letter-spacing: var(--body01-letter-spacing);
+  color: #ffffff;
   --ifm-link-decoration: none;
 }
 
@@ -635,6 +637,8 @@ html {
 /* Sidebar menu styling */
 .menu {
   --ifm-link-decoration: none;
+  background: var(--ifm-background-color);
+  color: var(--text-color01);
 }
 
 .menu .menu__link {
