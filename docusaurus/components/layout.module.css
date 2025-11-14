@@ -1,0 +1,22 @@
+.home {
+  height: 218px;
+  background-color: var(--ui05);
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='104' height='101' viewBox='0 0 104 101' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M70.8627 101L0 0H104V88.1827L70.8627 101Z' fill='%23CEDD5C'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='65' height='85' viewBox='0 0 65 85' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.2525 0L82 60.4167L7.45455 85L0 49.1667L54.2525 0Z' fill='%23D97E49'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='154' height='232' viewBox='0 0 154 232' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M83.987 -57.1396L224.162 30.3408L57.7908 231.822L-3.61563e-05 158.418L83.987 -57.1396Z' fill='%234C878A'/%3E%3C/svg%3E");
+  background-position:
+    calc(100% - 221px) -46px,
+    calc(100%) 62px,
+    calc(100%) -51px;
+  background-repeat: no-repeat;
+  background-size: auto, auto, auto;
+}
+
+.home {
+  @media (min-width: 997px) {
+    [class*='docItemCol'] {
+      max-width: 1250px !important;
+    }
+  }
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 
+import styles from './card.module.css';
+
 /**
  * Unified Card component that supports two display modes:
  * 1. Description card: Shows title + description, entire card is clickable
@@ -43,9 +45,12 @@ export default function Card({
   // Description card: entire card is a link
   if (description && link) {
     return (
-      <Link to={link} className={`card card--clickable ${className}`.trim()}>
-        <h3 className="card__title">{title}</h3>
-        <p className="card__description">{description}</p>
+      <Link
+        to={link}
+        className={`${styles.card} ${styles.cardClickable} ${className}`.trim()}
+      >
+        <h3>{title}</h3>
+        <p className={styles.cardDescription}>{description}</p>
       </Link>
     );
   }
@@ -53,9 +58,9 @@ export default function Card({
   // List card: contains multiple links
   if (items && items.length > 0) {
     return (
-      <div className={`card card--list ${className}`.trim()}>
-        <h3 className="card__title">{title}</h3>
-        <ul className="card__list">
+      <div className={`${styles.card} ${className}`.trim()}>
+        <h3>{title}</h3>
+        <ul className={styles.cardList}>
           {items.map((item, index) => (
             <li key={index}>
               <Link to={item.link}>{item.label}</Link>
@@ -68,9 +73,9 @@ export default function Card({
 
   // Fallback: simple card with just title
   return (
-    <div className={`card ${className}`.trim()}>
-      <h3 className="card__title">{title}</h3>
-      {description && <p className="card__description">{description}</p>}
+    <div className={`${styles.card} ${className}`.trim()}>
+      <h3>{title}</h3>
+      {description && <p className={styles.cardDescription}>{description}</p>}
     </div>
   );
 }

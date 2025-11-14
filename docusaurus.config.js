@@ -150,8 +150,17 @@ const config = {
       },
     },
     footer: {
-      style: 'dark',
-      copyright: `© ${new Date().getFullYear()} by 8x8. All rights reserved. | <a href="/license">8x8 API License Agreement</a> | <a href="/page/sdk-license">8x8 SDK License Agreement</a>`,
+      copyright: `© ${new Date().getFullYear()} by 8x8. All rights reserved.`,
+      links: [
+        {
+          label: '8x8 API License Agreement',
+          href: '/license',
+        },
+        {
+          label: '8x8 SDK License Agreement',
+          href: '/page/sdk-license',
+        },
+      ],
     },
     metadata: [
       {
@@ -162,10 +171,10 @@ const config = {
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
     navbar: {
-      title: '8x8 Developer Portal',
+      title: 'Developer Portal',
       logo: {
         alt: '8x8',
-        src: 'img/Logo8x8Light.svg',
+        src: 'img/Logo8x8Dark.svg',
         srcDark: 'img/Logo8x8Dark.svg',
       },
       items: [

@@ -1,6 +1,8 @@
 import React from 'react';
 import Card from './Card';
 
+import styles from './card.module.css';
+
 const cards = [
   {
     title: 'SMS API',
@@ -276,7 +278,7 @@ const cards = [
 
 export default function ConnectCards() {
   return (
-    <div className="cards-grid cards-grid--3col">
+    <div className={styles.grid}>
       {cards.map((card, idx) => (
         <Card key={idx} title={card.title} items={card.items} />
       ))}

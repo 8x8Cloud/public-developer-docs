@@ -1,6 +1,8 @@
 import React from 'react';
 import Card from './Card';
 
+import styles from './card.module.css';
+
 const cards = [
   {
     title: 'XCaaS Actions & Events',
@@ -54,7 +56,7 @@ const cards = [
 
 export default function DeveloperHubCards() {
   return (
-    <div className="cards-grid cards-grid--3col">
+    <div className={styles.grid}>
       {cards.map((card, idx) => (
         <Card
           key={idx}

@@ -1,0 +1,82 @@
+/* Unified Card System */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  margin: 32px 0;
+  padding: 0;
+}
+
+/* Grid variants */
+@media (min-width: 782px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1184px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Base card styles */
+.card {
+  font-family: var(--body01-font-family);
+  font-size: var(--body01-font-size);
+  font-weight: var(--body01-font-weight);
+  line-height: var(--body01-line-height);
+  letter-spacing: var(--body01-letter-spacing);
+  color: var(--text-color01);
+  display: block;
+  padding: 24px;
+  border: 1px solid var(--ui01);
+  border-radius: 6px;
+  background: var(--ui02);
+  box-shadow: var(--shadow-low);
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Clickable card (with description and link) */
+.cardClickable {
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+}
+
+.cardClickable:hover,
+.cardClickable:focus {
+  color: var(--text-color01);
+  box-shadow: var(--shadow-medium);
+  text-decoration: none;
+  border-color: var(--ui03);
+}
+
+/* Card title */
+.card h3 {
+  font-family: var(--heading01-font-family);
+  font-size: var(--heading01-font-size);
+  font-weight: var(--heading01-font-weight);
+  line-height: var(--heading01-line-height);
+  letter-spacing: var(--heading01-letter-spacing);
+  margin: 0 0 12px 0;
+}
+
+/* Card list (for list cards) */
+.cardList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cardList li {
+  margin-bottom: 0.5rem;
+}
+
+.cardList li:last-child {
+  margin-bottom: 0;
+}

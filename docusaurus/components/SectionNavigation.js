@@ -16,6 +16,7 @@ const TAB_LABELS = {
 const ICON_CLASSES = {
   GUIDES: 'icon-guides',
   REFERENCES: 'icon-references',
+  SUPPORT: 'icon-support',
 };
 
 // Helper function to recursively search for a doc ID in a sidebar structure
@@ -34,7 +35,11 @@ function findDocInSidebar(items, docId) {
       return true;
     }
     // Handle category with link (e.g., {type: 'category', link: {type: 'doc', id: '...'}, items: [...]})
-    if (item.type === 'category' && item.link?.type === 'doc' && item.link?.id === docId) {
+    if (
+      item.type === 'category' &&
+      item.link?.type === 'doc' &&
+      item.link?.id === docId
+    ) {
       return true;
     }
     // Recursively search category items
@@ -108,7 +113,7 @@ const BASE_SECTION_NAV_CONFIG = {
       {
         label: TAB_LABELS.SUPPORT,
         path: 'https://support.cpaas.8x8.com/hc/en-us',
-        // No sidebar property for external links
+        iconClass: ICON_CLASSES.SUPPORT,
       },
     ],
   },
@@ -219,7 +224,9 @@ export default function SectionNavigation() {
 
     if (sidebarName) {
       // Find the tab that has this sidebar
-      const tabIndex = config.tabs.findIndex(tab => tab.sidebar === sidebarName);
+      const tabIndex = config.tabs.findIndex(
+        tab => tab.sidebar === sidebarName,
+      );
       // Return the tab index, or -1 if not found (no highlight)
       return tabIndex !== -1 ? tabIndex : -1;
     }
