@@ -95,6 +95,13 @@ Detailed data for surveys and questions is available via our detailed reports AP
 | SurveyScorePercentage | ratio of the user's inputted score over the total achievable score for numeric questions |
 | SurveyType | One of "stayOnCall", "callback" |
 | TransactionIds | List of transaction ids associated with a particular survey or question. For more information about transaction IDs, [please review the documentation.](https://support.8x8.com/contact-center/8x8-contact-center/agents/how-to-get-transaction-ids-in-8x8-contact-center) |
+| actualScore | The score provided by the customer in response to all numerical questions on the survey |
+| achievableScore | The maximum score for all validly answered numerical questions on the survey |
+| agentGroupIds | The list of all agent group ids that any agents involved with the survey are in |
+| agentGroupNames | The name of all agent groups from the agentGroupIds field |
+| channelId | The channel associated with the call the survey was on |
+| surveyIsDeleted | Boolean value for if the survey is currently deleted or not |
+| voiceRecordingUuid | The uuid value associated with a question (if the question is a voice comment) |
 
 ### Grouping and filtering
 

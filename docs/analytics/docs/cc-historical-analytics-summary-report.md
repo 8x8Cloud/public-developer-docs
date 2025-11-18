@@ -459,7 +459,7 @@ no filtersingle queuefilter on multiple queuesfilter on multiple queues and mult
 
 *Notes:*
 
-* When filtering by `media`, if the user also wants to filter by phone direction, instead of using `{"name": "media", "values": ["Phone"]}`, the phone direction can be specified as follows: `{"name": "media", "values": ["OutboundPhone"]}` or `{"name": "media", "values": ["InboundPhone"]}`
+* When filtering by `media`, if the user also wants to filter by phone or email direction, instead of using `{"name": "media", "values": ["Phone"]}`, the phone direction can be specified as follows: `{"name": "media", "values": ["OutboundPhone"]}` or `{"name": "media", "values": ["InboundPhone"]}`, and instead of using `{"name": "media", "values": ["Email"]}`, the email direction can be specified as follows: `{"name": "media", "values": ["OutboundEmail"]}` or `{"name": "media", "values": ["InboundEmail"]}`
 * When creating an `agent-interactions-by-wrap-up-code` report type, and the customer wants to filter by `wrap-up-code`, the filter values should be formatted as follows: `{"name": "wrap-up-code", "values": ["<wrap-up-code-list-id>-<wrap-up-code-item-id>"]}`. The `<wrap-up-code-list-id>` and `<wrap-up-code-item-id>` can be found in the CCA UI detailed reports by adding the 'Wrap Up Code List ID' and 'Wrap Up Code ID' fields to the report. For example: `{"name": "wrap-up-code", "values": ["170-1201"]}`
 
 #### metrics
