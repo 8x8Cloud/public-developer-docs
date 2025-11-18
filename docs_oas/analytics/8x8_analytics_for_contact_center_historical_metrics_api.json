@@ -48,7 +48,7 @@
         "security": [{ "bearerAuth": [] }],
         "tags": ["Report Access"],
         "summary": "Create Report",
-        "description": "This endpoint initializes Report Access. For step-by-step instructions on using the Historical Metrics API refer to the [CC Historical Analytics Summary Report](doc:cc-historical-analytics-summary-report) Guide. **_. A report can be either defined as grouping, filtering, metrics, time interval, or another type.",
+        "description": "This endpoint initializes Report Access. For step-by-step instructions on using the Historical Metrics API refer to the [CC Historical Analytics Summary Report](/analytics/docs/cc-historical-analytics-summary-report) Guide. A report can be either defined as grouping, filtering, metrics, time interval, or another type.",
         "operationId": "cc-historical-report-create",
         "requestBody": {
           "content": {
@@ -391,7 +391,7 @@
       "post": {
         "tags": ["Report Access"],
         "summary": "Create Detailed Report",
-        "description": "This endpoint initializes Detailed Report Access. For step-by-step instructions on using the Historical Metrics API refer to the [CC Historical Analytics Detailed Report](doc:cc-historical-analytics-detailed-report) Guide. **_. A report can be either defined as filtering, metrics, time interval, or another type.",
+        "description": "This endpoint initializes Detailed Report Access. For step-by-step instructions on using the Historical Metrics API refer to the [CC Historical Analytics Detailed Report](/analytics/docs/cc-historical-analytics-detailed-report) Guide. A report can be either defined as filtering, metrics, time interval, or another type.",
         "operationId": "cc-detailed-report-create",
         "requestBody": {
           "content": {
