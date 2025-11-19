@@ -24,7 +24,7 @@ This section is dedicated to the Contact object structure, which is a central el
 > >
 > >
 >
-> This API supports full CRUD for company contacts. For corporate contacts, only the profile picture can be managed. Please note that other modifications to contacts are not supported
+> This API allows modifications to company contacts only. You can create, update or delete company contacts as needed. Please note that modifications to other types of contacts are not supported
 >
 >
 
