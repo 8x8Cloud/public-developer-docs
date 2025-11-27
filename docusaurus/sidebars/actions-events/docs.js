@@ -100,7 +100,9 @@ const sidebarConfig = [
     type: 'category',
     label: 'Contact Centre Data Augmentation',
     collapsed: true,
-    items: ['actions-events/docs/webhooks-2'],
+    items: [
+        'actions-events/docs/8x8-contact-center-data-augmentation-api'
+    ],
   },
 ];
 
