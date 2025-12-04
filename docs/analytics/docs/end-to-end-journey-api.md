@@ -2,13 +2,9 @@
 
 ## Introduction
 
-The CIDP Journey API provides a consolidated view of customer interactions belonging to the same journey. These  
-interactions may happen on one or multiple 8x8 platform, including Contact Center (CC), Unified Communications (UC), and  
-Engage. Using the API users can retrieve journey data and detailed transition information, enabling end-to-end tracking  
-of customer journeys regardless of transfers between systems or agents.
+The CIDP Journey API provides a consolidated view of customer interactions belonging to the same journey. These interactions may happen on one or multiple 8x8 platforms, including Contact Center (CC), Unified Communications (UC), and Engage. Using the API users can retrieve journey data and detailed transition information, enabling end-to-end tracking of customer journeys regardless of transfers between systems or agents.
 
-This API is particularly valuable for organizations with complex flows that span multiple systems, where customers may  
-be transferred between formal contact center agents and back-office operations.
+This API is particularly valuable for organizations with complex flows that span multiple systems, where customers may be transferred between formal contact center agents and back-office operations.
 
 ## Business Value
 
@@ -16,17 +12,14 @@ The CIDP Journey API solves critical business challenges:
 
 - **Unified Customer Journey Tracking:** Track complete customer journeys across CC, UC, and Engage in a single view
 - **Transfer Pattern Analysis:** Understand how calls are transferred between systems and agents
-- **Comprehensive Metrics:** Access consolidated metrics like handling time, queue wait time, and outcomes across all  
-  platforms
+- **Comprehensive Metrics:** Access consolidated metrics like handling time, queue wait time, and outcomes across all platforms
 - **Detailed Transition History:** Examine every state a customer interaction passed through
 
-Instead of working with disconnected reporting systems, organizations can now build comprehensive reports and dashboards  
-in third-party BI tools with a complete view of all customer interactions.
+Instead of working with disconnected reporting systems, organizations can now build comprehensive reports and dashboards in third-party BI tools with a complete view of all customer interactions.
 
 ## Authentication
 
-All API requests require an x-api-key header for authentication. Obtain your x-api-key from the Admin Console  
-application.
+All API requests require an x-api-key header for authentication. Obtain your x-api-key from the Admin Console application.
 
 Required Request Header:
 
@@ -630,13 +623,7 @@ A journey can progress through multiple transition states:
 
 ### Journey Outcomes
 
-The `outcome` field in the Journeys API response summarizes the result of a customer journey. The outcome is determined by analyzing all underlying interaction outcomes and the total handling duration, using the following logic:
-
-- **Handled**: The journey is considered handled if any interaction outcome is `Handled` or `Accepted`, or if the total handling duration is greater than zero.
-- **Abandoned**: The journey is considered abandoned if any interaction outcome is `Abandoned` and the total handling duration is zero.
-- **EndedInScript**: The journey ended in an IVR or script if any interaction outcome is `EndedInScript`.
-- **Other**: If none of the above apply, but at least one interaction outcome matches a known outcome type, the journey is marked as `Other`.
-- **UnknownOutcome**: If no known outcome is found, the journey is marked as `UnknownOutcome`.
+The `outcome` field in the Journeys API response summarizes the result of a customer journey.
 
 #### Possible Outcome Values
 
