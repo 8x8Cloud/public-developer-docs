@@ -50,12 +50,16 @@ Add or update custom variables for a specific interaction.
 
 ```json
 {
-  "variables": [
+  "data": [
     {
-      "name": "_customerId",
-      "value": "CUST-123456",
-      "display": true,
-      "displayName": "Customer ID"
+      "variables": [
+        {
+          "name": "_customerId",
+          "value": "CUST-123456",
+          "display": true,
+          "displayName": "Customer ID"
+        }
+      ]
     }
   ]
 }
@@ -132,11 +136,15 @@ curl -X POST \
   -H 'Authorization: Basic {credentials}' \
   -H 'Content-Type: application/json' \
   -d '{
-    "variables": [
+    "data": [
       {
-        "name": "_customerTier",
-        "value": "VIP",
-        "ivr": true
+        "variables": [
+          {
+            "name": "_customerTier",
+            "value": "VIP",
+            "ivr": true
+          }
+        ]
       }
     ]
   }'
@@ -154,17 +162,21 @@ curl -X POST \
 
 ```json
 {
-  "variables": [
+  "data": [
     {
-      "name": "_accountBalance",
-      "value": "1250.75",
-      "ivr": true,
-      "dataType": "currency"
-    },
-    {
-      "name": "_paymentDue",
-      "value": "true",
-      "ivr": true
+      "variables": [
+        {
+          "name": "_accountBalance",
+          "value": "1250.75",
+          "ivr": true,
+          "dataType": "currency"
+        },
+        {
+          "name": "_paymentDue",
+          "value": "true",
+          "ivr": true
+        }
+      ]
     }
   ]
 }
@@ -186,31 +198,35 @@ Variables with `display: true` appear in the Agent Workspace, providing valuable
 
 ```json
 {
-  "variables": [
+  "data": [
     {
-      "name": "_customerId",
-      "value": "CUST-123456",
-      "display": true,
-      "displayName": "Customer ID"
-    },
-    {
-      "name": "_membershipLevel",
-      "value": "Gold",
-      "display": true,
-      "displayName": "Membership Level"
-    },
-    {
-      "name": "_lastContactReason",
-      "value": "Billing Inquiry",
-      "display": true,
-      "displayName": "Last Contact Reason"
-    },
-    {
-      "name": "_accountBalance",
-      "value": "$1,250.75",
-      "display": true,
-      "displayName": "Account Balance",
-      "dataType": "currency"
+      "variables": [
+        {
+          "name": "_customerId",
+          "value": "CUST-123456",
+          "display": true,
+          "displayName": "Customer ID"
+        },
+        {
+          "name": "_membershipLevel",
+          "value": "Gold",
+          "display": true,
+          "displayName": "Membership Level"
+        },
+        {
+          "name": "_lastContactReason",
+          "value": "Billing Inquiry",
+          "display": true,
+          "displayName": "Last Contact Reason"
+        },
+        {
+          "name": "_accountBalance",
+          "value": "$1,250.75",
+          "display": true,
+          "displayName": "Account Balance",
+          "dataType": "currency"
+        }
+      ]
     }
   ]
 }
@@ -246,34 +262,38 @@ curl -X POST \
   -H 'Authorization: Basic {credentials}' \
   -H 'Content-Type: application/json' \
   -d '{
-    "variables": [
+    "data": [
       {
-        "name": "_orderStatus",
-        "value": "shipped",
-        "ivr": true,
-        "display": true,
-        "displayName": "Order Status"
-      },
-      {
-        "name": "_orderValue",
-        "value": "299.99",
-        "display": true,
-        "displayName": "Order Value",
-        "dataType": "currency"
-      },
-      {
-        "name": "_customerTier",
-        "value": "Premium",
-        "ivr": true,
-        "display": true,
-        "displayName": "Customer Tier"
-      },
-      {
-        "name": "_shippingDate",
-        "value": "2024-07-10",
-        "display": true,
-        "displayName": "Shipping Date",
-        "dataType": "date"
+        "variables": [
+          {
+            "name": "_orderStatus",
+            "value": "shipped",
+            "ivr": true,
+            "display": true,
+            "displayName": "Order Status"
+          },
+          {
+            "name": "_orderValue",
+            "value": "299.99",
+            "display": true,
+            "displayName": "Order Value",
+            "dataType": "currency"
+          },
+          {
+            "name": "_customerTier",
+            "value": "Premium",
+            "ivr": true,
+            "display": true,
+            "displayName": "Customer Tier"
+          },
+          {
+            "name": "_shippingDate",
+            "value": "2024-07-10",
+            "display": true,
+            "displayName": "Shipping Date",
+            "dataType": "date"
+          }
+        ]
       }
     ]
   }'
@@ -349,12 +369,16 @@ curl -X POST \
 
 ```json
 {
-  "variables": [
-    {"name": "_customerId", "value": "CUST-123", "display": true, "displayName": "Customer ID"},
-    {"name": "_accountBalance", "value": "1250.75", "display": true, "displayName": "Balance", "dataType": "currency"},
-    {"name": "_membershipLevel", "value": "Gold", "ivr": true, "display": true, "displayName": "Membership"},
-    {"name": "_lastContactDate", "value": "2024-07-10", "display": true, "displayName": "Last Contact", "dataType": "date"},
-    {"name": "_accountPin", "value": "1234", "privacy": true, "ivr": true}
+  "data": [
+    {
+      "variables": [
+        {"name": "_customerId", "value": "CUST-123", "display": true, "displayName": "Customer ID"},
+        {"name": "_accountBalance", "value": "1250.75", "display": true, "displayName": "Balance", "dataType": "currency"},
+        {"name": "_membershipLevel", "value": "Gold", "ivr": true, "display": true, "displayName": "Membership"},
+        {"name": "_lastContactDate", "value": "2024-07-10", "display": true, "displayName": "Last Contact", "dataType": "date"},
+        {"name": "_accountPin", "value": "1234", "privacy": true, "ivr": true}
+      ]
+    }
   ]
 }
 ```
