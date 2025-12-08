@@ -2,7 +2,7 @@
   "config": {
     "extends": ".markdown-rules.json",
     "MD033": {
-      "allowed_elements": ["br", "iframe", "ul", "li"]
+      "allowed_elements": ["br", "iframe", "ul", "li", "details", "summary"]
     }
   },
   "globs": ["docs/**/*.md"]
