@@ -8,6 +8,8 @@ const darkCodeTheme = themes.dracula;
 
 // Import redirects array
 const redirects = require('./docusaurus/redirects/index.js');
+// Import languageTabs configuration
+const languageTabs = require('./docusaurus/openapi/languageTabs.js');
 
 // Determine baseUrl early so we can use it
 const baseUrl = process.env.BASE_URL || '/';
@@ -143,6 +145,7 @@ const config = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
+    languageTabs,
     docs: {
       sidebar: {
         hideable: true,
