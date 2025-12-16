@@ -10,7 +10,7 @@ The JSON object has the following properties:
 | destination | string\* | **Required**. Destination phone number. |
 | text | string\* | **Required**. SMS body (ie: text of the message). |
 | source | string | Alphanumeric or numeric string used as Sender ID for the SMS. |
-| clientMessageId | string | Unique id that you want to associate with the SMS (*50 chars max*) |
+| clientMessageId | string | Unique id that you want to associate with the SMS (*350 chars max*) |
 | encoding | string | `enum`, Character set to use for this SMS. Possible values are `AUTO`, `GSM7`, `UCS2` |
 | scheduled | string | `timestamp`, Pre-defined date and time for this SMS to be sent in the future. |
 | expiry | string | `timestamp`, Maximum date and time for this SMS to be sent at |
@@ -68,7 +68,7 @@ Valid examples: `+12025550308`, `12025550308`
 
 * This value is optional.
 * If used, the `ClientMessageId` allows you to submit SMS associated to your custom message ID. That way, you are able to match the information contained in the API response  with the ID from your own business logic. You can later read `ClientMessageId` from delivery reports.
-* The maximum length allowed for the `ClientMessageId` is 50 characters.
+* The maximum length allowed for the `ClientMessageId` is 350 characters.
 
 ### encoding
 

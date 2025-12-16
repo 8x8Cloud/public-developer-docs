@@ -1996,7 +1996,7 @@
             "description": "Source number (SenderId) - \"From:\" field for the SMS"
           },
           "clientMessageId": {
-            "maxLength": 50,
+            "maxLength": 350,
             "type": "string",
             "description": "Client managed id for the message: your own unique reference"
           },
