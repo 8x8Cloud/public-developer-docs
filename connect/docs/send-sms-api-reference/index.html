@@ -9,7 +9,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.5c2b0b28.css">
-<script src="/assets/js/runtime~main.74c2abde.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.91fd57f4.js" defer="defer"></script>
 <script src="/assets/js/main.633b69f3.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -70,7 +70,7 @@
 
 
 
-<table><thead><tr><th>Property name</th><th>Property type</th><th>Description</th></tr></thead><tbody><tr><td>destination</td><td>string*</td><td><strong>Required</strong>. Destination phone number.</td></tr><tr><td>text</td><td>string*</td><td><strong>Required</strong>. SMS body (ie: text of the message).</td></tr><tr><td>source</td><td>string</td><td>Alphanumeric or numeric string used as Sender ID for the SMS.</td></tr><tr><td>clientMessageId</td><td>string</td><td>Unique id that you want to associate with the SMS (<em>50 chars max</em>)</td></tr><tr><td>encoding</td><td>string</td><td><code>enum</code>, Character set to use for this SMS. Possible values are <code>AUTO</code>, <code>GSM7</code>, <code>UCS2</code></td></tr><tr><td>scheduled</td><td>string</td><td><code>timestamp</code>, Pre-defined date and time for this SMS to be sent in the future.</td></tr><tr><td>expiry</td><td>string</td><td><code>timestamp</code>, Maximum date and time for this SMS to be sent at</td></tr><tr><td>dlrCallbackUrl</td><td>string</td><td><code>uri</code>, Webhook URL where delivery status for the SMS will be posted (<em>Overwrites your default account callback URL</em></td></tr></tbody></table>
+<table><thead><tr><th>Property name</th><th>Property type</th><th>Description</th></tr></thead><tbody><tr><td>destination</td><td>string*</td><td><strong>Required</strong>. Destination phone number.</td></tr><tr><td>text</td><td>string*</td><td><strong>Required</strong>. SMS body (ie: text of the message).</td></tr><tr><td>source</td><td>string</td><td>Alphanumeric or numeric string used as Sender ID for the SMS.</td></tr><tr><td>clientMessageId</td><td>string</td><td>Unique id that you want to associate with the SMS (<em>350 chars max</em>)</td></tr><tr><td>encoding</td><td>string</td><td><code>enum</code>, Character set to use for this SMS. Possible values are <code>AUTO</code>, <code>GSM7</code>, <code>UCS2</code></td></tr><tr><td>scheduled</td><td>string</td><td><code>timestamp</code>, Pre-defined date and time for this SMS to be sent in the future.</td></tr><tr><td>expiry</td><td>string</td><td><code>timestamp</code>, Maximum date and time for this SMS to be sent at</td></tr><tr><td>dlrCallbackUrl</td><td>string</td><td><code>uri</code>, Webhook URL where delivery status for the SMS will be posted (<em>Overwrites your default account callback URL</em></td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="parameters-overview">Parameters overview<a href="#parameters-overview" class="hash-link" aria-label="Direct link to Parameters overview" title="Direct link to Parameters overview" translate="no">​</a></h2>
 <p>Below is a more detailed description of the parameters in the SMS request body (<code>JSON</code> object submitted to the API)</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="destination">destination<a href="#destination" class="hash-link" aria-label="Direct link to destination" title="Direct link to destination" translate="no">​</a></h3>
@@ -128,7 +128,7 @@
 <ul>
 <li>This value is optional.</li>
 <li>If used, the <code>ClientMessageId</code> allows you to submit SMS associated to your custom message ID. That way, you are able to match the information contained in the API response  with the ID from your own business logic. You can later read <code>ClientMessageId</code> from delivery reports.</li>
-<li>The maximum length allowed for the <code>ClientMessageId</code> is 50 characters.</li>
+<li>The maximum length allowed for the <code>ClientMessageId</code> is 350 characters.</li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="encoding">encoding<a href="#encoding" class="hash-link" aria-label="Direct link to encoding" title="Direct link to encoding" translate="no">​</a></h3>
 <p><code>AUTO</code>, <code>GSM7</code> or <code>UCS2</code></p>
