@@ -224,7 +224,8 @@
                               "list",
                               "product",
                               "product_list",
-                              "cta_url"
+                              "cta_url",
+                              "flow"
                             ],
                             "description": "The type of interactive message you want to send."
                           },
@@ -340,6 +341,46 @@
                                   "url": {
                                     "type": "string",
                                     "description": "URL to load in the device's default web browser when tapped by user."
+                                  },
+                                  "flowId": {
+                                    "type": "string",
+                                    "description": "Required for Flow messages. Unique ID of the Flow provided by WhatsApp.",
+                                    "example": "859504979861628"
+                                  },
+                                  "flowCta": {
+                                    "type": "string",
+                                    "description": "Required for Flow messages. Text on the CTA button. For example: \"Signup\". CTA text length is advised to be 30 characters or less (no emoji).",
+                                    "maxLength": 30,
+                                    "example": "Get Recommendations"
+                                  },
+                                  "flowAction": {
+                                    "type": "string",
+                                    "description": "Optional for Flow messages. Either \"navigate\" or \"data_exchange\". Defaults to \"navigate\" if not provided.",
+                                    "enum": ["navigate", "data_exchange"],
+                                    "default": "navigate",
+                                    "example": "navigate"
+                                  },
+                                  "flowActionPayload": {
+                                    "type": "object",
+                                    "description": "Optional for Flow messages. Should only be used when flowAction is \"navigate\". Should be omitted otherwise.",
+                                    "properties": {
+                                      "screen": {
+                                        "type": "string",
+                                        "description": "Optional. The ID of the screen displayed first. It needs to be an entry screen. Defaults to \"FIRST_ENTRY_SCREEN\" if not provided.",
+                                        "default": "FIRST_ENTRY_SCREEN",
+                                        "example": "RECOMMEND"
+                                      },
+                                      "data": {
+                                        "type": "object",
+                                        "description": "Optional. Input data for the first Screen of the Flow. If provided, this must be a non-empty object. Defaults to null if not provided.",
+                                        "additionalProperties": true,
+                                        "example": {
+                                          "product_id": "12345",
+                                          "user_name": "John Doe",
+                                          "campaign_id": "summer_sale_2024"
+                                        }
+                                      }
+                                    }
                                   }
                                 }
                               }
@@ -480,7 +521,7 @@
                                     "properties": {
                                       "type": {
                                         "type": "string",
-                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\n",
+                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\n",
                                         "enum": [
                                           "text",
                                           "image",
@@ -488,7 +529,8 @@
                                           "document",
                                           "location",
                                           "payload",
-                                          "couponCode"
+                                          "couponCode",
+                                          "action"
                                         ]
                                       },
                                       "text": {
@@ -534,6 +576,28 @@
                                       "couponCode": {
                                         "type": "string",
                                         "description": "Required for \"couponCode\" type.\n\nThe coupon code to be copied when the customer taps the button."
+                                      },
+                                      "flowActionData": {
+                                        "type": "object",
+                                        "description": "Optional for \"action\" type.\n\nFlow action data for Flow button parameters.",
+                                        "properties": {
+                                          "screen": {
+                                            "type": "string",
+                                            "description": "Optional. The ID of the screen displayed first. It needs to be an entry screen. Should only be used when flow_action is navigate, and should be omitted otherwise. Defaults to \"FIRST_ENTRY_SCREEN\" if not provided.",
+                                            "default": "FIRST_ENTRY_SCREEN",
+                                            "example": "RECOMMEND"
+                                          },
+                                          "data": {
+                                            "type": "object",
+                                            "description": "Optional. Input data for the first Screen of the Flow. If provided, this must be a non-empty object. Defaults to null if not provided.",
+                                            "additionalProperties": true,
+                                            "example": {
+                                              "productId": "12345",
+                                              "userName": "John Doe",
+                                              "campaignId": "summer_sale_2024"
+                                            }
+                                          }
+                                        }
                                       }
                                     },
                                     "required": ["type"]
@@ -548,8 +612,8 @@
                                 },
                                 "subType": {
                                   "type": "string",
-                                  "description": "Required for \"button\" type.\n\nType of button being created\nValues: QuickReply, Url, CopyCode.",
-                                  "enum": ["QuickReply", "Url", "CopyCode"]
+                                  "description": "Required for \"button\" type.\n\nType of button being created\nValues: QuickReply, Url, CopyCode, Flow.",
+                                  "enum": ["QuickReply", "Url", "CopyCode", "Flow"]
                                 },
                                 "cards": {
                                   "type": "array",
@@ -2616,7 +2680,8 @@
                                   "URL",
                                   "QUICK_REPLY",
                                   "OTP",
-                                  "COPY_CODE"
+                                  "COPY_CODE",
+                                  "FLOW"
                                 ],
                                 "description": "Button type"
                               },
@@ -2649,6 +2714,27 @@
                                 "items": {
                                   "type": "string"
                                 }
+                              },
+                              "flowId": {
+                                "type": "string",
+                                "description": "Required for type \"FLOW\".\n\nThe ID of the WhatsApp Flow to launch when the button is clicked.",
+                                "example": "859504979861628"
+                              },
+                              "flowAction": {
+                                "type": "string",
+                                "description": "Optional for type \"FLOW\".\n\nThe action to perform when launching the flow. Defaults to \"navigate\" if not provided.",
+                                "enum": [
+                                  "navigate",
+                                  "data_exchange"
+                                ],
+                                "default": "navigate",
+                                "example": "navigate"
+                              },
+                              "navigateScreen": {
+                                "type": "string",
+                                "description": "Optional for type \"FLOW\".\n\nThe screen ID to navigate to when launching the flow. Used when flowAction is \"navigate\". Defaults to \"FIRST_ENTRY_SCREEN\" if not provided.",
+                                "default": "FIRST_ENTRY_SCREEN",
+                                "example": "RECOMMEND"
                               }
                             },
                             "required": ["type", "text"]
@@ -2833,6 +2919,32 @@
                                 ]
                               }
                             ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "whatsAppFlowTemplate": {
+                  "summary": "Add WhatsApp Template with Flow Button",
+                  "value": {
+                    "name": "template_with_flow",
+                    "category": "MARKETING",
+                    "language": "en",
+                    "components": [
+                      {
+                        "type": "BODY",
+                        "text": "Share your preferences with us to receive personalized recommendations."
+                      },
+                      {
+                        "type": "BUTTONS",
+                        "buttons": [
+                          {
+                            "type": "FLOW",
+                            "text": "Share Info",
+                            "flowId": "123456789876543",
+                            "flowAction": "navigate",
+                            "navigateScreen": "RECOMMEND"
                           }
                         ]
                       }
