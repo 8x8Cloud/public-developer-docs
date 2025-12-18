@@ -53,13 +53,13 @@ const sidebarConfig = [
       {
         type: 'category',
         label: 'RCS',
-        link: { type: 'doc', id: 'connect/docs/guide-rcs' },
+        link: { type: 'doc', id: 'connect/docs/rcs/overview' },
         collapsed: true,
         items: [
-          'connect/docs/getting-started-1',
-          'connect/docs/compliance',
-          'connect/docs/usage-samples-rcs',
-          'connect/docs/billing',
+          'connect/docs/rcs/registration',
+          'connect/docs/rcs/message-types',
+          'connect/docs/rcs/compliance',
+          'connect/docs/rcs/billing',
         ],
       },
       'connect/docs/usage-samples-viber',
