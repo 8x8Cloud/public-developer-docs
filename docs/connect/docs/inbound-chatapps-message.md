@@ -29,12 +29,12 @@ In case of connection error/timeout or HTTP response code 4XX or 5XX, there will
 
 Request body description
 
-| Parameter name | Parameter type | Description |
-| --- | --- | --- |
-| namespace | string | A generic namespace for incoming webhook.<br>Equal to `Messaging Apps` for inbound Messaging Apps message. |
-| eventType | string | Webhook type.<br>Equals to `inbound_message_received` for inbound Messaging Apps message. |
-| description | string | Human-readable description of the incoming event |
-| payload | object | Inbound message information, see below. |
+| Parameter name | Parameter type | Description                                                                                          |
+| --- | --- |------------------------------------------------------------------------------------------------------|
+| namespace | string | A generic namespace for incoming webhook.<br>Equal to `ChatApps` for inbound Messaging Apps message. |
+| eventType | string | Webhook type.<br>Equals to `inbound_message_received` for inbound Messaging Apps message.            |
+| description | string | Human-readable description of the incoming event                                                     |
+| payload | object | Inbound message information, see below.                                                              |
 
 Payload object description
 
@@ -45,7 +45,7 @@ Payload object description
 | timestamp | string | UTC date and time when the message was received expressed in ISO 8601 format. |
 | user | object | Information about the user the message is associated with. |
 | recipient | object | Recipient information, see below |
-| type | string | Inbound message type. Possible values:<br>- `none`<br>- `text`<br>- `audio`<br>- `video`<br>- `image`<br>- `location`<br>- `file`<br>- `carousel`<br>- `list`<br>- `buttons`<br>- `template`<br>- `interactive` |
+| type | string | Inbound message type. Possible values:<br>- `None`<br>- `Text`<br>- `Audio`<br>- `Video`<br>- `Image`<br>- `Location`<br>- `File`<br>- `Carousel`<br>- `List`<br>- `Buttons`<br>- `Template`<br>- `Interactive` |
 | content | object | Message content |
 | replyToUmid | uuid | Optional context data, if this inbound message is referring to a previous inbound message (ex, quoted messages on WhatsApp). |
 
@@ -68,11 +68,11 @@ Content information object description
 
 | Parameter name | Parameter type | Description                                                |
 | :------------- | :------------- | :--------------------------------------------------------- |
-| text           | string         | Message text (for payload with type = `text`)              |
+| text           | string         | Message text (for payload with type = `Text`)              |
 | url            | string         | The URL of the media attachment (rich content) if any      |
 | payload        | string         | Content payload (for interactive messages)                 |
-| location       | object         | Location object (for payload with type = `location`)       |
-| interactive    | object         | Interactive object (for payload with type = `interactive`) |
+| location       | object         | Location object (for payload with type = `Location`)       |
+| interactive    | object         | Interactive object (for payload with type = `Interactive`) |
 
 Location information object description
 
@@ -83,11 +83,12 @@ Location information object description
 
 Interactive information object description
 
-| Parameter name | Parameter type | Description |
-| --- | --- | --- |
-| type | string | Type of the message. Possible values:<br>- `button_reply`<br>- `list_reply` |
-| button\_reply | object | Button reply object. Sent when a customer clicks a button. |
-| list\_reply | object | List reply object. Sent when a customer selects an item from a list. |
+| Parameter name | Parameter type | Description                                                                                                                  |
+|----------------| --- |------------------------------------------------------------------------------------------------------------------------------|
+| type           | string | Type of the message. Possible values:<br>- `button_reply`<br>- `list_reply`<br>- `nfmReply`                                  |
+| button\_reply  | object | Button reply object. Sent when a customer clicks a button.                                                                   |
+| list\_reply    | object | List reply object. Sent when a customer selects an item from a list.                                                         |
+| nfmReply       | object | Flow reply object. Sent when a customer completes or submits a WhatsApp Flow. Contains flow response data in `responseJson`. |
 
 Button reply information object description
 
@@ -103,6 +104,12 @@ List reply information object description
 | id             | string         | Unique ID of the selected list item |
 | title          | string         | Title of the selected list item.    |
 | description    | string         | Description of the selected row.    |
+
+NFM reply information object description
+
+| Parameter name | Parameter type | Description |
+| :------------- | :------------- | :---------- |
+| responseJson   | string         | The raw JSON string returned from the completed Flow, containing the user's submitted data (e.g., flow token, field values). |
 
 > ❗️
 >
@@ -133,6 +140,38 @@ List reply information object description
       "text": "Test message"
     },
     "replyToUmid": "777a57f4-bd74-eb11-851d-00155d9fer55"
+  }
+}
+```
+
+### Sample Messaging Apps inbound message (Flow Response)
+
+```json
+{
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": "2b1e044d-6fce-4a11-8962-b39900a755c1",
+    "subAccountId": "SubAccount-1",
+    "timestamp": "2018-03-19T22:51:55.00Z",
+    "user": {
+      "msisdn": "+12025550023",
+      "channelUserId": "12025550023"
+    },
+    "recipient": {
+      "channel": "whatsapp",
+      "channelId": "4b2ba2df-deb0-4c29-8ba5-a266672daf49"
+    },
+    "type": "Interactive",
+    "content": {
+      "interactive": {
+        "type": "nfmReply",
+        "nfmReply": {
+          "responseJson": "{\"flow_token\": \"<FLOW_TOKEN>\", \"optional_param1\": \"<value1>\", \"optional_param2\": \"<value2>\"}"
+        }
+      }
+    }
   }
 }
 ```
