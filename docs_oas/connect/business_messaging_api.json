@@ -647,7 +647,67 @@
                                               "type": "array",
                                               "description": "Parameters list to use for template placeholders.",
                                               "items": {
-                                                "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages/post/requestBody/content/application~1json/schema/properties/content/properties/template/properties/components/items/properties/parameters/items"
+                                                "type": "object",
+                                                "properties": {
+                                                  "type": {
+                                                    "type": "string",
+                                                    "description": "Parameter type.\nPossible values are \"text\", \"image\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\n",
+                                                    "enum": [
+                                                      "text",
+                                                      "image",
+                                                      "video",
+                                                      "document",
+                                                      "location",
+                                                      "payload",
+                                                      "couponCode"
+                                                    ]
+                                                  },
+                                                  "text": {
+                                                    "type": "string",
+                                                    "example": "To be or not to be",
+                                                    "description": "Text for \"text\" parameter type"
+                                                  },
+                                                  "url": {
+                                                    "type": "string",
+                                                    "description": "Required for \"image\", \"video\", \"document\" parameter types.\n\nResource URL.",
+                                                    "example": "http://example.com"
+                                                  },
+                                                  "location": {
+                                                    "type": "object",
+                                                    "description": "Required for \"location\" parameter type.\n\nLocation object.",
+                                                    "properties": {
+                                                      "latitude": {
+                                                        "type": "number",
+                                                        "description": "Latitude",
+                                                        "example": 12.345
+                                                      },
+                                                      "longitude": {
+                                                        "type": "number",
+                                                        "example": 12.345,
+                                                        "description": "Longitude"
+                                                      },
+                                                      "name": {
+                                                        "type": "string",
+                                                        "example": "Pablo Morales",
+                                                        "description": "Text that will appear below the generic map at the top of the message"
+                                                      },
+                                                      "address": {
+                                                        "type": "string",
+                                                        "example": "1 Hacker Way, Menlo Park, CA 94025",
+                                                        "description": "Address that will appear below the generic map at the top of the message"
+                                                      }
+                                                    }
+                                                  },
+                                                  "payload": {
+                                                    "type": "string",
+                                                    "description": "Required for \"payload\" type.\n\nCustomer-defined payload that will be returned when the button in the interactive message is clicked."
+                                                  },
+                                                  "couponCode": {
+                                                    "type": "string",
+                                                    "description": "Required for \"couponCode\" type.\n\nThe coupon code to be copied when the customer taps the button."
+                                                  }
+                                                },
+                                                "required": ["type"]
                                               }
                                             },
                                             "index": {
@@ -2784,7 +2844,52 @@
                               "buttons": {
                                 "type": "array",
                                 "items": {
-                                  "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1channels~1%7BchannelId%7D~1templates/post/requestBody/content/application~1json/schema/properties/components/items/properties/buttons/items"
+                                  "type": "object",
+                                  "description": "The parameters related to the button component",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "PHONE_NUMBER",
+                                        "URL",
+                                        "QUICK_REPLY",
+                                        "OTP",
+                                        "COPY_CODE"
+                                      ],
+                                      "description": "Button type"
+                                    },
+                                    "text": {
+                                      "type": "string",
+                                      "description": "The text to be displayed on the button.",
+                                      "minLength": 1,
+                                      "maxLength": 20
+                                    },
+                                    "phoneNumber": {
+                                      "type": "string",
+                                      "description": "Required for type \"PHONE_NUMBER\".\n\nThe phone number that will be called on clicking the button."
+                                    },
+                                    "country": {
+                                      "type": "string",
+                                      "description": "Optional country code of phone number (ISO 3166-1 alpha-2). Required if the phone number in the national format.",
+                                      "minLength": 2,
+                                      "maxLength": 2,
+                                      "example": "US"
+                                    },
+                                    "url": {
+                                      "type": "string",
+                                      "description": "Required for type \"URL\".\n\nThe URL that will be visited on clicking the button\nVariables can be used to create dynamic links.",
+                                      "format": "uri",
+                                      "example": "https://website.com/{{1}}"
+                                    },
+                                    "example": {
+                                      "type": "array",
+                                      "description": "To help WhatsApp moderators during the review and approval process, you can include example data. This can help WhatsApp understand what kind of message you plan to send and showcase the customer experience.\n\nFor example, you could include an image that could represent a customer's profile picture to personalize the experience.\n\nMake sure these are examples and do not include any confidential or personal information.",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "required": ["type", "text"]
                                 }
                               },
                               "examples": {
