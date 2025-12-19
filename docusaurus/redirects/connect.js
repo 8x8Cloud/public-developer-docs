@@ -1,9 +1,14 @@
 // Connect redirects
 const redirects = [
+  // Root redirect
+  {
+    from: '/connect',
+    to: '/connect/docs/8x8-cpaas-products',
+  },
   // docs -> docs
   {
     from: '/connect/docs',
-    to: '/connect/docs/getting-started',
+    to: '/connect/docs/8x8-cpaas-products',
   },
   {
     from: '/connect/docs/guide-whatsapp',

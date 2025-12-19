@@ -23,28 +23,10 @@ const cards = [
     link: '/jaas',
   },
   {
-    title: '8x8 Connect CPaaS',
+    title: 'CPaaS: Connect & Communication APIs',
     description:
       'APIs for all your communications needs. Empower rich messaging and voice interactions.',
     link: '/connect',
-  },
-  {
-    title: 'Messaging Apps',
-    description:
-      'Have rich conversations with your users on all leading messaging platforms.',
-    link: '/connect/docs/messaging-apps-api-get-started',
-  },
-  {
-    title: 'Lookup',
-    description:
-      'Get insights about phone numbers from format to portability and live status.',
-    link: '/connect/docs/getting-started-with-number-lookup-api',
-  },
-  {
-    title: 'Mobile Verification',
-    description:
-      'Generate, send and verify SMS and voice one-time passwords in two smart API requests.',
-    link: '/connect/docs/tutorial-mobile-verification',
   },
   {
     title: 'Technical Partners',

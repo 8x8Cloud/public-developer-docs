@@ -1,0 +1,994 @@
+---
+title: WhatsApp Template Message API Library
+sidebar_label: 'Template Message API Library'
+---
+
+
+import ImageHeaderTemplate from './images/Image Header Template.webp';
+import AuthTemplate from './images/WhatsApp Authentication Template.webp';
+import VideoHeaderTemplate from './images/Video Header Template.webp';
+import DocumentHeaderTemplate from './images/Document Header Template.webp';
+import LocationHeaderTemplate from './images/Location Header Template.webp';
+import CarouselTemplate from './images/WhatsApp Carousel Template.gif';
+import ButtonCombinationTemplate from './images/WhatsApp Template - Rich Button.gif';
+
+This page provides a comprehensive library of WhatsApp template API payloads for both creating and sending templates.
+
+<table>
+<colgroup>
+<col style={{width: '200px', minWidth: '200px', maxWidth: '200px'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '200px'}}>Template Type</th>
+<th style={{verticalAlign: 'top'}}>API Payloads</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Authentication (OTP)
+
+<img src={AuthTemplate} alt="WhatsApp Authentication OTP Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+
+Creates an `AUTHENTICATION` template with a `COPY_CODE` button.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "language": "en_US",
+  "name": "authentication_template_demo",
+  "category": "AUTHENTICATION",
+  "components": [
+    {
+      "type": "BODY",
+      "add_security_recommendation": true
+    },
+    {
+      "type": "FOOTER",
+      "code_expiration_minutes": 5
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "OTP",
+          "text": "Copy Code",
+          "otp_type": "COPY_CODE"
+        }
+      ]
+    }
+  ]
+}
+```
+
+</details>
+
+**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends the template, populating the `body` parameter and the `copyCode` parameter with the OTP.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "template",
+  "content": {
+    "template": {
+      "language": "en_US",
+      "name": "authentication_template_demo",
+      "components": [
+        {
+          "type": "body",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "123456"
+            }
+          ]
+        },
+        {
+          "type": "Button",
+          "subType": 1,
+          "index": 0,
+          "parameters": [
+            {
+              "type": "text",
+              "text": "123456"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Media Header (Image)
+
+<img src={ImageHeaderTemplate} alt="WhatsApp Image Header Template Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+
+Creates a `MARKETING` template with an `IMAGE` header and a dynamic `URL` button.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "language": "en_US",
+  "name": "marketing_template_demo",
+  "category": "MARKETING",
+  "components": [
+    {
+      "type": "HEADER",
+      "format": "image",
+      "examples": [
+        "https://iili.io/KtDO5BV.jpg"
+      ]
+    },
+    {
+      "type": "BODY",
+      "text": "Hi {{1}}, ready to elevate your customer communications? Discover the power of 8x8 CPaaS.",
+      "examples": [
+        "Tony"
+      ]
+    },
+    {
+      "type": "FOOTER",
+      "text": "Powered by 8x8"
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "URL",
+          "text": "Discover all channels",
+          "url": "https://cpaas.8x8.com/en/products/{{1}}",
+          "examples": [
+            "omnichannel-messaging"
+          ]
+        },
+        {
+          "type": "quick_reply",
+          "text": "Talk to Sales"
+        }
+      ]
+    }
+  ]
+}
+```
+
+</details>
+
+**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends the template, providing the `url` for the image, the `text` for the body, and the dynamic part of the `url` button.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "template",
+  "content": {
+    "template": {
+      "language": "en_US",
+      "name": "marketing_template_demo",
+      "components": [
+        {
+          "type": "header",
+          "parameters": [
+            {
+              "type": "image",
+              "url": "https://iili.io/KtDO5BV.jpg"
+            }
+          ]
+        },
+        {
+          "type": "body",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "Tony"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "index": "0",
+          "subType": "url",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "omnichannel-messaging"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Media Header (Video)
+
+<img src={VideoHeaderTemplate} alt="WhatsApp Video Header Template Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+
+Creates a `UTILITY` template with a `VIDEO` header.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "language": "en_US",
+  "name": "video_template_demo",
+  "category": "UTILITY",
+  "components": [
+    {
+      "type": "HEADER",
+      "format": "Video",
+      "examples": [
+        "https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
+      ]
+    },
+    {
+      "type": "BODY",
+      "text": "Hi {{1}}, this is the video.",
+      "examples": [
+        "Alex"
+      ]
+    },
+    {
+      "type": "FOOTER",
+      "text": "Powered by 8x8"
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "URL",
+          "text": "Download",
+          "url": "https://cpaas.8x8.com/en/products/{{1}}",
+          "examples": [
+            "omnichannel-messaging"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+</details>
+
+**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends the template, providing the `url` for the video and the `text` for the body parameter.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "template",
+  "content": {
+    "template": {
+      "language": "en_US",
+      "name": "video_template_demo",
+      "components": [
+        {
+          "type": "header",
+          "parameters": [
+            {
+              "type": "video",
+              "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
+            }
+          ]
+        },
+        {
+          "type": "body",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "Alex"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "index": "0",
+          "subType": "url",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "omnichannel-messaging"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Media Header (Document)
+
+<img src={DocumentHeaderTemplate} alt="WhatsApp Document Header Template Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+
+Creates a `UTILITY` template with a `DOCUMENT` header.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "language": "en_US",
+  "name": "document_template_demo",
+  "category": "UTILITY",
+  "components": [
+    {
+      "type": "HEADER",
+      "format": "Document",
+      "examples": [
+        "https://pdfobject.com/pdf/sample.pdf"
+      ]
+    },
+    {
+      "type": "BODY",
+      "text": "Hi {{1}}, this is the document.",
+      "examples": [
+        "Alex"
+      ]
+    },
+    {
+      "type": "FOOTER",
+      "text": "Powered by 8x8"
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "URL",
+          "text": "Download",
+          "url": "https://cpaas.8x8.com/en/products/{{1}}",
+          "examples": [
+            "omnichannel-messaging"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+</details>
+
+**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends the template, providing the `url` for the document and the `text` for the body parameter.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "template",
+  "content": {
+    "template": {
+      "language": "en_US",
+      "name": "document_template_demo",
+      "components": [
+        {
+          "type": "header",
+          "parameters": [
+            {
+              "type": "document",
+              "url": "https://pdfobject.com/pdf/sample.pdf"
+            }
+          ]
+        },
+        {
+          "type": "body",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "Alex"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "index": "0",
+          "subType": "url",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "omnichannel-messaging"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Location Header
+
+<img src={LocationHeaderTemplate} alt="WhatsApp Location Header Template Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+
+Creates a `UTILITY` template with a `LOCATION` header. Note: No example is needed at creation.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "language": "en_US",
+  "name": "order_tracking_template_demo",
+  "category": "UTILITY",
+  "components": [
+    {
+      "type": "HEADER",
+      "format": "Location"
+    },
+    {
+      "type": "BODY",
+      "text": "Hi {{1}}, your delivery is on the way, you can track your delivery effectively.",
+      "examples": [
+        "Alex"
+      ]
+    },
+    {
+      "type": "FOOTER",
+      "text": "Powered by 8x8"
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "URL",
+          "text": "Track delivery",
+          "url": "https://cpaas.8x8.com/en/products/{{1}}",
+          "examples": [
+            "omnichannel-messaging"
+          ]
+        },
+        {
+          "type": "PHONE_NUMBER",
+          "text": "Request address change",
+          "phoneNumber": "62211521",
+          "country": "SG"
+        },
+        {
+          "type": "quick_reply",
+          "text": "Change delivery time"
+        }
+      ]
+    }
+  ]
+}
+```
+
+</details>
+
+**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends the template, providing the full `location` object (lat, lon, name, address) in the header parameters.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "template",
+  "content": {
+    "template": {
+      "language": "en_US",
+      "name": "order_tracking_template_demo",
+      "components": [
+        {
+          "type": "header",
+          "parameters": [
+            {
+              "type": "location",
+              "location": {
+                "latitude": "1.2857",
+                "longitude": "103.8479",
+                "name": "8x8 Singapore Office",
+                "address": "1 George St, #22-03/04 One George Street, Singapore 049145"
+              }
+            }
+          ]
+        },
+        {
+          "type": "body",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "Alex"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "index": "0",
+          "subType": "url",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "omnichannel-messaging"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Carousel Template
+
+<img src={CarouselTemplate} alt="WhatsApp Carousel Template Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+
+Creates a `MARKETING` template with a `CAROUSEL` component containing multiple cards.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "language": "en_US",
+  "name": "cpaas_features_carousel_demo",
+  "category": "MARKETING",
+  "components": [
+    {
+      "type": "body",
+      "text": "Hi {{1}}, swipe through to discover the power of 8x8 CPaaS. Book a demo and get {{2}} in free API credits!",
+      "examples": [
+        "Alex",
+        "$100"
+      ]
+    },
+    {
+      "type": "carousel",
+      "cards": [
+        {
+          "components": [
+            {
+              "type": "header",
+              "format": "image",
+              "examples": [
+                "https://iili.io/KtDO5BV.jpg"
+              ]
+            },
+            {
+              "type": "body",
+              "text": "Engage on every channel your customers love."
+            },
+            {
+              "type": "buttons",
+              "buttons": [
+                {
+                  "type": "url",
+                  "text": "See All Channels",
+                  "url": "https://www.8x8.com/cpaas/{{1}}",
+                  "examples": [
+                    "channels"
+                  ]
+                },
+                {
+                  "type": "quick_reply",
+                  "text": "Talk to Sales"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "components": [
+            {
+              "type": "header",
+              "format": "image",
+              "examples": [
+                "https://iili.io/KtDO5BV.jpg"
+              ]
+            },
+            {
+              "type": "body",
+              "text": "Connect globally, instantly with 99.99% uptime."
+            },
+            {
+              "type": "buttons",
+              "buttons": [
+                {
+                  "type": "url",
+                  "text": "Explore Our Network",
+                  "url": "https://www.8x8.com/cpaas/{{1}}",
+                  "examples": [
+                    "global-network"
+                  ]
+                },
+                {
+                  "type": "quick_reply",
+                  "text": "Talk to Sales"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+</details>
+
+**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends the template, populating the main `body` parameters and the dynamic parameters for each card's `header` (image) and `button` (url).
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "template",
+  "content": {
+    "template": {
+      "language": "en_US",
+      "name": "cpaas_features_carousel_demo",
+      "components": [
+        {
+          "type": "body",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "Alex"
+            },
+            {
+              "type": "text",
+              "text": "$100"
+            }
+          ]
+        },
+        {
+          "type": "carousel",
+          "cards": [
+            {
+              "cardIndex": 0,
+              "components": [
+                {
+                  "type": "header",
+                  "parameters": [
+                    {
+                      "type": "image",
+                      "url": "https://iili.io/KtDO5BV.jpg"
+                    }
+                  ]
+                },
+                {
+                  "type": "button",
+                  "index": 0,
+                  "subType": "url",
+                  "parameters": [
+                    {
+                      "type": "text",
+                      "text": "channels"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "cardIndex": 1,
+              "components": [
+                {
+                  "type": "header",
+                  "parameters": [
+                    {
+                      "type": "image",
+                      "url": "https://iili.io/KtDO5BV.jpg"
+                    }
+                  ]
+                },
+                {
+                  "type": "button",
+                  "index": 0,
+                  "subType": "url",
+                  "parameters": [
+                    {
+                      "type": "text",
+                      "text": "global-network"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Button Combination
+
+<img src={ButtonCombinationTemplate} alt="WhatsApp Button Combination Template Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+
+Creates a `MARKETING` template with an `IMAGE` header and a combination of 1 `COPY_CODE` button, 2 `URL` buttons, 1 `PHONE_NUMBER` button, and 6 `quick_reply` buttons.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "language": "en_US",
+  "name": "button_combination_template_demo",
+  "category": "MARKETING",
+  "components": [
+    {
+      "type": "HEADER",
+      "format": "image",
+      "examples": [
+        "https://iili.io/KtDO5BV.jpg"
+      ]
+    },
+    {
+      "type": "BODY",
+      "text": "Hi {{1}}, ready to elevate your customer communications? Discover the power of 8x8 CPaaS. We provide the tools to connect with your customers on their favorite channels, seamlessly and reliably. ",
+      "examples": [
+        "Tony"
+      ]
+    },
+    {
+      "type": "FOOTER",
+      "text": "Powered by 8x8"
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "COPY_CODE",
+          "examples": [
+            "250FF"
+          ]
+        },
+        {
+          "type": "URL",
+          "text": "Discover all omnichannels",
+          "url": "https://cpaas.8x8.com/en/products/{{1}}",
+          "examples": [
+            "omnichannel-messaging"
+          ]
+        },
+        {
+          "type": "URL",
+          "text": "Discover all channels",
+          "url": "https://cpaas.8x8.com/en/products/{{1}}",
+          "examples": [
+            "channels"
+          ]
+        },
+        {
+          "type": "PHONE_NUMBER",
+          "text": "Request address change",
+          "phoneNumber": "62211521",
+          "country": "SG"
+        },
+        {
+          "type": "quick_reply",
+          "text": "Want to know more"
+        },
+        {
+          "type": "quick_reply",
+          "text": "Talk to Sales"
+        },
+        {
+          "type": "quick_reply",
+          "text": "Call me"
+        },
+        {
+          "type": "quick_reply",
+          "text": "Schedule demo"
+        },
+        {
+          "type": "quick_reply",
+          "text": "Get service quotation"
+        },
+        {
+          "type": "quick_reply",
+          "text": "Get support"
+        }
+      ]
+    }
+  ]
+}
+```
+
+</details>
+
+**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends the template, providing the `url` for the image, the `text` for the body, the `couponCode` for the COPY_CODE button, and the dynamic parts of the `url` buttons. Note: Only dynamic buttons (COPY_CODE and URL) need to be specified in the send request; quick_reply and PHONE_NUMBER buttons are static.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "template",
+  "content": {
+    "template": {
+      "language": "en_US",
+      "name": "button_combination_template_demo",
+      "components": [
+        {
+          "type": "header",
+          "parameters": [
+            {
+              "type": "image",
+              "url": "https://iili.io/KtDO5BV.jpg"
+            }
+          ]
+        },
+        {
+          "type": "body",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "Jason"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "index": "0",
+          "subType": "copyCode",
+          "parameters": [
+            {
+              "type": "couponCode",
+              "couponCode": "25OFF"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "index": "1",
+          "subType": "url",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "omnichannel-messaging"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "index": "2",
+          "subType": "url",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "channel"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+</tbody>
+</table>

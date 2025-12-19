@@ -194,7 +194,7 @@ const config = {
         {
           to: '/connect',
           position: 'left',
-          label: 'Connect CPaaS',
+          label: 'CPaaS',
         },
         {
           to: '/jaas',

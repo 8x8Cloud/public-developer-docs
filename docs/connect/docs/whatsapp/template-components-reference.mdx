@@ -1,0 +1,1178 @@
+---
+sidebar_label: 'Template Components Reference'
+---
+
+# WhatsApp Template Components Reference
+
+This technical reference provides detailed specifications for all WhatsApp template components, including constraints, formatting rules, and API payload structures. Use this guide when building or debugging template creation requests.
+
+## HEADER Component
+
+An optional component for adding a title or rich media to your template. Maximum of **one header per template**.
+
+### Header Types
+
+<table>
+<colgroup>
+<col style={{width: '150px', minWidth: '150px', maxWidth: '150px'}} />
+<col style={{width: '40%'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '150px'}}>Type</th>
+<th style={{verticalAlign: 'top'}}>Description & Constraints</th>
+<th style={{verticalAlign: 'top'}}>API Payload for Template Creation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+#### TEXT
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+**Optional**, max 1 per template.
+
+**Length:** Max 60 characters.
+
+**Parameters:** Supports exactly 1 parameter (e.g., `{{1}}`).
+
+**Use Case:** Personalized subject lines or titles.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "HEADER",
+  "format": "TEXT",
+  "text": "Your order {{1}} has shipped!",
+  "examples": ["12345"]
+}
+```
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+### IMAGE
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+**Optional**. Requires uploading media to 8x8 first.
+
+**Formats:** `image/jpeg`, `image/png`.
+
+**Size:** Max 5MB (Meta limit).
+
+**Dimensions:** Recommended 800 x 418 px (ratio 1.91:1).
+
+**Use Case:** Product images, promotional banners, receipts.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "HEADER",
+  "format": "IMAGE",
+  "examples": [
+    "https://chatapps.8x8.com/files/YOUR_FILE.png"
+  ]
+}
+```
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+### VIDEO
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+**Optional**. Requires uploading media to 8x8 first.
+
+**Format:** `video/mp4`, `video/3gpp`.
+
+**Size:** Max 16MB (Meta limit).
+
+**Duration:** Recommended < 60 seconds.
+
+**Use Case:** Product demos, tutorials, announcements.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "HEADER",
+  "format": "VIDEO",
+  "examples": [
+    "https://chatapps.8x8.com/files/YOUR_FILE.mp4"
+  ]
+}
+```
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+### DOCUMENT
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+**Optional**. Requires uploading media to 8x8 first.
+
+**Format:** `application/pdf` (most common), also supports DOC, DOCX, XLS, XLSX, PPT, PPTX.
+
+**Size:** Max 100MB (Meta limit).
+
+**Use Case:** Invoices, receipts, contracts, statements.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "HEADER",
+  "format": "DOCUMENT",
+  "examples": [
+    "https://chatapps.8x8.com/files/YOUR_FILE.pdf"
+  ]
+}
+```
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+### LOCATION
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+**Optional**. Allowed for `UTILITY` or `MARKETING` templates only.
+
+**Format:** Static map pin with coordinates.
+
+**Note:** Location data (latitude, longitude, name, address) is provided when *sending* the message, not at creation.
+
+**Use Case:** Store locations, delivery tracking, appointment addresses.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "HEADER",
+  "format": "LOCATION"
+}
+```
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### Media URL Requirement
+
+For IMAGE, VIDEO, and DOCUMENT headers, you need to provide a media URL in the `examples` array when creating the template. You have two options:
+
+1. **Upload to 8x8**: Use the Upload Media API to obtain a permanent URL
+2. **Self-host**: Provide your own publicly accessible HTTPS URL
+
+**8x8 Upload Endpoint:**
+
+```json
+POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/files
+```
+
+**See Also:**
+
+- [File & Media Management](./whatsapp-over-8x8-api.md#file--media-management) - Complete guide for both upload and self-hosting options
+
+## BODY Component
+
+The main text content of your template. This is the **only required component** and the only component that supports multiple parameters.
+
+### Specifications
+
+<table>
+<colgroup>
+<col style={{width: '150px', minWidth: '150px', maxWidth: '150px'}} />
+<col style={{width: '40%'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '150px'}}>Property</th>
+<th style={{verticalAlign: 'top'}}>Requirement</th>
+<th style={{verticalAlign: 'top'}}>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Required**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Yes
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Every template must have exactly one BODY component
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Max Length**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+1024 characters
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Including variables (e.g., `{{1}}`, `{{2}}`)
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Parameters**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+limited
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Use `{{1}}`, `{{2}}`, etc. for dynamic content
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Formatting**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Markdown-style formatting supported
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+**Supported formatting:**
+
+- **Italic**: `_text_`
+- **Bold**: `*text*`
+- **Strikethrough**: `~text~`
+- **Monospace**: ` ```text``` `
+- **Inline code**: `` `text` ``
+- **Bulleted list**: `* text` or `- text`
+- **Numbered list**: `1. text`
+- **Quote**: `> text`
+
+**Important:** When using in JSON payloads, proper escaping is required. Use `\n` for line breaks and escape special characters according to JSON standards.
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Emojis**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Allowed
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Count toward character limit (typically 2-4 chars each)
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### API Payload Example
+
+```json
+{
+  "type": "BODY",
+  "text": "Hi {{1}}, your order {{2}} is confirmed and will arrive by {{3}}.",
+  "examples": ["Maria", "ABC-123", "Dec 15"]
+}
+```
+
+### Best Practices
+
+- **Keep it concise**: Users read on mobile devices
+- **Use parameters wisely**: Only parameterize data that changes (names, dates, IDs)
+- **Static text first**: Start with static text for Meta review clarity
+- **No parameters at edges**: Don't start or end with `{{1}}`
+
+## FOOTER Component
+
+An optional component for adding small print, legal text, or brand attribution.
+
+### Specifications
+
+<table>
+<colgroup>
+<col style={{width: '150px', minWidth: '150px', maxWidth: '150px'}} />
+<col style={{width: '40%'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '150px'}}>Property</th>
+<th style={{verticalAlign: 'top'}}>Requirement</th>
+<th style={{verticalAlign: 'top'}}>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Required**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+No
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Optional, max 1 per template
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Max Length**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+60 characters
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Strictly enforced by Meta
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Parameters**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Not supported
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Footer must be static text only
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Formatting**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Plain text
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+No Markdown, HTML, or emojis recommended
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### API Payload Example
+
+```json
+{
+  "type": "FOOTER",
+  "text": "Not you? Contact support."
+}
+```
+
+### Common Use Cases
+
+- Unsubscribe instructions: "Reply STOP to opt out"
+- Legal disclaimers: "Terms apply"
+- Brand attribution: "Powered by YourCompany"
+- Support contact: "Need help? Reply to this message"
+
+## BUTTONS Component
+
+An optional component to add interactive buttons. Buttons enable users to take action with a single tap.
+
+### Button Types & Specifications
+
+<table>
+<colgroup>
+<col style={{width: '150px', minWidth: '150px', maxWidth: '150px'}} />
+<col style={{width: '40%'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '150px'}}>Button Type</th>
+<th style={{verticalAlign: 'top'}}>Description & Constraints</th>
+<th style={{verticalAlign: 'top'}}>API Payload Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+### Quick Reply
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Sends a predefined text string back to your business when tapped.
+
+**Limit:** Up to 10 per template.
+
+**Text Length:** Max 25 characters.
+
+**Response:** User tap sends button text to your webhook.
+
+**Use Case:** Menu options, confirmation (Yes/No), feedback.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "quick_reply",
+  "text": "Main Menu"
+}
+```
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+### URL / Call to Action
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Opens a web browser to the specified URL.
+
+**Limit:** Up to 2 URL buttons per template.
+
+**Text Length:** Max 25 characters.
+
+**URL Length:** Max 2000 characters.
+
+**Parameters:** Supports 1 variable at end of URL (e.g., `.../track/{{1}}`).
+
+**Use Case:** Track order, view invoice, book appointment.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "URL",
+  "text": "Track Order",
+  "url": "https://myapp.com/track/{{1}}",
+  "examples": ["12345"]
+}
+```
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+### Phone Number
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Initiates a phone call to the specified number when tapped.
+
+**Limit:** Max 1 per template.
+
+**Text Length:** Max 25 characters.
+
+**Number Format:** Max 20 characters, alphanumeric.
+
+**Country Code:** Required (2-letter ISO code).
+
+**Use Case:** Call support, emergency contact, sales inquiry.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "PHONE_NUMBER",
+  "text": "Call Support",
+  "phoneNumber": "62211521",
+  "country": "SG"
+}
+```
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+### OTP Copy Code
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Copies an OTP code to clipboard for one-tap autofill.
+
+**Category:** `AUTHENTICATION` templates only.
+
+**Limit:** Max 1 per template.
+
+**Text:** Fixed as "Copy Code" (not customizable).
+
+**Autofill:** Integrates with iOS/Android autofill.
+
+**Use Case:** Login verification, password reset, 2FA.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "OTP",
+  "otp_type": "COPY_CODE"
+}
+```
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+### Copy Offer Code
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Copies a promotional code to clipboard for easy redemption.
+
+**Category:** `MARKETING` templates only.
+
+**Limit:** Max 1 per template.
+
+**Text:** Fixed as "Copy offer code" (not customizable).
+
+**Code Length:** 4-15 characters.
+
+**Use Case:** Discount codes, promo campaigns, loyalty rewards.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "COPY_CODE",
+  "examples": ["250FF"]
+}
+```
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### Button Combination Rules
+
+**Total Button Limit:** Maximum of **10 buttons** across all types combined.
+
+**Mixing Button Types:**
+
+- Quick Reply buttons can be mixed with URL/Phone buttons
+- Copy Offer Code buttons can be mixed with other CTA buttons (URL/Phone/Quick Reply)
+- When mixing, buttons of the same type must be consecutive (e.g., all URL buttons together, then all Quick Reply buttons together, or vice versa - do not intermix)
+- OTP Copy Code buttons cannot be mixed with any other button types (must be used alone)
+
+**Valid Examples:**
+
+- ✅ `[URL, URL, Quick Reply, Quick Reply]`
+- ✅ `[Quick Reply, Quick Reply, URL, URL]`
+- ✅ `[PHONE_NUMBER, URL, Quick Reply, Quick Reply]`
+- ✅ `[Quick Reply, Quick Reply, Quick Reply, PHONE_NUMBER, URL]`
+- ✅ `[COPY_CODE, URL, Quick Reply]` - Copy Offer Code can mix with other CTA buttons
+- ✅ `[OTP]` - OTP Copy Code buttons must be used alone
+- ❌ `[URL, Quick Reply, URL, Quick Reply]` - Invalid (intermixed)
+- ❌ `[OTP, Quick Reply]` - Invalid (OTP Copy Code cannot mix with other types)
+- ❌ `[OTP, URL]` - Invalid (OTP Copy Code cannot mix with other types)
+
+**Desktop Display Limitations:**
+
+- Templates with 4+ buttons may not render properly on WhatsApp Desktop
+- Mixed button types (URL + Quick Reply) may prompt "View on phone"
+- Test templates on both mobile and desktop before launching campaigns
+
+### Button Array Structure
+
+Buttons are defined within a BUTTONS component:
+
+```json
+{
+  "type": "BUTTONS",
+  "buttons": [
+    {
+      "type": "URL",
+      "text": "Track Order",
+      "url": "https://myapp.com/track/{{1}}",
+      "examples": ["12345"]
+    },
+    {
+      "type": "quick_reply",
+      "text": "Contact Support"
+    },
+    {
+      "type": "quick_reply",
+      "text": "Main Menu"
+    }
+  ]
+}
+```
+
+## CAROUSEL Component
+
+A special template type for `MARKETING` category that displays a horizontally scrollable list of up to 10 "cards." Each card can have its own image/video, text, and buttons.
+
+### Carousel Specifications
+
+<table>
+<colgroup>
+<col style={{width: '150px', minWidth: '150px', maxWidth: '150px'}} />
+<col style={{width: '40%'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '150px'}}>Property</th>
+<th style={{verticalAlign: 'top'}}>Requirement</th>
+<th style={{verticalAlign: 'top'}}>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Category**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+`MARKETING` only
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Cannot be used for UTILITY or AUTHENTICATION
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Card Count**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+1-10 cards
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Minimum 1 card, maximum 10 cards
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Card Structure**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Header + Body + Buttons
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Each card has its own components array
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### Card Component Requirements
+
+Each card within the carousel must contain:
+
+1. **HEADER (Required)**
+   - **Must** be IMAGE or VIDEO format
+   - Same size/format constraints as standard headers (IMAGE: max 5MB, VIDEO: max 16MB)
+   - Each card can have a different image/video
+
+2. **BODY (Required)**
+   - **Max Length:** 160 characters (shorter than standard templates)
+   - Supports parameters: `{{1}}`, `{{2}}`, etc.
+   - Each card can have different body text
+
+3. **BUTTONS (Required)**
+   - Each card must have at least 1 button
+   - **Max 2 buttons per card**
+   - Button types allowed: URL (with dynamic parameter), Quick Reply
+   - All cards must have the **same button configuration** (same number and types)
+
+### Carousel API Payload Structure
+
+```json
+{
+  "language": "en_US",
+  "name": "product_carousel_demo",
+  "category": "MARKETING",
+  "components": [
+    {
+      "type": "body",
+      "text": "Hi {{1}}, check out our featured products! Special offer: {{2}}% off.",
+      "examples": ["Alex", "25"]
+    },
+    {
+      "type": "carousel",
+      "cards": [
+        {
+          "components": [
+            {
+              "type": "header",
+              "format": "image",
+              "examples": ["https://chatapps.8x8.com/files/product1.jpg"]
+            },
+            {
+              "type": "body",
+              "text": "Product A - Now {{1}}",
+              "examples": ["$49.99"]
+            },
+            {
+              "type": "buttons",
+              "buttons": [
+                {
+                  "type": "url",
+                  "text": "Buy Now",
+                  "url": "https://mystore.com/product/{{1}}",
+                  "examples": ["product-a"]
+                },
+                {
+                  "type": "quick_reply",
+                  "text": "Add to Cart"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "components": [
+            {
+              "type": "header",
+              "format": "image",
+              "examples": ["https://chatapps.8x8.com/files/product2.jpg"]
+            },
+            {
+              "type": "body",
+              "text": "Product B - Limited {{1}}",
+              "examples": ["Stock"]
+            },
+            {
+              "type": "buttons",
+              "buttons": [
+                {
+                  "type": "url",
+                  "text": "Buy Now",
+                  "url": "https://mystore.com/product/{{1}}",
+                  "examples": ["product-b"]
+                },
+                {
+                  "type": "quick_reply",
+                  "text": "Add to Cart"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Carousel Best Practices
+
+- **Consistent Design:** Use similar image dimensions and styling across all cards
+- **Clear Value:** Each card should showcase a distinct product/offer
+- **Actionable Buttons:** Every card needs clear CTAs
+- **Test on Mobile:** Carousels are mobile-optimized; test scrolling behavior
+- **Limit Parameters:** Too many variables make templates hard to maintain
+
+## Parameter Formatting Rules
+
+WhatsApp templates support two parameter types: **positional** and **named**.
+
+### Positional Parameters (Recommended)
+
+**Format:** `{{1}}`, `{{2}}`, `{{3}}`, etc.
+
+**Rules:**
+
+- Parameters must be sequential: `{{1}}`, `{{2}}`, `{{3}}` (no skipping)
+- Order matters when sending: parameters are matched by position
+- Can be used in: BODY (unlimited), HEADER text (max 1), URL buttons (max 1 at end)
+
+**Example:**
+
+```json
+{
+  "type": "BODY",
+  "text": "Hi {{1}}, order {{2}} ships on {{3}}",
+  "examples": ["John", "ORD-123", "Dec 10"]
+}
+```
+
+When sending, provide parameters in order:
+
+```json
+{
+  "type": "body",
+  "parameters": [
+    {"type": "text", "text": "John"},
+    {"type": "text", "text": "ORD-123"},
+    {"type": "text", "text": "Dec 10"}
+  ]
+}
+```
+
+### Named Parameters
+
+**Format:** `{{first_name}}`, `{{order_number}}`, `{{delivery_date}}`, etc.
+
+**Rules:**
+
+- Allows providing parameters out of order when sending
+- More readable for templates with many variables
+- Still requires sequential numbering in some Meta systems
+
+**Example:**
+
+```json
+{
+  "type": "BODY",
+  "text": "Hi {{customer_name}}, order {{order_id}} ships on {{ship_date}}"
+}
+```
+
+### Parameter Constraints
+
+**General Rules:**
+
+- **No parameters at start/end:** Don't begin or end body text with a parameter
+- **Examples required:** Every parameter must have a sample value in `examples` array
+- **Character limits apply:** Parameter examples count toward component character limits
+- **No special characters:** Don't use `#`, `$`, `%` in parameter values
+
+**Component-Specific Limits:**
+
+- **BODY:** Unlimited parameters
+- **HEADER (text):** Max 1 parameter
+- **URL buttons:** Max 1 parameter (must be at end of URL)
+- **FOOTER:** No parameters allowed
+
+### Parameter Examples Requirement
+
+When creating a template, you **must** provide sample values for every parameter:
+
+```json
+{
+  "type": "BODY",
+  "text": "Hi {{1}}, your {{2}} order arrives {{3}}.",
+  "examples": ["Maria", "Premium", "tomorrow"]
+}
+```
+
+Meta uses these examples to:
+
+- Validate template format and category
+- Preview how the template will appear
+- Test parameter substitution logic
+
+## Template Limits & Quotas
+
+### Per-WABA Limits
+
+<table>
+<colgroup>
+<col style={{width: '150px', minWidth: '150px', maxWidth: '150px'}} />
+<col style={{width: '40%'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '150px'}}>Limit Type</th>
+<th style={{verticalAlign: 'top'}}>Unverified Business</th>
+<th style={{verticalAlign: 'top'}}>Verified Business</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Total Templates**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+250 templates
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+6,000 templates
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Creation Rate**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+100 per hour
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+100 per hour
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**Languages**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Unlimited
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Unlimited
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### Component Limits
+
+<table>
+<colgroup>
+<col style={{width: '150px', minWidth: '150px', maxWidth: '150px'}} />
+<col style={{width: '25%'}} />
+<col style={{width: '25%'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '150px'}}>Component</th>
+<th style={{verticalAlign: 'top'}}>Max Count</th>
+<th style={{verticalAlign: 'top'}}>Max Length</th>
+<th style={{verticalAlign: 'top'}}>Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**HEADER**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+1
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+60 chars (text only)
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+1 (text only)
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**BODY**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+1 (required)
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+1024 chars
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Unlimited
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**FOOTER**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+1
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+60 chars
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+None
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**BUTTONS**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+10 total
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+25 chars per button
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+1 (URL only)
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+**CAROUSEL**
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+10 cards
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+160 chars per card body
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Per card
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Related Resources
+
+**For Creating Templates:**
+
+- [WhatsApp over 8x8 API](./whatsapp-over-8x8-api.md#creating-a-template-via-api) - API endpoint and authentication
+- [Template Message API Library](./template-message-api-library.mdx) - Complete Create & Send payload examples
+- [Message Types & Templates](./message-types-templates.md) - High-level concepts and portal guide
+
+**For Sending Templates:**
+
+- [WhatsApp over 8x8 API](./whatsapp-over-8x8-api.md#sending-a-template-message-via-api) - Send endpoint overview
+- [Template Message API Library](./template-message-api-library.mdx) - Send payload examples for all types
+
+**For Template Compliance:**
+
+- [Governance, Security & Compliance](./governance-security.md#content--template-compliance-meta-guidelines) - Meta's template policies
+- [Operations, Monitoring & Troubleshooting](./operations-monitoring.md) - Template rejection reasons and fixes

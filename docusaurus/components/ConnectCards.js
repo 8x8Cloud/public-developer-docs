@@ -199,10 +199,10 @@ const cards = [
   {
     title: 'Messaging Apps',
     items: [
-      { label: 'WhatsApp', link: '/connect/docs/usage-samples-whatsapp' },
+      { label: 'WhatsApp', link: '/connect/docs/whatsapp/whatsapp-hub' },
       { label: 'RCS', link: '/connect/docs/guide-rcs' },
       { label: 'Viber', link: '/connect/docs/usage-samples-viber' },
-      { label: 'View More…', link: '/connect/docs/usage-samples-whatsapp' },
+      { label: 'View More…', link: '/connect/docs/whatsapp/whatsapp-hub' },
     ],
   },
   {

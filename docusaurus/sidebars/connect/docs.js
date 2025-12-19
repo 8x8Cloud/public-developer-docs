@@ -1,4 +1,5 @@
 const sidebarConfig = [
+  'connect/docs/8x8-cpaas-products',
   {
     type: 'category',
     label: 'API Information',
@@ -41,13 +42,37 @@ const sidebarConfig = [
       {
         type: 'category',
         label: 'WhatsApp',
+        link: { type: 'doc', id: 'connect/docs/whatsapp/whatsapp-hub' },
         collapsed: true,
         items: [
-          'connect/docs/usage-samples-whatsapp',
-          'connect/docs/guide-creating-whatsapp-template-request',
+          'connect/docs/whatsapp/concepts-fundamentals',
+          'connect/docs/whatsapp/getting-started',
+          'connect/docs/whatsapp/message-types-templates',
+          'connect/docs/whatsapp/whatsapp-in-8x8-connect',
+          {
+            type: 'category',
+            label: 'WhatsApp over 8x8 API',
+            link: { type: 'doc', id: 'connect/docs/whatsapp/whatsapp-over-8x8-api' },
+            collapsed: true,
+            items: [
+              'connect/docs/whatsapp/template-components-reference',
+              'connect/docs/whatsapp/template-message-api-library',
+              'connect/docs/whatsapp/interactive-message-api-library',
+              'connect/docs/whatsapp/whatsapp-webhooks',
+              'connect/docs/whatsapp/whatsapp-media-hosting',
+              'connect/docs/whatsapp/constructing-whatsapp-template-send-requests',
+              'connect/docs/whatsapp/whatsapp-sms-fallback',
+            ],
+          },
+          'connect/docs/whatsapp/advanced-capabilities',
+          'connect/docs/whatsapp/scenarios-tutorials',
+          'connect/docs/whatsapp/vertical-playbooks',
+          'connect/docs/whatsapp/operations-monitoring',
+          'connect/docs/whatsapp/governance-security',
+          'connect/docs/whatsapp/reference-resources',
+          'connect/docs/whatsapp/learning-paths',
           'connect/docs/guide-whatsapp-one-tap-or-zero-tap-authentication',
           'connect/docs/guide-whatsapp-template-validity-period-ttl',
-          'connect/docs/guide-whatsapp-image-optimization',
         ],
       },
       {

@@ -1,0 +1,578 @@
+---
+title: WhatsApp Interactive Message API Library
+sidebar_label: 'Interactive Message API Library'
+---
+
+
+import TextMessageImg from './images/Text Message.webp';
+import ImageMessageImg from './images/Image Message.webp';
+import VideoMessageImg from './images/Video Message.webp';
+import DocumentMessageImg from './images/Document Message.webp';
+import LocationMessageImg from './images/Location Message.webp';
+import InteractiveButtonsImg from './images/Quick Reply Button Message.webp';
+import InteractiveButtonsImageHeaderImg from './images/Interactive Reply Button with Image Header.webp';
+import InteractiveListImg from './images/Menu List Message.webp';
+import CtaButtonImg from './images/URL CTA Button Message.webp';
+import SingleProductImg from '../../images/62ac5b5-image.png';
+import ProductListImg from '../../images/a32565d-image.png';
+
+This page provides a comprehensive library of WhatsApp interactive and freeform message API payloads. Unlike template messages, these do not require Meta approval and can be sent during active conversation windows.
+
+<table>
+<colgroup>
+<col style={{width: '200px', minWidth: '200px', maxWidth: '200px'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '200px'}}>Message Type</th>
+<th style={{verticalAlign: 'top'}}>API Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Text Message
+
+<img src={TextMessageImg} alt="WhatsApp Text Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a plain text message to the user.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "{{PhoneNumber}}"
+  },
+  "type": "text",
+  "content": {
+    "text": "Welcome to 8x8 Inc.! We are the leading global provider of unified cloud communications, video collaboration, and contact center solutions.\n\nWe empower your business to thrive in the modern workplace by offering a single, secure, and integrated platform for all your voice, video, chat, and customer service needs.\n\nOur solutions are designed to deliver exceptional experiences for both your employees and your customers, ensuring seamless global connectivity and robust reliability.\n\nHow can we help you unify your communications today? Reply with INFO for a quick link to our solutions guide or TALK to connect with a specialist."
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Image Message
+
+<img src={ImageMessageImg} alt="WhatsApp Image Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends an image from a URL with optional text caption.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "{{PhoneNumber}}"
+  },
+  "type": "Image",
+  "content": {
+    "url": "https://chatapps.8x8.com/files/7723febafb67440b89c6872e9d72efdd.jpeg?token=CfDJ8LwbBIzqYzxMo4VXraj4E8kbpPbOLHNZ3GfGzhGDm3ajqPMrbjJONU3UAtPsnv00QjW7FYXfmj5QMjTz9hbcVRMnhy-jJWfHshe83bNAzbZjJwkaf-31Ok2UXF7C6fyAOPTKVPOnUU3ERQcgvkE7GC-NZf9vJnt7_cDoHKjawoPyxrodvh7LRtIqVKR-TDysUg",
+    "text": "Welcome to the world of 8x8 ChatApps APIs!\nCommunications for the customer obsessed."
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Video Message
+
+<img src={VideoMessageImg} alt="WhatsApp Video Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a video from a URL with optional text caption.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "{{PhoneNumber}}"
+  },
+  "type": "video",
+  "content": {
+    "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
+    "text": "This is the video file"
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Document Message
+
+<img src={DocumentMessageImg} alt="WhatsApp Document Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a document from a URL with optional filename and caption.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "{{PhoneNumber}}"
+  },
+  "type": "File",
+  "content": {
+    "url": "https://pdfobject.com/pdf/sample.pdf",
+    "text": "Thanks for your interest. Attached is our latest 8x8 brochure with all the details you need. Take a look and let me know if you have any questions!"
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Location Message
+
+<img src={LocationMessageImg} alt="WhatsApp Location Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a location message with latitude, longitude, name, and address.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "{{PhoneNumber}}"
+  },
+  "type": "location",
+  "content": {
+    "location": {
+      "latitude": "1.2857",
+      "longitude": "103.8479",
+      "name": "8x8 Singapore Office",
+      "address": "1 George St, #22-03/04 One George Street, Singapore 049145"
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Interactive List Menu
+
+<img src={InteractiveListImg} alt="WhatsApp Interactive List Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Creates a list menu with multiple options organized in sections.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "{{PhoneNumber}}"
+  },
+  "type": "interactive",
+  "content": {
+    "interactive": {
+      "type": "list",
+      "header": {
+        "type": "text",
+        "text": "8x8 Customer Success personalized sessions"
+      },
+      "body": {
+        "text": "Looking for personalized assistance? Our Customer Success team has the following slots available. Tap to select a time."
+      },
+      "footer": {
+        "text": "For urgent inquiries, email cpaas-sales@8×8.com"
+      },
+      "action": {
+        "button": "Book Slot",
+        "sections": [
+          {
+            "title": "Oct 9, 2024",
+            "rows": [
+              {
+                "id": "slot-1",
+                "title": "Monday, Oct 9",
+                "description": "9:00 AM - 10:00 AM"
+              },
+              {
+                "id": "slot-2",
+                "title": "Monday, Oct 9",
+                "description": "11:00 AM - 12:00 PM"
+              }
+            ]
+          },
+          {
+            "title": "Oct 10, 2024",
+            "rows": [
+              {
+                "id": "slot-3",
+                "title": "Tuesday, Oct 10",
+                "description": "2:00 PM - 3:00 PM"
+              },
+              {
+                "id": "slot-4",
+                "title": "Tuesday, Oct 10",
+                "description": "4:00 PM - 5:00 PM"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Interactive Reply Buttons
+
+<img src={InteractiveButtonsImg} alt="WhatsApp Interactive Buttons Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Creates an interactive message with up to 3 reply buttons. Users can tap a button to send a quick reply.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "{{PhoneNumber}}"
+  },
+  "type": "interactive",
+  "content": {
+    "interactive": {
+      "type": "button",
+      "header": {
+        "type": "text",
+        "text": "8x8"
+      },
+      "body": {
+        "text": "👋 Welcome to 8x8 Inc.! We are the leading provider of cloud communications, video collaboration, and contact center solutions.\n\nTo help you quickly find what you need, please select one of the options below:\n\n📞 Contact Us: Speak directly with a Sales or Support representative regarding your account or new service inquiry.\n\n❓ FAQ: Get instant answers to common questions about our products, pricing, and features.\n\n📍 Office: Find the address and contact details for our global office locations."
+      },
+      "footer": {
+        "text": "This is an official message from 8x8."
+      },
+      "action": {
+        "buttons": [
+          {
+            "type": "reply",
+            "reply": {
+              "title": "contact-us",
+              "id": "option-1"
+            }
+          },
+          {
+            "type": "reply",
+            "reply": {
+              "title": "faq",
+              "id": "option-2"
+            }
+          },
+          {
+            "type": "reply",
+            "reply": {
+              "title": "office",
+              "id": "option-3"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Interactive Reply Buttons (Image Header)
+
+<img src={InteractiveButtonsImageHeaderImg} alt="WhatsApp Interactive Buttons with Image Header Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Creates an interactive message with an image header and up to 3 reply buttons.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "{{PhoneNumber}}"
+  },
+  "type": "interactive",
+  "content": {
+    "interactive": {
+      "type": "cta_url",
+      "header": {
+        "type": "image",
+        "image": {
+          "link": "https://chatapps.8x8.com/files/991c9667f7644584acf91aa8dd9fba60.png?token=CfDJ8LwbBIzqYzxMo4VXraj4E8k4uW4Kjsnx2rTsG0O-bgz0v3CXHYwHi8BVTm1jLn6tSswTva_BhILXyvFi2DmZZQOcYmEn60cOdB2mvtEEBvd3lEA6f1P1kL2K8TpWIOaTcca70UdUtOZTnmNfdHBrJugXjasrG4Zu7WW5JOEbPF4kDOynKUulYQdVqRIR-DU9lw"
+        }
+      },
+      "body": {
+        "text": "Welcome to 8x8 Inc. How may we help?"
+      },
+      "footer": {
+        "text": "This is an official message from 8x8."
+      },
+      "action": {
+        "parameters": {
+          "display_text": "Click for more",
+          "url": "https://developers.facebook.com/docs/whatsapp/cloud-api/messages/interactive-cta-url-messages"
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Interactive CTA Button
+
+<img src={CtaButtonImg} alt="WhatsApp CTA Button Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Creates a message with a single CTA button that can open a URL or initiate a phone call.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "{{PhoneNumber}}"
+  },
+  "type": "interactive",
+  "content": {
+    "interactive": {
+      "type": "cta_url",
+      "header": {
+        "type": "text",
+        "text": "8x8"
+      },
+      "body": {
+        "text": "Welcome to 8x8! We are the leading provider of cloud communications, video collaboration, and contact center solutions.\n\n"
+      },
+      "footer": {
+        "text": "This is an official message from 8x8."
+      },
+      "action": {
+        "parameters": {
+          "display_text": "Click for more",
+          "url": "https://developers.facebook.com/docs/whatsapp/cloud-api/messages/interactive-cta-url-messages"
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Product Message (Single)
+
+<img src={SingleProductImg} alt="WhatsApp Single Product Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Displays a single product from your WhatsApp Business catalog.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "interactive",
+  "content": {
+    "interactive": {
+      "type": "product",
+      "body": {
+        "text": "Check out this amazing product from our store!"
+      },
+      "footer": {
+        "text": "Limited stock available"
+      },
+      "action": {
+        "catalog_id": "YOUR_CATALOG_ID",
+        "product_retailer_id": "PRODUCT_SKU_123"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Product List Message
+
+<img src={ProductListImg} alt="WhatsApp Product List Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+Displays multiple products from your WhatsApp Business catalog in sections.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "interactive",
+  "content": {
+    "interactive": {
+      "type": "product_list",
+      "header": {
+        "type": "text",
+        "text": "Featured Products"
+      },
+      "body": {
+        "text": "Browse our latest collection of products."
+      },
+      "footer": {
+        "text": "Free shipping on orders over $50"
+      },
+      "action": {
+        "catalog_id": "YOUR_CATALOG_ID",
+        "sections": [
+          {
+            "title": "Best Sellers",
+            "product_items": [
+              {
+                "product_retailer_id": "PRODUCT_SKU_1"
+              },
+              {
+                "product_retailer_id": "PRODUCT_SKU_2"
+              }
+            ]
+          },
+          {
+            "title": "New Arrivals",
+            "product_items": [
+              {
+                "product_retailer_id": "PRODUCT_SKU_3"
+              },
+              {
+                "product_retailer_id": "PRODUCT_SKU_4"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+</tbody>
+</table>
