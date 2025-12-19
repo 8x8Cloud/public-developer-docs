@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-connect/docs/whatsapp/concepts-fundamentals" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">Concepts &amp; Fundamentals | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/whatsapp/concepts-fundamentals"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Concepts &amp; Fundamentals | 8x8 Developer Portal"><meta data-rh="true" name="description" content="Before you send your first message, it&#x27;s essential to understand the core concepts and rules of the WhatsApp Business Platform. These rules govern how you can interact with customers, what you can send, how you are billed, and how your account&#x27;s reputation is managed."><meta data-rh="true" property="og:description" content="Before you send your first message, it&#x27;s essential to understand the core concepts and rules of the WhatsApp Business Platform. These rules govern how you can interact with customers, what you can send, how you are billed, and how your account&#x27;s reputation is managed."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/whatsapp/concepts-fundamentals"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/whatsapp/concepts-fundamentals" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/whatsapp/concepts-fundamentals" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.5c2b0b28.css">
+<script src="/assets/js/runtime~main.cc3c49e9.js" defer="defer"></script>
+<script src="/assets/js/main.ea2838d0.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a class="navbar__item navbar__link" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides section-navigation__tab--active" href="/connect/docs">Guides</a><a class="section-navigation__tab icon-references" href="/connect/reference">API Reference</a><a href="https://support.cpaas.8x8.com/hc/en-us" target="_blank" rel="noopener noreferrer" class="section-navigation__tab icon-support">Support</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/connect/docs/8x8-cpaas-products"><span title="CPaaS: Connect &amp; Communication APIs" class="linkLabel_WmDU">CPaaS: Connect &amp; Communication APIs</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/getting-started"><span title="API Information" class="categoryLinkLabel_W154">API Information</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/send-sms-api-reference"><span title="SMS" class="categoryLinkLabel_W154">SMS</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/connect/docs/whatsapp/whatsapp-hub"><span title="Messaging Apps" class="categoryLinkLabel_W154">Messaging Apps</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/connect/docs/whatsapp/whatsapp-hub"><span title="WhatsApp" class="categoryLinkLabel_W154">WhatsApp</span></a><button aria-label="Collapse sidebar category &#x27;WhatsApp&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/connect/docs/whatsapp/concepts-fundamentals"><span title="Concepts &amp; Fundamentals" class="linkLabel_WmDU">Concepts &amp; Fundamentals</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/getting-started"><span title="Getting Started" class="linkLabel_WmDU">Getting Started</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/message-types-templates"><span title="Message Types &amp; Templates" class="linkLabel_WmDU">Message Types &amp; Templates</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/whatsapp-in-8x8-connect"><span title="WhatsApp in 8x8 Connect" class="linkLabel_WmDU">WhatsApp in 8x8 Connect</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/whatsapp/whatsapp-over-8x8-api"><span title="WhatsApp over 8x8 API" class="categoryLinkLabel_W154">WhatsApp over 8x8 API</span></a><button aria-label="Expand sidebar category &#x27;WhatsApp over 8x8 API&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/advanced-capabilities"><span title="Advanced Capabilities" class="linkLabel_WmDU">Advanced Capabilities</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/scenarios-tutorials"><span title="Scenarios &amp; Tutorials" class="linkLabel_WmDU">Scenarios &amp; Tutorials</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/vertical-playbooks"><span title="Vertical Playbooks" class="linkLabel_WmDU">Vertical Playbooks</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/operations-monitoring"><span title="Operations &amp; Monitoring" class="linkLabel_WmDU">Operations &amp; Monitoring</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/governance-security"><span title="Governance &amp; Security" class="linkLabel_WmDU">Governance &amp; Security</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/reference-resources"><span title="Reference &amp; Resources" class="linkLabel_WmDU">Reference &amp; Resources</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/learning-paths"><span title="Learning Paths" class="linkLabel_WmDU">Learning Paths</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/guide-whatsapp-one-tap-or-zero-tap-authentication"><span title="Zero-tap and One-tap WhatsApp Authentication Template" class="linkLabel_WmDU">Zero-tap and One-tap WhatsApp Authentication Template</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/guide-whatsapp-template-validity-period-ttl"><span title="WhatsApp Template Validity Period (TTL)" class="linkLabel_WmDU">WhatsApp Template Validity Period (TTL)</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/rcs/overview"><span title="RCS" class="categoryLinkLabel_W154">RCS</span></a><button aria-label="Expand sidebar category &#x27;RCS&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-viber"><span title="Viber" class="linkLabel_WmDU">Viber</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-zns"><span title="Zalo Notification Service (ZNS)" class="linkLabel_WmDU">Zalo Notification Service (ZNS)</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-line-official-notification"><span title="LINE Official Notification" class="linkLabel_WmDU">LINE Official Notification</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/connect-overview"><span title="Connect Portal" class="categoryLinkLabel_W154">Connect Portal</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/creating-a-contact"><span title="Contacts API Tutorials" class="categoryLinkLabel_W154">Contacts API Tutorials</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/adobe-campaigns"><span title="Integrations" class="categoryLinkLabel_W154">Integrations</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/overview"><span title="Voice SDK" class="categoryLinkLabel_W154">Voice SDK</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/converse-overview"><span title="Converse" class="categoryLinkLabel_W154">Converse</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/vi-overview"><span title="Video Interaction" class="categoryLinkLabel_W154">Video Interaction</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/accessing-and-viewing-your-customer-list"><span title="Partner Hub" class="categoryLinkLabel_W154">Partner Hub</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>Concepts &amp; Fundamentals</h1></header>
+<p>Before you send your first message, it&#x27;s essential to understand the core concepts and rules of the WhatsApp Business Platform. These rules govern how you can interact with customers, what you can send, how you are billed, and how your account&#x27;s reputation is managed.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="meta--8x8-platform-hierarchy">Meta &amp; 8x8 Platform Hierarchy<a href="#meta--8x8-platform-hierarchy" class="hash-link" aria-label="Direct link to Meta &amp; 8x8 Platform Hierarchy" title="Direct link to Meta &amp; 8x8 Platform Hierarchy" translate="no">​</a></h2>
+<p>These are the fundamental components provided by Meta that represent your business on WhatsApp, organized hierarchically and typically managed through the 8x8 Connect portal:</p>
+<ol>
+<li>
+<p><strong>Meta Business Portfolio:</strong> (Formerly Meta Business Manager) Meta&#x27;s top-level container for managing business assets, crucial for initial onboarding and Business Verification.</p>
+</li>
+<li>
+<p><strong>WhatsApp Business Account (WABA):</strong> Your specific business profile container within the Meta Portfolio, holding your phone numbers, templates, and quality rating.</p>
+</li>
+<li>
+<p><strong>Business Phone Number:</strong> A verified phone number linked to your WABA, used via 8x8 to send/receive messages. This acts as your &quot;Sender ID&quot; on WhatsApp.</p>
+</li>
+<li>
+<p><strong>Message Templates:</strong> Pre-approved message formats required for initiating conversations or replying outside the 24-hour window, managed via the 8x8 Connect portal.</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="business-initiated-conversations-outbound">Business-Initiated Conversations (Outbound)<a href="#business-initiated-conversations-outbound" class="hash-link" aria-label="Direct link to Business-Initiated Conversations (Outbound)" title="Direct link to Business-Initiated Conversations (Outbound)" translate="no">​</a></h2>
+<p>A business-initiated conversation occurs when you send the first message to a customer, or if you message a customer <em>after</em> the 24-hour Customer Service Window (see <a href="#user-initiated-conversations-inbound">User-Initiated Conversations</a>) has closed.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-template-messages">1. Template Messages<a href="#1-template-messages" class="hash-link" aria-label="Direct link to 1. Template Messages" title="Direct link to 1. Template Messages" translate="no">​</a></h3>
+<p>To initiate a conversation, you <strong>must</strong> use a <strong>Template Message</strong>.</p>
+<ul>
+<li>
+<p><strong>What they are:</strong> Pre-approved, structured message formats.</p>
+</li>
+<li>
+<p><strong>When to use them:</strong></p>
+<ol>
+<li>
+<p>To <strong>initiate</strong> a new conversation with a customer.</p>
+</li>
+<li>
+<p>To reply to a customer <strong>outside</strong> the 24-hour customer service window.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Content:</strong> Can include text, media (image, video, document, location), and interactive buttons (Quick Reply, Call to Action, Copy Code).</p>
+</li>
+<li>
+<p><strong>Impact:</strong> Sending a template message opens a new, 24-hour template-based conversation, which is billed according to its category. If the customer replies, they open a 24-hour Customer Service Window.</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-template-categories">2. Template Categories<a href="#2-template-categories" class="hash-link" aria-label="Direct link to 2. Template Categories" title="Direct link to 2. Template Categories" translate="no">​</a></h3>
+<p>Every Template Message you create must be assigned one of three categories. This category defines the template&#x27;s purpose and is used by Meta to determine billing.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Category</th><th>Description</th><th>Common Use Cases</th></tr></thead><tbody><tr><td><strong>Authentication</strong></td><td>Enables you to send one-time passcodes (OTPs) to authenticate users.</td><td>User login, account verification, password reset, integrity checks.</td></tr><tr><td><strong>Marketing</strong></td><td>Used for promotions, offers, or announcements to drive customer engagement and sales.</td><td>New product alerts, sale notifications, re-engagement campaigns.</td></tr><tr><td><strong>Utility</strong></td><td>Facilitates a specific, agreed-upon request, transaction, or update for an existing customer.</td><td>Order confirmations, delivery status, appointment reminders, account statements.</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="user-initiated-conversations-inbound">User-Initiated Conversations (Inbound)<a href="#user-initiated-conversations-inbound" class="hash-link" aria-label="Direct link to User-Initiated Conversations (Inbound)" title="Direct link to User-Initiated Conversations (Inbound)" translate="no">​</a></h2>
+<p>A user-initiated conversation occurs when a customer sends your business a message first, or when they reply to one of your Template Messages. This action triggers specific time windows that determine your messaging capabilities and costs.</p>
+<p>To receive inbound messages from customers, you need to configure webhooks. See <a href="/connect/docs/whatsapp/whatsapp-webhooks">Webhooks Reference</a> for setup and payload details.</p>
+<p><strong>Regarding July 1, 2025 Pricing Changes:</strong> Under the per-message pricing model, understanding these windows is essential to utilizing free messaging tiers.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-the-24-hour-customer-service-window-csw">1. The 24-Hour Customer Service Window (CSW)<a href="#1-the-24-hour-customer-service-window-csw" class="hash-link" aria-label="Direct link to 1. The 24-Hour Customer Service Window (CSW)" title="Direct link to 1. The 24-Hour Customer Service Window (CSW)" translate="no">​</a></h3>
+<p>The Customer Service Window is the standard period for two-way support interactions.</p>
+<ul>
+<li><strong>What it is:</strong> A 24-hour window during which you can reply to customers using non-template (freeform) messages or specific template types.</li>
+<li><strong>How it starts:</strong> The window opens automatically when a customer sends you a message.</li>
+<li><strong>How it resets:</strong> The 24-hour timer resets <strong>every time</strong> the customer sends a new message.</li>
+<li><strong>What happens when it closes:</strong> After 24 hours from the customer&#x27;s last message, the window closes. You can no longer send freeform messages and must use a paid Template Message to re-initiate contact.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="pricing--capabilities-within-the-csw">Pricing &amp; Capabilities within the CSW<a href="#pricing--capabilities-within-the-csw" class="hash-link" aria-label="Direct link to Pricing &amp; Capabilities within the CSW" title="Direct link to Pricing &amp; Capabilities within the CSW" translate="no">​</a></h4>
+<p>While this window is open, the following rules apply:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Message Type</th><th style="text-align:left">Delivery Status</th><th style="text-align:left">Cost</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Non-Template</strong> (Text, Image, Audio)</td><td style="text-align:left">Allowed</td><td style="text-align:left"><strong>Free</strong></td></tr><tr><td style="text-align:left"><strong>Utility Templates</strong></td><td style="text-align:left">Allowed</td><td style="text-align:left"><strong>Free</strong></td></tr><tr><td style="text-align:left"><strong>Marketing / Auth Templates</strong></td><td style="text-align:left">Allowed</td><td style="text-align:left"><strong>Paid</strong> (Standard Rates)</td></tr></tbody></table>
+<blockquote>
+<p><strong>Key Takeaway:</strong> To minimize costs, maximize the use of freeform text and Utility templates while the customer is actively conversing with you.</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-the-72-hour-free-entry-point-fep-window">2. The 72-Hour Free Entry Point (FEP) Window<a href="#2-the-72-hour-free-entry-point-fep-window" class="hash-link" aria-label="Direct link to 2. The 72-Hour Free Entry Point (FEP) Window" title="Direct link to 2. The 72-Hour Free Entry Point (FEP) Window" translate="no">​</a></h3>
+<p>The Free Entry Point window is a special promotional period triggered by specific Meta advertising interactions. It offers the widest range of free messaging.</p>
+<ul>
+<li>
+<p><strong>How it starts:</strong> This window opens <strong>only</strong> when a user messages your business through:</p>
+<ul>
+<li>A Meta <strong>Click-to-WhatsApp Ad</strong>.</li>
+<li>A Facebook Page <strong>Call-to-Action (CTA)</strong> button.</li>
+</ul>
+</li>
+<li>
+<p><strong>Activation Requirement (Critical):</strong> The FEP window does <strong>not</strong> open immediately upon the user&#x27;s message. To activate the 72-hour free window, <strong>you must reply to the user&#x27;s message within 24 hours.</strong></p>
+<ul>
+<li><em>If you reply within 24 hours:</em> The 72-hour FEP window activates immediately upon your reply delivery.</li>
+<li><em>If you do NOT reply within 24 hours:</em> The opportunity is lost. Any subsequent message you send must be a paid Template Message, and it will not trigger the 72-hour free window.</li>
+</ul>
+</li>
+<li>
+<p><strong>Duration:</strong> Once activated, it lasts for a fixed <strong>72 hours</strong>.</p>
+</li>
+<li>
+<p><strong>Reset Rules:</strong> Unlike the CSW, this timer <strong>does not reset</strong> if the customer replies. It is a single, continuous 72-hour window.</p>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="pricing--capabilities-within-the-fep">Pricing &amp; Capabilities within the FEP<a href="#pricing--capabilities-within-the-fep" class="hash-link" aria-label="Direct link to Pricing &amp; Capabilities within the FEP" title="Direct link to Pricing &amp; Capabilities within the FEP" translate="no">​</a></h4>
+<p>During this 72-hour period, standard pricing is overridden:</p>
+<ul>
+<li><strong>All Messages are Free:</strong> This includes non-template messages and <strong>all categories</strong> of Template Messages (including Marketing, Authentication and Utility).</li>
+<li><strong>Interaction with the CSW:</strong>
+<ul>
+<li>The FEP and the 24-hour CSW run in parallel.</li>
+<li>If the standard 24-hour CSW closes (e.g., the customer hasn&#x27;t replied in 24 hours) but the 72-hour FEP is still active, you can <strong>still send Template Messages for free</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="summary-of-windows">Summary of Windows<a href="#summary-of-windows" class="hash-link" aria-label="Direct link to Summary of Windows" title="Direct link to Summary of Windows" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Feature</th><th style="text-align:left">Customer Service Window (24h)</th><th style="text-align:left">Free Entry Point Window (72h)</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Trigger</strong></td><td style="text-align:left">Any incoming user message/reply</td><td style="text-align:left">Click-to-WhatsApp Ad or Page CTA</td></tr><tr><td style="text-align:left"><strong>Duration</strong></td><td style="text-align:left">24 hours (Resets on new message)</td><td style="text-align:left">72 hours (Fixed, does not reset)</td></tr><tr><td style="text-align:left"><strong>Freeform Messages</strong></td><td style="text-align:left"><strong>Allowed &amp; Free</strong></td><td style="text-align:left"><strong>Free</strong> (Must be within active CSW)</td></tr><tr><td style="text-align:left"><strong>Utility Templates</strong></td><td style="text-align:left"><strong>Free</strong></td><td style="text-align:left"><strong>Free</strong></td></tr><tr><td style="text-align:left"><strong>Marketing/Auth Templates</strong></td><td style="text-align:left">Paid</td><td style="text-align:left"><strong>Free</strong></td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-interactive-freeform-messages">3. Interactive (Freeform) Messages<a href="#3-interactive-freeform-messages" class="hash-link" aria-label="Direct link to 3. Interactive (Freeform) Messages" title="Direct link to 3. Interactive (Freeform) Messages" translate="no">​</a></h3>
+<p>These are the messages you can send <em>inside</em> an open 24-hour Customer Service Window. They do <strong>not</strong> require pre-approval.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Message Type</th><th>Description</th></tr></thead><tbody><tr><td><strong>Text</strong></td><td>A simple text message.</td></tr><tr><td><strong>Media</strong></td><td>An Image, Video, Audio, or Document, which can include an optional text caption.</td></tr><tr><td><strong>Location</strong></td><td>A map pin of a specific geographic location.</td></tr><tr><td><strong>Interactive Buttons</strong></td><td>A message with a body, optional header/footer, and up to <strong>3 Quick Reply</strong> buttons.</td></tr><tr><td><strong>Interactive List</strong></td><td>A message that opens a pop-up menu of up to <strong>10 items</strong>, ideal for selection menus.</td></tr><tr><td><strong>Interactive CTA URL Button</strong></td><td>A message with text that features a single, prominent button that opens a website URL.</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="quality-rating--messaging-limits">Quality Rating &amp; Messaging Limits<a href="#quality-rating--messaging-limits" class="hash-link" aria-label="Direct link to Quality Rating &amp; Messaging Limits" title="Direct link to Quality Rating &amp; Messaging Limits" translate="no">​</a></h2>
+<p>Meta monitors your account&#x27;s sending activity to protect users from spam. This is managed through quality ratings and messaging limits.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-quality-rating">1. Quality Rating<a href="#1-quality-rating" class="hash-link" aria-label="Direct link to 1. Quality Rating" title="Direct link to 1. Quality Rating" translate="no">​</a></h3>
+<ul>
+<li>
+<p><strong>What it is:</strong> A rating (<code>High</code>, <code>Medium</code>, <code>Low</code>) for your business phone number based on customer feedback, such as how many times your messages are blocked or reported as spam.</p>
+</li>
+<li>
+<p><strong>Where to find it:</strong> You can find your rating in the Meta WhatsApp Manager.</p>
+</li>
+<li>
+<p><strong>Impact:</strong> If your quality rating drops to <strong>Low</strong>, your templates may be automatically <strong>Paused</strong> (temporarily disabled) to protect your rating from dropping further.</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-messaging-limits-portfolio-based">2. Messaging Limits (Portfolio-Based)<a href="#2-messaging-limits-portfolio-based" class="hash-link" aria-label="Direct link to 2. Messaging Limits (Portfolio-Based)" title="Direct link to 2. Messaging Limits (Portfolio-Based)" translate="no">​</a></h3>
+<ul>
+<li>
+<p><strong>What it is:</strong> The maximum number of <strong>unique users</strong> you can initiate conversations with in a rolling 24-hour period. This is now set at the <strong>Business Portfolio level</strong> and shared across all phone numbers in that portfolio.</p>
+</li>
+<li>
+<p><strong>Note:</strong> This limit <strong>does not</strong> apply to replies within an active 24-hour customer service window. You can have unlimited customer service conversations.</p>
+</li>
+</ul>
+<p><strong>Messaging Tiers:</strong></p>
+<ul>
+<li>
+<p><strong>Tier 1 (250):</strong> All new portfolios start here, able to message 250 unique users per 24 hours.</p>
+</li>
+<li>
+<p><strong>Tier 2 (2,000):</strong> You can upgrade to this tier by:</p>
+<ol>
+<li>
+<p>Verifying your business (see <a href="/connect/docs/whatsapp/getting-started#business-verification--raising-limits">Business Verification &amp; Raising Limits</a>).</p>
+</li>
+<li>
+<p>OR Sending 2,000 high-quality template messages to unique users within a 30-day window.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Automatic Scaling (Tier 3+):</strong> After reaching 2,000, your portfolio can be automatically upgraded to 10k, 100k, and finally Unlimited users. Upgrades happen if:</p>
+<ol>
+<li>
+<p>You are sending high-quality messages.</p>
+</li>
+<li>
+<p>You have used at least 50% of your current limit in the last 7 days.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Webhook Notification:</strong> You will receive a <code>phone_number_quality_update</code> <a href="/connect/docs/whatsapp/whatsapp-webhooks#phone-number-quality--messaging-limit-updates">webhook</a> when your portfolio&#x27;s limit is upgraded (e.g., <code>event: &quot;UPGRADE&quot;, currentLimit: &quot;TIER_10K&quot;</code>).</p>
+</li>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/whatsapp/whatsapp-hub"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">WhatsApp Business Platform</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/whatsapp/getting-started"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Getting Started</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#meta--8x8-platform-hierarchy" class="table-of-contents__link toc-highlight">Meta &amp; 8x8 Platform Hierarchy</a></li><li><a href="#business-initiated-conversations-outbound" class="table-of-contents__link toc-highlight">Business-Initiated Conversations (Outbound)</a><ul><li><a href="#1-template-messages" class="table-of-contents__link toc-highlight">1. Template Messages</a></li><li><a href="#2-template-categories" class="table-of-contents__link toc-highlight">2. Template Categories</a></li></ul></li><li><a href="#user-initiated-conversations-inbound" class="table-of-contents__link toc-highlight">User-Initiated Conversations (Inbound)</a><ul><li><a href="#1-the-24-hour-customer-service-window-csw" class="table-of-contents__link toc-highlight">1. The 24-Hour Customer Service Window (CSW)</a></li><li><a href="#2-the-72-hour-free-entry-point-fep-window" class="table-of-contents__link toc-highlight">2. The 72-Hour Free Entry Point (FEP) Window</a></li><li><a href="#summary-of-windows" class="table-of-contents__link toc-highlight">Summary of Windows</a></li><li><a href="#3-interactive-freeform-messages" class="table-of-contents__link toc-highlight">3. Interactive (Freeform) Messages</a></li></ul></li><li><a href="#quality-rating--messaging-limits" class="table-of-contents__link toc-highlight">Quality Rating &amp; Messaging Limits</a><ul><li><a href="#1-quality-rating" class="table-of-contents__link toc-highlight">1. Quality Rating</a></li><li><a href="#2-messaging-limits-portfolio-based" class="table-of-contents__link toc-highlight">2. Messaging Limits (Portfolio-Based)</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a class="footer__link-item" href="/license">8x8 API License Agreement</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/page/sdk-license">8x8 SDK License Agreement</a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>

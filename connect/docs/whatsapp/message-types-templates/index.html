@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-connect/docs/whatsapp/message-types-templates" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">Message Types &amp; Templates | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/whatsapp/message-types-templates"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Message Types &amp; Templates | 8x8 Developer Portal"><meta data-rh="true" name="description" content="This section covers the most important component of business-initiated conversations: Message Templates. You will learn what they are, how they are structured, and how to create and manage them using both the 8x8 Connect portal and the 8x8 Messaging App API."><meta data-rh="true" property="og:description" content="This section covers the most important component of business-initiated conversations: Message Templates. You will learn what they are, how they are structured, and how to create and manage them using both the 8x8 Connect portal and the 8x8 Messaging App API."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/whatsapp/message-types-templates"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/whatsapp/message-types-templates" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/whatsapp/message-types-templates" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.5c2b0b28.css">
+<script src="/assets/js/runtime~main.cc3c49e9.js" defer="defer"></script>
+<script src="/assets/js/main.ea2838d0.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a class="navbar__item navbar__link" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides section-navigation__tab--active" href="/connect/docs">Guides</a><a class="section-navigation__tab icon-references" href="/connect/reference">API Reference</a><a href="https://support.cpaas.8x8.com/hc/en-us" target="_blank" rel="noopener noreferrer" class="section-navigation__tab icon-support">Support</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/connect/docs/8x8-cpaas-products"><span title="CPaaS: Connect &amp; Communication APIs" class="linkLabel_WmDU">CPaaS: Connect &amp; Communication APIs</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/getting-started"><span title="API Information" class="categoryLinkLabel_W154">API Information</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/send-sms-api-reference"><span title="SMS" class="categoryLinkLabel_W154">SMS</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/connect/docs/whatsapp/whatsapp-hub"><span title="Messaging Apps" class="categoryLinkLabel_W154">Messaging Apps</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/connect/docs/whatsapp/whatsapp-hub"><span title="WhatsApp" class="categoryLinkLabel_W154">WhatsApp</span></a><button aria-label="Collapse sidebar category &#x27;WhatsApp&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/concepts-fundamentals"><span title="Concepts &amp; Fundamentals" class="linkLabel_WmDU">Concepts &amp; Fundamentals</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/getting-started"><span title="Getting Started" class="linkLabel_WmDU">Getting Started</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/connect/docs/whatsapp/message-types-templates"><span title="Message Types &amp; Templates" class="linkLabel_WmDU">Message Types &amp; Templates</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/whatsapp-in-8x8-connect"><span title="WhatsApp in 8x8 Connect" class="linkLabel_WmDU">WhatsApp in 8x8 Connect</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/whatsapp/whatsapp-over-8x8-api"><span title="WhatsApp over 8x8 API" class="categoryLinkLabel_W154">WhatsApp over 8x8 API</span></a><button aria-label="Expand sidebar category &#x27;WhatsApp over 8x8 API&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/advanced-capabilities"><span title="Advanced Capabilities" class="linkLabel_WmDU">Advanced Capabilities</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/scenarios-tutorials"><span title="Scenarios &amp; Tutorials" class="linkLabel_WmDU">Scenarios &amp; Tutorials</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/vertical-playbooks"><span title="Vertical Playbooks" class="linkLabel_WmDU">Vertical Playbooks</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/operations-monitoring"><span title="Operations &amp; Monitoring" class="linkLabel_WmDU">Operations &amp; Monitoring</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/governance-security"><span title="Governance &amp; Security" class="linkLabel_WmDU">Governance &amp; Security</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/reference-resources"><span title="Reference &amp; Resources" class="linkLabel_WmDU">Reference &amp; Resources</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/learning-paths"><span title="Learning Paths" class="linkLabel_WmDU">Learning Paths</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/guide-whatsapp-one-tap-or-zero-tap-authentication"><span title="Zero-tap and One-tap WhatsApp Authentication Template" class="linkLabel_WmDU">Zero-tap and One-tap WhatsApp Authentication Template</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/guide-whatsapp-template-validity-period-ttl"><span title="WhatsApp Template Validity Period (TTL)" class="linkLabel_WmDU">WhatsApp Template Validity Period (TTL)</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/rcs/overview"><span title="RCS" class="categoryLinkLabel_W154">RCS</span></a><button aria-label="Expand sidebar category &#x27;RCS&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-viber"><span title="Viber" class="linkLabel_WmDU">Viber</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-zns"><span title="Zalo Notification Service (ZNS)" class="linkLabel_WmDU">Zalo Notification Service (ZNS)</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-line-official-notification"><span title="LINE Official Notification" class="linkLabel_WmDU">LINE Official Notification</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/connect-overview"><span title="Connect Portal" class="categoryLinkLabel_W154">Connect Portal</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/creating-a-contact"><span title="Contacts API Tutorials" class="categoryLinkLabel_W154">Contacts API Tutorials</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/adobe-campaigns"><span title="Integrations" class="categoryLinkLabel_W154">Integrations</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/overview"><span title="Voice SDK" class="categoryLinkLabel_W154">Voice SDK</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/converse-overview"><span title="Converse" class="categoryLinkLabel_W154">Converse</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/vi-overview"><span title="Video Interaction" class="categoryLinkLabel_W154">Video Interaction</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/accessing-and-viewing-your-customer-list"><span title="Partner Hub" class="categoryLinkLabel_W154">Partner Hub</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>Message Types &amp; Templates</h1></header>
+<p>This section covers the most important component of business-initiated conversations: <strong>Message Templates</strong>. You will learn what they are, how they are structured, and how to create and manage them using both the 8x8 Connect portal and the 8x8 Messaging App API.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="template-categories--use-cases">Template Categories &amp; Use Cases<a href="#template-categories--use-cases" class="hash-link" aria-label="Direct link to Template Categories &amp; Use Cases" title="Direct link to Template Categories &amp; Use Cases" translate="no">​</a></h2>
+<p>All templates must be assigned a category that describes their purpose. This category determines how the message is treated (and billed) by Meta.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Category</th><th>Description</th><th>Common Use Cases</th></tr></thead><tbody><tr><td><strong>Authentication</strong></td><td>Enables you to send one-time passcodes (OTPs) to authenticate users.</td><td>User login, account verification, password reset, integrity checks.</td></tr><tr><td><strong>Marketing</strong></td><td>Used for promotions, offers, or announcements to drive customer engagement and sales.</td><td>New product alerts, sale notifications, re-engagement campaigns.</td></tr><tr><td><strong>Utility</strong></td><td>Facilitates a specific, agreed-upon request, transaction, or update for an existing customer.</td><td>Order confirmations, delivery status, appointment reminders, account statements.</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="template-anatomy--general-rules">Template Anatomy &amp; General Rules<a href="#template-anatomy--general-rules" class="hash-link" aria-label="Direct link to Template Anatomy &amp; General Rules" title="Direct link to Template Anatomy &amp; General Rules" translate="no">​</a></h2>
+<p>A template is a structured message format composed of different components. You must follow this structure for your template to be approved.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="core-requirements">Core Requirements<a href="#core-requirements" class="hash-link" aria-label="Direct link to Core Requirements" title="Direct link to Core Requirements" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Component</th><th>Description</th><th>Required?</th></tr></thead><tbody><tr><td><strong><code>name</code></strong></td><td>A unique name for your template. Max 512 characters; allowed characters are <strong>lowercase</strong> alphanumeric and underscores (e.g., <code>order_confirmation_v2</code>).</td><td><strong>Yes</strong></td></tr><tr><td><strong><code>language</code></strong></td><td>The language code for the template (e.g., <code>en_US</code>, <code>es</code>).</td><td><strong>Yes</strong></td></tr><tr><td><strong><code>category</code></strong></td><td>The template&#x27;s purpose (<code>AUTHENTICATION</code>, <code>MARKETING</code>, or <code>UTILITY</code>).</td><td><strong>Yes</strong></td></tr><tr><td><strong><code>components</code></strong></td><td>An array of objects that define the message content.</td><td><strong>Yes</strong> (Must contain at least a <code>BODY</code>)</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="platform-wide-template-limits">Platform-wide Template Limits<a href="#platform-wide-template-limits" class="hash-link" aria-label="Direct link to Platform-wide Template Limits" title="Direct link to Platform-wide Template Limits" translate="no">​</a></h3>
+<ul>
+<li>
+<p><strong>Template Count Limit:</strong></p>
+<ul>
+<li>
+<p><strong>Unverified</strong> Meta Business Portfolio: Up to <strong>250</strong> templates per WABA.</p>
+</li>
+<li>
+<p><strong>Verified</strong> Meta Business Portfolio (with at least one number with an approved display name): Up to <strong>6,000</strong> templates per WABA.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Creation Rate Limit:</strong> You can create up to <strong>100</strong> templates per WABA per hour.</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="creating--managing-templates-in-the-portal">Creating &amp; Managing Templates in the Portal<a href="#creating--managing-templates-in-the-portal" class="hash-link" aria-label="Direct link to Creating &amp; Managing Templates in the Portal" title="Direct link to Creating &amp; Managing Templates in the Portal" translate="no">​</a></h2>
+<p>The 8x8 Connect portal provides a visual interface for managing the entire template lifecycle.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-viewing-templates">1. Viewing Templates<a href="#1-viewing-templates" class="hash-link" aria-label="Direct link to 1. Viewing Templates" title="Direct link to 1. Viewing Templates" translate="no">​</a></h3>
+<p>You can view, filter, and search all existing templates associated with your WhatsApp channels.</p>
+<ol>
+<li>
+<p>Navigate to <strong>Messaging Apps &gt; WhatsApp Templates</strong> in the 8x8 Connect portal.</p>
+</li>
+<li>
+<p>The list displays the template&#x27;s <strong>Name</strong>, <strong>Category</strong>, <strong>Language</strong>, <strong>Status</strong> (e.g., Approved, Rejected, Pending), and <strong>Last Updated</strong> date.</p>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="WhatsApp Template List" src="/assets/images/WhatsApp Template List-bfe9b1ba44ac39f6aa889f4e091b0c87.webp" width="3248" height="2112" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-creating-a-new-template">2. Creating a New Template<a href="#2-creating-a-new-template" class="hash-link" aria-label="Direct link to 2. Creating a New Template" title="Direct link to 2. Creating a New Template" translate="no">​</a></h3>
+<ol>
+<li>
+<p>From the <strong>WhatsApp Templates</strong> page, click the <strong>&quot;Create new template&quot;</strong> button.</p>
+</li>
+<li>
+<p>A pop-up will guide you through defining all the necessary components:</p>
+<ul>
+<li>
+<p><strong>Name, Category, Language, and Channel ID</strong> (the sender phone number).</p>
+</li>
+<li>
+<p><strong>Header</strong> (Text, Image, Video, or Document).</p>
+</li>
+<li>
+<p><strong>Body</strong> (This is where you add your text and <code>{{1}}</code> placeholders).</p>
+</li>
+<li>
+<p><strong>Footer</strong> (Optional text).</p>
+</li>
+<li>
+<p><strong>Buttons</strong> (Quick Reply, Call to Action, or OTP).</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Submit the template for approval by Meta. This process can take from a few minutes to several hours.</p>
+</li>
+<li>
+<p>You can monitor the status of your submission on the main template page.</p>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="WhatsApp Template Creation" src="/assets/images/WhatsApp Template Creation-93c66bd8ca53992c57a374c24ef4ab54.webp" width="3248" height="2112" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-editing-templates">3. Editing Templates<a href="#3-editing-templates" class="hash-link" aria-label="Direct link to 3. Editing Templates" title="Direct link to 3. Editing Templates" translate="no">​</a></h3>
+<p>While templates cannot be edited directly within the 8x8 Connect portal, you <strong>can</strong> edit approved templates in the <strong>Meta WhatsApp Manager Dashboard</strong>. Be aware that edits must be re-submitted for approval by Meta.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-duplicating-templates">4. Duplicating Templates<a href="#4-duplicating-templates" class="hash-link" aria-label="Direct link to 4. Duplicating Templates" title="Direct link to 4. Duplicating Templates" translate="no">​</a></h3>
+<p>To save time, the 8x8 Connect portal allows you to <strong>duplicate</strong> an existing template.</p>
+<ol>
+<li>
+<p>Find the template you wish to copy in the template list.</p>
+</li>
+<li>
+<p>Click the <strong>duplicate</strong> button.</p>
+</li>
+<li>
+<p>This will open the &quot;Create new template&quot; modal, pre-filled with all the components (Header, Body, Buttons, etc.) from the template you selected.</p>
+</li>
+<li>
+<p>You can then make your changes (e.g., adjust wording, add a new button) and give it a new, unique name before submitting it for approval.</p>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="WhatsApp Template Duplication" src="/assets/images/WhatsApp Template Duplication-7983efa85f520b98751f304e78b6d690.webp" width="3248" height="2112" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="5-deleting-templates">5. Deleting Templates<a href="#5-deleting-templates" class="hash-link" aria-label="Direct link to 5. Deleting Templates" title="Direct link to 5. Deleting Templates" translate="no">​</a></h3>
+<p>You can delete a template by hovering over it in the list and selecting the delete button.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="managing-templates-via-api">Managing Templates via API<a href="#managing-templates-via-api" class="hash-link" aria-label="Direct link to Managing Templates via API" title="Direct link to Managing Templates via API" translate="no">​</a></h2>
+<p>You can also create templates programmatically using the 8x8 Messaging App API. This is useful for automating template creation or integrating it into your own content management system.</p>
+<p>To create a template, you send a <code>POST</code> request to the create template endpoint:</p>
+<p><code>POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates</code></p>
+<p>For detailed API documentation and examples:</p>
+<ul>
+<li><a href="/connect/docs/whatsapp/whatsapp-over-8x8-api#creating-a-template-via-api">Creating a Template via API</a> - API endpoint and example payload</li>
+<li><a href="/connect/docs/whatsapp/template-components-reference">Template Components Reference</a> - Detailed component specifications</li>
+<li><a href="/connect/docs/whatsapp/template-message-api-library">Template Message API Library</a> - Complete create &amp; send payload examples</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="api-resources--developer-references">API Resources &amp; Developer References<a href="#api-resources--developer-references" class="hash-link" aria-label="Direct link to API Resources &amp; Developer References" title="Direct link to API Resources &amp; Developer References" translate="no">​</a></h2>
+<p>For developers integrating template functionality via the API, these resources provide detailed technical specifications and examples:</p>
+<p><strong>Component Specifications:</strong></p>
+<ul>
+<li><a href="/connect/docs/whatsapp/template-components-reference">Template Components Reference</a> - Complete technical specifications for all template components (headers, body, buttons, carousels) including character limits, format requirements, and parameter rules</li>
+</ul>
+<p><strong>API Payloads &amp; Examples:</strong></p>
+<ul>
+<li><a href="/connect/docs/whatsapp/template-message-api-library">Template Message API Library</a> - Comprehensive collection of Create and Send payload examples for every template type</li>
+<li><a href="/connect/docs/whatsapp/whatsapp-over-8x8-api">WhatsApp over 8x8 API</a> - API authentication, endpoints, and integration guide</li>
+</ul>
+<p><strong>Related Guides:</strong></p>
+<ul>
+<li><a href="/connect/docs/whatsapp/governance-security#content--template-compliance-meta-guidelines">Governance, Security &amp; Compliance</a> - Meta&#x27;s template policies and approval guidelines</li>
+<li><a href="/connect/docs/whatsapp/operations-monitoring">Operations, Monitoring &amp; Troubleshooting</a> - Template rejection reasons, debugging, and monitoring</li>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/whatsapp/getting-started"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Getting Started</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/whatsapp/whatsapp-in-8x8-connect"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">WhatsApp in 8x8 Connect</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#template-categories--use-cases" class="table-of-contents__link toc-highlight">Template Categories &amp; Use Cases</a></li><li><a href="#template-anatomy--general-rules" class="table-of-contents__link toc-highlight">Template Anatomy &amp; General Rules</a><ul><li><a href="#core-requirements" class="table-of-contents__link toc-highlight">Core Requirements</a></li><li><a href="#platform-wide-template-limits" class="table-of-contents__link toc-highlight">Platform-wide Template Limits</a></li></ul></li><li><a href="#creating--managing-templates-in-the-portal" class="table-of-contents__link toc-highlight">Creating &amp; Managing Templates in the Portal</a><ul><li><a href="#1-viewing-templates" class="table-of-contents__link toc-highlight">1. Viewing Templates</a></li><li><a href="#2-creating-a-new-template" class="table-of-contents__link toc-highlight">2. Creating a New Template</a></li><li><a href="#3-editing-templates" class="table-of-contents__link toc-highlight">3. Editing Templates</a></li><li><a href="#4-duplicating-templates" class="table-of-contents__link toc-highlight">4. Duplicating Templates</a></li><li><a href="#5-deleting-templates" class="table-of-contents__link toc-highlight">5. Deleting Templates</a></li></ul></li><li><a href="#managing-templates-via-api" class="table-of-contents__link toc-highlight">Managing Templates via API</a></li><li><a href="#api-resources--developer-references" class="table-of-contents__link toc-highlight">API Resources &amp; Developer References</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a class="footer__link-item" href="/license">8x8 API License Agreement</a><span class="footer__link-separator">·</span><a class="footer__link-item" href="/page/sdk-license">8x8 SDK License Agreement</a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2025 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>
