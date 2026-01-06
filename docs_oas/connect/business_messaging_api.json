@@ -87,7 +87,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "operationId": "Send-Message",
@@ -1776,7 +1776,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "tags": ["Send Message API"],
@@ -1923,7 +1923,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "operationId": "send-lon-message",
@@ -2261,7 +2261,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "tags": ["Send Message API"],
@@ -2328,7 +2328,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "summary": "Mark message as read",
@@ -2618,7 +2618,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "summary": "Get WhatsApp templates",
@@ -2665,7 +2665,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "summary": "Add WhatsApp template",
@@ -3111,7 +3111,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "description": "This endpoint is used to remove an existing WhatsApp message template.\n\nWhatsApp Message Templates are message formats for common reusable messages a business may want to send. \nBusinesses must use Message Templates for sending notifications to customers.\nAny message sent outside the 24h customer service window, needs to be a template message, to be delivered. \nAdvertising, marketing, or promotional messages are not permitted.",
@@ -3253,7 +3253,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "security": [
@@ -3491,7 +3491,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "security": [
@@ -3707,7 +3707,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "security": [
@@ -3872,7 +3872,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "security": [
@@ -3929,7 +3929,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "security": [
@@ -4036,7 +4036,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "security": [
@@ -4095,7 +4095,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "security": [
@@ -4154,7 +4154,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "security": [
@@ -4573,7 +4573,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "404": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/404"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/404"
           },
           "429": {
             "description": "Rate limiting quota exceeded error",
@@ -4855,7 +4855,7 @@
             }
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "summary": "Get all Webhooks for Account",
@@ -4880,7 +4880,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "summary": "Create or Replace webhooks",
@@ -4964,7 +4964,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "summary": "Delete webhooks",
@@ -5061,7 +5061,7 @@
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "security": [
@@ -5143,7 +5143,7 @@
             }
           },
           "500": {
-            "$ref": "#/paths/~1api~1v1~1files/get/responses/500"
+            "$ref": "#/paths/~1api~1v1~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
         "requestBody": {
@@ -5176,9 +5176,19 @@
         "tags": ["File Upload API"]
       }
     },
-    "/api/v1/files": {
+    "/api/v1/files/{filename}": {
       "get": {
         "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "5e0e61c3452d4a5384f57f8622cb0c40.png"
+            },
+            "in": "path",
+            "name": "filename",
+            "description": "File name with extension",
+            "required": true
+          },
           {
             "schema": {
               "type": "string",
