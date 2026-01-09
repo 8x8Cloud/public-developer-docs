@@ -5,6 +5,18 @@ custom_edit_url: null
 
 # 8x8 Software Development Kit License Agreement
 
+:::info Official License Agreement
+The official 8x8 Software Development Kit License Agreement is now maintained at:
+
+**[https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement](https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement)**
+
+Please refer to the official source for the current terms and conditions.
+:::
+
+---
+
+## Historical Reference
+
 **Updated:** August 7, 2020; Effective from August 7, 2020
 
 **THESE TERMS SHOULD BE READ CAREFULLY, AS THEY AFFECT THE PARTIES' LEGAL RIGHTS BY, AMONG OTHER THINGS, LIMITING 8×8'S LIABILITY AND PERMITING 8×8 TO CHANGE THESE TERMS.**

@@ -157,11 +157,11 @@ const config = {
       links: [
         {
           label: '8x8 API License Agreement',
-          href: '/license',
+          href: 'https://www.8x8.com/terms-and-conditions/api-license-agreement',
         },
         {
           label: '8x8 SDK License Agreement',
-          href: '/page/sdk-license',
+          href: 'https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement',
         },
       ],
     },
