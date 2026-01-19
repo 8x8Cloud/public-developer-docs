@@ -12,6 +12,8 @@
 // @ts-check
 import sidebarActionsEventsDocs from './actions-events/docs';
 import sidebarActionsEventsReference from './actions-events/reference';
+import sidebarAdministrationDocs from './administration/docs';
+import sidebarAdministrationReference from './administration/reference';
 import sidebarAnalyticsDocs from './analytics/docs';
 import sidebarAnalyticsReference from './analytics/reference';
 import sidebarConnectDocs from './connect/docs';
@@ -25,6 +27,8 @@ import sidebarTechPartner from './tech-partner';
 const index = {
   sidebarActionsEventsDocs,
   sidebarActionsEventsReference,
+  sidebarAdministrationDocs,
+  sidebarAdministrationReference,
   sidebarAnalyticsDocs,
   sidebarAnalyticsReference,
   sidebarConnectDocs,

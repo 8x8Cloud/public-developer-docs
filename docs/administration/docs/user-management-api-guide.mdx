@@ -1,0 +1,1022 @@
+# User Management API Guide
+
+**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)
+
+import TabbedExternalCodeSample from '@site/docusaurus/components/TabbedExternalCodeSample';
+
+:::warning BETA - Limited Access
+
+**These Administration APIs are currently in Beta testing.** API keys cannot be generated in Admin Console at this point. Only Beta program participants may use these APIs.
+
+:::
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Prerequisites & Authentication](#prerequisites--authentication)
+3. [Quickstart](#quickstart)
+4. [Core Concepts](#core-concepts)
+5. [Use Cases](#use-cases)
+6. [API Reference](#api-reference)
+7. [Business Rules](#business-rules)
+8. [API-Specific Error Scenarios](#api-specific-error-scenarios)
+9. [API-Specific Troubleshooting](#api-specific-troubleshooting)
+10. [Additional Resources](#additional-resources)
+
+---
+
+## Overview
+
+The 8x8 User Management API provides programmatic access to user lifecycle management within your 8x8 organization. This RESTful API enables you to automate the complete lifecycle of users, from creation through configuration to deletion, supporting integration with HR systems, identity providers, and custom automation workflows.
+
+### What You Can Do
+
+- Create and configure users with comprehensive profile information
+- Search and filter users using powerful RSQL query syntax
+- Update user details, assignments, and service configurations
+- Delete users when they leave your organization
+
+### Primary Use Cases
+
+**Employee Lifecycle Automation**: Integrate with HR systems (Workday, BambooHR, SAP SuccessFactors) to automatically provision and deprovision users.
+
+**Site Deployment**: Bulk provision users for new office locations or business units.
+
+**Directory Synchronization**: Synchronize user information with external identity providers and organizational directories.
+
+### API Architecture
+
+- **RESTful Design**: Standard HTTP methods (GET, POST, DELETE) with JSON payloads
+- **Asynchronous Operations**: Create and delete operations use async processing (see [API Essentials - Async Operations](./suite-common.mdx#asynchronous-operations))
+- **RSQL Filtering**: Powerful query syntax for precise user searches (see [API Essentials - RSQL](./suite-common.mdx#filtering-with-rsql))
+- **Scroll-Based Pagination**: Efficient pagination for large result sets (see [API Essentials - Pagination](./suite-common.mdx#pagination))
+
+### Reference
+
+View the [API Reference](#api-reference) section below for detailed endpoint documentation.
+
+---
+
+## Prerequisites & Authentication
+
+Before using the User Management API, review the **[Administration API Essentials](./suite-common.mdx)**, which covers:
+
+- **Prerequisites**: Account requirements, API credential acquisition, technical requirements
+- **Getting Started**: Step-by-step credential setup and testing
+- **Authentication**: API key authentication with `x-api-key` header
+- **API Versioning**: Version negotiation with `Accept` header
+- **Common Patterns**: Asynchronous operations, pagination, filtering, sorting
+- **Error Handling**: RFC 7807 format and common error scenarios
+- **Rate Limiting**: Request limits and handling strategies
+- **Best Practices**: Performance, security, and data consistency
+- **Troubleshooting**: Common issues and debugging steps
+- **Support Resources**: Contact information and escalation procedures
+
+### User Management API Specifics
+
+**Accept Header** for this API:
+
+```http
+Accept: application/vnd.users.v1+json
+```
+
+**Required API Products** (when creating API key in Admin Console):
+- **UC & CC Admin Operations**: Required for user management operations
+- **UC & CC User Management**: Required for user-specific operations
+
+**User-Specific Prerequisites**:
+- Understanding of 8x8's organizational hierarchy (Customer → PBX → Site → User)
+- Knowledge of your site IDs (obtain from Admin Console → Sites)
+- Familiarity with user roles and permissions within 8x8
+
+---
+
+## Quickstart
+
+This quickstart demonstrates your first successful interaction with the User Management API. You'll create a user, monitor the operation to completion, and retrieve the created user's details.
+
+**Prerequisite Knowledge**: This quickstart assumes you've reviewed the [Common Documentation](./suite-common.mdx) and understand:
+- API key authentication
+- Asynchronous operation patterns
+- How to poll operation status
+
+### What You'll Accomplish
+
+1. Create a new user with basic information
+2. Receive an operation ID and poll until completion
+3. Retrieve the fully created user object
+
+**Time to Complete**: Approximately 5 minutes
+
+### Prerequisites for Quickstart
+
+- API key obtained and tested (see [API Essentials - Getting Started](./suite-common.mdx#getting-started))
+- Valid Site ID from your organization (obtain from Admin Console → Sites or lookup via the [Site Management API](./site-management-api-guide))
+- Basic user information ready (name, email, username)
+
+### Step 1: Create a User
+
+User creation is an asynchronous operation (see [API Essentials - Async Operations](./suite-common.mdx#asynchronous-operations) for details). The API immediately returns a 202 Accepted response with an operation ID that you'll use to track progress.
+
+**Required Fields**:
+- `basicInfo.userName`: Unique login username (3-70 characters)
+- `basicInfo.firstName`: User's first name (2-128 characters)
+- `basicInfo.lastName`: User's last name (2-30 characters)
+- `basicInfo.primaryEmail`: Primary contact email (valid email format)
+- `basicInfo.site.id`: Site assignment (valid site ID from your organization)
+
+**Optional but Recommended**:
+- `basicInfo.status`: User account status (ACTIVE or INACTIVE)
+- `basicInfo.locale`: Language preference (e.g., en-US, en-GB)
+- `basicInfo.timezone`: Timezone for call recordings and queues
+
+<TabbedExternalCodeSample
+  path="example_code/administration/users-api/quickstart-create-user"
+  title="Example: Create a New User"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Response** (202 Accepted):
+
+```json
+{
+  "operationId": "op_1a2b3c4d5e6f",
+  "status": "PENDING",
+  "resourceType": "USER",
+  "operationType": "CREATE",
+  "createdTime": "2025-12-01T15:30:45Z",
+  "_links": {
+    "self": {
+      "href": "/operations/op_1a2b3c4d5e6f"
+    }
+  }
+}
+```
+
+The operation ID (`op_1a2b3c4d5e6f` in this example) is your tracking token for monitoring progress.
+
+### Step 2: Poll Operation Status
+
+Since user creation happens asynchronously, you need to check the operation status periodically until it completes. See [API Essentials - Async Operations](./suite-common.mdx#asynchronous-operations) for complete polling guidance.
+
+**Polling Strategy**:
+- Start checking after 1 second
+- Check no more frequently than once per second
+- Set a maximum timeout (5 minutes recommended)
+
+<TabbedExternalCodeSample
+  path="example_code/administration/users-api/quickstart-poll-operation"
+  title="Example: Poll Operation Status"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Response** (Operation Completed):
+
+```json
+{
+  "operationId": "op_1a2b3c4d5e6f",
+  "status": "COMPLETED",
+  "resourceType": "USER",
+  "resourceId": "hvOB1l3zDCaDAwp9tNLzZA",
+  "operationType": "CREATE",
+  "createdTime": "2025-12-01T15:30:45Z",
+  "completedTime": "2025-12-01T15:30:52Z",
+  "_links": {
+    "self": {
+      "href": "/operations/op_1a2b3c4d5e6f"
+    },
+    "resource": {
+      "href": "/users/hvOB1l3zDCaDAwp9tNLzZA"
+    }
+  }
+}
+```
+
+When `status` is `COMPLETED`, the `resourceId` field contains your new user's ID.
+
+### Step 3: Retrieve the Created User
+
+Once the operation completes, retrieve the full user object to confirm all details were created correctly.
+
+<TabbedExternalCodeSample
+  path="example_code/administration/users-api/quickstart-get-user"
+  title="Example: Retrieve User Details"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Response** (200 OK):
+
+```json
+{
+  "basicInfo": {
+    "userId": "hvOB1l3zDCaDAwp9tNLzZA",
+    "customerId": "0012J00042NkZQIQA3",
+    "createdTime": "2025-12-01T15:30:52Z",
+    "lastUpdatedTime": "2025-12-01T15:30:52Z",
+    "userName": "jane.smith@example.com",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "status": "ACTIVE",
+    "locale": "en-US",
+    "timezone": "America/Los_Angeles",
+    "primaryEmail": "jane.smith@example.com",
+    "site": {
+      "id": "SAH3U8guQaK4WQhpDZi0rQ",
+      "name": "Headquarters",
+      "pbxName": "corpco01"
+    }
+  },
+  "directoryInfo": {
+    "displayInDirectory": true
+  },
+  "serviceInfo": {
+    "licenses": [],
+    "extensions": []
+  },
+  "assignmentInfo": {
+    "ringGroups": [],
+    "ucCallQueues": [],
+    "userGroups": []
+  }
+}
+```
+
+### Quickstart Complete
+
+You've successfully:
+- ✅ Created a user via the API
+- ✅ Monitored an asynchronous operation to completion
+- ✅ Retrieved the created user's details
+
+**Next Steps**:
+- Explore [Use Cases](#use-cases) for more complex scenarios
+- Learn about [Core Concepts](#core-concepts) for deeper understanding
+- Review [API Essentials - Best Practices](./suite-common.mdx#best-practices) for production implementations
+
+---
+
+## Core Concepts
+
+Understanding these foundational concepts specific to the User Management API will help you use it effectively.
+
+For general concepts (asynchronous operations, pagination, filtering, sorting, error handling), see [Administration API Essentials](./suite-common.mdx).
+
+### User Object Structure
+
+Users in 8x8 have a comprehensive data model organized into four logical sections:
+
+#### 1. basicInfo (Required)
+
+Core identity and account information:
+
+- **userId**: Unique system-generated identifier (read-only)
+- **customerId**: Organization identifier (read-only)
+- **userName**: Login username (required, 3-70 characters, unique)
+- **firstName**: User's given name (required, 2-128 characters)
+- **lastName**: User's family name (required, 2-30 characters)
+- **primaryEmail**: Primary contact email (required, valid email format)
+- **status**: Account status - ACTIVE or INACTIVE
+- **locale**: Language for UI, prompts, and notifications
+- **timezone**: Time zone for recordings and queue views
+- **site**: Physical location assignment (critical for routing and features)
+- **createdTime**, **lastUpdatedTime**: Audit timestamps (read-only)
+- **scimProvider**, **ssoProvider**, **ssoFederationId**: Identity integration fields
+
+#### 2. directoryInfo (Optional)
+
+Directory and organizational profile:
+
+- **jobTitle**: User's role or position
+- **department**: Organizational unit
+- **directoryScope**: Visibility scope (CUSTOMER, PBX, or SITE)
+- **displayInDirectory**: Whether user appears in searches
+- **personalPhoneNumbers**: Additional contact numbers array
+
+#### 3. serviceInfo (Optional)
+
+Service assignments and configurations:
+
+- **licenses**: Array of assigned licenses/subscriptions
+- **extensions**: Array of voice extensions with complete configuration:
+  - Extension numbers and phone numbers
+  - Call routing and forwarding settings
+  - Voicemail configuration
+  - Device assignments
+  - Caller ID settings
+  - Recording preferences
+  - Emergency address information
+
+#### 4. assignmentInfo (Optional)
+
+Group memberships and policies:
+
+- **profilePolicy**: Applied user profile policy
+- **ringGroups**: Ring group memberships
+- **ucCallQueues**: Call queue assignments
+- **userGroups**: User group memberships
+
+### 8x8 Organizational Hierarchy
+
+Users exist within a hierarchical structure that affects routing, features, and management:
+
+```text
+Customer (Organization)
+  └── PBX (Platform Instance)
+      └── Site (Physical Location)
+          └── User (Individual Account)
+              └── Extension (Voice Service)
+```
+
+**Key Points**:
+- Every user must be assigned to a Site
+- Site determines PBX assignment automatically
+- Multiple sites can share a PBX
+- Extensions provide telephony capabilities
+- Hierarchy affects feature availability and call routing
+
+---
+
+## Use Cases
+
+This section covers the most common real-world scenarios for using the User Management API, with implementation patterns and code examples.
+
+For common patterns like pagination, filtering, and error handling, see [Administration API Essentials](./suite-common.mdx).
+
+### Use Case 1: Employee Onboarding Automation
+
+**Business Context**: When new employees join your organization, their user accounts need to be created quickly and configured consistently. Manual provisioning through the Admin Console is time-consuming and error-prone at scale. Integrating with your HR system (Workday, BambooHR, SAP SuccessFactors) enables automatic user creation when employees are added.
+
+**When to Use**:
+- Integrating HR system with 8x8 for automated provisioning
+- Reducing IT workload for routine user creation
+- Ensuring consistent user configuration across the organization
+- Supporting rapid scaling or seasonal hiring
+
+**Implementation Pattern**:
+
+1. **Receive Employee Data**: HR system triggers webhook or scheduled sync provides employee details
+2. **Map to User Schema**: Transform HR data to User API schema (userName from email, names, department, site assignment)
+3. **Create User**: POST to `/users` with complete user information
+4. **Monitor Operation**: Poll operation status until completion (see [API Essentials - Async Operations](./suite-common.mdx#asynchronous-operations))
+5. **Handle Results**: Log success, retry on transient failures, alert on business logic errors
+6. **Notify Stakeholders**: Send welcome email, create tickets for additional setup (hardware, access cards)
+
+**Required Information**:
+- Employee first name, last name, email
+- Valid site ID for office location
+- Department, job title for directory
+- Desired status (ACTIVE for immediate access, INACTIVE for pre-boarding)
+
+<TabbedExternalCodeSample
+  path="example_code/administration/users-api/usecase-onboarding-complete-workflow"
+  title="Example: Employee Onboarding Workflow"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Outcomes**:
+- User account created in 8x8 within minutes of HR system entry
+- Consistent configuration based on role and location
+- Audit trail of all provisioning actions
+- Reduced IT workload and faster employee onboarding
+
+**Common Challenges**:
+- **Site ID Mapping**: Maintain mapping between HR office locations and 8x8 site IDs
+- **Username Conflicts**: Handle duplicates with numbering scheme (e.g., jane.smith2)
+- **Partial Failures**: User created but downstream operations fail (licenses, extensions)
+- **Data Quality**: Validate and clean HR data before submission
+
+---
+
+### Use Case 2: Bulk User Management
+
+**Business Context**: When deploying a new office location or migrating from another platform, you need to create dozens or hundreds of users quickly. Sequential creation through the UI or individual API calls is inefficient. Bulk operations enable rapid deployment while maintaining consistency.
+
+**When to Use**:
+- New site/office deployments
+- Platform migrations
+- Mergers and acquisitions
+- Organizational restructuring
+- Seasonal workforce scaling
+
+**Implementation Pattern**:
+
+1. **Prepare Data**: Create CSV/Excel with user information, validate completeness
+2. **Validate Site IDs**: Ensure all referenced sites exist
+3. **Submit in Batches**: Create users in parallel (5-10 concurrent requests recommended, see [API Essentials - Best Practices](./suite-common.mdx#best-practices))
+4. **Track Operations**: Store operation IDs with corresponding user data
+5. **Monitor Progress**: Poll all operations, implement retry logic for failures
+6. **Generate Report**: Summary of successful vs failed creations with error details
+
+**Pagination for Discovery**:
+
+When you need to retrieve all users (for reporting, migration, or synchronization), use scroll-based pagination (see [API Essentials - Pagination](./suite-common.mdx#pagination)):
+
+<TabbedExternalCodeSample
+  path="example_code/administration/users-api/usecase-bulk-create-users"
+  title="Example: Bulk User Creation"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+<TabbedExternalCodeSample
+  path="example_code/administration/users-api/usecase-paginate-all-users"
+  title="Example: Paginate Through All Users"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Outcomes**:
+- Rapid user creation (dozens per minute)
+- Consistent configuration across all users
+- Clear audit trail of bulk operation
+- Detailed success/failure reporting
+
+**Best Practices**:
+- **Batch Size**: Create 5-10 users concurrently (more may hit rate limits, see [API Essentials - Rate Limiting](./suite-common.mdx#rate-limiting))
+- **Operation Tracking**: Store operation IDs with source data for correlation
+- **Error Handling**: Distinguish validation errors (fix data) from transient failures (retry per [API Essentials - Error Handling](./suite-common.mdx#error-handling))
+- **Progress Monitoring**: Implement progress indicators for long-running operations
+- **Rollback Planning**: Have process to delete bulk-created users if validation fails
+
+---
+
+### Use Case 3: User Information Updates
+
+**Business Context**: Employee information changes frequently - promotions, department transfers, name changes, office relocations. Keeping 8x8 user data synchronized with HR systems and organizational directories requires systematic updates. Manual updates are error-prone and don't scale.
+
+**When to Use**:
+- Employee role or department changes
+- Office relocations or site reassignments
+- Name changes or contact information updates
+- Service assignment modifications
+- Directory information corrections
+
+:::danger CRITICAL: Understanding PUT Semantics
+
+The User Management API does NOT support partial updates via PATCH. PUT operations require the COMPLETE user object.
+
+Be sure to familiarise yourself with the correct update pattern in the [Administration API Essentials - Understanding PUT Semantics](./suite-common.mdx#understanding-put-semantics) section to avoid unintended data loss.
+
+:::
+
+**Implementation Pattern**:
+
+1. **Identify User**: Get userId from sync system or search by email/username
+2. **Retrieve Current State**: GET `/users/{userId}` for complete user object
+3. **Apply Changes**: Modify specific fields in memory (never submit partial objects)
+4. **Validate Changes**: Ensure required fields still present, data types correct
+5. **Submit Update**: PUT complete modified user object (not currently supported in API - only POST and DELETE are implemented)
+6. **Monitor Operation**: Poll until completion
+7. **Verify**: GET user again to confirm changes applied
+
+<TabbedExternalCodeSample
+  path="example_code/administration/users-api/usecase-update-user-info"
+  title="Example: Update User Information"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Outcomes**:
+- User information updated accurately
+- No data loss from incomplete submissions
+- Audit trail of changes
+- Changes reflected in Admin Console immediately after operation completes
+
+---
+
+### Use Case 4: Employee Offboarding
+
+**Business Context**: When employees leave, their accounts must be deactivated or removed to maintain security and license compliance. Automated offboarding ensures timely deprovisioning when HR systems record terminations, eliminating security risks from forgotten accounts.
+
+**When to Use**:
+- Employee termination or resignation
+- Contractor end-of-engagement
+- Account cleanup for inactive users
+- License reclamation
+- Security and compliance requirements
+
+**Implementation Pattern**:
+
+Most organizations use a three-stage offboarding process rather than immediate deletion:
+
+**Stage 1: Immediate Disable** (Termination Day)
+- Use PUT to change `basicInfo.status` to `INACTIVE`
+- Disables login immediately while preserving all user data
+- Allows time for knowledge transfer and data retrieval
+- User remains visible in directory but cannot access services
+
+**Stage 2: License Deprovision** (After Grace Period, typically 3-7 days)
+- Use PUT to remove licenses and extensions from the user
+- Frees licenses for reassignment to other users
+- User record remains but has no service access
+- Typically triggered by offboarding process milestone
+
+**Stage 3: Account Deletion** (After Retention Period, typically 30-90 days)
+- Use DELETE `/users/{userId}` to permanently remove user
+- Complies with data retention policies
+- Frees up the username for potential reuse
+- Final cleanup of user record
+
+**Why Three Stages?**:
+- **Compliance**: Maintains audit trail during retention period
+- **Operational**: Allows IT to retrieve data, transfer ownership, update documentation
+- **License Management**: Immediate license recovery without data loss
+- **Reversibility**: Can reactivate user if termination reversed (before Stage 3)
+
+<TabbedExternalCodeSample
+  path="example_code/administration/users-api/usecase-offboard-employee"
+  title="Example: Three-Stage Employee Offboarding"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Outcomes**:
+- User account disabled immediately (INACTIVE status)
+- Login access revoked within minutes
+- Permanent deletion after retention period
+- License freed for reassignment
+- Audit trail for compliance
+
+---
+
+## Business Rules
+
+This section documents important constraints and special behaviors specific to user management operations.
+
+### Site Assignment Constraints
+
+**Site is Immutable**: The `basicInfo.site` field cannot be modified after user creation.
+
+- Site assignment is permanent and cannot be changed via PUT
+- Users requiring site reassignment must be deleted and recreated
+- Plan site assignments carefully during initial user creation
+
+**Workaround for Site Changes**:
+If a user must be moved to a different site:
+1. Document current user configuration (GET user, save complete response)
+2. Delete the user (DELETE operation)
+3. Recreate user with new site ID (POST operation with same data, different site)
+4. Note: User ID will change - update any external system references
+
+### Directory Visibility
+
+Multiple attributes control directory visibility with complex interactions:
+
+**Attributes**:
+- `directoryInfo.displayInDirectory`
+- `serviceInfo.extensions[].displayInDirectory`
+
+**Visibility Rules**:
+
+**Users without licenses**: The `directoryInfo.displayInDirectory` attribute controls whether the user is visible at all in any directory, including any personal contact numbers.
+
+**Users with UC license**: The `serviceInfo.extensions[].displayInDirectory` attribute for the extension object that has `serviceInfo.extensions[].extensionType = "UC"` and the `directoryInfo.displayInDirectory` attributes are synchronized (i.e., toggling one will toggle the other), controlling visibility of all numbers of the user except for their CC agent details (personal numbers, UC extension numbers, and fax numbers).
+
+**Users with CC license**: The `serviceInfo.extensions[].displayInDirectory` attribute for the extension object that has `serviceInfo.extensions[].extensionType = "CC"` controls whether their contact center agent details are visible.
+
+### User Group Assignment
+
+The `assignmentInfo.userGroups` field is structured as an array, but users can only belong to one user group at a time.
+
+**Behavior**:
+- If multiple user groups are provided in the array, the user will be assigned to the last group processed
+- The processing order is not guaranteed, making the result unpredictable when multiple groups are specified
+- Previous group assignments are overwritten, not accumulated
+
+**Best Practice**: Provide a maximum of one user group in the `assignmentInfo.userGroups` array to ensure predictable assignment behavior.
+
+**Example** (Correct - Single User Group):
+
+```json
+{
+  "assignmentInfo": {
+    "userGroups": [
+      { "id": "ug_abc123" }
+    ]
+  }
+}
+```
+
+**Example** (Avoid - Multiple User Groups):
+
+```json
+{
+  "assignmentInfo": {
+    "userGroups": [
+      { "id": "ug_abc123" },
+      { "id": "ug_def456" }  // Only one of these will be assigned
+    ]
+  }
+}
+```
+
+### DID License Assignment
+
+DID (Direct Inward Dialing) licenses have special handling:
+
+- **Not assigned explicitly**: Don't include DID licenses in POST or PUT requests
+- **Automatic assignment**: DID licenses are assigned automatically when phone numbers are configured
+- **Visible on GET**: DID licenses will appear in GET responses after phone number configuration
+
+### License Changes
+
+Changing a user's license type (e.g., upgrading from an X2 to an X4 license) cannot be accomplished in a single PUT operation.
+
+**Two-Step Update Required**:
+
+1. **Remove Existing License**: Submit a PUT request with the `serviceInfo.licenses` array empty or with the current license removed
+2. **Apply New License**: Submit a second PUT request with the new license configuration
+
+**Data Loss Warning**:
+
+:::warning Extension Data Loss
+
+When licenses are removed and reapplied, certain extension-related data will be permanently lost:
+
+- **Group Memberships**: Ring group and call queue assignments will be removed
+- **Voicemail Setup**: Voicemail greetings, PIN, and configuration settings will be reset
+- **Voicemail Messages**: Existing voicemail recordings will be deleted
+
+Plan accordingly and inform users before making license changes. Consider exporting or documenting critical configurations before proceeding.
+
+:::
+
+**Example Workflow**:
+
+```text
+Step 1: GET /users/{userId}              → Retrieve current user state
+Step 2: PUT /users/{userId}              → Submit with licenses removed
+Step 3: Poll operation until COMPLETED
+Step 4: PUT /users/{userId}              → Submit with new license applied
+Step 5: Poll operation until COMPLETED
+Step 6: Reconfigure group memberships, voicemail, etc. as needed
+```
+
+### Dial Plan Country Codes
+
+When configuring extensions, the `serviceInfo.extensions[].dialPlanCallingCountry` attribute can take one of the values from the table below.  If omitted the Site default value will be set.
+**Note** Ensure the dial plan calling country matches the country of the primary phone number to ensure correct outbound calling.
+
+| Country | Dial Plan Calling Country |
+|---------|----------------|
+| Angola | AGONP |
+| Argentina | ARGNP |
+| Australia | AUSTNP |
+| Austria | AUSTRIANP |
+| Bahrain | BHRNP |
+| Belgium | BLGMNP |
+| Brazil | BRAZILNP |
+| Bulgaria | BGRNP |
+| Chile | CHLNP |
+| China | CHNNP |
+| Colombia | CLMBANP |
+| Costa Rica | CRINP |
+| Croatia | HRVNP |
+| Czech Republic | CZENP |
+| Denmark | DNKNP |
+| Ecuador | ECUNP |
+| Estonia | ESTNP |
+| Finland | FINLNDNP |
+| France | FRANCENP |
+| Germany | GERNP |
+| Greece | GRCNP |
+| Hong Kong | HKNP |
+| Hungary | HGRYNP |
+| India | INDNP |
+| Indonesia | IDNNP |
+| Ireland | IRELANDNP |
+| Israel | ISRAELNP |
+| Italy | ITALYNP |
+| Japan | JAPANNP |
+| Kazakhstan | KZNP |
+| Kenya | KENNP |
+| Latvia | LVANP |
+| Lithuania | LTUNP |
+| Luxembourg | LUXNP |
+| Malaysia | MLYNP |
+| Malta | MLTNP |
+| Mexico | MXNP |
+| Netherlands | NTHRLNDNP |
+| New Zealand | NZLNP |
+| North America | NANP |
+| Norway | NORNP |
+| Panama | PANNP |
+| Peru | PERNP |
+| Philippines | PHNP |
+| Poland | PLNDNP |
+| Portugal | PRTNP |
+| Romania | RMNNP |
+| Russia | RUSNP |
+| Singapore | SINGNP |
+| Slovakia | SVKNP |
+| Slovenia | SVNNP |
+| South Africa | STHAFNP |
+| South Korea | KORNP |
+| Spain | SPNNP |
+| Sri Lanka | SRILANKNP |
+| Sweden | SWEDENNP |
+| Switzerland | SWITZNP |
+| Taiwan | TWNNP |
+| Thailand | THANP |
+| Turkey | TRKYNP |
+| UK | UKNP |
+| Ukraine | UKRNP |
+| United Arab Emirates | ARENP |
+| Vietnam | VTNMNP |
+
+---
+
+## API Reference
+
+### Endpoints Overview
+
+| Endpoint | Method | Purpose | Async? | Authentication |
+|----------|--------|---------|--------|----------------|
+| `/users` | GET | Search/list users with filtering and pagination | No | Required |
+| `/users` | POST | Create new user | Yes | Required |
+| `/users/{userId}` | GET | Retrieve specific user details | No | Required |
+| `/users/{userId}` | DELETE | Delete user | Yes | Required |
+
+**Note**: PUT (update) operations are documented in the OpenAPI specification but not currently implemented in v1.0.0. Updates require delete and recreate workflow.
+
+### Base URL
+
+`https://api.8x8.com/admin-provisioning`
+
+### Required Headers
+
+See [API Essentials - Common Request Patterns](./suite-common.mdx#common-request-patterns) for complete header requirements.
+
+For User Management API specifically:
+
+```http
+x-api-key: your-api-key-here
+Accept: application/vnd.users.v1+json
+Content-Type: application/json  (for POST/PUT requests)
+```
+
+### Query Parameters
+
+**Pagination Parameters** (GET `/users`):
+- `pageSize` (integer, 1-1000): Items per page, default 100
+- `scrollId` (string): Continuation token for next page (see [API Essentials - Pagination](./suite-common.mdx#pagination))
+- `filter` (string): RSQL filter expression (see [API Essentials - RSQL Filtering](./suite-common.mdx#filtering-with-rsql))
+- `sort` (string): Sort criteria (e.g., `+lastName,-firstName`, see [API Essentials - Sorting](./suite-common.mdx#sorting-results))
+
+**Path Parameters**:
+- `userId` (string): Unique user identifier (e.g., `hvOB1l3zDCaDAwp9tNLzZA`)
+
+### HTTP Status Codes
+
+See [API Essentials - Error Handling](./suite-common.mdx#error-handling) for complete status code descriptions.
+
+**Success Codes**:
+- `200 OK`: Successful GET request
+- `202 Accepted`: Async operation accepted (create, delete)
+
+**Error Codes**:
+- `400 Bad Request`: Validation error or malformed request
+- `401 Unauthorized`: Missing or invalid authentication
+- `403 Forbidden`: Insufficient permissions
+- `404 Not Found`: User does not exist
+- `429 Too Many Requests`: Rate limit exceeded (see [API Essentials - Rate Limiting](./suite-common.mdx#rate-limiting))
+- `424 Failed Dependency`: Downstream service failure
+- `500 Internal Server Error`: Unexpected server error
+
+### Key Data Models
+
+**User Object** (Complete):
+- `basicInfo` (required): Core identity fields (see [Core Concepts](#user-object-structure))
+- `directoryInfo` (optional): Organizational profile
+- `serviceInfo` (optional): Service assignments
+- `assignmentInfo` (optional): Group memberships
+
+**Operation Object**:
+See [API Essentials - Asynchronous Operations](./suite-common.mdx#asynchronous-operations) for complete operation object description.
+
+**UserPage Object** (List Response):
+See [API Essentials - Pagination](./suite-common.mdx#pagination) for pagination response structure.
+
+### Field Constraints
+
+**Required Fields** (basicInfo):
+- `userName`: 3-70 characters, pattern: `[A-Za-z0-9.@\-_/]+`
+- `firstName`: 2-128 characters, pattern: `[A-Za-z0-9.,\-_()' ]+`
+- `lastName`: 2-30 characters, pattern: `[A-Za-z0-9.,\-_()' ]+`
+- `primaryEmail`: 5-128 characters, valid email format
+
+**Common Field Formats**:
+- Dates: ISO 8601 format (`2025-12-01T15:30:45Z`)
+- Phone Numbers: E.164 format (`+14085551234`)
+- Status Values: ACTIVE, INACTIVE
+- Locale: ISO codes (en-US, en-GB, fr-FR, etc.)
+
+### OpenAPI Specification
+
+View the complete [OpenAPI Specification](/administration/user-api-v1.yaml) for detailed endpoint documentation.
+
+## API-Specific Error Scenarios
+
+For common error handling patterns, see [Administration API Essentials - Error Handling](./suite-common.mdx#error-handling).
+
+This section covers error scenarios specific to the User Management API.
+
+### Missing Required Fields
+
+**Request**: Create user without email
+
+```json
+POST /users
+{
+  "basicInfo": {
+    "userName": "jsmith",
+    "firstName": "John",
+    "lastName": "Smith"
+    // primaryEmail missing
+  }
+}
+```
+
+**Response** (400 Bad Request):
+
+```json
+{
+  "status": 400,
+  "title": "Validation Error",
+  "detail": "Required fields are missing",
+  "errors": [
+    {
+      "field": "basicInfo.primaryEmail",
+      "code": "VALIDATION_ERROR",
+      "message": "primaryEmail is required"
+    }
+  ]
+}
+```
+
+**Resolution**: Add missing required field and resubmit.
+
+### Duplicate Username
+
+**Request**: Create user with existing userName
+
+```json
+POST /users
+{
+  "basicInfo": {
+    "userName": "jsmith",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "primaryEmail": "jane.smith@example.com"
+  }
+}
+```
+
+**Operation Response** (status: FAILED):
+
+```json
+{
+  "operationId": "op_1a2b3c4d5e6f",
+  "status": "FAILED",
+  "error": {
+    "status": 400,
+    "title": "Duplicate Username",
+    "detail": "User with this username already exists",
+    "errors": [
+      {
+        "field": "basicInfo.userName",
+        "code": "VALIDATION_ERROR",
+        "message": "Username jsmith is already in use"
+      }
+    ]
+  }
+}
+```
+
+**Resolution**: Use unique username or delete existing user first.
+
+### User-Specific Validation Errors
+
+**Invalid Field Patterns**:
+- Username must match pattern `[A-Za-z0-9.@\-_/]+`
+- First name must match pattern `[A-Za-z0-9.,\-_()' ]+`
+- Email must be valid email format
+- Locale must be valid ISO locale code
+
+**Invalid Site Assignment**:
+- Site ID must exist in the organization
+- Site must be active and accessible
+
+---
+
+## API-Specific Troubleshooting
+
+For common troubleshooting guidance, see [Administration API Essentials - Troubleshooting](./suite-common.mdx#troubleshooting).
+
+This section covers troubleshooting issues specific to the User Management API.
+
+### User Not Visible After Creation
+
+**Problem**: Operation completes but user not visible in Admin Console
+
+**Debugging Steps**:
+1. Verify operation status is `COMPLETED` (not just `IN_PROGRESS`)
+2. Check user `basicInfo.status` is `ACTIVE`
+3. Clear Admin Console cache (hard refresh browser)
+4. Verify viewing correct site filter in Admin Console
+5. Use `GET /users/{userId}` directly to confirm user exists
+6. Check `directoryInfo.displayInDirectory` setting
+
+**Resolution**: If user exists via API but not visible in console, check directory visibility settings per [Business Rules - Directory Visibility](#directory-visibility).
+
+### Missing User Data After Creation
+
+**Problem**: User created but missing expected optional fields
+
+**Debugging Steps**:
+1. Verify operation completed successfully (status: COMPLETED)
+2. Check original request body for missing optional fields
+3. Retrieve user with GET to see actual stored data
+4. Review API response for warnings or partial success indicators
+5. Check if downstream provisioning is delayed (extensions, licenses)
+
+**Resolution**: Optional fields not included in POST request are not populated. Submit new request with complete data or update user (when PUT is available).
+
+### Site Reassignment Not Allowed
+
+**Problem**: Attempting to change user's site via PUT fails
+
+**Cause**: Site is immutable per [Business Rules - Site Assignment Constraints](#site-assignment-constraints)
+
+**Resolution**: Follow the three-step workaround:
+1. Document complete user configuration (GET and save)
+2. Delete user (DELETE operation)
+3. Recreate with new site ID (POST with same data, different site)
+4. Update external system references (user ID will change)
+
+### Duplicate Username on Bulk Import
+
+**Problem**: Some users fail during bulk import with duplicate username
+
+**Cause**: Username conflicts with existing users or within import batch
+
+**Resolution**:
+- Pre-check usernames with GET `/users?filter=basicInfo.userName=={username}`
+- Implement numbering scheme (jane.smith, jane.smith2, jane.smith3)
+- Validate import data for internal duplicates before submission
+- Handle failures gracefully with detailed error logging
+
+---
+
+## Additional Resources
+
+**API Documentation**:
+- [Administration API Essentials](./suite-common.mdx)
+- [OpenAPI Specification](/administration/user-api-v1.yaml)
+- [8x8 Admin Console](https://admin.8x8.com)
+
+**Technical References**:
+- [RSQL Specification](https://github.com/jirutka/rsql-parser) (for filtering syntax)
+- [RFC 7807 - Problem Details](https://tools.ietf.org/html/rfc7807) (error format)
+- [ISO 8601 Date Format](https://en.wikipedia.org/wiki/ISO_8601)
+- [E.164 Phone Number Format](https://en.wikipedia.org/wiki/E.164)
+
+**Service Status**:
+- [8x8 Status Page](https://status.8x8.com)
+
+**Support**:
+- Admin Console: User profile menu → Contact Support
+
+**When Contacting Support**: See [API Essentials - Support Resources](./suite-common.mdx#support-resources) for required information.
+
+---
+
+**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)  |  **Feedback**: Submit feedback via Admin Console

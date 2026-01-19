@@ -138,6 +138,20 @@ const BASE_SECTION_NAV_CONFIG = {
       },
     ],
   },
+  administration: {
+    tabs: [
+      {
+        label: TAB_LABELS.GUIDES,
+        path: '/administration/docs',
+        iconClass: ICON_CLASSES.GUIDES,
+      },
+      {
+        label: TAB_LABELS.API_REFERENCE,
+        path: '/administration/reference',
+        iconClass: ICON_CLASSES.REFERENCES,
+      },
+    ],
+  },
 };
 
 export default function SectionNavigation() {

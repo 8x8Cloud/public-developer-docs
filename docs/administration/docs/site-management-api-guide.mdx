@@ -1,0 +1,1226 @@
+import TabbedExternalCodeSample from '@site/docusaurus/components/TabbedExternalCodeSample';
+
+# Site Management API Guide
+
+**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)
+
+:::warning BETA - Limited Access
+
+**These Administration APIs are currently in Beta testing.** API keys cannot be generated in Admin Console at this point. Only Beta program participants may use these APIs.
+
+:::
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Core Concepts](#core-concepts)
+3. [Getting Started](#getting-started)
+4. [Use Cases](#use-cases)
+5. [API Reference](#api-reference)
+6. [API-Specific Error Scenarios](#api-specific-error-scenarios)
+7. [API-Specific Troubleshooting](#api-specific-troubleshooting)
+8. [Additional Resources](#additional-resources)
+
+---
+
+## Overview
+
+The Site Management API enables programmatic management of sites (physical or logical locations) and their associated addresses within your 8x8 organization. Sites are fundamental organizational units in the 8x8 hierarchy that contain users and UC resources, providing shared telephony features and emergency service configuration.
+
+This guide covers two related APIs:
+
+- **Site API**: Create, retrieve, update, and delete sites
+- **Address API**: Create, retrieve, and delete addresses used by sites
+
+Sites represent physical or logical customer locations such as offices, clinics, or facilities. Each site must have an associated address, which is registered with in-country authorities for emergency services and inherited by users at that site.
+
+### Suite Integration
+
+This API is part of the Administration API Suite, which shares common patterns for authentication, versioning, error handling, and more. See the [Administration API Suite Common Documentation](./suite-common.mdx) for details on:
+
+- [Authentication](./suite-common.mdx#authentication)
+- [API Versioning](./suite-common.mdx#api-versioning)
+- [Asynchronous Operations](./suite-common.mdx#asynchronous-operations)
+- [Pagination](./suite-common.mdx#pagination)
+- [RSQL Filtering](./suite-common.mdx#filtering-with-rsql)
+- [Error Handling](./suite-common.mdx#error-handling)
+- [Rate Limiting](./suite-common.mdx#rate-limiting)
+
+### API-Specific Versioning
+
+When making requests to the Site Management APIs, use these API-specific Accept headers:
+
+- **Site API**: `Accept: application/vnd.sites.v1+json`
+- **Address API**: `Accept: application/vnd.addresses.v1+json`
+
+See [API Versioning](./suite-common.mdx#api-versioning) in the common documentation for more details on how versioning works.
+
+## Core Concepts
+
+### Sites
+
+Sites represent physical or logical locations within your organization where users and devices are deployed. Sites are part of the organizational hierarchy and provide shared configuration for users at that location.
+
+**Organizational Hierarchy**:
+
+```text
+Customer → PBX → Site → Users/Resources
+```
+
+**Key Site Properties**:
+
+- **Name**: Human-readable identifier for the site (e.g., "Headquarters", "San Jose Office")
+- **PBX**: Parent PBX that owns the site (cannot be changed after creation)
+- **Address**: Physical address registered for emergency services (can be updated)
+- **Locale**: Default language for system prompts and desk phone displays (e.g., `en-US`, `fr-FR`)
+- **Timezone**: Timezone for the site, inherited by users (can be overridden at user level)
+- **Extension Management**: `extensionLength` and `siteCode` properties for extension configuration
+
+**Shared UC Telephony Features**:
+
+Sites provide shared configuration for users and resources at that location:
+
+- **Caller ID Settings** (`callerIdSettings`):
+  - Main number for the site
+  - Whether to use main number as caller ID
+  - Whether to share main number across users
+  - Display name for caller ID
+
+- **External Calling Permissions** (`defaultDialPlanRuleset`):
+  - `INTERNATIONAL`: Allow international, domestic, and emergency calls
+  - `DOMESTIC`: Allow domestic and emergency calls only
+  - `EMERGENCYONLY`: Allow emergency calls only
+
+- **Emergency Notifications**: Email addresses to notify when emergency calls are made from the site
+
+**Site Lifecycle**:
+
+- Sites must exist before users can be created
+- Users must be linked to exactly one site
+- Sites can be updated after creation (including address changes)
+- Sites can be deleted only if no users or resources are associated
+
+### Addresses
+
+Addresses are physical locations registered with in-country authorities for emergency services. Addresses are required for site creation and are inherited by users as their emergency addresses.
+
+**Key Address Characteristics**:
+
+- **Immutable**: Cannot be updated after creation (only created or deleted)
+- **Idempotent Creation**: If an identical address already exists, the API returns the existing address ID instead of creating a duplicate
+- **Reference Tracking**: The GET endpoint includes an `addressUsage` object with categorized usage counts
+- **Deletion Rules**: Can only be deleted when all usage counts are zero
+- **Country Mandatory**: The only required field for address creation
+
+**Address Usage Categories**:
+
+When you retrieve an address, the `addressUsage` object shows how many times the address is referenced in each category:
+
+- `customer`: Used as customer address
+- `site`: Used by sites (this guide's focus)
+- `userPersonal`: Used as user personal addresses
+- `userExtension`: Used as user extension addresses
+- `trunk`: Used by trunk configurations
+- `operatorConnect`: Used by Operator Connect configurations
+- `license`: Used by license configurations
+
+**Address Fields**:
+
+Addresses support various fields for different address formats worldwide:
+
+- `streetNumber`, `streetName`, `streetNumberSuffix`, `streetNameSuffix`
+- `preDirectional`, `postDirectional` (e.g., "N" in "123 N Main St")
+- `secondaryLocation` (e.g., "Unit 203", "Suite 400")
+- `city`, `dependentCity`
+- `state`, `county`
+- `postal`, `zip4`
+- `country` (required)
+- `building`, `organization`
+
+The API automatically populates a `displayForm` field with a formatted representation of the address.
+
+### Locale and Timezone
+
+**Locale** specifies the default language for:
+- System audio prompts (e.g., voicemail instructions)
+- Desk phone display language
+
+**Timezone** determines:
+- When time-based features activate (e.g., scheduled call routing)
+- Timestamp display in user interfaces
+
+Both can be set at the site level and overridden at the user level, allowing users in different timezones or speaking different languages to work within the same site.
+
+## Getting Started
+
+### Prerequisites
+
+Before using the Site Management API, ensure you have:
+
+1. **API Products**: The following API products must be enabled for your API key:
+   - **UC Site Admin**: Required for site management operations
+   - **UC & CC Admin Operations**: Required for asynchronous operations
+
+2. **API Authentication**: An API key with appropriate permissions. See [Authentication](./suite-common.mdx#authentication) in the common documentation.
+
+3. **Existing PBX**: Sites must be created within an existing PBX. If you don't have a PBX, create one first through the Admin Console or appropriate API.
+
+### Base URL
+
+All Site Management API endpoints use the base URL:
+
+```text
+https://api.8x8.com/admin-provisioning
+```
+
+### Quick Start: Create Your First Site
+
+Creating a site is a two-step process: first create an address, then create a site that references that address.
+
+#### Step 1: Create an Address
+
+Address creation is synchronous and returns the created address immediately.
+
+<TabbedExternalCodeSample
+  path="example_code/administration/site-management-api/create-address-basic"
+  title="Example: Create Address (Synchronous)"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Request Example**:
+
+```http
+POST /addresses HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.addresses.v1+json
+Content-Type: application/vnd.addresses.v1+json
+
+{
+  "streetNumber": "7",
+  "streetName": "34TH ST",
+  "secondaryLocation": "613",
+  "city": "New York",
+  "state": "NY",
+  "postal": "10001",
+  "country": "US"
+}
+```
+
+**Response Example** (200 OK):
+
+```json
+{
+  "id": "b1c4944a-17a0-4b00-8d48-36001df07e22",
+  "displayForm": "7 W 34TH ST, 613, New York NY, 10001",
+  "streetNumber": "7",
+  "preDirectional": "W",
+  "streetName": "34TH ST",
+  "secondaryLocation": "613",
+  "city": "New York",
+  "state": "NY",
+  "postal": "10001",
+  "country": "US",
+  "createdTime": "2025-01-01T01:02:03Z",
+  "origin": "ADMIN_API"
+}
+```
+
+**Note**: Save the `id` value (`b1c4944a-17a0-4b00-8d48-36001df07e22`) for use in site creation.
+
+:::info Address API Uses Synchronous Create Operations
+
+Unlike other Administration APIs, the Address API's `POST /addresses` endpoint returns `200 OK` with the created Address object immediately, **not** `202 Accepted` with an Operation object.
+
+This is the only create operation in the Administration API Suite that does not use asynchronous processing. Site creation still uses the standard async pattern.
+:::
+
+#### Step 2: Create a Site
+
+Site creation is asynchronous. The API returns an Operation object that you poll to track progress.
+
+<TabbedExternalCodeSample
+  path="example_code/administration/site-management-api/create-site-basic"
+  title="Example: Create Site (Asynchronous)"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Request Example**:
+
+```http
+POST /sites HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.sites.v1+json
+Content-Type: application/vnd.sites.v1+json
+
+{
+  "name": "Headquarters",
+  "pbxName": "pbx01",
+  "locale": "en-US",
+  "timezone": "America/Los_Angeles",
+  "siteCode": "1345",
+  "extensionLength": 4,
+  "address": {
+    "id": "b1c4944a-17a0-4b00-8d48-36001df07e22"
+  }
+}
+```
+
+**Response Example** (202 Accepted):
+
+```json
+{
+  "operationId": "op_123456789",
+  "status": "PENDING",
+  "customerId": "0012J00042NkZQIQA3",
+  "resourceType": "SITE",
+  "resourceId": "0023OEZiR7qQ_EGb6xYjgg",
+  "operationType": "CREATE",
+  "createdTime": "2025-01-01T01:02:03Z"
+}
+```
+
+**Note**: Save the `operationId` to poll for completion status. See [Asynchronous Operations](./suite-common.mdx#asynchronous-operations) for polling guidance.
+
+#### Step 3: Poll the Operation
+
+Site creation is asynchronous. Poll the operation to check its status.
+
+<TabbedExternalCodeSample
+  path="example_code/administration/site-management-api/poll-site-operation"
+  title="Example: Poll Operation Status"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Request Example**:
+
+```http
+GET /operations/op_123456789 HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.operations.v1+json
+```
+
+**Response Example** (200 OK - Completed):
+
+```json
+{
+  "operationId": "op_123456789",
+  "status": "COMPLETED",
+  "customerId": "0012J00042NkZQIQA3",
+  "resourceType": "SITE",
+  "resourceId": "0023OEZiR7qQ_EGb6xYjgg",
+  "operationType": "CREATE",
+  "createdTime": "2025-01-01T01:02:03Z",
+  "completedTime": "2025-01-01T01:02:05Z",
+  "_links": {
+    "self": {
+      "href": "/admin-provisioning/operations/op_123456789"
+    },
+    "resource": {
+      "href": "/admin-provisioning/sites/0023OEZiR7qQ_EGb6xYjgg"
+    }
+  }
+}
+```
+
+**Note**: When `status` is `COMPLETED`, use the `resourceId` or `_links.resource.href` to retrieve the created site.
+
+See [Asynchronous Operations](./suite-common.mdx#asynchronous-operations) in the common documentation for details on operation polling patterns and status values.
+
+## Use Cases
+
+### Use Case 1: Create an Emergency-Ready Site
+
+Create a new site with a validated address registered for emergency services.
+
+**Scenario**: Your organization is opening a new office in San Francisco. You need to create a site with emergency address registration so that users at this location can make emergency calls.
+
+**Steps**:
+
+1. Create an address with complete street, city, state information
+2. Handle address validation errors if they occur
+3. Create a site referencing the address ID
+4. Poll the operation until the site creation completes
+5. Retrieve the created site to verify configuration
+
+<TabbedExternalCodeSample
+  path="example_code/administration/site-management-api/create-emergency-ready-site"
+  title="Example: Create Emergency-Ready Site"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Request Example (Step 1 - Create Address)**:
+
+```http
+POST /addresses HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.addresses.v1+json
+Content-Type: application/vnd.addresses.v1+json
+
+{
+  "streetNumber": "100",
+  "streetName": "Market St",
+  "city": "San Francisco",
+  "state": "CA",
+  "postal": "94105",
+  "country": "US"
+}
+```
+
+**Response Example (Step 1)** (200 OK):
+
+```json
+{
+  "id": "addr_sf_market_st",
+  "displayForm": "100 Market St, San Francisco CA, 94105",
+  "streetNumber": "100",
+  "streetName": "Market St",
+  "city": "San Francisco",
+  "state": "CA",
+  "postal": "94105",
+  "country": "US",
+  "createdTime": "2025-01-01T01:02:03Z",
+  "origin": "ADMIN_API"
+}
+```
+
+**Request Example (Step 2 - Create Site)**:
+
+```http
+POST /sites HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.sites.v1+json
+Content-Type: application/vnd.sites.v1+json
+
+{
+  "name": "San Francisco Office",
+  "pbxName": "pbx01",
+  "locale": "en-US",
+  "timezone": "America/Los_Angeles",
+  "siteCode": "SF01",
+  "extensionLength": 4,
+  "address": {
+    "id": "addr_sf_market_st"
+  },
+  "emergencyNotifications": [
+    {
+      "type": "EMAIL",
+      "values": ["security@company.com", "facilities@company.com"]
+    }
+  ]
+}
+```
+
+**Response Example (Step 2)** (202 Accepted):
+
+```json
+{
+  "operationId": "op_create_sf_site",
+  "status": "PENDING",
+  "resourceType": "SITE",
+  "operationType": "CREATE"
+}
+```
+
+**Note**: Address validation uses external providers. If validation fails, see the Troubleshooting section for guidance on handling address validation errors.
+
+### Use Case 2: Configure Site Telephony Features
+
+Update an existing site's caller ID settings and external calling permissions.
+
+**Scenario**: Your San Francisco office site needs updated telephony configuration. You want to set a main phone number for caller ID and restrict external calling to domestic calls only.
+
+**Steps**:
+
+1. Retrieve the current site configuration
+2. Update the site with new caller ID settings and dial plan ruleset
+3. Poll the operation until the update completes
+4. Verify the updated configuration
+
+:::danger CRITICAL: Understanding PUT Semantics
+
+The Site Management API does NOT support partial updates via PATCH. PUT operations require the COMPLETE site object.
+
+Be sure to familiarise yourself with the correct update pattern in the [Administration API Essentials - Understanding PUT Semantics](./suite-common.mdx#understanding-put-semantics) section to avoid unintended data loss.
+
+:::
+
+<TabbedExternalCodeSample
+  path="example_code/administration/site-management-api/update-site-telephony"
+  title="Example: Update Site Telephony Settings"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Request Example**:
+
+```http
+PUT /sites/{siteId} HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.sites.v1+json
+Content-Type: application/vnd.sites.v1+json
+
+{
+  "name": "San Francisco Office",
+  "pbxName": "pbx01",
+  "locale": "en-US",
+  "timezone": "America/Los_Angeles",
+  "siteCode": "SF01",
+  "extensionLength": 4,
+  "address": {
+    "id": "addr_sf_market_st"
+  },
+  "callerIdSettings": {
+    "mainNumber": "+14155551234",
+    "setMainNumberAsCallerId": true,
+    "shareMainNumberAsCallerId": false,
+    "displayName": "SF Office"
+  },
+  "defaultDialPlanRuleset": "DOMESTIC"
+}
+```
+
+**Response Example** (202 Accepted):
+
+```json
+{
+  "operationId": "op_update_sf_site",
+  "status": "PENDING",
+  "resourceType": "SITE",
+  "operationType": "UPDATE",
+  "createdTime": "2025-01-01T01:02:03Z"
+}
+```
+
+**Note**: The site update is asynchronous. Poll the operation to check when it completes.
+
+**Caller ID Options**:
+
+- `setMainNumberAsCallerId`: When `true`, sets the main number as the default caller ID for users at this site
+- `shareMainNumberAsCallerId`: When `true`, allows users at this site to use the main number as their caller ID
+- `displayName`: Display name shown for caller ID
+
+**External Calling Permissions**:
+
+- `INTERNATIONAL`: Allow international, domestic, and emergency calls
+- `DOMESTIC`: Allow domestic and emergency calls only (restricts international)
+- `EMERGENCYONLY`: Allow emergency calls only (restricts all other outbound calling)
+
+### Use Case 3: Search Sites by Name
+
+List sites in a PBX with wildcard name filtering.
+
+**Scenario**: You need to find all sites in your organization whose names start with "Office".
+
+**Steps**:
+
+1. Use the GET /sites endpoint with a filter parameter
+2. Parse the paginated results
+3. Handle pagination if there are many results
+
+<TabbedExternalCodeSample
+  path="example_code/administration/site-management-api/search-sites-by-name"
+  title="Example: Search Sites with Wildcard Filter"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Request Example**:
+
+```http
+GET /sites?filter=name==Office*&pageSize=100&pageNumber=0 HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.sites.v1+json
+```
+
+**Response Example** (200 OK):
+
+```json
+{
+  "data": [
+    {
+      "id": "site_sf",
+      "name": "Office - San Francisco",
+      "pbxName": "pbx01",
+      "locale": "en-US",
+      "timezone": "America/Los_Angeles",
+      "siteCode": "SF01",
+      "extensionLength": 4,
+      "address": {
+        "id": "addr_sf"
+      }
+    },
+    {
+      "id": "site_ny",
+      "name": "Office - New York",
+      "pbxName": "pbx01",
+      "locale": "en-US",
+      "timezone": "America/New_York",
+      "siteCode": "NY01",
+      "extensionLength": 4,
+      "address": {
+        "id": "addr_ny"
+      }
+    }
+  ],
+  "pagination": {
+    "pageSize": 100,
+    "pageNumber": 0,
+    "hasMore": false
+  }
+}
+```
+
+**Note**: Site search uses limited RSQL support - see the API-Specific Patterns section below.
+
+:::info Site Search Has Limited RSQL Support
+
+The Site API has **limited RSQL filtering support** compared to other Administration APIs:
+
+- **Only the `name` field** can be filtered
+- **Only the `==` operator** is supported
+- **Wildcards** (`*`) can appear at the beginning or end of the value (e.g., `name==Office*`, `name==*Branch`, `name==*Office*`)
+- **No logical operations** (`AND`, `OR`) are supported
+
+This is different from the full RSQL filtering described in the [common documentation](./suite-common.mdx#filtering-with-rsql).
+
+**Valid Examples**:
+- `name==Headquarters` (exact match)
+- `name==Office*` (starts with "Office")
+- `name==*Branch` (ends with "Branch")
+- `name==*Office*` (contains "Office")
+
+**Invalid Examples**:
+- `filter=pbxName==pbx01` (unsupported field)
+- `filter=name!=Office` (unsupported operator)
+- `filter=name==Office*;locale==en-US` (logical operations not supported)
+:::
+
+### Use Case 4: Delete Site and Unused Address
+
+Delete a site and its associated address when the site is no longer needed.
+
+**Scenario**: Your organization is closing the San Francisco office. You need to delete the site and, if the address is not used elsewhere, delete the address as well.
+
+**Steps**:
+
+1. Ensure no users or resources are assigned to the site
+2. Delete the site
+3. Poll the operation until the deletion completes
+4. Check the address usage counts
+5. If all usage counts are zero, delete the address
+
+<TabbedExternalCodeSample
+  path="example_code/administration/site-management-api/delete-site"
+  title="Example: Delete Site and Address"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Request Example (Step 1 - Delete Site)**:
+
+```http
+DELETE /sites/{siteId} HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.sites.v1+json
+```
+
+**Response Example (Step 1)** (202 Accepted):
+
+```json
+{
+  "operationId": "op_delete_sf_site",
+  "status": "PENDING",
+  "resourceType": "SITE",
+  "operationType": "DELETE",
+  "createdTime": "2025-01-01T01:02:03Z"
+}
+```
+
+**Request Example (Step 2 - Check Address Usage)**:
+
+```http
+GET /addresses/{addressId} HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.addresses.v1+json
+```
+
+**Response Example (Step 2)** (200 OK):
+
+```json
+{
+  "id": "addr_sf_market_st",
+  "displayForm": "100 Market St, San Francisco CA, 94105",
+  "country": "US",
+  "addressUsage": {
+    "customer": 0,
+    "site": 0,
+    "userPersonal": 0,
+    "userExtension": 0,
+    "trunk": 0,
+    "operatorConnect": 0,
+    "license": 0
+  }
+}
+```
+
+**Request Example (Step 3 - Delete Address)**:
+
+```http
+DELETE /addresses/{addressId} HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.addresses.v1+json
+```
+
+**Response Example (Step 3)** (204 No Content):
+
+```text
+(Empty response body)
+```
+
+**Note**: Site deletion will fail if any users or resources are still assigned to the site. Address deletion will fail if the address is still in use (any usage count > 0).
+
+### Use Case 5: Check Address Reusability
+
+Check if an address can be deleted or is still in use by other resources.
+
+**Scenario**: You want to clean up unused addresses in your system. You need to identify which addresses can be safely deleted.
+
+**Steps**:
+
+1. List all addresses
+2. For each address, check its usage counts
+3. Identify addresses with zero usage counts that can be deleted
+
+<TabbedExternalCodeSample
+  path="example_code/administration/site-management-api/check-address-usage"
+  title="Example: Check Address Usage"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Request Example**:
+
+```http
+GET /addresses/{addressId} HTTP/1.1
+Host: api.8x8.com/admin-provisioning
+x-api-key: your-api-key-here
+Accept: application/vnd.addresses.v1+json
+```
+
+**Response Example** (200 OK):
+
+```json
+{
+  "id": "addr_ny_shared",
+  "displayForm": "7 W 34TH ST, 613, New York NY, 10001",
+  "streetNumber": "7",
+  "preDirectional": "W",
+  "streetName": "34TH ST",
+  "secondaryLocation": "613",
+  "city": "New York",
+  "state": "NY",
+  "postal": "10001",
+  "country": "US",
+  "createdTime": "2025-01-01T01:02:03Z",
+  "origin": "ADMIN_API",
+  "addressUsage": {
+    "customer": 1,
+    "site": 2,
+    "userPersonal": 0,
+    "userExtension": 3,
+    "trunk": 0,
+    "operatorConnect": 0,
+    "license": 0
+  }
+}
+```
+
+**Note**: This address is in use by 1 customer, 2 sites, and 3 user extensions. It cannot be deleted until all usage counts are zero.
+
+**Address Usage Categories**:
+
+- `customer`: Number of customer records using this address
+- `site`: Number of sites using this address (focus of this guide)
+- `userPersonal`: Number of user personal addresses
+- `userExtension`: Number of user extension addresses
+- `trunk`: Number of trunk configurations using this address
+- `operatorConnect`: Number of Operator Connect configurations
+- `license`: Number of license configurations
+
+An address can only be deleted when **all** usage counts are zero.
+
+## API Reference
+
+### Site API
+
+#### Create Site
+
+- **Endpoint**: `POST /sites`
+- **Async**: Yes (returns Operation object)
+- **Description**: Creates a new site within a PBX
+
+**Required Fields**: `name`, `pbxName`, `locale`, `timezone`, `address.id`
+
+**Key Parameters**:
+- `address.id`: ID of a previously created address
+- `locale`: Language/locale code (e.g., `en-US`, `fr-FR`, `de-DE`)
+- `timezone`: IANA timezone (e.g., `America/Los_Angeles`, `Europe/London`)
+- `siteCode`: Optional site code for extension management
+- `extensionLength`: Optional extension length (digits)
+
+#### Get Site
+
+- **Endpoint**: `GET /sites/{siteId}`
+- **Description**: Retrieves a specific site by ID
+
+**Response includes**: All site properties including caller ID settings, dial plan ruleset, and emergency notifications.
+
+#### Search Sites
+
+- **Endpoint**: `GET /sites`
+- **Query Parameters**:
+  - `pageSize`: Number of items per page (default: 100)
+  - `pageNumber`: Page number (0-indexed, default: 0)
+  - `filter`: RSQL filter expression (limited to `name` field with `==` operator)
+  - `sort`: Sort expression (e.g., `name`, `-name` for descending)
+
+**Filtering**: Limited to `name` field only. See "Site Search Has Limited RSQL Support" callout above.
+
+#### Update Site
+
+- **Endpoint**: `PUT /sites/{siteId}`
+- **Async**: Yes (returns Operation object)
+- **Description**: Updates an existing site
+
+**Updatable Fields**: All fields except `id` and `pbxName`. The PBX cannot be changed after site creation.
+
+**Note**: To update a site's address, provide a different `address.id` value.
+
+#### Delete Site
+
+- **Endpoint**: `DELETE /sites/{siteId}`
+- **Async**: Yes (returns Operation object)
+- **Description**: Deletes a site
+
+**Precondition**: The site must have no users or resources assigned. If users exist, the operation will fail with a `400 Bad Request` error.
+
+### Address API
+
+#### Create Address
+
+- **Endpoint**: `POST /addresses`
+- **Async**: No (synchronous, returns Address object immediately)
+- **Description**: Creates a new address or returns existing address if identical
+
+**Required Fields**: `country` only
+
+**Idempotency**: If an address with identical field values already exists, the API returns the existing address ID instead of creating a duplicate.
+
+**Validation**: Uses external validation providers. Legitimate addresses may sometimes be rejected due to validation provider limitations. See Troubleshooting for guidance.
+
+#### Get Address
+
+- **Endpoint**: `GET /addresses/{addressId}`
+- **Description**: Retrieves a specific address by ID
+
+**Response includes**: All address fields plus `addressUsage` object with categorized usage counts.
+
+#### Search Addresses
+
+- **Endpoint**: `GET /addresses`
+- **Query Parameters**:
+  - `pageSize`: Number of items per page (default: 100)
+  - `scrollId`: Scroll identifier for pagination (see [Pagination](./suite-common.mdx#pagination))
+  - `filter`: RSQL filter expression (supports `country`, `state`, `displayForm` fields)
+  - `sort`: Sort expression (e.g., `city`, `-city` for descending)
+
+**Pagination**: Uses scroll-based pagination. See [Pagination](./suite-common.mdx#pagination) in the common documentation.
+
+**Filtering**: Supports full RSQL syntax for `country`, `state`, and `displayForm` fields.
+
+#### Delete Address
+
+- **Endpoint**: `DELETE /addresses/{addressId}`
+- **Async**: No (synchronous, returns `204 No Content`)
+- **Description**: Deletes an address
+
+**Precondition**: All `addressUsage` counts must be zero. If the address is in use, the operation will fail with a `400 Bad Request` error.
+
+## Common Patterns
+
+This API follows standard patterns covered in the **[Administration API Essentials](./suite-common.mdx)**:
+
+- **Authentication**: See [Common Docs - Authentication](./suite-common.mdx#authentication)
+- **Asynchronous Operations**: See [Common Docs - Async Operations](./suite-common.mdx#asynchronous-operations)
+- **Pagination**: See [Common Docs - Pagination](./suite-common.mdx#pagination)
+- **Filtering with RSQL**: See [Common Docs - Filtering](./suite-common.mdx#filtering-with-rsql)
+- **Sorting**: See [Common Docs - Sorting](./suite-common.mdx#sorting-results)
+- **Error Handling**: See [Common Docs - Error Handling](./suite-common.mdx#error-handling)
+- **Rate Limiting**: See [Common Docs - Rate Limiting](./suite-common.mdx#rate-limiting)
+
+### API-Specific Pattern Notes
+
+**Mixed Synchronous/Asynchronous Operations**: Site create, update, and delete operations are asynchronous (requiring operation polling), while Address create and delete operations are synchronous (immediate response).
+
+**Limited RSQL for Site Search**: Site search has limited RSQL support compared to full RSQL capabilities available in Address search. See Use Case 3 for details on Site search limitations.
+
+## API-Specific Error Scenarios
+
+### Common Errors
+
+All Site Management APIs follow the RFC 7807 Problem Details standard. See [Error Handling](./suite-common.mdx#error-handling) in the common documentation for the standard error response format.
+
+### API-Specific Error Scenarios
+
+#### Site API Errors
+
+**Site Creation Errors**:
+
+```json
+{
+  "status": 400,
+  "title": "Bad Request",
+  "errors": [
+    {
+      "code": "VALIDATION_ERROR",
+      "field": "address.id",
+      "message": "Address not found"
+    }
+  ]
+}
+```
+
+**Common Site API Error Codes**:
+- `VALIDATION_ERROR`: Invalid field values (e.g., invalid locale, timezone, or address ID)
+- `NOT_FOUND`: Site or address not found
+- `BAD_REQUEST`: Cannot delete site that has users assigned
+- `CONFLICT`: Site code already in use
+
+**Site Deletion Errors**:
+
+```json
+{
+  "status": 400,
+  "title": "Bad Request",
+  "errors": [
+    {
+      "code": "BAD_REQUEST",
+      "message": "Branch with id 0023OEZiR7qQ_EGb6xYjgg can not be removed. It is used by at least one extension"
+    }
+  ]
+}
+```
+
+**Solution**: Move or delete all users and resources from the site before attempting deletion.
+
+**Site Search Filtering Errors**:
+
+```json
+{
+  "status": 400,
+  "title": "Invalid filter format",
+  "errors": [
+    {
+      "code": "VALIDATION_ERROR",
+      "message": "Invalid filter field: id. Only filtering by name is supported"
+    }
+  ]
+}
+```
+
+**Solution**: Use only `name` field with `==` operator. No logical operations allowed.
+
+#### Address API Errors
+
+**Address Validation Errors**:
+
+```json
+{
+  "status": 400,
+  "title": "Multiple validation errors",
+  "errors": [
+    {
+      "code": "VALIDATION_ERROR",
+      "field": "city",
+      "message": "Validation provider returned a different address"
+    },
+    {
+      "code": "VALIDATION_ERROR",
+      "field": "streetName",
+      "message": "Validation provider returned a different address"
+    }
+  ]
+}
+```
+
+**Solution**: See "Address Validation Challenges" in the Troubleshooting section below.
+
+**Address Deletion Errors**:
+
+```json
+{
+  "status": 400,
+  "title": "Address is currently in use and cannot be deleted",
+  "errors": [
+    {
+      "code": "BAD_REQUEST",
+      "message": "Address is currently in use and cannot be deleted"
+    }
+  ]
+}
+```
+
+**Solution**: Use `GET /addresses/{addressId}` to check `addressUsage` counts. The address cannot be deleted until all usage counts are zero.
+
+**Country Code Errors**:
+
+```json
+{
+  "status": 400,
+  "title": "Failed to create address",
+  "errors": [
+    {
+      "code": "VALIDATION_ERROR",
+      "message": "Invalid country code"
+    }
+  ]
+}
+```
+
+**Solution**: Use valid ISO 3166-1 alpha-2 country codes (e.g., `US`, `GB`, `FR`, `DE`).
+
+### Asynchronous Operation Errors
+
+When an asynchronous operation fails, the Operation object includes an error field. See [Asynchronous Operations Error Handling](./suite-common.mdx#error-handling) for details on checking operation errors.
+
+<TabbedExternalCodeSample
+  path="example_code/administration/site-management-api/async-operation-error-example"
+  title="Example: Handle Failed Asynchronous Operation"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Response Example** (200 OK - Operation Failed):
+
+```json
+{
+  "operationId": "op_failed_example",
+  "status": "FAILED",
+  "resourceType": "SITE",
+  "operationType": "CREATE",
+  "error": {
+    "status": 400,
+    "title": "Address not found",
+    "errors": [
+      {
+        "code": "VALIDATION_ERROR",
+        "field": "address.id",
+        "message": "Address with ID invalid_address_id does not exist"
+      }
+    ]
+  }
+}
+```
+
+**Note**: When status is FAILED, check the error field for details.
+
+## Best Practices
+
+### Site Management Best Practices
+
+1. **Create Addresses Before Sites**: Always create addresses first and use the returned address ID when creating sites.
+
+2. **Validate Address Data**: Ensure address data is as complete and accurate as possible to maximize validation success rates.
+
+3. **Use Idempotent Address Creation**: Take advantage of automatic address deduplication. You don't need to search for existing addresses before creating.
+
+4. **Check Address Usage Before Deletion**: Always retrieve the address and check `addressUsage` counts before attempting deletion.
+
+5. **Handle Validation Errors Gracefully**: Address validation can fail for legitimate addresses. Have a fallback plan (see Troubleshooting).
+
+6. **Respect Site-User Dependencies**: Ensure no users are assigned to a site before attempting deletion.
+
+7. **Use Appropriate Dial Plan Rulesets**: Set `defaultDialPlanRuleset` based on your organization's calling policies:
+   - Use `DOMESTIC` to prevent accidental international calls
+   - Use `EMERGENCYONLY` for kiosks or public areas where only emergency calling is needed
+
+8. **Configure Emergency Notifications**: Always set `emergencyNotifications` so appropriate personnel are alerted when emergency calls are made.
+
+9. **Choose Appropriate Locales**: Set site `locale` based on the primary language spoken at that location to ensure users hear prompts in their language.
+
+10. **Use Site Codes Consistently**: If using `siteCode` for extension management, establish a consistent naming convention across your organization.
+
+### API Usage Best Practices
+
+For general API best practices including rate limiting, error handling, and retry strategies, see [Best Practices](./suite-common.mdx#best-practices) in the common documentation.
+
+## API-Specific Troubleshooting
+
+### Address Validation Challenges
+
+Address validation uses external validation providers to ensure accuracy for emergency services. However, these providers sometimes incorrectly reject legitimate addresses.
+
+**Common Issues**:
+- Address exists but validation provider doesn't recognize it
+- Address format doesn't match provider's expectations
+- New addresses not yet in provider's database
+
+**Troubleshooting Steps**:
+
+1. **Verify Address Fields**: Double-check that all address components are spelled correctly and use standard abbreviations.
+
+2. **Try Different Field Mappings**: If validation fails, try putting address components in different fields. For example:
+   - Move suite/unit number from `secondaryLocation` to `building`
+   - Try with or without street suffix (e.g., "Street" vs "St")
+   - Adjust which fields contain apartment/unit information
+
+3. **Simplify the Address**: Remove optional fields and try with only the essential components (`streetNumber`, `streetName`, `city`, `state`, `postal`, `country`).
+
+4. **Check for Typos**: Small typos in street names or city names can cause validation failures.
+
+5. **Verify Country Code**: Ensure you're using the correct ISO 3166-1 alpha-2 country code (e.g., `US` not `USA`).
+
+6. **Last Resort - Admin Console**: If the API validation continues to fail for a legitimate address, create the site manually through the Admin Console UI. The Admin Console may have alternate validation paths or manual override capabilities.
+
+**Example Validation Error**:
+
+```json
+{
+  "status": 400,
+  "title": "Multiple validation errors",
+  "errors": [
+    {
+      "code": "VALIDATION_ERROR",
+      "field": "city",
+      "message": "Validation provider returned a different address"
+    }
+  ]
+}
+```
+
+**Resolution**: Try adjusting the address field values, or use the Admin Console as a workaround.
+
+### Site Deletion Failures
+
+**Error**: "Branch with id X can not be removed. It is used by at least one extension"
+
+**Cause**: Users or resources are still assigned to the site.
+
+**Solution**:
+1. Use the User Management API to list all users at the site
+2. Move users to a different site or delete them
+3. Check for other resources (ring groups, auto-attendants) assigned to the site
+4. After all resources are removed, retry site deletion
+
+### Site Search Not Finding Expected Results
+
+**Issue**: Your RSQL filter returns no results or an error.
+
+**Possible Causes**:
+1. You're filtering by a field other than `name` (not supported)
+2. You're using an operator other than `==` (not supported)
+3. You're using logical operations (`AND`, `OR`) (not supported)
+4. Wildcard is in the middle of the value (not supported)
+
+**Solution**: Use only `name==pattern` where pattern can have wildcards at the beginning or end only.
+
+### Address Cannot Be Deleted
+
+**Error**: "Address is currently in use and cannot be deleted"
+
+**Cause**: The address has non-zero usage counts in one or more categories.
+
+**Solution**:
+1. Use `GET /addresses/{addressId}` to retrieve the `addressUsage` object
+2. Identify which categories have non-zero counts
+3. Remove the address references from those resources (e.g., update sites to use different addresses)
+4. Verify all usage counts are zero before retrying deletion
+
+### Operation Stuck in PENDING Status
+
+**Issue**: A site create/update/delete operation remains in `PENDING` status for an extended period.
+
+**Solution**: See [Troubleshooting Asynchronous Operations](./suite-common.mdx#troubleshooting) in the common documentation for guidance on handling stuck operations.
+
+### Rate Limit Exceeded
+
+**Error**: `429 Too Many Requests`
+
+**Solution**: See [Rate Limiting](./suite-common.mdx#rate-limiting) in the common documentation for rate limits and retry strategies.
+
+### Downstream Service Failures
+
+**Error**: `424 Failed Dependency`
+
+**Cause**: A downstream internal service is unavailable or timing out.
+
+**Solution**:
+1. Retry the request after a short delay (exponential backoff recommended)
+2. If the problem persists, contact 8x8 support
+3. Check the [8x8 Status Page](https://status.8x8.com) for known service issues
+
+## Additional Resources
+
+**API Documentation**:
+- [Administration API Essentials](./suite-common.mdx)
+- [OpenAPI Specification](/administration/site-api-v1.yaml)
+- [8x8 Admin Console](https://admin.8x8.com)
+
+**Technical References**:
+- [RSQL Specification](https://github.com/jirutka/rsql-parser) (for filtering syntax)
+- [RFC 7807 - Problem Details](https://tools.ietf.org/html/rfc7807) (error format)
+- [ISO 3166-1 Country Codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) (country codes)
+- [IANA Time Zone Database](https://www.iana.org/time-zones) (timezone identifiers)
+
+**Service Status**:
+- [8x8 Status Page](https://status.8x8.com)
+
+**Support**:
+- Admin Console: User profile menu → Contact Support
+
+**When Contacting Support**: See [API Essentials - Support Resources](./suite-common.mdx#support-resources) for required information.
+
+---
+
+**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)  |  **Feedback**: Submit feedback via Admin Console

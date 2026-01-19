@@ -1,0 +1,1310 @@
+# Administration API Essentials
+
+**Version**: 1.0  |  **Last Updated**: January 16, 2026  |  **Applies to**: All Administration API Suite APIs
+
+import TabbedExternalCodeSample from '@site/docusaurus/components/TabbedExternalCodeSample';
+
+:::warning BETA - Limited Access
+
+**These Administration APIs are currently in Beta testing.** API keys cannot be generated in Admin Console at this point. Only Beta program participants may use these APIs.
+
+:::
+
+## Table of Contents
+
+1. [Suite Overview](#suite-overview)
+2. [Prerequisites](#prerequisites)
+3. [Getting Started](#getting-started)
+4. [Authentication](#authentication)
+5. [API Versioning](#api-versioning)
+6. [Common Request Patterns](#common-request-patterns)
+7. [Asynchronous Operations](#asynchronous-operations)
+8. [Pagination](#pagination)
+9. [Filtering with RSQL](#filtering-with-rsql)
+10. [Sorting Results](#sorting-results)
+11. [Error Handling](#error-handling)
+12. [Rate Limiting](#rate-limiting)
+13. [Best Practices](#best-practices)
+14. [Troubleshooting](#troubleshooting)
+15. [Support Resources](#support-resources)
+
+---
+
+## Suite Overview
+
+The Administration API Suite provides programmatic access to 8x8 administrative functions, enabling automation of user management, organizational configuration, and telephony provisioning. All APIs in this suite share common authentication, patterns, and infrastructure for a consistent developer experience.
+
+### APIs in This Suite
+
+- **User Management API**: Manage users, roles, and permissions across your 8x8 organization
+- **Ring Group Management API**: Configure ring groups and call distribution
+- **Phone Number Management API**: Discover and retrieve phone number inventory and availability
+- **Site Management API**: Manage organizational sites and physical locations
+- **Contact Management API**: Manage contacts and contact information
+
+### When to Use Which API
+
+- **User Management API**: For creating, updating, and deleting individual user accounts and managing their profiles
+- **Ring Group Management API**: For setting up and managing team call distribution and ring group configurations
+- **Phone Number Management API**: For discovering available phone numbers and retrieving phone number metadata before assignment
+- **Site Management API**: For managing sites, addresses, and organizational structure
+- **Contact Management API**: For creating and managing contacts associated with your organization
+
+### Common Characteristics
+
+All Administration APIs share:
+- API key authentication with `x-api-key` header
+- Base URL: `https://api.8x8.com/admin-provisioning`
+- Asynchronous operation patterns for mutations (CREATE, UPDATE, DELETE)
+- Scroll-based pagination for list operations
+- RSQL filtering syntax for precise searches
+- RFC 7807 Problem Details error format
+- Rate limiting and security best practices
+
+---
+
+## Prerequisites
+
+Before using any Administration API, ensure you have the following:
+
+### Required Access
+
+**8x8 Account Requirements**:
+- Active 8x8 account with Admin Console access
+- API Administrator role or equivalent permissions
+- Access to the customer organization where you'll manage resources
+
+**Technical Requirements**:
+- HTTPS-capable client (Python, Node.js, or equivalent programming language)
+- Understanding of REST API principles
+- Familiarity with JSON data format
+
+### Knowledge Prerequisites
+
+**8x8 Platform Understanding**:
+- Basic knowledge of 8x8's organizational hierarchy (Customer → PBX → Site → Resources)
+- Familiarity with 8x8 Admin Console navigation
+- Understanding of user roles and permissions within 8x8
+
+**Technical Skills**:
+- Experience with REST API integration
+- Understanding of asynchronous operation patterns
+- Knowledge of RSQL query syntax (for filtering) - examples provided in this guide
+
+---
+
+## Getting Started
+
+### Obtaining API Credentials
+
+API keys are generated and managed through the 8x8 Admin Console. Follow these steps to obtain your API credentials:
+
+1. Log in to the 8x8 Admin Console at [https://admin.8x8.com](https://admin.8x8.com)
+2. Open the main navigation menu and go to **API Keys**
+3. Click **Create App**
+4. Add the appropriate API products to your key based on which Administration APIs you need:
+   - **UC & CC Admin Operations**: Required if your key will be used to make changes on any APIs with asynchronous operations
+   - **UC & CC Number Admin**: Required for number management operations
+   - **UC & CC User Admin**: Required for user management operations
+   - **UC Ring Group Admin**: Required for ring group management operations
+   - **UC Site Admin**: Required for site management operations
+5. Copy and securely store your API key
+6. Note your customer ID for reference
+
+**Security Note**: Treat API keys like passwords. Never commit them to source control, share them in unsecured channels, or log them in plain text. Store them in environment variables or secure vault systems (AWS Secrets Manager, Azure Key Vault, etc.).
+
+### Testing Your Credentials
+
+Once you have your API key, test that it works correctly by making a simple authenticated request:
+
+<TabbedExternalCodeSample
+  path="example_code/administration/common/auth-test-credentials"
+  title="Example: Testing API Credentials"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+A successful response (HTTP 200 or 202) confirms your credentials are valid and properly configured.
+
+---
+
+## Authentication
+
+All Administration APIs use API key authentication passed in the `x-api-key` request header. Every request must include this header with a valid API key.
+
+### Authentication Method
+
+Authentication uses the `x-api-key` header:
+
+```http
+x-api-key: your-api-key-here
+```
+
+This header must be included in every API request. Requests without valid authentication will receive a `401 Unauthorized` response.
+
+### Base URL
+
+**Production**: `https://api.8x8.com/admin-provisioning`
+
+All Administration API endpoints are accessed through this base URL.
+
+---
+
+## API Versioning
+
+Administration APIs use the `Accept` header for version negotiation. This approach allows the APIs to evolve while maintaining backward compatibility for existing integrations.
+
+### Version Format
+
+Versions use **major version numbers only** (v1, v2, etc., not v1.4 or v1.2.3). Minor updates and patches are deployed transparently without requiring version changes.
+
+### Specifying Version
+
+All Administration APIs use the `Accept` header with a consistent format pattern:
+
+```http
+Accept: application/vnd.{resource}.v{major}+json
+```
+
+Where:
+- `{resource}` is the API resource type (e.g., `users`, `ringgroups`)
+- `{major}` is the major version number (e.g., `v1`, `v2`)
+
+**Examples:**
+
+**User Management API**:
+
+```http
+Accept: application/vnd.users.v1+json
+```
+
+**Ring Group Management API**:
+
+```http
+Accept: application/vnd.ringgroups.v1+json
+```
+
+For other Administration APIs, check the specific API guide for its exact Accept header format.
+
+### Backward Compatibility
+
+- Major versions are maintained for extended periods (typically 12-24 months after next version release)
+- Deprecated features are announced well in advance
+- Breaking changes only occur in major version increments
+- Minor enhancements and bug fixes are deployed to current major version
+
+---
+
+## Common Request Patterns
+
+### Required Headers
+
+Every API request to Administration APIs must include:
+
+```http
+x-api-key: your-api-key-here
+Accept: application/vnd.{resource}.v{version}+json
+```
+
+For requests that contain a payload (POST and PUT operations), also include:
+
+```http
+Content-Type: application/json
+```
+
+### Example Request
+
+```http
+GET https://api.8x8.com/admin-provisioning/users?pageSize=10
+x-api-key: your-api-key-here
+Accept: application/vnd.users.v1+json
+```
+
+```http
+POST https://api.8x8.com/admin-provisioning/users
+x-api-key: your-api-key-here
+Accept: application/vnd.users.v1+json
+Content-Type: application/json
+
+{
+  "basicInfo": {
+    "userName": "jane.smith@example.com",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "primaryEmail": "jane.smith@example.com"
+  }
+}
+```
+
+---
+
+## Asynchronous Operations
+
+All mutation operations (CREATE, UPDATE, DELETE) in Administration APIs use asynchronous processing to prevent timeouts, enable bulk operations, and provide operation tracking.
+
+### Operation Flow
+
+1. **Submit Request**: Client sends POST, PUT, or DELETE request
+2. **Receive Acknowledgment**: API immediately returns `202 Accepted` with operation object
+3. **Poll Status**: Client periodically checks operation status via GET `/operations/{operationId}`
+4. **Check Status**: Operation progresses through states: `PENDING` → `IN_PROGRESS` → `COMPLETED` or `FAILED`
+5. **Retrieve Resource**: Once `COMPLETED`, use `resourceId` to get created/updated resource
+
+### Operation Status Values
+
+- **PENDING**: Operation queued but not yet started
+- **IN_PROGRESS**: Operation currently processing
+- **COMPLETED**: Operation finished successfully
+- **FAILED**: Operation encountered an error
+- **UNKNOWN**: Status cannot be determined (rare, contact support if seen)
+
+### Operation Object Structure
+
+When you submit a mutation request, you receive an operation object:
+
+```json
+{
+  "operationId": "op_1a2b3c4d5e6f",
+  "status": "PENDING",
+  "resourceType": "USER",
+  "operationType": "CREATE",
+  "createdTime": "2025-12-01T15:30:45Z",
+  "_links": {
+    "self": {
+      "href": "/operations/op_1a2b3c4d5e6f"
+    }
+  }
+}
+```
+
+When the operation completes, the structure includes additional fields:
+
+```json
+{
+  "operationId": "op_1a2b3c4d5e6f",
+  "status": "COMPLETED",
+  "resourceType": "USER",
+  "resourceId": "hvOB1l3zDCaDAwp9tNLzZA",
+  "operationType": "CREATE",
+  "createdTime": "2025-12-01T15:30:45Z",
+  "completedTime": "2025-12-01T15:30:52Z",
+  "_links": {
+    "self": {
+      "href": "/operations/op_1a2b3c4d5e6f"
+    },
+    "resource": {
+      "href": "/users/hvOB1l3zDCaDAwp9tNLzZA"
+    }
+  }
+}
+```
+
+### Polling Best Practices
+
+**Recommended Strategy**:
+- Start polling after 1-2 seconds
+- Poll no more frequently than once per second
+- Set a maximum timeout (5 minutes recommended)
+- Log operation IDs for troubleshooting
+
+**Typical Completion Times**:
+- Simple operations (create user, update settings): 2-5 seconds
+- Complex operations (bulk updates, with dependencies): 5-15 seconds
+- If operation exceeds 60 seconds, investigate for issues
+
+### Code Example
+
+<TabbedExternalCodeSample
+  path="example_code/administration/common/async-polling-pattern"
+  title="Example: Async Operation Polling Pattern"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+### Handling Operation Failures
+
+If an operation fails (`status: "FAILED"`), the operation object includes an `error` field:
+
+```json
+{
+  "operationId": "op_1a2b3c4d5e6f",
+  "status": "FAILED",
+  "error": {
+    "status": 400,
+    "title": "Validation Error",
+    "detail": "Invalid field value",
+    "errors": [
+      {
+        "field": "basicInfo.primaryEmail",
+        "code": "VALIDATION_ERROR",
+        "message": "Email address format is invalid"
+      }
+    ]
+  }
+}
+```
+
+Review the error details to understand the failure cause, correct the issue, and resubmit if appropriate.
+
+---
+
+## Pagination
+
+Administration APIs use **scroll-based pagination** for consistent, efficient results when listing resources. This approach provides stable iteration even when data changes during the scroll.
+
+### How Scroll-Based Pagination Works
+
+1. **Initial Request**: Specify `pageSize` (default 100, max 1000) and optional filters/sorting
+2. **Receive First Page**: Response includes `nextScrollId` if more results exist
+3. **Subsequent Requests**: Pass `scrollId` parameter to get the next page
+4. **Continue**: Repeat until `hasMore` is false
+
+### Key Characteristics
+
+- **Opaque Scroll IDs**: Scroll IDs are opaque tokens - treat them as black boxes, don't try to decode or manipulate them
+- **Filter Encoding**: Filters and sort order are encoded in the scroll ID
+- **Consistent Results**: Even if data changes during iteration, you'll get consistent results for your scroll
+- **Immutable**: Don't modify filters or sort order mid-scroll (start new scroll instead)
+
+### Pagination Response Structure
+
+```json
+{
+  "data": [
+    { /* resource object */ }
+  ],
+  "pagination": {
+    "pageSize": 100,
+    "hasMore": true,
+    "nextScrollId": "abc123def456",
+    "filter": "basicInfo.status==ACTIVE",
+    "sort": "+lastName"
+  },
+  "_links": {
+    "self": { "href": "/users?pageSize=100" },
+    "next": { "href": "/users?pageSize=100&scrollId=abc123def456" }
+  } 
+}
+```
+
+### Pagination Best Practices
+
+**Choosing Page Size**:
+- **Real-time/Interactive**: 50-100 items for quick responses
+- **Bulk Export/Processing**: 100-1000 items to reduce API calls
+- **Memory Constrained**: Smaller pages (25-50) to reduce memory usage
+- Balance between number of API calls and response size
+
+**Efficient Iteration**:
+- Process pages as they arrive (streaming) rather than buffering all results
+- Don't restart scrolls unnecessarily - they're expensive server-side
+- Cache scroll IDs if you need resumable operations
+- If scroll expires, start fresh from the beginning
+
+**Error Handling**:
+- If you receive a scroll expiration error, start a new scroll
+- Don't try to continue a failed scroll - begin fresh query
+
+### Code Example
+
+<TabbedExternalCodeSample
+  path="example_code/administration/common/pagination-loop"
+  title="Example: Pagination Loop"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+---
+
+## Filtering with RSQL
+
+Administration APIs support powerful filtering using **RSQL (RESTful Service Query Language)** syntax. This enables precise resource searches without retrieving unnecessary data.
+
+### RSQL Syntax Overview
+
+RSQL provides a URL-friendly query language for filtering API results.
+
+### Comparison Operators
+
+- `==` equals
+- `!=` not equals
+- `>` greater than
+- `<` less than
+- `>=` greater than or equal
+- `<=` less than or equal
+
+### Logical Operators
+
+- `;` AND condition (both must be true)
+- `,` OR condition (either can be true)
+- `()` grouping for complex expressions
+
+### Special Features
+
+**Case Insensitivity**: Filter comparisons are case-insensitive by default. `name==jane` matches "jane", "Jane", or "JANE".
+
+**Wildcard Matching**: Use asterisk `*` for partial string matches:
+- `name==*smith` - ends with "smith"
+- `name==john*` - starts with "john"
+- `name==*doe*` - contains "doe"
+
+**Quoting Values**: Quote values containing spaces or special characters:
+- `department=='Research and Development'`
+- `title=='VP, Engineering'`
+
+### Filter Examples
+
+**Simple Equality**:
+
+```text
+status==ACTIVE
+```
+
+**Comparison Operators**:
+
+```text
+createdTime>2025-11-01T00:00:00Z
+extensionNumber>=1000
+```
+
+**Wildcard Search**:
+
+```text
+name==*Support*
+email==*@example.com
+```
+
+**Logical AND (semicolon)**:
+
+```text
+status==ACTIVE;department==Engineering
+```
+
+**Logical OR (comma)**:
+
+```text
+department==Engineering,department==Sales
+```
+
+**Complex Expression**:
+
+```text
+status==ACTIVE;(department==Engineering,department==Sales);createdTime>2025-01-01T00:00:00Z
+```
+
+This finds active resources in either Engineering or Sales created after January 1, 2025.
+
+### Field Paths
+
+Use dot notation for nested fields. The exact field names depend on the API:
+
+**User Management API**:
+- `basicInfo.status` - user status
+- `basicInfo.primaryEmail` - user email
+- `directoryInfo.department` - user department
+- `basicInfo.createdTime` - creation timestamp
+
+**Ring Group Management API**:
+- `name` - ring group name
+- `extensionNumber` - extension number
+- `ringPattern` - distribution pattern
+- `ringTimeout` - ring duration
+
+Refer to each API's documentation for available filterable fields.
+
+### Best Practices
+
+**Performance**:
+- Filter early and precisely to reduce data transfer
+- Avoid overly complex RSQL expressions (max 2000 characters)
+- Use specific field paths
+- Test filters with small page sizes first
+
+**Correctness**:
+- Match field names exactly (case-sensitive for field paths)
+- Use correct operators (`==` not `=`)
+- Quote values with spaces
+- Validate RSQL syntax before submitting
+- Check for matching parentheses in complex expressions
+
+### Common Pitfalls
+
+❌ **Wrong**: `status=ACTIVE` (single equals)
+✅ **Correct**: `status==ACTIVE` (double equals)
+
+❌ **Wrong**: `Status==ACTIVE` (wrong case for field name)
+✅ **Correct**: `basicInfo.status==ACTIVE` (exact field path)
+
+❌ **Wrong**: `department==Research and Development` (unquoted spaces)
+✅ **Correct**: `department=='Research and Development'` (quoted)
+
+### Code Example
+
+<TabbedExternalCodeSample
+  path="example_code/administration/common/rsql-filtering"
+  title="Example: RSQL Filtering"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+### Further Reading
+
+For complete RSQL specification, see the [RSQL Parser documentation](https://github.com/jirutka/rsql-parser).
+
+---
+
+## Sorting Results
+
+Control the order of results using the `sort` query parameter. Sorting is applied before pagination, ensuring consistent ordering across all pages.
+
+### Sort Syntax
+
+**Ascending Order**: Use `+` prefix or no prefix
+
+```text
+sort=+lastName
+sort=lastName
+```
+
+**Descending Order**: Use `-` prefix
+
+```text
+sort=-createdTime
+```
+
+**Multiple Fields**: Comma-separated for multi-level sorting
+
+```text
+sort=+department,+lastName,+firstName
+```
+
+This sorts first by department (A-Z), then by last name (A-Z), then by first name (A-Z).
+
+### Sort Examples
+
+**By Last Name (A-Z)**:
+
+```text
+sort=+lastName
+```
+
+**By Creation Date (Newest First)**:
+
+```text
+sort=-createdTime
+```
+
+**Multi-Level Sort**:
+
+```text
+sort=+department,-createdTime
+```
+
+Sorts by department (A-Z), then within each department by creation date (newest first).
+
+### Sortable Fields
+
+Available sort fields depend on the specific API. Common sortable fields:
+
+**User Management API**:
+- `basicInfo.lastName`, `basicInfo.firstName`
+- `basicInfo.createdTime`, `basicInfo.lastUpdatedTime`
+- `basicInfo.status`
+- `directoryInfo.department`
+
+**Ring Group Management API**:
+- `name`
+- `extensionNumber`
+- `ringPattern`
+
+Refer to each API's documentation for complete list of sortable fields.
+
+### Best Practices
+
+- Use field paths that match the API's data model
+- Test single-field sorts before combining multiple fields
+- Combine with pagination for consistent iteration
+- Use appropriate ascending/descending based on use case
+
+### Code Example
+
+<TabbedExternalCodeSample
+  path="example_code/administration/common/sorting-results"
+  title="Example: Sorting Results"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+---
+
+## Error Handling
+
+Administration APIs use **RFC 7807 Problem Details** format for structured, consistent error responses. This standard format makes error handling predictable across all APIs.
+
+### Error Response Format
+
+All error responses follow this structure:
+
+```json
+{
+  "status": 400,
+  "instance": "/users",
+  "time": "2025-12-01T15:30:45Z",
+  "title": "Request Validation Failed",
+  "errors": [
+    {
+      "field": "basicInfo.primaryEmail",
+      "code": "VALIDATION_ERROR",
+      "message": "Email address format is invalid"
+    }
+  ]
+}
+```
+
+### Key Fields
+
+- **status**: HTTP status code (400, 401, 403, 404, 429, 500)
+- **title**: Human-readable error summary
+- **detail**: Specific explanation for this error occurrence
+- **errors**: Array of field-level validation errors (if applicable)
+- **field**: Specific field path where error occurred
+- **code**: Machine-readable error code for programmatic handling
+- **message**: Human-readable error message for this field
+- **requestId**, **responseId**: Tracking identifiers for support escalation
+
+### Common HTTP Status Codes
+
+**Success Codes**:
+- `200 OK`: Successful GET request
+- `202 Accepted`: Async operation accepted (create, update, delete)
+
+**Client Error Codes**:
+- `400 Bad Request`: Validation error, malformed request, or invalid parameters
+- `401 Unauthorized`: Missing or invalid API key authentication
+- `403 Forbidden`: Insufficient permissions or customer ID mismatch
+- `404 Not Found`: Resource does not exist
+- `409 Conflict`: Resource conflict (e.g., duplicate extension number)
+- `429 Too Many Requests`: Rate limit exceeded
+
+**Server Error Codes**:
+- `500 Internal Server Error`: Unexpected server error
+
+### Generic Error Codes
+
+**VALIDATION_ERROR** (400):
+- Field validation failed (format, length, pattern)
+- Required field missing
+- Invalid enum value
+
+**INVALID_FILTER** (400):
+- RSQL filter syntax error
+- Invalid field name in filter
+- Malformed filter expression
+
+**INVALID_SORT** (400):
+- Sort expression format error
+- Invalid field name for sorting
+- Unsupported sort direction
+
+**INVALID_PAGE_SIZE** (400):
+- pageSize out of range (must be 1-1000)
+
+**FORBIDDEN** (403):
+- Insufficient permissions
+- Customer ID mismatch (accessing another customer's resources)
+
+**NOT_FOUND** (404):
+- Resource does not exist
+- Malformed resource ID
+
+**RATE_LIMIT_EXCEEDED** (429):
+- Too many requests in time window
+- See Rate Limiting section for handling strategy
+
+### Common Error Scenarios
+
+#### Scenario 1: Authentication Failure (401)
+
+**Request**: Missing or invalid API key
+
+```http
+GET /users
+// x-api-key header missing or invalid
+```
+
+**Response**:
+
+```json
+{
+  "status": 401,
+  "title": "Unauthorized",
+  "detail": "Valid authentication credentials required"
+}
+```
+
+**Resolution**: Verify `x-api-key` header is present and contains valid API key. Regenerate key if expired.
+
+#### Scenario 2: Authorization Failure (403)
+
+**Request**: Valid API key but accessing another customer's resources
+
+**Response**:
+
+```json
+{
+  "status": 403,
+  "title": "Forbidden",
+  "detail": "Insufficient permissions to access this resource",
+  "errors": [
+    {
+      "code": "FORBIDDEN",
+      "message": "Customer ID mismatch"
+    }
+  ]
+}
+```
+
+**Resolution**: Verify you're accessing resources for the correct customer ID. Check API key permissions in Admin Console.
+
+#### Scenario 3: Invalid RSQL Filter (400)
+
+**Request**: Malformed filter syntax
+
+```http
+GET /users?filter=status=active
+```
+
+**Response**:
+
+```json
+{
+  "status": 400,
+  "title": "Invalid Filter",
+  "detail": "RSQL filter syntax is invalid",
+  "errors": [
+    {
+      "field": "filter",
+      "code": "INVALID_FILTER",
+      "message": "Use '==' for equality, not '='"
+    }
+  ]
+}
+```
+
+**Resolution**: Correct RSQL syntax: `filter=basicInfo.status==ACTIVE`
+
+#### Scenario 4: Invalid Sort Expression (400)
+
+**Request**: Unsupported sort field
+
+```http
+GET /users?sort=invalidField
+```
+
+**Response**:
+
+```json
+{
+  "status": 400,
+  "title": "Invalid Sort",
+  "detail": "Sort field is not supported",
+  "errors": [
+    {
+      "field": "sort",
+      "code": "INVALID_SORT",
+      "message": "Field 'invalidField' cannot be used for sorting"
+    }
+  ]
+}
+```
+
+**Resolution**: Use valid sortable field from API documentation with proper field path.
+
+#### Scenario 5: Rate Limit Exceeded (429)
+
+**Request**: Too many requests in short period
+
+**Response**:
+
+```json
+{
+  "status": 429,
+  "title": "Too Many Requests",
+  "detail": "Rate limit exceeded",
+  "errors": [
+    {
+      "code": "RATE_LIMIT_EXCEEDED",
+      "message": "Maximum 100 requests per minute exceeded"
+    }
+  ]
+}
+```
+
+**Response Headers**:
+
+```http
+x-ratelimit-limit: 100
+x-ratelimit-remaining: 0
+x-ratelimit-reset: 1733073045
+```
+
+**Resolution**: Wait until `x-ratelimit-reset` time or implement exponential backoff (see Rate Limiting section).
+
+### Recovery Strategies
+
+**Transient Failures** (429, 500):
+- Implement exponential backoff: wait 1s, 2s, 4s, 8s, 16s between retries
+- Maximum 5 retry attempts recommended
+- Log failures for monitoring
+- Check status page if widespread
+
+**Permanent Failures** (400, 401, 403, 404, 409):
+- Do not retry automatically
+- Log error details with requestId/responseId
+- Fix input data or configuration
+- Alert administrators if unexpected
+
+**Validation Errors** (400 with field-level errors):
+- Review `errors` array for specific field issues
+- Correct invalid field values
+- Ensure required fields present
+- Validate data types and formats
+- Resubmit with corrected data
+
+### Code Example
+
+<TabbedExternalCodeSample
+  path="example_code/administration/common/error-handling-comprehensive"
+  title="Example: Comprehensive Error Handling"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+---
+
+## Rate Limiting
+
+Administration APIs enforce rate limits to ensure fair usage and system stability. Understanding and respecting these limits is essential for reliable integrations.
+
+### Current Rate Limits
+
+**Per API Key**:
+- **100 requests per minute**: Maximum sustained request rate
+- **10 concurrent async operations**: Maximum in-flight operations per organization
+- **Burst allowance**: Up to 20 requests in 10-second window (for bursty workflows)
+
+**Note**: Rate limits are subject to change. Monitor response headers for current values.
+
+### Rate Limit Headers
+
+Every API response includes rate limit information in headers:
+
+```http
+x-ratelimit-limit: 100
+x-ratelimit-remaining: 87
+x-ratelimit-reset: 1733073045
+```
+
+- **x-ratelimit-limit**: Maximum requests allowed in current window
+- **x-ratelimit-remaining**: Requests remaining in current window
+- **x-ratelimit-reset**: Unix timestamp when rate limit resets
+
+### Handling Rate Limits
+
+**Proactive Monitoring**:
+1. Monitor `x-ratelimit-remaining` header in every response
+2. Slow down requests when remaining count is low (< 10)
+3. Implement client-side throttling before hitting limit
+
+**Reactive Handling** (429 Response):
+1. Stop sending requests immediately
+2. Parse `x-ratelimit-reset` from response
+3. Calculate wait time: `reset_time - current_time`
+4. Wait until reset time
+5. Resume with exponential backoff: 2s, 4s, 8s, 16s
+
+**Exponential Backoff Pattern**:
+
+```text
+Attempt 1: Wait 2 seconds
+Attempt 2: Wait 4 seconds
+Attempt 3: Wait 8 seconds
+Attempt 4: Wait 16 seconds
+Attempt 5: Wait 32 seconds
+Maximum: Give up or wait for reset
+```
+
+### Best Practices
+
+**Distribute Load**:
+- Spread requests evenly over time rather than bursting
+- Use queuing on client side to control request rate
+- For bulk operations, implement client-side throttling (e.g., 1 request per second)
+
+**Optimize Request Patterns**:
+- Use appropriate page sizes to reduce number of requests
+- Filter results server-side rather than client-side
+- Cache responses when data doesn't change frequently
+- Batch updates in single requests where possible
+
+**Handle Limits Gracefully**:
+- Implement retry logic with exponential backoff
+- Log rate limit events for monitoring
+- Alert on repeated rate limiting (may indicate design issue)
+- Consider request priority (delay non-critical requests)
+
+### Code Example
+
+<TabbedExternalCodeSample
+  path="example_code/administration/common/rate-limit-handling"
+  title="Example: Rate Limit Handling with Exponential Backoff"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+---
+
+## Best Practices
+
+### Understanding PUT Semantics
+
+:::danger CRITICAL: PUT Replaces the Entire Resource
+
+Administration APIs use PUT for updates, which requires the COMPLETE resource object. PUT operations are not partial updates.
+
+**Why This Matters**:
+- Omitted fields are interpreted as requests to remove that data
+- Missing sections could delete critical configurations
+- Partial submissions can cause unintended data loss
+
+**Correct Update Pattern**:
+1. GET the complete current resource object
+    - ⚠️ Use the get one `GET /entity/{id}` endpoint NOT the list/get all `GET /entity endpoint` for this as the payloads may be different.
+2. Modify only the specific fields you want to change IN MEMORY
+3. PUT the entire modified object back
+
+**Never Do This** (Partial PUT):
+
+```text
+PUT /resources/{id}
+{
+  "oneField": "newValue"
+}
+```
+
+This will REMOVE, RESET and/or DEPROVISON all other resource attributes potentially resulting in loss of service and/or data.
+
+**Always Do This** (Complete PUT):
+
+```text
+GET /resources/{id} → Retrieve complete resource
+Modify in memory → resource.section.field = "newValue"
+PUT /resources/{id} with COMPLETE modified resource object
+```
+
+:::
+
+### Performance Optimization
+
+**Concurrent Operations**:
+- Submit operations in parallel but limit concurrency (5-10 requests recommended)
+- Monitor async operation queue depth
+- Implement client-side rate limiting before hitting API limits
+- Don't wait for one operation before starting next
+
+**Efficient Pagination**:
+- Choose appropriate page sizes based on use case:
+  - Real-time/Interactive: 50-100 items
+  - Bulk Export: 100-1000 items
+  - Memory Constrained: 25-50 items
+- Process pages as they arrive (streaming) rather than buffering
+- Don't restart scrolls unnecessarily (expensive server-side)
+- Cache scroll IDs for resumable operations
+
+**Filtering Performance**:
+- Filter early and precisely to reduce data transfer
+- Avoid overly complex RSQL expressions
+- Test filters with small page sizes first
+- Use indexed fields when possible (status, timestamps)
+
+**Async Operation Polling**:
+- Start with 1-2 second initial poll interval
+- Increase interval with exponential backoff if operation is long-running
+- Set maximum poll duration (5 minutes recommended)
+- Most operations complete within 5-10 seconds
+
+**Caching Considerations**:
+- Cache relatively static data (sites, organizational structure)
+- Use appropriate TTL based on update frequency (15-60 minutes typical)
+- Invalidate cache on mutations
+- Consider cache staleness acceptable for your use case
+
+### Security Best Practices
+
+**API Key Management**:
+- **Storage**: Use environment variables or secure vault systems (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault)
+- **Never Hardcode**: Don't embed keys in source code or configuration files
+- **Separation**: Use separate keys for dev, staging, production environments
+- **Rotation**: Rotate keys every 90 days as security best practice
+- **Revocation**: Implement immediate key revocation procedures for compromised keys
+- **Monitoring**: Monitor usage patterns for anomalies or suspicious activity
+- **Logging**: Never log full API keys - log last 4 characters only
+
+**Data Protection**:
+- **HTTPS Only**: All requests must use HTTPS (HTTP will be rejected)
+- **SSL Validation**: Validate SSL certificates in HTTP clients
+- **Sensitive Data**: Don't log sensitive data (emails, phone numbers, addresses, names)
+- **Encryption at Rest**: Implement encryption for data stored in your systems
+- **Data Retention**: Follow data retention policies (typically 7+ years for audit)
+- **Compliance**: Comply with applicable regulations (GDPR, CCPA, HIPAA if applicable)
+
+**Audit Logging**:
+- **Mutation Operations**: Log all create, update, delete operations with timestamps
+- **Operation IDs**: Record operation IDs for traceability
+- **Resource Changes**: Log resource IDs and affected fields (not sensitive values)
+- **Tamper-Proof**: Implement tamper-proof audit trails
+- **Retention**: Retain logs per compliance requirements (typically 7+ years)
+- **Monitoring**: Monitor logs for security events and anomalies
+
+**Access Control**:
+- **Least Privilege**: Apply principle of least privilege for API keys
+- **Scope Limiting**: Limit API key scope to required operations only
+- **Regular Review**: Review and revoke unused API keys regularly
+- **Service Accounts**: Use service accounts (not personal accounts) for API access
+- **IP Restrictions**: Consider IP whitelisting if your infrastructure allows
+
+**Monitoring and Alerting**:
+- Log all API requests and responses (excluding credentials and sensitive data)
+- Monitor for unusual patterns (spike in errors, unexpected deletes, off-hours access)
+- Alert on authentication failures
+- Track operation failure rates
+- Set up notifications for rate limit events
+
+### Data Consistency
+
+**Handling Asynchronous Operations**:
+- Store operation IDs with source requests for correlation
+- Implement idempotency for safe retries where possible
+- Handle duplicate submissions gracefully
+- Verify completion before proceeding to dependent operations
+- Don't assume success - always check operation status
+
+**PUT Request Safety**:
+- **Critical**: PUT operations replace the entire resource - omitted fields may be set to null or default values
+- Always retrieve the complete resource with GET before updating
+- Modify only the fields you intend to change, preserving all others
+- Validate the complete payload includes all required fields before sending PUT
+- Example pitfall: Omitting `phoneNumber` in a PUT request may delete the user's phone number even if you only intended to update their email
+- When updating a single field, consider if the API supports PATCH instead of PUT
+- Test PUT operations in development with complete payloads to avoid data loss
+
+**Update Safety**:
+- Always GET complete resource before updating
+- Never submit partial resource objects (unless API explicitly supports PATCH)
+- Validate all required fields present after modification
+- Consider optimistic locking for concurrent updates if available
+- Verify updates completed successfully before proceeding
+
+**Error Recovery**:
+- Distinguish between transient and permanent failures
+- Implement appropriate retry logic for transient failures
+- Log all failures with sufficient detail for debugging
+- Have rollback procedures for failed bulk operations
+
+---
+
+## Troubleshooting
+
+### Authentication Issues
+
+**Problem**: 401 Unauthorized errors
+
+**Debugging Steps**:
+1. Verify `x-api-key` header is set correctly (case-sensitive)
+2. Check for whitespace or encoding issues in key value
+3. Confirm API key hasn't been revoked in Admin Console
+4. Test with curl to isolate client library issues:
+
+   ```bash
+   curl -H "x-api-key: YOUR_KEY" \
+        -H "Accept: application/vnd.users.v1+json" \
+        https://api.8x8.com/admin-provisioning/users?pageSize=1
+   ```
+
+5. Regenerate API key if needed
+
+**Problem**: 403 Forbidden despite valid key
+
+**Debugging Steps**:
+1. Verify API key has required API products enabled
+2. Check account status in Admin Console
+3. Confirm accessing resources for correct customer organization
+4. Verify no IP restrictions blocking requests
+5. Contact support if issue persists
+
+### Pagination Issues
+
+**Problem**: Inconsistent results between pages
+
+**Cause**: Data changed during scroll, or filter was modified
+
+**Solution**: Don't modify data or filters during active scroll. Start fresh scroll if data changed.
+
+**Problem**: Duplicate resources across pages
+
+**Cause**: Shouldn't occur with scroll-based pagination (report to support if seen)
+
+**Solution**: File support ticket with scroll ID and example duplicates.
+
+### Async Operation Problems
+
+**Problem**: Operation stuck in PENDING or IN_PROGRESS
+
+**Debugging Steps**:
+1. Check if operation timeout exceeded (> 5 minutes) - may indicate system issue
+2. Verify no prior rate limiting (check for 429 responses)
+3. Check [8x8 status page](https://status.8x8.com) for incidents
+4. Review operation details for error messages
+5. Contact support with operation ID if persists > 10 minutes
+
+**Problem**: Operation fails with generic error
+
+**Debugging Steps**:
+1. Check operation response `error` field for details
+2. Verify input data was valid (all required fields, correct formats)
+3. Test with minimal request (only required fields)
+4. Check for dependency issues (invalid IDs, missing prerequisites)
+5. Review requestId/responseId in error response for support escalation
+
+**Problem**: Operation completes but resource not visible
+
+**Debugging Steps**:
+1. Verify operation status is COMPLETED (not just IN_PROGRESS)
+2. Check resource status/state is as expected
+3. Clear Admin Console cache (hard refresh browser)
+4. Verify viewing correct organization/site filter
+5. Use GET directly with resource ID to confirm existence
+
+### Filter and Query Issues
+
+**Problem**: RSQL filter returns no results unexpectedly
+
+**Debugging Steps**:
+1. Test without filter to verify resources exist
+2. Simplify filter to one condition at a time
+3. Check field names match API exactly (case-sensitive for paths)
+4. Verify enum values match exactly (e.g., `ACTIVE` not `active`)
+5. Use correct operators (`==` for equality, not `=`)
+6. Quote values with spaces: `department=='Research and Development'`
+
+**Problem**: "Invalid filter syntax" errors
+
+**Solutions**:
+- Check parentheses matching: `(condition1,condition2)`
+- Use semicolon for AND: `status==ACTIVE;department==Engineering`
+- Use comma for OR: `department==Engineering,department==Sales`
+- Escape special characters if needed
+- Refer to [RSQL specification](https://github.com/jirutka/rsql-parser) for complex queries
+
+**Problem**: Sorting not working as expected
+
+**Solutions**:
+- Use correct field paths with + or - prefix: `+lastName` (ascending) or `-lastName` (descending)
+- Verify field is sortable (not all fields support sorting)
+- Test with single sort field first before combining
+
+### Performance Issues
+
+**Problem**: Slow API responses
+
+**Debugging Steps**:
+1. Check page size - large pages (500-1000) take longer
+2. Simplify complex RSQL filters
+3. Verify network latency (test from different locations)
+4. Check for high request concurrency (reduce parallel requests)
+5. Monitor rate limit headers for throttling
+
+**Problem**: Timeouts during bulk operations
+
+**Solutions**:
+- Reduce concurrency (5-10 parallel requests maximum)
+- Implement proper backoff between requests
+- Break large batches into smaller chunks
+- Monitor API status page during bulk operations
+- Use async operations correctly (don't block waiting)
+
+---
+
+## Support Resources
+
+### Documentation
+
+**API Documentation**:
+- [8x8 Admin Console](https://admin.8x8.com)
+- Individual API OpenAPI Specifications (see each API guide)
+
+**Technical References**:
+- [RSQL Specification](https://github.com/jirutka/rsql-parser)
+- [RFC 7807 - Problem Details for HTTP APIs](https://tools.ietf.org/html/rfc7807)
+- [ISO 8601 Date Format](https://en.wikipedia.org/wiki/ISO_8601)
+- [E.164 Phone Number Format](https://en.wikipedia.org/wiki/E.164)
+
+### Service Status
+
+- [8x8 Status Page](https://status.8x8.com)
+
+### Getting Support
+
+**When to Contact Support**:
+- Operation stuck for > 10 minutes
+- Repeated 500 errors
+- Unexpected authentication/authorization failures
+- Data inconsistencies or corruption
+- Questions about API behavior or capabilities
+
+**Required Information When Contacting Support**:
+- **Operation ID**: For async operation issues
+- **Request ID and Response ID**: From error response (requestId, responseId fields)
+- **Timestamp**: Of the issue occurrence (UTC timezone)
+- **API Key**: Last 4 characters only (never full key)
+- **Complete Error Response**: Sanitize sensitive data, include all fields
+- **Steps to Reproduce**: Detailed steps to replicate the issue
+- **Frequency**: One-time, intermittent, or constant
+- **Environment**: Development, staging, or production
+- **Recent Changes**: Any recent changes to integration code
+
+**How to Contact Support**:
+- **Admin Console**: User profile menu → Contact Support
+- For production-critical issues, mention "Production Critical" in subject
+
+**Before Contacting Support**:
+1. Check [8x8 Status Page](https://status.8x8.com) for known incidents
+2. Review this troubleshooting section
+3. Test with curl to isolate client library issues
+4. Verify API key permissions and status
+5. Collect logs and error responses with requestId/responseId
+
+---
+
+**Version**: 1.0  |  **Last Updated**: January 16, 2026  |  **Applies to**: All Administration API Suite APIs

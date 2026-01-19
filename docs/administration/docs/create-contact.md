@@ -2,7 +2,7 @@
 
 Our Contact API allows you to add new contacts into the system. This section guides you through the steps to create a contact. Before you start, make sure you have an API key to authenticate your requests.
 
-For comprehensive information about the object structure, including restrictions, please refer to the [Object Structure Guide](/analytics/docs/contact-object-structure-guide).
+For comprehensive information about the object structure, including restrictions, please refer to the [Object Structure Guide](/administration/docs/contact-object-structure-guide).
 
 **Endpoint for Contact Management**: `https://api.8x8.com/directory-contacts/api/v3/contacts`
 
@@ -10,7 +10,7 @@ For comprehensive information about the object structure, including restrictions
 
 To use the Contact Search endpoint, you must obtain a **Contact Management API Key**. This key is required for any requests that create, update, or delete contact information, i.e., POST, PUT, DELETE methods.
 
-[How to get API Keys](https://dash.readme.com/project/analytics-prod/v8-x-8/docs/how-to-get-api-keys)
+[How to get API Keys](/analytics/docs/how-to-get-api-keys)
 
 ## 2. Create Contact
 
@@ -29,7 +29,7 @@ Once authenticated, you can create a new contact by sending a `POST` request to 
 
 ### Body
 
-[Detailed Field Descriptions](/analytics/docs/contact-object-structure-guide)
+[Detailed Field Descriptions](/administration/docs/contact-object-structure-guide)
 
 ```json
 {
@@ -167,7 +167,7 @@ Replace `{contactId}` with the unique identifier of the contact you wish to upda
 
 ### Body
 
-[Detailed Field Descriptions](/analytics/docs/contact-object-structure-guide)
+[Detailed Field Descriptions](/administration/docs/contact-object-structure-guide)
 
 ```json
 {
@@ -335,7 +335,7 @@ A successful deletion will yield a 200 status code. The response body will typic
 
 While the ContactApp Product excels in managing contact details, for retrieving or searching for specific contacts, it's recommended to utilize the dedicated `Contact Search` API Key within the same service. This feature is specifically optimized for efficient and precise querying of contact data.
 
- For detailed instructions on how to use this functionality, please refer to the documentation [here](/analytics/docs/contact-search).
+ For detailed instructions on how to use this functionality, please refer to the documentation [here](/administration/docs/search-contacts).
 
 ## Rate Limiting
 

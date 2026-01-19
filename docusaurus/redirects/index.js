@@ -2,6 +2,7 @@
 // Used by @docusaurus/plugin-client-redirects in docusaurus.config.js
 
 const actionsEventsRedirects = require('./actions-events.js');
+const administrationRedirects = require('./administration.js');
 const analyticsRedirects = require('./analytics.js');
 const connectRedirects = require('./connect.js');
 const contactCenterRedirects = require('./contactcenter.js');
@@ -11,6 +12,9 @@ const techPartnerRedirects = require('./tech-partner.js');
 const redirects = [
   // Actions & Events redirects
   ...actionsEventsRedirects,
+
+  // Administration redirects
+  ...administrationRedirects,
 
   // Analytics redirects
   ...analyticsRedirects,

@@ -1,0 +1,50 @@
+---
+id: 8-x-8-administration-operations-api
+title: "8x8 Administration - Operations API"
+description: "Operation management API providing endpoints to retrieve and track the status of asynchronous operations. Operations are created automatically when asynchronous resource operations (create, update, delete) are initiated."
+sidebar_label: Introduction
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+---
+
+import Heading from "@theme/Heading";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  8x8 Administration - Operations API
+</Heading>
+
+Operation management API providing endpoints to retrieve and track the status of asynchronous operations. Operations are created automatically when asynchronous resource operations (create, update, delete) are initiated.
+
+The current version of the API is v1.0.
+
+## Authentication
+
+All requests to this API require authentication using an API key. Include your API key in the request header:
+
+```
+x-api-key: YOUR_API_KEY
+```
+
+## Versioning
+
+Specify the API version using the `Accept` header:
+
+```
+Accept: application/vnd.operations.v1+json
+```
+
+## Base URL
+
+`https://api.8x8.com/admin-provisioning`
+
+## Endpoints
+
+| Endpoint | Method | Purpose | Async? |
+|----------|--------|---------|--------|
+| `/operations/{operationId}` | GET | Retrieve the status and details of an asynchronous operation | No |
+
+## OpenAPI Specification
+
+Download the complete OpenAPI specification: [operation-api-v1.yaml](/administration/operation-api-v1.yaml)
+

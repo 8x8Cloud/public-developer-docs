@@ -1,0 +1,630 @@
+# Ring Group Management API Guide
+
+**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)
+
+import TabbedExternalCodeSample from '@site/docusaurus/components/TabbedExternalCodeSample';
+
+export const LANGUAGES = [
+  { ext: 'py', label: 'Python', syntax: 'python' },
+  { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+  { ext: 'sh', label: 'cURL', syntax: 'bash' }
+];
+
+:::warning BETA - Limited Access
+
+**These Administration APIs are currently in Beta testing.** API keys cannot be generated in Admin Console at this point. Only Beta program participants may use these APIs.
+
+:::
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Prerequisites & Authentication](#prerequisites--authentication)
+3. [Getting Started](#getting-started)
+4. [Core Concepts](#core-concepts)
+5. [Use Cases](#use-cases)
+6. [API Reference](#api-reference)
+7. [Business Rules](#business-rules)
+8. [API-Specific Error Scenarios](#api-specific-error-scenarios)
+9. [API-Specific Troubleshooting](#api-specific-troubleshooting)
+10. [Additional Resources](#additional-resources)
+
+---
+
+## Overview
+
+The Ring Group Management API enables customers and partners to programmatically manage ring groups across their 8x8 voice infrastructure. Ring groups distribute incoming calls among team members using configurable routing patterns, ensuring calls are efficiently handled by available staff.
+
+This API provides complete lifecycle management for ring groups, including:
+
+- Creating and configuring ring groups with custom routing patterns
+- Managing ring group memberships and member settings
+- Configuring call forwarding rules and voicemail
+- Assigning phone numbers to ring groups
+- Searching and filtering ring groups with advanced query capabilities
+
+**Primary use cases**:
+
+- Automated provisioning of ring groups for new departments or teams
+- Bulk management of ring group members during organizational changes
+- Integration with HR systems for automatic member provisioning
+- Programmatic management of call forwarding and voicemail settings
+
+### API Architecture
+
+- **RESTful Design**: Standard HTTP methods (GET, POST, PUT, DELETE) with JSON payloads
+- **Asynchronous Operations**: Create, update, and delete operations use async processing (see [API Essentials - Async Operations](./suite-common.mdx#asynchronous-operations))
+- **RSQL Filtering**: Powerful query syntax for precise ring group searches (see [API Essentials - RSQL](./suite-common.mdx#filtering-with-rsql))
+- **Scroll-Based Pagination**: Efficient pagination for large result sets (see [API Essentials - Pagination](./suite-common.mdx#pagination))
+
+### Reference
+
+View the complete [OpenAPI Specification](../../../docs_oas/administration/ringgroup-api-v1.yaml) for detailed endpoint documentation.
+
+---
+
+## Prerequisites & Authentication
+
+Before using the Ring Group Management API, review the **[Administration API Essentials](./suite-common.mdx)**, which covers:
+
+- **Prerequisites**: Account requirements, API credential acquisition, technical requirements
+- **Getting Started**: Step-by-step credential setup and testing
+- **Authentication**: API key authentication with `x-api-key` header
+- **API Versioning**: Version negotiation with `Accept` header
+- **Common Patterns**: Asynchronous operations, pagination, filtering, sorting
+- **Error Handling**: RFC 7807 format and common error scenarios
+- **Rate Limiting**: Request limits and handling strategies
+- **Best Practices**: Performance, security, and data consistency
+- **Troubleshooting**: Common issues and debugging steps
+- **Support Resources**: Contact information and escalation procedures
+
+### Ring Group Management API Specifics
+
+**Accept Header** for this API:
+
+```http
+Accept: application/vnd.ringgroups.v1+json
+```
+
+**Required API Products** (when creating API key in Admin Console):
+
+- **UC & CC Admin Operations**: Required for ring group management operations
+
+**Ring-Group-Specific Prerequisites**:
+
+- Appropriate permissions to manage ring groups
+- Understanding of ring group concepts (ring patterns, forwarding rules)
+- Knowledge of user IDs for ring group members
+
+---
+
+## Getting Started
+
+This quickstart demonstrates how to create a new ring group and verify it was created successfully. You'll learn the basic request/response pattern and asynchronous operation tracking used throughout the API.
+
+**Prerequisite Knowledge**: This quickstart assumes you've reviewed the [Common Documentation](./suite-common.mdx) and understand:
+
+- API key authentication
+- Asynchronous operation patterns
+- How to poll operation status
+
+### Create Your First Ring Group
+
+Ring groups require five essential properties:
+
+- `name`: A descriptive name for the ring group
+- `extensionNumber`: Internal extension number for routing
+- `ringPattern`: How calls are distributed (ROUND_ROBIN, SEQUENTIAL, or SIMULTANEOUS)
+- `ringTimeout`: Seconds each member's device rings before advancing
+- `site.id`: Valid Site ID from your organization (obtain from Admin Console → Sites or lookup via the [Site Management API](./site-management-api-guide))
+
+<TabbedExternalCodeSample
+  path="example_code/administration/ring-group-management-api/quickstart-create-ring-group"
+  title="Example: Create Your First Ring Group"
+  languages={LANGUAGES}
+/>
+
+Expected response for ring group creation:
+
+```json
+{
+  "operationId": "op_123456789",
+  "status": "PENDING",
+  "customerId": "0012J00042NkZQIQA3",
+  "resourceType": "RING_GROUP",
+  "operationType": "CREATE",
+  "createdTime": "2025-01-01T01:02:03Z",
+  "_links": {
+    "self": {
+      "href": "https://api.8x8.com/admin-provisioning/operations/op_123456789"
+    }
+  }
+}
+```
+
+For complete async operation handling, see [API Essentials - Asynchronous Operations](./suite-common.mdx#asynchronous-operations).
+
+---
+
+## Core Concepts
+
+Understanding these concepts specific to the Ring Group Management API will help you use it effectively.
+
+For general concepts (asynchronous operations, pagination, filtering, sorting, error handling), see [Administration API Essentials](./suite-common.mdx).
+
+### Ring Patterns
+
+Ring groups support three distribution patterns:
+
+- **ROUND_ROBIN**: Starts with the member who was alerted last on the previous call, ensuring even distribution of incoming calls across all members
+- **SEQUENTIAL**: Always starts with the same member on each new call, proceeding through members in order based on their sequence number
+- **SIMULTANEOUS**: Alerts all members at the same time, with the first to answer receiving the call
+
+### Ring Group Members
+
+Members are users assigned to receive calls distributed by the ring group. Each member has:
+
+- `userId` and `extensionId`: Unique identifiers
+- `sequenceNumber`: Determines order for ROUND_ROBIN and SEQUENTIAL patterns
+- `loggedIn`: Current login status (if allowLogInLogOut is enabled)
+- `voicemailAccessEnabled`: Permission to access ring group voicemail
+
+### Caller ID Configuration
+
+The `inboundCallerIdFormat` property controls what caller ID information members see:
+
+- `RGNAME_CALLERNUMBER`: Shows ring group name and caller's number
+- `CALLERNAME_CALLERNUMBER`: Shows caller's name and number
+- `RGNAME_RGEXTENSION`: Shows ring group name and extension
+- `RGNAME_DIALEDNUMBER`: Shows ring group name and dialed number
+
+### Forwarding Rules
+
+Ring groups support forwarding rules that activate under specific conditions:
+
+- `UNCONDITIONALLY`: Always forward calls
+- `BUSY`: Forward when all members are busy
+- `NO_ANSWER`: Forward when no member answers within the timeout period
+- `OUTAGE`: Forward during system outages
+
+Destinations can be auto attendants, extension numbers, external numbers, voicemail, or call drop.
+
+---
+
+## Use Cases
+
+This section covers the most common real-world scenarios for using the Ring Group Management API.
+
+For common patterns like pagination, filtering, error handling, and rate limiting, see [Administration API Essentials](./suite-common.mdx).
+
+### Use Case 1: Create Ring Group with Multiple Members
+
+When onboarding a new team or department, you need to create a ring group and add multiple members in a single workflow.
+
+This use case demonstrates:
+
+- Creating a ring group with optimal settings for team collaboration
+- Adding multiple members with appropriate sequence numbers
+- Configuring caller ID for professional presentation
+- Setting up voicemail for missed calls
+
+<TabbedExternalCodeSample
+  path="example_code/administration/ring-group-management-api/use-case-create-with-members"
+  title="Example: Create Ring Group with Multiple Members"
+  languages={LANGUAGES}
+/>
+
+**Expected outcome**: Ring group created with all specified members, ready to receive calls with fair distribution.
+
+### Use Case 2: Search and Filter Ring Groups
+
+When managing multiple ring groups across departments, you need to find specific groups using filters and handle paginated results.
+
+This use case demonstrates:
+
+- Using RSQL filter syntax with multiple operators (see [API Essentials - RSQL](./suite-common.mdx#filtering-with-rsql))
+- Implementing cursor-based pagination with scrollId (see [API Essentials - Pagination](./suite-common.mdx#pagination))
+- Sorting results by relevant fields (see [API Essentials - Sorting](./suite-common.mdx#sorting-results))
+- Handling empty result sets
+
+<TabbedExternalCodeSample
+  path="example_code/administration/ring-group-management-api/use-case-search-filter"
+  title="Example: Search and Filter Ring Groups"
+  languages={LANGUAGES}
+/>
+
+**Expected outcome**: Filtered list of ring groups matching search criteria, efficiently paginated using scroll IDs and sorted as requested.
+
+### Use Case 3: Update Ring Group Settings
+
+When business requirements change, you need to update ring group configuration such as ring patterns, timeouts, or caller ID settings.
+
+This use case demonstrates:
+
+- Retrieving current ring group configuration
+- Modifying specific settings while preserving others
+- Tracking update operation to completion (see [API Essentials - Async Operations](./suite-common.mdx#asynchronous-operations))
+- Verifying changes were applied
+
+:::danger CRITICAL: Understanding PUT Semantics
+
+The Ring Group Management API does NOT support partial updates via PATCH. PUT operations require the COMPLETE ring group object.
+
+Be sure to familiarise yourself with the correct update pattern in the [Administration API Essentials - Understanding PUT Semantics](./suite-common.mdx#understanding-put-semantics) section to avoid unintended data loss.
+
+:::
+
+<TabbedExternalCodeSample
+  path="example_code/administration/ring-group-management-api/use-case-update-settings"
+  title="Example: Update Ring Group Settings"
+  languages={LANGUAGES}
+/>
+
+**Expected outcome**: Ring group updated with new settings, all other configuration preserved.
+
+### Use Case 4: Manage Ring Group Members
+
+When team composition changes, you need to add new members, remove departing members, or adjust member settings like sequence order or voicemail access.
+
+This use case demonstrates:
+
+- Adding new members to existing ring group
+- Removing members who have left the team
+- Updating member sequence numbers
+- Enabling/disabling voicemail access for members
+
+<TabbedExternalCodeSample
+  path="example_code/administration/ring-group-management-api/use-case-manage-members"
+  title="Example: Manage Ring Group Members"
+  languages={LANGUAGES}
+/>
+
+**Expected outcome**: Ring group membership updated to reflect team changes with proper sequencing.
+
+### Use Case 5: Configure Forwarding Rules
+
+When ring groups need to handle overflow or after-hours calls, you must configure forwarding rules with appropriate conditions and destinations.
+
+This use case demonstrates:
+
+- Setting up NO_ANSWER forwarding to voicemail
+- Configuring BUSY forwarding to another extension
+- Setting up OUTAGE forwarding to external number
+- Enabling and disabling rules
+
+<TabbedExternalCodeSample
+  path="example_code/administration/ring-group-management-api/use-case-forwarding-rules"
+  title="Example: Configure Forwarding Rules"
+  languages={LANGUAGES}
+/>
+
+**Expected outcome**: Ring group with multiple forwarding rules handling various call scenarios.
+
+### Use Case 6: Delete Ring Group
+
+When a ring group is no longer needed due to departmental changes or organizational restructuring, you must safely delete it and verify removal.
+
+This use case demonstrates:
+
+- Checking ring group exists before deletion
+- Initiating delete operation
+- Polling operation status (see [API Essentials - Async Operations](./suite-common.mdx#asynchronous-operations))
+- Handling deletion errors
+- Verifying ring group no longer exists
+
+<TabbedExternalCodeSample
+  path="example_code/administration/ring-group-management-api/use-case-delete-ring-group"
+  title="Example: Delete Ring Group"
+  languages={LANGUAGES}
+/>
+
+**Expected outcome**: Ring group permanently removed, confirmed by 404 response on retrieval.
+
+---
+
+## API Reference
+
+### Base URL
+
+`https://api.8x8.com/admin-provisioning`
+
+### Key Endpoints
+
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| GET | `/ring-groups` | Search ring groups with filtering and pagination |
+| POST | `/ring-groups` | Create new ring group (async operation) |
+| GET | `/ring-groups/{ringGroupId}` | Retrieve specific ring group by ID |
+| PUT | `/ring-groups/{ringGroupId}` | Update ring group (async operation) |
+| DELETE | `/ring-groups/{ringGroupId}` | Delete ring group (async operation) |
+
+### Required Headers
+
+See [API Essentials - Common Request Patterns](./suite-common.mdx#common-request-patterns) for complete header requirements.
+
+For Ring Group Management API specifically:
+
+```http
+x-api-key: your-api-key-here
+Accept: application/vnd.ringgroups.v1+json
+Content-Type: application/json  (for POST/PUT requests)
+```
+
+### Content Type
+
+All requests and responses use:
+
+```text
+Content-Type: application/vnd.ringgroups.v1+json
+```
+
+### Important Parameters
+
+**Search/List Parameters**:
+
+- `pageSize`: Number of items per page (default: 100, min: 1, max: 1000) - see [API Essentials - Pagination](./suite-common.mdx#pagination)
+- `scrollId`: Cursor for pagination (obtained from `pagination.nextScrollId` in previous response)
+- `filter`: RSQL filter expression (max 2000 characters) - see [API Essentials - RSQL](./suite-common.mdx#filtering-with-rsql)
+- `sort`: Sort expression (max 200 characters) - see [API Essentials - Sorting](./suite-common.mdx#sorting-results)
+
+**Ring Group Properties**:
+
+- `name`: Ring group name (2-64 characters, required)
+- `extensionNumber`: Internal extension (required)
+- `ringPattern`: ROUND_ROBIN, SEQUENTIAL, or SIMULTANEOUS (required)
+- `ringTimeout`: Ring duration in seconds (required)
+- `inboundCallerIdFormat`: Caller ID display format (required)
+- `allowLogInLogOut`: Allow members to log in/out
+- `numberOfCycles`: Cycles through members before forwarding (ROUND_ROBIN/SEQUENTIAL only)
+- `voicemailSettings.accessPin`: Voicemail PIN (6-15 characters)
+
+For complete parameter details, see the [OpenAPI Specification](../../../docs_oas/administration/ringgroup-api-v1.yaml).
+
+### HTTP Status Codes
+
+See [API Essentials - Error Handling](./suite-common.mdx#error-handling) for complete status code descriptions.
+
+**Success Codes**:
+
+- `200 OK`: Successful GET request
+- `202 Accepted`: Asynchronous operation initiated (POST, PUT, DELETE)
+
+**Error Codes**:
+
+- `400 Bad Request`: Invalid request parameters, validation errors, or malformed request body
+- `401 Unauthorized`: Missing or invalid API key authentication
+- `403 Forbidden`: Insufficient permissions or customer ID mismatch
+- `404 Not Found`: Ring group or related resource not found
+- `409 Conflict`: Ring group with same extension already exists
+- `424 Failed Dependency`: Downstream service failure or unavailable
+- `429 Too Many Requests`: Rate limit exceeded (see [API Essentials - Rate Limiting](./suite-common.mdx#rate-limiting))
+- `500 Internal Server Error`: Unexpected server error occurred
+
+---
+
+## Business Rules
+
+This section documents important constraints and special behaviors specific to ring group management operations.
+
+### Member Limits
+
+**Recommended Maximum**: 20 members per ring group.
+
+While the API does not enforce a strict limit on ring group membership, exceeding 20 members may cause stability issues:
+
+- **Call Distribution Delays**: Large member counts can slow call routing decisions
+- **Simultaneous Ring Impact**: SIMULTANEOUS ring pattern performance degrades significantly with many members
+- **System Resource Usage**: Each member requires system resources for call state tracking
+
+**Best Practices**:
+- Keep ring groups under 20 members for optimal performance
+- For larger teams, consider using multiple ring groups with overflow forwarding
+- Use call queues instead of ring groups for high-volume scenarios with many agents
+
+---
+
+## API-Specific Error Scenarios
+
+For common error handling patterns, see [Administration API Essentials - Error Handling](./suite-common.mdx#error-handling).
+
+This section covers error scenarios specific to the Ring Group Management API.
+
+### Validation Errors (400)
+
+**Ring group name must be 2-64 characters**:
+
+```json
+{
+  "status": 400,
+  "title": "Validation Error",
+  "errors": [
+    {
+      "field": "name",
+      "code": "VALIDATION_ERROR",
+      "message": "Ring group name must be between 2 and 64 characters"
+    }
+  ]
+}
+```
+
+**Required fields validation**:
+
+- `name`, `extensionNumber`, `ringPattern`, `ringTimeout`, `inboundCallerIdFormat` must be present
+- Ring timeout must be positive integer
+- Number of cycles only applies to ROUND_ROBIN and SEQUENTIAL patterns
+- Voicemail PIN must be 6-15 characters if provided
+
+**RSQL filter validation**:
+
+- Filter expression must be valid syntax (max 2000 characters)
+- See [API Essentials - RSQL](./suite-common.mdx#filtering-with-rsql) for syntax rules
+
+**Sort expression validation**:
+
+- Sort expression must be valid (max 200 characters)
+- See [API Essentials - Sorting](./suite-common.mdx#sorting-results) for syntax rules
+
+### Conflict Errors (409)
+
+**Duplicate extension number**:
+
+```json
+{
+  "status": 409,
+  "title": "Conflict",
+  "detail": "Extension number already in use",
+  "errors": [
+    {
+      "field": "extensionNumber",
+      "code": "CONFLICT",
+      "message": "Extension 1001 is already assigned to another ring group or user"
+    }
+  ]
+}
+```
+
+**Resolution**: Search for existing ring groups with that extension, choose different extension number.
+
+### Resource Not Found (404)
+
+**Ring group does not exist**:
+
+```json
+{
+  "status": 404,
+  "title": "Not Found",
+  "detail": "Ring group not found",
+  "errors": [
+    {
+      "code": "NOT_FOUND",
+      "message": "Ring group with ID abc123 does not exist"
+    }
+  ]
+}
+```
+
+**Causes**:
+
+- Ring group ID is incorrect
+- Ring group was deleted
+- Related resource not found (e.g., site for ring group creation)
+
+**Resolution**: Verify resource ID is correct, check if resource exists in correct customer account.
+
+### Operation Failures
+
+Poll operation status to get failure details. Common causes:
+
+- Invalid member IDs (users don't exist)
+- Duplicate extension numbers
+- Invalid phone number formats (must be E.164)
+- Site or PBX configuration issues
+
+See [API Essentials - Async Operations](./suite-common.mdx#asynchronous-operations) for handling operation errors.
+
+---
+
+## API-Specific Troubleshooting
+
+For common troubleshooting guidance, see [Administration API Essentials - Troubleshooting](./suite-common.mdx#troubleshooting).
+
+This section covers troubleshooting issues specific to the Ring Group Management API.
+
+### Ring Group Not Receiving Calls
+
+**Problem**: Ring group created but not receiving calls
+
+**Debugging Steps**:
+
+1. Verify phone numbers are assigned to ring group
+2. Check forwarding rules aren't misconfigured (unconditional forward active)
+3. Verify members are logged in (if `allowLogInLogOut` is true)
+4. Check ring group status and configuration
+5. Test with direct call to extension number
+
+**Resolution**:
+
+- Assign phone numbers via Admin Console or related API
+- Review and correct forwarding rules
+- Ensure at least one member is logged in and available
+- Verify extension number is correctly configured
+
+### Members Not Showing in Ring Group
+
+**Problem**: Members not appearing in GET response after update
+
+**Debugging Steps**:
+
+1. Verify members were included in PUT request members array
+2. Check update operation status (should be COMPLETED)
+3. Ensure member user IDs are valid and users exist
+4. Retrieve ring group to see actual member list
+5. Check for validation errors in operation response
+
+**Resolution**:
+
+- Always include complete members array in PUT requests
+- Verify all member user IDs exist before submitting
+- Check operation error details for specific member issues
+
+### Extension Number Conflicts
+
+**Problem**: 409 Conflict when creating ring group
+
+**Cause**: Extension number already in use by another ring group or user
+
+**Debugging Steps**:
+
+1. Search for existing ring groups: `GET /ring-groups?filter=extensionNumber=={number}`
+2. Check if extension assigned to user in Admin Console
+3. Choose different available extension number
+
+**Resolution**: Use unique extension number within your organization's extension plan.
+
+### Operation Stuck or Failed
+
+See [API Essentials - Troubleshooting - Async Operation Problems](./suite-common.mdx#async-operation-problems) for general async operation troubleshooting.
+
+**Ring-Group-Specific Causes**:
+
+- Invalid member IDs in members array
+- Invalid phone number formats
+- System constraint violations (e.g., maximum members exceeded)
+- Ring group configuration conflicts
+
+**Resolution**:
+
+- Check operation `error` field for specific details
+- Validate all member IDs exist
+- Ensure phone numbers are in E.164 format
+- Contact support if issue persists with operation ID
+
+---
+
+## Additional Resources
+
+**API Documentation**:
+
+- [Administration API Essentials](./suite-common.mdx)
+- [OpenAPI Specification](/administration/ringgroup-api-v1.yaml)
+- [8x8 Admin Console](https://admin.8x8.com)
+
+**Technical References**:
+
+- [RSQL Specification](https://github.com/jirutka/rsql-parser) (for filtering syntax)
+- [RFC 7807 - Problem Details](https://tools.ietf.org/html/rfc7807) (error format)
+- [E.164 Phone Number Format](https://en.wikipedia.org/wiki/E.164)
+
+**Service Status**:
+
+- [8x8 Status Page](https://status.8x8.com)
+
+**Support**:
+
+- Admin Console: User profile menu → Contact Support
+
+**When Contacting Support**: See [API Essentials - Support Resources](./suite-common.mdx#support-resources) for required information.
+
+---
+
+**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)  |  **Feedback**: Submit feedback via Admin Console

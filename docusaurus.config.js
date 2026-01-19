@@ -87,6 +87,14 @@ const config = {
               groupPathsBy: 'tag',
             },
           },
+          administrationApis: {
+            specPath: 'docs_oas/administration',
+            outputDir: 'docs/administration/reference',
+            sidebarOptions: {
+              groupPathsBy: 'tag',
+            },
+            infoTemplate: 'docusaurus/templates/administration-api-info.mdx',
+          },
           analyticsContentApis: {
             specPath: 'docs_oas/analytics',
             outputDir: 'docs/analytics/reference',
@@ -123,7 +131,23 @@ const config = {
     path.resolve(__dirname, 'docusaurus/plugins/amplitude-analytics'),
   ],
 
-  staticDirectories: [path.resolve(__dirname, 'docusaurus/static')],
+  staticDirectories: [
+    path.resolve(__dirname, 'docusaurus/static'),
+    path.resolve(__dirname, 'example_code'),
+    path.resolve(__dirname, 'docs_oas'),
+  ],
+
+  customFields: {
+    // Code samples mode: 'local' or 'remote'
+    // - Explicit override via CODE_SAMPLES_MODE env var
+    // - Auto-detect: 'local' in development, 'remote' in production builds
+    codeSamplesMode:
+      process.env.CODE_SAMPLES_MODE ||
+      (process.env.NODE_ENV === 'development' ? 'local' : 'remote'),
+
+    // Base path for local code samples (served by Docusaurus static directories)
+    codeSamplesLocalPath: '/example_code',
+  },
 
   themes: [
     'docusaurus-theme-openapi-docs',
@@ -205,6 +229,11 @@ const config = {
           to: '/tech-partner',
           position: 'left',
           label: 'Tech Partners',
+        },
+        {
+          to: '/administration',
+          position: 'left',
+          label: 'Administration',
         },
         {
           href: 'https://github.com/8x8Cloud/public-developer-docs',

@@ -34,6 +34,12 @@ const cards = [
       '8x8 is proud to provide a cohesive user experience for customers when using 8x8 products.',
     link: '/tech-partner',
   },
+  {
+    title: 'XCaaS Administration',
+    description:
+      'APIs and guides for deployment and administration of UC and CC services.',
+    link: '/administration',
+  },
 ];
 
 export default function DeveloperHubCards() {

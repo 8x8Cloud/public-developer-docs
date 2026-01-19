@@ -1,0 +1,691 @@
+import TabbedExternalCodeSample from '@site/docusaurus/components/TabbedExternalCodeSample';
+
+# Phone Number Management API Guide
+
+**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)
+
+:::warning BETA - Limited Access
+
+**These Administration APIs are currently in Beta testing.** API keys cannot be generated in Admin Console at this point. Only Beta program participants may use these APIs.
+
+:::
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Prerequisites & Authentication](#prerequisites--authentication)
+3. [Getting Started](#getting-started)
+4. [Core Concepts](#core-concepts)
+5. [Use Cases](#use-cases)
+6. [API Reference](#api-reference)
+7. [API-Specific Error Scenarios](#api-specific-error-scenarios)
+8. [API-Specific Troubleshooting](#api-specific-troubleshooting)
+9. [Additional Resources](#additional-resources)
+
+---
+
+## Overview
+
+The **Phone Number Management API** is part of the **[Administration API Suite](./suite-common.mdx)**. It provides read-only access to your organization's phone number inventory, enabling you to discover available phone numbers, understand number assignments, and export your phone number estate for integration with external systems.
+
+### What This API Does
+
+This API enables you to:
+
+- **Search and filter phone numbers** in your inventory by status, country, category, and other attributes
+- **Retrieve detailed metadata** about specific phone numbers including formatting, origin, and assignment status
+- **Identify available phone numbers** for assignment to users or ring groups via the User Management and Ring Group Management APIs
+- **Export phone number data** for reporting, auditing, or integration with external provisioning systems
+
+### When to Use This API
+
+Use the Phone Number Management API when you need to:
+
+- Find available phone numbers before assigning them to users or ring groups
+- Audit your organization's phone number inventory
+- Track phone number usage and availability across your organization
+- Build automated provisioning workflows that require phone number discovery
+- Export phone number data to external systems
+
+This API is designed for **discovery and retrieval** of phone number information. For number acquisition (claiming from 8x8 stock or porting from other carriers), use the Phone Numbers page in the 8x8 Admin Console.
+
+### Relationship to Other APIs
+
+The Phone Number Management API works alongside other Administration APIs:
+
+- **User Management API**: Assign discovered phone numbers to user accounts
+- **Ring Group Management API**: Assign discovered phone numbers to ring groups
+- **Phone Number Management API** (this API): Discover available phone numbers and retrieve metadata
+
+**Typical workflow**: Use this API to find available phone numbers, then use User Management or Ring Group Management APIs to assign those numbers to services.
+
+---
+
+## Prerequisites & Authentication
+
+Before using the Phone Number Management API, review the **[Administration API Essentials](./suite-common.mdx)**, which covers:
+
+- **Prerequisites**: Account requirements, API credential acquisition, technical requirements
+- **Getting Started**: Step-by-step credential setup and testing
+- **Authentication**: API key authentication with x-api-key header
+- **API Versioning**: Version negotiation with Accept header
+- **Common Patterns**: Asynchronous operations, pagination, filtering, sorting
+- **Error Handling**: RFC 7807 format and common error scenarios
+- **Rate Limiting**: Request limits and handling strategies
+- **Best Practices**: Performance, security, and data consistency
+- **Troubleshooting**: Common issues and debugging steps
+- **Support Resources**: Contact information and escalation procedures
+
+### Phone Number Management API Specifics
+
+**Accept Header** for this API:
+
+```text
+Accept: application/vnd.phonenumbers.v1+json
+```
+
+**Required API Products** (when creating API key in Admin Console):
+- **UC & CC Number Admin**: Required for phone number data access
+
+**Phone Number Management-Specific Prerequisites**:
+- Access to 8x8 Admin Console to verify your phone number inventory
+- Understanding of E.164 phone number format (international standard)
+- Familiarity with your organization's phone number assignment policies
+
+---
+
+## Getting Started
+
+This quickstart demonstrates how to retrieve your organization's phone number inventory and filter for available numbers in a specific country.
+
+### Your First Phone Number Query
+
+**Request**: Make a GET request to `/phone-numbers` with a filter for available US numbers:
+
+```http
+GET /phone-numbers?filter=status==AVAILABLE;country==US&pageSize=100
+```
+
+**Expected Response**:
+
+The API returns a paginated list of phone numbers matching your filter:
+
+```json
+{
+  "data": [
+    {
+      "phoneNumber": "+14085551234",
+      "nationalFormattedNumber": "(408) 555-1234",
+      "country": "US",
+      "category": "LOCAL",
+      "origin": "CLAIMED",
+      "status": "AVAILABLE"
+    },
+    {
+      "phoneNumber": "+14155559876",
+      "nationalFormattedNumber": "(415) 555-9876",
+      "country": "US",
+      "category": "TOLL_FREE",
+      "origin": "PORTING",
+      "status": "AVAILABLE"
+    }
+  ],
+  "pagination": {
+    "pageSize": 100,
+    "hasMore": false,
+    "filter": "status==AVAILABLE;country==US"
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.8x8.com/admin-provisioning/phone-numbers?filter=status==AVAILABLE;country==US&pageSize=100"
+    }
+  }
+}
+```
+
+<TabbedExternalCodeSample
+  path="example_code/administration/phone-number-management-api/quickstart-list-available-numbers"
+  title="Example: List Available Phone Numbers"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+### Next Steps
+
+Now that you've retrieved your phone number inventory, explore:
+
+- [Filtering by phone number attributes](#filtering-phone-numbers) to find specific numbers
+- [Understanding phone number status](#phone-number-status) for provisioning workflows
+- [Retrieving specific phone numbers](#get-phone-numbersphonenumber) by their E.164 value
+
+---
+
+## Core Concepts
+
+### Phone Numbers in E.164 Format
+
+All phone numbers in this API use **E.164 international format**: a plus sign (`+`) followed by the country code and number with no spaces or special characters.
+
+**Examples**:
+
+- United States: `+14085551234`
+- United Kingdom: `+442071234567`
+- Australia: `+61212345678`
+
+The API also provides a `nationalFormattedNumber` field with country-specific formatting for display purposes (e.g., `"(408) 555-1234"` for US numbers).
+
+### Phone Number Status
+
+Phone numbers in your inventory have one of four status values that indicate their current state:
+
+| Status | Description | Use For |
+|--------|-------------|---------|
+| `AVAILABLE` | Ready to be assigned to a service (user or ring group). Most common status for provisioning workflows. | Searching for numbers to assign to users or ring groups |
+| `ASSIGNED` | Currently in use by a service (user, ring group, or other telephony resource). | Auditing which numbers are actively in use |
+| `PRE_PORTING` | Linked to a temporary 8x8 number, but porting process has not started. Includes `portingNumber` and `temporaryNumber` fields. | Preparing for number porting |
+| `PORTING` | Porting process actively underway. Will become `AVAILABLE` or `ASSIGNED` once complete. | Tracking porting progress |
+
+### Number Origin
+
+The `origin` field indicates how the number entered your inventory:
+
+| Origin | Description |
+|--------|-------------|
+| `CLAIMED` | Claimed directly from 8x8's available phone number stock through Admin Console or provisioning process. |
+| `PORTING` | Being ported (or was ported) from another carrier to 8x8. |
+
+### Number Category
+
+The `category` field indicates the type of phone number:
+
+| Category | Description |
+|----------|-------------|
+| `LOCAL` | Standard local phone number tied to a specific geographic area and country. |
+| `TOLL_FREE` | Toll-free number that allows callers to reach you without incurring charges (e.g., 1-800 numbers in the US). |
+
+### Country Codes
+
+The `country` field uses **[ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)** two-character country codes:
+
+- `US`: United States
+- `GB`: United Kingdom
+- `AU`: Australia
+- `CA`: Canada
+- `DE`: Germany
+
+---
+
+## Use Cases
+
+### Use Case 1: Find Available Phone Numbers for User Assignment
+
+**Scenario**: You're building an automated user provisioning workflow and need to discover available phone numbers in a specific country before assigning them to new users.
+
+**Implementation Pattern**:
+
+1. Query the Phone Number Management API to find available numbers filtered by country and category
+2. Select an appropriate number from the results
+3. Use the User Management API to assign the selected number to a user
+
+<TabbedExternalCodeSample
+  path="example_code/administration/phone-number-management-api/use-case-find-available-for-assignment"
+  title="Example: Find Available Number for Assignment"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Outcome**: You receive a list of available phone numbers matching your criteria, ready for assignment via the User Management API.
+
+**Next Step**: Pass the selected `phoneNumber` value (e.g., `+14085551234`) to the User Management API when creating or updating a user.
+
+---
+
+### Use Case 2: Audit Phone Number Usage by Status
+
+**Scenario**: You need to generate a report showing how many phone numbers are available, assigned, or in porting status for capacity planning and inventory management.
+
+**Implementation Pattern**:
+
+1. Query the Phone Number Management API multiple times with different status filters
+2. Count results for each status category
+3. Aggregate data for reporting or dashboard display
+
+<TabbedExternalCodeSample
+  path="example_code/administration/phone-number-management-api/use-case-audit-by-status"
+  title="Example: Audit Phone Numbers by Status"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Outcome**: You receive counts for each status category, enabling capacity planning and inventory management decisions.
+
+---
+
+### Use Case 3: Export Phone Number Inventory to External System
+
+**Scenario**: You need to export your complete phone number inventory to an external CRM, reporting system, or database for integration with other business processes.
+
+**Implementation Pattern**:
+
+1. Query the Phone Number Management API without filters to retrieve all phone numbers
+2. Handle pagination using scroll IDs to iterate through large datasets
+3. Transform data to required format for external system
+4. Load data into target system
+
+<TabbedExternalCodeSample
+  path="example_code/administration/phone-number-management-api/use-case-export-inventory"
+  title="Example: Export Complete Phone Number Inventory"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Outcome**: Complete phone number inventory exported to external system in required format.
+
+---
+
+### Use Case 4: Verify Phone Number Availability Before Assignment
+
+**Scenario**: Before assigning a specific phone number to a user or ring group, you need to verify it exists in your inventory and is currently available.
+
+**Implementation Pattern**:
+
+1. Use the GET `/phone-numbers/\{phoneNumber\}` endpoint to retrieve specific number
+2. Check the `status` field to verify it's `AVAILABLE`
+3. Proceed with assignment if available, or select alternative number if not
+
+<TabbedExternalCodeSample
+  path="example_code/administration/phone-number-management-api/use-case-verify-availability"
+  title="Example: Verify Phone Number Availability"
+  languages={[
+    { ext: 'py', label: 'Python', syntax: 'python' },
+    { ext: 'js', label: 'Node.js', syntax: 'javascript' },
+    { ext: 'sh', label: 'cURL', syntax: 'bash' }
+  ]}
+/>
+
+**Expected Outcome**: Confirmation of phone number status before proceeding with assignment operation.
+
+---
+
+## API Reference
+
+The Phone Number Management API provides two endpoints for phone number discovery and retrieval.
+
+### Endpoints Summary
+
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/phone-numbers` | GET | Search and list phone numbers with filtering, sorting, and pagination |
+| `/phone-numbers/\{phoneNumber\}` | GET | Retrieve specific phone number by E.164 value |
+
+### GET /phone-numbers
+
+**Purpose**: Search for phone numbers in your inventory with optional filtering, sorting, and scroll-based pagination.
+
+**Query Parameters**:
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `pageSize` | integer | No | Number of items per page (default: 100, max: 100) |
+| `scrollId` | string | No | Scroll identifier for retrieving next page (obtained from previous response) |
+| `filter` | string | No | RSQL filter expression (see [Filtering](#filtering-phone-numbers) below) |
+| `sort` | string | No | Sort expression - single attribute only (see [Sorting](#sorting-results) below) |
+
+**Response**: Returns a paginated list of phone numbers matching your criteria.
+
+**See**: [Administration API Essentials - Pagination](./suite-common.mdx#pagination) for scroll-based pagination details.
+
+#### Filtering Phone Numbers
+
+The API supports RSQL filtering on the following phone number attributes:
+
+**Filterable Fields**:
+
+- `phoneNumber`: The E.164 phone number value (e.g., `+14085551234`)
+- `country`: ISO 3166-1 alpha-2 country code (e.g., `US`, `GB`, `AU`)
+- `category`: Number category (`LOCAL` or `TOLL_FREE`)
+- `origin`: Number origin (`CLAIMED` or `PORTING`)
+- `status`: Current status (`AVAILABLE`, `ASSIGNED`, `PORTING`, `PRE_PORTING`)
+
+**Common Filter Examples**:
+
+```text
+status==AVAILABLE
+country==US
+status==AVAILABLE;country==US
+category==LOCAL
+status==AVAILABLE;country==US;category==LOCAL
+phoneNumber==+14085551234
+origin==CLAIMED;status==AVAILABLE
+```
+
+**See**: [Administration API Essentials - Filtering with RSQL](./suite-common.mdx#filtering-with-rsql) for complete RSQL syntax and operators.
+
+#### Sorting Results
+
+The API supports sorting on a **single attribute only** (unlike some other APIs that support multi-attribute sorting).
+
+**Sortable Fields**:
+
+- `phoneNumber`
+- `country`
+- `category`
+
+**Sort Syntax**:
+
+- Ascending: `phoneNumber` or `+phoneNumber`
+- Descending: `-phoneNumber`
+
+**Examples**:
+
+```text
+sort=phoneNumber         (ascending by phone number)
+sort=-country            (descending by country)
+sort=category            (ascending by category)
+```
+
+**Note**: Only one sort attribute can be specified per request. Attempting to sort by multiple attributes will result in a validation error.
+
+**See**: [Administration API Essentials - Sorting Results](./suite-common.mdx#sorting-results) for general sorting conventions.
+
+### GET /phone-numbers/\{phoneNumber\}
+
+**Purpose**: Retrieve detailed information about a specific phone number by its E.164 value.
+
+**Path Parameters**:
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `phoneNumber` | string | Yes | Phone number in E.164 format (e.g., `+14085551234`) |
+
+**Response**: Returns complete metadata for the specified phone number.
+
+**Error Scenarios**:
+
+- `400 Bad Request`: Phone number not in valid E.164 format
+- `404 Not Found`: Phone number does not exist in your inventory
+- `403 Forbidden`: Insufficient permissions or customer ID mismatch
+
+### Phone Number Response Schema
+
+All endpoints return phone number objects with these fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `phoneNumber` | string | E.164 formatted phone number (e.g., `+14085551234`) |
+| `nationalFormattedNumber` | string | Country-specific formatted number (e.g., `"(408) 555-1234"`) |
+| `country` | string | ISO 3166-1 alpha-2 country code |
+| `category` | string | Number type: `LOCAL` or `TOLL_FREE` |
+| `origin` | string | Number source: `CLAIMED` or `PORTING` |
+| `status` | string | Current state: `AVAILABLE`, `ASSIGNED`, `PORTING`, `PRE_PORTING` |
+| `portingNumber` | string | (Optional) During porting: the number being ported |
+| `temporaryNumber` | string | (Optional) During porting: the temporary 8x8 number |
+
+**Full Schema**: See the [OpenAPI Specification](../../../docs_oas/administration/phonenumber-api-v1.yaml) for complete schema definitions.
+
+---
+
+## Common Patterns
+
+This API follows standard patterns covered in the **[Administration API Suite Common Documentation](./suite-common.mdx)**:
+
+- **Authentication**: See [Administration API Essentials - Authentication](./suite-common.mdx#authentication) for API key usage and header format
+- **Pagination**: See [Administration API Essentials - Pagination](./suite-common.mdx#pagination) for scroll-based pagination with `scrollId` parameter
+- **Filtering**: See [Administration API Essentials - Filtering with RSQL](./suite-common.mdx#filtering-with-rsql) for RSQL syntax, operators, and examples
+- **Sorting**: See [Administration API Essentials - Sorting Results](./suite-common.mdx#sorting-results) for general sorting conventions
+- **Rate Limiting**: See [Administration API Essentials - Rate Limiting](./suite-common.mdx#rate-limiting) for policies and best practices
+- **Error Handling**: See [Administration API Essentials - Error Handling](./suite-common.mdx#error-handling) for status codes and recovery strategies
+
+### API-Specific Pattern Notes
+
+**Single-Attribute Sorting Only**: Unlike some Administration APIs that support multi-attribute sorting, the Phone Number Management API only supports sorting by a single attribute per request. Attempting to specify multiple sort attributes will result in a `400 Bad Request` error.
+
+**Synchronous Operations**: All phone number retrieval operations are synchronous. You receive results immediately in the response (no asynchronous polling required).
+
+**E.164 Format**: Always use the `phoneNumber` field value (E.164 format like `+14085551234`) when passing numbers to other APIs, not the `nationalFormattedNumber`.
+
+For general best practices, see [Administration API Essentials - Best Practices](./suite-common.mdx#best-practices).
+
+---
+
+## API-Specific Error Scenarios
+
+This section covers error scenarios **specific to the Phone Number Management API**. For common HTTP status codes and generic error handling, see **[Administration API Essentials - Error Handling](./suite-common.mdx#error-handling)**.
+
+### Invalid E.164 Format (400 Bad Request)
+
+**When**: Phone number in path parameter is not in valid E.164 format
+
+**Example**: `GET /phone-numbers/4085551234` (missing `+` prefix)
+
+**Response**:
+
+```json
+{
+  "status": 400,
+  "title": "Invalid phone number",
+  "detail": "Invalid phone number 4085551234",
+  "errors": [
+    {
+      "field": "phoneNumber",
+      "code": "VALIDATION_ERROR",
+      "message": "Invalid phone number 4085551234"
+    }
+  ]
+}
+```
+
+**Resolution**: Ensure phone number includes `+` prefix and country code (e.g., `+14085551234`)
+
+#### Invalid Filter Syntax (400 Bad Request)
+
+**When**: RSQL filter expression has syntax errors
+
+**Example**: `?filter=status=AVAILABLE` (using `=` instead of `==`)
+
+**Response**:
+
+```json
+{
+  "status": 400,
+  "title": "Validation error",
+  "errors": [
+    {
+      "field": "filter",
+      "code": "VALIDATION_ERROR",
+      "message": "Invalid filter syntax"
+    }
+  ]
+}
+```
+
+**Resolution**: Use correct RSQL syntax with `==` for equality comparisons. See [Filtering](#filtering-phone-numbers) for examples.
+
+#### Invalid Sort Parameter (400 Bad Request)
+
+**When**: Sort parameter references an invalid field or attempts multi-attribute sorting
+
+**Response**:
+
+```json
+{
+  "status": 400,
+  "title": "Validation error",
+  "errors": [
+    {
+      "field": "sort",
+      "code": "VALIDATION_ERROR",
+      "message": "Invalid sort parameter"
+    }
+  ]
+}
+```
+
+**Resolution**: Use a single sortable field (`phoneNumber`, `country`, or `category`)
+
+#### Invalid Scroll ID (400 Bad Request)
+
+**When**: Scroll ID from previous response is malformed or expired
+
+**Response**:
+
+```json
+{
+  "status": 400,
+  "title": "Validation error",
+  "errors": [
+    {
+      "field": "scrollId",
+      "code": "VALIDATION_ERROR",
+      "message": "Invalid scroll identifier"
+    }
+  ]
+}
+```
+
+**Resolution**: Ensure you're using the `nextScrollId` from the most recent response. Scroll IDs have a limited lifetime - restart pagination if expired.
+
+#### Conflicting Query Parameters (400 Bad Request)
+
+**When**: Attempting to use `scrollId` with other first-page query parameters
+
+**Example**: `?scrollId=abc123&filter=status==AVAILABLE` (mixing scrollId with filter)
+
+**Response**:
+
+```json
+{
+  "status": 400,
+  "title": "Conflicting query parameters",
+  "errors": [
+    {
+      "code": "CONFLICTING_QUERY_PARAMETER",
+      "message": "Cannot use scrollId with other first-page query parameters"
+    }
+  ]
+}
+```
+
+**Resolution**: Use `scrollId` only for continuation requests. Apply filters only on the first page.
+
+#### Phone Number Not Found (404 Not Found)
+
+**When**: Requested phone number does not exist in your organization's inventory
+
+**Example**: `GET /phone-numbers/+14085551234` (number not in inventory)
+
+**Response**:
+
+```json
+{
+  "status": 404,
+  "title": "Phone number not found",
+  "errors": [
+    {
+      "code": "NOT_FOUND",
+      "message": "Phone number not found: customerId: CUST123 phoneNumber: +14085551234"
+    }
+  ]
+}
+```
+
+**Resolution**: Verify the phone number exists in your inventory. The number may belong to another customer or may not have been provisioned yet.
+
+---
+
+## API-Specific Troubleshooting
+
+This section covers issues **specific to the Phone Number Management API**. For authentication, rate limiting, and other common issues, see **[Administration API Essentials - Troubleshooting](./suite-common.mdx#troubleshooting)**.
+
+### No Available Phone Numbers Found
+
+**Symptom**: Query with `filter=status==AVAILABLE` returns empty results
+
+**Possible Causes**:
+
+1. All phone numbers in your inventory are currently assigned
+2. Filter is too restrictive (e.g., specific country + category combination has no matches)
+3. Phone numbers have not been provisioned to your organization yet
+
+**Resolution**:
+
+1. Remove or relax filters to see if any numbers exist: `GET /phone-numbers`
+2. Check for numbers in other countries or categories
+3. Verify phone numbers have been claimed or ported via Admin Console
+
+### Scroll ID Expired During Pagination
+
+**Symptom**: `400 Bad Request` with `VALIDATION_ERROR` on scroll ID after some time
+
+**Cause**: Scroll IDs have a limited lifetime (typically 5-10 minutes)
+
+**Resolution**:
+
+1. Complete pagination quickly to avoid expiration
+2. If scroll ID expires, restart pagination from the beginning
+3. For large exports, consider breaking into multiple smaller queries by filtering
+
+### Phone Number Format Rejected
+
+**Symptom**: `400 Bad Request` when querying specific phone number by ID
+
+**Cause**: Phone number not in E.164 format (missing `+`, has spaces or special characters)
+
+**Resolution**:
+
+Ensure phone numbers:
+
+- Start with `+` sign
+- Include country code
+- Have no spaces, dashes, or parentheses
+- Example: `+14085551234` not `(408) 555-1234` or `4085551234`
+
+### Cannot Sort By Multiple Attributes
+
+**Symptom**: `400 Bad Request` when attempting to sort by multiple fields
+
+**Cause**: This API only supports single-attribute sorting
+
+**Resolution**:
+
+1. Choose the most important sort attribute
+2. Implement additional sorting client-side if needed
+3. Example: `sort=country` (then sort by phoneNumber in your code)
+
+---
+
+## Additional Resources
+
+**API Documentation**:
+- [Administration API Essentials](./suite-common.mdx)
+- [OpenAPI Specification](/administration/phonenumber-api-v1.yaml)
+- [8x8 Admin Console](https://admin.8x8.com)
+
+**Technical References**:
+- [RSQL Specification](https://github.com/jirutka/rsql-parser) (for filtering syntax)
+- [RFC 7807 - Problem Details](https://tools.ietf.org/html/rfc7807) (error format)
+- [E.164 Phone Number Format](https://en.wikipedia.org/wiki/E.164) (international phone number standard)
+
+**Service Status**:
+- [8x8 Status Page](https://status.8x8.com)
+
+**Support**:
+- Admin Console: User profile menu → Contact Support
+
+**When Contacting Support**: See [Administration API Essentials - Support Resources](./suite-common.mdx#support-resources) for required information.
+
+---
+
+**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)  |  **Feedback**: Submit feedback via Admin Console

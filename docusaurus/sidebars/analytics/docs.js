@@ -66,16 +66,6 @@ const sidebarConfig = [
   },
   {
     type: 'category',
-    label: 'Contact Management',
-    collapsed: true,
-    items: [
-      'analytics/docs/search-contacts',
-      'analytics/docs/create-contact',
-      'analytics/docs/contact-object-structure-guide',
-    ],
-  },
-  {
-    type: 'category',
     label: 'Audit Records',
     collapsed: true,
     items: ['analytics/docs/audit-records'],

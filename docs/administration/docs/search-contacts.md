@@ -28,7 +28,7 @@ Construct your search query using the supported query parameters to filter and s
 
 | Name | Description` | Example |
 | --- | --- | --- |
-| details | Details needed for contact***Available values*** : TAG, ADDRESS, PHONE, EMAIL, EXTENSION For an in-depth explanation of each parameter and the overall structure, please refer to our [Contact Object Structure Guide](/analytics/docs/contact-object-structure-guide) | PHONE,ADDRESS |
+| details | Details needed for contact***Available values*** : TAG, ADDRESS, PHONE, EMAIL, EXTENSION For an in-depth explanation of each parameter and the overall structure, please refer to our [Contact Object Structure Guide](/administration/docs/contact-object-structure-guide) | PHONE,ADDRESS |
 | filter | Filtering capabilities by using Feed Item Query Language (FIQL) filter expressions | firstName==John |
 | filterByDisplayFlag | Flag to filter results by display criteria | true |
 
@@ -36,7 +36,7 @@ Construct your search query using the supported query parameters to filter and s
 
 **Filtering**
 
-[Contact Object Structure Guide](/analytics/docs/contact-object-structure-guide)
+[Contact Object Structure Guide](/administration/docs/contact-object-structure-guide)
 
 > 📘 **Filtering**
 >
