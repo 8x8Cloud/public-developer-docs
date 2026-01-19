@@ -1,0 +1,2786 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Fax as a Service (FaaS) API",
+    "description": "This is the FaaS API which provides access to the Fax as a Service platform features via REST API.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.8x8.com/faxapi",
+      "description": "Production Cluster Location"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Webhook Fax Event Notification Controller",
+      "description": "APIs for webhook fax event notification management"
+    },
+    {
+      "name": "Phones Controller",
+      "description": "APIs for fax DIDs management"
+    },
+    {
+      "name": "Webhook Controller",
+      "description": "APIs for fax webhooks management"
+    },
+    {
+      "name": "health",
+      "description": "Publicly available ping"
+    },
+    {
+      "name": "health",
+      "description": "Publicly available health metrics"
+    },
+    {
+      "name": "Faxes Controller",
+      "description": "APIs for faxes management"
+    }
+  ],
+  "paths": {
+    "/v1/notifications/webhook": {
+      "get": {
+        "tags": ["Webhook Controller"],
+        "summary": "Get all webhooks information",
+        "description": "Retrieves all of the customer webhooks information details.",
+        "operationId": "getcustomerwebhooks",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Webhook information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerWebHookInformationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Webhook Controller"],
+        "summary": "Creates a new webhook",
+        "description": "Creates a webhook for the customer from the provided parameters.",
+        "operationId": "createcustomerwebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Webhook created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid webhook request body parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/notifications/fax-event/webhook-service/phones": {
+      "get": {
+        "tags": ["Webhook Fax Event Notification Controller"],
+        "summary": "Gets all fax event webhook configurations specific for DIDs",
+        "description": "Retrieves all of the customer's fax event webhook configurations associated with the customer's DIDs.",
+        "operationId": "getcustomerdidfaxeventswebhooks",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DIDs Fax Event notification webhooks configuration retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDidWebHookInformationPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Webhook Fax Event Notification Controller"],
+        "summary": "Create a new fax event webhook configurations for a customer's DID",
+        "description": "Creates a new FaxEvent webhook configuration for a customer's specific DID.",
+        "operationId": "createconfigurationforfaxeventdidwebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FaxEventDidWebhookConfiguration"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Fax Event Webhook Notification configuration created successfully for specified DID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer DID or Webhook ID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/notifications/fax-event/webhook-service/default": {
+      "get": {
+        "tags": ["Webhook Fax Event Notification Controller"],
+        "summary": "Gets all default fax event webhook configurations",
+        "description": "Retrieves all of the customer's default fax event webhook configurations.",
+        "operationId": "getcustomerdefaultfaxeventswebhooks",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Fax Event Webhook configuration retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDefaultWebHookInformationPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Webhook Fax Event Notification Controller"],
+        "summary": "Create a new default fax event webhook configurations",
+        "description": "Creates a new default FaxEvent webhook configuration for the customer",
+        "operationId": "createconfigurationforfaxeventdefaultwebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FaxEventDefaultWebhookConfiguration"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Default Fax Event Webhook Notification configuration created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook ID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes": {
+      "get": {
+        "tags": ["Faxes Controller"],
+        "summary": "Get customer's current fax list",
+        "description": "Retrieve the customer's current fax list with each fax detail based on sorting parameters.",
+        "operationId": "getcustomerfaxlist",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FaxPageable"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "bi-directional",
+              "enum": ["inbound", "outbound", "bi-directional"]
+            }
+          },
+          {
+            "name": "filterFailures",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer Fax List retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaxAttributesPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Faxes Controller"],
+        "summary": "Send a fax using the provided parameters",
+        "description": "Queues a fax to be sent using the provided parameters, immediately returning the fax operational details.",
+        "operationId": "sendfax",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendFaxRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Send Fax request created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer DID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/{faxId}/cancel": {
+      "post": {
+        "tags": ["Faxes Controller"],
+        "summary": "Cancel a currently ongoing outbound fax by ID",
+        "description": "Cancel a customer's currently ongoing outbound fax by ID.",
+        "operationId": "cancelfax",
+        "parameters": [
+          {
+            "name": "faxId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Specified Fax Processing Cancelled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Fax ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Fax with specified ID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/bulk-delete": {
+      "post": {
+        "tags": ["Faxes Controller"],
+        "summary": "Deletes multiple existent faxes by list of IDs",
+        "description": "Attempts to delete all of the faxes specified in the provided list of IDs. Returns a result body with the details of the bulk operation.",
+        "operationId": "deletemultiplefaxes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FaxBulkDeleteRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Specified Bulk Fax Deletion executed with success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkDeleteResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/notifications/webhook/{webhookId}": {
+      "get": {
+        "tags": ["Webhook Controller"],
+        "summary": "Get webhook detail by ID",
+        "description": "Retrieves a specific customer webhook details.",
+        "operationId": "getcustomerwebhook",
+        "parameters": [
+          {
+            "name": "webhookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Webhook information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerWebHookInformation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid webhook ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Specified Webhook not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Webhook Controller"],
+        "summary": "Deletes a webhook by ID",
+        "description": "Updates a customer webhook details from the provided parameters by ID",
+        "operationId": "deletecustomerwebhook",
+        "parameters": [
+          {
+            "name": "webhookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Webhook successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid webhook ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Webhook Controller"],
+        "summary": "Updates a webhook details by ID",
+        "description": "Updates a customer webhook details from the provided parameters by ID",
+        "operationId": "updatecustomerwebhookconfiguration",
+        "parameters": [
+          {
+            "name": "webhookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerWebhookConfiguration"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Webhook successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/notifications/fax-event/webhook-service/phones/{did}/{webhookId}": {
+      "delete": {
+        "tags": ["Webhook Fax Event Notification Controller"],
+        "summary": "Deletes a customer's DID fax event webhook configuration by ID",
+        "description": "Deletes an existent customer's DID fax event webhook configuration by customer's DID and webhook ID",
+        "operationId": "deleteconfigurationforfaxeventdidwebhook",
+        "parameters": [
+          {
+            "name": "did",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "webhookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Customer DID Fax Event Webhook Notification configuration deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Specified Customer DID or Webhook ID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Webhook Fax Event Notification Controller"],
+        "summary": "Update an existent customer's DID fax event webhook configuration by customer's webhook ID and DID",
+        "description": "Update an existent customer's customer's DID fax event webhook configuration using provided parameters and the customer's webhook ID and DID",
+        "operationId": "updateconfigurationforfaxeventdidwebhook",
+        "parameters": [
+          {
+            "name": "did",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "webhookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FaxEventWebhookConfiguration"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Customer DID Fax Event Webhook Notification configuration updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer DID or Webhook ID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/notifications/fax-event/webhook-service/default/{webhookId}": {
+      "delete": {
+        "tags": ["Webhook Fax Event Notification Controller"],
+        "summary": "Deletes a default fax event webhook configuration by ID",
+        "description": "Deletes an existent customer's default fax event webhook configuration by webhook ID",
+        "operationId": "deleteconfigurationforfaxeventdefaultwebhook",
+        "parameters": [
+          {
+            "name": "webhookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Default Fax Event Webhook Notification configuration deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid webhook ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Specified Webhook not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Webhook Fax Event Notification Controller"],
+        "summary": "Update an existent customer's default fax event webhook configuration by webhook ID",
+        "description": "Update an existent customer's default fax event webhook configuration using provided parameters and the customer's webhook ID",
+        "operationId": "updateconfigurationforfaxeventdefaultwebhook",
+        "parameters": [
+          {
+            "name": "webhookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FaxEventWebhookConfiguration"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Default Fax Event Webhook Notification configuration updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook ID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/phones": {
+      "get": {
+        "tags": ["Phones Controller"],
+        "summary": "List the DIDs associated with the Customer",
+        "description": "Creates a paginated list of all customer associated DIDs detailed information.",
+        "operationId": "getcustomerassociateddidsinfo",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DIDs information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAssociatedDidInfoPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/{faxId}": {
+      "get": {
+        "tags": ["Faxes Controller"],
+        "summary": "Get fax information details by ID",
+        "description": "Retrieve the customer's fax information details specified by ID",
+        "operationId": "getfaxinformation",
+        "parameters": [
+          {
+            "name": "faxId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer Fax Information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaxAttributes"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Fax ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Fax with specified ID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Faxes Controller"],
+        "summary": "Delete a fax by ID",
+        "description": "Deletes an existent customer's fax by ID.",
+        "operationId": "deletefax",
+        "parameters": [
+          {
+            "name": "faxId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Specified Fax deleted with success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Fax ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Fax with specified ID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/{faxId}/file": {
+      "get": {
+        "tags": ["Faxes Controller"],
+        "summary": "Get the fax pdf file by ID",
+        "description": "Retrieve the customer's fax pdf file specified by ID",
+        "operationId": "getfaxfile",
+        "parameters": [
+          {
+            "name": "faxId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fax File retrieved successfully",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/PdfFileResourceResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Fax ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Fax with specified ID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/unread": {
+      "get": {
+        "tags": ["Faxes Controller"],
+        "summary": "Get customer's current unread fax list",
+        "description": "Retrieve the customer's current unread fax list with each fax detail based on sorting parameters.",
+        "operationId": "getcustomerunreadfaxlist",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FaxPageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer Fax List retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaxAttributesPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/phones/{did}": {
+      "get": {
+        "tags": ["Faxes Controller"],
+        "summary": "Get customer's current fax list by DID",
+        "description": "Retrieve the customer's current fax list with each fax detail based on sorting parameters, for a specific customer's DID.",
+        "operationId": "getcustomerdidfaxlist",
+        "parameters": [
+          {
+            "name": "did",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FaxPageable"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "bi-directional",
+              "enum": ["inbound", "outbound", "bi-directional"]
+            }
+          },
+          {
+            "name": "filterFailures",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer Fax List retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaxAttributesPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer DID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/phones/{did}/unread": {
+      "get": {
+        "tags": ["Faxes Controller"],
+        "summary": "Get customer's current unread fax list by DID",
+        "description": "Retrieve the customer's current unread fax list with each fax detail based on sorting parameters, for a specific customer's DID.",
+        "operationId": "getcustomerdidunreadfaxlist",
+        "parameters": [
+          {
+            "name": "did",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FaxPageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer Fax List retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaxAttributesPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer DID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable at the moment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud8ErrorResponseProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/ping": {
+      "get": {
+        "tags": ["health"],
+        "summary": "Returns status 200",
+        "description": "The publicly available ping endpoint that can be used by external services to check the service is alive",
+        "operationId": "getping",
+        "responses": {
+          "default": {
+            "description": "success",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/health": {
+      "get": {
+        "tags": ["health"],
+        "summary": "Returns the health of the service",
+        "description": "The publicly available health endpoint that can be used by external services to check the health of the service",
+        "operationId": "gethealth",
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthVO"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "WebhookBody": {
+        "type": "object",
+        "properties": {
+          "uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "credential": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["basic", "bearer"]
+          }
+        }
+      },
+      "Cloud8ErrorResponseProblemDetail": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "format": "uri"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "instance": {
+            "type": "string",
+            "format": "uri"
+          },
+          "cloud8": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "cause": {
+            "type": "object"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "FaxEventDidWebhookConfiguration": {
+        "type": "object",
+        "properties": {
+          "webhookId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "did": {
+            "type": "string"
+          }
+        }
+      },
+      "FaxEventDefaultWebhookConfiguration": {
+        "type": "object",
+        "properties": {
+          "webhookId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "SendFaxRequestBody": {
+        "type": "object",
+        "properties": {
+          "fromDid": {
+            "type": "string"
+          },
+          "toDid": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "senderName": {
+            "type": "string"
+          },
+          "recipientName": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      },
+      "FaxBulkDeleteRequestBody": {
+        "type": "object",
+        "properties": {
+          "faxIDs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "BulkDeleteResult": {
+        "type": "object",
+        "properties": {
+          "successful": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "failed": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CustomerWebhookConfiguration": {
+        "type": "object",
+        "properties": {
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FaxEventWebhookConfiguration": {
+        "type": "object",
+        "properties": {
+          "direction": {
+            "type": "string",
+            "enum": ["inbound", "outbound", "bi-directional"]
+          }
+        }
+      },
+      "Pageable": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "sortList": {
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CustomerAssociatedDidInfoPageResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/PagedModelEntityModelCustomerAssociatedDidInfo"
+          }
+        },
+        "description": "Paginated response for customer DIDs infos"
+      },
+      "CustomerWebHookInformation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "credentialType": {
+            "type": "string",
+            "enum": ["basic", "bearer"]
+          }
+        }
+      },
+      "EntityModelCustomerAssociatedDidInfo": {
+        "type": "object",
+        "properties": {
+          "did": {
+            "type": "string"
+          },
+          "didStatus": {
+            "type": "string"
+          },
+          "didType": {
+            "type": "string"
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "subscriptionStatus": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "licenseId": {
+            "type": "string"
+          },
+          "lastUpdate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "webhooks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomerWebHookInformation"
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "Links": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/Link"
+        }
+      },
+      "PageMetadata": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PagedModelEntityModelCustomerAssociatedDidInfo": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "customerAssociatedDidInfoList": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntityModelCustomerAssociatedDidInfo"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        },
+        "description": "List of customer associated DID information"
+      },
+      "CustomerWebHookInformationResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/PagedModelEntityModelCustomerWebHookInformation"
+          }
+        },
+        "description": "Paginated response for webhook infos"
+      },
+      "EntityModelCustomerWebHookInformation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "credentialType": {
+            "type": "string",
+            "enum": ["basic", "bearer"]
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "PagedModelEntityModelCustomerWebHookInformation": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "customerWebHookInformationList": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntityModelCustomerWebHookInformation"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        },
+        "description": "List of customer webhooks information"
+      },
+      "CustomerDidWebHookInformationPageResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/PagedModelEntityModelCustomerDidWebHookInformation"
+          }
+        },
+        "description": "Fax Event Webhooks Notifications configurations for Customer DIDs"
+      },
+      "EntityModelCustomerDidWebHookInformation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "did": {
+            "type": "string"
+          },
+          "didStatus": {
+            "type": "string"
+          },
+          "didType": {
+            "type": "string"
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "subscriptionStatus": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string",
+            "enum": ["inbound", "outbound", "bi-directional"]
+          },
+          "uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "credentialType": {
+            "type": "string",
+            "enum": ["basic", "bearer"]
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "PagedModelEntityModelCustomerDidWebHookInformation": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "customerDidWebHookInformationList": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntityModelCustomerDidWebHookInformation"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        },
+        "description": "List of customer DIDs Fax Event notification webhooks configuration"
+      },
+      "CustomerDefaultWebHookInformationPageResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/PagedModelEntityModelCustomerDefaultWebHookInformation"
+          }
+        },
+        "description": "Customer Default Fax Event Webhooks Notifications configurations"
+      },
+      "EntityModelCustomerDefaultWebHookInformation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "direction": {
+            "type": "string",
+            "enum": ["inbound", "outbound", "bi-directional"]
+          },
+          "uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "credentialType": {
+            "type": "string",
+            "enum": ["basic", "bearer"]
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "PagedModelEntityModelCustomerDefaultWebHookInformation": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "customerDefaultWebHookInformationList": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntityModelCustomerDefaultWebHookInformation"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        },
+        "description": "List of customer default Fax Event notification webhooks configuration"
+      },
+      "FaxPageable": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "sortList": {
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "EntityModelFaxAttributes": {
+        "type": "object",
+        "properties": {
+          "faxId": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastStateUpdateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleteTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "direction": {
+            "type": "string",
+            "enum": ["inbound", "outbound", "bi-directional"]
+          },
+          "fromDid": {
+            "type": "string"
+          },
+          "toDid": {
+            "type": "string"
+          },
+          "remotePartyId": {
+            "type": "string"
+          },
+          "faxState": {
+            "type": "string"
+          },
+          "subState": {
+            "type": "string"
+          },
+          "cause": {
+            "type": "string"
+          },
+          "retryCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "barCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FaxBarcode"
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "FaxAttributes": {
+        "type": "object",
+        "properties": {
+          "faxId": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastStateUpdateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleteTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "direction": {
+            "type": "string",
+            "enum": ["inbound", "outbound", "bi-directional"]
+          },
+          "fromDid": {
+            "type": "string"
+          },
+          "toDid": {
+            "type": "string"
+          },
+          "remotePartyId": {
+            "type": "string"
+          },
+          "faxState": {
+            "type": "string"
+          },
+          "subState": {
+            "type": "string"
+          },
+          "cause": {
+            "type": "string"
+          },
+          "retryCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "barCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FaxBarcode"
+            }
+          }
+        }
+      },
+      "FaxAttributesPageResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/PagedModelEntityModelFaxAttributes"
+          }
+        },
+        "description": "Paginated response for Faxes info"
+      },
+      "FaxBarcode": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          }
+        }
+      },
+      "PagedModelEntityModelFaxAttributes": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "faxAttributesList": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntityModelFaxAttributes"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        },
+        "description": "List of Faxes information"
+      },
+      "PdfFileResourceResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "format": "binary"
+          }
+        },
+        "description": "File response for Fax File Request"
+      },
+      "HealthVO": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["UP", "DOWN", "UNKNOWN", "OUT_OF_SERVICE"]
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "hreflang": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "deprecation": {
+            "type": "string"
+          },
+          "profile": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "templated": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "name": "X-API-Key",
+        "in": "header"
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}

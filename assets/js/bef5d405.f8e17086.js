@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[58330],{55005:e=>{e.exports=JSON.parse('{"to":"/administration/docs/overview"}')}}]);

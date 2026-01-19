@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-administration/docs/suite-common" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">Administration API Essentials | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/administration/docs/suite-common"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Administration API Essentials | 8x8 Developer Portal"><meta data-rh="true" name="description" content="Version January 16, 2026  |  Applies to: All Administration API Suite APIs"><meta data-rh="true" property="og:description" content="Version January 16, 2026  |  Applies to: All Administration API Suite APIs"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/administration/docs/suite-common"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/administration/docs/suite-common" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/administration/docs/suite-common" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.5ea60389.css">
+<script src="/assets/js/runtime~main.9787f118.js" defer="defer"></script>
+<script src="/assets/js/main.a2ac79b7.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a class="navbar__item navbar__link" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a class="navbar__item navbar__link" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/administration">Administration</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides" href="/administration/docs">Guides</a><a class="section-navigation__tab icon-references" href="/administration/reference">API Reference</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/administration/docs/overview"><span title="Administration" class="categoryLinkLabel_W154">Administration</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/administration/docs/overview"><span title="Introduction" class="linkLabel_WmDU">Introduction</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/administration/docs/suite-common"><span title="Administration API Essentials" class="linkLabel_WmDU">Administration API Essentials</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/administration/docs/api-change-policy"><span title="API Change Policy" class="linkLabel_WmDU">API Change Policy</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/administration/docs/user-management-api-guide"><span title="User Management" class="categoryLinkLabel_W154">User Management</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/administration/docs/ring-group-management-api-guide"><span title="Ring Group Management" class="categoryLinkLabel_W154">Ring Group Management</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/administration/docs/phone-number-management-api-guide"><span title="Phone Number Management" class="categoryLinkLabel_W154">Phone Number Management</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/administration/docs/site-management-api-guide"><span title="Site Management" class="categoryLinkLabel_W154">Site Management</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/administration/docs/search-contacts"><span title="Contact Management" class="categoryLinkLabel_W154">Contact Management</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>Administration API Essentials</h1></header>
+<p><strong>Version</strong>: 1.0  |  <strong>Last Updated</strong>: January 16, 2026  |  <strong>Applies to</strong>: All Administration API Suite APIs</p>
+<!-- -->
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>BETA - Limited Access</div><div class="admonitionContent_BuS1"><p><strong>These Administration APIs are currently in Beta testing.</strong> API keys cannot be generated in Admin Console at this point. Only Beta program participants may use these APIs.</p></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="table-of-contents">Table of Contents<a href="#table-of-contents" class="hash-link" aria-label="Direct link to Table of Contents" title="Direct link to Table of Contents" translate="no">​</a></h2>
+<ol>
+<li><a href="#suite-overview">Suite Overview</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#authentication">Authentication</a></li>
+<li><a href="#api-versioning">API Versioning</a></li>
+<li><a href="#common-request-patterns">Common Request Patterns</a></li>
+<li><a href="#asynchronous-operations">Asynchronous Operations</a></li>
+<li><a href="#pagination">Pagination</a></li>
+<li><a href="#filtering-with-rsql">Filtering with RSQL</a></li>
+<li><a href="#sorting-results">Sorting Results</a></li>
+<li><a href="#error-handling">Error Handling</a></li>
+<li><a href="#rate-limiting">Rate Limiting</a></li>
+<li><a href="#best-practices">Best Practices</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#support-resources">Support Resources</a></li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="suite-overview">Suite Overview<a href="#suite-overview" class="hash-link" aria-label="Direct link to Suite Overview" title="Direct link to Suite Overview" translate="no">​</a></h2>
+<p>The Administration API Suite provides programmatic access to 8x8 administrative functions, enabling automation of user management, organizational configuration, and telephony provisioning. All APIs in this suite share common authentication, patterns, and infrastructure for a consistent developer experience.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="apis-in-this-suite">APIs in This Suite<a href="#apis-in-this-suite" class="hash-link" aria-label="Direct link to APIs in This Suite" title="Direct link to APIs in This Suite" translate="no">​</a></h3>
+<ul>
+<li><strong>User Management API</strong>: Manage users, roles, and permissions across your 8x8 organization</li>
+<li><strong>Ring Group Management API</strong>: Configure ring groups and call distribution</li>
+<li><strong>Phone Number Management API</strong>: Discover and retrieve phone number inventory and availability</li>
+<li><strong>Site Management API</strong>: Manage organizational sites and physical locations</li>
+<li><strong>Contact Management API</strong>: Manage contacts and contact information</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="when-to-use-which-api">When to Use Which API<a href="#when-to-use-which-api" class="hash-link" aria-label="Direct link to When to Use Which API" title="Direct link to When to Use Which API" translate="no">​</a></h3>
+<ul>
+<li><strong>User Management API</strong>: For creating, updating, and deleting individual user accounts and managing their profiles</li>
+<li><strong>Ring Group Management API</strong>: For setting up and managing team call distribution and ring group configurations</li>
+<li><strong>Phone Number Management API</strong>: For discovering available phone numbers and retrieving phone number metadata before assignment</li>
+<li><strong>Site Management API</strong>: For managing sites, addresses, and organizational structure</li>
+<li><strong>Contact Management API</strong>: For creating and managing contacts associated with your organization</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="common-characteristics">Common Characteristics<a href="#common-characteristics" class="hash-link" aria-label="Direct link to Common Characteristics" title="Direct link to Common Characteristics" translate="no">​</a></h3>
+<p>All Administration APIs share:</p>
+<ul>
+<li>API key authentication with <code>x-api-key</code> header</li>
+<li>Base URL: <code>https://api.8x8.com/admin-provisioning</code></li>
+<li>Asynchronous operation patterns for mutations (CREATE, UPDATE, DELETE)</li>
+<li>Scroll-based pagination for list operations</li>
+<li>RSQL filtering syntax for precise searches</li>
+<li>RFC 7807 Problem Details error format</li>
+<li>Rate limiting and security best practices</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites">Prerequisites<a href="#prerequisites" class="hash-link" aria-label="Direct link to Prerequisites" title="Direct link to Prerequisites" translate="no">​</a></h2>
+<p>Before using any Administration API, ensure you have the following:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="required-access">Required Access<a href="#required-access" class="hash-link" aria-label="Direct link to Required Access" title="Direct link to Required Access" translate="no">​</a></h3>
+<p><strong>8x8 Account Requirements</strong>:</p>
+<ul>
+<li>Active 8x8 account with Admin Console access</li>
+<li>API Administrator role or equivalent permissions</li>
+<li>Access to the customer organization where you&#x27;ll manage resources</li>
+</ul>
+<p><strong>Technical Requirements</strong>:</p>
+<ul>
+<li>HTTPS-capable client (Python, Node.js, or equivalent programming language)</li>
+<li>Understanding of REST API principles</li>
+<li>Familiarity with JSON data format</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="knowledge-prerequisites">Knowledge Prerequisites<a href="#knowledge-prerequisites" class="hash-link" aria-label="Direct link to Knowledge Prerequisites" title="Direct link to Knowledge Prerequisites" translate="no">​</a></h3>
+<p><strong>8x8 Platform Understanding</strong>:</p>
+<ul>
+<li>Basic knowledge of 8x8&#x27;s organizational hierarchy (Customer → PBX → Site → Resources)</li>
+<li>Familiarity with 8x8 Admin Console navigation</li>
+<li>Understanding of user roles and permissions within 8x8</li>
+</ul>
+<p><strong>Technical Skills</strong>:</p>
+<ul>
+<li>Experience with REST API integration</li>
+<li>Understanding of asynchronous operation patterns</li>
+<li>Knowledge of RSQL query syntax (for filtering) - examples provided in this guide</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="getting-started">Getting Started<a href="#getting-started" class="hash-link" aria-label="Direct link to Getting Started" title="Direct link to Getting Started" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="obtaining-api-credentials">Obtaining API Credentials<a href="#obtaining-api-credentials" class="hash-link" aria-label="Direct link to Obtaining API Credentials" title="Direct link to Obtaining API Credentials" translate="no">​</a></h3>
+<p>API keys are generated and managed through the 8x8 Admin Console. Follow these steps to obtain your API credentials:</p>
+<ol>
+<li>Log in to the 8x8 Admin Console at <a href="https://admin.8x8.com" target="_blank" rel="noopener noreferrer">https://admin.8x8.com</a></li>
+<li>Open the main navigation menu and go to <strong>API Keys</strong></li>
+<li>Click <strong>Create App</strong></li>
+<li>Add the appropriate API products to your key based on which Administration APIs you need:<!-- -->
+<ul>
+<li><strong>UC &amp; CC Admin Operations</strong>: Required if your key will be used to make changes on any APIs with asynchronous operations</li>
+<li><strong>UC &amp; CC Number Admin</strong>: Required for number management operations</li>
+<li><strong>UC &amp; CC User Admin</strong>: Required for user management operations</li>
+<li><strong>UC Ring Group Admin</strong>: Required for ring group management operations</li>
+<li><strong>UC Site Admin</strong>: Required for site management operations</li>
+</ul>
+</li>
+<li>Copy and securely store your API key</li>
+<li>Note your customer ID for reference</li>
+</ol>
+<p><strong>Security Note</strong>: Treat API keys like passwords. Never commit them to source control, share them in unsecured channels, or log them in plain text. Store them in environment variables or secure vault systems (AWS Secrets Manager, Azure Key Vault, etc.).</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="testing-your-credentials">Testing Your Credentials<a href="#testing-your-credentials" class="hash-link" aria-label="Direct link to Testing Your Credentials" title="Direct link to Testing Your Credentials" translate="no">​</a></h3>
+<p>Once you have your API key, test that it works correctly by making a simple authenticated request:</p>
+<details><summary>Example: Testing API Credentials<!-- --> (click to expand)</summary></details>
+<p>A successful response (HTTP 200 or 202) confirms your credentials are valid and properly configured.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="authentication">Authentication<a href="#authentication" class="hash-link" aria-label="Direct link to Authentication" title="Direct link to Authentication" translate="no">​</a></h2>
+<p>All Administration APIs use API key authentication passed in the <code>x-api-key</code> request header. Every request must include this header with a valid API key.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="authentication-method">Authentication Method<a href="#authentication-method" class="hash-link" aria-label="Direct link to Authentication Method" title="Direct link to Authentication Method" translate="no">​</a></h3>
+<p>Authentication uses the <code>x-api-key</code> header:</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">x-api-key: your-api-key-here</span><br></span></code></pre></div></div>
+<p>This header must be included in every API request. Requests without valid authentication will receive a <code>401 Unauthorized</code> response.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="base-url">Base URL<a href="#base-url" class="hash-link" aria-label="Direct link to Base URL" title="Direct link to Base URL" translate="no">​</a></h3>
+<p><strong>Production</strong>: <code>https://api.8x8.com/admin-provisioning</code></p>
+<p>All Administration API endpoints are accessed through this base URL.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="api-versioning">API Versioning<a href="#api-versioning" class="hash-link" aria-label="Direct link to API Versioning" title="Direct link to API Versioning" translate="no">​</a></h2>
+<p>Administration APIs use the <code>Accept</code> header for version negotiation. This approach allows the APIs to evolve while maintaining backward compatibility for existing integrations.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="version-format">Version Format<a href="#version-format" class="hash-link" aria-label="Direct link to Version Format" title="Direct link to Version Format" translate="no">​</a></h3>
+<p>Versions use <strong>major version numbers only</strong> (v1, v2, etc., not v1.4 or v1.2.3). Minor updates and patches are deployed transparently without requiring version changes.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="specifying-version">Specifying Version<a href="#specifying-version" class="hash-link" aria-label="Direct link to Specifying Version" title="Direct link to Specifying Version" translate="no">​</a></h3>
+<p>All Administration APIs use the <code>Accept</code> header with a consistent format pattern:</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Accept: application/vnd.{resource}.v{major}+json</span><br></span></code></pre></div></div>
+<p>Where:</p>
+<ul>
+<li><code>{resource}</code> is the API resource type (e.g., <code>users</code>, <code>ringgroups</code>)</li>
+<li><code>{major}</code> is the major version number (e.g., <code>v1</code>, <code>v2</code>)</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<p><strong>User Management API</strong>:</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Accept: application/vnd.users.v1+json</span><br></span></code></pre></div></div>
+<p><strong>Ring Group Management API</strong>:</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Accept: application/vnd.ringgroups.v1+json</span><br></span></code></pre></div></div>
+<p>For other Administration APIs, check the specific API guide for its exact Accept header format.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="backward-compatibility">Backward Compatibility<a href="#backward-compatibility" class="hash-link" aria-label="Direct link to Backward Compatibility" title="Direct link to Backward Compatibility" translate="no">​</a></h3>
+<ul>
+<li>Major versions are maintained for extended periods (typically 12-24 months after next version release)</li>
+<li>Deprecated features are announced well in advance</li>
+<li>Breaking changes only occur in major version increments</li>
+<li>Minor enhancements and bug fixes are deployed to current major version</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="common-request-patterns">Common Request Patterns<a href="#common-request-patterns" class="hash-link" aria-label="Direct link to Common Request Patterns" title="Direct link to Common Request Patterns" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="required-headers">Required Headers<a href="#required-headers" class="hash-link" aria-label="Direct link to Required Headers" title="Direct link to Required Headers" translate="no">​</a></h3>
+<p>Every API request to Administration APIs must include:</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">x-api-key: your-api-key-here</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Accept: application/vnd.{resource}.v{version}+json</span><br></span></code></pre></div></div>
+<p>For requests that contain a payload (POST and PUT operations), also include:</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Content-Type: application/json</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="example-request">Example Request<a href="#example-request" class="hash-link" aria-label="Direct link to Example Request" title="Direct link to Example Request" translate="no">​</a></h3>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">GET https://api.8x8.com/admin-provisioning/users?pageSize=10</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">x-api-key: your-api-key-here</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Accept: application/vnd.users.v1+json</span><br></span></code></pre></div></div>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">POST https://api.8x8.com/admin-provisioning/users</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">x-api-key: your-api-key-here</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Accept: application/vnd.users.v1+json</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Content-Type: application/json</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  &quot;basicInfo&quot;: {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;userName&quot;: &quot;jane.smith@example.com&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;firstName&quot;: &quot;Jane&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;lastName&quot;: &quot;Smith&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;primaryEmail&quot;: &quot;jane.smith@example.com&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="asynchronous-operations">Asynchronous Operations<a href="#asynchronous-operations" class="hash-link" aria-label="Direct link to Asynchronous Operations" title="Direct link to Asynchronous Operations" translate="no">​</a></h2>
+<p>All mutation operations (CREATE, UPDATE, DELETE) in Administration APIs use asynchronous processing to prevent timeouts, enable bulk operations, and provide operation tracking.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="operation-flow">Operation Flow<a href="#operation-flow" class="hash-link" aria-label="Direct link to Operation Flow" title="Direct link to Operation Flow" translate="no">​</a></h3>
+<ol>
+<li><strong>Submit Request</strong>: Client sends POST, PUT, or DELETE request</li>
+<li><strong>Receive Acknowledgment</strong>: API immediately returns <code>202 Accepted</code> with operation object</li>
+<li><strong>Poll Status</strong>: Client periodically checks operation status via GET <code>/operations/{operationId}</code></li>
+<li><strong>Check Status</strong>: Operation progresses through states: <code>PENDING</code> → <code>IN_PROGRESS</code> → <code>COMPLETED</code> or <code>FAILED</code></li>
+<li><strong>Retrieve Resource</strong>: Once <code>COMPLETED</code>, use <code>resourceId</code> to get created/updated resource</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="operation-status-values">Operation Status Values<a href="#operation-status-values" class="hash-link" aria-label="Direct link to Operation Status Values" title="Direct link to Operation Status Values" translate="no">​</a></h3>
+<ul>
+<li><strong>PENDING</strong>: Operation queued but not yet started</li>
+<li><strong>IN_PROGRESS</strong>: Operation currently processing</li>
+<li><strong>COMPLETED</strong>: Operation finished successfully</li>
+<li><strong>FAILED</strong>: Operation encountered an error</li>
+<li><strong>UNKNOWN</strong>: Status cannot be determined (rare, contact support if seen)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="operation-object-structure">Operation Object Structure<a href="#operation-object-structure" class="hash-link" aria-label="Direct link to Operation Object Structure" title="Direct link to Operation Object Structure" translate="no">​</a></h3>
+<p>When you submit a mutation request, you receive an operation object:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;operationId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;op_1a2b3c4d5e6f&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;PENDING&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;resourceType&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;USER&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;operationType&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;CREATE&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;createdTime&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;2025-12-01T15:30:45Z&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;_links&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;self&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;href&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/operations/op_1a2b3c4d5e6f&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>When the operation completes, the structure includes additional fields:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;operationId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;op_1a2b3c4d5e6f&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;COMPLETED&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;resourceType&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;USER&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;resourceId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;hvOB1l3zDCaDAwp9tNLzZA&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;operationType&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;CREATE&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;createdTime&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;2025-12-01T15:30:45Z&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;completedTime&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;2025-12-01T15:30:52Z&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;_links&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;self&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;href&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/operations/op_1a2b3c4d5e6f&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;resource&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;href&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/users/hvOB1l3zDCaDAwp9tNLzZA&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="polling-best-practices">Polling Best Practices<a href="#polling-best-practices" class="hash-link" aria-label="Direct link to Polling Best Practices" title="Direct link to Polling Best Practices" translate="no">​</a></h3>
+<p><strong>Recommended Strategy</strong>:</p>
+<ul>
+<li>Start polling after 1-2 seconds</li>
+<li>Poll no more frequently than once per second</li>
+<li>Set a maximum timeout (5 minutes recommended)</li>
+<li>Log operation IDs for troubleshooting</li>
+</ul>
+<p><strong>Typical Completion Times</strong>:</p>
+<ul>
+<li>Simple operations (create user, update settings): 2-5 seconds</li>
+<li>Complex operations (bulk updates, with dependencies): 5-15 seconds</li>
+<li>If operation exceeds 60 seconds, investigate for issues</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="code-example">Code Example<a href="#code-example" class="hash-link" aria-label="Direct link to Code Example" title="Direct link to Code Example" translate="no">​</a></h3>
+<details><summary>Example: Async Operation Polling Pattern<!-- --> (click to expand)</summary></details>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="handling-operation-failures">Handling Operation Failures<a href="#handling-operation-failures" class="hash-link" aria-label="Direct link to Handling Operation Failures" title="Direct link to Handling Operation Failures" translate="no">​</a></h3>
+<p>If an operation fails (<code>status: &quot;FAILED&quot;</code>), the operation object includes an <code>error</code> field:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;operationId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;op_1a2b3c4d5e6f&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;FAILED&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;error&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">400</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;title&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Validation Error&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;detail&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Invalid field value&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;errors&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;field&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;basicInfo.primaryEmail&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;code&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;VALIDATION_ERROR&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Email address format is invalid&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>Review the error details to understand the failure cause, correct the issue, and resubmit if appropriate.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="pagination">Pagination<a href="#pagination" class="hash-link" aria-label="Direct link to Pagination" title="Direct link to Pagination" translate="no">​</a></h2>
+<p>Administration APIs use <strong>scroll-based pagination</strong> for consistent, efficient results when listing resources. This approach provides stable iteration even when data changes during the scroll.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="how-scroll-based-pagination-works">How Scroll-Based Pagination Works<a href="#how-scroll-based-pagination-works" class="hash-link" aria-label="Direct link to How Scroll-Based Pagination Works" title="Direct link to How Scroll-Based Pagination Works" translate="no">​</a></h3>
+<ol>
+<li><strong>Initial Request</strong>: Specify <code>pageSize</code> (default 100, max 1000) and optional filters/sorting</li>
+<li><strong>Receive First Page</strong>: Response includes <code>nextScrollId</code> if more results exist</li>
+<li><strong>Subsequent Requests</strong>: Pass <code>scrollId</code> parameter to get the next page</li>
+<li><strong>Continue</strong>: Repeat until <code>hasMore</code> is false</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-characteristics">Key Characteristics<a href="#key-characteristics" class="hash-link" aria-label="Direct link to Key Characteristics" title="Direct link to Key Characteristics" translate="no">​</a></h3>
+<ul>
+<li><strong>Opaque Scroll IDs</strong>: Scroll IDs are opaque tokens - treat them as black boxes, don&#x27;t try to decode or manipulate them</li>
+<li><strong>Filter Encoding</strong>: Filters and sort order are encoded in the scroll ID</li>
+<li><strong>Consistent Results</strong>: Even if data changes during iteration, you&#x27;ll get consistent results for your scroll</li>
+<li><strong>Immutable</strong>: Don&#x27;t modify filters or sort order mid-scroll (start new scroll instead)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pagination-response-structure">Pagination Response Structure<a href="#pagination-response-structure" class="hash-link" aria-label="Direct link to Pagination Response Structure" title="Direct link to Pagination Response Structure" translate="no">​</a></h3>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;data&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic">/* resource object */</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;pagination&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;pageSize&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">100</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;hasMore&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">true</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;nextScrollId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;abc123def456&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;filter&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;basicInfo.status==ACTIVE&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;sort&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;+lastName&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;_links&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;self&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><span class="token property" style="color:#36acaa">&quot;href&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/users?pageSize=100&quot;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;next&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><span class="token property" style="color:#36acaa">&quot;href&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/users?pageSize=100&amp;scrollId=abc123def456&quot;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"> </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pagination-best-practices">Pagination Best Practices<a href="#pagination-best-practices" class="hash-link" aria-label="Direct link to Pagination Best Practices" title="Direct link to Pagination Best Practices" translate="no">​</a></h3>
+<p><strong>Choosing Page Size</strong>:</p>
+<ul>
+<li><strong>Real-time/Interactive</strong>: 50-100 items for quick responses</li>
+<li><strong>Bulk Export/Processing</strong>: 100-1000 items to reduce API calls</li>
+<li><strong>Memory Constrained</strong>: Smaller pages (25-50) to reduce memory usage</li>
+<li>Balance between number of API calls and response size</li>
+</ul>
+<p><strong>Efficient Iteration</strong>:</p>
+<ul>
+<li>Process pages as they arrive (streaming) rather than buffering all results</li>
+<li>Don&#x27;t restart scrolls unnecessarily - they&#x27;re expensive server-side</li>
+<li>Cache scroll IDs if you need resumable operations</li>
+<li>If scroll expires, start fresh from the beginning</li>
+</ul>
+<p><strong>Error Handling</strong>:</p>
+<ul>
+<li>If you receive a scroll expiration error, start a new scroll</li>
+<li>Don&#x27;t try to continue a failed scroll - begin fresh query</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="code-example-1">Code Example<a href="#code-example-1" class="hash-link" aria-label="Direct link to Code Example" title="Direct link to Code Example" translate="no">​</a></h3>
+<details><summary>Example: Pagination Loop<!-- --> (click to expand)</summary></details>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="filtering-with-rsql">Filtering with RSQL<a href="#filtering-with-rsql" class="hash-link" aria-label="Direct link to Filtering with RSQL" title="Direct link to Filtering with RSQL" translate="no">​</a></h2>
+<p>Administration APIs support powerful filtering using <strong>RSQL (RESTful Service Query Language)</strong> syntax. This enables precise resource searches without retrieving unnecessary data.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="rsql-syntax-overview">RSQL Syntax Overview<a href="#rsql-syntax-overview" class="hash-link" aria-label="Direct link to RSQL Syntax Overview" title="Direct link to RSQL Syntax Overview" translate="no">​</a></h3>
+<p>RSQL provides a URL-friendly query language for filtering API results.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="comparison-operators">Comparison Operators<a href="#comparison-operators" class="hash-link" aria-label="Direct link to Comparison Operators" title="Direct link to Comparison Operators" translate="no">​</a></h3>
+<ul>
+<li><code>==</code> equals</li>
+<li><code>!=</code> not equals</li>
+<li><code>&gt;</code> greater than</li>
+<li><code>&lt;</code> less than</li>
+<li><code>&gt;=</code> greater than or equal</li>
+<li><code>&lt;=</code> less than or equal</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="logical-operators">Logical Operators<a href="#logical-operators" class="hash-link" aria-label="Direct link to Logical Operators" title="Direct link to Logical Operators" translate="no">​</a></h3>
+<ul>
+<li><code>;</code> AND condition (both must be true)</li>
+<li><code>,</code> OR condition (either can be true)</li>
+<li><code>()</code> grouping for complex expressions</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="special-features">Special Features<a href="#special-features" class="hash-link" aria-label="Direct link to Special Features" title="Direct link to Special Features" translate="no">​</a></h3>
+<p><strong>Case Insensitivity</strong>: Filter comparisons are case-insensitive by default. <code>name==jane</code> matches &quot;jane&quot;, &quot;Jane&quot;, or &quot;JANE&quot;.</p>
+<p><strong>Wildcard Matching</strong>: Use asterisk <code>*</code> for partial string matches:</p>
+<ul>
+<li><code>name==*smith</code> - ends with &quot;smith&quot;</li>
+<li><code>name==john*</code> - starts with &quot;john&quot;</li>
+<li><code>name==*doe*</code> - contains &quot;doe&quot;</li>
+</ul>
+<p><strong>Quoting Values</strong>: Quote values containing spaces or special characters:</p>
+<ul>
+<li><code>department==&#x27;Research and Development&#x27;</code></li>
+<li><code>title==&#x27;VP, Engineering&#x27;</code></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="filter-examples">Filter Examples<a href="#filter-examples" class="hash-link" aria-label="Direct link to Filter Examples" title="Direct link to Filter Examples" translate="no">​</a></h3>
+<p><strong>Simple Equality</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">status==ACTIVE</span><br></span></code></pre></div></div>
+<p><strong>Comparison Operators</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">createdTime&gt;2025-11-01T00:00:00Z</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">extensionNumber&gt;=1000</span><br></span></code></pre></div></div>
+<p><strong>Wildcard Search</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">name==*Support*</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">email==*@example.com</span><br></span></code></pre></div></div>
+<p><strong>Logical AND (semicolon)</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">status==ACTIVE;department==Engineering</span><br></span></code></pre></div></div>
+<p><strong>Logical OR (comma)</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">department==Engineering,department==Sales</span><br></span></code></pre></div></div>
+<p><strong>Complex Expression</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">status==ACTIVE;(department==Engineering,department==Sales);createdTime&gt;2025-01-01T00:00:00Z</span><br></span></code></pre></div></div>
+<p>This finds active resources in either Engineering or Sales created after January 1, 2025.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="field-paths">Field Paths<a href="#field-paths" class="hash-link" aria-label="Direct link to Field Paths" title="Direct link to Field Paths" translate="no">​</a></h3>
+<p>Use dot notation for nested fields. The exact field names depend on the API:</p>
+<p><strong>User Management API</strong>:</p>
+<ul>
+<li><code>basicInfo.status</code> - user status</li>
+<li><code>basicInfo.primaryEmail</code> - user email</li>
+<li><code>directoryInfo.department</code> - user department</li>
+<li><code>basicInfo.createdTime</code> - creation timestamp</li>
+</ul>
+<p><strong>Ring Group Management API</strong>:</p>
+<ul>
+<li><code>name</code> - ring group name</li>
+<li><code>extensionNumber</code> - extension number</li>
+<li><code>ringPattern</code> - distribution pattern</li>
+<li><code>ringTimeout</code> - ring duration</li>
+</ul>
+<p>Refer to each API&#x27;s documentation for available filterable fields.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="best-practices">Best Practices<a href="#best-practices" class="hash-link" aria-label="Direct link to Best Practices" title="Direct link to Best Practices" translate="no">​</a></h3>
+<p><strong>Performance</strong>:</p>
+<ul>
+<li>Filter early and precisely to reduce data transfer</li>
+<li>Avoid overly complex RSQL expressions (max 2000 characters)</li>
+<li>Use specific field paths</li>
+<li>Test filters with small page sizes first</li>
+</ul>
+<p><strong>Correctness</strong>:</p>
+<ul>
+<li>Match field names exactly (case-sensitive for field paths)</li>
+<li>Use correct operators (<code>==</code> not <code>=</code>)</li>
+<li>Quote values with spaces</li>
+<li>Validate RSQL syntax before submitting</li>
+<li>Check for matching parentheses in complex expressions</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="common-pitfalls">Common Pitfalls<a href="#common-pitfalls" class="hash-link" aria-label="Direct link to Common Pitfalls" title="Direct link to Common Pitfalls" translate="no">​</a></h3>
+<p>❌ <strong>Wrong</strong>: <code>status=ACTIVE</code> (single equals)
+✅ <strong>Correct</strong>: <code>status==ACTIVE</code> (double equals)</p>
+<p>❌ <strong>Wrong</strong>: <code>Status==ACTIVE</code> (wrong case for field name)
+✅ <strong>Correct</strong>: <code>basicInfo.status==ACTIVE</code> (exact field path)</p>
+<p>❌ <strong>Wrong</strong>: <code>department==Research and Development</code> (unquoted spaces)
+✅ <strong>Correct</strong>: <code>department==&#x27;Research and Development&#x27;</code> (quoted)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="code-example-2">Code Example<a href="#code-example-2" class="hash-link" aria-label="Direct link to Code Example" title="Direct link to Code Example" translate="no">​</a></h3>
+<details><summary>Example: RSQL Filtering<!-- --> (click to expand)</summary></details>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="further-reading">Further Reading<a href="#further-reading" class="hash-link" aria-label="Direct link to Further Reading" title="Direct link to Further Reading" translate="no">​</a></h3>
+<p>For complete RSQL specification, see the <a href="https://github.com/jirutka/rsql-parser" target="_blank" rel="noopener noreferrer">RSQL Parser documentation</a>.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="sorting-results">Sorting Results<a href="#sorting-results" class="hash-link" aria-label="Direct link to Sorting Results" title="Direct link to Sorting Results" translate="no">​</a></h2>
+<p>Control the order of results using the <code>sort</code> query parameter. Sorting is applied before pagination, ensuring consistent ordering across all pages.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sort-syntax">Sort Syntax<a href="#sort-syntax" class="hash-link" aria-label="Direct link to Sort Syntax" title="Direct link to Sort Syntax" translate="no">​</a></h3>
+<p><strong>Ascending Order</strong>: Use <code>+</code> prefix or no prefix</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sort=+lastName</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sort=lastName</span><br></span></code></pre></div></div>
+<p><strong>Descending Order</strong>: Use <code>-</code> prefix</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sort=-createdTime</span><br></span></code></pre></div></div>
+<p><strong>Multiple Fields</strong>: Comma-separated for multi-level sorting</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sort=+department,+lastName,+firstName</span><br></span></code></pre></div></div>
+<p>This sorts first by department (A-Z), then by last name (A-Z), then by first name (A-Z).</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sort-examples">Sort Examples<a href="#sort-examples" class="hash-link" aria-label="Direct link to Sort Examples" title="Direct link to Sort Examples" translate="no">​</a></h3>
+<p><strong>By Last Name (A-Z)</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sort=+lastName</span><br></span></code></pre></div></div>
+<p><strong>By Creation Date (Newest First)</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sort=-createdTime</span><br></span></code></pre></div></div>
+<p><strong>Multi-Level Sort</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sort=+department,-createdTime</span><br></span></code></pre></div></div>
+<p>Sorts by department (A-Z), then within each department by creation date (newest first).</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sortable-fields">Sortable Fields<a href="#sortable-fields" class="hash-link" aria-label="Direct link to Sortable Fields" title="Direct link to Sortable Fields" translate="no">​</a></h3>
+<p>Available sort fields depend on the specific API. Common sortable fields:</p>
+<p><strong>User Management API</strong>:</p>
+<ul>
+<li><code>basicInfo.lastName</code>, <code>basicInfo.firstName</code></li>
+<li><code>basicInfo.createdTime</code>, <code>basicInfo.lastUpdatedTime</code></li>
+<li><code>basicInfo.status</code></li>
+<li><code>directoryInfo.department</code></li>
+</ul>
+<p><strong>Ring Group Management API</strong>:</p>
+<ul>
+<li><code>name</code></li>
+<li><code>extensionNumber</code></li>
+<li><code>ringPattern</code></li>
+</ul>
+<p>Refer to each API&#x27;s documentation for complete list of sortable fields.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="best-practices-1">Best Practices<a href="#best-practices-1" class="hash-link" aria-label="Direct link to Best Practices" title="Direct link to Best Practices" translate="no">​</a></h3>
+<ul>
+<li>Use field paths that match the API&#x27;s data model</li>
+<li>Test single-field sorts before combining multiple fields</li>
+<li>Combine with pagination for consistent iteration</li>
+<li>Use appropriate ascending/descending based on use case</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="code-example-3">Code Example<a href="#code-example-3" class="hash-link" aria-label="Direct link to Code Example" title="Direct link to Code Example" translate="no">​</a></h3>
+<details><summary>Example: Sorting Results<!-- --> (click to expand)</summary></details>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="error-handling">Error Handling<a href="#error-handling" class="hash-link" aria-label="Direct link to Error Handling" title="Direct link to Error Handling" translate="no">​</a></h2>
+<p>Administration APIs use <strong>RFC 7807 Problem Details</strong> format for structured, consistent error responses. This standard format makes error handling predictable across all APIs.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="error-response-format">Error Response Format<a href="#error-response-format" class="hash-link" aria-label="Direct link to Error Response Format" title="Direct link to Error Response Format" translate="no">​</a></h3>
+<p>All error responses follow this structure:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">400</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;instance&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/users&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;time&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;2025-12-01T15:30:45Z&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;title&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Request Validation Failed&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;errors&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;field&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;basicInfo.primaryEmail&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;code&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;VALIDATION_ERROR&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Email address format is invalid&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-fields">Key Fields<a href="#key-fields" class="hash-link" aria-label="Direct link to Key Fields" title="Direct link to Key Fields" translate="no">​</a></h3>
+<ul>
+<li><strong>status</strong>: HTTP status code (400, 401, 403, 404, 429, 500)</li>
+<li><strong>title</strong>: Human-readable error summary</li>
+<li><strong>detail</strong>: Specific explanation for this error occurrence</li>
+<li><strong>errors</strong>: Array of field-level validation errors (if applicable)</li>
+<li><strong>field</strong>: Specific field path where error occurred</li>
+<li><strong>code</strong>: Machine-readable error code for programmatic handling</li>
+<li><strong>message</strong>: Human-readable error message for this field</li>
+<li><strong>requestId</strong>, <strong>responseId</strong>: Tracking identifiers for support escalation</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="common-http-status-codes">Common HTTP Status Codes<a href="#common-http-status-codes" class="hash-link" aria-label="Direct link to Common HTTP Status Codes" title="Direct link to Common HTTP Status Codes" translate="no">​</a></h3>
+<p><strong>Success Codes</strong>:</p>
+<ul>
+<li><code>200 OK</code>: Successful GET request</li>
+<li><code>202 Accepted</code>: Async operation accepted (create, update, delete)</li>
+</ul>
+<p><strong>Client Error Codes</strong>:</p>
+<ul>
+<li><code>400 Bad Request</code>: Validation error, malformed request, or invalid parameters</li>
+<li><code>401 Unauthorized</code>: Missing or invalid API key authentication</li>
+<li><code>403 Forbidden</code>: Insufficient permissions or customer ID mismatch</li>
+<li><code>404 Not Found</code>: Resource does not exist</li>
+<li><code>409 Conflict</code>: Resource conflict (e.g., duplicate extension number)</li>
+<li><code>429 Too Many Requests</code>: Rate limit exceeded</li>
+</ul>
+<p><strong>Server Error Codes</strong>:</p>
+<ul>
+<li><code>500 Internal Server Error</code>: Unexpected server error</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="generic-error-codes">Generic Error Codes<a href="#generic-error-codes" class="hash-link" aria-label="Direct link to Generic Error Codes" title="Direct link to Generic Error Codes" translate="no">​</a></h3>
+<p><strong>VALIDATION_ERROR</strong> (400):</p>
+<ul>
+<li>Field validation failed (format, length, pattern)</li>
+<li>Required field missing</li>
+<li>Invalid enum value</li>
+</ul>
+<p><strong>INVALID_FILTER</strong> (400):</p>
+<ul>
+<li>RSQL filter syntax error</li>
+<li>Invalid field name in filter</li>
+<li>Malformed filter expression</li>
+</ul>
+<p><strong>INVALID_SORT</strong> (400):</p>
+<ul>
+<li>Sort expression format error</li>
+<li>Invalid field name for sorting</li>
+<li>Unsupported sort direction</li>
+</ul>
+<p><strong>INVALID_PAGE_SIZE</strong> (400):</p>
+<ul>
+<li>pageSize out of range (must be 1-1000)</li>
+</ul>
+<p><strong>FORBIDDEN</strong> (403):</p>
+<ul>
+<li>Insufficient permissions</li>
+<li>Customer ID mismatch (accessing another customer&#x27;s resources)</li>
+</ul>
+<p><strong>NOT_FOUND</strong> (404):</p>
+<ul>
+<li>Resource does not exist</li>
+<li>Malformed resource ID</li>
+</ul>
+<p><strong>RATE_LIMIT_EXCEEDED</strong> (429):</p>
+<ul>
+<li>Too many requests in time window</li>
+<li>See Rate Limiting section for handling strategy</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="common-error-scenarios">Common Error Scenarios<a href="#common-error-scenarios" class="hash-link" aria-label="Direct link to Common Error Scenarios" title="Direct link to Common Error Scenarios" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="scenario-1-authentication-failure-401">Scenario 1: Authentication Failure (401)<a href="#scenario-1-authentication-failure-401" class="hash-link" aria-label="Direct link to Scenario 1: Authentication Failure (401)" title="Direct link to Scenario 1: Authentication Failure (401)" translate="no">​</a></h4>
+<p><strong>Request</strong>: Missing or invalid API key</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">GET /users</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// x-api-key header missing or invalid</span><br></span></code></pre></div></div>
+<p><strong>Response</strong>:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">401</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;title&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Unauthorized&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;detail&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Valid authentication credentials required&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Resolution</strong>: Verify <code>x-api-key</code> header is present and contains valid API key. Regenerate key if expired.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="scenario-2-authorization-failure-403">Scenario 2: Authorization Failure (403)<a href="#scenario-2-authorization-failure-403" class="hash-link" aria-label="Direct link to Scenario 2: Authorization Failure (403)" title="Direct link to Scenario 2: Authorization Failure (403)" translate="no">​</a></h4>
+<p><strong>Request</strong>: Valid API key but accessing another customer&#x27;s resources</p>
+<p><strong>Response</strong>:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">403</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;title&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Forbidden&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;detail&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Insufficient permissions to access this resource&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;errors&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;code&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;FORBIDDEN&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Customer ID mismatch&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Resolution</strong>: Verify you&#x27;re accessing resources for the correct customer ID. Check API key permissions in Admin Console.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="scenario-3-invalid-rsql-filter-400">Scenario 3: Invalid RSQL Filter (400)<a href="#scenario-3-invalid-rsql-filter-400" class="hash-link" aria-label="Direct link to Scenario 3: Invalid RSQL Filter (400)" title="Direct link to Scenario 3: Invalid RSQL Filter (400)" translate="no">​</a></h4>
+<p><strong>Request</strong>: Malformed filter syntax</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">GET /users?filter=status=active</span><br></span></code></pre></div></div>
+<p><strong>Response</strong>:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">400</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;title&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Invalid Filter&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;detail&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;RSQL filter syntax is invalid&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;errors&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;field&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;filter&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;code&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;INVALID_FILTER&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Use &#x27;==&#x27; for equality, not &#x27;=&#x27;&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Resolution</strong>: Correct RSQL syntax: <code>filter=basicInfo.status==ACTIVE</code></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="scenario-4-invalid-sort-expression-400">Scenario 4: Invalid Sort Expression (400)<a href="#scenario-4-invalid-sort-expression-400" class="hash-link" aria-label="Direct link to Scenario 4: Invalid Sort Expression (400)" title="Direct link to Scenario 4: Invalid Sort Expression (400)" translate="no">​</a></h4>
+<p><strong>Request</strong>: Unsupported sort field</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">GET /users?sort=invalidField</span><br></span></code></pre></div></div>
+<p><strong>Response</strong>:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">400</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;title&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Invalid Sort&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;detail&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Sort field is not supported&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;errors&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;field&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;sort&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;code&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;INVALID_SORT&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Field &#x27;invalidField&#x27; cannot be used for sorting&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Resolution</strong>: Use valid sortable field from API documentation with proper field path.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="scenario-5-rate-limit-exceeded-429">Scenario 5: Rate Limit Exceeded (429)<a href="#scenario-5-rate-limit-exceeded-429" class="hash-link" aria-label="Direct link to Scenario 5: Rate Limit Exceeded (429)" title="Direct link to Scenario 5: Rate Limit Exceeded (429)" translate="no">​</a></h4>
+<p><strong>Request</strong>: Too many requests in short period</p>
+<p><strong>Response</strong>:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">429</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;title&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Too Many Requests&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;detail&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Rate limit exceeded&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;errors&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;code&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;RATE_LIMIT_EXCEEDED&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Maximum 100 requests per minute exceeded&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Response Headers</strong>:</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">x-ratelimit-limit: 100</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">x-ratelimit-remaining: 0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">x-ratelimit-reset: 1733073045</span><br></span></code></pre></div></div>
+<p><strong>Resolution</strong>: Wait until <code>x-ratelimit-reset</code> time or implement exponential backoff (see Rate Limiting section).</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="recovery-strategies">Recovery Strategies<a href="#recovery-strategies" class="hash-link" aria-label="Direct link to Recovery Strategies" title="Direct link to Recovery Strategies" translate="no">​</a></h3>
+<p><strong>Transient Failures</strong> (429, 500):</p>
+<ul>
+<li>Implement exponential backoff: wait 1s, 2s, 4s, 8s, 16s between retries</li>
+<li>Maximum 5 retry attempts recommended</li>
+<li>Log failures for monitoring</li>
+<li>Check status page if widespread</li>
+</ul>
+<p><strong>Permanent Failures</strong> (400, 401, 403, 404, 409):</p>
+<ul>
+<li>Do not retry automatically</li>
+<li>Log error details with requestId/responseId</li>
+<li>Fix input data or configuration</li>
+<li>Alert administrators if unexpected</li>
+</ul>
+<p><strong>Validation Errors</strong> (400 with field-level errors):</p>
+<ul>
+<li>Review <code>errors</code> array for specific field issues</li>
+<li>Correct invalid field values</li>
+<li>Ensure required fields present</li>
+<li>Validate data types and formats</li>
+<li>Resubmit with corrected data</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="code-example-4">Code Example<a href="#code-example-4" class="hash-link" aria-label="Direct link to Code Example" title="Direct link to Code Example" translate="no">​</a></h3>
+<details><summary>Example: Comprehensive Error Handling<!-- --> (click to expand)</summary></details>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="rate-limiting">Rate Limiting<a href="#rate-limiting" class="hash-link" aria-label="Direct link to Rate Limiting" title="Direct link to Rate Limiting" translate="no">​</a></h2>
+<p>Administration APIs enforce rate limits to ensure fair usage and system stability. Understanding and respecting these limits is essential for reliable integrations.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="current-rate-limits">Current Rate Limits<a href="#current-rate-limits" class="hash-link" aria-label="Direct link to Current Rate Limits" title="Direct link to Current Rate Limits" translate="no">​</a></h3>
+<p><strong>Per API Key</strong>:</p>
+<ul>
+<li><strong>100 requests per minute</strong>: Maximum sustained request rate</li>
+<li><strong>10 concurrent async operations</strong>: Maximum in-flight operations per organization</li>
+<li><strong>Burst allowance</strong>: Up to 20 requests in 10-second window (for bursty workflows)</li>
+</ul>
+<p><strong>Note</strong>: Rate limits are subject to change. Monitor response headers for current values.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="rate-limit-headers">Rate Limit Headers<a href="#rate-limit-headers" class="hash-link" aria-label="Direct link to Rate Limit Headers" title="Direct link to Rate Limit Headers" translate="no">​</a></h3>
+<p>Every API response includes rate limit information in headers:</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">x-ratelimit-limit: 100</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">x-ratelimit-remaining: 87</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">x-ratelimit-reset: 1733073045</span><br></span></code></pre></div></div>
+<ul>
+<li><strong>x-ratelimit-limit</strong>: Maximum requests allowed in current window</li>
+<li><strong>x-ratelimit-remaining</strong>: Requests remaining in current window</li>
+<li><strong>x-ratelimit-reset</strong>: Unix timestamp when rate limit resets</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="handling-rate-limits">Handling Rate Limits<a href="#handling-rate-limits" class="hash-link" aria-label="Direct link to Handling Rate Limits" title="Direct link to Handling Rate Limits" translate="no">​</a></h3>
+<p><strong>Proactive Monitoring</strong>:</p>
+<ol>
+<li>Monitor <code>x-ratelimit-remaining</code> header in every response</li>
+<li>Slow down requests when remaining count is low (&lt; 10)</li>
+<li>Implement client-side throttling before hitting limit</li>
+</ol>
+<p><strong>Reactive Handling</strong> (429 Response):</p>
+<ol>
+<li>Stop sending requests immediately</li>
+<li>Parse <code>x-ratelimit-reset</code> from response</li>
+<li>Calculate wait time: <code>reset_time - current_time</code></li>
+<li>Wait until reset time</li>
+<li>Resume with exponential backoff: 2s, 4s, 8s, 16s</li>
+</ol>
+<p><strong>Exponential Backoff Pattern</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Attempt 1: Wait 2 seconds</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Attempt 2: Wait 4 seconds</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Attempt 3: Wait 8 seconds</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Attempt 4: Wait 16 seconds</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Attempt 5: Wait 32 seconds</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Maximum: Give up or wait for reset</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="best-practices-2">Best Practices<a href="#best-practices-2" class="hash-link" aria-label="Direct link to Best Practices" title="Direct link to Best Practices" translate="no">​</a></h3>
+<p><strong>Distribute Load</strong>:</p>
+<ul>
+<li>Spread requests evenly over time rather than bursting</li>
+<li>Use queuing on client side to control request rate</li>
+<li>For bulk operations, implement client-side throttling (e.g., 1 request per second)</li>
+</ul>
+<p><strong>Optimize Request Patterns</strong>:</p>
+<ul>
+<li>Use appropriate page sizes to reduce number of requests</li>
+<li>Filter results server-side rather than client-side</li>
+<li>Cache responses when data doesn&#x27;t change frequently</li>
+<li>Batch updates in single requests where possible</li>
+</ul>
+<p><strong>Handle Limits Gracefully</strong>:</p>
+<ul>
+<li>Implement retry logic with exponential backoff</li>
+<li>Log rate limit events for monitoring</li>
+<li>Alert on repeated rate limiting (may indicate design issue)</li>
+<li>Consider request priority (delay non-critical requests)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="code-example-5">Code Example<a href="#code-example-5" class="hash-link" aria-label="Direct link to Code Example" title="Direct link to Code Example" translate="no">​</a></h3>
+<details><summary>Example: Rate Limit Handling with Exponential Backoff<!-- --> (click to expand)</summary></details>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="best-practices-3">Best Practices<a href="#best-practices-3" class="hash-link" aria-label="Direct link to Best Practices" title="Direct link to Best Practices" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="understanding-put-semantics">Understanding PUT Semantics<a href="#understanding-put-semantics" class="hash-link" aria-label="Direct link to Understanding PUT Semantics" title="Direct link to Understanding PUT Semantics" translate="no">​</a></h3>
+<div class="theme-admonition theme-admonition-danger admonition_xJq3 alert alert--danger"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg></span>CRITICAL: PUT Replaces the Entire Resource</div><div class="admonitionContent_BuS1"><p>Administration APIs use PUT for updates, which requires the COMPLETE resource object. PUT operations are not partial updates.</p><p><strong>Why This Matters</strong>:</p><ul>
+<li>Omitted fields are interpreted as requests to remove that data</li>
+<li>Missing sections could delete critical configurations</li>
+<li>Partial submissions can cause unintended data loss</li>
+</ul><p><strong>Correct Update Pattern</strong>:</p><ol>
+<li>GET the complete current resource object<!-- -->
+<ul>
+<li>⚠️ Use the get one <code>GET /entity/{id}</code> endpoint NOT the list/get all <code>GET /entity endpoint</code> for this as the payloads may be different.</li>
+</ul>
+</li>
+<li>Modify only the specific fields you want to change IN MEMORY</li>
+<li>PUT the entire modified object back</li>
+</ol><p><strong>Never Do This</strong> (Partial PUT):</p><div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">PUT /resources/{id}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  &quot;oneField&quot;: &quot;newValue&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div><p>This will REMOVE, RESET and/or DEPROVISON all other resource attributes potentially resulting in loss of service and/or data.</p><p><strong>Always Do This</strong> (Complete PUT):</p><div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">GET /resources/{id} → Retrieve complete resource</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Modify in memory → resource.section.field = &quot;newValue&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">PUT /resources/{id} with COMPLETE modified resource object</span><br></span></code></pre></div></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-optimization">Performance Optimization<a href="#performance-optimization" class="hash-link" aria-label="Direct link to Performance Optimization" title="Direct link to Performance Optimization" translate="no">​</a></h3>
+<p><strong>Concurrent Operations</strong>:</p>
+<ul>
+<li>Submit operations in parallel but limit concurrency (5-10 requests recommended)</li>
+<li>Monitor async operation queue depth</li>
+<li>Implement client-side rate limiting before hitting API limits</li>
+<li>Don&#x27;t wait for one operation before starting next</li>
+</ul>
+<p><strong>Efficient Pagination</strong>:</p>
+<ul>
+<li>Choose appropriate page sizes based on use case:<!-- -->
+<ul>
+<li>Real-time/Interactive: 50-100 items</li>
+<li>Bulk Export: 100-1000 items</li>
+<li>Memory Constrained: 25-50 items</li>
+</ul>
+</li>
+<li>Process pages as they arrive (streaming) rather than buffering</li>
+<li>Don&#x27;t restart scrolls unnecessarily (expensive server-side)</li>
+<li>Cache scroll IDs for resumable operations</li>
+</ul>
+<p><strong>Filtering Performance</strong>:</p>
+<ul>
+<li>Filter early and precisely to reduce data transfer</li>
+<li>Avoid overly complex RSQL expressions</li>
+<li>Test filters with small page sizes first</li>
+<li>Use indexed fields when possible (status, timestamps)</li>
+</ul>
+<p><strong>Async Operation Polling</strong>:</p>
+<ul>
+<li>Start with 1-2 second initial poll interval</li>
+<li>Increase interval with exponential backoff if operation is long-running</li>
+<li>Set maximum poll duration (5 minutes recommended)</li>
+<li>Most operations complete within 5-10 seconds</li>
+</ul>
+<p><strong>Caching Considerations</strong>:</p>
+<ul>
+<li>Cache relatively static data (sites, organizational structure)</li>
+<li>Use appropriate TTL based on update frequency (15-60 minutes typical)</li>
+<li>Invalidate cache on mutations</li>
+<li>Consider cache staleness acceptable for your use case</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="security-best-practices">Security Best Practices<a href="#security-best-practices" class="hash-link" aria-label="Direct link to Security Best Practices" title="Direct link to Security Best Practices" translate="no">​</a></h3>
+<p><strong>API Key Management</strong>:</p>
+<ul>
+<li><strong>Storage</strong>: Use environment variables or secure vault systems (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault)</li>
+<li><strong>Never Hardcode</strong>: Don&#x27;t embed keys in source code or configuration files</li>
+<li><strong>Separation</strong>: Use separate keys for dev, staging, production environments</li>
+<li><strong>Rotation</strong>: Rotate keys every 90 days as security best practice</li>
+<li><strong>Revocation</strong>: Implement immediate key revocation procedures for compromised keys</li>
+<li><strong>Monitoring</strong>: Monitor usage patterns for anomalies or suspicious activity</li>
+<li><strong>Logging</strong>: Never log full API keys - log last 4 characters only</li>
+</ul>
+<p><strong>Data Protection</strong>:</p>
+<ul>
+<li><strong>HTTPS Only</strong>: All requests must use HTTPS (HTTP will be rejected)</li>
+<li><strong>SSL Validation</strong>: Validate SSL certificates in HTTP clients</li>
+<li><strong>Sensitive Data</strong>: Don&#x27;t log sensitive data (emails, phone numbers, addresses, names)</li>
+<li><strong>Encryption at Rest</strong>: Implement encryption for data stored in your systems</li>
+<li><strong>Data Retention</strong>: Follow data retention policies (typically 7+ years for audit)</li>
+<li><strong>Compliance</strong>: Comply with applicable regulations (GDPR, CCPA, HIPAA if applicable)</li>
+</ul>
+<p><strong>Audit Logging</strong>:</p>
+<ul>
+<li><strong>Mutation Operations</strong>: Log all create, update, delete operations with timestamps</li>
+<li><strong>Operation IDs</strong>: Record operation IDs for traceability</li>
+<li><strong>Resource Changes</strong>: Log resource IDs and affected fields (not sensitive values)</li>
+<li><strong>Tamper-Proof</strong>: Implement tamper-proof audit trails</li>
+<li><strong>Retention</strong>: Retain logs per compliance requirements (typically 7+ years)</li>
+<li><strong>Monitoring</strong>: Monitor logs for security events and anomalies</li>
+</ul>
+<p><strong>Access Control</strong>:</p>
+<ul>
+<li><strong>Least Privilege</strong>: Apply principle of least privilege for API keys</li>
+<li><strong>Scope Limiting</strong>: Limit API key scope to required operations only</li>
+<li><strong>Regular Review</strong>: Review and revoke unused API keys regularly</li>
+<li><strong>Service Accounts</strong>: Use service accounts (not personal accounts) for API access</li>
+<li><strong>IP Restrictions</strong>: Consider IP whitelisting if your infrastructure allows</li>
+</ul>
+<p><strong>Monitoring and Alerting</strong>:</p>
+<ul>
+<li>Log all API requests and responses (excluding credentials and sensitive data)</li>
+<li>Monitor for unusual patterns (spike in errors, unexpected deletes, off-hours access)</li>
+<li>Alert on authentication failures</li>
+<li>Track operation failure rates</li>
+<li>Set up notifications for rate limit events</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="data-consistency">Data Consistency<a href="#data-consistency" class="hash-link" aria-label="Direct link to Data Consistency" title="Direct link to Data Consistency" translate="no">​</a></h3>
+<p><strong>Handling Asynchronous Operations</strong>:</p>
+<ul>
+<li>Store operation IDs with source requests for correlation</li>
+<li>Implement idempotency for safe retries where possible</li>
+<li>Handle duplicate submissions gracefully</li>
+<li>Verify completion before proceeding to dependent operations</li>
+<li>Don&#x27;t assume success - always check operation status</li>
+</ul>
+<p><strong>PUT Request Safety</strong>:</p>
+<ul>
+<li><strong>Critical</strong>: PUT operations replace the entire resource - omitted fields may be set to null or default values</li>
+<li>Always retrieve the complete resource with GET before updating</li>
+<li>Modify only the fields you intend to change, preserving all others</li>
+<li>Validate the complete payload includes all required fields before sending PUT</li>
+<li>Example pitfall: Omitting <code>phoneNumber</code> in a PUT request may delete the user&#x27;s phone number even if you only intended to update their email</li>
+<li>When updating a single field, consider if the API supports PATCH instead of PUT</li>
+<li>Test PUT operations in development with complete payloads to avoid data loss</li>
+</ul>
+<p><strong>Update Safety</strong>:</p>
+<ul>
+<li>Always GET complete resource before updating</li>
+<li>Never submit partial resource objects (unless API explicitly supports PATCH)</li>
+<li>Validate all required fields present after modification</li>
+<li>Consider optimistic locking for concurrent updates if available</li>
+<li>Verify updates completed successfully before proceeding</li>
+</ul>
+<p><strong>Error Recovery</strong>:</p>
+<ul>
+<li>Distinguish between transient and permanent failures</li>
+<li>Implement appropriate retry logic for transient failures</li>
+<li>Log all failures with sufficient detail for debugging</li>
+<li>Have rollback procedures for failed bulk operations</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="troubleshooting">Troubleshooting<a href="#troubleshooting" class="hash-link" aria-label="Direct link to Troubleshooting" title="Direct link to Troubleshooting" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="authentication-issues">Authentication Issues<a href="#authentication-issues" class="hash-link" aria-label="Direct link to Authentication Issues" title="Direct link to Authentication Issues" translate="no">​</a></h3>
+<p><strong>Problem</strong>: 401 Unauthorized errors</p>
+<p><strong>Debugging Steps</strong>:</p>
+<ol>
+<li>
+<p>Verify <code>x-api-key</code> header is set correctly (case-sensitive)</p>
+</li>
+<li>
+<p>Check for whitespace or encoding issues in key value</p>
+</li>
+<li>
+<p>Confirm API key hasn&#x27;t been revoked in Admin Console</p>
+</li>
+<li>
+<p>Test with curl to isolate client library issues:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">curl -H &quot;x-api-key: YOUR_KEY&quot; \</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">     -H &quot;Accept: application/vnd.users.v1+json&quot; \</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">     https://api.8x8.com/admin-provisioning/users?pageSize=1</span><br></span></code></pre></div></div>
+</li>
+<li>
+<p>Regenerate API key if needed</p>
+</li>
+</ol>
+<p><strong>Problem</strong>: 403 Forbidden despite valid key</p>
+<p><strong>Debugging Steps</strong>:</p>
+<ol>
+<li>Verify API key has required API products enabled</li>
+<li>Check account status in Admin Console</li>
+<li>Confirm accessing resources for correct customer organization</li>
+<li>Verify no IP restrictions blocking requests</li>
+<li>Contact support if issue persists</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pagination-issues">Pagination Issues<a href="#pagination-issues" class="hash-link" aria-label="Direct link to Pagination Issues" title="Direct link to Pagination Issues" translate="no">​</a></h3>
+<p><strong>Problem</strong>: Inconsistent results between pages</p>
+<p><strong>Cause</strong>: Data changed during scroll, or filter was modified</p>
+<p><strong>Solution</strong>: Don&#x27;t modify data or filters during active scroll. Start fresh scroll if data changed.</p>
+<p><strong>Problem</strong>: Duplicate resources across pages</p>
+<p><strong>Cause</strong>: Shouldn&#x27;t occur with scroll-based pagination (report to support if seen)</p>
+<p><strong>Solution</strong>: File support ticket with scroll ID and example duplicates.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="async-operation-problems">Async Operation Problems<a href="#async-operation-problems" class="hash-link" aria-label="Direct link to Async Operation Problems" title="Direct link to Async Operation Problems" translate="no">​</a></h3>
+<p><strong>Problem</strong>: Operation stuck in PENDING or IN_PROGRESS</p>
+<p><strong>Debugging Steps</strong>:</p>
+<ol>
+<li>Check if operation timeout exceeded (&gt; 5 minutes) - may indicate system issue</li>
+<li>Verify no prior rate limiting (check for 429 responses)</li>
+<li>Check <a href="https://status.8x8.com" target="_blank" rel="noopener noreferrer">8x8 status page</a> for incidents</li>
+<li>Review operation details for error messages</li>
+<li>Contact support with operation ID if persists &gt; 10 minutes</li>
+</ol>
+<p><strong>Problem</strong>: Operation fails with generic error</p>
+<p><strong>Debugging Steps</strong>:</p>
+<ol>
+<li>Check operation response <code>error</code> field for details</li>
+<li>Verify input data was valid (all required fields, correct formats)</li>
+<li>Test with minimal request (only required fields)</li>
+<li>Check for dependency issues (invalid IDs, missing prerequisites)</li>
+<li>Review requestId/responseId in error response for support escalation</li>
+</ol>
+<p><strong>Problem</strong>: Operation completes but resource not visible</p>
+<p><strong>Debugging Steps</strong>:</p>
+<ol>
+<li>Verify operation status is COMPLETED (not just IN_PROGRESS)</li>
+<li>Check resource status/state is as expected</li>
+<li>Clear Admin Console cache (hard refresh browser)</li>
+<li>Verify viewing correct organization/site filter</li>
+<li>Use GET directly with resource ID to confirm existence</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="filter-and-query-issues">Filter and Query Issues<a href="#filter-and-query-issues" class="hash-link" aria-label="Direct link to Filter and Query Issues" title="Direct link to Filter and Query Issues" translate="no">​</a></h3>
+<p><strong>Problem</strong>: RSQL filter returns no results unexpectedly</p>
+<p><strong>Debugging Steps</strong>:</p>
+<ol>
+<li>Test without filter to verify resources exist</li>
+<li>Simplify filter to one condition at a time</li>
+<li>Check field names match API exactly (case-sensitive for paths)</li>
+<li>Verify enum values match exactly (e.g., <code>ACTIVE</code> not <code>active</code>)</li>
+<li>Use correct operators (<code>==</code> for equality, not <code>=</code>)</li>
+<li>Quote values with spaces: <code>department==&#x27;Research and Development&#x27;</code></li>
+</ol>
+<p><strong>Problem</strong>: &quot;Invalid filter syntax&quot; errors</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Check parentheses matching: <code>(condition1,condition2)</code></li>
+<li>Use semicolon for AND: <code>status==ACTIVE;department==Engineering</code></li>
+<li>Use comma for OR: <code>department==Engineering,department==Sales</code></li>
+<li>Escape special characters if needed</li>
+<li>Refer to <a href="https://github.com/jirutka/rsql-parser" target="_blank" rel="noopener noreferrer">RSQL specification</a> for complex queries</li>
+</ul>
+<p><strong>Problem</strong>: Sorting not working as expected</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Use correct field paths with + or - prefix: <code>+lastName</code> (ascending) or <code>-lastName</code> (descending)</li>
+<li>Verify field is sortable (not all fields support sorting)</li>
+<li>Test with single sort field first before combining</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance-issues">Performance Issues<a href="#performance-issues" class="hash-link" aria-label="Direct link to Performance Issues" title="Direct link to Performance Issues" translate="no">​</a></h3>
+<p><strong>Problem</strong>: Slow API responses</p>
+<p><strong>Debugging Steps</strong>:</p>
+<ol>
+<li>Check page size - large pages (500-1000) take longer</li>
+<li>Simplify complex RSQL filters</li>
+<li>Verify network latency (test from different locations)</li>
+<li>Check for high request concurrency (reduce parallel requests)</li>
+<li>Monitor rate limit headers for throttling</li>
+</ol>
+<p><strong>Problem</strong>: Timeouts during bulk operations</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Reduce concurrency (5-10 parallel requests maximum)</li>
+<li>Implement proper backoff between requests</li>
+<li>Break large batches into smaller chunks</li>
+<li>Monitor API status page during bulk operations</li>
+<li>Use async operations correctly (don&#x27;t block waiting)</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="support-resources">Support Resources<a href="#support-resources" class="hash-link" aria-label="Direct link to Support Resources" title="Direct link to Support Resources" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="documentation">Documentation<a href="#documentation" class="hash-link" aria-label="Direct link to Documentation" title="Direct link to Documentation" translate="no">​</a></h3>
+<p><strong>API Documentation</strong>:</p>
+<ul>
+<li><a href="https://admin.8x8.com" target="_blank" rel="noopener noreferrer">8x8 Admin Console</a></li>
+<li>Individual API OpenAPI Specifications (see each API guide)</li>
+</ul>
+<p><strong>Technical References</strong>:</p>
+<ul>
+<li><a href="https://github.com/jirutka/rsql-parser" target="_blank" rel="noopener noreferrer">RSQL Specification</a></li>
+<li><a href="https://tools.ietf.org/html/rfc7807" target="_blank" rel="noopener noreferrer">RFC 7807 - Problem Details for HTTP APIs</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank" rel="noopener noreferrer">ISO 8601 Date Format</a></li>
+<li><a href="https://en.wikipedia.org/wiki/E.164" target="_blank" rel="noopener noreferrer">E.164 Phone Number Format</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="service-status">Service Status<a href="#service-status" class="hash-link" aria-label="Direct link to Service Status" title="Direct link to Service Status" translate="no">​</a></h3>
+<ul>
+<li><a href="https://status.8x8.com" target="_blank" rel="noopener noreferrer">8x8 Status Page</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="getting-support">Getting Support<a href="#getting-support" class="hash-link" aria-label="Direct link to Getting Support" title="Direct link to Getting Support" translate="no">​</a></h3>
+<p><strong>When to Contact Support</strong>:</p>
+<ul>
+<li>Operation stuck for &gt; 10 minutes</li>
+<li>Repeated 500 errors</li>
+<li>Unexpected authentication/authorization failures</li>
+<li>Data inconsistencies or corruption</li>
+<li>Questions about API behavior or capabilities</li>
+</ul>
+<p><strong>Required Information When Contacting Support</strong>:</p>
+<ul>
+<li><strong>Operation ID</strong>: For async operation issues</li>
+<li><strong>Request ID and Response ID</strong>: From error response (requestId, responseId fields)</li>
+<li><strong>Timestamp</strong>: Of the issue occurrence (UTC timezone)</li>
+<li><strong>API Key</strong>: Last 4 characters only (never full key)</li>
+<li><strong>Complete Error Response</strong>: Sanitize sensitive data, include all fields</li>
+<li><strong>Steps to Reproduce</strong>: Detailed steps to replicate the issue</li>
+<li><strong>Frequency</strong>: One-time, intermittent, or constant</li>
+<li><strong>Environment</strong>: Development, staging, or production</li>
+<li><strong>Recent Changes</strong>: Any recent changes to integration code</li>
+</ul>
+<p><strong>How to Contact Support</strong>:</p>
+<ul>
+<li><strong>Admin Console</strong>: User profile menu → Contact Support</li>
+<li>For production-critical issues, mention &quot;Production Critical&quot; in subject</li>
+</ul>
+<p><strong>Before Contacting Support</strong>:</p>
+<ol>
+<li>Check <a href="https://status.8x8.com" target="_blank" rel="noopener noreferrer">8x8 Status Page</a> for known incidents</li>
+<li>Review this troubleshooting section</li>
+<li>Test with curl to isolate client library issues</li>
+<li>Verify API key permissions and status</li>
+<li>Collect logs and error responses with requestId/responseId</li>
+</ol>
+<hr>
+<p><strong>Version</strong>: 1.0  |  <strong>Last Updated</strong>: January 16, 2026  |  <strong>Applies to</strong>: All Administration API Suite APIs</p></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/administration/docs/overview"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Introduction</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/administration/docs/api-change-policy"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">API Change Policy</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#table-of-contents" class="table-of-contents__link toc-highlight">Table of Contents</a></li><li><a href="#suite-overview" class="table-of-contents__link toc-highlight">Suite Overview</a><ul><li><a href="#apis-in-this-suite" class="table-of-contents__link toc-highlight">APIs in This Suite</a></li><li><a href="#when-to-use-which-api" class="table-of-contents__link toc-highlight">When to Use Which API</a></li><li><a href="#common-characteristics" class="table-of-contents__link toc-highlight">Common Characteristics</a></li></ul></li><li><a href="#prerequisites" class="table-of-contents__link toc-highlight">Prerequisites</a><ul><li><a href="#required-access" class="table-of-contents__link toc-highlight">Required Access</a></li><li><a href="#knowledge-prerequisites" class="table-of-contents__link toc-highlight">Knowledge Prerequisites</a></li></ul></li><li><a href="#getting-started" class="table-of-contents__link toc-highlight">Getting Started</a><ul><li><a href="#obtaining-api-credentials" class="table-of-contents__link toc-highlight">Obtaining API Credentials</a></li><li><a href="#testing-your-credentials" class="table-of-contents__link toc-highlight">Testing Your Credentials</a></li></ul></li><li><a href="#authentication" class="table-of-contents__link toc-highlight">Authentication</a><ul><li><a href="#authentication-method" class="table-of-contents__link toc-highlight">Authentication Method</a></li><li><a href="#base-url" class="table-of-contents__link toc-highlight">Base URL</a></li></ul></li><li><a href="#api-versioning" class="table-of-contents__link toc-highlight">API Versioning</a><ul><li><a href="#version-format" class="table-of-contents__link toc-highlight">Version Format</a></li><li><a href="#specifying-version" class="table-of-contents__link toc-highlight">Specifying Version</a></li><li><a href="#backward-compatibility" class="table-of-contents__link toc-highlight">Backward Compatibility</a></li></ul></li><li><a href="#common-request-patterns" class="table-of-contents__link toc-highlight">Common Request Patterns</a><ul><li><a href="#required-headers" class="table-of-contents__link toc-highlight">Required Headers</a></li><li><a href="#example-request" class="table-of-contents__link toc-highlight">Example Request</a></li></ul></li><li><a href="#asynchronous-operations" class="table-of-contents__link toc-highlight">Asynchronous Operations</a><ul><li><a href="#operation-flow" class="table-of-contents__link toc-highlight">Operation Flow</a></li><li><a href="#operation-status-values" class="table-of-contents__link toc-highlight">Operation Status Values</a></li><li><a href="#operation-object-structure" class="table-of-contents__link toc-highlight">Operation Object Structure</a></li><li><a href="#polling-best-practices" class="table-of-contents__link toc-highlight">Polling Best Practices</a></li><li><a href="#code-example" class="table-of-contents__link toc-highlight">Code Example</a></li><li><a href="#handling-operation-failures" class="table-of-contents__link toc-highlight">Handling Operation Failures</a></li></ul></li><li><a href="#pagination" class="table-of-contents__link toc-highlight">Pagination</a><ul><li><a href="#how-scroll-based-pagination-works" class="table-of-contents__link toc-highlight">How Scroll-Based Pagination Works</a></li><li><a href="#key-characteristics" class="table-of-contents__link toc-highlight">Key Characteristics</a></li><li><a href="#pagination-response-structure" class="table-of-contents__link toc-highlight">Pagination Response Structure</a></li><li><a href="#pagination-best-practices" class="table-of-contents__link toc-highlight">Pagination Best Practices</a></li><li><a href="#code-example-1" class="table-of-contents__link toc-highlight">Code Example</a></li></ul></li><li><a href="#filtering-with-rsql" class="table-of-contents__link toc-highlight">Filtering with RSQL</a><ul><li><a href="#rsql-syntax-overview" class="table-of-contents__link toc-highlight">RSQL Syntax Overview</a></li><li><a href="#comparison-operators" class="table-of-contents__link toc-highlight">Comparison Operators</a></li><li><a href="#logical-operators" class="table-of-contents__link toc-highlight">Logical Operators</a></li><li><a href="#special-features" class="table-of-contents__link toc-highlight">Special Features</a></li><li><a href="#filter-examples" class="table-of-contents__link toc-highlight">Filter Examples</a></li><li><a href="#field-paths" class="table-of-contents__link toc-highlight">Field Paths</a></li><li><a href="#best-practices" class="table-of-contents__link toc-highlight">Best Practices</a></li><li><a href="#common-pitfalls" class="table-of-contents__link toc-highlight">Common Pitfalls</a></li><li><a href="#code-example-2" class="table-of-contents__link toc-highlight">Code Example</a></li><li><a href="#further-reading" class="table-of-contents__link toc-highlight">Further Reading</a></li></ul></li><li><a href="#sorting-results" class="table-of-contents__link toc-highlight">Sorting Results</a><ul><li><a href="#sort-syntax" class="table-of-contents__link toc-highlight">Sort Syntax</a></li><li><a href="#sort-examples" class="table-of-contents__link toc-highlight">Sort Examples</a></li><li><a href="#sortable-fields" class="table-of-contents__link toc-highlight">Sortable Fields</a></li><li><a href="#best-practices-1" class="table-of-contents__link toc-highlight">Best Practices</a></li><li><a href="#code-example-3" class="table-of-contents__link toc-highlight">Code Example</a></li></ul></li><li><a href="#error-handling" class="table-of-contents__link toc-highlight">Error Handling</a><ul><li><a href="#error-response-format" class="table-of-contents__link toc-highlight">Error Response Format</a></li><li><a href="#key-fields" class="table-of-contents__link toc-highlight">Key Fields</a></li><li><a href="#common-http-status-codes" class="table-of-contents__link toc-highlight">Common HTTP Status Codes</a></li><li><a href="#generic-error-codes" class="table-of-contents__link toc-highlight">Generic Error Codes</a></li><li><a href="#common-error-scenarios" class="table-of-contents__link toc-highlight">Common Error Scenarios</a></li><li><a href="#recovery-strategies" class="table-of-contents__link toc-highlight">Recovery Strategies</a></li><li><a href="#code-example-4" class="table-of-contents__link toc-highlight">Code Example</a></li></ul></li><li><a href="#rate-limiting" class="table-of-contents__link toc-highlight">Rate Limiting</a><ul><li><a href="#current-rate-limits" class="table-of-contents__link toc-highlight">Current Rate Limits</a></li><li><a href="#rate-limit-headers" class="table-of-contents__link toc-highlight">Rate Limit Headers</a></li><li><a href="#handling-rate-limits" class="table-of-contents__link toc-highlight">Handling Rate Limits</a></li><li><a href="#best-practices-2" class="table-of-contents__link toc-highlight">Best Practices</a></li><li><a href="#code-example-5" class="table-of-contents__link toc-highlight">Code Example</a></li></ul></li><li><a href="#best-practices-3" class="table-of-contents__link toc-highlight">Best Practices</a><ul><li><a href="#understanding-put-semantics" class="table-of-contents__link toc-highlight">Understanding PUT Semantics</a></li><li><a href="#performance-optimization" class="table-of-contents__link toc-highlight">Performance Optimization</a></li><li><a href="#security-best-practices" class="table-of-contents__link toc-highlight">Security Best Practices</a></li><li><a href="#data-consistency" class="table-of-contents__link toc-highlight">Data Consistency</a></li></ul></li><li><a href="#troubleshooting" class="table-of-contents__link toc-highlight">Troubleshooting</a><ul><li><a href="#authentication-issues" class="table-of-contents__link toc-highlight">Authentication Issues</a></li><li><a href="#pagination-issues" class="table-of-contents__link toc-highlight">Pagination Issues</a></li><li><a href="#async-operation-problems" class="table-of-contents__link toc-highlight">Async Operation Problems</a></li><li><a href="#filter-and-query-issues" class="table-of-contents__link toc-highlight">Filter and Query Issues</a></li><li><a href="#performance-issues" class="table-of-contents__link toc-highlight">Performance Issues</a></li></ul></li><li><a href="#support-resources" class="table-of-contents__link toc-highlight">Support Resources</a><ul><li><a href="#documentation" class="table-of-contents__link toc-highlight">Documentation</a></li><li><a href="#service-status" class="table-of-contents__link toc-highlight">Service Status</a></li><li><a href="#getting-support" class="table-of-contents__link toc-highlight">Getting Support</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>

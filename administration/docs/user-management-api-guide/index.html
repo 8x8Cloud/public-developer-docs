@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-administration/docs/user-management-api-guide" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">User Management API Guide | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/administration/docs/user-management-api-guide"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="User Management API Guide | 8x8 Developer Portal"><meta data-rh="true" name="description" content="API Version January 15, 2026  |  Part of: Administration API Suite"><meta data-rh="true" property="og:description" content="API Version January 15, 2026  |  Part of: Administration API Suite"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/administration/docs/user-management-api-guide"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/administration/docs/user-management-api-guide" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/administration/docs/user-management-api-guide" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.5ea60389.css">
+<script src="/assets/js/runtime~main.9787f118.js" defer="defer"></script>
+<script src="/assets/js/main.a2ac79b7.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a class="navbar__item navbar__link" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a class="navbar__item navbar__link" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/administration">Administration</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides" href="/administration/docs">Guides</a><a class="section-navigation__tab icon-references" href="/administration/reference">API Reference</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/administration/docs/overview"><span title="Administration" class="categoryLinkLabel_W154">Administration</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/administration/docs/user-management-api-guide"><span title="User Management" class="categoryLinkLabel_W154">User Management</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/administration/docs/user-management-api-guide"><span title="User Management API Guide" class="linkLabel_WmDU">User Management API Guide</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/administration/docs/ring-group-management-api-guide"><span title="Ring Group Management" class="categoryLinkLabel_W154">Ring Group Management</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/administration/docs/phone-number-management-api-guide"><span title="Phone Number Management" class="categoryLinkLabel_W154">Phone Number Management</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/administration/docs/site-management-api-guide"><span title="Site Management" class="categoryLinkLabel_W154">Site Management</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/administration/docs/search-contacts"><span title="Contact Management" class="categoryLinkLabel_W154">Contact Management</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>User Management API Guide</h1></header>
+<p><strong>API Version</strong>: 1.0  |  <strong>Last Updated</strong>: January 15, 2026  |  <strong>Part of</strong>: <a href="/administration/docs/suite-common">Administration API Suite</a></p>
+<!-- -->
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>BETA - Limited Access</div><div class="admonitionContent_BuS1"><p><strong>These Administration APIs are currently in Beta testing.</strong> API keys cannot be generated in Admin Console at this point. Only Beta program participants may use these APIs.</p></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="table-of-contents">Table of Contents<a href="#table-of-contents" class="hash-link" aria-label="Direct link to Table of Contents" title="Direct link to Table of Contents" translate="no">​</a></h2>
+<ol>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#prerequisites--authentication">Prerequisites &amp; Authentication</a></li>
+<li><a href="#quickstart">Quickstart</a></li>
+<li><a href="#core-concepts">Core Concepts</a></li>
+<li><a href="#use-cases">Use Cases</a></li>
+<li><a href="#api-reference">API Reference</a></li>
+<li><a href="#business-rules">Business Rules</a></li>
+<li><a href="#api-specific-error-scenarios">API-Specific Error Scenarios</a></li>
+<li><a href="#api-specific-troubleshooting">API-Specific Troubleshooting</a></li>
+<li><a href="#additional-resources">Additional Resources</a></li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="overview">Overview<a href="#overview" class="hash-link" aria-label="Direct link to Overview" title="Direct link to Overview" translate="no">​</a></h2>
+<p>The 8x8 User Management API provides programmatic access to user lifecycle management within your 8x8 organization. This RESTful API enables you to automate the complete lifecycle of users, from creation through configuration to deletion, supporting integration with HR systems, identity providers, and custom automation workflows.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="what-you-can-do">What You Can Do<a href="#what-you-can-do" class="hash-link" aria-label="Direct link to What You Can Do" title="Direct link to What You Can Do" translate="no">​</a></h3>
+<ul>
+<li>Create and configure users with comprehensive profile information</li>
+<li>Search and filter users using powerful RSQL query syntax</li>
+<li>Update user details, assignments, and service configurations</li>
+<li>Delete users when they leave your organization</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="primary-use-cases">Primary Use Cases<a href="#primary-use-cases" class="hash-link" aria-label="Direct link to Primary Use Cases" title="Direct link to Primary Use Cases" translate="no">​</a></h3>
+<p><strong>Employee Lifecycle Automation</strong>: Integrate with HR systems (Workday, BambooHR, SAP SuccessFactors) to automatically provision and deprovision users.</p>
+<p><strong>Site Deployment</strong>: Bulk provision users for new office locations or business units.</p>
+<p><strong>Directory Synchronization</strong>: Synchronize user information with external identity providers and organizational directories.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="api-architecture">API Architecture<a href="#api-architecture" class="hash-link" aria-label="Direct link to API Architecture" title="Direct link to API Architecture" translate="no">​</a></h3>
+<ul>
+<li><strong>RESTful Design</strong>: Standard HTTP methods (GET, POST, DELETE) with JSON payloads</li>
+<li><strong>Asynchronous Operations</strong>: Create and delete operations use async processing (see <a href="/administration/docs/suite-common#asynchronous-operations">API Essentials - Async Operations</a>)</li>
+<li><strong>RSQL Filtering</strong>: Powerful query syntax for precise user searches (see <a href="/administration/docs/suite-common#filtering-with-rsql">API Essentials - RSQL</a>)</li>
+<li><strong>Scroll-Based Pagination</strong>: Efficient pagination for large result sets (see <a href="/administration/docs/suite-common#pagination">API Essentials - Pagination</a>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="reference">Reference<a href="#reference" class="hash-link" aria-label="Direct link to Reference" title="Direct link to Reference" translate="no">​</a></h3>
+<p>View the <a href="#api-reference">API Reference</a> section below for detailed endpoint documentation.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites--authentication">Prerequisites &amp; Authentication<a href="#prerequisites--authentication" class="hash-link" aria-label="Direct link to Prerequisites &amp; Authentication" title="Direct link to Prerequisites &amp; Authentication" translate="no">​</a></h2>
+<p>Before using the User Management API, review the <strong><a href="/administration/docs/suite-common">Administration API Essentials</a></strong>, which covers:</p>
+<ul>
+<li><strong>Prerequisites</strong>: Account requirements, API credential acquisition, technical requirements</li>
+<li><strong>Getting Started</strong>: Step-by-step credential setup and testing</li>
+<li><strong>Authentication</strong>: API key authentication with <code>x-api-key</code> header</li>
+<li><strong>API Versioning</strong>: Version negotiation with <code>Accept</code> header</li>
+<li><strong>Common Patterns</strong>: Asynchronous operations, pagination, filtering, sorting</li>
+<li><strong>Error Handling</strong>: RFC 7807 format and common error scenarios</li>
+<li><strong>Rate Limiting</strong>: Request limits and handling strategies</li>
+<li><strong>Best Practices</strong>: Performance, security, and data consistency</li>
+<li><strong>Troubleshooting</strong>: Common issues and debugging steps</li>
+<li><strong>Support Resources</strong>: Contact information and escalation procedures</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="user-management-api-specifics">User Management API Specifics<a href="#user-management-api-specifics" class="hash-link" aria-label="Direct link to User Management API Specifics" title="Direct link to User Management API Specifics" translate="no">​</a></h3>
+<p><strong>Accept Header</strong> for this API:</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Accept: application/vnd.users.v1+json</span><br></span></code></pre></div></div>
+<p><strong>Required API Products</strong> (when creating API key in Admin Console):</p>
+<ul>
+<li><strong>UC &amp; CC Admin Operations</strong>: Required for user management operations</li>
+<li><strong>UC &amp; CC User Management</strong>: Required for user-specific operations</li>
+</ul>
+<p><strong>User-Specific Prerequisites</strong>:</p>
+<ul>
+<li>Understanding of 8x8&#x27;s organizational hierarchy (Customer → PBX → Site → User)</li>
+<li>Knowledge of your site IDs (obtain from Admin Console → Sites)</li>
+<li>Familiarity with user roles and permissions within 8x8</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="quickstart">Quickstart<a href="#quickstart" class="hash-link" aria-label="Direct link to Quickstart" title="Direct link to Quickstart" translate="no">​</a></h2>
+<p>This quickstart demonstrates your first successful interaction with the User Management API. You&#x27;ll create a user, monitor the operation to completion, and retrieve the created user&#x27;s details.</p>
+<p><strong>Prerequisite Knowledge</strong>: This quickstart assumes you&#x27;ve reviewed the <a href="/administration/docs/suite-common">Common Documentation</a> and understand:</p>
+<ul>
+<li>API key authentication</li>
+<li>Asynchronous operation patterns</li>
+<li>How to poll operation status</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="what-youll-accomplish">What You&#x27;ll Accomplish<a href="#what-youll-accomplish" class="hash-link" aria-label="Direct link to What You&#x27;ll Accomplish" title="Direct link to What You&#x27;ll Accomplish" translate="no">​</a></h3>
+<ol>
+<li>Create a new user with basic information</li>
+<li>Receive an operation ID and poll until completion</li>
+<li>Retrieve the fully created user object</li>
+</ol>
+<p><strong>Time to Complete</strong>: Approximately 5 minutes</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="prerequisites-for-quickstart">Prerequisites for Quickstart<a href="#prerequisites-for-quickstart" class="hash-link" aria-label="Direct link to Prerequisites for Quickstart" title="Direct link to Prerequisites for Quickstart" translate="no">​</a></h3>
+<ul>
+<li>API key obtained and tested (see <a href="/administration/docs/suite-common#getting-started">API Essentials - Getting Started</a>)</li>
+<li>Valid Site ID from your organization (obtain from Admin Console → Sites or lookup via the <a href="/administration/docs/site-management-api-guide">Site Management API</a>)</li>
+<li>Basic user information ready (name, email, username)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-1-create-a-user">Step 1: Create a User<a href="#step-1-create-a-user" class="hash-link" aria-label="Direct link to Step 1: Create a User" title="Direct link to Step 1: Create a User" translate="no">​</a></h3>
+<p>User creation is an asynchronous operation (see <a href="/administration/docs/suite-common#asynchronous-operations">API Essentials - Async Operations</a> for details). The API immediately returns a 202 Accepted response with an operation ID that you&#x27;ll use to track progress.</p>
+<p><strong>Required Fields</strong>:</p>
+<ul>
+<li><code>basicInfo.userName</code>: Unique login username (3-70 characters)</li>
+<li><code>basicInfo.firstName</code>: User&#x27;s first name (2-128 characters)</li>
+<li><code>basicInfo.lastName</code>: User&#x27;s last name (2-30 characters)</li>
+<li><code>basicInfo.primaryEmail</code>: Primary contact email (valid email format)</li>
+<li><code>basicInfo.site.id</code>: Site assignment (valid site ID from your organization)</li>
+</ul>
+<p><strong>Optional but Recommended</strong>:</p>
+<ul>
+<li><code>basicInfo.status</code>: User account status (ACTIVE or INACTIVE)</li>
+<li><code>basicInfo.locale</code>: Language preference (e.g., en-US, en-GB)</li>
+<li><code>basicInfo.timezone</code>: Timezone for call recordings and queues</li>
+</ul>
+<details><summary>Example: Create a New User<!-- --> (click to expand)</summary></details>
+<p><strong>Expected Response</strong> (202 Accepted):</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;operationId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;op_1a2b3c4d5e6f&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;PENDING&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;resourceType&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;USER&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;operationType&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;CREATE&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;createdTime&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;2025-12-01T15:30:45Z&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;_links&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;self&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;href&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/operations/op_1a2b3c4d5e6f&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>The operation ID (<code>op_1a2b3c4d5e6f</code> in this example) is your tracking token for monitoring progress.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-2-poll-operation-status">Step 2: Poll Operation Status<a href="#step-2-poll-operation-status" class="hash-link" aria-label="Direct link to Step 2: Poll Operation Status" title="Direct link to Step 2: Poll Operation Status" translate="no">​</a></h3>
+<p>Since user creation happens asynchronously, you need to check the operation status periodically until it completes. See <a href="/administration/docs/suite-common#asynchronous-operations">API Essentials - Async Operations</a> for complete polling guidance.</p>
+<p><strong>Polling Strategy</strong>:</p>
+<ul>
+<li>Start checking after 1 second</li>
+<li>Check no more frequently than once per second</li>
+<li>Set a maximum timeout (5 minutes recommended)</li>
+</ul>
+<details><summary>Example: Poll Operation Status<!-- --> (click to expand)</summary></details>
+<p><strong>Expected Response</strong> (Operation Completed):</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;operationId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;op_1a2b3c4d5e6f&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;COMPLETED&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;resourceType&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;USER&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;resourceId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;hvOB1l3zDCaDAwp9tNLzZA&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;operationType&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;CREATE&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;createdTime&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;2025-12-01T15:30:45Z&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;completedTime&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;2025-12-01T15:30:52Z&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;_links&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;self&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;href&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/operations/op_1a2b3c4d5e6f&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;resource&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;href&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/users/hvOB1l3zDCaDAwp9tNLzZA&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>When <code>status</code> is <code>COMPLETED</code>, the <code>resourceId</code> field contains your new user&#x27;s ID.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-3-retrieve-the-created-user">Step 3: Retrieve the Created User<a href="#step-3-retrieve-the-created-user" class="hash-link" aria-label="Direct link to Step 3: Retrieve the Created User" title="Direct link to Step 3: Retrieve the Created User" translate="no">​</a></h3>
+<p>Once the operation completes, retrieve the full user object to confirm all details were created correctly.</p>
+<details><summary>Example: Retrieve User Details<!-- --> (click to expand)</summary></details>
+<p><strong>Expected Response</strong> (200 OK):</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;basicInfo&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;userId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;hvOB1l3zDCaDAwp9tNLzZA&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;customerId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;0012J00042NkZQIQA3&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;createdTime&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;2025-12-01T15:30:52Z&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;lastUpdatedTime&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;2025-12-01T15:30:52Z&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;userName&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;jane.smith@example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;firstName&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Jane&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;lastName&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Smith&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;ACTIVE&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;locale&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;en-US&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;timezone&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;America/Los_Angeles&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;primaryEmail&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;jane.smith@example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;site&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;SAH3U8guQaK4WQhpDZi0rQ&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;name&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Headquarters&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;pbxName&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;corpco01&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;directoryInfo&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;displayInDirectory&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">true</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;serviceInfo&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;licenses&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;extensions&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;assignmentInfo&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;ringGroups&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;ucCallQueues&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;userGroups&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="quickstart-complete">Quickstart Complete<a href="#quickstart-complete" class="hash-link" aria-label="Direct link to Quickstart Complete" title="Direct link to Quickstart Complete" translate="no">​</a></h3>
+<p>You&#x27;ve successfully:</p>
+<ul>
+<li>✅ Created a user via the API</li>
+<li>✅ Monitored an asynchronous operation to completion</li>
+<li>✅ Retrieved the created user&#x27;s details</li>
+</ul>
+<p><strong>Next Steps</strong>:</p>
+<ul>
+<li>Explore <a href="#use-cases">Use Cases</a> for more complex scenarios</li>
+<li>Learn about <a href="#core-concepts">Core Concepts</a> for deeper understanding</li>
+<li>Review <a href="/administration/docs/suite-common#best-practices">API Essentials - Best Practices</a> for production implementations</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="core-concepts">Core Concepts<a href="#core-concepts" class="hash-link" aria-label="Direct link to Core Concepts" title="Direct link to Core Concepts" translate="no">​</a></h2>
+<p>Understanding these foundational concepts specific to the User Management API will help you use it effectively.</p>
+<p>For general concepts (asynchronous operations, pagination, filtering, sorting, error handling), see <a href="/administration/docs/suite-common">Administration API Essentials</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="user-object-structure">User Object Structure<a href="#user-object-structure" class="hash-link" aria-label="Direct link to User Object Structure" title="Direct link to User Object Structure" translate="no">​</a></h3>
+<p>Users in 8x8 have a comprehensive data model organized into four logical sections:</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="1-basicinfo-required">1. basicInfo (Required)<a href="#1-basicinfo-required" class="hash-link" aria-label="Direct link to 1. basicInfo (Required)" title="Direct link to 1. basicInfo (Required)" translate="no">​</a></h4>
+<p>Core identity and account information:</p>
+<ul>
+<li><strong>userId</strong>: Unique system-generated identifier (read-only)</li>
+<li><strong>customerId</strong>: Organization identifier (read-only)</li>
+<li><strong>userName</strong>: Login username (required, 3-70 characters, unique)</li>
+<li><strong>firstName</strong>: User&#x27;s given name (required, 2-128 characters)</li>
+<li><strong>lastName</strong>: User&#x27;s family name (required, 2-30 characters)</li>
+<li><strong>primaryEmail</strong>: Primary contact email (required, valid email format)</li>
+<li><strong>status</strong>: Account status - ACTIVE or INACTIVE</li>
+<li><strong>locale</strong>: Language for UI, prompts, and notifications</li>
+<li><strong>timezone</strong>: Time zone for recordings and queue views</li>
+<li><strong>site</strong>: Physical location assignment (critical for routing and features)</li>
+<li><strong>createdTime</strong>, <strong>lastUpdatedTime</strong>: Audit timestamps (read-only)</li>
+<li><strong>scimProvider</strong>, <strong>ssoProvider</strong>, <strong>ssoFederationId</strong>: Identity integration fields</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="2-directoryinfo-optional">2. directoryInfo (Optional)<a href="#2-directoryinfo-optional" class="hash-link" aria-label="Direct link to 2. directoryInfo (Optional)" title="Direct link to 2. directoryInfo (Optional)" translate="no">​</a></h4>
+<p>Directory and organizational profile:</p>
+<ul>
+<li><strong>jobTitle</strong>: User&#x27;s role or position</li>
+<li><strong>department</strong>: Organizational unit</li>
+<li><strong>directoryScope</strong>: Visibility scope (CUSTOMER, PBX, or SITE)</li>
+<li><strong>displayInDirectory</strong>: Whether user appears in searches</li>
+<li><strong>personalPhoneNumbers</strong>: Additional contact numbers array</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="3-serviceinfo-optional">3. serviceInfo (Optional)<a href="#3-serviceinfo-optional" class="hash-link" aria-label="Direct link to 3. serviceInfo (Optional)" title="Direct link to 3. serviceInfo (Optional)" translate="no">​</a></h4>
+<p>Service assignments and configurations:</p>
+<ul>
+<li><strong>licenses</strong>: Array of assigned licenses/subscriptions</li>
+<li><strong>extensions</strong>: Array of voice extensions with complete configuration:<!-- -->
+<ul>
+<li>Extension numbers and phone numbers</li>
+<li>Call routing and forwarding settings</li>
+<li>Voicemail configuration</li>
+<li>Device assignments</li>
+<li>Caller ID settings</li>
+<li>Recording preferences</li>
+<li>Emergency address information</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="4-assignmentinfo-optional">4. assignmentInfo (Optional)<a href="#4-assignmentinfo-optional" class="hash-link" aria-label="Direct link to 4. assignmentInfo (Optional)" title="Direct link to 4. assignmentInfo (Optional)" translate="no">​</a></h4>
+<p>Group memberships and policies:</p>
+<ul>
+<li><strong>profilePolicy</strong>: Applied user profile policy</li>
+<li><strong>ringGroups</strong>: Ring group memberships</li>
+<li><strong>ucCallQueues</strong>: Call queue assignments</li>
+<li><strong>userGroups</strong>: User group memberships</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="8x8-organizational-hierarchy">8x8 Organizational Hierarchy<a href="#8x8-organizational-hierarchy" class="hash-link" aria-label="Direct link to 8x8 Organizational Hierarchy" title="Direct link to 8x8 Organizational Hierarchy" translate="no">​</a></h3>
+<p>Users exist within a hierarchical structure that affects routing, features, and management:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Customer (Organization)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  └── PBX (Platform Instance)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      └── Site (Physical Location)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          └── User (Individual Account)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">              └── Extension (Voice Service)</span><br></span></code></pre></div></div>
+<p><strong>Key Points</strong>:</p>
+<ul>
+<li>Every user must be assigned to a Site</li>
+<li>Site determines PBX assignment automatically</li>
+<li>Multiple sites can share a PBX</li>
+<li>Extensions provide telephony capabilities</li>
+<li>Hierarchy affects feature availability and call routing</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="use-cases">Use Cases<a href="#use-cases" class="hash-link" aria-label="Direct link to Use Cases" title="Direct link to Use Cases" translate="no">​</a></h2>
+<p>This section covers the most common real-world scenarios for using the User Management API, with implementation patterns and code examples.</p>
+<p>For common patterns like pagination, filtering, and error handling, see <a href="/administration/docs/suite-common">Administration API Essentials</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-case-1-employee-onboarding-automation">Use Case 1: Employee Onboarding Automation<a href="#use-case-1-employee-onboarding-automation" class="hash-link" aria-label="Direct link to Use Case 1: Employee Onboarding Automation" title="Direct link to Use Case 1: Employee Onboarding Automation" translate="no">​</a></h3>
+<p><strong>Business Context</strong>: When new employees join your organization, their user accounts need to be created quickly and configured consistently. Manual provisioning through the Admin Console is time-consuming and error-prone at scale. Integrating with your HR system (Workday, BambooHR, SAP SuccessFactors) enables automatic user creation when employees are added.</p>
+<p><strong>When to Use</strong>:</p>
+<ul>
+<li>Integrating HR system with 8x8 for automated provisioning</li>
+<li>Reducing IT workload for routine user creation</li>
+<li>Ensuring consistent user configuration across the organization</li>
+<li>Supporting rapid scaling or seasonal hiring</li>
+</ul>
+<p><strong>Implementation Pattern</strong>:</p>
+<ol>
+<li><strong>Receive Employee Data</strong>: HR system triggers webhook or scheduled sync provides employee details</li>
+<li><strong>Map to User Schema</strong>: Transform HR data to User API schema (userName from email, names, department, site assignment)</li>
+<li><strong>Create User</strong>: POST to <code>/users</code> with complete user information</li>
+<li><strong>Monitor Operation</strong>: Poll operation status until completion (see <a href="/administration/docs/suite-common#asynchronous-operations">API Essentials - Async Operations</a>)</li>
+<li><strong>Handle Results</strong>: Log success, retry on transient failures, alert on business logic errors</li>
+<li><strong>Notify Stakeholders</strong>: Send welcome email, create tickets for additional setup (hardware, access cards)</li>
+</ol>
+<p><strong>Required Information</strong>:</p>
+<ul>
+<li>Employee first name, last name, email</li>
+<li>Valid site ID for office location</li>
+<li>Department, job title for directory</li>
+<li>Desired status (ACTIVE for immediate access, INACTIVE for pre-boarding)</li>
+</ul>
+<details><summary>Example: Employee Onboarding Workflow<!-- --> (click to expand)</summary></details>
+<p><strong>Expected Outcomes</strong>:</p>
+<ul>
+<li>User account created in 8x8 within minutes of HR system entry</li>
+<li>Consistent configuration based on role and location</li>
+<li>Audit trail of all provisioning actions</li>
+<li>Reduced IT workload and faster employee onboarding</li>
+</ul>
+<p><strong>Common Challenges</strong>:</p>
+<ul>
+<li><strong>Site ID Mapping</strong>: Maintain mapping between HR office locations and 8x8 site IDs</li>
+<li><strong>Username Conflicts</strong>: Handle duplicates with numbering scheme (e.g., jane.smith2)</li>
+<li><strong>Partial Failures</strong>: User created but downstream operations fail (licenses, extensions)</li>
+<li><strong>Data Quality</strong>: Validate and clean HR data before submission</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-case-2-bulk-user-management">Use Case 2: Bulk User Management<a href="#use-case-2-bulk-user-management" class="hash-link" aria-label="Direct link to Use Case 2: Bulk User Management" title="Direct link to Use Case 2: Bulk User Management" translate="no">​</a></h3>
+<p><strong>Business Context</strong>: When deploying a new office location or migrating from another platform, you need to create dozens or hundreds of users quickly. Sequential creation through the UI or individual API calls is inefficient. Bulk operations enable rapid deployment while maintaining consistency.</p>
+<p><strong>When to Use</strong>:</p>
+<ul>
+<li>New site/office deployments</li>
+<li>Platform migrations</li>
+<li>Mergers and acquisitions</li>
+<li>Organizational restructuring</li>
+<li>Seasonal workforce scaling</li>
+</ul>
+<p><strong>Implementation Pattern</strong>:</p>
+<ol>
+<li><strong>Prepare Data</strong>: Create CSV/Excel with user information, validate completeness</li>
+<li><strong>Validate Site IDs</strong>: Ensure all referenced sites exist</li>
+<li><strong>Submit in Batches</strong>: Create users in parallel (5-10 concurrent requests recommended, see <a href="/administration/docs/suite-common#best-practices">API Essentials - Best Practices</a>)</li>
+<li><strong>Track Operations</strong>: Store operation IDs with corresponding user data</li>
+<li><strong>Monitor Progress</strong>: Poll all operations, implement retry logic for failures</li>
+<li><strong>Generate Report</strong>: Summary of successful vs failed creations with error details</li>
+</ol>
+<p><strong>Pagination for Discovery</strong>:</p>
+<p>When you need to retrieve all users (for reporting, migration, or synchronization), use scroll-based pagination (see <a href="/administration/docs/suite-common#pagination">API Essentials - Pagination</a>):</p>
+<details><summary>Example: Bulk User Creation<!-- --> (click to expand)</summary></details>
+<details><summary>Example: Paginate Through All Users<!-- --> (click to expand)</summary></details>
+<p><strong>Expected Outcomes</strong>:</p>
+<ul>
+<li>Rapid user creation (dozens per minute)</li>
+<li>Consistent configuration across all users</li>
+<li>Clear audit trail of bulk operation</li>
+<li>Detailed success/failure reporting</li>
+</ul>
+<p><strong>Best Practices</strong>:</p>
+<ul>
+<li><strong>Batch Size</strong>: Create 5-10 users concurrently (more may hit rate limits, see <a href="/administration/docs/suite-common#rate-limiting">API Essentials - Rate Limiting</a>)</li>
+<li><strong>Operation Tracking</strong>: Store operation IDs with source data for correlation</li>
+<li><strong>Error Handling</strong>: Distinguish validation errors (fix data) from transient failures (retry per <a href="/administration/docs/suite-common#error-handling">API Essentials - Error Handling</a>)</li>
+<li><strong>Progress Monitoring</strong>: Implement progress indicators for long-running operations</li>
+<li><strong>Rollback Planning</strong>: Have process to delete bulk-created users if validation fails</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-case-3-user-information-updates">Use Case 3: User Information Updates<a href="#use-case-3-user-information-updates" class="hash-link" aria-label="Direct link to Use Case 3: User Information Updates" title="Direct link to Use Case 3: User Information Updates" translate="no">​</a></h3>
+<p><strong>Business Context</strong>: Employee information changes frequently - promotions, department transfers, name changes, office relocations. Keeping 8x8 user data synchronized with HR systems and organizational directories requires systematic updates. Manual updates are error-prone and don&#x27;t scale.</p>
+<p><strong>When to Use</strong>:</p>
+<ul>
+<li>Employee role or department changes</li>
+<li>Office relocations or site reassignments</li>
+<li>Name changes or contact information updates</li>
+<li>Service assignment modifications</li>
+<li>Directory information corrections</li>
+</ul>
+<div class="theme-admonition theme-admonition-danger admonition_xJq3 alert alert--danger"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg></span>CRITICAL: Understanding PUT Semantics</div><div class="admonitionContent_BuS1"><p>The User Management API does NOT support partial updates via PATCH. PUT operations require the COMPLETE user object.</p><p>Be sure to familiarise yourself with the correct update pattern in the <a href="/administration/docs/suite-common#understanding-put-semantics">Administration API Essentials - Understanding PUT Semantics</a> section to avoid unintended data loss.</p></div></div>
+<p><strong>Implementation Pattern</strong>:</p>
+<ol>
+<li><strong>Identify User</strong>: Get userId from sync system or search by email/username</li>
+<li><strong>Retrieve Current State</strong>: GET <code>/users/{userId}</code> for complete user object</li>
+<li><strong>Apply Changes</strong>: Modify specific fields in memory (never submit partial objects)</li>
+<li><strong>Validate Changes</strong>: Ensure required fields still present, data types correct</li>
+<li><strong>Submit Update</strong>: PUT complete modified user object (not currently supported in API - only POST and DELETE are implemented)</li>
+<li><strong>Monitor Operation</strong>: Poll until completion</li>
+<li><strong>Verify</strong>: GET user again to confirm changes applied</li>
+</ol>
+<details><summary>Example: Update User Information<!-- --> (click to expand)</summary></details>
+<p><strong>Expected Outcomes</strong>:</p>
+<ul>
+<li>User information updated accurately</li>
+<li>No data loss from incomplete submissions</li>
+<li>Audit trail of changes</li>
+<li>Changes reflected in Admin Console immediately after operation completes</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-case-4-employee-offboarding">Use Case 4: Employee Offboarding<a href="#use-case-4-employee-offboarding" class="hash-link" aria-label="Direct link to Use Case 4: Employee Offboarding" title="Direct link to Use Case 4: Employee Offboarding" translate="no">​</a></h3>
+<p><strong>Business Context</strong>: When employees leave, their accounts must be deactivated or removed to maintain security and license compliance. Automated offboarding ensures timely deprovisioning when HR systems record terminations, eliminating security risks from forgotten accounts.</p>
+<p><strong>When to Use</strong>:</p>
+<ul>
+<li>Employee termination or resignation</li>
+<li>Contractor end-of-engagement</li>
+<li>Account cleanup for inactive users</li>
+<li>License reclamation</li>
+<li>Security and compliance requirements</li>
+</ul>
+<p><strong>Implementation Pattern</strong>:</p>
+<p>Most organizations use a three-stage offboarding process rather than immediate deletion:</p>
+<p><strong>Stage 1: Immediate Disable</strong> (Termination Day)</p>
+<ul>
+<li>Use PUT to change <code>basicInfo.status</code> to <code>INACTIVE</code></li>
+<li>Disables login immediately while preserving all user data</li>
+<li>Allows time for knowledge transfer and data retrieval</li>
+<li>User remains visible in directory but cannot access services</li>
+</ul>
+<p><strong>Stage 2: License Deprovision</strong> (After Grace Period, typically 3-7 days)</p>
+<ul>
+<li>Use PUT to remove licenses and extensions from the user</li>
+<li>Frees licenses for reassignment to other users</li>
+<li>User record remains but has no service access</li>
+<li>Typically triggered by offboarding process milestone</li>
+</ul>
+<p><strong>Stage 3: Account Deletion</strong> (After Retention Period, typically 30-90 days)</p>
+<ul>
+<li>Use DELETE <code>/users/{userId}</code> to permanently remove user</li>
+<li>Complies with data retention policies</li>
+<li>Frees up the username for potential reuse</li>
+<li>Final cleanup of user record</li>
+</ul>
+<p><strong>Why Three Stages?</strong>:</p>
+<ul>
+<li><strong>Compliance</strong>: Maintains audit trail during retention period</li>
+<li><strong>Operational</strong>: Allows IT to retrieve data, transfer ownership, update documentation</li>
+<li><strong>License Management</strong>: Immediate license recovery without data loss</li>
+<li><strong>Reversibility</strong>: Can reactivate user if termination reversed (before Stage 3)</li>
+</ul>
+<details><summary>Example: Three-Stage Employee Offboarding<!-- --> (click to expand)</summary></details>
+<p><strong>Expected Outcomes</strong>:</p>
+<ul>
+<li>User account disabled immediately (INACTIVE status)</li>
+<li>Login access revoked within minutes</li>
+<li>Permanent deletion after retention period</li>
+<li>License freed for reassignment</li>
+<li>Audit trail for compliance</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="business-rules">Business Rules<a href="#business-rules" class="hash-link" aria-label="Direct link to Business Rules" title="Direct link to Business Rules" translate="no">​</a></h2>
+<p>This section documents important constraints and special behaviors specific to user management operations.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="site-assignment-constraints">Site Assignment Constraints<a href="#site-assignment-constraints" class="hash-link" aria-label="Direct link to Site Assignment Constraints" title="Direct link to Site Assignment Constraints" translate="no">​</a></h3>
+<p><strong>Site is Immutable</strong>: The <code>basicInfo.site</code> field cannot be modified after user creation.</p>
+<ul>
+<li>Site assignment is permanent and cannot be changed via PUT</li>
+<li>Users requiring site reassignment must be deleted and recreated</li>
+<li>Plan site assignments carefully during initial user creation</li>
+</ul>
+<p><strong>Workaround for Site Changes</strong>:
+If a user must be moved to a different site:</p>
+<ol>
+<li>Document current user configuration (GET user, save complete response)</li>
+<li>Delete the user (DELETE operation)</li>
+<li>Recreate user with new site ID (POST operation with same data, different site)</li>
+<li>Note: User ID will change - update any external system references</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="directory-visibility">Directory Visibility<a href="#directory-visibility" class="hash-link" aria-label="Direct link to Directory Visibility" title="Direct link to Directory Visibility" translate="no">​</a></h3>
+<p>Multiple attributes control directory visibility with complex interactions:</p>
+<p><strong>Attributes</strong>:</p>
+<ul>
+<li><code>directoryInfo.displayInDirectory</code></li>
+<li><code>serviceInfo.extensions[].displayInDirectory</code></li>
+</ul>
+<p><strong>Visibility Rules</strong>:</p>
+<p><strong>Users without licenses</strong>: The <code>directoryInfo.displayInDirectory</code> attribute controls whether the user is visible at all in any directory, including any personal contact numbers.</p>
+<p><strong>Users with UC license</strong>: The <code>serviceInfo.extensions[].displayInDirectory</code> attribute for the extension object that has <code>serviceInfo.extensions[].extensionType = &quot;UC&quot;</code> and the <code>directoryInfo.displayInDirectory</code> attributes are synchronized (i.e., toggling one will toggle the other), controlling visibility of all numbers of the user except for their CC agent details (personal numbers, UC extension numbers, and fax numbers).</p>
+<p><strong>Users with CC license</strong>: The <code>serviceInfo.extensions[].displayInDirectory</code> attribute for the extension object that has <code>serviceInfo.extensions[].extensionType = &quot;CC&quot;</code> controls whether their contact center agent details are visible.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="user-group-assignment">User Group Assignment<a href="#user-group-assignment" class="hash-link" aria-label="Direct link to User Group Assignment" title="Direct link to User Group Assignment" translate="no">​</a></h3>
+<p>The <code>assignmentInfo.userGroups</code> field is structured as an array, but users can only belong to one user group at a time.</p>
+<p><strong>Behavior</strong>:</p>
+<ul>
+<li>If multiple user groups are provided in the array, the user will be assigned to the last group processed</li>
+<li>The processing order is not guaranteed, making the result unpredictable when multiple groups are specified</li>
+<li>Previous group assignments are overwritten, not accumulated</li>
+</ul>
+<p><strong>Best Practice</strong>: Provide a maximum of one user group in the <code>assignmentInfo.userGroups</code> array to ensure predictable assignment behavior.</p>
+<p><strong>Example</strong> (Correct - Single User Group):</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;assignmentInfo&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;userGroups&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><span class="token property" style="color:#36acaa">&quot;id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;ug_abc123&quot;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Example</strong> (Avoid - Multiple User Groups):</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;assignmentInfo&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;userGroups&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><span class="token property" style="color:#36acaa">&quot;id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;ug_abc123&quot;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><span class="token property" style="color:#36acaa">&quot;id&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;ug_def456&quot;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">  </span><span class="token comment" style="color:#999988;font-style:italic">// Only one of these will be assigned</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="did-license-assignment">DID License Assignment<a href="#did-license-assignment" class="hash-link" aria-label="Direct link to DID License Assignment" title="Direct link to DID License Assignment" translate="no">​</a></h3>
+<p>DID (Direct Inward Dialing) licenses have special handling:</p>
+<ul>
+<li><strong>Not assigned explicitly</strong>: Don&#x27;t include DID licenses in POST or PUT requests</li>
+<li><strong>Automatic assignment</strong>: DID licenses are assigned automatically when phone numbers are configured</li>
+<li><strong>Visible on GET</strong>: DID licenses will appear in GET responses after phone number configuration</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="license-changes">License Changes<a href="#license-changes" class="hash-link" aria-label="Direct link to License Changes" title="Direct link to License Changes" translate="no">​</a></h3>
+<p>Changing a user&#x27;s license type (e.g., upgrading from an X2 to an X4 license) cannot be accomplished in a single PUT operation.</p>
+<p><strong>Two-Step Update Required</strong>:</p>
+<ol>
+<li><strong>Remove Existing License</strong>: Submit a PUT request with the <code>serviceInfo.licenses</code> array empty or with the current license removed</li>
+<li><strong>Apply New License</strong>: Submit a second PUT request with the new license configuration</li>
+</ol>
+<p><strong>Data Loss Warning</strong>:</p>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Extension Data Loss</div><div class="admonitionContent_BuS1"><p>When licenses are removed and reapplied, certain extension-related data will be permanently lost:</p><ul>
+<li><strong>Group Memberships</strong>: Ring group and call queue assignments will be removed</li>
+<li><strong>Voicemail Setup</strong>: Voicemail greetings, PIN, and configuration settings will be reset</li>
+<li><strong>Voicemail Messages</strong>: Existing voicemail recordings will be deleted</li>
+</ul><p>Plan accordingly and inform users before making license changes. Consider exporting or documenting critical configurations before proceeding.</p></div></div>
+<p><strong>Example Workflow</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Step 1: GET /users/{userId}              → Retrieve current user state</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Step 2: PUT /users/{userId}              → Submit with licenses removed</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Step 3: Poll operation until COMPLETED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Step 4: PUT /users/{userId}              → Submit with new license applied</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Step 5: Poll operation until COMPLETED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Step 6: Reconfigure group memberships, voicemail, etc. as needed</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="dial-plan-country-codes">Dial Plan Country Codes<a href="#dial-plan-country-codes" class="hash-link" aria-label="Direct link to Dial Plan Country Codes" title="Direct link to Dial Plan Country Codes" translate="no">​</a></h3>
+<p>When configuring extensions, the <code>serviceInfo.extensions[].dialPlanCallingCountry</code> attribute can take one of the values from the table below.  If omitted the Site default value will be set.
+<strong>Note</strong> Ensure the dial plan calling country matches the country of the primary phone number to ensure correct outbound calling.</p>
+<table><thead><tr><th>Country</th><th>Dial Plan Calling Country</th></tr></thead><tbody><tr><td>Angola</td><td>AGONP</td></tr><tr><td>Argentina</td><td>ARGNP</td></tr><tr><td>Australia</td><td>AUSTNP</td></tr><tr><td>Austria</td><td>AUSTRIANP</td></tr><tr><td>Bahrain</td><td>BHRNP</td></tr><tr><td>Belgium</td><td>BLGMNP</td></tr><tr><td>Brazil</td><td>BRAZILNP</td></tr><tr><td>Bulgaria</td><td>BGRNP</td></tr><tr><td>Chile</td><td>CHLNP</td></tr><tr><td>China</td><td>CHNNP</td></tr><tr><td>Colombia</td><td>CLMBANP</td></tr><tr><td>Costa Rica</td><td>CRINP</td></tr><tr><td>Croatia</td><td>HRVNP</td></tr><tr><td>Czech Republic</td><td>CZENP</td></tr><tr><td>Denmark</td><td>DNKNP</td></tr><tr><td>Ecuador</td><td>ECUNP</td></tr><tr><td>Estonia</td><td>ESTNP</td></tr><tr><td>Finland</td><td>FINLNDNP</td></tr><tr><td>France</td><td>FRANCENP</td></tr><tr><td>Germany</td><td>GERNP</td></tr><tr><td>Greece</td><td>GRCNP</td></tr><tr><td>Hong Kong</td><td>HKNP</td></tr><tr><td>Hungary</td><td>HGRYNP</td></tr><tr><td>India</td><td>INDNP</td></tr><tr><td>Indonesia</td><td>IDNNP</td></tr><tr><td>Ireland</td><td>IRELANDNP</td></tr><tr><td>Israel</td><td>ISRAELNP</td></tr><tr><td>Italy</td><td>ITALYNP</td></tr><tr><td>Japan</td><td>JAPANNP</td></tr><tr><td>Kazakhstan</td><td>KZNP</td></tr><tr><td>Kenya</td><td>KENNP</td></tr><tr><td>Latvia</td><td>LVANP</td></tr><tr><td>Lithuania</td><td>LTUNP</td></tr><tr><td>Luxembourg</td><td>LUXNP</td></tr><tr><td>Malaysia</td><td>MLYNP</td></tr><tr><td>Malta</td><td>MLTNP</td></tr><tr><td>Mexico</td><td>MXNP</td></tr><tr><td>Netherlands</td><td>NTHRLNDNP</td></tr><tr><td>New Zealand</td><td>NZLNP</td></tr><tr><td>North America</td><td>NANP</td></tr><tr><td>Norway</td><td>NORNP</td></tr><tr><td>Panama</td><td>PANNP</td></tr><tr><td>Peru</td><td>PERNP</td></tr><tr><td>Philippines</td><td>PHNP</td></tr><tr><td>Poland</td><td>PLNDNP</td></tr><tr><td>Portugal</td><td>PRTNP</td></tr><tr><td>Romania</td><td>RMNNP</td></tr><tr><td>Russia</td><td>RUSNP</td></tr><tr><td>Singapore</td><td>SINGNP</td></tr><tr><td>Slovakia</td><td>SVKNP</td></tr><tr><td>Slovenia</td><td>SVNNP</td></tr><tr><td>South Africa</td><td>STHAFNP</td></tr><tr><td>South Korea</td><td>KORNP</td></tr><tr><td>Spain</td><td>SPNNP</td></tr><tr><td>Sri Lanka</td><td>SRILANKNP</td></tr><tr><td>Sweden</td><td>SWEDENNP</td></tr><tr><td>Switzerland</td><td>SWITZNP</td></tr><tr><td>Taiwan</td><td>TWNNP</td></tr><tr><td>Thailand</td><td>THANP</td></tr><tr><td>Turkey</td><td>TRKYNP</td></tr><tr><td>UK</td><td>UKNP</td></tr><tr><td>Ukraine</td><td>UKRNP</td></tr><tr><td>United Arab Emirates</td><td>ARENP</td></tr><tr><td>Vietnam</td><td>VTNMNP</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="api-reference">API Reference<a href="#api-reference" class="hash-link" aria-label="Direct link to API Reference" title="Direct link to API Reference" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="endpoints-overview">Endpoints Overview<a href="#endpoints-overview" class="hash-link" aria-label="Direct link to Endpoints Overview" title="Direct link to Endpoints Overview" translate="no">​</a></h3>
+<table><thead><tr><th>Endpoint</th><th>Method</th><th>Purpose</th><th>Async?</th><th>Authentication</th></tr></thead><tbody><tr><td><code>/users</code></td><td>GET</td><td>Search/list users with filtering and pagination</td><td>No</td><td>Required</td></tr><tr><td><code>/users</code></td><td>POST</td><td>Create new user</td><td>Yes</td><td>Required</td></tr><tr><td><code>/users/{userId}</code></td><td>GET</td><td>Retrieve specific user details</td><td>No</td><td>Required</td></tr><tr><td><code>/users/{userId}</code></td><td>DELETE</td><td>Delete user</td><td>Yes</td><td>Required</td></tr></tbody></table>
+<p><strong>Note</strong>: PUT (update) operations are documented in the OpenAPI specification but not currently implemented in v1.0.0. Updates require delete and recreate workflow.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="base-url">Base URL<a href="#base-url" class="hash-link" aria-label="Direct link to Base URL" title="Direct link to Base URL" translate="no">​</a></h3>
+<p><code>https://api.8x8.com/admin-provisioning</code></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="required-headers">Required Headers<a href="#required-headers" class="hash-link" aria-label="Direct link to Required Headers" title="Direct link to Required Headers" translate="no">​</a></h3>
+<p>See <a href="/administration/docs/suite-common#common-request-patterns">API Essentials - Common Request Patterns</a> for complete header requirements.</p>
+<p>For User Management API specifically:</p>
+<div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">x-api-key: your-api-key-here</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Accept: application/vnd.users.v1+json</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Content-Type: application/json  (for POST/PUT requests)</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="query-parameters">Query Parameters<a href="#query-parameters" class="hash-link" aria-label="Direct link to Query Parameters" title="Direct link to Query Parameters" translate="no">​</a></h3>
+<p><strong>Pagination Parameters</strong> (GET <code>/users</code>):</p>
+<ul>
+<li><code>pageSize</code> (integer, 1-1000): Items per page, default 100</li>
+<li><code>scrollId</code> (string): Continuation token for next page (see <a href="/administration/docs/suite-common#pagination">API Essentials - Pagination</a>)</li>
+<li><code>filter</code> (string): RSQL filter expression (see <a href="/administration/docs/suite-common#filtering-with-rsql">API Essentials - RSQL Filtering</a>)</li>
+<li><code>sort</code> (string): Sort criteria (e.g., <code>+lastName,-firstName</code>, see <a href="/administration/docs/suite-common#sorting-results">API Essentials - Sorting</a>)</li>
+</ul>
+<p><strong>Path Parameters</strong>:</p>
+<ul>
+<li><code>userId</code> (string): Unique user identifier (e.g., <code>hvOB1l3zDCaDAwp9tNLzZA</code>)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="http-status-codes">HTTP Status Codes<a href="#http-status-codes" class="hash-link" aria-label="Direct link to HTTP Status Codes" title="Direct link to HTTP Status Codes" translate="no">​</a></h3>
+<p>See <a href="/administration/docs/suite-common#error-handling">API Essentials - Error Handling</a> for complete status code descriptions.</p>
+<p><strong>Success Codes</strong>:</p>
+<ul>
+<li><code>200 OK</code>: Successful GET request</li>
+<li><code>202 Accepted</code>: Async operation accepted (create, delete)</li>
+</ul>
+<p><strong>Error Codes</strong>:</p>
+<ul>
+<li><code>400 Bad Request</code>: Validation error or malformed request</li>
+<li><code>401 Unauthorized</code>: Missing or invalid authentication</li>
+<li><code>403 Forbidden</code>: Insufficient permissions</li>
+<li><code>404 Not Found</code>: User does not exist</li>
+<li><code>429 Too Many Requests</code>: Rate limit exceeded (see <a href="/administration/docs/suite-common#rate-limiting">API Essentials - Rate Limiting</a>)</li>
+<li><code>424 Failed Dependency</code>: Downstream service failure</li>
+<li><code>500 Internal Server Error</code>: Unexpected server error</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-data-models">Key Data Models<a href="#key-data-models" class="hash-link" aria-label="Direct link to Key Data Models" title="Direct link to Key Data Models" translate="no">​</a></h3>
+<p><strong>User Object</strong> (Complete):</p>
+<ul>
+<li><code>basicInfo</code> (required): Core identity fields (see <a href="#user-object-structure">Core Concepts</a>)</li>
+<li><code>directoryInfo</code> (optional): Organizational profile</li>
+<li><code>serviceInfo</code> (optional): Service assignments</li>
+<li><code>assignmentInfo</code> (optional): Group memberships</li>
+</ul>
+<p><strong>Operation Object</strong>:
+See <a href="/administration/docs/suite-common#asynchronous-operations">API Essentials - Asynchronous Operations</a> for complete operation object description.</p>
+<p><strong>UserPage Object</strong> (List Response):
+See <a href="/administration/docs/suite-common#pagination">API Essentials - Pagination</a> for pagination response structure.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="field-constraints">Field Constraints<a href="#field-constraints" class="hash-link" aria-label="Direct link to Field Constraints" title="Direct link to Field Constraints" translate="no">​</a></h3>
+<p><strong>Required Fields</strong> (basicInfo):</p>
+<ul>
+<li><code>userName</code>: 3-70 characters, pattern: <code>[A-Za-z0-9.@\-_/]+</code></li>
+<li><code>firstName</code>: 2-128 characters, pattern: <code>[A-Za-z0-9.,\-_()&#x27; ]+</code></li>
+<li><code>lastName</code>: 2-30 characters, pattern: <code>[A-Za-z0-9.,\-_()&#x27; ]+</code></li>
+<li><code>primaryEmail</code>: 5-128 characters, valid email format</li>
+</ul>
+<p><strong>Common Field Formats</strong>:</p>
+<ul>
+<li>Dates: ISO 8601 format (<code>2025-12-01T15:30:45Z</code>)</li>
+<li>Phone Numbers: E.164 format (<code>+14085551234</code>)</li>
+<li>Status Values: ACTIVE, INACTIVE</li>
+<li>Locale: ISO codes (en-US, en-GB, fr-FR, etc.)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="openapi-specification">OpenAPI Specification<a href="#openapi-specification" class="hash-link" aria-label="Direct link to OpenAPI Specification" title="Direct link to OpenAPI Specification" translate="no">​</a></h3>
+<p>View the complete <a href="/assets/files/user-api-v1-789e64a5c0c8bba3236b36d87c05cbe4.yaml" target="_blank">OpenAPI Specification</a> for detailed endpoint documentation.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="api-specific-error-scenarios">API-Specific Error Scenarios<a href="#api-specific-error-scenarios" class="hash-link" aria-label="Direct link to API-Specific Error Scenarios" title="Direct link to API-Specific Error Scenarios" translate="no">​</a></h2>
+<p>For common error handling patterns, see <a href="/administration/docs/suite-common#error-handling">Administration API Essentials - Error Handling</a>.</p>
+<p>This section covers error scenarios specific to the User Management API.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="missing-required-fields">Missing Required Fields<a href="#missing-required-fields" class="hash-link" aria-label="Direct link to Missing Required Fields" title="Direct link to Missing Required Fields" translate="no">​</a></h3>
+<p><strong>Request</strong>: Create user without email</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">POST /users</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;basicInfo&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;userName&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;jsmith&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;firstName&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;John&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;lastName&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Smith&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// primaryEmail missing</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Response</strong> (400 Bad Request):</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">400</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;title&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Validation Error&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;detail&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Required fields are missing&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;errors&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;field&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;basicInfo.primaryEmail&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;code&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;VALIDATION_ERROR&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;primaryEmail is required&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Resolution</strong>: Add missing required field and resubmit.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="duplicate-username">Duplicate Username<a href="#duplicate-username" class="hash-link" aria-label="Direct link to Duplicate Username" title="Direct link to Duplicate Username" translate="no">​</a></h3>
+<p><strong>Request</strong>: Create user with existing userName</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">POST /users</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;basicInfo&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;userName&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;jsmith&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;firstName&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Jane&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;lastName&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Smith&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;primaryEmail&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;jane.smith@example.com&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Operation Response</strong> (status: FAILED):</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;operationId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;op_1a2b3c4d5e6f&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;FAILED&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;error&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;status&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">400</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;title&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Duplicate Username&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;detail&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;User with this username already exists&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;errors&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;field&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;basicInfo.userName&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;code&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;VALIDATION_ERROR&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;message&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Username jsmith is already in use&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p><strong>Resolution</strong>: Use unique username or delete existing user first.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="user-specific-validation-errors">User-Specific Validation Errors<a href="#user-specific-validation-errors" class="hash-link" aria-label="Direct link to User-Specific Validation Errors" title="Direct link to User-Specific Validation Errors" translate="no">​</a></h3>
+<p><strong>Invalid Field Patterns</strong>:</p>
+<ul>
+<li>Username must match pattern <code>[A-Za-z0-9.@\-_/]+</code></li>
+<li>First name must match pattern <code>[A-Za-z0-9.,\-_()&#x27; ]+</code></li>
+<li>Email must be valid email format</li>
+<li>Locale must be valid ISO locale code</li>
+</ul>
+<p><strong>Invalid Site Assignment</strong>:</p>
+<ul>
+<li>Site ID must exist in the organization</li>
+<li>Site must be active and accessible</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="api-specific-troubleshooting">API-Specific Troubleshooting<a href="#api-specific-troubleshooting" class="hash-link" aria-label="Direct link to API-Specific Troubleshooting" title="Direct link to API-Specific Troubleshooting" translate="no">​</a></h2>
+<p>For common troubleshooting guidance, see <a href="/administration/docs/suite-common#troubleshooting">Administration API Essentials - Troubleshooting</a>.</p>
+<p>This section covers troubleshooting issues specific to the User Management API.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="user-not-visible-after-creation">User Not Visible After Creation<a href="#user-not-visible-after-creation" class="hash-link" aria-label="Direct link to User Not Visible After Creation" title="Direct link to User Not Visible After Creation" translate="no">​</a></h3>
+<p><strong>Problem</strong>: Operation completes but user not visible in Admin Console</p>
+<p><strong>Debugging Steps</strong>:</p>
+<ol>
+<li>Verify operation status is <code>COMPLETED</code> (not just <code>IN_PROGRESS</code>)</li>
+<li>Check user <code>basicInfo.status</code> is <code>ACTIVE</code></li>
+<li>Clear Admin Console cache (hard refresh browser)</li>
+<li>Verify viewing correct site filter in Admin Console</li>
+<li>Use <code>GET /users/{userId}</code> directly to confirm user exists</li>
+<li>Check <code>directoryInfo.displayInDirectory</code> setting</li>
+</ol>
+<p><strong>Resolution</strong>: If user exists via API but not visible in console, check directory visibility settings per <a href="#directory-visibility">Business Rules - Directory Visibility</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="missing-user-data-after-creation">Missing User Data After Creation<a href="#missing-user-data-after-creation" class="hash-link" aria-label="Direct link to Missing User Data After Creation" title="Direct link to Missing User Data After Creation" translate="no">​</a></h3>
+<p><strong>Problem</strong>: User created but missing expected optional fields</p>
+<p><strong>Debugging Steps</strong>:</p>
+<ol>
+<li>Verify operation completed successfully (status: COMPLETED)</li>
+<li>Check original request body for missing optional fields</li>
+<li>Retrieve user with GET to see actual stored data</li>
+<li>Review API response for warnings or partial success indicators</li>
+<li>Check if downstream provisioning is delayed (extensions, licenses)</li>
+</ol>
+<p><strong>Resolution</strong>: Optional fields not included in POST request are not populated. Submit new request with complete data or update user (when PUT is available).</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="site-reassignment-not-allowed">Site Reassignment Not Allowed<a href="#site-reassignment-not-allowed" class="hash-link" aria-label="Direct link to Site Reassignment Not Allowed" title="Direct link to Site Reassignment Not Allowed" translate="no">​</a></h3>
+<p><strong>Problem</strong>: Attempting to change user&#x27;s site via PUT fails</p>
+<p><strong>Cause</strong>: Site is immutable per <a href="#site-assignment-constraints">Business Rules - Site Assignment Constraints</a></p>
+<p><strong>Resolution</strong>: Follow the three-step workaround:</p>
+<ol>
+<li>Document complete user configuration (GET and save)</li>
+<li>Delete user (DELETE operation)</li>
+<li>Recreate with new site ID (POST with same data, different site)</li>
+<li>Update external system references (user ID will change)</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="duplicate-username-on-bulk-import">Duplicate Username on Bulk Import<a href="#duplicate-username-on-bulk-import" class="hash-link" aria-label="Direct link to Duplicate Username on Bulk Import" title="Direct link to Duplicate Username on Bulk Import" translate="no">​</a></h3>
+<p><strong>Problem</strong>: Some users fail during bulk import with duplicate username</p>
+<p><strong>Cause</strong>: Username conflicts with existing users or within import batch</p>
+<p><strong>Resolution</strong>:</p>
+<ul>
+<li>Pre-check usernames with GET <code>/users?filter=basicInfo.userName=={username}</code></li>
+<li>Implement numbering scheme (jane.smith, jane.smith2, jane.smith3)</li>
+<li>Validate import data for internal duplicates before submission</li>
+<li>Handle failures gracefully with detailed error logging</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="additional-resources">Additional Resources<a href="#additional-resources" class="hash-link" aria-label="Direct link to Additional Resources" title="Direct link to Additional Resources" translate="no">​</a></h2>
+<p><strong>API Documentation</strong>:</p>
+<ul>
+<li><a href="/administration/docs/suite-common">Administration API Essentials</a></li>
+<li><a href="/assets/files/user-api-v1-789e64a5c0c8bba3236b36d87c05cbe4.yaml" target="_blank">OpenAPI Specification</a></li>
+<li><a href="https://admin.8x8.com" target="_blank" rel="noopener noreferrer">8x8 Admin Console</a></li>
+</ul>
+<p><strong>Technical References</strong>:</p>
+<ul>
+<li><a href="https://github.com/jirutka/rsql-parser" target="_blank" rel="noopener noreferrer">RSQL Specification</a> (for filtering syntax)</li>
+<li><a href="https://tools.ietf.org/html/rfc7807" target="_blank" rel="noopener noreferrer">RFC 7807 - Problem Details</a> (error format)</li>
+<li><a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank" rel="noopener noreferrer">ISO 8601 Date Format</a></li>
+<li><a href="https://en.wikipedia.org/wiki/E.164" target="_blank" rel="noopener noreferrer">E.164 Phone Number Format</a></li>
+</ul>
+<p><strong>Service Status</strong>:</p>
+<ul>
+<li><a href="https://status.8x8.com" target="_blank" rel="noopener noreferrer">8x8 Status Page</a></li>
+</ul>
+<p><strong>Support</strong>:</p>
+<ul>
+<li>Admin Console: User profile menu → Contact Support</li>
+</ul>
+<p><strong>When Contacting Support</strong>: See <a href="/administration/docs/suite-common#support-resources">API Essentials - Support Resources</a> for required information.</p>
+<hr>
+<p><strong>API Version</strong>: 1.0  |  <strong>Last Updated</strong>: January 15, 2026  |  <strong>Part of</strong>: <a href="/administration/docs/suite-common">Administration API Suite</a>  |  <strong>Feedback</strong>: Submit feedback via Admin Console</p></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/administration/docs/api-change-policy"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">API Change Policy</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/administration/docs/ring-group-management-api-guide"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Ring Group Management API Guide</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#table-of-contents" class="table-of-contents__link toc-highlight">Table of Contents</a></li><li><a href="#overview" class="table-of-contents__link toc-highlight">Overview</a><ul><li><a href="#what-you-can-do" class="table-of-contents__link toc-highlight">What You Can Do</a></li><li><a href="#primary-use-cases" class="table-of-contents__link toc-highlight">Primary Use Cases</a></li><li><a href="#api-architecture" class="table-of-contents__link toc-highlight">API Architecture</a></li><li><a href="#reference" class="table-of-contents__link toc-highlight">Reference</a></li></ul></li><li><a href="#prerequisites--authentication" class="table-of-contents__link toc-highlight">Prerequisites &amp; Authentication</a><ul><li><a href="#user-management-api-specifics" class="table-of-contents__link toc-highlight">User Management API Specifics</a></li></ul></li><li><a href="#quickstart" class="table-of-contents__link toc-highlight">Quickstart</a><ul><li><a href="#what-youll-accomplish" class="table-of-contents__link toc-highlight">What You&#39;ll Accomplish</a></li><li><a href="#prerequisites-for-quickstart" class="table-of-contents__link toc-highlight">Prerequisites for Quickstart</a></li><li><a href="#step-1-create-a-user" class="table-of-contents__link toc-highlight">Step 1: Create a User</a></li><li><a href="#step-2-poll-operation-status" class="table-of-contents__link toc-highlight">Step 2: Poll Operation Status</a></li><li><a href="#step-3-retrieve-the-created-user" class="table-of-contents__link toc-highlight">Step 3: Retrieve the Created User</a></li><li><a href="#quickstart-complete" class="table-of-contents__link toc-highlight">Quickstart Complete</a></li></ul></li><li><a href="#core-concepts" class="table-of-contents__link toc-highlight">Core Concepts</a><ul><li><a href="#user-object-structure" class="table-of-contents__link toc-highlight">User Object Structure</a></li><li><a href="#8x8-organizational-hierarchy" class="table-of-contents__link toc-highlight">8x8 Organizational Hierarchy</a></li></ul></li><li><a href="#use-cases" class="table-of-contents__link toc-highlight">Use Cases</a><ul><li><a href="#use-case-1-employee-onboarding-automation" class="table-of-contents__link toc-highlight">Use Case 1: Employee Onboarding Automation</a></li><li><a href="#use-case-2-bulk-user-management" class="table-of-contents__link toc-highlight">Use Case 2: Bulk User Management</a></li><li><a href="#use-case-3-user-information-updates" class="table-of-contents__link toc-highlight">Use Case 3: User Information Updates</a></li><li><a href="#use-case-4-employee-offboarding" class="table-of-contents__link toc-highlight">Use Case 4: Employee Offboarding</a></li></ul></li><li><a href="#business-rules" class="table-of-contents__link toc-highlight">Business Rules</a><ul><li><a href="#site-assignment-constraints" class="table-of-contents__link toc-highlight">Site Assignment Constraints</a></li><li><a href="#directory-visibility" class="table-of-contents__link toc-highlight">Directory Visibility</a></li><li><a href="#user-group-assignment" class="table-of-contents__link toc-highlight">User Group Assignment</a></li><li><a href="#did-license-assignment" class="table-of-contents__link toc-highlight">DID License Assignment</a></li><li><a href="#license-changes" class="table-of-contents__link toc-highlight">License Changes</a></li><li><a href="#dial-plan-country-codes" class="table-of-contents__link toc-highlight">Dial Plan Country Codes</a></li></ul></li><li><a href="#api-reference" class="table-of-contents__link toc-highlight">API Reference</a><ul><li><a href="#endpoints-overview" class="table-of-contents__link toc-highlight">Endpoints Overview</a></li><li><a href="#base-url" class="table-of-contents__link toc-highlight">Base URL</a></li><li><a href="#required-headers" class="table-of-contents__link toc-highlight">Required Headers</a></li><li><a href="#query-parameters" class="table-of-contents__link toc-highlight">Query Parameters</a></li><li><a href="#http-status-codes" class="table-of-contents__link toc-highlight">HTTP Status Codes</a></li><li><a href="#key-data-models" class="table-of-contents__link toc-highlight">Key Data Models</a></li><li><a href="#field-constraints" class="table-of-contents__link toc-highlight">Field Constraints</a></li><li><a href="#openapi-specification" class="table-of-contents__link toc-highlight">OpenAPI Specification</a></li></ul></li><li><a href="#api-specific-error-scenarios" class="table-of-contents__link toc-highlight">API-Specific Error Scenarios</a><ul><li><a href="#missing-required-fields" class="table-of-contents__link toc-highlight">Missing Required Fields</a></li><li><a href="#duplicate-username" class="table-of-contents__link toc-highlight">Duplicate Username</a></li><li><a href="#user-specific-validation-errors" class="table-of-contents__link toc-highlight">User-Specific Validation Errors</a></li></ul></li><li><a href="#api-specific-troubleshooting" class="table-of-contents__link toc-highlight">API-Specific Troubleshooting</a><ul><li><a href="#user-not-visible-after-creation" class="table-of-contents__link toc-highlight">User Not Visible After Creation</a></li><li><a href="#missing-user-data-after-creation" class="table-of-contents__link toc-highlight">Missing User Data After Creation</a></li><li><a href="#site-reassignment-not-allowed" class="table-of-contents__link toc-highlight">Site Reassignment Not Allowed</a></li><li><a href="#duplicate-username-on-bulk-import" class="table-of-contents__link toc-highlight">Duplicate Username on Bulk Import</a></li></ul></li><li><a href="#additional-resources" class="table-of-contents__link toc-highlight">Additional Resources</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>
