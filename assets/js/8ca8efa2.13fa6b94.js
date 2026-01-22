@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[59083],{1086:e=>{e.exports=JSON.parse('{"to":"/actions-events/docs/legacy-streaming-api-overview"}')}}]);
