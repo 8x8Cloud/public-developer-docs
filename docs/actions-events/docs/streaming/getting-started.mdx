@@ -1,0 +1,116 @@
+---
+sidebar_position: 2
+---
+
+# Getting Started
+
+## Prerequisites
+
+Required:
+
+1. **Your 8x8 tenant name**
+2. **API credentials** - See [Authentication](./authentication.mdx) for details
+   - **Recommended:** **Admin Console Keys** from **8x8 Admin Console** (X-API-Key format)
+   - **Also supported:** **Contact Center (CC) Tokens** from **Configuration Manager**
+3. **A WebSocket client** - Use provided examples or your own implementation
+
+## Quick Start with Example Clients
+
+Use one of the pre-built client examples:
+
+> 📘 **Authentication**
+>
+> The examples below use `--x-api-key` which works for both **Admin Console Keys** (recommended) and **CC Tokens** (also supported). See the [Authentication Guide](./authentication.mdx) for details on obtaining credentials.
+>
+>
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="go" label="Go">
+
+See the [Go Client Example](./examples/golang.md) for complete code and build instructions.
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+See the [Java Client Example](./examples/java.md) for complete code and Maven configuration.
+
+</TabItem>
+<TabItem value="python" label="Python">
+
+See the [Python Client Example](./examples/python.mdx) for complete code and dependencies.
+
+</TabItem>
+<TabItem value="nodejs" label="Node.js">
+
+See the [Node.js Client Example](./examples/nodejs.mdx) for complete code and package.json.
+
+</TabItem>
+<TabItem value="browser" label="Browser">
+
+Access the [Pulsar UI](./examples/browser.md) web service - no installation required.
+
+</TabItem>
+</Tabs>
+
+## What You'll See
+
+Events are delivered in JSON format:
+
+```json
+{
+  "eventId": "evt_123456",
+  "eventType": "agent.login",
+  "timestamp": "2025-10-15T09:30:00Z",
+  "tenantId": "your-tenant",
+  "data": {
+    "agentId": "12345",
+    "extensionId": "67890"
+  }
+}
+```
+
+## Processing Events
+
+Pipe output to tools like `jq` for filtering and processing:
+
+```bash
+# Pretty-print all events
+./pulsar-simple-client -tenant YOUR_TENANT -x-api-key YOUR_KEY | jq .
+
+# Filter only agent login events
+./pulsar-simple-client -tenant YOUR_TENANT -x-api-key YOUR_KEY | \
+  jq 'select(.eventType == "agent.login")'
+
+# Extract specific fields
+./pulsar-simple-client -tenant YOUR_TENANT -x-api-key YOUR_KEY | \
+  jq '{eventType: .eventType, timestamp: .timestamp}'
+```
+
+## Connection Parameters
+
+The quick start client requires your **tenant name** and **API key**. The service connects to:
+
+- **Host**: Regional endpoint (e.g., `pulsar-ws-euw2.8x8.com` for EUW2) - see [Regional Endpoints](./connection.md#regional-endpoints)
+- **Namespace**: `event-v1`
+- **Topic**: `all` (receives all event types)
+
+For complete connection details including all available topics, query parameters, and URL construction, see the [Connection Guide](./connection.md).
+
+## Next Steps
+
+- **[Connection details](./connection.md)** - WebSocket connection details
+- **[Authentication options](./authentication.mdx)** - Authentication methods
+- **[Message format](./message-format.mdx)** - Event structure
+- **[Code examples](./examples/golang.md)** - Complete working examples
+- **[Troubleshooting](./troubleshooting.md)** - Common issues
+
+## Need Help?
+
+For issues:
+
+1. See [Troubleshooting Guide](./troubleshooting.md)
+2. Review the complete code examples in the language-specific guides above
+3. Contact 8x8 support for credentials or access issues

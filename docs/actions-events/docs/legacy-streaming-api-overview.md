@@ -1,4 +1,4 @@
-# Streaming API Overview
+# Streaming API Overview (Legacy)
 
 ## General Approach
 
@@ -46,7 +46,7 @@ wss://vcc-`{cluster}`.8x8.com/api/streaming/v`{version}`/clientconnect/subscribe
 | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
 | cluster        | ✓        | Contact Center cluster can be found in the url when accessing CC Configuration Manager. <br />North America starts NA<br />Europe starts EU<br />Canada starts CA<br />Asia Pacific starts AP<br />Australia starts AU<br />Bell Canada starts BC<br />Sandbox starts SB | eu3               |
 | version        | ✓        | The API version. The current version is 1 resulting in v1                                                                                                                                                                                                                | 1                 |
-| subscriptionId | ✓        | This is a consumer specified unique identifier for the subscription. See [Connection Lifecycle Information](/actions-events/docs/streaming-api-overview#connection-lifecycle-information) for guidance.                                                                  | real-time-monitor |
+| subscriptionId | ✓        | This is a consumer specified unique identifier for the subscription. See [Connection Lifecycle Information](/actions-events/docs/legacy-streaming-api-overview#connection-lifecycle-information) for guidance.                                                                  | real-time-monitor |
 
 #### Query
 

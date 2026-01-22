@@ -18,6 +18,11 @@ const redirects = [
     from: '/actions-events/reference/agent-status',
     to: '/actions-events/reference/getagentsstatus',
   },
+  // Redirect for renamed streaming API overview
+  {
+    from: '/actions-events/docs/streaming-api-overview',
+    to: '/actions-events/docs/legacy-streaming-api-overview',
+  },
 ];
 
 module.exports = redirects;

@@ -1,0 +1,509 @@
+---
+sidebar_position: 5
+---
+
+# Message Format
+
+Structure of messages received from the 8x8 Event Streaming service.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Pulsar WebSocket Message Structure
+
+Messages received via the WebSocket connection follow the Pulsar WebSocket message format. Each message is a JSON object with the following structure:
+
+```json
+{
+  "messageId": "CAEQAQ==",
+  "payload": "eyJldmVudElkIjogImV2dF8xMjM0NTYiLCAiZXZlbnRUeXBlIjogImFnZW50LmxvZ2luIn0=",
+  "properties": {},
+  "publishTime": "2025-10-15T09:30:00.000Z",
+  "redeliveryCount": 0
+}
+```
+
+### Field Descriptions
+
+| Field              | Type   | Description                                                    |
+|--------------------|--------|----------------------------------------------------------------|
+| `messageId`        | string | Unique identifier for this message (base64 encoded)            |
+| `payload`          | string | The actual event data (base64 encoded JSON)                    |
+| `properties`       | object | Optional metadata key-value pairs                              |
+| `publishTime`      | string | Timestamp when the message was published (ISO 8601 format)     |
+| `redeliveryCount`  | number | Number of times this message has been redelivered              |
+
+## Payload Decoding
+
+The `payload` field contains the actual event data, encoded in base64. To access the event data:
+
+1. **Base64 decode** the payload string
+2. **Parse the result** as UTF-8 JSON
+
+## Event Payload Structure
+
+After decoding the base64 payload, you'll receive a JSON object representing the event. Events follow a structured format with common fields and event-specific data.
+
+### Common Event Fields
+
+Most events include these common fields:
+
+| Field                | Type   | Description                                                |
+|----------------------|--------|------------------------------------------------------------|
+| `msgInfo`            | object | Metadata about the event (instanceId, sequenceId, timestamp) |
+| `msgInfo.instanceId` | string | Server instance identifier                                  |
+| `msgInfo.sequenceId` | number | Event sequence number for ordering                          |
+| `msgInfo.timestamp`  | number | Event timestamp in milliseconds since epoch                 |
+
+**Note:** The `msgInfo` object provides important context about the event source and sequencing.
+
+### Interaction Event Fields
+
+Interaction events (phone calls, chats, etc.) include additional common fields:
+
+| Field                  | Type    | Description                                                   |
+|------------------------|---------|---------------------------------------------------------------|
+| `event`                | string  | Event type name (e.g., "InteractionCreated")                 |
+| `interactionGUID`      | string  | Unique identifier for this interaction                        |
+| `interactionEventTS`   | number  | Interaction event timestamp (seconds since epoch)             |
+| `callState`            | string  | Current call state (see Call States table below)             |
+| `mediaType`            | string  | Communication channel<br />"phone"<br />"chat"<br />"email"<br />etc.        |
+| `direction`            | string  | Interaction direction<br />"in" (inbound)<br />"out" (outbound)    |
+| `attachedData`         | object  | Additional metadata as key-value pairs                        |
+| `resourceType`         | number  | Numeric resource type identifier                              |
+| `agentId`              | string  | Agent identifier (when agent is involved)                     |
+| `agentGUID`            | string  | Full agent GUID (when agent is involved)                      |
+| `participatingAgents`  | string  | Comma-separated list of participating agent IDs               |
+| `queueId`              | number  | Queue identifier                                              |
+| `queueList`            | number  | Queue list identifier                                         |
+| `queueTime`            | number  | Time when interaction entered queue (seconds since epoch)     |
+| `eventTS`              | number  | Event timestamp (seconds since epoch)                         |
+| `transactionNum`       | number  | Transaction number                                            |
+| `recordingMode`        | string  | Recording mode ("yes", "no")                                  |
+| `isAgentInitiated`     | boolean | Whether interaction was initiated by agent                    |
+| `isDirectAccess`       | boolean | Whether this is direct access interaction                     |
+| `isExternal`           | boolean | Whether interaction involves external party                   |
+| `inboundChannelid`     | mixed   | Inbound channel identifier (number or "N/A" for outbound)     |
+| `isOutboundCall`       | boolean | Whether this is an outbound call                              |
+
+For detailed information about specific fields, see the [Field Reference](./field-reference.mdx).
+
+### Call States
+
+Interaction events use these call state values:
+
+| Call State        | Description                                       |
+|-------------------|---------------------------------------------------|
+| `CS_IDLE`         | Call created, not yet in progress                 |
+| `CS_QUEUED`       | Call waiting in queue for an available agent      |
+| `CS_INPROGRESS`   | Call in progress (ringing or connecting)          |
+| `CS_CONNECTED`    | Call connected and active                         |
+| `CS_HOLD`         | Call on hold (music playing)                      |
+| `CS_DISCONNECTED` | Call ended or hung up                             |
+
+For comprehensive call state documentation including transitions, see [Field Reference - Call State Codes](./field-reference.mdx#call-state-codes).
+
+## Event Lifecycle and Correlation
+
+Events for an interaction are correlated using the `interactionGUID` field. To understand how events flow through an interaction's lifecycle, including state transitions, timing, and patterns for different call types, see the [Event Lifecycle Guide](./event-lifecycle.mdx).
+
+**Key points for event correlation:**
+- Use `interactionGUID` to group all events for a single interaction
+- Track `callState` to monitor state transitions
+- Calculate durations using `eventTS` or `interactionEventTS` timestamps
+- Check `hangupInitiator` and `callHangupReason` in InteractionDeleted to understand outcomes
+
+## Attached Data Structure
+
+The `attachedData` field contains an array of key-value pairs:
+
+```json
+"attachedData": {
+  "attachedDatum": [
+    {"attachedDataKey": "phoneNum", "attachedDataValue": 5551234567},
+    {"attachedDataKey": "callingName", "attachedDataValue": "Alpaca Herd"},
+    {"attachedDataKey": "channelName", "attachedDataValue": "Support Queue"}
+  ]
+}
+```
+
+Common attached data keys include:
+- `phoneNum`: Phone number
+- `callingName`: Caller name
+- `channelName`: Channel/queue name
+- `queueDirection`: Queue direction (in/out)
+- `tenantSkillName`: Skill name
+- `@pri`: Priority value
+
+For a comprehensive list of all attachedData keys, see the [Field Reference](./field-reference.mdx#comprehensive-attacheddata-keys-reference).
+
+## Message Types
+
+The WebSocket connection can receive several types of frames:
+
+### Text and Binary Messages
+
+Most messages will be **TextMessage** or **BinaryMessage** types containing the Pulsar message JSON.
+
+### Control Messages
+
+- **CloseMessage**: Indicates the server is closing the connection
+- **PingMessage**: Heartbeat from server (respond with PongMessage)
+- **PongMessage**: Response to PingMessage
+
+Most WebSocket libraries handle ping/pong automatically.
+
+## Processing Messages
+
+### Basic Processing Pattern
+
+1. **Receive WebSocket message**
+2. **Parse the Pulsar message JSON** to extract the payload field
+3. **Base64 decode the payload**
+4. **Parse the decoded payload as JSON** to get the actual event
+5. **Process the event** based on its type and data
+
+### Example: Complete Message Processing
+
+<Tabs>
+<TabItem value="go" label="Go">
+
+```go
+// Read WebSocket message
+messageType, message, err := conn.ReadMessage()
+if err != nil {
+    return err
+}
+
+// Parse Pulsar message
+var pulsarMsg PulsarMessage
+if err := json.Unmarshal(message, &pulsarMsg); err != nil {
+    return err
+}
+
+// Decode payload
+payload, err := base64.StdEncoding.DecodeString(pulsarMsg.Payload)
+if err != nil {
+    return err
+}
+
+// Parse event
+var event Event
+if err := json.Unmarshal(payload, &event); err != nil {
+    return err
+}
+
+// Process event
+processEvent(event)
+```
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+```java
+@Override
+public void onMessage(String message) {
+    try {
+        // Parse Pulsar message
+        PulsarMessage pulsarMsg = objectMapper.readValue(message, PulsarMessage.class);
+
+        // Decode payload
+        byte[] payloadBytes = Base64.getDecoder().decode(pulsarMsg.getPayload());
+        String payloadJson = new String(payloadBytes, StandardCharsets.UTF_8);
+
+        // Parse event
+        Event event = objectMapper.readValue(payloadJson, Event.class);
+
+        // Process event
+        processEvent(event);
+
+    } catch (Exception e) {
+        log.error("Error processing message: {}", e.getMessage());
+    }
+}
+```
+
+</TabItem>
+<TabItem value="python" label="Python">
+
+```python
+import json
+import base64
+
+async def process_websocket_message(message):
+    try:
+        # Parse Pulsar message
+        pulsar_msg = json.loads(message)
+
+        # Decode payload
+        payload_bytes = base64.b64decode(pulsar_msg['payload'])
+        payload_json = payload_bytes.decode('utf-8')
+
+        # Parse event
+        event = json.loads(payload_json)
+
+        # Process event
+        process_event(event)
+
+    except (json.JSONDecodeError, KeyError, UnicodeDecodeError) as e:
+        print(f"Error processing message: {e}")
+```
+
+</TabItem>
+<TabItem value="nodejs" label="Node.js">
+
+```javascript
+ws.on('message', (data) => {
+    try {
+        // Parse Pulsar message
+        const pulsarMsg = JSON.parse(data.toString());
+
+        // Decode payload
+        const payloadBytes = Buffer.from(pulsarMsg.payload, 'base64');
+        const payloadJson = payloadBytes.toString('utf-8');
+
+        // Parse event
+        const event = JSON.parse(payloadJson);
+
+        // Process event
+        processEvent(event);
+
+    } catch (e) {
+        console.error('Error processing message:', e.message);
+    }
+});
+```
+
+</TabItem>
+</Tabs>
+
+## Message Ordering
+
+Messages are delivered in the order they were published to the topic. When reading from `earliest`, you'll receive all available historical messages in order before receiving new messages.
+
+## Event Sequence Examples
+
+Understanding the sequence of events for common call scenarios helps when building integrations. The following examples show typical event flows with their `EventType` and `callState` values.
+
+### Inbound Call
+
+| Step | Action                                                                           | Event Type                      | Call State            |
+|------|----------------------------------------------------------------------------------|--------------------------------|-----------------------|
+| 1    | An incoming call from a customer                                                 | `InteractionCreated`           | `CS_QUEUED`           |
+| 2    | The call goes into queue and is waiting to be assigned to an agent               | `InteractionQueued`            | `CS_QUEUED`           |
+| 3    | The call is assigned to an agent                                                 | `InteractionAssigned`          | `CS_QUEUED`           |
+| 4    | The agent accepts the call and speaks with the customer                          | `InteractionAccepted`          | `CS_CONNECTED`        |
+| 5    | Automatic post processing starts (conclusion/wrapping up of call)                | `InteractionPostProcess`       | `CS_DISCONNECTED`     |
+| 6    | Automatic post processing concludes                                              | `InteractionEndPostProcess`    | `CS_DISCONNECTED`     |
+| 7    | The customer ends the call                                                       | `InteractionDeassigned`        | `CS_DISCONNECTED`     |
+| 8    | The agent ends the call                                                          | `InteractionDeassigned`        | `CS_DISCONNECTED`     |
+
+### Outbound Call (No Queue)
+
+| Step | Action                                                                           | Event Type                      | Call State            |
+|------|----------------------------------------------------------------------------------|--------------------------------|-----------------------|
+| 1    | An outbound call is created                                                      | `InteractionCreated`           | `CS_IDLE`             |
+| 2    | The call is assigned to an agent                                                 | `InteractionAssigned`          | `CS_IDLE`             |
+| 3    | System starts recording the call leg                                             | `InteractionRecordingStarted`  | N/A                   |
+| 4    | Call is in progress, ringing at destination                                      | `InteractionAccepted`          | `CS_INPROGRESS`       |
+| 5    | Customer answers the call                                                        | `InteractionCustomerAccepted`  | `CS_CONNECTED`        |
+| 6    | Call wrap-up process concludes                                                   | `InteractionEndPostProcess`    | `CS_DISCONNECTED`     |
+| 7    | Call is reassigned from agent                                                    | `InteractionDeassigned`        | `CS_DISCONNECTED`     |
+
+### Call Transfer to Another Agent
+
+| Step | Action                                                                           | Event Type                      | Call State            |
+|------|----------------------------------------------------------------------------------|--------------------------------|-----------------------|
+| 1    | Original call in progress                                                        | `InteractionCreated`           | `CS_IDLE`             |
+| 2    | First agent connected with customer                                              | `InteractionAccepted`          | `CS_CONNECTED`        |
+| 3    | First agent calls second agent (line 2)                                          | `InteractionCreated`           | `CS_IDLE`             |
+| 4    | Second agent's phone rings                                                       | `InteractionAssigned`          | `CS_IDLE`             |
+| 5    | Second agent answers                                                             | `InteractionAccepted`          | `CS_INPROGRESS`       |
+| 6    | First agent transfers call to second agent                                       | `InteractionTransferRequest`   | N/A                   |
+| 7    | First agent's wrap-up starts                                                     | `InteractionPostProcess`       | `CS_DISCONNECTED`     |
+| 8    | Second agent joins the call                                                      | `InteractionParticipantChange` | `CS_CONNECTED`        |
+| 9    | First agent's wrap-up concludes                                                  | `InteractionEndPostProcess`    | `CS_DISCONNECTED`     |
+| 10   | First agent deassigned                                                           | `InteractionDeassigned`        | `CS_DISCONNECTED`     |
+
+> 📘 **Note**
+>
+> These are simplified examples. Real call flows may have additional events depending on features used (hold, recording, conferencing, etc.). See [Event Reference](./event-reference.md) for complete event type descriptions.
+>
+>
+
+## Sample Event Messages
+
+The following examples show real event messages with actual field structures and values.
+
+### Agent Status Change
+
+```json
+{
+  "AgentStatusChange": {
+    "agentId": "ag64oyEUb_Sk6bxVB9P5yaaa",
+    "msgInfo": {
+      "instanceId": "us1tomcat04.us1.whitepj.net-sapi-v1",
+      "sequenceId": 215,
+      "timestamp": 1669235544917
+    },
+    "newReasonCodeUser": "801=1722",
+    "newState": 5,
+    "newSubState": "none",
+    "newSubStateReason": "none",
+    "statusEventTS": 1669235544
+  }
+}
+```
+
+### Interaction Created (Incoming Call)
+
+```json
+{
+  "Interaction": {
+    "attachedData": {
+      "attachedDatum": [
+        {
+          "attachedDataKey": "@pri",
+          "attachedDataValue": 100
+        },
+        {
+          "attachedDataKey": "callingName",
+          "attachedDataValue": "Andrew Cunningh"
+        },
+        {
+          "attachedDataKey": "cha",
+          "attachedDataValue": 13125555068
+        },
+        {
+          "attachedDataKey": "phoneNum",
+          "attachedDataValue": 5515557212
+        },
+        {
+          "attachedDataKey": "remoteCallingName",
+          "attachedDataValue": "Andrew Cunningh"
+        },
+        {
+          "attachedDataKey": "remotePhoneNum",
+          "attachedDataValue": "+15515557212"
+        }
+      ]
+    },
+    "callState": "CS_QUEUED",
+    "event": "InteractionCreated",
+    "inboundChannelid": 13125555068,
+    "interactionEventTS": 1669235827,
+    "interactionGUID": "int-184a63564dc-ohWfVIbHJz2Hr2JFhAfdlb4Fa-phone-00-acmecorp01",
+    "msgInfo": {
+      "instanceId": "us1tomcat04.us1.whitepj.net-sapi-v1",
+      "sequenceId": 224,
+      "timestamp": 1669235827942
+    },
+    "resourceType": 0
+  }
+}
+```
+
+### Interaction Queued
+
+```json
+{
+  "Interaction": {
+    "attachedData": {
+      "attachedDatum": [
+        {
+          "attachedDataKey": "channelName",
+          "attachedDataValue": "Acme Ads OG"
+        },
+        {
+          "attachedDataKey": "que",
+          "attachedDataValue": "acmecorp01~~queue~~phone~~591"
+        },
+        {
+          "attachedDataKey": "queueDirection",
+          "attachedDataValue": "in"
+        },
+        {
+          "attachedDataKey": "priority",
+          "attachedDataValue": 50
+        },
+        {
+          "attachedDataKey": "tenantSkillName",
+          "attachedDataValue": "Test Sales"
+        }
+      ]
+    },
+    "callState": "CS_QUEUED",
+    "direction": "in",
+    "event": "InteractionQueued",
+    "eventTS": 1669235836,
+    "inboundChannelid": 13125555068,
+    "interactionEventTS": 1669235836,
+    "interactionGUID": "int-184a63564dc-ohWfVIbHJz2Hr2JFhAfdlb4Fa-phone-00-acmecorp01",
+    "isAgentInitiated": false,
+    "mediaType": "phone",
+    "msgInfo": {
+      "instanceId": "us1tomcat04.us1.whitepj.net-sapi-v1",
+      "sequenceId": 225,
+      "timestamp": 1669235836708
+    },
+    "priority": 50,
+    "queueId": 591,
+    "queueList": 591,
+    "queueTime": 1669235836,
+    "resourceType": 0,
+    "transactionNum": 19727
+  }
+}
+```
+
+### Interaction Deleted (Call Ended)
+
+```json
+{
+  "Interaction": {
+    "attachedData": {
+      "attachedDatum": [
+        {
+          "attachedDataKey": "callingName",
+          "attachedDataValue": "Andrew Cunningh"
+        },
+        {
+          "attachedDataKey": "phoneNum",
+          "attachedDataValue": 5515557212
+        },
+        {
+          "attachedDataKey": "remotePhoneNum",
+          "attachedDataValue": "+15515557212"
+        }
+      ]
+    },
+    "callHangupReason": "CEC_DISCONNECT_NORMAL",
+    "callState": "CS_DISCONNECTED",
+    "dispositionCode": 1000,
+    "event": "InteractionDeleted",
+    "hangupInitiator": "CUSTOMER",
+    "inboundChannelid": 13125555068,
+    "interactionEventTS": 1669236911,
+    "interactionGUID": "int-184a645e074-zGIsMxOkCYzQ8yg68e3t61i7A-phone-00-acmecorp01",
+    "isAgentInitiated": false,
+    "isDirectAccess": false,
+    "isQueued": false,
+    "mediaType": "phone",
+    "msgInfo": {
+      "instanceId": "us1tomcat04.us1.whitepj.net-sapi-v1",
+      "sequenceId": 251,
+      "timestamp": 1669236911188
+    },
+    "recordingMode": "no",
+    "rejectReason": 0,
+    "resourceType": 0
+  }
+}
+```
+
+## Next Steps
+
+- [Event Reference](./event-reference.md) - Browse all available event types
+- [Field Reference](./field-reference.mdx) - Detailed field documentation
+- [Code Examples](./examples/golang.md) - See complete message processing examples
+- [Troubleshooting](./troubleshooting.md) - Common message processing issues
