@@ -1,3 +1,4 @@
+
 // Connect API Reference Sidebar
 // Generated from: https://developer.8x8.com/connect/reference/getting-started-with-sms-api
 
@@ -205,46 +206,7 @@ const sidebarConfig = [
             type: 'doc',
             id: 'connect/reference/remove-wa-template',
           },
-          {
-            type: 'category',
-            label: 'WhatsApp Flow Management',
-            collapsed: true,
-            items: [
-              {
-                type: 'doc',
-                id: 'connect/reference/get-whatsapp-flows',
-              },
-              {
-                type: 'doc',
-                id: 'connect/reference/get-whatsapp-flow-details',
-              },
-              {
-                type: 'doc',
-                id: 'connect/reference/create-whatsapp-flow',
-              },
-              {
-                type: 'doc',
-                id: 'connect/reference/update-whatsapp-flow',
-              },
-              {
-                type: 'doc',
-                id: 'connect/reference/preview-whatsapp-flow',
-              },
-              {
-                type: 'doc',
-                id: 'connect/reference/publish-whatsapp-flow',
-              },
-              {
-                type: 'doc',
-                id: 'connect/reference/deprecate-whatsapp-flow',
-              },
-              {
-                type: 'doc',
-                id: 'connect/reference/delete-whatsapp-flow',
-              },
-            ],
-          },
-        ],
+           ],
       },
       {
         type: 'category',
@@ -374,47 +336,19 @@ const sidebarConfig = [
     type: 'category',
     label: 'Voice API',
     collapsed: true,
+    link: {
+      type: 'doc',
+      id: 'connect/docs/voice/api-introduction', // voice-api-introduction.mdx
+    },
     items: [
       {
-        type: 'doc',
-        id: 'connect/docs/voice-messaging',
-      },
-      {
         type: 'category',
-        label: 'Voice Messaging',
+        label: 'Callflow API',
         collapsed: true,
         items: [
           {
             type: 'doc',
             id: 'connect/reference/send-callflow',
-          },
-          {
-            type: 'doc',
-            id: 'connect/docs/voice-messaging-guide',
-          },
-          {
-            type: 'doc',
-            id: 'connect/docs/vm-session-status',
-          },
-        ],
-      },
-      {
-        type: 'category',
-        label: 'IVR',
-        link: { type: 'doc', id: 'connect/docs/ivr-1' },
-        collapsed: true,
-        items: [
-          {
-            type: 'doc',
-            id: 'connect/reference/ivr-send-callflow',
-          },
-          {
-            type: 'doc',
-            id: 'connect/docs/webhook-setup-guide-for-ivr-',
-          },
-          {
-            type: 'doc',
-            id: 'connect/docs/simple-ivr',
           },
         ],
       },
@@ -426,48 +360,6 @@ const sidebarConfig = [
           {
             type: 'doc',
             id: 'connect/reference/get-voice-profile-information',
-          },
-        ],
-      },
-      {
-        type: 'category',
-        label: 'Webhooks API',
-        collapsed: true,
-        items: [
-          {
-            type: 'doc',
-            id: 'connect/reference/get-webhooks-information-1',
-          },
-          {
-            type: 'doc',
-            id: 'connect/reference/create-a-new-webhook-1',
-          },
-          {
-            type: 'doc',
-            id: 'connect/reference/delete-a-specific-type-of-webhook-1',
-          },
-        ],
-      },
-      {
-        type: 'category',
-        label: 'Voice Call Action Webhook',
-        link: { type: 'doc', id: 'connect/docs/voice-call-action-webhook' },
-        collapsed: true,
-        items: [
-          {
-            type: 'doc',
-            id: 'connect/docs/call-action-handling-ivr',
-          },
-        ],
-      },
-      {
-        type: 'category',
-        label: 'Error Code (Voice Messaging & IVR)',
-        collapsed: true,
-        items: [
-          {
-            type: 'doc',
-            id: 'connect/docs/status-error-code',
           },
         ],
       },
@@ -528,21 +420,6 @@ const sidebarConfig = [
           },
         ],
       },
-    ],
-  },
-  {
-    type: 'category',
-    label: 'Number Masking API',
-    collapsed: true,
-    items: [
-      {
-        type: 'doc',
-        id: 'connect/docs/getting-started-with-number-masking',
-      },
-      {
-        type: 'doc',
-        id: 'connect/docs/how-number-masking-protects-customer-privacy',
-      },
       {
         type: 'category',
         label: 'Webhooks API',
@@ -560,35 +437,22 @@ const sidebarConfig = [
             type: 'doc',
             id: 'connect/reference/delete-a-specific-type-of-webhook',
           },
-          {
-            type: 'doc',
-            id: 'connect/docs/webhook-setup-guide-for-ivr',
-          },
         ],
       },
       {
-        type: 'doc',
-        id: 'connect/docs/call-status',
-      },
-      {
-        type: 'doc',
-        id: 'connect/docs/call-action-handling',
-      },
-      {
-        type: 'doc',
-        id: 'connect/docs/session-summary-number-masking',
-      },
-      {
-        type: 'doc',
-        id: 'connect/docs/error-codes-number-masking',
-      },
-      {
-        type: 'doc',
-        id: 'connect/docs/virtual-number-updated-event',
-      },
-      {
-        type: 'doc',
-        id: 'connect/docs/call-recordings',
+        type: 'category',
+        label: 'Error Codes & Status Reference',
+        collapsed: true,
+        items: [
+          {
+            type: 'doc',
+            id: 'connect/docs/voice/error-codes/voice-error-codes-reference',
+          },
+          {
+            type: 'doc',
+            id: 'connect/docs/voice/error-codes/voice-status-codes-reference',
+          },
+        ],
       },
     ],
   },

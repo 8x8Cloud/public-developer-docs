@@ -49,7 +49,7 @@ In your business cases, you may want to implement a simple security defense to b
 There are many ways how to apply this measure in your business context. You may want to enforce the rate limit in your service locally after obtaining the actual origin IP of end-users, or you can delegate the rate-limiting to us simply by filling up the `clientIP` field with that IP address. Endpoints that support rate-limiting by clientIp are:
 
 1. [Code generation API](/connect/reference/verify-request-v2)
-2. [Send SMS API](/connect/reference/send-sms)
+2. [Send SMS API](/connect/reference/send-sms-single)
 3. [Send SMS batch API](/connect/reference/send-sms-batch)  
 
 To enable IP rate limiting to these endpoints for your service, you will need to do it in 2 steps:  

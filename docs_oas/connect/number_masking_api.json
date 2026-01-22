@@ -343,8 +343,8 @@
                   "type": {
                     "type": "string",
                     "nullable": false,
-                    "enum": ["VCS", "VCA", "VSS", "VRU"],
-                    "description": "Type of the webhooks: \nVCA: Voice Call Action (for more details please visit https://developer.8x8.com/connect/reference/call-action-handle) \nVCS: Voice Call Summary (for more details please visit https://developer.8x8.com/connect/reference/call-status) \nVSS: Voice Session Summary (for more details please visit https://developer.8x8.com/connect/reference/session-status) \nVRU: Voice Recording URL (for more details please visit https://developer.8x8.com/connect/reference/call-recordings)\n"
+                    "enum": ["VCS", "VCA", "VSS", "VRU", "VNU"],
+                    "description": "Webhook type:\n\n- **VCA** (Voice Call Action) - [Webhook Guide](/connect/docs/voice/number-masking/call-action-handling)\n- **VCS** (Voice Call Status) - [Webhook Guide](/connect/docs/voice/number-masking/call-status)\n- **VSS** (Voice Session Summary) - [Overview](/connect/docs/voice/webhook-guides/voice-session-summary-webhook) | [IVR](/connect/docs/voice/ivr/session-summary) | [Voice Messaging](/connect/docs/voice/voice-messaging/session-status) | [Number Masking](/connect/docs/voice/number-masking/session-summary)\n- **VRU** (Voice Recording Uploaded) - [Webhook Guide](/connect/docs/voice/number-masking/call-recordings)\n- **VNU** (Virtual Number Updated) - [Webhook Guide](/connect/docs/voice/number-masking/virtual-number-updated)"
                   },
                   "url": {
                     "type": "string",
@@ -981,8 +981,8 @@
           "type": {
             "type": "string",
             "nullable": false,
-            "enum": ["VCS", "VCA", "VSS", "VDC", "VRU"],
-            "description": "Type of the webhooks: \nVCA: Voice Call Action (for more details please visit https://developer.8x8.com/connect/reference/call-commands) \nVCS: Voice Call Summary (for more details please visit https://developer.8x8.com/connect/reference/call-status) \nVSS: Voice Session Summary (for more details please visit https://developer.8x8.com/connect/reference/session-status) \nVDC: Voice DTMF Capture \nVRU: Voice Recording URL (for more details please visit https://developer.8x8.com/connect/reference/call-recordings)\n"
+            "enum": ["VCS", "VCA", "VSS", "VRU", "VNU"],
+            "description": "Webhook type:\n\n- **VCA** (Voice Call Action) - [Webhook Guide](/connect/docs/voice/number-masking/call-action-handling)\n- **VCS** (Voice Call Status) - [Webhook Guide](/connect/docs/voice/number-masking/call-status)\n- **VSS** (Voice Session Summary) - [Webhook Guide](/connect/docs/voice/number-masking/session-summary)\n- **VRU** (Voice Recording Uploaded) - [Webhook Guide](/connect/docs/voice/number-masking/call-recordings)\n- **VNU** (Virtual Number Updated) - [Webhook Guide](/connect/docs/voice/number-masking/virtual-number-updated)"
           },
           "url": {
             "type": "string",

@@ -61,7 +61,7 @@ const cards = [
         link: '/connect/reference/voice-messaging',
       },
       { label: 'Voice Messaging', link: '/connect/reference/ivr' },
-      { label: 'IVR', link: '/connect/reference/ivr-1' },
+      { label: 'IVR', link: '/connect/reference/ivr-introduction' },
       { label: 'View More…', link: '/connect/reference/voice-messaging' },
     ],
   },

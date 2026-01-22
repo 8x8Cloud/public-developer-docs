@@ -1,0 +1,45 @@
+// IVR Menu Flow
+digraph {
+	rankdir=TB size=10
+	node [fontname=Helvetica fontsize=10 margin=0.2 shape=box style="filled, rounded"]
+	Start [label="Welcome to ABC Restaurant
+To book a table press 1
+To speak to a representative press 2
+To hear our restaurant hours press 3" fillcolor="#d9534f" fontcolor=white]
+	L1_A [label="Press 1 to make a new reservation
+Press 2 to reschedule existing reservation
+Press 3 to return to main menu" fillcolor="#5bc0de"]
+	L1_B [label="Connecting to representative...
+Press 1 to connect now
+Press 2 to return to main menu" fillcolor="#5bc0de"]
+	L1_C [label="Restaurant hours are between
+9AM and 9PM every day" fillcolor="#5bc0de"]
+	L2_A [label="Reserving a Table
+Press 1 for today
+Press 2 for tomorrow" fillcolor="#5cb85c"]
+	L2_B [label="Rescheduling Reservation
+Press 1 to keep current
+Press 2 to change to tomorrow" fillcolor="#5cb85c"]
+	L2_C [label="Connect Call to Another Number" fillcolor="#5cb85c"]
+	End_A [label="Booked table for today.
+Thank you." fillcolor="#dda0dd"]
+	End_B [label="Booked table for tomorrow.
+Thank you." fillcolor="#dda0dd"]
+	End_C [label="Keeping current reservation.
+Thank you." fillcolor="#dda0dd"]
+	End_D [label="Changed reservation to tomorrow.
+Thank you." fillcolor="#dda0dd"]
+	Start -> L1_A [label="DTMF Input: 1"]
+	Start -> L1_B [label="DTMF Input: 2"]
+	Start -> L1_C [label="DTMF Input: 3"]
+	L1_A -> Start [label="DTMF Input: 3"]
+	L1_B -> Start [label="DTMF Input: 2"]
+	L1_C -> Start [label="DTMF Input: 2"]
+	L1_A -> L2_A [label="DTMF Input: 1"]
+	L1_A -> L2_B [label="DTMF Input: 2"]
+	L1_B -> L2_C [label="DTMF Input: 1"]
+	L2_A -> End_A [label="DTMF Input: 1"]
+	L2_A -> End_B [label="DTMF Input: 2"]
+	L2_B -> End_C [label="DTMF Input: 1"]
+	L2_B -> End_D [label="DTMF Input: 2"]
+}

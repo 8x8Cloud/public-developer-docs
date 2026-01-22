@@ -466,18 +466,6 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "IVR",
-      items: [
-        {
-          type: "doc",
-          id: "connect/reference/ivr-send-callflow",
-          label: "Send Callflow",
-          className: "api-method post",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Voice Profile API",
       items: [
         {
@@ -512,19 +500,19 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "connect/reference/get-webhooks-information-1",
+          id: "connect/reference/get-webhooks-information",
           label: "Get webhook information for your account",
           className: "api-method get",
         },
         {
           type: "doc",
-          id: "connect/reference/create-a-new-webhook-1",
+          id: "connect/reference/create-a-new-webhook",
           label: "Create a new webhook",
           className: "api-method post",
         },
         {
           type: "doc",
-          id: "connect/reference/delete-a-specific-type-of-webhook-1",
+          id: "connect/reference/delete-a-specific-type-of-webhook",
           label: "Delete a specific type of webhook",
           className: "api-method delete",
         },

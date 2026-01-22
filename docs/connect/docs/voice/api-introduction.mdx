@@ -1,0 +1,416 @@
+---
+slug: /connect/docs/voice/api-introduction
+title: Voice API – Introduction
+sidebar_label: API – Introduction
+---
+
+The 8x8 Voice API lets you programmatically **make and control calls** using **JSON callflows**.
+
+A single callflow model powers multiple voice products and patterns, including:
+
+- **Voice Messaging** (TTS and pre-recorded audio playback) — [Voice Messaging – Guide](/connect/docs/voice/voice-messaging/voice-messaging-guide)
+- **IVR** (DTMF menus via `sayAndCapture`) — [IVR – Introduction](/connect/docs/voice/ivr/ivr-introduction)
+- **Outbound reminders, collections, and callbacks** — built using callflows + webhooks (start with [Send Callflow](/connect/reference/ivr-send-callflow))
+- **Number masking (call bridging)** — two-leg call bridging patterns (start with [Getting started with Number Masking](/connect/docs/voice/number-masking/getting-started))
+- **Voice apps integrated with your backend via webhooks** — [Voice Call Action webhook guide](/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide)
+
+---
+
+## Start here (recommended reading order)
+
+If you're new to Voice:
+
+1. **Understand callflows + actions** (this page + reference)
+   - [Callflow Actions](/connect/docs/voice/ivr/call-action-handling)
+2. **Send your first callflow**
+   - [Send Callflow](/connect/reference/ivr-send-callflow)
+3. **Add interactivity / logic**
+   - [Voice Call Action webhook guide](/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide)
+4. **Learn your use case end-to-end**
+   - IVR:  [IVR – Introduction](/connect/docs/voice/ivr/ivr-introduction) → [Simple IVR](/connect/docs/voice/ivr/simple-ivr-guide)
+   - Voice Messaging: [Voice Messaging – Guide](/connect/docs/voice/voice-messaging/voice-messaging-guide)
+   - Number Masking: [Getting started with Number Masking](/connect/docs/voice/number-masking/getting-started)
+
+---
+
+## The core endpoint:  Send Callflow
+
+All voice experiences start by sending a callflow to a subaccount:
+
+`POST /api/v1/subaccounts/{subaccountId}/callflows`
+
+**What it does**
+- Starts a voice session and executes the callflow actions in order.
+- The first action must be `makeCall` (this originates the first call leg and creates the session).
+- Returns an immediate response indicating if the request was accepted.
+
+**API Response (immediate)**
+
+The Send Callflow API returns an immediate response with:
+- **sessionStatus**: `CREATED` (request accepted) or `NOT_CREATED` (request rejected)
+- **sessionId**: Unique identifier for the session (if created)
+- **statusCode**: Numeric code indicating the result
+- **statusMessage**: Human-readable message explaining the status
+
+Example success response:
+
+```json
+{
+  "sessionId": "d9874358-89ac-4c50-bbab-1eb634482a94",
+  "sessionStatus": "CREATED",
+  "statusCode": 1,
+  "statusMessage": "Created"
+}
+```
+
+Example failure response:
+
+```json
+{
+  "sessionStatus": "NOT_CREATED",
+  "statusCode": -1002,
+  "statusMessage": "Speech profile or language parameter invalid"
+}
+```
+
+> **Note:** This immediate response tells you if your request was **accepted**, not the final call outcome. For end-of-session results (answered, busy, failed, etc.), use the [Voice Session Summary webhook](#vss--voice-session-summary-authoritative-final-outcome).
+
+**Understanding Session Status**
+
+The `sessionStatus` field tracks a voice session through its lifecycle:
+
+1. **Initial status** (API response):
+   - `CREATED` - Request accepted, session initiated
+   - `NOT_CREATED` - Request rejected, check `statusCode` and `statusMessage` for reason
+
+2. **Final status** (in VSS webhook after session ends):
+   - `COMPLETED` - Call answered and completed successfully
+   - `FAILED` - Call failed (busy, no answer, invalid number, etc.)
+   - `CANCELLED` - Session cancelled before completion
+
+**Where to track session status:**
+- **Immediate status:** Check API response `sessionStatus` (tells you if request was accepted)
+- **Progress status:** Use VCS (Voice Call Status) webhook for real-time updates (optional)
+- **Final status:** Use VSS (Voice Session Summary) webhook for authoritative end-of-session outcome
+
+**Example flow:**
+
+```text
+1. POST /api/v1/subaccounts/{id}/callflows
+   → Response: {"sessionStatus": "CREATED", "sessionId": "abc123"}
+
+2. Call in progress...
+   → VCS webhook: {"status": "RINGING"} (optional, if configured)
+   → VCS webhook: {"status": "ANSWERED"} (optional, if configured)
+
+3. Call ends
+   → VSS webhook: {"sessionStatus": "COMPLETED", "sessionId": "abc123"}
+```
+
+**Related documentation:**
+- [Session Status (Voice Messaging)](/connect/docs/voice/voice-messaging/session-status) - Voice Messaging session status details
+- [Session Summary (IVR)](/connect/docs/voice/ivr/session-summary) - IVR session outcomes
+- [Session Summary (Number Masking)](/connect/docs/voice/number-masking/session-summary) - Number Masking session details
+
+**API reference**
+- Voice Messaging entry:  [Send Callflow](/connect/reference/send-callflow)
+- IVR entry: [Send Callflow (IVR)](/connect/reference/ivr-send-callflow)
+
+**Guides that use this endpoint**
+- [Voice Messaging – Guide](/connect/docs/voice/voice-messaging/voice-messaging-guide)
+- [IVR – Introduction](/connect/docs/voice/ivr/ivr-introduction)
+- [Simple IVR](/connect/docs/voice/ivr/simple-ivr-guide)
+- [Advanced IVR](/connect/docs/voice/ivr/advanced-ivr-guide)
+
+> **Note:** Number Masking does NOT use the Send Callflow API. Number Masking sessions start with inbound calls to virtual numbers, and your backend responds to [VCA webhooks](/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide) with callflow JSON to bridge the call.
+
+> Note: Any API request that uses a `source` (caller ID / CLID) requires **CLID whitelisting**. See the note on the Send Callflow reference page.
+> If you need CLID enablement, follow the standard support path listed in the API reference.
+
+---
+
+## Callflows:  what they are
+
+A **callflow** is an ordered list of actions executed by the voice platform.
+
+Common action families include:
+
+- `makeCall`: originate a call leg (starts the session)
+- `say`: play TTS into the call
+- `playFile`: play an audio file (MP3/WAV hosted on HTTP/HTTPS URL)
+- `sayAndCapture`: play a prompt and capture DTMF input (IVR)
+- `hangup`: terminate the call/session
+
+**API reference**
+- [Callflow Actions](/connect/docs/voice/ivr/call-action-handling) — authoritative action list + parameters.
+
+**Guides**
+- [Voice Messaging – Guide](/connect/docs/voice/voice-messaging/voice-messaging-guide)
+- [Simple IVR](/connect/docs/voice/ivr/simple-ivr-guide)
+- [Advanced IVR](/connect/docs/voice/ivr/advanced-ivr-guide)
+
+---
+
+## Error codes (how to debug fast)
+
+Voice errors typically show up in two places:
+
+1) **Synchronous API errors** when sending a callflow (invalid schema, invalid parameters, authorization issues).
+2) **Asynchronous runtime outcomes** (no answer, busy, routing/provider failures) delivered via callbacks/session outcomes.
+
+Use the error guides by product:
+
+- **IVR & Voice Messaging error codes**
+  [IVR and Voice Messaging error codes](/connect/docs/voice/error-codes/voice-status-codes)
+
+- **Number Masking error codes**
+  [Number Masking error codes](/connect/docs/voice/error-codes/number-masking-error-codes)
+
+**How to use these effectively**
+- Start from your request and response: [Send Callflow](/connect/reference/ivr-send-callflow)
+- Correlate with callbacks and final outcome:
+  - For interactive flows: [Voice Call Action webhook guide](/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide)
+  - For end-of-session outcomes: [Voice Session Summary](/connect/docs/voice/webhook-guides/voice-session-summary-webhook)
+
+---
+
+## Webhooks: how voice apps become dynamic
+
+Webhooks allow the platform to call **your backend** to deliver events such as:
+
+- **DTMF results** from `sayAndCapture` (IVR selections)
+- **call progress / call status** events (when configured)
+- **end-of-session summaries** (final outcomes)
+- **virtual number lifecycle events** (number provisioning, configuration changes)
+- **recording availability / recording status** notifications (when enabled)
+
+Start here:
+- [Voice Call Action webhook guide](/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide)
+- [Webhooks Overview](/connect/docs/voice/webhook-guides/webhooks-overview)
+
+### Webhook types you'll use (and what each one is for)
+
+Webhook type is chosen when you configure the webhook destination for your **subaccount**.
+
+#### VCA — Voice Call Action (interactive control point)
+
+**Use it for**
+- IVR menus and any scenario where your backend must decide "what's next" during a live call.
+
+**Typical triggers**
+- `sayAndCapture` completes and delivers **DTMF digits**.
+- Other in-call action decision points depending on your flow.
+
+**What you do**
+- Parse the payload (DTMF/event data).
+- Respond with the next callflow step (continue menu, branch, bridge, or hang up).
+
+Links:
+- Guide: [Voice Call Action webhook guide](/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide)
+- Reference: [Call Action Handling (IVR)](/connect/docs/voice/ivr/call-action-handling)
+- Setup: [Webhook Setup Guide for IVR](/connect/docs/voice/ivr/webhook-setup-guide-for-ivr)
+- Example: [Simple IVR](/connect/docs/voice/ivr/simple-ivr-guide)
+
+#### VSS — Voice Session Summary (authoritative final outcome)
+
+**Use it for**
+- Reliable end-of-session record for analytics, reconciliation, retries, and customer reporting.
+
+**What you do**
+- Treat this as the final outcome signal.
+- Persist results keyed by `sessionId`.
+- Correlate outcomes with the relevant error code guides.
+
+Links:
+- Guide: [Voice Session Summary](/connect/docs/voice/webhook-guides/voice-session-summary-webhook)
+- Payload Reference: [Session Summary (Voice Messaging)](/connect/docs/voice/voice-messaging/session-status)
+- Payload Reference: [Session Summary (IVR)](/connect/docs/voice/ivr/session-summary)
+
+#### VCS — Voice Call Status (progress telemetry)
+
+**Use it for**
+- Near-real-time progress updates (ringing/answered/disconnected), especially for UI status or live monitoring.
+
+**What you do**
+- Log as timeline telemetry (idempotent, best-effort, do not assume ordering).
+- Do not use as the final source of truth (use session summary for final outcomes).
+
+Link:
+- Reference: [Call Status (Number Masking)](/connect/docs/voice/number-masking/call-status)
+
+#### VNU — Virtual Number Updated (number lifecycle events)
+
+**Use it for**
+- Track lifecycle events for virtual numbers assigned to your subaccount (number provisioning, configuration changes, deactivation).
+
+**What you do**
+- Update your internal number inventory when virtual numbers are added, modified, or removed.
+- Sync number availability for inbound routing, masking pools, or customer assignments.
+
+Link:
+- Guide: [Virtual Number Updated Event](/connect/docs/virtual-number-updated-event)
+
+#### VRU — Recording notifications (recording status / availability)
+
+**Use it for**
+- Recording workflows where you need a callback when recording assets are available or upload completes.
+
+**What you do**
+- Update your systems when recording status changes.
+- Optionally query recording status endpoints for verification.
+
+Links:
+- Reference: [Create a new recording push config](/connect/reference/create-a-new-recording-push-config)
+- Reference: [Get recording status information](/connect/reference/get-recording-status-information)
+
+### Webhook configuration endpoints (API Reference)
+
+All voice webhooks are configured per subaccount:
+
+- List existing webhooks
+  `GET /api/v1/subaccounts/{subaccountId}/webhooks`
+  → [Get webhook information](/connect/reference/get-webhooks-information)
+
+- Create a webhook (choose type:  VCA/VSS/VCS/VNU/VRU)
+  `POST /api/v1/subaccounts/{subaccountId}/webhooks`
+  → [Create a new webhook](/connect/reference/create-a-new-webhook)
+
+- Delete a webhook by type
+  `DELETE /api/v1/subaccounts/{subaccountId}/webhooks/{webhookType}`
+  → [Delete a specific type of webhook](/connect/reference/delete-a-specific-type-of-webhook)
+
+---
+
+## Production building blocks (APIs you'll likely use next)
+
+Once you can send callflows and handle webhooks, these APIs help you productionize:  provisioning numbers, choosing voices, enabling recordings, and exporting logs for reconciliation.
+
+### Virtual Number Management API (number inventory / assigned numbers)
+
+**What it's for**
+- List and validate virtual numbers assigned to a subaccount (useful for inbound flows, DID ownership checks, masking pools, and operational monitoring).
+
+**When you need it**
+- Your solution requires a virtual number (e.g., inbound IVR, inbound masking callback numbers, or managing a pool per customer/subaccount).
+- You want to validate whether a number belongs to a given subaccount before using it in callflows.
+
+**API reference**
+- List numbers:
+  - [Get My Virtual Numbers](/connect/reference/get-virtual-numbers)
+- Validate/check a specific number:
+  - [Check Virtual Number](/connect/reference/check-virtual-number)
+
+**Related guides**
+- [Getting started with Number Masking](/connect/docs/voice/number-masking/getting-started)
+- [Virtual Number Updated Event](/connect/docs/virtual-number-updated-event)
+- Errors: [Number Masking error codes](/connect/docs/voice/error-codes/number-masking-error-codes)
+
+---
+
+### Voice Profile API (TTS voices / language profiles)
+
+**What it's for**
+- Retrieve the available voice profiles (voices/languages) for your subaccount.  This helps you standardize which voice is used for TTS (`say`) across environments and markets.
+
+**When you need it**
+- You are using `say` (TTS) and want a predictable voice selection strategy per market/subaccount.
+- You need to list supported voices in your UI or configuration portal.
+
+**API reference**
+- [Get voice profile information](/connect/reference/get-voice-profile-information)
+
+**Related guides**
+- [Voice Messaging – Guide](/connect/docs/voice/voice-messaging/voice-messaging-guide)
+- Errors: [IVR and Voice Messaging error codes](/connect/docs/voice/error-codes/voice-status-codes)
+
+---
+
+### Recording API (recording configuration + recording status)
+
+**What it's for**
+- Configure recording delivery/notification and query recording status for a session.
+
+**When you need it**
+- Compliance / QA requires call recordings.
+- You want a callback when recording artifacts are ready.
+- You need to retrieve/verify recording status after call completion.
+
+**API reference**
+- Recording push configuration:
+  - [Get recording push config](/connect/reference/get-recording-push-config-information)
+  - [Create a new recording push config](/connect/reference/create-a-new-recording-push-config)
+  - [Delete recording push config](/connect/reference/delete-recording-push-config)
+- Recording status:
+  - [Get recording status information](/connect/reference/get-recording-status-information)
+
+**Related guides**
+- Webhooks / callback handling: [Voice Call Action webhook guide](/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide)
+- Recording details: [Number Masking Call Recordings](/connect/docs/voice/number-masking/call-recordings)
+
+---
+
+### Reporting API (voice log exports)
+
+**What it's for**
+- Export voice logs for analytics, reconciliation, and operational reporting (job-based export).
+
+**When you need it**
+- Finance reconciliation, supplier verification, customer reporting dashboards.
+- You need a bulk export of historical activity beyond per-session webhooks.
+
+**API reference**
+- Start an export job:
+  - [Start voice log export job](/connect/reference/start-voice-log-export-job)
+- Retrieve the export result:
+  - [Get voice log export job result](/connect/reference/get-voice-log-export-job-result)
+- Cancel an export job:
+  - [Cancel voice log export job](/connect/reference/cancel-voice-log-export-job)
+
+**Related guides**
+- Errors:
+  - [IVR and Voice Messaging error codes](/connect/docs/voice/error-codes/voice-status-codes)
+  - [Number Masking error codes](/connect/docs/voice/error-codes/number-masking-error-codes)
+
+---
+
+## Quick-start paths (Guides)
+
+Pick your use case:
+
+### IVR
+
+- [IVR – Introduction](/connect/docs/voice/ivr/ivr-introduction)
+- [Simple IVR](/connect/docs/voice/ivr/simple-ivr-guide)
+- [Advanced IVR](/connect/docs/voice/ivr/advanced-ivr-guide)
+- Webhooks: [Voice Call Action webhook guide](/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide)
+- Errors: [IVR and Voice Messaging error codes](/connect/docs/voice/error-codes/voice-status-codes)
+
+### Voice Messaging
+
+- [Voice Messaging – Guide](/connect/docs/voice/voice-messaging/voice-messaging-guide)
+- Session outcomes: [Voice Session Summary](/connect/docs/voice/webhook-guides/voice-session-summary-webhook)
+- Errors: [IVR and Voice Messaging error codes](/connect/docs/voice/error-codes/voice-status-codes)
+
+### Number masking (call bridging)
+
+- [Getting started with Number Masking](/connect/docs/voice/number-masking/getting-started)
+- [How Number Masking Protects Customer Privacy](/connect/docs/voice/number-masking/how-number-masking-protects-customer-privacy)
+- [Number Masking Call Action Handling](/connect/docs/voice/number-masking/call-action-handling)
+- [Session Summary - Number Masking](/connect/docs/voice/number-masking/session-summary)
+- Errors: [Number Masking error codes](/connect/docs/voice/error-codes/number-masking-error-codes)
+
+---
+
+## Where to go next
+
+- Build and validate a callflow:  [Send Callflow](/connect/reference/ivr-send-callflow)
+- Build an IVR menu: [IVR – Introduction](/connect/docs/voice/ivr/ivr-introduction) + [Call Action Handling (IVR)](/connect/docs/voice/ivr/call-action-handling)
+- Configure webhooks: [Create a new webhook](/connect/reference/create-a-new-webhook)
+- Debug faster with error guides:
+  - [IVR and Voice Messaging error codes](/connect/docs/voice/error-codes/voice-status-codes)
+  - [Number Masking error codes](/connect/docs/voice/error-codes/number-masking-error-codes)
+- Productionize with numbers, profiles, recordings, and exports:
+  - [Get My Virtual Numbers](/connect/reference/get-virtual-numbers)
+  - [Get voice profile information](/connect/reference/get-voice-profile-information)
+  - [Create a new recording push config](/connect/reference/create-a-new-recording-push-config)
+  - [Start voice log export job](/connect/reference/start-voice-log-export-job)

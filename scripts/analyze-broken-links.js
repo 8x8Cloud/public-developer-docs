@@ -30,7 +30,6 @@ const IGNORE_BROKEN_LINKS = [
   '/sms/API-Reference/mobile-verification-api/verify-otp',
   '/connect/reference/create-a-new-voice-webhook',
   '/connect/reference/send-sms-batch',
-  '/connect/reference/send-sms',
   '/connect/reference/webhook-configuration-api-sms',
   '/connect/reference/call-flow-actions-say',
   '/connect/reference/call-flow-actions-sayandcapture',

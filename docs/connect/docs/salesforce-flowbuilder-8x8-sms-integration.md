@@ -23,7 +23,7 @@ This guide utilizes Salesforce External Services. According to the official Sale
 
 * **8x8 Connect Account:** An active account with SMS services enabled.
 * **API Credentials:** Your 8x8 Subaccount ID and your API Key (Bearer Token), which you can generate from your 8x8 Connect customer portal.
-* **OpenAPI Specification (OAS) File:** You will need the OAS file for the SMS API. You can find and download it from the **[Send SMS API Reference](https://8x8-enterprise-group.readme.io/connect/reference/getting-started-with-sms-api)** page.
+* **OpenAPI Specification (OAS) File:** You will need the OAS file for the SMS API. You can find and download it from the **[Send SMS API Reference](https://8x8-enterprise-group.readme.io/connect/docs/getting-started-with-sms-api)** page.
 
 ---
 
@@ -86,9 +86,9 @@ Now, we will use your SMS OAS file to teach Salesforce about the specific API ca
 4. Configure the service:
   * **Service Name**: `CPaaSSMS`
   * **Named Credential**: Select the **`8x8 SMS API`** Named Credential you just created.
-  * **Service Schema**: Select **Complete JSON** and upload your SMS-specific [OAS](https://8x8-enterprise-group.readme.io/connect/reference/getting-started-with-sms-api) `.json` file.
+  * **Service Schema**: Select **Complete JSON** and upload your SMS-specific [OAS](https://8x8-enterprise-group.readme.io/connect/docs/getting-started-with-sms-api) `.json` file.
   * **Service Schema**:
-    * Select Upload from local and upload the complete [OAS](https://8x8-enterprise-group.readme.io/connect/reference/getting-started-with-sms-api) `.json` file **or**
+    * Select Upload from local and upload the complete [OAS](https://8x8-enterprise-group.readme.io/connect/docs/getting-started-with-sms-api) `.json` file **or**
     * Select "Complete Schema" and paste the schema below (contains only send single SMS and send batch SMS)
 5.
 

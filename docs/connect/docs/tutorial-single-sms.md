@@ -6,13 +6,13 @@
 
 8x8 offers different API methods that allow you to send SMS programmatically.  
 
-In this tutorial, we are going to cover the simplest method: [Send SMS](/connect/reference/send-sms)  
+In this tutorial, we are going to cover the simplest method: [Send SMS](/connect/reference/send-sms-single)  
 
 It is used to send SMS one by one.  
 
 We also offer bulk methods that allow sending multiple SMS in one command - for more information, check the following methods in the documentation:  
 
-[Send SMS batch](/connect/reference/send-sms-batch) and [Send SMS batch (compact)](/connect/reference/send-sms-batch-compact)  
+[Send Many SMS](/connect/reference/send-many-sms)  
 
 If you follow the different steps of this tutorial, you will get to send an SMS directly from your command line utility using a simple curl command.
 
@@ -102,7 +102,7 @@ At the end of the section, we will generate a curl command to send an SMS direct
 ##### Remarks
 
 * We are going to send a POST request to the 8x8 API single URL endpoint.
-* As detailed in the [Send SMS](/connect/reference/send-sms) , the URL is defined by the following pattern: `https://sms.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+* As detailed in the [Send SMS](/connect/reference/send-sms-single) , the URL is defined by the following pattern: `https://sms.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 ##### Tutorial URL
 
@@ -247,7 +247,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages \
   * **destination**: this is the phone number to which the SMS was sent.
   * **encoding**: this is the encoding used to send the message, it depends on the character set to use for the content. Here GSM7 is the standard when no UNICODE character is required.
   * **status**: this array contains 2 elements: the status of the message and the description of this status
-* For more information, check the dedicated section of the [Send SMS](/connect/reference/send-sms), "Response" section in the right panel.
+* For more information, check the dedicated section of the [Send SMS](/connect/reference/send-sms-single), "Response" section in the right panel.
 
 #### II. API errors
 

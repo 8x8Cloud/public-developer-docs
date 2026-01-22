@@ -40,7 +40,7 @@ For Messaging Apps and Voice, you can customize your configuration for each type
 ![image](../images/c138b61a28c32ba9e5bb300b2bc76c8823e424f6d262270ec9e7ef78deb41863-image.png)
 The **HTTP Authorization** field is an **optional** parameter, in case your webhook requires authentication.
 
-Webhooks can also be managed via API, [here](/connect/reference/get-webhooks-1) for ChatApps and [here](/connect/reference/get-webhooks-2) for SMS, and [here](/connect/reference/get-webhooks-information-1) for Voice.
+Webhooks can also be managed via API, [here](/connect/reference/get-webhooks-1) for ChatApps and [here](/connect/reference/get-webhooks-2) for SMS, and [here](/connect/reference/get-webhooks-information) for Voice.
 
 ## IP Whitelisting
 

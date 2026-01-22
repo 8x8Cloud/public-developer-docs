@@ -94,6 +94,112 @@ const sidebarConfig = [
   },
   {
     type: 'category',
+    label: 'Voice',
+    collapsed: true,
+    items: [
+      'connect/docs/voice/overview',
+      {
+        type: 'category',
+        label: 'WhatsApp Business Calling',
+        collapsed: true,
+        items: [
+          'connect/docs/voice/whatsapp-business-calling/whatsapp-business-calling-overview',
+          'connect/docs/voice/whatsapp-business-calling/whatsapp-business-calling-user-initiated',
+          'connect/docs/voice/whatsapp-business-calling/whatsapp-business-calling-business-initiated',
+          'connect/docs/voice/whatsapp-business-calling/whatsapp-business-calling-scenarios',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Voice Messaging',
+        collapsed: true,
+        items: [
+          'connect/docs/voice/voice-messaging/voice-messaging-guide',
+          'connect/docs/voice/voice-messaging/session-status',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'IVR',
+        collapsed: true,
+        items: [
+          'connect/docs/voice/ivr/ivr-introduction',
+          'connect/docs/voice/ivr/simple-ivr',
+          'connect/docs/voice/ivr/advanced-ivr',
+          'connect/docs/voice/ivr/call-action-handling',
+          'connect/docs/voice/ivr/webhook-setup-guide-for-ivr',
+          'connect/docs/voice/ivr/session-summary-ivr',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Number Masking',
+        collapsed: true,
+        items: [
+          'connect/docs/voice/number-masking/getting-started-with-number-masking',
+          'connect/docs/voice/number-masking/how-number-masking-protects-customer-privacy',
+          'connect/docs/voice/number-masking/call-action-handling',
+          'connect/docs/voice/number-masking/session-summary-number-masking',
+          'connect/docs/voice/number-masking/number-masking-call-status',
+          'connect/docs/voice/number-masking/number-masking-call-recordings',
+          'connect/docs/voice/number-masking/virtual-number-updated',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Voice SDK',
+        collapsed: true,
+        items: [
+          'connect/docs/voice/voice-sdk/voice-sdk-overview',
+          {
+            type: 'category',
+            label: 'Android - Integrating the SDK',
+            link: { type: 'doc', id: 'connect/docs/voice/voice-sdk/voice-sdk-android-integrating' },
+            collapsed: true,
+            items: [
+              'connect/docs/voice/voice-sdk/voice-sdk-using',
+              'connect/docs/voice/voice-sdk/voice-sdk-api-specification-android',
+            ],
+          },
+          {
+            type: 'category',
+            label: 'iOS - Integrating the SDK',
+            link: { type: 'doc', id: 'connect/docs/voice/voice-sdk/voice-sdk-ios-integrating' },
+            collapsed: true,
+            items: [
+              'connect/docs/voice/voice-sdk/voice-sdk-using-ios',
+              'connect/docs/voice/voice-sdk/voice-sdk-api-specification-ios',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Webhooks',
+        collapsed: true,
+        items: [
+          'connect/docs/voice/webhook-guides/webhooks-overview',
+          'connect/docs/voice/webhook-guides/voice-call-action-webhook-guide',
+          'connect/docs/voice/webhook-guides/voice-session-summary-webhook',
+          'connect/docs/voice/voice-messaging/session-status',
+          'connect/docs/voice/ivr/session-summary-ivr',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Status and Error Codes Guide',
+        collapsed: true,
+        items: [
+          'connect/docs/voice/error-codes/voice-status-codes',
+          'connect/docs/voice/error-codes/voice-error-codes',
+          'connect/docs/voice/error-codes/number-masking-error-codes',
+        ],
+      },
+    ],
+  },  
+
+  {
+    type: 'category',
     label: 'Connect Portal',
     collapsed: true,
     items: [
@@ -302,34 +408,6 @@ const sidebarConfig = [
       },
       'connect/docs/zendesk-support',
       'connect/docs/zendesk-notifications-webhooks',
-    ],
-  },
-  {
-    type: 'category',
-    label: 'Voice SDK',
-    collapsed: true,
-    items: [
-      'connect/docs/overview',
-      {
-        type: 'category',
-        label: 'Android - Integrating the SDK',
-        link: { type: 'doc', id: 'connect/docs/android-integrating-the-sdk' },
-        collapsed: true,
-        items: [
-          'connect/docs/using-the-sdk',
-          'connect/docs/api-specification-android',
-        ],
-      },
-      {
-        type: 'category',
-        label: 'iOS - Integrating the SDK',
-        link: { type: 'doc', id: 'connect/docs/ios-integrating-the-sdk' },
-        collapsed: true,
-        items: [
-          'connect/docs/using-the-ios-sdk',
-          'connect/docs/api-specification-ios',
-        ],
-      },
     ],
   },
   {

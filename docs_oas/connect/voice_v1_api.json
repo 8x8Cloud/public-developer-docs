@@ -45,7 +45,9 @@
   "paths": {
     "/api/v1/subaccounts/{subAccountId}/callflows": {
       "post": {
-        "tags": ["Voice Messaging"],
+        "tags": [
+          "Voice Messaging"
+        ],
         "summary": "Send Callflow",
         "operationId": "Send-Callflow",
         "parameters": [
@@ -72,187 +74,14 @@
                           "type": "object",
                           "anyOf": [
                             {
-                              "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubaccountId%7D~1callflows/post/requestBody/content/application~1json/schema/anyOf/0/properties/callflow/items/anyOf/0"
-                            },
-                            {
-                              "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubaccountId%7D~1callflows/post/requestBody/content/application~1json/schema/anyOf/0/properties/callflow/items/anyOf/1"
-                            },
-                            {
-                              "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubaccountId%7D~1callflows/post/requestBody/content/application~1json/schema/anyOf/0/properties/callflow/items/anyOf/3"
-                            },
-                            {
-                              "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubaccountId%7D~1callflows/post/requestBody/content/application~1json/schema/anyOf/0/properties/callflow/items/anyOf/4"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "default": {
-                      "validUntil": "2024-07-03T05:59:32.226Z",
-                      "callflow": [
-                        {
-                          "action": "makeCall",
-                          "params": {
-                            "source": "6512345678",
-                            "destination": "6590000000"
-                          }
-                        },
-                        {
-                          "action": "say",
-                          "params": {
-                            "text": "Hi, This is a test message from 8x8",
-                            "voiceProfile": "en-GB-Emma",
-                            "repetition": 1,
-                            "speed": 1
-                          }
-                        },
-                        {
-                          "action": "hangup"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          },
-          "description": "- To send a Voice callflow Message using the 8x8 Voice Message API you need to POST a JSON object to the url defined above.\n- Additionally it is required to set either a language code or a voice profile in the request, to guarantee the correct pronunciation of the voice message. \n- The JSON object takes the following properties:\n"
-        },
-        "responses": {
-          "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubaccountId%7D~1callflows/post/responses"
-        },
-        "description": "* Note for all api request that has a source param, CLID whitelisting is mandatory, please reach out to your account manager or email cpaas-support@8x8.com if you have a voice account with 8x8 CPaaaS.\n\n* We currently support:\n  - Say (Sending a text to speech message)\n  - PlayFile (To play an audio file during the call)"
-      }
-    },
-    "/api/v1/subaccounts/{subAccountId}/speech-profiles": {
-      "get": {
-        "tags": ["Voice Profile API"],
-        "summary": "Get speech profiles for your account",
-        "operationId": "get voice profile information",
-        "parameters": [
-          {
-            "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1numbers/get/parameters/0"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request succeeded",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "speechProfiles": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "speechProfileCode": {
-                            "type": "string",
-                            "description": "The unique code for the speech profile."
-                          },
-                          "localeCode": {
-                            "type": "string",
-                            "description": "The locale code for the speech profile."
-                          },
-                          "localeDescription": {
-                            "type": "string",
-                            "description": "The locale description for the speech profile."
-                          },
-                          "gender": {
-                            "type": "string",
-                            "description": "The gender of the voice profile."
-                          }
-                        }
-                      }
-                    },
-                    "statusCode": {
-                      "type": "integer"
-                    },
-                    "statusMessage": {
-                      "type": "string"
-                    }
-                  },
-                  "example": {
-                    "speechProfiles": [
-                      {
-                        "speechProfileCode": "en-US-Standard-A",
-                        "localeCode": "en-US",
-                        "localeDescription": "EnglishUS",
-                        "gender": "F"
-                      },
-                      {
-                        "speechProfileCode": "da-DK-Naja",
-                        "localeCode": "da-DK",
-                        "localeDescription": "Danish",
-                        "gender": "F"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "API key not found or invalid"
-          },
-          "403": {
-            "description": "Resource not accessible"
-          },
-          "404": {
-            "description": "Resource not found"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        }
-      }
-    },
-    "/api/v1/subaccounts/{subaccountId}/callflows": {
-      "post": {
-        "tags": ["IVR"],
-        "summary": "Send Callflow",
-        "operationId": "IVR-Send-Callflow",
-        "description": "* Note for all api request that has a source param, CLID whitelisting is mandatory, please reach out to your account manager or email cpaas-support@8x8.com if you have a voice account with 8x8 CPaaaS.\n\n* Callflows API allows you to\n  - Create an IVR flow\n  - Voice Message\n  - Your defined call scenarios using our callflow objects",
-        "parameters": [
-          {
-            "name": "subaccountId",
-            "in": "path",
-            "description": "You must replace {subaccountId} with the subaccountid that you want to use. By default this is generated once you have completed the voice onboarding.",
-            "required": true,
-            "schema": {
-              "maxLength": 50,
-              "minLength": 3,
-              "pattern": "^[A-Za-z0-9\\-._&]{3,50}$",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "anyOf": [
-                  {
-                    "title": "Callflow Request",
-                    "type": "object",
-                    "properties": {
-                      "validUntil": {
-                        "type": "string",
-                        "description": "Optional date time. format: YYYY-MM-DDTHH:MM:SS.SSSZ"
-                      },
-                      "callflow": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "anyOf": [
-                            {
                               "title": "MakeCall",
                               "type": "object",
                               "properties": {
                                 "action": {
                                   "type": "string",
-                                  "enum": ["makeCall"],
+                                  "enum": [
+                                    "makeCall"
+                                  ],
                                   "description": "makeCall enables you to create an outbound voice call to a specified destination with the caller id \nspecified as source. Once the call is answered by the receiving party, the rest of the callflow actions \nwill be executed in sequence. If two makeCall actions are used in the same callflow, the 2nd call will be\nbridged to the 1st call once answered. Currently, we do not support call conferencing, so the maximum \nallowed makeCall actions in a callflow is 2."
                                 },
                                 "params": {
@@ -270,7 +99,10 @@
                                     }
                                   },
                                   "maxProperties": 2,
-                                  "required": ["source", "destination"]
+                                  "required": [
+                                    "source",
+                                    "destination"
+                                  ]
                                 }
                               }
                             },
@@ -281,7 +113,9 @@
                               "properties": {
                                 "action": {
                                   "type": "string",
-                                  "enum": ["say"],
+                                  "enum": [
+                                    "say"
+                                  ],
                                   "description": "Say enables you to convert the given text into a speech and play it in the currently active call."
                                 },
                                 "params": {
@@ -309,7 +143,10 @@
                                     }
                                   },
                                   "maxProperties": 5,
-                                  "required": ["text", "voiceProfile"]
+                                  "required": [
+                                    "text",
+                                    "voiceProfile"
+                                  ]
                                 }
                               }
                             },
@@ -319,7 +156,9 @@
                               "properties": {
                                 "action": {
                                   "type": "string",
-                                  "enum": ["sayAndCapture"],
+                                  "enum": [
+                                    "sayAndCapture"
+                                  ],
                                   "description": "sayAndCapture - Plays a voice file in to the call and then captures users DTMF input and reports back the \nDTMF via Voice Call Action (VCA) webhook. https://developer.8x8.com/connect/reference/voice-call-action-webhook"
                                 },
                                 "params": {
@@ -330,7 +169,7 @@
                                       "description": "The message body content to be converted to voice. Maximum voice message length is 3000 characters"
                                     },
                                     "voiceProfile": {
-                                      "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubaccountId%7D~1callflows/post/requestBody/content/application~1json/schema/anyOf/0/properties/callflow/items/anyOf/1/properties/params/properties/voiceProfile"
+                                      "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1callflows/post/requestBody/content/application~1json/schema/anyOf/0/properties/callflow/items/anyOf/1/properties/params/properties/voiceProfile"
                                     },
                                     "speed": {
                                       "type": "integer",
@@ -387,7 +226,10 @@
                                   }
                                 }
                               },
-                              "required": ["promptMessage", "voiceProfile"]
+                              "required": [
+                                "promptMessage",
+                                "voiceProfile"
+                              ]
                             },
                             {
                               "title": "PlayFile",
@@ -395,7 +237,9 @@
                               "properties": {
                                 "action": {
                                   "type": "string",
-                                  "enum": ["playFile"],
+                                  "enum": [
+                                    "playFile"
+                                  ],
                                   "description": "playFile enables you to send an audio recording to an end user."
                                 },
                                 "params": {
@@ -410,7 +254,9 @@
                                       "description": "No of times to repeat the audio file content. Accepted values are 1, 2 or 3. Default is 1 (no repeat)."
                                     }
                                   },
-                                  "required": ["fileUrl"]
+                                  "required": [
+                                    "fileUrl"
+                                  ]
                                 }
                               },
                               "example": {
@@ -425,7 +271,9 @@
                               "properties": {
                                 "action": {
                                   "type": "string",
-                                  "enum": ["hangup"],
+                                  "enum": [
+                                    "hangup"
+                                  ],
                                   "description": "Hangup - Disconnects all active calls. This will terminate the session, triggering the session summary webhook."
                                 }
                               }
@@ -435,14 +283,35 @@
                       }
                     },
                     "default": {
-                      "validUntil": "2024-07-03T05:59:32.226Z"
+                      "validUntil": "2024-07-03T05:59:32.226Z",
+                      "callflow": [
+                        {
+                          "action": "makeCall",
+                          "params": {
+                            "source": "6512345678",
+                            "destination": "6590000000"
+                          }
+                        },
+                        {
+                          "action": "say",
+                          "params": {
+                            "text": "Hi, This is a test message from 8x8",
+                            "voiceProfile": "en-GB-Emma",
+                            "repetition": 1,
+                            "speed": 1
+                          }
+                        },
+                        {
+                          "action": "hangup"
+                        }
+                      ]
                     }
                   }
                 ]
               }
             }
           },
-          "description": "- To send a CallFlows using the 8x8 CallFlows API you need to POST a JSON object to the url defined above.\n- Additionally it is required to set either a language code or a voice profile in the request, to guarantee the correct pronunciation of the voice message. \n- The JSON object takes the following properties:\n"
+          "description": "- To send a Voice callflow Message using the 8x8 Voice Message API you need to POST a JSON object to the url defined above.\n- Additionally it is required to set either a language code or a voice profile in the request, to guarantee the correct pronunciation of the voice message. \n- The JSON object takes the following properties:\n"
         },
         "responses": {
           "200": {
@@ -559,7 +428,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubaccountId%7D~1callflows/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1callflows/post/responses/400/content/application~1json/schema"
                 },
                 "examples": {
                   "response": {
@@ -579,7 +448,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubaccountId%7D~1callflows/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1callflows/post/responses/400/content/application~1json/schema"
                 },
                 "examples": {
                   "response": {
@@ -599,7 +468,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubaccountId%7D~1callflows/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1callflows/post/responses/400/content/application~1json/schema"
                 },
                 "examples": {
                   "response": {
@@ -619,7 +488,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubaccountId%7D~1callflows/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1callflows/post/responses/400/content/application~1json/schema"
                 },
                 "examples": {
                   "response": {
@@ -634,14 +503,103 @@
               }
             }
           }
+        },
+        "description": "**Note:** For all API requests that include a `source` parameter, CLID whitelisting is mandatory. Please contact your account manager or email cpaas-support@8x8.com if you have a voice account with 8x8 CPaaS.\n\n## Use Cases\n\nThe Callflows API enables you to build sophisticated voice solutions:\n\n**Interactive Voice Response (IVR)**\n\nCreate interactive menu systems with DTMF capture, conditional routing, and voice prompts.\n- [Simple IVR Guide](/connect/docs/voice/ivr/simple-ivr-guide) - Basic IVR implementation\n- [Advanced IVR Guide](/connect/docs/voice/ivr/advanced-ivr-guide) - Complex IVR with conditional logic\n\n**Voice Messaging**\n\nDeliver automated voice messages using text-to-speech (TTS) or pre-recorded audio files.\n- [Voice Messaging Guide](/connect/docs/voice/voice-messaging/voice-messaging-guide)\n\n**Custom Call Scenarios**\n\nBuild tailored call flows by combining multiple actions (makeCall, say, playFile, sayAndCapture, hangup) to meet your specific business requirements.\n\n---\n\n## API Examples\n\n### Example 1: IVR with DTMF Capture\n\n```json\n{\n  \"callflow\": [\n    {\n      \"action\": \"makeCall\",\n      \"params\": {\n        \"source\": \"+6588000000\",\n        \"destination\": \"+6590000000\"\n      }\n    },\n    {\n      \"action\": \"sayAndCapture\",\n      \"params\": {\n        \"promptMessage\": \"Press 1 for Sales, Press 2 for Support\",\n        \"voiceProfile\": \"en-US-Neural2-C\",\n        \"minDigits\": 1,\n        \"maxDigits\": 1,\n        \"digitTimeout\": 5000,\n        \"completeOnHash\": false\n      }\n    }\n  ]\n}\n```\n\n### Example 2: Voice Message (Text-to-Speech)\n\n```json\n{\n  \"callflow\": [\n    {\n      \"action\": \"makeCall\",\n      \"params\": {\n        \"source\": \"+6588000000\",\n        \"destination\": \"+6590000000\"\n      }\n    },\n    {\n      \"action\": \"say\",\n      \"params\": {\n        \"text\": \"Hello, this is a reminder about your appointment tomorrow at 2 PM.\",\n        \"voiceProfile\": \"en-GB-Emma\",\n        \"repetition\": 1,\n        \"speed\": 1\n      }\n    },\n    {\n      \"action\": \"hangup\"\n    }\n  ]\n}\n```\n\n### Example 3: Voice Message (Audio File)\n\n```json\n{\n  \"callflow\": [\n    {\n      \"action\": \"makeCall\",\n      \"params\": {\n        \"source\": \"+6588000000\",\n        \"destination\": \"+6590000000\"\n      }\n    },\n    {\n      \"action\": \"playFile\",\n      \"params\": {\n        \"fileUrl\": \"https://example.com/audio/notification.mp3\",\n        \"repetition\": 1\n      }\n    },\n    {\n      \"action\": \"hangup\"\n    }\n  ]\n}\n```"
+      }
+    },
+    "/api/v1/subaccounts/{subAccountId}/speech-profiles": {
+      "get": {
+        "tags": [
+          "Voice Profile API"
+        ],
+        "summary": "Get speech profiles for your account",
+        "operationId": "get-voice-profile-information",
+        "parameters": [
+          {
+            "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1numbers/get/parameters/0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "speechProfiles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "speechProfileCode": {
+                            "type": "string",
+                            "description": "The unique code for the speech profile."
+                          },
+                          "localeCode": {
+                            "type": "string",
+                            "description": "The locale code for the speech profile."
+                          },
+                          "localeDescription": {
+                            "type": "string",
+                            "description": "The locale description for the speech profile."
+                          },
+                          "gender": {
+                            "type": "string",
+                            "description": "The gender of the voice profile."
+                          }
+                        }
+                      }
+                    },
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "statusMessage": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "speechProfiles": [
+                      {
+                        "speechProfileCode": "en-US-Standard-A",
+                        "localeCode": "en-US",
+                        "localeDescription": "EnglishUS",
+                        "gender": "F"
+                      },
+                      {
+                        "speechProfileCode": "da-DK-Naja",
+                        "localeCode": "da-DK",
+                        "localeDescription": "Danish",
+                        "gender": "F"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "API key not found or invalid"
+          },
+          "403": {
+            "description": "Resource not accessible"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
         }
       }
     },
     "/api/v1/subaccounts/{subAccountId}/webhooks": {
       "get": {
-        "tags": ["Webhooks API"],
+        "tags": [
+          "Webhooks API"
+        ],
         "summary": "Get webhook information for your account",
-        "operationId": "get webhooks information 1",
+        "operationId": "get-webhooks-information",
         "parameters": [
           {
             "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1numbers/get/parameters/0"
@@ -726,9 +684,11 @@
         ]
       },
       "post": {
-        "tags": ["Webhooks API"],
+        "tags": [
+          "Webhooks API"
+        ],
         "summary": "Create a new webhook",
-        "operationId": "Create a new webhook 1",
+        "operationId": "create-a-new-webhook",
         "parameters": [
           {
             "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1numbers/get/parameters/0"
@@ -744,8 +704,14 @@
                   "type": {
                     "type": "string",
                     "nullable": false,
-                    "enum": ["VCS", "VCA", "VSS", "VRU"],
-                    "description": "Type of the webhooks: \nVCA: Voice Call Action (for more details please visit https://developer.8x8.com/connect/reference/call-action-handle) \nVCS: Voice Call Summary (for more details please visit https://developer.8x8.com/connect/reference/call-status) \nVSS: Voice Session Summary (for more details please visit https://developer.8x8.com/connect/reference/session-status) \nVRU: Voice Recording URL (for more details please visit https://developer.8x8.com/connect/reference/call-recordings)\n"
+                    "enum": [
+                      "VCS",
+                      "VCA",
+                      "VSS",
+                      "VRU",
+                      "VNU"
+                    ],
+                    "description": "Webhook type:\n\n- **VCA** (Voice Call Action) - [Webhook Guide](/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide)\n- **VSS** (Voice Session Summary) - [Overview](/connect/docs/voice/webhook-guides/voice-session-summary-webhook) | [IVR](/connect/docs/voice/ivr/session-summary) | [Voice Messaging](/connect/docs/voice/voice-messaging/session-status) | [Number Masking](/connect/docs/voice/number-masking/session-summary)\n- **VCS** (Voice Call Status) - [Webhook Guide](/connect/docs/voice/number-masking/call-status)\n- **VRU** (Voice Recording Uploaded) - [Webhook Guide](/connect/docs/voice/number-masking/call-recordings)\n- **VNU** (Virtual Number Updated) - [Webhook Guide](/connect/docs/voice/number-masking/virtual-number-updated)"
                   },
                   "url": {
                     "type": "string",
@@ -871,9 +837,11 @@
     },
     "/api/v1/subaccounts/{subAccountId}/webhooks/{webhook-type}": {
       "delete": {
-        "tags": ["Webhooks API"],
+        "tags": [
+          "Webhooks API"
+        ],
         "summary": "Delete a specific type of webhook",
-        "operationId": "Delete a specific type of webhook 1",
+        "operationId": "delete-a-specific-type-of-webhook",
         "parameters": [
           {
             "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1numbers/get/parameters/0"
@@ -885,7 +853,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["VCS", "VCA", "VSS", "VRU"]
+              "enum": [
+                "VCS",
+                "VCA",
+                "VSS",
+                "VRU"
+              ]
             }
           }
         ],
@@ -942,9 +915,11 @@
     },
     "/api/v1/subaccounts/{subAccountId}/recording-push-config": {
       "get": {
-        "tags": ["Recording API"],
+        "tags": [
+          "Recording API"
+        ],
         "summary": "Get recording push config for your account",
-        "operationId": "get recording push config information",
+        "operationId": "get-recording-push-config-information",
         "parameters": [
           {
             "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1numbers/get/parameters/0"
@@ -1025,9 +1000,11 @@
         }
       },
       "post": {
-        "tags": ["Recording API"],
+        "tags": [
+          "Recording API"
+        ],
         "summary": "Create a new recording push config",
-        "operationId": "Create a new recording push config",
+        "operationId": "create-a-new-recording-push-config",
         "parameters": [
           {
             "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1numbers/get/parameters/0"
@@ -1173,9 +1150,11 @@
         ]
       },
       "delete": {
-        "tags": ["Recording API"],
+        "tags": [
+          "Recording API"
+        ],
         "summary": "Delete recording push config",
-        "operationId": "Delete recording push config",
+        "operationId": "delete-recording-push-config",
         "parameters": [
           {
             "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1numbers/get/parameters/0"
@@ -1214,9 +1193,11 @@
     },
     "/api/v1/subaccounts/{subAccountId}/recordings/{sessionId}": {
       "get": {
-        "tags": ["Recording API"],
+        "tags": [
+          "Recording API"
+        ],
         "summary": "Get recording status",
-        "operationId": "get recording status information",
+        "operationId": "get-recording-status-information",
         "parameters": [
           {
             "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1numbers/get/parameters/0"
@@ -1444,7 +1425,9 @@
             }
           }
         },
-        "tags": ["Virtual Number Management API"],
+        "tags": [
+          "Virtual Number Management API"
+        ],
         "security": [
           {
             "apiKey": []
@@ -1513,7 +1496,7 @@
             }
           },
           "404": {
-            "description": "In case that Virtual Number does not exist or can’t be found, the JSON response will contain a code and message value to explain what is wrong.\nThe following is an example of bad response:\n",
+            "description": "In case that Virtual Number does not exist or can\u2019t be found, the JSON response will contain a code and message value to explain what is wrong.\nThe following is an example of bad response:\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -1535,7 +1518,9 @@
             }
           }
         },
-        "tags": ["Virtual Number Management API"],
+        "tags": [
+          "Virtual Number Management API"
+        ],
         "security": [
           {
             "apiKey": []
@@ -1545,7 +1530,9 @@
     },
     "/api/v1/subaccounts/{subAccountId}/messages/exports": {
       "post": {
-        "tags": ["Reporting API"],
+        "tags": [
+          "Reporting API"
+        ],
         "summary": "Start log export job",
         "description": "* Sending a **POST** request on this endpoint allows to **request an Voice logs file**.\n\n### URL\n\nThe 8x8 Voice `subAccountId` needs to be provided in the URL as shown below:\n`https://voice.wavecell.com/api/v1/subaccounts/{subAccountId}/messages/exports`\n\n> You must replace `{subAccountId}` in the URL above with the subaccountid that you want to use.",
         "operationId": "start-voice-log-export-job",
@@ -1589,7 +1576,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["jobId"],
+                  "required": [
+                    "jobId"
+                  ],
                   "type": "object",
                   "properties": {
                     "jobId": {
@@ -1614,7 +1603,9 @@
     },
     "/api/v1/subaccounts/{subAccountId}/messages/exports/{jobId}": {
       "get": {
-        "tags": ["Reporting API"],
+        "tags": [
+          "Reporting API"
+        ],
         "summary": "Get log export job result",
         "description": "* Sending a **GET** request on this endpoint allows to **check the status of an Voice Logs export job** and to **get a download link** if its generation has succeeded.\n\n  \n\n### URL\n\nTo define which Voice logs export you want to retrieve, you need to enter the Job ID generated by XXXXX in the path as well as the 8x8 subaccountid you used in the previous request.\n`https://voice.wavecell.com/api/v1/subaccounts/{subAccountID}/messages/exports/{jobId}`\n\n> You must replace `{jobID}`  and `{subAccountId}` in the URL above with the jobID and subaccountid from the start logs export job request",
         "operationId": "get-voice-log-export-job-result",
@@ -1702,7 +1693,9 @@
         ]
       },
       "delete": {
-        "tags": ["Reporting API"],
+        "tags": [
+          "Reporting API"
+        ],
         "summary": "Cancel the log export job ",
         "operationId": "cancel-voice-log-export-job",
         "parameters": [
