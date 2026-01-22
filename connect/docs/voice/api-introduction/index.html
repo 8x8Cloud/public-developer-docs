@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-connect/docs/voice/api-introduction" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">Voice API – Introduction | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/voice/api-introduction"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Voice API – Introduction | 8x8 Developer Portal"><meta data-rh="true" name="description" content="The 8x8 Voice API lets you programmatically make and control calls using JSON callflows."><meta data-rh="true" property="og:description" content="The 8x8 Voice API lets you programmatically make and control calls using JSON callflows."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/voice/api-introduction"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/voice/api-introduction" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/voice/api-introduction" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.5ea60389.css">
+<script src="/assets/js/runtime~main.2c6f03a2.js" defer="defer"></script>
+<script src="/assets/js/main.0c98f4fa.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a class="navbar__item navbar__link" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a><a class="navbar__item navbar__link" href="/administration">Administration</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides" href="/connect/docs">Guides</a><a class="section-navigation__tab icon-references section-navigation__tab--active" href="/connect/reference">API Reference</a><a href="https://support.cpaas.8x8.com/hc/en-us" target="_blank" rel="noopener noreferrer" class="section-navigation__tab icon-support">Support</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/getting-started-with-sms-api"><span title="SMS API" class="categoryLinkLabel_W154">SMS API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/messaging-apps-api-get-started"><span title="Business Messaging API" class="categoryLinkLabel_W154">Business Messaging API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/verification-api-get-started"><span title="Verification API" class="categoryLinkLabel_W154">Verification API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible menu__list-item-collapsible--active"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" aria-current="page" href="/connect/docs/voice/api-introduction"><span title="Voice API" class="categoryLinkLabel_W154">Voice API</span></a><button aria-label="Collapse sidebar category &#x27;Voice API&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/connect/reference/send-callflow"><span title="Callflow API" class="categoryLinkLabel_W154">Callflow API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/connect/reference/get-voice-profile-information"><span title="Voice Profile API" class="categoryLinkLabel_W154">Voice Profile API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/connect/reference/get-recording-push-config-information"><span title="Recording API" class="categoryLinkLabel_W154">Recording API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/connect/reference/get-virtual-numbers"><span title="Virtual Number Management API" class="categoryLinkLabel_W154">Virtual Number Management API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/connect/reference/start-voice-log-export-job"><span title="Reporting API" class="categoryLinkLabel_W154">Reporting API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/connect/reference/get-webhooks-information"><span title="Webhooks API" class="categoryLinkLabel_W154">Webhooks API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/connect/docs/voice/error-codes/voice-error-codes-reference"><span title="Error Codes &amp; Status Reference" class="categoryLinkLabel_W154">Error Codes &amp; Status Reference</span></a></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/vi-introduction"><span title="Video Interaction API" class="categoryLinkLabel_W154">Video Interaction API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/getting-started-with-number-lookup-api"><span title="Number Lookup API" class="categoryLinkLabel_W154">Number Lookup API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/getting-started-with-automation-api"><span title="Automation API" class="categoryLinkLabel_W154">Automation API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/getting-started-with-contacts-api"><span title="Contacts API" class="categoryLinkLabel_W154">Contacts API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/api-error-codes"><span title="General API information" class="categoryLinkLabel_W154">General API information</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/smpp-connection"><span title="SMPP" class="categoryLinkLabel_W154">SMPP</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Voice API – Introduction</h1></header><div class="row"><div class="col col--12 markdown"><p>The 8x8 Voice API lets you programmatically <strong>make and control calls</strong> using <strong>JSON callflows</strong>.</p>
+<p>A single callflow model powers multiple voice products and patterns, including:</p>
+<ul>
+<li><strong>Voice Messaging</strong> (TTS and pre-recorded audio playback) — <a href="/connect/docs/voice/voice-messaging/voice-messaging-guide">Voice Messaging – Guide</a></li>
+<li><strong>IVR</strong> (DTMF menus via <code>sayAndCapture</code>) — <a href="/connect/docs/voice/ivr/ivr-introduction">IVR – Introduction</a></li>
+<li><strong>Outbound reminders, collections, and callbacks</strong> — built using callflows + webhooks (start with <a href="/connect/reference/ivr-send-callflow">Send Callflow</a>)</li>
+<li><strong>Number masking (call bridging)</strong> — two-leg call bridging patterns (start with <a href="/connect/docs/voice/number-masking/getting-started">Getting started with Number Masking</a>)</li>
+<li><strong>Voice apps integrated with your backend via webhooks</strong> — <a href="/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide">Voice Call Action webhook guide</a></li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="start-here-recommended-reading-order">Start here (recommended reading order)<a href="#start-here-recommended-reading-order" class="hash-link" aria-label="Direct link to Start here (recommended reading order)" title="Direct link to Start here (recommended reading order)" translate="no">​</a></h2>
+<p>If you&#x27;re new to Voice:</p>
+<ol>
+<li><strong>Understand callflows + actions</strong> (this page + reference)<!-- -->
+<ul>
+<li><a href="/connect/docs/voice/ivr/call-action-handling">Callflow Actions</a></li>
+</ul>
+</li>
+<li><strong>Send your first callflow</strong>
+<ul>
+<li><a href="/connect/reference/ivr-send-callflow">Send Callflow</a></li>
+</ul>
+</li>
+<li><strong>Add interactivity / logic</strong>
+<ul>
+<li><a href="/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide">Voice Call Action webhook guide</a></li>
+</ul>
+</li>
+<li><strong>Learn your use case end-to-end</strong>
+<ul>
+<li>IVR:  <a href="/connect/docs/voice/ivr/ivr-introduction">IVR – Introduction</a> → <a href="/connect/docs/voice/ivr/simple-ivr-guide">Simple IVR</a></li>
+<li>Voice Messaging: <a href="/connect/docs/voice/voice-messaging/voice-messaging-guide">Voice Messaging – Guide</a></li>
+<li>Number Masking: <a href="/connect/docs/voice/number-masking/getting-started">Getting started with Number Masking</a></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-core-endpoint--send-callflow">The core endpoint:  Send Callflow<a href="#the-core-endpoint--send-callflow" class="hash-link" aria-label="Direct link to The core endpoint:  Send Callflow" title="Direct link to The core endpoint:  Send Callflow" translate="no">​</a></h2>
+<p>All voice experiences start by sending a callflow to a subaccount:</p>
+<p><code>POST /api/v1/subaccounts/{subaccountId}/callflows</code></p>
+<p><strong>What it does</strong></p>
+<ul>
+<li>Starts a voice session and executes the callflow actions in order.</li>
+<li>The first action must be <code>makeCall</code> (this originates the first call leg and creates the session).</li>
+<li>Returns an immediate response indicating if the request was accepted.</li>
+</ul>
+<p><strong>API Response (immediate)</strong></p>
+<p>The Send Callflow API returns an immediate response with:</p>
+<ul>
+<li><strong>sessionStatus</strong>: <code>CREATED</code> (request accepted) or <code>NOT_CREATED</code> (request rejected)</li>
+<li><strong>sessionId</strong>: Unique identifier for the session (if created)</li>
+<li><strong>statusCode</strong>: Numeric code indicating the result</li>
+<li><strong>statusMessage</strong>: Human-readable message explaining the status</li>
+</ul>
+<p>Example success response:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;sessionId&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;d9874358-89ac-4c50-bbab-1eb634482a94&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;sessionStatus&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;CREATED&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;statusCode&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;statusMessage&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Created&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>Example failure response:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;sessionStatus&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;NOT_CREATED&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;statusCode&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">-1002</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;statusMessage&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Speech profile or language parameter invalid&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<blockquote>
+<p><strong>Note:</strong> This immediate response tells you if your request was <strong>accepted</strong>, not the final call outcome. For end-of-session results (answered, busy, failed, etc.), use the <a href="#vss--voice-session-summary-authoritative-final-outcome">Voice Session Summary webhook</a>.</p>
+</blockquote>
+<p><strong>Understanding Session Status</strong></p>
+<p>The <code>sessionStatus</code> field tracks a voice session through its lifecycle:</p>
+<ol>
+<li>
+<p><strong>Initial status</strong> (API response):</p>
+<ul>
+<li><code>CREATED</code> - Request accepted, session initiated</li>
+<li><code>NOT_CREATED</code> - Request rejected, check <code>statusCode</code> and <code>statusMessage</code> for reason</li>
+</ul>
+</li>
+<li>
+<p><strong>Final status</strong> (in VSS webhook after session ends):</p>
+<ul>
+<li><code>COMPLETED</code> - Call answered and completed successfully</li>
+<li><code>FAILED</code> - Call failed (busy, no answer, invalid number, etc.)</li>
+<li><code>CANCELLED</code> - Session cancelled before completion</li>
+</ul>
+</li>
+</ol>
+<p><strong>Where to track session status:</strong></p>
+<ul>
+<li><strong>Immediate status:</strong> Check API response <code>sessionStatus</code> (tells you if request was accepted)</li>
+<li><strong>Progress status:</strong> Use VCS (Voice Call Status) webhook for real-time updates (optional)</li>
+<li><strong>Final status:</strong> Use VSS (Voice Session Summary) webhook for authoritative end-of-session outcome</li>
+</ul>
+<p><strong>Example flow:</strong></p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">1. POST /api/v1/subaccounts/{id}/callflows</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   → Response: {&quot;sessionStatus&quot;: &quot;CREATED&quot;, &quot;sessionId&quot;: &quot;abc123&quot;}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. Call in progress...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   → VCS webhook: {&quot;status&quot;: &quot;RINGING&quot;} (optional, if configured)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   → VCS webhook: {&quot;status&quot;: &quot;ANSWERED&quot;} (optional, if configured)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">3. Call ends</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   → VSS webhook: {&quot;sessionStatus&quot;: &quot;COMPLETED&quot;, &quot;sessionId&quot;: &quot;abc123&quot;}</span><br></span></code></pre></div></div>
+<p><strong>Related documentation:</strong></p>
+<ul>
+<li><a href="/connect/docs/voice/voice-messaging/session-status">Session Status (Voice Messaging)</a> - Voice Messaging session status details</li>
+<li><a href="/connect/docs/voice/ivr/session-summary">Session Summary (IVR)</a> - IVR session outcomes</li>
+<li><a href="/connect/docs/voice/number-masking/session-summary">Session Summary (Number Masking)</a> - Number Masking session details</li>
+</ul>
+<p><strong>API reference</strong></p>
+<ul>
+<li>Voice Messaging entry:  <a href="/connect/reference/send-callflow">Send Callflow</a></li>
+<li>IVR entry: <a href="/connect/reference/ivr-send-callflow">Send Callflow (IVR)</a></li>
+</ul>
+<p><strong>Guides that use this endpoint</strong></p>
+<ul>
+<li><a href="/connect/docs/voice/voice-messaging/voice-messaging-guide">Voice Messaging – Guide</a></li>
+<li><a href="/connect/docs/voice/ivr/ivr-introduction">IVR – Introduction</a></li>
+<li><a href="/connect/docs/voice/ivr/simple-ivr-guide">Simple IVR</a></li>
+<li><a href="/connect/docs/voice/ivr/advanced-ivr-guide">Advanced IVR</a></li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> Number Masking does NOT use the Send Callflow API. Number Masking sessions start with inbound calls to virtual numbers, and your backend responds to <a href="/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide">VCA webhooks</a> with callflow JSON to bridge the call.</p>
+</blockquote>
+<blockquote>
+<p>Note: Any API request that uses a <code>source</code> (caller ID / CLID) requires <strong>CLID whitelisting</strong>. See the note on the Send Callflow reference page.
+If you need CLID enablement, follow the standard support path listed in the API reference.</p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="callflows--what-they-are">Callflows:  what they are<a href="#callflows--what-they-are" class="hash-link" aria-label="Direct link to Callflows:  what they are" title="Direct link to Callflows:  what they are" translate="no">​</a></h2>
+<p>A <strong>callflow</strong> is an ordered list of actions executed by the voice platform.</p>
+<p>Common action families include:</p>
+<ul>
+<li><code>makeCall</code>: originate a call leg (starts the session)</li>
+<li><code>say</code>: play TTS into the call</li>
+<li><code>playFile</code>: play an audio file (MP3/WAV hosted on HTTP/HTTPS URL)</li>
+<li><code>sayAndCapture</code>: play a prompt and capture DTMF input (IVR)</li>
+<li><code>hangup</code>: terminate the call/session</li>
+</ul>
+<p><strong>API reference</strong></p>
+<ul>
+<li><a href="/connect/docs/voice/ivr/call-action-handling">Callflow Actions</a> — authoritative action list + parameters.</li>
+</ul>
+<p><strong>Guides</strong></p>
+<ul>
+<li><a href="/connect/docs/voice/voice-messaging/voice-messaging-guide">Voice Messaging – Guide</a></li>
+<li><a href="/connect/docs/voice/ivr/simple-ivr-guide">Simple IVR</a></li>
+<li><a href="/connect/docs/voice/ivr/advanced-ivr-guide">Advanced IVR</a></li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="error-codes-how-to-debug-fast">Error codes (how to debug fast)<a href="#error-codes-how-to-debug-fast" class="hash-link" aria-label="Direct link to Error codes (how to debug fast)" title="Direct link to Error codes (how to debug fast)" translate="no">​</a></h2>
+<p>Voice errors typically show up in two places:</p>
+<ol>
+<li><strong>Synchronous API errors</strong> when sending a callflow (invalid schema, invalid parameters, authorization issues).</li>
+<li><strong>Asynchronous runtime outcomes</strong> (no answer, busy, routing/provider failures) delivered via callbacks/session outcomes.</li>
+</ol>
+<p>Use the error guides by product:</p>
+<ul>
+<li>
+<p><strong>IVR &amp; Voice Messaging error codes</strong>
+<a href="/connect/docs/voice/error-codes/voice-status-codes">IVR and Voice Messaging error codes</a></p>
+</li>
+<li>
+<p><strong>Number Masking error codes</strong>
+<a href="/connect/docs/voice/error-codes/number-masking-error-codes">Number Masking error codes</a></p>
+</li>
+</ul>
+<p><strong>How to use these effectively</strong></p>
+<ul>
+<li>Start from your request and response: <a href="/connect/reference/ivr-send-callflow">Send Callflow</a></li>
+<li>Correlate with callbacks and final outcome:<!-- -->
+<ul>
+<li>For interactive flows: <a href="/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide">Voice Call Action webhook guide</a></li>
+<li>For end-of-session outcomes: <a href="/connect/docs/voice/webhook-guides/voice-session-summary-webhook">Voice Session Summary</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="webhooks-how-voice-apps-become-dynamic">Webhooks: how voice apps become dynamic<a href="#webhooks-how-voice-apps-become-dynamic" class="hash-link" aria-label="Direct link to Webhooks: how voice apps become dynamic" title="Direct link to Webhooks: how voice apps become dynamic" translate="no">​</a></h2>
+<p>Webhooks allow the platform to call <strong>your backend</strong> to deliver events such as:</p>
+<ul>
+<li><strong>DTMF results</strong> from <code>sayAndCapture</code> (IVR selections)</li>
+<li><strong>call progress / call status</strong> events (when configured)</li>
+<li><strong>end-of-session summaries</strong> (final outcomes)</li>
+<li><strong>virtual number lifecycle events</strong> (number provisioning, configuration changes)</li>
+<li><strong>recording availability / recording status</strong> notifications (when enabled)</li>
+</ul>
+<p>Start here:</p>
+<ul>
+<li><a href="/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide">Voice Call Action webhook guide</a></li>
+<li><a href="/connect/docs/voice/webhook-guides/webhooks-overview">Webhooks Overview</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="webhook-types-youll-use-and-what-each-one-is-for">Webhook types you&#x27;ll use (and what each one is for)<a href="#webhook-types-youll-use-and-what-each-one-is-for" class="hash-link" aria-label="Direct link to Webhook types you&#x27;ll use (and what each one is for)" title="Direct link to Webhook types you&#x27;ll use (and what each one is for)" translate="no">​</a></h3>
+<p>Webhook type is chosen when you configure the webhook destination for your <strong>subaccount</strong>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="vca--voice-call-action-interactive-control-point">VCA — Voice Call Action (interactive control point)<a href="#vca--voice-call-action-interactive-control-point" class="hash-link" aria-label="Direct link to VCA — Voice Call Action (interactive control point)" title="Direct link to VCA — Voice Call Action (interactive control point)" translate="no">​</a></h4>
+<p><strong>Use it for</strong></p>
+<ul>
+<li>IVR menus and any scenario where your backend must decide &quot;what&#x27;s next&quot; during a live call.</li>
+</ul>
+<p><strong>Typical triggers</strong></p>
+<ul>
+<li><code>sayAndCapture</code> completes and delivers <strong>DTMF digits</strong>.</li>
+<li>Other in-call action decision points depending on your flow.</li>
+</ul>
+<p><strong>What you do</strong></p>
+<ul>
+<li>Parse the payload (DTMF/event data).</li>
+<li>Respond with the next callflow step (continue menu, branch, bridge, or hang up).</li>
+</ul>
+<p>Links:</p>
+<ul>
+<li>Guide: <a href="/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide">Voice Call Action webhook guide</a></li>
+<li>Reference: <a href="/connect/docs/voice/ivr/call-action-handling">Call Action Handling (IVR)</a></li>
+<li>Setup: <a href="/connect/docs/voice/ivr/webhook-setup-guide-for-ivr">Webhook Setup Guide for IVR</a></li>
+<li>Example: <a href="/connect/docs/voice/ivr/simple-ivr-guide">Simple IVR</a></li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="vss--voice-session-summary-authoritative-final-outcome">VSS — Voice Session Summary (authoritative final outcome)<a href="#vss--voice-session-summary-authoritative-final-outcome" class="hash-link" aria-label="Direct link to VSS — Voice Session Summary (authoritative final outcome)" title="Direct link to VSS — Voice Session Summary (authoritative final outcome)" translate="no">​</a></h4>
+<p><strong>Use it for</strong></p>
+<ul>
+<li>Reliable end-of-session record for analytics, reconciliation, retries, and customer reporting.</li>
+</ul>
+<p><strong>What you do</strong></p>
+<ul>
+<li>Treat this as the final outcome signal.</li>
+<li>Persist results keyed by <code>sessionId</code>.</li>
+<li>Correlate outcomes with the relevant error code guides.</li>
+</ul>
+<p>Links:</p>
+<ul>
+<li>Guide: <a href="/connect/docs/voice/webhook-guides/voice-session-summary-webhook">Voice Session Summary</a></li>
+<li>Payload Reference: <a href="/connect/docs/voice/voice-messaging/session-status">Session Summary (Voice Messaging)</a></li>
+<li>Payload Reference: <a href="/connect/docs/voice/ivr/session-summary">Session Summary (IVR)</a></li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="vcs--voice-call-status-progress-telemetry">VCS — Voice Call Status (progress telemetry)<a href="#vcs--voice-call-status-progress-telemetry" class="hash-link" aria-label="Direct link to VCS — Voice Call Status (progress telemetry)" title="Direct link to VCS — Voice Call Status (progress telemetry)" translate="no">​</a></h4>
+<p><strong>Use it for</strong></p>
+<ul>
+<li>Near-real-time progress updates (ringing/answered/disconnected), especially for UI status or live monitoring.</li>
+</ul>
+<p><strong>What you do</strong></p>
+<ul>
+<li>Log as timeline telemetry (idempotent, best-effort, do not assume ordering).</li>
+<li>Do not use as the final source of truth (use session summary for final outcomes).</li>
+</ul>
+<p>Link:</p>
+<ul>
+<li>Reference: <a href="/connect/docs/voice/number-masking/call-status">Call Status (Number Masking)</a></li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="vnu--virtual-number-updated-number-lifecycle-events">VNU — Virtual Number Updated (number lifecycle events)<a href="#vnu--virtual-number-updated-number-lifecycle-events" class="hash-link" aria-label="Direct link to VNU — Virtual Number Updated (number lifecycle events)" title="Direct link to VNU — Virtual Number Updated (number lifecycle events)" translate="no">​</a></h4>
+<p><strong>Use it for</strong></p>
+<ul>
+<li>Track lifecycle events for virtual numbers assigned to your subaccount (number provisioning, configuration changes, deactivation).</li>
+</ul>
+<p><strong>What you do</strong></p>
+<ul>
+<li>Update your internal number inventory when virtual numbers are added, modified, or removed.</li>
+<li>Sync number availability for inbound routing, masking pools, or customer assignments.</li>
+</ul>
+<p>Link:</p>
+<ul>
+<li>Guide: <a href="/connect/docs/virtual-number-updated-event">Virtual Number Updated Event</a></li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="vru--recording-notifications-recording-status--availability">VRU — Recording notifications (recording status / availability)<a href="#vru--recording-notifications-recording-status--availability" class="hash-link" aria-label="Direct link to VRU — Recording notifications (recording status / availability)" title="Direct link to VRU — Recording notifications (recording status / availability)" translate="no">​</a></h4>
+<p><strong>Use it for</strong></p>
+<ul>
+<li>Recording workflows where you need a callback when recording assets are available or upload completes.</li>
+</ul>
+<p><strong>What you do</strong></p>
+<ul>
+<li>Update your systems when recording status changes.</li>
+<li>Optionally query recording status endpoints for verification.</li>
+</ul>
+<p>Links:</p>
+<ul>
+<li>Reference: <a href="/connect/reference/create-a-new-recording-push-config">Create a new recording push config</a></li>
+<li>Reference: <a href="/connect/reference/get-recording-status-information">Get recording status information</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="webhook-configuration-endpoints-api-reference">Webhook configuration endpoints (API Reference)<a href="#webhook-configuration-endpoints-api-reference" class="hash-link" aria-label="Direct link to Webhook configuration endpoints (API Reference)" title="Direct link to Webhook configuration endpoints (API Reference)" translate="no">​</a></h3>
+<p>All voice webhooks are configured per subaccount:</p>
+<ul>
+<li>
+<p>List existing webhooks
+<code>GET /api/v1/subaccounts/{subaccountId}/webhooks</code>
+→ <a href="/connect/reference/get-webhooks-information">Get webhook information</a></p>
+</li>
+<li>
+<p>Create a webhook (choose type:  VCA/VSS/VCS/VNU/VRU)
+<code>POST /api/v1/subaccounts/{subaccountId}/webhooks</code>
+→ <a href="/connect/reference/create-a-new-webhook">Create a new webhook</a></p>
+</li>
+<li>
+<p>Delete a webhook by type
+<code>DELETE /api/v1/subaccounts/{subaccountId}/webhooks/{webhookType}</code>
+→ <a href="/connect/reference/delete-a-specific-type-of-webhook">Delete a specific type of webhook</a></p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="production-building-blocks-apis-youll-likely-use-next">Production building blocks (APIs you&#x27;ll likely use next)<a href="#production-building-blocks-apis-youll-likely-use-next" class="hash-link" aria-label="Direct link to Production building blocks (APIs you&#x27;ll likely use next)" title="Direct link to Production building blocks (APIs you&#x27;ll likely use next)" translate="no">​</a></h2>
+<p>Once you can send callflows and handle webhooks, these APIs help you productionize:  provisioning numbers, choosing voices, enabling recordings, and exporting logs for reconciliation.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="virtual-number-management-api-number-inventory--assigned-numbers">Virtual Number Management API (number inventory / assigned numbers)<a href="#virtual-number-management-api-number-inventory--assigned-numbers" class="hash-link" aria-label="Direct link to Virtual Number Management API (number inventory / assigned numbers)" title="Direct link to Virtual Number Management API (number inventory / assigned numbers)" translate="no">​</a></h3>
+<p><strong>What it&#x27;s for</strong></p>
+<ul>
+<li>List and validate virtual numbers assigned to a subaccount (useful for inbound flows, DID ownership checks, masking pools, and operational monitoring).</li>
+</ul>
+<p><strong>When you need it</strong></p>
+<ul>
+<li>Your solution requires a virtual number (e.g., inbound IVR, inbound masking callback numbers, or managing a pool per customer/subaccount).</li>
+<li>You want to validate whether a number belongs to a given subaccount before using it in callflows.</li>
+</ul>
+<p><strong>API reference</strong></p>
+<ul>
+<li>List numbers:<!-- -->
+<ul>
+<li><a href="/connect/reference/get-virtual-numbers">Get My Virtual Numbers</a></li>
+</ul>
+</li>
+<li>Validate/check a specific number:<!-- -->
+<ul>
+<li><a href="/connect/reference/check-virtual-number">Check Virtual Number</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Related guides</strong></p>
+<ul>
+<li><a href="/connect/docs/voice/number-masking/getting-started">Getting started with Number Masking</a></li>
+<li><a href="/connect/docs/virtual-number-updated-event">Virtual Number Updated Event</a></li>
+<li>Errors: <a href="/connect/docs/voice/error-codes/number-masking-error-codes">Number Masking error codes</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="voice-profile-api-tts-voices--language-profiles">Voice Profile API (TTS voices / language profiles)<a href="#voice-profile-api-tts-voices--language-profiles" class="hash-link" aria-label="Direct link to Voice Profile API (TTS voices / language profiles)" title="Direct link to Voice Profile API (TTS voices / language profiles)" translate="no">​</a></h3>
+<p><strong>What it&#x27;s for</strong></p>
+<ul>
+<li>Retrieve the available voice profiles (voices/languages) for your subaccount.  This helps you standardize which voice is used for TTS (<code>say</code>) across environments and markets.</li>
+</ul>
+<p><strong>When you need it</strong></p>
+<ul>
+<li>You are using <code>say</code> (TTS) and want a predictable voice selection strategy per market/subaccount.</li>
+<li>You need to list supported voices in your UI or configuration portal.</li>
+</ul>
+<p><strong>API reference</strong></p>
+<ul>
+<li><a href="/connect/reference/get-voice-profile-information">Get voice profile information</a></li>
+</ul>
+<p><strong>Related guides</strong></p>
+<ul>
+<li><a href="/connect/docs/voice/voice-messaging/voice-messaging-guide">Voice Messaging – Guide</a></li>
+<li>Errors: <a href="/connect/docs/voice/error-codes/voice-status-codes">IVR and Voice Messaging error codes</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="recording-api-recording-configuration--recording-status">Recording API (recording configuration + recording status)<a href="#recording-api-recording-configuration--recording-status" class="hash-link" aria-label="Direct link to Recording API (recording configuration + recording status)" title="Direct link to Recording API (recording configuration + recording status)" translate="no">​</a></h3>
+<p><strong>What it&#x27;s for</strong></p>
+<ul>
+<li>Configure recording delivery/notification and query recording status for a session.</li>
+</ul>
+<p><strong>When you need it</strong></p>
+<ul>
+<li>Compliance / QA requires call recordings.</li>
+<li>You want a callback when recording artifacts are ready.</li>
+<li>You need to retrieve/verify recording status after call completion.</li>
+</ul>
+<p><strong>API reference</strong></p>
+<ul>
+<li>Recording push configuration:<!-- -->
+<ul>
+<li><a href="/connect/reference/get-recording-push-config-information">Get recording push config</a></li>
+<li><a href="/connect/reference/create-a-new-recording-push-config">Create a new recording push config</a></li>
+<li><a href="/connect/reference/delete-recording-push-config">Delete recording push config</a></li>
+</ul>
+</li>
+<li>Recording status:<!-- -->
+<ul>
+<li><a href="/connect/reference/get-recording-status-information">Get recording status information</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Related guides</strong></p>
+<ul>
+<li>Webhooks / callback handling: <a href="/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide">Voice Call Action webhook guide</a></li>
+<li>Recording details: <a href="/connect/docs/voice/number-masking/call-recordings">Number Masking Call Recordings</a></li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="reporting-api-voice-log-exports">Reporting API (voice log exports)<a href="#reporting-api-voice-log-exports" class="hash-link" aria-label="Direct link to Reporting API (voice log exports)" title="Direct link to Reporting API (voice log exports)" translate="no">​</a></h3>
+<p><strong>What it&#x27;s for</strong></p>
+<ul>
+<li>Export voice logs for analytics, reconciliation, and operational reporting (job-based export).</li>
+</ul>
+<p><strong>When you need it</strong></p>
+<ul>
+<li>Finance reconciliation, supplier verification, customer reporting dashboards.</li>
+<li>You need a bulk export of historical activity beyond per-session webhooks.</li>
+</ul>
+<p><strong>API reference</strong></p>
+<ul>
+<li>Start an export job:<!-- -->
+<ul>
+<li><a href="/connect/reference/start-voice-log-export-job">Start voice log export job</a></li>
+</ul>
+</li>
+<li>Retrieve the export result:<!-- -->
+<ul>
+<li><a href="/connect/reference/get-voice-log-export-job-result">Get voice log export job result</a></li>
+</ul>
+</li>
+<li>Cancel an export job:<!-- -->
+<ul>
+<li><a href="/connect/reference/cancel-voice-log-export-job">Cancel voice log export job</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Related guides</strong></p>
+<ul>
+<li>Errors:<!-- -->
+<ul>
+<li><a href="/connect/docs/voice/error-codes/voice-status-codes">IVR and Voice Messaging error codes</a></li>
+<li><a href="/connect/docs/voice/error-codes/number-masking-error-codes">Number Masking error codes</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="quick-start-paths-guides">Quick-start paths (Guides)<a href="#quick-start-paths-guides" class="hash-link" aria-label="Direct link to Quick-start paths (Guides)" title="Direct link to Quick-start paths (Guides)" translate="no">​</a></h2>
+<p>Pick your use case:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="ivr">IVR<a href="#ivr" class="hash-link" aria-label="Direct link to IVR" title="Direct link to IVR" translate="no">​</a></h3>
+<ul>
+<li><a href="/connect/docs/voice/ivr/ivr-introduction">IVR – Introduction</a></li>
+<li><a href="/connect/docs/voice/ivr/simple-ivr-guide">Simple IVR</a></li>
+<li><a href="/connect/docs/voice/ivr/advanced-ivr-guide">Advanced IVR</a></li>
+<li>Webhooks: <a href="/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide">Voice Call Action webhook guide</a></li>
+<li>Errors: <a href="/connect/docs/voice/error-codes/voice-status-codes">IVR and Voice Messaging error codes</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="voice-messaging">Voice Messaging<a href="#voice-messaging" class="hash-link" aria-label="Direct link to Voice Messaging" title="Direct link to Voice Messaging" translate="no">​</a></h3>
+<ul>
+<li><a href="/connect/docs/voice/voice-messaging/voice-messaging-guide">Voice Messaging – Guide</a></li>
+<li>Session outcomes: <a href="/connect/docs/voice/webhook-guides/voice-session-summary-webhook">Voice Session Summary</a></li>
+<li>Errors: <a href="/connect/docs/voice/error-codes/voice-status-codes">IVR and Voice Messaging error codes</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="number-masking-call-bridging">Number masking (call bridging)<a href="#number-masking-call-bridging" class="hash-link" aria-label="Direct link to Number masking (call bridging)" title="Direct link to Number masking (call bridging)" translate="no">​</a></h3>
+<ul>
+<li><a href="/connect/docs/voice/number-masking/getting-started">Getting started with Number Masking</a></li>
+<li><a href="/connect/docs/voice/number-masking/how-number-masking-protects-customer-privacy">How Number Masking Protects Customer Privacy</a></li>
+<li><a href="/connect/docs/voice/number-masking/call-action-handling">Number Masking Call Action Handling</a></li>
+<li><a href="/connect/docs/voice/number-masking/session-summary">Session Summary - Number Masking</a></li>
+<li>Errors: <a href="/connect/docs/voice/error-codes/number-masking-error-codes">Number Masking error codes</a></li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="where-to-go-next">Where to go next<a href="#where-to-go-next" class="hash-link" aria-label="Direct link to Where to go next" title="Direct link to Where to go next" translate="no">​</a></h2>
+<ul>
+<li>Build and validate a callflow:  <a href="/connect/reference/ivr-send-callflow">Send Callflow</a></li>
+<li>Build an IVR menu: <a href="/connect/docs/voice/ivr/ivr-introduction">IVR – Introduction</a> + <a href="/connect/docs/voice/ivr/call-action-handling">Call Action Handling (IVR)</a></li>
+<li>Configure webhooks: <a href="/connect/reference/create-a-new-webhook">Create a new webhook</a></li>
+<li>Debug faster with error guides:<!-- -->
+<ul>
+<li><a href="/connect/docs/voice/error-codes/voice-status-codes">IVR and Voice Messaging error codes</a></li>
+<li><a href="/connect/docs/voice/error-codes/number-masking-error-codes">Number Masking error codes</a></li>
+</ul>
+</li>
+<li>Productionize with numbers, profiles, recordings, and exports:<!-- -->
+<ul>
+<li><a href="/connect/reference/get-virtual-numbers">Get My Virtual Numbers</a></li>
+<li><a href="/connect/reference/get-voice-profile-information">Get voice profile information</a></li>
+<li><a href="/connect/reference/create-a-new-recording-push-config">Create a new recording push config</a></li>
+<li><a href="/connect/reference/start-voice-log-export-job">Start voice log export job</a></li>
+</ul>
+</li>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/reference/sma-coverage-check"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">SMA coverage check</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/reference/send-callflow"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Send Callflow</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#start-here-recommended-reading-order" class="table-of-contents__link toc-highlight">Start here (recommended reading order)</a></li><li><a href="#the-core-endpoint--send-callflow" class="table-of-contents__link toc-highlight">The core endpoint:  Send Callflow</a></li><li><a href="#callflows--what-they-are" class="table-of-contents__link toc-highlight">Callflows:  what they are</a></li><li><a href="#error-codes-how-to-debug-fast" class="table-of-contents__link toc-highlight">Error codes (how to debug fast)</a></li><li><a href="#webhooks-how-voice-apps-become-dynamic" class="table-of-contents__link toc-highlight">Webhooks: how voice apps become dynamic</a><ul><li><a href="#webhook-types-youll-use-and-what-each-one-is-for" class="table-of-contents__link toc-highlight">Webhook types you&#39;ll use (and what each one is for)</a></li><li><a href="#webhook-configuration-endpoints-api-reference" class="table-of-contents__link toc-highlight">Webhook configuration endpoints (API Reference)</a></li></ul></li><li><a href="#production-building-blocks-apis-youll-likely-use-next" class="table-of-contents__link toc-highlight">Production building blocks (APIs you&#39;ll likely use next)</a><ul><li><a href="#virtual-number-management-api-number-inventory--assigned-numbers" class="table-of-contents__link toc-highlight">Virtual Number Management API (number inventory / assigned numbers)</a></li><li><a href="#voice-profile-api-tts-voices--language-profiles" class="table-of-contents__link toc-highlight">Voice Profile API (TTS voices / language profiles)</a></li><li><a href="#recording-api-recording-configuration--recording-status" class="table-of-contents__link toc-highlight">Recording API (recording configuration + recording status)</a></li><li><a href="#reporting-api-voice-log-exports" class="table-of-contents__link toc-highlight">Reporting API (voice log exports)</a></li></ul></li><li><a href="#quick-start-paths-guides" class="table-of-contents__link toc-highlight">Quick-start paths (Guides)</a><ul><li><a href="#ivr" class="table-of-contents__link toc-highlight">IVR</a></li><li><a href="#voice-messaging" class="table-of-contents__link toc-highlight">Voice Messaging</a></li><li><a href="#number-masking-call-bridging" class="table-of-contents__link toc-highlight">Number masking (call bridging)</a></li></ul></li><li><a href="#where-to-go-next" class="table-of-contents__link toc-highlight">Where to go next</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>

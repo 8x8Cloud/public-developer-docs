@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[16659],{52608:e=>{e.exports=JSON.parse('{"to":"/connect/docs/voice/whatsapp-business-calling-overview"}')}}]);

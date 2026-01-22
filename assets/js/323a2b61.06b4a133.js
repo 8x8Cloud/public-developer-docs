@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[2639],{27570:e=>{e.exports=JSON.parse('{"to":"/connect/docs/voice/voice-sdk/overview"}')}}]);

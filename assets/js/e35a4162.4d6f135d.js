@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[22896],{45387:e=>{e.exports=JSON.parse('{"to":"/connect/reference/send-many-sms"}')}}]);

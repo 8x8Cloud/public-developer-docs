@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[2655],{17530:e=>{e.exports=JSON.parse('{"to":"/connect/docs/voice/webhook-guides/voice-call-action-webhook-guide"}')}}]);

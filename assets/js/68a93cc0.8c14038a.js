@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[86888],{7259:e=>{e.exports=JSON.parse('{"to":"/connect/reference/send-callflow"}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunk_8x8_developer_docs=globalThis.webpackChunk_8x8_developer_docs||[]).push([[4704],{57579:e=>{e.exports=JSON.parse('{"to":"/connect/docs/context-scripting"}')}}]);
