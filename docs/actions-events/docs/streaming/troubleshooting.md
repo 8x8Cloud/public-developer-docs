@@ -102,7 +102,7 @@ Common issues when connecting to the 8x8 Event Streaming service.
 1. **Verify you're using the correct regional endpoint:**
    - Check your Contact Center deployment region
    - See [Regional Endpoints](./connection.md#regional-endpoints) for hostname mapping
-   - Example: If your Contact Center is in EUW2, use `pulsar-ws-euw2.8x8.com`
+   - Example: If your Contact Center is in UK3, use `pulsar-ws-euw2.8x8.com`
 
 2. **Confirm your region with 8x8 Support** if unsure
 

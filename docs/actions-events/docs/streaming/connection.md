@@ -37,7 +37,7 @@ The 8x8 Event Streaming service is available in multiple AWS regions. Connect to
 
 | 8x8 Region | Hostname                 | Availability |
 |------------|--------------------------|--------------|
-| EUW2       | `pulsar-ws-euw2.8x8.com` | Available    |
+| UK3        | `pulsar-ws-euw2.8x8.com` | Available    |
 | US1        | `pulsar-ws-use1.8x8.com` | Available    |
 
 > 📘 **Finding Your Region**
