@@ -19,11 +19,18 @@ If you need to restrict inbound traffic to your webhook endpoint, please allow r
 
 ## Programmable Voice
 
-The below IPs have to be whitelisted for Number Masking API, call handle, call status, voice summary webhooks and Voice Recording uploads:
+For detailed Voice IP address information, see the [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) page.
 
-- 18.140.80.2
-- 52.220.253.234
-- 54.255.116.8
-- 52.74.232.241
+If you need to restrict inbound traffic to your webhook endpoints, please allow requests originating from the following outbound IP addresses:
 
-*This list was updated on: Oct 13, 2023.*
+| Platform Region | IP Addresses |
+| --------------- | ------------ |
+| Asia Pacific (Singapore) | 18.140.80.2, 52.220.253.234, 54.255.116.8, 52.74.232.241 |
+
+These IPs are used for webhook deliveries from Voice products:
+
+- **Number Masking** - Voice Call Action webhook, Voice Session Summary webhook, Voice Call Status webhook, Voice Recording Uploaded webhook, Virtual Number Updated webhook
+- **Voice Messaging** - Voice Session Summary webhook
+- **Interactive Voice Response** - Voice Call Action webhook, Voice Session Summary webhook
+
+*This list was updated on: January 1st, 2026.*

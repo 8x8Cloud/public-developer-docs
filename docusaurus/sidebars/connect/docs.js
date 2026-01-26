@@ -195,6 +195,14 @@ const sidebarConfig = [
           'connect/docs/voice/error-codes/number-masking-error-codes',
         ],
       },
+      {
+        type: 'category',
+        label: 'General Voice API Information',
+        collapsed: true,
+        items: [
+          'connect/docs/voice/voice-ip-addresses',
+        ],
+      },
     ],
   },  
 

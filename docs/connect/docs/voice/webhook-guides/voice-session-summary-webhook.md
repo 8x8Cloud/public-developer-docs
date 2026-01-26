@@ -20,6 +20,8 @@ You register VSS using the Webhooks API:
 - API reference: [Create a new webhook](/connect/reference/create-a-new-webhook)
 - Setup walkthrough (IVR-focused, but the Webhooks API steps are the same): [Webhook Setup Guide for IVR](/connect/docs/voice/ivr/webhook-setup-guide-for-ivr)
 
+If you need to restrict inbound traffic to your webhook endpoints, see [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services.
+
 ### Example: register a VSS webhook
 
 `POST /api/v1/subaccounts/{subaccountId}/webhooks`

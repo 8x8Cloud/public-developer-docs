@@ -7,6 +7,8 @@ This webhook provides a comprehensive summary of a Voice Messaging session after
 
 Your VSS endpoint can be configured at the sub-account level using the [Voice Webhooks API](/connect/reference/create-a-new-webhook).
 
+If you need to restrict inbound traffic to your webhook endpoints, see [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services.
+
 When a voice session ends, the 8x8 platform will POST a JSON object to your VSS endpoint.
 
 ## Webhook Payload

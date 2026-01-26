@@ -367,6 +367,8 @@ For the complete list of `statusCode` values and their messages, see the
 
 Upon termination of the session, a **Voice Session Summary (VSS)** is returned via webhook.
 
+If you need to restrict inbound traffic to your webhook endpoints, see [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services.
+
 To learn more about the Voice Session Summary payload and fields, see the
 [Session status](/connect/docs/voice/voice-messaging/session-status) documentation.
 

@@ -5,6 +5,8 @@ title: Call Status (Number Masking)
 
 This method provides insights about call details and will be sent to your "Voice Call Summary" (VCS) endpoint. Your "Voice Call Summary" (VCS) endpoint can be configured on the sub-account level with the Webhooks API.
 
+If you need to restrict inbound traffic to your webhook endpoints, see [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services.
+
 When receiving status updates for ongoing calls, the 8x8 platform will POST a JSON object to your "Voice Call Summary" (VCS) endpoint.
 
 The JSON object will contain the following values:

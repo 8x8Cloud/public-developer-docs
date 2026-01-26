@@ -98,6 +98,8 @@ The response will contain the following parameters:
 
 An event is triggered each time a recording has been successfully uploaded to your file server (S3 or SFTP). This is an optional callback and it needs to be enabled on the account level. If you want to set up the callback endpoint, please take a look at [Create a new webhook](/connect/reference/create-a-new-webhook) and the webhook type "VRU".
 
+If you need to restrict inbound traffic to your webhook endpoints, see [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services.
+
 The following is an example of the callback that you would receive on your "VRU" callback endpoint:
 
 ```json

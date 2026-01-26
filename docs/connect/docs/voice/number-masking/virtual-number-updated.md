@@ -7,6 +7,8 @@ Notifies customers that a change in either Virtual Number or Virtual Number Heal
 
 A webhook will be sent to your endpoint each time Virtual Numbers are updated in the Virtual Number pool associated with your subaccount.
 
+If you need to restrict inbound traffic to your webhook endpoints, see [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services.
+
 The JSON object will contain the following values:
 
 | Name | Type | Description |

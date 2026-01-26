@@ -3,7 +3,9 @@ slug: /connect/docs/voice/ivr/webhook-setup-guide-for-ivr
 title: Webhook Setup Guide for IVR
 ---
 
-First you should have an URL endpoint configured in order to receive webhooks. Your endpoint will need to response to the webhooks in order to trigger following actions in an IVR
+First you should have a URL endpoint configured in order to receive webhooks. Your endpoint will need to respond to the webhooks in order to trigger following actions in an IVR.
+
+If you need to restrict inbound traffic to your webhook endpoints, see [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services.
 
 Then we will need to setup two webhooks, **a VCA (Voice Call Action) Webhook** and a **VSS (Voice Session Summary) Webhook.**
 

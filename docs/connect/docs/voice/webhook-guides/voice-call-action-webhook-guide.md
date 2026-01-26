@@ -19,6 +19,8 @@ VCA webhooks are used across multiple 8x8 Voice products:
 
 Your VCA endpoint can be configured at the sub-account level using the [Webhooks API](/connect/reference/create-a-new-webhook).
 
+If you need to restrict inbound traffic to your webhook endpoints, see [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services.
+
 ## How It Works
 
 1. **Call event occurs** – A caller presses a digit (DTMF), a call connects, or another action completes

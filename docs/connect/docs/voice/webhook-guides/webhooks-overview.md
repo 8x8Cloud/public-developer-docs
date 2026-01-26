@@ -122,7 +122,7 @@ Configure webhooks using the Webhooks API (per subaccount):
 ## Security Best Practices
 
 - Use **HTTPS** endpoints
-- Validate inbound requests (for example, allowlist source IPs if your environment supports it)
+- Validate inbound requests (for example, allowlist source IPs if your environment supports it) - See [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services
 - Implement **idempotency** (assume duplicate deliveries can occur)
 - Return **HTTP 200 OK** quickly and process asynchronously where possible
 

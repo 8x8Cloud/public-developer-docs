@@ -21,6 +21,7 @@ Before you get started, please contact your account manager to ensure that your 
 * You will need a new voice `subAccountId` which has to be set up for 8x8's Number Masking service
 * To use our Number Masking API, you require a Virtual Number that will be allocated to your sub-account by the 8x8 team
 * You must set up and configure an endpoint where the call action handles will be sent (via the [webhooks API](/connect/reference/create-a-new-webhook) - Voice Call Action). After that, you can use our Number Masking product to begin building your call flows.
+* If you need to restrict inbound traffic to your webhook endpoints, see [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services.
 
 If you have not already done so, please visit the 8x8 website at [https://connect.8x8.com](https://connect.8x8.com) to sign up for your account. Do take note that number masking requires an account manager for set up.
 

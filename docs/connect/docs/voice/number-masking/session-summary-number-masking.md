@@ -4,9 +4,11 @@ slug: /connect/docs/voice/number-masking/session-summary
 
 # Session Summary (Number Masking)
 
-This method allows you to review the "Voice Session Summary" status and individual call legs.  
+This method allows you to review the "Voice Session Summary" status and individual call legs.
 
-"Voice Session Summary" (VSS) endpoint. Your "Voice Session Summary" (VSS) endpoint can be configured on the sub-account level with the Voice Call Action [Webhooks](/connect/reference/create-a-new-webhook)  
+Your "Voice Session Summary" (VSS) endpoint can be configured on the sub-account level using the Voice Call Action [Webhooks](/connect/reference/create-a-new-webhook)
+
+If you need to restrict inbound traffic to your webhook endpoints, see [Voice IP Addresses](/connect/docs/voice/voice-ip-addresses) for the list of outbound IPs used by 8x8 Voice services.
 
 This can be used alongside or instead of the [Call Status](/connect/docs/voice/number-masking/call-status), to simplify your monitoring.
 
