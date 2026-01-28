@@ -181,6 +181,17 @@ Retrieves journey data based on the specified criteria.
         "Phone"
       ],
       "outcome": "EndedInScript",
+      "origin": {
+        "type": "user",
+        "id": "user-789",
+        "name": "Jane Smith",
+        "phoneNumber": null,
+        "extension": "1036",
+        "email": "jane.smith@example.com",
+        "pbx": "8x8",
+        "loginId": "jsmith",
+        "department": "Sales"
+      },
       "pbxNames": [],
       "queues": [],
       "ringGroups": [],
@@ -472,28 +483,29 @@ Example:
 
 The Journeys Endpoint provides a consolidated view of all customer interactions belonging to the same journey across all 8x8 platforms. Each journey record includes the following structure:
 
-| Field                           | Type           | Description                                                                                                                                                                                                                                                                     |
-|---------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `time`                          | ISO8601 date   | When the journey occurred                                                                                                                                                                                                                                                       |
-| `journeyId`                     | string         | The journeyId field returned by the Journeys Endpoint uniquely identifies and aggregates all interactions associated with a particular customer journey across all platforms. Use this journeyId to correlate and analyze comprehensive interaction data for a specific journey. |
-| `interactions`                  | Interaction\[] | Array of interaction objects representing the interactions belonging to the journey. These interactions can originate from CC, UC or Engage platforms.                                                                                                                          |
-| `agents`                        | Agent\[]       | Array of agent objects involved in handling the journey                                                                                                                                                                                                                         |
-| `contact`                       | Contact        | Contact object containing name, phone number, and email who interacts with the organization. As an example for inbound phone interactions this is the caller, and for outbound ones this is the callee.                                                                         |
-| `entryPoint`                    | entryPoint     | entryPoint object is populated only for inbound journeys and identifies where the interaction first enters the organization (e.g. a contact center channel, or a unified communication ring group). For outbound journeys this object is `null`.                                |
-| `transfersCompleted`            | int            | Number of warm & cold transfers during the journey                                                                                                                                                                                                                              |
-| `forwardedToQueue`              | int            | Number of automated forwards to a CC or UC queue during the journey                                                                                                                                                                                                             |
-| `forwardedToRingGroup`          | int            | Number of automated forwards to a Ring Group during the journey                                                                                                                                                                                                                 |
-| `forwardedToScript`             | int            | Number of automated forwards to a UC AA + CC script/IVR                                                                                                                                                                                                                         |
-| `holdDuration`                  | long           | Total hold time in milliseconds                                                                                                                                                                                                                                                 |
-| `mediaTypes`                    | string\[]      | Types of media in the journey (phone, chat, email, etc.)                                                                                                                                                                                                                        |
-| `outcome`                       | string         | Outcome of the journey (e.g. abandoned, handled, forwarded to VM).                                                                                                                                                                                                              |
-| `direction`                     | string         | Direction of the journey (e.g. Inbound, Outbound, Internal).                                                                                                                                                                                                                    |
-| `pbxNames`                      | string\[]      | PBX names                                                                                                                                                                                                                                                                       |
-| `queues`                        | Queue\[]       | Array of queue objects used in the journey                                                                                                                                                                                                                                      |
-| `ringGroups`                    | RingGroup\[]   | Array of ring group objects used in the journey                                                                                                                                                                                                                                 |
-| `scheduleHours`                 | string\[]      | Distinct array of values for all the IVR `scheduleHours` nodes of the journey.                                                                                                                                                                                    |
-| `tenantIds`                     | string\[]      | Tenant IDs                                                                                                                                                                                                                                                                      |
-| `wrapUpCodes`                   | string\[]      | Wrap-up codes applied to the journey                                                                                                                                                                                                                                            |
+| Field                    | Type           | Description                                                                                                                                                                                                                                                                      |
+|--------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `time`                   | ISO8601 date   | When the journey occurred                                                                                                                                                                                                                                                        |
+| `journeyId`              | string         | The journeyId field returned by the Journeys Endpoint uniquely identifies and aggregates all interactions associated with a particular customer journey across all platforms. Use this journeyId to correlate and analyze comprehensive interaction data for a specific journey. |
+| `interactions`           | Interaction\[] | Array of interaction objects representing the interactions belonging to the journey. These interactions can originate from CC, UC or Engage platforms.                                                                                                                           |
+| `agents`                 | Agent\[]       | Array of agent objects involved in handling the journey                                                                                                                                                                                                                          |
+| `contact`                | Contact        | Contact object containing name, phone number, and email who interacts with the organization. As an example for inbound phone interactions this is the caller, and for outbound ones this is the callee.                                                                          |
+| `entryPoint`             | entryPoint     | entryPoint object is populated only for inbound journeys and identifies where the interaction first enters the organization (e.g. a contact center channel, or a unified communication ring group). For outbound journeys this object is `null`.                                 |
+| `transfersCompleted`     | int            | Number of warm & cold transfers during the journey                                                                                                                                                                                                                               |
+| `forwardedToQueue`       | int            | Number of automated forwards to a CC or UC queue during the journey                                                                                                                                                                                                              |
+| `forwardedToRingGroup`   | int            | Number of automated forwards to a Ring Group during the journey                                                                                                                                                                                                                  |
+| `forwardedToScript`      | int            | Number of automated forwards to a UC AA + CC script/IVR                                                                                                                                                                                                                          |
+| `holdDuration`           | long           | Total hold time in milliseconds                                                                                                                                                                                                                                                  |
+| `mediaTypes`             | string\[]      | Types of media in the journey (phone, chat, email, etc.)                                                                                                                                                                                                                         |
+| `origin`                 | origin         | Origin object is populated only for UC outbound calls and identifies what agent made the call                                                                                                                                                                                    |
+| `outcome`                | string         | Outcome of the journey (e.g. abandoned, handled, forwarded to VM).                                                                                                                                                                                                               |
+| `direction`              | string         | Direction of the journey (e.g. Inbound, Outbound, Internal).                                                                                                                                                                                                                     |
+| `pbxNames`               | string\[]      | PBX names                                                                                                                                                                                                                                                                        |
+| `queues`                 | Queue\[]       | Array of queue objects used in the journey                                                                                                                                                                                                                                       |
+| `ringGroups`             | RingGroup\[]   | Array of ring group objects used in the journey                                                                                                                                                                                                                                  |
+| `scheduleHours`          | string\[]      | Distinct array of values for all the IVR `scheduleHours` nodes of the journey.                                                                                                                                                                                                   |
+| `tenantIds`              | string\[]      | Tenant IDs                                                                                                                                                                                                                                                                       |
+| `wrapUpCodes`            | string\[]      | Wrap-up codes applied to the journey                                                                                                                                                                                                                                             |
 
 #### Nested Object Structures
 
@@ -586,6 +598,24 @@ The `type` field in the entryPoint object is an enum that identifies the type of
 - **ring-group**: The inbound interaction enters through a ring group
 - **auto-attendant**: The inbound interaction enters through a unified communication auto-attendant
 - **user**: The inbound interaction targets a unified communication user directly, bypassing contact center channels. Entry points of this type include additional user details (`email`, `loginId`, `department`) reflecting current Admin Console configuration
+
+**origin Object:**
+
+The origin object is populated only for UC outbound journeys and identifies what agent initiated the call.
+
+```json
+{
+  "type": "user",
+  "id": "string",
+  "name": "string",
+  "phoneNumber": "string",
+  "extension": "string",
+  "email": "string",
+  "pbx": "string",
+  "loginId": "string",
+  "department": "string"
+}
+```
 
 ### Transition Data Model
 
