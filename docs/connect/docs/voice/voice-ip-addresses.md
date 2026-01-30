@@ -43,6 +43,14 @@ Interactive Voice Response delivers the following webhooks:
 
 [Learn more about Interactive Voice Response](/connect/docs/voice/ivr/ivr-introduction)
 
+### Programmable SIP
+
+Programmable SIP customers receive the following webhooks:
+
+- **Voice Session Summary webhook** - Receives end-of-session outcomes with call details, duration, participants, and error information after the call ends
+
+Contact your account manager for Programmable SIP documentation and setup information.
+
 ## IP Addresses to Whitelist
 
 Whitelist the following outbound IP addresses to allow webhook deliveries from 8x8 Voice services to your endpoints:

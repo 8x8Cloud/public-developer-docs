@@ -454,6 +454,17 @@ const sidebarConfig = [
           },
         ],
       },
+      {
+        type: 'category',
+        label: 'SIP Response Codes',
+        collapsed: true,
+        items: [
+          {
+            type: 'doc',
+            id: 'connect/docs/voice/sip-response-codes/sip-response-codes',
+          },
+        ],
+      },
     ],
   },
   {
