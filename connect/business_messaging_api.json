@@ -1271,6 +1271,33 @@
                     }
                   }
                 },
+                "whatsAppFlowTemplate": {
+                  "summary": "WhatsApp Template Message - Media Carousel with 2 cards",
+                  "value": {
+                    "user": {
+                      "msisdn": "+6500000000"
+                    },
+                    "type": "template",
+                    "content": {
+                      "template": {
+                        "language": "en_US",
+                        "name": "<Insert Template Name>",
+                        "components": [
+                          {
+                            "type": "button",
+                            "subType": "flow",
+                            "index": 0,
+                            "parameters": [
+                              {
+                                "type": "action"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
                 "whatsAppInteractiveMessageReplyButtons": {
                   "summary": "WhatsApp Interactive Message - Quick Reply Buttons",
                   "value": {
@@ -1464,6 +1491,36 @@
                         },
                         "footer": {
                           "text": "This collection contains only the finest from 8x8."
+                        }
+                      }
+                    }
+                  }
+                },
+                "whatsAppInteractiveMessageFlowButton": {
+                  "summary": "WhatsApp Interactive Message - Catalog of Products",
+                  "value": {
+                    "user": {
+                      "msisdn": "+6500000000"
+                    },
+                    "type": "interactive",
+                    "content": {
+                      "interactive": {
+                        "type": "flow",
+                        "header": {
+                          "type": "text",
+                          "text": "Customer Feedback!"
+                        },
+                        "body": {
+                          "text": "Your feedback ensures we continually improove. Please click below to share your thoughts on your recent visit. Thank you in advance!"
+                        },
+                        "action": {
+                          "parameters": {
+                            "flowId": "<Insert flow Id here>",
+                            "flowCta": "Share Feedback"
+                          }
+                        },
+                        "footer": {
+                          "text": "We appreciate your support!"
                         }
                       }
                     }
