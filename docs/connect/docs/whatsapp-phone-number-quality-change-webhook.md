@@ -44,8 +44,9 @@ Request body description
 | Parameter name | Parameter type | Description |
 | --- | --- | --- |
 | event | string | Messaging limit change or throughput change event.<br>Possible values are`DOWNGRADE`— Messaging limit has decreased.`FLAGGED` — Messaging quality will be decreased if the number continues to receive negative feedback.`ONBOARDING` — Phone number is still being registered.`THROUGHPUT_UPGRADE` — Throughput level has increased.`UNFLAGGED` — Business phone number is eligible to receive a messaging limit increase if it continues to receive positive feedback.`UPGRADE` — Messaging limit has increased. |
-| currentLimit | string | Indicates current messaging limit or throughput level.<br>Possible values are`TIER_50` — Indicates a messaging limit of 50.`TIER_250` — Indicates a messaging limit of 250.`TIER_1K` — Indicates a messaging limit of 1,000.`TIER_10K` — Indicates a messaging limit of 10,000.`TIER_100K` — Indicates a messaging limit of 100,000.`TIER_NOT_SET` — Indicates the business phone number has not been used to send a message yet.`TIER_UNLIMITED` — Indicates the business phone number has higher throughput. |
-| oldLimit | string | Old limit and only included for messaging limit changes. |
+| currentLimit | string | **This field will be removed in February, 2026. Use `maxDailyConversationsPerBusiness` instead.**<br>Indicates current messaging limit or throughput level.<br>Possible values are`TIER_50` — Indicates a messaging limit of 50.`TIER_250` — Indicates a messaging limit of 250.`TIER_1K` — Indicates a messaging limit of 1,000.`TIER_10K` — Indicates a messaging limit of 10,000.`TIER_100K` — Indicates a messaging limit of 100,000.`TIER_NOT_SET` — Indicates the business phone number has not been used to send a message yet.`TIER_UNLIMITED` — Indicates the business phone number has higher throughput. |
+| oldLimit | string | **This parameter will be removed in February, 2026. Use `maxDailyConversationsPerBusiness` instead.**<br>Old limit and only included for messaging limit changes. |
+| maxDailyConversationsPerBusiness | string | Indicates a change to the owning business portfolio's messaging limit or throughput change.<br>Possible values are`TIER_50` — Indicates a messaging limit of 50.`TIER_250` — Indicates a messaging limit of 250.`TIER_2K` — Indicates a messaging limit of 2,000.`TIER_10K` — Indicates a messaging limit of 10,000.`TIER_100K` — Indicates a messaging limit of 100,000.`TIER_NOT_SET` — Indicates the business phone number has not been used to send a message yet.`TIER_UNLIMITED` — Indicates the business phone number has higher throughput. |
 
 ### Sample webhook
 
@@ -81,6 +82,44 @@ Request body description
         "meta": {
             "event": "THROUGHPUT_UPGRADE",
             "currentLimit": "TIER_UNLIMITED"
+        }
+    }
+}
+```
+
+In February 2026, the deprecated fields will be removed and only `maxDailyConversationsPerBusiness` will be included.
+
+```coffeescript Onboarding
+{
+    "eventId": "0f88f5c4-fae7-4dcf-8ff2-b2990133edea",
+    "timestamp": "2025-01-01T00:00:00.00Z",
+    "provider": "WhatsApp",
+    "businessAccountId": <BusinessAccountId>,
+    "accountId": <AccountId>,
+    "eventType": "phone_number_quality_update",
+    "eventDetails": {
+        "displayPhoneNumber": "15550783881",
+        "meta": {
+            "event": "ONBOARDING",
+            "maxDailyConversationsPerBusiness": "TIER_10K"
+        }
+    }
+}
+```
+
+```coffeescript Throughput Upgrade
+{
+    "eventId": "0f88f5c4-fae7-4dcf-8ff2-b2990133edea",
+    "timestamp": "2025-01-01T00:00:00.00Z",
+    "provider": "WhatsApp",
+    "businessAccountId": <BusinessAccountId>,
+    "accountId": <AccountId>,
+    "eventType": "phone_number_quality_update",
+    "eventDetails": {
+        "displayPhoneNumber": "15550783881",
+        "meta": {
+            "event": "THROUGHPUT_UPGRADE",
+            "maxDailyConversationsPerBusiness": "TIER_UNLIMITED"
         }
     }
 }
