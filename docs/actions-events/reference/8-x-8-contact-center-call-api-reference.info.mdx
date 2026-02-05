@@ -1,0 +1,94 @@
+---
+id: 8-x-8-contact-center-call-api-reference
+title: "8x8 Contact Center Call API Reference"
+description: "The 8x8 Contact Center Call API facilitates contact center management of agent calls. Using the Call API you can designate a specific agent to either respond to or join a call. The Call API manages and assigns phone contacts along with transaction codes and interaction IDs."
+sidebar_label: Introduction
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+---
+
+import ApiLogo from "@theme/ApiLogo";
+import Heading from "@theme/Heading";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+import Export from "@theme/ApiExplorer/Export";
+
+<span
+  className={"theme-doc-version-badge badge badge--secondary"}
+  children={"Version: 1"}
+>
+</span>
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"8x8 Contact Center Call API Reference"}
+>
+</Heading>
+
+
+
+The 8x8 Contact Center Call API facilitates contact center management of agent calls. Using the Call API you can designate a specific agent to either respond to or join a call. The Call API manages and assigns phone contacts along with transaction codes and interaction IDs.
+
+The Call API enables you to:
+* Create an agent assigned outbound phone interaction for calling a desired number
+* Amend the transaction codes for an interaction
+* End a phone call based on the **`interactionId`**
+
+* Hang up the call for an agent (If the call is a conference or call was transferred it will not hang up for the other participants.)
+* Free up a telephone line for the specified agent or agents in preparation for the next call
+
+<div
+  style={{"marginBottom":"2rem"}}
+>
+  <Heading
+    id={"authentication"}
+    as={"h2"}
+    className={"openapi-tabs__heading"}
+    children={"Authentication"}
+  >
+  </Heading><SchemaTabs
+    className={"openapi-tabs__security-schemes"}
+  >
+    <TabItem
+      label={"HTTP: Basic Auth"}
+      value={"BasicAuth"}
+    >
+      
+      
+      The username is the tenantId and the password is the VCC action-token. These values are used for the Agent Status API.
+      
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                Security Scheme Type:
+              </th><td>
+                http
+              </td>
+            </tr><tr>
+              <th>
+                HTTP Authorization Scheme:
+              </th><td>
+                basic
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem>
+  </SchemaTabs>
+</div><div
+  style={{"display":"flex","flexDirection":"column","marginBottom":"var(--ifm-paragraph-margin-bottom)"}}
+>
+  <h3
+    style={{"marginBottom":"0.25rem"}}
+  >
+    Contact
+  </h3><span>
+    VCC Engineering Team: [vcc-dev@8x8.com](mailto:vcc-dev@8x8.com)
+  </span>
+</div>
+      

@@ -436,6 +436,48 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Phone calls",
+      items: [
+        {
+          type: "doc",
+          id: "actions-events/reference/place-phone-call",
+          label: "Creates an agent assigned outbound phone interaction for calling the desired number.",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/add-transaction-codes",
+          label: "Ammends the transaction codes for both an interaction and the associated agent.",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/delete-phone-interaction",
+          label: "Ends a phone call based on the interactionId.",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/hangup-agent-handling-interaction",
+          label: "Hangs up the call for an agent. If the call is a conference or call was transferred it will not hang up for the other participants.",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/hangup-agent-lines",
+          label: "Frees up the agent lines in preparation to take the next call.",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/hangup-agent-line",
+          label: "Frees up a telephone line for the specified agent in preparation for the next call.",
+          className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Webhook Fax Event Notification Controller",
       items: [
         {

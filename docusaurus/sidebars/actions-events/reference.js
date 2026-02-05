@@ -276,6 +276,44 @@ const sidebarConfig = [
   },
   {
     type: 'category',
+    label: '8x8 Contact Center Call API',
+    collapsed: true,
+    items: [
+      {
+        type: 'category',
+        label: 'Phone calls',
+        collapsed: true,
+        items: [
+          {
+            type: 'doc',
+            id: 'actions-events/reference/place-phone-call',
+          },
+          {
+            type: 'doc',
+            id: 'actions-events/reference/add-transaction-codes',
+          },
+          {
+            type: 'doc',
+            id: 'actions-events/reference/delete-phone-interaction',
+          },
+          {
+            type: 'doc',
+            id: 'actions-events/reference/hangup-agent-handling-interaction',
+          },
+          {
+            type: 'doc',
+            id: 'actions-events/reference/hangup-agent-line',
+          },
+          {
+            type: 'doc',
+            id: 'actions-events/reference/hangup-agent-lines',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'category',
     label: '8x8 Contact Center Chat API V2',
     collapsed: true,
     items: [

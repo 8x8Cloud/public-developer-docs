@@ -57,7 +57,7 @@ Body is JSON and includes extTransactionData, ctlUserData which are optional arr
 | ctlUserData[].name        | ☐        | Name of the element to be passed. See [ctlUserData details](https://support.8x8.com/cloud-contact-center/8x8-contact-center/developers/8x8-contact-center-click-to-dial-api#ctl_userdata) for more information                                                                                                           |                         |
 | ctlUserData[].value       | ☐        | Value for the element to be passed. See [ctlUserData details](https://support.8x8.com/cloud-contact-center/8x8-contact-center/developers/8x8-contact-center-click-to-dial-api#ctl_userdata) for more information                                                                                                         |                         |
 
-[Phone Call API Reference](/actions-events/reference/placephonecall) allows you to try out this API.
+[Phone Call API Reference](/actions-events/reference/place-phone-call) allows you to try out this API.
 
 ### Place Call For Agent Request
 
