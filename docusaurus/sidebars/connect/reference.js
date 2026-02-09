@@ -187,13 +187,24 @@ const sidebarConfig = [
       },
       {
         type: 'category',
-        label: 'Management API',
+        label: 'Send Message Event API',
         collapsed: true,
         items: [
           {
             type: 'doc',
+            id: 'connect/reference/send-typing-indicator',
+          },
+          {
+            type: 'doc',
             id: 'connect/reference/mark-message-read',
           },
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Management API',
+        collapsed: true,
+        items: [
           {
             type: 'doc',
             id: 'connect/reference/get-whatsapp-templates',
@@ -206,7 +217,46 @@ const sidebarConfig = [
             type: 'doc',
             id: 'connect/reference/remove-wa-template',
           },
-           ],
+          {
+            type: 'category',
+            label: 'WhatsApp Flow Management',
+            collapsed: true,
+            items: [
+              {
+                type: 'doc',
+                id: 'connect/reference/get-whatsapp-flows',
+              },
+              {
+                type: 'doc',
+                id: 'connect/reference/get-whatsapp-flow-details',
+              },
+              {
+                type: 'doc',
+                id: 'connect/reference/create-whatsapp-flow',
+              },
+              {
+                type: 'doc',
+                id: 'connect/reference/update-whatsapp-flow',
+              },
+              {
+                type: 'doc',
+                id: 'connect/reference/preview-whatsapp-flow',
+              },
+              {
+                type: 'doc',
+                id: 'connect/reference/publish-whatsapp-flow',
+              },
+              {
+                type: 'doc',
+                id: 'connect/reference/deprecate-whatsapp-flow',
+              },
+              {
+                type: 'doc',
+                id: 'connect/reference/delete-whatsapp-flow',
+              },
+            ],
+          },
+        ],
       },
       {
         type: 'category',

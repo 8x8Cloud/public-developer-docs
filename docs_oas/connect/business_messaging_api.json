@@ -34,6 +34,9 @@
       "name": "Send Message API"
     },
     {
+      "name": "Send Message Event API"
+    },
+    {
       "name": "Management API"
     },
     {
@@ -915,7 +918,21 @@
                       "description": "Override default Channel fallback configuration",
                       "properties": {
                         "channel": {
-                          "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages~1%7Bumid%7D~1read/post/requestBody/content/application~1json/schema/properties/channel"
+                          "type": "string",
+                          "description": "Messaging Apps Channel enumeration",
+                          "enum": [
+                            "SMS",
+                            "WhatsApp",
+                            "Facebook",
+                            "GoogleRCS",
+                            "Viber",
+                            "Line",
+                            "WeChat",
+                            "Zalo",
+                            "Instagram"
+                          ],
+                          "example": "WhatsApp",
+                          "title": "Channel type"
                         },
                         "fallbackAfter": {
                           "type": "integer",
@@ -1911,6 +1928,87 @@
         }
       ]
     },
+    "/api/v1/subaccounts/{subAccountId}/events": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Request is successful."
+          },
+          "400": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/400"
+          },
+          "401": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
+          },
+          "500": {
+            "$ref": "#/paths/~1files~1%7Bfilename%7D/get/responses/500"
+          }
+        },
+        "summary": "Send Typing Indicator",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "type": "string",
+                    "description": "Messaging Apps channel to send the typing indicator to",
+                    "enum": [
+                      "whatsapp"
+                    ],
+                    "example": "whatsapp",
+                    "title": "Channel type"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Type of event",
+                    "enum": [
+                      "typing"
+                    ],
+                    "example": "typing",
+                    "title": "Event type"
+                  },
+                  "umid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Unique message ID of the inbound message to respond to",
+                    "example": "cf3cbbf5-3e2d-ea11-815d-020897df5459"
+                  }
+                },
+                "required": ["channel", "type", "umid"],
+                "title": "Send typing indicator request",
+                "description": "Request to send a typing indicator to a messaging channel"
+              },
+              "examples": {
+                "WhatsApp Typing Indicator": {
+                  "summary": "Mark WhatsApp message as read and display a typing indicator",
+                  "value": {
+                    "channel": "whatsapp",
+                    "type": "typing",
+                    "umid": "cf3cbbf5-3e2d-ea11-815d-020897df5459"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Send a typing indicator to a messaging channel to show that the brand or official account is composing a message."
+        },
+        "tags": ["Send Message Event API"],
+        "description": "This endpoint is used to send typing indicators to messaging channels. This allows brands to provide real-time feedback to end users, showing that a response is being composed.\nThe `umid` parameter should reference the unique message ID of an inbound message that you are responding to.\n\n**Important:** Typing indicators can only be sent for inbound messages received within the last 2 hours.",
+        "operationId": "send-typing-indicator",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1lon/parameters/0"
+        }
+      ]
+    },
     "/api/v1/subaccounts/{subAccountId}/lon": {
       "parameters": [
         {
@@ -2389,55 +2487,7 @@
           }
         },
         "summary": "Mark message as read",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user": {
-                    "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1lon/post/requestBody/content/application~1json/schema/properties/user"
-                  },
-                  "umid": {
-                    "type": "string",
-                    "format": "uuid",
-                    "description": "Unique messages ID",
-                    "example": "cf3cbbf5-3e2d-ea11-815d-020897df5459"
-                  },
-                  "channel": {
-                    "type": "string",
-                    "description": "Messaging Apps Channel enumeration",
-                    "enum": [
-                      "SMS",
-                      "WhatsApp",
-                      "Facebook",
-                      "GoogleRCS",
-                      "Viber",
-                      "Line",
-                      "WeChat",
-                      "Zalo",
-                      "Instagram"
-                    ],
-                    "example": "WhatsApp",
-                    "title": "Channel type"
-                  }
-                },
-                "title": "Read message request",
-                "description": "Read message request"
-              }
-            }
-          },
-          "description": "- Either `user` or `umid` is required in the request. \n- Hence the endpoint can be \n\n`{\n  \"user\": {\n      \"msisdn\" : \"+6500000000\"\n  }\n}`\n\nor \n\n`{\n  \"umid\": \"F5C6DR30-8905-EA81-8SDC-4634897DFG45H\"\n}`\n\t\n\n- The message channel is optional and can be used when a subaccount is configured with multiple channels and a read status is required to be submitted to a specific channel. ",
-          "x-examples": {
-            "application/json": {
-              "user": {
-                "msisdn": "+6500000000"
-              },
-              "channel": "whatsapp"
-            }
-          }
-        },
-        "tags": ["Management API"],
+        "tags": ["Send Message Event API"],
         "description": "This endpoint is used to indicate to end users that a message has been read by the respective brand or official account. \n\nCurrent channel support: \n- WhatsApp Business account (two blue ticks on customers message). \n",
         "operationId": "mark-message-read",
         "security": [

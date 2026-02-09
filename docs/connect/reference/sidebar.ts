@@ -46,14 +46,26 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Management API",
+      label: "Send Message Event API",
       items: [
+        {
+          type: "doc",
+          id: "connect/reference/send-typing-indicator",
+          label: "Send Typing Indicator",
+          className: "api-method post",
+        },
         {
           type: "doc",
           id: "connect/reference/mark-message-read",
           label: "Mark message as read",
           className: "api-method post",
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Management API",
+      items: [
         {
           type: "doc",
           id: "connect/reference/get-whatsapp-templates",
