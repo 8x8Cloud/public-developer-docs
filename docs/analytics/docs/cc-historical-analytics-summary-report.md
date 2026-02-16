@@ -50,7 +50,7 @@ The following error messages could be returned when dealing with a multitenant c
 
 CC Historical Analytics allows the consumer to get a listing of the available reports including information about their options and available data.
 
-Additional information about each of the reports and detailed definitions of metrics can be found in the [CC Historical Analytics Glossary](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/Glossary-historical-reports.htm)
+Additional information about each of the reports and detailed definitions of metrics can be found in the [Metrics Glossary](#8-metrics-glossary)
 
 ### Parameters
 
@@ -109,7 +109,7 @@ For the summary reports the response has a number of elements to guide the usage
 * `groupBy` each report has one or more groupBy options. This specifies the grouping for the output
   * `name` this is the name to specify when creating a report with a specific grouping
   * `filters` these are the available filters for this report type for this particular grouping. The filters available vary depending on the type AND the grouping.
-* `metrics` these are the available metrics for the report type. When creating a report. See the [CC Historical Analytics Glossary](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/Glossary-historical-reports.htm) for additional detail on the definition of the available metrics
+* `metrics` these are the available metrics for the report type. When creating a report. See the [Metrics Glossary](#8-metrics-glossary) for additional detail on the definition of the available metrics
 * When running reports:
   * if no metrics are specified: All metrics will be returned
   * if metrics are specified: ONLY the specified metrics will be returned
@@ -469,7 +469,7 @@ If the requirement is to only have a subset of the the available metrics for the
 * if no metrics are specified (omitted entirely or empty array) ==> All metrics will be returned
 * if metrics are specified ==> ONLY the specified metrics will be returned
 
- [CC Historical Analytics Glossary](https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/Glossary-historical-reports.htm) provides detail on the definition of the available metrics
+The [Metrics Glossary](#8-metrics-glossary) provides detail on the definition of the available metrics
 
 ```json
 "metrics": [
@@ -986,3 +986,419 @@ The body will be an array as shown below.
 ]
 
 ```
+
+## 8. Metrics Glossary
+
+This glossary provides comprehensive definitions for all metrics available across the aggregated report types. Use this reference when selecting metrics for your reports and understanding the data returned.
+
+### 8.1. Agent Status Metrics
+
+Agent status metrics track how agents spend their time across different operational states. These metrics help analyze agent productivity, availability patterns, and time allocation.
+
+#### 8.1.1. Agent Status by Status Code
+
+<details>
+<summary>Click to expand Agent Status by Status Code Metrics (4 metrics)</summary>
+
+Report type: `agent-status-by-status-code`
+
+This report breaks down agent time by specific status codes, showing how long agents spend in each configured status reason.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `loggedInTime` | v7+ | Total time the agent maintained active system connection and was available for work across all queues and activities within the current aggregation interval |
+| `statusCodeCount` | v1+ | Number of times the agent entered or changed to a specific status code within the current aggregation interval. Tracks frequency of status changes for each configured status reason |
+| `statusCodeTime` | v1+ | Total time the agent spent in a specific status code within the current aggregation interval. Represents the cumulative duration for each configured status reason |
+| `timePercentage` | v7+ | Percentage of time the agent spent in a specific status code relative to total logged-in time within the current aggregation interval. Calculated as (statusCodeTime / loggedInTime) × 100 |
+
+</details>
+
+#### 8.1.2. Agent Status Logged In
+
+<details>
+<summary>Click to expand Agent Status Logged In Metrics (1 metric)</summary>
+
+Report type: `agent-status-logged-in`
+
+Tracks agent availability and productivity by showing the login sessions.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `loggedInTime` | v1+ | Total duration of the agent's login session. Represents how long the agent maintained active system connection from login to logout |
+
+</details>
+
+#### 8.1.3. Agent Status Time on Status
+
+<details>
+<summary>Click to expand Agent Status Time on Status Metrics (15 metrics)</summary>
+
+Report type: `agent-status-time-on-status`
+
+This report breaks down agent time across major operational states, providing insight into how agents allocate their time between handling interactions, being available, taking breaks, and working offline.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `availableTime` | v1+ | Total time the agent spent in Available state, ready to receive incoming interactions within the current aggregation interval |
+| `availableTimePercentage` | v1+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work within the current aggregation interval |
+| `busyTime` | v1+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities within the current aggregation interval |
+| `busyTimePercentage` | v1+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working within the current aggregation interval |
+| `handlingTime` | v1+ | Total time the agent spent in Handling state, actively processing interactions within the current aggregation interval |
+| `handlingTimePercentage` | v1+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions within the current aggregation interval |
+| `loggedInTime` | v1+ | Total time the agent maintained active system connection and was available for work across all queues and activities within the current aggregation interval |
+| `offeringTime` | v7+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities within the current aggregation interval |
+| `offeringTimePercent` | v7+ | Percentage of offering time relative to total logged-in time. Shows what proportion of login duration agent spent with interactions being offered within the current aggregation interval. Calculated as (offeringTime / loggedInTime) × 100 |
+| `onBreakTime` | v1+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions within the current aggregation interval |
+| `onBreakTimePercentage` | v1+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break within the current aggregation interval |
+| `workingOfflineTime` | v1+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions within the current aggregation interval |
+| `workingOfflineTimePercentage` | v1+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status within the current aggregation interval |
+| `wrapUpTime` | v1+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer within the current aggregation interval |
+| `wrapUpTimePercentage` | v1+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state within the current aggregation interval |
+
+</details>
+
+### 8.2. Queue Interactions Metrics
+
+Queue interactions metrics track how interactions flow through queues, including acceptance, abandonment, wait times, and agent handling performance.
+
+#### 8.2.1. Queue Interactions Summary
+
+<details>
+<summary>Click to expand Queue Interactions Summary Metrics (28 metrics)</summary>
+
+Report type: `queue-interactions-summary`
+
+This report provides comprehensive queue performance metrics, tracking interaction flow, agent handling, wait times, and abandonment patterns.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `accepted` | v1+ | Total interactions answered by agents. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent in the current aggregation interval |
+| `acceptedInSla` | v1+ | Total number of interactions answered by all agents within the SLA Threshold Time. Measures interactions where the agent answered before the configured SLA time limit was exceeded in the current aggregation interval |
+| `acceptedInSlaPercentage` | v1+ | Percentage of total number of interactions answered by all agents within the SLA Threshold Time, relative to total accepted interactions in the current aggregation interval |
+| `acceptedPercentage` | v2+ | Percentage of total interactions answered by agents relative to total entries. Shows what proportion of all interactions entering the queue were successfully connected to and handled by an agent in the current aggregation interval |
+| `avgAbandonTime` | v2+ | Average time spent by all interactions in the queue waiting to be served that ended up as an abandonment (includes short abandoned) in the current aggregation interval |
+| `avgBusyTime` | v1+ | Average time agents spent in the Offering, Handling, and Wrap Up states per interaction in the current aggregation interval |
+| `avgHandlingTime` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval |
+| `avgProcessingTime` | v1+ | Average combined time in Handling and Wrap Up states per accepted interaction. This represents the total time from when an agent accepts an interaction through final completion, including wrap-up work in the current aggregation interval |
+| `avgWaitBeforeAcceptedTime` | v1+ | Average time an interaction spent in the queue, from the time it entered the queue until it was accepted by an agent in the current aggregation interval |
+| `avgWaitTime` | v1+ | Average waiting time for interactions. Time interactions spend in queue from entry until acceptance, abandonment, or diversion in the current aggregation interval |
+| `avgWrapUpTime` | v1+ | Average post-processing time per interaction entered. Time spent by agents completing administrative tasks after finishing handling an interaction in the current aggregation interval |
+| `busyTime` | v1+ | Total time agents spent in the Offering, Handling, and Wrap Up states. Measured from when an interaction is presented to an agent until it is wrapped up in the current aggregation interval |
+| `diverted` | v1+ | Interactions leaving queue without termination via transfer, forwarding, or IVR routing. Represents interactions that were moved out of the queue through various routing mechanisms in the current aggregation interval |
+| `entered` | v1+ | Inbound interactions entering queue; outbound interactions directed through queue. Counts all interactions that came into this queue waiting to be processed in the current aggregation interval |
+| `handlingTime` | v1+ | Total time agents spent in the Handling state. Measured from when an interaction is accepted by an agent until it is terminated in the current aggregation interval |
+| `longestAbandonTime` | v2+ | Longest time an interaction spent waiting in a queue to be served and ended up as an abandonment in the current aggregation interval |
+| `longestWaitBeforeAcceptTime` | v7+ | Longest time an interaction spent in the queue from entry until it was accepted by an agent in the current aggregation interval |
+| `longestWaitTime` | v1+ | Longest wait in queue for interactions. Duration of the longest waiting interaction in the queue in the current aggregation interval |
+| `newInQueue` | v4+ | Interactions entering queue in the current aggregation interval only. Excludes interactions from previous intervals, showing only freshly entered interactions |
+| `processingTime` | v1+ | Total time agents spent in the Handling and Wrap Up states. Measured from when an interaction is accepted by an agent until it is wrapped up in the current aggregation interval |
+| `slaPercentage` | v1+ | Percentage of interactions answered before configured SLA time threshold relative to total entries, excluding short abandonments in the current aggregation interval |
+| `totalAbandonTime` | v2+ | Total cumulative time all abandoned interactions spent waiting in queue before abandonment in the current aggregation interval |
+| `totalAbandoned` | v1+ | All interactions finishing in abandonment including short abandonments. Provides complete picture of both quick and extended abandonments combined in the current aggregation interval |
+| `totalAbandonedPercentage` | v2+ | Percentage of abandoned interactions relative to total entries. Shows the complete abandonment rate including all types of abandonments in the current aggregation interval |
+| `voicemailsLeft` | v7+ | Number of interactions where customers left a voicemail in the current aggregation interval |
+| `waitingInQueue` | v1+ | Number of interactions waiting in queue to be answered at the end of the current aggregation interval |
+| `waitingInQueueTime` | v2+ | Total cumulative time all interactions spent waiting in queue in the current aggregation interval |
+| `wrapUpTime` | v1+ | Total time agents spent in the Wrap Up state completing post-interaction administrative tasks after disconnecting from customer in the current aggregation interval |
+
+</details>
+
+#### 8.2.2. Queue Interactions Accepted Offline
+
+<details>
+<summary>Click to expand Queue Interactions Accepted Offline Metrics (13 metrics)</summary>
+
+Report type: `queue-interactions-accepted-offline`
+
+This report tracks offline interactions (email, voicemail) accepted by agents, broken down by time buckets based on how long the interaction waited in queue before being answered.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `accepted` | v1+ | Total interactions answered by agents. Represents every offline interaction that was successfully connected to and handled by an agent in the current aggregation interval |
+| `accepted.lowerThan30m` | v1+ | Number of interactions answered by agents in under 30 minutes from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `accepted.30m-1h` | v1+ | Number of interactions answered by agents between 30 minutes and 1 hour from the moment the interaction entered the queue in the current aggregation interval |
+| `accepted.1h-1h30m` | v1+ | Number of interactions answered by agents between 1 and 1.5 hours from the moment the interaction entered the queue in the current aggregation interval |
+| `accepted.1h30m-2h` | v1+ | Number of interactions answered by agents between 1.5 and 2 hours from the moment the interaction entered the queue in the current aggregation interval |
+| `accepted.2h-3h` | v1+ | Number of interactions answered by agents between 2 and 3 hours from the moment the interaction entered the queue in the current aggregation interval |
+| `accepted.greaterThan3h` | v1+ | Number of interactions answered by agents in over 3 hours from the moment the interaction entered the queue in the current aggregation interval |
+| `acceptedPercentage.lowerThan30m` | v1+ | Percentage of accepted interactions in under 30 minutes over the total accepted interactions in the current aggregation interval. Calculated as (Accepted under 30 min / Accepted) × 100 |
+| `acceptedPercentage.30m-1h` | v1+ | Percentage of accepted interactions between 30 minutes and 1 hour over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 30min-1h / Accepted) × 100 |
+| `acceptedPercentage.1h-1h30m` | v1+ | Percentage of accepted interactions between 1 and 1.5 hours over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 1h-1h30m / Accepted) × 100 |
+| `acceptedPercentage.1h30m-2h` | v1+ | Percentage of accepted interactions between 1.5 and 2 hours over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 1h30m-2h / Accepted) × 100 |
+| `acceptedPercentage.2h-3h` | v1+ | Percentage of accepted interactions between 2 and 3 hours over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 2h-3h / Accepted) × 100 |
+| `acceptedPercentage.greaterThan3h` | v1+ | Percentage of accepted interactions in over 3 hours over the total accepted interactions in the current aggregation interval. Calculated as (Accepted over 3h / Accepted) × 100 |
+
+</details>
+
+#### 8.2.3. Queue Interactions Accepted Online
+
+<details>
+<summary>Click to expand Queue Interactions Accepted Online Metrics (21 metrics)</summary>
+
+Report type: `queue-interactions-accepted-online`
+
+This report tracks online interactions (phone, chat) accepted by agents, broken down by time buckets based on how long the interaction waited in queue before being answered.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `accepted` | v1+ | Total interactions answered by agents. Represents every online interaction that was successfully connected to and handled by an agent in the current aggregation interval |
+| `accepted.lowerThan5s` | v1+ | Number of interactions answered by agents in under 5 seconds from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `accepted.5s-10s` | v1+ | Number of interactions answered by agents between 5 and 10 seconds from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `accepted.10s-20s` | v1+ | Number of interactions answered by agents between 10 and 20 seconds from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `accepted.20s-30s` | v1+ | Number of interactions answered by agents between 20 and 30 seconds from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `accepted.30s-45s` | v1+ | Number of interactions answered by agents between 30 and 45 seconds from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `accepted.45s-1m` | v1+ | Number of interactions answered by agents between 45 seconds and 1 minute from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `accepted.1m-2m` | v1+ | Number of interactions answered by agents between 1 and 2 minutes from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `accepted.2m-5m` | v1+ | Number of interactions answered by agents between 2 and 5 minutes from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `accepted.5m-10m` | v1+ | Number of interactions answered by agents between 5 and 10 minutes from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `accepted.greaterThan10m` | v1+ | Number of interactions answered by agents in more than 10 minutes from the moment the interaction entered the queue until it was answered in the current aggregation interval |
+| `acceptedPercentage.lowerThan5s` | v1+ | Percentage of accepted interactions in under 5 seconds over the total accepted interactions in the current aggregation interval. Calculated as (Accepted under 5s / Accepted) × 100 |
+| `acceptedPercentage.5s-10s` | v1+ | Percentage of accepted interactions between 5 and 10 seconds over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 5s-10s / Accepted) × 100 |
+| `acceptedPercentage.10s-20s` | v1+ | Percentage of accepted interactions between 10 and 20 seconds over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 10s-20s / Accepted) × 100 |
+| `acceptedPercentage.20s-30s` | v1+ | Percentage of accepted interactions between 20 and 30 seconds over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 20s-30s / Accepted) × 100 |
+| `acceptedPercentage.30s-45s` | v1+ | Percentage of accepted interactions between 30 and 45 seconds over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 30s-45s / Accepted) × 100 |
+| `acceptedPercentage.45s-1m` | v1+ | Percentage of accepted interactions between 45 seconds and 1 minute over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 45s-1m / Accepted) × 100 |
+| `acceptedPercentage.1m-2m` | v1+ | Percentage of accepted interactions between 1 and 2 minutes over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 1m-2m / Accepted) × 100 |
+| `acceptedPercentage.2m-5m` | v1+ | Percentage of accepted interactions between 2 and 5 minutes over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 2m-5m / Accepted) × 100 |
+| `acceptedPercentage.5m-10m` | v1+ | Percentage of accepted interactions between 5 and 10 minutes over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 5m-10m / Accepted) × 100 |
+| `acceptedPercentage.greaterThan10m` | v1+ | Percentage of accepted interactions in more than 10 minutes over the total accepted interactions in the current aggregation interval. Calculated as (Accepted over 10m / Accepted) × 100 |
+
+</details>
+
+#### 8.2.4. Queue Interactions Abandoned
+
+<details>
+<summary>Click to expand Queue Interactions Abandoned Metrics (40 metrics)</summary>
+
+Report type: `queue-interactions-abandoned`
+
+This report tracks interactions that were abandoned in queue, broken down by time buckets based on how long the interaction waited before the customer terminated the interaction. Includes summary statistics on abandonment patterns.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `abandon.lowerThan5s` | v1+ | Number of abandoned interactions where customer terminated in under 5 seconds from entering queue in the current aggregation interval |
+| `abandon.5s-10s` | v1+ | Number of abandoned interactions where customer terminated between 5 and 10 seconds from entering queue in the current aggregation interval |
+| `abandon.10s-20s` | v1+ | Number of abandoned interactions where customer terminated between 10 and 20 seconds from entering queue in the current aggregation interval |
+| `abandon.20s-30s` | v1+ | Number of abandoned interactions where customer terminated between 20 and 30 seconds from entering queue in the current aggregation interval |
+| `abandon.30s-45s` | v1+ | Number of abandoned interactions where customer terminated between 30 and 45 seconds from entering queue in the current aggregation interval |
+| `abandon.45s-1m` | v1+ | Number of abandoned interactions where customer terminated between 45 seconds and 1 minute from entering queue in the current aggregation interval |
+| `abandon.1m-2m` | v1+ | Number of abandoned interactions where customer terminated between 1 and 2 minutes from entering queue in the current aggregation interval |
+| `abandon.2m-5m` | v1+ | Number of abandoned interactions where customer terminated between 2 and 5 minutes from entering queue in the current aggregation interval |
+| `abandon.5m-10m` | v1+ | Number of abandoned interactions where customer terminated between 5 and 10 minutes from entering queue in the current aggregation interval |
+| `abandon.greaterThan10m` | v1+ | Number of abandoned interactions where customer terminated in more than 10 minutes from entering queue in the current aggregation interval |
+| `abandonPercentage.lowerThan5s` | v1+ | Percentage of Total Abandoned interactions in under 5 seconds over the total Entered interactions in the current aggregation interval |
+| `abandonPercentage.5s-10s` | v1+ | Percentage of Total Abandoned interactions between 5 and 10 seconds over the total Entered interactions in the current aggregation interval |
+| `abandonPercentage.10s-20s` | v1+ | Percentage of Total Abandoned interactions between 10 and 20 seconds over the total Entered interactions in the current aggregation interval |
+| `abandonPercentage.20s-30s` | v1+ | Percentage of Total Abandoned interactions between 20 and 30 seconds over the total Entered interactions in the current aggregation interval |
+| `abandonPercentage.30s-45s` | v1+ | Percentage of Total Abandoned interactions between 30 and 45 seconds over the total Entered interactions in the current aggregation interval |
+| `abandonPercentage.45s-1m` | v1+ | Percentage of Total Abandoned interactions between 45 seconds and 1 minute over the total Entered interactions in the current aggregation interval |
+| `abandonPercentage.1m-2m` | v1+ | Percentage of Total Abandoned interactions between 1 and 2 minutes over the total Entered interactions in the current aggregation interval |
+| `abandonPercentage.2m-5m` | v1+ | Percentage of Total Abandoned interactions between 2 and 5 minutes over the total Entered interactions in the current aggregation interval |
+| `abandonPercentage.5m-10m` | v1+ | Percentage of Total Abandoned interactions between 5 and 10 minutes over the total Entered interactions in the current aggregation interval |
+| `abandonPercentage.greaterThan10m` | v1+ | Percentage of Total Abandoned interactions in more than 10 minutes over the total Entered interactions in the current aggregation interval |
+| `abandoned` | v1+ | Number of interactions that terminated in the queue and ended with customer disconnecting, excluding short abandonments in the current aggregation interval |
+| `abandonedPercentage` | v1+ | Percentage of interactions that terminated in the queue without being served over total entries, excluding short abandonments in the current aggregation interval |
+| `accepted` | v1+ | Total interactions answered by agents. Represents every interaction that was successfully connected to and handled by an agent in the current aggregation interval |
+| `acceptedPercentage` | v2+ | Percentage of interactions answered by agents over total entries in the current aggregation interval |
+| `avgAbandonTime` | v2+ | Average time abandoned interactions spent waiting in queue in the current aggregation interval |
+| `diverted` | v1+ | Number of interactions entering and leaving the queue without ending. Includes interactions transferred to other queues or voicemail in the current aggregation interval |
+| `divertedPercentage` | v1+ | Percentage of diverted interactions over total entries in the current aggregation interval |
+| `entered` | v1+ | Inbound interactions entering queue; outbound interactions directed through queue. Counts all interactions that came into this queue waiting to be processed in the current aggregation interval |
+| `longestAbandonTime` | v1+ | Longest wait time for abandoned interaction. Duration of the interaction that waited longest before customer disconnected in the current aggregation interval |
+| `newInQueue` | v4+ | Interactions entering queue in the current aggregation interval only. Excludes interactions from previous intervals, showing only freshly entered interactions |
+| `offering` | v1+ | Number of interactions being offered to available agents awaiting acceptance or rejection at the end of the current aggregation interval |
+| `offeringPercentage` | v1+ | Percentage of interactions in offering state over total entries in the current aggregation interval |
+| `shortAbandoned` | v1+ | Number of short abandonments. Interactions ending with customer exit in queue before 5 seconds in the current aggregation interval |
+| `shortAbandonedPercentage` | v1+ | Percentage of short abandonments. Percentage of interactions ending with customer exit in queue before 5 seconds relative to total entries in the current aggregation interval |
+| `totalAbandonTime` | v2+ | Total cumulative time all abandoned interactions spent waiting in queue before abandonment in the current aggregation interval |
+| `totalAbandoned` | v1+ | All interactions finishing in abandonment including short abandonments. Provides complete picture of both quick and extended abandonments combined in the current aggregation interval |
+| `totalAbandonedPercentage` | v1+ | Percentage of all abandoned interactions (including short abandonments) relative to total entries in the current aggregation interval |
+| `voicemailsLeft` | v7+ | Number of interactions where customers left a voicemail in the current aggregation interval |
+| `waitingInQueue` | v1+ | Number of interactions waiting in queue to be answered at the end of the current aggregation interval |
+| `waitingInQueueTime` | v2+ | Total cumulative time all interactions spent waiting in queue in the current aggregation interval |
+
+</details>
+
+### 8.3. Agent Interactions Metrics
+
+Agent interactions metrics track agent activity across different interaction types, including handling times, transfers, and wrap-up activities. These metrics help analyze agent performance and interaction outcomes.
+
+#### 8.3.1. Agent Interactions by Wrap Up Code
+
+<details>
+<summary>Click to expand Agent Interactions by Wrap Up Code Metrics (2 metrics)</summary>
+
+Report type: `agent-interactions-by-wrap-up-code`
+
+This report tracks agent activity by wrap-up codes (transaction codes), showing how many times each code was used and the total processing time associated with interactions marked with that code.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `transactionCodeCount` | v1+ | Total number of times the transaction code has been used in the current aggregation interval |
+| `transactionCodeTime` | v1+ | Total time agents spent processing interactions (Handling and Wrap Up) that finished with this transaction code in the current aggregation interval |
+
+</details>
+
+#### 8.3.2. Agent Interactions Call Summary
+
+<details>
+<summary>Click to expand Agent Interactions Call Summary Metrics (29 metrics)</summary>
+
+Report type: `agent-interactions-call-summary`
+
+This report provides comprehensive statistics on agent call activity including direct inbound/outbound calls, holds, transfers (blind and warm), conferences, consultations, and internal agent-to-agent calls.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `avgDirectInboundTime` | v1+ | Average time agents spent on direct inbound calls, excluding agent-to-agent calls in the current aggregation interval |
+| `avgDirectOutboundTime` | v1+ | Average time agents spent on outbound calls, excluding outbound queue calls and agent-to-agent calls in the current aggregation interval |
+| `avgHoldTime` | v2+ | Average duration per hold action. Calculated as total Hold Time divided by Number of Holds in the current aggregation interval |
+| `blindTransferToAgent` | v1+ | Total blind transfers initiated and received by agents outside of a queue in the current aggregation interval |
+| `blindTransferToQueue` | v1+ | Total blind transfers to queues initiated by agents in the current aggregation interval |
+| `blindTransfersInitiated` | v1+ | Number of blind transfers performed by agents in the current aggregation interval. Transfer where agent does not speak to recipient first |
+| `blindTransfersReceived` | v1+ | Number of blind transfers received by agents in the current aggregation interval |
+| `conferenceTime` | v1+ | Total cumulative duration agents spent in multi-party conference calls in the current aggregation interval |
+| `conferences` | v1+ | Total number of conferences in the current aggregation interval |
+| `conferencesEstablished` | v1+ | Total number of conferences (join lines) agents have initiated in the current aggregation interval |
+| `conferencesEstablishedTime` | v1+ | Total time agents spent in conference calls that they initiated in the current aggregation interval |
+| `conferencesReceived` | v1+ | Total number of conferences (join lines) agents have received in the current aggregation interval |
+| `conferencesReceivedTime` | v1+ | Total time agents spent in conference calls that they received in the current aggregation interval |
+| `consultationsEstablished` | v1+ | Number of times agents successfully established an outbound call while another call is on hold in the current aggregation interval |
+| `directInbound` | v1+ | Total number of direct inbound calls to agents excluding agent-to-agent calls in the current aggregation interval |
+| `directInboundTime` | v1+ | Total cumulative duration agents spent on direct inbound calls, excluding agent-to-agent calls in the current aggregation interval |
+| `directOutbound` | v1+ | Number of calls made by agents excluding outbound queue calls and agent-to-agent calls in the current aggregation interval |
+| `directOutboundTime` | v1+ | Total cumulative duration agents spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls in the current aggregation interval |
+| `hold` | v1+ | Total number of call holds agents have performed in the current aggregation interval |
+| `holdTime` | v1+ | Total time agents spent placing customers or agents on hold on any line in the current aggregation interval |
+| `internalCalls` | v1+ | Total number of agent-to-agent calls initiated or received in the current aggregation interval |
+| `internalCallsInitiated` | v1+ | Number of agent-to-agent calls initiated in the current aggregation interval |
+| `internalCallsReceived` | v1+ | Number of agent-to-agent calls received in the current aggregation interval |
+| `internalCallsTime` | v1+ | Total cumulative duration agents spent on agent-to-agent calls, both initiated and received in the current aggregation interval |
+| `longestHoldTime` | v1+ | Maximum single continuous hold duration when agent placed customer on hold in the current aggregation interval |
+| `transfersInitiated` | v1+ | Warm and blind transfers initiated by agents. All outgoing transfers in the current aggregation interval |
+| `transfersReceived` | v1+ | Warm and blind transfers routed to agents for handling. All incoming transfers in the current aggregation interval |
+| `warmTransfersCompleted` | v1+ | Total number of warm transfers initiated by agents in the current aggregation interval. Transfer where agent spoke to recipient first |
+| `warmTransfersReceived` | v1+ | Total number of warm transfers received by agents in the current aggregation interval |
+
+</details>
+
+#### 8.3.3. Agent Interactions Handling and Wrap Up
+
+<details>
+<summary>Click to expand Agent Interactions Handling and Wrap Up Metrics (10 metrics)</summary>
+
+Report type: `agent-interactions-handling-and-wrap-up`
+
+This report tracks agent time spent across different interaction processing states: Offering (waiting for acceptance), Handling (actively working), Wrap Up (post-call tasks), and combined Busy time.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `avgBusyTime` | v1+ | Average combined time in Offering, Handling, and Wrap Up states per interaction. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval |
+| `avgHandlingTime` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval |
+| `avgOfferingTime` | v1+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it in the current aggregation interval |
+| `avgProcessingTime` | v1+ | Average combined time in Handling and Wrap Up states per accepted interaction. This represents the total time from when an agent accepts an interaction through final completion, including wrap-up work in the current aggregation interval |
+| `avgWrapUpTime` | v1+ | Average post-processing time per interaction entered. Time spent by agents completing administrative tasks after finishing handling an interaction in the current aggregation interval |
+| `busyTime` | v1+ | Total combined time in Offering, Handling, and Wrap Up states. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval |
+| `handlingTime` | v1+ | Total time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval |
+| `offeringTime` | v1+ | Total duration from interaction presentation to acceptance or rejection in the current aggregation interval |
+| `processingTime` | v1+ | Total combined time in Handling and Wrap Up states per accepted interaction. This represents the total time from when an agent accepts an interaction through final completion, including wrap-up work in the current aggregation interval |
+| `wrapUpTime` | v1+ | Total time spent by agents completing administrative tasks after finishing handling an interaction in the current aggregation interval |
+
+</details>
+
+#### 8.3.4. Agent Interactions Summary
+
+<details>
+<summary>Click to expand Agent Interactions Summary Metrics (32 metrics)</summary>
+
+Report type: `agent-interactions-summary`
+
+This report provides a comprehensive overview of agent performance including interaction acceptance/rejection rates, handling times, transfers, and hold statistics. Combines metrics from call activity, handling times, and wrap-up activities.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description |
+|--------|---------|-------------|
+| `abandoned` | v1+ | Total number of interactions abandoned by a customer while being presented to the agent in the current aggregation interval |
+| `abandonedPercentage` | v1+ | Percentage of interactions abandoned while being presented to the agent over the total interactions presented in the current aggregation interval |
+| `accepted` | v1+ | Total interactions answered by agents. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent in the current aggregation interval |
+| `acceptedPercentage` | v1+ | Percentage of interactions answered by agents over the total interactions presented in the current aggregation interval |
+| `alerting` | v1+ | Number of interactions currently being presented to agents via a queue or direct assignment in the current aggregation interval |
+| `avgBusyTime` | v1+ | Average combined time in Offering, Handling, and Wrap Up states per interaction. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval |
+| `avgHandlingTime` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval |
+| `avgHoldTime` | v2+ | Average duration per hold action. Calculated as total Hold Time divided by Number of Holds in the current aggregation interval |
+| `avgSpeedToAnswer` | v1+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it in the current aggregation interval |
+| `avgWrapUpTime` | v1+ | Average post-processing time per interaction entered. Time spent by agents completing administrative tasks after finishing handling an interaction in the current aggregation interval |
+| `blindTransferToAgent` | v1+ | Total blind transfers initiated and received by agents outside of a queue in the current aggregation interval |
+| `blindTransferToQueue` | v1+ | Total blind transfers to queues initiated by agents in the current aggregation interval |
+| `blindTransfersInitiated` | v1+ | Number of blind transfers performed by agents in the current aggregation interval. Transfer where agent does not speak to recipient first |
+| `blindTransfersReceived` | v1+ | Number of blind transfers received by agents in the current aggregation interval |
+| `busyTime` | v1+ | Total combined time in Offering, Handling, and Wrap Up states. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval |
+| `handlingTime` | v1+ | Total time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval |
+| `hold` | v1+ | Total number of call holds agents have performed in the current aggregation interval |
+| `holdTime` | v1+ | Total time agents spent placing customers or agents on hold on any line in the current aggregation interval |
+| `longestHoldTime` | v1+ | Maximum single continuous hold duration when agent placed customer on hold in the current aggregation interval |
+| `longestOfferingTime` | v1+ | Longest time to accept an interaction from the time it is offered to the time it is accepted or rejected by an agent in the current aggregation interval |
+| `offeringTime` | v1+ | Total duration from interaction presentation to acceptance or rejection in the current aggregation interval |
+| `presented` | v1+ | Total interactions presented to agents for acceptance or rejection. Includes interactions continuing from prior intervals in the current aggregation interval |
+| `processingTime` | v7+ | Total combined time in Handling and Wrap Up states per accepted interaction. This represents the total time from when an agent accepts an interaction through final completion, including wrap-up work in the current aggregation interval |
+| `rejectTimeout` | v1+ | Count of interactions automatically rejected when agent did not respond within configured timeout period in the current aggregation interval |
+| `rejected` | v1+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer in the current aggregation interval |
+| `rejectedPercentage` | v1+ | Percentage of interactions rejected by agents over the total interactions presented in the current aggregation interval |
+| `transfersInitiated` | v1+ | Warm and blind transfers initiated by agents. All outgoing transfers in the current aggregation interval |
+| `transfersInitiatedPercentage` | v2+ | Percentage of interactions transferred by agents, calculated relative to total interactions accepted in the current aggregation interval |
+| `transfersReceived` | v1+ | Warm and blind transfers routed to agents for handling. All incoming transfers in the current aggregation interval |
+| `warmTransfersCompleted` | v1+ | Total number of warm transfers initiated by agents in the current aggregation interval. Transfer where agent spoke to recipient first |
+| `warmTransfersReceived` | v1+ | Total number of warm transfers received by agents in the current aggregation interval |
+| `wrapUpTime` | v1+ | Total time spent by agents completing administrative tasks after finishing handling an interaction in the current aggregation interval |
+
+</details>
+
+### 8.4. Digital Channels Metrics
+
+Digital channels metrics track performance for non-voice interactions such as email and chat. These metrics measure interaction volumes and durations across different processing stages.
+
+#### 8.4.1. Digital Channels Summary
+
+<details>
+<summary>Click to expand Digital Channels Summary Metrics (9 metrics)</summary>
+
+Report type: `digital-channels-summary`
+
+This report displays aggregate metrics for digital channels such as email and chat, tracking interaction volumes, and durations across different processing stages.
+
+**Version** indicates minimum CC Historical Analytics API version where metric became available.
+
+| Metric | Version | Description                                                                                                                                                                           |
+|--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `avgSpeedToAnswer` | v1+ | Average duration from interaction presentation to acceptance for digital channel interactions in the current aggregation interval                                                     |
+| `countOfInteractions` | v1+ | Total count of digital channel interactions processed in the current aggregation interval                                                                                             |
+| `handlingDuration` | v1+ | Total time agents spend handling digital channel interactions. Measured from when an agent accepts an interaction until they finish processing it in the current aggregation interval |
+| `numberOfRepliedEmails` | v1+ | Total count of email interactions that received agent replies in the current aggregation interval                                                                                     |
+| `offeringDuration` | v1+ | Total duration digital channel interactions spent in Offering state waiting for agent acceptance or rejection in the current aggregation interval                                     |
+| `queueWaitDuration` | v1+ | Total cumulative time digital channel interactions spent waiting in queue in the current aggregation interval |
+| `scriptTreatmentDuration` | v1+ | Total time digital channel interactions spent in script treatment, excluding queue time in the current aggregation interval |
+| `totalInteractionsDuration` | v1+ | Total combined duration for digital channel interactions. Includes script treatment, queue wait, and handling time in the current aggregation interval |
+| `wrapUpDuration` | v1+ | Total time agents spend completing post-interaction administrative tasks for digital channel interactions. Measured from when an agent disconnects from customer until wrap-up is finalized in the current aggregation interval |
+
+</details>
