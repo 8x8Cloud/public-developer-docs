@@ -9,7 +9,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.c247a45b.css">
-<script src="/assets/js/runtime~main.a9d8c84f.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.41c6c9bb.js" defer="defer"></script>
 <script src="/assets/js/main.33158837.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -53,7 +53,7 @@
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-get-available-report-types">3. Get Available Report Types<a href="#3-get-available-report-types" class="hash-link" aria-label="Direct link to 3. Get Available Report Types" title="Direct link to 3. Get Available Report Types" translate="no">​</a></h2>
 <p>CC Historical Analytics allows the consumer to get a listing of the available reports including information about their options and available data.</p>
-<p>Additional information about each of the reports and detailed definitions of metrics can be found in the <a href="https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/Glossary-historical-reports.htm" target="_blank" rel="noopener noreferrer">CC Historical Analytics Glossary</a></p>
+<p>Additional information about each of the reports and detailed definitions of metrics can be found in the <a href="#8-metrics-glossary">Metrics Glossary</a></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="parameters">Parameters<a href="#parameters" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h3>
 <p><strong>Method: GET</strong></p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="headers">Headers<a href="#headers" class="hash-link" aria-label="Direct link to Headers" title="Direct link to Headers" translate="no">​</a></h4>
@@ -122,7 +122,7 @@
 <li><code>filters</code> these are the available filters for this report type for this particular grouping. The filters available vary depending on the type AND the grouping.</li>
 </ul>
 </li>
-<li><code>metrics</code> these are the available metrics for the report type. When creating a report. See the <a href="https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/Glossary-historical-reports.htm" target="_blank" rel="noopener noreferrer">CC Historical Analytics Glossary</a> for additional detail on the definition of the available metrics</li>
+<li><code>metrics</code> these are the available metrics for the report type. When creating a report. See the <a href="#8-metrics-glossary">Metrics Glossary</a> for additional detail on the definition of the available metrics</li>
 <li>When running reports:
 <ul>
 <li>if no metrics are specified: All metrics will be returned</li>
@@ -341,7 +341,7 @@
 <li>if no metrics are specified (omitted entirely or empty array) ==&gt; All metrics will be returned</li>
 <li>if metrics are specified ==&gt; ONLY the specified metrics will be returned</li>
 </ul>
-<p><a href="https://docs.8x8.com/8x8WebHelp/8x8Analytics/Content/8x8Analytics/Glossary-historical-reports.htm" target="_blank" rel="noopener noreferrer">CC Historical Analytics Glossary</a> provides detail on the definition of the available metrics</p>
+<p>The <a href="#8-metrics-glossary">Metrics Glossary</a> provides detail on the definition of the available metrics</p>
 <div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token property" style="color:#36acaa">&quot;metrics&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token string" style="color:#e3116c">&quot;accepted&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token string" style="color:#e3116c">&quot;acceptedInSla&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token string" style="color:#e3116c">&quot;acceptedInSlaPercentage&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token string" style="color:#e3116c">&quot;acceptedPercentage&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token string" style="color:#e3116c">&quot;totalAbandoned&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token string" style="color:#e3116c">&quot;totalAbandonedPercentage&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
 <p><a href="/analytics/reference/cc-historical-report-create">API reference</a></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="create-report-request">Create Report Request<a href="#create-report-request" class="hash-link" aria-label="Direct link to Create Report Request" title="Direct link to Create Report Request" translate="no">​</a></h3>
@@ -696,6 +696,1252 @@
 <li><code>status</code> is always shown</li>
 <li><code>data</code> and <code>download</code> are shown if the report status is DONE</li>
 </ul>
-<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;relation&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;status&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;link&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;https://api.8x8.com/analytics/cc/v8/historical-metrics/2684392/status&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;relation&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;data&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;link&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;https://api.8x8.com/analytics/cc/v8/historical-metrics/2684392/data?page=0&amp;size=100&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;relation&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;download&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;link&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;https://api.8x8.com/analytics/cc/v8/historical-metrics/2684392/download&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/analytics/docs/cc-realtime-statistics"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">CC Realtime Statistics</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/analytics/docs/cc-historical-analytics-detailed-report"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">CC Historical Analytics Detailed Report</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-authenticate-to-retrieve-access-token" class="table-of-contents__link toc-highlight">1. Authenticate to retrieve access token</a></li><li><a href="#2-multitenancy-support" class="table-of-contents__link toc-highlight">2 Multitenancy support</a></li><li><a href="#3-get-available-report-types" class="table-of-contents__link toc-highlight">3. Get Available Report Types</a><ul><li><a href="#parameters" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#report-types-request" class="table-of-contents__link toc-highlight">Report Types Request</a></li><li><a href="#report-types-response" class="table-of-contents__link toc-highlight">Report Types Response</a></li></ul></li><li><a href="#4-creating-a-summary-report" class="table-of-contents__link toc-highlight">4. Creating A Summary Report</a><ul><li><a href="#parameters-1" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#create-report-request" class="table-of-contents__link toc-highlight">Create Report Request</a></li><li><a href="#create-report-response" class="table-of-contents__link toc-highlight">Create Report Response</a></li></ul></li><li><a href="#5-get-report-status" class="table-of-contents__link toc-highlight">5. Get Report Status</a><ul><li><a href="#parameters-2" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#report-status-request" class="table-of-contents__link toc-highlight">Report Status Request</a></li><li><a href="#report-status-response" class="table-of-contents__link toc-highlight">Report Status response</a></li></ul></li><li><a href="#6a-get-report-data-json" class="table-of-contents__link toc-highlight">6a. Get Report Data (JSON)</a><ul><li><a href="#parameters-3" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#report-data-json-request" class="table-of-contents__link toc-highlight">Report Data (JSON) Request</a></li><li><a href="#report-data-json-response" class="table-of-contents__link toc-highlight">Report Data (JSON) Response</a></li></ul></li><li><a href="#6b-get-report-download-csvxlsx" class="table-of-contents__link toc-highlight">6b. Get Report Download (CSV/XLSX)</a><ul><li><a href="#parameters-4" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#report-download-csvxlsx-request" class="table-of-contents__link toc-highlight">Report Download (CSV/XLSX) Request</a></li><li><a href="#report-download-csvxlsx-response" class="table-of-contents__link toc-highlight">Report Download (CSV/XLSX) Response</a></li></ul></li><li><a href="#7-access-report-links" class="table-of-contents__link toc-highlight">7. Access Report Links</a><ul><li><a href="#parameters-5" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#report-links-request" class="table-of-contents__link toc-highlight">Report Links Request</a></li><li><a href="#report-links-response" class="table-of-contents__link toc-highlight">Report Links Response</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;relation&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;status&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;link&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;https://api.8x8.com/analytics/cc/v8/historical-metrics/2684392/status&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;relation&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;data&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;link&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;https://api.8x8.com/analytics/cc/v8/historical-metrics/2684392/data?page=0&amp;size=100&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;relation&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;download&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;link&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;https://api.8x8.com/analytics/cc/v8/historical-metrics/2684392/download&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="8-metrics-glossary">8. Metrics Glossary<a href="#8-metrics-glossary" class="hash-link" aria-label="Direct link to 8. Metrics Glossary" title="Direct link to 8. Metrics Glossary" translate="no">​</a></h2>
+<p>This glossary provides comprehensive definitions for all metrics available across the aggregated report types. Use this reference when selecting metrics for your reports and understanding the data returned.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="81-agent-status-metrics">8.1. Agent Status Metrics<a href="#81-agent-status-metrics" class="hash-link" aria-label="Direct link to 8.1. Agent Status Metrics" title="Direct link to 8.1. Agent Status Metrics" translate="no">​</a></h3>
+<p>Agent status metrics track how agents spend their time across different operational states. These metrics help analyze agent productivity, availability patterns, and time allocation.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="811-agent-status-by-status-code">8.1.1. Agent Status by Status Code<a href="#811-agent-status-by-status-code" class="hash-link" aria-label="Direct link to 8.1.1. Agent Status by Status Code" title="Direct link to 8.1.1. Agent Status by Status Code" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Agent Status by Status Code Metrics (4 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>agent-status-by-status-code</code></p>
+<p>This report breaks down agent time by specific status codes, showing how long agents spend in each configured status reason.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>loggedInTime</code></td><td>v7+</td><td>Total time the agent maintained active system connection and was available for work across all queues and activities within the current aggregation interval</td></tr><tr><td><code>statusCodeCount</code></td><td>v1+</td><td>Number of times the agent entered or changed to a specific status code within the current aggregation interval. Tracks frequency of status changes for each configured status reason</td></tr><tr><td><code>statusCodeTime</code></td><td>v1+</td><td>Total time the agent spent in a specific status code within the current aggregation interval. Represents the cumulative duration for each configured status reason</td></tr><tr><td><code>timePercentage</code></td><td>v7+</td><td>Percentage of time the agent spent in a specific status code relative to total logged-in time within the current aggregation interval. Calculated as (statusCodeTime / loggedInTime) × 100</td></tr></tbody></table>
+</div></div></details>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="812-agent-status-logged-in">8.1.2. Agent Status Logged In<a href="#812-agent-status-logged-in" class="hash-link" aria-label="Direct link to 8.1.2. Agent Status Logged In" title="Direct link to 8.1.2. Agent Status Logged In" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Agent Status Logged In Metrics (1 metric)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>agent-status-logged-in</code></p>
+<p>Tracks agent availability and productivity by showing the login sessions.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>loggedInTime</code></td><td>v1+</td><td>Total duration of the agent&#x27;s login session. Represents how long the agent maintained active system connection from login to logout</td></tr></tbody></table>
+</div></div></details>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="813-agent-status-time-on-status">8.1.3. Agent Status Time on Status<a href="#813-agent-status-time-on-status" class="hash-link" aria-label="Direct link to 8.1.3. Agent Status Time on Status" title="Direct link to 8.1.3. Agent Status Time on Status" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Agent Status Time on Status Metrics (15 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>agent-status-time-on-status</code></p>
+<p>This report breaks down agent time across major operational states, providing insight into how agents allocate their time between handling interactions, being available, taking breaks, and working offline.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>availableTime</code></td><td>v1+</td><td>Total time the agent spent in Available state, ready to receive incoming interactions within the current aggregation interval</td></tr><tr><td><code>availableTimePercentage</code></td><td>v1+</td><td>Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work within the current aggregation interval</td></tr><tr><td><code>busyTime</code></td><td>v1+</td><td>Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities within the current aggregation interval</td></tr><tr><td><code>busyTimePercentage</code></td><td>v1+</td><td>Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working within the current aggregation interval</td></tr><tr><td><code>handlingTime</code></td><td>v1+</td><td>Total time the agent spent in Handling state, actively processing interactions within the current aggregation interval</td></tr><tr><td><code>handlingTimePercentage</code></td><td>v1+</td><td>Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions within the current aggregation interval</td></tr><tr><td><code>loggedInTime</code></td><td>v1+</td><td>Total time the agent maintained active system connection and was available for work across all queues and activities within the current aggregation interval</td></tr><tr><td><code>offeringTime</code></td><td>v7+</td><td>Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities within the current aggregation interval</td></tr><tr><td><code>offeringTimePercent</code></td><td>v7+</td><td>Percentage of offering time relative to total logged-in time. Shows what proportion of login duration agent spent with interactions being offered within the current aggregation interval. Calculated as (offeringTime / loggedInTime) × 100</td></tr><tr><td><code>onBreakTime</code></td><td>v1+</td><td>Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions within the current aggregation interval</td></tr><tr><td><code>onBreakTimePercentage</code></td><td>v1+</td><td>Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break within the current aggregation interval</td></tr><tr><td><code>workingOfflineTime</code></td><td>v1+</td><td>Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions within the current aggregation interval</td></tr><tr><td><code>workingOfflineTimePercentage</code></td><td>v1+</td><td>Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status within the current aggregation interval</td></tr><tr><td><code>wrapUpTime</code></td><td>v1+</td><td>Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer within the current aggregation interval</td></tr><tr><td><code>wrapUpTimePercentage</code></td><td>v1+</td><td>Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state within the current aggregation interval</td></tr></tbody></table>
+</div></div></details>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="82-queue-interactions-metrics">8.2. Queue Interactions Metrics<a href="#82-queue-interactions-metrics" class="hash-link" aria-label="Direct link to 8.2. Queue Interactions Metrics" title="Direct link to 8.2. Queue Interactions Metrics" translate="no">​</a></h3>
+<p>Queue interactions metrics track how interactions flow through queues, including acceptance, abandonment, wait times, and agent handling performance.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="821-queue-interactions-summary">8.2.1. Queue Interactions Summary<a href="#821-queue-interactions-summary" class="hash-link" aria-label="Direct link to 8.2.1. Queue Interactions Summary" title="Direct link to 8.2.1. Queue Interactions Summary" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Queue Interactions Summary Metrics (28 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>queue-interactions-summary</code></p>
+<p>This report provides comprehensive queue performance metrics, tracking interaction flow, agent handling, wait times, and abandonment patterns.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>accepted</code></td><td>v1+</td><td>Total interactions answered by agents. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent in the current aggregation interval</td></tr><tr><td><code>acceptedInSla</code></td><td>v1+</td><td>Total number of interactions answered by all agents within the SLA Threshold Time. Measures interactions where the agent answered before the configured SLA time limit was exceeded in the current aggregation interval</td></tr><tr><td><code>acceptedInSlaPercentage</code></td><td>v1+</td><td>Percentage of total number of interactions answered by all agents within the SLA Threshold Time, relative to total accepted interactions in the current aggregation interval</td></tr><tr><td><code>acceptedPercentage</code></td><td>v2+</td><td>Percentage of total interactions answered by agents relative to total entries. Shows what proportion of all interactions entering the queue were successfully connected to and handled by an agent in the current aggregation interval</td></tr><tr><td><code>avgAbandonTime</code></td><td>v2+</td><td>Average time spent by all interactions in the queue waiting to be served that ended up as an abandonment (includes short abandoned) in the current aggregation interval</td></tr><tr><td><code>avgBusyTime</code></td><td>v1+</td><td>Average time agents spent in the Offering, Handling, and Wrap Up states per interaction in the current aggregation interval</td></tr><tr><td><code>avgHandlingTime</code></td><td>v1+</td><td>Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval</td></tr><tr><td><code>avgProcessingTime</code></td><td>v1+</td><td>Average combined time in Handling and Wrap Up states per accepted interaction. This represents the total time from when an agent accepts an interaction through final completion, including wrap-up work in the current aggregation interval</td></tr><tr><td><code>avgWaitBeforeAcceptedTime</code></td><td>v1+</td><td>Average time an interaction spent in the queue, from the time it entered the queue until it was accepted by an agent in the current aggregation interval</td></tr><tr><td><code>avgWaitTime</code></td><td>v1+</td><td>Average waiting time for interactions. Time interactions spend in queue from entry until acceptance, abandonment, or diversion in the current aggregation interval</td></tr><tr><td><code>avgWrapUpTime</code></td><td>v1+</td><td>Average post-processing time per interaction entered. Time spent by agents completing administrative tasks after finishing handling an interaction in the current aggregation interval</td></tr><tr><td><code>busyTime</code></td><td>v1+</td><td>Total time agents spent in the Offering, Handling, and Wrap Up states. Measured from when an interaction is presented to an agent until it is wrapped up in the current aggregation interval</td></tr><tr><td><code>diverted</code></td><td>v1+</td><td>Interactions leaving queue without termination via transfer, forwarding, or IVR routing. Represents interactions that were moved out of the queue through various routing mechanisms in the current aggregation interval</td></tr><tr><td><code>entered</code></td><td>v1+</td><td>Inbound interactions entering queue; outbound interactions directed through queue. Counts all interactions that came into this queue waiting to be processed in the current aggregation interval</td></tr><tr><td><code>handlingTime</code></td><td>v1+</td><td>Total time agents spent in the Handling state. Measured from when an interaction is accepted by an agent until it is terminated in the current aggregation interval</td></tr><tr><td><code>longestAbandonTime</code></td><td>v2+</td><td>Longest time an interaction spent waiting in a queue to be served and ended up as an abandonment in the current aggregation interval</td></tr><tr><td><code>longestWaitBeforeAcceptTime</code></td><td>v7+</td><td>Longest time an interaction spent in the queue from entry until it was accepted by an agent in the current aggregation interval</td></tr><tr><td><code>longestWaitTime</code></td><td>v1+</td><td>Longest wait in queue for interactions. Duration of the longest waiting interaction in the queue in the current aggregation interval</td></tr><tr><td><code>newInQueue</code></td><td>v4+</td><td>Interactions entering queue in the current aggregation interval only. Excludes interactions from previous intervals, showing only freshly entered interactions</td></tr><tr><td><code>processingTime</code></td><td>v1+</td><td>Total time agents spent in the Handling and Wrap Up states. Measured from when an interaction is accepted by an agent until it is wrapped up in the current aggregation interval</td></tr><tr><td><code>slaPercentage</code></td><td>v1+</td><td>Percentage of interactions answered before configured SLA time threshold relative to total entries, excluding short abandonments in the current aggregation interval</td></tr><tr><td><code>totalAbandonTime</code></td><td>v2+</td><td>Total cumulative time all abandoned interactions spent waiting in queue before abandonment in the current aggregation interval</td></tr><tr><td><code>totalAbandoned</code></td><td>v1+</td><td>All interactions finishing in abandonment including short abandonments. Provides complete picture of both quick and extended abandonments combined in the current aggregation interval</td></tr><tr><td><code>totalAbandonedPercentage</code></td><td>v2+</td><td>Percentage of abandoned interactions relative to total entries. Shows the complete abandonment rate including all types of abandonments in the current aggregation interval</td></tr><tr><td><code>voicemailsLeft</code></td><td>v7+</td><td>Number of interactions where customers left a voicemail in the current aggregation interval</td></tr><tr><td><code>waitingInQueue</code></td><td>v1+</td><td>Number of interactions waiting in queue to be answered at the end of the current aggregation interval</td></tr><tr><td><code>waitingInQueueTime</code></td><td>v2+</td><td>Total cumulative time all interactions spent waiting in queue in the current aggregation interval</td></tr><tr><td><code>wrapUpTime</code></td><td>v1+</td><td>Total time agents spent in the Wrap Up state completing post-interaction administrative tasks after disconnecting from customer in the current aggregation interval</td></tr></tbody></table>
+</div></div></details>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="822-queue-interactions-accepted-offline">8.2.2. Queue Interactions Accepted Offline<a href="#822-queue-interactions-accepted-offline" class="hash-link" aria-label="Direct link to 8.2.2. Queue Interactions Accepted Offline" title="Direct link to 8.2.2. Queue Interactions Accepted Offline" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Queue Interactions Accepted Offline Metrics (13 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>queue-interactions-accepted-offline</code></p>
+<p>This report tracks offline interactions (email, voicemail) accepted by agents, broken down by time buckets based on how long the interaction waited in queue before being answered.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>accepted</code></td><td>v1+</td><td>Total interactions answered by agents. Represents every offline interaction that was successfully connected to and handled by an agent in the current aggregation interval</td></tr><tr><td><code>accepted.lowerThan30m</code></td><td>v1+</td><td>Number of interactions answered by agents in under 30 minutes from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>accepted.30m-1h</code></td><td>v1+</td><td>Number of interactions answered by agents between 30 minutes and 1 hour from the moment the interaction entered the queue in the current aggregation interval</td></tr><tr><td><code>accepted.1h-1h30m</code></td><td>v1+</td><td>Number of interactions answered by agents between 1 and 1.5 hours from the moment the interaction entered the queue in the current aggregation interval</td></tr><tr><td><code>accepted.1h30m-2h</code></td><td>v1+</td><td>Number of interactions answered by agents between 1.5 and 2 hours from the moment the interaction entered the queue in the current aggregation interval</td></tr><tr><td><code>accepted.2h-3h</code></td><td>v1+</td><td>Number of interactions answered by agents between 2 and 3 hours from the moment the interaction entered the queue in the current aggregation interval</td></tr><tr><td><code>accepted.greaterThan3h</code></td><td>v1+</td><td>Number of interactions answered by agents in over 3 hours from the moment the interaction entered the queue in the current aggregation interval</td></tr><tr><td><code>acceptedPercentage.lowerThan30m</code></td><td>v1+</td><td>Percentage of accepted interactions in under 30 minutes over the total accepted interactions in the current aggregation interval. Calculated as (Accepted under 30 min / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.30m-1h</code></td><td>v1+</td><td>Percentage of accepted interactions between 30 minutes and 1 hour over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 30min-1h / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.1h-1h30m</code></td><td>v1+</td><td>Percentage of accepted interactions between 1 and 1.5 hours over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 1h-1h30m / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.1h30m-2h</code></td><td>v1+</td><td>Percentage of accepted interactions between 1.5 and 2 hours over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 1h30m-2h / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.2h-3h</code></td><td>v1+</td><td>Percentage of accepted interactions between 2 and 3 hours over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 2h-3h / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.greaterThan3h</code></td><td>v1+</td><td>Percentage of accepted interactions in over 3 hours over the total accepted interactions in the current aggregation interval. Calculated as (Accepted over 3h / Accepted) × 100</td></tr></tbody></table>
+</div></div></details>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="823-queue-interactions-accepted-online">8.2.3. Queue Interactions Accepted Online<a href="#823-queue-interactions-accepted-online" class="hash-link" aria-label="Direct link to 8.2.3. Queue Interactions Accepted Online" title="Direct link to 8.2.3. Queue Interactions Accepted Online" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Queue Interactions Accepted Online Metrics (21 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>queue-interactions-accepted-online</code></p>
+<p>This report tracks online interactions (phone, chat) accepted by agents, broken down by time buckets based on how long the interaction waited in queue before being answered.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>accepted</code></td><td>v1+</td><td>Total interactions answered by agents. Represents every online interaction that was successfully connected to and handled by an agent in the current aggregation interval</td></tr><tr><td><code>accepted.lowerThan5s</code></td><td>v1+</td><td>Number of interactions answered by agents in under 5 seconds from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>accepted.5s-10s</code></td><td>v1+</td><td>Number of interactions answered by agents between 5 and 10 seconds from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>accepted.10s-20s</code></td><td>v1+</td><td>Number of interactions answered by agents between 10 and 20 seconds from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>accepted.20s-30s</code></td><td>v1+</td><td>Number of interactions answered by agents between 20 and 30 seconds from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>accepted.30s-45s</code></td><td>v1+</td><td>Number of interactions answered by agents between 30 and 45 seconds from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>accepted.45s-1m</code></td><td>v1+</td><td>Number of interactions answered by agents between 45 seconds and 1 minute from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>accepted.1m-2m</code></td><td>v1+</td><td>Number of interactions answered by agents between 1 and 2 minutes from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>accepted.2m-5m</code></td><td>v1+</td><td>Number of interactions answered by agents between 2 and 5 minutes from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>accepted.5m-10m</code></td><td>v1+</td><td>Number of interactions answered by agents between 5 and 10 minutes from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>accepted.greaterThan10m</code></td><td>v1+</td><td>Number of interactions answered by agents in more than 10 minutes from the moment the interaction entered the queue until it was answered in the current aggregation interval</td></tr><tr><td><code>acceptedPercentage.lowerThan5s</code></td><td>v1+</td><td>Percentage of accepted interactions in under 5 seconds over the total accepted interactions in the current aggregation interval. Calculated as (Accepted under 5s / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.5s-10s</code></td><td>v1+</td><td>Percentage of accepted interactions between 5 and 10 seconds over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 5s-10s / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.10s-20s</code></td><td>v1+</td><td>Percentage of accepted interactions between 10 and 20 seconds over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 10s-20s / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.20s-30s</code></td><td>v1+</td><td>Percentage of accepted interactions between 20 and 30 seconds over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 20s-30s / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.30s-45s</code></td><td>v1+</td><td>Percentage of accepted interactions between 30 and 45 seconds over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 30s-45s / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.45s-1m</code></td><td>v1+</td><td>Percentage of accepted interactions between 45 seconds and 1 minute over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 45s-1m / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.1m-2m</code></td><td>v1+</td><td>Percentage of accepted interactions between 1 and 2 minutes over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 1m-2m / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.2m-5m</code></td><td>v1+</td><td>Percentage of accepted interactions between 2 and 5 minutes over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 2m-5m / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.5m-10m</code></td><td>v1+</td><td>Percentage of accepted interactions between 5 and 10 minutes over the total accepted interactions in the current aggregation interval. Calculated as (Accepted 5m-10m / Accepted) × 100</td></tr><tr><td><code>acceptedPercentage.greaterThan10m</code></td><td>v1+</td><td>Percentage of accepted interactions in more than 10 minutes over the total accepted interactions in the current aggregation interval. Calculated as (Accepted over 10m / Accepted) × 100</td></tr></tbody></table>
+</div></div></details>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="824-queue-interactions-abandoned">8.2.4. Queue Interactions Abandoned<a href="#824-queue-interactions-abandoned" class="hash-link" aria-label="Direct link to 8.2.4. Queue Interactions Abandoned" title="Direct link to 8.2.4. Queue Interactions Abandoned" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Queue Interactions Abandoned Metrics (40 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>queue-interactions-abandoned</code></p>
+<p>This report tracks interactions that were abandoned in queue, broken down by time buckets based on how long the interaction waited before the customer terminated the interaction. Includes summary statistics on abandonment patterns.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>abandon.lowerThan5s</code></td><td>v1+</td><td>Number of abandoned interactions where customer terminated in under 5 seconds from entering queue in the current aggregation interval</td></tr><tr><td><code>abandon.5s-10s</code></td><td>v1+</td><td>Number of abandoned interactions where customer terminated between 5 and 10 seconds from entering queue in the current aggregation interval</td></tr><tr><td><code>abandon.10s-20s</code></td><td>v1+</td><td>Number of abandoned interactions where customer terminated between 10 and 20 seconds from entering queue in the current aggregation interval</td></tr><tr><td><code>abandon.20s-30s</code></td><td>v1+</td><td>Number of abandoned interactions where customer terminated between 20 and 30 seconds from entering queue in the current aggregation interval</td></tr><tr><td><code>abandon.30s-45s</code></td><td>v1+</td><td>Number of abandoned interactions where customer terminated between 30 and 45 seconds from entering queue in the current aggregation interval</td></tr><tr><td><code>abandon.45s-1m</code></td><td>v1+</td><td>Number of abandoned interactions where customer terminated between 45 seconds and 1 minute from entering queue in the current aggregation interval</td></tr><tr><td><code>abandon.1m-2m</code></td><td>v1+</td><td>Number of abandoned interactions where customer terminated between 1 and 2 minutes from entering queue in the current aggregation interval</td></tr><tr><td><code>abandon.2m-5m</code></td><td>v1+</td><td>Number of abandoned interactions where customer terminated between 2 and 5 minutes from entering queue in the current aggregation interval</td></tr><tr><td><code>abandon.5m-10m</code></td><td>v1+</td><td>Number of abandoned interactions where customer terminated between 5 and 10 minutes from entering queue in the current aggregation interval</td></tr><tr><td><code>abandon.greaterThan10m</code></td><td>v1+</td><td>Number of abandoned interactions where customer terminated in more than 10 minutes from entering queue in the current aggregation interval</td></tr><tr><td><code>abandonPercentage.lowerThan5s</code></td><td>v1+</td><td>Percentage of Total Abandoned interactions in under 5 seconds over the total Entered interactions in the current aggregation interval</td></tr><tr><td><code>abandonPercentage.5s-10s</code></td><td>v1+</td><td>Percentage of Total Abandoned interactions between 5 and 10 seconds over the total Entered interactions in the current aggregation interval</td></tr><tr><td><code>abandonPercentage.10s-20s</code></td><td>v1+</td><td>Percentage of Total Abandoned interactions between 10 and 20 seconds over the total Entered interactions in the current aggregation interval</td></tr><tr><td><code>abandonPercentage.20s-30s</code></td><td>v1+</td><td>Percentage of Total Abandoned interactions between 20 and 30 seconds over the total Entered interactions in the current aggregation interval</td></tr><tr><td><code>abandonPercentage.30s-45s</code></td><td>v1+</td><td>Percentage of Total Abandoned interactions between 30 and 45 seconds over the total Entered interactions in the current aggregation interval</td></tr><tr><td><code>abandonPercentage.45s-1m</code></td><td>v1+</td><td>Percentage of Total Abandoned interactions between 45 seconds and 1 minute over the total Entered interactions in the current aggregation interval</td></tr><tr><td><code>abandonPercentage.1m-2m</code></td><td>v1+</td><td>Percentage of Total Abandoned interactions between 1 and 2 minutes over the total Entered interactions in the current aggregation interval</td></tr><tr><td><code>abandonPercentage.2m-5m</code></td><td>v1+</td><td>Percentage of Total Abandoned interactions between 2 and 5 minutes over the total Entered interactions in the current aggregation interval</td></tr><tr><td><code>abandonPercentage.5m-10m</code></td><td>v1+</td><td>Percentage of Total Abandoned interactions between 5 and 10 minutes over the total Entered interactions in the current aggregation interval</td></tr><tr><td><code>abandonPercentage.greaterThan10m</code></td><td>v1+</td><td>Percentage of Total Abandoned interactions in more than 10 minutes over the total Entered interactions in the current aggregation interval</td></tr><tr><td><code>abandoned</code></td><td>v1+</td><td>Number of interactions that terminated in the queue and ended with customer disconnecting, excluding short abandonments in the current aggregation interval</td></tr><tr><td><code>abandonedPercentage</code></td><td>v1+</td><td>Percentage of interactions that terminated in the queue without being served over total entries, excluding short abandonments in the current aggregation interval</td></tr><tr><td><code>accepted</code></td><td>v1+</td><td>Total interactions answered by agents. Represents every interaction that was successfully connected to and handled by an agent in the current aggregation interval</td></tr><tr><td><code>acceptedPercentage</code></td><td>v2+</td><td>Percentage of interactions answered by agents over total entries in the current aggregation interval</td></tr><tr><td><code>avgAbandonTime</code></td><td>v2+</td><td>Average time abandoned interactions spent waiting in queue in the current aggregation interval</td></tr><tr><td><code>diverted</code></td><td>v1+</td><td>Number of interactions entering and leaving the queue without ending. Includes interactions transferred to other queues or voicemail in the current aggregation interval</td></tr><tr><td><code>divertedPercentage</code></td><td>v1+</td><td>Percentage of diverted interactions over total entries in the current aggregation interval</td></tr><tr><td><code>entered</code></td><td>v1+</td><td>Inbound interactions entering queue; outbound interactions directed through queue. Counts all interactions that came into this queue waiting to be processed in the current aggregation interval</td></tr><tr><td><code>longestAbandonTime</code></td><td>v1+</td><td>Longest wait time for abandoned interaction. Duration of the interaction that waited longest before customer disconnected in the current aggregation interval</td></tr><tr><td><code>newInQueue</code></td><td>v4+</td><td>Interactions entering queue in the current aggregation interval only. Excludes interactions from previous intervals, showing only freshly entered interactions</td></tr><tr><td><code>offering</code></td><td>v1+</td><td>Number of interactions being offered to available agents awaiting acceptance or rejection at the end of the current aggregation interval</td></tr><tr><td><code>offeringPercentage</code></td><td>v1+</td><td>Percentage of interactions in offering state over total entries in the current aggregation interval</td></tr><tr><td><code>shortAbandoned</code></td><td>v1+</td><td>Number of short abandonments. Interactions ending with customer exit in queue before 5 seconds in the current aggregation interval</td></tr><tr><td><code>shortAbandonedPercentage</code></td><td>v1+</td><td>Percentage of short abandonments. Percentage of interactions ending with customer exit in queue before 5 seconds relative to total entries in the current aggregation interval</td></tr><tr><td><code>totalAbandonTime</code></td><td>v2+</td><td>Total cumulative time all abandoned interactions spent waiting in queue before abandonment in the current aggregation interval</td></tr><tr><td><code>totalAbandoned</code></td><td>v1+</td><td>All interactions finishing in abandonment including short abandonments. Provides complete picture of both quick and extended abandonments combined in the current aggregation interval</td></tr><tr><td><code>totalAbandonedPercentage</code></td><td>v1+</td><td>Percentage of all abandoned interactions (including short abandonments) relative to total entries in the current aggregation interval</td></tr><tr><td><code>voicemailsLeft</code></td><td>v7+</td><td>Number of interactions where customers left a voicemail in the current aggregation interval</td></tr><tr><td><code>waitingInQueue</code></td><td>v1+</td><td>Number of interactions waiting in queue to be answered at the end of the current aggregation interval</td></tr><tr><td><code>waitingInQueueTime</code></td><td>v2+</td><td>Total cumulative time all interactions spent waiting in queue in the current aggregation interval</td></tr></tbody></table>
+</div></div></details>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="83-agent-interactions-metrics">8.3. Agent Interactions Metrics<a href="#83-agent-interactions-metrics" class="hash-link" aria-label="Direct link to 8.3. Agent Interactions Metrics" title="Direct link to 8.3. Agent Interactions Metrics" translate="no">​</a></h3>
+<p>Agent interactions metrics track agent activity across different interaction types, including handling times, transfers, and wrap-up activities. These metrics help analyze agent performance and interaction outcomes.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="831-agent-interactions-by-wrap-up-code">8.3.1. Agent Interactions by Wrap Up Code<a href="#831-agent-interactions-by-wrap-up-code" class="hash-link" aria-label="Direct link to 8.3.1. Agent Interactions by Wrap Up Code" title="Direct link to 8.3.1. Agent Interactions by Wrap Up Code" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Agent Interactions by Wrap Up Code Metrics (2 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>agent-interactions-by-wrap-up-code</code></p>
+<p>This report tracks agent activity by wrap-up codes (transaction codes), showing how many times each code was used and the total processing time associated with interactions marked with that code.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>transactionCodeCount</code></td><td>v1+</td><td>Total number of times the transaction code has been used in the current aggregation interval</td></tr><tr><td><code>transactionCodeTime</code></td><td>v1+</td><td>Total time agents spent processing interactions (Handling and Wrap Up) that finished with this transaction code in the current aggregation interval</td></tr></tbody></table>
+</div></div></details>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="832-agent-interactions-call-summary">8.3.2. Agent Interactions Call Summary<a href="#832-agent-interactions-call-summary" class="hash-link" aria-label="Direct link to 8.3.2. Agent Interactions Call Summary" title="Direct link to 8.3.2. Agent Interactions Call Summary" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Agent Interactions Call Summary Metrics (29 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>agent-interactions-call-summary</code></p>
+<p>This report provides comprehensive statistics on agent call activity including direct inbound/outbound calls, holds, transfers (blind and warm), conferences, consultations, and internal agent-to-agent calls.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>avgDirectInboundTime</code></td><td>v1+</td><td>Average time agents spent on direct inbound calls, excluding agent-to-agent calls in the current aggregation interval</td></tr><tr><td><code>avgDirectOutboundTime</code></td><td>v1+</td><td>Average time agents spent on outbound calls, excluding outbound queue calls and agent-to-agent calls in the current aggregation interval</td></tr><tr><td><code>avgHoldTime</code></td><td>v2+</td><td>Average duration per hold action. Calculated as total Hold Time divided by Number of Holds in the current aggregation interval</td></tr><tr><td><code>blindTransferToAgent</code></td><td>v1+</td><td>Total blind transfers initiated and received by agents outside of a queue in the current aggregation interval</td></tr><tr><td><code>blindTransferToQueue</code></td><td>v1+</td><td>Total blind transfers to queues initiated by agents in the current aggregation interval</td></tr><tr><td><code>blindTransfersInitiated</code></td><td>v1+</td><td>Number of blind transfers performed by agents in the current aggregation interval. Transfer where agent does not speak to recipient first</td></tr><tr><td><code>blindTransfersReceived</code></td><td>v1+</td><td>Number of blind transfers received by agents in the current aggregation interval</td></tr><tr><td><code>conferenceTime</code></td><td>v1+</td><td>Total cumulative duration agents spent in multi-party conference calls in the current aggregation interval</td></tr><tr><td><code>conferences</code></td><td>v1+</td><td>Total number of conferences in the current aggregation interval</td></tr><tr><td><code>conferencesEstablished</code></td><td>v1+</td><td>Total number of conferences (join lines) agents have initiated in the current aggregation interval</td></tr><tr><td><code>conferencesEstablishedTime</code></td><td>v1+</td><td>Total time agents spent in conference calls that they initiated in the current aggregation interval</td></tr><tr><td><code>conferencesReceived</code></td><td>v1+</td><td>Total number of conferences (join lines) agents have received in the current aggregation interval</td></tr><tr><td><code>conferencesReceivedTime</code></td><td>v1+</td><td>Total time agents spent in conference calls that they received in the current aggregation interval</td></tr><tr><td><code>consultationsEstablished</code></td><td>v1+</td><td>Number of times agents successfully established an outbound call while another call is on hold in the current aggregation interval</td></tr><tr><td><code>directInbound</code></td><td>v1+</td><td>Total number of direct inbound calls to agents excluding agent-to-agent calls in the current aggregation interval</td></tr><tr><td><code>directInboundTime</code></td><td>v1+</td><td>Total cumulative duration agents spent on direct inbound calls, excluding agent-to-agent calls in the current aggregation interval</td></tr><tr><td><code>directOutbound</code></td><td>v1+</td><td>Number of calls made by agents excluding outbound queue calls and agent-to-agent calls in the current aggregation interval</td></tr><tr><td><code>directOutboundTime</code></td><td>v1+</td><td>Total cumulative duration agents spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls in the current aggregation interval</td></tr><tr><td><code>hold</code></td><td>v1+</td><td>Total number of call holds agents have performed in the current aggregation interval</td></tr><tr><td><code>holdTime</code></td><td>v1+</td><td>Total time agents spent placing customers or agents on hold on any line in the current aggregation interval</td></tr><tr><td><code>internalCalls</code></td><td>v1+</td><td>Total number of agent-to-agent calls initiated or received in the current aggregation interval</td></tr><tr><td><code>internalCallsInitiated</code></td><td>v1+</td><td>Number of agent-to-agent calls initiated in the current aggregation interval</td></tr><tr><td><code>internalCallsReceived</code></td><td>v1+</td><td>Number of agent-to-agent calls received in the current aggregation interval</td></tr><tr><td><code>internalCallsTime</code></td><td>v1+</td><td>Total cumulative duration agents spent on agent-to-agent calls, both initiated and received in the current aggregation interval</td></tr><tr><td><code>longestHoldTime</code></td><td>v1+</td><td>Maximum single continuous hold duration when agent placed customer on hold in the current aggregation interval</td></tr><tr><td><code>transfersInitiated</code></td><td>v1+</td><td>Warm and blind transfers initiated by agents. All outgoing transfers in the current aggregation interval</td></tr><tr><td><code>transfersReceived</code></td><td>v1+</td><td>Warm and blind transfers routed to agents for handling. All incoming transfers in the current aggregation interval</td></tr><tr><td><code>warmTransfersCompleted</code></td><td>v1+</td><td>Total number of warm transfers initiated by agents in the current aggregation interval. Transfer where agent spoke to recipient first</td></tr><tr><td><code>warmTransfersReceived</code></td><td>v1+</td><td>Total number of warm transfers received by agents in the current aggregation interval</td></tr></tbody></table>
+</div></div></details>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="833-agent-interactions-handling-and-wrap-up">8.3.3. Agent Interactions Handling and Wrap Up<a href="#833-agent-interactions-handling-and-wrap-up" class="hash-link" aria-label="Direct link to 8.3.3. Agent Interactions Handling and Wrap Up" title="Direct link to 8.3.3. Agent Interactions Handling and Wrap Up" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Agent Interactions Handling and Wrap Up Metrics (10 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>agent-interactions-handling-and-wrap-up</code></p>
+<p>This report tracks agent time spent across different interaction processing states: Offering (waiting for acceptance), Handling (actively working), Wrap Up (post-call tasks), and combined Busy time.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>avgBusyTime</code></td><td>v1+</td><td>Average combined time in Offering, Handling, and Wrap Up states per interaction. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval</td></tr><tr><td><code>avgHandlingTime</code></td><td>v1+</td><td>Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval</td></tr><tr><td><code>avgOfferingTime</code></td><td>v1+</td><td>Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it in the current aggregation interval</td></tr><tr><td><code>avgProcessingTime</code></td><td>v1+</td><td>Average combined time in Handling and Wrap Up states per accepted interaction. This represents the total time from when an agent accepts an interaction through final completion, including wrap-up work in the current aggregation interval</td></tr><tr><td><code>avgWrapUpTime</code></td><td>v1+</td><td>Average post-processing time per interaction entered. Time spent by agents completing administrative tasks after finishing handling an interaction in the current aggregation interval</td></tr><tr><td><code>busyTime</code></td><td>v1+</td><td>Total combined time in Offering, Handling, and Wrap Up states. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval</td></tr><tr><td><code>handlingTime</code></td><td>v1+</td><td>Total time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval</td></tr><tr><td><code>offeringTime</code></td><td>v1+</td><td>Total duration from interaction presentation to acceptance or rejection in the current aggregation interval</td></tr><tr><td><code>processingTime</code></td><td>v1+</td><td>Total combined time in Handling and Wrap Up states per accepted interaction. This represents the total time from when an agent accepts an interaction through final completion, including wrap-up work in the current aggregation interval</td></tr><tr><td><code>wrapUpTime</code></td><td>v1+</td><td>Total time spent by agents completing administrative tasks after finishing handling an interaction in the current aggregation interval</td></tr></tbody></table>
+</div></div></details>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="834-agent-interactions-summary">8.3.4. Agent Interactions Summary<a href="#834-agent-interactions-summary" class="hash-link" aria-label="Direct link to 8.3.4. Agent Interactions Summary" title="Direct link to 8.3.4. Agent Interactions Summary" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Agent Interactions Summary Metrics (32 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>agent-interactions-summary</code></p>
+<p>This report provides a comprehensive overview of agent performance including interaction acceptance/rejection rates, handling times, transfers, and hold statistics. Combines metrics from call activity, handling times, and wrap-up activities.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>abandoned</code></td><td>v1+</td><td>Total number of interactions abandoned by a customer while being presented to the agent in the current aggregation interval</td></tr><tr><td><code>abandonedPercentage</code></td><td>v1+</td><td>Percentage of interactions abandoned while being presented to the agent over the total interactions presented in the current aggregation interval</td></tr><tr><td><code>accepted</code></td><td>v1+</td><td>Total interactions answered by agents. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent in the current aggregation interval</td></tr><tr><td><code>acceptedPercentage</code></td><td>v1+</td><td>Percentage of interactions answered by agents over the total interactions presented in the current aggregation interval</td></tr><tr><td><code>alerting</code></td><td>v1+</td><td>Number of interactions currently being presented to agents via a queue or direct assignment in the current aggregation interval</td></tr><tr><td><code>avgBusyTime</code></td><td>v1+</td><td>Average combined time in Offering, Handling, and Wrap Up states per interaction. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval</td></tr><tr><td><code>avgHandlingTime</code></td><td>v1+</td><td>Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval</td></tr><tr><td><code>avgHoldTime</code></td><td>v2+</td><td>Average duration per hold action. Calculated as total Hold Time divided by Number of Holds in the current aggregation interval</td></tr><tr><td><code>avgSpeedToAnswer</code></td><td>v1+</td><td>Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it in the current aggregation interval</td></tr><tr><td><code>avgWrapUpTime</code></td><td>v1+</td><td>Average post-processing time per interaction entered. Time spent by agents completing administrative tasks after finishing handling an interaction in the current aggregation interval</td></tr><tr><td><code>blindTransferToAgent</code></td><td>v1+</td><td>Total blind transfers initiated and received by agents outside of a queue in the current aggregation interval</td></tr><tr><td><code>blindTransferToQueue</code></td><td>v1+</td><td>Total blind transfers to queues initiated by agents in the current aggregation interval</td></tr><tr><td><code>blindTransfersInitiated</code></td><td>v1+</td><td>Number of blind transfers performed by agents in the current aggregation interval. Transfer where agent does not speak to recipient first</td></tr><tr><td><code>blindTransfersReceived</code></td><td>v1+</td><td>Number of blind transfers received by agents in the current aggregation interval</td></tr><tr><td><code>busyTime</code></td><td>v1+</td><td>Total combined time in Offering, Handling, and Wrap Up states. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval</td></tr><tr><td><code>handlingTime</code></td><td>v1+</td><td>Total time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval</td></tr><tr><td><code>hold</code></td><td>v1+</td><td>Total number of call holds agents have performed in the current aggregation interval</td></tr><tr><td><code>holdTime</code></td><td>v1+</td><td>Total time agents spent placing customers or agents on hold on any line in the current aggregation interval</td></tr><tr><td><code>longestHoldTime</code></td><td>v1+</td><td>Maximum single continuous hold duration when agent placed customer on hold in the current aggregation interval</td></tr><tr><td><code>longestOfferingTime</code></td><td>v1+</td><td>Longest time to accept an interaction from the time it is offered to the time it is accepted or rejected by an agent in the current aggregation interval</td></tr><tr><td><code>offeringTime</code></td><td>v1+</td><td>Total duration from interaction presentation to acceptance or rejection in the current aggregation interval</td></tr><tr><td><code>presented</code></td><td>v1+</td><td>Total interactions presented to agents for acceptance or rejection. Includes interactions continuing from prior intervals in the current aggregation interval</td></tr><tr><td><code>processingTime</code></td><td>v7+</td><td>Total combined time in Handling and Wrap Up states per accepted interaction. This represents the total time from when an agent accepts an interaction through final completion, including wrap-up work in the current aggregation interval</td></tr><tr><td><code>rejectTimeout</code></td><td>v1+</td><td>Count of interactions automatically rejected when agent did not respond within configured timeout period in the current aggregation interval</td></tr><tr><td><code>rejected</code></td><td>v1+</td><td>Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer in the current aggregation interval</td></tr><tr><td><code>rejectedPercentage</code></td><td>v1+</td><td>Percentage of interactions rejected by agents over the total interactions presented in the current aggregation interval</td></tr><tr><td><code>transfersInitiated</code></td><td>v1+</td><td>Warm and blind transfers initiated by agents. All outgoing transfers in the current aggregation interval</td></tr><tr><td><code>transfersInitiatedPercentage</code></td><td>v2+</td><td>Percentage of interactions transferred by agents, calculated relative to total interactions accepted in the current aggregation interval</td></tr><tr><td><code>transfersReceived</code></td><td>v1+</td><td>Warm and blind transfers routed to agents for handling. All incoming transfers in the current aggregation interval</td></tr><tr><td><code>warmTransfersCompleted</code></td><td>v1+</td><td>Total number of warm transfers initiated by agents in the current aggregation interval. Transfer where agent spoke to recipient first</td></tr><tr><td><code>warmTransfersReceived</code></td><td>v1+</td><td>Total number of warm transfers received by agents in the current aggregation interval</td></tr><tr><td><code>wrapUpTime</code></td><td>v1+</td><td>Total time spent by agents completing administrative tasks after finishing handling an interaction in the current aggregation interval</td></tr></tbody></table>
+</div></div></details>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="84-digital-channels-metrics">8.4. Digital Channels Metrics<a href="#84-digital-channels-metrics" class="hash-link" aria-label="Direct link to 8.4. Digital Channels Metrics" title="Direct link to 8.4. Digital Channels Metrics" translate="no">​</a></h3>
+<p>Digital channels metrics track performance for non-voice interactions such as email and chat. These metrics measure interaction volumes and durations across different processing stages.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="841-digital-channels-summary">8.4.1. Digital Channels Summary<a href="#841-digital-channels-summary" class="hash-link" aria-label="Direct link to 8.4.1. Digital Channels Summary" title="Direct link to 8.4.1. Digital Channels Summary" translate="no">​</a></h4>
+<details class="details_lb9f alert alert--info details_b_Ee" data-collapsed="true"><summary>Click to expand Digital Channels Summary Metrics (9 metrics)</summary><div><div class="collapsibleContent_i85q">
+<!-- -->
+<p>Report type: <code>digital-channels-summary</code></p>
+<p>This report displays aggregate metrics for digital channels such as email and chat, tracking interaction volumes, and durations across different processing stages.</p>
+<p><strong>Version</strong> indicates minimum CC Historical Analytics API version where metric became available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Version</th><th>Description</th></tr></thead><tbody><tr><td><code>avgSpeedToAnswer</code></td><td>v1+</td><td>Average duration from interaction presentation to acceptance for digital channel interactions in the current aggregation interval</td></tr><tr><td><code>countOfInteractions</code></td><td>v1+</td><td>Total count of digital channel interactions processed in the current aggregation interval</td></tr><tr><td><code>handlingDuration</code></td><td>v1+</td><td>Total time agents spend handling digital channel interactions. Measured from when an agent accepts an interaction until they finish processing it in the current aggregation interval</td></tr><tr><td><code>numberOfRepliedEmails</code></td><td>v1+</td><td>Total count of email interactions that received agent replies in the current aggregation interval</td></tr><tr><td><code>offeringDuration</code></td><td>v1+</td><td>Total duration digital channel interactions spent in Offering state waiting for agent acceptance or rejection in the current aggregation interval</td></tr><tr><td><code>queueWaitDuration</code></td><td>v1+</td><td>Total cumulative time digital channel interactions spent waiting in queue in the current aggregation interval</td></tr><tr><td><code>scriptTreatmentDuration</code></td><td>v1+</td><td>Total time digital channel interactions spent in script treatment, excluding queue time in the current aggregation interval</td></tr><tr><td><code>totalInteractionsDuration</code></td><td>v1+</td><td>Total combined duration for digital channel interactions. Includes script treatment, queue wait, and handling time in the current aggregation interval</td></tr><tr><td><code>wrapUpDuration</code></td><td>v1+</td><td>Total time agents spend completing post-interaction administrative tasks for digital channel interactions. Measured from when an agent disconnects from customer until wrap-up is finalized in the current aggregation interval</td></tr></tbody></table>
+</div></div></details></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/analytics/docs/cc-realtime-statistics"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">CC Realtime Statistics</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/analytics/docs/cc-historical-analytics-detailed-report"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">CC Historical Analytics Detailed Report</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-authenticate-to-retrieve-access-token" class="table-of-contents__link toc-highlight">1. Authenticate to retrieve access token</a></li><li><a href="#2-multitenancy-support" class="table-of-contents__link toc-highlight">2 Multitenancy support</a></li><li><a href="#3-get-available-report-types" class="table-of-contents__link toc-highlight">3. Get Available Report Types</a><ul><li><a href="#parameters" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#report-types-request" class="table-of-contents__link toc-highlight">Report Types Request</a></li><li><a href="#report-types-response" class="table-of-contents__link toc-highlight">Report Types Response</a></li></ul></li><li><a href="#4-creating-a-summary-report" class="table-of-contents__link toc-highlight">4. Creating A Summary Report</a><ul><li><a href="#parameters-1" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#create-report-request" class="table-of-contents__link toc-highlight">Create Report Request</a></li><li><a href="#create-report-response" class="table-of-contents__link toc-highlight">Create Report Response</a></li></ul></li><li><a href="#5-get-report-status" class="table-of-contents__link toc-highlight">5. Get Report Status</a><ul><li><a href="#parameters-2" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#report-status-request" class="table-of-contents__link toc-highlight">Report Status Request</a></li><li><a href="#report-status-response" class="table-of-contents__link toc-highlight">Report Status response</a></li></ul></li><li><a href="#6a-get-report-data-json" class="table-of-contents__link toc-highlight">6a. Get Report Data (JSON)</a><ul><li><a href="#parameters-3" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#report-data-json-request" class="table-of-contents__link toc-highlight">Report Data (JSON) Request</a></li><li><a href="#report-data-json-response" class="table-of-contents__link toc-highlight">Report Data (JSON) Response</a></li></ul></li><li><a href="#6b-get-report-download-csvxlsx" class="table-of-contents__link toc-highlight">6b. Get Report Download (CSV/XLSX)</a><ul><li><a href="#parameters-4" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#report-download-csvxlsx-request" class="table-of-contents__link toc-highlight">Report Download (CSV/XLSX) Request</a></li><li><a href="#report-download-csvxlsx-response" class="table-of-contents__link toc-highlight">Report Download (CSV/XLSX) Response</a></li></ul></li><li><a href="#7-access-report-links" class="table-of-contents__link toc-highlight">7. Access Report Links</a><ul><li><a href="#parameters-5" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#report-links-request" class="table-of-contents__link toc-highlight">Report Links Request</a></li><li><a href="#report-links-response" class="table-of-contents__link toc-highlight">Report Links Response</a></li></ul></li><li><a href="#8-metrics-glossary" class="table-of-contents__link toc-highlight">8. Metrics Glossary</a><ul><li><a href="#81-agent-status-metrics" class="table-of-contents__link toc-highlight">8.1. Agent Status Metrics</a></li><li><a href="#82-queue-interactions-metrics" class="table-of-contents__link toc-highlight">8.2. Queue Interactions Metrics</a></li><li><a href="#83-agent-interactions-metrics" class="table-of-contents__link toc-highlight">8.3. Agent Interactions Metrics</a></li><li><a href="#84-digital-channels-metrics" class="table-of-contents__link toc-highlight">8.4. Digital Channels Metrics</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
 </body>
 </html>
