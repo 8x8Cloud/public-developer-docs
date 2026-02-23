@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-connect/docs/whatsapp/whatsapp-flows" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">WhatsApp Flows | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/whatsapp/whatsapp-flows"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="WhatsApp Flows | 8x8 Developer Portal"><meta data-rh="true" name="description" content="WhatsApp Flows Landing Page"><meta data-rh="true" property="og:description" content="WhatsApp Flows Landing Page"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/whatsapp/whatsapp-flows"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/whatsapp/whatsapp-flows" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/whatsapp/whatsapp-flows" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.c247a45b.css">
+<script src="/assets/js/runtime~main.e844b5fb.js" defer="defer"></script>
+<script src="/assets/js/main.ad9d0100.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a class="navbar__item navbar__link" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a><a class="navbar__item navbar__link" href="/administration">Administration</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides section-navigation__tab--active" href="/connect/docs">Guides</a><a class="section-navigation__tab icon-references" href="/connect/reference">API Reference</a><a href="https://support.cpaas.8x8.com/hc/en-us" target="_blank" rel="noopener noreferrer" class="section-navigation__tab icon-support">Support</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/connect/docs/8x8-cpaas-products"><span title="CPaaS: Connect &amp; Communication APIs" class="linkLabel_WmDU">CPaaS: Connect &amp; Communication APIs</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/getting-started"><span title="API Information" class="categoryLinkLabel_W154">API Information</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/send-sms-api-reference"><span title="SMS" class="categoryLinkLabel_W154">SMS</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/connect/docs/whatsapp/whatsapp-hub"><span title="Messaging Apps" class="categoryLinkLabel_W154">Messaging Apps</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/connect/docs/whatsapp/whatsapp-hub"><span title="WhatsApp" class="categoryLinkLabel_W154">WhatsApp</span></a><button aria-label="Collapse sidebar category &#x27;WhatsApp&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/concepts-fundamentals"><span title="Concepts &amp; Fundamentals" class="linkLabel_WmDU">Concepts &amp; Fundamentals</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/getting-started"><span title="Getting Started" class="linkLabel_WmDU">Getting Started</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/message-types-templates"><span title="Message Types &amp; Templates" class="linkLabel_WmDU">Message Types &amp; Templates</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/whatsapp-in-8x8-connect"><span title="WhatsApp in 8x8 Connect" class="linkLabel_WmDU">WhatsApp in 8x8 Connect</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/whatsapp/whatsapp-over-8x8-api"><span title="WhatsApp over 8x8 API" class="categoryLinkLabel_W154">WhatsApp over 8x8 API</span></a><button aria-label="Expand sidebar category &#x27;WhatsApp over 8x8 API&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class="menu__list-item-collapsible menu__list-item-collapsible--active"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" aria-current="page" tabindex="0" href="/connect/docs/whatsapp/whatsapp-flows"><span title="WhatsApp Flows" class="categoryLinkLabel_W154">WhatsApp Flows</span></a><button aria-label="Collapse sidebar category &#x27;WhatsApp Flows&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/whatsapp-flows-ui-guide"><span title="WhatsApp Flows in 8x8 Connect" class="linkLabel_WmDU">WhatsApp Flows in 8x8 Connect</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/whatsapp-flows-api"><span title="WhatsApp Flows over 8x8 API" class="linkLabel_WmDU">WhatsApp Flows over 8x8 API</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/whatsapp/whatsapp-flows-examples"><span title="Flow Examples" class="categoryLinkLabel_W154">Flow Examples</span></a><button aria-label="Expand sidebar category &#x27;Flow Examples&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/whatsapp-flows-components"><span title="Flow Component Reference" class="linkLabel_WmDU">Flow Component Reference</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/whatsapp-flows-best-practices"><span title="Best Practices" class="linkLabel_WmDU">Best Practices</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/advanced-capabilities"><span title="Advanced Capabilities" class="linkLabel_WmDU">Advanced Capabilities</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/scenarios-tutorials"><span title="Scenarios &amp; Tutorials" class="linkLabel_WmDU">Scenarios &amp; Tutorials</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/vertical-playbooks"><span title="Vertical Playbooks" class="linkLabel_WmDU">Vertical Playbooks</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/operations-monitoring"><span title="Operations &amp; Monitoring" class="linkLabel_WmDU">Operations &amp; Monitoring</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/governance-security"><span title="Governance &amp; Security" class="linkLabel_WmDU">Governance &amp; Security</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/reference-resources"><span title="Reference &amp; Resources" class="linkLabel_WmDU">Reference &amp; Resources</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/whatsapp/learning-paths"><span title="Learning Paths" class="linkLabel_WmDU">Learning Paths</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/guide-whatsapp-one-tap-or-zero-tap-authentication"><span title="Zero-tap and One-tap WhatsApp Authentication Template" class="linkLabel_WmDU">Zero-tap and One-tap WhatsApp Authentication Template</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/guide-whatsapp-template-validity-period-ttl"><span title="WhatsApp Template Validity Period (TTL)" class="linkLabel_WmDU">WhatsApp Template Validity Period (TTL)</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/rcs/overview"><span title="RCS" class="categoryLinkLabel_W154">RCS</span></a><button aria-label="Expand sidebar category &#x27;RCS&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-viber"><span title="Viber" class="linkLabel_WmDU">Viber</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-zns"><span title="Zalo Notification Service (ZNS)" class="linkLabel_WmDU">Zalo Notification Service (ZNS)</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-line-official-notification"><span title="LINE Official Notification" class="linkLabel_WmDU">LINE Official Notification</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/voice/cpaas-voice-offerings"><span title="Voice" class="categoryLinkLabel_W154">Voice</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/connect-overview"><span title="Connect Portal" class="categoryLinkLabel_W154">Connect Portal</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/creating-a-contact"><span title="Contacts API Tutorials" class="categoryLinkLabel_W154">Contacts API Tutorials</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/adobe-campaigns"><span title="Integrations" class="categoryLinkLabel_W154">Integrations</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/converse-overview"><span title="Converse" class="categoryLinkLabel_W154">Converse</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/vi-overview"><span title="Video Interaction" class="categoryLinkLabel_W154">Video Interaction</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/accessing-and-viewing-your-customer-list"><span title="Partner Hub" class="categoryLinkLabel_W154">Partner Hub</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>WhatsApp Flows</h1></header>
+<p><img decoding="async" loading="lazy" alt="WhatsApp Flows Landing Page" src="/assets/images/whatsapp-flows-landing-page-f120bf0ef08c284abb50cfe3ef8c99ca.webp" width="1834" height="1087" class="img_ev3q"></p>
+<p>WhatsApp Flows enable you to collect structured input from customers using guided UI forms within the WhatsApp conversation. Instead of exchanging multiple back-and-forth text messages, Flows present users with an interactive, multi-step form that guides them through data entry with built-in validation and a polished user experience.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="overview">Overview<a href="#overview" class="hash-link" aria-label="Direct link to Overview" title="Direct link to Overview" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="what-are-whatsapp-flows">What are WhatsApp Flows?<a href="#what-are-whatsapp-flows" class="hash-link" aria-label="Direct link to What are WhatsApp Flows?" title="Direct link to What are WhatsApp Flows?" translate="no">​</a></h3>
+<p>WhatsApp Flows are interactive, form-based experiences that run directly inside WhatsApp. They allow you to:</p>
+<ul>
+<li><strong>Collect structured data</strong> through form fields (text input, dropdowns, radio buttons, checkboxes, date pickers)</li>
+<li><strong>Validate input in real-time</strong> before submission reaches your backend</li>
+<li><strong>Guide users through multi-screen journeys</strong> with branching logic and conditional navigation</li>
+<li><strong>Reduce conversation friction</strong> by replacing 10+ message exchanges with a single, intuitive form</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="when-to-use-flows">When to Use Flows<a href="#when-to-use-flows" class="hash-link" aria-label="Direct link to When to Use Flows" title="Direct link to When to Use Flows" translate="no">​</a></h3>
+<p>Flows are ideal when you need to:</p>
+<ul>
+<li><strong>Capture consistent, structured information</strong> for downstream automation (CRM, booking systems, ticketing)</li>
+<li><strong>Reduce data entry errors</strong> with built-in validation and constrained inputs</li>
+<li><strong>Improve user experience</strong> by providing a guided, mobile-optimized form interface</li>
+<li><strong>Automate multi-step processes</strong> like appointment booking, lead qualification, or feedback collection</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flows-vs-automation-builder">Flows vs. Automation Builder<a href="#flows-vs-automation-builder" class="hash-link" aria-label="Direct link to Flows vs. Automation Builder" title="Direct link to Flows vs. Automation Builder" translate="no">​</a></h3>
+<p>Both tools help create interactive experiences, but serve different purposes:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>WhatsApp Flows</th><th><a href="/connect/docs/automation-builder">8x8 Automation Builder</a></th></tr></thead><tbody><tr><td><strong>Best for</strong></td><td>Structured form data collection</td><td>Conversational workflows and branching logic</td></tr><tr><td><strong>User Experience</strong></td><td>Native WhatsApp form UI</td><td>Text messages with buttons/lists</td></tr><tr><td><strong>Data Collection</strong></td><td>Single submission with all fields</td><td>Multiple message exchanges</td></tr><tr><td><strong>Validation</strong></td><td>Built-in field validation</td><td>Custom logic via branches</td></tr><tr><td><strong>Integration</strong></td><td>Both UI and API</td><td>Portal-based (visual workflow builder)</td></tr><tr><td><strong>Use Case Example</strong></td><td>Appointment booking form with date/time/service fields</td><td>Restaurant reservation bot with menu selection and confirmation</td></tr></tbody></table>
+<p><strong>Recommendation:</strong> Use Flows for <strong>data capture</strong> and Automation Builder for <strong>conversational workflows</strong>. You can combine both: use Automation Builder to trigger a Flow, then process the submission.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="common-use-cases">Common Use Cases<a href="#common-use-cases" class="hash-link" aria-label="Direct link to Common Use Cases" title="Direct link to Common Use Cases" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Industry</th><th>Use Case</th><th>What Flows Collect</th><th>Next Action</th></tr></thead><tbody><tr><td><strong>Retail &amp; eCommerce</strong></td><td>Product finder / preferences</td><td>Size, style, budget, category</td><td>Product recommendations</td></tr><tr><td><strong>Healthcare</strong></td><td>Appointment scheduling</td><td>Location, specialty, preferred date/time</td><td>Create booking</td></tr><tr><td><strong>Financial Services</strong></td><td>Account onboarding</td><td>Identity fields, consent</td><td>Trigger KYC workflow</td></tr><tr><td><strong>Logistics</strong></td><td>Delivery rescheduling</td><td>New time window, address details</td><td>Update delivery system</td></tr><tr><td><strong>Customer Support</strong></td><td>Feedback collection</td><td>NPS score, satisfaction ratings, comments</td><td>Store in CRM</td></tr><tr><td><strong>Real Estate</strong></td><td>Property inquiry</td><td>Location, budget, bedrooms, move-in date</td><td>Agent assignment</td></tr><tr><td><strong>Travel</strong></td><td>Booking request</td><td>Destination, dates, travelers, preferences</td><td>Check availability</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="choosing-your-approach">Choosing Your Approach<a href="#choosing-your-approach" class="hash-link" aria-label="Direct link to Choosing Your Approach" title="Direct link to Choosing Your Approach" translate="no">​</a></h2>
+<p>8x8 provides two ways to work with WhatsApp Flows:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="8x8-connect-ui-recommended-for-getting-started">8x8 Connect UI (Recommended for Getting Started)<a href="#8x8-connect-ui-recommended-for-getting-started" class="hash-link" aria-label="Direct link to 8x8 Connect UI (Recommended for Getting Started)" title="Direct link to 8x8 Connect UI (Recommended for Getting Started)" translate="no">​</a></h3>
+<p>Visual, no-code interface for creating and managing Flows through the 8x8 Connect portal.</p>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>No coding required</li>
+<li>Live preview while building</li>
+<li>Direct integration with Templates and Campaigns</li>
+<li>Export Flow JSON for version control</li>
+</ul>
+<p><strong>Best for:</strong></p>
+<ul>
+<li>Business users and marketers</li>
+<li>Quick prototyping and testing</li>
+<li>Teams without developer resources</li>
+<li>One-off campaigns and promotions</li>
+</ul>
+<p>→ <strong><a href="/connect/docs/whatsapp/whatsapp-flows-ui-guide">Get Started with UI Guide</a></strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="api-integration-advanced">API Integration (Advanced)<a href="#api-integration-advanced" class="hash-link" aria-label="Direct link to API Integration (Advanced)" title="Direct link to API Integration (Advanced)" translate="no">​</a></h3>
+<p>Programmatic control for automation and CI/CD workflows.</p>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Scriptable deployments</li>
+<li>Version control friendly</li>
+<li>Automated testing</li>
+<li>Integration with existing DevOps pipelines</li>
+</ul>
+<p><strong>Best for:</strong></p>
+<ul>
+<li>Development teams</li>
+<li>Large-scale deployments</li>
+<li>Automated Flow management</li>
+<li>Complex integration requirements</li>
+</ul>
+<p>→ <strong><a href="/connect/docs/whatsapp/whatsapp-flows-api">See API Reference</a></strong></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="before-you-begin">Before You Begin<a href="#before-you-begin" class="hash-link" aria-label="Direct link to Before You Begin" title="Direct link to Before You Begin" translate="no">​</a></h2>
+<p>To implement WhatsApp Flows, you need:</p>
+<ol>
+<li><strong>Active WhatsApp Channel</strong> in 8x8 Connect</li>
+<li><strong>Webhook endpoint</strong> configured to receive Flow submissions (see <a href="/connect/docs/whatsapp/whatsapp-webhooks">WhatsApp Webhooks</a>)</li>
+<li><strong>For UI Approach:</strong> Access to 8x8 Connect portal</li>
+<li><strong>For API Approach:</strong> Channel ID, Subaccount ID, and API Key</li>
+</ol>
+<blockquote>
+<p><strong>Note</strong>
+Flow submission data is delivered via webhooks as inbound messages. See <a href="/connect/docs/whatsapp/whatsapp-webhooks">WhatsApp Webhooks</a> for webhook configuration.</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-flows-work">How Flows Work<a href="#how-flows-work" class="hash-link" aria-label="Direct link to How Flows Work" title="Direct link to How Flows Work" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flow-lifecycle">Flow Lifecycle<a href="#flow-lifecycle" class="hash-link" aria-label="Direct link to Flow Lifecycle" title="Direct link to Flow Lifecycle" translate="no">​</a></h3>
+<p>A typical Flow implementation follows this sequence:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">1. Design       → Build Flow JSON definition (screens, fields, validation)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. Create       → Upload Flow via 8x8 Connect UI or API</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">3. Preview      → Validate rendering and user experience</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">4. Publish      → Make Flow available for use in messages</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">5. Send         → Trigger Flow via Template or Interactive message</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">6. Submit       → User completes Flow; submission sent to webhook</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">7. Process      → Your system handles submission and responds</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-concepts">Key Concepts<a href="#key-concepts" class="hash-link" aria-label="Direct link to Key Concepts" title="Direct link to Key Concepts" translate="no">​</a></h3>
+<p><strong>Screens:</strong> Individual pages within a Flow. Users navigate between screens using footer buttons.</p>
+<p><strong>Navigation Modes:</strong></p>
+<ul>
+<li><strong>navigate:</strong> Opens the Flow to a specific screen, optionally passing data</li>
+<li><strong>data_exchange:</strong> (Advanced) Enables dynamic data fetching from your server during Flow interaction</li>
+</ul>
+<p><strong>Terminal Screens:</strong> The final screen of a Flow, marked with <code>&quot;terminal&quot;: true</code>. When users complete this screen, their submission is sent to your webhook.</p>
+<p><strong>Flow JSON:</strong> The complete definition of your Flow&#x27;s structure, validation rules, and navigation logic. Can be created visually or coded manually.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="integration-with-conversation-windows">Integration with Conversation Windows<a href="#integration-with-conversation-windows" class="hash-link" aria-label="Direct link to Integration with Conversation Windows" title="Direct link to Integration with Conversation Windows" translate="no">​</a></h3>
+<p>Flows work within WhatsApp&#x27;s conversation window rules:</p>
+<ul>
+<li><strong>Business-Initiated (Template with Flow button):</strong> Use to start new conversations or re-open closed windows</li>
+<li><strong>User-Initiated (Interactive Flow message):</strong> Use within the 24-hour customer service window</li>
+</ul>
+<p>See <a href="/connect/docs/whatsapp/concepts-fundamentals">Concepts &amp; Fundamentals</a> for complete conversation window rules.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="documentation-structure">Documentation Structure<a href="#documentation-structure" class="hash-link" aria-label="Direct link to Documentation Structure" title="Direct link to Documentation Structure" translate="no">​</a></h2>
+<p>This documentation is organized into focused guides for different needs:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="for-business-users--marketers">For Business Users &amp; Marketers<a href="#for-business-users--marketers" class="hash-link" aria-label="Direct link to For Business Users &amp; Marketers" title="Direct link to For Business Users &amp; Marketers" translate="no">​</a></h3>
+<ul>
+<li><strong><a href="/connect/docs/whatsapp/whatsapp-flows-ui-guide">Creating Flows with 8x8 Connect UI</a></strong> - Step-by-step guide for creating, testing, and deploying Flows using the visual interface</li>
+<li><strong><a href="/connect/docs/whatsapp/whatsapp-flows-examples">Flow Examples</a></strong> - Industry-specific, production-ready Flow implementations you can adapt</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="for-developers">For Developers<a href="#for-developers" class="hash-link" aria-label="Direct link to For Developers" title="Direct link to For Developers" translate="no">​</a></h3>
+<ul>
+<li><strong><a href="/connect/docs/whatsapp/whatsapp-flows-api">Flow API Reference</a></strong> - Complete API documentation for programmatic Flow management</li>
+<li><strong><a href="/connect/docs/whatsapp/whatsapp-flows-components">Flow Component Reference</a></strong> - Technical reference for all UI components and their properties</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="for-everyone">For Everyone<a href="#for-everyone" class="hash-link" aria-label="Direct link to For Everyone" title="Direct link to For Everyone" translate="no">​</a></h3>
+<ul>
+<li><strong><a href="/connect/docs/whatsapp/whatsapp-flows-best-practices">Best Practices &amp; Governance</a></strong> - Design guidelines, security, testing, and troubleshooting</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="quick-start-guides">Quick Start Guides<a href="#quick-start-guides" class="hash-link" aria-label="Direct link to Quick Start Guides" title="Direct link to Quick Start Guides" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="option-1-build-your-first-flow-ui">Option 1: Build Your First Flow (UI)<a href="#option-1-build-your-first-flow-ui" class="hash-link" aria-label="Direct link to Option 1: Build Your First Flow (UI)" title="Direct link to Option 1: Build Your First Flow (UI)" translate="no">​</a></h3>
+<ol>
+<li>Review <a href="/connect/docs/whatsapp/whatsapp-flows-examples">Flow Examples</a> to find a similar use case</li>
+<li>Copy the Flow JSON from the example</li>
+<li>Follow the <a href="/connect/docs/whatsapp/whatsapp-flows-ui-guide">UI Guide</a> to create and publish</li>
+<li>Send to test users via Templates or Interactive messages</li>
+<li>Monitor submissions in the 8x8 Connect portal</li>
+</ol>
+<p><strong>Time:</strong> 15-30 minutes</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="option-2-integrate-via-api">Option 2: Integrate via API<a href="#option-2-integrate-via-api" class="hash-link" aria-label="Direct link to Option 2: Integrate via API" title="Direct link to Option 2: Integrate via API" translate="no">​</a></h3>
+<ol>
+<li>Review <a href="/connect/docs/whatsapp/whatsapp-flows-api">API Reference</a> for authentication and endpoints</li>
+<li>Create Flow programmatically with POST request</li>
+<li>Publish the Flow</li>
+<li>Configure webhook to receive submissions</li>
+<li>Send Flow via Template or Interactive message API</li>
+</ol>
+<p><strong>Time:</strong> 1-2 hours (including webhook setup)</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps" translate="no">​</a></h2>
+<p>Choose your path based on your role and needs:</p>
+<p><strong>For Business Users:</strong>
+→ <a href="/connect/docs/whatsapp/whatsapp-flows-ui-guide">Creating Flows with 8x8 Connect UI</a></p>
+<p><strong>For Developers:</strong>
+→ <a href="/connect/docs/whatsapp/whatsapp-flows-api">Flow API Reference</a></p>
+<p><strong>For Everyone:</strong>
+→ <a href="/connect/docs/whatsapp/whatsapp-flows-examples">Flow Examples</a> - See production-ready examples</p>
+<p><strong>Need Help with Components?</strong>
+→ <a href="/connect/docs/whatsapp/whatsapp-flows-components">Flow Component Reference</a></p>
+<p><strong>Want Best Practices?</strong>
+→ <a href="/connect/docs/whatsapp/whatsapp-flows-best-practices">Best Practices &amp; Governance</a></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="additional-resources">Additional Resources<a href="#additional-resources" class="hash-link" aria-label="Direct link to Additional Resources" title="Direct link to Additional Resources" translate="no">​</a></h2>
+<ul>
+<li><strong><a href="/connect/docs/whatsapp/whatsapp-webhooks">WhatsApp Webhooks</a></strong> - Configure webhooks to receive Flow submissions</li>
+<li><strong><a href="/connect/docs/whatsapp/template-message-api-library">Template Message API</a></strong> - Send Flows via business-initiated messages</li>
+<li><strong><a href="/connect/docs/whatsapp/interactive-message-api-library">Interactive Message API</a></strong> - Send Flows within service window</li>
+<li><strong><a href="https://developers.facebook.com/docs/whatsapp/flows" target="_blank" rel="noopener noreferrer">Meta WhatsApp Flows Official Documentation</a></strong> - WhatsApp&#x27;s official Flow documentation</li>
+<li><strong><a href="/connect/docs/automation-builder">8x8 Automation Builder</a></strong> - Combine Flows with conversational workflows</li>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/whatsapp/whatsapp-sms-fallback"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">WhatsApp SMS Fallback</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/whatsapp/whatsapp-flows-ui-guide"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">WhatsApp Flows in 8x8 Connect</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#overview" class="table-of-contents__link toc-highlight">Overview</a><ul><li><a href="#what-are-whatsapp-flows" class="table-of-contents__link toc-highlight">What are WhatsApp Flows?</a></li><li><a href="#when-to-use-flows" class="table-of-contents__link toc-highlight">When to Use Flows</a></li><li><a href="#flows-vs-automation-builder" class="table-of-contents__link toc-highlight">Flows vs. Automation Builder</a></li></ul></li><li><a href="#common-use-cases" class="table-of-contents__link toc-highlight">Common Use Cases</a></li><li><a href="#choosing-your-approach" class="table-of-contents__link toc-highlight">Choosing Your Approach</a><ul><li><a href="#8x8-connect-ui-recommended-for-getting-started" class="table-of-contents__link toc-highlight">8x8 Connect UI (Recommended for Getting Started)</a></li><li><a href="#api-integration-advanced" class="table-of-contents__link toc-highlight">API Integration (Advanced)</a></li></ul></li><li><a href="#before-you-begin" class="table-of-contents__link toc-highlight">Before You Begin</a></li><li><a href="#how-flows-work" class="table-of-contents__link toc-highlight">How Flows Work</a><ul><li><a href="#flow-lifecycle" class="table-of-contents__link toc-highlight">Flow Lifecycle</a></li><li><a href="#key-concepts" class="table-of-contents__link toc-highlight">Key Concepts</a></li><li><a href="#integration-with-conversation-windows" class="table-of-contents__link toc-highlight">Integration with Conversation Windows</a></li></ul></li><li><a href="#documentation-structure" class="table-of-contents__link toc-highlight">Documentation Structure</a><ul><li><a href="#for-business-users--marketers" class="table-of-contents__link toc-highlight">For Business Users &amp; Marketers</a></li><li><a href="#for-developers" class="table-of-contents__link toc-highlight">For Developers</a></li><li><a href="#for-everyone" class="table-of-contents__link toc-highlight">For Everyone</a></li></ul></li><li><a href="#quick-start-guides" class="table-of-contents__link toc-highlight">Quick Start Guides</a><ul><li><a href="#option-1-build-your-first-flow-ui" class="table-of-contents__link toc-highlight">Option 1: Build Your First Flow (UI)</a></li><li><a href="#option-2-integrate-via-api" class="table-of-contents__link toc-highlight">Option 2: Integrate via API</a></li></ul></li><li><a href="#next-steps" class="table-of-contents__link toc-highlight">Next Steps</a></li><li><a href="#additional-resources" class="table-of-contents__link toc-highlight">Additional Resources</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>
