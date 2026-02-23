@@ -2771,6 +2771,22 @@
           "401": {
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
           },
+          "409": {
+            "description": "Template name cannot be reused within 30 days of deletion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages~1%7Bumid%7D/delete/responses/400/content/application~1json/schema"
+                },
+                "example": {
+                  "code": 3060,
+                  "message": "New Indonesian content can't be added while the existing Indonesian content is being deleted. Try again in 4 weeks or consider creating a new message template.",
+                  "errorId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                  "timestamp": "2024-02-16T10:30:00.00Z"
+                }
+              }
+            }
+          },
           "500": {
             "$ref": "#/paths/~1files~1%7Bfilename%7D/get/responses/500"
           }
