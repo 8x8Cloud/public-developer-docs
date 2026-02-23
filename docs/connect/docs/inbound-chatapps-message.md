@@ -85,10 +85,11 @@ Interactive information object description
 
 | Parameter name | Parameter type | Description                                                                                                                  |
 |----------------| --- |------------------------------------------------------------------------------------------------------------------------------|
-| type           | string | Type of the message. Possible values:<br>- `button_reply`<br>- `list_reply`<br>- `nfmReply`                                  |
+| type           | string | Type of the message. Possible values:<br>- `button_reply`<br>- `list_reply`<br>- `nfmReply`<br>- `callPermissionReply`                                  |
 | button\_reply  | object | Button reply object. Sent when a customer clicks a button.                                                                   |
 | list\_reply    | object | List reply object. Sent when a customer selects an item from a list.                                                         |
 | nfmReply       | object | Flow reply object. Sent when a customer completes or submits a WhatsApp Flow. Contains flow response data in `responseJson`. |
+| callPermissionReply       | object | Call permission reply object. Sent when a customer responds to a call permission request on WhatsApp. Contains the user's permission decision and related metadata. |
 
 Button reply information object description
 
@@ -110,6 +111,15 @@ NFM reply information object description
 | Parameter name | Parameter type | Description |
 | :------------- | :------------- | :---------- |
 | responseJson   | string         | The raw JSON string returned from the completed Flow, containing the user's submitted data (e.g., flow token, field values). |
+
+Call permission reply information object description
+
+| Parameter name | Parameter type | Description |
+| :------------- | :------------- | :---------- |
+| response   | string         | The user's response to the call permission request. Possible values:<br>- `accept` - User granted call permission<br>- `reject` - User denied call permission |
+| isPermanent   | boolean         | Indicates whether the permission is permanent. `false` for temporary permissions (7 days), `true` for permanent permissions. |
+| expirationTimestamp   | string         | UTC date and time when the temporary call permission expires, expressed in ISO 8601 format. Only present when `isPermanent` is `false`. |
+| responseSource   | string         | The source of the permission. Always `user_action` - indicates the user explicitly approved or rejected the permission. Note: Automatic permissions (e.g., when a WhatsApp user initiates the call) do not trigger this webhook. |
 
 > ❗️
 >
@@ -169,6 +179,41 @@ NFM reply information object description
         "type": "nfmReply",
         "nfmReply": {
           "responseJson": "{\"flow_token\": \"<FLOW_TOKEN>\", \"optional_param1\": \"<value1>\", \"optional_param2\": \"<value2>\"}"
+        }
+      }
+    }
+  }
+}
+```
+
+### Sample Messaging Apps inbound message (Call Permission Reply)
+
+```json
+{
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": "2b1e044d-6fce-4a11-8962-b39900a755c1",
+    "subAccountId": "SubAccount-1",
+    "timestamp": "2026-01-22T22:51:55.00Z",
+    "user": {
+      "msisdn": "+12025550023",
+      "channelUserId": "12025550023"
+    },
+    "recipient": {
+      "channel": "whatsapp",
+      "channelId": "4b2ba2df-deb0-4c29-8ba5-a266672daf49"
+    },
+    "type": "Interactive",
+    "content": {
+      "interactive": {
+        "type": "callPermissionReply",
+        "callPermissionReply": {
+          "response": "accept",
+          "isPermanent": false,
+          "expirationTimestamp": "2026-01-23T06:51:55.00Z",
+          "responseSource": "user_action"
         }
       }
     }
