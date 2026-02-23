@@ -626,6 +626,43 @@ Copies a promotional code to clipboard for easy redemption.
 
 </td>
 </tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '150px', minWidth: '150px', maxWidth: '150px'}}>
+
+### Flow Button
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+Opens a WhatsApp Flow when tapped, allowing structured data collection via guided forms.
+
+**Limit:** Max 1 Flow button per template.
+
+**Text Length:** Max 25 characters.
+
+**Flow ID:** Required. Must be a published Flow (obtained from Flow Configuration API).
+
+**Flow Action:** Optional. Defaults to `"navigate"`. Can be `"navigate"` or `"data_exchange"`.
+
+**Navigate Screen:** Optional. Specifies the screen ID to open (from Flow JSON). Required if you want to start at a specific screen.
+
+**Use Case:** Appointment booking, lead qualification, feedback surveys, onboarding forms.
+
+**See:** [WhatsApp Flows](./whatsapp-flows.md) for complete Flow implementation guide.
+
+</td>
+<td style={{verticalAlign: 'top'}}>
+
+```json
+{
+  "type": "FLOW",
+  "text": "Book Appointment",
+  "flowId": "1234567890123456"
+}
+```
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -637,6 +674,7 @@ Copies a promotional code to clipboard for easy redemption.
 
 - Quick Reply buttons can be mixed with URL/Phone buttons
 - Copy Offer Code buttons can be mixed with other CTA buttons (URL/Phone/Quick Reply)
+- Flow buttons can be mixed with other CTA buttons (URL/Phone/Quick Reply)
 - When mixing, buttons of the same type must be consecutive (e.g., all URL buttons together, then all Quick Reply buttons together, or vice versa - do not intermix)
 - OTP Copy Code buttons cannot be mixed with any other button types (must be used alone)
 
@@ -647,10 +685,13 @@ Copies a promotional code to clipboard for easy redemption.
 - ✅ `[PHONE_NUMBER, URL, Quick Reply, Quick Reply]`
 - ✅ `[Quick Reply, Quick Reply, Quick Reply, PHONE_NUMBER, URL]`
 - ✅ `[COPY_CODE, URL, Quick Reply]` - Copy Offer Code can mix with other CTA buttons
+- ✅ `[FLOW, Quick Reply, Quick Reply]` - Flow button can mix with Quick Reply buttons
+- ✅ `[FLOW, URL]` - Flow button can mix with URL buttons
 - ✅ `[OTP]` - OTP Copy Code buttons must be used alone
 - ❌ `[URL, Quick Reply, URL, Quick Reply]` - Invalid (intermixed)
 - ❌ `[OTP, Quick Reply]` - Invalid (OTP Copy Code cannot mix with other types)
 - ❌ `[OTP, URL]` - Invalid (OTP Copy Code cannot mix with other types)
+- ❌ `[OTP, FLOW]` - Invalid (OTP Copy Code cannot mix with other types)
 
 **Desktop Display Limitations:**
 
@@ -671,6 +712,11 @@ Buttons are defined within a BUTTONS component:
       "text": "Track Order",
       "url": "https://myapp.com/track/{{1}}",
       "examples": ["12345"]
+    },
+    {
+      "type": "FLOW",
+      "text": "Book Appointment",
+      "flowId": "1234567890123456"
     },
     {
       "type": "quick_reply",

@@ -10,6 +10,7 @@ import VideoHeaderTemplate from './images/Video Header Template.webp';
 import DocumentHeaderTemplate from './images/Document Header Template.webp';
 import LocationHeaderTemplate from './images/Location Header Template.webp';
 import CarouselTemplate from './images/WhatsApp Carousel Template.gif';
+import FlowTemplate from './images/WhatsApp Flow Demo.gif';
 import ButtonCombinationTemplate from './images/WhatsApp Template - Rich Button.gif';
 
 This page provides a comprehensive library of WhatsApp template API payloads for both creating and sending templates.
@@ -36,7 +37,7 @@ This page provides a comprehensive library of WhatsApp template API payloads for
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+**Create Template:** `POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates`
 
 Creates an `AUTHENTICATION` template with a `COPY_CODE` button.
 
@@ -73,7 +74,7 @@ Creates an `AUTHENTICATION` template with a `COPY_CODE` button.
 
 </details>
 
-**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends the template, populating the `body` parameter and the `copyCode` parameter with the OTP.
 
@@ -131,7 +132,7 @@ Sends the template, populating the `body` parameter and the `copyCode` parameter
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+**Create Template:** `POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates`
 
 Creates a `MARKETING` template with an `IMAGE` header and a dynamic `URL` button.
 
@@ -185,7 +186,7 @@ Creates a `MARKETING` template with an `IMAGE` header and a dynamic `URL` button
 
 </details>
 
-**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends the template, providing the `url` for the image, the `text` for the body, and the dynamic part of the `url` button.
 
@@ -252,7 +253,7 @@ Sends the template, providing the `url` for the image, the `text` for the body, 
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+**Create Template:** `POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates`
 
 Creates a `UTILITY` template with a `VIDEO` header.
 
@@ -302,7 +303,7 @@ Creates a `UTILITY` template with a `VIDEO` header.
 
 </details>
 
-**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends the template, providing the `url` for the video and the `text` for the body parameter.
 
@@ -369,7 +370,7 @@ Sends the template, providing the `url` for the video and the `text` for the bod
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+**Create Template:** `POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates`
 
 Creates a `UTILITY` template with a `DOCUMENT` header.
 
@@ -419,7 +420,7 @@ Creates a `UTILITY` template with a `DOCUMENT` header.
 
 </details>
 
-**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends the template, providing the `url` for the document and the `text` for the body parameter.
 
@@ -486,7 +487,7 @@ Sends the template, providing the `url` for the document and the `text` for the 
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+**Create Template:** `POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates`
 
 Creates a `UTILITY` template with a `LOCATION` header. Note: No example is needed at creation.
 
@@ -543,7 +544,7 @@ Creates a `UTILITY` template with a `LOCATION` header. Note: No example is neede
 
 </details>
 
-**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends the template, providing the full `location` object (lat, lon, name, address) in the header parameters.
 
@@ -615,7 +616,7 @@ Sends the template, providing the full `location` object (lat, lon, name, addres
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+**Create Template:** `POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates`
 
 Creates a `MARKETING` template with a `CAROUSEL` component containing multiple cards.
 
@@ -711,7 +712,7 @@ Creates a `MARKETING` template with a `CAROUSEL` component containing multiple c
 
 </details>
 
-**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends the template, populating the main `body` parameters and the dynamic parameters for each card's `header` (image) and `button` (url).
 
@@ -810,6 +811,111 @@ Sends the template, populating the main `body` parameters and the dynamic parame
 <tr>
 <td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
 
+### Flow Template
+
+<img src={FlowTemplate} alt="WhatsApp Flow Template Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Create Template:** `POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates`
+
+Creates a `UTILITY` template with a `FLOW` button. The Flow must be published before creating the template.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+    "name": "appointment_booking_template_190126",
+    "language": "en_US",
+    "category": "MARKETING",
+    "components": [
+        {
+            "type": "HEADER",
+            "format": "image",
+            "examples": [
+                "https://iili.io/KtDO5BV.jpg"
+            ]
+        },
+        {
+            "type": "BODY",
+            "text": "Hello! Ready to transform your customer engagement? Schedule a demo with our 8x8 sales team to explore our SMS, Voice, and Video APIs."
+        },
+        {
+            "type": "FOOTER",
+            "text": "Empowering global communications."
+        },
+        {
+            "type": "BUTTONS",
+            "buttons": [
+                {
+                    "type": "FLOW",
+                    "text": "Schedule now",
+                    "flowId": "1633450807827276"
+                }
+            ]
+        }
+    ]
+}
+```
+
+</details>
+
+**Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends the template with the Flow button. When users tap the button, the WhatsApp Flow opens in-app.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "template",
+    "content": {
+        "template": {
+            "language": "en_US",
+            "name": "appointment_booking_template_190126",
+            "components": [
+                {
+                    "type": "header",
+                    "parameters": [
+                        {
+                            "type": "image",
+                            "url": "https://iili.io/KtDO5BV.jpg"
+                        }
+                    ]
+                },
+                {
+                    "type": "button",
+                    "subType": "flow",
+                    "index": 0,
+                    "parameters": [
+                        {
+                            "type": "action"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+```
+
+</details>
+
+:::tip
+Learn more about building and sending WhatsApp Flows in the [WhatsApp Flows](/connect/docs/whatsapp/whatsapp-flows) guide.
+:::
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
 ### Button Combination
 
 <img src={ButtonCombinationTemplate} alt="WhatsApp Button Combination Template Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
@@ -817,9 +923,9 @@ Sends the template, populating the main `body` parameters and the dynamic parame
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Create Template:** `POST /api/v1/accounts/{accountId}/channels/{channelId}/templates`
+**Create Template:** `POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates`
 
-Creates a `MARKETING` template with an `IMAGE` header and a combination of 1 `COPY_CODE` button, 2 `URL` buttons, 1 `PHONE_NUMBER` button, and 6 `quick_reply` buttons.
+Creates a `MARKETING` template with an `IMAGE` header and a combination of 1 `COPY_CODE` button, 2 `URL` buttons, 1 `PHONE_NUMBER` button, 1 `FLOW` button, and 6 `quick_reply` buttons.
 
 <details>
 <summary>View JSON</summary>
@@ -880,6 +986,11 @@ Creates a `MARKETING` template with an `IMAGE` header and a combination of 1 `CO
           "country": "SG"
         },
         {
+          "type": "FLOW",
+          "text": "Book Appointment",
+          "flowId": "1234567890123456"
+        },
+        {
           "type": "quick_reply",
           "text": "Want to know more"
         },
@@ -911,9 +1022,9 @@ Creates a `MARKETING` template with an `IMAGE` header and a combination of 1 `CO
 
 </details>
 
-**Send Template:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
-Sends the template, providing the `url` for the image, the `text` for the body, the `couponCode` for the COPY_CODE button, and the dynamic parts of the `url` buttons. Note: Only dynamic buttons (COPY_CODE and URL) need to be specified in the send request; quick_reply and PHONE_NUMBER buttons are static.
+Sends the template, providing the `url` for the image, the `text` for the body, the `couponCode` for the COPY_CODE button, the dynamic parts of the `url` buttons, and the optional Flow parameters. Note: COPY_CODE, URL, and FLOW buttons need to be specified in the send request; quick_reply and PHONE_NUMBER buttons are static.
 
 <details>
 <summary>View JSON</summary>
@@ -977,6 +1088,22 @@ Sends the template, providing the `url` for the image, the `text` for the body, 
             {
               "type": "text",
               "text": "channel"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "index": "4",
+          "subType": "flow",
+          "parameters": [
+            {
+              "type": "action",
+              "action": "navigate",
+              "navigateScreen": "APPOINTMENT_SCREEN",
+              "flowActionData": {
+                "customerName": "Jason",
+                "preferredDate": "2024-02-15"
+              }
             }
           ]
         }

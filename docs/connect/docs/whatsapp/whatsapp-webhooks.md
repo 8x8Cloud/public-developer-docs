@@ -35,7 +35,7 @@ Fires when a user sends a message to your WhatsApp number. This is the primary w
 
 The inbound message webhook structure varies based on the message type. Below are examples for the most common types.
 
-#### Text Message
+### Text Message
 
 **Sample JSON Payload:**
 
@@ -70,7 +70,7 @@ The inbound message webhook structure varies based on the message type. Below ar
 - `type`: `"Text"`
 - `content.text`: The text message content sent by the user
 
-#### Media Message (Image, Video, Audio, Document)
+### Media Message (Image, Video, Audio, Document)
 
 **Sample JSON Payload (Image):**
 
@@ -112,7 +112,7 @@ The inbound message webhook structure varies based on the message type. Below ar
 - `Audio`: Customer sent a voice message or audio file
 - `Document`: Customer sent a document (PDF, Word, Excel, etc.)
 
-#### Interactive Message (Button Reply)
+### Interactive Message (Button Reply)
 
 When a user responds to an interactive button or list, the payload includes the interactive response details.
 
@@ -163,6 +163,73 @@ When a user responds to an interactive button or list, the payload includes the 
 
 - `button_reply`: User tapped a quick-reply button
 - `list_reply`: User selected an item from an interactive list
+
+### Flow Submission (nfmReply)
+
+When a user completes a WhatsApp Flow, the submission is delivered as a special type of interactive message.
+
+**Sample JSON Payload:**
+
+```json
+{
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": "abc123-def456-ghi789",
+    "subAccountId": "your-subaccount-id",
+    "timestamp": "2026-01-15T10:30:00.000Z",
+    "user": {
+      "msisdn": "+15551234567",
+      "channelUserId": "15551234567"
+    },
+    "recipient": {
+      "channel": "whatsapp",
+      "channelId": "your-channel-id"
+    },
+    "type": "Interactive",
+    "content": {
+      "interactive": {
+        "type": "nfmReply",
+        "nfmReply": {
+          "responseJson": "{\"customer_name\":\"Jane Smith\",\"email\":\"jane@example.com\",\"feedback\":\"Excellent service!\",\"flow_token\":\"<FLOW_TOKEN>\"}"
+        }
+      }
+    }
+  }
+}
+```
+
+**Key Fields:**
+
+- `type`: `"Interactive"`
+- `content.interactive.type`: `"nfmReply"` (indicates a Flow submission)
+- `content.interactive.nfmReply.responseJson`: **JSON string** containing the submitted form data
+
+**Parsing Flow Submissions:**
+
+The `responseJson` field contains a stringified JSON object. Always parse it before processing:
+
+```javascript
+// Extract the response JSON string
+const responseJsonString = payload.content.interactive.nfmReply.responseJson;
+
+// Parse to object
+const submissionData = JSON.parse(responseJsonString);
+
+// Access submitted fields
+console.log(submissionData.customer_name); // "Jane Smith"
+console.log(submissionData.email); // "jane@example.com"
+console.log(submissionData.feedback); // "Excellent service!"
+```
+
+**Important:**
+- Always validate and sanitize submission data before processing
+- Store `umid` and `flow_token` for traceability
+- Respond with a confirmation message within seconds
+- Handle JSON parsing errors gracefully
+
+**See:** [WhatsApp Flows API - Webhook Integration](./whatsapp-flows-api.md#webhook-integration) for complete Flow submission handling guidance and examples.
 
 ### Common Fields (All Message Types)
 

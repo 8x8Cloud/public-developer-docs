@@ -13,6 +13,7 @@ import InteractiveButtonsImg from './images/Quick Reply Button Message.webp';
 import InteractiveButtonsImageHeaderImg from './images/Interactive Reply Button with Image Header.webp';
 import InteractiveListImg from './images/Menu List Message.webp';
 import CtaButtonImg from './images/URL CTA Button Message.webp';
+import FlowMessageImg from './images/WhatsApp Flow Demo.gif';
 import SingleProductImg from '../../images/62ac5b5-image.png';
 import ProductListImg from '../../images/a32565d-image.png';
 
@@ -40,7 +41,7 @@ This page provides a comprehensive library of WhatsApp interactive and freeform 
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends a plain text message to the user.
 
@@ -50,7 +51,7 @@ Sends a plain text message to the user.
 ```json
 {
   "user": {
-    "msisdn": "{{PhoneNumber}}"
+    "msisdn": "+15551234567"
   },
   "type": "text",
   "content": {
@@ -73,7 +74,7 @@ Sends a plain text message to the user.
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends an image from a URL with optional text caption.
 
@@ -83,7 +84,7 @@ Sends an image from a URL with optional text caption.
 ```json
 {
   "user": {
-    "msisdn": "{{PhoneNumber}}"
+    "msisdn": "+15551234567"
   },
   "type": "Image",
   "content": {
@@ -107,7 +108,7 @@ Sends an image from a URL with optional text caption.
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends a video from a URL with optional text caption.
 
@@ -117,7 +118,7 @@ Sends a video from a URL with optional text caption.
 ```json
 {
   "user": {
-    "msisdn": "{{PhoneNumber}}"
+    "msisdn": "+15551234567"
   },
   "type": "video",
   "content": {
@@ -141,7 +142,7 @@ Sends a video from a URL with optional text caption.
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends a document from a URL with optional filename and caption.
 
@@ -151,7 +152,7 @@ Sends a document from a URL with optional filename and caption.
 ```json
 {
   "user": {
-    "msisdn": "{{PhoneNumber}}"
+    "msisdn": "+15551234567"
   },
   "type": "File",
   "content": {
@@ -175,7 +176,7 @@ Sends a document from a URL with optional filename and caption.
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Sends a location message with latitude, longitude, name, and address.
 
@@ -185,7 +186,7 @@ Sends a location message with latitude, longitude, name, and address.
 ```json
 {
   "user": {
-    "msisdn": "{{PhoneNumber}}"
+    "msisdn": "+15551234567"
   },
   "type": "location",
   "content": {
@@ -213,7 +214,7 @@ Sends a location message with latitude, longitude, name, and address.
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Creates a list menu with multiple options organized in sections.
 
@@ -223,7 +224,7 @@ Creates a list menu with multiple options organized in sections.
 ```json
 {
   "user": {
-    "msisdn": "{{PhoneNumber}}"
+    "msisdn": "+15551234567"
   },
   "type": "interactive",
   "content": {
@@ -293,7 +294,7 @@ Creates a list menu with multiple options organized in sections.
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Creates an interactive message with up to 3 reply buttons. Users can tap a button to send a quick reply.
 
@@ -303,7 +304,7 @@ Creates an interactive message with up to 3 reply buttons. Users can tap a butto
 ```json
 {
   "user": {
-    "msisdn": "{{PhoneNumber}}"
+    "msisdn": "+15551234567"
   },
   "type": "interactive",
   "content": {
@@ -363,7 +364,7 @@ Creates an interactive message with up to 3 reply buttons. Users can tap a butto
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Creates an interactive message with an image header and up to 3 reply buttons.
 
@@ -373,7 +374,7 @@ Creates an interactive message with an image header and up to 3 reply buttons.
 ```json
 {
   "user": {
-    "msisdn": "{{PhoneNumber}}"
+    "msisdn": "+15551234567"
   },
   "type": "interactive",
   "content": {
@@ -416,7 +417,7 @@ Creates an interactive message with an image header and up to 3 reply buttons.
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Creates a message with a single CTA button that can open a URL or initiate a phone call.
 
@@ -426,7 +427,7 @@ Creates a message with a single CTA button that can open a URL or initiate a pho
 ```json
 {
   "user": {
-    "msisdn": "{{PhoneNumber}}"
+    "msisdn": "+15551234567"
   },
   "type": "interactive",
   "content": {
@@ -460,6 +461,61 @@ Creates a message with a single CTA button that can open a URL or initiate a pho
 <tr>
 <td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
 
+### Interactive Flow
+
+<img src={FlowMessageImg} alt="WhatsApp Interactive Flow Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends an interactive message that opens a WhatsApp Flow when tapped. Flows enable structured data collection through guided forms within WhatsApp. Can only be sent within the 24-hour customer service window.
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "type": "Interactive",
+  "content": {
+    "interactive": {
+      "type": "flow",
+      "header": {
+        "type": "image",
+        "image": {
+          "link": "https://iili.io/KtDO5BV.jpg"
+        }
+      },
+      "body": {
+        "text": "Hello! Ready to transform your customer engagement? Schedule a demo with our 8x8 sales team to explore our SMS, Voice, and Video APIs."
+      },
+      "footer": {
+        "text": "Empowering global communications."
+      },
+      "action": {
+        "parameters": {
+          "flowId": "1633450807827276",
+          "flowCta": "Schedule now"
+        }
+      }
+    }
+  }
+}
+```
+
+</details>
+
+> **Note:** The Flow must be published before sending. Use the Flow Configuration API to create and publish Flows. See [WhatsApp Flows](./whatsapp-flows.md) for complete documentation.
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
 ### Product Message (Single)
 
 <img src={SingleProductImg} alt="WhatsApp Single Product Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
@@ -467,7 +523,7 @@ Creates a message with a single CTA button that can open a URL or initiate a pho
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Displays a single product from your WhatsApp Business catalog.
 
@@ -512,7 +568,7 @@ Displays a single product from your WhatsApp Business catalog.
 </td>
 <td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
 
-**Send Message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
 Displays multiple products from your WhatsApp Business catalog in sections.
 

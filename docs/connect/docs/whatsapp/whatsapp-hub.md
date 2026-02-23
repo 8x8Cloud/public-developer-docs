@@ -65,3 +65,9 @@ To help you find the information you need, we have organized this documentation 
 - **See:** [Business-initiated Conversations: Templates](./whatsapp-over-8x8-api.md#business-initiated-conversations-templates)
 
 - **See:** [User-initiated Conversations: Interactive Messages](./whatsapp-over-8x8-api.md#user-initiated-conversations-interactive-messages)
+
+**For Developers Building Interactive Experiences** Learn how to collect structured data using WhatsApp Flows - guided forms that run inside WhatsApp conversations.
+
+- **See:** [WhatsApp Flows](./whatsapp-flows.md) - Create, send, and manage interactive forms for data collection
+
+- **See:** [Flow Examples Library](./whatsapp-flows-examples.md) - Industry-specific implementations with complete payloads
