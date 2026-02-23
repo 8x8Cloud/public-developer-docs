@@ -45,6 +45,7 @@ Payload object description
 | channel         | string         | Name of the channel used to send the message, please see [List of supported Messaging Apps channels](/connect/docs/list-of-supported-chatapps-channels) for details |
 | user            | object         | Information about the user the message is associated with                                                                                                           |
 | status          | object         | Current status of the message, please see [Message status reference](/connect/reference/message-status-references) for details                                      |
+| whatsapp        | object         | WhatsApp-specific information. Only present when `channel` is `whatsapp`. See below for details                                                                     |
 
 User information object description
 
@@ -52,6 +53,13 @@ User information object description
 | :------------- | :------------- | :--------------------------------------------------- |
 | msisdn         | string         | Phone number expressed in E.164 international format |
 | channelUserId  | string         | Channel user identifier                              |
+
+WhatsApp object description
+
+| Parameter name    | Parameter type | Description                                                                                                               |
+| :---------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------ |
+| providerErrorCode | string         | WhatsApp's own error code. Only present if there was an error                                                             |
+| pricingCategory   | string         | WhatsApp's pricing category as defined by Meta. Only included with sent status, and one of either delivered or read status |
 
 > 🚧
 >
@@ -85,6 +93,9 @@ User information object description
       "state": "delivered",
       "detail": "delivered_to_recipient",
       "timestamp": "2025-05-05T09:15:57.00Z"
+    },
+    "whatsapp": {
+      "pricingCategory": "business_initiated"
     }
   }
 }
@@ -109,6 +120,9 @@ User information object description
     "status": {
       "state": "read",
       "timestamp": "2025-05-17T06:27:52.45Z"
+    },
+    "whatsapp": {
+      "pricingCategory": "user_initiated"
     }
   }
 }
@@ -136,6 +150,9 @@ User information object description
       "timestamp": "2016-01-01T00:00:00Z",
       "errorCode": 15,
       "errorMessage": "Invalid destination"
+    },
+    "whatsapp": {
+      "providerErrorCode": "131009"
     }
   }
 }
