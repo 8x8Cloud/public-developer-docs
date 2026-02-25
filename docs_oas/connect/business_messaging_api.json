@@ -1955,7 +1955,8 @@
                     "type": "string",
                     "description": "Messaging Apps channel to send the typing indicator to",
                     "enum": [
-                      "whatsapp"
+                      "whatsapp",
+                      "rcs"
                     ],
                     "example": "whatsapp",
                     "title": "Channel type"
@@ -1985,6 +1986,14 @@
                   "summary": "Mark WhatsApp message as read and display a typing indicator",
                   "value": {
                     "channel": "whatsapp",
+                    "type": "typing",
+                    "umid": "cf3cbbf5-3e2d-ea11-815d-020897df5459"
+                  }
+                },
+                "RCS Typing Indicator": {
+                  "summary": "Display a typing indicator for RCS",
+                  "value": {
+                    "channel": "rcs",
                     "type": "typing",
                     "umid": "cf3cbbf5-3e2d-ea11-815d-020897df5459"
                   }
