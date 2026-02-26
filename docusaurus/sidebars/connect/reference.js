@@ -325,6 +325,10 @@ const sidebarConfig = [
             type: 'doc',
             id: 'connect/docs/whatsapp-phone-number-quality-change-webhook',
           },
+          {
+            type: 'doc',
+            id: 'connect/docs/whatsapp-account-update-webhook',
+          },
         ],
       },
       {
