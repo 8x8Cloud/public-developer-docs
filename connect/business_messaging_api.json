@@ -951,6 +951,19 @@
                       "required": ["channel"],
                       "title": "Channel override"
                     }
+                  },
+                  "context": {
+                    "type": "object",
+                    "description": "Contextual replies object. This allows you to reply to a specific message in a conversation thread. Only supported for WhatsApp messages.\n\nFor more information and limitations, see [WhatsApp Contextual Replies documentation](https://developers.facebook.com/documentation/business-messaging/whatsapp/messages/contextual-replies#limitations).",
+                    "properties": {
+                      "umid": {
+                        "type": "string",
+                        "description": "The unique message ID (umid) of the message you want to reply to. This creates a quoted reply in WhatsApp, showing the original message above your response.",
+                        "example": "aa7c29ad-4433-2211-9c8b-00004e2b9ecc"
+                      }
+                    },
+                    "required": ["umid"],
+                    "title": "Context object"
                   }
                 },
                 "required": ["user", "type", "content"],
@@ -1540,6 +1553,21 @@
                           "text": "We appreciate your support!"
                         }
                       }
+                    }
+                  }
+                },
+                "whatsAppTextContextualReply": {
+                  "summary": "WhatsApp Message - Text Message With Contextual Reply",
+                  "value": {
+                    "user": {
+                      "msisdn": "+6500000000"
+                    },
+                    "content": {
+                      "text": "Yes bro, we see the chess board."
+                    },
+                    "type": "text",
+                    "context": {
+                      "umid": "aa7c29ad-4433-2211-9c8b-00004e2b9ecc"
                     }
                   }
                 },
