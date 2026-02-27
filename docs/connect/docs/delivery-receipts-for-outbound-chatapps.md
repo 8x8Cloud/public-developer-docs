@@ -29,7 +29,7 @@ Request body description
 | Parameter name | Parameter type | Description |
 | --- | --- | --- |
 | namespace | string | A generic namespace for incoming webhook.<br>Equal to `ChatApps` for delivery receipts. |
-| eventType | string | Webhook type.<br>Equals to `outbound_message_status_changed` for delivery receipts |
+| eventType | string | Webhook type.<br>- `outbound_message_status_changed` for delivery receipts<br>- `external_app_message` for WhatsApp Business App messages |
 | description | string | Human-readable description of the incoming event |
 | payload | object | Delivery receipt information, see below |
 
@@ -42,9 +42,12 @@ Payload object description
 | clientMessageId | string         | Custom identifier you provided for this message                                                                                                                     |
 | clientBatchId   | string         | Custom identifier you provided for this batch of messages                                                                                                           |
 | subAccountId    | string         | The sub-account id used to deliver the message                                                                                                                      |
+| timestamp       | string         | UTC date and time when the message was sent expressed in ISO 8601 format.<br>Only present when `eventType=external_app_message`                                    |
 | channel         | string         | Name of the channel used to send the message, please see [List of supported Messaging Apps channels](/connect/docs/list-of-supported-chatapps-channels) for details |
 | user            | object         | Information about the user the message is associated with                                                                                                           |
-| status          | object         | Current status of the message, please see [Message status reference](/connect/reference/message-status-references) for details                                      |
+| type            | string         | Message type. See [Inbound Messaging Apps message type field](/connect/docs/inbound-chatapps-message#webhook-format) for possible values.<br>Only present when `eventType=external_app_message` |
+| content         | object         | Message content. Structure varies based on the `type` field.<br>Only present when `eventType=external_app_message`                                                 |
+| status          | object         | Current status of the message, please see [Message status reference](/connect/reference/message-status-references) for details.<br>Only present when `eventType=outbound_message_status_changed` |
 | whatsapp        | object         | WhatsApp-specific information. Only present when `channel` is `whatsapp`. See below for details                                                                     |
 
 User information object description
@@ -153,6 +156,43 @@ WhatsApp object description
     },
     "whatsapp": {
       "providerErrorCode": "131009"
+    }
+  }
+}
+```
+
+## WhatsApp Business App Messages
+
+When using WhatsApp with Embedded Signup, messages sent by your business through the WhatsApp Business App are forwarded to your configured webhook as `external_app_message` events. This allows you to track all outbound messages sent on behalf of your business through the WhatsApp Business App.
+
+> 📘
+>
+> For more information, see [WhatsApp's Embedded Signup documentation](https://developers.facebook.com/documentation/business-messaging/whatsapp/embedded-signup/onboarding-business-app-users#smb_message_echoes).
+
+**Key differences from delivery receipts:**
+- `eventType` is `external_app_message` instead of `outbound_message_status_changed`
+- Includes `timestamp`, `type`, and `content` fields in the payload (see webhook format above)
+- Does **not** include `status`, `batchId`, `clientMessageId`, or `clientBatchId` fields
+
+### Sample WhatsApp Business App message webhook
+
+```json
+{
+  "namespace": "ChatApps",
+  "eventType": "external_app_message",
+  "description": "External App Message",
+  "payload": {
+    "umid": "20a5347f-6898-4f39-86ef-b3e100b50929",
+    "subAccountId": "integration_test_whatsapp",
+    "timestamp": "2026-01-28T09:16:53.00Z",
+    "channel": "whatsapp",
+    "user": {
+      "msisdn": "+16505551234",
+      "channelUserId": "16505551234"
+    },
+    "type": "Text",
+    "content": {
+      "text": "Here's the info you requested! https://www.meta.com/quest/quest-3/"
     }
   }
 }
