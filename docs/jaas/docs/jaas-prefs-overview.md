@@ -7,4 +7,4 @@ You can find below a few of the JaaS meeting's features.
 * [Meeting security](/jaas/docs/jaas-prefs-security)
 * [Recordings](/jaas/docs/jaas-prefs-recording)
 * [Advanced branding](/jaas/docs/jaas-prefs-advanced-branding)
-* [Dial in](/jaas/docs/jaas-prefs-dial-in)
+* [Dial in](/jaas/docs/pstn-dial-in-and-out)

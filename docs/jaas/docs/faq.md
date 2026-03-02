@@ -16,7 +16,7 @@ No. We handle that for you, which is one of the advantages of using JaaS vs. you
 
 ### Is there an API available to retrieve dial-in numbers and PIN codes? [dial-in / numbers / sip / pstn]
 
-JaaS provides the APIs to retrieve PIN codes and DIDs. Please see the [dial-in documentation](/jaas/docs/jaas-prefs-dial-in) for more information.
+JaaS provides the APIs to retrieve PIN codes and DIDs. Please see the [dial-in documentation](/jaas/docs/pstn-dial-in-and-out) for more information.
 
 ```text
 **For the Meeting ID - HTTP GET**
@@ -175,6 +175,63 @@ JaaS documentation will often refer to various Jitsi Meet developer guide subsec
 
 You can change the base URL for your meeting invites from the Branding section of the JaaS Console. Please refer to [this](jaas-console-branding) page for more details.
 
+### Why isn't my custom meeting invite URL working? Do I need a CNAME to 8x8.vc?
+
+This is a common misconception. The **Custom invite URL** setting in the JaaS Console only changes the URL displayed in meeting invite links within meetings—it does **not** provision or host anything on 8x8's servers.
+
+**You do not need to create a CNAME record pointing to 8x8.vc or any 8x8 domain.** In fact, doing so will not work as expected.
+
+#### What you actually need to do
+
+1. **Host your own server** at your custom domain (e.g., `meet.yourdomain.com`)
+2. **Configure your own SSL/TLS certificate** for that domain
+3. **Build a web application** that:
+   * Serves an HTML page embedding the JaaS meeting using our [iFrame API](/jaas/docs/iframe-api-overview)
+   * Generates valid [JWTs](/jaas/docs/api-keys-overview) for authentication
+   * Handles your own user authentication logic (if needed)
+   * Includes the `brandingRoomAlias` in your `configOverwrite` options (see below)
+
+The JaaS iFrame automatically loads all meeting resources from the `8x8.vc` domain—you don't need to proxy or redirect anything.
+
+#### Using brandingRoomAlias
+
+The `brandingRoomAlias` config option works together with your custom invite URL to transform meeting invite links. When a participant clicks "Invite" within a meeting, the generated link will use your custom domain instead of the default `8x8.vc` URL.
+
+For example, if your custom invite URL is `https://meet.yourdomain.com` and a user is in a meeting called `mymeeting`, the invite link will be `https://meet.yourdomain.com/mymeeting` instead of `https://8x8.vc/vpaas-magic-cookie-.../mymeeting`.
+
+To enable this, include `brandingRoomAlias` in your iFrame configuration:
+
+```javascript
+const api = new JitsiMeetExternalAPI("8x8.vc", {
+    roomName: "vpaas-magic-cookie-xxxxx/mymeeting",
+    // ... other options
+    configOverwrite: {
+        brandingRoomAlias: "mymeeting",
+        // ... other config options
+    },
+});
+```
+
+The `brandingRoomAlias` value should be the room name portion of your custom URL—typically the meeting name without your tenant ID prefix.
+
+#### Example flow
+
+When a user visits `https://meet.yourdomain.com/mymeeting`:
+
+* Your server receives the request and extracts `mymeeting` from the URL
+* Your server generates a JWT and builds an HTML page with the JaaS iFrame embed
+* Your server sets `brandingRoomAlias: "mymeeting"` in the configOverwrite
+* The iFrame loads the meeting interface from `8x8.vc`
+* When participants share the meeting link, it displays as `https://meet.yourdomain.com/mymeeting`
+
+#### Documentation
+
+* [iFrame API Overview](/jaas/docs/iframe-api-overview)
+* [iFrame API - Custom Invite Links](/jaas/docs/iframe-api-invite)
+* [JWT Authentication](/jaas/docs/api-keys-overview)
+* [Advanced Branding](/jaas/docs/jaas-prefs-advanced-branding)
+* [Jitsi iFrame Developer Guide](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe)
+
 ### lib-jitsi-meet vs IFrame API
 
 The difference between the iFrame and the **lib-Jitsi-Meet** library is not really one of features, the iFrame is all built on top of our lib-jitsi-meet library. The main consideration here as to which one you use is more about how much control over the UI you want in addition to how you build and maintain your own product.
@@ -332,7 +389,7 @@ Remote access control is possible, but browsers do not support it, so it is not 
 
 Video call recording comes at an extra cost of $0.01 per min. Learn more about [JaaS pricing here](https://jaas.8x8.vc/#/pricing).
 
-Recording can be initiated by the moderator (with recording permissions set in the [JWT](/jaas/docs/jaas-onboarding#the-jitsi-jwt1) or via the [iFrame API](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe/#startrecording)
+Recording can be initiated by the moderator (with recording permissions set in the [JWT](/jaas/docs/api-keys-jwt)) or via the [iFrame API](https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe/#startrecording)
 
 Call recording files are temporarily stored in the 8x8 cloud for 24 hours and can be retrieved via a link available in the UI and/or delivered via a Webhook event (data retention period is 24 hours).  
 
