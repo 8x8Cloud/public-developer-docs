@@ -86,6 +86,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "connect/reference/get-call-permission-status",
+          label: "Get Call Permission Status",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "connect/reference/get-whatsapp-flows",
           label: "Get WhatsApp Flows",
           className: "api-method get",

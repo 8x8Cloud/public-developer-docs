@@ -218,6 +218,10 @@ const sidebarConfig = [
             id: 'connect/reference/remove-wa-template',
           },
           {
+            type: 'doc',
+            id: 'connect/reference/get-call-permission-status',
+          },
+          {
             type: 'category',
             label: 'WhatsApp Flow Management',
             collapsed: true,
