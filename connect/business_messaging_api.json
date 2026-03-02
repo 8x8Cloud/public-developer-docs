@@ -228,7 +228,8 @@
                               "product",
                               "product_list",
                               "cta_url",
-                              "flow"
+                              "flow",
+                              "call_permission_request"
                             ],
                             "description": "The type of interactive message you want to send."
                           },
@@ -439,7 +440,7 @@
                           },
                           "body": {
                             "type": "object",
-                            "description": "Optional for type product. Required for other message types.\n\nAn object with the body of the message.",
+                            "description": "Optional for type 'product' and 'call_permission_request'. Required for other message types.\n\nAn object with the body of the message.",
                             "properties": {
                               "text": {
                                 "type": "string",
@@ -507,13 +508,14 @@
                                 "type": {
                                   "type": "string",
                                   "default": "body",
-                                  "description": "Component type. Possible values are \"header\", \"footer\", \"body\", \"button\", \"carousel\"",
+                                  "description": "Component type. Possible values are \"header\", \"footer\", \"body\", \"button\", \"carousel\", \"call_permission_request\"",
                                   "enum": [
                                     "header",
                                     "footer",
                                     "body",
                                     "button",
-                                    "carousel"
+                                    "carousel",
+                                    "call_permission_request"
                                   ]
                                 },
                                 "parameters": {
@@ -1328,6 +1330,21 @@
                     }
                   }
                 },
+                "whatsAppCallPermissionTemplate": {
+                  "summary": "WhatsApp Template Message - Call Permission Request",
+                  "value": {
+                    "user": {
+                      "msisdn": "+6500000000"
+                    },
+                    "type": "template",
+                    "content": {
+                      "template": {
+                        "language": "en_US",
+                        "name": "<Insert Approved Call Permission Request Template Name>"
+                      }
+                    }
+                  }
+                },
                 "whatsAppInteractiveMessageReplyButtons": {
                   "summary": "WhatsApp Interactive Message - Quick Reply Buttons",
                   "value": {
@@ -1551,6 +1568,23 @@
                         },
                         "footer": {
                           "text": "We appreciate your support!"
+                        }
+                      }
+                    }
+                  }
+                },
+                "whatsAppInteractiveMessageCallPermissionRequest": {
+                  "summary": "WhatsApp Interactive Message - Call Permission Request",
+                  "value": {
+                    "user": {
+                      "msisdn": "+6500000000"
+                    },
+                    "type": "interactive",
+                    "content": {
+                      "interactive": {
+                        "type": "call_permission_request",
+                        "body": {
+                          "text": "We would like to call you to help support your query."
                         }
                       }
                     }
@@ -1814,7 +1848,7 @@
           },
           "description": "Messaging Apps API: request model for send single message"
         },
-        "description": "This endpoint is used to send Messaging Apps messages individually (1 request per message).\nIt is ideal to send single personalized messages for use-cases like notifications or alerting for example.\n\n**For WhatsApp:**\nWhen sending a 'text' type message, we will try to match it with registered WhatsApp templates under your account\nIf matching is successful, the message will be submitted as a template to WhatsApp, if not as a normal message\n\nTo bypass the template matching and send template only, you can select type 'template'\nIn this case, you need to provide template name, language and parameters\n\n\nMore examples on how this endpoint can be used are available here: [Usage examples](/connect/docs/usage-samples-whatsapp)",
+        "description": "This endpoint is used to send Messaging Apps messages individually (1 request per message).\nIt is ideal to send single personalized messages for use-cases like notifications or alerting for example.\n\n**For WhatsApp:**\nWhen sending a 'text' type message, we will try to match it with registered WhatsApp templates under your account\nIf matching is successful, the message will be submitted as a template to WhatsApp, if not as a normal message\n\nTo bypass the template matching and send template only, you can select type 'template'\nIn this case, you need to provide template name, language and parameters\n\n**WhatsApp Call Permission Request:**\nYou can request permission to call a customer using either:\n- **Interactive message**: Set type to 'interactive' with interactive.type as 'call_permission_request'. The body field is optional.\n- **Template message**: Set type to 'template' with your approved Call Permission Request template name and language.\n\n\nMore examples on how this endpoint can be used are available here: [Usage examples](/connect/docs/usage-samples-whatsapp)",
         "security": [
           {
             "apiKey": []
@@ -2867,7 +2901,8 @@
                             "BODY",
                             "FOOTER",
                             "BUTTONS",
-                            "CAROUSEL"
+                            "CAROUSEL",
+                            "CALL_PERMISSION_REQUEST"
                           ]
                         },
                         "format": {
@@ -3216,6 +3251,31 @@
                       }
                     ]
                   }
+                },
+                "whatsAppCallPermissionTemplate": {
+                  "summary": "Add WhatsApp Template with Call Permission Request",
+                  "value": {
+                    "name": "cpr_template_sample",
+                    "category": "MARKETING|UTILITY",
+                    "language": "en",
+                    "components": [
+                      {
+                        "type": "HEADER",
+                        "text": "Customer Service Request"
+                      },
+                      {
+                        "type": "BODY",
+                        "text": "We would like to call you to help resolve your recent inquiry faster and provide personalized assistance."
+                      },
+                      {
+                        "type": "FOOTER",
+                        "text": "Talk to you soon!"
+                      },
+                      {
+                        "type": "CALL_PERMISSION_REQUEST"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -3311,6 +3371,165 @@
           }
         }
       ]
+    },
+    "/api/v1/whatsapp/subaccounts/{subAccountId}/channels/{channelId}/callPermissions": {
+      "get": {
+        "summary": "Get Call Permission Status",
+        "operationId": "get-call-permission-status",
+        "description": "This endpoint is used to check the status of call permission for a specific destination on WhatsApp. It returns whether the business is allowed to initiate voice calls to the specified phone number.",
+        "tags": ["Management API"],
+        "parameters": [
+          {
+            "name": "subAccountId",
+            "in": "path",
+            "description": "Sub-account identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "description": "Channel identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destination",
+            "in": "query",
+            "description": "Destination phone number to check call permission status (E.164 format)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "+6500000000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "The current call permission status",
+                      "enum": ["temporary", "permanent", "not_granted"],
+                      "example": "temporary"
+                    },
+                    "actions": {
+                      "type": "array",
+                      "description": "List of actions and their permissions",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "actionName": {
+                            "type": "string",
+                            "description": "Name of the action",
+                            "enum": ["send_call_permission_request", "start_call"],
+                            "example": "send_call_permission_request"
+                          },
+                          "canPerformAction": {
+                            "type": "boolean",
+                            "description": "Whether the action can be performed",
+                            "example": true
+                          },
+                          "limits": {
+                            "type": "array",
+                            "description": "Rate limits for this action",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "timePeriod": {
+                                  "type": "string",
+                                  "description": "ISO 8601 duration format (e.g., PT24H for 24 hours, P7D for 7 days)",
+                                  "example": "PT24H"
+                                },
+                                "maxAllowed": {
+                                  "type": "integer",
+                                  "description": "Maximum number of actions allowed in the time period",
+                                  "example": 1
+                                },
+                                "currentUsage": {
+                                  "type": "integer",
+                                  "description": "Current usage count in the time period",
+                                  "example": 0
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "expirationTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp indicating when the call permission expires",
+                      "example": "2026-02-06T08:12:30.00Z"
+                    }
+                  }
+                },
+                "examples": {
+                  "temporary_permission": {
+                    "value": {
+                      "status": "temporary",
+                      "actions": [
+                        {
+                          "actionName": "send_call_permission_request",
+                          "canPerformAction": true,
+                          "limits": [
+                            {
+                              "timePeriod": "PT24H",
+                              "maxAllowed": 1,
+                              "currentUsage": 0
+                            },
+                            {
+                              "timePeriod": "P7D",
+                              "maxAllowed": 2,
+                              "currentUsage": 0
+                            }
+                          ]
+                        },
+                        {
+                          "actionName": "start_call",
+                          "canPerformAction": true,
+                          "limits": [
+                            {
+                              "timePeriod": "PT24H",
+                              "maxAllowed": 100,
+                              "currentUsage": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "expirationTime": "2026-02-06T08:12:30.00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/400"
+          },
+          "401": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
+          },
+          "500": {
+            "$ref": "#/paths/~1files~1%7Bfilename%7D/get/responses/500"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
     },
     "/api/v1/accounts/{accountId}/channels/{channelId}/flows": {
       "get": {
