@@ -2875,12 +2875,13 @@
                           "enum": [
                             "Text",
                             "Image",
+                            "Gif",
                             "Video",
                             "Document",
                             "Location"
                           ],
                           "example": "Image",
-                          "description": "Component type.\nRequired for HEADER component type."
+                          "description": "Component type.\nRequired for HEADER component type.<br/>Note: Gifs are currently only available for Marketing Messages API for WhatsApp."
                         },
                         "text": {
                           "type": "string",
