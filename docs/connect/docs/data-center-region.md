@@ -14,7 +14,7 @@ At 8x8 CPaaS, we understand that data latency and residency compliance are criti
 ## Setting your Platform region
 
 * **New Account creation.** The most relevant data center to your location is automatically preselected during the new account creation process. However, we understand that your business needs may vary, so we provide you with the flexibility to modify the data center selection during that process. This empowers you to choose the location that would best align with and benefit your specific business requirements.
-* **Migrate existing account** *(available only to Enterprise accounts)*. Customers that have long–term contracts, account managed (enterprise) or purchase a significant amount of credits every month*(USD 10,000/month or more)* can email their account managers or our [support team](mailto:cpaas-support@8x8.com) to request a migration of account data to another geographical region.
+* **Migrate existing account** *(available only to Enterprise accounts)*. Customers that have long–term contracts, account managed (enterprise) or purchase a significant amount of credits every month *(USD 10,000/month or more)* can email their account managers or our [support team](mailto:cpaas-support@8x8.com) to request a migration of account data to another geographical region.
 
 ## API Endpoints and Platform Region
 
