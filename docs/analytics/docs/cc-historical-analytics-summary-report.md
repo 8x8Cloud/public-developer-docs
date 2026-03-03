@@ -282,6 +282,7 @@ The result **will be different** for each report type.
         "acceptedPercentage",
         "alerting",
         "avgBusyTime",
+        "avgFocusTime",
         "avgHandlingTime",
         "avgHoldTime",
         "avgSpeedToAnswer",
@@ -291,6 +292,7 @@ The result **will be different** for each report type.
         "blindTransfersInitiated",
         "blindTransfersReceived",
         "busyTime",
+        "focusTime",
         "handlingTime",
         "hold",
         "holdTime",
@@ -1329,7 +1331,7 @@ This report tracks agent time spent across different interaction processing stat
 #### 8.3.4. Agent Interactions Summary
 
 <details>
-<summary>Click to expand Agent Interactions Summary Metrics (32 metrics)</summary>
+<summary>Click to expand Agent Interactions Summary Metrics (34 metrics)</summary>
 
 Report type: `agent-interactions-summary`
 
@@ -1345,6 +1347,7 @@ This report provides a comprehensive overview of agent performance including int
 | `acceptedPercentage` | v1+ | Percentage of interactions answered by agents over the total interactions presented in the current aggregation interval |
 | `alerting` | v1+ | Number of interactions currently being presented to agents via a queue or direct assignment in the current aggregation interval |
 | `avgBusyTime` | v1+ | Average combined time in Offering, Handling, and Wrap Up states per interaction. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval |
+| `avgFocusTime` | v8+ | Average time agents spent with digital interactions (chat, email) in focus in the current aggregation interval. We consider that a digital interaction is in focus when an agent actively views and works on the interaction window, as opposed to switching to other tasks such as consulting knowledge bases or documentation |
 | `avgHandlingTime` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval |
 | `avgHoldTime` | v2+ | Average duration per hold action. Calculated as total Hold Time divided by Number of Holds in the current aggregation interval |
 | `avgSpeedToAnswer` | v1+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it in the current aggregation interval |
@@ -1354,6 +1357,7 @@ This report provides a comprehensive overview of agent performance including int
 | `blindTransfersInitiated` | v1+ | Number of blind transfers performed by agents in the current aggregation interval. Transfer where agent does not speak to recipient first |
 | `blindTransfersReceived` | v1+ | Number of blind transfers received by agents in the current aggregation interval |
 | `busyTime` | v1+ | Total combined time in Offering, Handling, and Wrap Up states. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval |
+| `focusTime` | v8+ | Total cumulative time agents spent with digital interactions (chat, email) in focus in the current aggregation interval. We consider that a digital interaction is in focus when an agent actively views and works on the interaction window, as opposed to switching to other tasks such as consulting knowledge bases or documentation |
 | `handlingTime` | v1+ | Total time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval |
 | `hold` | v1+ | Total number of call holds agents have performed in the current aggregation interval |
 | `holdTime` | v1+ | Total time agents spent placing customers or agents on hold on any line in the current aggregation interval |

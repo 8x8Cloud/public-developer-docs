@@ -311,7 +311,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 #### Agents within a Queue Request
 
 ```bash
-curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/{queue-id}/agents?page=0&size=100&agent-ids={agent-id1}&agent-ids={agent-id2}&metrics=status.rt,statusCode.rt,timeOnStatus.rt,lastLogin.rt' \
+curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/{queue-id}/agents?page=0&size=100&agent-ids={agent-id1}&agent-ids={agent-id2}&metrics=status.rt,statusCode.rt,timeOnStatus.rt,timeOnStatusCode.rt,lastLogin.rt,lastStatusChange.rt' \
 --header 'Authorization: Bearer FnZGG0u5BpNwRkuwKuSmfG2JAG9w'
 
 ```
@@ -329,6 +329,10 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
                 "value": "2022-12-16T16:28:08.013Z"
             },
             {
+                "key": "lastStatusChange.rt",
+                "value": "2022-12-16T18:15:22.741Z"
+            },
+            {
                 "key": "status.rt",
                 "value": "LoggedOut"
             },
@@ -339,7 +343,11 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
             {
                 "key": "timeOnStatus.rt",
                 "value": 245611272
-            }
+            },
+          {
+            "key": "timeOnStatusCode.rt",
+            "value": 145611272
+          }
         ]
     },
     {
@@ -349,6 +357,10 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
             {
                 "key": "lastLogin.rt",
                 "value": "2022-12-02T17:32:31.299Z"
+            },
+            {
+                "key": "lastStatusChange.rt",
+                "value": "2022-12-02T19:45:18.632Z"
             },
             {
                 "key": "status.rt",
@@ -361,7 +373,11 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
             {
                 "key": "timeOnStatus.rt",
                 "value": 1469499666
-            }
+            },
+          {
+            "key": "timeOnStatusCode.rt",
+            "value": 1269499666
+          }
         ]
     }
 ]
@@ -382,7 +398,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 #### Single Agent within a Queue Request
 
 ```bash
-curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/{queue-id}/agents/{agent-id}?metrics=status.rt,statusCode.rt,timeOnStatus.rt,lastLogin.rt' \
+curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/{queue-id}/agents/{agent-id}?metrics=status.rt,statusCode.rt,timeOnStatus.rt,timeOnStatusCode.rt,lastLogin.rt' \
 --header 'Authorization: Bearer FnZGG0u5BpNwRkuwKuSmfG2JAG9w'
 
 ```
@@ -400,6 +416,10 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
                 "value": "2022-12-16T16:28:08.013Z"
             },
             {
+                "key": "lastStatusChange.rt",
+                "value": "2022-12-16T18:15:22.741Z"
+            },
+            {
                 "key": "status.rt",
                 "value": "LoggedOut"
             },
@@ -410,7 +430,11 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
             {
                 "key": "timeOnStatus.rt",
                 "value": 245611272
-            }
+            },
+          {
+            "key": "timeOnStatusCode.rt",
+            "value": 145611272
+          }
         ]
     }
 ]
@@ -438,7 +462,7 @@ Sample request limited to two queues and just three of the available metrics (Tw
 #### Agents within a Queue Request
 
 ```bash
-curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/agents-in-queue-groups?metrics=status.rt,timeOnStatus.rt,accepted.today.inQueue&queue-ids={queue-id-1}&queue-ids={queue-id-2}&page=0&size=100' \
+curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/agents-in-queue-groups?metrics=status.rt,timeOnStatus.rt,timeOnStatusCode.rt,accepted.today.inQueue&queue-ids={queue-id-1}&queue-ids={queue-id-2}&page=0&size=100' \
 --header 'Authorization: Bearer FnZGG0u5BpNwRkuwKuSmfG2JAG9w'
 
 ```
@@ -455,7 +479,8 @@ The response contains two sections. First section is an array of agents, where f
             "name": "John Agent",
             "metrics": {
                 "status.rt": "Available",
-                "timeOnStatus.rt": 123
+                "timeOnStatus.rt": 123,
+                "timeOnStatusCode.rt": 23
             }
         },
         {
@@ -463,7 +488,8 @@ The response contains two sections. First section is an array of agents, where f
             "name": "Jane Agent",
             "metrics": {
                 "status.rt": "LoggedOut",
-                "timeOnStatus.rt": 2224
+                "timeOnStatus.rt": 2224,
+                "timeOnStatusCode.rt": 224
             }
         }
     ],
@@ -519,7 +545,7 @@ Retrieve all agents with all specified metrics values within a tenant. The *summ
 #### Request with a specified list of metrics, agent-ids and group-ids
 
 ```bash
-curl --location --request GET 'https://api.8x8.com/analytics/cc/v5/realtime-metrics/agents?metrics=status.rt,timeOnStatus.rt,accepted.today.inQueue&agent-ids={agent-id-1}&agent-ids={agent-id-2}&group-ids={group-id-1}&group-ids={group-id-2}&page=0&size=100' \
+curl --location --request GET 'https://api.8x8.com/analytics/cc/v5/realtime-metrics/agents?metrics=status.rt,timeOnStatus.rt,timeOnStatusCode.rt,accepted.today.inQueue&agent-ids={agent-id-1}&agent-ids={agent-id-2}&group-ids={group-id-1}&group-ids={group-id-2}&page=0&size=100' \
 --header 'Authorization: Bearer FnZGG0u5BpNwRkuwKuSmfG2JAG9w'
 
 ```
@@ -1482,149 +1508,151 @@ This glossary provides comprehensive definitions for all metrics available when 
 **Note on `.inQueue` metrics:** The `.inQueue` suffix indicates that the metric measures agent activity specific to interactions routed through the **current queue**. These metrics exclude agent activity from direct inbound/outbound calls, internal agent-to-agent calls, and other non-queue interactions. Use `.inQueue` metrics to analyze agent performance for the selected queue.
 
 <details>
-<summary>Click to expand Agent Metrics Glossary - Queue Context (137 metrics)</summary>
+<summary>Click to expand Agent Metrics Glossary - Queue Context (139 metrics)</summary>
 
 **Version** indicates minimum Real-time API version where metric became available on this API endpoint.
 
-| Metric | Version | Description |
-|--------|---------|-------------|
-| `accepted.int-15m.inQueue` | v1+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 15-minutes) |
-| `accepted.int-30m.inQueue` | v1+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 30-minutes) |
-| `accepted.today.inQueue` | v1+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (current day) |
-| `alerting.rt` | v1+ | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
-| `availableTime.int-15m` | v1+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
-| `availableTime.int-30m` | v1+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
-| `availableTime.today` | v1+ | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
-| `availableTimePercentage.int-15m` | v1+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 15-minutes) |
-| `availableTimePercentage.int-30m` | v1+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 30-minutes) |
-| `availableTimePercentage.today` | v1+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (current day) |
-| `averageHandlingTime.int-15m.inQueue` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 15-minutes) |
-| `averageHandlingTime.int-30m.inQueue` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 30-minutes) |
-| `averageHandlingTime.today.inQueue` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (current day) |
-| `averageHoldTime.int-15m.inQueue` | v2+ | Average time the agent placed customers on hold (last 15-minutes) |
-| `averageHoldTime.int-30m.inQueue` | v2+ | Average time the agent placed customers on hold (last 30-minutes) |
-| `averageHoldTime.today.inQueue` | v2+ | Average time the agent placed customers on hold (current day) |
-| `averageOfferingTime.int-15m.inQueue` | v1+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 15-minutes) |
-| `averageOfferingTime.int-30m.inQueue` | v1+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 30-minutes) |
-| `averageOfferingTime.today.inQueue` | v1+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (current day) |
-| `averageWrapUpTime.int-15m.inQueue` | v1+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 15-minutes) |
-| `averageWrapUpTime.int-30m.inQueue` | v1+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 30-minutes) |
-| `averageWrapUpTime.today.inQueue` | v1+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (current day) |
-| `blindTransfers.int-15m.inQueue` | v1+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 15-minutes) |
-| `blindTransfers.int-30m.inQueue` | v1+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 30-minutes) |
-| `blindTransfers.today.inQueue` | v1+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (current day) |
-| `busyTime.int-15m` | v1+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 15-minutes) |
-| `busyTime.int-30m` | v1+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 30-minutes) |
-| `busyTime.today` | v1+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (current day) |
-| `busyTimePercentage.int-15m` | v1+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 15-minutes) |
-| `busyTimePercentage.int-30m` | v1+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 30-minutes) |
-| `busyTimePercentage.today` | v1+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (current day) |
-| `conferenceTime.int-15m.inQueue` | v1+ | Total cumulative duration the agent spent in multi-party conference calls (last 15-minutes) |
-| `conferenceTime.int-30m.inQueue` | v1+ | Total cumulative duration the agent spent in multi-party conference calls (last 30-minutes) |
-| `conferenceTime.today.inQueue` | v1+ | Total cumulative duration the agent spent in multi-party conference calls (current day) |
-| `conferences.int-15m.inQueue` | v1+ | Total number of conferences established by the agent (last 15-minutes) |
-| `conferences.int-30m.inQueue` | v1+ | Total number of conferences established by the agent (last 30-minutes) |
-| `conferences.today.inQueue` | v1+ | Total number of conferences established by the agent (current day) |
-| `consultations.int-15m.inQueue` | v1+ | Times an agent successfully established an outbound call while another call is on hold (last 15-minutes) |
-| `consultations.int-30m.inQueue` | v1+ | Times an agent successfully established an outbound call while another call is on hold (last 30-minutes) |
-| `consultations.today.inQueue` | v1+ | Times an agent successfully established an outbound call while another call is on hold (current day) |
-| `directInboundTime.int-15m` | v1+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 15-minutes) |
-| `directInboundTime.int-30m` | v1+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 30-minutes) |
-| `directInboundTime.today` | v1+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (current day) |
-| `directInbounds.int-15m` | v1+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 15-minutes) |
-| `directInbounds.int-30m` | v1+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 30-minutes) |
-| `directInbounds.today` | v1+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (current day) |
-| `directOutboundTime.int-15m` | v1+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
-| `directOutboundTime.int-30m` | v1+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
-| `directOutboundTime.today` | v1+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (current day) |
-| `directOutbounds.int-15m` | v1+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
-| `directOutbounds.int-30m` | v1+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
-| `directOutbounds.today` | v1+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (current day) |
-| `handlingTime.int-15m` | v1+ | Total time the agent spent in Handling state, actively processing interactions (last 15-minutes) |
-| `handlingTime.int-30m` | v1+ | Total time the agent spent in Handling state, actively processing interactions (last 30-minutes) |
-| `handlingTime.today` | v1+ | Total time the agent spent in Handling state, actively processing interactions (current day) |
-| `handlingTimePercentage.int-15m` | v1+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 15-minutes) |
-| `handlingTimePercentage.int-30m` | v1+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 30-minutes) |
-| `handlingTimePercentage.today` | v1+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (current day) |
-| `hold.int-15m.inQueue` | v1+ | Number of occasions the agent placed customers on hold (last 15-minutes) |
-| `hold.int-30m.inQueue` | v1+ | Number of occasions the agent placed customers on hold (last 30-minutes) |
-| `hold.today.inQueue` | v1+ | Number of occasions the agent placed customers on hold (current day) |
-| `internalCalls.int-15m` | v1+ | Total number of agent-to-agent calls initiated or received by the agent (last 15-minutes) |
-| `internalCalls.int-30m` | v1+ | Total number of agent-to-agent calls initiated or received by the agent (last 30-minutes) |
-| `internalCalls.today` | v1+ | Total number of agent-to-agent calls initiated or received by the agent (current day) |
-| `internalCallsInitiated.int-15m` | v1+ | Number of agent-to-agent calls initiated by this agent (last 15-minutes) |
-| `internalCallsInitiated.int-30m` | v1+ | Number of agent-to-agent calls initiated by this agent (last 30-minutes) |
-| `internalCallsInitiated.today` | v1+ | Number of agent-to-agent calls initiated by this agent (current day) |
-| `internalCallsReceived.int-15m` | v1+ | Number of agent-to-agent calls received by this agent (last 15-minutes) |
-| `internalCallsReceived.int-30m` | v1+ | Number of agent-to-agent calls received by this agent (last 30-minutes) |
-| `internalCallsReceived.today` | v1+ | Number of agent-to-agent calls received by this agent (current day) |
-| `internalCallsTime.int-15m` | v1+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 15-minutes) |
-| `internalCallsTime.int-30m` | v1+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 30-minutes) |
-| `internalCallsTime.today` | v1+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (current day) |
-| `lastLogin.rt` | v1+ | Timestamp representing the agent's most recent login to the system (currently) |
-| `lastLogout.rt` | v1+ | Timestamp representing the agent's most recent logout from the system (currently) |
-| `line1Status.rt` | v1+ | Current operational status of the agent's first communication line (currently) |
-| `line1TimeOnStatus.rt` | v1+ | Time in milliseconds since the agent's first line status last changed (currently) |
-| `line2Status.rt` | v1+ | Current operational status of the agent's second communication line (currently) |
-| `line2TimeOnStatus.rt` | v1+ | Time in milliseconds since the agent's second line status last changed (currently) |
-| `loggedInTime.int-15m` | v1+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 15-minutes) |
-| `loggedInTime.int-30m` | v1+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 30-minutes) |
-| `loggedInTime.rt` | v1+ | Cumulative time the agent has maintained active system connection during their current login session (currently) |
-| `loggedInTime.today` | v1+ | Total time the agent maintained active system connection and was available for work across all queues and activities (current day) |
-| `longestHold.int-15m.inQueue` | v1+ | Maximum single continuous hold duration when agent placed customer on hold (last 15-minutes) |
-| `longestHold.int-30m.inQueue` | v1+ | Maximum single continuous hold duration when agent placed customer on hold (last 30-minutes) |
-| `longestHold.today.inQueue` | v1+ | Maximum single continuous hold duration when agent placed customer on hold (current day) |
-| `longestOffering.int-15m.inQueue` | v1+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 15-minutes) |
-| `longestOffering.int-30m.inQueue` | v1+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 30-minutes) |
-| `longestOffering.today.inQueue` | v1+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (current day) |
-| `offered.int-15m.inQueue` | v1+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 15-minutes) |
-| `offered.int-30m.inQueue` | v1+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 30-minutes) |
-| `offered.today.inQueue` | v1+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (current day) |
-| `offeringTime.int-15m` | v1+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 15-minutes) |
-| `offeringTime.int-30m` | v1+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 30-minutes) |
-| `offeringTime.today` | v1+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (current day) |
-| `onBreakTime.int-15m` | v1+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 15-minutes) |
-| `onBreakTime.int-30m` | v1+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 30-minutes) |
-| `onBreakTime.today` | v1+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (current day) |
-| `onBreakTimePercentage.int-15m` | v1+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 15-minutes) |
-| `onBreakTimePercentage.int-30m` | v1+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 30-minutes) |
-| `onBreakTimePercentage.today` | v1+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (current day) |
-| `onHoldTime.int-15m.inQueue` | v1+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 15-minutes) |
-| `onHoldTime.int-30m.inQueue` | v1+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 30-minutes) |
-| `onHoldTime.today.inQueue` | v1+ | Total duration the agent kept customers on hold. Sum of all hold periods (current day) |
-| `rejectTimeout.int-15m.inQueue` | v1+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 15-minutes) |
-| `rejectTimeout.int-30m.inQueue` | v1+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 30-minutes) |
-| `rejectTimeout.today.inQueue` | v1+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (current day) |
-| `rejected.int-15m.inQueue` | v1+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 15-minutes) |
-| `rejected.int-30m.inQueue` | v1+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 30-minutes) |
-| `rejected.today.inQueue` | v1+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (current day) |
-| `status.rt` | v1+ | Agent's current operational state showing system status. Examples: Available, Handling, OnBreak, LoggedOut, WorkingOffline (currently) |
-| `statusCode.rt` | v1+ | Specific reason code that justifies or details the agent's current operational status (currently) |
-| `timeOnStatus.rt` | v1+ | Elapsed duration in milliseconds showing how long the agent has maintained their current operational status (currently) |
-| `transfersInitiated.int-15m.inQueue` | v2+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 15-minutes) |
-| `transfersInitiated.int-30m.inQueue` | v2+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 30-minutes) |
-| `transfersInitiated.today.inQueue` | v2+ | Warm and blind transfers initiated by the agent. All outgoing transfers (current day) |
-| `transfersInitiatedPercentage.int-15m.inQueue` | v2+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 15-minutes) |
-| `transfersInitiatedPercentage.int-30m.inQueue` | v2+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 30-minutes) |
-| `transfersInitiatedPercentage.today.inQueue` | v2+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (current day) |
-| `transfersReceived.int-15m.inQueue` | v1+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 15-minutes) |
-| `transfersReceived.int-30m.inQueue` | v1+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 30-minutes) |
-| `transfersReceived.today.inQueue` | v1+ | Warm and blind transfers routed to agent for handling. All incoming transfers (current day) |
-| `warmTransfers.int-15m.inQueue` | v1+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 15-minutes) |
-| `warmTransfers.int-30m.inQueue` | v1+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 30-minutes) |
-| `warmTransfers.today.inQueue` | v1+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (current day) |
-| `workingOfflineTime.int-15m` | v1+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 15-minutes) |
-| `workingOfflineTime.int-30m` | v1+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 30-minutes) |
-| `workingOfflineTime.today` | v1+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (current day) |
-| `workingOfflineTimePercentage.int-15m` | v1+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 15-minutes) |
-| `workingOfflineTimePercentage.int-30m` | v1+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 30-minutes) |
-| `workingOfflineTimePercentage.today` | v1+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (current day) |
-| `wrapUpTime.int-15m` | v1+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 15-minutes) |
-| `wrapUpTime.int-30m` | v1+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 30-minutes) |
-| `wrapUpTime.today` | v1+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (current day) |
-| `wrapUpTimePercentage.int-15m` | v1+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 15-minutes) |
-| `wrapUpTimePercentage.int-30m` | v1+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 30-minutes) |
-| `wrapUpTimePercentage.today` | v1+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (current day) |
+| Metric                                         | Version | Description |
+|------------------------------------------------|---------|-------------|
+| `accepted.int-15m.inQueue`                     | v1+     | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 15-minutes) |
+| `accepted.int-30m.inQueue`                     | v1+     | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 30-minutes) |
+| `accepted.today.inQueue`                       | v1+     | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (current day) |
+| `alerting.rt`                                  | v1+     | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
+| `availableTime.int-15m`                        | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
+| `availableTime.int-30m`                        | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
+| `availableTime.today`                          | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
+| `availableTimePercentage.int-15m`              | v1+     | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 15-minutes) |
+| `availableTimePercentage.int-30m`              | v1+     | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 30-minutes) |
+| `availableTimePercentage.today`                | v1+     | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (current day) |
+| `averageHandlingTime.int-15m.inQueue`          | v1+     | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 15-minutes) |
+| `averageHandlingTime.int-30m.inQueue`          | v1+     | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 30-minutes) |
+| `averageHandlingTime.today.inQueue`            | v1+     | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (current day) |
+| `averageHoldTime.int-15m.inQueue`              | v2+     | Average time the agent placed customers on hold (last 15-minutes) |
+| `averageHoldTime.int-30m.inQueue`              | v2+     | Average time the agent placed customers on hold (last 30-minutes) |
+| `averageHoldTime.today.inQueue`                | v2+     | Average time the agent placed customers on hold (current day) |
+| `averageOfferingTime.int-15m.inQueue`          | v1+     | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 15-minutes) |
+| `averageOfferingTime.int-30m.inQueue`          | v1+     | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 30-minutes) |
+| `averageOfferingTime.today.inQueue`            | v1+     | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (current day) |
+| `averageWrapUpTime.int-15m.inQueue`            | v1+     | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 15-minutes) |
+| `averageWrapUpTime.int-30m.inQueue`            | v1+     | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 30-minutes) |
+| `averageWrapUpTime.today.inQueue`              | v1+     | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (current day) |
+| `blindTransfers.int-15m.inQueue`               | v1+     | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 15-minutes) |
+| `blindTransfers.int-30m.inQueue`               | v1+     | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 30-minutes) |
+| `blindTransfers.today.inQueue`                 | v1+     | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (current day) |
+| `busyTime.int-15m`                             | v1+     | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 15-minutes) |
+| `busyTime.int-30m`                             | v1+     | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 30-minutes) |
+| `busyTime.today`                               | v1+     | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (current day) |
+| `busyTimePercentage.int-15m`                   | v1+     | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 15-minutes) |
+| `busyTimePercentage.int-30m`                   | v1+     | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 30-minutes) |
+| `busyTimePercentage.today`                     | v1+     | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (current day) |
+| `conferenceTime.int-15m.inQueue`               | v1+     | Total cumulative duration the agent spent in multi-party conference calls (last 15-minutes) |
+| `conferenceTime.int-30m.inQueue`               | v1+     | Total cumulative duration the agent spent in multi-party conference calls (last 30-minutes) |
+| `conferenceTime.today.inQueue`                 | v1+     | Total cumulative duration the agent spent in multi-party conference calls (current day) |
+| `conferences.int-15m.inQueue`                  | v1+     | Total number of conferences established by the agent (last 15-minutes) |
+| `conferences.int-30m.inQueue`                  | v1+     | Total number of conferences established by the agent (last 30-minutes) |
+| `conferences.today.inQueue`                    | v1+     | Total number of conferences established by the agent (current day) |
+| `consultations.int-15m.inQueue`                | v1+     | Times an agent successfully established an outbound call while another call is on hold (last 15-minutes) |
+| `consultations.int-30m.inQueue`                | v1+     | Times an agent successfully established an outbound call while another call is on hold (last 30-minutes) |
+| `consultations.today.inQueue`                  | v1+     | Times an agent successfully established an outbound call while another call is on hold (current day) |
+| `directInboundTime.int-15m`                    | v1+     | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 15-minutes) |
+| `directInboundTime.int-30m`                    | v1+     | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 30-minutes) |
+| `directInboundTime.today`                      | v1+     | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (current day) |
+| `directInbounds.int-15m`                       | v1+     | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 15-minutes) |
+| `directInbounds.int-30m`                       | v1+     | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 30-minutes) |
+| `directInbounds.today`                         | v1+     | Total number of direct inbound calls to the agent excluding agent-to-agent calls (current day) |
+| `directOutboundTime.int-15m`                   | v1+     | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
+| `directOutboundTime.int-30m`                   | v1+     | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
+| `directOutboundTime.today`                     | v1+     | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (current day) |
+| `directOutbounds.int-15m`                      | v1+     | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
+| `directOutbounds.int-30m`                      | v1+     | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
+| `directOutbounds.today`                        | v1+     | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (current day) |
+| `handlingTime.int-15m`                         | v1+     | Total time the agent spent in Handling state, actively processing interactions (last 15-minutes) |
+| `handlingTime.int-30m`                         | v1+     | Total time the agent spent in Handling state, actively processing interactions (last 30-minutes) |
+| `handlingTime.today`                           | v1+     | Total time the agent spent in Handling state, actively processing interactions (current day) |
+| `handlingTimePercentage.int-15m`               | v1+     | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 15-minutes) |
+| `handlingTimePercentage.int-30m`               | v1+     | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 30-minutes) |
+| `handlingTimePercentage.today`                 | v1+     | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (current day) |
+| `hold.int-15m.inQueue`                         | v1+     | Number of occasions the agent placed customers on hold (last 15-minutes) |
+| `hold.int-30m.inQueue`                         | v1+     | Number of occasions the agent placed customers on hold (last 30-minutes) |
+| `hold.today.inQueue`                           | v1+     | Number of occasions the agent placed customers on hold (current day) |
+| `internalCalls.int-15m`                        | v1+     | Total number of agent-to-agent calls initiated or received by the agent (last 15-minutes) |
+| `internalCalls.int-30m`                        | v1+     | Total number of agent-to-agent calls initiated or received by the agent (last 30-minutes) |
+| `internalCalls.today`                          | v1+     | Total number of agent-to-agent calls initiated or received by the agent (current day) |
+| `internalCallsInitiated.int-15m`               | v1+     | Number of agent-to-agent calls initiated by this agent (last 15-minutes) |
+| `internalCallsInitiated.int-30m`               | v1+     | Number of agent-to-agent calls initiated by this agent (last 30-minutes) |
+| `internalCallsInitiated.today`                 | v1+     | Number of agent-to-agent calls initiated by this agent (current day) |
+| `internalCallsReceived.int-15m`                | v1+     | Number of agent-to-agent calls received by this agent (last 15-minutes) |
+| `internalCallsReceived.int-30m`                | v1+     | Number of agent-to-agent calls received by this agent (last 30-minutes) |
+| `internalCallsReceived.today`                  | v1+     | Number of agent-to-agent calls received by this agent (current day) |
+| `internalCallsTime.int-15m`                    | v1+     | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 15-minutes) |
+| `internalCallsTime.int-30m`                    | v1+     | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 30-minutes) |
+| `internalCallsTime.today`                      | v1+     | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (current day) |
+| `lastLogin.rt`                                 | v1+     | Timestamp representing the agent's most recent login to the system (currently) |
+| `lastLogout.rt`                                | v1+     | Timestamp representing the agent's most recent logout from the system (currently) |
+| `lastStatusChange.rt`                          | v5+     | Timestamp when the agent's operational status last changed (currently) |
+| `line1Status.rt`                               | v1+     | Current operational status of the agent's first communication line (currently) |
+| `line1TimeOnStatus.rt`                         | v1+     | Time in milliseconds since the agent's first line status last changed (currently) |
+| `line2Status.rt`                               | v1+     | Current operational status of the agent's second communication line (currently) |
+| `line2TimeOnStatus.rt`                         | v1+     | Time in milliseconds since the agent's second line status last changed (currently) |
+| `loggedInTime.int-15m`                         | v1+     | Total time the agent maintained active system connection and was available for work across all queues and activities (last 15-minutes) |
+| `loggedInTime.int-30m`                         | v1+     | Total time the agent maintained active system connection and was available for work across all queues and activities (last 30-minutes) |
+| `loggedInTime.rt`                              | v1+     | Cumulative time the agent has maintained active system connection during their current login session (currently) |
+| `loggedInTime.today`                           | v1+     | Total time the agent maintained active system connection and was available for work across all queues and activities (current day) |
+| `longestHold.int-15m.inQueue`                  | v1+     | Maximum single continuous hold duration when agent placed customer on hold (last 15-minutes) |
+| `longestHold.int-30m.inQueue`                  | v1+     | Maximum single continuous hold duration when agent placed customer on hold (last 30-minutes) |
+| `longestHold.today.inQueue`                    | v1+     | Maximum single continuous hold duration when agent placed customer on hold (current day) |
+| `longestOffering.int-15m.inQueue`              | v1+     | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 15-minutes) |
+| `longestOffering.int-30m.inQueue`              | v1+     | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 30-minutes) |
+| `longestOffering.today.inQueue`                | v1+     | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (current day) |
+| `offered.int-15m.inQueue`                      | v1+     | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 15-minutes) |
+| `offered.int-30m.inQueue`                      | v1+     | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 30-minutes) |
+| `offered.today.inQueue`                        | v1+     | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (current day) |
+| `offeringTime.int-15m`                         | v1+     | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 15-minutes) |
+| `offeringTime.int-30m`                         | v1+     | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 30-minutes) |
+| `offeringTime.today`                           | v1+     | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (current day) |
+| `onBreakTime.int-15m`                          | v1+     | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 15-minutes) |
+| `onBreakTime.int-30m`                          | v1+     | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 30-minutes) |
+| `onBreakTime.today`                            | v1+     | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (current day) |
+| `onBreakTimePercentage.int-15m`                | v1+     | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 15-minutes) |
+| `onBreakTimePercentage.int-30m`                | v1+     | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 30-minutes) |
+| `onBreakTimePercentage.today`                  | v1+     | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (current day) |
+| `onHoldTime.int-15m.inQueue`                   | v1+     | Total duration the agent kept customers on hold. Sum of all hold periods (last 15-minutes) |
+| `onHoldTime.int-30m.inQueue`                   | v1+     | Total duration the agent kept customers on hold. Sum of all hold periods (last 30-minutes) |
+| `onHoldTime.today.inQueue`                     | v1+     | Total duration the agent kept customers on hold. Sum of all hold periods (current day) |
+| `rejectTimeout.int-15m.inQueue`                | v1+     | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 15-minutes) |
+| `rejectTimeout.int-30m.inQueue`                | v1+     | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 30-minutes) |
+| `rejectTimeout.today.inQueue`                  | v1+     | Count of interactions automatically rejected when agent did not respond within configured timeout period (current day) |
+| `rejected.int-15m.inQueue`                     | v1+     | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 15-minutes) |
+| `rejected.int-30m.inQueue`                     | v1+     | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 30-minutes) |
+| `rejected.today.inQueue`                       | v1+     | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (current day) |
+| `status.rt`                                    | v1+     | Agent's current operational state showing system status. Examples: Available, Handling, OnBreak, LoggedOut, WorkingOffline (currently) |
+| `statusCode.rt`                                | v1+     | Specific reason code that justifies or details the agent's current operational status (currently) |
+| `timeOnStatus.rt`                              | v1+     | Elapsed duration in milliseconds showing how long the agent has maintained their current operational status (currently) |
+| `timeOnStatusCode.rt`                          | v5+     | Elapsed duration in milliseconds showing how long the agent has maintained their current status code. The metric resets every time the status or the combination status + statusCode changes |
+| `transfersInitiated.int-15m.inQueue`           | v2+     | Warm and blind transfers initiated by the agent. All outgoing transfers (last 15-minutes) |
+| `transfersInitiated.int-30m.inQueue`           | v2+     | Warm and blind transfers initiated by the agent. All outgoing transfers (last 30-minutes) |
+| `transfersInitiated.today.inQueue`             | v2+     | Warm and blind transfers initiated by the agent. All outgoing transfers (current day) |
+| `transfersInitiatedPercentage.int-15m.inQueue` | v2+     | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 15-minutes) |
+| `transfersInitiatedPercentage.int-30m.inQueue` | v2+     | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 30-minutes) |
+| `transfersInitiatedPercentage.today.inQueue`   | v2+     | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (current day) |
+| `transfersReceived.int-15m.inQueue`            | v1+     | Warm and blind transfers routed to agent for handling. All incoming transfers (last 15-minutes) |
+| `transfersReceived.int-30m.inQueue`            | v1+     | Warm and blind transfers routed to agent for handling. All incoming transfers (last 30-minutes) |
+| `transfersReceived.today.inQueue`              | v1+     | Warm and blind transfers routed to agent for handling. All incoming transfers (current day) |
+| `warmTransfers.int-15m.inQueue`                | v1+     | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 15-minutes) |
+| `warmTransfers.int-30m.inQueue`                | v1+     | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 30-minutes) |
+| `warmTransfers.today.inQueue`                  | v1+     | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (current day) |
+| `workingOfflineTime.int-15m`                   | v1+     | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 15-minutes) |
+| `workingOfflineTime.int-30m`                   | v1+     | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 30-minutes) |
+| `workingOfflineTime.today`                     | v1+     | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (current day) |
+| `workingOfflineTimePercentage.int-15m`         | v1+     | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 15-minutes) |
+| `workingOfflineTimePercentage.int-30m`         | v1+     | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 30-minutes) |
+| `workingOfflineTimePercentage.today`           | v1+     | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (current day) |
+| `wrapUpTime.int-15m`                           | v1+     | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 15-minutes) |
+| `wrapUpTime.int-30m`                           | v1+     | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 30-minutes) |
+| `wrapUpTime.today`                             | v1+     | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (current day) |
+| `wrapUpTimePercentage.int-15m`                 | v1+     | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 15-minutes) |
+| `wrapUpTimePercentage.int-30m`                 | v1+     | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 30-minutes) |
+| `wrapUpTimePercentage.today`                   | v1+     | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (current day) |
 
 </details>
 
@@ -1636,153 +1664,155 @@ This glossary provides comprehensive definitions for all metrics available when 
 * `GET /realtime-metrics/groups/{group-id}/agents/{agent-id}` - Individual agent in a group
 
 <details>
-<summary>Click to expand Agent Metrics Glossary - Group Context (141 metrics)</summary>
+<summary>Click to expand Agent Metrics Glossary - Group Context (143 metrics)</summary>
 
 **Version** indicates minimum Real-time API version where metric became available on this API endpoint.
 
-| Metric | Version | Description |
-|--------|---------|-------------|
-| `accepted.int-15m` | v1+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 15-minutes) |
-| `accepted.int-30m` | v1+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 30-minutes) |
-| `accepted.today` | v1+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (current day) |
-| `activeChannels.rt` | v1+ | List of communication channels with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing channel name and count of such interactions in each channel (currently) |
-| `activeDirections.rt` | v1+ | List of interaction directions (Inbound, Outbound) with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing direction and count of such interactions in each direction (currently) |
-| `activeInteractionsCount.rt` | v1+ | Total number of interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state) across all queues, channels, and directions (currently) |
-| `activeQueues.rt` | v1+ | List of queues with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing queue name and count of such interactions in each queue (currently) |
-| `alerting.rt` | v1+ | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
-| `availableTime.int-15m` | v1+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
-| `availableTime.int-30m` | v1+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
-| `availableTime.today` | v1+ | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
-| `availableTimePercentage.int-15m` | v1+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 15-minutes) |
-| `availableTimePercentage.int-30m` | v1+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 30-minutes) |
-| `availableTimePercentage.today` | v1+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (current day) |
-| `averageHandlingTime.int-15m` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 15-minutes) |
-| `averageHandlingTime.int-30m` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 30-minutes) |
-| `averageHandlingTime.today` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (current day) |
-| `averageHoldTime.int-15m` | v2+ | Average time the agent placed customers on hold (last 15-minutes) |
-| `averageHoldTime.int-30m` | v2+ | Average time the agent placed customers on hold (last 30-minutes) |
-| `averageHoldTime.today` | v2+ | Average time the agent placed customers on hold (current day) |
-| `averageOfferingTime.int-15m` | v1+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 15-minutes) |
-| `averageOfferingTime.int-30m` | v1+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 30-minutes) |
-| `averageOfferingTime.today` | v1+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (current day) |
-| `averageWrapUpTime.int-15m` | v1+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 15-minutes) |
-| `averageWrapUpTime.int-30m` | v1+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 30-minutes) |
-| `averageWrapUpTime.today` | v1+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (current day) |
-| `blindTransfers.int-15m` | v1+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 15-minutes) |
-| `blindTransfers.int-30m` | v1+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 30-minutes) |
-| `blindTransfers.today` | v1+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (current day) |
-| `busyTime.int-15m` | v1+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 15-minutes) |
-| `busyTime.int-30m` | v1+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 30-minutes) |
-| `busyTime.today` | v1+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (current day) |
-| `busyTimePercentage.int-15m` | v1+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 15-minutes) |
-| `busyTimePercentage.int-30m` | v1+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 30-minutes) |
-| `busyTimePercentage.today` | v1+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (current day) |
-| `conferenceTime.int-15m` | v1+ | Total cumulative duration the agent spent in multi-party conference calls (last 15-minutes) |
-| `conferenceTime.int-30m` | v1+ | Total cumulative duration the agent spent in multi-party conference calls (last 30-minutes) |
-| `conferenceTime.today` | v1+ | Total cumulative duration the agent spent in multi-party conference calls (current day) |
-| `conferences.int-15m` | v1+ | Total number of conferences established by the agent (last 15-minutes) |
-| `conferences.int-30m` | v1+ | Total number of conferences established by the agent (last 30-minutes) |
-| `conferences.today` | v1+ | Total number of conferences established by the agent (current day) |
-| `consultations.int-15m` | v1+ | Times an agent successfully established an outbound call while another call is on hold (last 15-minutes) |
-| `consultations.int-30m` | v1+ | Times an agent successfully established an outbound call while another call is on hold (last 30-minutes) |
-| `consultations.today` | v1+ | Times an agent successfully established an outbound call while another call is on hold (current day) |
-| `directInboundTime.int-15m` | v1+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 15-minutes) |
-| `directInboundTime.int-30m` | v1+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 30-minutes) |
-| `directInboundTime.today` | v1+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (current day) |
-| `directInbounds.int-15m` | v1+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 15-minutes) |
-| `directInbounds.int-30m` | v1+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 30-minutes) |
-| `directInbounds.today` | v1+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (current day) |
-| `directOutboundTime.int-15m` | v1+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
-| `directOutboundTime.int-30m` | v1+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
-| `directOutboundTime.today` | v1+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (current day) |
-| `directOutbounds.int-15m` | v1+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
-| `directOutbounds.int-30m` | v1+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
-| `directOutbounds.today` | v1+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (current day) |
-| `handlingTime.int-15m` | v1+ | Total time the agent spent in Handling state, actively processing interactions (last 15-minutes) |
-| `handlingTime.int-30m` | v1+ | Total time the agent spent in Handling state, actively processing interactions (last 30-minutes) |
-| `handlingTime.today` | v1+ | Total time the agent spent in Handling state, actively processing interactions (current day) |
-| `handlingTimePercentage.int-15m` | v1+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 15-minutes) |
-| `handlingTimePercentage.int-30m` | v1+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 30-minutes) |
-| `handlingTimePercentage.today` | v1+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (current day) |
-| `hold.int-15m` | v1+ | Number of occasions the agent placed customers on hold (last 15-minutes) |
-| `hold.int-30m` | v1+ | Number of occasions the agent placed customers on hold (last 30-minutes) |
-| `hold.today` | v1+ | Number of occasions the agent placed customers on hold (current day) |
-| `internalCalls.int-15m` | v1+ | Total number of agent-to-agent calls initiated or received by the agent (last 15-minutes) |
-| `internalCalls.int-30m` | v1+ | Total number of agent-to-agent calls initiated or received by the agent (last 30-minutes) |
-| `internalCalls.today` | v1+ | Total number of agent-to-agent calls initiated or received by the agent (current day) |
-| `internalCallsInitiated.int-15m` | v1+ | Number of agent-to-agent calls initiated by this agent (last 15-minutes) |
-| `internalCallsInitiated.int-30m` | v1+ | Number of agent-to-agent calls initiated by this agent (last 30-minutes) |
-| `internalCallsInitiated.today` | v1+ | Number of agent-to-agent calls initiated by this agent (current day) |
-| `internalCallsReceived.int-15m` | v1+ | Number of agent-to-agent calls received by this agent (last 15-minutes) |
-| `internalCallsReceived.int-30m` | v1+ | Number of agent-to-agent calls received by this agent (last 30-minutes) |
-| `internalCallsReceived.today` | v1+ | Number of agent-to-agent calls received by this agent (current day) |
-| `internalCallsTime.int-15m` | v1+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 15-minutes) |
-| `internalCallsTime.int-30m` | v1+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 30-minutes) |
-| `internalCallsTime.today` | v1+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (current day) |
-| `lastLogin.rt` | v1+ | Timestamp representing the agent's most recent login to the system (currently) |
-| `lastLogout.rt` | v1+ | Timestamp representing the agent's most recent logout from the system (currently) |
-| `line1Status.rt` | v1+ | Current operational status of the agent's first communication line (currently) |
-| `line1TimeOnStatus.rt` | v1+ | Time in milliseconds since the agent's first line status last changed (currently) |
-| `line2Status.rt` | v1+ | Current operational status of the agent's second communication line (currently) |
-| `line2TimeOnStatus.rt` | v1+ | Time in milliseconds since the agent's second line status last changed (currently) |
-| `loggedInTime.int-15m` | v1+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 15-minutes) |
-| `loggedInTime.int-30m` | v1+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 30-minutes) |
-| `loggedInTime.rt` | v1+ | Cumulative time the agent has maintained active system connection during their current login session (currently) |
-| `loggedInTime.today` | v1+ | Total time the agent maintained active system connection and was available for work across all queues and activities (current day) |
-| `longestHold.int-15m` | v1+ | Maximum single continuous hold duration when agent placed customer on hold (last 15-minutes) |
-| `longestHold.int-30m` | v1+ | Maximum single continuous hold duration when agent placed customer on hold (last 30-minutes) |
-| `longestHold.today` | v1+ | Maximum single continuous hold duration when agent placed customer on hold (current day) |
-| `longestOffering.int-15m` | v1+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 15-minutes) |
-| `longestOffering.int-30m` | v1+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 30-minutes) |
-| `longestOffering.today` | v1+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (current day) |
-| `offered.int-15m` | v1+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 15-minutes) |
-| `offered.int-30m` | v1+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 30-minutes) |
-| `offered.today` | v1+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (current day) |
-| `offeringTime.int-15m` | v1+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 15-minutes) |
-| `offeringTime.int-30m` | v1+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 30-minutes) |
-| `offeringTime.today` | v1+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (current day) |
-| `onBreakTime.int-15m` | v1+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 15-minutes) |
-| `onBreakTime.int-30m` | v1+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 30-minutes) |
-| `onBreakTime.today` | v1+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (current day) |
-| `onBreakTimePercentage.int-15m` | v1+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 15-minutes) |
-| `onBreakTimePercentage.int-30m` | v1+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 30-minutes) |
-| `onBreakTimePercentage.today` | v1+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (current day) |
-| `onHoldTime.int-15m` | v1+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 15-minutes) |
-| `onHoldTime.int-30m` | v1+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 30-minutes) |
-| `onHoldTime.today` | v1+ | Total duration the agent kept customers on hold. Sum of all hold periods (current day) |
-| `rejectTimeout.int-15m` | v1+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 15-minutes) |
-| `rejectTimeout.int-30m` | v1+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 30-minutes) |
-| `rejectTimeout.today` | v1+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (current day) |
-| `rejected.int-15m` | v1+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 15-minutes) |
-| `rejected.int-30m` | v1+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 30-minutes) |
-| `rejected.today` | v1+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (current day) |
-| `status.rt` | v1+ | Agent's current operational state showing system status. Examples: Available, Handling, OnBreak, LoggedOut, WorkingOffline (currently) |
-| `statusCode.rt` | v1+ | Specific reason code that justifies or details the agent's current operational status (currently) |
-| `timeOnStatus.rt` | v1+ | Elapsed duration in milliseconds showing how long the agent has maintained their current operational status (currently) |
-| `transfersInitiated.int-15m` | v2+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 15-minutes) |
-| `transfersInitiated.int-30m` | v2+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 30-minutes) |
-| `transfersInitiated.today` | v2+ | Warm and blind transfers initiated by the agent. All outgoing transfers (current day) |
-| `transfersInitiatedPercentage.int-15m` | v2+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 15-minutes) |
-| `transfersInitiatedPercentage.int-30m` | v2+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 30-minutes) |
-| `transfersInitiatedPercentage.today` | v2+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (current day) |
-| `transfersReceived.int-15m` | v1+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 15-minutes) |
-| `transfersReceived.int-30m` | v1+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 30-minutes) |
-| `transfersReceived.today` | v1+ | Warm and blind transfers routed to agent for handling. All incoming transfers (current day) |
-| `warmTransfers.int-15m` | v1+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 15-minutes) |
-| `warmTransfers.int-30m` | v1+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 30-minutes) |
-| `warmTransfers.today` | v1+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (current day) |
-| `workingOfflineTime.int-15m` | v1+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 15-minutes) |
-| `workingOfflineTime.int-30m` | v1+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 30-minutes) |
-| `workingOfflineTime.today` | v1+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (current day) |
-| `workingOfflineTimePercentage.int-15m` | v1+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 15-minutes) |
-| `workingOfflineTimePercentage.int-30m` | v1+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 30-minutes) |
-| `workingOfflineTimePercentage.today` | v1+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (current day) |
-| `wrapUpTime.int-15m` | v1+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 15-minutes) |
-| `wrapUpTime.int-30m` | v1+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 30-minutes) |
-| `wrapUpTime.today` | v1+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (current day) |
-| `wrapUpTimePercentage.int-15m` | v1+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 15-minutes) |
-| `wrapUpTimePercentage.int-30m` | v1+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 30-minutes) |
-| `wrapUpTimePercentage.today` | v1+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (current day) |
+| Metric                                 | Version | Description |
+|----------------------------------------|---------|-------------|
+| `accepted.int-15m`                     | v1+     | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 15-minutes) |
+| `accepted.int-30m`                     | v1+     | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 30-minutes) |
+| `accepted.today`                       | v1+     | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (current day) |
+| `activeChannels.rt`                    | v1+     | List of communication channels with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing channel name and count of such interactions in each channel (currently) |
+| `activeDirections.rt`                  | v1+     | List of interaction directions (Inbound, Outbound) with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing direction and count of such interactions in each direction (currently) |
+| `activeInteractionsCount.rt`           | v1+     | Total number of interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state) across all queues, channels, and directions (currently) |
+| `activeQueues.rt`                      | v1+     | List of queues with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing queue name and count of such interactions in each queue (currently) |
+| `alerting.rt`                          | v1+     | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
+| `availableTime.int-15m`                | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
+| `availableTime.int-30m`                | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
+| `availableTime.today`                  | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
+| `availableTimePercentage.int-15m`      | v1+     | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 15-minutes) |
+| `availableTimePercentage.int-30m`      | v1+     | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 30-minutes) |
+| `availableTimePercentage.today`        | v1+     | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (current day) |
+| `averageHandlingTime.int-15m`          | v1+     | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 15-minutes) |
+| `averageHandlingTime.int-30m`          | v1+     | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 30-minutes) |
+| `averageHandlingTime.today`            | v1+     | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (current day) |
+| `averageHoldTime.int-15m`              | v2+     | Average time the agent placed customers on hold (last 15-minutes) |
+| `averageHoldTime.int-30m`              | v2+     | Average time the agent placed customers on hold (last 30-minutes) |
+| `averageHoldTime.today`                | v2+     | Average time the agent placed customers on hold (current day) |
+| `averageOfferingTime.int-15m`          | v1+     | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 15-minutes) |
+| `averageOfferingTime.int-30m`          | v1+     | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 30-minutes) |
+| `averageOfferingTime.today`            | v1+     | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (current day) |
+| `averageWrapUpTime.int-15m`            | v1+     | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 15-minutes) |
+| `averageWrapUpTime.int-30m`            | v1+     | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 30-minutes) |
+| `averageWrapUpTime.today`              | v1+     | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (current day) |
+| `blindTransfers.int-15m`               | v1+     | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 15-minutes) |
+| `blindTransfers.int-30m`               | v1+     | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 30-minutes) |
+| `blindTransfers.today`                 | v1+     | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (current day) |
+| `busyTime.int-15m`                     | v1+     | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 15-minutes) |
+| `busyTime.int-30m`                     | v1+     | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 30-minutes) |
+| `busyTime.today`                       | v1+     | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (current day) |
+| `busyTimePercentage.int-15m`           | v1+     | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 15-minutes) |
+| `busyTimePercentage.int-30m`           | v1+     | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 30-minutes) |
+| `busyTimePercentage.today`             | v1+     | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (current day) |
+| `conferenceTime.int-15m`               | v1+     | Total cumulative duration the agent spent in multi-party conference calls (last 15-minutes) |
+| `conferenceTime.int-30m`               | v1+     | Total cumulative duration the agent spent in multi-party conference calls (last 30-minutes) |
+| `conferenceTime.today`                 | v1+     | Total cumulative duration the agent spent in multi-party conference calls (current day) |
+| `conferences.int-15m`                  | v1+     | Total number of conferences established by the agent (last 15-minutes) |
+| `conferences.int-30m`                  | v1+     | Total number of conferences established by the agent (last 30-minutes) |
+| `conferences.today`                    | v1+     | Total number of conferences established by the agent (current day) |
+| `consultations.int-15m`                | v1+     | Times an agent successfully established an outbound call while another call is on hold (last 15-minutes) |
+| `consultations.int-30m`                | v1+     | Times an agent successfully established an outbound call while another call is on hold (last 30-minutes) |
+| `consultations.today`                  | v1+     | Times an agent successfully established an outbound call while another call is on hold (current day) |
+| `directInboundTime.int-15m`            | v1+     | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 15-minutes) |
+| `directInboundTime.int-30m`            | v1+     | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 30-minutes) |
+| `directInboundTime.today`              | v1+     | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (current day) |
+| `directInbounds.int-15m`               | v1+     | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 15-minutes) |
+| `directInbounds.int-30m`               | v1+     | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 30-minutes) |
+| `directInbounds.today`                 | v1+     | Total number of direct inbound calls to the agent excluding agent-to-agent calls (current day) |
+| `directOutboundTime.int-15m`           | v1+     | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
+| `directOutboundTime.int-30m`           | v1+     | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
+| `directOutboundTime.today`             | v1+     | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (current day) |
+| `directOutbounds.int-15m`              | v1+     | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
+| `directOutbounds.int-30m`              | v1+     | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
+| `directOutbounds.today`                | v1+     | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (current day) |
+| `handlingTime.int-15m`                 | v1+     | Total time the agent spent in Handling state, actively processing interactions (last 15-minutes) |
+| `handlingTime.int-30m`                 | v1+     | Total time the agent spent in Handling state, actively processing interactions (last 30-minutes) |
+| `handlingTime.today`                   | v1+     | Total time the agent spent in Handling state, actively processing interactions (current day) |
+| `handlingTimePercentage.int-15m`       | v1+     | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 15-minutes) |
+| `handlingTimePercentage.int-30m`       | v1+     | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 30-minutes) |
+| `handlingTimePercentage.today`         | v1+     | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (current day) |
+| `hold.int-15m`                         | v1+     | Number of occasions the agent placed customers on hold (last 15-minutes) |
+| `hold.int-30m`                         | v1+     | Number of occasions the agent placed customers on hold (last 30-minutes) |
+| `hold.today`                           | v1+     | Number of occasions the agent placed customers on hold (current day) |
+| `internalCalls.int-15m`                | v1+     | Total number of agent-to-agent calls initiated or received by the agent (last 15-minutes) |
+| `internalCalls.int-30m`                | v1+     | Total number of agent-to-agent calls initiated or received by the agent (last 30-minutes) |
+| `internalCalls.today`                  | v1+     | Total number of agent-to-agent calls initiated or received by the agent (current day) |
+| `internalCallsInitiated.int-15m`       | v1+     | Number of agent-to-agent calls initiated by this agent (last 15-minutes) |
+| `internalCallsInitiated.int-30m`       | v1+     | Number of agent-to-agent calls initiated by this agent (last 30-minutes) |
+| `internalCallsInitiated.today`         | v1+     | Number of agent-to-agent calls initiated by this agent (current day) |
+| `internalCallsReceived.int-15m`        | v1+     | Number of agent-to-agent calls received by this agent (last 15-minutes) |
+| `internalCallsReceived.int-30m`        | v1+     | Number of agent-to-agent calls received by this agent (last 30-minutes) |
+| `internalCallsReceived.today`          | v1+     | Number of agent-to-agent calls received by this agent (current day) |
+| `internalCallsTime.int-15m`            | v1+     | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 15-minutes) |
+| `internalCallsTime.int-30m`            | v1+     | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 30-minutes) |
+| `internalCallsTime.today`              | v1+     | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (current day) |
+| `lastLogin.rt`                         | v1+     | Timestamp representing the agent's most recent login to the system (currently) |
+| `lastLogout.rt`                        | v1+     | Timestamp representing the agent's most recent logout from the system (currently) |
+| `lastStatusChange.rt`                  | v5+     | Timestamp when the agent's operational status last changed (currently) |
+| `line1Status.rt`                       | v1+     | Current operational status of the agent's first communication line (currently) |
+| `line1TimeOnStatus.rt`                 | v1+     | Time in milliseconds since the agent's first line status last changed (currently) |
+| `line2Status.rt`                       | v1+     | Current operational status of the agent's second communication line (currently) |
+| `line2TimeOnStatus.rt`                 | v1+     | Time in milliseconds since the agent's second line status last changed (currently) |
+| `loggedInTime.int-15m`                 | v1+     | Total time the agent maintained active system connection and was available for work across all queues and activities (last 15-minutes) |
+| `loggedInTime.int-30m`                 | v1+     | Total time the agent maintained active system connection and was available for work across all queues and activities (last 30-minutes) |
+| `loggedInTime.rt`                      | v1+     | Cumulative time the agent has maintained active system connection during their current login session (currently) |
+| `loggedInTime.today`                   | v1+     | Total time the agent maintained active system connection and was available for work across all queues and activities (current day) |
+| `longestHold.int-15m`                  | v1+     | Maximum single continuous hold duration when agent placed customer on hold (last 15-minutes) |
+| `longestHold.int-30m`                  | v1+     | Maximum single continuous hold duration when agent placed customer on hold (last 30-minutes) |
+| `longestHold.today`                    | v1+     | Maximum single continuous hold duration when agent placed customer on hold (current day) |
+| `longestOffering.int-15m`              | v1+     | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 15-minutes) |
+| `longestOffering.int-30m`              | v1+     | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 30-minutes) |
+| `longestOffering.today`                | v1+     | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (current day) |
+| `offered.int-15m`                      | v1+     | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 15-minutes) |
+| `offered.int-30m`                      | v1+     | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 30-minutes) |
+| `offered.today`                        | v1+     | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (current day) |
+| `offeringTime.int-15m`                 | v1+     | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 15-minutes) |
+| `offeringTime.int-30m`                 | v1+     | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 30-minutes) |
+| `offeringTime.today`                   | v1+     | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (current day) |
+| `onBreakTime.int-15m`                  | v1+     | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 15-minutes) |
+| `onBreakTime.int-30m`                  | v1+     | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 30-minutes) |
+| `onBreakTime.today`                    | v1+     | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (current day) |
+| `onBreakTimePercentage.int-15m`        | v1+     | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 15-minutes) |
+| `onBreakTimePercentage.int-30m`        | v1+     | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 30-minutes) |
+| `onBreakTimePercentage.today`          | v1+     | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (current day) |
+| `onHoldTime.int-15m`                   | v1+     | Total duration the agent kept customers on hold. Sum of all hold periods (last 15-minutes) |
+| `onHoldTime.int-30m`                   | v1+     | Total duration the agent kept customers on hold. Sum of all hold periods (last 30-minutes) |
+| `onHoldTime.today`                     | v1+     | Total duration the agent kept customers on hold. Sum of all hold periods (current day) |
+| `rejectTimeout.int-15m`                | v1+     | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 15-minutes) |
+| `rejectTimeout.int-30m`                | v1+     | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 30-minutes) |
+| `rejectTimeout.today`                  | v1+     | Count of interactions automatically rejected when agent did not respond within configured timeout period (current day) |
+| `rejected.int-15m`                     | v1+     | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 15-minutes) |
+| `rejected.int-30m`                     | v1+     | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 30-minutes) |
+| `rejected.today`                       | v1+     | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (current day) |
+| `status.rt`                            | v1+     | Agent's current operational state showing system status. Examples: Available, Handling, OnBreak, LoggedOut, WorkingOffline (currently) |
+| `statusCode.rt`                        | v1+     | Specific reason code that justifies or details the agent's current operational status (currently) |
+| `timeOnStatus.rt`                      | v1+     | Elapsed duration in milliseconds showing how long the agent has maintained their current operational status (currently) |
+| `timeOnStatusCode.rt`                  | v5+     | Elapsed duration in milliseconds showing how long the agent has maintained their current status code. The metric resets every time the status or the combination status + statusCode changes |
+| `transfersInitiated.int-15m`           | v2+     | Warm and blind transfers initiated by the agent. All outgoing transfers (last 15-minutes) |
+| `transfersInitiated.int-30m`           | v2+     | Warm and blind transfers initiated by the agent. All outgoing transfers (last 30-minutes) |
+| `transfersInitiated.today`             | v2+     | Warm and blind transfers initiated by the agent. All outgoing transfers (current day) |
+| `transfersInitiatedPercentage.int-15m` | v2+     | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 15-minutes) |
+| `transfersInitiatedPercentage.int-30m` | v2+     | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 30-minutes) |
+| `transfersInitiatedPercentage.today`   | v2+     | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (current day) |
+| `transfersReceived.int-15m`            | v1+     | Warm and blind transfers routed to agent for handling. All incoming transfers (last 15-minutes) |
+| `transfersReceived.int-30m`            | v1+     | Warm and blind transfers routed to agent for handling. All incoming transfers (last 30-minutes) |
+| `transfersReceived.today`              | v1+     | Warm and blind transfers routed to agent for handling. All incoming transfers (current day) |
+| `warmTransfers.int-15m`                | v1+     | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 15-minutes) |
+| `warmTransfers.int-30m`                | v1+     | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 30-minutes) |
+| `warmTransfers.today`                  | v1+     | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (current day) |
+| `workingOfflineTime.int-15m`           | v1+     | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 15-minutes) |
+| `workingOfflineTime.int-30m`           | v1+     | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 30-minutes) |
+| `workingOfflineTime.today`             | v1+     | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (current day) |
+| `workingOfflineTimePercentage.int-15m` | v1+     | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 15-minutes) |
+| `workingOfflineTimePercentage.int-30m` | v1+     | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 30-minutes) |
+| `workingOfflineTimePercentage.today`   | v1+     | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (current day) |
+| `wrapUpTime.int-15m`                   | v1+     | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 15-minutes) |
+| `wrapUpTime.int-30m`                   | v1+     | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 30-minutes) |
+| `wrapUpTime.today`                     | v1+     | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (current day) |
+| `wrapUpTimePercentage.int-15m`         | v1+     | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 15-minutes) |
+| `wrapUpTimePercentage.int-30m`         | v1+     | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 30-minutes) |
+| `wrapUpTimePercentage.today`           | v1+     | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (current day) |
 
 </details>
 
@@ -1794,153 +1824,155 @@ This glossary provides comprehensive definitions for all metrics available when 
 * `GET /realtime-metrics/agents?agent-ids={agent-id}` - Specific agents in the tenant
 
 <details>
-<summary>Click to expand Agent Metrics Glossary - All Agents (141 metrics)</summary>
+<summary>Click to expand Agent Metrics Glossary - All Agents (143 metrics)</summary>
 
 **Version** indicates minimum Real-time API version where metric became available on this API endpoint.
 
-| Metric | Version | Description |
-|--------|---------|-------------|
-| `accepted.int-15m` | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 15-minutes) |
-| `accepted.int-30m` | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 30-minutes) |
-| `accepted.today` | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (current day) |
-| `activeChannels.rt` | v5+ | List of communication channels with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing channel name and count of such interactions in each channel (currently) |
-| `activeDirections.rt` | v5+ | List of interaction directions (Inbound, Outbound) with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing direction and count of such interactions in each direction (currently) |
-| `activeInteractionsCount.rt` | v5+ | Total number of interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state) across all queues, channels, and directions (currently) |
-| `activeQueues.rt` | v5+ | List of queues with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing queue name and count of such interactions in each queue (currently) |
-| `alerting.rt` | v5+ | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
-| `availableTime.int-15m` | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
-| `availableTime.int-30m` | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
-| `availableTime.today` | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
-| `availableTimePercentage.int-15m` | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 15-minutes) |
-| `availableTimePercentage.int-30m` | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 30-minutes) |
-| `availableTimePercentage.today` | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (current day) |
-| `averageHandlingTime.int-15m` | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 15-minutes) |
-| `averageHandlingTime.int-30m` | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 30-minutes) |
-| `averageHandlingTime.today` | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (current day) |
-| `averageHoldTime.int-15m` | v5+ | Average time the agent placed customers on hold (last 15-minutes) |
-| `averageHoldTime.int-30m` | v5+ | Average time the agent placed customers on hold (last 30-minutes) |
-| `averageHoldTime.today` | v5+ | Average time the agent placed customers on hold (current day) |
-| `averageOfferingTime.int-15m` | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 15-minutes) |
-| `averageOfferingTime.int-30m` | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 30-minutes) |
-| `averageOfferingTime.today` | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (current day) |
-| `averageWrapUpTime.int-15m` | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 15-minutes) |
-| `averageWrapUpTime.int-30m` | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 30-minutes) |
-| `averageWrapUpTime.today` | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (current day) |
-| `blindTransfers.int-15m` | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 15-minutes) |
-| `blindTransfers.int-30m` | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 30-minutes) |
-| `blindTransfers.today` | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (current day) |
-| `busyTime.int-15m` | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 15-minutes) |
-| `busyTime.int-30m` | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 30-minutes) |
-| `busyTime.today` | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (current day) |
-| `busyTimePercentage.int-15m` | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 15-minutes) |
-| `busyTimePercentage.int-30m` | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 30-minutes) |
-| `busyTimePercentage.today` | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (current day) |
-| `conferenceTime.int-15m` | v5+ | Total cumulative duration the agent spent in multi-party conference calls (last 15-minutes) |
-| `conferenceTime.int-30m` | v5+ | Total cumulative duration the agent spent in multi-party conference calls (last 30-minutes) |
-| `conferenceTime.today` | v5+ | Total cumulative duration the agent spent in multi-party conference calls (current day) |
-| `conferences.int-15m` | v5+ | Total number of conferences established by the agent (last 15-minutes) |
-| `conferences.int-30m` | v5+ | Total number of conferences established by the agent (last 30-minutes) |
-| `conferences.today` | v5+ | Total number of conferences established by the agent (current day) |
-| `consultations.int-15m` | v5+ | Times an agent successfully established an outbound call while another call is on hold (last 15-minutes) |
-| `consultations.int-30m` | v5+ | Times an agent successfully established an outbound call while another call is on hold (last 30-minutes) |
-| `consultations.today` | v5+ | Times an agent successfully established an outbound call while another call is on hold (current day) |
-| `directInboundTime.int-15m` | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 15-minutes) |
-| `directInboundTime.int-30m` | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 30-minutes) |
-| `directInboundTime.today` | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (current day) |
-| `directInbounds.int-15m` | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 15-minutes) |
-| `directInbounds.int-30m` | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 30-minutes) |
-| `directInbounds.today` | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (current day) |
-| `directOutboundTime.int-15m` | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
-| `directOutboundTime.int-30m` | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
-| `directOutboundTime.today` | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (current day) |
-| `directOutbounds.int-15m` | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
-| `directOutbounds.int-30m` | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
-| `directOutbounds.today` | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (current day) |
-| `handlingTime.int-15m` | v5+ | Total time the agent spent in Handling state, actively processing interactions (last 15-minutes) |
-| `handlingTime.int-30m` | v5+ | Total time the agent spent in Handling state, actively processing interactions (last 30-minutes) |
-| `handlingTime.today` | v5+ | Total time the agent spent in Handling state, actively processing interactions (current day) |
-| `handlingTimePercentage.int-15m` | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 15-minutes) |
-| `handlingTimePercentage.int-30m` | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 30-minutes) |
-| `handlingTimePercentage.today` | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (current day) |
-| `hold.int-15m` | v5+ | Number of occasions the agent placed customers on hold (last 15-minutes) |
-| `hold.int-30m` | v5+ | Number of occasions the agent placed customers on hold (last 30-minutes) |
-| `hold.today` | v5+ | Number of occasions the agent placed customers on hold (current day) |
-| `internalCalls.int-15m` | v5+ | Total number of agent-to-agent calls initiated or received by the agent (last 15-minutes) |
-| `internalCalls.int-30m` | v5+ | Total number of agent-to-agent calls initiated or received by the agent (last 30-minutes) |
-| `internalCalls.today` | v5+ | Total number of agent-to-agent calls initiated or received by the agent (current day) |
-| `internalCallsInitiated.int-15m` | v5+ | Number of agent-to-agent calls initiated by this agent (last 15-minutes) |
-| `internalCallsInitiated.int-30m` | v5+ | Number of agent-to-agent calls initiated by this agent (last 30-minutes) |
-| `internalCallsInitiated.today` | v5+ | Number of agent-to-agent calls initiated by this agent (current day) |
-| `internalCallsReceived.int-15m` | v5+ | Number of agent-to-agent calls received by this agent (last 15-minutes) |
-| `internalCallsReceived.int-30m` | v5+ | Number of agent-to-agent calls received by this agent (last 30-minutes) |
-| `internalCallsReceived.today` | v5+ | Number of agent-to-agent calls received by this agent (current day) |
-| `internalCallsTime.int-15m` | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 15-minutes) |
-| `internalCallsTime.int-30m` | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 30-minutes) |
-| `internalCallsTime.today` | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (current day) |
-| `lastLogin.rt` | v5+ | Timestamp representing the agent's most recent login to the system (currently) |
-| `lastLogout.rt` | v5+ | Timestamp representing the agent's most recent logout from the system (currently) |
-| `line1Status.rt` | v5+ | Current operational status of the agent's first communication line (currently) |
-| `line1TimeOnStatus.rt` | v5+ | Time in milliseconds since the agent's first line status last changed (currently) |
-| `line2Status.rt` | v5+ | Current operational status of the agent's second communication line (currently) |
-| `line2TimeOnStatus.rt` | v5+ | Time in milliseconds since the agent's second line status last changed (currently) |
-| `loggedInTime.int-15m` | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 15-minutes) |
-| `loggedInTime.int-30m` | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 30-minutes) |
-| `loggedInTime.rt` | v5+ | Cumulative time the agent has maintained active system connection during their current login session (currently) |
-| `loggedInTime.today` | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (current day) |
-| `longestHold.int-15m` | v5+ | Maximum single continuous hold duration when agent placed customer on hold (last 15-minutes) |
-| `longestHold.int-30m` | v5+ | Maximum single continuous hold duration when agent placed customer on hold (last 30-minutes) |
-| `longestHold.today` | v5+ | Maximum single continuous hold duration when agent placed customer on hold (current day) |
-| `longestOffering.int-15m` | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 15-minutes) |
-| `longestOffering.int-30m` | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 30-minutes) |
-| `longestOffering.today` | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (current day) |
-| `offered.int-15m` | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 15-minutes) |
-| `offered.int-30m` | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 30-minutes) |
-| `offered.today` | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (current day) |
-| `offeringTime.int-15m` | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 15-minutes) |
-| `offeringTime.int-30m` | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 30-minutes) |
-| `offeringTime.today` | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (current day) |
-| `onBreakTime.int-15m` | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 15-minutes) |
-| `onBreakTime.int-30m` | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 30-minutes) |
-| `onBreakTime.today` | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (current day) |
-| `onBreakTimePercentage.int-15m` | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 15-minutes) |
-| `onBreakTimePercentage.int-30m` | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 30-minutes) |
-| `onBreakTimePercentage.today` | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (current day) |
-| `onHoldTime.int-15m` | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 15-minutes) |
-| `onHoldTime.int-30m` | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 30-minutes) |
-| `onHoldTime.today` | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (current day) |
-| `rejectTimeout.int-15m` | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 15-minutes) |
-| `rejectTimeout.int-30m` | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 30-minutes) |
-| `rejectTimeout.today` | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (current day) |
-| `rejected.int-15m` | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 15-minutes) |
-| `rejected.int-30m` | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 30-minutes) |
-| `rejected.today` | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (current day) |
-| `status.rt` | v5+ | Agent's current operational state showing system status. Examples: Available, Handling, OnBreak, LoggedOut, WorkingOffline (currently) |
-| `statusCode.rt` | v5+ | Specific reason code that justifies or details the agent's current operational status (currently) |
-| `timeOnStatus.rt` | v5+ | Elapsed duration in milliseconds showing how long the agent has maintained their current operational status (currently) |
-| `transfersInitiated.int-15m` | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 15-minutes) |
-| `transfersInitiated.int-30m` | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 30-minutes) |
-| `transfersInitiated.today` | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (current day) |
+| Metric                                 | Version | Description |
+|----------------------------------------|---------|-------------|
+| `accepted.int-15m`                     | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 15-minutes) |
+| `accepted.int-30m`                     | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 30-minutes) |
+| `accepted.today`                       | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (current day) |
+| `activeChannels.rt`                    | v5+ | List of communication channels with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing channel name and count of such interactions in each channel (currently) |
+| `activeDirections.rt`                  | v5+ | List of interaction directions (Inbound, Outbound) with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing direction and count of such interactions in each direction (currently) |
+| `activeInteractionsCount.rt`           | v5+ | Total number of interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state) across all queues, channels, and directions (currently) |
+| `activeQueues.rt`                      | v5+ | List of queues with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing queue name and count of such interactions in each queue (currently) |
+| `alerting.rt`                          | v5+ | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
+| `availableTime.int-15m`                | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
+| `availableTime.int-30m`                | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
+| `availableTime.today`                  | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
+| `availableTimePercentage.int-15m`      | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 15-minutes) |
+| `availableTimePercentage.int-30m`      | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 30-minutes) |
+| `availableTimePercentage.today`        | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (current day) |
+| `averageHandlingTime.int-15m`          | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 15-minutes) |
+| `averageHandlingTime.int-30m`          | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 30-minutes) |
+| `averageHandlingTime.today`            | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (current day) |
+| `averageHoldTime.int-15m`              | v5+ | Average time the agent placed customers on hold (last 15-minutes) |
+| `averageHoldTime.int-30m`              | v5+ | Average time the agent placed customers on hold (last 30-minutes) |
+| `averageHoldTime.today`                | v5+ | Average time the agent placed customers on hold (current day) |
+| `averageOfferingTime.int-15m`          | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 15-minutes) |
+| `averageOfferingTime.int-30m`          | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 30-minutes) |
+| `averageOfferingTime.today`            | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (current day) |
+| `averageWrapUpTime.int-15m`            | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 15-minutes) |
+| `averageWrapUpTime.int-30m`            | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 30-minutes) |
+| `averageWrapUpTime.today`              | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (current day) |
+| `blindTransfers.int-15m`               | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 15-minutes) |
+| `blindTransfers.int-30m`               | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 30-minutes) |
+| `blindTransfers.today`                 | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (current day) |
+| `busyTime.int-15m`                     | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 15-minutes) |
+| `busyTime.int-30m`                     | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 30-minutes) |
+| `busyTime.today`                       | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (current day) |
+| `busyTimePercentage.int-15m`           | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 15-minutes) |
+| `busyTimePercentage.int-30m`           | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 30-minutes) |
+| `busyTimePercentage.today`             | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (current day) |
+| `conferenceTime.int-15m`               | v5+ | Total cumulative duration the agent spent in multi-party conference calls (last 15-minutes) |
+| `conferenceTime.int-30m`               | v5+ | Total cumulative duration the agent spent in multi-party conference calls (last 30-minutes) |
+| `conferenceTime.today`                 | v5+ | Total cumulative duration the agent spent in multi-party conference calls (current day) |
+| `conferences.int-15m`                  | v5+ | Total number of conferences established by the agent (last 15-minutes) |
+| `conferences.int-30m`                  | v5+ | Total number of conferences established by the agent (last 30-minutes) |
+| `conferences.today`                    | v5+ | Total number of conferences established by the agent (current day) |
+| `consultations.int-15m`                | v5+ | Times an agent successfully established an outbound call while another call is on hold (last 15-minutes) |
+| `consultations.int-30m`                | v5+ | Times an agent successfully established an outbound call while another call is on hold (last 30-minutes) |
+| `consultations.today`                  | v5+ | Times an agent successfully established an outbound call while another call is on hold (current day) |
+| `directInboundTime.int-15m`            | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 15-minutes) |
+| `directInboundTime.int-30m`            | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 30-minutes) |
+| `directInboundTime.today`              | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (current day) |
+| `directInbounds.int-15m`               | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 15-minutes) |
+| `directInbounds.int-30m`               | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 30-minutes) |
+| `directInbounds.today`                 | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (current day) |
+| `directOutboundTime.int-15m`           | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
+| `directOutboundTime.int-30m`           | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
+| `directOutboundTime.today`             | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (current day) |
+| `directOutbounds.int-15m`              | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
+| `directOutbounds.int-30m`              | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
+| `directOutbounds.today`                | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (current day) |
+| `handlingTime.int-15m`                 | v5+ | Total time the agent spent in Handling state, actively processing interactions (last 15-minutes) |
+| `handlingTime.int-30m`                 | v5+ | Total time the agent spent in Handling state, actively processing interactions (last 30-minutes) |
+| `handlingTime.today`                   | v5+ | Total time the agent spent in Handling state, actively processing interactions (current day) |
+| `handlingTimePercentage.int-15m`       | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 15-minutes) |
+| `handlingTimePercentage.int-30m`       | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 30-minutes) |
+| `handlingTimePercentage.today`         | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (current day) |
+| `hold.int-15m`                         | v5+ | Number of occasions the agent placed customers on hold (last 15-minutes) |
+| `hold.int-30m`                         | v5+ | Number of occasions the agent placed customers on hold (last 30-minutes) |
+| `hold.today`                           | v5+ | Number of occasions the agent placed customers on hold (current day) |
+| `internalCalls.int-15m`                | v5+ | Total number of agent-to-agent calls initiated or received by the agent (last 15-minutes) |
+| `internalCalls.int-30m`                | v5+ | Total number of agent-to-agent calls initiated or received by the agent (last 30-minutes) |
+| `internalCalls.today`                  | v5+ | Total number of agent-to-agent calls initiated or received by the agent (current day) |
+| `internalCallsInitiated.int-15m`       | v5+ | Number of agent-to-agent calls initiated by this agent (last 15-minutes) |
+| `internalCallsInitiated.int-30m`       | v5+ | Number of agent-to-agent calls initiated by this agent (last 30-minutes) |
+| `internalCallsInitiated.today`         | v5+ | Number of agent-to-agent calls initiated by this agent (current day) |
+| `internalCallsReceived.int-15m`        | v5+ | Number of agent-to-agent calls received by this agent (last 15-minutes) |
+| `internalCallsReceived.int-30m`        | v5+ | Number of agent-to-agent calls received by this agent (last 30-minutes) |
+| `internalCallsReceived.today`          | v5+ | Number of agent-to-agent calls received by this agent (current day) |
+| `internalCallsTime.int-15m`            | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 15-minutes) |
+| `internalCallsTime.int-30m`            | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 30-minutes) |
+| `internalCallsTime.today`              | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (current day) |
+| `lastLogin.rt`                         | v5+ | Timestamp representing the agent's most recent login to the system (currently) |
+| `lastLogout.rt`                        | v5+ | Timestamp representing the agent's most recent logout from the system (currently) |
+| `lastStatusChange.rt`                  | v5+ | Timestamp when the agent's operational status last changed (currently) |
+| `line1Status.rt`                       | v5+ | Current operational status of the agent's first communication line (currently) |
+| `line1TimeOnStatus.rt`                 | v5+ | Time in milliseconds since the agent's first line status last changed (currently) |
+| `line2Status.rt`                       | v5+ | Current operational status of the agent's second communication line (currently) |
+| `line2TimeOnStatus.rt`                 | v5+ | Time in milliseconds since the agent's second line status last changed (currently) |
+| `loggedInTime.int-15m`                 | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 15-minutes) |
+| `loggedInTime.int-30m`                 | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 30-minutes) |
+| `loggedInTime.rt`                      | v5+ | Cumulative time the agent has maintained active system connection during their current login session (currently) |
+| `loggedInTime.today`                   | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (current day) |
+| `longestHold.int-15m`                  | v5+ | Maximum single continuous hold duration when agent placed customer on hold (last 15-minutes) |
+| `longestHold.int-30m`                  | v5+ | Maximum single continuous hold duration when agent placed customer on hold (last 30-minutes) |
+| `longestHold.today`                    | v5+ | Maximum single continuous hold duration when agent placed customer on hold (current day) |
+| `longestOffering.int-15m`              | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 15-minutes) |
+| `longestOffering.int-30m`              | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 30-minutes) |
+| `longestOffering.today`                | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (current day) |
+| `offered.int-15m`                      | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 15-minutes) |
+| `offered.int-30m`                      | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 30-minutes) |
+| `offered.today`                        | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (current day) |
+| `offeringTime.int-15m`                 | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 15-minutes) |
+| `offeringTime.int-30m`                 | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 30-minutes) |
+| `offeringTime.today`                   | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (current day) |
+| `onBreakTime.int-15m`                  | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 15-minutes) |
+| `onBreakTime.int-30m`                  | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 30-minutes) |
+| `onBreakTime.today`                    | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (current day) |
+| `onBreakTimePercentage.int-15m`        | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 15-minutes) |
+| `onBreakTimePercentage.int-30m`        | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 30-minutes) |
+| `onBreakTimePercentage.today`          | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (current day) |
+| `onHoldTime.int-15m`                   | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 15-minutes) |
+| `onHoldTime.int-30m`                   | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 30-minutes) |
+| `onHoldTime.today`                     | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (current day) |
+| `rejectTimeout.int-15m`                | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 15-minutes) |
+| `rejectTimeout.int-30m`                | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 30-minutes) |
+| `rejectTimeout.today`                  | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (current day) |
+| `rejected.int-15m`                     | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 15-minutes) |
+| `rejected.int-30m`                     | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 30-minutes) |
+| `rejected.today`                       | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (current day) |
+| `status.rt`                            | v5+ | Agent's current operational state showing system status. Examples: Available, Handling, OnBreak, LoggedOut, WorkingOffline (currently) |
+| `statusCode.rt`                        | v5+ | Specific reason code that justifies or details the agent's current operational status (currently) |
+| `timeOnStatus.rt`                      | v5+ | Elapsed duration in milliseconds showing how long the agent has maintained their current operational status (currently) |
+| `timeOnStatusCode.rt`                  | v5+ | Elapsed duration in milliseconds showing how long the agent has maintained their current status code. The metric resets every time the status or the combination status + statusCode changes |
+| `transfersInitiated.int-15m`           | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 15-minutes) |
+| `transfersInitiated.int-30m`           | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 30-minutes) |
+| `transfersInitiated.today`             | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (current day) |
 | `transfersInitiatedPercentage.int-15m` | v5+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 15-minutes) |
 | `transfersInitiatedPercentage.int-30m` | v5+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 30-minutes) |
-| `transfersInitiatedPercentage.today` | v5+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (current day) |
-| `transfersReceived.int-15m` | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 15-minutes) |
-| `transfersReceived.int-30m` | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 30-minutes) |
-| `transfersReceived.today` | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (current day) |
-| `warmTransfers.int-15m` | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 15-minutes) |
-| `warmTransfers.int-30m` | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 30-minutes) |
-| `warmTransfers.today` | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (current day) |
-| `workingOfflineTime.int-15m` | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 15-minutes) |
-| `workingOfflineTime.int-30m` | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 30-minutes) |
-| `workingOfflineTime.today` | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (current day) |
+| `transfersInitiatedPercentage.today`   | v5+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (current day) |
+| `transfersReceived.int-15m`            | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 15-minutes) |
+| `transfersReceived.int-30m`            | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 30-minutes) |
+| `transfersReceived.today`              | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (current day) |
+| `warmTransfers.int-15m`                | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 15-minutes) |
+| `warmTransfers.int-30m`                | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 30-minutes) |
+| `warmTransfers.today`                  | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (current day) |
+| `workingOfflineTime.int-15m`           | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 15-minutes) |
+| `workingOfflineTime.int-30m`           | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 30-minutes) |
+| `workingOfflineTime.today`             | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (current day) |
 | `workingOfflineTimePercentage.int-15m` | v5+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 15-minutes) |
 | `workingOfflineTimePercentage.int-30m` | v5+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 30-minutes) |
-| `workingOfflineTimePercentage.today` | v5+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (current day) |
-| `wrapUpTime.int-15m` | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 15-minutes) |
-| `wrapUpTime.int-30m` | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 30-minutes) |
-| `wrapUpTime.today` | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (current day) |
-| `wrapUpTimePercentage.int-15m` | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 15-minutes) |
-| `wrapUpTimePercentage.int-30m` | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 30-minutes) |
-| `wrapUpTimePercentage.today` | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (current day) |
+| `workingOfflineTimePercentage.today`   | v5+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (current day) |
+| `wrapUpTime.int-15m`                   | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 15-minutes) |
+| `wrapUpTime.int-30m`                   | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 30-minutes) |
+| `wrapUpTime.today`                     | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (current day) |
+| `wrapUpTimePercentage.int-15m`         | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 15-minutes) |
+| `wrapUpTimePercentage.int-30m`         | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 30-minutes) |
+| `wrapUpTimePercentage.today`           | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (current day) |
 
 </details>
 
@@ -1953,148 +1985,150 @@ This glossary provides comprehensive definitions for all metrics available when 
 **Note on `.inQueue` metrics:** The `.inQueue` suffix indicates that the metric measures agent activity specific to interactions routed through the **current queue**. These metrics exclude agent activity from direct inbound/outbound calls, internal agent-to-agent calls, and other non-queue interactions. Use `.inQueue` metrics to analyze agent performance for the selected queue.
 
 <details>
-<summary>Click to expand Agent Metrics Glossary - Multiple Queues Context (137 metrics)</summary>
+<summary>Click to expand Agent Metrics Glossary - Multiple Queues Context (139 metrics)</summary>
 
 **Version** indicates minimum Real-time API version where metric became available on this API endpoint.
 
-| Metric | Version | Description |
-|--------|---------|-------------|
-| `accepted.int-15m.inQueue` | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 15-minutes) |
-| `accepted.int-30m.inQueue` | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 30-minutes) |
-| `accepted.today.inQueue` | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (current day) |
-| `alerting.rt` | v5+ | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
-| `availableTime.int-15m` | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
-| `availableTime.int-30m` | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
-| `availableTime.today` | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
-| `availableTimePercentage.int-15m` | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 15-minutes) |
-| `availableTimePercentage.int-30m` | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 30-minutes) |
-| `availableTimePercentage.today` | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (current day) |
-| `averageHandlingTime.int-15m.inQueue` | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 15-minutes) |
-| `averageHandlingTime.int-30m.inQueue` | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 30-minutes) |
-| `averageHandlingTime.today.inQueue` | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (current day) |
-| `averageHoldTime.int-15m.inQueue` | v5+ | Average time the agent placed customers on hold (last 15-minutes) |
-| `averageHoldTime.int-30m.inQueue` | v5+ | Average time the agent placed customers on hold (last 30-minutes) |
-| `averageHoldTime.today.inQueue` | v5+ | Average time the agent placed customers on hold (current day) |
-| `averageOfferingTime.int-15m.inQueue` | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 15-minutes) |
-| `averageOfferingTime.int-30m.inQueue` | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 30-minutes) |
-| `averageOfferingTime.today.inQueue` | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (current day) |
-| `averageWrapUpTime.int-15m.inQueue` | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 15-minutes) |
-| `averageWrapUpTime.int-30m.inQueue` | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 30-minutes) |
-| `averageWrapUpTime.today.inQueue` | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (current day) |
-| `blindTransfers.int-15m.inQueue` | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 15-minutes) |
-| `blindTransfers.int-30m.inQueue` | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 30-minutes) |
-| `blindTransfers.today.inQueue` | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (current day) |
-| `busyTime.int-15m` | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 15-minutes) |
-| `busyTime.int-30m` | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 30-minutes) |
-| `busyTime.today` | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (current day) |
-| `busyTimePercentage.int-15m` | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 15-minutes) |
-| `busyTimePercentage.int-30m` | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 30-minutes) |
-| `busyTimePercentage.today` | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (current day) |
-| `conferenceTime.int-15m.inQueue` | v5+ | Total cumulative duration the agent spent in multi-party conference calls (last 15-minutes) |
-| `conferenceTime.int-30m.inQueue` | v5+ | Total cumulative duration the agent spent in multi-party conference calls (last 30-minutes) |
-| `conferenceTime.today.inQueue` | v5+ | Total cumulative duration the agent spent in multi-party conference calls (current day) |
-| `conferences.int-15m.inQueue` | v5+ | Total number of conferences established by the agent (last 15-minutes) |
-| `conferences.int-30m.inQueue` | v5+ | Total number of conferences established by the agent (last 30-minutes) |
-| `conferences.today.inQueue` | v5+ | Total number of conferences established by the agent (current day) |
-| `consultations.int-15m.inQueue` | v5+ | Times an agent successfully established an outbound call while another call is on hold (last 15-minutes) |
-| `consultations.int-30m.inQueue` | v5+ | Times an agent successfully established an outbound call while another call is on hold (last 30-minutes) |
-| `consultations.today.inQueue` | v5+ | Times an agent successfully established an outbound call while another call is on hold (current day) |
-| `directInboundTime.int-15m` | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 15-minutes) |
-| `directInboundTime.int-30m` | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 30-minutes) |
-| `directInboundTime.today` | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (current day) |
-| `directInbounds.int-15m` | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 15-minutes) |
-| `directInbounds.int-30m` | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 30-minutes) |
-| `directInbounds.today` | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (current day) |
-| `directOutboundTime.int-15m` | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
-| `directOutboundTime.int-30m` | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
-| `directOutboundTime.today` | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (current day) |
-| `directOutbounds.int-15m` | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
-| `directOutbounds.int-30m` | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
-| `directOutbounds.today` | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (current day) |
-| `handlingTime.int-15m` | v5+ | Total time the agent spent in Handling state, actively processing interactions (last 15-minutes) |
-| `handlingTime.int-30m` | v5+ | Total time the agent spent in Handling state, actively processing interactions (last 30-minutes) |
-| `handlingTime.today` | v5+ | Total time the agent spent in Handling state, actively processing interactions (current day) |
-| `handlingTimePercentage.int-15m` | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 15-minutes) |
-| `handlingTimePercentage.int-30m` | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 30-minutes) |
-| `handlingTimePercentage.today` | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (current day) |
-| `hold.int-15m.inQueue` | v5+ | Number of occasions the agent placed customers on hold (last 15-minutes) |
-| `hold.int-30m.inQueue` | v5+ | Number of occasions the agent placed customers on hold (last 30-minutes) |
-| `hold.today.inQueue` | v5+ | Number of occasions the agent placed customers on hold (current day) |
-| `internalCalls.int-15m` | v5+ | Total number of agent-to-agent calls initiated or received by the agent (last 15-minutes) |
-| `internalCalls.int-30m` | v5+ | Total number of agent-to-agent calls initiated or received by the agent (last 30-minutes) |
-| `internalCalls.today` | v5+ | Total number of agent-to-agent calls initiated or received by the agent (current day) |
-| `internalCallsInitiated.int-15m` | v5+ | Number of agent-to-agent calls initiated by this agent (last 15-minutes) |
-| `internalCallsInitiated.int-30m` | v5+ | Number of agent-to-agent calls initiated by this agent (last 30-minutes) |
-| `internalCallsInitiated.today` | v5+ | Number of agent-to-agent calls initiated by this agent (current day) |
-| `internalCallsReceived.int-15m` | v5+ | Number of agent-to-agent calls received by this agent (last 15-minutes) |
-| `internalCallsReceived.int-30m` | v5+ | Number of agent-to-agent calls received by this agent (last 30-minutes) |
-| `internalCallsReceived.today` | v5+ | Number of agent-to-agent calls received by this agent (current day) |
-| `internalCallsTime.int-15m` | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 15-minutes) |
-| `internalCallsTime.int-30m` | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 30-minutes) |
-| `internalCallsTime.today` | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (current day) |
-| `lastLogin.rt` | v5+ | Timestamp representing the agent's most recent login to the system (currently) |
-| `lastLogout.rt` | v5+ | Timestamp representing the agent's most recent logout from the system (currently) |
-| `line1Status.rt` | v5+ | Current operational status of the agent's first communication line (currently) |
-| `line1TimeOnStatus.rt` | v5+ | Time in milliseconds since the agent's first line status last changed (currently) |
-| `line2Status.rt` | v5+ | Current operational status of the agent's second communication line (currently) |
-| `line2TimeOnStatus.rt` | v5+ | Time in milliseconds since the agent's second line status last changed (currently) |
-| `loggedInTime.int-15m` | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 15-minutes) |
-| `loggedInTime.int-30m` | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 30-minutes) |
-| `loggedInTime.rt` | v5+ | Cumulative time the agent has maintained active system connection during their current login session (currently) |
-| `loggedInTime.today` | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (current day) |
-| `longestHold.int-15m.inQueue` | v5+ | Maximum single continuous hold duration when agent placed customer on hold (last 15-minutes) |
-| `longestHold.int-30m.inQueue` | v5+ | Maximum single continuous hold duration when agent placed customer on hold (last 30-minutes) |
-| `longestHold.today.inQueue` | v5+ | Maximum single continuous hold duration when agent placed customer on hold (current day) |
-| `longestOffering.int-15m.inQueue` | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 15-minutes) |
-| `longestOffering.int-30m.inQueue` | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 30-minutes) |
-| `longestOffering.today.inQueue` | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (current day) |
-| `offered.int-15m.inQueue` | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 15-minutes) |
-| `offered.int-30m.inQueue` | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 30-minutes) |
-| `offered.today.inQueue` | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (current day) |
-| `offeringTime.int-15m` | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 15-minutes) |
-| `offeringTime.int-30m` | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 30-minutes) |
-| `offeringTime.today` | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (current day) |
-| `onBreakTime.int-15m` | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 15-minutes) |
-| `onBreakTime.int-30m` | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 30-minutes) |
-| `onBreakTime.today` | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (current day) |
-| `onBreakTimePercentage.int-15m` | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 15-minutes) |
-| `onBreakTimePercentage.int-30m` | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 30-minutes) |
-| `onBreakTimePercentage.today` | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (current day) |
-| `onHoldTime.int-15m.inQueue` | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 15-minutes) |
-| `onHoldTime.int-30m.inQueue` | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 30-minutes) |
-| `onHoldTime.today.inQueue` | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (current day) |
-| `rejectTimeout.int-15m.inQueue` | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 15-minutes) |
-| `rejectTimeout.int-30m.inQueue` | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 30-minutes) |
-| `rejectTimeout.today.inQueue` | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (current day) |
-| `rejected.int-15m.inQueue` | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 15-minutes) |
-| `rejected.int-30m.inQueue` | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 30-minutes) |
-| `rejected.today.inQueue` | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (current day) |
-| `status.rt` | v5+ | Agent's current operational state showing system status. Examples: Available, Handling, OnBreak, LoggedOut, WorkingOffline (currently) |
-| `statusCode.rt` | v5+ | Specific reason code that justifies or details the agent's current operational status (currently) |
-| `timeOnStatus.rt` | v5+ | Elapsed duration in milliseconds showing how long the agent has maintained their current operational status (currently) |
-| `transfersInitiated.int-15m.inQueue` | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 15-minutes) |
-| `transfersInitiated.int-30m.inQueue` | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 30-minutes) |
-| `transfersInitiated.today.inQueue` | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (current day) |
+| Metric                                         | Version | Description |
+|------------------------------------------------|---------|-------------|
+| `accepted.int-15m.inQueue`                     | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 15-minutes) |
+| `accepted.int-30m.inQueue`                     | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 30-minutes) |
+| `accepted.today.inQueue`                       | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (current day) |
+| `alerting.rt`                                  | v5+ | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
+| `availableTime.int-15m`                        | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
+| `availableTime.int-30m`                        | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
+| `availableTime.today`                          | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
+| `availableTimePercentage.int-15m`              | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 15-minutes) |
+| `availableTimePercentage.int-30m`              | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (last 30-minutes) |
+| `availableTimePercentage.today`                | v5+ | Percentage of available time relative to total logged-in time. Shows the proportion of total login time the agent spent in Available state ready to receive work (current day) |
+| `averageHandlingTime.int-15m.inQueue`          | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 15-minutes) |
+| `averageHandlingTime.int-30m.inQueue`          | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (last 30-minutes) |
+| `averageHandlingTime.today.inQueue`            | v5+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold (current day) |
+| `averageHoldTime.int-15m.inQueue`              | v5+ | Average time the agent placed customers on hold (last 15-minutes) |
+| `averageHoldTime.int-30m.inQueue`              | v5+ | Average time the agent placed customers on hold (last 30-minutes) |
+| `averageHoldTime.today.inQueue`                | v5+ | Average time the agent placed customers on hold (current day) |
+| `averageOfferingTime.int-15m.inQueue`          | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 15-minutes) |
+| `averageOfferingTime.int-30m.inQueue`          | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (last 30-minutes) |
+| `averageOfferingTime.today.inQueue`            | v5+ | Average duration from interaction presentation to acceptance or rejection. Measures how long an interaction is offered to an agent before they either accept it or decline it (current day) |
+| `averageWrapUpTime.int-15m.inQueue`            | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 15-minutes) |
+| `averageWrapUpTime.int-30m.inQueue`            | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (last 30-minutes) |
+| `averageWrapUpTime.today.inQueue`              | v5+ | Average post-processing time. Time spent by agents completing administrative tasks after finishing handling an interaction (current day) |
+| `blindTransfers.int-15m.inQueue`               | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 15-minutes) |
+| `blindTransfers.int-30m.inQueue`               | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (last 30-minutes) |
+| `blindTransfers.today.inQueue`                 | v5+ | Number of blind transfers performed by the agent. Transfer where agent does not speak to recipient first (current day) |
+| `busyTime.int-15m`                             | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 15-minutes) |
+| `busyTime.int-30m`                             | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (last 30-minutes) |
+| `busyTime.today`                               | v5+ | Combined duration the agent spent in Offering, Handling, and Wrap Up states across all activities. Time agent is actively engaged in work activities (current day) |
+| `busyTimePercentage.int-15m`                   | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 15-minutes) |
+| `busyTimePercentage.int-30m`                   | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (last 30-minutes) |
+| `busyTimePercentage.today`                     | v5+ | Percentage of busy time relative to total logged-in time. Shows proportion of time agent was actively working (current day) |
+| `conferenceTime.int-15m.inQueue`               | v5+ | Total cumulative duration the agent spent in multi-party conference calls (last 15-minutes) |
+| `conferenceTime.int-30m.inQueue`               | v5+ | Total cumulative duration the agent spent in multi-party conference calls (last 30-minutes) |
+| `conferenceTime.today.inQueue`                 | v5+ | Total cumulative duration the agent spent in multi-party conference calls (current day) |
+| `conferences.int-15m.inQueue`                  | v5+ | Total number of conferences established by the agent (last 15-minutes) |
+| `conferences.int-30m.inQueue`                  | v5+ | Total number of conferences established by the agent (last 30-minutes) |
+| `conferences.today.inQueue`                    | v5+ | Total number of conferences established by the agent (current day) |
+| `consultations.int-15m.inQueue`                | v5+ | Times an agent successfully established an outbound call while another call is on hold (last 15-minutes) |
+| `consultations.int-30m.inQueue`                | v5+ | Times an agent successfully established an outbound call while another call is on hold (last 30-minutes) |
+| `consultations.today.inQueue`                  | v5+ | Times an agent successfully established an outbound call while another call is on hold (current day) |
+| `directInboundTime.int-15m`                    | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 15-minutes) |
+| `directInboundTime.int-30m`                    | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (last 30-minutes) |
+| `directInboundTime.today`                      | v5+ | Total cumulative duration the agent spent on direct inbound calls, excluding agent-to-agent calls (current day) |
+| `directInbounds.int-15m`                       | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 15-minutes) |
+| `directInbounds.int-30m`                       | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (last 30-minutes) |
+| `directInbounds.today`                         | v5+ | Total number of direct inbound calls to the agent excluding agent-to-agent calls (current day) |
+| `directOutboundTime.int-15m`                   | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
+| `directOutboundTime.int-30m`                   | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
+| `directOutboundTime.today`                     | v5+ | Total cumulative duration the agent spent on direct outbound calls, excluding outbound queue calls and agent-to-agent calls (current day) |
+| `directOutbounds.int-15m`                      | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 15-minutes) |
+| `directOutbounds.int-30m`                      | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (last 30-minutes) |
+| `directOutbounds.today`                        | v5+ | Number of calls made by the agent excluding outbound queue calls and agent-to-agent calls (current day) |
+| `handlingTime.int-15m`                         | v5+ | Total time the agent spent in Handling state, actively processing interactions (last 15-minutes) |
+| `handlingTime.int-30m`                         | v5+ | Total time the agent spent in Handling state, actively processing interactions (last 30-minutes) |
+| `handlingTime.today`                           | v5+ | Total time the agent spent in Handling state, actively processing interactions (current day) |
+| `handlingTimePercentage.int-15m`               | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 15-minutes) |
+| `handlingTimePercentage.int-30m`               | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (last 30-minutes) |
+| `handlingTimePercentage.today`                 | v5+ | Percentage of handling time relative to total logged-in time. Shows what proportion of total login duration agent spent actively handling interactions (current day) |
+| `hold.int-15m.inQueue`                         | v5+ | Number of occasions the agent placed customers on hold (last 15-minutes) |
+| `hold.int-30m.inQueue`                         | v5+ | Number of occasions the agent placed customers on hold (last 30-minutes) |
+| `hold.today.inQueue`                           | v5+ | Number of occasions the agent placed customers on hold (current day) |
+| `internalCalls.int-15m`                        | v5+ | Total number of agent-to-agent calls initiated or received by the agent (last 15-minutes) |
+| `internalCalls.int-30m`                        | v5+ | Total number of agent-to-agent calls initiated or received by the agent (last 30-minutes) |
+| `internalCalls.today`                          | v5+ | Total number of agent-to-agent calls initiated or received by the agent (current day) |
+| `internalCallsInitiated.int-15m`               | v5+ | Number of agent-to-agent calls initiated by this agent (last 15-minutes) |
+| `internalCallsInitiated.int-30m`               | v5+ | Number of agent-to-agent calls initiated by this agent (last 30-minutes) |
+| `internalCallsInitiated.today`                 | v5+ | Number of agent-to-agent calls initiated by this agent (current day) |
+| `internalCallsReceived.int-15m`                | v5+ | Number of agent-to-agent calls received by this agent (last 15-minutes) |
+| `internalCallsReceived.int-30m`                | v5+ | Number of agent-to-agent calls received by this agent (last 30-minutes) |
+| `internalCallsReceived.today`                  | v5+ | Number of agent-to-agent calls received by this agent (current day) |
+| `internalCallsTime.int-15m`                    | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 15-minutes) |
+| `internalCallsTime.int-30m`                    | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (last 30-minutes) |
+| `internalCallsTime.today`                      | v5+ | Total cumulative duration the agent spent on agent-to-agent calls, both initiated and received (current day) |
+| `lastLogin.rt`                                 | v5+ | Timestamp representing the agent's most recent login to the system (currently) |
+| `lastLogout.rt`                                | v5+ | Timestamp representing the agent's most recent logout from the system (currently) |
+| `lastStatusChange.rt`                          | v5+ | Timestamp when the agent's operational status last changed (currently) |
+| `line1Status.rt`                               | v5+ | Current operational status of the agent's first communication line (currently) |
+| `line1TimeOnStatus.rt`                         | v5+ | Time in milliseconds since the agent's first line status last changed (currently) |
+| `line2Status.rt`                               | v5+ | Current operational status of the agent's second communication line (currently) |
+| `line2TimeOnStatus.rt`                         | v5+ | Time in milliseconds since the agent's second line status last changed (currently) |
+| `loggedInTime.int-15m`                         | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 15-minutes) |
+| `loggedInTime.int-30m`                         | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (last 30-minutes) |
+| `loggedInTime.rt`                              | v5+ | Cumulative time the agent has maintained active system connection during their current login session (currently) |
+| `loggedInTime.today`                           | v5+ | Total time the agent maintained active system connection and was available for work across all queues and activities (current day) |
+| `longestHold.int-15m.inQueue`                  | v5+ | Maximum single continuous hold duration when agent placed customer on hold (last 15-minutes) |
+| `longestHold.int-30m.inQueue`                  | v5+ | Maximum single continuous hold duration when agent placed customer on hold (last 30-minutes) |
+| `longestHold.today.inQueue`                    | v5+ | Maximum single continuous hold duration when agent placed customer on hold (current day) |
+| `longestOffering.int-15m.inQueue`              | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 15-minutes) |
+| `longestOffering.int-30m.inQueue`              | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (last 30-minutes) |
+| `longestOffering.today.inQueue`                | v5+ | Maximum duration from when interaction was offered until agent accepted or rejected it. Shows longest time interaction remained in Offering state (current day) |
+| `offered.int-15m.inQueue`                      | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 15-minutes) |
+| `offered.int-30m.inQueue`                      | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (last 30-minutes) |
+| `offered.today.inQueue`                        | v5+ | Total interactions presented to the agent for acceptance or rejection. Includes interactions continuing from prior intervals (current day) |
+| `offeringTime.int-15m`                         | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 15-minutes) |
+| `offeringTime.int-30m`                         | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (last 30-minutes) |
+| `offeringTime.today`                           | v5+ | Total duration the agent spent in Offering state waiting to accept or reject interactions across all activities (current day) |
+| `onBreakTime.int-15m`                          | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 15-minutes) |
+| `onBreakTime.int-30m`                          | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (last 30-minutes) |
+| `onBreakTime.today`                            | v5+ | Total duration the agent spent in On Break status, temporarily unavailable to receive new interactions (current day) |
+| `onBreakTimePercentage.int-15m`                | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 15-minutes) |
+| `onBreakTimePercentage.int-30m`                | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (last 30-minutes) |
+| `onBreakTimePercentage.today`                  | v5+ | Percentage of break time relative to total logged-in time. Shows what proportion of login duration agent spent on break (current day) |
+| `onHoldTime.int-15m.inQueue`                   | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 15-minutes) |
+| `onHoldTime.int-30m.inQueue`                   | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (last 30-minutes) |
+| `onHoldTime.today.inQueue`                     | v5+ | Total duration the agent kept customers on hold. Sum of all hold periods (current day) |
+| `rejectTimeout.int-15m.inQueue`                | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 15-minutes) |
+| `rejectTimeout.int-30m.inQueue`                | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (last 30-minutes) |
+| `rejectTimeout.today.inQueue`                  | v5+ | Count of interactions automatically rejected when agent did not respond within configured timeout period (current day) |
+| `rejected.int-15m.inQueue`                     | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 15-minutes) |
+| `rejected.int-30m.inQueue`                     | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (last 30-minutes) |
+| `rejected.today.inQueue`                       | v5+ | Count of interactions manually declined by agent when interaction was offered. Agent explicitly rejected the offer (current day) |
+| `status.rt`                                    | v5+ | Agent's current operational state showing system status. Examples: Available, Handling, OnBreak, LoggedOut, WorkingOffline (currently) |
+| `statusCode.rt`                                | v5+ | Specific reason code that justifies or details the agent's current operational status (currently) |
+| `timeOnStatus.rt`                              | v5+ | Elapsed duration in milliseconds showing how long the agent has maintained their current operational status (currently) |
+| `timeOnStatusCode.rt`                          | v5+ | Elapsed duration in milliseconds showing how long the agent has maintained their current status code. The metric resets every time the status or the combination status + statusCode changes |
+| `transfersInitiated.int-15m.inQueue`           | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 15-minutes) |
+| `transfersInitiated.int-30m.inQueue`           | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (last 30-minutes) |
+| `transfersInitiated.today.inQueue`             | v5+ | Warm and blind transfers initiated by the agent. All outgoing transfers (current day) |
 | `transfersInitiatedPercentage.int-15m.inQueue` | v5+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 15-minutes) |
 | `transfersInitiatedPercentage.int-30m.inQueue` | v5+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (last 30-minutes) |
-| `transfersInitiatedPercentage.today.inQueue` | v5+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (current day) |
-| `transfersReceived.int-15m.inQueue` | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 15-minutes) |
-| `transfersReceived.int-30m.inQueue` | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 30-minutes) |
-| `transfersReceived.today.inQueue` | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (current day) |
-| `warmTransfers.int-15m.inQueue` | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 15-minutes) |
-| `warmTransfers.int-30m.inQueue` | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 30-minutes) |
-| `warmTransfers.today.inQueue` | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (current day) |
-| `workingOfflineTime.int-15m` | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 15-minutes) |
-| `workingOfflineTime.int-30m` | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 30-minutes) |
-| `workingOfflineTime.today` | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (current day) |
-| `workingOfflineTimePercentage.int-15m` | v5+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 15-minutes) |
-| `workingOfflineTimePercentage.int-30m` | v5+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 30-minutes) |
-| `workingOfflineTimePercentage.today` | v5+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (current day) |
-| `wrapUpTime.int-15m` | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 15-minutes) |
-| `wrapUpTime.int-30m` | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 30-minutes) |
-| `wrapUpTime.today` | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (current day) |
-| `wrapUpTimePercentage.int-15m` | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 15-minutes) |
-| `wrapUpTimePercentage.int-30m` | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 30-minutes) |
-| `wrapUpTimePercentage.today` | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (current day) |
+| `transfersInitiatedPercentage.today.inQueue`   | v5+ | Percentage of interactions transferred by the agent, calculated relative to total interactions accepted (current day) |
+| `transfersReceived.int-15m.inQueue`            | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 15-minutes) |
+| `transfersReceived.int-30m.inQueue`            | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (last 30-minutes) |
+| `transfersReceived.today.inQueue`              | v5+ | Warm and blind transfers routed to agent for handling. All incoming transfers (current day) |
+| `warmTransfers.int-15m.inQueue`                | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 15-minutes) |
+| `warmTransfers.int-30m.inQueue`                | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (last 30-minutes) |
+| `warmTransfers.today.inQueue`                  | v5+ | Number of warm transfers performed by the agent. Transfer where agent spoke to recipient first (current day) |
+| `workingOfflineTime.int-15m`                   | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 15-minutes) |
+| `workingOfflineTime.int-30m`                   | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (last 30-minutes) |
+| `workingOfflineTime.today`                     | v5+ | Total duration the agent spent in Working Offline status performing non-interactive work. Agent not available to receive new interactions (current day) |
+| `workingOfflineTimePercentage.int-15m`         | v5+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 15-minutes) |
+| `workingOfflineTimePercentage.int-30m`         | v5+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (last 30-minutes) |
+| `workingOfflineTimePercentage.today`           | v5+ | Percentage of offline work time relative to total logged-in time. Shows what proportion of login duration agent spent in Working Offline status (current day) |
+| `wrapUpTime.int-15m`                           | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 15-minutes) |
+| `wrapUpTime.int-30m`                           | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (last 30-minutes) |
+| `wrapUpTime.today`                             | v5+ | Total duration the agent spent in Wrap Up state completing post-interaction administrative tasks across all activities after disconnecting from customer (current day) |
+| `wrapUpTimePercentage.int-15m`                 | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 15-minutes) |
+| `wrapUpTimePercentage.int-30m`                 | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (last 30-minutes) |
+| `wrapUpTimePercentage.today`                   | v5+ | Percentage of wrap-up time relative to total logged-in time. Shows what proportion of login duration agent spent finalizing interactions in Wrap Up state (current day) |
 
 </details>
