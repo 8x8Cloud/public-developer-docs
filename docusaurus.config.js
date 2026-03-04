@@ -129,6 +129,8 @@ const config = {
     path.resolve(__dirname, 'docusaurus/plugins/client-side-redirects'),
     // Custom plugin for Amplitude analytics (production-only page view tracking)
     path.resolve(__dirname, 'docusaurus/plugins/amplitude-analytics'),
+    // Generate llms.txt and llms-full.txt for LLM/AI assistant discoverability
+    'docusaurus-plugin-llms',
   ],
 
   staticDirectories: [

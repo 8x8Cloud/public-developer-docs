@@ -55,6 +55,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.1",
     "@redocly/cli": "^2.7.0",
+    "docusaurus-plugin-llms": "^0.3.0",
     "markdownlint-cli2": "^0.18.1",
     "prettier": "^3.6.2",
     "rimraf": "^6.1.0"
