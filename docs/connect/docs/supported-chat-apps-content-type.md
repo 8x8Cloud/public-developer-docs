@@ -11,7 +11,7 @@ This page describes the supported messaging apps content types, along with their
 | Viber                      | `viber`            | ✅    | ✅        | ✅     | ✅     | ✅      | ✅    | ❌        | ❌                    | ❌         | ❌                  |
 | Zalo Notification Service  | `ZaloNotification` | ✅    | ✅        | ✅     | ❌     | ✅      | ❌    | ❌        | ❌                    | ❌         | ❌                  |
 | LINE Official Notification | `LineNotification` | ✅    | ✅        | ❌     | ❌     | ✅      | ❌    | ❌        | ❌                    | ❌         | ❌                  |
-| Google RCS                 | GoogleRCS          | ✅    | ❌        | ✅     | ✅     | ✅      | ✅    | ✅        | ✅                    | ❌         | ❌                  |
+| RCS                        | `RCS`              | ✅    | ❌        | ✅     | ✅     | ✅      | ✅    | ✅        | ✅                    | ❌         | ❌                  |
 
 ***
 

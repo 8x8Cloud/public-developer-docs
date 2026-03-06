@@ -407,7 +407,7 @@ Next, we will use your OAS file to teach Salesforce about the specific 8x8 API c
                     "SMS",
                     "WhatsApp",
                     "Facebook",
-                    "GoogleRCS",
+                    "RCS",
                     "Viber",
                     "Line",
                     "WeChat",

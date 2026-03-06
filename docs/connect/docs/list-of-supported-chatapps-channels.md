@@ -9,7 +9,7 @@
 | Viber                      | `viber`            | ✅        | ✅    | ✅         | ✅    |
 | Zalo Notification Service  | `ZaloNotification` | ✅        | ✅    | ✅         | ❌    |
 | LINE Official Notification | `LineNotification` | ✅        | ✅    | ✅         | ❌    |
-| Google RCS                 | `GoogleRCS`        | ✅        | ✅    | ✅         | ✅    |
+| RCS                        | `RCS`              | ✅        | ✅    | ✅         | ✅    |
 
 ### Supported channels and directions
 
@@ -20,4 +20,4 @@
 | Viber                      | `viber`            | ✅               | ✅                |
 | Zalo Notification Service  | `ZaloNotification` | ❌               | ✅                |
 | LINE Official Notification | `LineNotification` | ❌               | ✅                |
-| Google RCS                 | `GoogleRCS`        | ✅               | ✅                |
+| RCS                        | `RCS`              | ✅               | ✅                |
