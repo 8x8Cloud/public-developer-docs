@@ -229,7 +229,8 @@
                               "product_list",
                               "cta_url",
                               "flow",
-                              "call_permission_request"
+                              "call_permission_request",
+                              "voice_call"
                             ],
                             "description": "The type of interactive message you want to send."
                           },
@@ -335,12 +336,25 @@
                               },
                               "parameters": {
                                 "type": "object",
-                                "description": "Required for Call-to-Action Url (`cta_url`) Messages.",
+                                "description": "Required for Call-to-Action Url (`cta_url`) and `voice_call` messages.",
                                 "properties": {
                                   "display_text": {
                                     "type": "string",
-                                    "description": "CTA Url button label text.",
+                                    "description": "CTA Url button label text. For `voice_call`, this is the label shown on the call button. Optional; defaults to \"Call Now\" if omitted. Max 20 characters.",
                                     "maxLength": 20
+                                  },
+                                  "ttlMinutes": {
+                                    "type": "integer",
+                                    "description": "Optional for `voice_call` only. Overrides the template-level TTL at send time. Must be between 1 min and 43200 mins (30 days). Defaults to 10080 (7 days) if omitted.",
+                                    "minimum": 1,
+                                    "maximum": 43200,
+                                    "default": 10080,
+                                    "example": 10
+                                  },
+                                  "payload": {
+                                    "type": "string",
+                                    "description": "Optional for `voice_call`. Customer-defined payload. Max 512 characters.",
+                                    "maxLength": 512
                                   },
                                   "url": {
                                     "type": "string",
@@ -526,7 +540,7 @@
                                     "properties": {
                                       "type": {
                                         "type": "string",
-                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\n",
+                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only — overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
                                         "enum": [
                                           "text",
                                           "image",
@@ -535,7 +549,8 @@
                                           "location",
                                           "payload",
                                           "couponCode",
-                                          "action"
+                                          "action",
+                                          "ttlMinutes"
                                         ]
                                       },
                                       "text": {
@@ -603,6 +618,14 @@
                                             }
                                           }
                                         }
+                                      },
+                                      "ttlMinutes": {
+                                        "type": "integer",
+                                        "description": "Required for \"ttlMinutes\" parameter type (VoiceCall subtype only).\n\nOverrides the template-level TTL at send time. Must be between 1 min and 43200 mins (30 days). Defaults to 10080 (7 days) if omitted.\n\nNote: When creating a template, the minimum is 1440 (1 day). When sending, the minimum is 1 (1 minute).",
+                                        "minimum": 1,
+                                        "maximum": 43200,
+                                        "default": 10080,
+                                        "example": 2
                                       }
                                     },
                                     "required": ["type"]
@@ -617,8 +640,8 @@
                                 },
                                 "subType": {
                                   "type": "string",
-                                  "description": "Required for \"button\" type.\n\nType of button being created\nValues: QuickReply, Url, CopyCode, Flow.",
-                                  "enum": ["QuickReply", "Url", "CopyCode", "Flow"]
+                                  "description": "Required for \"button\" type.\n\nType of button being created\nValues: QuickReply, Url, CopyCode, Flow, VoiceCall.\n\nFor VoiceCall, the `parameters` array is optional. All other subtypes require at least one parameter.",
+                                  "enum": ["QuickReply", "Url", "CopyCode", "Flow", "VoiceCall"]
                                 },
                                 "cards": {
                                   "type": "array",
@@ -1345,6 +1368,38 @@
                     }
                   }
                 },
+                "whatsAppVoiceCallTemplate": {
+                  "summary": "WhatsApp Template Message - Voice Call Button",
+                  "value": {
+                    "user": {
+                      "msisdn": "+6500000000"
+                    },
+                    "type": "template",
+                    "content": {
+                      "template": {
+                        "language": "<language>>",
+                        "name": "<Insert approved voice call template name>",
+                        "components": [
+                          {
+                            "type": "button",
+                            "subType": "VoiceCall",
+                            "index": 0,
+                            "parameters": [
+                              {
+                                "type": "ttlMinutes",
+                                "ttlMinutes": 1440
+                              },
+                              {
+                                "type": "payload",
+                                "payload": "payload data"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
                 "whatsAppInteractiveMessageReplyButtons": {
                   "summary": "WhatsApp Interactive Message - Quick Reply Buttons",
                   "value": {
@@ -1585,6 +1640,31 @@
                         "type": "call_permission_request",
                         "body": {
                           "text": "We would like to call you to help support your query."
+                        }
+                      }
+                    }
+                  }
+                },
+                "whatsAppInteractiveVoiceCall": {
+                  "summary": "WhatsApp Interactive Message - Voice Call",
+                  "value": {
+                    "user": {
+                      "msisdn": "+6500000000"
+                    },
+                    "type": "interactive",
+                    "content": {
+                      "interactive": {
+                        "type": "voice_call",
+                        "action": {
+                          "name": "voice_call",
+                          "parameters": {
+                            "display_text": "Click to Call",
+                            "ttlMinutes": 10,
+                            "payload": "payload data"
+                          }
+                        },
+                        "body": {
+                          "text": "You can call us on WhatsApp now for faster service"
                         }
                       }
                     }
@@ -2882,7 +2962,7 @@
                   },
                   "category": {
                     "type": "string",
-                    "description": "template category",
+                    "description": "Template category.\n\nTemplates containing a `VOICE_CALL` button are only allowed in `MARKETING` or `UTILITY` categories.",
                     "example": "UTILITY"
                   },
                   "components": {
@@ -2937,13 +3017,14 @@
                                   "QUICK_REPLY",
                                   "OTP",
                                   "COPY_CODE",
-                                  "FLOW"
+                                  "FLOW",
+                                  "VOICE_CALL"
                                 ],
                                 "description": "Button type"
                               },
                               "text": {
                                 "type": "string",
-                                "description": "The text to be displayed on the button.",
+                                "description": "The text to be displayed on the button (except `VOICE_CALL`, where it is optional).",
                                 "minLength": 1,
                                 "maxLength": 20
                               },
@@ -2991,6 +3072,13 @@
                                 "description": "Optional for type \"FLOW\".\n\nThe screen ID to navigate to when launching the flow. Used when flowAction is \"navigate\". Defaults to \"FIRST_ENTRY_SCREEN\" if not provided.",
                                 "default": "FIRST_ENTRY_SCREEN",
                                 "example": "RECOMMEND"
+                              },
+                              "ttlMinutes": {
+                                "type": "integer",
+                                "description": "Optional property for type \"VOICE_CALL\" only.\n\nThe time-to-live in minutes for the voice call button. If provided, must be between 1440 mins (1 day) and 43200 mins (30 days), inclusive.",
+                                "minimum": 1440,
+                                "maximum": 43200,
+                                "example": 1440
                               }
                             },
                             "required": ["type", "text"]
@@ -3273,6 +3361,40 @@
                       },
                       {
                         "type": "CALL_PERMISSION_REQUEST"
+                      }
+                    ]
+                  }
+                },
+                "whatsAppVoiceCallTemplate": {
+                  "summary": "Add WhatsApp Template with Voice Call Button",
+                  "value": {
+                    "name": "template_with_voice_call",
+                    "language": "en_US",
+                    "category": "MARKETING|UTILITY", 
+                    "allow_category_change": true,
+                    "components": [
+                      {
+                        "type": "HEADER",
+                        "format": "TEXT",
+                        "text": "Appointment Reminder"
+                      },
+                      {
+                        "type": "BODY",
+                        "text": "You have an upcoming appointment scheduled with us.\n\nIf you need to reschedule or have any questions about your appointment, please call us directly using the button below.\n\nThank you!"
+                      },
+                      {
+                        "type": "FOOTER",
+                        "text": "We look forward to seeing you"
+                      },
+                      {
+                        "type": "BUTTONS",
+                        "buttons": [
+                          {
+                            "type": "VOICE_CALL",
+                            "text": "Call to Reschedule",
+                            "ttlMinutes": 1440
+                          }
+                        ]
                       }
                     ]
                   }
