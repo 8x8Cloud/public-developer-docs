@@ -5,9 +5,9 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"8x8-developer-docs@workspace:.":
+"@8x8/developer-docs@workspace:.":
   version: 0.0.0-use.local
-  resolution: "8x8-developer-docs@workspace:."
+  resolution: "@8x8/developer-docs@workspace:."
   dependencies:
     "@8x8/oxygen-config": "npm:^2.103.1"
     "@8x8/oxygen-constants": "npm:^2.103.1"
