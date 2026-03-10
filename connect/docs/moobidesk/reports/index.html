@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-connect/docs/moobidesk/reports" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">Reports &amp; Statistics | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/moobidesk/reports"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Reports &amp; Statistics | 8x8 Developer Portal"><meta data-rh="true" name="description" content="Moobidesk provides comprehensive analytics across conversations, agent performance, queue efficiency, and customer satisfaction."><meta data-rh="true" property="og:description" content="Moobidesk provides comprehensive analytics across conversations, agent performance, queue efficiency, and customer satisfaction."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/moobidesk/reports"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/moobidesk/reports" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/moobidesk/reports" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.c247a45b.css">
+<script src="/assets/js/runtime~main.304720eb.js" defer="defer"></script>
+<script src="/assets/js/main.60c3074a.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a class="navbar__item navbar__link" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a><a class="navbar__item navbar__link" href="/administration">Administration</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides section-navigation__tab--active" href="/connect/docs">Guides</a><a class="section-navigation__tab icon-references" href="/connect/reference">API Reference</a><a href="https://support.cpaas.8x8.com/hc/en-us" target="_blank" rel="noopener noreferrer" class="section-navigation__tab icon-support">Support</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/connect/docs/8x8-cpaas-products"><span title="CPaaS: Connect &amp; Communication APIs" class="linkLabel_WmDU">CPaaS: Connect &amp; Communication APIs</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/getting-started"><span title="API Information" class="categoryLinkLabel_W154">API Information</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/send-sms-api-reference"><span title="SMS" class="categoryLinkLabel_W154">SMS</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/whatsapp/whatsapp-hub"><span title="Messaging Apps" class="categoryLinkLabel_W154">Messaging Apps</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/voice/cpaas-voice-offerings"><span title="Voice" class="categoryLinkLabel_W154">Voice</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/connect-overview"><span title="Connect Portal" class="categoryLinkLabel_W154">Connect Portal</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/creating-a-contact"><span title="Contacts API Tutorials" class="categoryLinkLabel_W154">Contacts API Tutorials</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/adobe-campaigns"><span title="Integrations" class="categoryLinkLabel_W154">Integrations</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/converse-overview"><span title="Converse" class="categoryLinkLabel_W154">Converse</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/connect/docs/moobidesk"><span title="Moobidesk" class="categoryLinkLabel_W154">Moobidesk</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk"><span title="Overview" class="linkLabel_WmDU">Overview</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/getting-started"><span title="Getting Started" class="linkLabel_WmDU">Getting Started</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/user-roles"><span title="User Roles &amp; Permissions" class="linkLabel_WmDU">User Roles &amp; Permissions</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/contacts"><span title="Contact Management" class="linkLabel_WmDU">Contact Management</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/agents"><span title="Agent Management" class="linkLabel_WmDU">Agent Management</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/queue"><span title="Queue Management" class="linkLabel_WmDU">Queue Management</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/conversations"><span title="Conversations" class="linkLabel_WmDU">Conversations</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/connect/docs/moobidesk/reports"><span title="Reports &amp; Statistics" class="linkLabel_WmDU">Reports &amp; Statistics</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/settings"><span title="Settings &amp; Configuration" class="linkLabel_WmDU">Settings &amp; Configuration</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/vi-overview"><span title="Video Interaction" class="categoryLinkLabel_W154">Video Interaction</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/accessing-and-viewing-your-customer-list"><span title="Partner Hub" class="categoryLinkLabel_W154">Partner Hub</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>Reports &amp; Statistics</h1></header>
+<p>Moobidesk provides comprehensive analytics across conversations, agent performance, queue efficiency, and customer satisfaction.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="real-time-statistics">Real-Time Statistics<a href="#real-time-statistics" class="hash-link" aria-label="Direct link to Real-Time Statistics" title="Direct link to Real-Time Statistics" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="dashboard-overview">Dashboard Overview<a href="#dashboard-overview" class="hash-link" aria-label="Direct link to Dashboard Overview" title="Direct link to Dashboard Overview" translate="no">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="Statistics Dashboard" src="/assets/images/page57_img1-ff31c3d395691624f357d49746c92eea.png" width="1606" height="834" class="img_ev3q"></p>
+<p>The main dashboard displays live metrics:</p>
+<p><strong>System-Wide</strong>:</p>
+<ul>
+<li><strong>Active Chats</strong>: Conversations currently in progress</li>
+<li><strong>Queued Chats</strong>: Waiting for agent assignment</li>
+<li><strong>Active Agents</strong>: Agents currently available</li>
+<li><strong>SLA Compliance</strong>: Real-time service level adherence</li>
+</ul>
+<p><strong>Agent Performance</strong>:</p>
+<ul>
+<li>Active conversations per agent</li>
+<li>Average response time</li>
+<li>Conversations handled today</li>
+<li>Current status distribution (Available, Busy, Away, Offline)</li>
+</ul>
+<p><strong>Queue Status</strong>:</p>
+<ul>
+<li>Wait time by queue</li>
+<li>Conversations in each queue</li>
+<li>SLA compliance by queue</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="auto-refresh">Auto-Refresh<a href="#auto-refresh" class="hash-link" aria-label="Direct link to Auto-Refresh" title="Direct link to Auto-Refresh" translate="no">​</a></h3>
+<p>Statistics update automatically:</p>
+<ul>
+<li><strong>Dashboard</strong>: Every 30 seconds</li>
+<li><strong>Agent View</strong>: Real-time</li>
+<li><strong>Queue View</strong>: Every 10 seconds</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="historical-reports">Historical Reports<a href="#historical-reports" class="hash-link" aria-label="Direct link to Historical Reports" title="Direct link to Historical Reports" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="conversation-reports">Conversation Reports<a href="#conversation-reports" class="hash-link" aria-label="Direct link to Conversation Reports" title="Direct link to Conversation Reports" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="conversation-volume">Conversation Volume<a href="#conversation-volume" class="hash-link" aria-label="Direct link to Conversation Volume" title="Direct link to Conversation Volume" translate="no">​</a></h4>
+<p>Track conversation trends over time.</p>
+<p><strong>Metrics</strong>:</p>
+<ul>
+<li>Total conversations by date range</li>
+<li>Channel breakdown (WhatsApp, Email, Facebook)</li>
+<li>New vs returning contacts</li>
+<li>Peak traffic hours/days</li>
+</ul>
+<p><strong>Filters</strong>:</p>
+<ul>
+<li>Date range (today, last 7 days, last 30 days, custom)</li>
+<li>Channel</li>
+<li>Queue</li>
+<li>Agent</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="conversation-details">Conversation Details<a href="#conversation-details" class="hash-link" aria-label="Direct link to Conversation Details" title="Direct link to Conversation Details" translate="no">​</a></h4>
+<p>Drill into individual conversation data.</p>
+<p><strong>Included Data</strong>:</p>
+<ul>
+<li>Conversation ID and timestamp</li>
+<li>Contact information</li>
+<li>Channel</li>
+<li>Assigned agent</li>
+<li>Queue</li>
+<li>Duration (start to resolution)</li>
+<li>First response time</li>
+<li>Status (resolved, abandoned)</li>
+<li>Tags and labels applied</li>
+<li>SLA compliance</li>
+</ul>
+<p><strong>Export</strong>: Download as CSV for external analysis</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="agent-performance-reports">Agent Performance Reports<a href="#agent-performance-reports" class="hash-link" aria-label="Direct link to Agent Performance Reports" title="Direct link to Agent Performance Reports" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="agent-productivity">Agent Productivity<a href="#agent-productivity" class="hash-link" aria-label="Direct link to Agent Productivity" title="Direct link to Agent Productivity" translate="no">​</a></h4>
+<p><img decoding="async" loading="lazy" alt="Agent Reports" src="/assets/images/page58_img1-17d59af7d11c2a83590c8a6562cd5a22.png" width="1635" height="777" class="img_ev3q"></p>
+<p>Evaluate individual and team performance.</p>
+<p><strong>Metrics</strong>:</p>
+<ul>
+<li><strong>Conversations Handled</strong>: Total assigned conversations</li>
+<li><strong>Average Handle Time</strong>: Mean time from assignment to resolution</li>
+<li><strong>First Response Time</strong>: Time to first agent reply</li>
+<li><strong>Average Response Time</strong>: Mean reply time throughout conversation</li>
+<li><strong>Concurrent Conversations</strong>: Average number of simultaneous chats</li>
+<li><strong>Resolved Conversations</strong>: Successfully completed conversations</li>
+<li><strong>Transferred Conversations</strong>: Conversations transferred to others</li>
+</ul>
+<p><strong>Time Periods</strong>: Today, Yesterday, Last 7 days, Last 30 days, Custom range</p>
+<p><strong>Comparison</strong>: Compare agents side-by-side</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="agent-availability">Agent Availability<a href="#agent-availability" class="hash-link" aria-label="Direct link to Agent Availability" title="Direct link to Agent Availability" translate="no">​</a></h4>
+<p>Understand time allocation across activities.</p>
+<p><strong>Metrics</strong>:</p>
+<ul>
+<li><strong>Online Time</strong>: Total logged-in duration</li>
+<li><strong>Available Time</strong>: Time in &quot;Available&quot; status</li>
+<li><strong>Busy Time</strong>: Time handling conversations or in wrap-up</li>
+<li><strong>Away Time</strong>: Time in &quot;Away&quot; status, broken down by aux code</li>
+<li><strong>Break Time</strong>: Aux code breakdown (Break, Lunch, Training, Meeting)</li>
+</ul>
+<p><strong>Aux Code Detail</strong>:</p>
+<ul>
+<li>Time spent in each aux code</li>
+<li>Frequency of aux code usage</li>
+<li>Comparison across agents</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="agent-leaderboard">Agent Leaderboard<a href="#agent-leaderboard" class="hash-link" aria-label="Direct link to Agent Leaderboard" title="Direct link to Agent Leaderboard" translate="no">​</a></h4>
+<p>Gamify performance with ranked metrics.</p>
+<p><strong>Rankings</strong>:</p>
+<ul>
+<li>Most conversations handled</li>
+<li>Fastest average response time</li>
+<li>Highest CSAT scores</li>
+<li>Most resolved conversations</li>
+<li>Highest SLA compliance</li>
+</ul>
+<p><strong>Time Frame</strong>: Daily, Weekly, Monthly</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="queue-reports">Queue Reports<a href="#queue-reports" class="hash-link" aria-label="Direct link to Queue Reports" title="Direct link to Queue Reports" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="queue-performance">Queue Performance<a href="#queue-performance" class="hash-link" aria-label="Direct link to Queue Performance" title="Direct link to Queue Performance" translate="no">​</a></h4>
+<p>Analyze queue efficiency and bottlenecks.</p>
+<p><strong>Metrics</strong>:</p>
+<ul>
+<li><strong>Total Conversations</strong>: Volume through each queue</li>
+<li><strong>Average Wait Time</strong>: Time from queue entry to agent pickup</li>
+<li><strong>Max Wait Time</strong>: Longest wait experienced</li>
+<li><strong>Abandoned Rate</strong>: Percentage of conversations abandoned before pickup</li>
+<li><strong>SLA Compliance</strong>: Percentage meeting first response target</li>
+<li><strong>Transfers In/Out</strong>: Queue transfer patterns</li>
+</ul>
+<p><strong>Insights</strong>:</p>
+<ul>
+<li>Identify understaffed queues</li>
+<li>Spot peak demand periods</li>
+<li>Optimize routing rules</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="sla-performance">SLA Performance<a href="#sla-performance" class="hash-link" aria-label="Direct link to SLA Performance" title="Direct link to SLA Performance" translate="no">​</a></h4>
+<p>Monitor service level agreement adherence.</p>
+<p><strong>Metrics</strong>:</p>
+<ul>
+<li><strong>First Response SLA</strong>: Percentage meeting initial response target</li>
+<li><strong>Resolution SLA</strong>: Percentage resolved within target time</li>
+<li><strong>Breaches</strong>: Count of SLA violations</li>
+<li><strong>At Risk</strong>: Conversations approaching SLA threshold</li>
+</ul>
+<p><strong>Breakdown</strong>:</p>
+<ul>
+<li>By queue</li>
+<li>By agent</li>
+<li>By time of day</li>
+<li>By channel</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="customer-satisfaction-csat">Customer Satisfaction (CSAT)<a href="#customer-satisfaction-csat" class="hash-link" aria-label="Direct link to Customer Satisfaction (CSAT)" title="Direct link to Customer Satisfaction (CSAT)" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="csat-scores">CSAT Scores<a href="#csat-scores" class="hash-link" aria-label="Direct link to CSAT Scores" title="Direct link to CSAT Scores" translate="no">​</a></h4>
+<p>Measure customer satisfaction after conversation resolution.</p>
+<p><strong>Collection Methods</strong>:</p>
+<ul>
+<li>Post-conversation survey (1-5 stars or thumbs up/down)</li>
+<li>Automatic request after resolution</li>
+<li>WhatsApp quick reply buttons</li>
+</ul>
+<p><strong>Metrics</strong>:</p>
+<ul>
+<li><strong>Average CSAT</strong>: Mean satisfaction score</li>
+<li><strong>Response Rate</strong>: Percentage of customers providing feedback</li>
+<li><strong>Distribution</strong>: Breakdown by score (5-star, 4-star, etc.)</li>
+<li><strong>Trend</strong>: CSAT over time</li>
+</ul>
+<p><strong>Segmentation</strong>:</p>
+<ul>
+<li>By agent</li>
+<li>By queue</li>
+<li>By channel</li>
+<li>By conversation tags</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="feedback-comments">Feedback Comments<a href="#feedback-comments" class="hash-link" aria-label="Direct link to Feedback Comments" title="Direct link to Feedback Comments" translate="no">​</a></h4>
+<p>Review qualitative customer feedback.</p>
+<p><strong>Features</strong>:</p>
+<ul>
+<li>Filter by CSAT score</li>
+<li>Search feedback text</li>
+<li>Tag common themes</li>
+<li>Export for sentiment analysis</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="broadcast-reports">Broadcast Reports<a href="#broadcast-reports" class="hash-link" aria-label="Direct link to Broadcast Reports" title="Direct link to Broadcast Reports" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="campaign-performance">Campaign Performance<a href="#campaign-performance" class="hash-link" aria-label="Direct link to Campaign Performance" title="Direct link to Campaign Performance" translate="no">​</a></h4>
+<p>Analyze broadcast campaign effectiveness.</p>
+<p><strong>Metrics</strong>:</p>
+<ul>
+<li><strong>Sent</strong>: Total messages sent</li>
+<li><strong>Delivered</strong>: Successfully delivered to recipient devices</li>
+<li><strong>Read</strong>: Messages opened by customers</li>
+<li><strong>Replied</strong>: Customers who responded</li>
+<li><strong>Failed</strong>: Delivery failures with reason breakdown</li>
+</ul>
+<p><strong>Engagement</strong>:</p>
+<ul>
+<li>Delivery Rate: Delivered ÷ Sent</li>
+<li>Read Rate: Read ÷ Delivered</li>
+<li>Response Rate: Replied ÷ Delivered</li>
+</ul>
+<p><strong>Comparison</strong>: Compare campaigns side-by-side</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="template-performance">Template Performance<a href="#template-performance" class="hash-link" aria-label="Direct link to Template Performance" title="Direct link to Template Performance" translate="no">​</a></h4>
+<p>Evaluate which message templates drive engagement.</p>
+<p><strong>Metrics</strong>:</p>
+<ul>
+<li>Usage frequency</li>
+<li>Average delivery rate</li>
+<li>Average read rate</li>
+<li>Average response rate</li>
+<li>Failure rate by template</li>
+</ul>
+<p><strong>Optimization</strong>: Identify high-performing templates for future campaigns</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="custom-reports">Custom Reports<a href="#custom-reports" class="hash-link" aria-label="Direct link to Custom Reports" title="Direct link to Custom Reports" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="report-builder">Report Builder<a href="#report-builder" class="hash-link" aria-label="Direct link to Report Builder" title="Direct link to Report Builder" translate="no">​</a></h3>
+<p>Create custom reports with specific metrics and filters:</p>
+<ol>
+<li>Navigate to Reports → Custom Reports → Create New</li>
+<li>Select report type (Conversation, Agent, Queue, CSAT)</li>
+<li>Choose metrics to include</li>
+<li>Apply filters (date range, channel, tags, etc.)</li>
+<li>Select grouping (by day, week, agent, queue)</li>
+<li>Save report for future use</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="scheduled-reports">Scheduled Reports<a href="#scheduled-reports" class="hash-link" aria-label="Direct link to Scheduled Reports" title="Direct link to Scheduled Reports" translate="no">​</a></h3>
+<p>Automate report delivery:</p>
+<ol>
+<li>Create or select existing report</li>
+<li>Click &quot;Schedule&quot;</li>
+<li>Set frequency (Daily, Weekly, Monthly)</li>
+<li>Choose delivery method (Email, Dashboard)</li>
+<li>Add recipients</li>
+<li>Save schedule</li>
+</ol>
+<p><strong>Delivery Formats</strong>: PDF, CSV, Excel</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="data-export">Data Export<a href="#data-export" class="hash-link" aria-label="Direct link to Data Export" title="Direct link to Data Export" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="export-options">Export Options<a href="#export-options" class="hash-link" aria-label="Direct link to Export Options" title="Direct link to Export Options" translate="no">​</a></h3>
+<p>Export any report for external analysis:</p>
+<ul>
+<li><strong>CSV</strong>: Raw data for spreadsheet analysis</li>
+<li><strong>Excel</strong>: Formatted workbook with charts</li>
+<li><strong>PDF</strong>: Presentation-ready report</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="bulk-export">Bulk Export<a href="#bulk-export" class="hash-link" aria-label="Direct link to Bulk Export" title="Direct link to Bulk Export" translate="no">​</a></h3>
+<p>Export all conversations for compliance or backup:</p>
+<ol>
+<li>Navigate to Reports → Data Export</li>
+<li>Select date range</li>
+<li>Choose data scope (All conversations, Specific queue, Specific agent)</li>
+<li>Include attachments (optional)</li>
+<li>Request export</li>
+<li>Download link sent via email when ready</li>
+</ol>
+<p><strong>Note</strong>: Large exports may take several hours to process</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="dashboards">Dashboards<a href="#dashboards" class="hash-link" aria-label="Direct link to Dashboards" title="Direct link to Dashboards" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pre-built-dashboards">Pre-Built Dashboards<a href="#pre-built-dashboards" class="hash-link" aria-label="Direct link to Pre-Built Dashboards" title="Direct link to Pre-Built Dashboards" translate="no">​</a></h3>
+<p>Access role-specific dashboards:</p>
+<p><strong>Agent Dashboard</strong>:</p>
+<ul>
+<li>Personal statistics</li>
+<li>Active conversations</li>
+<li>Personal CSAT trend</li>
+</ul>
+<p><strong>Supervisor Dashboard</strong>:</p>
+<ul>
+<li>Team performance overview</li>
+<li>Queue status</li>
+<li>Agent availability</li>
+<li>SLA compliance alerts</li>
+</ul>
+<p><strong>Manager Dashboard</strong>:</p>
+<ul>
+<li>System-wide metrics</li>
+<li>Trend analysis</li>
+<li>Comparative queue performance</li>
+<li>Strategic insights</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="custom-dashboards">Custom Dashboards<a href="#custom-dashboards" class="hash-link" aria-label="Direct link to Custom Dashboards" title="Direct link to Custom Dashboards" translate="no">​</a></h3>
+<p>Build personalized dashboards:</p>
+<ol>
+<li>Navigate to Reports → Dashboards → Create</li>
+<li>Add widgets (metric cards, charts, tables)</li>
+<li>Configure each widget (metric, filters, visualization)</li>
+<li>Arrange layout</li>
+<li>Save dashboard</li>
+<li>Set as default (optional)</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="analytics-best-practices">Analytics Best Practices<a href="#analytics-best-practices" class="hash-link" aria-label="Direct link to Analytics Best Practices" title="Direct link to Analytics Best Practices" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="monitoring-frequency">Monitoring Frequency<a href="#monitoring-frequency" class="hash-link" aria-label="Direct link to Monitoring Frequency" title="Direct link to Monitoring Frequency" translate="no">​</a></h3>
+<p><strong>Daily</strong>: Agent performance, queue status, SLA compliance
+<strong>Weekly</strong>: Conversation volume trends, CSAT trends, broadcast performance
+<strong>Monthly</strong>: Strategic metrics, capacity planning, process improvements</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-performance-indicators-kpis">Key Performance Indicators (KPIs)<a href="#key-performance-indicators-kpis" class="hash-link" aria-label="Direct link to Key Performance Indicators (KPIs)" title="Direct link to Key Performance Indicators (KPIs)" translate="no">​</a></h3>
+<p><strong>Efficiency</strong>:</p>
+<ul>
+<li>Average handle time: Target &lt;8 minutes</li>
+<li>First response time: Target &lt;30 seconds</li>
+<li>SLA compliance: Target &gt;95%</li>
+</ul>
+<p><strong>Quality</strong>:</p>
+<ul>
+<li>CSAT score: Target &gt;4.5/5</li>
+<li>Abandon rate: Target &lt;5%</li>
+<li>Transfer rate: Target &lt;10%</li>
+</ul>
+<p><strong>Productivity</strong>:</p>
+<ul>
+<li>Conversations per agent per hour: Target 6-8</li>
+<li>Concurrent conversations: Target 3-5</li>
+<li>Utilization rate: Target 70-85%</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="actionable-insights">Actionable Insights<a href="#actionable-insights" class="hash-link" aria-label="Direct link to Actionable Insights" title="Direct link to Actionable Insights" translate="no">​</a></h3>
+<p>Use reports to drive improvements:</p>
+<ul>
+<li><strong>High transfer rates</strong>: Provide additional agent training</li>
+<li><strong>Long handle times</strong>: Review conversation efficiency, update canned messages</li>
+<li><strong>Low CSAT in specific queue</strong>: Investigate root cause, adjust staffing</li>
+<li><strong>High abandon rates</strong>: Add agents during peak hours</li>
+<li><strong>SLA breaches by time of day</strong>: Adjust shift schedules</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="data-driven-decisions">Data-Driven Decisions<a href="#data-driven-decisions" class="hash-link" aria-label="Direct link to Data-Driven Decisions" title="Direct link to Data-Driven Decisions" translate="no">​</a></h3>
+<p>Leverage analytics for:</p>
+<ul>
+<li><strong>Capacity Planning</strong>: Forecast staffing needs based on trends</li>
+<li><strong>Training Needs</strong>: Identify skill gaps from performance data</li>
+<li><strong>Process Optimization</strong>: Find bottlenecks in conversation flow</li>
+<li><strong>Customer Experience</strong>: Improve based on CSAT feedback themes</li>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/moobidesk/conversations"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Conversations</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/moobidesk/settings"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Settings &amp; Configuration</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#real-time-statistics" class="table-of-contents__link toc-highlight">Real-Time Statistics</a><ul><li><a href="#dashboard-overview" class="table-of-contents__link toc-highlight">Dashboard Overview</a></li><li><a href="#auto-refresh" class="table-of-contents__link toc-highlight">Auto-Refresh</a></li></ul></li><li><a href="#historical-reports" class="table-of-contents__link toc-highlight">Historical Reports</a><ul><li><a href="#conversation-reports" class="table-of-contents__link toc-highlight">Conversation Reports</a></li><li><a href="#agent-performance-reports" class="table-of-contents__link toc-highlight">Agent Performance Reports</a></li><li><a href="#queue-reports" class="table-of-contents__link toc-highlight">Queue Reports</a></li><li><a href="#customer-satisfaction-csat" class="table-of-contents__link toc-highlight">Customer Satisfaction (CSAT)</a></li><li><a href="#broadcast-reports" class="table-of-contents__link toc-highlight">Broadcast Reports</a></li></ul></li><li><a href="#custom-reports" class="table-of-contents__link toc-highlight">Custom Reports</a><ul><li><a href="#report-builder" class="table-of-contents__link toc-highlight">Report Builder</a></li><li><a href="#scheduled-reports" class="table-of-contents__link toc-highlight">Scheduled Reports</a></li></ul></li><li><a href="#data-export" class="table-of-contents__link toc-highlight">Data Export</a><ul><li><a href="#export-options" class="table-of-contents__link toc-highlight">Export Options</a></li><li><a href="#bulk-export" class="table-of-contents__link toc-highlight">Bulk Export</a></li></ul></li><li><a href="#dashboards" class="table-of-contents__link toc-highlight">Dashboards</a><ul><li><a href="#pre-built-dashboards" class="table-of-contents__link toc-highlight">Pre-Built Dashboards</a></li><li><a href="#custom-dashboards" class="table-of-contents__link toc-highlight">Custom Dashboards</a></li></ul></li><li><a href="#analytics-best-practices" class="table-of-contents__link toc-highlight">Analytics Best Practices</a><ul><li><a href="#monitoring-frequency" class="table-of-contents__link toc-highlight">Monitoring Frequency</a></li><li><a href="#key-performance-indicators-kpis" class="table-of-contents__link toc-highlight">Key Performance Indicators (KPIs)</a></li><li><a href="#actionable-insights" class="table-of-contents__link toc-highlight">Actionable Insights</a></li><li><a href="#data-driven-decisions" class="table-of-contents__link toc-highlight">Data-Driven Decisions</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>

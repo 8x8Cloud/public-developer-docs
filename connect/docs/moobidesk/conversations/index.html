@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-connect/docs/moobidesk/conversations" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">Conversations | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/moobidesk/conversations"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Conversations | 8x8 Developer Portal"><meta data-rh="true" name="description" content="The Conversations (Chats) module is the core workspace where agents engage with customers across WhatsApp, Email, and Facebook Messenger."><meta data-rh="true" property="og:description" content="The Conversations (Chats) module is the core workspace where agents engage with customers across WhatsApp, Email, and Facebook Messenger."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/moobidesk/conversations"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/moobidesk/conversations" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/moobidesk/conversations" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.c247a45b.css">
+<script src="/assets/js/runtime~main.304720eb.js" defer="defer"></script>
+<script src="/assets/js/main.60c3074a.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a class="navbar__item navbar__link" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a><a class="navbar__item navbar__link" href="/administration">Administration</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides section-navigation__tab--active" href="/connect/docs">Guides</a><a class="section-navigation__tab icon-references" href="/connect/reference">API Reference</a><a href="https://support.cpaas.8x8.com/hc/en-us" target="_blank" rel="noopener noreferrer" class="section-navigation__tab icon-support">Support</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/connect/docs/8x8-cpaas-products"><span title="CPaaS: Connect &amp; Communication APIs" class="linkLabel_WmDU">CPaaS: Connect &amp; Communication APIs</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/getting-started"><span title="API Information" class="categoryLinkLabel_W154">API Information</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/send-sms-api-reference"><span title="SMS" class="categoryLinkLabel_W154">SMS</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/whatsapp/whatsapp-hub"><span title="Messaging Apps" class="categoryLinkLabel_W154">Messaging Apps</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/voice/cpaas-voice-offerings"><span title="Voice" class="categoryLinkLabel_W154">Voice</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/connect-overview"><span title="Connect Portal" class="categoryLinkLabel_W154">Connect Portal</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/creating-a-contact"><span title="Contacts API Tutorials" class="categoryLinkLabel_W154">Contacts API Tutorials</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/adobe-campaigns"><span title="Integrations" class="categoryLinkLabel_W154">Integrations</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/converse-overview"><span title="Converse" class="categoryLinkLabel_W154">Converse</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/connect/docs/moobidesk"><span title="Moobidesk" class="categoryLinkLabel_W154">Moobidesk</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk"><span title="Overview" class="linkLabel_WmDU">Overview</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/getting-started"><span title="Getting Started" class="linkLabel_WmDU">Getting Started</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/user-roles"><span title="User Roles &amp; Permissions" class="linkLabel_WmDU">User Roles &amp; Permissions</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/contacts"><span title="Contact Management" class="linkLabel_WmDU">Contact Management</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/agents"><span title="Agent Management" class="linkLabel_WmDU">Agent Management</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/queue"><span title="Queue Management" class="linkLabel_WmDU">Queue Management</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/connect/docs/moobidesk/conversations"><span title="Conversations" class="linkLabel_WmDU">Conversations</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/reports"><span title="Reports &amp; Statistics" class="linkLabel_WmDU">Reports &amp; Statistics</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/moobidesk/settings"><span title="Settings &amp; Configuration" class="linkLabel_WmDU">Settings &amp; Configuration</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/vi-overview"><span title="Video Interaction" class="categoryLinkLabel_W154">Video Interaction</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/accessing-and-viewing-your-customer-list"><span title="Partner Hub" class="categoryLinkLabel_W154">Partner Hub</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>Conversations</h1></header>
+<p>The Conversations (Chats) module is the core workspace where agents engage with customers across WhatsApp, Email, and Facebook Messenger.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conversation-interface">Conversation Interface<a href="#conversation-interface" class="hash-link" aria-label="Direct link to Conversation Interface" title="Direct link to Conversation Interface" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="layout">Layout<a href="#layout" class="hash-link" aria-label="Direct link to Layout" title="Direct link to Layout" translate="no">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="Conversation Interface" src="/assets/images/page34_img1-0ed562da12724a869b4ad0bbe682a112.png" width="1194" height="389" class="img_ev3q"></p>
+<p>The conversation workspace consists of three panels:</p>
+<p><strong>Left Panel - Conversation List</strong>:</p>
+<ul>
+<li>Active conversations assigned to agent</li>
+<li>Queued conversations awaiting assignment</li>
+<li>Filter by channel, status, or tag</li>
+<li>Search by contact name or content</li>
+</ul>
+<p><strong>Center Panel - Message Thread</strong>:</p>
+<ul>
+<li>Full conversation history</li>
+<li>Real-time message exchange</li>
+<li>Rich media support (images, videos, documents)</li>
+<li>Typing indicators</li>
+<li>Read receipts (WhatsApp)</li>
+</ul>
+<p><strong>Right Panel - Contact Details</strong>:</p>
+<ul>
+<li>Customer profile information</li>
+<li>Custom attributes</li>
+<li>Conversation tags and labels</li>
+<li>Internal notes</li>
+<li>Interaction history</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="conversation-states">Conversation States<a href="#conversation-states" class="hash-link" aria-label="Direct link to Conversation States" title="Direct link to Conversation States" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>State</th><th>Description</th><th>Agent Action</th></tr></thead><tbody><tr><td><strong>Queued</strong></td><td>Waiting for agent assignment</td><td>Click to accept</td></tr><tr><td><strong>Active</strong></td><td>Assigned to agent, open</td><td>Respond to customer</td></tr><tr><td><strong>Pending</strong></td><td>Waiting for customer reply</td><td>Monitor for response</td></tr><tr><td><strong>Resolved</strong></td><td>Completed by agent</td><td>Closed, available for reporting</td></tr><tr><td><strong>Abandoned</strong></td><td>Customer left before resolution</td><td>Auto-closed after timeout</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="managing-conversations">Managing Conversations<a href="#managing-conversations" class="hash-link" aria-label="Direct link to Managing Conversations" title="Direct link to Managing Conversations" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="accepting-conversations">Accepting Conversations<a href="#accepting-conversations" class="hash-link" aria-label="Direct link to Accepting Conversations" title="Direct link to Accepting Conversations" translate="no">​</a></h3>
+<p><strong>From Queue</strong>:</p>
+<ol>
+<li>View available conversations in queue panel</li>
+<li>Click conversation to review details</li>
+<li>Click &quot;Accept&quot; to assign to yourself</li>
+<li>Conversation moves to your active list</li>
+</ol>
+<p><strong>Auto-Assignment</strong>:</p>
+<ul>
+<li>System automatically routes based on queue rules</li>
+<li>Notification alert when new conversation assigned</li>
+<li>Appears immediately in active conversation list</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="responding-to-messages">Responding to Messages<a href="#responding-to-messages" class="hash-link" aria-label="Direct link to Responding to Messages" title="Direct link to Responding to Messages" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="text-messages">Text Messages<a href="#text-messages" class="hash-link" aria-label="Direct link to Text Messages" title="Direct link to Text Messages" translate="no">​</a></h4>
+<ol>
+<li>Type response in message input field</li>
+<li>Press Enter or click Send</li>
+<li>Message delivered via customer&#x27;s channel (WhatsApp, Email, Facebook)</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="rich-media">Rich Media<a href="#rich-media" class="hash-link" aria-label="Direct link to Rich Media" title="Direct link to Rich Media" translate="no">​</a></h4>
+<p><strong>Sending Images/Documents</strong>:</p>
+<ol>
+<li>Click attachment icon</li>
+<li>Select file from computer</li>
+<li>Add caption (optional)</li>
+<li>Send - file uploaded and delivered</li>
+</ol>
+<p><strong>Supported File Types</strong>:</p>
+<ul>
+<li>Images: JPG, PNG, GIF (max 5MB)</li>
+<li>Documents: PDF, DOC, XLS (max 10MB)</li>
+<li>Videos: MP4 (max 16MB) - WhatsApp only</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="canned-messages">Canned Messages<a href="#canned-messages" class="hash-link" aria-label="Direct link to Canned Messages" title="Direct link to Canned Messages" translate="no">​</a></h4>
+<p><img decoding="async" loading="lazy" alt="Canned Messages" src="/assets/images/page40_img1-f448145a2c49ec0cfe9fec4bd75d9fb4.png" width="1218" height="506" class="img_ev3q"></p>
+<p>Use pre-written templates for common responses:</p>
+<ol>
+<li>Click canned message icon (or type <code>/</code>)</li>
+<li>Search by keyword or browse categories</li>
+<li>Select template</li>
+<li>Auto-populates with contact variables: <code>{{first_name}}</code>, <code>{{email}}</code>, etc.</li>
+<li>Edit if needed and send</li>
+</ol>
+<p><strong>Example Canned Message</strong>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Hi {{first_name}}, thanks for contacting us! I&#x27;m {{agent_name}}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">and I&#x27;ll be happy to help you today.</span><br></span></code></pre></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="transferring-conversations">Transferring Conversations<a href="#transferring-conversations" class="hash-link" aria-label="Direct link to Transferring Conversations" title="Direct link to Transferring Conversations" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="transfer-to-agent">Transfer to Agent<a href="#transfer-to-agent" class="hash-link" aria-label="Direct link to Transfer to Agent" title="Direct link to Transfer to Agent" translate="no">​</a></h4>
+<ol>
+<li>Click transfer icon</li>
+<li>View available agents with current capacity</li>
+<li>Select destination agent</li>
+<li>Add transfer notes: &quot;Customer needs Spanish support&quot;</li>
+<li>Confirm - conversation immediately moves to recipient agent</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="transfer-to-queue">Transfer to Queue<a href="#transfer-to-queue" class="hash-link" aria-label="Direct link to Transfer to Queue" title="Direct link to Transfer to Queue" translate="no">​</a></h4>
+<ol>
+<li>Click &quot;Transfer to Queue&quot;</li>
+<li>Select destination queue</li>
+<li>Conversation re-enters routing logic</li>
+<li>Next available agent in that queue receives it</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="internal-notes">Internal Notes<a href="#internal-notes" class="hash-link" aria-label="Direct link to Internal Notes" title="Direct link to Internal Notes" translate="no">​</a></h3>
+<p>Add context for other agents without sending to customer:</p>
+<ol>
+<li>Click notes icon in right panel</li>
+<li>Type internal comment: &quot;Customer called earlier, promised callback&quot;</li>
+<li>Save note</li>
+<li>Appears in conversation history with &quot;Internal Note&quot; label</li>
+<li>Visible to all agents, never sent to customer</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="tagging-conversations">Tagging Conversations<a href="#tagging-conversations" class="hash-link" aria-label="Direct link to Tagging Conversations" title="Direct link to Tagging Conversations" translate="no">​</a></h3>
+<p>Categorize for reporting and analysis:</p>
+<ol>
+<li>Click tag icon</li>
+<li>Select from predefined tags: &quot;Billing Issue&quot;, &quot;Product Question&quot;, &quot;Complaint&quot;</li>
+<li>Create custom tags as needed</li>
+<li>Apply multiple tags per conversation</li>
+<li>Tags appear in reports and searchable</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="conversation-labels">Conversation Labels<a href="#conversation-labels" class="hash-link" aria-label="Direct link to Conversation Labels" title="Direct link to Conversation Labels" translate="no">​</a></h3>
+<p>Use labels for workflow management:</p>
+<ul>
+<li><strong>Follow-up Required</strong>: Needs future action</li>
+<li><strong>Escalated</strong>: Requires manager attention</li>
+<li><strong>Bug Report</strong>: Technical issue identified</li>
+<li><strong>Feature Request</strong>: Customer suggestion</li>
+</ul>
+<p><strong>Applying Labels</strong>:</p>
+<ol>
+<li>Right-click conversation in list</li>
+<li>Select &quot;Add Label&quot;</li>
+<li>Choose label</li>
+<li>Labeled conversations highlighted in list</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="resolving-conversations">Resolving Conversations<a href="#resolving-conversations" class="hash-link" aria-label="Direct link to Resolving Conversations" title="Direct link to Resolving Conversations" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="marking-as-resolved">Marking as Resolved<a href="#marking-as-resolved" class="hash-link" aria-label="Direct link to Marking as Resolved" title="Direct link to Marking as Resolved" translate="no">​</a></h3>
+<p>When customer issue is complete:</p>
+<ol>
+<li>Click &quot;Resolve&quot; button</li>
+<li>Add resolution notes (optional): &quot;Refund processed&quot;</li>
+<li>Confirm closure</li>
+<li>Conversation moves to resolved state</li>
+<li>Customer can re-open by sending new message</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="auto-resolution">Auto-Resolution<a href="#auto-resolution" class="hash-link" aria-label="Direct link to Auto-Resolution" title="Direct link to Auto-Resolution" translate="no">​</a></h3>
+<p>System automatically resolves conversations:</p>
+<ul>
+<li><strong>24 hours</strong> of customer inactivity (configurable)</li>
+<li>Agent explicitly closes conversation</li>
+<li>Customer sends &quot;resolved&quot; or &quot;thanks&quot; (if configured)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="re-opening-resolved-conversations">Re-opening Resolved Conversations<a href="#re-opening-resolved-conversations" class="hash-link" aria-label="Direct link to Re-opening Resolved Conversations" title="Direct link to Re-opening Resolved Conversations" translate="no">​</a></h3>
+<p>If customer replies to resolved conversation:</p>
+<ul>
+<li>System creates new conversation linked to previous</li>
+<li>Maintains full history</li>
+<li>Re-enters queue routing</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="multi-channel-considerations">Multi-Channel Considerations<a href="#multi-channel-considerations" class="hash-link" aria-label="Direct link to Multi-Channel Considerations" title="Direct link to Multi-Channel Considerations" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="whatsapp">WhatsApp<a href="#whatsapp" class="hash-link" aria-label="Direct link to WhatsApp" title="Direct link to WhatsApp" translate="no">​</a></h3>
+<ul>
+<li><strong>24-Hour Window</strong>: After customer message, business has 24 hours to respond freely</li>
+<li><strong>Template Messages</strong>: Outside 24-hour window, must use pre-approved templates</li>
+<li><strong>Read Receipts</strong>: Blue checkmarks indicate customer has read message</li>
+<li><strong>Media</strong>: Full support for images, videos, documents, audio</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="email">Email<a href="#email" class="hash-link" aria-label="Direct link to Email" title="Direct link to Email" translate="no">​</a></h3>
+<ul>
+<li><strong>Subject Line</strong>: Displayed in conversation list</li>
+<li><strong>Threading</strong>: All replies grouped under original email</li>
+<li><strong>CC/BCC</strong>: Not supported - direct communication only</li>
+<li><strong>Attachments</strong>: Full support for all document types</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="facebook-messenger">Facebook Messenger<a href="#facebook-messenger" class="hash-link" aria-label="Direct link to Facebook Messenger" title="Direct link to Facebook Messenger" translate="no">​</a></h3>
+<ul>
+<li><strong>Response Time</strong>: 24-hour response window for promotional content</li>
+<li><strong>Standard Messaging</strong>: No time limit for customer service responses</li>
+<li><strong>Rich Features</strong>: Quick replies, buttons, carousels supported</li>
+<li><strong>Media</strong>: Images and documents supported</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="search--filters">Search &amp; Filters<a href="#search--filters" class="hash-link" aria-label="Direct link to Search &amp; Filters" title="Direct link to Search &amp; Filters" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="quick-search">Quick Search<a href="#quick-search" class="hash-link" aria-label="Direct link to Quick Search" title="Direct link to Quick Search" translate="no">​</a></h3>
+<p>Search across all conversations by:</p>
+<ul>
+<li>Contact name</li>
+<li>Phone or email</li>
+<li>Message content</li>
+<li>Conversation ID</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="advanced-filters">Advanced Filters<a href="#advanced-filters" class="hash-link" aria-label="Direct link to Advanced Filters" title="Direct link to Advanced Filters" translate="no">​</a></h3>
+<p>Filter conversation list by:</p>
+<ul>
+<li><strong>Channel</strong>: WhatsApp, Email, Facebook</li>
+<li><strong>Status</strong>: Queued, Active, Pending, Resolved</li>
+<li><strong>Date Range</strong>: Last 24 hours, 7 days, 30 days, custom</li>
+<li><strong>Tags</strong>: Any applied conversation tags</li>
+<li><strong>Labels</strong>: Workflow labels</li>
+<li><strong>Agent</strong>: Assigned agent name</li>
+<li><strong>Queue</strong>: Source queue</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="keyboard-shortcuts">Keyboard Shortcuts<a href="#keyboard-shortcuts" class="hash-link" aria-label="Direct link to Keyboard Shortcuts" title="Direct link to Keyboard Shortcuts" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Shortcut</th><th>Action</th></tr></thead><tbody><tr><td><code>Ctrl+Enter</code></td><td>Send message</td></tr><tr><td><code>Ctrl+/</code></td><td>Open canned messages</td></tr><tr><td><code>Ctrl+T</code></td><td>Transfer conversation</td></tr><tr><td><code>Ctrl+R</code></td><td>Resolve conversation</td></tr><tr><td><code>Ctrl+N</code></td><td>Add internal note</td></tr><tr><td><code>Esc</code></td><td>Close conversation detail</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="best-practices">Best Practices<a href="#best-practices" class="hash-link" aria-label="Direct link to Best Practices" title="Direct link to Best Practices" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="response-time">Response Time<a href="#response-time" class="hash-link" aria-label="Direct link to Response Time" title="Direct link to Response Time" translate="no">​</a></h3>
+<ul>
+<li>Acknowledge new conversations within 30 seconds</li>
+<li>Set expectations: &quot;Let me look into this, I&#x27;ll have an answer in 5 minutes&quot;</li>
+<li>Use auto-responders during off-hours</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="message-quality">Message Quality<a href="#message-quality" class="hash-link" aria-label="Direct link to Message Quality" title="Direct link to Message Quality" translate="no">​</a></h3>
+<ul>
+<li>Use customer&#x27;s name for personalization</li>
+<li>Keep messages concise and scannable</li>
+<li>Use canned messages for consistency</li>
+<li>Proofread before sending</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="conversation-management">Conversation Management<a href="#conversation-management" class="hash-link" aria-label="Direct link to Conversation Management" title="Direct link to Conversation Management" translate="no">​</a></h3>
+<ul>
+<li>Tag all conversations for accurate reporting</li>
+<li>Add internal notes for continuity</li>
+<li>Transfer promptly when you can&#x27;t resolve</li>
+<li>Resolve conversations only when fully complete</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="workload-management">Workload Management<a href="#workload-management" class="hash-link" aria-label="Direct link to Workload Management" title="Direct link to Workload Management" translate="no">​</a></h3>
+<ul>
+<li>Accept conversations within your capacity</li>
+<li>Use &quot;Busy&quot; status when at max capacity</li>
+<li>Take breaks to prevent burnout</li>
+<li>Communicate delays to customers proactively</li>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/moobidesk/queue"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Queue Management</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/moobidesk/reports"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Reports &amp; Statistics</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#conversation-interface" class="table-of-contents__link toc-highlight">Conversation Interface</a><ul><li><a href="#layout" class="table-of-contents__link toc-highlight">Layout</a></li><li><a href="#conversation-states" class="table-of-contents__link toc-highlight">Conversation States</a></li></ul></li><li><a href="#managing-conversations" class="table-of-contents__link toc-highlight">Managing Conversations</a><ul><li><a href="#accepting-conversations" class="table-of-contents__link toc-highlight">Accepting Conversations</a></li><li><a href="#responding-to-messages" class="table-of-contents__link toc-highlight">Responding to Messages</a></li><li><a href="#transferring-conversations" class="table-of-contents__link toc-highlight">Transferring Conversations</a></li><li><a href="#internal-notes" class="table-of-contents__link toc-highlight">Internal Notes</a></li><li><a href="#tagging-conversations" class="table-of-contents__link toc-highlight">Tagging Conversations</a></li><li><a href="#conversation-labels" class="table-of-contents__link toc-highlight">Conversation Labels</a></li></ul></li><li><a href="#resolving-conversations" class="table-of-contents__link toc-highlight">Resolving Conversations</a><ul><li><a href="#marking-as-resolved" class="table-of-contents__link toc-highlight">Marking as Resolved</a></li><li><a href="#auto-resolution" class="table-of-contents__link toc-highlight">Auto-Resolution</a></li><li><a href="#re-opening-resolved-conversations" class="table-of-contents__link toc-highlight">Re-opening Resolved Conversations</a></li></ul></li><li><a href="#multi-channel-considerations" class="table-of-contents__link toc-highlight">Multi-Channel Considerations</a><ul><li><a href="#whatsapp" class="table-of-contents__link toc-highlight">WhatsApp</a></li><li><a href="#email" class="table-of-contents__link toc-highlight">Email</a></li><li><a href="#facebook-messenger" class="table-of-contents__link toc-highlight">Facebook Messenger</a></li></ul></li><li><a href="#search--filters" class="table-of-contents__link toc-highlight">Search &amp; Filters</a><ul><li><a href="#quick-search" class="table-of-contents__link toc-highlight">Quick Search</a></li><li><a href="#advanced-filters" class="table-of-contents__link toc-highlight">Advanced Filters</a></li></ul></li><li><a href="#keyboard-shortcuts" class="table-of-contents__link toc-highlight">Keyboard Shortcuts</a></li><li><a href="#best-practices" class="table-of-contents__link toc-highlight">Best Practices</a><ul><li><a href="#response-time" class="table-of-contents__link toc-highlight">Response Time</a></li><li><a href="#message-quality" class="table-of-contents__link toc-highlight">Message Quality</a></li><li><a href="#conversation-management" class="table-of-contents__link toc-highlight">Conversation Management</a></li><li><a href="#workload-management" class="table-of-contents__link toc-highlight">Workload Management</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>
