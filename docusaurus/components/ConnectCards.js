@@ -263,6 +263,18 @@ const cards = [
     ],
   },
   {
+    title: 'Moobidesk',
+    items: [
+      {
+        label: 'Overview',
+        link: '/connect/docs/moobidesk',
+      },
+      { label: 'Getting Started', link: '/connect/docs/moobidesk/getting-started' },
+      { label: 'Conversations', link: '/connect/docs/moobidesk/conversations' },
+      { label: 'View More…', link: '/connect/docs/moobidesk' },
+    ],
+  },
+  {
     title: 'Video Interaction',
     items: [
       { label: 'Overview', link: '/connect/docs/vi-overview' },

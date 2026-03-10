@@ -483,6 +483,26 @@ const sidebarConfig = [
   },
   {
     type: 'category',
+    label: 'Moobidesk',
+    collapsed: true,
+    items: [
+      {
+        type: 'doc',
+        id: 'connect/docs/moobidesk-overview',
+        label: 'Overview',
+      },
+      'connect/docs/moobidesk/getting-started',
+      'connect/docs/moobidesk/user-roles',
+      'connect/docs/moobidesk/contacts',
+      'connect/docs/moobidesk/agents',
+      'connect/docs/moobidesk/queue',
+      'connect/docs/moobidesk/conversations',
+      'connect/docs/moobidesk/reports',
+      'connect/docs/moobidesk/settings',
+    ],
+  },
+  {
+    type: 'category',
     label: 'Video Interaction',
     collapsed: true,
     items: [
