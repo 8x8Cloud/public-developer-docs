@@ -230,7 +230,8 @@
                               "cta_url",
                               "flow",
                               "call_permission_request",
-                              "voice_call"
+                              "voice_call",
+                              "location_request_message"
                             ],
                             "description": "The type of interactive message you want to send."
                           },
@@ -283,6 +284,10 @@
                               "product_retailer_id": {
                                 "type": "string",
                                 "description": "Required for Single Product Messages and Multi-Product Messages.\n\nUnique identifier of the product in a catalog."
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "Required to be `send_location` for Location Request Message."
                               },
                               "sections": {
                                 "type": "array",
@@ -406,7 +411,7 @@
                           },
                           "header": {
                             "type": "object",
-                            "description": "Header content displayed on top of a message. You cannot set a header if your interactive object is of product type.",
+                            "description": "Header content displayed on top of a message. You cannot set a header if your interactive object is of product and location request message type.",
                             "properties": {
                               "document": {
                                 "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages/post/requestBody/content/application~1json/schema/properties/content/properties/interactive/properties/header/properties/text"
@@ -465,7 +470,7 @@
                           },
                           "footer": {
                             "type": "object",
-                            "description": "An object with the footer of the message.",
+                            "description": "An object with the footer of the message. You cannot set a footer for location request message type",
                             "properties": {
                               "text": {
                                 "type": "string",
@@ -1665,6 +1670,26 @@
                         },
                         "body": {
                           "text": "You can call us on WhatsApp now for faster service"
+                        }
+                      }
+                    }
+                  }
+                },
+                "whatsAppInteractiveLocationRequestMessage": {
+                  "summary": "WhatsApp Interactive Message - Location Request Message",
+                  "value": {
+                    "user": {
+                      "msisdn": "+6500000000"
+                    },
+                    "type": "interactive",
+                    "content": {
+                      "interactive": {
+                        "type": "location_request_message",
+                        "action": {
+                          "name": "send_location"
+                        },
+                        "body": {
+                          "text": "Please share your location or enter your pickup address."
                         }
                       }
                     }
