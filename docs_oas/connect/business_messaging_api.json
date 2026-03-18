@@ -3221,6 +3221,11 @@
                     "example": false,
                     "description": "set to true to allow whatsapp to automatically assign a category. If omitted, the template may be rejected due to mis-categorization.",
                     "default": true
+                  },
+                  "message_send_ttl_seconds": {
+                    "type": "integer",
+                    "example": 300,
+                    "description": "Custom time-to-live (TTL) for message delivery in seconds. If a message cannot be delivered within this time, it will be dropped.<br/>Valid ranges: Authentication templates (30-900 seconds or -1 for 30 days), Utility templates (30-43200 seconds or -1 for 30 days), Marketing templates (43200-2592000 seconds).<br/>Default TTL: Authentication=10 minutes (600 seconds), Utility/Marketing=30 days."
                   }
                 },
                 "required": ["language", "name", "category", "components"],
