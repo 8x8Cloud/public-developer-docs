@@ -5312,11 +5312,50 @@
                         "example": "http://example.com",
                         "description": "The `url` to use for the webhook (8x8 platform will send events to this URL)."
                       },
+                      "httpAuthorization": {
+                        "type": "string",
+                        "description": "The static HTTP `Authorization` header value sent with every webhook request. Masked as `***` in GET responses.",
+                        "example": "***"
+                      },
                       "enabled": {
                         "type": "boolean",
                         "example": false,
                         "description": "Use this flag to enable or disable a Webhook.",
                         "default": true
+                      },
+                      "oauth": {
+                        "type": "object",
+                        "description": "OAuth 2.0 Client Credentials configuration for webhook authentication. When configured, the platform will obtain an access token from the specified token endpoint and include it in the webhook request. The `clientSecret` is masked (`***`) in GET responses.",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "The token endpoint URL used to obtain the OAuth access token.",
+                            "example": "https://auth.example.com/oauth/token"
+                          },
+                          "clientId": {
+                            "type": "string",
+                            "description": "The client ID for OAuth authentication.",
+                            "example": "my-client-id"
+                          },
+                          "clientSecret": {
+                            "type": "string",
+                            "description": "The client secret for OAuth authentication. Masked as `***` in GET responses.",
+                            "example": "***"
+                          },
+                          "credentialsLocation": {
+                            "type": "string",
+                            "enum": ["header", "body"],
+                            "description": "Specifies where the client credentials are sent: `header` (HTTP Basic Auth) or `body` (form body).",
+                            "example": "header"
+                          },
+                          "scope": {
+                            "type": "string",
+                            "description": "Optional space-separated list of OAuth scopes to request.",
+                            "example": "read write"
+                          }
+                        },
+                        "required": ["url", "clientId", "clientSecret", "credentialsLocation"]
                       }
                     },
                     "required": ["subAccountId", "url"]
@@ -5329,7 +5368,21 @@
                         "type": "CADR",
                         "subAccountId": "Onion_Marketing",
                         "url": "http://example.com/dr/marketing",
-                        "enabled": true
+                        "enabled": true,
+                        "oauth": {
+                          "url": "https://auth.example.com/oauth/token",
+                          "clientId": "my-client-id",
+                          "clientSecret": "***",
+                          "credentialsLocation": "header",
+                          "scope": "read write"
+                        }
+                      },
+                      {
+                        "type": "MSG",
+                        "subAccountId": "Onion_Marketing",
+                        "url": "http://example.com/dr/sales",
+                        "enabled": true,
+                        "httpAuthorization": "***"
                       },
                       {
                         "type": "MSG",
@@ -5435,7 +5488,7 @@
                     },
                     "httpAuthorization": {
                       "type": "string",
-                      "description": "- If your webhook requires an authorization, use this parameter to specify it.\n- If specified, the HTTP Authorization header will be passed to your webhook as is.\n- Examples:\n\t- **Basic Authorization** example\n\t\t- for `user:password`, you must encode the string `user:password` in base64 (encoded: dXNlcjpwYXNzd29yZA==)\n  \t\t- the parameter value should then be set to `Basic dXNlcjpwYXNzd29yZA==`\n\t- **OAuth2 Authorization** \n\t\t- We support OAuth2 Client Credentials flow. Please contact support to configure OAuth2 parameters.",
+                      "description": "A static value sent as the HTTP `Authorization` header with every webhook request. Use this for static credentials such as API keys or pre-shared tokens.\n\n**Example — Basic Authorization:**\n- Encode `user:password` in base64 (e.g. `dXNlcjpwYXNzd29yZA==`)\n- Set this field to `Basic dXNlcjpwYXNzd29yZA==`\n\n> For OAuth 2.0 Client Credentials flow, leave this field empty and use the `oauth` property instead.",
                       "example": "Bearer 9QQhlsEb8VY"
                     },
                     "enabled": {
@@ -5448,27 +5501,92 @@
                       "type": "string",
                       "enum": ["CADR", "MSG", "CABM"],
                       "description": "This parameter is not mandatory.\n- Sets the type of webhook to be added/updated.\n- Possible values are:\n  * `CADR` for delivery receipts\n  * `MSG` for inbound messages\n  * `CABM` for Messaging Apps Business Management Updates\n- When not provided, webhooks will be added/updated for only CADR and MSG."
+                    },
+                    "oauth": {
+                      "type": "object",
+                      "description": "OAuth 2.0 Client Credentials configuration for webhook authentication. When configured, the platform will obtain an access token from the specified token endpoint and include it in the webhook request.",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "format": "uri",
+                          "description": "The token endpoint URL used to obtain the OAuth access token.",
+                          "example": "https://auth.example.com/oauth/token"
+                        },
+                        "clientId": {
+                          "type": "string",
+                          "description": "The client ID for OAuth authentication.",
+                          "example": "my-client-id"
+                        },
+                        "clientSecret": {
+                          "type": "string",
+                          "description": "The client secret for OAuth authentication.",
+                          "example": "my-client-secret"
+                        },
+                        "credentialsLocation": {
+                          "type": "string",
+                          "enum": ["header", "body"],
+                          "description": "Specifies where the client credentials are sent: `header` (HTTP Basic Auth) or `body` (form body).",
+                          "example": "header"
+                        },
+                        "scope": {
+                          "type": "string",
+                          "description": "Optional space-separated list of OAuth scopes to request.",
+                          "example": "read write"
+                        }
+                      },
+                      "required": ["url", "clientId", "clientSecret", "credentialsLocation"]
                     }
                   },
                   "required": ["subAccountId", "url"]
                 }
+              },
+              "examples": {
+                "no authorization": {
+                  "summary": "Without authorization",
+                  "value": [
+                    {
+                      "subAccountId": "Onion_Marketing",
+                      "url": "http://example.com/DR/marketing",
+                      "enabled": true
+                    },
+                    {
+                      "subAccountId": "*",
+                      "url": "http://example.com/mo/general",
+                      "enabled": true,
+                      "type": "MSG"
+                    }
+                  ]
+                },
+                "basic authorization": {
+                  "summary": "With Basic Authorization",
+                  "value": [
+                    {
+                      "subAccountId": "Onion_Marketing",
+                      "url": "http://example.com/DR/marketing",
+                      "enabled": true,
+                      "httpAuthorization": "Basic dXNlcjpwYXNzd29yZA=="
+                    }
+                  ]
+                },
+                "oauth": {
+                  "summary": "With OAuth",
+                  "value": [
+                    {
+                      "subAccountId": "Onion_Marketing",
+                      "url": "http://example.com/DR/marketing",
+                      "enabled": true,
+                      "oauth": {
+                        "url": "https://auth.example.com/oauth/token",
+                        "clientId": "my-client-id",
+                        "clientSecret": "my-client-secret",
+                        "credentialsLocation": "header",
+                        "scope": "read write"
+                      }
+                    }
+                  ]
+                }
               }
             }
-          },
-          "x-examples": {
-            "application/json": [
-              {
-                "subAccountId": "Onion_Marketing",
-                "url": "http://example.com/DR/marketing",
-                "httpAuthorization": "Basic dXNlcjpwYXNzd29yZA==",
-                "enabled": false
-              },
-              {
-                "subAccountId": "*",
-                "url": "http://example.com/mo/general",
-                "enabled": true
-              }
-            ]
           }
         },
         "security": [
