@@ -105,7 +105,7 @@
           },
           "httpAuthorization": {
             "type": "string",
-            "description": "- If your webhook requires an authorization, use this parameter to specify it.\n- If specified, the HTTP Authorization header will be passed to your webhook as is.\n- Examples:\n\t- **Basic Authorization** example\n\t\t- for `user:password`, you must encode the string `user:password` in base64 (encoded: dXNlcjpwYXNzd29yZA==)\n  \t\t- the parameter value should then be set to `Basic dXNlcjpwYXNzd29yZA==`\n\t- **OAuth2 Authorization**\n\t\t- We support OAuth2 Client Credentials flow. Please contact support to configure OAuth2 parameters.",
+            "description": "A static value sent as the HTTP `Authorization` header with every webhook request. Use this for static credentials such as API keys or pre-shared tokens.\n\n**Example — Basic Authorization:**\n- Encode `user:password` in base64 (e.g. `dXNlcjpwYXNzd29yZA==`)\n- Set this field to `Basic dXNlcjpwYXNzd29yZA==`\n\n> For OAuth 2.0 Client Credentials flow, leave this field empty and use the `oauth` property instead.",
             "example": "Bearer 9QQhlsEb8VY"
           },
           "enabled": {
