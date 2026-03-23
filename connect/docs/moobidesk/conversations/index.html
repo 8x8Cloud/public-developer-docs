@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.c247a45b.css">
-<script src="/assets/js/runtime~main.390ecd45.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.fbf682ce.js" defer="defer"></script>
 <script src="/assets/js/main.60c3074a.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -82,7 +82,7 @@
 
 
 
-<table><thead><tr><th>State</th><th>Description</th><th>Agent Action</th></tr></thead><tbody><tr><td><strong>Queued</strong></td><td>Waiting for agent assignment</td><td>Click to accept</td></tr><tr><td><strong>Active</strong></td><td>Assigned to agent, open</td><td>Respond to customer</td></tr><tr><td><strong>Pending</strong></td><td>Waiting for customer reply</td><td>Monitor for response</td></tr><tr><td><strong>Resolved</strong></td><td>Completed by agent</td><td>Closed, available for reporting</td></tr><tr><td><strong>Abandoned</strong></td><td>Customer left before resolution</td><td>Auto-closed after timeout</td></tr></tbody></table>
+<table><thead><tr><th>State</th><th>Description</th><th>Agent Action</th></tr></thead><tbody><tr><td><strong>Unassigned (Open)</strong></td><td>New conversations that have not been assigned to any agent</td><td>Claim (Pick-Me) or auto-assigned by system (Round-Robin)</td></tr><tr><td><strong>Assigned</strong></td><td>Conversations assigned to an agent</td><td>View and manage the conversation</td></tr><tr><td><strong>Read</strong></td><td>Conversation has been viewed by the agent</td><td>Prepare and respond to the customer</td></tr><tr><td><strong>Responded</strong></td><td>Agent has replied to the customer</td><td>Continue conversation or wait for customer reply</td></tr><tr><td><strong>Closed</strong></td><td>Conversation has been completed and closed</td><td>No further action required</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="managing-conversations">Managing Conversations<a href="#managing-conversations" class="hash-link" aria-label="Direct link to Managing Conversations" title="Direct link to Managing Conversations" translate="no">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="accepting-conversations">Accepting Conversations<a href="#accepting-conversations" class="hash-link" aria-label="Direct link to Accepting Conversations" title="Direct link to Accepting Conversations" translate="no">​</a></h3>
 <p><strong>From Queue</strong>:</p>
@@ -123,7 +123,7 @@
 <p><img decoding="async" loading="lazy" alt="Canned Messages" src="/assets/images/page40_img1-f448145a2c49ec0cfe9fec4bd75d9fb4.png" width="1218" height="506" class="img_ev3q"></p>
 <p>Use pre-written templates for common responses:</p>
 <ol>
-<li>Click canned message icon (or type <code>/</code>)</li>
+<li>Click canned message icon (or type <code>#</code>)</li>
 <li>Search by keyword or browse categories</li>
 <li>Select template</li>
 <li>Auto-populates with contact variables: <code>{{first_name}}</code>, <code>{{email}}</code>, etc.</li>
@@ -235,52 +235,6 @@
 <li>Message content</li>
 <li>Conversation ID</li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="advanced-filters">Advanced Filters<a href="#advanced-filters" class="hash-link" aria-label="Direct link to Advanced Filters" title="Direct link to Advanced Filters" translate="no">​</a></h3>
-<p>Filter conversation list by:</p>
-<ul>
-<li><strong>Channel</strong>: WhatsApp, Email, Facebook</li>
-<li><strong>Status</strong>: Queued, Active, Pending, Resolved</li>
-<li><strong>Date Range</strong>: Last 24 hours, 7 days, 30 days, custom</li>
-<li><strong>Tags</strong>: Any applied conversation tags</li>
-<li><strong>Labels</strong>: Workflow labels</li>
-<li><strong>Agent</strong>: Assigned agent name</li>
-<li><strong>Queue</strong>: Source queue</li>
-</ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="keyboard-shortcuts">Keyboard Shortcuts<a href="#keyboard-shortcuts" class="hash-link" aria-label="Direct link to Keyboard Shortcuts" title="Direct link to Keyboard Shortcuts" translate="no">​</a></h2>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Shortcut</th><th>Action</th></tr></thead><tbody><tr><td><code>Ctrl+Enter</code></td><td>Send message</td></tr><tr><td><code>Ctrl+/</code></td><td>Open canned messages</td></tr><tr><td><code>Ctrl+T</code></td><td>Transfer conversation</td></tr><tr><td><code>Ctrl+R</code></td><td>Resolve conversation</td></tr><tr><td><code>Ctrl+N</code></td><td>Add internal note</td></tr><tr><td><code>Esc</code></td><td>Close conversation detail</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="best-practices">Best Practices<a href="#best-practices" class="hash-link" aria-label="Direct link to Best Practices" title="Direct link to Best Practices" translate="no">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="response-time">Response Time<a href="#response-time" class="hash-link" aria-label="Direct link to Response Time" title="Direct link to Response Time" translate="no">​</a></h3>
 <ul>
@@ -308,6 +262,6 @@
 <li>Use &quot;Busy&quot; status when at max capacity</li>
 <li>Take breaks to prevent burnout</li>
 <li>Communicate delays to customers proactively</li>
-</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/moobidesk/queue"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Queue Management</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/moobidesk/reports"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Reports &amp; Statistics</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#conversation-interface" class="table-of-contents__link toc-highlight">Conversation Interface</a><ul><li><a href="#layout" class="table-of-contents__link toc-highlight">Layout</a></li><li><a href="#conversation-states" class="table-of-contents__link toc-highlight">Conversation States</a></li></ul></li><li><a href="#managing-conversations" class="table-of-contents__link toc-highlight">Managing Conversations</a><ul><li><a href="#accepting-conversations" class="table-of-contents__link toc-highlight">Accepting Conversations</a></li><li><a href="#responding-to-messages" class="table-of-contents__link toc-highlight">Responding to Messages</a></li><li><a href="#transferring-conversations" class="table-of-contents__link toc-highlight">Transferring Conversations</a></li><li><a href="#internal-notes" class="table-of-contents__link toc-highlight">Internal Notes</a></li><li><a href="#tagging-conversations" class="table-of-contents__link toc-highlight">Tagging Conversations</a></li><li><a href="#conversation-labels" class="table-of-contents__link toc-highlight">Conversation Labels</a></li></ul></li><li><a href="#resolving-conversations" class="table-of-contents__link toc-highlight">Resolving Conversations</a><ul><li><a href="#marking-as-resolved" class="table-of-contents__link toc-highlight">Marking as Resolved</a></li><li><a href="#auto-resolution" class="table-of-contents__link toc-highlight">Auto-Resolution</a></li><li><a href="#re-opening-resolved-conversations" class="table-of-contents__link toc-highlight">Re-opening Resolved Conversations</a></li></ul></li><li><a href="#multi-channel-considerations" class="table-of-contents__link toc-highlight">Multi-Channel Considerations</a><ul><li><a href="#whatsapp" class="table-of-contents__link toc-highlight">WhatsApp</a></li><li><a href="#email" class="table-of-contents__link toc-highlight">Email</a></li><li><a href="#facebook-messenger" class="table-of-contents__link toc-highlight">Facebook Messenger</a></li></ul></li><li><a href="#search--filters" class="table-of-contents__link toc-highlight">Search &amp; Filters</a><ul><li><a href="#quick-search" class="table-of-contents__link toc-highlight">Quick Search</a></li><li><a href="#advanced-filters" class="table-of-contents__link toc-highlight">Advanced Filters</a></li></ul></li><li><a href="#keyboard-shortcuts" class="table-of-contents__link toc-highlight">Keyboard Shortcuts</a></li><li><a href="#best-practices" class="table-of-contents__link toc-highlight">Best Practices</a><ul><li><a href="#response-time" class="table-of-contents__link toc-highlight">Response Time</a></li><li><a href="#message-quality" class="table-of-contents__link toc-highlight">Message Quality</a></li><li><a href="#conversation-management" class="table-of-contents__link toc-highlight">Conversation Management</a></li><li><a href="#workload-management" class="table-of-contents__link toc-highlight">Workload Management</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/moobidesk/queue"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Queue Management</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/moobidesk/reports"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Reports &amp; Statistics</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#conversation-interface" class="table-of-contents__link toc-highlight">Conversation Interface</a><ul><li><a href="#layout" class="table-of-contents__link toc-highlight">Layout</a></li><li><a href="#conversation-states" class="table-of-contents__link toc-highlight">Conversation States</a></li></ul></li><li><a href="#managing-conversations" class="table-of-contents__link toc-highlight">Managing Conversations</a><ul><li><a href="#accepting-conversations" class="table-of-contents__link toc-highlight">Accepting Conversations</a></li><li><a href="#responding-to-messages" class="table-of-contents__link toc-highlight">Responding to Messages</a></li><li><a href="#transferring-conversations" class="table-of-contents__link toc-highlight">Transferring Conversations</a></li><li><a href="#internal-notes" class="table-of-contents__link toc-highlight">Internal Notes</a></li><li><a href="#tagging-conversations" class="table-of-contents__link toc-highlight">Tagging Conversations</a></li><li><a href="#conversation-labels" class="table-of-contents__link toc-highlight">Conversation Labels</a></li></ul></li><li><a href="#resolving-conversations" class="table-of-contents__link toc-highlight">Resolving Conversations</a><ul><li><a href="#marking-as-resolved" class="table-of-contents__link toc-highlight">Marking as Resolved</a></li><li><a href="#auto-resolution" class="table-of-contents__link toc-highlight">Auto-Resolution</a></li><li><a href="#re-opening-resolved-conversations" class="table-of-contents__link toc-highlight">Re-opening Resolved Conversations</a></li></ul></li><li><a href="#multi-channel-considerations" class="table-of-contents__link toc-highlight">Multi-Channel Considerations</a><ul><li><a href="#whatsapp" class="table-of-contents__link toc-highlight">WhatsApp</a></li><li><a href="#email" class="table-of-contents__link toc-highlight">Email</a></li><li><a href="#facebook-messenger" class="table-of-contents__link toc-highlight">Facebook Messenger</a></li></ul></li><li><a href="#search--filters" class="table-of-contents__link toc-highlight">Search &amp; Filters</a><ul><li><a href="#quick-search" class="table-of-contents__link toc-highlight">Quick Search</a></li></ul></li><li><a href="#best-practices" class="table-of-contents__link toc-highlight">Best Practices</a><ul><li><a href="#response-time" class="table-of-contents__link toc-highlight">Response Time</a></li><li><a href="#message-quality" class="table-of-contents__link toc-highlight">Message Quality</a></li><li><a href="#conversation-management" class="table-of-contents__link toc-highlight">Conversation Management</a></li><li><a href="#workload-management" class="table-of-contents__link toc-highlight">Workload Management</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
 </body>
 </html>

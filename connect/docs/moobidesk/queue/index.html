@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.c247a45b.css">
-<script src="/assets/js/runtime~main.390ecd45.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.fbf682ce.js" defer="defer"></script>
 <script src="/assets/js/main.60c3074a.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -21,14 +21,16 @@
 <p>The Queue module controls how incoming conversations are distributed to available agents based on routing rules, priority, and agent availability.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="queue-overview">Queue Overview<a href="#queue-overview" class="hash-link" aria-label="Direct link to Queue Overview" title="Direct link to Queue Overview" translate="no">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="queue-list-view">Queue List View<a href="#queue-list-view" class="hash-link" aria-label="Direct link to Queue List View" title="Direct link to Queue List View" translate="no">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="Queue Management" src="/assets/images/page27_img1-5c32cf349a7c210d1f58849401894003.png" width="1366" height="1002" class="img_ev3q"></p>
-<p>Active queues display:</p>
+<p><img decoding="async" loading="lazy" alt="Queue Management" src="/assets/images/queue-overview-2d6bafd2cf32e9198e016caf2f55be23.png" width="1312" height="901" class="img_ev3q"></p>
+<p>Each queue contains the following configurations:</p>
 <ul>
-<li><strong>Queue Name</strong>: Identifier for the queue</li>
-<li><strong>Waiting</strong>: Conversations pending agent assignment</li>
-<li><strong>Active</strong>: Conversations currently being handled</li>
-<li><strong>Assigned Agents</strong>: Number of agents allocated to the queue</li>
-<li><strong>Avg Wait Time</strong>: Average time before agent pickup</li>
+<li><strong>Queue Name</strong>: Unique identifier for the queue</li>
+<li><strong>Queue Type</strong>: Defines the queue&#x27;s purpose and usage</li>
+<li><strong>Assigned Channels</strong>: Communication channels linked to the queue</li>
+<li><strong>Skillsets</strong>: Required agent capabilities for handling conversations</li>
+<li><strong>Assigned Agents</strong>: Agents allocated to handle conversations in the queue</li>
+<li><strong>Routing Priority</strong>: Determines how conversations are distributed among agents</li>
+<li><strong>SLA Settings</strong>: Defines response time targets for conversations</li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="queue-types">Queue Types<a href="#queue-types" class="hash-link" aria-label="Direct link to Queue Types" title="Direct link to Queue Types" translate="no">​</a></h3>
 
@@ -56,95 +58,80 @@
 
 
 
-
-
-
-
-
-<table><thead><tr><th>Type</th><th>Purpose</th><th>Routing Logic</th></tr></thead><tbody><tr><td><strong>General</strong></td><td>Default queue for all channels</td><td>Round-robin to available agents</td></tr><tr><td><strong>Skill-Based</strong></td><td>Specialized inquiries</td><td>Routes to agents with required skills</td></tr><tr><td><strong>VIP</strong></td><td>High-priority customers</td><td>Priority routing to senior agents</td></tr><tr><td><strong>Overflow</strong></td><td>Backup for high-volume periods</td><td>Receives transfers from at-capacity queues</td></tr></tbody></table>
+<table><thead><tr><th>Type</th><th>Purpose</th><th>Routing Logic</th></tr></thead><tbody><tr><td><strong>General</strong></td><td>Default queue for handling incoming conversations</td><td>Conversations are routed to available agents within the queue</td></tr><tr><td><strong>Non-General</strong></td><td>Queue configured for specific channels, skillsets, or use cases</td><td>Conversations are routed based on configured channels and skillset matching</td></tr><tr><td><strong>Outbound</strong></td><td>Used for agent-initiated conversations</td><td>Conversations are initiated by agents and assigned directly</td></tr></tbody></table>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="creating-queues">Creating Queues<a href="#creating-queues" class="hash-link" aria-label="Direct link to Creating Queues" title="Direct link to Creating Queues" translate="no">​</a></h2>
-<p>Administrators configure queues:</p>
+<p>Managers can create and configure queues to manage conversation routing:</p>
 <ol>
-<li>Navigate to Settings → Queues → Add Queue</li>
+<li>Navigate to Queues → Add Queue</li>
 <li>Enter queue details:
 <ul>
-<li><strong>Name</strong>: Descriptive queue identifier</li>
-<li><strong>Description</strong>: Internal purpose notes</li>
-<li><strong>Priority</strong>: 1 (lowest) to 10 (highest)</li>
+<li><strong>Queue Name</strong>: Unique identifier for the queue</li>
+<li><strong>Queue Type</strong>: Select the queue type (e.g., General, Non-General, Outbound)</li>
+<li><strong>Assigned Channels</strong>: Select communication channels for the queue (e.g., WhatsApp, Email)</li>
+<li><strong>Skillsets</strong>: Define required skillsets for agents handling this queue</li>
 </ul>
 </li>
-<li>Configure routing settings:
+<li>Configure queue settings:
 <ul>
-<li><strong>Distribution Method</strong>: Round-robin, Least-active, or Skill-based</li>
-<li><strong>Max Wait Time</strong>: SLA threshold in seconds</li>
-<li><strong>Overflow Queue</strong>: Fallback if wait time exceeds threshold</li>
+<li><strong>Assigned Agents</strong></li>
+<li><strong>Routing Priority</strong>: Define agent priority within the queue (used for distribution)</li>
+<li><strong>SLA Settings</strong>: Configure response time targets (Assigned, Read, Responded, Closed)</li>
 </ul>
 </li>
-<li>Assign agents to queue</li>
 <li>Save configuration</li>
 </ol>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="routing-methods">Routing Methods<a href="#routing-methods" class="hash-link" aria-label="Direct link to Routing Methods" title="Direct link to Routing Methods" translate="no">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="round-robin">Round-Robin<a href="#round-robin" class="hash-link" aria-label="Direct link to Round-Robin" title="Direct link to Round-Robin" translate="no">​</a></h3>
 <p>Distributes conversations sequentially to agents in rotation.</p>
 <p><strong>Best For</strong>: Balanced workload distribution, general inquiries</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="least-active">Least-Active<a href="#least-active" class="hash-link" aria-label="Direct link to Least-Active" title="Direct link to Least-Active" translate="no">​</a></h3>
-<p>Routes to the agent with the fewest active conversations.</p>
-<p><strong>Best For</strong>: Optimizing agent capacity utilization</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="skill-based">Skill-Based<a href="#skill-based" class="hash-link" aria-label="Direct link to Skill-Based" title="Direct link to Skill-Based" translate="no">​</a></h3>
-<p>Matches conversation requirements to agent expertise.</p>
-<p><strong>Best For</strong>: Technical support, specialized services, multilingual support</p>
-<p><strong>Configuration</strong>:</p>
-<ol>
-<li>Define required skills for queue (e.g., &quot;Billing + Spanish&quot;)</li>
-<li>Set minimum proficiency level (1-5)</li>
-<li>System routes to agents meeting criteria</li>
-<li>Falls back to general routing if no match within timeout</li>
-</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pick-me">Pick-Me<a href="#pick-me" class="hash-link" aria-label="Direct link to Pick-Me" title="Direct link to Pick-Me" translate="no">​</a></h3>
+<p>New conversations are placed in the Unassigned queue. Agents manually select and claim conversations from the queue.</p>
+<p><strong>Best For</strong>: Flexible conversation handling, Teams that prefer manual assignment, Low to moderate conversation volume</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="priority-management">Priority Management<a href="#priority-management" class="hash-link" aria-label="Direct link to Priority Management" title="Direct link to Priority Management" translate="no">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="queue-priority">Queue Priority<a href="#queue-priority" class="hash-link" aria-label="Direct link to Queue Priority" title="Direct link to Queue Priority" translate="no">​</a></h3>
-<p>Assign priority levels (1-10) to control routing order:</p>
+<p>Queues can be configured with agent priority levels to control how conversations are distributed.</p>
 <ul>
-<li><strong>High Priority (8-10)</strong>: VIP customers, escalations - processed first</li>
-<li><strong>Medium Priority (4-7)</strong>: Standard customer inquiries</li>
-<li><strong>Low Priority (1-3)</strong>: Marketing responses, non-urgent requests</li>
+<li>Priority levels range from 1 (highest) to 5 (lowest)</li>
+<li>Agents with higher priority receive conversations first</li>
+<li>Agents with the same priority level receive conversations in a round-robin approach</li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="within-queue-priority">Within-Queue Priority<a href="#within-queue-priority" class="hash-link" aria-label="Direct link to Within-Queue Priority" title="Direct link to Within-Queue Priority" translate="no">​</a></h3>
-<p>Individual conversations can be escalated:</p>
-<ol>
-<li>Supervisor opens queued conversation</li>
-<li>Selects &quot;Increase Priority&quot;</li>
-<li>Conversation moves to front of queue</li>
-<li>Next available agent receives it immediately</li>
-</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="assignment-logic">Assignment Logic<a href="#assignment-logic" class="hash-link" aria-label="Direct link to Assignment Logic" title="Direct link to Assignment Logic" translate="no">​</a></h3>
+<ul>
+<li>The system evaluates agents starting from Priority 1 to Priority 5</li>
+<li>Only eligible agents are considered for assignment</li>
+<li>If no eligible agents are available, the conversation remains Unassigned</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="agent-eligibility">Agent Eligibility<a href="#agent-eligibility" class="hash-link" aria-label="Direct link to Agent Eligibility" title="Direct link to Agent Eligibility" translate="no">​</a></h3>
+<p>To receive a conversation, an agent must:</p>
+<ul>
+<li>Be in Available status</li>
+<li>Not exceed the maximum concurrent conversation limit</li>
+</ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="sla-service-level-agreement">SLA (Service Level Agreement)<a href="#sla-service-level-agreement" class="hash-link" aria-label="Direct link to SLA (Service Level Agreement)" title="Direct link to SLA (Service Level Agreement)" translate="no">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="configuring-slas">Configuring SLAs<a href="#configuring-slas" class="hash-link" aria-label="Direct link to Configuring SLAs" title="Direct link to Configuring SLAs" translate="no">​</a></h3>
-<p>Set performance thresholds per queue:</p>
+<p>SLA defines the expected response time for handling conversations within a queue.</p>
+<p>The following SLA parameters can be configured:</p>
 <ul>
-<li><strong>First Response Time</strong>: Target seconds for initial agent reply</li>
-<li><strong>Resolution Time</strong>: Target seconds for conversation close</li>
-<li><strong>Abandon Rate</strong>: Acceptable percentage of customer-abandoned chats</li>
+<li><strong>Assigned</strong>: Time taken for a conversation to be assigned to an agent</li>
+<li><strong>Read</strong>: Time taken for the agent to read the conversation</li>
+<li><strong>Responded</strong>: Time taken for the agent to respond</li>
+<li><strong>Closed</strong>: Total time from assignment to closure</li>
 </ul>
+<p>The Closed SLA must be equal to or greater than the total of the other SLA durations.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="sla-monitoring">SLA Monitoring<a href="#sla-monitoring" class="hash-link" aria-label="Direct link to SLA Monitoring" title="Direct link to SLA Monitoring" translate="no">​</a></h3>
-<p>Real-time SLA compliance displayed in:</p>
+<p>SLA performance is tracked within the conversation interface and reports.</p>
 <ul>
-<li>Dashboard top bar (system-wide)</li>
-<li>Queue detail view (per queue)</li>
-<li>Agent performance reports</li>
+<li>SLA timers are displayed during conversation handling</li>
+<li>Indicators show whether response time is within SLA limits</li>
+<li>SLA data is available in reporting modules</li>
 </ul>
-<p><strong>SLA Status</strong>:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sla-status">SLA Status<a href="#sla-status" class="hash-link" aria-label="Direct link to SLA Status" title="Direct link to SLA Status" translate="no">​</a></h3>
+<p>SLA status is visually indicated using color indicators:</p>
 <ul>
-<li><strong>Green</strong>: Meeting targets</li>
-<li><strong>Yellow</strong>: Approaching threshold (within 10%)</li>
-<li><strong>Red</strong>: Breaching SLA</li>
+<li><strong>Green</strong>: Within SLA</li>
+<li><strong>Yellow</strong>: Approaching SLA limit</li>
+<li><strong>Red</strong>: SLA exceeded</li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sla-escalations">SLA Escalations<a href="#sla-escalations" class="hash-link" aria-label="Direct link to SLA Escalations" title="Direct link to SLA Escalations" translate="no">​</a></h3>
-<p>When SLA thresholds are breached:</p>
-<ol>
-<li>System sends alert to supervisors</li>
-<li>Conversation priority automatically increases</li>
-<li>Notifications sent to available agents</li>
-<li>Incident logged in reports</li>
-</ol>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="agent-assignment">Agent Assignment<a href="#agent-assignment" class="hash-link" aria-label="Direct link to Agent Assignment" title="Direct link to Agent Assignment" translate="no">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="manual-assignment">Manual Assignment<a href="#manual-assignment" class="hash-link" aria-label="Direct link to Manual Assignment" title="Direct link to Manual Assignment" translate="no">​</a></h3>
 <p>Supervisors can manually route conversations:</p>
@@ -206,6 +193,6 @@
 <li>Review queue performance daily during ramp-up</li>
 <li>Adjust routing rules based on SLA trends</li>
 <li>Investigate frequent queue transfers for process improvements</li>
-</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/moobidesk/agents"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Agent Management</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/moobidesk/conversations"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Conversations</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#queue-overview" class="table-of-contents__link toc-highlight">Queue Overview</a><ul><li><a href="#queue-list-view" class="table-of-contents__link toc-highlight">Queue List View</a></li><li><a href="#queue-types" class="table-of-contents__link toc-highlight">Queue Types</a></li></ul></li><li><a href="#creating-queues" class="table-of-contents__link toc-highlight">Creating Queues</a></li><li><a href="#routing-methods" class="table-of-contents__link toc-highlight">Routing Methods</a><ul><li><a href="#round-robin" class="table-of-contents__link toc-highlight">Round-Robin</a></li><li><a href="#least-active" class="table-of-contents__link toc-highlight">Least-Active</a></li><li><a href="#skill-based" class="table-of-contents__link toc-highlight">Skill-Based</a></li></ul></li><li><a href="#priority-management" class="table-of-contents__link toc-highlight">Priority Management</a><ul><li><a href="#queue-priority" class="table-of-contents__link toc-highlight">Queue Priority</a></li><li><a href="#within-queue-priority" class="table-of-contents__link toc-highlight">Within-Queue Priority</a></li></ul></li><li><a href="#sla-service-level-agreement" class="table-of-contents__link toc-highlight">SLA (Service Level Agreement)</a><ul><li><a href="#configuring-slas" class="table-of-contents__link toc-highlight">Configuring SLAs</a></li><li><a href="#sla-monitoring" class="table-of-contents__link toc-highlight">SLA Monitoring</a></li><li><a href="#sla-escalations" class="table-of-contents__link toc-highlight">SLA Escalations</a></li></ul></li><li><a href="#agent-assignment" class="table-of-contents__link toc-highlight">Agent Assignment</a><ul><li><a href="#manual-assignment" class="table-of-contents__link toc-highlight">Manual Assignment</a></li><li><a href="#bulk-assignment" class="table-of-contents__link toc-highlight">Bulk Assignment</a></li></ul></li><li><a href="#queue-transfers" class="table-of-contents__link toc-highlight">Queue Transfers</a><ul><li><a href="#automatic-overflow" class="table-of-contents__link toc-highlight">Automatic Overflow</a></li><li><a href="#manual-queue-transfer" class="table-of-contents__link toc-highlight">Manual Queue Transfer</a></li></ul></li><li><a href="#best-practices" class="table-of-contents__link toc-highlight">Best Practices</a><ul><li><a href="#queue-design" class="table-of-contents__link toc-highlight">Queue Design</a></li><li><a href="#routing-optimization" class="table-of-contents__link toc-highlight">Routing Optimization</a></li><li><a href="#agent-allocation" class="table-of-contents__link toc-highlight">Agent Allocation</a></li><li><a href="#monitoring" class="table-of-contents__link toc-highlight">Monitoring</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/moobidesk/agents"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Agent Management</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/moobidesk/conversations"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Conversations</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#queue-overview" class="table-of-contents__link toc-highlight">Queue Overview</a><ul><li><a href="#queue-list-view" class="table-of-contents__link toc-highlight">Queue List View</a></li><li><a href="#queue-types" class="table-of-contents__link toc-highlight">Queue Types</a></li></ul></li><li><a href="#creating-queues" class="table-of-contents__link toc-highlight">Creating Queues</a></li><li><a href="#routing-methods" class="table-of-contents__link toc-highlight">Routing Methods</a><ul><li><a href="#round-robin" class="table-of-contents__link toc-highlight">Round-Robin</a></li><li><a href="#pick-me" class="table-of-contents__link toc-highlight">Pick-Me</a></li></ul></li><li><a href="#priority-management" class="table-of-contents__link toc-highlight">Priority Management</a><ul><li><a href="#queue-priority" class="table-of-contents__link toc-highlight">Queue Priority</a></li><li><a href="#assignment-logic" class="table-of-contents__link toc-highlight">Assignment Logic</a></li><li><a href="#agent-eligibility" class="table-of-contents__link toc-highlight">Agent Eligibility</a></li></ul></li><li><a href="#sla-service-level-agreement" class="table-of-contents__link toc-highlight">SLA (Service Level Agreement)</a><ul><li><a href="#configuring-slas" class="table-of-contents__link toc-highlight">Configuring SLAs</a></li><li><a href="#sla-monitoring" class="table-of-contents__link toc-highlight">SLA Monitoring</a></li><li><a href="#sla-status" class="table-of-contents__link toc-highlight">SLA Status</a></li></ul></li><li><a href="#agent-assignment" class="table-of-contents__link toc-highlight">Agent Assignment</a><ul><li><a href="#manual-assignment" class="table-of-contents__link toc-highlight">Manual Assignment</a></li><li><a href="#bulk-assignment" class="table-of-contents__link toc-highlight">Bulk Assignment</a></li></ul></li><li><a href="#queue-transfers" class="table-of-contents__link toc-highlight">Queue Transfers</a><ul><li><a href="#automatic-overflow" class="table-of-contents__link toc-highlight">Automatic Overflow</a></li><li><a href="#manual-queue-transfer" class="table-of-contents__link toc-highlight">Manual Queue Transfer</a></li></ul></li><li><a href="#best-practices" class="table-of-contents__link toc-highlight">Best Practices</a><ul><li><a href="#queue-design" class="table-of-contents__link toc-highlight">Queue Design</a></li><li><a href="#routing-optimization" class="table-of-contents__link toc-highlight">Routing Optimization</a></li><li><a href="#agent-allocation" class="table-of-contents__link toc-highlight">Agent Allocation</a></li><li><a href="#monitoring" class="table-of-contents__link toc-highlight">Monitoring</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
 </body>
 </html>
