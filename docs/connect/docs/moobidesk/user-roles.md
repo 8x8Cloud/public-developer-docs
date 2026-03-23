@@ -8,8 +8,6 @@ Moobidesk provides role-based access control with four distinct user types, each
 
 ## Role Overview
 
-![User Roles](../../images/moobidesk/page9_img1.png)
-
 | Role | Primary Function | Access Level |
 |------|-----------------|--------------|
 | **Agent** | Handle customer conversations | Limited - Own chats only |

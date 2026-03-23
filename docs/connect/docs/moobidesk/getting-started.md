@@ -9,23 +9,14 @@ slug: /connect/docs/moobidesk/getting-started
 Access Moobidesk through your organization's URL:
 
 ```text
-https://[your-organization].moobidesk.com
+https://e18.moobidesk.com
 ```
 
 Use the credentials provided by your system administrator to log in.
 
 ## Dashboard Overview
 
-The Moobidesk dashboard provides real-time visibility into your contact center operations:
-
-![Moobidesk Dashboard](../../images/moobidesk/page6_img1.png)
-
-### Key Metrics (Top Bar)
-
-- **Active Chats**: Current conversations in progress
-- **Queued Chats**: Conversations waiting for agent assignment
-- **Active Agents**: Agents currently available
-- **SLA Compliance**: Real-time service level performance
+The Moobidesk dashboard provides real-time visibility into your contact center operations.
 
 ### Main Navigation
 

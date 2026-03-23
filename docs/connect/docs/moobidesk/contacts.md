@@ -10,7 +10,7 @@ The Contacts module provides a unified customer database with interaction histor
 
 ### Contact List View
 
-![Contact List](../../images/moobidesk/page11_img1.png)
+![Contact List](../../images/moobidesk/contact-list.png)
 
 The main contact list displays:
 - **Name**: Customer full name
@@ -34,7 +34,7 @@ The main contact list displays:
 
 ### Profile Information
 
-![Contact Details](../../images/moobidesk/page13_img1.png)
+![Contact Details](../../images/moobidesk/contact-profile-information.png)
 
 Each contact record contains:
 - **Basic Info**: Name, phone, email

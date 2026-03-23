@@ -34,7 +34,7 @@ The main agent view displays:
 ### Creating Agents
 
 Administrators can create agent accounts:
-1. Navigate to Settings → Users → Add User
+1. Navigate to Agents → Add Agent
 2. Enter agent details (name, email, username)
 3. Assign role (Agent)
 4. Set max concurrent conversations (default: 5)
@@ -62,14 +62,6 @@ Administrators define skill categories:
 - **Examples**: Technical Support, Billing, Sales, Spanish Language, VIP Customer Care
 - Assign to agents with proficiency levels (1-5)
 - Higher proficiency agents receive priority routing
-
-### Skill-Based Routing
-
-When enabled in queue configuration:
-1. Conversation requires specific skill (e.g., "Billing")
-2. System routes to agents with that skill
-3. Priority given to agents with higher proficiency
-4. Falls back to general queue if no skilled agents available
 
 ## Auxiliary (Aux) Codes
 
@@ -138,7 +130,6 @@ Supervisors and Managers can view:
 - **Active Conversations**: Ongoing chats per agent
 - **Average Response Time**: Speed of agent replies
 - **Conversations Handled**: Total for current session
-- **Customer Satisfaction**: CSAT scores from recent conversations
 
 ### Agent Reports
 
@@ -146,7 +137,6 @@ Generate performance reports:
 - **Conversation Volume**: Total handled by time period
 - **Response Time**: First response and average response metrics
 - **SLA Compliance**: Percentage meeting service level targets
-- **CSAT Scores**: Customer satisfaction trends
 - **Aux Code Time**: Breakdown of non-conversation time
 
 ## Best Practices

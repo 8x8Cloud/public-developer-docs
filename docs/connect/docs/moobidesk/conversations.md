@@ -38,11 +38,11 @@ The conversation workspace consists of three panels:
 
 | State | Description | Agent Action |
 |-------|-------------|--------------|
-| **Queued** | Waiting for agent assignment | Click to accept |
-| **Active** | Assigned to agent, open | Respond to customer |
-| **Pending** | Waiting for customer reply | Monitor for response |
-| **Resolved** | Completed by agent | Closed, available for reporting |
-| **Abandoned** | Customer left before resolution | Auto-closed after timeout |
+| **Unassigned (Open)** | New conversations that have not been assigned to any agent | Claim (Pick-Me) or auto-assigned by system (Round-Robin) |
+| **Assigned** | Conversations assigned to an agent | View and manage the conversation |
+| **Read** | Conversation has been viewed by the agent | Prepare and respond to the customer |
+| **Responded** | Agent has replied to the customer | Continue conversation or wait for customer reply |
+| **Closed** | Conversation has been completed and closed | No further action required |
 
 ## Managing Conversations
 
@@ -85,7 +85,7 @@ The conversation workspace consists of three panels:
 ![Canned Messages](../../images/moobidesk/page40_img1.png)
 
 Use pre-written templates for common responses:
-1. Click canned message icon (or type `/`)
+1. Click canned message icon (or type `#`)
 2. Search by keyword or browse categories
 3. Select template
 4. Auto-populates with contact variables: `{{first_name}}`, `{{email}}`, etc.
@@ -204,28 +204,6 @@ Search across all conversations by:
 - Phone or email
 - Message content
 - Conversation ID
-
-### Advanced Filters
-
-Filter conversation list by:
-- **Channel**: WhatsApp, Email, Facebook
-- **Status**: Queued, Active, Pending, Resolved
-- **Date Range**: Last 24 hours, 7 days, 30 days, custom
-- **Tags**: Any applied conversation tags
-- **Labels**: Workflow labels
-- **Agent**: Assigned agent name
-- **Queue**: Source queue
-
-## Keyboard Shortcuts
-
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+Enter` | Send message |
-| `Ctrl+/` | Open canned messages |
-| `Ctrl+T` | Transfer conversation |
-| `Ctrl+R` | Resolve conversation |
-| `Ctrl+N` | Add internal note |
-| `Esc` | Close conversation detail |
 
 ## Best Practices
 

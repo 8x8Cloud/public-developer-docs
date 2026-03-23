@@ -10,39 +10,40 @@ The Queue module controls how incoming conversations are distributed to availabl
 
 ### Queue List View
 
-![Queue Management](../../images/moobidesk/page27_img1.png)
+![Queue Management](../../images/moobidesk/queue-overview.png)
 
-Active queues display:
-- **Queue Name**: Identifier for the queue
-- **Waiting**: Conversations pending agent assignment
-- **Active**: Conversations currently being handled
-- **Assigned Agents**: Number of agents allocated to the queue
-- **Avg Wait Time**: Average time before agent pickup
+Each queue contains the following configurations:
+- **Queue Name**: Unique identifier for the queue
+- **Queue Type**: Defines the queue's purpose and usage
+- **Assigned Channels**: Communication channels linked to the queue
+- **Skillsets**: Required agent capabilities for handling conversations
+- **Assigned Agents**: Agents allocated to handle conversations in the queue
+- **Routing Priority**: Determines how conversations are distributed among agents
+- **SLA Settings**: Defines response time targets for conversations
 
 ### Queue Types
 
 | Type | Purpose | Routing Logic |
 |------|---------|---------------|
-| **General** | Default queue for all channels | Round-robin to available agents |
-| **Skill-Based** | Specialized inquiries | Routes to agents with required skills |
-| **VIP** | High-priority customers | Priority routing to senior agents |
-| **Overflow** | Backup for high-volume periods | Receives transfers from at-capacity queues |
+| **General** | Default queue for handling incoming conversations | Conversations are routed to available agents within the queue |
+| **Non-General** | Queue configured for specific channels, skillsets, or use cases | Conversations are routed based on configured channels and skillset matching |
+| **Outbound** | Used for agent-initiated conversations | Conversations are initiated by agents and assigned directly |
 
 ## Creating Queues
 
-Administrators configure queues:
+Managers can create and configure queues to manage conversation routing:
 
-1. Navigate to Settings → Queues → Add Queue
+1. Navigate to Queues → Add Queue
 2. Enter queue details:
-   - **Name**: Descriptive queue identifier
-   - **Description**: Internal purpose notes
-   - **Priority**: 1 (lowest) to 10 (highest)
-3. Configure routing settings:
-   - **Distribution Method**: Round-robin, Least-active, or Skill-based
-   - **Max Wait Time**: SLA threshold in seconds
-   - **Overflow Queue**: Fallback if wait time exceeds threshold
-4. Assign agents to queue
-5. Save configuration
+   - **Queue Name**: Unique identifier for the queue
+   - **Queue Type**: Select the queue type (e.g., General, Non-General, Outbound)
+   - **Assigned Channels**: Select communication channels for the queue (e.g., WhatsApp, Email)
+   - **Skillsets**: Define required skillsets for agents handling this queue
+3. Configure queue settings:
+   - **Assigned Agents**
+   - **Routing Priority**: Define agent priority within the queue (used for distribution)
+   - **SLA Settings**: Configure response time targets (Assigned, Read, Responded, Closed)
+4. Save configuration
 
 ## Routing Methods
 
@@ -52,69 +53,62 @@ Distributes conversations sequentially to agents in rotation.
 
 **Best For**: Balanced workload distribution, general inquiries
 
-### Least-Active
+### Pick-Me
 
-Routes to the agent with the fewest active conversations.
+New conversations are placed in the Unassigned queue. Agents manually select and claim conversations from the queue.
 
-**Best For**: Optimizing agent capacity utilization
-
-### Skill-Based
-
-Matches conversation requirements to agent expertise.
-
-**Best For**: Technical support, specialized services, multilingual support
-
-**Configuration**:
-1. Define required skills for queue (e.g., "Billing + Spanish")
-2. Set minimum proficiency level (1-5)
-3. System routes to agents meeting criteria
-4. Falls back to general routing if no match within timeout
+**Best For**: Flexible conversation handling, Teams that prefer manual assignment, Low to moderate conversation volume
 
 ## Priority Management
 
 ### Queue Priority
 
-Assign priority levels (1-10) to control routing order:
-- **High Priority (8-10)**: VIP customers, escalations - processed first
-- **Medium Priority (4-7)**: Standard customer inquiries
-- **Low Priority (1-3)**: Marketing responses, non-urgent requests
+Queues can be configured with agent priority levels to control how conversations are distributed.
 
-### Within-Queue Priority
+- Priority levels range from 1 (highest) to 5 (lowest)
+- Agents with higher priority receive conversations first
+- Agents with the same priority level receive conversations in a round-robin approach
 
-Individual conversations can be escalated:
-1. Supervisor opens queued conversation
-2. Selects "Increase Priority"
-3. Conversation moves to front of queue
-4. Next available agent receives it immediately
+### Assignment Logic
+
+- The system evaluates agents starting from Priority 1 to Priority 5
+- Only eligible agents are considered for assignment
+- If no eligible agents are available, the conversation remains Unassigned
+
+### Agent Eligibility
+
+To receive a conversation, an agent must:
+- Be in Available status
+- Not exceed the maximum concurrent conversation limit
 
 ## SLA (Service Level Agreement)
 
 ### Configuring SLAs
 
-Set performance thresholds per queue:
-- **First Response Time**: Target seconds for initial agent reply
-- **Resolution Time**: Target seconds for conversation close
-- **Abandon Rate**: Acceptable percentage of customer-abandoned chats
+SLA defines the expected response time for handling conversations within a queue.
+
+The following SLA parameters can be configured:
+- **Assigned**: Time taken for a conversation to be assigned to an agent
+- **Read**: Time taken for the agent to read the conversation
+- **Responded**: Time taken for the agent to respond
+- **Closed**: Total time from assignment to closure
+
+The Closed SLA must be equal to or greater than the total of the other SLA durations.
 
 ### SLA Monitoring
 
-Real-time SLA compliance displayed in:
-- Dashboard top bar (system-wide)
-- Queue detail view (per queue)
-- Agent performance reports
+SLA performance is tracked within the conversation interface and reports.
 
-**SLA Status**:
-- **Green**: Meeting targets
-- **Yellow**: Approaching threshold (within 10%)
-- **Red**: Breaching SLA
+- SLA timers are displayed during conversation handling
+- Indicators show whether response time is within SLA limits
+- SLA data is available in reporting modules
 
-### SLA Escalations
+### SLA Status
 
-When SLA thresholds are breached:
-1. System sends alert to supervisors
-2. Conversation priority automatically increases
-3. Notifications sent to available agents
-4. Incident logged in reports
+SLA status is visually indicated using color indicators:
+- **Green**: Within SLA
+- **Yellow**: Approaching SLA limit
+- **Red**: SLA exceeded
 
 ## Agent Assignment
 
