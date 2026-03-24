@@ -545,10 +545,11 @@
                                     "properties": {
                                       "type": {
                                         "type": "string",
-                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only — overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
+                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"gif\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only — overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
                                         "enum": [
                                           "text",
                                           "image",
+                                          "gif",
                                           "video",
                                           "document",
                                           "location",
@@ -565,7 +566,7 @@
                                       },
                                       "url": {
                                         "type": "string",
-                                        "description": "Required for \"image\", \"video\", \"document\" parameter types.\n\nResource URL.",
+                                        "description": "Required for \"image\", \"gif\", \"video\", \"document\" parameter types.\n\nResource URL.<br/>Note: For type = gif, the url must point to a [Video file type](/connect/docs/supported-chat-apps-content-type), not a .gif.",
                                         "example": "http://example.com"
                                       },
                                       "location": {
