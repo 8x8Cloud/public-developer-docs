@@ -6,7 +6,7 @@ slug: /connect/docs/moobidesk/reports
 
 Moobidesk provides comprehensive analytics across conversations, agent performance, queue efficiency, and customer satisfaction.
 
-## Real-Time Statistics
+## Historical Reports
 
 ### Dashboard Overview
 
@@ -38,8 +38,6 @@ Statistics include visual breakdowns of conversations by:
 - **Disposition** (e.g., General, Transfer)
 - **Queue**
 - **SLA Result** (Passed vs Failed)
-
-## Real-Time Statistics
 
 ### Conversation Report
 

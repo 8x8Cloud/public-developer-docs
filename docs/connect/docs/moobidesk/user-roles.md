@@ -4,7 +4,7 @@ slug: /connect/docs/moobidesk/user-roles
 
 # User Roles & Permissions
 
-Moobidesk provides role-based access control with four distinct user types, each with specific capabilities and access levels.
+Moobidesk provides role-based access control with two distinct user types, each with specific capabilities and access levels.
 
 ## Role Overview
 
@@ -12,8 +12,6 @@ Moobidesk provides role-based access control with four distinct user types, each
 |------|-----------------|--------------|
 | **Agent** | Handle customer conversations | Limited - Own chats only |
 | **Supervisor** | Monitor team performance | Extended - Team visibility |
-| **Manager** | Analyze and optimize operations | Broad - All data access |
-| **Administrator** | Configure system settings | Full - System configuration |
 
 ## Agent
 
@@ -53,57 +51,17 @@ Supervisors oversee agent teams and ensure service quality.
 - Cannot manage user accounts
 - Limited report customization
 
-## Manager
-
-Managers analyze performance data and make strategic operational decisions.
-
-### Capabilities
-
-- All Supervisor capabilities
-- Generate comprehensive reports across all queues and agents
-- View historical analytics and trends
-- Access SLA performance metrics
-- Export data for external analysis
-- Configure broadcast campaigns
-
-### Limitations
-
-- Cannot modify user roles or permissions
-- Cannot configure system integrations
-- Cannot manage authentication settings
-
-## Administrator
-
-Administrators have full system access and configure all platform settings.
-
-### Capabilities
-
-- All Manager capabilities
-- Create and manage user accounts
-- Configure queues and routing rules
-- Set up skill sets and proficiency levels
-- Manage canned messages and templates
-- Configure conversation tags and labels
-- Set up auxiliary (Aux) codes
-- Integrate with external systems
-- Configure SLA thresholds
-- Manage system security settings
-
 ## Permission Matrix
 
-| Feature | Agent | Supervisor | Manager | Administrator |
-|---------|-------|------------|---------|---------------|
-| Handle conversations | ✓ | ✓ | ✓ | ✓ |
-| View team conversations | - | ✓ | ✓ | ✓ |
-| Real-time statistics | Limited | ✓ | ✓ | ✓ |
-| Generate reports | - | Limited | ✓ | ✓ |
-| Broadcast campaigns | - | - | ✓ | ✓ |
-| Manage users | - | - | - | ✓ |
-| System configuration | - | - | - | ✓ |
+| Feature | Agent | Supervisor |
+|---------|-------|------------|
+| Handle conversations | ✓ | ✓ |
+| View team conversations | - | ✓ |
+| Real-time statistics | Limited | ✓ |
+| Generate reports | - | Limited |
 
 ## Best Practices
 
 - Assign the minimum role required for each user's responsibilities
 - Regularly review user access and remove inactive accounts
 - Use Supervisor role for quality assurance teams
-- Limit Administrator access to IT and senior operations staff
