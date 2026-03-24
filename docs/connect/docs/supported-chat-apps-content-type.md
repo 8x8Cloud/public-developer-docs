@@ -21,9 +21,10 @@ This page describes the supported messaging apps content types, along with their
 - Supported **File** formats are:
 
 | File Type | File Formats                                      | Max File Size |
-| :-------- | :------------------------------------------------ | :------------ |
+|:----------|:--------------------------------------------------|:--------------|
 | Document  | .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .txt | 100 MB        |
 | Image     | .jpeg, .png                                       | 5 MB          |
+| Gif       | .gif                                              | 4 MB          |
 | Audio     | .aac, .m4a, .amr, .mp3, .ogg, .opus               | 16 MB         |
 | Video     | .mp4, .3gp                                        | 16 MB         |
 
