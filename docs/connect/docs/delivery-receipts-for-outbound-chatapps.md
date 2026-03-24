@@ -98,7 +98,7 @@ WhatsApp object description
       "timestamp": "2025-05-05T09:15:57.00Z"
     },
     "whatsapp": {
-      "pricingCategory": "business_initiated"
+      "pricingCategory": "marketing"
     }
   }
 }
@@ -125,7 +125,7 @@ WhatsApp object description
       "timestamp": "2025-05-17T06:27:52.45Z"
     },
     "whatsapp": {
-      "pricingCategory": "user_initiated"
+      "pricingCategory": "marketing"
     }
   }
 }
