@@ -4,9 +4,9 @@ slug: /connect/docs/rcs/overview
 
 # RCS
 
-RCS Business Messaging (RBM) is designed to enable rich, interactive communication between businesses and consumers—all within the default messaging app on Android devices.
+RCS Business Messaging (RBM) is designed to enable rich, interactive communication between businesses and consumers—all within the default messaging app on their mobile devices.
 
-It's powered by Rich Communication Services (RCS), a protocol developed by Google and mobile carriers to modernise texting.
+It's powered by Rich Communication Services (RCS), an industry protocol standardized by the GSMA (Global System for Mobile Communications Association) and adopted by mobile carriers and device manufacturers worldwide to modernise traditional SMS/MMS messaging.
 
 **Key Features:**
 
@@ -20,7 +20,7 @@ It's powered by Rich Communication Services (RCS), a protocol developed by Googl
 
 - Drives higher engagement than traditional SMS with app-like experiences.
 - Builds trust and authenticity through verified branding.
-- Supports two-way conversations (ideal for updates, promotions, reminders, and support).
+- Supports two-way conversations — ideal for updates, promotions, reminders, and customer support.
 
 ![image](../../images/25348533873ca8cdf3c734bde3024e321448d9e5e8987ae4927f62b1c96768df-Rich-card.png)
 
