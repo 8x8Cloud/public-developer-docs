@@ -763,6 +763,9 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [24 March 2025 Release](https://developer.8x8.com/jaas/docs/release-5821): **New Features**
 - [16 June 2025 Release](https://developer.8x8.com/jaas/docs/release-5963): **General**
 - [15 July 2025 Release](https://developer.8x8.com/jaas/docs/release-6176): * **File Sharing Support**: Users are now able to share files in the chat
+- [11 November 2025 Release](https://developer.8x8.com/jaas/docs/release-6393): * **Viewer Role Enhancements:** Expanded controls for demoting users to viewers, including new options in moderation menus.
+- [20 January 2026 Release](https://developer.8x8.com/jaas/docs/release-6524): * Display file uploads as inline chat messages
+- [19 February 2026 Release](https://developer.8x8.com/jaas/docs/release-6626): * Added tooltip to file upload button for improved user experience
 - [Releases](https://developer.8x8.com/jaas/docs/releases): Jitsi as a Service is by default using the latest release. To have full control over which release is being used in your app, you can pin a certain...
 - [RTC Visualizer](https://developer.8x8.com/jaas/docs/rtc-visualizer): This project contains the server & client used to visualize data from RTC stats server: [https://github.com/jitsi/rtc-visualizer](https://github.co...
 - [SIP Dial In/Out](https://developer.8x8.com/jaas/docs/sip-dial-in-and-out): JaaS **SIP Dial In/Out** feature allows users to connect with participants on traditional phone networks, extending the flexibility and reach of Ji...
