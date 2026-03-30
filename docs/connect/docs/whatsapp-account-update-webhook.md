@@ -37,7 +37,10 @@ Request body description
 | Parameter name                  | Parameter type | Description                                                                                                     |
 | :------------------------------ | :------------- |:----------------------------------------------------------------------------------------------------------------|
 | event                           | string         | Specific account update event type.                                                                             |
+| phoneNumber                     | string         | Phone number associated with the account. Included for `ACCOUNT_VIOLATION` and `ACCOUNT_RESTRICTION` events.   |
 | businessVerificationInfo  | object         | Only included for `BUSINESS_VERIFICATION_STATUS_UPDATE` event. Business verification status details, see below. |
+| violationInfo                   | object         | Only included for `ACCOUNT_VIOLATION` event. Account violation details, see below.                              |
+| restrictionInfo                 | array          | Only included for `ACCOUNT_RESTRICTION` event. Array of account restriction details, see below.                 |
 
 `businessVerificationInfo` object description
 
@@ -46,6 +49,21 @@ Request body description
 | businessId | string         | The client's business identifier. |
 | verificationStatus           | string         | Verification status.              |
 | rejectionReasons | array          | Array of rejection reasons.       |
+
+`violationInfo` object description
+
+| Parameter name   | Parameter type | Description                                                                                                                                                                                    |
+| :--------------- | :------------- |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| violationType    | string         | Type of violation. Possible values: `LOW_BUSINESS_INITIATED_CALLING_QUALITY`, `LOW_USER_INITIATED_CALLING_QUALITY`, `USER_INITIATED_CALLS_LOW_PICKUP_RATE`.                                   |
+| remediation      | string         | Remediation text describing how to address the violation.                                                                                                                                      |
+
+`restrictionInfo` array item description
+
+| Parameter name   | Parameter type | Description                                                                                                                                                                      |
+| :--------------- | :------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| restrictionType  | string         | Type of restriction. Possible values: `RESTRICTED_BUSINESS_INITIATED_CALLING`, `RESTRICTED_USER_INITIATED_CALLING`, `RESTRICTED_USER_INITIATED_CALLING_CALL_BUTTON_HIDDEN`.     |
+| expiration       | string         | Timestamp when the restriction expires in ISO 8601 format.                                                                                                                       |
+| remediation      | string         | Remediation text describing how to address the restriction.                                                                                                                      |
 
 ### Sample Webhooks
 
@@ -92,6 +110,50 @@ Request body description
               "NONE"
             ]
         }
+    }
+}
+```
+
+#### Account Violation
+
+```json
+{
+    "eventId": "9ac6f2cb-abb7-43e6-b533-b3d7017846fd",
+    "timestamp": "2026-01-19T13:50:20.00Z",
+    "provider": "WhatsApp",
+    "businessAccountId": "950523421983857",
+    "accountId": "IntegrationTestCampaign",
+    "eventType": "account_update",
+    "eventDetails": {
+        "event": "ACCOUNT_VIOLATION",
+        "phoneNumber": "16505552771",
+        "violationInfo": {
+            "violationType": "USER_INITIATED_CALLS_LOW_PICKUP_RATE",
+            "remediation": "Please identify and address the cause of user-initiated calls not being picked up and make sure the business is properly resourced to handle expected call volumes."
+        }
+    }
+}
+```
+
+#### Account Restriction
+
+```json
+{
+    "eventId": "9ac6f2cb-abb7-43e6-b533-b3d7017846fd",
+    "timestamp": "2026-01-19T13:50:20.00Z",
+    "provider": "WhatsApp",
+    "businessAccountId": "950523421983857",
+    "accountId": "IntegrationTestCampaign",
+    "eventType": "account_update",
+    "eventDetails": {
+        "event": "ACCOUNT_RESTRICTION",
+        "phoneNumber": "16505552771",
+        "restrictionInfo": [
+            {
+                "restrictionType": "RESTRICTED_USER_INITIATED_CALLING",
+                "expiration": "2022-01-10T20:54:17.00Z"
+            }
+        ]
     }
 }
 ```
