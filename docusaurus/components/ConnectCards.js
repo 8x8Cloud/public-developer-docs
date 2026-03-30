@@ -54,45 +54,82 @@ const cards = [
     ],
   },
   {
-    title: 'Voice API',
+    title: 'Callflows API',
     items: [
       {
         label: 'Getting started with Voice API',
-        link: '/connect/reference/voice-messaging',
+        link: '/connect/docs/voice/cpaas-voice-offerings',
       },
-      { label: 'Voice Messaging', link: '/connect/reference/ivr' },
-      { label: 'IVR', link: '/connect/reference/ivr-introduction' },
-      { label: 'View More…', link: '/connect/reference/voice-messaging' },
+      { label: 'Send Callflow API', link: '/connect/reference/send-callflow' },
+      { label: 'Session Summary Guide', link: '/connect/docs/voice/webhook-guides/voice-session-summary-webhook' },
+      { label: 'Webhook Setup Guide', link: '/connect/docs/voice/webhook-guides/webhooks-overview' },
+      { label: 'View More…', link: '/connect/docs/voice/cpaas-voice-offerings' },
     ],
   },
   {
-    title: 'Number Masking API',
+    title: 'Voice Messaging',
+    items: [
+      {
+        label: 'Voice Messaging Guide',
+        link: '/connect/docs/voice/voice-messaging/voice-messaging-guide',
+      },
+      { label: 'Session Status', link: '/connect/docs/voice/voice-messaging/session-status' },
+      { label: 'View More…', link: '/connect/docs/voice/voice-messaging/voice-messaging-guide' },
+    ],
+  },
+  {
+    title: 'IVR',
+    items: [
+      {
+        label: 'IVR Introduction',
+        link: '/connect/docs/voice/ivr/ivr-introduction',
+      },
+      { label: 'Simple IVR', link: '/connect/docs/voice/ivr/simple-ivr-guide' },
+      { label: 'Advanced IVR', link: '/connect/docs/voice/ivr/advanced-ivr-guide' },
+      { label: 'View More…', link: '/connect/docs/voice/ivr/ivr-introduction' },
+    ],
+  },
+  {
+    title: 'WhatsApp Business Calling',
+    items: [
+      {
+        label: 'Overview',
+        link: '/connect/docs/voice/whatsapp-business-calling/whatsapp-business-calling-overview',
+      },
+      { label: 'User Initiated Calls', link: '/connect/docs/voice/whatsapp-business-calling/whatsapp-business-calling-user-initiated' },
+      { label: 'Business Initiated Calls', link: '/connect/docs/voice/whatsapp-business-calling/whatsapp-business-calling-business-initiated' },
+      { label: 'View More…', link: '/connect/docs/voice/whatsapp-business-calling/whatsapp-business-calling-overview' },
+    ],
+  },
+  {
+    title: 'Number Masking',
     items: [
       {
         label: 'Getting started with Number Masking',
-        link: '/connect/reference/getting-started-with-number-masking',
+        link: '/connect/docs/voice/number-masking/getting-started',
       },
       {
         label: 'How to implement 8x8 Number Masking?',
-        link: '/connect/reference/how-number-masking-protects-customer-privacy',
+        link: '/connect/docs/voice/number-masking/how-number-masking-protects-customer-privacy',
       },
-      { label: 'Webhooks API', link: '/connect/reference/webhooks-api' },
+      { label: 'Call Action Handling', link: '/connect/docs/voice/number-masking/call-action-handling' },
       {
         label: 'View More…',
-        link: '/connect/reference/getting-started-with-number-masking',
+        link: '/connect/docs/voice/number-masking/getting-started',
       },
     ],
   },
   {
-    title: 'Video Interaction API',
+    title: 'Video Interaction',
     items: [
+      { label: 'Overview', link: '/connect/docs/vi-overview' },
       { label: 'Introduction', link: '/connect/reference/vi-introduction' },
       { label: 'Management API', link: '/connect/reference/management-api' },
       {
         label: 'Getting Started',
         link: '/connect/reference/vi-gettingstarted',
       },
-      { label: 'View More…', link: '/connect/reference/vi-introduction' },
+      { label: 'View More…', link: '/connect/docs/vi-overview' },
     ],
   },
   {
@@ -239,15 +276,16 @@ const cards = [
   {
     title: 'Voice SDK',
     items: [
-      { label: 'Overview', link: '/connect/docs/overview' },
+      { label: 'Overview', link: '/connect/docs/voice/voice-sdk/overview' },
       {
         label: 'Android - Integrating the SDK',
-        link: '/connect/docs/android-integrating-the-sdk',
+        link: '/connect/docs/voice/voice-sdk/android-integration',
       },
       {
         label: 'iOS - Integrating the SDK',
-        link: '/connect/docs/ios-integrating-the-sdk',
+        link: '/connect/docs/voice/voice-sdk/ios-integration',
       },
+      { label: 'View More…', link: '/connect/docs/voice/voice-sdk/overview' },
     ],
   },
   {
