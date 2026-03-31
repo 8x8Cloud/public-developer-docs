@@ -104,6 +104,10 @@ const sidebarConfig = [
     type: 'category',
     label: 'Cloud Storage Service Public API',
     collapsed: true,
+    link: {
+      type: 'doc',
+      id: 'analytics/reference/cloud-storage-service-public-api',
+    },
     items: [
       {
         type: 'category',
@@ -145,6 +149,10 @@ const sidebarConfig = [
     type: 'category',
     label: 'Quality Management and Speech Analytics API',
     collapsed: true,
+    link: {
+      type: 'doc',
+      id: 'analytics/reference/quality-management-and-speech-analytics-api',
+    },
     items: [
       {
         type: 'category',
