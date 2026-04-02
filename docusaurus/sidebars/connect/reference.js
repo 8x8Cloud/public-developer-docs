@@ -890,10 +890,6 @@ const sidebarConfig = [
         type: 'doc',
         id: 'connect/docs/smpp-delivery-receipts',
       },
-      {
-        type: 'doc',
-        id: 'connect/docs/smpp-data-encoding',
-      },
     ],
   },
 ];

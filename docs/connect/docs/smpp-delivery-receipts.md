@@ -8,7 +8,6 @@ The following format should be expected:
 
 ```text
 id:IIIIIIIIII sub:SSS dlvrd:DDD submit date:YYMMDDhhmm done date:YYMMDDhhmm stat:DDDDDDD err:E Text: . . . . . . . . .
-
 ```
 
 Where:
