@@ -18,7 +18,7 @@ JWT payload example:
 
 ```
 
-* ***BAN_USER***: ban a user based on the user id
+## ***BAN_USER***: ban a user based on the user id
 
  Endpoint: [https://8x8.vc/v1/_jaas/jaccess/v1/access-management/{appId}/ban/user/{userId}](https://8x8.vc/v1/_jaas/jaccess/v1/access-management/%7BappId%7D/ban/user/%7BuserId%7D)
 
@@ -34,7 +34,7 @@ curl -X POST "https://8x8.vc/v1/_jaas/jaccess/v1/access-management/vpaas-magic-c
 
 ```
 
-* ***BAN_JWT***: ban a jwt
+## ***BAN_JWT***: ban a jwt
 
  Endpoint: [https://8x8.vc/v1/_jaas/jaccess/v1/access-management/{appId}/ban/jwt](https://8x8.vc/v1/_jaas/jaccess/v1/access-management/%7BappId%7D/ban/jwt)
 
@@ -53,7 +53,7 @@ curl -X POST "https://8x8.vc/v1/_jaas/jaccess/v1/access-management/vpaas-magic-c
 
 ```
 
-* ***DESTROY_ROOM***: Terminate an ongoing meeting
+## ***DESTROY_ROOM***: Terminate an ongoing meeting
 
  Endpoint: [https://8x8.vc/v1/_jaas/conference-commands/v1/meeting](https://8x8.vc/v1/_jaas/conference-commands/v1/meeting)
 
@@ -93,7 +93,7 @@ curl -X 'POST' \
 
 ```
 
-* ***DIAL_OUT_PARTICIPANT***: Dial out a participant from the meeting.
+## ***DIAL_OUT_PARTICIPANT***: Dial out a participant from the meeting.
 
 Endpoint: [https://8x8.vc/v1/_jaas/conference-commands/v1/meeting](https://8x8.vc/v1/_jaas/conference-commands/v1/meeting)
 
@@ -138,7 +138,7 @@ Body (JSON):
 
 ```
 
-* ***HANG_UP_CALL***: Cancel an initiated outbound call or kick the dialed-out participant if is already joined
+## ***HANG_UP_CALL***: Cancel an initiated outbound call or kick the dialed-out participant if is already joined
 
 Endpoint: [https://8x8.vc/v1/_jaas/conference-commands/v1/meeting](https://8x8.vc/v1/_jaas/conference-commands/v1/meeting)
 
@@ -182,7 +182,7 @@ Body (JSON):
 
 ```
 
-* ***KICK_PARTICIPANT***: Kick a participant from the meeting.
+## ***KICK_PARTICIPANT***: Kick a participant from the meeting.
 
 Endpoint: [https://8x8.vc/v1/_jaas/conference-commands/v1/meeting](https://8x8.vc/v1/_jaas/conference-commands/v1/meeting)
 
