@@ -142,9 +142,11 @@
                       "location",
                       "file",
                       "interactive",
-                      "template"
+                      "template",
+                      "carousel",
+                      "richCard"
                     ],
-                    "description": "Messaging Apps message content type.\nAllowed values are \"text\", \"image\", \"audio\", \"video\", \"file\", \"location\", \"interactive\" and \"template\". \nIf the type is \"text\", then content object should contain a \"text\" parameter. \nIf the type is \"image\", \"audio\", \"video\" or \"file\", then content object should contain a \"url\" parameter and all other parameters can be used.\nIf the type is \"location\", then content object should contain a \"latitude\", \"longitude\" parameters.\nIf the type is \"interactive\", then content object should contain an \"interactive\" parameter\nIf the type is \"template\", then content object should contain a \"template\" parameter.",
+                    "description": "Messaging Apps message content type.\nAllowed values are \"text\", \"image\", \"audio\", \"video\", \"file\", \"location\", \"interactive\", \"template\", \"carousel\" and \"richCard\". \nIf the type is \"text\", then content object should contain a \"text\" parameter. \nIf the type is \"image\", \"audio\", \"video\" or \"file\", then content object should contain a \"url\" parameter and all other parameters can be used.\nIf the type is \"location\", then content object should contain a \"latitude\", \"longitude\" parameters.\nIf the type is \"interactive\", then content object should contain an \"interactive\" parameter\nIf the type is \"template\", then content object should contain a \"template\" parameter.\nIf the type is \"carousel\", then content object should contain a \"carousel\" parameter. Supported for RCS channel only.\nIf the type is \"richCard\", then content object should contain a \"richCard\" parameter. Supported for RCS channel only.",
                     "example": "Text",
                     "title": "Content type"
                   },
@@ -767,9 +769,99 @@
                           }
                         }
                       },
+                      "richCard": {
+                        "type": "object",
+                        "description": "RCS Rich Card message content. Required when type is \"richCard\". Supported for RCS channel only.",
+                        "title": "RCS Rich Card",
+                        "properties": {
+                          "cardOrientation": {
+                            "type": "string",
+                            "description": "Orientation of the card.",
+                            "enum": ["horizontal", "vertical"],
+                            "example": "vertical"
+                          },
+                          "thumbnailImageAlignment": {
+                            "type": "string",
+                            "description": "Alignment of the thumbnail image. Applicable for horizontal cards.",
+                            "enum": ["left", "right"],
+                            "example": "right"
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "Title of the rich card.",
+                            "maxLength": 200
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "Description of the rich card.",
+                            "maxLength": 2000
+                          },
+                          "media": {
+                            "$ref": "#/components/schemas/RcsCardMedia"
+                          },
+                          "suggestions": {
+                            "type": "array",
+                            "description": "List of suggested actions or replies for the rich card.",
+                            "maxItems": 4,
+                            "items": {
+                              "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages/post/requestBody/content/application~1json/schema/properties/content/properties/suggestions/items"
+                            }
+                          }
+                        },
+                        "required": ["cardOrientation", "media"]
+                      },
+                      "carousel": {
+                        "type": "object",
+                        "description": "RCS Carousel message content. Required when type is \"carousel\". Supported for RCS channel only.",
+                        "title": "RCS Carousel",
+                        "properties": {
+                          "cardWidth": {
+                            "type": "string",
+                            "description": "The width of the cards in the carousel.",
+                            "enum": ["small", "medium"],
+                            "example": "medium"
+                          },
+                          "cards": {
+                            "type": "array",
+                            "description": "List of rich card items in the carousel. Minimum 2 cards, maximum 10 cards.",
+                            "minItems": 2,
+                            "maxItems": 10,
+                            "items": {
+                              "type": "object",
+                              "description": "A single rich card in the carousel.",
+                              "properties": {
+                                "title": {
+                                  "type": "string",
+                                  "description": "Title of the card.",
+                                  "maxLength": 200
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "description": "Description of the card.",
+                                  "maxLength": 2000
+                                },
+                                "media": {
+                                  "$ref": "#/components/schemas/RcsCardMedia"
+                                },
+                                "suggestions": {
+                                  "type": "array",
+                                  "description": "List of suggested actions or replies for the card.",
+                                  "maxItems": 4,
+                                  "items": {
+                                    "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages/post/requestBody/content/application~1json/schema/properties/content/properties/suggestions/items"
+                                  }
+                                }
+                              },
+                              "required": ["media"]
+                            }
+                          }
+                        },
+                        "required": ["cardWidth", "cards"]
+                      },
                       "suggestions": {
                         "type": "array",
                         "description": "List of suggestioned actions that can be taken by the user for the message",
+                        "maxItems": 10,
                         "items": {
                           "description": "Suggestion object. You can only specific either reply or action, not both.",
                           "type": "object",
@@ -1946,6 +2038,213 @@
                           }
                         }
                       ]
+                    }
+                  }
+                },
+                "rcsCarousel": {
+                  "summary": "RCS Carousel Message",
+                  "value": {
+                    "user": {
+                      "msisdn": "+84123456789"
+                    },
+                    "type": "carousel",
+                    "content": {
+                      "carousel": {
+                        "cardWidth": "medium",
+                        "cards": [
+                          {
+                            "title": "Catamaran day-trip",
+                            "description": "Snorkel, sushi, & sunset cocktails. $99, 6 spots left!",
+                            "media": {
+                              "height": "short",
+                              "contentInfo": {
+                                "fileUrl": "https://www.example.com/image.jpg",
+                                "thumbnailUrl": "https://www.example.com/image.jpg",
+                                "forceRefresh": false
+                              }
+                            },
+                            "suggestions": [
+                              {
+                                "action": {
+                                  "text": "Buy now",
+                                  "postbackData": "buy_catamaran",
+                                  "openUrlAction": {
+                                    "url": "https://example.com",
+                                    "application": "WEBVIEW",
+                                    "webviewViewMode": "FULL",
+                                    "description": "Buy catamaran day-trip"
+                                  }
+                                }
+                              },
+                              {
+                                "reply": {
+                                  "text": "More details",
+                                  "postbackData": "details_catamaran"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "title": "Jungle ATV tour",
+                            "description": "Explore off-road with an expert guide. $99, limited spots!",
+                            "media": {
+                              "height": "short",
+                              "contentInfo": {
+                                "fileUrl": "https://www.example.com/image.jpg",
+                                "thumbnailUrl": "https://www.example.com/image.jpg",
+                                "forceRefresh": false
+                              }
+                            },
+                            "suggestions": [
+                              {
+                                "action": {
+                                  "text": "Buy now",
+                                  "postbackData": "buy_atv_tour",
+                                  "openUrlAction": {
+                                    "url": "https://example.com",
+                                    "application": "WEBVIEW",
+                                    "webviewViewMode": "FULL",
+                                    "description": "Buy jungle ATV tour"
+                                  }
+                                }
+                              },
+                              {
+                                "reply": {
+                                  "text": "More details",
+                                  "postbackData": "details_atv_tour"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "suggestions": [
+                        {
+                          "reply": {
+                            "text": "Check my orders",
+                            "postbackData": "check_my_orders"
+                          }
+                        },
+                        {
+                          "reply": {
+                            "text": "Not interested",
+                            "postbackData": "not_interested"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "rcsRichCardVertical": {
+                  "summary": "RCS Rich Card - Vertical",
+                  "value": {
+                    "user": {
+                      "msisdn": "+84123456789"
+                    },
+                    "type": "richCard",
+                    "content": {
+                      "richCard": {
+                        "cardOrientation": "vertical",
+                        "title": "Hey Melissa! New year, new shoes? 👟",
+                        "description": "Check out our latest arrivals, including the AirPulse, perfect for your next run! Plus, get a free gait analysis with any purchase this week.",
+                        "media": {
+                          "height": "short",
+                          "contentInfo": {
+                            "fileUrl": "https://www.example.com/image.jpg",
+                            "thumbnailUrl": "https://www.example.com/image.jpg",
+                            "forceRefresh": false
+                          }
+                        },
+                        "suggestions": [
+                          {
+                            "reply": {
+                              "text": "🛍️ View new arrivals",
+                              "postbackData": "view_new_arrivals"
+                            }
+                          },
+                          {
+                            "reply": {
+                              "text": "📋 Book Gait Analysis",
+                              "postbackData": "book_gait_analysis"
+                            }
+                          },
+                          {
+                            "action": {
+                              "text": "👗 Shop now",
+                              "postbackData": "shop_now",
+                              "openUrlAction": {
+                                "url": "https://example.com",
+                                "application": "WEBVIEW",
+                                "webviewViewMode": "FULL",
+                                "description": "Shop Bridgepoint Runners"
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "suggestions": [
+                        {
+                          "reply": {
+                            "text": "Check my orders",
+                            "postbackData": "check_my_orders"
+                          }
+                        },
+                        {
+                          "reply": {
+                            "text": "Not interested",
+                            "postbackData": "not_interested"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "rcsRichCardHorizontal": {
+                  "summary": "RCS Rich Card - Horizontal",
+                  "value": {
+                    "user": {
+                      "msisdn": "+84123456789"
+                    },
+                    "type": "richCard",
+                    "content": {
+                      "richCard": {
+                        "cardOrientation": "horizontal",
+                        "thumbnailImageAlignment": "right",
+                        "title": "Your reservation at Ebi",
+                        "description": "We're springing into action to get your table ready for 5:00 PM! 🕔 Have any questions before you arrive?",
+                        "media": {
+                          "contentInfo": {
+                            "fileUrl": "https://www.example.com/image.jpg",
+                            "thumbnailUrl": "https://www.example.com/image.jpg",
+                            "forceRefresh": false
+                          }
+                        },
+                        "suggestions": [
+                          {
+                            "action": {
+                              "text": "Ebi location",
+                              "postbackData": "ebi_location",
+                              "viewLocationAction": {
+                                "latLong": {
+                                  "latitude": 37.7749,
+                                  "longitude": -122.4194
+                                },
+                                "label": "Ebi Restaurant"
+                              }
+                            }
+                          },
+                          {
+                            "action": {
+                              "text": "Call us",
+                              "postbackData": "call_ebi",
+                              "dialAction": {
+                                "phoneNumber": "+12025551234"
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "suggestions": []
                     }
                   }
                 }
@@ -5895,6 +6194,46 @@
     }
   },
   "components": {
+    "schemas": {
+      "RcsContentInfo": {
+        "type": "object",
+        "description": "Information about the media file.",
+        "properties": {
+          "fileUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "Publicly accessible URL of the media file."
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "Publicly accessible URL of the thumbnail for the media."
+          },
+          "forceRefresh": {
+            "type": "boolean",
+            "description": "If set to true, the RCS platform will fetch the file again even if it has been cached.",
+            "default": false
+          }
+        },
+        "required": ["fileUrl"]
+      },
+      "RcsCardMedia": {
+        "type": "object",
+        "description": "Media content of the card.",
+        "properties": {
+          "height": {
+            "type": "string",
+            "description": "Height of the media within the card.",
+            "enum": ["short", "medium", "tall"],
+            "example": "short"
+          },
+          "contentInfo": {
+            "$ref": "#/components/schemas/RcsContentInfo"
+          }
+        },
+        "required": ["contentInfo"]
+      }
+    },
     "parameters": {
       "group-id": {
         "name": "groupId",
