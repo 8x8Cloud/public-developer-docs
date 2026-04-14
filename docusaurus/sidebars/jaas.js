@@ -146,6 +146,7 @@ const sidebarConfig = [
   {
     type: 'category',
     label: 'Release Notes',
+    link: { type: 'doc', id: 'jaas/docs/release-notes' },
     collapsed: true,
     items: [
       'jaas/docs/mobile-sdk-release-notes',
