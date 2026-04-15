@@ -79,6 +79,9 @@
           },
           "500": {
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1prices/get/responses/500"
+          },
+          "426": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1prices/get/responses/426"
           }
         },
         "tags": ["Send SMS API"],
@@ -205,6 +208,9 @@
           },
           "500": {
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1prices/get/responses/500"
+          },
+          "426": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1prices/get/responses/426"
           }
         },
         "security": [
@@ -261,6 +267,9 @@
           },
           "500": {
             "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1prices/get/responses/500"
+          },
+          "426": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1prices/get/responses/426"
           }
         },
         "security": [
@@ -1102,6 +1111,9 @@
                 }
               }
             }
+          },
+          "426": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1prices/get/responses/426"
           }
         }
       }
@@ -1358,6 +1370,30 @@
                   "message": "Internal server error",
                   "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
                   "timestamp": "2018-07-02T09:42:38.8988997+00:00"
+                }
+              }
+            }
+          },
+          "426": {
+            "description": "Upgrade Required — client is using an unsupported TLS version",
+            "headers": {
+              "Upgrade": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "TLS/1.3"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages~1%7Bumid%7D~1pii/delete/responses/404/content/*~1*/schema"
+                },
+                "example": {
+                  "code": 1014,
+                  "message": "TLS 1.3+ is required for Singapore-bound messages. Detected: TLSv1.2",
+                  "errorId": "b4478860-b76c-e811-814e-022a35cc1c71",
+                  "timestamp": "2018-08-04T09:25:40.9235752+00:00"
                 }
               }
             }
