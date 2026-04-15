@@ -24,6 +24,7 @@
 | 404  | **Not Found**, The server can not find the requested resource.                                                                                                                   |
 | 410  | **Gone**, The requested content has been permanently deleted from the server, with no forwarding address. This usually applied to the API version that's not supported anymore.  |
 | 422  | **422 Unprocessable Entity**, The request was well-formed but was unable to be followed due to semantic errors.                                                                  |
+| 426  | **Upgrade Required**, The client is using an unsupported TLS version. Upgrade to TLS 1.3 or higher. The response includes an `Upgrade: TLS/1.3` header. |
 | 429  | **Too Many Requests**, The user has sent too many requests in a given amount of time ("rate limiting").                                                                          |
 | 500  | **Internal Server Error**, The server has encountered a situation it doesn't know how to handle.                                                                                 |
 
@@ -67,6 +68,7 @@ The table below refers to the possible values of the "code" parameter, in the re
 | 1010 | Parameter out of range                                                                           |
 | 1011 | Invalid Schedule Time                                                                            |
 | 1012 | Invalid Ip Address                                                                               |
+| 1014 | Insecure Protocol — unsupported TLS version                                                     |
 | 1100 | Bulk limit reached                                                                               |
 | 1200 | Unauthorized Access                                                                              |
 | 1201 | Access forbidden                                                                                 |

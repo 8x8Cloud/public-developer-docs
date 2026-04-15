@@ -135,6 +135,30 @@
                 }
               }
             }
+          },
+          "426": {
+            "description": "Upgrade Required — client is using an unsupported TLS version",
+            "headers": {
+              "Upgrade": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "TLS/1.3"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "code": 1014,
+                  "message": "TLS 1.3+ is required for Singapore-bound messages. Detected: TLSv1.2",
+                  "errorId": "b4478860-b76c-e811-814e-022a35cc1c71",
+                  "timestamp": "2025-12-18T09:25:40.9235752+00:00"
+                }
+              }
+            }
           }
         },
         "operationId": "verify-request-v2",
