@@ -264,6 +264,24 @@ const sidebar: SidebarsConfig = {
           label: "Creates a post agent assignment for a conversation.",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "actions-events/reference/sendtypingindicator",
+          label: "Creates a typing indicator for a conversation.",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/sendthinkingindicator",
+          label: "Sends a thinking indicator for a conversation.",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/sendreadreceipt",
+          label: "Sends a read receipt for a conversation.",
+          className: "api-method post",
+        },
       ],
     },
     {

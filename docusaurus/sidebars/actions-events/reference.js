@@ -108,7 +108,19 @@ const sidebarConfig = [
           {
             type: 'doc',
             id: "actions-events/reference/createpostagentassignment",
-          }
+          },
+          {
+            type: 'doc',
+            id: 'actions-events/reference/sendtypingindicator',
+          },
+          {
+            type: 'doc',
+            id: 'actions-events/reference/sendthinkingindicator',
+          },
+          {
+            type: 'doc',
+            id: 'actions-events/reference/sendreadreceipt',
+          },
         ],
       },
       {
