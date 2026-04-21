@@ -23,11 +23,11 @@ Please enter the following details:
 
 * SMPP connection mode: **Transceiver**
 * Receiver server: **smpp.8x8.com**
-* Receiver port: **2775** use **2776** if you enable TLS over SMPP (To note TLC v1.2)
+* Receiver port: **2776** (TLS v1.3)
 * Receiver account and password will be provided by your account manager. Please contact [hello-cpaas@8x8.com](mailto:hello-cpaas@8x8.com)) if you have not been allocated someone directly.
 
 ![1152](../images/cc24767-1596707708166.png "1596707708166.png")
-The **Enable TLS over SMPP** option allows you to encrypt SMPP traffic, use **2776** for your **Receiver port** .  
+The **Enable TLS over SMPP** option encrypts SMPP traffic using TLS v1.3. Ensure you use port **2776** for your **Receiver port**.
 
 **Enable verbose SMPP traces** in the log file allows you to dump all SMPP traffic in log files. This option must be enabled to troubleshoot the connector and to compare with the traffic seen by 8x8.  
 

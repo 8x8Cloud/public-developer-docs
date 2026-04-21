@@ -2,7 +2,7 @@
 
 8x8 supports SMPP (Short Message Peer-to-Peer), a mature binary protocol widely used in carrier-grade SMS infrastructure. Unlike REST APIs, SMPP uses persistent TCP connections and is designed for sustained, high-volume message throughput with low latency.
 
-This connection method is a good fit if you are running enterprise messaging software, an SMS gateway, or any platform that natively speaks SMPP. For new integrations without an existing SMPP requirement, the [8x8 SMS API](getting-started-with-sms-api) offers a simpler REST-based alternative.
+This connection method is a good fit if you are running enterprise messaging software, an SMS gateway, or any platform that natively speaks SMPP. For new integrations without an existing SMPP requirement, the [8x8 SMS API](/connect/docs/getting-started-with-sms-api) offers a simpler REST-based alternative.
 
 The 8x8 SMPP environment runs on a high-availability cluster designed for enterprise-scale traffic. Connecting to our regional hostnames provides automatic failover and intelligent load balancing to ensure optimal performance.
 
@@ -15,13 +15,13 @@ The 8x8 SMPP environment runs on a high-availability cluster designed for enterp
 
 ## Connection Details
 
-The hostname depends on the [platform region](data-center-region) your account is provisioned in.
+The hostname depends on the [platform region](/connect/docs/data-center-region) your account is provisioned in.
 
 | Setting | Value |
 | --- | --- |
 | Hostname (Asia Pacific) | smpp.8x8.com |
 | Hostname (Europe) | smpp.8x8.uk |
-| Port | 2775 (**Legacy/Non-Secure**) |
+| Port | 2775 (Legacy/Non-Secure) |
 | Port (TLS) | 2776 (TLS v1.3) |
 | system_id | your username |
 | password | your password |
@@ -82,6 +82,6 @@ When sending messages, set the correct Data Coding Scheme (DCS) value in your `s
 
 | DCS Value | Encoding |
 | --- | --- |
-| `0` or `1` | GSM7 (default) |
-| `3` | Latin-1 (ISO-8859-1) |
-| `8` | Unicode (UCS-2) |
+| 0 or 1 | GSM7 (default) |
+| 3 | Latin-1 (ISO-8859-1) |
+| 8 | Unicode (UCS-2) |
