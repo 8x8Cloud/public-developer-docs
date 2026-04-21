@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.c247a45b.css">
-<script src="/assets/js/runtime~main.398d5fbe.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.c19a2322.js" defer="defer"></script>
 <script src="/assets/js/main.d213680e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -35,11 +35,11 @@ Please enter the following details:</p>
 <ul>
 <li>SMPP connection mode: <strong>Transceiver</strong></li>
 <li>Receiver server: <strong>smpp.8x8.com</strong></li>
-<li>Receiver port: <strong>2775</strong> use <strong>2776</strong> if you enable TLS over SMPP (To note TLC v1.2)</li>
+<li>Receiver port: <strong>2776</strong> (TLS v1.3)</li>
 <li>Receiver account and password will be provided by your account manager. Please contact <a href="mailto:hello-cpaas@8x8.com" target="_blank" rel="noopener noreferrer">hello-cpaas@8x8.com</a>) if you have not been allocated someone directly.</li>
 </ul>
 <p><img decoding="async" loading="lazy" alt="1152" src="/assets/images/cc24767-1596707708166-71b2776cd4a47438126c790daa5f3d27.png" title="1596707708166.png" width="1152" height="686" class="img_ev3q">
-The <strong>Enable TLS over SMPP</strong> option allows you to encrypt SMPP traffic, use <strong>2776</strong> for your <strong>Receiver port</strong> .</p>
+The <strong>Enable TLS over SMPP</strong> option encrypts SMPP traffic using TLS v1.3. Ensure you use port <strong>2776</strong> for your <strong>Receiver port</strong>.</p>
 <p><strong>Enable verbose SMPP traces</strong> in the log file allows you to dump all SMPP traffic in log files. This option must be enabled to troubleshoot the connector and to compare with the traffic seen by 8x8.</p>
 <ol start="4">
 <li>
