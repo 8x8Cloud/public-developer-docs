@@ -311,7 +311,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 #### Agents within a Queue Request
 
 ```bash
-curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/{queue-id}/agents?page=0&size=100&agent-ids={agent-id1}&agent-ids={agent-id2}&metrics=status.rt,statusCode.rt,timeOnStatus.rt,timeOnStatusCode.rt,lastLogin.rt,lastStatusChange.rt' \
+curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/{queue-id}/agents?page=0&size=100&agent-ids={agent-id1}&agent-ids={agent-id2}&metrics=status.rt,statusCode.rt,timeOnStatus.rt,timeOnStatusCode.rt,lastLogin.rt,lastStatusChange.rt,lastStatusCodeChange.rt' \
 --header 'Authorization: Bearer FnZGG0u5BpNwRkuwKuSmfG2JAG9w'
 
 ```
@@ -330,6 +330,10 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
             },
             {
                 "key": "lastStatusChange.rt",
+                "value": "2022-12-16T18:15:22.741Z"
+            },
+            {
+                "key": "lastStatusCodeChange.rt",
                 "value": "2022-12-16T18:15:22.741Z"
             },
             {
@@ -360,6 +364,10 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
             },
             {
                 "key": "lastStatusChange.rt",
+                "value": "2022-12-02T19:45:18.632Z"
+            },
+            {
+                "key": "lastStatusCodeChange.rt",
                 "value": "2022-12-02T19:45:18.632Z"
             },
             {
@@ -398,7 +406,7 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 #### Single Agent within a Queue Request
 
 ```bash
-curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/{queue-id}/agents/{agent-id}?metrics=status.rt,statusCode.rt,timeOnStatus.rt,timeOnStatusCode.rt,lastLogin.rt' \
+curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARealtime\>>/realtime-metrics/queues/{queue-id}/agents/{agent-id}?metrics=status.rt,statusCode.rt,timeOnStatus.rt,timeOnStatusCode.rt,lastLogin.rt,lastStatusChange.rt,lastStatusCodeChange.rt' \
 --header 'Authorization: Bearer FnZGG0u5BpNwRkuwKuSmfG2JAG9w'
 
 ```
@@ -417,6 +425,10 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
             },
             {
                 "key": "lastStatusChange.rt",
+                "value": "2022-12-16T18:15:22.741Z"
+            },
+            {
+                "key": "lastStatusCodeChange.rt",
                 "value": "2022-12-16T18:15:22.741Z"
             },
             {
@@ -1508,7 +1520,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 **Note on `.inQueue` metrics:** The `.inQueue` suffix indicates that the metric measures agent activity specific to interactions routed through the **current queue**. These metrics exclude agent activity from direct inbound/outbound calls, internal agent-to-agent calls, and other non-queue interactions. Use `.inQueue` metrics to analyze agent performance for the selected queue.
 
 <details>
-<summary>Click to expand Agent Metrics Glossary - Queue Context (139 metrics)</summary>
+<summary>Click to expand Agent Metrics Glossary - Queue Context (140 metrics)</summary>
 
 **Version** indicates minimum Real-time API version where metric became available on this API endpoint.
 
@@ -1590,6 +1602,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 | `lastLogin.rt`                                 | v1+     | Timestamp representing the agent's most recent login to the system (currently) |
 | `lastLogout.rt`                                | v1+     | Timestamp representing the agent's most recent logout from the system (currently) |
 | `lastStatusChange.rt`                          | v5+     | Timestamp when the agent's operational status last changed (currently) |
+| `lastStatusCodeChange.rt`                      | v5+     | Timestamp when the agent's status code last changed (currently) |
 | `line1Status.rt`                               | v1+     | Current operational status of the agent's first communication line (currently) |
 | `line1TimeOnStatus.rt`                         | v1+     | Time in milliseconds since the agent's first line status last changed (currently) |
 | `line2Status.rt`                               | v1+     | Current operational status of the agent's second communication line (currently) |
@@ -1664,7 +1677,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 * `GET /realtime-metrics/groups/{group-id}/agents/{agent-id}` - Individual agent in a group
 
 <details>
-<summary>Click to expand Agent Metrics Glossary - Group Context (143 metrics)</summary>
+<summary>Click to expand Agent Metrics Glossary - Group Context (144 metrics)</summary>
 
 **Version** indicates minimum Real-time API version where metric became available on this API endpoint.
 
@@ -1750,6 +1763,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 | `lastLogin.rt`                         | v1+     | Timestamp representing the agent's most recent login to the system (currently) |
 | `lastLogout.rt`                        | v1+     | Timestamp representing the agent's most recent logout from the system (currently) |
 | `lastStatusChange.rt`                  | v5+     | Timestamp when the agent's operational status last changed (currently) |
+| `lastStatusCodeChange.rt`              | v5+     | Timestamp when the agent's status code last changed (currently) |
 | `line1Status.rt`                       | v1+     | Current operational status of the agent's first communication line (currently) |
 | `line1TimeOnStatus.rt`                 | v1+     | Time in milliseconds since the agent's first line status last changed (currently) |
 | `line2Status.rt`                       | v1+     | Current operational status of the agent's second communication line (currently) |
@@ -1824,7 +1838,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 * `GET /realtime-metrics/agents?agent-ids={agent-id}` - Specific agents in the tenant
 
 <details>
-<summary>Click to expand Agent Metrics Glossary - All Agents (143 metrics)</summary>
+<summary>Click to expand Agent Metrics Glossary - All Agents (144 metrics)</summary>
 
 **Version** indicates minimum Real-time API version where metric became available on this API endpoint.
 
@@ -1910,6 +1924,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 | `lastLogin.rt`                         | v5+ | Timestamp representing the agent's most recent login to the system (currently) |
 | `lastLogout.rt`                        | v5+ | Timestamp representing the agent's most recent logout from the system (currently) |
 | `lastStatusChange.rt`                  | v5+ | Timestamp when the agent's operational status last changed (currently) |
+| `lastStatusCodeChange.rt`              | v5+ | Timestamp when the agent's status code last changed (currently) |
 | `line1Status.rt`                       | v5+ | Current operational status of the agent's first communication line (currently) |
 | `line1TimeOnStatus.rt`                 | v5+ | Time in milliseconds since the agent's first line status last changed (currently) |
 | `line2Status.rt`                       | v5+ | Current operational status of the agent's second communication line (currently) |
@@ -1985,7 +2000,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 **Note on `.inQueue` metrics:** The `.inQueue` suffix indicates that the metric measures agent activity specific to interactions routed through the **current queue**. These metrics exclude agent activity from direct inbound/outbound calls, internal agent-to-agent calls, and other non-queue interactions. Use `.inQueue` metrics to analyze agent performance for the selected queue.
 
 <details>
-<summary>Click to expand Agent Metrics Glossary - Multiple Queues Context (139 metrics)</summary>
+<summary>Click to expand Agent Metrics Glossary - Multiple Queues Context (140 metrics)</summary>
 
 **Version** indicates minimum Real-time API version where metric became available on this API endpoint.
 
@@ -2067,6 +2082,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 | `lastLogin.rt`                                 | v5+ | Timestamp representing the agent's most recent login to the system (currently) |
 | `lastLogout.rt`                                | v5+ | Timestamp representing the agent's most recent logout from the system (currently) |
 | `lastStatusChange.rt`                          | v5+ | Timestamp when the agent's operational status last changed (currently) |
+| `lastStatusCodeChange.rt`                      | v5+ | Timestamp when the agent's status code last changed (currently) |
 | `line1Status.rt`                               | v5+ | Current operational status of the agent's first communication line (currently) |
 | `line1TimeOnStatus.rt`                         | v5+ | Time in milliseconds since the agent's first line status last changed (currently) |
 | `line2Status.rt`                               | v5+ | Current operational status of the agent's second communication line (currently) |
