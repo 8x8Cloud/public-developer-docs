@@ -188,9 +188,9 @@ Retrieves journey data based on the specified criteria.
         "phoneNumber": null,
         "extension": "1036",
         "email": "jane.smith@example.com",
-        "pbx": "8x8",
         "loginId": "jsmith",
-        "department": "Sales"
+        "department": "Sales",
+        "pbx": "mainPbx"
       },
       "pbxNames": [],
       "queues": [],
@@ -199,7 +199,8 @@ Retrieves journey data based on the specified criteria.
       "tenantIds": [
         "8x8"
       ],
-      "wrapUpCodes": []
+      "wrapUpCodes": [],
+      "outboundPhoneCodes": []
     }
   ],
   "nextPageCursor": "ZW5jbLW5leHQtRlZC1jdXJzb3ItZm9ycGFnZQ==",
@@ -310,7 +311,9 @@ Same structure as Journeys endpoint, but with transition-specific filters.
             }
           ],
           "previousQueue": {
-            "name": "Service Client"
+            "id": "queue-101",
+            "name": "Service Client",
+            "extension": "2001"
           },
           "previousRingGroup": null,
           "queue": null,
@@ -331,39 +334,64 @@ Same structure as Journeys endpoint, but with transition-specific filters.
 
 Filters allow you to narrow down the data returned by the API based on specific criteria. Different filter types are available for journeys and Transitions endpoints.
 
+By default, the API returns all journeys/transitions belonging to your customer account across all PBXes and tenants. To return only journeys for a specific PBX, add a `pbxNames` filter. To return only journeys for a specific tenant, add a `tenantIds` filter. All filters use AND logic — when multiple filters are provided, only results matching **all** of them are returned.
+
 ### Journey Filters
 
-| Filter Name              | Description                       | Example Values                         |
-|--------------------------|-----------------------------------|----------------------------------------|
-| `agents.group.id`        | Filter by agent group IDs         | `["group1", "group2"]`                 |
-| `agents.group.name`      | Filter by agent group names       | `["Team A", "Team B"]`                 |
-| `agents.name`            | Filter by agent names             | `["John Doe", "Jane Smith"]`           |
-| `interactions.id`        | Filter by interaction ID          | `["interaction-123"]`                  |
-| `mediaTypes`             | Filter by media types             | `["phone", "chat", "email"]`           |
-| `pbxNames`               | Filter by PBX names               | `["pbx1", "pbx2"]`                     |
-| `queues.name`            | Filter by queue names             | `["support", "sales"]`                 |
-| `ringGroups.name`        | Filter by ring group names        | `["group1", "group2"]`                 |
-| `journeyId`              | Filter by journey ID              | `["journey-123"]`                      |
-| `tenantIds`              | Filter by tenant IDs              | `["tenant1", "tenant2"]`               |
-| `entryPoint.type`        | Filter by entry point type        | `["cc-channel", "ring-group", "call-queue", "auto-attendant", "user"]` |
-| `entryPoint.phoneNumber` | Filter by entry point phoneNumber | `["053244122"]`                         |
-| `wrapUpCodes`            | Filter by wrap-up codes           | `["Service Call", "Support Call"]`     |
+| Filter Name                    | Description                              | Example Values                                                           |
+|--------------------------------|------------------------------------------|--------------------------------------------------------------------------|
+| `agents.group.id`              | Filter by agent group IDs                | `["group1", "group2"]`                                                   |
+| `agents.group.name`            | Filter by agent group names              | `["Team A", "Team B"]`                                                   |
+| `agents.name`                  | Filter by agent names                    | `["John Doe", "Jane Smith"]`                                             |
+| `entryPoint.extension`         | Filter by entry point extension          | `["1001"]`                                                               |
+| `entryPoint.id`                | Filter by entry point ID                 | `["ep-789"]`                                                             |
+| `entryPoint.name`              | Filter by entry point name               | `["Main Support Line"]`                                                  |
+| `entryPoint.phoneNumber`       | Filter by entry point phone number       | `["053244122"]`                                                          |
+| `entryPoint.type`              | Filter by entry point type               | `["cc-channel", "ring-group", "call-queue", "auto-attendant", "user"]`   |
+| `interactions.id`              | Filter by interaction ID                 | `["interaction-123"]`                                                    |
+| `journeyId`                    | Filter by journey ID                     | `["journey-123"]`                                                        |
+| `mediaTypes`                   | Filter by media types                    | `["phone", "chat", "email"]`                                             |
+| `origin.extension`             | Filter by origin extension               | `["1001"]`                                                               |
+| `origin.id`                    | Filter by origin ID                      | `["user-789"]`                                                           |
+| `origin.name`                  | Filter by origin name                    | `["Jane Smith"]`                                                         |
+| `origin.phoneNumber`           | Filter by origin phone number            | `["+1234567890"]`                                                        |
+| `origin.type`                  | Filter by origin type                    | `["user"]`                                                               |
+| `outboundPhoneCodes.listName`  | Filter by outbound phone code list name  | `["JohnDoeInbound"]`                                                     |
+| `outboundPhoneCodes.name`      | Filter by outbound phone code name       | `["No queue"]`                                                           |
+| `outboundPhoneCodes.shortCode` | Filter by outbound phone code short code | `["Unt1"]`                                                               |
+| `pbxNames`                     | Filter by PBX names                      | `["pbx1", "pbx2"]`                                                       |
+| `queues.extension`             | Filter by queue extension                | `["2001"]`                                                               |
+| `queues.id`                    | Filter by queue ID                       | `["queue-123"]`                                                          |
+| `queues.name`                  | Filter by queue names                    | `["Customer Support Queue"]`                                             |
+| `ringGroups.extension`         | Filter by ring group extension           | `["3001"]`                                                               |
+| `ringGroups.id`                | Filter by ring group ID                  | `["rg-456"]`                                                             |
+| `ringGroups.name`              | Filter by ring group names               | `["Sales Ring Group"]`                                                   |
+| `tenantIds`                    | Filter by tenant IDs                     | `["tenant1", "tenant2"]`                                                 |
+| `wrapUpCodes`                  | Filter by wrap-up codes                  | `["Service Call", "Support Call"]`                                       |
 
 ### Transition Filters
 
-| Filter Name                          | Description                    | Example Values            |
-|--------------------------------------|--------------------------------| ------------------------- |
-| `transitions.agents.name`            | Filter by agent names          | `["John Doe"]`            |
-| `transitions.interactionId`          | Filter by interaction ID       | `["interaction-123"]`     |
-| `pbxNames`                           | Filter by PBX names            | `["pbx1"]`                |
-| `transitions.previousAgents.name`    | Filter by previous agents      | `["Marsha Mellow"]`       |
-| `transitions.previousQueue.name`     | Filter by previous queues      | `["Support S2"]`          |
-| `transitions.previousRingGroup.name` | Filter by previous ring groups | `["1015"]`                |
-| `transitions.queue.name`             | Filter by queue name           | `["Support S1"]`          |
-| `transitions.ringGroup.name`         | Filter by ring group name      | `["1011"]`                |
-| `journeyId`                          | Filter by journey ID           | `["journey-123"]`         |
-| `tenantIds`                          | Filter by tenant IDs           | `["tenant1"]`             |
-| `transitions.name`                   | Filter by transition name      | `["TALKING", "TRANSFER"]` |
+| Filter Name                               | Description                             | Example Values            |
+|-------------------------------------------|-----------------------------------------|---------------------------|
+| `journeyId`                              | Filter by journey ID                    | `["journey-123"]`         |
+| `pbxNames`                               | Filter by PBX names                     | `["pbx1"]`                |
+| `tenantIds`                              | Filter by tenant IDs                    | `["tenant1"]`             |
+| `transitions.agents.name`               | Filter by agent names                   | `["John Doe"]`            |
+| `transitions.interactionId`             | Filter by interaction ID                | `["interaction-123"]`     |
+| `transitions.name`                      | Filter by transition name               | `["TALKING", "TRANSFER"]` |
+| `transitions.previousAgents.name`       | Filter by previous agents               | `["Marsha Mellow"]`       |
+| `transitions.previousQueue.extension`   | Filter by previous queue extension      | `["2001"]`                |
+| `transitions.previousQueue.id`          | Filter by previous queue ID             | `["queue-123"]`           |
+| `transitions.previousQueue.name`        | Filter by previous queue name           | `["Support S2"]`          |
+| `transitions.previousRingGroup.extension` | Filter by previous ring group extension | `["3001"]`              |
+| `transitions.previousRingGroup.id`      | Filter by previous ring group ID        | `["rg-456"]`              |
+| `transitions.previousRingGroup.name`    | Filter by previous ring group name      | `["Sales Ring Group"]`    |
+| `transitions.queue.extension`           | Filter by queue extension               | `["2001"]`                |
+| `transitions.queue.id`                  | Filter by queue ID                      | `["queue-123"]`           |
+| `transitions.queue.name`               | Filter by queue name                    | `["Support S1"]`          |
+| `transitions.ringGroup.extension`       | Filter by ring group extension          | `["3001"]`                |
+| `transitions.ringGroup.id`             | Filter by ring group ID                 | `["rg-456"]`              |
+| `transitions.ringGroup.name`           | Filter by ring group name               | `["Sales Ring Group"]`    |
 
 ### Filter Format
 
@@ -388,10 +416,6 @@ Filters are provided as an array of objects in the request body:
   ]
 }
 ```
-
-> 📘 **Automatic Default Filtering**
->
-> If no `pbxNames` or `tenantIds` filters are provided, the system automatically applies filters based on the authorized PBXs and tenants for your API key.
 
 ## Pagination
 
@@ -483,29 +507,30 @@ Example:
 
 The Journeys Endpoint provides a consolidated view of all customer interactions belonging to the same journey across all 8x8 platforms. Each journey record includes the following structure:
 
-| Field                    | Type           | Description                                                                                                                                                                                                                                                                      |
-|--------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `time`                   | ISO8601 date   | When the journey occurred                                                                                                                                                                                                                                                        |
-| `journeyId`              | string         | The journeyId field returned by the Journeys Endpoint uniquely identifies and aggregates all interactions associated with a particular customer journey across all platforms. Use this journeyId to correlate and analyze comprehensive interaction data for a specific journey. |
-| `interactions`           | Interaction\[] | Array of interaction objects representing the interactions belonging to the journey. These interactions can originate from CC, UC or Engage platforms.                                                                                                                           |
-| `agents`                 | Agent\[]       | Array of agent objects involved in handling the journey                                                                                                                                                                                                                          |
-| `contact`                | Contact        | Contact object containing name, phone number, and email who interacts with the organization. As an example for inbound phone interactions this is the caller, and for outbound ones this is the callee.                                                                          |
-| `entryPoint`             | entryPoint     | entryPoint object is populated only for inbound journeys and identifies where the interaction first enters the organization (e.g. a contact center channel, or a unified communication ring group). For outbound journeys this object is `null`.                                 |
-| `transfersCompleted`     | int            | Number of warm & cold transfers during the journey                                                                                                                                                                                                                               |
-| `forwardedToQueue`       | int            | Number of automated forwards to a CC or UC queue during the journey                                                                                                                                                                                                              |
-| `forwardedToRingGroup`   | int            | Number of automated forwards to a Ring Group during the journey                                                                                                                                                                                                                  |
-| `forwardedToScript`      | int            | Number of automated forwards to a UC AA + CC script/IVR                                                                                                                                                                                                                          |
-| `holdDuration`           | long           | Total hold time in milliseconds                                                                                                                                                                                                                                                  |
-| `mediaTypes`             | string\[]      | Types of media in the journey (phone, chat, email, etc.)                                                                                                                                                                                                                         |
-| `origin`                 | origin         | Origin object is populated only for UC outbound calls and identifies what agent made the call                                                                                                                                                                                    |
-| `outcome`                | string         | Outcome of the journey (e.g. abandoned, handled, forwarded to VM).                                                                                                                                                                                                               |
-| `direction`              | string         | Direction of the journey (e.g. Inbound, Outbound, Internal).                                                                                                                                                                                                                     |
-| `pbxNames`               | string\[]      | PBX names                                                                                                                                                                                                                                                                        |
-| `queues`                 | Queue\[]       | Array of queue objects used in the journey                                                                                                                                                                                                                                       |
-| `ringGroups`             | RingGroup\[]   | Array of ring group objects used in the journey                                                                                                                                                                                                                                  |
-| `scheduleHours`          | string\[]      | Distinct array of values for all the IVR `scheduleHours` nodes of the journey.                                                                                                                                                                                                   |
-| `tenantIds`              | string\[]      | Tenant IDs                                                                                                                                                                                                                                                                       |
-| `wrapUpCodes`            | string\[]      | Wrap-up codes applied to the journey                                                                                                                                                                                                                                             |
+| Field                    | Type                 | Description                                                                                                                                                                                                                                                                     |
+|--------------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `time`                   | ISO8601 date         | When the journey occurred                                                                                                                                                                                                                                                       |
+| `journeyId`              | string               | The journeyId field returned by the Journeys Endpoint uniquely identifies and aggregates all interactions associated with a particular customer journey across all platforms. Use this journeyId to correlate and analyze comprehensive interaction data for a specific journey. |
+| `interactions`           | Interaction\[]       | Array of interaction objects representing the interactions belonging to the journey. These interactions can originate from CC, UC or Engage platforms.                                                                                                                          |
+| `agents`                 | Agent\[]             | Array of agent objects involved in handling the journey                                                                                                                                                                                                                         |
+| `contact`                | Contact              | Contact object containing name, phone number, and email who interacts with the organization. As an example for inbound phone interactions this is the caller, and for outbound ones this is the callee.                                                                         |
+| `entryPoint`             | entryPoint           | entryPoint object is populated only for inbound journeys and identifies where the interaction first enters the organization (e.g. a contact center channel, or a unified communication ring group). For outbound journeys this object is `null`.                                |
+| `transfersCompleted`     | int                  | Number of warm & cold transfers during the journey                                                                                                                                                                                                                              |
+| `forwardedToQueue`       | int                  | Number of automated forwards to a CC or UC queue during the journey                                                                                                                                                                                                             |
+| `forwardedToRingGroup`   | int                  | Number of automated forwards to a Ring Group during the journey                                                                                                                                                                                                                 |
+| `forwardedToScript`      | int                  | Number of automated forwards to a UC AA + CC script/IVR                                                                                                                                                                                                                         |
+| `holdDuration`           | long                 | Total hold time in milliseconds                                                                                                                                                                                                                                                 |
+| `mediaTypes`             | string\[]            | Types of media in the journey (phone, chat, email, etc.)                                                                                                                                                                                                                        |
+| `origin`                 | origin               | Origin object is populated only for UC outbound calls and identifies what agent made the call                                                                                                                                                                                   |
+| `outcome`                | string               | Outcome of the journey (e.g. abandoned, handled, forwarded to VM).                                                                                                                                                                                                              |
+| `direction`              | string               | Direction of the journey (e.g. Inbound, Outbound, Internal).                                                                                                                                                                                                                    |
+| `pbxNames`               | string\[]            | PBX names                                                                                                                                                                                                                                                                       |
+| `queues`                 | Queue\[]             | Array of queue objects used in the journey                                                                                                                                                                                                                                      |
+| `ringGroups`             | RingGroup\[]         | Array of ring group objects used in the journey                                                                                                                                                                                                                                 |
+| `scheduleHours`          | string\[]            | Distinct array of values for all the IVR `scheduleHours` nodes of the journey.                                                                                                                                                                                                  |
+| `tenantIds`              | string\[]            | Tenant IDs                                                                                                                                                                                                                                                                      |
+| `wrapUpCodes`            | string\[]            | Wrap-up codes applied to the journey                                                                                                                                                                                                                                            |
+| `outboundPhoneCodes`     | OutboundPhoneCode\[] | Outbound phone codes - populated only for CC agent-initiated outbound interactions.                                                                                                                                      |
 
 #### Nested Object Structures
 
@@ -554,17 +579,51 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 
 ```json
 {
-  "name": "string"
+  "id": "string",
+  "name": "string",
+  "extension": "string"
 }
 ```
+
+| Field       | Type   | Description                                                                                                                                                                                     |
+|-------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`        | string | Unique identifier of the queue                                                                                                                                                                  |
+| `name`      | string | Display name of the queue                                                                                                                                                                       |
+| `extension` | string | Queue extension number. **Note:** Contact Center queues do not have extensions — this field will be `null` for Contact Center queues. Only Unified Communications queues have extension values. |
 
 **RingGroup Object:**
 
 ```json
 {
-  "name": "string"
+  "id": "string",
+  "name": "string",
+  "extension": "string"
 }
 ```
+
+| Field       | Type   | Description                              |
+|-------------|--------|------------------------------------------|
+| `id`        | string | Unique identifier of the ring group      |
+| `name`      | string | Display name of the ring group           |
+| `extension` | string | Ring group extension number              |
+
+**OutboundPhoneCode Object:**
+
+The outboundPhoneCodes field is populated only for CC agent-initiated outbound interactions.
+
+```json
+{
+  "listName": "string",
+  "name": "string",
+  "shortCode": "string"
+}
+```
+
+| Field       | Description                                              |
+|-------------|----------------------------------------------------------|
+| `name`      | Menu text of the outbound phone code in Contact Manager  |
+| `shortCode` | Short code identifier of the outbound phone code         |
+| `listName`  | Name of the outbound phone code list                     |
 
 **entryPoint Object:**
 
@@ -611,9 +670,9 @@ The origin object is populated only for UC outbound journeys and identifies what
   "phoneNumber": "string",
   "extension": "string",
   "email": "string",
-  "pbx": "string",
   "loginId": "string",
-  "department": "string"
+  "department": "string",
+  "pbx": "string"
 }
 ```
 
@@ -643,6 +702,7 @@ the exact journey path. Journeys are identified with the *journeyId*. Each trans
 A journey can progress through multiple transition states:
 
 - **STARTED**: An interaction with a customer has started. Information about the customer is included in the `contact` object of the journey.
+- **OUTBOUND_STARTED**: An outbound interaction initiated by a UC user or CC agent has started. The `duration` captures the time from initiation until the customer answers (transition to `TALKING`) or the call is abandoned/disconnected (transition to `FINISHED`).
 - **IN_SCRIPT**: The customer is interacting with a script like an IVR script or an auto-attendant.
 - **WAITING**: The customer is waiting to be handled by an agent (e.g. waiting in a queue or while the phones in a ring group are ringing etc.).
 - **TALKING**: An agent is interacting with the customer.
@@ -694,112 +754,112 @@ The API returns standard HTTP status codes and an error response body:
 
 ## Error Codes
 
-This section provides detailed explanations for each error code that the API might return. Each error header is linkable  
+This section provides detailed explanations for each error code that the API might return. Each error header is linkable
 via its anchor for easy navigation within the documentation.
 
 ### Invalid PBX {#invalidPbx}
 
-This error occurs when one or more PBX names provided in the filter do not belong to the authenticated customer's  
+This error occurs when one or more PBX names provided in the filter do not belong to the authenticated customer's
 account. It ensures that users cannot request data for PBXes that are not associated with their account.
 
 ### Invalid Tenant {#invalidTenant}
 
-This error is returned when the tenant IDs specified in the filter are not recognized as belonging to the current  
+This error is returned when the tenant IDs specified in the filter are not recognized as belonging to the current
 customer's account. It helps maintain data integrity by restricting access only to authorized tenant information.
 
 ### Malformed Request {#malformedRequest}
 
-This error indicates that the request payload is not properly structured. It may be due to invalid JSON syntax or an  
+This error indicates that the request payload is not properly structured. It may be due to invalid JSON syntax or an
 incorrect structure that does not conform to the API specification.
 
 ### Bad Request {#badRequest}
 
-A generic error indicating that the request is invalid. This can be caused by missing required fields, incorrect data  
+A generic error indicating that the request is invalid. This can be caused by missing required fields, incorrect data
 types, or any other violation of the API’s requirements.
 
 ### Date Range Not Null {#dateRangeNotNull}
 
-This error is raised when the date range parameter is missing from the request. A valid date range is required to  
+This error is raised when the date range parameter is missing from the request. A valid date range is required to
 determine the period for which the data should be retrieved.
 
 ### Start Date Not Null {#startRangeNotNull}
 
-This error occurs when the start date of the date range is not provided. The API requires a valid start date to define  
+This error occurs when the start date of the date range is not provided. The API requires a valid start date to define
 the beginning of the data retrieval period.
 
 ### End Date Not Null {#endRangeNotNull}
 
-This error is returned if the end date of the date range is missing. A valid end date is needed to mark the conclusion  
+This error is returned if the end date of the date range is missing. A valid end date is needed to mark the conclusion
 of the period for which data is requested.
 
 ### End Date Before Start Date {#endDateBeforeStartDate}
 
-This error occurs when the provided start date is later than the end date. The API expects the start date to precede the  
+This error occurs when the provided start date is later than the end date. The API expects the start date to precede the
 end date to form a valid interval.
 
 ### Filters Not Empty {#filtersNotEmpty}
 
-This error is triggered when the filters array is empty. At least one filter must be supplied to narrow down the data  
+This error is triggered when the filters array is empty. At least one filter must be supplied to narrow down the data
 and make the query meaningful.
 
 ### ISO 8061 With Timezone Format {#iso8061WithTzFormat}
 
-This error is raised when a date does not conform to the ISO 8601 format with a timezone designator (for example,  
+This error is raised when a date does not conform to the ISO 8601 format with a timezone designator (for example,
 `2025-03-01T00:00:00Z`). Correct date formatting is required for proper parsing.
 
 ### Max Interval {#maxInterval}
 
-This error indicates that the interval between the start and end dates exceeds the maximum allowed period. The user  
+This error indicates that the interval between the start and end dates exceeds the maximum allowed period. The user
 should specify a smaller date range to process the request successfully.
 
 ### Filter Values Not Empty {#filterValuesNotEmpty}
 
-This error is returned when a filter is provided without any associated values. Each filter must include at least one  
+This error is returned when a filter is provided without any associated values. Each filter must include at least one
 value to effectively narrow down the data.
 
 ### Invalid Filter Type {#invalidFilterType}
 
-This error occurs when the filter type specified in the request is not among the supported types. Users must ensure that  
+This error occurs when the filter type specified in the request is not among the supported types. Users must ensure that
 only valid filter types are used.
 
 ### Timezone Not Null {#timezoneNotNull}
 
-This error is raised when the displayTimezone parameter is missing. A valid IANA timezone identifier must be provided to  
+This error is raised when the displayTimezone parameter is missing. A valid IANA timezone identifier must be provided to
 ensure accurate time-based data processing.
 
 ### Invalid Timezone {#invalidTimezone}
 
-This error is thrown if the provided timezone does not match any recognized IANA timezone. Users should verify and  
+This error is thrown if the provided timezone does not match any recognized IANA timezone. Users should verify and
 provide a valid timezone identifier.
 
 ### Invalid Sort Direction {#invalidSortDirection}
 
-This error occurs when the sort direction is neither `asc` nor `desc`. The API only accepts these two values for sorting  
+This error occurs when the sort direction is neither `asc` nor `desc`. The API only accepts these two values for sorting
 order.
 
 ### Invalid Sort Field {#invalidSortField}
 
-This error is returned when the sort field specified is not supported. At the moment, only the `TIME` field is available  
+This error is returned when the sort field specified is not supported. At the moment, only the `TIME` field is available
 for sorting results.
 
 ### Invalid Limit {#invalidLimit}
 
-This error indicates that the limit parameter is out of the acceptable range (typically between 1 and 1000). Users  
+This error indicates that the limit parameter is out of the acceptable range (typically between 1 and 1000). Users
 should adjust the limit to a valid number within the allowed range.
 
 ### Invalid Cursor {#invalidCursor}
 
-This error is raised when the pagination cursor provided in the request is invalid. The cursor must be the one returned  
+This error is raised when the pagination cursor provided in the request is invalid. The cursor must be the one returned
 from a previous valid request.
 
 ### Cursor And Sort Mismatch {#cursorAndSortMismatch}
 
-This error indicates that the sort field or direction associated with the provided cursor does not match the current  
+This error indicates that the sort field or direction associated with the provided cursor does not match the current
 request parameters. Ensure that the cursor is used with the same sort settings as those in the original response.
 
 ### Missing PBX For Customer {#missingPbxForCustomer}
 
-This error is thrown when the authenticated customer’s account does not have an associated PBX. The user should contact  
+This error is thrown when the authenticated customer’s account does not have an associated PBX. The user should contact
 their account administrator to have a PBX linked to their account.
 
 ### Invalid Endpoint {#invalidApiPath}
@@ -944,7 +1004,7 @@ POST /v1/journeys/search
 
 ## Best Practices
 
-1. **Use appropriate date ranges**: Keep date ranges reasonably small (ideally less than 1 day) to improve  
+1. **Use appropriate date ranges**: Keep date ranges reasonably small (ideally less than 1 day) to improve
    performance. For longer historical analysis, consider breaking your requests into multiple segments.
 
 2. **Apply relevant filters**: Use filters to narrow down results and improve response times.
@@ -953,7 +1013,7 @@ POST /v1/journeys/search
 
 4. **Respect rate limits**: Implement appropriate retry mechanisms with backoff when encountering rate limiting.
 
-5. **Cache results when appropriate**: For frequently accessed data that doesn't change often, consider caching on your  
+5. **Cache results when appropriate**: For frequently accessed data that doesn't change often, consider caching on your
    side.
 
 6. **Handle errors gracefully**: Check for error responses and retry with backoff for transient errors.
@@ -962,7 +1022,7 @@ POST /v1/journeys/search
 
 ### Time Representations
 
-All times in the API are represented in ISO 8601 format with timezone designator (e.g., `2025-03-01T00:00:00Z`).  
+All times in the API are represented in ISO 8601 format with timezone designator (e.g., `2025-03-01T00:00:00Z`).
 The displayTimezone specified in your request is only used for displaying purposes.
 
 ### Duration Metrics
