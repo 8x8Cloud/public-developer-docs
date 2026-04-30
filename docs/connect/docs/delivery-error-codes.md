@@ -33,7 +33,7 @@ Possible error codes returned in the Messaging Apps delivery receipts include:
 ## WhatsApp Error Codes
 
 | Code | Possible Reasons           | Description                                                                                       |
-| :--- | :------------------------- | :------------------------------------------------------------------------------------------------ |
+|:-----|:---------------------------|:--------------------------------------------------------------------------------------------------|
 | 1000 | Authentication failed      | AuthException — Unable to authenticate app user (WhatsApp: 0)                                     |
 | 1001 | Method not allowed         | API Method — Capability/permissions issue (WhatsApp: 3)                                           |
 | 1002 | Rate limit exceeded        | API Too Many Calls — App rate limit reached (WhatsApp: 4)                                         |
@@ -89,26 +89,30 @@ Possible error codes returned in the Messaging Apps delivery receipts include:
 
 ## Viber Error Codes
 
-| Code | Possible Reasons              | Description                                           |
-| :--- | :---------------------------- | :---------------------------------------------------- |
-| 2000 | Successfully sent             | Message sent successfully                             |
-| 2001 | Internal server error         | Internal processing failure                           |
-| 2002 | Invalid service ID            | Service ID unused or not yet uploaded                 |
-| 2003 | Bad request structure         | Malformed request (e.g. JSON formatting)              |
-| 2004 | Incorrect message type        | Unsupported or invalid message type                   |
-| 2005 | Missing parameters            | Required field like tracking\_data is missing         |
-| 2006 | Timeout                       | Viber server timeout                                  |
-| 2007 | User blocked                  | User has blocked this ID or all business messages     |
-| 2008 | Not a Viber user              | Destination number not registered with Viber          |
-| 2009 | No suitable device            | Device not compatible with Business Messages          |
-| 2010 | Unauthorized IP or ID         | Wrong IP or ID not whitelisted                        |
-| 2012 | Bad label                     | Missing or invalid 'label' parameter                  |
-| 2013 | Invalid TTL                   | TTL is out of allowed range                           |
-| 2014 | Session message limit reached | Exceeded 10-message session cap                       |
-| 2015 | Unsupported file format       | File type not allowed for this feature                |
-| 2016 | Filename too long             | File name exceeds 25 character limit                  |
-| 2017 | Thumbnail too long            | Thumbnail URL exceeds 1000 characters                 |
-| 2018 | File too large                | File size exceeds 200 MB                              |
-| 2019 | Video too long                | Video duration exceeds 600 seconds                    |
-| 2020 | Template ID not found         | The provided template ID is not found                 |
-| 2021 | Template validation failed    | Template variables did not pass the server validation |
+| Code | Possible Reasons                   | Description                                                                                                   |
+|:-----|:-----------------------------------|:--------------------------------------------------------------------------------------------------------------|
+| 2000 | Successfully sent                  | Message sent successfully                                                                                     |
+| 2001 | Internal server error              | Internal processing failure                                                                                   |
+| 2002 | Invalid service ID                 | Service ID unused or not yet uploaded                                                                         |
+| 2003 | Bad request structure              | Malformed request (e.g. JSON formatting)                                                                      |
+| 2004 | Incorrect message type             | Unsupported or invalid message type                                                                           |
+| 2005 | Missing parameters                 | Required field like tracking\_data is missing                                                                 |
+| 2006 | Timeout                            | Viber server timeout                                                                                          |
+| 2007 | User blocked                       | User has blocked this ID or all business messages                                                             |
+| 2008 | Not a Viber user                   | Destination number not registered with Viber                                                                  |
+| 2009 | No suitable device                 | Device not compatible with Business Messages                                                                  |
+| 2010 | Unauthorized IP or ID              | Wrong IP or ID not whitelisted                                                                                |
+| 2012 | Bad label                          | Missing or invalid 'label' parameter                                                                          |
+| 2013 | Invalid TTL                        | TTL is out of allowed range                                                                                   |
+| 2014 | Session message limit reached      | Exceeded 10-message session cap                                                                               |
+| 2015 | Unsupported file format            | File type not allowed for this feature                                                                        |
+| 2016 | Filename too long                  | File name exceeds 25 character limit                                                                          |
+| 2017 | Thumbnail too long                 | Thumbnail URL exceeds 1000 characters                                                                         |
+| 2018 | File too large                     | File size exceeds 200 MB                                                                                      |
+| 2019 | Video too long                     | Video duration exceeds 600 seconds                                                                            |
+| 2020 | Template ID not found              | The provided template ID is not found                                                                         |
+| 2021 | Template validation failed         | Template variables did not pass the server validation                                                         |
+| 2022 | Incompatible with Version          | Version is not compatible to the message fields                                                               |
+| 2023 | Invalid destination number         | The destination number is invalid or does not exist. Please verify the destination phone number and try again |
+| 2024 | Invalid List Message Parameter     | Message delivery failed because one or more List Message parameters are invalid                               |
+| 2025 | Invalid Carousel Message Parameter | Message delivery failed because one or more Carousel Message parameters are invalid                           |
