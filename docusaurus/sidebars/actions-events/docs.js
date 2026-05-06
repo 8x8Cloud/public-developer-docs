@@ -99,14 +99,19 @@ const sidebarConfig = [
   {
     type: 'category',
     label: 'Webchat API v2',
+    link: { type: 'doc', id: 'actions-events/docs/webchat-api-introduction' },
     collapsed: true,
     items: [
-      'actions-events/docs/introduction-1',
       'actions-events/docs/webchat-script',
-      'actions-events/docs/customer-information',
-      'actions-events/docs/chat-language',
-      'actions-events/docs/chat-language-copy',
       'actions-events/docs/trigger-webchat',
+      'actions-events/docs/end-chat',
+      'actions-events/docs/customer-information',
+      'actions-events/docs/reset-customer-information',
+      'actions-events/docs/chat-language',
+      'actions-events/docs/set-chat-variables',
+      'actions-events/docs/invitation-quick-replies',
+      'actions-events/docs/notification-sound',
+      'actions-events/docs/event-callbacks',
       {
         type: 'category',
         label: 'Theming',
