@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-actions-events/docs/cc-campaigns/state-machine" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">Campaign State Machine | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/actions-events/docs/cc-campaigns/state-machine"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Campaign State Machine | 8x8 Developer Portal"><meta data-rh="true" name="description" content="The Contact Center Campaigns API is currently in Beta. See the Overview for details."><meta data-rh="true" property="og:description" content="The Contact Center Campaigns API is currently in Beta. See the Overview for details."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/actions-events/docs/cc-campaigns/state-machine"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/actions-events/docs/cc-campaigns/state-machine" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/actions-events/docs/cc-campaigns/state-machine" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.c247a45b.css">
+<script src="/assets/js/runtime~main.78f14818.js" defer="defer"></script>
+<script src="/assets/js/main.197ed360.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a class="navbar__item navbar__link" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a><a class="navbar__item navbar__link" href="/administration">Administration</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides section-navigation__tab--active" href="/actions-events/docs">Guides</a><a class="section-navigation__tab icon-references" href="/actions-events/reference">API Reference</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/actions-events/docs/introduction"><span title="Actions &amp; Events" class="categoryLinkLabel_W154">Actions &amp; Events</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/actions-events/docs/getting-started-chapi"><span title="CHAPI - Work Chat API" class="categoryLinkLabel_W154">CHAPI - Work Chat API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/actions-events/docs/chat-gateway"><span title="CC Chat Gateway" class="categoryLinkLabel_W154">CC Chat Gateway</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/actions-events/docs/cc-managing-campaign-status"><span title="Contact Center Dynamic Campaigns API" class="categoryLinkLabel_W154">Contact Center Dynamic Campaigns API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/actions-events/docs/cc-campaigns/overview"><span title="Contact Center Campaigns API (BETA)" class="categoryLinkLabel_W154">Contact Center Campaigns API (BETA)</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/actions-events/docs/cc-campaigns/overview"><span title="Overview" class="linkLabel_WmDU">Overview</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/actions-events/docs/cc-campaigns/getting-started"><span title="Getting Started" class="linkLabel_WmDU">Getting Started</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/actions-events/docs/cc-campaigns/authentication"><span title="Authentication" class="linkLabel_WmDU">Authentication</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/actions-events/docs/cc-campaigns/endpoints"><span title="Endpoints" class="categoryLinkLabel_W154">Endpoints</span></a><button aria-label="Expand sidebar category &#x27;Endpoints&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/actions-events/docs/cc-campaigns/state-machine"><span title="Campaign State Machine" class="linkLabel_WmDU">Campaign State Machine</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/actions-events/docs/cc-campaigns/field-reference"><span title="Field Reference" class="linkLabel_WmDU">Field Reference</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/actions-events/docs/cc-campaigns/troubleshooting"><span title="Troubleshooting" class="linkLabel_WmDU">Troubleshooting</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/actions-events/docs/cc-managing-agent-status"><span title="Contact Center Agent Status" class="categoryLinkLabel_W154">Contact Center Agent Status</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/actions-events/docs/cc-manage-phone-calls"><span title="Contact Center Phone Call API" class="categoryLinkLabel_W154">Contact Center Phone Call API</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/actions-events/docs/streaming/overview"><span title="Contact Center - Event Streaming (BETA)" class="categoryLinkLabel_W154">Contact Center - Event Streaming (BETA)</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/actions-events/docs/webchat-api-introduction"><span title="Webchat API v2" class="categoryLinkLabel_W154">Webchat API v2</span></a><button aria-label="Expand sidebar category &#x27;Webchat API v2&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/actions-events/docs/8x8-contact-center-data-augmentation-api"><span title="Contact Centre Data Augmentation" class="categoryLinkLabel_W154">Contact Centre Data Augmentation</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>Campaign State Machine</h1></header>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>BETA</div><div class="admonitionContent_BuS1"><p><strong>The Contact Center Campaigns API is currently in Beta.</strong> See the <a href="/actions-events/docs/cc-campaigns/overview">Overview</a> for details.</p></div></div>
+<p>Every <code>PATCH /campaigns/{campaignId}</code> request supplies an <code>action</code>. The server validates that action against the campaign&#x27;s current <code>state</code> and responds with <code>409 Conflict</code> when the action isn&#x27;t allowed. Understanding the state machine is a prerequisite to using this API reliably.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="states">States<a href="#states" class="hash-link" aria-label="Direct link to States" title="Direct link to States" translate="no">​</a></h2>
+<p>A campaign is always in exactly one state. The full set of states:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>State</th><th>Description</th><th>Transient?</th></tr></thead><tbody><tr><td><code>CREATED</code></td><td>The campaign has just been created and is not yet active.</td><td>no</td></tr><tr><td><code>BUILDING</code></td><td>The system is querying CRM data and preparing the campaign for use. The CRM query and filter can be edited and the campaign rebuilt as many times as needed before it is started.</td><td>yes</td></tr><tr><td><code>READY</code></td><td>The campaign is fully built and ready to be started.</td><td>no</td></tr><tr><td><code>PENDING</code></td><td>The campaign has been started and is waiting for its scheduled start time.</td><td>no</td></tr><tr><td><code>STARTING</code></td><td>The campaign is being started, including any final preparations before it becomes active.</td><td>yes</td></tr><tr><td><code>RUNNING</code></td><td>The campaign is currently active and dialing records when agents are available.</td><td>no</td></tr><tr><td><code>PAUSED</code></td><td>The campaign is paused, new records are no longer being added to the dialing queue, but records already queued will still be dialed. The campaign can be resumed.</td><td>no</td></tr><tr><td><code>COMPLETE</code></td><td>The campaign has finished running, either because it reached its end time or was cancelled. A completed campaign cannot be restarted.</td><td>no</td></tr><tr><td><code>BUILD_ERROR</code></td><td>An error occurred while building the campaign.</td><td>no</td></tr><tr><td><code>RUN_ERROR</code></td><td>An error occurred while running the campaign.</td><td>no</td></tr><tr><td><code>DELETED</code></td><td>The campaign has been soft-deleted and is retained only for record-keeping.</td><td>no</td></tr></tbody></table>
+<p>Transient states (<code>BUILDING</code>, <code>STARTING</code>) are the result of an action the server is still processing. The campaign will leave them without further client input.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="actions-and-their-preconditions">Actions and their preconditions<a href="#actions-and-their-preconditions" class="hash-link" aria-label="Direct link to Actions and their preconditions" title="Direct link to Actions and their preconditions" translate="no">​</a></h2>
+<p>Each action is valid only from a specific set of states:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Valid from states</th><th>Result</th></tr></thead><tbody><tr><td><code>BUILD</code></td><td><code>CREATED</code>, <code>READY</code>, <code>BUILD_ERROR</code></td><td>Campaign moves to <code>BUILDING</code>, then settles in <code>READY</code> (or <code>BUILD_ERROR</code> on failure)</td></tr><tr><td><code>RESET</code></td><td><code>READY</code>, <code>BUILD_ERROR</code></td><td>Campaign returns to <code>CREATED</code>, allowing it to be rebuilt</td></tr><tr><td><code>START</code></td><td><code>READY</code></td><td>Campaign moves to <code>PENDING</code> or <code>STARTING</code>, then to <code>RUNNING</code></td></tr><tr><td><code>PAUSE</code></td><td><code>RUNNING</code></td><td>Campaign moves to <code>PAUSED</code></td></tr><tr><td><code>RESUME</code></td><td><code>PAUSED</code></td><td>Campaign returns to <code>RUNNING</code></td></tr><tr><td><code>RETRY</code></td><td><code>RUN_ERROR</code></td><td>Campaign resumes processing</td></tr><tr><td><code>CANCEL</code></td><td><code>PENDING</code>, <code>RUNNING</code>, <code>PAUSED</code>, <code>RUN_ERROR</code></td><td>Campaign moves to <code>COMPLETE</code></td></tr><tr><td><code>PURGE</code></td><td><code>PAUSED</code>, <code>RUN_ERROR</code>, <code>COMPLETE</code></td><td>Clears queued interactions for the campaign</td></tr></tbody></table>
+<p>If an action is sent from a state not listed as valid, the API returns <code>409 Conflict</code>. See <a href="/actions-events/docs/cc-campaigns/troubleshooting#409-conflict">Troubleshooting</a> for details.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="visual-diagram">Visual diagram<a href="#visual-diagram" class="hash-link" aria-label="Direct link to Visual diagram" title="Direct link to Visual diagram" translate="no">​</a></h2>
+<p>The state machine is split into two phases. The <strong>Management phase</strong> covers campaign creation, building, and validation before the campaign has ever run. The <strong>Processing phase</strong> begins when <code>START</code> is sent and covers everything from there to termination.</p>
+<p><code>READY</code> appears in both diagrams as the bridge state: from <code>READY</code> the campaign either hands off into the Processing phase via <code>START</code>, or is cancelled without ever running.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="management-phase">Management phase<a href="#management-phase" class="hash-link" aria-label="Direct link to Management phase" title="Direct link to Management phase" translate="no">​</a></h3>
+<!-- -->
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="processing-phase">Processing phase<a href="#processing-phase" class="hash-link" aria-label="Direct link to Processing phase" title="Direct link to Processing phase" translate="no">​</a></h3>
+<!-- -->
+<p>A few things worth knowing to read the diagrams:</p>
+<ul>
+<li><strong>Uppercase labels</strong> (<code>BUILD</code>, <code>START</code>, <code>PAUSE</code>, <code>CANCEL</code>, …) are client actions sent via <code>PATCH /campaigns/{campaignId}</code>.</li>
+<li><strong>Lowercase labels</strong> (<code>success</code>, <code>error</code>, <code>schedule opens</code>, <code>schedule ends</code>) are automatic transitions triggered by the service — the client does not send these.</li>
+<li><code>PENDING</code> is <strong>skipped</strong> if the campaign&#x27;s <code>startTime</code> is in the past when <code>START</code> is sent — the campaign transitions directly into <code>STARTING</code>.</li>
+<li><code>PURGE</code> does not change the campaign state and is therefore not shown as an edge. It is valid from <code>PAUSED</code>, <code>RUN_ERROR</code>, and <code>COMPLETE</code>, and clears queued interactions for the campaign.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-enabled-flag">The <code>enabled</code> flag<a href="#the-enabled-flag" class="hash-link" aria-label="Direct link to the-enabled-flag" title="Direct link to the-enabled-flag" translate="no">​</a></h2>
+<p>In addition to its state, every campaign has a boolean <code>enabled</code> flag which is independent of the state machine. When a campaign is disabled, only the <code>BUILD</code> and <code>RESET</code> actions are allowed; all other actions are rejected until the campaign is re-enabled.</p>
+<p>Toggle the flag by supplying <code>enabled</code> in the PATCH body:</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><span class="token property" style="color:#36acaa">&quot;action&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;BUILD&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token property" style="color:#36acaa">&quot;enabled&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">true</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<p>Omit <code>enabled</code> to leave the current value unchanged.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="display-status-vs-actual-state">Display status vs actual state<a href="#display-status-vs-actual-state" class="hash-link" aria-label="Direct link to Display status vs actual state" title="Direct link to Display status vs actual state" translate="no">​</a></h2>
+<p>The campaign response includes a separate <code>displayStatus</code> field (of type <a href="/actions-events/docs/cc-campaigns/field-reference#campaigndisplaystatus"><code>CampaignDisplayStatus</code></a>). This is a UI-oriented derived view — for example:</p>
+<ul>
+<li><code>SCHEDULED</code> is shown when <code>state</code> is <code>PENDING</code></li>
+<li><code>PURGED</code> is shown when <code>state</code> is <code>PAUSED</code> and the campaign has been purged</li>
+<li><code>DISABLED</code> is shown when <code>enabled</code> is <code>false</code>, regardless of state</li>
+</ul>
+<p>Automation that drives the API should branch on <code>state</code>, not on <code>displayStatus</code>. The full mapping table is in the <a href="/actions-events/docs/cc-campaigns/field-reference#campaigndisplaystatus">Field Reference</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next steps<a href="#next-steps" class="hash-link" aria-label="Direct link to Next steps" title="Direct link to Next steps" translate="no">​</a></h2>
+<ul>
+<li><a href="/actions-events/docs/cc-campaigns/endpoints">Endpoints</a> - Full request and response detail</li>
+<li><a href="/actions-events/docs/cc-campaigns/field-reference">Field Reference</a> - Full schema for every object and enum</li>
+<li><a href="/actions-events/docs/cc-campaigns/troubleshooting">Troubleshooting</a> - Error format and common issues</li>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/actions-events/docs/cc-campaigns/endpoints/add-records"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Add Records</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/actions-events/docs/cc-campaigns/field-reference"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Field Reference</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#states" class="table-of-contents__link toc-highlight">States</a></li><li><a href="#actions-and-their-preconditions" class="table-of-contents__link toc-highlight">Actions and their preconditions</a></li><li><a href="#visual-diagram" class="table-of-contents__link toc-highlight">Visual diagram</a><ul><li><a href="#management-phase" class="table-of-contents__link toc-highlight">Management phase</a></li><li><a href="#processing-phase" class="table-of-contents__link toc-highlight">Processing phase</a></li></ul></li><li><a href="#the-enabled-flag" class="table-of-contents__link toc-highlight">The <code>enabled</code> flag</a></li><li><a href="#display-status-vs-actual-state" class="table-of-contents__link toc-highlight">Display status vs actual state</a></li><li><a href="#next-steps" class="table-of-contents__link toc-highlight">Next steps</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>

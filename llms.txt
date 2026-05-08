@@ -9,10 +9,19 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Contact Center Data Augmentation API](https://developer.8x8.com/actions-events/docs/8x8-contact-center-data-augmentation-api): The Data Augmentation API allows you to enrich interaction data with custom variables collected from web forms, IVR systems, CRM data, or any exter...
 - [API Key](https://developer.8x8.com/actions-events/docs/api-key): You can obtain an API key using your [8x8 Admin Console](https://admin.8x8.com/) implementation.
 - [Button theming](https://developer.8x8.com/actions-events/docs/button-theming): You can change both the primary and secondary colours on the chat button, either globally across each of the parts of the widget, invitation/form/w...
+- [Authentication](https://developer.8x8.com/actions-events/docs/cc-campaigns/authentication): :::warning BETA
+- [Add Records](https://developer.8x8.com/actions-events/docs/cc-campaigns/endpoints/add-records): :::warning BETA
+- [Modify Campaign](https://developer.8x8.com/actions-events/docs/cc-campaigns/endpoints/modify-campaign): :::warning BETA
+- [Endpoints](https://developer.8x8.com/actions-events/docs/cc-campaigns/endpoints): :::warning BETA
+- [Field Reference](https://developer.8x8.com/actions-events/docs/cc-campaigns/field-reference): :::warning BETA
+- [Getting Started](https://developer.8x8.com/actions-events/docs/cc-campaigns/getting-started): :::warning BETA
+- [Overview](https://developer.8x8.com/actions-events/docs/cc-campaigns/overview): :::warning BETA
+- [Campaign State Machine](https://developer.8x8.com/actions-events/docs/cc-campaigns/state-machine): :::warning BETA
+- [Troubleshooting](https://developer.8x8.com/actions-events/docs/cc-campaigns/troubleshooting): :::warning BETA
 - [CC Manage Phone Calls](https://developer.8x8.com/actions-events/docs/cc-manage-phone-calls): CC Phone Call APIs leverage the credentials from the Integration >> API Token area in Configuration Manager.
 - [CC Managing Agent Status](https://developer.8x8.com/actions-events/docs/cc-managing-agent-status): This guide describes how to manage agent status via API
-- [CC Managing Campaign Records](https://developer.8x8.com/actions-events/docs/cc-managing-campaign-records): > 📘 **Prerequisites**
-- [CC Managing Campaign Status](https://developer.8x8.com/actions-events/docs/cc-managing-campaign-status): > 📘 **Prerequisites**
+- [CC Managing Campaign Records](https://developer.8x8.com/actions-events/docs/cc-managing-campaign-records): > ⚠️ **Beta customers — use the new Contact Center Campaigns API**
+- [CC Managing Campaign Status](https://developer.8x8.com/actions-events/docs/cc-managing-campaign-status): > ⚠️ **Beta customers — use the new Contact Center Campaigns API**
 - [Channel](https://developer.8x8.com/actions-events/docs/channel): After creating a webhook you can then create a channel. The channel contains a webhook that passes the outbound messages and notifications.
 - [API Key](https://developer.8x8.com/actions-events/docs/chat-api-key): You can now get an API key via the 8x8 [Admin Console.](https://admin.8x8.com)
 - [Chat Gateway](https://developer.8x8.com/actions-events/docs/chat-gateway): The 8x8 Contact Center Chat Gateway enables you to provide chat services with your chat app and chatbot.
@@ -59,12 +68,14 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [8x8 Contact Center Call API Reference](https://developer.8x8.com/actions-events/reference/8-x-8-contact-center-call-api-reference.info): The 8x8 Contact Center Call API facilitates contact center management of agent calls. Using the Call API you can designate a specific agent to eith...
 - [8x8 Contact Center Chat API V2](https://developer.8x8.com/actions-events/reference/8-x-8-contact-center-chat-api-v-2.info): Integration with the 8x8 Contact Center (CC) Chat API enables you to:
 - [8x8 Contact Center Dynamic Campaigns](https://developer.8x8.com/actions-events/reference/8-x-8-contact-center-dynamic-campaigns.info): The 8x8 Contact Center Dynamic Campaigns API:
+- [Add records to campaign](https://developer.8x8.com/actions-events/reference/add-records.api): Add one or more records (1-100) to a dynamic campaign. Records are validated, CRM data is queried, and phone numbers are checked against DNC lists....
 - [Ammends the transaction codes for both an interaction and the associated agent.](https://developer.8x8.com/actions-events/reference/add-transaction-codes.api): Ammends the transaction codes for both an interaction and the associated agent.
 - [Add an attachment.](https://developer.8x8.com/actions-events/reference/addconversationattachments.api): Add an attachment that you can later use as a reference when adding a message to the conversation.
 - [Add a new customer to an existing campaign](https://developer.8x8.com/actions-events/reference/addcustomer.api): Add a new customer to an existing campaign  **Note: the campaign must be have dynamic campaign enabled to leverage this feature**
 - [The change status for an existing campaign.](https://developer.8x8.com/actions-events/reference/changecampaignstatus.api): The change status for an existing campaign. **Note: the campaign must be have dynamic campaign enabled to leverage this feature**
 - [Chapi - Chat API](https://developer.8x8.com/actions-events/reference/chapi-chat-api.info): 8x8 Work Chat API
 - [Contact Center Agent Status API](https://developer.8x8.com/actions-events/reference/contact-center-agent-status-api.info): The 8x8 Contact Center Get/Set Agent Status API enables you to set an agent's status or availability in your contact center. You can set the status...
+- [Contact Center Campaigns API](https://developer.8x8.com/actions-events/reference/contact-center-campaigns-api.info): Use the Campaign Management API to control the lifecycle of outbound campaigns and dynamically inject records for dialling from your own systems.
 - [Contact Center Chat Gateway](https://developer.8x8.com/actions-events/reference/contact-center-chat-gateway.info): Integration with the 8x8 Contact Center (CC) Chat API
 - [Creates a new access token that can be used for API access.](https://developer.8x8.com/actions-events/reference/createaccesstoken.api): Creates a new access token that can be used for API access.
 - [Creates a new conversation.](https://developer.8x8.com/actions-events/reference/createcctransaction-1.api): Creates a new transaction in the Contact Center and returns a conversation Id as an identifier that can be used later on to send messages to agent ...
@@ -111,6 +122,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Hangs up the call for an agent. If the call is a conference or call was transferred it will not hang up for the other participants.](https://developer.8x8.com/actions-events/reference/hangup-agent-handling-interaction.api): Hangs up the call for an agent. If the call is a conference or call was transferred it will not hang up for the other participants.
 - [Frees up a telephone line for the specified agent in preparation for the next call.](https://developer.8x8.com/actions-events/reference/hangup-agent-line.api): Frees up a telephone line for the specified agent in preparation for the next call.
 - [Frees up the agent lines in preparation to take the next call.](https://developer.8x8.com/actions-events/reference/hangup-agent-lines.api): Frees up the agent lines in preparation to take the next call.
+- [Modify campaign state](https://developer.8x8.com/actions-events/reference/modify-campaign.api): Change campaign state. State transitions are validated and must follow allowed state machine rules.
 - [Patch a conversation details.](https://developer.8x8.com/actions-events/reference/patchcctransaction.api): Patch a conversation details.
 - [Creates an agent assigned outbound phone interaction for calling the desired number.](https://developer.8x8.com/actions-events/reference/place-phone-call.api): Creates an agent assigned outbound phone interaction for calling the desired number.
 - [Update a conversation details.](https://developer.8x8.com/actions-events/reference/putcctransaction.api): Update a conversation details.
