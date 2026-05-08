@@ -316,6 +316,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "External Campaign API",
+      items: [
+        {
+          type: "doc",
+          id: "actions-events/reference/add-records",
+          label: "Add records to campaign",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "actions-events/reference/modify-campaign",
+          label: "Modify campaign state",
+          className: "api-method patch",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "chat",
       items: [
         {

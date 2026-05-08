@@ -1,0 +1,71 @@
+---
+id: add-records
+title: "Add records to campaign"
+description: "Add one or more records (1-100) to a dynamic campaign. Records are validated, CRM data is queried, and phone numbers are checked against DNC lists. Operation is atomic - all records succeed or all fail."
+sidebar_label: "Add records to campaign"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: actions-events/reference/contact-center-campaigns-api
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Add records to campaign"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/{campaignId}/records"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Add one or more records (1-100) to a dynamic campaign. Records are validated, CRM data is queried, and phone numbers are checked against DNC lists. Operation is atomic - all records succeed or all fail.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"x-api-key","in":"header","description":"Admin Console API Key with the **Contact Center Campaigns** API Product attached. Always starts with `eght_`.","required":true,"schema":{"type":"string"}},{"name":"X-8x8-Tenant","in":"header","description":"Tenant identifier","required":true,"schema":{"type":"string"}},{"name":"campaignId","in":"path","description":"Campaign UUID","required":true,"schema":{"type":"string","format":"uuid"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/vnd.campaigns.v1+json":{"schema":{"required":["records"],"type":"object","properties":{"records":{"maxItems":100,"minItems":1,"type":"array","description":"List of records to add - minimum 1, maximum 100","items":{"maxLength":100,"minLength":1,"required":["crmRecordId"],"type":"object","properties":{"crmRecordId":{"maxLength":32,"minLength":1,"type":"string","description":"CRM record identifier - must be unique within campaign","example":"CRM-12345"},"scheduleAt":{"type":"string","description":"Schedule record attempt (optional). Records are ordered by the earliest scheduleAt value first, triggering only at (or after) the scheduleAt time.","format":"date-time","example":"2024-01-16T10:00:00Z"},"priority":{"type":"string","description":"Dialing priority: HIGH, MEDIUM, LOW.\nRecords are dialed in priority order (HIGH first).\n","example":"HIGH","enum":["HIGH","MEDIUM","LOW"]},"rank":{"type":"number","description":"Ranking within priority group (optional, auto-assigned if not provided)","format":"double","example":1.5}},"description":"Request to add a single record to a campaign","title":"AddRecordRequest"}}},"description":"Records to add (1-100 records)","title":"AddRecordsRequest"}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"Records successfully added","content":{"application/vnd.campaigns.v1+json":{"schema":{"type":"object","properties":{"records":{"type":"array","description":"List of records that were successfully added","items":{"type":"object","properties":{"id":{"type":"string","description":"Record unique identifier","format":"uuid","example":"789e4567-e89b-12d3-a456-426614174000"},"type":{"type":"string","description":"Record type","example":"DYNAMIC","enum":["CRM_QUERY","DYNAMIC"]},"crmRecordId":{"maxLength":32,"type":"string","description":"CRM record identifier","example":"CRM-12345"},"priority":{"type":"string","description":"Dialing priority: HIGH, MEDIUM, LOW.\nRecords are dialed in priority order (HIGH first).\n","example":"HIGH","enum":["HIGH","MEDIUM","LOW"]},"rank":{"type":"number","description":"Ranking within priority group","format":"double","example":1.5},"nextAttemptAfter":{"type":"string","description":"Next scheduled attempt time","format":"date-time","example":"2024-01-15T11:30:00Z"},"retryCount":{"type":"integer","description":"Number of retry attempts","format":"int32","example":2},"state":{"type":"string","description":"Record state","example":"READY","enum":["PENDING","REQUESTED","QUEUED","CANCEL_REQUESTED","AGENT_ACCEPTED","COMPLETE","REJECTED","DELETED","ERROR"]},"stateReason":{"type":"string","description":"Reason for current state","example":"Scheduled for retry"},"result":{"type":"string","description":"Record processing result","example":"COMPLETED","enum":["SUCCESS","NO_VALID_NUMBER","SCHEDULE_COMPLETE","INTERACTION_FAILED","MAX_ATTEMPTS_REACHED","INTERACTION_SKIPPED","CALLBACK_SCHEDULED"]}},"description":"Campaign record representing a single contact to be dialed","title":"Record"}}},"description":"Response containing successfully added records","title":"AddRecordsResponse"}}}},"400":{"description":"Invalid request, validation failure, or duplicate CRM IDs","content":{"application/vnd.campaigns.v1+json":{"schema":{"type":"object","properties":{"title":{"type":"string","description":"Short, human-readable summary of the problem","example":"Validation failed"},"status":{"type":"integer","description":"HTTP status code","format":"int32","example":400},"detail":{"type":"string","description":"Human-readable explanation specific to this occurrence","example":"Campaign already contains record for Id: CRM-12345"},"instance":{"type":"string","description":"URI reference identifying the specific occurrence"},"time":{"type":"string","description":"Timestamp when error occurred","format":"date-time","example":"2024-01-15T10:30:00Z"},"errors":{"type":"array","description":"Field-level validation errors (if applicable)","items":{"type":"object","properties":{"field":{"type":"string","description":"Field name","example":"crmRecordId"},"code":{"type":"string","description":"Error code","example":"NotBlank"},"message":{"type":"string","description":"Error message","example":"must not be blank"}},"description":"Validation error for a specific field","title":"FieldError"}}},"description":"RFC 9457 Problem JSON error response","title":"ErrorMessage"}}}},"404":{"description":"Campaign not found","content":{"application/vnd.campaigns.v1+json":{"schema":{"type":"object","properties":{"title":{"type":"string","description":"Short, human-readable summary of the problem","example":"Validation failed"},"status":{"type":"integer","description":"HTTP status code","format":"int32","example":400},"detail":{"type":"string","description":"Human-readable explanation specific to this occurrence","example":"Campaign already contains record for Id: CRM-12345"},"instance":{"type":"string","description":"URI reference identifying the specific occurrence"},"time":{"type":"string","description":"Timestamp when error occurred","format":"date-time","example":"2024-01-15T10:30:00Z"},"errors":{"type":"array","description":"Field-level validation errors (if applicable)","items":{"type":"object","properties":{"field":{"type":"string","description":"Field name","example":"crmRecordId"},"code":{"type":"string","description":"Error code","example":"NotBlank"},"message":{"type":"string","description":"Error message","example":"must not be blank"}},"description":"Validation error for a specific field","title":"FieldError"}}},"description":"RFC 9457 Problem JSON error response","title":"ErrorMessage"}}}},"500":{"description":"Internal server error","content":{"application/vnd.campaigns.v1+json":{"schema":{"type":"object","properties":{"title":{"type":"string","description":"Short, human-readable summary of the problem","example":"Validation failed"},"status":{"type":"integer","description":"HTTP status code","format":"int32","example":400},"detail":{"type":"string","description":"Human-readable explanation specific to this occurrence","example":"Campaign already contains record for Id: CRM-12345"},"instance":{"type":"string","description":"URI reference identifying the specific occurrence"},"time":{"type":"string","description":"Timestamp when error occurred","format":"date-time","example":"2024-01-15T10:30:00Z"},"errors":{"type":"array","description":"Field-level validation errors (if applicable)","items":{"type":"object","properties":{"field":{"type":"string","description":"Field name","example":"crmRecordId"},"code":{"type":"string","description":"Error code","example":"NotBlank"},"message":{"type":"string","description":"Error message","example":"must not be blank"}},"description":"Validation error for a specific field","title":"FieldError"}}},"description":"RFC 9457 Problem JSON error response","title":"ErrorMessage"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

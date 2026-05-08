@@ -1,0 +1,96 @@
+---
+sidebar_position: 2
+---
+
+# Getting Started
+
+:::warning BETA
+
+**The Contact Center Campaigns API is currently in Beta.** See the [Overview](./overview.md) for details.
+
+:::
+
+This guide walks through a minimal end-to-end flow: build a campaign, start it, add a record, and pause it. Each step links to the endpoint reference for full request and response detail.
+
+## Prerequisites
+
+You will need:
+
+1. **Your 8x8 tenant name** (not the customer site — see below)
+2. **An Admin Console API Key** with the **Contact Center Campaigns** API Product attached to its app — see [Authentication](./authentication.mdx)
+3. **An existing dynamic campaign** — create and configure the campaign in Contact Center Configuration Manager first, and note its **campaign ID**
+4. **Your customer site identifier** — one of `US1`, `US2`, or `UK3`, based on your tenant configuration
+
+## Base URL
+
+All requests use the following pattern:
+
+```text
+https://api.8x8.com/cc/{customer-site}/campaigns/v1/{campaignId}
+```
+
+Where `{customer-site}` is your tenant's customer site:
+
+| Customer site | Region  |
+|---------------|---------|
+| `US1`         | US East |
+| `US2`         | US West |
+| `UK3`         | UK      |
+
+> 📘 **Customer site vs tenant name**
+>
+> The `{customer-site}` value identifies the *region* your tenant is deployed in and appears in the URL path. Your *tenant name* is a separate value sent in the `X-8x8-Tenant` request header. If you're unsure of either value, contact 8x8 support.
+
+## Required headers
+
+Every request must include:
+
+```text
+X-API-Key: eght_your_admin_console_key
+X-8x8-Tenant: your-tenant-name
+```
+
+Any request with a body must additionally include:
+
+```text
+Content-Type: application/vnd.campaigns.v1+json
+```
+
+## Quick start
+
+### Step 1 — Build the campaign
+
+Call [`PATCH /campaigns/{campaignId}`](./endpoints/modify-campaign.md) with `action: "BUILD"`. The campaign moves `CREATED → BUILDING → READY`. `BUILDING` is transient — wait a few seconds before the next step (future API enhancements will have an API to poll, to confirm when the Campaign has finished building).
+
+> 📘 **Build-and-start in one call**
+>
+> Steps 1 and 2 can be collapsed into a single request by sending `action: "START"` with [`buildOnStart: true`](./endpoints/modify-campaign.md#start-variant--buildonstart) from `CREATED`.
+
+### Step 2 — Start the campaign
+
+Once the campaign is in `READY`, call [`PATCH /campaigns/{campaignId}`](./endpoints/modify-campaign.md) with `action: "START"`. The campaign moves to `RUNNING` — or to `PENDING` first if a future `startTime` is configured, transitioning to `RUNNING` when its scheduled window opens.
+
+### Step 3 — Add records
+
+Call [`POST /campaigns/{campaignId}/records`](./endpoints/add-records.md) with a `records` array of 1-100 entries. Each record needs at minimum a `crmRecordId` (your identifier, unique within the campaign); `priority`, `scheduleAt`, and `rank` are optional.
+
+Record addition is **atomic** — if any record in the batch is invalid or its `crmRecordId` collides with an existing one, the whole request is rejected and nothing is persisted.
+
+### Step 4 — Pause the campaign
+
+Call [`PATCH /campaigns/{campaignId}`](./endpoints/modify-campaign.md) with `action: "PAUSE"`. Resume with `"RESUME"`, or end the campaign early with `"CANCEL"`.
+
+## Next steps
+
+- **[Authentication](./authentication.mdx)** - Get an Admin Console API Key
+- **[Modify Campaign endpoint](./endpoints/modify-campaign.md)** - Full request and response reference, including the `buildOnStart` shortcut for combining steps 1 and 2
+- **[Add Records endpoint](./endpoints/add-records.md)** - Batch record addition reference
+- **[Campaign State Machine](./state-machine.md)** - Which actions are valid from which states
+- **[Field Reference](./field-reference.md)** - Full schema for campaigns and records
+- **[Troubleshooting](./troubleshooting.md)** - Error format and common issues
+
+## Need help?
+
+1. Check the [Troubleshooting](./troubleshooting.md) guide
+2. Confirm the Admin Console API Key has the **Contact Center Campaigns** API Product attached
+3. Contact 8x8 support for credentials or access issues

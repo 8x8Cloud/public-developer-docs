@@ -258,6 +258,32 @@ const sidebarConfig = [
   },
   {
     type: 'category',
+    label: '8x8 Contact Center Campaigns (BETA)',
+    collapsed: true,
+    items: [
+      {
+        type: 'doc',
+        id: 'actions-events/reference/contact-center-campaigns-api',
+      },
+      {
+        type: 'category',
+        label: 'External Campaign API',
+        collapsed: true,
+        items: [
+          {
+            type: 'doc',
+            id: 'actions-events/reference/modify-campaign',
+          },
+          {
+            type: 'doc',
+            id: 'actions-events/reference/add-records',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'category',
     label: 'Contact Center Agent Status API',
     collapsed: true,
     items: [

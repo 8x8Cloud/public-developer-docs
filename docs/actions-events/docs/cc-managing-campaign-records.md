@@ -2,6 +2,10 @@
 
 ## TODO
 
+> ⚠️ **Beta customers — use the new Contact Center Campaigns API**
+>
+> If you are part of the [Contact Center Campaigns API (BETA)](./cc-campaigns/overview.md), use that API instead of the one documented on this page. The two APIs manage entirely separate sets of campaigns — see [Relationship to the legacy Contact Center Dynamic Campaigns API](./cc-campaigns/overview.md#relationship-to-the-legacy-contact-center-dynamic-campaigns-api) for details.
+
 > 📘 **Prerequisites**
 >
 > * The Campaign MUST be configured as a Dynamic Campaign

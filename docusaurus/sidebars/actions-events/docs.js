@@ -56,6 +56,29 @@ const sidebarConfig = [
   },
   {
     type: 'category',
+    label: 'Contact Center Campaigns API (BETA)',
+    collapsed: true,
+    items: [
+      'actions-events/docs/cc-campaigns/overview',
+      'actions-events/docs/cc-campaigns/getting-started',
+      'actions-events/docs/cc-campaigns/authentication',
+      {
+        type: 'category',
+        label: 'Endpoints',
+        link: { type: 'doc', id: 'actions-events/docs/cc-campaigns/endpoints' },
+        collapsed: true,
+        items: [
+          'actions-events/docs/cc-campaigns/endpoints/modify-campaign',
+          'actions-events/docs/cc-campaigns/endpoints/add-records',
+        ],
+      },
+      'actions-events/docs/cc-campaigns/state-machine',
+      'actions-events/docs/cc-campaigns/field-reference',
+      'actions-events/docs/cc-campaigns/troubleshooting',
+    ],
+  },
+  {
+    type: 'category',
     label: 'Contact Center Agent Status',
     collapsed: true,
     items: ['actions-events/docs/cc-managing-agent-status'],
