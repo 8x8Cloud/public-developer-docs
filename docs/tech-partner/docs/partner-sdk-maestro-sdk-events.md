@@ -1,4 +1,4 @@
-# events
+# Events
 
 MaestroSDK provide a comprehensive set of events that partners can receive, enabling enhanced integration capabilities. Partners also have the ability to send events to the MaestroSDK.
 

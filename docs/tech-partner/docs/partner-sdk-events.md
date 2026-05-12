@@ -1,4 +1,4 @@
-# events
+# Events
 
 8x8 products provide a comprehensive set of events that partners can receive, enabling enhanced integration capabilities. Partners also have the ability to send events to the 8x8 platform.
 
