@@ -6,6 +6,8 @@
 
 * Added separate transcription indicator with contextual notifications for clearer status visibility
 * Recording advanced options now correctly shown in more scenarios, including when only transcriptions are enabled
+* Recording and transcription notification sounds refreshed with more natural-sounding voices
+* Custom transcription headers and URL parameters are now correctly applied when transcription is configured before any Colibri session exists
 
 ### UI / UX
 
@@ -62,14 +64,14 @@
 **Release version**
 
 * Release: 6741
-* Jitsi Meet: release-9162
+* Jitsi Meet: release-9168
 * Jitsi Videobridge: 2.3-288-g020f11f3d
-* Jicofo: 1175
+* Jicofo: 1176
 
 **Changelog**
 
-* [Jitsi Meet](https://github.com/jitsi/jitsi-meet/compare/release-9036...release-9162)
-* [Jicofo](https://github.com/jitsi/jicofo/compare/1174...1175)
+* [Jitsi Meet](https://github.com/jitsi/jitsi-meet/compare/release-9036...release-9168)
+* [Jicofo](https://github.com/jitsi/jicofo/compare/1174...1176)
 * [Jitsi Videobridge](https://github.com/jitsi/jitsi-videobridge/compare/38293b315...020f11f3d)
 
 Follow us on [Twitter](https://twitter.com/JaaSOfficial) to get the news about our latest releases!
