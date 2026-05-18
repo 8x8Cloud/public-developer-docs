@@ -176,6 +176,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "connect/reference/get-message-usage",
+          label: "Get message usage",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
           id: "connect/reference/start-log-export-job",
           label: "Start SMS log export job",
           className: "api-method post",

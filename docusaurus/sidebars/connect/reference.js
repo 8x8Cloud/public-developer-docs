@@ -287,6 +287,10 @@ const sidebarConfig = [
             type: 'doc',
             id: 'connect/reference/get-chatapps-message-details',
           },
+          {
+            type: 'doc',
+            id: 'connect/reference/get-message-usage',
+          },
         ],
       },
       {
