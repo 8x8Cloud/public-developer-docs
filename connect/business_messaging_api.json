@@ -95,7 +95,9 @@
         },
         "operationId": "Send-Message",
         "summary": "Send message",
-        "tags": ["Send Message API"],
+        "tags": [
+          "Send Message API"
+        ],
         "parameters": [
           {
             "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1lon/parameters/0"
@@ -214,7 +216,10 @@
                             "description": "Address that will appear below the generic map at the top of the message"
                           }
                         },
-                        "required": ["latitude", "longitude"],
+                        "required": [
+                          "latitude",
+                          "longitude"
+                        ],
                         "title": "Location data"
                       },
                       "interactive": {
@@ -257,7 +262,9 @@
                                     "type": {
                                       "type": "string",
                                       "example": "reply",
-                                      "enum": ["reply"],
+                                      "enum": [
+                                        "reply"
+                                      ],
                                       "description": "Type of button"
                                     },
                                     "reply": {
@@ -381,7 +388,10 @@
                                   "flowAction": {
                                     "type": "string",
                                     "description": "Optional for Flow messages. Either \"navigate\" or \"data_exchange\". Defaults to \"navigate\" if not provided.",
-                                    "enum": ["navigate", "data_exchange"],
+                                    "enum": [
+                                      "navigate",
+                                      "data_exchange"
+                                    ],
                                     "default": "navigate",
                                     "example": "navigate"
                                   },
@@ -451,7 +461,12 @@
                               "type": {
                                 "type": "string",
                                 "example": "text",
-                                "enum": ["text", "video", "image", "document"],
+                                "enum": [
+                                  "text",
+                                  "video",
+                                  "image",
+                                  "document"
+                                ],
                                 "description": "The header type you would like to use. The type property is required."
                               },
                               "video": {
@@ -503,7 +518,11 @@
                             "description": "Duration of video (in seconds)"
                           }
                         },
-                        "required": ["thumbnail", "filesize", "duration"],
+                        "required": [
+                          "thumbnail",
+                          "filesize",
+                          "duration"
+                        ],
                         "title": "Video data"
                       },
                       "template": {
@@ -547,7 +566,7 @@
                                     "properties": {
                                       "type": {
                                         "type": "string",
-                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"gif\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only — overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
+                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"gif\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only \u2014 overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
                                         "enum": [
                                           "text",
                                           "image",
@@ -636,7 +655,9 @@
                                         "example": 2
                                       }
                                     },
-                                    "required": ["type"]
+                                    "required": [
+                                      "type"
+                                    ]
                                   }
                                 },
                                 "index": {
@@ -649,7 +670,13 @@
                                 "subType": {
                                   "type": "string",
                                   "description": "Required for \"button\" type.\n\nType of button being created\nValues: QuickReply, Url, CopyCode, Flow, VoiceCall.\n\nFor VoiceCall, the `parameters` array is optional. All other subtypes require at least one parameter.",
-                                  "enum": ["QuickReply", "Url", "CopyCode", "Flow", "VoiceCall"]
+                                  "enum": [
+                                    "QuickReply",
+                                    "Url",
+                                    "CopyCode",
+                                    "Flow",
+                                    "VoiceCall"
+                                  ]
                                 },
                                 "cards": {
                                   "type": "array",
@@ -743,7 +770,9 @@
                                                     "description": "Required for \"couponCode\" type.\n\nThe coupon code to be copied when the customer taps the button."
                                                   }
                                                 },
-                                                "required": ["type"]
+                                                "required": [
+                                                  "type"
+                                                ]
                                               }
                                             },
                                             "index": {
@@ -756,7 +785,10 @@
                                             "subType": {
                                               "type": "string",
                                               "description": "Required for \"button\" type.\n\nType of button being created\nValues: QuickReply, Url.",
-                                              "enum": ["QuickReply", "Url"]
+                                              "enum": [
+                                                "QuickReply",
+                                                "Url"
+                                              ]
                                             }
                                           }
                                         }
@@ -881,7 +913,10 @@
                                   "maxLength": 2048
                                 }
                               },
-                              "required": ["text", "postbackData"]
+                              "required": [
+                                "text",
+                                "postbackData"
+                              ]
                             },
                             "action": {
                               "description": "Suggest an action to the message. Only one of the following properties can be specified: dialAction, viewLocationAction, createCalendarEventAction, openUrlAction.",
@@ -905,7 +940,9 @@
                                           "type": "string"
                                         }
                                       },
-                                      "required": ["phoneNumber"]
+                                      "required": [
+                                        "phoneNumber"
+                                      ]
                                     },
                                     "viewLocationAction": {
                                       "type": "object",
@@ -928,7 +965,10 @@
                                               "maximum": 180
                                             }
                                           },
-                                          "required": ["latitude", "longitude"]
+                                          "required": [
+                                            "latitude",
+                                            "longitude"
+                                          ]
                                         },
                                         "label": {
                                           "description": "Text label of the location opened.",
@@ -1007,7 +1047,9 @@
                                           "description": "Accessibility description for webview."
                                         }
                                       },
-                                      "required": ["url"]
+                                      "required": [
+                                        "url"
+                                      ]
                                     }
                                   }
                                 }
@@ -1066,12 +1108,19 @@
                         "successStatus": {
                           "type": "string",
                           "description": "Enumeration of Success Delivery status",
-                          "enum": ["Accepted", "Sent", "Delivered", "Read"],
+                          "enum": [
+                            "Accepted",
+                            "Sent",
+                            "Delivered",
+                            "Read"
+                          ],
                           "example": "Delivered",
                           "title": "Success status"
                         }
                       },
-                      "required": ["channel"],
+                      "required": [
+                        "channel"
+                      ],
                       "title": "Channel override"
                     }
                   },
@@ -1085,11 +1134,17 @@
                         "example": "aa7c29ad-4433-2211-9c8b-00004e2b9ecc"
                       }
                     },
-                    "required": ["umid"],
+                    "required": [
+                      "umid"
+                    ],
                     "title": "Context object"
                   }
                 },
-                "required": ["user", "type", "content"],
+                "required": [
+                  "user",
+                  "type",
+                  "content"
+                ],
                 "description": "Messaging Apps API: request model for send single message",
                 "title": "Single message request"
               },
@@ -1897,7 +1952,7 @@
                     },
                     "type": "buttons",
                     "content": {
-                      "text": "🎉 Successful Purchase! 🎉\\n\\nHello Ana,\\n\\nThank you for purchasing your Singapore OCBC Skyway ticket! Your ticket is now confirmed and ready for use.\\n\\n📅 Date: October 15, 2023\\n⏰ Time: 3:00 PM - 4:00 PM\\n🎫 Ticket ID: SKY98723\\n\\nTo view your e-ticket, click the button below.",
+                      "text": "\ud83c\udf89 Successful Purchase! \ud83c\udf89\\n\\nHello Ana,\\n\\nThank you for purchasing your Singapore OCBC Skyway ticket! Your ticket is now confirmed and ready for use.\\n\\n\ud83d\udcc5 Date: October 15, 2023\\n\u23f0 Time: 3:00 PM - 4:00 PM\\n\ud83c\udfab Ticket ID: SKY98723\\n\\nTo view your e-ticket, click the button below.",
                       "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg",
                       "button": {
                         "caption": "View E-ticket",
@@ -2320,7 +2375,9 @@
             "$ref": "#/paths/~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
-        "tags": ["Send Message API"],
+        "tags": [
+          "Send Message API"
+        ],
         "summary": "Send message batch",
         "description": "* This endpoint is used to send Messaging Apps messages by batches (1 request for multiple messages) with personalized contents/properties. \n* It is ideal to send any kind of massive personalized announcement. \n* Using this API, it is possible to send up to 1,000 messages per request.",
         "requestBody": {
@@ -2374,7 +2431,9 @@
                     "description": "If 'True', then information about every message will be returned in API response"
                   }
                 },
-                "required": ["messages"],
+                "required": [
+                  "messages"
+                ],
                 "description": "Messaging Apps API: request model for send batch of messages",
                 "title": "Batch message request"
               }
@@ -2444,7 +2503,11 @@
                     "example": "cf3cbbf5-3e2d-ea11-815d-020897df5459"
                   }
                 },
-                "required": ["channel", "type", "umid"],
+                "required": [
+                  "channel",
+                  "type",
+                  "umid"
+                ],
                 "title": "Send typing indicator request",
                 "description": "Request to send a typing indicator to a messaging channel"
               },
@@ -2470,7 +2533,9 @@
           },
           "description": "Send a typing indicator to a messaging channel to show that the brand or official account is composing a message."
         },
-        "tags": ["Send Message Event API"],
+        "tags": [
+          "Send Message Event API"
+        ],
         "description": "This endpoint is used to send typing indicators to messaging channels. This allows brands to provide real-time feedback to end users, showing that a response is being composed.\nThe `umid` parameter should reference the unique message ID of an inbound message that you are responding to.\n\n**Important:** Typing indicators can only be sent for inbound messages received within the last 2 hours.",
         "operationId": "send-typing-indicator",
         "security": [
@@ -2526,7 +2591,11 @@
                       "description": "Client managed id for the message: your own unique reference"
                     }
                   },
-                  "required": ["status", "umid", "user"],
+                  "required": [
+                    "status",
+                    "umid",
+                    "user"
+                  ],
                   "title": "Single message response"
                 },
                 "examples": {
@@ -2559,7 +2628,9 @@
         },
         "operationId": "send-lon-message",
         "summary": "Send Line Notification message",
-        "tags": ["Send Message API"],
+        "tags": [
+          "Send Message API"
+        ],
         "parameters": [
           {
             "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1lon/parameters/0"
@@ -2777,7 +2848,11 @@
                       },
                       "encoding": {
                         "description": "Encoding for the text of the message. \"AUTO\", \"GSM7\" and \"UCS2\" \n",
-                        "enum": ["AUTO", "GSM7", "UCS2"],
+                        "enum": [
+                          "AUTO",
+                          "GSM7",
+                          "UCS2"
+                        ],
                         "type": "string",
                         "example": "AUTO",
                         "title": "Encoding"
@@ -2785,7 +2860,10 @@
                     }
                   }
                 },
-                "required": ["user", "content"],
+                "required": [
+                  "user",
+                  "content"
+                ],
                 "description": "Messaging Apps API: request model for send single Line Notification message",
                 "title": "Single Line Notification message request"
               }
@@ -2842,7 +2920,11 @@
                       }
                     }
                   },
-                  "required": ["batchId", "acceptedCount", "rejectedCount"],
+                  "required": [
+                    "batchId",
+                    "acceptedCount",
+                    "rejectedCount"
+                  ],
                   "description": "Successful batch response",
                   "title": "Batch message response"
                 },
@@ -2895,7 +2977,9 @@
             "$ref": "#/paths/~1files~1%7Bfilename%7D/get/responses/500"
           }
         },
-        "tags": ["Send Message API"],
+        "tags": [
+          "Send Message API"
+        ],
         "summary": "Send Line Notification message batch",
         "description": "* This endpoint is used to send Messaging Apps messages by batches (1 request for multiple messages) with personalized contents/properties. \n* It is ideal to send any kind of massive personalized announcement. \n* Using this API, it is possible to send up to 1,000 messages per request.",
         "requestBody": {
@@ -2925,7 +3009,9 @@
                     "description": "If 'True', then information about every message will be returned in API response"
                   }
                 },
-                "required": ["messages"],
+                "required": [
+                  "messages"
+                ],
                 "description": "Messaging Apps API: request model for send batch of messages",
                 "title": "Batch message request"
               }
@@ -2963,7 +3049,9 @@
           }
         },
         "summary": "Mark message as read",
-        "tags": ["Send Message Event API"],
+        "tags": [
+          "Send Message Event API"
+        ],
         "description": "This endpoint is used to indicate to end users that a message has been read by the respective brand or official account. \n\nCurrent channel support: \n- WhatsApp Business account (two blue ticks on customers message). \n",
         "operationId": "mark-message-read",
         "security": [
@@ -3100,7 +3188,9 @@
                                   }
                                 }
                               },
-                              "required": ["type"]
+                              "required": [
+                                "type"
+                              ]
                             }
                           },
                           "category": {
@@ -3206,7 +3296,9 @@
         },
         "summary": "Get WhatsApp templates",
         "operationId": "get-whatsapp-templates",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "description": "This endpoint is used to get your registered WhatsApp message template and their approval status. \n\nWhatsApp Message Templates are message formats for common reusable messages a business may want to send. \nBusinesses must use Message Templates for sending notifications to customers.\nAny message sent outside the 24h customer service window, needs to be a template message, to be delivered. \nAdvertising, marketing, or promotional messages are not permitted.",
         "security": [
           {
@@ -3406,7 +3498,10 @@
                                 "example": 1440
                               }
                             },
-                            "required": ["type", "text"]
+                            "required": [
+                              "type",
+                              "text"
+                            ]
                           }
                         },
                         "examples": {
@@ -3437,11 +3532,18 @@
                                 "type": "string",
                                 "default": "BODY",
                                 "description": "Component type",
-                                "enum": ["HEADER", "BODY", "BUTTONS"]
+                                "enum": [
+                                  "HEADER",
+                                  "BODY",
+                                  "BUTTONS"
+                                ]
                               },
                               "format": {
                                 "type": "string",
-                                "enum": ["Image", "Video"],
+                                "enum": [
+                                  "Image",
+                                  "Video"
+                                ],
                                 "example": "Image",
                                 "description": "Component type.\nRequired for HEADER component type."
                               },
@@ -3498,7 +3600,10 @@
                                       }
                                     }
                                   },
-                                  "required": ["type", "text"]
+                                  "required": [
+                                    "type",
+                                    "text"
+                                  ]
                                 }
                               },
                               "examples": {
@@ -3509,11 +3614,15 @@
                                 }
                               }
                             },
-                            "required": ["type"]
+                            "required": [
+                              "type"
+                            ]
                           }
                         }
                       },
-                      "required": ["type"]
+                      "required": [
+                        "type"
+                      ]
                     }
                   },
                   "allow_category_change": {
@@ -3528,7 +3637,12 @@
                     "description": "Custom time-to-live (TTL) for message delivery in seconds. If a message cannot be delivered within this time, it will be dropped.<br/>Valid ranges: Authentication templates (30-900 seconds or -1 for 30 days), Utility templates (30-43200 seconds or -1 for 30 days), Marketing templates (43200-2592000 seconds).<br/>Default TTL: Authentication=10 minutes (600 seconds), Utility/Marketing=30 days."
                   }
                 },
-                "required": ["language", "name", "category", "components"],
+                "required": [
+                  "language",
+                  "name",
+                  "category",
+                  "components"
+                ],
                 "title": "Register template request",
                 "description": "Register template request"
               },
@@ -3544,7 +3658,11 @@
                       {
                         "type": "body",
                         "text": "Rare succulents for sale! {{1}}, add these unique plants to your collection. Each of these rare succulents are {{2}} if you checkout using code {{3}}. Shop now and add some unique and beautiful plants to your collection!",
-                        "examples": ["Pablo", "30%", "30OFF"]
+                        "examples": [
+                          "Pablo",
+                          "30%",
+                          "30OFF"
+                        ]
                       },
                       {
                         "type": "carousel",
@@ -3573,7 +3691,9 @@
                                     "type": "url",
                                     "text": "Shop",
                                     "url": "https://www.example.com/rare-succulents/{{1}}",
-                                    "examples": ["BLUE_ELF"]
+                                    "examples": [
+                                      "BLUE_ELF"
+                                    ]
                                   }
                                 ]
                               }
@@ -3603,7 +3723,9 @@
                                     "type": "url",
                                     "text": "Shop",
                                     "url": "https://www.example.com/rare-succulents{{1}}",
-                                    "examples": ["BUDDHA"]
+                                    "examples": [
+                                      "BUDDHA"
+                                    ]
                                   }
                                 ]
                               }
@@ -3633,7 +3755,9 @@
                                     "type": "url",
                                     "text": "Shop",
                                     "url": "https://www.example.com/rare-succulents{{1}}",
-                                    "examples": ["BLACK_PRINCE"]
+                                    "examples": [
+                                      "BLACK_PRINCE"
+                                    ]
                                   }
                                 ]
                               }
@@ -3700,7 +3824,7 @@
                   "value": {
                     "name": "template_with_voice_call",
                     "language": "en_US",
-                    "category": "MARKETING|UTILITY", 
+                    "category": "MARKETING|UTILITY",
                     "allow_category_change": true,
                     "components": [
                       {
@@ -3754,7 +3878,9 @@
             }
           }
         },
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "description": "This endpoint is used to register new WhatsApp message template.\n\nPlease note that special html entities should be unescaped.\n\nWhatsApp Message Templates are message formats for common reusable messages a business may want to send. \nBusinesses must use Message Templates for sending notifications to customers.\nAny message sent outside the 24h customer service window, needs to be a template message, to be delivered. \nAdvertising, marketing, or promotional messages are not permitted.",
         "security": [
           {
@@ -3795,7 +3921,9 @@
           }
         ],
         "operationId": "remove-wa-template",
-        "tags": ["Management API"]
+        "tags": [
+          "Management API"
+        ]
       },
       "parameters": [
         {
@@ -3829,7 +3957,9 @@
         "summary": "Get Call Permission Status",
         "operationId": "get-call-permission-status",
         "description": "This endpoint is used to check the status of call permission for a specific destination on WhatsApp. It returns whether the business is allowed to initiate voice calls to the specified phone number.",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "parameters": [
           {
             "name": "subAccountId",
@@ -3871,7 +4001,11 @@
                     "status": {
                       "type": "string",
                       "description": "The current call permission status",
-                      "enum": ["temporary", "permanent", "not_granted"],
+                      "enum": [
+                        "temporary",
+                        "permanent",
+                        "not_granted"
+                      ],
                       "example": "temporary"
                     },
                     "actions": {
@@ -3883,7 +4017,10 @@
                           "actionName": {
                             "type": "string",
                             "description": "Name of the action",
-                            "enum": ["send_call_permission_request", "start_call"],
+                            "enum": [
+                              "send_call_permission_request",
+                              "start_call"
+                            ],
                             "example": "send_call_permission_request"
                           },
                           "canPerformAction": {
@@ -3988,7 +4125,9 @@
         "summary": "Get WhatsApp Flows",
         "operationId": "get-whatsapp-flows",
         "description": "This endpoint is used to retrieve the list of WhatsApp Flows and their status for the channel.",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "parameters": [
           {
             "name": "accountId",
@@ -4052,7 +4191,11 @@
                           "status": {
                             "type": "string",
                             "description": "Flow status",
-                            "enum": ["DRAFT", "PUBLISHED", "DEPRECATED"],
+                            "enum": [
+                              "DRAFT",
+                              "PUBLISHED",
+                              "DEPRECATED"
+                            ],
                             "example": "DRAFT"
                           }
                         }
@@ -4098,7 +4241,9 @@
         "summary": "Create WhatsApp Flow",
         "operationId": "create-whatsapp-flow",
         "description": "This endpoint is used to create a new WhatsApp Flow.\n\nWhatsApp Flows are interactive experiences that businesses can use to collect information from customers through WhatsApp conversations. Flows provide a structured way to guide users through multi-step processes like booking appointments, collecting feedback, or processing orders.",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "parameters": [
           {
             "name": "accountId",
@@ -4138,9 +4283,20 @@
                     "description": "Flow categories",
                     "items": {
                       "type": "string",
-                      "enum": ["SIGN_UP", "SIGN_IN", "APPOINTMENT_BOOKING", "LEAD_GENERATION", "CONTACT_US", "CUSTOMER_SUPPORT", "SURVEY", "OTHER"]
+                      "enum": [
+                        "SIGN_UP",
+                        "SIGN_IN",
+                        "APPOINTMENT_BOOKING",
+                        "LEAD_GENERATION",
+                        "CONTACT_US",
+                        "CUSTOMER_SUPPORT",
+                        "SURVEY",
+                        "OTHER"
+                      ]
                     },
-                    "example": ["OTHER"]
+                    "example": [
+                      "OTHER"
+                    ]
                   },
                   "publish": {
                     "type": "boolean",
@@ -4165,14 +4321,19 @@
                     "example": "https://example.com/webhook/flow-completion"
                   }
                 },
-                "required": ["name", "categories"]
+                "required": [
+                  "name",
+                  "categories"
+                ]
               },
               "examples": {
                 "createFlow": {
                   "summary": "Create a new WhatsApp Flow",
                   "value": {
                     "name": "Example Flow",
-                    "categories": ["OTHER"],
+                    "categories": [
+                      "OTHER"
+                    ],
                     "publish": false,
                     "flowJson": "{\"version\":\"5.0\",\"screens\":[{\"id\":\"WELCOME_SCREEN\",\"layout\":{\"type\":\"SingleColumnLayout\",\"children\":[{\"type\":\"TextHeading\",\"text\":\"Hello World\"},{\"type\":\"Footer\",\"label\":\"Complete\",\"on-click-action\":{\"name\":\"complete\",\"payload\":{}}}]},\"title\":\"Welcome\",\"terminal\":true,\"success\":true,\"data\":{}}]}"
                   }
@@ -4338,7 +4499,9 @@
         "summary": "Get WhatsApp Flow details",
         "operationId": "get-whatsapp-flow-details",
         "description": "This endpoint is used to retrieve details of a specific WhatsApp Flow.\n\nWhatsApp Flows are interactive experiences that businesses can use to collect information from customers through WhatsApp conversations. This endpoint returns comprehensive information about a flow including its current status, validation errors, and flow JSON URL.",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "parameters": [
           {
             "name": "accountId",
@@ -4399,7 +4562,11 @@
                     "status": {
                       "type": "string",
                       "description": "Flow status",
-                      "enum": ["DRAFT", "PUBLISHED", "DEPRECATED"],
+                      "enum": [
+                        "DRAFT",
+                        "PUBLISHED",
+                        "DEPRECATED"
+                      ],
                       "example": "DRAFT"
                     },
                     "categories": {
@@ -4407,9 +4574,20 @@
                       "description": "Flow categories",
                       "items": {
                         "type": "string",
-                        "enum": ["SIGN_UP", "SIGN_IN", "APPOINTMENT_BOOKING", "LEAD_GENERATION", "CONTACT_US", "CUSTOMER_SUPPORT", "SURVEY", "OTHER"]
+                        "enum": [
+                          "SIGN_UP",
+                          "SIGN_IN",
+                          "APPOINTMENT_BOOKING",
+                          "LEAD_GENERATION",
+                          "CONTACT_US",
+                          "CUSTOMER_SUPPORT",
+                          "SURVEY",
+                          "OTHER"
+                        ]
                       },
-                      "example": ["OTHER"]
+                      "example": [
+                        "OTHER"
+                      ]
                     },
                     "validationErrors": {
                       "type": "array",
@@ -4495,7 +4673,9 @@
                       "flowJsonUrl": "https://mmg.whatsapp.net/m1/v/t24/An-a1LjKk34-zpvJMd&_nc_sid=471",
                       "name": "Example flow",
                       "status": "DRAFT",
-                      "categories": ["OTHER"],
+                      "categories": [
+                        "OTHER"
+                      ],
                       "validationErrors": [
                         {
                           "error": "INVALID_PROPERTY_VALUE",
@@ -4525,7 +4705,9 @@
                       "flowJsonUrl": "https://mmg.whatsapp.net/m1/v/t24/An-a1LjKk34-zpvJMd&_nc_sid=471",
                       "name": "Example flow",
                       "status": "PUBLISHED",
-                      "categories": ["OTHER"]
+                      "categories": [
+                        "OTHER"
+                      ]
                     }
                   }
                 }
@@ -4552,7 +4734,9 @@
         "summary": "Update WhatsApp Flow",
         "operationId": "update-whatsapp-flow",
         "description": "This endpoint is used to update an existing WhatsApp Flow. The flow must be in draft state.\n\nWhatsApp Flows are interactive experiences that businesses can use to collect information from customers through WhatsApp conversations. This endpoint allows you to update flow properties including name, categories, flow JSON definition, endpoint URI, and application ID.\n\nAt least one property must be present in the request body.",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "parameters": [
           {
             "name": "accountId",
@@ -4601,9 +4785,20 @@
                     "description": "Flow categories",
                     "items": {
                       "type": "string",
-                      "enum": ["SIGN_UP", "SIGN_IN", "APPOINTMENT_BOOKING", "LEAD_GENERATION", "CONTACT_US", "CUSTOMER_SUPPORT", "SURVEY", "OTHER"]
+                      "enum": [
+                        "SIGN_UP",
+                        "SIGN_IN",
+                        "APPOINTMENT_BOOKING",
+                        "LEAD_GENERATION",
+                        "CONTACT_US",
+                        "CUSTOMER_SUPPORT",
+                        "SURVEY",
+                        "OTHER"
+                      ]
                     },
-                    "example": ["OTHER"]
+                    "example": [
+                      "OTHER"
+                    ]
                   },
                   "publish": {
                     "type": "boolean",
@@ -4641,7 +4836,9 @@
                   "summary": "Update WhatsApp Flow",
                   "value": {
                     "name": "Example Flow - Updated",
-                    "categories": ["OTHER"],
+                    "categories": [
+                      "OTHER"
+                    ],
                     "flowJson": "{\"version\":\"5.0\",\"screens\":[{\"id\":\"WELCOME_SCREEN\",\"layout\":{\"type\":\"SingleColumnLayout\",\"children\":[{\"type\":\"TextHeading\",\"text\":\"Hello World!\"},{\"type\":\"Footer\",\"label\":\"Complete\",\"on-click-action\":{\"name\":\"complete\",\"payload\":{}}}]},\"title\":\"Welcome\",\"terminal\":true,\"success\":true,\"data\":{}}]}"
                   }
                 }
@@ -4717,7 +4914,9 @@
         "summary": "Delete WhatsApp Flow",
         "operationId": "delete-whatsapp-flow",
         "description": "This endpoint is used to delete a WhatsApp Flow.\n\nOnly flows that are not published can be deleted. If a flow has been published, it cannot be deleted and the API will return an error. This operation is permanent and cannot be undone.",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "parameters": [
           {
             "name": "accountId",
@@ -4776,7 +4975,9 @@
         "summary": "Preview WhatsApp Flow",
         "operationId": "preview-whatsapp-flow",
         "description": "This endpoint is used to generate a preview URL for a WhatsApp Flow.\n\nThe preview allows you to visualize and interact with your flow before publishing it. You can force regeneration of the preview by setting the `refresh` query parameter to `true`.\n\nFor interactive previews with custom parameters, you can add query parameters to the generated preview URL. For a list of supported query parameters, refer to the 'Visualizing and interacting with your Flow using the Web Preview' section of the [WhatsApp Flows API documentation](https://developers.facebook.com/docs/whatsapp/flows/reference/flowsapi).",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "parameters": [
           {
             "name": "accountId",
@@ -4883,7 +5084,9 @@
         "summary": "Publish WhatsApp Flow",
         "operationId": "publish-whatsapp-flow",
         "description": "This endpoint is used to publish a WhatsApp Flow.\n\nPublishing a flow makes it available for use in WhatsApp conversations. Once published, the flow can be sent to customers through WhatsApp messages(Template message and Interactive messages). A flow must be in DRAFT status and pass all validations before it can be published.",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "parameters": [
           {
             "name": "accountId",
@@ -4942,7 +5145,9 @@
         "summary": "Deprecate WhatsApp Flow",
         "operationId": "deprecate-whatsapp-flow",
         "description": "This endpoint is used to deprecate a WhatsApp Flow.\n\nDeprecating a flow marks it as no longer recommended for use, but keeps it accessible for existing integrations. This allows you to phase out a flow gracefully without breaking active implementations. Once deprecated, the flow status will be updated to reflect its deprecated state.",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "parameters": [
           {
             "name": "accountId",
@@ -5011,7 +5216,9 @@
                       "description": "Identifier of the job started. Use this value to query job result."
                     }
                   },
-                  "required": ["jobId"]
+                  "required": [
+                    "jobId"
+                  ]
                 },
                 "examples": {
                   "response": {
@@ -5026,7 +5233,9 @@
         },
         "summary": "Start log export job",
         "operationId": "start-log-export-job-1",
-        "tags": ["Reporting API"],
+        "tags": [
+          "Reporting API"
+        ],
         "security": [
           {
             "apiKey": []
@@ -5063,7 +5272,10 @@
                       "maxLength": 2,
                       "example": "US"
                     },
-                    "example": ["US", "SG"]
+                    "example": [
+                      "US",
+                      "SG"
+                    ]
                   },
                   "limit": {
                     "type": "integer",
@@ -5165,7 +5377,9 @@
         },
         "summary": "Get log export job result",
         "operationId": "get-log-export-job-result-1",
-        "tags": ["Reporting API"],
+        "tags": [
+          "Reporting API"
+        ],
         "security": [
           {
             "apiKey": []
@@ -5215,7 +5429,9 @@
         },
         "summary": "Cancel the log export job ",
         "operationId": "cancel-log-export-job-1",
-        "tags": ["Reporting API"],
+        "tags": [
+          "Reporting API"
+        ],
         "security": [
           {
             "apiKey": []
@@ -5363,7 +5579,9 @@
                       }
                     }
                   },
-                  "required": ["data"]
+                  "required": [
+                    "data"
+                  ]
                 },
                 "examples": {
                   "response": {
@@ -5424,7 +5642,9 @@
             }
           }
         },
-        "tags": ["Reporting API"],
+        "tags": [
+          "Reporting API"
+        ],
         "summary": "Retrieve message details",
         "description": "This resource can be used to query message details like delivery status using the UMID of the message. You need to specify the sub account id and the umid of the message in place of *{subAccountId}* and *{umid}* respectively. *umid* is the unique identifier (in the form of a uuid) you received when you submitted the message to the api.\n\n### API Rate Limiting\nTo protect the platform from being overloaded and maintain a high quality of service to all customers, we enforce API rate limits for this API endpoint.\n\nThe limit is set to 1 request/second per subaccount.\n> To safeguard your privacy, sensitive data such as message content and phone numbers are masked by default. Access to this information can be requested by contacting our support team.",
         "operationId": "get-chatapps-message-details",
@@ -5435,7 +5655,9 @@
         ]
       },
       "delete": {
-        "tags": ["Send Message API"],
+        "tags": [
+          "Send Message API"
+        ],
         "summary": "Cancel the scheduled message",
         "operationId": "cancel-scheduled-message-1",
         "description": "This resource can be used to cancel a scheduled message that has not been sent yet using the *unique message identifier* (`UMID`) of the message.\n\n### URL\nYou need to specify the *sub-account id* and the *umid* of the message in place of `{subAccountId}` and `{umid}` respectively. \n`umid` is the unique identifier you received when you submitted the message to the API.\n",
@@ -5471,7 +5693,9 @@
                       "description": "Number of cancelled messages"
                     }
                   },
-                  "required": ["cancelledCount"]
+                  "required": [
+                    "cancelledCount"
+                  ]
                 },
                 "examples": {
                   "example-1": {
@@ -5489,7 +5713,11 @@
               "application/json": {
                 "schema": {
                   "title": "ErrorResponse",
-                  "required": ["code", "errorId", "timestamp"],
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
                   "type": "object",
                   "properties": {
                     "code": {
@@ -5593,7 +5821,9 @@
         }
       ],
       "get": {
-        "tags": ["Webhook Configuration API"],
+        "tags": [
+          "Webhook Configuration API"
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -5650,7 +5880,10 @@
                           },
                           "credentialsLocation": {
                             "type": "string",
-                            "enum": ["header", "body"],
+                            "enum": [
+                              "header",
+                              "body"
+                            ],
                             "description": "Specifies where the client credentials are sent: `header` (HTTP Basic Auth) or `body` (form body).",
                             "example": "header"
                           },
@@ -5660,10 +5893,18 @@
                             "example": "read write"
                           }
                         },
-                        "required": ["url", "clientId", "clientSecret", "credentialsLocation"]
+                        "required": [
+                          "url",
+                          "clientId",
+                          "clientSecret",
+                          "credentialsLocation"
+                        ]
                       }
                     },
-                    "required": ["subAccountId", "url"]
+                    "required": [
+                      "subAccountId",
+                      "url"
+                    ]
                   }
                 },
                 "examples": {
@@ -5753,7 +5994,9 @@
         "description": "Sending a GET request on this endpoint allows to **retrieve a list of all the webhooks or a specific webhook configured for an account**."
       },
       "post": {
-        "tags": ["Webhook Configuration API"],
+        "tags": [
+          "Webhook Configuration API"
+        ],
         "responses": {
           "200": {
             "description": "The webhook was created or updated successfully"
@@ -5793,7 +6036,7 @@
                     },
                     "httpAuthorization": {
                       "type": "string",
-                      "description": "A static value sent as the HTTP `Authorization` header with every webhook request. Use this for static credentials such as API keys or pre-shared tokens.\n\n**Example — Basic Authorization:**\n- Encode `user:password` in base64 (e.g. `dXNlcjpwYXNzd29yZA==`)\n- Set this field to `Basic dXNlcjpwYXNzd29yZA==`\n\n> For OAuth 2.0 Client Credentials flow, leave this field empty and use the `oauth` property instead.",
+                      "description": "A static value sent as the HTTP `Authorization` header with every webhook request. Use this for static credentials such as API keys or pre-shared tokens.\n\n**Example \u2014 Basic Authorization:**\n- Encode `user:password` in base64 (e.g. `dXNlcjpwYXNzd29yZA==`)\n- Set this field to `Basic dXNlcjpwYXNzd29yZA==`\n\n> For OAuth 2.0 Client Credentials flow, leave this field empty and use the `oauth` property instead.",
                       "example": "Bearer 9QQhlsEb8VY"
                     },
                     "enabled": {
@@ -5804,7 +6047,11 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": ["CADR", "MSG", "CABM"],
+                      "enum": [
+                        "CADR",
+                        "MSG",
+                        "CABM"
+                      ],
                       "description": "This parameter is not mandatory.\n- Sets the type of webhook to be added/updated.\n- Possible values are:\n  * `CADR` for delivery receipts\n  * `MSG` for inbound messages\n  * `CABM` for Messaging Apps Business Management Updates\n- When not provided, webhooks will be added/updated for only CADR and MSG."
                     },
                     "oauth": {
@@ -5829,7 +6076,10 @@
                         },
                         "credentialsLocation": {
                           "type": "string",
-                          "enum": ["header", "body"],
+                          "enum": [
+                            "header",
+                            "body"
+                          ],
                           "description": "Specifies where the client credentials are sent: `header` (HTTP Basic Auth) or `body` (form body).",
                           "example": "header"
                         },
@@ -5839,10 +6089,18 @@
                           "example": "read write"
                         }
                       },
-                      "required": ["url", "clientId", "clientSecret", "credentialsLocation"]
+                      "required": [
+                        "url",
+                        "clientId",
+                        "clientSecret",
+                        "credentialsLocation"
+                      ]
                     }
                   },
-                  "required": ["subAccountId", "url"]
+                  "required": [
+                    "subAccountId",
+                    "url"
+                  ]
                 }
               },
               "examples": {
@@ -5902,7 +6160,9 @@
         "description": "Sending a POST request on this endpoint allows to **add a new webhook for an account or modify the configuration of an existing one** .  \n\nWebhooks can be given an account-wide and/or a type-wide scope using the \\* character  \n\nFor example: if a webhook is created with subAccount=\\* , this webhook will receive events across all the subaccounts of an account."
       },
       "delete": {
-        "tags": ["Webhook Configuration API"],
+        "tags": [
+          "Webhook Configuration API"
+        ],
         "responses": {
           "200": {
             "description": "The webhook was deleted successfully"
@@ -5936,11 +6196,17 @@
                     },
                     "type": {
                       "type": "string",
-                      "enum": ["CADR", "MSG", "CABM"],
+                      "enum": [
+                        "CADR",
+                        "MSG",
+                        "CABM"
+                      ],
                       "description": "This parameter is not mandatory.\n- Sets the type of webhook to be delete.\n- Possible values are:\n  * `CADR` for delivery receipts\n  * `MSG` for inbound messages\n  * `CABM` for Messaging Apps Business Management Updates\n- When not provided, webhooks will be deleted for only CADR and MSG."
                     }
                   },
-                  "required": ["subAccountId"]
+                  "required": [
+                    "subAccountId"
+                  ]
                 }
               }
             }
@@ -5967,7 +6233,9 @@
     },
     "/api/v1/subaccounts/{subAccountId}/messages/batch/{batchId}": {
       "delete": {
-        "tags": ["Send Message API"],
+        "tags": [
+          "Send Message API"
+        ],
         "summary": "Cancel batch of scheduled message",
         "description": "- Sending a DELETE request on this this endpoint allows to **cancel a batch of scheduled messages** that has not been sent yet.\n- This method should be used to cancel a batch of scheduled messages sent by  previously submitting a POST request to either the \"many\" or \"many compact\" endpoint.\n- To cancel a batch of scheduled messages, use its *batchId* to target it.\n\n### URL\n* In the original POST request used to schedule the batch of messages, you used a specific subaccountid and the API responded with a batchID.\n* You need to use both as path parameters in order to send your DELETE request successfully as shown below:\n`https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages/batch/{batchId}`\n\n> You must replace `{subAccountId}` and `{batchId}` in the URL above with the subaccountid you used to schedule the messages in the first place and the batchId you got in response.",
         "operationId": "cancel-many-chat-apps-messages",
@@ -6055,7 +6323,10 @@
                       "description": "A token required for downloading the uploaded file."
                     }
                   },
-                  "required": ["fileName", "token"],
+                  "required": [
+                    "fileName",
+                    "token"
+                  ],
                   "description": "Successful file upload response",
                   "title": "File upload response"
                 },
@@ -6107,7 +6378,9 @@
                     "description": "The file. Refer to https://developer.8x8.com/connect/reference/supported-chat-apps-content-type#whatsapp for the accepted file types and sizes."
                   }
                 },
-                "required": ["file"],
+                "required": [
+                  "file"
+                ],
                 "title": "File upload request",
                 "description": "File upload request"
               },
@@ -6123,7 +6396,9 @@
         },
         "operationId": "Upload-File",
         "summary": "Upload file",
-        "tags": ["File Upload API"]
+        "tags": [
+          "File Upload API"
+        ]
       }
     },
     "/files/{filename}": {
@@ -6189,7 +6464,364 @@
         },
         "operationId": "Download-File",
         "summary": "Download file",
-        "tags": ["File Upload API"]
+        "tags": [
+          "File Upload API"
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountId}/usage/messages": {
+      "get": {
+        "operationId": "get-message-usage",
+        "summary": "Get message usage",
+        "description": "Returns monthly per-message usage totals for the specified billing period. Results can be filtered and grouped by subaccount, business account, channel, pricing category, and destination country.\n\nCurrently, only WhatsApp is supported.\n\n**Constraints:**\n- Data is available from **February 2026** onwards\n- Only **closed billing periods** can be queried\n- Maximum lookback: **6 months**\n\n**Grouping behavior:**\n- If `groupBy` is omitted, a single aggregated total is returned\n- `pricing` is included when `groupBy` contains `channel`, `businessAccountId`, `pricingCategory`, and `country`",
+        "tags": [
+          "Reporting API"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "description": "You must replace *{accountId}* with the account ID that you want to use.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "billingPeriod",
+            "in": "query",
+            "required": true,
+            "description": "The billing month to query, in `YYYY-MM` format (e.g. `2026-03`). Must be a closed billing period from February 2026 or later. Maximum lookback is 6 months.",
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-(0[1-9]|1[0-2])$",
+              "example": "2026-03"
+            }
+          },
+          {
+            "name": "channel",
+            "in": "query",
+            "required": false,
+            "description": "Filter results by messaging channel. Currently, only `whatsapp` is supported. Defaults to `whatsapp` if omitted.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "whatsapp"
+              ],
+              "example": "whatsapp"
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated list of dimensions to group results by. When omitted, a single aggregated total is returned. `pricing` is included when `groupBy` contains `channel`, `businessAccountId`, `pricingCategory`, and `country`.\n\nAvailable values: `subAccountId`, `channel`, `businessAccountId`, `pricingCategory`, `country`.",
+            "schema": {
+              "type": "string",
+              "example": "subAccountId,channel,businessAccountId,pricingCategory,country"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response containing message usage data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "description": "List of usage records, grouped according to the `groupBy` parameter.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "subAccountId": {
+                            "type": "string",
+                            "description": "Sub-account identifier. Present when `subAccountId` is included in `groupBy`.",
+                            "example": "umsg_AGG001"
+                          },
+                          "channel": {
+                            "type": "string",
+                            "enum": [
+                              "whatsapp"
+                            ],
+                            "description": "Messaging channel. Present when `channel` is included in `groupBy`.",
+                            "example": "whatsapp"
+                          },
+                          "country": {
+                            "type": "string",
+                            "description": "ISO 3166-1 alpha-2 destination country code. Present when `country` is included in `groupBy`.",
+                            "example": "IN"
+                          },
+                          "businessAccountId": {
+                            "type": "string",
+                            "description": "Business account identifier associated with the messaging provider. For WhatsApp, this represents the WhatsApp Business Account (WABA) ID. Present when `businessAccountId` is included in `groupBy`.",
+                            "example": "120xx01234567890"
+                          },
+                          "pricingCategory": {
+                            "type": "string",
+                            "description": "Message pricing category. For WhatsApp: `utility`, `marketing`, `authentication`, `authentication_international`, `service`. Present when `pricingCategory` is included in `groupBy`.",
+                            "example": "utility"
+                          },
+                          "volume": {
+                            "type": "object",
+                            "description": "Message volume breakdown.",
+                            "properties": {
+                              "delivered": {
+                                "type": "integer",
+                                "description": "Total number of delivered messages.",
+                                "example": 479100
+                              },
+                              "charged": {
+                                "type": "integer",
+                                "description": "Number of messages that were charged.",
+                                "example": 437900
+                              },
+                              "free": {
+                                "type": "integer",
+                                "description": "Number of messages delivered at no charge.",
+                                "example": 41200
+                              }
+                            }
+                          },
+                          "pricing": {
+                            "type": "object",
+                            "description": "Pricing structure. Present when `groupBy` includes `channel`, `businessAccountId`, `pricingCategory`, and `country`.",
+                            "properties": {
+                              "rateModel": {
+                                "type": "string",
+                                "enum": [
+                                  "flat",
+                                  "tiered"
+                                ],
+                                "description": "The pricing rate model applied to this combination.",
+                                "example": "tiered"
+                              },
+                              "tiers": {
+                                "type": "array",
+                                "description": "Tier breakdown. Only present when `rateModel` is `tiered`.",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "from": {
+                                      "type": "integer",
+                                      "description": "Lower bound of this tier (inclusive).",
+                                      "example": 0
+                                    },
+                                    "to": {
+                                      "type": "integer",
+                                      "description": "Upper bound of this tier (inclusive). `null` indicates an openended bracket with no upper limit.",
+                                      "example": 250000
+                                    },
+                                    "quantity": {
+                                      "type": "integer",
+                                      "description": "Number of messages that fall within this tier.",
+                                      "example": 250000
+                                    },
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "completed"
+                                      ],
+                                      "description": "Indicates the tier was fully settled. Always `completed` since only closed billing periods can be queried.",
+                                      "example": "completed"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "description": "Metadata about the request and result set.",
+                      "properties": {
+                        "accountId": {
+                          "type": "string",
+                          "description": "The account ID used in the request.",
+                          "example": "bp-xxx"
+                        },
+                        "billingPeriod": {
+                          "type": "object",
+                          "properties": {
+                            "start": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "Start date of the billing period.",
+                              "example": "2026-03-01"
+                            },
+                            "end": {
+                              "type": "string",
+                              "format": "date",
+                              "description": "End date of the billing period.",
+                              "example": "2026-03-31"
+                            },
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "closed"
+                              ],
+                              "description": "The billing period status. Always `closed` since only closed billing periods can be queried.",
+                              "example": "closed"
+                            }
+                          }
+                        },
+                        "dataAsOf": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Timestamp the final data snapshot for this billing period.",
+                          "example": "2026-03-16T12:00:00Z"
+                        },
+                        "groupBy": {
+                          "type": "array",
+                          "description": "The `groupBy` dimensions applied to this query.",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": [
+                            "subAccountId",
+                            "channel",
+                            "businessAccountId",
+                            "pricingCategory",
+                            "country"
+                          ]
+                        },
+                        "currency": {
+                          "type": "string",
+                          "description": "Currency used for pricing amounts (ISO 4217 code).",
+                          "example": "USD"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "full-groupby": {
+                    "summary": "Response with full groupBy (includes pricing)",
+                    "value": {
+                      "data": [
+                        {
+                          "subAccountId": "umsg_AGG001",
+                          "channel": "whatsapp",
+                          "country": "IN",
+                          "businessAccountId": "120xx01234567890",
+                          "pricingCategory": "utility",
+                          "volume": {
+                            "delivered": 479100,
+                            "charged": 437900,
+                            "free": 41200
+                          },
+                          "pricing": {
+                            "rateModel": "tiered",
+                            "tiers": [
+                              {
+                                "from": 0,
+                                "to": 250000,
+                                "quantity": 250000,
+                                "status": "completed"
+                              },
+                              {
+                                "from": 250001,
+                                "to": 500000,
+                                "quantity": 187900,
+                                "status": "completed"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "subAccountId": "umsg_AGG001",
+                          "channel": "whatsapp",
+                          "country": "IN",
+                          "businessAccountId": "120xx01234567890",
+                          "pricingCategory": "marketing",
+                          "volume": {
+                            "delivered": 1234,
+                            "charged": 1234,
+                            "free": 0
+                          },
+                          "pricing": {
+                            "rateModel": "flat"
+                          }
+                        }
+                      ],
+                      "meta": {
+                        "accountId": "bp-xxx",
+                        "billingPeriod": {
+                          "start": "2026-03-01",
+                          "end": "2026-03-31",
+                          "status": "closed"
+                        },
+                        "dataAsOf": "2026-03-16T12:00:00Z",
+                        "groupBy": [
+                          "subAccountId",
+                          "channel",
+                          "businessAccountId",
+                          "pricingCategory",
+                          "country"
+                        ],
+                        "currency": "USD"
+                      }
+                    }
+                  },
+                  "aggregated-only": {
+                    "summary": "Response without groupBy (aggregated volume only)",
+                    "value": {
+                      "data": [
+                        {
+                          "volume": {
+                            "delivered": 480334,
+                            "charged": 439134,
+                            "free": 41200
+                          }
+                        }
+                      ],
+                      "meta": {
+                        "accountId": "bp-xxx",
+                        "billingPeriod": {
+                          "start": "2026-03-01",
+                          "end": "2026-03-31",
+                          "status": "closed"
+                        },
+                        "dataAsOf": "2026-03-16T12:00:00Z",
+                        "groupBy": [],
+                        "currency": "USD"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request. The billing period format is invalid, the period is not yet closed, the date is before February 2026, or the lookback exceeds 6 months.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Request was not authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
       }
     }
   },
