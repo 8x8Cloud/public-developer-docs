@@ -37,7 +37,7 @@ In this tutorial, we are going to send the text “Bob, a special present for yo
 
 For this, we are going to use an 8x8 account created with our email [amazingdeveloperr@gmail.com](mailto:amazingdeveloperr@gmail.com) .  
 
-We are going to use our subaccountid `riders_hq`.  
+We are going to use our subaccountid `acme_corp`.  
 
 The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 
@@ -79,7 +79,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 1. Head over to the pricing section and use the subaccountid list to retrieve the `subaccountid` that you want to use
 2. By default, your account comes with only one `subaccountid` for your high-quality service. It is designated by your `accountid` and the suffix `_hq`.
 3. Note down this value, you will need it later.
-4. In that example, the `subaccountid` is `riders_hq`
+4. In that example, the `subaccountid` is `acme_corp`
 
 ![image](../images/2c35b4c-API_3.png "API 3.png")
 
@@ -106,12 +106,12 @@ At the end of the section, we will generate a curl command to send an SMS direct
 
 ##### Tutorial URL
 
-* In order to create the URL to use, we are going to replace `{subaccountid}` in the pattern above by `riders_hq`, the subaccountid that we are using in this tutorial
-* In that example, the URL that we are going to send the request to is: `https://sms.8x8.com/api/v1/subaccounts/rider_hq/messages`
+* In order to create the URL to use, we are going to replace `{subaccountid}` in the pattern above by `acme_corp`, the subaccountid that we are using in this tutorial
+* In that example, the URL that we are going to send the request to is: `https://sms.8x8.com/api/v1/subaccounts/acme_corp/messages`
 
-##### Data Center Region
+##### Platform Deployment Region
 
-* To ensure the use of the correct data center region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each data center region:
+* To ensure the use of the correct platform deployment region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each platform region:
 
 | URL                                              | Region                 |
 |--------------------------------------------------|------------------------|
@@ -120,14 +120,14 @@ At the end of the section, we will generate a curl command to send an SMS direct
 | [https://sms.8x8.uk](https://sms.8x8.uk)         | Europe                 |
 | [https://sms.8x8.id](https://sms.8x8.id)         | Indonesia              |
 
-* For more information on data center regions, please visit the following [page](/connect/docs/data-center-region).
+* For more information on platform deployment regions, please visit the following [page](/connect/docs/platform-deployment-regions).
 
 ##### curl
 
 * In curl, we will have to indicate that we want to do a POST request to this URL by using the following command:
 
 ```bash
-curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/rider_hq/messages
+curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/acme_corp/messages
 
 ```
 
@@ -159,7 +159,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/rider_hq/messages
 * The API expects to receive a structured request containing the SMS details and parameters. The format of the request is JSON and it can accept both optional and required parameters.
 * For simplicity sake, we are going to use only the most important of the parameters (the others are detailed in the documentation):
   * **Source**:
-    * this parameter defines the SMS SenderID, let’s use `"MyBrand"` 😎
+    * this parameter defines the SMS SenderID, let’s use `"Acme Corp"` 😎
   * **Destination**:
     * this is the phone number that we want to reach. As mentioned in the introduction, we want to send a message to 12345678 and it is a phone number registered in Singapore, which uses the international prefix +65.
     * For the destination parameter, we are going to use the value `"+6512345678"`
@@ -180,7 +180,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/rider_hq/messages
 
 ```json
 {
-  "source": "MyBrand",
+  "source": "Acme Corp",
   "destination": "+6512345678",
   "text": "Bob, a special present for you from Santa",
   "encoding": "AUTO"
@@ -195,7 +195,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/rider_hq/messages
 ```bash
 -H "Content-Type: application/json" 
 -d $'{ 
-  "source": "MyBrand", 
+  "source": "Acme Corp", 
   "destination": "+6512345678", 
   "text": "Bob, a special present for you from Santa", 
   "encoding": "AUTO" 
@@ -209,10 +209,10 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/rider_hq/messages
 * To send the API request to the SMS API endpoint with our message we should use the following command in our command line utility:
 
 ```bash
-curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages \
+curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/acme_corp/messages \
 -H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg" \
 -H "Content-Type: application/json" \
--d $'{ "source": "MyBrand", "destination": "+6512345678", "text": "Bob, a special present for you from Santa", "encoding": "AUTO" }'
+-d $'{ "source": "Acme Corp", "destination": "+6512345678", "text": "Bob, a special present for you from Santa", "encoding": "AUTO" }'
 
 ```
 

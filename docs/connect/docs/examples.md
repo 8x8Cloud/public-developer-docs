@@ -11,7 +11,7 @@ Chat Apps auto reply:
 
 ```json
 {
-  "subAccountId": "Test_12345_ChatApps",
+  "subAccountId": "acme_corp_chatapps",
   "trigger": "inbound_chat_apps",
   "status": "enabled",
   "definition": {
@@ -21,7 +21,7 @@ Chat Apps auto reply:
         "id": "send_CA",
         "stepType": "ChatAppsMessage",
         "inputs": {
-          "subAccountId": "Test_12345_ChatApps",
+          "subAccountId": "acme_corp_chatapps",
           "user": {
             "msisdn": "{{data.payload.user.msisdn}}"
           },
@@ -40,7 +40,7 @@ SMS auto reply:
 
 ```json
 {
-  "subAccountId": "Test_12345_hq",
+  "subAccountId": "acme_corp",
   "trigger": "inbound_sms",
   "status": "enabled",
   "definition": {
@@ -50,8 +50,8 @@ SMS auto reply:
         "id": "send_sms",
         "stepType": "SMS",
         "inputs": {
-          "subAccountId": "Test_12345_hq",
-          "source": "MyBrand",
+          "subAccountId": "acme_corp",
+          "source": "Acme Corp",
           "destination": "{{data.payload.source}}",
           "text": "Hello, thank you for your message!",
           "encoding": "Auto"
@@ -66,7 +66,7 @@ Out of Office with country branch:
 
 ```json
 {
-  "subAccountId": "Test_12345_ChatApps",
+  "subAccountId": "acme_corp_chatapps",
   "trigger": "inbound_chat_apps",
   "status": "enabled",
   "definition": {
@@ -118,7 +118,7 @@ Out of Office with country branch:
               "id": "message_from_PH_out_of_business_hours",
               "stepType": "ChatAppsMessage",
               "inputs": {
-                "subAccountId": "Test_12345_ChatApps",
+                "subAccountId": "acme_corp_chatapps",
                 "user": {
                   "msisdn": "{{data.payload.user.channelUserId}}"
                 },
@@ -135,7 +135,7 @@ Out of Office with country branch:
         "id": "message_from_Others",
         "stepType": "ChatAppsMessage",
         "inputs": {
-          "subAccountId": "Test_12345_ChatApps",
+          "subAccountId": "acme_corp_chatapps",
           "user": {
             "msisdn": "{{data.payload.user.channelUserId}}"
           },
@@ -154,7 +154,7 @@ Keyword detection:
 
 ```json
 {
-  "subAccountId": "Test_12345_hq",
+  "subAccountId": "acme_corp",
   "trigger": "inbound_sms",
   "status": "enabled",
   "definition": {
@@ -195,7 +195,7 @@ Keyword detection:
         "id": "register_flow_2",
         "stepType": "ChatAppsMessage",
         "inputs": {
-          "subAccountId": "Test_12345_ChatApps",
+          "subAccountId": "acme_corp_chatapps",
           "user": {
             "msisdn": "{{data.payload.user.msisdn}}"
           },
@@ -209,7 +209,7 @@ Keyword detection:
         "id": "register_flow_fail",
         "stepType": "ChatAppsMessage",
         "inputs": {
-          "subAccountId": "Test_12345_ChatApps",
+          "subAccountId": "acme_corp_chatapps",
           "user": {
             "msisdn": "{{data.payload.user.msisdn}}"
           },
@@ -229,7 +229,7 @@ Menu using WaitForReply:
 ```json
 {
   "trigger": "inbound_chat_apps",
-  "subAccountId": "Test_12345_hq",
+  "subAccountId": "acme_corp",
   "status": "enabled",
   "definition": {
     "name": "ChatBot-123",
@@ -238,7 +238,7 @@ Menu using WaitForReply:
         "stepType": "ChatAppsMessage",
         "id": "Hello",
         "inputs": {
-          "subAccountId": "Test_12345_hq",
+          "subAccountId": "acme_corp",
           "user": {
             "msisdn": "{{data.payload.user.channelUserId}}"
           },
@@ -283,7 +283,7 @@ Menu using WaitForReply:
         "stepType": "ChatAppsMessage",
         "id": "branch1",
         "inputs": {
-          "subAccountId": "Test_12345_hq",
+          "subAccountId": "acme_corp",
           "user": {
             "msisdn": "{{data.user_msisdn}}"
           },
@@ -297,7 +297,7 @@ Menu using WaitForReply:
         "stepType": "ChatAppsMessage",
         "id": "branch2",
         "inputs": {
-          "subAccountId": "Test_12345_hq",
+          "subAccountId": "acme_corp",
           "user": {
             "msisdn": "{{data.user_msisdn}}"
           },
@@ -311,7 +311,7 @@ Menu using WaitForReply:
         "stepType": "ChatAppsMessage",
         "id": "branch3",
         "inputs": {
-          "subAccountId": "Test_12345_hq",
+          "subAccountId": "acme_corp",
           "user": {
             "msisdn": "{{data.user_msisdn}}"
           },
@@ -325,7 +325,7 @@ Menu using WaitForReply:
         "stepType": "ChatAppsMessage",
         "id": "branch4",
         "inputs": {
-          "subAccountId": "Test_12345_hq",
+          "subAccountId": "acme_corp",
           "user": {
             "msisdn": "{{data.user_msisdn}}"
           },
@@ -339,7 +339,7 @@ Menu using WaitForReply:
         "stepType": "ChatAppsMessage",
         "id": "branch5",
         "inputs": {
-          "subAccountId": "Test_12345_hq",
+          "subAccountId": "acme_corp",
           "user": {
             "msisdn": "{{data.user_msisdn}}"
           },
@@ -353,7 +353,7 @@ Menu using WaitForReply:
         "stepType": "ChatAppsMessage",
         "id": "failure",
         "inputs": {
-          "subAccountId": "Test_12345_hq",
+          "subAccountId": "acme_corp",
           "user": {
             "msisdn": "{{data.user_msisdn}}"
           },

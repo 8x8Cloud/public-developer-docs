@@ -342,7 +342,7 @@ const sidebarConfig = [
       'connect/docs/connect-security',
       'connect/docs/authentication',
       'connect/docs/developer-tools',
-      'connect/docs/data-center-region',
+      'connect/docs/platform-deployment-regions',
     ],
   },
   {

@@ -393,7 +393,7 @@ npm install dotenv axios
 * Create a `.env` file:
 
 ```bash
-API_BASE_URL=https://chatapps.8x8.com # replace with endpoint associated with your DC region https://developer.8x8.com/connect/docs/data-center-region#api-endpoints-and-data-center-region
+API_BASE_URL=https://chatapps.8x8.com # replace with endpoint associated with your DC region https://developer.8x8.com/connect/docs/platform-deployment-regions#api-endpoints-and-platform-region
 ACCOUNT_ID=your_account_id
 CHANNEL_ID=your_channel_id
 SUBACCOUNT_ID=your_subaccount_id

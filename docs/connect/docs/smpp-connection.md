@@ -15,7 +15,7 @@ The 8x8 SMPP environment runs on a high-availability cluster designed for enterp
 
 ## Connection Details
 
-The hostname depends on the [platform region](/connect/docs/data-center-region) your account is provisioned in.
+The hostname depends on the [platform deployment region](/connect/docs/platform-deployment-regions) your account is provisioned in.
 
 | Setting | Value |
 | --- | --- |

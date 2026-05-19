@@ -55,7 +55,7 @@ Valid examples: `+12025550308`, `12025550308`
 * The source value can also be called `senderID` or TPOA.
 * It is the from address that will be used when delivering the SMS to the handset.
 * It can take different formats:
-  * **Alphanumeric** *(example: MyBrand):* this is the case when a source is composed of an alphanumeric string (max 11 characters: letters from the ASCII character set, digits and the space character). Alphanumeric sources are generally used for branded SMS to help the SMS receiver to identify the brand or services which originated the SMS.
+  * **Alphanumeric** *(example: Acme Corp):* this is the case when a source is composed of an alphanumeric string (max 11 characters: letters from the ASCII character set, digits and the space character). Alphanumeric sources are generally used for branded SMS to help the SMS receiver to identify the brand or services which originated the SMS.
   * **Numeric** *(example: +6512345678):* this the case when a source is composed of a string made purely of digits (max 17 chars). It can also start with the + sign. Numeric sources are generally used when the originator intends to receive an answer to the SMS as it is interpreted as a regular phone number by the destination handset.
 
 > 🚧 **Limitations**

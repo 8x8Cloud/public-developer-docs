@@ -32,9 +32,9 @@ The SMS API enables 8x8 customers to both send and receive SMS messages through 
 
 ## Server Regions
 
-To ensure the use of the correct data center region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each data center region.
+To ensure the use of the correct platform deployment region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each platform region.
 
-For more information on data center regions, please visit the following [page](/connect/docs/data-center-region#api-endpoints-and-data-center-region).
+For more information on platform regions, please visit the following [page](/connect/docs/platform-deployment-regions#api-endpoints-and-platform-region).
 
 **List of server URLs:**
 

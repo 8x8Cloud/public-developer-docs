@@ -174,7 +174,7 @@ Meta automatically reviews approved templates and may re-categorize them.
 
 ## Legal & Regulatory Considerations
 
-- **Data Residency:** 8x8 operates data centers in multiple regions (e.g., Asia Pacific, Europe, North America, Indonesia). You must select the appropriate data center region for your account to ensure you comply with your local data residency laws (e.g., GDPR in Europe, GR 71 in Indonesia).
+- **Data Residency:** 8x8 operates data centers in multiple regions (e.g., Asia Pacific, Europe, North America, Indonesia). You must select the appropriate platform deployment region for your account to ensure you comply with your local data residency laws (e.g., GDPR in Europe, GR 71 in Indonesia).
 
 - **Local Laws:** You are responsible for ensuring your message content and opt-in/opt-out practices comply with all telecommunications laws in the countries where you operate.
 

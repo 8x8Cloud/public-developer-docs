@@ -11,6 +11,12 @@ module.exports = [
     to: '/connect/reference/send-sms-single',
   },
 
+  // File renamed from data-center-region to platform-deployment-regions
+  {
+    from: '/connect/docs/data-center-region',
+    to: '/connect/docs/platform-deployment-regions',
+  },
+
   // ============================================================================
   // Reference -> Docs redirects
   // Legacy /connect/reference/* URLs that were moved to /connect/docs/*

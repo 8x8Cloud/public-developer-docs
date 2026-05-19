@@ -70,14 +70,14 @@ The Named Credential links the API's address (URL) to the authentication secret 
 3. Enter the following details:
   * **Label**: `8x8 Messaging API`
   * **Name**: `8x8_Messaging_API`
-  * **URL**: `https://chatapps.8x8.com` (Asia-Pacific deployment region; see full [list of regions](/connect/docs/data-center-region#api-endpoints-and-platform-region)
+  * **URL**: `https://chatapps.8x8.com` (Asia-Pacific deployment region; see full [list of regions](/connect/docs/platform-deployment-regions#api-endpoints-and-platform-region)
   * **External Credential**: Select the `8x8 CPaaS Authentication` credential you created above.
   * Ensure the **Generate Authorization Header** checkbox is checked.
 4. Click **Save**.
 
 > ℹ️ **Sending SMS**
 >
-> For SMS, use the corresponding [sms endpoint](/connect/docs/data-center-region#api-endpoints-and-platform-region) (default is sms.8x8.com) and the appropriate SMS OAS accordingly
+> For SMS, use the corresponding [sms endpoint](/connect/docs/platform-deployment-regions#api-endpoints-and-platform-region) (default is sms.8x8.com) and the appropriate SMS OAS accordingly
 >
 >
 

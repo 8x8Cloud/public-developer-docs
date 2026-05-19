@@ -90,13 +90,13 @@ Here is a simple example of a workflow definition.
 
 This definition contains the following attributes:
 
-- the trigger is any Inbound Chat Apps message on the subaccount Test_12345_ChatApps
+- the trigger is any Inbound Chat Apps message on the subaccount acme_corp_chatapps
 - there are no conditions, all instances will result in sending a Chat Apps message
 - the instance will send an auto reply message to any incoming Chat Apps message
 
 ```json
 {
-        "subAccountId": "Test_12345_ChatApps",
+        "subAccountId": "acme_corp_chatapps",
         "trigger": "inbound_chat_apps",
         "status": "enabled",
         "definition": {
@@ -106,7 +106,7 @@ This definition contains the following attributes:
                     "id": "send_CA",
                     "stepType": "ChatAppsMessage",
                     "inputs": {
-                        "subAccountId": "Test_12345_ChatApps",
+                        "subAccountId": "acme_corp_chatapps",
                         "user": {
                             "msisdn": "{{data.payload.user.msisdn}}"
                         },

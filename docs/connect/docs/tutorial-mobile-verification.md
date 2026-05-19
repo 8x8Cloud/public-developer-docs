@@ -51,7 +51,7 @@ If you follow the different steps of this tutorial, you will get to generate a c
 1. Head over to the pricing section and use the subaccountid list to retrieve the `subaccountid` that you want to use
 2. By default, your account comes with only one `subaccountid` for your high-quality service. It is designated by your `accountid` and the suffix `_hq`.
 3. Note down this value, you will need it later.
-4. In that example, the `subaccountid` is `riders_hq`
+4. In that example, the `subaccountid` is `acme_corp`
 
 ![image](../images/9c38989-API_3.png "API 3.png")
 
@@ -78,12 +78,12 @@ At the end of the section, we will generate a curl command to generate an SMS co
 
 ##### Tutorial URL
 
-* In order to create the URL to use, we are going to replace `{subaccountid}` in the pattern above by `riders_hq`, the subaccountid that we are using in this tutorial
-* In that example, the URL that we are going to send the request to is: `https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions`
+* In order to create the URL to use, we are going to replace `{subaccountid}` in the pattern above by `acme_corp`, the subaccountid that we are using in this tutorial
+* In that example, the URL that we are going to send the request to is: `https://verify.8x8.com/api/v2/subaccounts/acme_corp/sessions`
 
-##### Data Center Region
+##### Platform Deployment Region
 
-* To ensure the use of the correct data center region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each data center region:
+* To ensure the use of the correct platform deployment region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each platform region:
 
 | URL | Region |
 | --- | --- |
@@ -92,7 +92,7 @@ At the end of the section, we will generate a curl command to generate an SMS co
 | [https://verify.8x8.uk](https://verify.8x8.uk) | Europe |
 | [https://verify.8x8.id](https://verify.8x8.id) | Indonesia |
 
-* For more information on data center regions, please visit the following [page](/connect/docs/data-center-region).
+* For more information on platform deployment regions, please visit the following [page](/connect/docs/platform-deployment-regions).
 
 #####
 
@@ -101,7 +101,7 @@ At the end of the section, we will generate a curl command to generate an SMS co
 * In curl, we will have to indicate that we want to do a POST request to this URL by using the following command:
 
 ```bash
-curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions
+curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/acme_corp/sessions
 
 ```
 
@@ -158,7 +158,7 @@ curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions
 * To send the API request to 8x8 Mobile Verification - Code Generation endpoint we should use the following command in our command line utility:
 
 ```bash
-curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions -H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg" -H "Content-Type: application/json" -d $'{ "destination": "6598765432", "country": "SG"}'
+curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/acme_corp/sessions -H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg" -H "Content-Type: application/json" -d $'{ "destination": "6598765432", "country": "SG"}'
 
 ```
 
@@ -173,7 +173,7 @@ curl -i -X "POST" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions -
 ```json
 {
   "sessionID": "7c1137e8fb1ceb11827c00155dc319db",
-  "verifyUri": "/api/v2/subaccounts/riders_hq/sessions/",
+  "verifyUri": "/api/v2/subaccounts/acme_corp/sessions/",
   "destination": 6598765432,
   "status": "WAITING",
   "attempt": 0,
@@ -201,7 +201,7 @@ So our user received successfully his SMS containing the code required to verify
 Here below are the elements from the part 1 that are going to be used in this part 2:
 
 * **apiKey** = `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`
-* **Subaccountid** = *riders_hq*
+* **Subaccountid** = *acme_corp*
 * **sessionId** = *7c1137e8fb1ceb11827c00155dc319db*
 * **code** = *5612*
 
@@ -209,21 +209,21 @@ Here below are the elements from the part 1 that are going to be used in this pa
 
 According to the [documentation](/sms/API-Reference/mobile-verification-api/verify-otp), the 8x8 Mobile Verification - Code Validation method is much simpler to use: it simply expects a **GET request** sent to a URL built using 2 different parameters:
 
-* **the subaccountid:** *riders_hq*
+* **the subaccountid:** *acme_corp*
 * **the sessionID returned by the API during part 1:** *7c1137e8fb1ceb11827c00155dc319db*
 
 ➡ the URL where to send the GET request should follow this structure:  
 
 `https://verify.8x8.com/api/v2/subaccounts/{subAccountId}/sessions/{sessionId}`
 
-In our example, we just have to use the parameters' values listed above to compose our URL: `https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c1137e8fb1ceb11827c00155dc319`
+In our example, we just have to use the parameters' values listed above to compose our URL: `https://verify.8x8.com/api/v2/subaccounts/acme_corp/sessions/7c1137e8fb1ceb11827c00155dc319`
 
 #### curl
 
 In curl, we will have to indicate that we want to do a POST request to this URL by using the following command:
 
 ```bash
-curl -i -X "GET" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c1137e8fb1ceb11827c00155dc319
+curl -i -X "GET" https://verify.8x8.com/api/v2/subaccounts/acme_corp/sessions/7c1137e8fb1ceb11827c00155dc319
 
 ```
 
@@ -264,7 +264,7 @@ curl -i -X "GET" https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c
 * To send the API request to 8x8 Mobile Verification - Code Validation endpoint we should use the following command in our command line utility:
 
 ```bash
-curl -X GET  'https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c1137e8fb1ceb11827c00155dc319?code=5612' -H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg"
+curl -X GET  'https://verify.8x8.com/api/v2/subaccounts/acme_corp/sessions/7c1137e8fb1ceb11827c00155dc319?code=5612' -H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg"
 
 ```
 
@@ -273,7 +273,7 @@ curl -X GET  'https://verify.8x8.com/api/v2/subaccounts/riders_hq/sessions/7c113
 ```json
 {
   "uid": "7c1137e8fb1ceb11827c00155dc319",
-  "resourceUri": "/api/v2/subaccounts/riders_hq/sessions/7c1137e8fb1ceb11827c00155dc319",
+  "resourceUri": "/api/v2/subaccounts/acme_corp/sessions/7c1137e8fb1ceb11827c00155dc319",
   "destination": 6598765432,
   "status": "VERIFIED",
   "attempt": 0,

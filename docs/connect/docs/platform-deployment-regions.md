@@ -18,11 +18,11 @@ At 8x8 CPaaS, we understand that data latency and residency compliance are criti
 
 ## API Endpoints and Platform Region
 
-To ensure optimal API performance, it is essential to select the appropriate base URL for API calls corresponding to the data center region where your account is provisioned.
+To ensure optimal API performance, it is essential to select the appropriate base URL for API calls corresponding to the platform deployment region where your account is provisioned.
 
-**The key advantages of correctly specifying the data center region include**:
+**The key advantages of correctly specifying the platform deployment region include**:
 
-* **Latency/Network Advantages:** Reduced latency in API calls is achieved when your server, initiating the API calls, is geographically closer to the selected data center region of your account.
+* **Latency/Network Advantages:** Reduced latency in API calls is achieved when your server, initiating the API calls, is geographically closer to the selected platform region of your account.
 * **Data Isolation:** Complying with data residency requirements is facilitated by using the appropriate URL for your API calls, ensuring that data and logs associated with the API calls are stored in the designated region.
 
 Here is a list of available regions and their corresponding base URLs. Replace `{product}` with the relevant product name you are using. The `{product}` placeholder supports several subdomains: `sms`, `verify`, `smpp`, `lookup`, `contacts`.
@@ -34,4 +34,4 @@ Here is a list of available regions and their corresponding base URLs. Replace `
 | North America | https://{product-name}.**us.8x8.com** |
 | Indonesia | https://{product-name}.**8x8.id** |
 
-For example, if your account is provisioned in the Indonesian region, use `https://sms.8x8.id` for your SMS API calls instead of the default `https://sms.8x8.com` which will ensure you are connecting to the Indonesian data center region directly.
+For example, if your account is provisioned in the Indonesian region, use `https://sms.8x8.id` for your SMS API calls instead of the default `https://sms.8x8.com` which will ensure you are connecting to the Indonesian platform region directly.

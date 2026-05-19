@@ -33,7 +33,7 @@ In this tutorial, we are going to send a (small) batch of SMS at once by contact
 
 For this, we are going to use an 8x8 account created with our email: `user@example.com`.  
 
-We are going to use our subaccountid `riders_hq`.  
+We are going to use our subaccountid `acme_corp`.  
 
 The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 
@@ -75,7 +75,7 @@ The apiKey for our account is `5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg`.
 1. Head over to the pricing section and use the subaccountid list to retrieve the `subaccountid` that you want to use
 2. By default, your account comes with only one `subaccountid` for your high-quality service. It is designated by your `accountid` and the suffix `_hq`.
 3. Note down this value, you will need it later.
-4. In that example, the `subaccountid` is `riders_hq`
+4. In that example, the `subaccountid` is `acme_corp`
 
 ![image](../images/b0ec3e5-API_3.png "API 3.png")
 
@@ -102,12 +102,12 @@ At the end of the section, we will generate a curl command to send an SMS direct
 
 ##### Tutorial URL
 
-* In order to create the URL to use, we are going to replace `{subaccountid}` in the pattern above by `riders_hq`, the subaccountid that we are using in this tutorial
-* In that example, the URL that we are going to send the request to is: `https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages/batch`
+* In order to create the URL to use, we are going to replace `{subaccountid}` in the pattern above by `acme_corp`, the subaccountid that we are using in this tutorial
+* In that example, the URL that we are going to send the request to is: `https://sms.8x8.com/api/v1/subaccounts/acme_corp/messages/batch`
 
-##### Data Center Region
+##### Platform Deployment Region
 
-* To ensure the use of the correct data center region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each data center region:
+* To ensure the use of the correct platform deployment region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each platform region:
 
 | URL | Region |
 | --- | --- |
@@ -116,14 +116,14 @@ At the end of the section, we will generate a curl command to send an SMS direct
 | [https://sms.8x8.uk](https://sms.8x8.uk) | Europe |
 | [https://sms.8x8.id](https://sms.8x8.id) | Indonesia |
 
-* For more information on data center regions, please visit the following [page](/connect/docs/data-center-region).
+* For more information on platform deployment regions, please visit the following [page](/connect/docs/platform-deployment-regions).
 
 ##### curl
 
 * In curl, we will have to indicate that we want to do a POST request to this URL by using the following command:
 
 ```bash
-curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages/batch
+curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/acme_corp/messages/batch
 
 ```
 
@@ -180,7 +180,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages/batch
     }
   ],
   "template": {
-    "source": "MyBrand",
+    "source": "Acme Corp",
     "text": "Happy New Year!",
     "encoding": "AUTO"
   }
@@ -205,7 +205,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/riders_hq/messages/batch
     }
   ],
   "template": {
-    "source": "MyBrand",
+    "source": "Acme Corp",
     "text": "Happy New Year!",
     "encoding": "AUTO"
   }
@@ -223,7 +223,7 @@ curl -X "POST" https://sms.8x8.com/api/v1/subaccounts/amazing_hq/messages/batch
 -H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg" 
 -H "Content-Type:application/json" 
 -d $'{
-     "messages": [{"destination": "+6500000000"}, {"destination": "+6500000001","text": "Bob, special present for you from Santa"}], "template": { "source": "MyBrand", "text": "Happy New Year!","encoding": "AUTO" } }'
+     "messages": [{"destination": "+6500000000"}, {"destination": "+6500000001","text": "Bob, special present for you from Santa"}], "template": { "source": "Acme Corp", "text": "Happy New Year!","encoding": "AUTO" } }'
 
 ```
 

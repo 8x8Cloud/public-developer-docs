@@ -60,7 +60,7 @@ More details on each step:
     "id": "step1",
     "stepType": "SMS",
     "inputs": {
-        "subAccountId": "Test_12345_Sms",
+        "subAccountId": "acme_corp_sms",
         "destination": "+6512345678",
         "text": "Hello, world!"
     },
@@ -91,7 +91,7 @@ More details on each step:
     "id": "step1",
     "stepType": "ChatAppsMessage",
     "inputs": {
-        "subAccountId": "Test_12345_ChatApps",
+        "subAccountId": "acme_corp_chatapps",
         "user": {
             "msisdn": "+6512345678"
         },
@@ -211,7 +211,7 @@ In the below example, the two new properties for **If** are **do** and **inputs.
                 "stepType": "ChatAppsMessage",
                 "id": "send_ca",
                 "inputs": {
-                    "subAccountId": "Test_12345_ChatApps",
+                    "subAccountId": "acme_corp_chatapps",
                     "user": {
                         "msisdn": "{{data.payload.user.msisdn}}"
                     },
@@ -281,7 +281,7 @@ As per the 8x8 Voice API, you can choose from 3 types of voice messages:
     "id": "step1",
     "stepType": "VoiceMessage",
     "inputs": {
-        "subaccountId": "Test_12345_Voice",
+        "subaccountId": "acme_corp_voice",
         "clientRequestId": "myId123"
         "action": "say",
         "params": {

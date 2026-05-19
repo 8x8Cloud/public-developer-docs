@@ -40,9 +40,9 @@ This shows  Verif8 Logs the delivery status (Delivered/Read) of the OTP and the 
 
 ## Server Regions
 
-To ensure the use of the correct data center region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each data center region.
+To ensure the use of the correct platform deployment region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each platform region.
 
-For more information on data center regions, please visit the following [page](/connect/docs/data-center-region#api-endpoints-and-data-center-region).
+For more information on platform regions, please visit the following [page](/connect/docs/platform-deployment-regions#api-endpoints-and-platform-region).
 
 **List of server URLs:**
 
@@ -50,4 +50,5 @@ For more information on data center regions, please visit the following [page](/
 |:---------------|:-------------------------------------------------|
 | Asia (default) | [https://verify.8x8.com](https://verify.8x8.com) |
 | Europe         | [https://verify.8x8.uk](https://verify.8x8.uk)   |
+| North America  | [https://verify.us.8x8.com](https://verify.us.8x8.com) |
 | Indonesia      | [https://verify.8x8.id](https://verify.8x8.id)   |

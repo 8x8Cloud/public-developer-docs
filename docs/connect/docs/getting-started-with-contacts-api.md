@@ -14,14 +14,15 @@ It will allow you to:
 
 ## Server Regions
 
-To ensure the use of the correct data center region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each data center region.
+To ensure the use of the correct platform deployment region, it is necessary to modify the base URL to correspond with the provisioned region of your account. Refer to the table below for the appropriate base URL associated with each platform region.
 
-For more information on data center regions, please visit the following [page](/connect/docs/data-center-region#api-endpoints-and-platform-region).
+For more information on platform regions, please visit the following [page](/connect/docs/platform-deployment-regions#api-endpoints-and-platform-region).
 
 **List of server URLs:**
 
 | API Region     | Base URL                          |
 | :------------- | :-------------------------------- |
-| Asia (default) | <https://contacts.8x8.com/api/v1> |
-| Europe         | <https://contacts.8x8.uk/api/v1>  |
-| Indonesia      | <https://contacts.8x8.id/api/v1>  |
+| Asia (default) | <https://contacts.8x8.com> |
+| Europe         | <https://contacts.8x8.uk>  |
+| North America  | <https://contacts.us.8x8.com> |
+| Indonesia      | <https://contacts.8x8.id>  |

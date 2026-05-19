@@ -22,7 +22,7 @@ In this tutorial, we are going to send a Voice Message to the mobile phone numbe
 
 We are going to use:
 
-- Subaccount ID: `riders_hq`
+- Subaccount ID: `acme_corp`
 - Example caller ID (source): `+6512341234`
 
 Replace these values with your own in a real implementation.
@@ -282,7 +282,7 @@ POST https://voice.8x8.com/api/v1/subaccounts/{subaccountId}/callflows
 Putting together URL, authentication, and data payload, the `curl` command looks like:
 
 ~~~bash
-curl -X "POST" "https://voice.8x8.com/api/v1/subaccounts/riders_hq/callflows" \
+curl -X "POST" "https://voice.8x8.com/api/v1/subaccounts/acme_corp/callflows" \
   -H "Authorization: Bearer 5DhZxZRILVPKjXuFWsd7QGZ**********31n19pYmg" \
   -H "Content-Type: application/json" \
   -d '{

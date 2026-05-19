@@ -60,7 +60,7 @@ Turn Zendesk into an **auto-notify engine** that keeps customers updated without
 >
 > 📘 Ensure your endpoint base url is accurate
 >
-> **Platform Deployment Regions:** [/connect/docs/data-center-region](/connect/docs/data-center-region)
+> **Platform Deployment Regions:** [/connect/docs/platform-deployment-regions](/connect/docs/platform-deployment-regions)
 >
 
 ***
