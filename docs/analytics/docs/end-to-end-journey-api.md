@@ -42,10 +42,6 @@ The API provides two main synchronous endpoints:
 
 2. **Transitions** (`/v1/transitions/search`): Provides detailed information about each state transition within a journey, allowing you to track the exact journey path.
 
-> ℹ️ **Synchronous API**
->
-> The CIDP Journey API  operates synchronously. Simply send your request and receive the data immediately in the response.
-
 ## API Endpoints
 
 ### Journeys Endpoint
@@ -132,18 +128,18 @@ Retrieves journey data based on the specified criteria.
   "data": [
     {
       "time": "2025-03-10T13:33:42+02:00",
+      "finishedTime": "2025-03-10T13:38:15+02:00",
       "journeyId": "7b2429440d15183af1044dd47f1d447d",
       "interactions": [
         {
           "id": "int-196e53e066e-QNePASHISrp0D65MVgaNJYS13-phone-01-emeriaeurope01",
           "direction": "Inbound",
-          "type": null
+          "type": "Contact Center"
         }
       ],
       "agents": [
         {
           "id": "ag-123",
-          "subscriptionId": "sub-456",
           "name": "John Doe",
           "email": "john.doe@example.com",
           "loginId": "jdoe",
@@ -172,7 +168,7 @@ Retrieves journey data based on the specified criteria.
         "tenantId": "8x8",
         "site": null
       },
-      "direction": "Outbound",
+      "direction": "Inbound",
       "transfersCompleted": 0,
       "forwardedToQueue": 0,
       "forwardedToRingGroup": 0,
@@ -181,7 +177,7 @@ Retrieves journey data based on the specified criteria.
       "mediaTypes": [
         "Phone"
       ],
-      "outcome": "EndedInScript",
+      "outcome": "Handled",
       "origin": {
         "type": "user",
         "id": "user-789",
@@ -285,6 +281,7 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "externalNumber": null,
           "mediaType": "Phone"
         },
+        ["..."],
         {
           "time": "2025-05-21T12:10:12.143+03:00",
           "name":"TRANSFER",
@@ -292,7 +289,6 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "agents": [
             {
               "id": "ag-456",
-              "subscriptionId": "sub-789",
               "name": "Jack Pott",
               "email": "jack.pott@example.com",
               "loginId": "jpott",
@@ -303,7 +299,6 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "previousAgents": [
             {
               "id": "ag-123",
-              "subscriptionId": "sub-456",
               "name": "Marsha Mellow",
               "email": "marsha.mellow@example.com",
               "loginId": "mmellow",
@@ -322,7 +317,8 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "duration": 0,
           "externalNumber": "+441138413014",
           "mediaType": "Phone"
-        }
+        },
+        ["..."]
       ]
     }
   ],
@@ -524,7 +520,8 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 
 | Field                    | Type                 | Description                                                                                                                                                                                                                                                                     |
 |--------------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `time`                   | ISO8601 date         | When the journey occurred                                                                                                                                                                                                                                                       |
+| `time`                   | ISO8601 date         | When the journey started.                                                                                                                                                                                                                                                       |
+| `finishedTime`           | ISO8601 date         | When the journey ended. `null` if the journey is still in progress.                                                                                                                                                                                                             |
 | `journeyId`              | string               | The journeyId field returned by the Journeys Endpoint uniquely identifies and aggregates all interactions associated with a particular customer journey across all platforms. Use this journeyId to correlate and analyze comprehensive interaction data for a specific journey. |
 | `interactions`           | Interaction\[]       | Array of interaction objects representing the interactions belonging to the journey. These interactions can originate from CC, UC or Engage platforms.                                                                                                                          |
 | `agents`                 | Agent\[]             | Array of agent objects involved in handling the journey                                                                                                                                                                                                                         |
@@ -564,7 +561,6 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 ```json
 {
   "id": "string",
-  "subscriptionId": "string",
   "name": "string",
   "email": "string",
   "loginId": "string",
@@ -575,10 +571,6 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
   }
 }
 ```
-
-> ℹ️ **Note on User Details**
->
-> The `email`, `loginId`, and `department` fields reflect the current user configuration in the Admin Console at the time of the API request, not the historical configuration from when the journey or transition occurred. These fields may be `null` if not configured for the user.
 
 **Contact Object:**
 
@@ -706,10 +698,6 @@ The entryPoint object is populated only for inbound journeys and identifies wher
 | `pbx`         | string | PBX identifier                                                                                             |
 | `tenantId`    | string | Tenant identifier                                                                                          |
 | `site`        | Site   | Site associated with the entry point. Only populated when `type` is `call-queue`, `ring-group`, or `auto-attendant`; `null` otherwise. |
-
-> ℹ️ **Note on User Details for USER-type Entry Points**
->
-> When the entry point `type` is `user`, the `email`, `loginId`, and `department` fields reflect the current user configuration in the Admin Console at the time of the API request, not the historical configuration from when the journey occurred. These fields may be `null` if not configured for the user or if the entry point type is not `user`.
 
 **entryPoint Type Values:**
 
