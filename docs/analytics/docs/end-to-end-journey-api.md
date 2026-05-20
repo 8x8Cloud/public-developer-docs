@@ -169,7 +169,8 @@ Retrieves journey data based on the specified criteria.
         "loginId": "jsmith",
         "department": "Sales",
         "pbx": "mainPbx",
-        "tenantId": "8x8"
+        "tenantId": "8x8",
+        "site": null
       },
       "direction": "Outbound",
       "transfersCompleted": 0,
@@ -347,6 +348,8 @@ By default, the API returns all journeys/transitions belonging to your customer 
 | `entryPoint.id`                | Filter by entry point ID                 | `["ep-789"]`                                                             |
 | `entryPoint.name`              | Filter by entry point name               | `["Main Support Line"]`                                                  |
 | `entryPoint.phoneNumber`       | Filter by entry point phone number       | `["053244122"]`                                                          |
+| `entryPoint.site.id`           | Filter by entry point site ID            | `["site-123"]`                                                           |
+| `entryPoint.site.name`         | Filter by entry point site name          | `["London Office"]`                                                      |
 | `entryPoint.type`              | Filter by entry point type               | `["cc-channel", "ring-group", "call-queue", "auto-attendant", "user"]`   |
 | `interactions.id`              | Filter by interaction ID                 | `["interaction-123"]`                                                    |
 | `journeyId`                    | Filter by journey ID                     | `["journey-123"]`                                                        |
@@ -363,9 +366,13 @@ By default, the API returns all journeys/transitions belonging to your customer 
 | `queues.extension`             | Filter by queue extension                | `["2001"]`                                                               |
 | `queues.id`                    | Filter by queue ID                       | `["queue-123"]`                                                          |
 | `queues.name`                  | Filter by queue names                    | `["Customer Support Queue"]`                                             |
+| `queues.site.id`               | Filter by queue site ID                  | `["site-123"]`                                                           |
+| `queues.site.name`             | Filter by queue site name                | `["Paris Office"]`                                                       |
 | `ringGroups.extension`         | Filter by ring group extension           | `["3001"]`                                                               |
 | `ringGroups.id`                | Filter by ring group ID                  | `["rg-456"]`                                                             |
 | `ringGroups.name`              | Filter by ring group names               | `["Sales Ring Group"]`                                                   |
+| `ringGroups.site.id`           | Filter by ring group site ID             | `["site-123"]`                                                           |
+| `ringGroups.site.name`         | Filter by ring group site name           | `["Berlin Office"]`                                                      |
 | `tenantIds`                    | Filter by tenant IDs                     | `["tenant1", "tenant2"]`                                                 |
 | `wrapUpCodes`                  | Filter by wrap-up codes                  | `["Service Call", "Support Call"]`                                       |
 
@@ -383,15 +390,23 @@ By default, the API returns all journeys/transitions belonging to your customer 
 | `transitions.previousQueue.extension`   | Filter by previous queue extension      | `["2001"]`                |
 | `transitions.previousQueue.id`          | Filter by previous queue ID             | `["queue-123"]`           |
 | `transitions.previousQueue.name`        | Filter by previous queue name           | `["Support S2"]`          |
+| `transitions.previousQueue.site.id`     | Filter by previous queue site ID        | `["site-123"]`            |
+| `transitions.previousQueue.site.name`   | Filter by previous queue site name      | `["Vienna Office"]`       |
 | `transitions.previousRingGroup.extension` | Filter by previous ring group extension | `["3001"]`              |
 | `transitions.previousRingGroup.id`      | Filter by previous ring group ID        | `["rg-456"]`              |
 | `transitions.previousRingGroup.name`    | Filter by previous ring group name      | `["Sales Ring Group"]`    |
+| `transitions.previousRingGroup.site.id`   | Filter by previous ring group site ID   | `["site-123"]`          |
+| `transitions.previousRingGroup.site.name` | Filter by previous ring group site name | `["Madrid Office"]`     |
 | `transitions.queue.extension`           | Filter by queue extension               | `["2001"]`                |
 | `transitions.queue.id`                  | Filter by queue ID                      | `["queue-123"]`           |
 | `transitions.queue.name`               | Filter by queue name                    | `["Support S1"]`          |
+| `transitions.queue.site.id`             | Filter by queue site ID                 | `["site-123"]`            |
+| `transitions.queue.site.name`           | Filter by queue site name               | `["Rome Office"]`         |
 | `transitions.ringGroup.extension`       | Filter by ring group extension          | `["3001"]`                |
 | `transitions.ringGroup.id`             | Filter by ring group ID                 | `["rg-456"]`              |
 | `transitions.ringGroup.name`           | Filter by ring group name               | `["Sales Ring Group"]`    |
+| `transitions.ringGroup.site.id`         | Filter by ring group site ID            | `["site-123"]`            |
+| `transitions.ringGroup.site.name`       | Filter by ring group site name          | `["Amsterdam Office"]`        |
 
 ### Filter Format
 
@@ -581,7 +596,11 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 {
   "id": "string",
   "name": "string",
-  "extension": "string"
+  "extension": "string",
+  "site": {
+    "id": "string",
+    "name": "string"
+  }
 }
 ```
 
@@ -590,6 +609,7 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 | `id`        | string | Unique identifier of the queue                                                                                                                                                                  |
 | `name`      | string | Display name of the queue                                                                                                                                                                       |
 | `extension` | string | Queue extension number. **Note:** Contact Center queues do not have extensions — this field will be `null` for Contact Center queues. Only Unified Communications queues have extension values. |
+| `site`      | Site   | Site (branch/office) the queue belongs to.                                                                                                                                                      |
 
 **RingGroup Object:**
 
@@ -597,15 +617,40 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 {
   "id": "string",
   "name": "string",
-  "extension": "string"
+  "extension": "string",
+  "site": {
+    "id": "string",
+    "name": "string"
+  }
 }
 ```
 
-| Field       | Type   | Description                              |
-|-------------|--------|------------------------------------------|
-| `id`        | string | Unique identifier of the ring group      |
-| `name`      | string | Display name of the ring group           |
-| `extension` | string | Ring group extension number              |
+| Field       | Type   | Description                                                                                                       |
+|-------------|--------|-------------------------------------------------------------------------------------------------------------------|
+| `id`        | string | Unique identifier of the ring group                                                                               |
+| `name`      | string | Display name of the ring group                                                                                    |
+| `extension` | string | Ring group extension number                                                                                       |
+| `site`      | Site   | Site (branch/office) the ring group belongs to.                                                                   |
+
+**Site Object:** {#site-object}
+
+The Site object identifies the physical site (branch/office) associated with a Unified Communications service. The Site is exposed wherever those entities appear in the API:
+
+- on `queues[].site` and `ringGroups[].site` (journey response)
+- on `transitions[].queue.site`, `transitions[].previousQueue.site`, `transitions[].ringGroup.site`, `transitions[].previousRingGroup.site` (transition response)
+- on `entryPoint.site` when the entry point's `type` is `call-queue`, `ring-group`, or `auto-attendant`
+
+```json
+{
+  "id": "string",
+  "name": "string"
+}
+```
+
+| Field  | Type   | Description                  |
+|--------|--------|------------------------------|
+| `id`   | string | Unique identifier of the site |
+| `name` | string | Display name of the site      |
 
 **OutboundPhoneCode Object:**
 
@@ -640,9 +685,27 @@ The entryPoint object is populated only for inbound journeys and identifies wher
   "loginId": "string",
   "department": "string",
   "pbx": "string",
-  "tenantId": "string"
+  "tenantId": "string",
+  "site": {
+    "id": "string",
+    "name": "string"
+  }
 }
 ```
+
+| Field         | Type   | Description                                                                                                |
+|---------------|--------|------------------------------------------------------------------------------------------------------------|
+| `type`        | string | Entry point type. See **entryPoint Type Values** below.                                                    |
+| `id`          | string | Unique identifier of the entry point                                                                       |
+| `name`        | string | Display name of the entry point                                                                            |
+| `phoneNumber` | string | Phone number associated with the entry point                                                               |
+| `extension`   | string | Extension associated with the entry point                                                                  |
+| `email`       | string | Email of the entry point. May be `null`. See note on USER-type entry points below.                         |
+| `loginId`     | string | Login ID of the entry point. Only populated for USER-type. May be `null`.                                  |
+| `department`  | string | Department of the entry point. Only populated for USER-type. May be `null`.                                |
+| `pbx`         | string | PBX identifier                                                                                             |
+| `tenantId`    | string | Tenant identifier                                                                                          |
+| `site`        | Site   | Site associated with the entry point. Only populated when `type` is `call-queue`, `ring-group`, or `auto-attendant`; `null` otherwise. |
 
 > ℹ️ **Note on User Details for USER-type Entry Points**
 >
@@ -735,7 +798,7 @@ The API returns standard HTTP status codes and an error response body:
     {
       "message": "Error message description",
       "suggestion": "Suggested action to resolve the error",
-      "url": "https://developer.8x8.com/analytics/docs/end-to-end-journey-api#invalid-pbx-invalidpbx"
+      "url": "https://developer.8x8.com/analytics/docs/end-to-end-journey-api#malformed-request-malformedrequest"
     }
   ]
 }
@@ -756,16 +819,6 @@ The API returns standard HTTP status codes and an error response body:
 
 This section provides detailed explanations for each error code that the API might return. Each error header is linkable
 via its anchor for easy navigation within the documentation.
-
-### Invalid PBX {#invalidPbx}
-
-This error occurs when one or more PBX names provided in the filter do not belong to the authenticated customer's
-account. It ensures that users cannot request data for PBXes that are not associated with their account.
-
-### Invalid Tenant {#invalidTenant}
-
-This error is returned when the tenant IDs specified in the filter are not recognized as belonging to the current
-customer's account. It helps maintain data integrity by restricting access only to authorized tenant information.
 
 ### Malformed Request {#malformedRequest}
 
@@ -856,11 +909,6 @@ from a previous valid request.
 
 This error indicates that the sort field or direction associated with the provided cursor does not match the current
 request parameters. Ensure that the cursor is used with the same sort settings as those in the original response.
-
-### Missing PBX For Customer {#missingPbxForCustomer}
-
-This error is thrown when the authenticated customer’s account does not have an associated PBX. The user should contact
-their account administrator to have a PBX linked to their account.
 
 ### Invalid Endpoint {#invalidApiPath}
 
