@@ -756,7 +756,7 @@
           {
             "name": "metrics",
             "in": "query",
-            "description": "Expected metrics in response. Multiple values can be passed separated by comma.\n\n**Values allowed and their description**\n\n| Metric | Description |\n| ---------------- | ------------|\n| abandonedInHandlingCalls | The total number of handling interactions that ended up as being hung up by the customer |\n| abandonedInHandlingCallsPercentage | The total number of handling calls that ended up as being hung up by the customer over the number of entered calls |\n| abandonedInWaitingCalls | The total number of waiting interactions that ended up as being hung up by the customer |\n| abandonedInWaitingCallsPercentage | The total number of waiting calls that ended up as being hung up by the customer over the number of entered calls |\n| acceptedCalls | The total number of interactions answered by agents in the queue |\n| acceptedCallsPercentage | The total number of calls answered over the number of entered calls |\n| activeCalls | The number of calls still active at the end of the selected interval |\n| averageAnswerTime | Average time taken to answer a call after ringing begins |\n| averageHandlingTime | Average handling time for interactions in the specified time frame |\n| averageOnHoldTime | Average on hold time for finished calls |\n| averageTalkTime | Average talk time in the specified time frame |\n| averageTimeToAnswer | The average time agents take to answer calls (alerting duration) |\n| averageWaitingTime | Average waiting time for interactions in the specified time frame |\n| completedCalls | The number of calls completed at the end of the selected interval |\n| enteredCalls | The total number of interactions that entered the queue |\n| forwardedToVoiceMail | The total number of interactions that were forwarded to voice mail |\n| longestHandlingTime | Longest handling time for interactions in the specified time frame |\n| longestOnHoldTime | Longest on hold time for finished calls |\n| longestTalkTime | Longest talk time in the specified time frame |\n| longestWaitingTime | Longest waiting time for interactions in the specified time frame |\n| ongoingAvailableAgents | Number of users assigned to the queue, logged in and in the Available status |\n| ongoingAvgHandlingTime | Average handling time |\n| ongoingAvgTalkingTime | Average talking time |\n| ongoingAvgWaitingTime | Average waiting time |\n| ongoingEligibleAgents | The number of primary and secondary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEligibleOverflowAgents | The number of secondary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEligiblePrimaryAgents | The number of primary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEnabledOverflowAgents | Number of enabled overflow agents |\n| ongoingEnabledPrimaryAgents | Number of enabled primary agents |\n| ongoingHandlingCalls | Handling calls |\n| ongoingLoggedOutAndDndAgents | Number of primary and secondary users in statuses: Offline, Logged out, Dnd |\n| ongoingLoggedOutAndDndOverflowAgents | Number of secondary users in statuses: Offline, Logged out, Dnd |\n| ongoingLongestHandlingTime | Longest handling time |\n| ongoingLongestOnHoldTime | Longest on hold time |\n| ongoingLongestTalkingTime | Longest talking time |\n| ongoingLongestWaitingTime | Longest waiting time |\n| ongoingOnHoldCalls | On hold calls |\n| ongoingOnHoldTime | On hold time |\n| ongoingOverflowAgents | Total number of secondary users assigned to the queue regardless of their available status |\n| ongoingOverflowWrappingUpAgents | The number of secondary users in Wrap-up state |\n| ongoingPrimaryWrappingUpAgents | The number of primary users in Wrap-up state |\n| ongoingTalkingCalls | Talking calls |\n| ongoingTalkingTime | Talking time |\n| ongoingTotalCalls | Total calls |\n| ongoingTotalHandlingTime | Total handling time |\n| ongoingWaitingCalls | Waiting calls |\n| ongoingWaitingTime | Waiting time |\n| ongoingWrappingUpAgents | The number of primary and secondary users in Wrap-up state |\n| totalHandlingTime | Total handling time for interactions in the specified time frame |\n| totalOnHoldTime | Total on hold time for interactions in the specified time frame |\n| totalTalkTime | Total talk time for calls in the specified time frame |\n| totalWaitingTime | Total waiting time for interactions in the specified time frame |\n| transferredToCallQueue | The total number of interactions that were transferred to a call queue |\n| transferredToCallQueuePercentage | The total number of calls that were transferred to a call queue over the number of entered calls |\n| transferredToExternalNumber | The total number of interactions that were transferred to an external number |\n| transferredToRingGroup | The total number of interactions that were transferred to a ring group |\n| transferredToRingGroupPercentage | The total number of calls that were transferred to a ring group over the number of entered calls |\n",
+            "description": "Expected metrics in response. Multiple values can be passed separated by comma.\n\n**Values allowed and their description**\n\n| Metric | Description |\n| ---------------- | ------------|\n| abandonedInWaitingCalls | The total number of waiting interactions that ended up as being hung up by the customer |\n| abandonedInWaitingCallsPercentage | The total number of waiting calls that ended up as being hung up by the customer over the number of entered calls |\n| acceptedCalls | The total number of interactions answered by agents in the queue |\n| acceptedCallsPercentage | The total number of calls answered over the number of entered calls |\n| activeCalls | The number of calls still active at the end of the selected interval |\n| averageAnswerTime | Average time taken to answer a call after ringing begins |\n| averageHandlingTime | Average handling time for interactions in the specified time frame |\n| averageOnHoldTime | Average on hold time for finished calls |\n| averageTalkTime | Average talk time in the specified time frame |\n| averageTimeToAnswer | The average time agents take to answer calls (alerting duration) |\n| averageWaitingTime | Average waiting time for interactions in the specified time frame |\n| completedCalls | The number of calls completed at the end of the selected interval |\n| diverted | The total number of unique inbound calls that entered the queue and were routed to another destination by the system — such as voicemail, another queue, a ring group, or an external number — without ever being offered to any agent. The call never rang at any agent's device.<br><br>This metric helps distinguish between calls lost due to agent behavior (Missed, Rejected) and calls the system routed away before any agent was involved, which typically indicates a capacity, staffing, or routing configuration issue.<br><br>This metric is calculated after calls are completed, so ongoing calls are not included until they end. |\n| divertedCallsPercentage | The percentage of queue entries that were diverted by the system without ever being offered to an agent. Calculated as: (Diverted ÷ Queue Entries) × 100. If Queue Entries = 0, the value is 0%. |\n| enteredCalls | The total number of interactions that entered the queue |\n| forwardedToVoiceMail | The total number of interactions that were forwarded to voice mail |\n| longestHandlingTime | Longest handling time for interactions in the specified time frame |\n| longestOnHoldTime | Longest on hold time for finished calls |\n| longestTalkTime | Longest talk time in the specified time frame |\n| longestWaitingTime | Longest waiting time for interactions in the specified time frame |\n| ongoingAvailableAgents | Number of users assigned to the queue, logged in and in the Available status |\n| ongoingAvgHandlingTime | Average handling time |\n| ongoingAvgTalkingTime | Average talking time |\n| ongoingAvgWaitingTime | Average waiting time |\n| ongoingEligibleAgents | The number of primary and secondary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEligibleOverflowAgents | The number of secondary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEligiblePrimaryAgents | The number of primary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEnabledOverflowAgents | Number of enabled overflow agents |\n| ongoingEnabledPrimaryAgents | Number of enabled primary agents |\n| ongoingHandlingCalls | Handling calls |\n| ongoingLoggedOutAndDndAgents | Number of primary and secondary users in statuses: Offline, Logged out, Dnd |\n| ongoingLoggedOutAndDndOverflowAgents | Number of secondary users in statuses: Offline, Logged out, Dnd |\n| ongoingLongestHandlingTime | Longest handling time |\n| ongoingLongestOnHoldTime | Longest on hold time |\n| ongoingLongestTalkingTime | Longest talking time |\n| ongoingLongestWaitingTime | Longest waiting time |\n| ongoingOnHoldCalls | On hold calls |\n| ongoingOnHoldTime | On hold time |\n| ongoingOverflowAgents | Total number of secondary users assigned to the queue regardless of their available status |\n| ongoingOverflowWrappingUpAgents | The number of secondary users in Wrap-up state |\n| ongoingPrimaryWrappingUpAgents | The number of primary users in Wrap-up state |\n| ongoingTalkingCalls | Talking calls |\n| ongoingTalkingTime | Talking time |\n| ongoingTotalCalls | Total calls |\n| ongoingTotalHandlingTime | Total handling time |\n| ongoingWaitingCalls | Waiting calls |\n| ongoingWaitingTime | Waiting time |\n| ongoingWrappingUpAgents | The number of primary and secondary users in Wrap-up state |\n| totalHandlingTime | Total handling time for interactions in the specified time frame |\n| totalOnHoldTime | Total on hold time for interactions in the specified time frame |\n| totalTalkTime | Total talk time for calls in the specified time frame |\n| totalWaitingTime | Total waiting time for interactions in the specified time frame |\n| transferredToCallQueue | The total number of interactions that were transferred to a call queue |\n| transferredToCallQueuePercentage | The total number of calls that were transferred to a call queue over the number of entered calls |\n| transferredToExternalNumber | The total number of interactions that were transferred to an external number |\n| transferredToRingGroup | The total number of interactions that were transferred to a ring group |\n| transferredToRingGroupPercentage | The total number of calls that were transferred to a ring group over the number of entered calls |\n",
             "required": false,
             "schema": { "type": "string" }
           },
@@ -787,7 +787,6 @@
                       "metrics": {
                         "ongoingAvgTalkingTime": 0,
                         "averageTalkTime": 0,
-                        "rejectedCalls": 0,
                         "ongoingEligibleAgents": 1,
                         "ongoingTotalHandlingTime": 0,
                         "ongoingTalkingTime": 0,
@@ -800,12 +799,10 @@
                         "ongoingWrappingUpAgents": 0,
                         "ongoingWaitingCalls": 0,
                         "enteredCalls": 0,
-                        "rejectedCallsPercentage": 0,
                         "ongoingOverflowAgents": 1,
                         "activeCalls": 0,
                         "ongoingLoggedOutAndDndOverflowAgents": 1,
                         "transferredToCallQueue": 0,
-                        "abandonedInHandlingCallsPercentage": 0,
                         "totalWaitingTime": 0,
                         "averageHandlingTime": 0,
                         "ongoingLongestHandlingTime": 0,
@@ -820,13 +817,14 @@
                         "ongoingOnHoldCalls": 0,
                         "ongoingHandlingCalls": 0,
                         "totalTalkTime": 0,
-                        "abandonedInHandlingCalls": 0,
                         "ongoingWaitingTime": 0,
                         "ongoingTotalCalls": 0,
                         "averageOnHoldTime": 0,
                         "totalOnHoldTime": 0,
                         "totalHandlingTime": 0,
                         "completedCalls": 0,
+                        "diverted": 0,
+                        "divertedCallsPercentage": 0,
                         "abandonedInWaitingCalls": 0,
                         "missedCallsPercentage": 0,
                         "ongoingOverflowWrappingUpAgents": 0,
@@ -853,7 +851,6 @@
                       "metrics": {
                         "ongoingAvgTalkingTime": 0,
                         "averageTalkTime": 0,
-                        "rejectedCalls": 0,
                         "ongoingEligibleAgents": 1,
                         "ongoingTotalHandlingTime": 0,
                         "ongoingTalkingTime": 0,
@@ -866,12 +863,10 @@
                         "ongoingWrappingUpAgents": 0,
                         "ongoingWaitingCalls": 0,
                         "enteredCalls": 0,
-                        "rejectedCallsPercentage": 0,
                         "ongoingOverflowAgents": 1,
                         "activeCalls": 0,
                         "ongoingLoggedOutAndDndOverflowAgents": 1,
                         "transferredToCallQueue": 0,
-                        "abandonedInHandlingCallsPercentage": 0,
                         "totalWaitingTime": 0,
                         "averageHandlingTime": 0,
                         "ongoingLongestHandlingTime": 0,
@@ -880,7 +875,9 @@
                         "longestHandlingTime": 0,
                         "transferredToExternalNumber": 0,
                         "missedCalls": 0,
-                        "transferredToRingGroup": 0
+                        "transferredToRingGroup": 0,
+                        "diverted": 0,
+                        "divertedCallsPercentage": 0
                       }
                     }
                   ]
