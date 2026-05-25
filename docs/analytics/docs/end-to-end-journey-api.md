@@ -2,13 +2,13 @@
 
 ## Introduction
 
-The CIDP Journey API provides a consolidated view of customer interactions belonging to the same journey. These interactions may happen on one or multiple 8x8 platforms, including Contact Center (CC), Unified Communications (UC), and Engage. Using the API users can retrieve journey data and detailed transition information, enabling end-to-end tracking of customer journeys regardless of transfers between systems or agents.
+The Journey API provides a consolidated view of customer interactions belonging to the same journey. These interactions may happen on one or multiple 8x8 platforms, including Contact Center (CC), Unified Communications (UC), and Engage. Using the API users can retrieve journey data and detailed transition information, enabling end-to-end tracking of customer journeys regardless of transfers between systems or agents.
 
 This API is particularly valuable for organizations with complex flows that span multiple systems, where customers may be transferred between formal contact center agents and back-office operations.
 
 ## Business Value
 
-The CIDP Journey API solves critical business challenges:
+The Journey API solves critical business challenges:
 
 - **Unified Customer Journey Tracking:** Track complete customer journeys across CC, UC, and Engage in a single view
 - **Transfer Pattern Analysis:** Understand how calls are transferred between systems and agents
@@ -1083,5 +1083,5 @@ PBX names and tenant IDs are used for filtering and represent the 8x8 platform i
 
 ## Further Assistance
 
-For additional support or questions about the CIDP Journey API, please contact your 8x8 representative or submit a
+For additional support or questions about the Journey API, please contact your 8x8 representative or submit a
 support ticket through the 8x8 support portal.
