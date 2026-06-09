@@ -105,6 +105,11 @@ public class SimpleClient {
             String baseUrl = String.format("wss://%s:%d/ws/v2/reader/persistent/%s/%s/%s",
                     host, port, tenant, namespace, topic);
 
+            // URL query parameter values MUST be URL-encoded -- always run them
+            // through URLEncoder.encode(). Do NOT concatenate raw values into the
+            // query string. Pulsar message IDs in particular contain '+', '/' and
+            // '=' characters that have special meaning in a URL and will silently
+            // break a naive query string.
             if (xApiKey != null && !xApiKey.isEmpty()) {
                 baseUrl += "?x-api-key=" + URLEncoder.encode(xApiKey, StandardCharsets.UTF_8);
             }

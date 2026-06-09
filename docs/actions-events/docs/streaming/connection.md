@@ -181,6 +181,38 @@ You can append query parameters to the WebSocket URL to configure the reader:
 wss://pulsar-ws-euw2.8x8.com/ws/v2/reader/persistent/my-company/event-v1/all?x-api-key=YOUR_KEY&messageId=earliest
 ```
 
+### URL-encoding (important)
+
+Query parameter values **must be URL-encoded**. Use your language's URL builder
+(`urllib.parse.urlencode` in Python, `URLSearchParams` in JavaScript,
+`URLEncoder.encode` in Java, `url.Values.Encode()` in Go) rather than building
+the query string with f-strings, template literals or string concatenation.
+
+This matters most for `messageId`. A specific Pulsar message ID is a base64-ish
+string that frequently contains `+`, `/` and `=` — all of which have special
+meaning in a URL query string. The tutorial-style `latest` and `earliest`
+values won't trigger the bug, so it tends to surface only once your code
+starts using a real message ID returned by a previous message.
+
+**Bad** — interpolating a raw `messageId` will silently break when it contains a `+`:
+
+```python
+message_id = "CAEQAw+="   # value from a previous message
+url = f"wss://{host}/ws/v2/reader/persistent/{tenant}/event-v1/all?messageId={message_id}"
+# The server sees `messageId=CAEQAw =` (a literal space) and the read position is wrong.
+```
+
+**Good** — let the URL builder encode it:
+
+```python
+from urllib.parse import urlencode
+
+message_id = "CAEQAw+="
+query = urlencode({"messageId": message_id, "receiverQueueSize": 200})
+url = f"wss://{host}/ws/v2/reader/persistent/{tenant}/event-v1/all?{query}"
+# messageId=CAEQAw%2B%3D — round-trips correctly.
+```
+
 ## Authentication
 
 Authentication is provided via the `X-API-Key` HTTP header or `x-api-key` query parameter. See the [Authentication Guide](./authentication.mdx) for complete details on credential types, obtaining keys, and implementation.

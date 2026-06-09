@@ -134,7 +134,10 @@ class PulsarSimpleClient:
         """Build the Pulsar WebSocket URL"""
         base_url = f"wss://{self.host}:{self.port}/ws/v2/reader/persistent/{self.tenant}/{self.namespace}/{self.topic}"
 
-        # Add X-API-Key as query parameter if provided
+        # URL query parameter values MUST be URL-encoded. urlencode() handles this
+        # for you -- do NOT build query strings with f-strings/string concatenation.
+        # Pulsar message IDs in particular contain '+', '/' and '=' characters that
+        # have special meaning in a URL and will silently break a naive query string.
         if self.x_api_key:
             query_params = {"x-api-key": self.x_api_key}
             base_url = f"{base_url}?{urlencode(query_params)}"

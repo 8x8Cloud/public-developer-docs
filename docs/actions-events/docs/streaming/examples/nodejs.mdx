@@ -149,7 +149,10 @@ class PulsarSimpleClient {
     const baseUrl = `wss://${this.host}:${this.port}/ws/v2/reader/persistent/${this.tenant}/${this.namespace}/${this.topic}`;
     const url = new URL(baseUrl);
 
-    // Add X-API-Key as query parameter if provided
+    // URL query parameter values MUST be URL-encoded. URLSearchParams handles this
+    // for you -- do NOT build query strings with template literals/string concatenation.
+    // Pulsar message IDs in particular contain '+', '/' and '=' characters that
+    // have special meaning in a URL and will silently break a naive query string.
     if (this.xApiKey) {
       url.searchParams.set('x-api-key', this.xApiKey);
     }

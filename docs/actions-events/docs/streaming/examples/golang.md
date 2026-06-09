@@ -96,7 +96,10 @@ func buildURL(host string, port int, tenant, namespace, topic, xAPIKey string) (
         return "", fmt.Errorf("invalid URL: %w", err)
     }
 
-    // Add X-API-Key as query parameter if provided
+    // URL query parameter values MUST be URL-encoded. url.Values.Encode() handles
+    // this for you -- do NOT build query strings with fmt.Sprintf/concatenation.
+    // Pulsar message IDs in particular contain '+', '/' and '=' characters that
+    // have special meaning in a URL and will silently break a naive query string.
     if xAPIKey != "" {
         q := u.Query()
         q.Set("x-api-key", xAPIKey)
