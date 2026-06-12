@@ -55,7 +55,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Getting Started](https://developer.8x8.com/actions-events/docs/streaming/getting-started): Required:
 - [Message Format](https://developer.8x8.com/actions-events/docs/streaming/message-format): Structure of messages received from the 8x8 Event Streaming service.
 - [Migration Guide](https://developer.8x8.com/actions-events/docs/streaming/migration): This guide helps you transition from the legacy Streaming API (SAPI) to the new Apache Pulsar-based Event Streaming service.
-- [Overview](https://developer.8x8.com/actions-events/docs/streaming/overview): :::warning BETA - LIMITED ACCESS
+- [Overview](https://developer.8x8.com/actions-events/docs/streaming/overview): 8x8 Event Streaming provides a real-time stream of events from your 8x8 platform.
 - [Troubleshooting](https://developer.8x8.com/actions-events/docs/streaming/troubleshooting): Common issues when connecting to the 8x8 Event Streaming service.
 - [Theming](https://developer.8x8.com/actions-events/docs/theming): After configuring your web flow, you may want to be able to change the configuration of your invitation, form, window, while you can do this within...
 - [Trigger webchat](https://developer.8x8.com/actions-events/docs/trigger-webchat): There are occasions, where you might want to trigger the webchat yourself.
