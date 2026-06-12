@@ -10,25 +10,26 @@ Possible error codes returned in the Messaging Apps delivery receipts include:
 
 ## General Error Codes
 
-| Code | Possible reason                                | Description                                                                                               |
-| :--- | :--------------------------------------------- | :-------------------------------------------------------------------------------------------------------- |
-| 1    | AbsentSubscriber                               | Subscriber is not registered in this chat channel                                                         |
-| 2    | ContentRelatedError                            | Content Type is not supported by this channel                                                             |
-| 3    | DataMissing                                    | The request is missing a required parameter.                                                              |
-| 9    | EquipmentProtocolError                         | The receiver's app version is not capable of receiving business messages                                  |
-| 11   | Flooding                                       | Too many messages sent to the recipient in a short period of time.                                        |
-| 14   | InternalError                                  | Internal error                                                                                            |
-| 15   | InvalidDestination                             | UserId is not valid for that channel or is part of blacklist on Connect                                   |
-| 18   | Invalid parameter                              | Invalid or missing parameters. Check that all required parameters are passed and are of the correct type. |
-| 23   | ConnectionError                                | Channel connection error                                                                                  |
-| 25   | Operation Aborted By Receiving Network Or User | Message is intentionally undelivered by Channel                                                           |
-| 29   | PhoneRelatedError                              | The specified parameter value is invalid.                                                                 |
-| 36   | Expired                                        | Message expired (not delivered at the requested time)                                                     |
-| 41   | SmscReject                                     | Message rejected by Chat channel                                                                          |
-| 42   | NoCredit                                       | Not enough credit on Account wallet                                                                       |
-| 43   | SpamFilter                                     | Message filtered by anti-spam reason                                                                      |
-| 46   | SubscriberNotReachable                         | Message sent to Channel, but user is not reachable for delivery                                           |
-| 61   | SessionExpired                                 | Message trashed by session expired reason                                                                 |
+| Code | Possible reason                                | Description                                                                                              |
+|:-----|:-----------------------------------------------|:---------------------------------------------------------------------------------------------------------|
+| 1    | AbsentSubscriber                               | Subscriber is not registered in this chat channel                                                        |
+| 2    | ContentRelatedError                            | Content Type is not supported by this channel                                                            |
+| 3    | DataMissing                                    | The request is missing a required parameter                                                              |
+| 9    | EquipmentProtocolError                         | The receiver's app version is not capable of receiving business messages                                 |
+| 11   | Flooding                                       | Too many messages sent to the recipient in a short period of time                                        |
+| 14   | InternalError                                  | Internal error                                                                                           |
+| 15   | InvalidDestination                             | UserId is not valid for that channel or is part of blacklist on Connect                                  |
+| 18   | Invalid parameter                              | Invalid or missing parameters. Check that all required parameters are passed and are of the correct type |
+| 23   | ConnectionError                                | Channel connection error                                                                                 |
+| 25   | Operation Aborted By Receiving Network Or User | Message is intentionally undelivered by Channel                                                          |
+| 29   | PhoneRelatedError                              | The specified parameter value is invalid                                                                 |
+| 36   | Expired                                        | Message expired (not delivered at the requested time)                                                    |
+| 41   | SmscReject                                     | Message rejected by Chat channel                                                                         |
+| 42   | NoCredit                                       | Not enough credit on Account wallet                                                                      |
+| 43   | SpamFilter                                     | Message filtered by anti-spam reason                                                                     |
+| 46   | SubscriberNotReachable                         | Message sent to Channel, but user is not reachable for delivery                                          |
+| 57   | UnknownError                                   | An unknown error occurred with no more specific reason available                                         |
+| 61   | SessionExpired                                 | Message trashed by session expired reason                                                                |
 
 ## WhatsApp Error Codes
 
