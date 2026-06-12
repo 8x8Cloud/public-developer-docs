@@ -91,7 +91,7 @@ const sidebarConfig = [
   },
   {
     type: 'category',
-    label: 'Contact Center - Event Streaming (BETA)',
+    label: 'Contact Center - Event Streaming',
     collapsed: true,
     items: [
       'actions-events/docs/streaming/overview',

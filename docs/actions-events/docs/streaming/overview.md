@@ -4,13 +4,6 @@ sidebar_position: 1
 
 # Overview
 
-:::warning BETA - LIMITED ACCESS
-
-**The Event Streaming service is currently in Beta Testing.**
-For production deployments, the [Legacy Streaming API (SAPI)](/actions-events/docs/legacy-streaming-api-overview) remains fully available and supported.
-
-:::
-
 8x8 Event Streaming provides a real-time stream of events from your 8x8 platform.
 
 ## What is Event Streaming?
