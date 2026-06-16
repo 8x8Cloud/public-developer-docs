@@ -33,7 +33,7 @@ Request body description
 | provider | string | Provider of this event. Equal to `WhatsApp`.                                                                          |
 | businessAccountId | string | Business account identifier associated with provider.                                                                 |
 | accountId | string | AccountId which the event is associated with.                                                                         |
-| eventType | string | Webhook type.<br>Possible values are `template_category_update`, `template_status_update`, `template_quality_update`. |
+| eventType | string | Webhook type.<br>Possible values are `template_category_update`, `template_status_update`, `template_quality_update`, `template_correct_category_detection`. |
 | eventDetails | object | Event related information, see below.                                                                                 |
 
 `eventDetails` object description
@@ -57,6 +57,8 @@ Request body description
 | reason               | string         | Template rejection reason.<br>Possible values: `ABUSIVE_CONTENT`, `INCORRECT_CATEGORY`, `INVALID_FORMAT`, `SCAM`, `NONE`.`NONE` is also the default, set when template is approved.                                                                                                                          | `template_status_update`   |
 | disableInfo          | object         | Provided when template is scheduled to be disabled. Contains `disableDate`.                                                                                                                                                                                                                                  | `template_status_update`   |
 | otherInfo            | object         | Provided for pause or unpause event. Contains two properties `title` and `description`.  <br/>  <br/>- `title` to indicate the event. Possible values: `FIRST_PAUSE`, `SECOND_PAUSE`, `RATE_LIMITING_PAUSE`, `UNPAUSE`, `DISABLED`.<br/>- `description` to describe why the template was paused or unpaused. | `template_status_update`   |
+| category             | string         | The category the template was sent under (e.g. `UTILITY`).                                                                                                                                                                                                                                                   | `template_correct_category_detection` |
+| correctCategory      | string         | The category Meta detected the message should have been (e.g. `MARKETING`, `AUTHENTICATION`).                                                                                                                                                                                                                | `template_correct_category_detection` |
 
 ### Sample template update webhook
 
@@ -193,6 +195,33 @@ Request body description
           "title": "FIRST_PAUSE",
           "description": "Pause description"
         }
+      }
+    }
+}
+```
+
+> 📘
+>
+> `template_correct_category_detection` is a detection/advisory event only — the template's category is **not** changed. To clear the warning, re-categorize the template to match `correctCategory`.
+>
+
+```coffeescript Correct Category Detection
+{
+    "eventId": "0f88f5c4-fae7-4dcf-8ff2-b2990133edea",
+    "timestamp": "2025-01-01T00:00:00.00Z",
+    "provider": "WhatsApp",
+    "businessAccountId": <BusinessAccountId>,
+    "accountId": <AccountId>,
+    "eventType": "template_correct_category_detection",
+    "eventDetails":
+    {
+      "templateId" : <TEMPLATE_ID>,
+      "templateName" : <TEMPLATE_NAME>,
+      "templateLanguage" : <TEMPLATE_LANGUAGE>,
+      "meta":
+      {
+        "category": "UTILITY",
+        "correctCategory": "MARKETING"
       }
     }
 }
