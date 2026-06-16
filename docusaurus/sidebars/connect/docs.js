@@ -106,6 +106,7 @@ const sidebarConfig = [
         link: { type: 'doc', id: 'connect/docs/rcs/overview' },
         collapsed: true,
         items: [
+          'connect/docs/rcs/agent-profile',
           'connect/docs/rcs/registration',
           'connect/docs/rcs/message-types',
           'connect/docs/rcs/compliance',

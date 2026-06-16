@@ -33,7 +33,7 @@ slug: /connect/docs/rcs/message-types
 
 The corresponding message the user will receive:
 
-![image](../../images/922cb3b165f5e7b3b750e82d80d1dbcd0d41f95d3cb74c097d1e050789d0d4cf-Text.png)
+![Text message example](../../images/rcs-Text.png)
 
 ---
 
@@ -55,7 +55,7 @@ The corresponding message the user will receive:
     "type": "Image",
     "content": {
         "url": "https://www.example.com/image.jpg",
-        "text": "Hi Suzie! Meet Bruno :feet:—one of the many pups looking for a loving home. Every small donation helps us feed, shelter, and care for dogs like him."
+        "text": "Hi James! Your order #ORD-8821 has shipped and is on its way. Estimated delivery: tomorrow by 6 PM."
     }
 }
 
@@ -63,7 +63,7 @@ The corresponding message the user will receive:
 
 The corresponding message the user will receive:
 
-![image](../../images/c5f9de293d906f4fe09f184f2519b58ff8e02f347fa4acbbca6b780366766422-Image_6.png)
+![Image and text message example](../../images/rcs-Image_text.png)
 
 ---
 
@@ -77,7 +77,7 @@ The corresponding message the user will receive:
     "type": "Video",
     "content": {
         "url": "https://www.example.com/video.mp4",
-        "text": "Hi Suzie! Meet Bruno :feet:—one of the many pups looking for a loving home. Every small donation helps us feed, shelter, and care for dogs like him."
+        "text": "Hi Emma! Your account setup guide is ready. Watch this short video to get started in minutes."
     }
 }
 
@@ -85,7 +85,7 @@ The corresponding message the user will receive:
 
 The corresponding message the user will receive:
 
-![image](../../images/602dd6dd429b4863b5c199b6d2e49d8e05bc4765c2a8173fa9dea5f1cb1d4922-Video.png)
+![Video and text message example](../../images/rcs-Video_text.png)
 
 ---
 
@@ -98,14 +98,16 @@ The corresponding message the user will receive:
     },
     "type": "Audio",
     "content": {
-        "url": "https://www.example.com/video.mp4",
-        "text": "Hi There, this is a Sample RCS Audio Message"
+        "url": "https://www.example.com/audio.mp3",
+        "text": "Hi Alex! You have a new voice message from our support team regarding your recent request."
     }
 }
 
 ```
 
 The corresponding message the user will receive:
+
+![Audio and text message example](../../images/rcs-Audio_text.png)
 
 ---
 
@@ -127,7 +129,7 @@ The corresponding message the user will receive:
 
 The corresponding message the user will receive:
 
-![image](../../images/635d3e126566938536a5d8c5422384bafbf5b042bcf545aa09df5f48325294ec-File.png)
+![File and text message example](../../images/rcs-File_text.png)
 
 ---
 
@@ -501,7 +503,7 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 | **Open URL / Webview** | Opens browser or in-app webview (full/half/tall). | Secure checkout, product page, claim form, loyalty sign-in. | Seamless upsell without forcing an app download. |
 | **Create Calendar Event** | Pre-fills a calendar entry in the user's default calendar. | Doctor appointments, flight reminders, webinar invites. | Cuts no-shows by embedding reminders directly in the calendar. |
 
-![Appointment confirm](../../images/2f3128a1c6a2038bda2b9f5d6c9b2ddcc6149da519ba6edfdbfced18cfd6ed7b-Appointment_confirm.png)
+![Suggested actions example](../../images/rcs-suggestions.png)
 
 ### Best practices
 

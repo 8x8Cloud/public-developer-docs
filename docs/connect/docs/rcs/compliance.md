@@ -4,6 +4,80 @@ slug: /connect/docs/rcs/compliance
 
 # Compliance
 
+## Required message templates
+
+Your agent must automatically respond to the following keywords with compliant messages. These are verified during carrier approval — missing or incorrect responses will block launch.
+
+### CTA (Call-to-Action) / Opt-in disclosure
+
+Every opt-in touchpoint (web form, SMS keyword, in-app prompt) must include all of the following:
+
+- What the user is signing up for
+- Message and data rates disclosure
+- Message frequency disclosure
+- Instructions to reply STOP to opt out
+- A support contact (phone, email, or URL)
+- A link to your privacy policy
+
+**Example:**
+
+```text
+Message and data rates may apply. Message frequency varies. Reply STOP to opt-out.
+For support, visit [URL]. Privacy Policy: [URL]
+```
+
+### Welcome / opt-in confirmation
+
+Sent immediately after a user opts in. Must include:
+
+- Your brand name and confirmation of opt-in
+- Message frequency
+- Data rates disclosure
+- Instructions to reply HELP for help
+- Instructions to reply STOP to cancel
+- A customer care contact
+
+**Example:**
+
+```text
+Welcome to [Brand]! You are opted in. Msg freq varies. Msg & data rates may apply.
+Text HELP for help, STOP to unsubscribe. For support, visit [URL].
+```
+
+### HELP response
+
+Sent when a user replies `HELP`. Must include:
+
+- A direct support contact — phone, email, or URL (no "we'll get back to you")
+- A reminder that the user can reply STOP
+
+**Example:**
+
+```text
+For support, please visit [URL] or call [phone number]. To stop receiving messages, reply STOP.
+```
+
+### STOP response
+
+Sent when a user replies `STOP`. Your agent must also handle: `QUIT`, `CANCEL`, `END`, `STOPALL`, `UNSUBSCRIBE`. Must include:
+
+- Your brand name
+- Confirmation that no further messages will be sent
+- An offer to reply START to resubscribe
+
+**Example:**
+
+```text
+You have successfully unsubscribed from [Brand] messages.
+You will no longer receive messages. Reply START to resubscribe.
+```
+
+:::note
+Replace `[Brand]`, `[URL]`, and `[phone number]` with your actual values before submitting for carrier approval.
+:::
+
+---
+
 ## Opt-in & opt-out
 
 All RCS messaging must follow opt-in best practices:

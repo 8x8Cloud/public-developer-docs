@@ -1,0 +1,137 @@
+---
+slug: /connect/docs/rcs/agent-profile
+---
+
+# Agent Profile & Storefront
+
+When a user opens a conversation with your RCS agent, they see a verified profile page — your agent's storefront. This is what establishes trust before they read a single message.
+
+Every element shown here maps directly to a field you submit during agent registration.
+
+<div style={{background: '#f4f6f9', borderRadius: '12px', padding: '28px 32px', margin: '24px 0', fontFamily: 'system-ui, -apple-system, sans-serif'}}>
+  <div style={{display: 'grid', gridTemplateColumns: '260px 1fr', gap: '36px', alignItems: 'start'}}>
+
+    {/* Phone mockup */}
+    <div style={{width: '260px', border: '8px solid #1a1a2e', borderRadius: '30px', overflow: 'hidden', background: '#ffffff', boxShadow: '0 8px 28px rgba(0,0,0,0.18)'}}>
+      {/* Banner */}
+      <div style={{height: '80px', background: 'linear-gradient(120deg, #e8e6db 0%, #d7e2dc 100%)', position: 'relative'}}>
+        <span style={{position: 'absolute', right: '12px', top: '14px', fontSize: '13px', fontWeight: '800', color: '#1a1a2e'}}>8x8</span>
+        <span style={{position: 'absolute', right: '12px', top: '34px', fontSize: '8px', color: '#555'}}>Let's power your CX</span>
+      </div>
+      {/* Logo */}
+      <div style={{width: '64px', height: '64px', borderRadius: '16px', background: '#ffffff', boxShadow: '0 2px 10px rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', fontWeight: '800', color: '#1a1a2e', margin: '-32px auto 0', position: 'relative', zIndex: 1}}>8x8</div>
+      {/* Body */}
+      <div style={{padding: '10px 16px 16px', textAlign: 'center', background: '#ffffff'}}>
+        <div style={{fontSize: '18px', fontWeight: '700', marginTop: '6px', color: '#1a1a2e'}}>8x8</div>
+        <div style={{fontSize: '12px', color: '#6b7280', marginTop: '4px'}}>Demonstrate the power of RCS</div>
+        {/* Action buttons */}
+        <div style={{display: 'flex', justifyContent: 'space-around', margin: '14px 0 4px'}}>
+          <div style={{fontSize: '11px', color: '#1a1a2e', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px'}}>
+            <span style={{fontSize: '18px'}}>📞</span>Call
+          </div>
+          <div style={{fontSize: '11px', color: '#1a1a2e', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px'}}>
+            <span style={{fontSize: '18px'}}>🌐</span>Website
+          </div>
+          <div style={{fontSize: '11px', color: '#1a1a2e', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px'}}>
+            <span style={{fontSize: '18px'}}>✉️</span>Email
+          </div>
+        </div>
+        {/* Tabs */}
+        <div style={{display: 'flex', borderBottom: '1px solid #eee', marginTop: '10px'}}>
+          <div style={{flex: 1, padding: '8px 0', fontSize: '13px', textAlign: 'center', color: '#1a1a2e', fontWeight: '700', borderBottom: '2px solid #1a1a2e'}}>Info</div>
+          <div style={{flex: 1, padding: '8px 0', fontSize: '13px', textAlign: 'center', color: '#9ca3af'}}>Options</div>
+        </div>
+        {/* Info rows */}
+        <div style={{display: 'flex', gap: '10px', padding: '10px 4px', textAlign: 'left', borderBottom: '1px solid #f0f0f0', alignItems: 'flex-start'}}>
+          <span style={{fontSize: '15px', color: '#1a1a2e'}}>📞</span>
+          <div>
+            <div style={{fontSize: '12px', color: '#1a1a2e'}}>(656) 221-1521</div>
+            <div style={{fontSize: '11px', color: '#9ca3af'}}>Get in Touch</div>
+          </div>
+        </div>
+        <div style={{display: 'flex', gap: '10px', padding: '10px 4px', textAlign: 'left', alignItems: 'flex-start'}}>
+          <span style={{fontSize: '15px', color: '#1a1a2e'}}>🌐</span>
+          <div>
+            <div style={{fontSize: '12px', color: '#1a1a2e'}}>https://cpaas.8x8.com/</div>
+            <div style={{fontSize: '11px', color: '#9ca3af'}}>Visit Us</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Annotations */}
+    <div style={{paddingTop: '8px'}}>
+      {[
+        { label: 'Logo & banner', text: 'The circular icon and the header image. These are the first things a user sees and must be verified by the carrier.' },
+        { label: 'Agent name', text: 'Your verified brand name. Shown with a green verified checkmark in production once carrier vetting completes.' },
+        { label: 'Agent description', text: 'A short line (≤100 chars) under the name explaining what the agent does or what the user is opting into.' },
+        { label: 'Action buttons', text: 'Call, Website, and Email shortcuts pulled from your support contact details submitted at registration.' },
+        { label: 'Info tab', text: 'The full contact card: phone number, website, email, and links to your privacy policy and terms of service.' },
+      ].map(({ label, text }) => (
+        <div key={label} style={{display: 'flex', gap: '10px', marginBottom: '16px', alignItems: 'flex-start'}}>
+          <div style={{width: '8px', height: '8px', borderRadius: '50%', background: '#1a1a2e', marginTop: '5px', flexShrink: 0}}></div>
+          <div>
+            <div style={{fontSize: '13px', fontWeight: '700', color: '#1a1a2e', marginBottom: '2px'}}>{label}</div>
+            <div style={{fontSize: '13px', color: '#4a5568', lineHeight: '1.6'}}>{text}</div>
+          </div>
+        </div>
+      ))}
+      <div style={{background: '#ebf8ff', color: '#2c5282', fontSize: '13px', lineHeight: '1.6', padding: '12px 14px', borderRadius: '8px', borderLeft: '3px solid #2b6cb0', marginTop: '4px'}}>
+        <strong>Verified identity:</strong> Unlike SMS, RCS displays your brand name, logo, and a verified badge — so the customer knows the message is genuinely from you before they read a word.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+---
+
+## Storefront field reference
+
+| Storefront element | Registration field | Spec |
+| :--- | :--- | :--- |
+| **Agent name** | Brand / Program Name | Max 40 characters |
+| **Agent description** | Agent description | Max 100 characters. Describe what the agent does or what the user is opting into. |
+| **Tagline** | Brand slogan | Max 100 characters. A short brand phrase (separate from the description). |
+| **Logo** | Logo file | 224×224 px · max 50 KB · PNG or JPEG · rendered as a circle — leave padding so edges aren't cut off |
+| **Banner** | Hero / banner image | 1440×448 px · max 200 KB · JPEG or PNG · avoid transparent backgrounds (renders poorly in dark mode) |
+| **Call button** | Customer service phone + label | E.164 format, e.g. `+18668794647` |
+| **Website button** | Customer service website + label | Publicly accessible HTTPS URL |
+| **Email button** | Customer service email + label | Public support email address |
+| **Info tab — Privacy policy** | Privacy policy URL | Publicly accessible HTTPS URL |
+| **Info tab — Terms** | Terms of service URL | Publicly accessible HTTPS URL |
+| **Use case** | Agent use case | `Transactional`, `Promotional`, or `Multi-purpose` (see below) |
+
+---
+
+## Agent description vs. brand slogan
+
+These are two separate fields that are easy to confuse:
+
+- **Agent description** — tells the user what the agent *does* or what they're opting into. This is the line shown directly under your agent name on the storefront. Example: `Event alerts and live demos of 8x8 RCS capabilities`
+- **Brand slogan** — a short brand phrase. Example: `Explore the future of business messaging.`
+
+Both have a 100-character limit.
+
+---
+
+## Choosing a use case
+
+| Use case | What it covers | When to choose it |
+| :--- | :--- | :--- |
+| **Transactional** | Order receipts, booking confirmations, payment alerts, OTPs | You only send messages tied to an existing customer relationship |
+| **Promotional** | Marketing offers, coupons, sales alerts | You send marketing or promotional messages |
+| **Multi-purpose** | Both transactional and promotional | You send both types — register here to avoid re-submission later |
+
+:::caution
+If you register as Transactional but later send promotional messages, you will need to re-submit for approval. When in doubt, register as Multi-purpose.
+:::
+
+---
+
+## Brand color
+
+Your brand color is used for interactive elements such as buttons and suggested replies.
+
+- **Format:** HEX code (e.g. `#E91B0C`)
+- **Requirement:** Must have a minimum 4.5:1 contrast ratio against white text. Verify this with a [contrast checker](https://webaim.org/resources/contrastchecker/) before submitting.

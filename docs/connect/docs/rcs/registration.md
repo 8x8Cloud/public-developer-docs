@@ -75,7 +75,26 @@ RCS agents do not "just work" on any phone during the testing phase. You must st
 
 ## 3. Carrier Approval & Launch Requirements
 
-To launch a live agent, specifically for the US market, strictly enforced documentation and functionality proofs are required.
+Requirements vary by region. Select your target market below.
+
+### Global (excluding US)
+
+Agents in most regions outside the US follow a streamlined path — no program brief and no carrier pre-approval are required. The STOP/HELP/START compliance rules still apply.
+
+| Step | Description | Notes |
+| :--- | :--- | :--- |
+| **1. Submit Agent Request** | Submit to initiate agent creation. Unlocks a trial sandbox immediately so you can begin testing while approvals are processed. | [Submit Agent Request Form](https://support.cpaas.8x8.com/hc/en-us/requests/new?ticket_form_id=49167509400601) |
+| **2. Brand Vetting** | Your brand is verified on the carrier side. | Run in parallel with Step 1 to avoid delays. Typically 5–10 business days. [Submit Brand Vetting Form](https://support.cpaas.8x8.com/hc/en-us/requests/new?ticket_form_id=49345456602137) |
+| **3. Carrier Demo Video** | A screen recording demonstrating the full user journey. | Must show: opt-in/welcome flow, at least one transactional message, a promotional message (if multi-purpose), and the STOP interaction. |
+| **4. Testing & Launch** | Whitelist test device numbers and confirm RCS is enabled on test devices. | 8x8 will guide you through this step. |
+
+:::tip
+You can start testing immediately after submitting the Agent Request Form — no need to wait for carrier approval.
+:::
+
+### United States
+
+For the US market, additional documentation and functionality proofs are required.
 
 ### A. Required Documentation
 
