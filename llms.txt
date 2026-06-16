@@ -808,6 +808,44 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Whiteboard](https://developer.8x8.com/jaas/docs/whiteboard): **JaaS (Jitsi as a Service)** has an integrated **whiteboard** feature, providing users with a collaborative, visual workspace. This tool is design...
 - [8x8 API License Agreement](https://developer.8x8.com/license): :::info Official License Agreement
 - [8x8 Software Development Kit License Agreement](https://developer.8x8.com/page/sdk-license): :::info Official License Agreement
+- [`chat-init-v1` Event](https://developer.8x8.com/tech-partner/docs/events/aw-chat-init-v1): The `chat-init-v1` event is triggered when a chat interaction is successfully initialized, providing the initial message history.
+- [chat-message-received-v1](https://developer.8x8.com/tech-partner/docs/events/aw-chat-message-received-v1): Event to announce when a chat message has been received.
+- [`chat-message-sent-v1` Event](https://developer.8x8.com/tech-partner/docs/events/aw-chat-message-sent-v1): The `chat-message-sent-v1` event is triggered when the agent sends a chat message during an active chat interaction.
+- [`close-agent-assist-v1` Event](https://developer.8x8.com/tech-partner/docs/events/aw-close-agent-assist-v1): The `close-agent-assist-v1` event is triggered when the Agent Workspace signals that the agent assist panel should be closed.
+- [aw-interaction-ended-v1](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-ended-v1): Event to announce when an interaction has ended.
+- [`interaction-focus-v1` Event](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-focus-v1): > **Deprecated** as of 8 September 2025. Use [`aw-interaction-focus-v2`](./aw-interaction-focus-v2) instead.
+- [interaction-focus-v2](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-focus-v2): Event used by the Agent Workspace MFE to announce all the integrators about when an interaction is focused.
+- [interaction-focus-v3](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-focus-v3): Event used by the Agent Workspace MFE to announce all the integrators about when an interaction is focused.
+- [`hold-v1` Event](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-hold-v1): The `hold-v1` event is triggered when a voice interaction is placed on hold in the Agent Workspace.
+- [`mute-v1` Event](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-mute-v1): The `mute-v1` event is triggered when a voice interaction is muted in the Agent Workspace.
+- [`resume-v1` Event](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-resume-v1): The `resume-v1` event is triggered when a voice interaction is resumed from hold in the Agent Workspace.
+- [aw-interaction-started-v1](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-started-v1): Event to announce when an interaction has started.
+- [`unmute-v1` Event](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-unmute-v1): The `unmute-v1` event is triggered when a voice interaction is unmuted in the Agent Workspace.
+- [wrap-up-codes-received-v1](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-wrap-up-codes-received-v1): Event to announce when wrap-up codes have been received for an interaction.
+- [wrap-up-codes-v1](https://developer.8x8.com/tech-partner/docs/events/aw-interaction-wrap-up-codes-v1): Event to send wrap-up codes from interaction.
+- [call-manager-call-autoanswer-first-connect-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-autoanswer-first-connect-v1): Event emitted on the first auto-answer call connection
+- [call-manager-call-caller-number-change-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-caller-number-change-v1): Event emitted when the caller number changes during a call
+- [call-manager-call-conference-drop-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-conference-drop-v1): Event emitted when a participant is dropped from a conference call
+- [call-manager-call-conference-start-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-conference-start-v1): Event emitted when a conference call starts
+- [call-manager-call-connect-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-connect-v1): Event emitted when a call is connected
+- [call-manager-call-disconnected-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-disconnected-v1): Event emitted when a call is disconnected
+- [call-manager-call-failed-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-failed-v1): Event emitted when an outbound call fails
+- [call-manager-call-hold-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-hold-v1): Event emitted when a call is placed on hold
+- [call-manager-call-inbound-first-connect-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-inbound-first-connect-v1): Event emitted on the first call-connect event for an inbound call
+- [call-manager-call-incoming-first-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-incoming-first-v1): Event emitted on the first call-incoming event
+- [call-manager-call-incoming-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-incoming-v1): Event emitted when an call-incoming event is received
+- [call-manager-call-outbound-first-connect-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-outbound-first-connect-v1): Event emitted on the first call-connect event for an outbound call
+- [call-manager-call-outgoing-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-outgoing-v1): Event emitted when an outgoing call is initiated
+- [call-manager-call-record-end-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-record-end-v1): Event emitted when call recording ends
+- [call-manager-call-record-failed-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-record-failed-v1): Event emitted when call recording fails ( only available when using CTI provider)
+- [call-manager-call-record-start-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-record-start-v1): Event emitted when call recording starts
+- [call-manager-call-transfer-blind-success-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-transfer-blind-success-v1): Event emitted when a blind call transfer succeeds
+- [call-manager-call-transfer-failed-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-transfer-failed-v1): Event emitted when a call transfer fails
+- [call-manager-call-transfer-success-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-transfer-success-v1): Event emitted when a call transfer succeeds
+- [call-manager-call-transfer-voicemail-success-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-call-transfer-voicemail-success-v1): Event emitted when a call transfer to voicemail succeeds
+- [call-manager-mute-disabled-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-mute-disabled-v1): Event emitted when the audio input is unmuted at the provider level (applies to all calls).
+- [call-manager-mute-enabled-v1](https://developer.8x8.com/tech-partner/docs/events/call-manager-mute-enabled-v1): Event emitted when the audio input is muted at the provider level (applies to all calls).
+- [global-user-details-v1](https://developer.8x8.com/tech-partner/docs/events/global-user-details-v1): Event used by the Shell MFE to announce all the integrators about the global user details data.
 - [`chat-accepted-cc-v1` Event](https://developer.8x8.com/tech-partner/docs/events/mashell-chat-accepted-cc-event-v1): The `chat-accepted-cc-v1` event is triggered when a web chat is accepted in the 8x8 Contact Center agent panel.
 - [`chat-completed-cc-v1` Event](https://developer.8x8.com/tech-partner/docs/events/mashell-chat-completed-cc-event-v1): The `chat-completed-cc-v1` event is triggered when a web chat concludes, before the agent finalizes the wrap-up process in the 8x8 Contact Center a...
 - [`chat-nextgen-accepted-cc-v1` Event](https://developer.8x8.com/tech-partner/docs/events/mashell-chat-nextgen-accepted-cc-event-v1): The `chat-nextgen-accepted-cc-v1` event is triggered when a chat-nextgen (sms or WhatsApp) is accepted in the 8x8 Contact Center agent panel.
