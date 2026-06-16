@@ -25,7 +25,8 @@
     "validate:openapi": "node scripts/validate-openapi.js",
     "validate:sidebar": "node scripts/validate-sidebar.js",
     "format:check": "prettier --check \"**/*.{js,jsx,json}\"",
-    "format:write": "prettier --write \"**/*.{js,jsx,json}\""
+    "format:write": "prettier --write \"**/*.{js,jsx,json}\"",
+    "generate-events-overview": "node scripts/generate-events-overview.js"
   },
   "dependencies": {
     "@8x8/oxygen-config": "^2.103.1",

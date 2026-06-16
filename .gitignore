@@ -32,5 +32,6 @@ yarn-error.log*
 # Local certificates
 .cert/
 config-changes-justification.txt
+scripts/.partner-events-manifest.json
 pulsar-images/
 private/
