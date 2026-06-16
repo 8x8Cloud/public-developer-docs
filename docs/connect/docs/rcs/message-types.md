@@ -131,6 +131,362 @@ The corresponding message the user will receive:
 
 ---
 
+## Rich Card
+
+A **Rich Card** bundles a title, description, a single media asset (image or video), and up to four in-card suggestions into one interactive message. Use rich cards for product promotions, appointment confirmations, order summaries, or any scenario where visual content needs to be paired with clear calls to action.
+
+**Content:** Title + description + media + in-card suggestions + optional message-level suggestions
+
+**Card Orientation:** `vertical` or `horizontal`
+
+**Media Height** (vertical cards only): `SHORT`, `MEDIUM`, or `TALL`
+
+**Use Cases:** Product showcase, booking confirmation, loyalty reward, order summary
+
+### Rich Card — Vertical
+
+A vertical card displays the media at the top, followed by the title, description, and in-card suggestions. Use `MEDIUM` or `TALL` media height when the image is the primary content; use `SHORT` when the text is the primary content.
+
+#### Payload sample
+
+```json
+{
+  "user": {
+    "msisdn": "+441234567890"
+  },
+  "type": "RichCard",
+  "content": {
+    "richCard": {
+      "cardOrientation": "vertical",
+      "title": "Hey Melissa! New year, new shoes? 👟",
+      "description": "Check out our latest arrivals, including the AirPulse, perfect for your next run! Plus, get a free gait analysis with any purchase this week.",
+      "media": {
+        "height": "SHORT",
+        "contentInfo": {
+          "fileUrl": "https://www.example.com/rich_card_vertical.jpg",
+          "thumbnailUrl": "https://www.example.com/rich_card_vertical.jpg",
+          "forceRefresh": false
+        }
+      },
+      "suggestions": [
+        {
+          "reply": {
+            "text": "🛍️ View new arrivals",
+            "postbackData": "view_new_arrivals"
+          }
+        },
+        {
+          "reply": {
+            "text": "📋 Book Gait Analysis",
+            "postbackData": "book_gait_analysis"
+          }
+        },
+        {
+          "action": {
+            "text": "👗 Shop now",
+            "postbackData": "shop_now",
+            "openUrlAction": {
+              "url": "https://developer.8x8.com/connect/docs/rcs/message-types",
+              "application": "WEBVIEW",
+              "webviewViewMode": "FULL",
+              "description": "Shop Bridgepoint Runners"
+            },
+            "fallbackUrl": "https://developer.8x8.com/connect/docs/rcs/message-types"
+          }
+        }
+      ]
+    },
+    "suggestions": [
+      {
+        "reply": {
+          "text": "Check my orders",
+          "postbackData": "check_my_orders"
+        }
+      },
+      {
+        "reply": {
+          "text": "Not interested",
+          "postbackData": "not_interested"
+        }
+      }
+    ]
+  }
+}
+```
+
+The corresponding message the user will receive:
+
+![Rich card vertical — annotated](../../images/rich-card-vertical.png)
+
+The annotations map directly to the payload:
+
+* **Media** → `content.richCard.media`
+* **Title text** → `content.richCard.title`
+* **Description text** → `content.richCard.description`
+* **Primary suggestions** → `content.richCard.suggestions` (in-card, up to 4)
+* **Secondary suggestions** → `content.suggestions` (message-level, up to 7)
+
+### Rich Card — Horizontal
+
+A horizontal card displays the media to the left or right of the text block. Use it when the text is the primary content and the image plays a supporting role (e.g. confirmations, itineraries, compact receipts). Horizontal cards do not use `media.height` — the carrier sizes the media to the text block.
+
+#### Payload sample
+
+```json
+{
+  "user": {
+    "msisdn": "+441234567890"
+  },
+  "type": "RichCard",
+  "content": {
+    "richCard": {
+      "thumbnailImageAlignment": "right",
+      "cardOrientation": "horizontal",
+      "title": "Your reservation at Ebi",
+      "description": "We're springing into action to get your table ready for 5:00 PM! 🕔 Have any questions before you arrive?",
+      "media": {
+        "contentInfo": {
+          "fileUrl": "https://www.example.com/rich_card_horizontal.jpg",
+          "thumbnailUrl": "https://www.example.com/rich_card_horizontal.jpg",
+          "forceRefresh": false
+        }
+      },
+      "suggestions": [
+        {
+          "action": {
+            "text": "Ebi location",
+            "postbackData": "ebi_location",
+            "viewLocationAction": {
+              "latLong": {
+                "latitude": 37.7749,
+                "longitude": -122.4194
+              },
+              "label": "Ebi Restaurant"
+            }
+          }
+        },
+        {
+          "action": {
+            "text": "Call us",
+            "postbackData": "call_ebi",
+            "dialAction": {
+              "phoneNumber": "+12025551234"
+            }
+          }
+        }
+      ]
+    },
+    "suggestions": []
+  }
+}
+```
+
+The corresponding message the user will receive:
+
+![Rich card horizontal — Ebi reservation](../../images/rich-card-horizontal.png)
+
+### Suggestions: in-card vs. message-level
+
+A rich card supports two separate suggestion arrays:
+
+| Location | Path | Limit | Renders as |
+| --- | --- | --- | --- |
+| **In-card** | `content.richCard.suggestions` | Up to 4 | Buttons inside the card, tied to the card content. |
+| **Message-level** | `content.suggestions` | Up to 7 additional | Chips below the card, for broader follow-up actions. |
+
+Together, a single message can expose up to **11** suggestions (4 in-card + 7 message-level).
+
+### Rich Card field reference
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `cardOrientation` | string | `vertical` or `horizontal`. |
+| `thumbnailImageAlignment` | string | Horizontal cards only. `left` or `right` — positions the media relative to the text block. |
+| `title` | string | Card headline. Max 200 characters. |
+| `description` | string | Supporting body text. Max 2 000 characters. |
+| `media.height` | string | `SHORT`, `MEDIUM`, or `TALL`. Vertical cards only. |
+| `media.contentInfo.fileUrl` | string (URL) | Public URL of the image or video asset. |
+| `media.contentInfo.thumbnailUrl` | string (URL) | Public URL of the thumbnail (used for video). |
+| `media.contentInfo.forceRefresh` | boolean | If `true`, the carrier re-fetches the media instead of serving a cached copy. |
+| `suggestions[]` | array | In-card chips. Each entry contains either a `reply` or an `action`. |
+
+### Limits
+
+| Field | Limit |
+| --- | --- |
+| **Title** | 200 characters |
+| **Description** | 2 000 characters |
+| **In-card suggestions** | Up to 4 chips |
+| **Message-level suggestions** | Up to 7 chips |
+| **Media file size** | Up to 100 MB |
+| **Card payload size** | 250 KB |
+
+### Best practices
+
+* Keep titles short and scannable; use the description for supporting detail.
+* Pair every card with at least one suggestion so users have a clear next step.
+* Provide a `fallbackUrl` on every `openUrlAction` for clients that cannot open the webview.
+* Serve media over HTTPS from a stable, publicly reachable URL — the carrier may cache the asset.
+* Use message-level suggestions for persistent actions (e.g. "Check my orders") and keep in-card suggestions tied to the card's specific offer.
+
+---
+
+## Carousel
+
+A **Carousel** is a horizontally swipeable collection of rich cards delivered in a single message. Use carousels to present multiple comparable items — product variants, tour packages, available appointment slots, or menu choices — so the user can browse options inline without leaving the conversation.
+
+Each card in the carousel follows the same content model as a standalone rich card (title, description, media, in-card suggestions), but cards in a carousel share a common `cardWidth` and are always rendered vertically.
+
+**Content:** List of 2–10 cards + optional message-level suggestions
+
+**Card Width:** `small` or `medium` — applied to every card in the carousel
+
+**Use Cases:** Product catalogue, tour or package selection, menu, appointment slots, booking options
+
+### Payload sample
+
+```json
+{
+  "user": {
+    "msisdn": "+441234567890"
+  },
+  "type": "Carousel",
+  "content": {
+    "carousel": {
+      "cardWidth": "medium",
+      "cards": [
+        {
+          "title": "Catamaran day-trip",
+          "description": "Snorkel, sushi, & sunset cocktails. $99, 6 spots left!",
+          "media": {
+            "height": "short",
+            "contentInfo": {
+              "fileUrl": "https://www.example.com/catamaran.jpg",
+              "thumbnailUrl": "https://www.example.com/catamaran.jpg",
+              "forceRefresh": false
+            }
+          },
+          "suggestions": [
+            {
+              "action": {
+                "text": "Buy now",
+                "postbackData": "buy_catamaran",
+                "openUrlAction": {
+                  "url": "https://developer.8x8.com/connect/docs/rcs/message-types",
+                  "application": "WEBVIEW",
+                  "webviewViewMode": "FULL",
+                  "description": "Buy catamaran day-trip"
+                },
+                "fallbackUrl": "https://developer.8x8.com/connect/docs/rcs/message-types"
+              }
+            },
+            {
+              "reply": {
+                "text": "More details",
+                "postbackData": "details_catamaran"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Jungle ATV tour",
+          "description": "Explore off-road with an expert guide. $99, limited spots!",
+          "media": {
+            "height": "short",
+            "contentInfo": {
+              "fileUrl": "https://www.example.com/atv.png",
+              "thumbnailUrl": "https://www.example.com/atv.png",
+              "forceRefresh": false
+            }
+          },
+          "suggestions": [
+            {
+              "action": {
+                "text": "Buy now",
+                "postbackData": "buy_atv_tour",
+                "openUrlAction": {
+                  "url": "https://developer.8x8.com/connect/docs/rcs/message-types",
+                  "application": "WEBVIEW",
+                  "webviewViewMode": "FULL",
+                  "description": "Buy jungle ATV tour"
+                },
+                "fallbackUrl": "https://developer.8x8.com/connect/docs/rcs/message-types"
+              }
+            },
+            {
+              "reply": {
+                "text": "More details",
+                "postbackData": "details_atv_tour"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "suggestions": [
+      {
+        "reply": {
+          "text": "Check my orders",
+          "postbackData": "check_my_orders"
+        }
+      },
+      {
+        "reply": {
+          "text": "Not interested",
+          "postbackData": "not_interested"
+        }
+      }
+    ]
+  }
+}
+```
+
+The corresponding message the user will receive:
+
+![Carousel — annotated](../../images/carousel.png)
+
+The annotations map directly to the payload:
+
+* **Rich card carousel** → `content.carousel.cards` (the swipeable cards themselves)
+* **Suggestion chips** → `content.suggestions` (message-level, shown below the carousel)
+
+### Carousel field reference
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `cardWidth` | string | `small` or `medium`. Applies to every card in the carousel. |
+| `cards[]` | array | 2 to 10 card objects. Each card has the same shape as a standalone vertical rich card, minus `cardOrientation`. |
+| `cards[].title` | string | Card headline. Max 200 characters. |
+| `cards[].description` | string | Card body. Max 2 000 characters. |
+| `cards[].media.height` | string | `short`, `medium`, or `tall`. Applies per card. |
+| `cards[].media.contentInfo.fileUrl` | string (URL) | Public URL of the image or video. |
+| `cards[].media.contentInfo.thumbnailUrl` | string (URL) | Public URL of the thumbnail (used for video). |
+| `cards[].suggestions[]` | array | In-card chips. Up to 4 per card. |
+| `content.suggestions[]` | array | Message-level chips shown below the carousel. Up to 7. |
+
+### Limits
+
+| Field | Limit |
+| --- | --- |
+| **Cards per carousel** | 2 minimum, 10 maximum |
+| **Card title** | 200 characters |
+| **Card description** | 2 000 characters |
+| **In-card suggestions (per card)** | Up to 4 chips |
+| **Message-level suggestions** | Up to 7 chips |
+| **Media file size (per card)** | Up to 100 MB |
+| **Total payload size** | 250 KB |
+
+### Best practices
+
+* Keep `cardWidth` consistent with the content density — use `small` when titles and descriptions are short; use `medium` when you need room for longer copy or larger media.
+* Keep the number of cards manageable. 3–5 cards typically convert best; 10 cards is the absolute ceiling.
+* Lead with the most relevant card — users often only browse the first two or three before making a decision.
+* Use the same suggestion pattern on every card (e.g. "Buy now" + "More details") so users learn the pattern quickly.
+* Serve media over HTTPS from a stable, publicly reachable URL — the carrier may cache the asset.
+* Use message-level suggestions for actions that apply to the whole conversation ("Check my orders", "Not interested") rather than to a specific card.
+
+---
+
 ## Suggested Actions
 
 Suggestions in RCS Business Messaging provide interactive buttons, chips, or quick replies that guide users seamlessly through rich conversational experiences. By using suggestions, brands can streamline user journeys, enhance engagement, improve conversions, and gather immediate user feedback.
@@ -158,68 +514,67 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 ### Implementation Example
 
 ```json
-"user": {
-        "msisdn": "+10000000000"
-    },
-    "type": "Text",
-    "content": {
-        "text": ":wave: Hi Sarah! Just a reminder—your appointment at Wellness Dental is scheduled for tomorrow at 10:30 AM",
-        "suggestions": [
-            {
-                "reply": {
-                    "text": "Confirm",
-                    "postbackData": "user_confirmed"
-                }
+{
+  "user": {
+    "msisdn": "+441234567890"
+  },
+  "type": "Text",
+  "content": {
+    "text": "👋 Hi Sarah! Just a reminder—your appointment at Wellness Dental is scheduled for tomorrow at 10:30 AM",
+    "suggestions": [
+      {
+        "reply": {
+          "text": "Confirm",
+          "postbackData": "user_confirmed"
+        }
+      },
+      {
+        "reply": {
+          "text": "Reschedule",
+          "postbackData": "user_rescheduled"
+        }
+      },
+      {
+        "action": {
+          "text": "Add to Calendar",
+          "postbackData": "add_event_to_calendar",
+          "createCalendarEventAction": {
+            "title": "Dental Appointment",
+            "description": "Appointment at Wellness Dental",
+            "startTime": "2026-02-15T10:30:00Z",
+            "endTime": "2026-02-15T11:00:00Z"
+          }
+        }
+      },
+      {
+        "action": {
+          "text": "View Location",
+          "postbackData": "view_clinic_location",
+          "viewLocationAction": {
+            "latLong": {
+              "latitude": 37.7749,
+              "longitude": -122.4194
             },
-            {
-                "reply": {
-                    "text": "Reschedule",
-                    "postbackData": "user_rescheduled"
-                }
-            },
-            {
-                "action": {
-                    "text": "Add to Calendar",
-                    "postbackData": "add_event_to_calendar",
-                    "createCalendarEventAction": {
-                        "title": "Doctor Appointment",
-                        "description": "Annual health checkup at City Medical Center",
-                        "startTime": "2025-07-25T10:30:00Z",
-                        "endTime": "2025-07-25T11:00:00Z"
-                    }
-                }
-            },
-            {
-                "action": {
-                    "text": "View Location",
-                    "postbackData": "view_clinic_location",
-                    "viewLocationAction": {
-                        "latLong": {
-                            "latitude": 37.7749,
-                            "longitude": -122.4194
-                        },
-                        "label": "Star Clinic",
-                        "query": "clinics near me"
-                    }
-                }
-            },
-            {
-                "action": {
-                    "text": "Check our website",
-                    "postbackData": "open_product_page",
-                    "openUrlAction": {
-                        "url": "https://cpaas.8x8.com/en/",
-                        "application": "WEBVIEW",
-                        "webviewViewMode": "FULL",
-                        "description": "View product details"
-                    },
-                    "fallbackUrl": "https://example.com/fallback"
-                }
-            }
-        ]
-    }
-}'
-
+            "label": "Wellness Dental"
+          }
+        }
+      },
+      {
+        "action": {
+          "text": "Visit Website",
+          "postbackData": "open_website",
+          "openUrlAction": {
+            "url": "https://developer.8x8.com/connect/docs/rcs/message-types",
+            "application": "WEBVIEW",
+            "webviewViewMode": "FULL",
+            "description": "Visit our website"
+          },
+          "fallbackUrl": "https://developer.8x8.com/connect/docs/rcs/message-types"
+        }
+      }
+    ]
+  }
+}
 ```
 
 ## Overview of file types and limits
