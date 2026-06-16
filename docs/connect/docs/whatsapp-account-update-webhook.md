@@ -39,8 +39,8 @@ Request body description
 | event                           | string         | Specific account update event type.                                                                             |
 | phoneNumber                     | string         | Phone number associated with the account. Included for `ACCOUNT_VIOLATION` and `ACCOUNT_RESTRICTION` events.   |
 | businessVerificationInfo  | object         | Only included for `BUSINESS_VERIFICATION_STATUS_UPDATE` event. Business verification status details, see below. |
-| violationInfo                   | object         | Only included for `ACCOUNT_VIOLATION` event. Account violation details, see below.                              |
-| restrictionInfo                 | array          | Only included for `ACCOUNT_RESTRICTION` event. Array of account restriction details, see below.                 |
+| violationInfo                   | object         | Included for `ACCOUNT_VIOLATION` events and for `ACCOUNT_RESTRICTION` events related to Direct Send API category misuse. Account violation details, see below. |
+| restrictionInfo                 | array          | Included for `ACCOUNT_RESTRICTION` events. Array of account restriction details, see below. Omitted for Direct Send warning and unban events.                 |
 
 `businessVerificationInfo` object description
 
@@ -54,16 +54,16 @@ Request body description
 
 | Parameter name   | Parameter type | Description                                                                                                                                                                                    |
 | :--------------- | :------------- |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| violationType    | string         | Type of violation. Possible values: `LOW_BUSINESS_INITIATED_CALLING_QUALITY`, `LOW_USER_INITIATED_CALLING_QUALITY`, `USER_INITIATED_CALLS_LOW_PICKUP_RATE`.                                   |
-| remediation      | string         | Remediation text describing how to address the violation.                                                                                                                                      |
+| violationType    | string         | Type of violation. Possible values: `LOW_BUSINESS_INITIATED_CALLING_QUALITY`, `LOW_USER_INITIATED_CALLING_QUALITY`, `USER_INITIATED_CALLS_LOW_PICKUP_RATE`, `DIRECT_SEND_UTILITY_CATEGORY_ABUSE_WARN`, `DIRECT_SEND_UTILITY_CATEGORY_ABUSE_STRIKE_1`, `DIRECT_SEND_UTILITY_CATEGORY_ABUSE_STRIKE_2`, `DIRECT_SEND_UTILITY_CATEGORY_ABUSE_OFFBOARD`, `DIRECT_SEND_UTILITY_CATEGORY_ABUSE_UNBAN`. |
+| remediation      | string         | Remediation text describing how to address the violation. Not included for `DIRECT_SEND_*` violation types.                                                                                    |
 
 `restrictionInfo` array item description
 
 | Parameter name   | Parameter type | Description                                                                                                                                                                      |
 | :--------------- | :------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| restrictionType  | string         | Type of restriction. Possible values: `RESTRICTED_BUSINESS_INITIATED_CALLING`, `RESTRICTED_USER_INITIATED_CALLING`, `RESTRICTED_USER_INITIATED_CALLING_CALL_BUTTON_HIDDEN`.     |
+| restrictionType  | string         | Type of restriction. Possible values: `RESTRICTED_BUSINESS_INITIATED_CALLING`, `RESTRICTED_USER_INITIATED_CALLING`, `RESTRICTED_USER_INITIATED_CALLING_CALL_BUTTON_HIDDEN`, `RESTRICTED_DIRECT_SEND_UTILITY_TEMPLATES`. |
 | expiration       | string         | Timestamp when the restriction expires in ISO 8601 format.                                                                                                                       |
-| remediation      | string         | Remediation text describing how to address the restriction.                                                                                                                      |
+| remediation      | string         | Remediation text describing how to address the restriction. Not included for `RESTRICTED_DIRECT_SEND_UTILITY_TEMPLATES`.                                                          |
 
 ### Sample Webhooks
 
@@ -154,6 +154,75 @@ Request body description
                 "expiration": "2022-01-10T20:54:17.00Z"
             }
         ]
+    }
+}
+```
+
+#### Direct Send API - Category Abuse Warning
+
+Sent when category misuse is detected on the Direct Send API. No restriction is applied yet.
+
+```json
+{
+    "eventId": "9ac6f2cb-abb7-43e6-b533-b3d7017846fd",
+    "timestamp": "2026-01-19T13:50:20.00Z",
+    "provider": "WhatsApp",
+    "businessAccountId": "950523421983857",
+    "accountId": "IntegrationTestCampaign",
+    "eventType": "account_update",
+    "eventDetails": {
+        "event": "ACCOUNT_RESTRICTION",
+        "violationInfo": {
+            "violationType": "DIRECT_SEND_UTILITY_CATEGORY_ABUSE_WARN"
+        }
+    }
+}
+```
+
+#### Direct Send API - Category Abuse Strike
+
+Sent when a 7-day (`STRIKE_1`), 30-day (`STRIKE_2`), or permanent (`OFFBOARD`) Direct Send restriction is applied. The example below shows a 7-day restriction; substitute the `violationType` value for the other strike levels.
+
+```json
+{
+    "eventId": "9ac6f2cb-abb7-43e6-b533-b3d7017846fd",
+    "timestamp": "2026-01-19T13:50:20.00Z",
+    "provider": "WhatsApp",
+    "businessAccountId": "950523421983857",
+    "accountId": "IntegrationTestCampaign",
+    "eventType": "account_update",
+    "eventDetails": {
+        "event": "ACCOUNT_RESTRICTION",
+        "violationInfo": {
+            "violationType": "DIRECT_SEND_UTILITY_CATEGORY_ABUSE_STRIKE_1"
+        },
+        "restrictionInfo": [
+            {
+                "restrictionType": "RESTRICTED_DIRECT_SEND_UTILITY_TEMPLATES",
+                "expiration": "2026-01-26T13:50:20.00Z"
+            }
+        ]
+    }
+}
+```
+
+#### Direct Send API - Unban
+
+Sent when a Direct Send restriction is lifted.
+
+```json
+{
+    "eventId": "9ac6f2cb-abb7-43e6-b533-b3d7017846fd",
+    "timestamp": "2026-01-19T13:50:20.00Z",
+    "provider": "WhatsApp",
+    "businessAccountId": "950523421983857",
+    "accountId": "IntegrationTestCampaign",
+    "eventType": "account_update",
+    "eventDetails": {
+        "event": "ACCOUNT_RESTRICTION",
+        "violationInfo": {
+            "violationType": "DIRECT_SEND_UTILITY_CATEGORY_ABUSE_UNBAN"
+        }
     }
 }
 ```
