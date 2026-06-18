@@ -645,6 +645,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Start SMS log export job](https://developer.8x8.com/connect/reference/start-log-export-job.api): * Sending a **POST** request on this endpoint allows to **request an SMS logs file**.
 - [Start log export job](https://developer.8x8.com/connect/reference/start-voice-log-export-job.api): * Sending a **POST** request on this endpoint allows to **request an Voice logs file**.
 - [Test workflow definition](https://developer.8x8.com/connect/reference/start-workflow-instance.api): Use this resource to test workflow definition by starting workflow instances. This endpoint is useful for testing your workflows without involving ...
+- [Submit WhatsApp Direct Send Sample](https://developer.8x8.com/connect/reference/submit-whatsapp-direct-send-sample.api): This endpoint is used to submit a sample of a WhatsApp Direct Send message to Meta for review and classification.
 - [Send SMS Engage surveys as batch](https://developer.8x8.com/connect/reference/survey-send-many.api): * Sending a POST request on this endpoint allows to **send SMS Engage surveys by batch (multiple messages per request)**.
 - [Send SMS Engage survey](https://developer.8x8.com/connect/reference/survey-send.api): About SMS Engage
 - [Token creation](https://developer.8x8.com/connect/reference/tokens.api): This API endpoint allows the creation of a bearer token. The API endpoint can also be used to create a new room, once a room is created, participan...

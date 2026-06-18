@@ -4267,6 +4267,307 @@
         ]
       }
     },
+    "/api/v1/whatsapp/subaccounts/{subAccountId}/channels/{channelId}/directSend/sample": {
+      "post": {
+        "summary": "Submit WhatsApp Direct Send Sample",
+        "operationId": "submit-whatsapp-direct-send-sample",
+        "description": "This endpoint is used to submit a sample of a WhatsApp Direct Send message to Meta for review and classification.\n\nDirect Send auto-creates WhatsApp templates on the fly and matches incoming messages against them. Submitting sample messages will ensure that the messages you send through Direct Send are accurately classified and transformed into templates that are useful for your use cases.\n\nThe response indicates whether the sample was processed successfully and the category Meta assigned to it. Possible categories are `UTILITY`, `MARKETING`, and `AUTHENTICATION`.\n\nSamples can be of two types:\n* `text` — a plain text body.\n* `interactive` — an interactive message with a call-to-action URL (`cta_url`) or reply buttons (`button`).",
+        "tags": ["Management API"],
+        "parameters": [
+          {
+            "name": "subAccountId",
+            "in": "path",
+            "description": "Sub-account identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "description": "Channel identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Sample message to submit to Meta for review.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["type"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Sample type. Must be either `text` or `interactive`.",
+                    "enum": ["text", "interactive"],
+                    "example": "interactive"
+                  },
+                  "text": {
+                    "type": "object",
+                    "description": "Required when `type` is `text`.",
+                    "required": ["body"],
+                    "properties": {
+                      "body": {
+                        "type": "string",
+                        "description": "The text body of the sample message. Must not be empty.",
+                        "example": "Hello! This is a sample message."
+                      }
+                    }
+                  },
+                  "interactive": {
+                    "type": "object",
+                    "description": "Required when `type` is `interactive`.",
+                    "required": ["type", "body", "action"],
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "description": "Interactive type. Must be either `cta_url` (call-to-action URL) or `button` (reply buttons).",
+                        "enum": ["cta_url", "button"],
+                        "example": "cta_url"
+                      },
+                      "header": {
+                        "type": "object",
+                        "description": "Optional header for the interactive message.",
+                        "required": ["type", "text"],
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "description": "Header type. Only `text` is supported.",
+                            "enum": ["text"],
+                            "example": "text"
+                          },
+                          "text": {
+                            "type": "string",
+                            "description": "Header text. Must not exceed 60 characters.",
+                            "maxLength": 60,
+                            "example": "Welcome"
+                          }
+                        }
+                      },
+                      "body": {
+                        "type": "object",
+                        "description": "Body of the interactive message.",
+                        "required": ["text"],
+                        "properties": {
+                          "text": {
+                            "type": "string",
+                            "description": "Body text. Must not be empty and must not exceed 1024 characters.",
+                            "maxLength": 1024,
+                            "example": "Tap the button below to visit our store."
+                          }
+                        }
+                      },
+                      "footer": {
+                        "type": "object",
+                        "description": "Optional footer for the interactive message.",
+                        "required": ["text"],
+                        "properties": {
+                          "text": {
+                            "type": "string",
+                            "description": "Footer text. Must not exceed 60 characters.",
+                            "maxLength": 60,
+                            "example": "Powered by 8x8"
+                          }
+                        }
+                      },
+                      "action": {
+                        "type": "object",
+                        "description": "Action object. The required fields depend on the `interactive.type`:\n* For `cta_url`, `name` must be `cta_url` and `parameters` is required.\n* For `button`, `buttons` is required.",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Required when `interactive.type` is `cta_url`. Must be `cta_url`.",
+                            "enum": ["cta_url"],
+                            "example": "cta_url"
+                          },
+                          "parameters": {
+                            "type": "object",
+                            "description": "Required when `interactive.type` is `cta_url`.",
+                            "required": ["display_text", "url"],
+                            "properties": {
+                              "display_text": {
+                                "type": "string",
+                                "description": "Text displayed on the call-to-action button. Must not be empty.",
+                                "example": "Visit store"
+                              },
+                              "url": {
+                                "type": "string",
+                                "description": "Destination URL for the call-to-action. Must be a valid `http` or `https` URL.",
+                                "format": "uri",
+                                "example": "https://example.com/store"
+                              }
+                            }
+                          },
+                          "buttons": {
+                            "type": "array",
+                            "description": "Required when `interactive.type` is `button`. Must contain at most 10 reply buttons.",
+                            "maxItems": 10,
+                            "items": {
+                              "type": "object",
+                              "required": ["type", "reply"],
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "description": "Button type. Only `reply` is supported.",
+                                  "enum": ["reply"],
+                                  "example": "reply"
+                                },
+                                "reply": {
+                                  "type": "object",
+                                  "required": ["id", "title"],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "description": "Unique identifier for the button. Must not be empty.",
+                                      "example": "btn-yes"
+                                    },
+                                    "title": {
+                                      "type": "string",
+                                      "description": "Button label. Must not be empty and must not exceed 20 characters.",
+                                      "maxLength": 20,
+                                      "example": "Yes"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "text": {
+                  "summary": "Submit a text sample",
+                  "value": {
+                    "type": "text",
+                    "text": {
+                      "body": "Hello! This is a sample message."
+                    }
+                  }
+                },
+                "interactiveCtaUrl": {
+                  "summary": "Submit an interactive call-to-action URL sample",
+                  "value": {
+                    "type": "interactive",
+                    "interactive": {
+                      "type": "cta_url",
+                      "header": {
+                        "type": "text",
+                        "text": "Welcome"
+                      },
+                      "body": {
+                        "text": "Tap the button below to visit our store."
+                      },
+                      "footer": {
+                        "text": "Powered by 8x8"
+                      },
+                      "action": {
+                        "name": "cta_url",
+                        "parameters": {
+                          "display_text": "Visit store",
+                          "url": "https://example.com/store"
+                        }
+                      }
+                    }
+                  }
+                },
+                "interactiveButton": {
+                  "summary": "Submit an interactive reply buttons sample",
+                  "value": {
+                    "type": "interactive",
+                    "interactive": {
+                      "type": "button",
+                      "body": {
+                        "text": "Would you like to proceed?"
+                      },
+                      "action": {
+                        "buttons": [
+                          {
+                            "type": "reply",
+                            "reply": {
+                              "id": "btn-yes",
+                              "title": "Yes"
+                            }
+                          },
+                          {
+                            "type": "reply",
+                            "reply": {
+                              "id": "btn-no",
+                              "title": "No"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sample submitted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Direct Send sample response",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Indicates whether the sample was accepted by Meta.",
+                      "example": true
+                    },
+                    "category": {
+                      "type": "string",
+                      "description": "Category assigned by Meta to the submitted sample.",
+                      "enum": ["UTILITY", "MARKETING", "AUTHENTICATION"],
+                      "example": "UTILITY"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "summary": "Sample accepted and categorized",
+                    "value": {
+                      "success": true,
+                      "category": "UTILITY"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/400"
+          },
+          "401": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
+          },
+          "403": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
+          },
+          "500": {
+            "$ref": "#/paths/~1files~1%7Bfilename%7D/get/responses/500"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/api/v1/accounts/{accountId}/channels/{channelId}/flows": {
       "get": {
         "summary": "Get WhatsApp Flows",
