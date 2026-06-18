@@ -92,6 +92,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "connect/reference/submit-whatsapp-direct-send-sample",
+          label: "Submit WhatsApp Direct Send Sample",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "connect/reference/get-whatsapp-flows",
           label: "Get WhatsApp Flows",
           className: "api-method get",

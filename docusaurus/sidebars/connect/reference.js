@@ -222,6 +222,10 @@ const sidebarConfig = [
             id: 'connect/reference/get-call-permission-status',
           },
           {
+            type: 'doc',
+            id: 'connect/reference/submit-whatsapp-direct-send-sample',
+          },
+          {
             type: 'category',
             label: 'WhatsApp Flow Management',
             collapsed: true,
