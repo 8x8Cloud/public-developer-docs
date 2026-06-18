@@ -135,6 +135,11 @@ Retrieves journey data based on the specified criteria.
           "id": "int-196e53e066e-QNePASHISrp0D65MVgaNJYS13-phone-01-emeriaeurope01",
           "direction": "Inbound",
           "type": "Contact Center"
+        },
+        {
+          "id": "int-196e53e066e-QNePASHISrp0D65MVgaNJYS13-ai-studio-01",
+          "direction": "Inbound",
+          "type": "AI Studio"
         }
       ],
       "agents": [
@@ -147,7 +152,8 @@ Retrieves journey data based on the specified criteria.
           "group": {
             "id": "101",
             "name": "ungroup"
-          }
+          },
+          "type": "HUMAN"
         }
       ],
       "contact": {
@@ -193,6 +199,14 @@ Retrieves journey data based on the specified criteria.
       "queues": [],
       "ringGroups": [],
       "scheduleHours": ["Open", "Closed"],
+      "schedules": [
+        {
+          "id": 107,
+          "tag": "Ferie",
+          "tenantId": "cexpbx01",
+          "result": "open"
+        }
+      ],
       "tenantIds": [
         "8x8"
       ],
@@ -265,6 +279,7 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "ringGroup": null,
           "duration": 0,
           "externalNumber": null,
+          "channel": null,
           "mediaType": "Phone"
         },
         {
@@ -279,6 +294,14 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "ringGroup": null,
           "duration": 9206,
           "externalNumber": null,
+          "channel": null,
+          "scripts": [
+            {
+              "id": 541,
+              "name": "example_script_name",
+              "tenantId": "cexpbx01"
+            }
+          ],
           "mediaType": "Phone"
         },
         ["..."],
@@ -293,7 +316,8 @@ Same structure as Journeys endpoint, but with transition-specific filters.
               "email": "jack.pott@example.com",
               "loginId": "jpott",
               "department": "Technical Support",
-              "group": null
+              "group": null,
+              "type": "HUMAN"
             }
           ],
           "previousAgents": [
@@ -303,7 +327,8 @@ Same structure as Journeys endpoint, but with transition-specific filters.
               "email": "marsha.mellow@example.com",
               "loginId": "mmellow",
               "department": "Customer Support",
-              "group": null
+              "group": null,
+              "type": "HUMAN"
             }
           ],
           "previousQueue": {
@@ -316,6 +341,11 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "ringGroup": null,
           "duration": 0,
           "externalNumber": "+441138413014",
+          "channel": {
+            "id": "ch-voice-1",
+            "name": "Voice",
+            "tenantId": "testterrafoncia01"
+          },
           "mediaType": "Phone"
         },
         ["..."]
@@ -340,6 +370,13 @@ By default, the API returns all journeys/transitions belonging to your customer 
 | `agents.group.id`              | Filter by agent group IDs                | `["group1", "group2"]`                                                   |
 | `agents.group.name`            | Filter by agent group names              | `["Team A", "Team B"]`                                                   |
 | `agents.name`                  | Filter by agent names                    | `["John Doe", "Jane Smith"]`                                             |
+| `agents.site.id`               | Filter by agent site ID                  | `["site-123"]`                                                           |
+| `agents.site.name`             | Filter by agent site name                | `["London Office"]`                                                      |
+| `agents.type`                  | Filter by agent type (`HUMAN` or `AI`)   | `["HUMAN"]`, `["AI"]`                                                    |
+| `contact.email`                | Filter by contact email                  | `["jane.doe@example.com"]`                                               |
+| `contact.name`                 | Filter by contact name                   | `["Jane Doe"]`                                                           |
+| `contact.phoneNumber`          | Filter by contact phone number           | `["+1234567890"]`                                                        |
+| `direction`                    | Filter by journey direction              | `["Inbound", "Outbound", "Internal"]`                                    |
 | `entryPoint.extension`         | Filter by entry point extension          | `["1001"]`                                                               |
 | `entryPoint.id`                | Filter by entry point ID                 | `["ep-789"]`                                                             |
 | `entryPoint.name`              | Filter by entry point name               | `["Main Support Line"]`                                                  |
@@ -354,7 +391,10 @@ By default, the API returns all journeys/transitions belonging to your customer 
 | `origin.id`                    | Filter by origin ID                      | `["user-789"]`                                                           |
 | `origin.name`                  | Filter by origin name                    | `["Jane Smith"]`                                                         |
 | `origin.phoneNumber`           | Filter by origin phone number            | `["+1234567890"]`                                                        |
+| `origin.site.id`               | Filter by origin site ID                 | `["site-123"]`                                                           |
+| `origin.site.name`             | Filter by origin site name               | `["Berlin Office"]`                                                      |
 | `origin.type`                  | Filter by origin type                    | `["user"]`                                                               |
+| `outcome`                      | Filter by journey outcome                | `["Handled", "Abandoned", "EndedInScript", "Other", "UnknownOutcome"]`   |
 | `outboundPhoneCodes.listName`  | Filter by outbound phone code list name  | `["JohnDoeInbound"]`                                                     |
 | `outboundPhoneCodes.name`      | Filter by outbound phone code name       | `["No queue"]`                                                           |
 | `outboundPhoneCodes.shortCode` | Filter by outbound phone code short code | `["Unt1"]`                                                               |
@@ -380,9 +420,15 @@ By default, the API returns all journeys/transitions belonging to your customer 
 | `pbxNames`                               | Filter by PBX names                     | `["pbx1"]`                |
 | `tenantIds`                              | Filter by tenant IDs                    | `["tenant1"]`             |
 | `transitions.agents.name`               | Filter by agent names                   | `["John Doe"]`            |
+| `transitions.agents.site.id`            | Filter by agent site ID                 | `["site-123"]`            |
+| `transitions.agents.site.name`          | Filter by agent site name               | `["Toronto Office"]`      |
+| `transitions.agents.type`               | Filter by agent type (`HUMAN` or `AI`)  | `["HUMAN"]`, `["AI"]`     |
 | `transitions.interactionId`             | Filter by interaction ID                | `["interaction-123"]`     |
 | `transitions.name`                      | Filter by transition name               | `["TALKING", "TRANSFER"]` |
 | `transitions.previousAgents.name`       | Filter by previous agents               | `["Marsha Mellow"]`       |
+| `transitions.previousAgents.site.id`    | Filter by previous agent site ID        | `["site-123"]`            |
+| `transitions.previousAgents.site.name`  | Filter by previous agent site name      | `["Toronto Office"]`      |
+| `transitions.previousAgents.type`       | Filter by previous agent type (`HUMAN` or `AI`) | `["HUMAN"]`, `["AI"]` |
 | `transitions.previousQueue.extension`   | Filter by previous queue extension      | `["2001"]`                |
 | `transitions.previousQueue.id`          | Filter by previous queue ID             | `["queue-123"]`           |
 | `transitions.previousQueue.name`        | Filter by previous queue name           | `["Support S2"]`          |
@@ -403,6 +449,13 @@ By default, the API returns all journeys/transitions belonging to your customer 
 | `transitions.ringGroup.name`           | Filter by ring group name               | `["Sales Ring Group"]`    |
 | `transitions.ringGroup.site.id`         | Filter by ring group site ID            | `["site-123"]`            |
 | `transitions.ringGroup.site.name`       | Filter by ring group site name          | `["Amsterdam Office"]`        |
+| `transitions.autoAttendant.id`          | Filter by auto attendant ID             | `["aa-123"]`              |
+| `transitions.autoAttendant.name`        | Filter by auto attendant name           | `["Main Auto Attendant"]` |
+| `transitions.autoAttendant.extension`   | Filter by auto attendant extension      | `["1040"]`                |
+| `transitions.autoAttendant.site.id`     | Filter by auto attendant site ID        | `["site-123"]`            |
+| `transitions.autoAttendant.site.name`   | Filter by auto attendant site name      | `["London Office"]`       |
+
+> The `autoAttendant` field is populated when the underlying event is a UC auto attendant: on FORWARD/TRANSFER it is the auto attendant the call is routed to, and on IN_SCRIPT it is the auto attendant whose script is running.
 
 ### Filter Format
 
@@ -540,6 +593,7 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 | `queues`                 | Queue\[]             | Array of queue objects used in the journey                                                                                                                                                                                                                                      |
 | `ringGroups`             | RingGroup\[]         | Array of ring group objects used in the journey                                                                                                                                                                                                                                 |
 | `scheduleHours`          | string\[]            | Distinct array of values for all the IVR `scheduleHours` nodes of the journey.                                                                                                                                                                                                  |
+| `schedules`              | Schedule\[]          | CC schedule nodes the journey was evaluated against. Always an array — empty when the journey was evaluated against no schedule node. See **Schedule Object** below.                                                                                                             |
 | `tenantIds`              | string\[]            | Tenant IDs                                                                                                                                                                                                                                                                      |
 | `wrapUpCodes`            | string\[]            | Wrap-up codes applied to the journey                                                                                                                                                                                                                                            |
 | `outboundPhoneCodes`     | OutboundPhoneCode\[] | Outbound phone codes - populated only for CC agent-initiated outbound interactions.                                                                                                                                      |
@@ -556,6 +610,12 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 }
 ```
 
+| Field       | Type   | Description                                                                                     |
+|-------------|--------|-------------------------------------------------------------------------------------------------|
+| `id`        | string | Unique identifier of the interaction                                                            |
+| `direction` | string | Direction of the interaction (e.g. `Inbound`, `Outbound`)                                       |
+| `type`      | string | Type of the interaction. Known values: `Contact Center`, `Unified Communication`, `AI Studio`.  |
+
 **Agent Object:**
 
 ```json
@@ -568,9 +628,25 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
   "group": {
     "id": "string",
     "name": "string"
-  }
+  },
+  "site": {
+    "id": "string",
+    "name": "string"
+  },
+  "type": "HUMAN"
 }
 ```
+
+| Field        | Type       | Description                                                                                                                       |
+|--------------|------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `id`         | string     | Unique identifier of the agent/user                                                                                               |
+| `name`       | string     | Display name of the agent/user                                                                                                    |
+| `email`      | string     | Email address of the agent/user. May be `null` if user data enrichment is unavailable or disabled.                                |
+| `loginId`    | string     | Login ID of the agent/user. May be `null` if user data enrichment is unavailable or disabled.                                     |
+| `department` | string     | Department of the agent/user. May be `null` if user data enrichment is unavailable or disabled.                                   |
+| `group`      | AgentGroup | Agent group the agent belongs to. May be `null` for UC users (no Contact Center group).                                           |
+| `site`       | Site       | Site (branch/office) the agent/user belongs to. May be `null` if the agent has no site assigned. See **Site Object** below.       |
+| `type`       | string     | Agent type. `HUMAN` for CCA/UA agents, `AI` for AI Studio bots.                                                                   |
 
 **Contact Object:**
 
@@ -628,9 +704,14 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 
 The Site object identifies the physical site (branch/office) associated with a Unified Communications service. The Site is exposed wherever those entities appear in the API:
 
-- on `queues[].site` and `ringGroups[].site` (journey response)
+- on `agents[].site` (journey response) — site of the agent/user that handled the journey
+- on `queues[].site` and `ringGroups[].site` (journey response) — site of the UC queue/ring group
+- on `origin.site` (journey response) — site of the UC user that initiated an outbound call
+- on `transitions[].agents[].site` and `transitions[].previousAgents[].site` (transition response) — site of the agent/user at each state change
 - on `transitions[].queue.site`, `transitions[].previousQueue.site`, `transitions[].ringGroup.site`, `transitions[].previousRingGroup.site` (transition response)
 - on `entryPoint.site` when the entry point's `type` is `call-queue`, `ring-group`, or `auto-attendant`
+
+In all locations the field is `null` when the underlying entity has no site assigned. Filters are available on every `*.site.id` and `*.site.name` path — see [Journey Filters](#journey-filters) and [Transition Filters](#transition-filters).
 
 ```json
 {
@@ -661,6 +742,62 @@ The outboundPhoneCodes field is populated only for CC agent-initiated outbound i
 | `name`      | Menu text of the outbound phone code in Contact Manager  |
 | `shortCode` | Short code identifier of the outbound phone code         |
 | `listName`  | Name of the outbound phone code list                     |
+
+**Schedule Object:**
+
+A schedule node a journey was evaluated against in a CC script. `schedules` is always an array on the journey — an empty array when the journey was evaluated against no schedule node.
+
+```json
+{
+  "id": 107,
+  "tag": "Ferie",
+  "tenantId": "cexpbx01",
+  "result": "open"
+}
+```
+
+| Field          | Type   | Description                                                                                      |
+|----------------|--------|--------------------------------------------------------------------------------------------------|
+| `id`           | int64  | Unique identifier of the schedule                                                                |
+| `tag`          | string | Tag of the schedule node (IVR object tag). May be `null`.                                        |
+| `tenantId`     | string | Tenant identifier the schedule belongs to                                                        |
+| `result`       | string | Customer-facing evaluation result: `"open"`, `"closed"`, or `"1"`–`"6"` (a selected choice path) |
+
+**Channel Object:**
+
+The Channel object identifies the communication channel associated with a transition. It is exposed on the Transitions endpoint only; the Journeys endpoint does not return a `channel` field. The whole object is `null` for transitions that have no associated channel (e.g. `STARTED`, `WAITING`, `FINISHED`). When present, all three fields are populated.
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "tenantId": "string"
+}
+```
+
+| Field      | Type   | Description                                       |
+|------------|--------|---------------------------------------------------|
+| `id`       | string | Unique identifier of the channel                  |
+| `name`     | string | Display name of the channel                       |
+| `tenantId` | string | Tenant identifier the channel belongs to         |
+
+**Script Object:**
+
+The Script object identifies a CC IVR script the interaction visited. It is exposed on the Transitions endpoint only and is populated on `IN_SCRIPT` transitions; on every other transition state the `scripts` array is empty (`[]`), never `null`.
+
+```json
+{
+  "id": 541,
+  "name": "example_script_name",
+  "tenantId": "cexpbx01"
+}
+```
+
+| Field      | Type    | Description                                       |
+|------------|---------|---------------------------------------------------|
+| `id`       | integer | Unique identifier of the script (int64)           |
+| `name`     | string  | Display name of the script                        |
+| `tenantId` | string  | Tenant identifier the script belongs to           |
 
 **entryPoint Object:**
 
@@ -723,9 +860,26 @@ The origin object is populated only for UC outbound journeys and identifies what
   "email": "string",
   "loginId": "string",
   "department": "string",
-  "pbx": "string"
+  "pbx": "string",
+  "site": {
+    "id": "string",
+    "name": "string"
+  }
 }
 ```
+
+| Field         | Type   | Description                                                                                                                                       |
+|---------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`        | string | Origin type. Currently only `user` (the UC user who initiated the outbound call).                                                                |
+| `id`          | string | Unique identifier of the origin user                                                                                                              |
+| `name`        | string | Display name of the origin user                                                                                                                   |
+| `phoneNumber` | string | Phone number associated with the origin user                                                                                                      |
+| `extension`   | string | Extension associated with the origin user                                                                                                         |
+| `email`       | string | Email address of the origin user. May be `null` if user data enrichment is unavailable or disabled.                                              |
+| `loginId`     | string | Login ID of the origin user. May be `null` if user data enrichment is unavailable or disabled.                                                   |
+| `department`  | string | Department of the origin user. May be `null` if user data enrichment is unavailable or disabled.                                                  |
+| `pbx`         | string | PBX identifier                                                                                                                                    |
+| `site`        | Site   | Site (branch/office) the origin user belongs to. May be `null` if the user has no site assigned. See **Site Object** above.                      |
 
 ### Transition Data Model
 
@@ -746,6 +900,8 @@ the exact journey path. Journeys are identified with the *journeyId*. Each trans
 | `ringGroup`         | RingGroup    | Ring group object (if applicable)                          |
 | `duration`          | long         | Duration of this specific transition state in milliseconds |
 | `externalNumber`    | string       | External number (if applicable)                            |
+| `channel`           | Channel      | Communication channel associated with the transition. `null` when the transition has no associated channel. See **Channel Object** below. |
+| `scripts`           | Script\[]    | Ordered list of CC IVR scripts visited by the interaction. Populated only on `IN_SCRIPT` transitions. See **Script Object** below. |
 | `mediaType`         | string       | Media type (phone, chat, email, etc.)                      |
 
 ### Transition States
