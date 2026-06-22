@@ -250,6 +250,30 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "interactions-insight",
+      items: [
+        {
+          type: "doc",
+          id: "analytics/reference/get-interactions-insight",
+          label: "Get interaction insights",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "transcript-summaries",
+      items: [
+        {
+          type: "doc",
+          id: "analytics/reference/get-transcript-summaries",
+          label: "Get transcript summaries",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Users",
       items: [
         {

@@ -72,6 +72,12 @@ const sidebarConfig = [
   },
   {
     type: 'category',
+    label: 'Customer 360',
+    collapsed: true,
+    items: ['analytics/docs/customer-360'],
+  },
+  {
+    type: 'category',
     label: 'CIDP',
     collapsed: true,
     items: ['analytics/docs/end-to-end-journey-api'],

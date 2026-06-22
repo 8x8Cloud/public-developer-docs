@@ -1,0 +1,139 @@
+---
+id: customer-360-api
+title: "Customer 360 API"
+description: "The Customer 360 API provides unified access to customer interaction history and insights across all 8x8 contact center channels."
+sidebar_label: Introduction
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+---
+
+import ApiLogo from "@theme/ApiLogo";
+import Heading from "@theme/Heading";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+import Export from "@theme/ApiExplorer/Export";
+
+<span
+  className={"theme-doc-version-badge badge badge--secondary"}
+  children={"Version: 1"}
+>
+</span>
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Customer 360 API"}
+>
+</Heading>
+
+
+
+The Customer 360 API provides unified access to customer interaction history and insights across all 8x8 contact center channels.
+
+Given a customer identity (email, phone number, contact ID, or account ID), the API returns a list of interactions along with aggregated sentiment and topic insights.
+
+## Authentication
+
+All endpoints require an 8x8 API key obtained from the 8x8 Admin Console. Pass the key in the `x-api-key` request header:
+
+```
+x-api-key: <your-api-key>
+```
+
+Refer to [How to get API Keys](/analytics/docs/how-to-get-api-keys) for instructions on creating an API key.
+
+## Regions
+
+The API is available in four regions. Use the base URL corresponding to the region where your tenant is provisioned:
+
+| Region | Base URL |
+|---|---|
+| Phoenix (US) | `https://api.8x8.com/cidp-customer-360/us` |
+| London (UK) | `https://api.8x8.com/cidp-customer-360/uk` |
+| Toronto (Canada) | `https://api.8x8.com/cidp-customer-360/ca` |
+| Sydney (Australia) | `https://api.8x8.com/cidp-customer-360/ap` |
+
+## Search Strategies
+
+The API supports four mutually exclusive search strategies. You must provide exactly one identity field per request:
+
+| Strategy | Required | Optional | Forbidden |
+|---|---|---|---|
+| Contact ID | `contactId`, `crmId` | — | — |
+| Account ID | `accountId` | `crmId` | — |
+| Email | `email` | — | `crmId` |
+| Phone Number | `phoneNumber` | — | `crmId` |
+
+Only the native CRM is supported. Set `crmId` to `native`.
+
+## Time Range
+
+If `startTime` and `endTime` are omitted, a default window of 1 year ending at the current time is applied. Times must be in ISO-8601 format with timezone (e.g. `2025-08-15T10:30:00-05:00`).
+
+## Response Fields
+
+### interactions
+A list of individual interactions matching the search criteria. Each interaction includes:
+- `interactionId` — Unique identifier for the interaction
+- `mediaType` — Channel type: `PHONE`, `EMAIL`, `CHAT`, or `VOICEMAIL`
+- `direction` — `INBOUND` or `OUTBOUND`
+- `productType` — 8x8 product that handled the interaction: `CC` (Contact Center), `UC` (Unified Communications), or `ENGAGE`
+- `startedAt` / `endedAt` — Unix epoch milliseconds
+- `sentiment` — Overall sentiment: `POSITIVE`, `NEUTRAL`, or `NEGATIVE`
+- `topics` — List of topics detected in the interaction, each with a name and match count
+- `wrapUpCodes` — Agent wrap-up codes applied at the end of the interaction
+- `queueName` — Name of the queue that handled the interaction
+- `outcomeLabel` — Outcome label assigned to the interaction
+- `interactionLabels` — Labels applied to the interaction
+
+### insights
+Aggregated analysis across all returned interactions:
+- `aggregatedSentiments` — Overall customer, agent, and combined sentiment across all interactions
+- `aggregatedTopics` — Topic frequency breakdown showing which topics appeared most often and in what percentage of interactions
+
+
+
+<div
+  style={{"marginBottom":"2rem"}}
+>
+  <Heading
+    id={"authentication"}
+    as={"h2"}
+    className={"openapi-tabs__heading"}
+    children={"Authentication"}
+  >
+  </Heading><SchemaTabs
+    className={"openapi-tabs__security-schemes"}
+  >
+    <TabItem
+      label={"API Key: ApiKeyAuth"}
+      value={"ApiKeyAuth"}
+    >
+      
+      
+      8x8 API key obtained from the 8x8 Admin Console.
+      
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                Security Scheme Type:
+              </th><td>
+                apiKey
+              </td>
+            </tr><tr>
+              <th>
+                Header parameter name:
+              </th><td>
+                x-api-key
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem>
+  </SchemaTabs>
+</div>
+      

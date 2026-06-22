@@ -260,6 +260,15 @@ const sidebarConfig = [
   },
   {
     type: 'category',
+    label: 'Customer 360 API',
+    collapsed: true,
+    items: [
+      'analytics/reference/get-interactions-insight',
+      'analytics/reference/get-transcript-summaries',
+    ],
+  },
+  {
+    type: 'category',
     label: 'Work Analytics',
     collapsed: true,
     items: [
