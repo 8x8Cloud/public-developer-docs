@@ -1008,3 +1008,27 @@ html {
     width: auto;
   }
 }
+
+.screenshot {
+  display: block;
+  max-width: 100%;
+  margin: 24px auto;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 32px rgba(0, 0, 0, 0.10);
+}
+
+[data-theme='dark'] .screenshot {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Subtle dropshadow on 8x8 Resolve documentation screenshots (scoped to the
+   resolve docs instance so other product docs are unaffected). */
+html[class*="docs-doc-id-resolve"] .markdown img {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 6px 18px rgba(0, 0, 0, 0.10);
+}
+html[data-theme='dark'][class*="docs-doc-id-resolve"] .markdown img {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 6px 18px rgba(0, 0, 0, 0.5);
+}

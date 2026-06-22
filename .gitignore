@@ -35,3 +35,8 @@ config-changes-justification.txt
 scripts/.partner-events-manifest.json
 pulsar-images/
 private/
+
+# /resolve-docs-updater skill — local screenshot-generation scratch (not for commit/publish)
+/static/
+docusaurus/static/resolve-pages/
+.DS_Store
