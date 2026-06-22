@@ -810,6 +810,14 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Whiteboard](https://developer.8x8.com/jaas/docs/whiteboard): **JaaS (Jitsi as a Service)** has an integrated **whiteboard** feature, providing users with a collaborative, visual workspace. This tool is design...
 - [8x8 API License Agreement](https://developer.8x8.com/license): :::info Official License Agreement
 - [8x8 Software Development Kit License Agreement](https://developer.8x8.com/page/sdk-license): :::info Official License Agreement
+- [Analytics](https://developer.8x8.com/resolve/docs/analytics): ← [Back to Overview](./overview.md)
+- [Contacts](https://developer.8x8.com/resolve/docs/contacts): ← [Back to Overview](./overview.md)
+- [Dashboard](https://developer.8x8.com/resolve/docs/dashboard): ← [Back to Overview](./overview.md)
+- [Incidents](https://developer.8x8.com/resolve/docs/incidents): ← [Back to Overview](./overview.md)
+- [8x8 Resolve](https://developer.8x8.com/resolve/docs/overview): 8x8 Resolve is a critical communications platform that helps your organisation reach the right people instantly during an incident. Send targeted a...
+- [Scenarios](https://developer.8x8.com/resolve/docs/scenarios): ← [Back to Overview](./overview.md)
+- [Settings](https://developer.8x8.com/resolve/docs/settings): ← [Back to Overview](./overview.md)
+- [Message Templates](https://developer.8x8.com/resolve/docs/templates): ← [Back to Overview](./overview.md)
 - [`chat-init-v1` Event](https://developer.8x8.com/tech-partner/docs/events/aw-chat-init-v1): The `chat-init-v1` event is triggered when a chat interaction is successfully initialized, providing the initial message history.
 - [chat-message-received-v1](https://developer.8x8.com/tech-partner/docs/events/aw-chat-message-received-v1): Event to announce when a chat message has been received.
 - [`chat-message-sent-v1` Event](https://developer.8x8.com/tech-partner/docs/events/aw-chat-message-sent-v1): The `chat-message-sent-v1` event is triggered when the agent sends a chat message during an active chat interaction.

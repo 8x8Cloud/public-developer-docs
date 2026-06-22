@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-resolve/docs/contacts" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">Contacts | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/resolve/docs/contacts"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Contacts | 8x8 Developer Portal"><meta data-rh="true" name="description" content="← Back to Overview"><meta data-rh="true" property="og:description" content="← Back to Overview"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/resolve/docs/contacts"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/resolve/docs/contacts" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/resolve/docs/contacts" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.89b7d9b5.css">
+<script src="/assets/js/runtime~main.5948fdc5.js" defer="defer"></script>
+<script src="/assets/js/main.d9e364b3.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a class="navbar__item navbar__link" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a class="navbar__item navbar__link" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a><a class="navbar__item navbar__link" href="/administration">Administration</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>Contacts</h1></header>
+<p>← <a href="/resolve/docs/overview">Back to Overview</a></p>
+<p>Your contacts are the people who can receive incidents. You can manage them manually, import them from a CSV file, or keep them in sync automatically by <a href="#integrations">connecting an HR system</a>.</p>
+<p><img decoding="async" loading="lazy" alt="8x8 Resolve Contacts" src="/assets/images/contacts-a90b97338d7ab5348bbcfd01b995f857.png" width="1920" height="1080" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="view-your-contacts">View your contacts<a href="#view-your-contacts" class="hash-link" aria-label="Direct link to View your contacts" title="Direct link to View your contacts" translate="no">​</a></h2>
+<p>Navigate to <strong>Contacts</strong> from the left menu. The <strong>All Contacts</strong> tab opens by default and shows your full contact list; the <strong>Integrations</strong> tab is where you <a href="#integrations">connect an HR system</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Column</th><th>Description</th></tr></thead><tbody><tr><td><strong>Name</strong></td><td>The contact&#x27;s full name.</td></tr><tr><td><strong>Email</strong></td><td>Their email address.</td></tr><tr><td><strong>Mobile Phone</strong></td><td>Their mobile number. Shows &quot;–&quot; if not set.</td></tr><tr><td><strong>Source</strong></td><td>Where the contact was imported from (e.g., 8x8 Work, Google Workspace).</td></tr><tr><td><strong>Actions</strong></td><td>Click the eye icon to view full contact details.</td></tr></tbody></table>
+<p>The total contact count is shown above the table and updates when you apply filters.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="search-and-filter">Search and filter<a href="#search-and-filter" class="hash-link" aria-label="Direct link to Search and filter" title="Direct link to Search and filter" translate="no">​</a></h2>
+<ul>
+<li><strong>Search</strong> — Enter a name or email address to filter the list as you type.</li>
+<li><strong>Department</strong> — Filter by the contact&#x27;s department.</li>
+<li><strong>Role</strong> — Filter by the contact&#x27;s role.</li>
+<li><strong>Location</strong> — Filter by the contact&#x27;s office or site.</li>
+</ul>
+<p>Select your filter values and click <strong>Apply</strong>. Click <strong>Reset</strong> to clear all filters and show the full list again.</p>
+<blockquote>
+<p>📘 <strong>Tip</strong></p>
+<p>You can combine the search field with filters. For example, search for &quot;John&quot; and filter by Department: &quot;Engineering&quot; to find a specific contact quickly.</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="add-a-contact-manually">Add a contact manually<a href="#add-a-contact-manually" class="hash-link" aria-label="Direct link to Add a contact manually" title="Direct link to Add a contact manually" translate="no">​</a></h2>
+<ol>
+<li>Click <strong>Add Contact</strong>.</li>
+<li>Fill in the required fields.</li>
+<li>Click <strong>Save</strong>. The contact appears in the list immediately.</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="upload-contacts-from-a-csv">Upload contacts from a CSV<a href="#upload-contacts-from-a-csv" class="hash-link" aria-label="Direct link to Upload contacts from a CSV" title="Direct link to Upload contacts from a CSV" translate="no">​</a></h2>
+<ol>
+<li>Click the dropdown arrow next to <strong>Add Contact</strong>.</li>
+<li>Select <strong>Upload contacts</strong>.</li>
+<li>Choose your CSV file and start the upload. A progress bar shows you how the import is going.</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="view-contact-details">View contact details<a href="#view-contact-details" class="hash-link" aria-label="Direct link to View contact details" title="Direct link to View contact details" translate="no">​</a></h2>
+<p>Click the <strong>View</strong> (eye) icon on a row — or click anywhere on the contact&#x27;s row — to open that contact&#x27;s details page. From there you can review and <strong>edit the contact&#x27;s properties</strong> (name, email, phone, department, location, and group).</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="integrations">Integrations<a href="#integrations" class="hash-link" aria-label="Direct link to Integrations" title="Direct link to Integrations" translate="no">​</a></h2>
+<p>Connect your HR system to 8x8 Resolve from the <strong>Integrations</strong> tab and your contacts stay in sync automatically. When an employee&#x27;s department, location, or phone number changes in your HR system, Resolve picks it up — so your incident targeting is always accurate.</p>
+<p><img decoding="async" loading="lazy" alt="8x8 Resolve Contact Integrations" src="/assets/images/contact-integrations-bc8fed45c0b8a6aa43a374266095afae.png" width="1920" height="1080" class="img_ev3q"></p>
+<p>Each sync maps the contact&#x27;s <strong>Name, Email, Phone, Department, Location, and Group</strong>. Connections use secure API authentication (OAuth 2.0), data is isolated per tenant so it&#x27;s never shared between 8x8 customers, and failed syncs are logged and retried automatically.</p>
+<p>Supported sources:</p>
+<ul>
+<li><strong>8x8 Contacts App</strong> — contacts already held in your 8x8 account.</li>
+<li><a href="#microsoft-entra-id">Microsoft Entra ID</a> (Azure Active Directory)</li>
+<li><a href="#google-workspace">Google Workspace</a></li>
+<li><a href="#okta">Okta</a></li>
+<li><a href="#workday">Workday</a></li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="connect-an-integration">Connect an integration<a href="#connect-an-integration" class="hash-link" aria-label="Direct link to Connect an integration" title="Direct link to Connect an integration" translate="no">​</a></h3>
+<ol>
+<li>Navigate to <strong>Contacts</strong> → <strong>Integrations</strong> tab.</li>
+<li>Find the card for your HR system and click <strong>Connect</strong>.</li>
+<li>Enter the required credentials for your system (see the sections below).</li>
+<li>Click <strong>Test Connection</strong> to verify everything is working.</li>
+<li>Click <strong>Connect</strong> to save. Your integration appears in the connected platforms list.</li>
+</ol>
+<p>Once connected, click <strong>Manage</strong> on the integration card to view sync history or trigger a manual sync.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="target-contact-groups">Target contact groups<a href="#target-contact-groups" class="hash-link" aria-label="Direct link to Target contact groups" title="Direct link to Target contact groups" translate="no">​</a></h3>
+<p>Employee groups from your source system (for example, &quot;Engineering Team&quot; or &quot;US-Based Employees&quot;) sync across automatically and appear as named groups in the <strong>Recipients</strong> selector when you create an <a href="/resolve/docs/incidents">incident</a> or <a href="/resolve/docs/scenarios">scenario</a>. There&#x27;s no manual setup — when someone changes department or location in the source system, the matching group updates automatically, so your targeting stays accurate.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sync-history">Sync history<a href="#sync-history" class="hash-link" aria-label="Direct link to Sync history" title="Direct link to Sync history" translate="no">​</a></h3>
+<p>Every time Resolve syncs with your HR system, it logs the result here:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Column</th><th>Description</th></tr></thead><tbody><tr><td><strong>Job ID</strong></td><td>Unique identifier for the sync run.</td></tr><tr><td><strong>Status</strong></td><td>Whether the job succeeded or failed.</td></tr><tr><td><strong>Total Contacts</strong></td><td>Number of contacts found in the source.</td></tr><tr><td><strong>Synced</strong></td><td>Contacts successfully imported or updated.</td></tr><tr><td><strong>Started At</strong></td><td>When the job began.</td></tr><tr><td><strong>Finished</strong></td><td>When the job completed.</td></tr><tr><td><strong>Expand (∨ / ∧)</strong></td><td>Click to see a per-job breakdown: <strong>Added</strong>, <strong>Updated</strong>, and <strong>Deleted</strong> counts. An <strong>Export .csv</strong> button downloads the full details of that sync job.</td></tr></tbody></table>
+<p>Click <strong>Sync now</strong> in the integration panel to trigger an immediate sync outside the daily schedule.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="remove-an-integration">Remove an integration<a href="#remove-an-integration" class="hash-link" aria-label="Direct link to Remove an integration" title="Direct link to Remove an integration" translate="no">​</a></h3>
+<p>In the <strong>Manage</strong> panel, click <strong>Remove integration</strong>. A confirmation dialog shows how many contacts will be deleted. Confirm to remove the integration and all contacts it imported.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="google-workspace">Google Workspace<a href="#google-workspace" class="hash-link" aria-label="Direct link to Google Workspace" title="Direct link to Google Workspace" translate="no">​</a></h3>
+<p><strong>You&#x27;ll need:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Credential</th><th>Description</th></tr></thead><tbody><tr><td><strong>Credentials JSON</strong></td><td>A JSON credentials file for a Google Service Account with delegated Domain Wide Authority.</td></tr><tr><td><strong>Email Address</strong></td><td>The email address of the workspace admin who created the service account.</td></tr></tbody></table>
+<p><strong>How to set it up:</strong></p>
+<ol>
+<li>Follow Google&#x27;s <a href="https://developers.google.com/admin-sdk/directory/v1/guides/delegation" target="_blank" rel="noopener noreferrer">Domain Wide Delegation of Authority</a> guide to create a service account. You&#x27;ll need a Google Workspace administrator to do this.</li>
+<li>Grant the service account the following OAuth scopes:
+<ul>
+<li><code>https://www.googleapis.com/auth/admin.directory.user.readonly</code></li>
+<li><code>https://www.googleapis.com/auth/admin.directory.group.readonly</code></li>
+<li><code>https://www.googleapis.com/auth/admin.directory.orgunit.readonly</code></li>
+</ul>
+</li>
+<li>Download the JSON credentials file.</li>
+<li>Paste the JSON and your admin email address into the Resolve integration form.</li>
+</ol>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="microsoft-entra-id">Microsoft Entra ID<a href="#microsoft-entra-id" class="hash-link" aria-label="Direct link to Microsoft Entra ID" title="Direct link to Microsoft Entra ID" translate="no">​</a></h3>
+<p><strong>You&#x27;ll need:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Credential</th><th>Description</th></tr></thead><tbody><tr><td><strong>Tenant ID</strong></td><td>The tenant ID of the account that will read your user directory.</td></tr><tr><td><strong>Client ID</strong></td><td>The client ID of your registered application.</td></tr><tr><td><strong>Client Secret</strong></td><td>The client secret of your registered application.</td></tr></tbody></table>
+<p><strong>How to set it up:</strong></p>
+<ol>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app" target="_blank" rel="noopener noreferrer">Register an application</a> in Microsoft Entra ID.</p>
+</li>
+<li>
+<p>Create a client secret under <strong>Certificates and Secrets</strong>.</p>
+</li>
+<li>
+<p>Grant the following API permissions under your registered app (all Application type):</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Permission</th><th>Type</th><th>Requirement</th></tr></thead><tbody><tr><td><code>User.Read.All</code></td><td>Application</td><td>Admin approval required</td></tr><tr><td><code>Group.Read.All</code></td><td>Application</td><td>Admin approval required</td></tr><tr><td><code>Directory.Read.All</code></td><td>Application</td><td>Admin approval required</td></tr></tbody></table>
+</li>
+<li>
+<p>Copy the Tenant ID, Client ID, and Client Secret into the Resolve integration form.</p>
+</li>
+</ol>
+<blockquote>
+<p>🚧 <strong>Client secret expiry</strong></p>
+<p>Client secrets expire based on the duration you set when creating them. Update the secret in Resolve before it expires — expired credentials will cause sync jobs to fail.</p>
+</blockquote>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="okta">Okta<a href="#okta" class="hash-link" aria-label="Direct link to Okta" title="Direct link to Okta" translate="no">​</a></h3>
+<p><strong>You&#x27;ll need:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Credential</th><th>Description</th></tr></thead><tbody><tr><td><strong>Domain</strong></td><td>Your Okta organisation domain — the <code>MY_DOMAIN</code> part of <code>https://MY_DOMAIN.okta.com/</code>.</td></tr><tr><td><strong>API Token</strong></td><td>A personal API token with at least the Read-Only Administrator role.</td></tr></tbody></table>
+<p><strong>How to set it up:</strong></p>
+<ol>
+<li>Follow Okta&#x27;s guide to <a href="https://help.okta.com/en-us/content/topics/security/api.htm?cshid=ext-create-api-token#create-okta-api-token" target="_blank" rel="noopener noreferrer">create a personal API token</a>.</li>
+<li>Assign the token a <strong>Read-Only Administrator</strong> role at minimum.</li>
+<li>Enter your domain and API token into the Resolve integration form.</li>
+</ol>
+<blockquote>
+<p>🚧 <strong>API token expiry</strong></p>
+<p>Depending on your Okta configuration, API tokens may expire. Update the token in Resolve before it expires to avoid sync failures.</p>
+</blockquote>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="workday">Workday<a href="#workday" class="hash-link" aria-label="Direct link to Workday" title="Direct link to Workday" translate="no">​</a></h3>
+<p><strong>You&#x27;ll need:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Credential</th><th>Description</th></tr></thead><tbody><tr><td><strong>Report URL</strong></td><td>The URL to your Workday RaaS (Report as a Service) report, in JSON format.</td></tr><tr><td><strong>Username</strong></td><td>Username of the account with access to the report.</td></tr><tr><td><strong>Password</strong></td><td>Password of that account.</td></tr></tbody></table>
+<p><strong>How to set it up:</strong></p>
+<ol>
+<li>Create a Custom Report in Workday that outputs employee contact data.</li>
+<li>Get the report URL in JSON format — it will look something like:
+<code>https://wd5-impl-services1.workday.com/ccx/service/customreport2/your_org/report_name?format=json</code></li>
+<li>Enter the report URL, username, and password into the Resolve integration form.</li>
+</ol>
+<p><strong>Required report format:</strong></p>
+<p>Your Workday report must return data in this exact structure. Key names must match exactly — including capitalisation.</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token property" style="color:#36acaa">&quot;Report_Entry&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;Contact_Number&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;+1 411 111 1111&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;Department&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Sales&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;Email_Address&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;johnsmith@email.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;First_Name&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;John&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;Job_Title&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Product Manager&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token property" style="color:#36acaa">&quot;Last_Name&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Smith&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="integration-security">Integration security<a href="#integration-security" class="hash-link" aria-label="Direct link to Integration security" title="Direct link to Integration security" translate="no">​</a></h3>
+<blockquote>
+<p>📘 <strong>Recommended: use a dedicated read-only account</strong></p>
+<p>For each integration, we recommend creating a dedicated service account with read-only access. This limits the blast radius if credentials are ever compromised.</p>
+<p>All credentials you enter are stored encrypted. Sensitive values are never returned in plain text — even users with admin access cannot view them after they&#x27;ve been saved.</p>
+</blockquote></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#view-your-contacts" class="table-of-contents__link toc-highlight">View your contacts</a></li><li><a href="#search-and-filter" class="table-of-contents__link toc-highlight">Search and filter</a></li><li><a href="#add-a-contact-manually" class="table-of-contents__link toc-highlight">Add a contact manually</a></li><li><a href="#upload-contacts-from-a-csv" class="table-of-contents__link toc-highlight">Upload contacts from a CSV</a></li><li><a href="#view-contact-details" class="table-of-contents__link toc-highlight">View contact details</a></li><li><a href="#integrations" class="table-of-contents__link toc-highlight">Integrations</a><ul><li><a href="#connect-an-integration" class="table-of-contents__link toc-highlight">Connect an integration</a></li><li><a href="#target-contact-groups" class="table-of-contents__link toc-highlight">Target contact groups</a></li><li><a href="#sync-history" class="table-of-contents__link toc-highlight">Sync history</a></li><li><a href="#remove-an-integration" class="table-of-contents__link toc-highlight">Remove an integration</a></li><li><a href="#google-workspace" class="table-of-contents__link toc-highlight">Google Workspace</a></li><li><a href="#microsoft-entra-id" class="table-of-contents__link toc-highlight">Microsoft Entra ID</a></li><li><a href="#okta" class="table-of-contents__link toc-highlight">Okta</a></li><li><a href="#workday" class="table-of-contents__link toc-highlight">Workday</a></li><li><a href="#integration-security" class="table-of-contents__link toc-highlight">Integration security</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>
