@@ -188,6 +188,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [CC Realtime Statistics](https://developer.8x8.com/analytics/docs/cc-realtime-statistics): > 📘 **You will need a working API key to begin**
 - [Cloud Storage Service Bulk Download](https://developer.8x8.com/analytics/docs/cloud-storage-service-bulk-download): Customers looking to download content in bulk from [Cloud Storage Service](/analytics/reference/searchobject) can follow the this multi step proces...
 - [Cloud Storage Service Objects](https://developer.8x8.com/analytics/docs/cloud-storage-service-objects): Filtering by the date when objects where created or when objects were last updated can be done by using *createdTime* or *updatedTime* in the *filt...
+- [Customer 360](https://developer.8x8.com/analytics/docs/customer-360): The Customer 360 API provides unified access to a customer's interaction history and insights across all 8x8 contact center channels.
 - [Post Call Survey](https://developer.8x8.com/analytics/docs/customer-experience-post-call-survey): > 📘 **Post-call survey reporting has moved under the umbrella of Contact Center reporting.**
 - [[PILOT] End-to-End Journey API](https://developer.8x8.com/analytics/docs/end-to-end-journey-api): The Journey API provides a consolidated view of customer interactions belonging to the same journey. These interactions may happen on one or multip...
 - [How to get API Keys](https://developer.8x8.com/analytics/docs/how-to-get-api-keys): There are a number of different Authentication Methods across the suite of XCaaS APIs today.
@@ -233,6 +234,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Removes tasks from a download request.](https://developer.8x8.com/analytics/reference/cleardownloads.api): This method clears your task queue for bulk download requests.
 - [Cloud Storage Service Public API](https://developer.8x8.com/analytics/reference/cloud-storage-service-public-api.info): 8x8’s Cloud Storage Service (CSS) offers you a single point of access for Virtual Office PBX telephone, Virtual Contact Center call recordings, Vir...
 - [Company Summary](https://developer.8x8.com/analytics/reference/company-summary.api): With the Analytics for 8x8 Work Company Summary (/compsum) endpoint you can obtain summary information about call activity that occurred within you...
+- [Customer 360 API](https://developer.8x8.com/analytics/reference/customer-360-api.info): The Customer 360 API provides unified access to customer interaction history and insights across all 8x8 contact center channels.
 - [Deletes a single interaction.](https://developer.8x8.com/analytics/reference/delete-interaction.api): Removes the interaction and all associated metadata. This action cannot be undone.
 - [Deletes custom field data](https://developer.8x8.com/analytics/reference/deletes-the-custom-field.api): Updates or removes the custom field contained data for user customizable fields. Only the custom fields **1** to **15** are editable.
 - [Get Call Details](https://developer.8x8.com/analytics/reference/detailed.api): This endpoint returns the journey of a single interaction in the specified timeframe.
@@ -249,12 +251,14 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Get Agent Activity Metrics](https://developer.8x8.com/analytics/reference/get-agent-activity.api): This endpoint returns the agent activity metrics for the selected pbx, grouped by agent. The response can be further filtered by a list of queues, ...
 - [Get Agent Activity Metrics per Queues](https://developer.8x8.com/analytics/reference/get-agent-queue-activity.api): This endpoint returns the agent activity metrics for the selected pbx, grouped by queue and agent. The response can be further filtered by a list o...
 - [Get audit records.](https://developer.8x8.com/analytics/reference/get-audit-records.api): Retrieve audit records in JSON format
+- [Get interaction insights](https://developer.8x8.com/analytics/reference/get-interactions-insight.api): Retrieves interaction insights for a tenant, including interactions list and speech analytics.
 - [Returns the list of agents for the given pbx.](https://developer.8x8.com/analytics/reference/get-pbx-agents.api): Returns the list of agents for the given pbx.
 - [Returns the list of queues for the given pbx.](https://developer.8x8.com/analytics/reference/get-pbx-queues.api): Returns the list of queues for the given pbx.
 - [Returns the list of queues for the given pbx and site.](https://developer.8x8.com/analytics/reference/get-pbx-site-queues.api): Returns the list of queues for the given pbx and site.
 - [Returns the list of sites of a pbx](https://developer.8x8.com/analytics/reference/get-pbx-sites.api): Returns a list of sites of a pbx.
 - [Returns all pbxes of a customer](https://developer.8x8.com/analytics/reference/get-pbxes.api): This endpoint returns all the PBXes available for a customer
 - [Get Call Queue Metrics](https://developer.8x8.com/analytics/reference/get-queue-metrics.api): This endpoint returns the call queue metrics, for the selected PBX. The response can be further filtered by a list of queues, sites. If no date ran...
+- [Get transcript summaries](https://developer.8x8.com/analytics/reference/get-transcript-summaries.api): Retrieves transcript summaries for one or more interaction IDs.
 - [Retrieve realtime metrics for all agents in multiple queues.](https://developer.8x8.com/analytics/reference/getagentsinqueue.api): Retrieve realtime metrics for all agents in multiple queues.
 - [Returns the content of a specified bucket.](https://developer.8x8.com/analytics/reference/getbucket.api): This method returns all of the contents contained within a specific bucket.
 - [Find an object by it's ID.](https://developer.8x8.com/analytics/reference/getobject.api): Use this method to retrieve an object by its ID.
