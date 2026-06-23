@@ -126,7 +126,27 @@
                 },
                 "properties": {
                   "user": {
-                    "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1lon/post/requestBody/content/application~1json/schema/properties/user"
+                    "type": "object",
+                    "description": "User information\n",
+                    "title": "User",
+                    "properties": {
+                      "msisdn": {
+                        "type": "string",
+                        "description": "Mobile phone number (MSISDN) to send the message to. International phone number format with '+ sign prefered. In addition we support national (local) phone numbers, please set `country` field to use it.",
+                        "example": "+6500000000"
+                      },
+                      "country": {
+                        "type": "string",
+                        "maxLength": 2,
+                        "description": "Default country code (like 'sg', 'uk') for  national phone numbers format. You don't need it if `msisdn` in E.164 format (with '+' sign at the beginning)",
+                        "example": "SG"
+                      },
+                      "lineUserId": {
+                        "type": "string",
+                        "description": "LINE user ID of the recipient. Use this instead of `msisdn` when sending messages to a LINE user via the Line Official Account channel.",
+                        "example": "Ua12b345678c1de0fg1a1234567891011"
+                      }
+                    }
                   },
                   "clientMessageId": {
                     "type": "string",
@@ -148,7 +168,7 @@
                       "carousel",
                       "richCard"
                     ],
-                    "description": "Messaging Apps message content type.\nAllowed values are \"text\", \"image\", \"audio\", \"video\", \"file\", \"location\", \"interactive\", \"template\", \"carousel\" and \"richCard\". \nIf the type is \"text\", then content object should contain a \"text\" parameter. \nIf the type is \"image\", \"audio\", \"video\" or \"file\", then content object should contain a \"url\" parameter and all other parameters can be used.\nIf the type is \"location\", then content object should contain a \"latitude\", \"longitude\" parameters.\nIf the type is \"interactive\", then content object should contain an \"interactive\" parameter\nIf the type is \"template\", then content object should contain a \"template\" parameter.\nIf the type is \"carousel\", then content object should contain a \"carousel\" parameter. Supported for RCS channel only.\nIf the type is \"richCard\", then content object should contain a \"richCard\" parameter. Supported for RCS channel only.",
+                    "description": "Messaging Apps message content type.\nAllowed values are \"text\", \"image\", \"audio\", \"video\", \"file\", \"location\", \"interactive\", \"template\", \"carousel\" and \"richCard\".\n- If the type is \"text\", then content object should contain a \"text\" parameter.\n- If the type is \"image\", \"audio\", \"video\" or \"file\", then content object should contain a \"url\" parameter and all other parameters can be used.\n- If the type is \"location\", then content object should contain a \"latitude\", \"longitude\" parameters.\n- If the type is \"interactive\", then content object should contain an \"interactive\" parameter.\n- If the type is \"template\", then content object should contain a \"template\" parameter.\n- If the type is \"carousel\", then content object should contain a \"carousel\" parameter. Supported for RCS channel only.\n- If the type is \"richCard\", then content object should contain a \"richCard\" parameter. Supported for RCS channel only.",
                     "example": "Text",
                     "title": "Content type"
                   },
@@ -550,12 +570,34 @@
                             "description": "Duration of video (in seconds)"
                           }
                         },
+                        "title": "Video data"
+                      },
+                      "image": {
+                        "type": "object",
+                        "description": "Image object. Used for Line channel to specify thumbnail for image messages.",
+                        "properties": {
+                          "thumbnail": {
+                            "type": "string",
+                            "example": "https://www.example.com/thumbnail.jpg",
+                            "description": "URL of the thumbnail preview image"
+                          }
+                        },
+                        "title": "Image data"
+                      },
+                      "audio": {
+                        "type": "object",
+                        "description": "Audio object. Used for Line channel to specify duration for audio messages.",
+                        "properties": {
+                          "duration": {
+                            "type": "number",
+                            "example": 300,
+                            "description": "Duration of audio in seconds"
+                          }
+                        },
                         "required": [
-                          "thumbnail",
-                          "filesize",
                           "duration"
                         ],
-                        "title": "Video data"
+                        "title": "Audio data"
                       },
                       "template": {
                         "type": "object",
@@ -2447,6 +2489,80 @@
                         ]
                       },
                       "suggestions": []
+                    }
+                  }
+                },
+                "lineTextMessage": {
+                  "summary": "Line Message - Text",
+                  "value": {
+                    "user": {
+                      "lineUserId": "Ua12b345678c1de0fg1a1234567891011"
+                    },
+                    "type": "Text",
+                    "content": {
+                      "text": "Hello from 8x8 Messaging API"
+                    }
+                  }
+                },
+                "lineImageMessage": {
+                  "summary": "Line Message - Image",
+                  "value": {
+                    "user": {
+                      "lineUserId": "Ua12b345678c1de0fg1a1234567891011"
+                    },
+                    "type": "Image",
+                    "content": {
+                      "url": "https://samplelib.com/png/sample-boat-400x300.png",
+                      "image": {
+                        "thumbnail": "https://samplelib.com/jpeg/sample-clouds-400x300.jpg"
+                      }
+                    }
+                  }
+                },
+                "lineVideoMessage": {
+                  "summary": "Line Message - Video",
+                  "value": {
+                    "user": {
+                      "lineUserId": "Ua12b345678c1de0fg1a1234567891011"
+                    },
+                    "type": "Video",
+                    "content": {
+                      "url": "https://samplelib.com/mp4/sample-5s.mp4",
+                      "video": {
+                        "thumbnail": "https://samplelib.com/png/sample-boat-400x300.png"
+                      }
+                    }
+                  }
+                },
+                "lineAudioMessage": {
+                  "summary": "Line Message - Audio",
+                  "value": {
+                    "user": {
+                      "lineUserId": "Ua12b345678c1de0fg1a1234567891011"
+                    },
+                    "type": "Audio",
+                    "content": {
+                      "url": "https://samplelib.com/mp3/sample-speech-5m.mp3",
+                      "audio": {
+                        "duration": 300
+                      }
+                    }
+                  }
+                },
+                "lineLocationMessage": {
+                  "summary": "Line Message - Location",
+                  "value": {
+                    "user": {
+                      "lineUserId": "Ua12b345678c1de0fg1a1234567891011"
+                    },
+                    "type": "Location",
+                    "content": {
+                      "location": {
+                        "latitude": 1.285651,
+                        "longitude": 103.847564,
+                        "name": "8x8 Office Singapore",
+                        "address": "One George Street, Singapore 049145"
+                      }
                     }
                   }
                 }
