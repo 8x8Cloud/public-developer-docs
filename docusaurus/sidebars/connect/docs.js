@@ -113,6 +113,7 @@ const sidebarConfig = [
           'connect/docs/rcs/billing',
         ],
       },
+      'connect/docs/usage-samples-line',
       'connect/docs/usage-samples-viber',
       'connect/docs/usage-samples-zns',
       'connect/docs/usage-samples-line-official-notification',

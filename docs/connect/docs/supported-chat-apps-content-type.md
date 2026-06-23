@@ -5,12 +5,13 @@ This page describes the supported messaging apps content types, along with their
 ## Supported Content Types by Channel
 
 | Channel                    | Channel type value | Text | Template | Image | Video | Button | File | Location | Interactive Messages | Rich Card | Rich Card Carousel |
-| :------------------------- | :----------------- | :--- | :------- | :---- | :---- | :----- | :--- | :------- | :------------------- | :-------- | :----------------- |
+|:---------------------------| :----------------- | :--- | :------- | :---- | :---- | :----- | :--- | :------- | :------------------- | :-------- | :----------------- |
 | SMS                        | `sms`              | ✅    | ❌        | ❌     | ❌     | ❌      | ❌    | ❌        | ❌                    | ❌         | ❌                  |
 | WhatsApp                   | `whatsapp`         | ✅    | ✅        | ✅     | ✅     | ✅      | ✅    | ✅        | ✅                    | ✅         | ✅                  |
 | Viber                      | `viber`            | ✅    | ✅        | ✅     | ✅     | ✅      | ✅    | ❌        | ❌                    | ❌         | ❌                  |
 | Zalo Notification Service  | `ZaloNotification` | ✅    | ✅        | ✅     | ❌     | ✅      | ❌    | ❌        | ❌                    | ❌         | ❌                  |
 | LINE Official Notification | `LineNotification` | ✅    | ✅        | ❌     | ❌     | ✅      | ❌    | ❌        | ❌                    | ❌         | ❌                  |
+| Line Official Account      | `line`             | ✅    | ❌        | ✅     | ✅     | ❌      | ❌    | ✅        | ❌                    | ❌         | ❌                  |
 | RCS                        | `RCS`              | ✅    | ❌        | ✅     | ✅     | ✅      | ✅    | ✅        | ✅                    | ❌         | ❌                  |
 
 ***
@@ -101,6 +102,15 @@ Supported **File** formats are:
 
 - Zalo Notification Service (ZNS) is strictly for one-way messaging and requires templates to be approved before they can be sent.
 - ZNS template's character limit is 400 characters
+
+***
+
+## Line
+
+- Line corresponds to a LINE Official Account with the Messaging API enabled.
+- Supports bidirectional messaging (send and receive).
+- Supported outbound content types: Text, Image, Video, Audio, Location.
+- Supported inbound content types: Text, Image, Video, Audio, File, Location.
 
 ***
 
