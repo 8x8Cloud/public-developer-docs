@@ -1,0 +1,2 @@
+# Keeps the changelog entries directory present while empty.
+# Entry files (YYYY-MM-DD-<slug>.md) are added by the /admin-changelog-draft skill.

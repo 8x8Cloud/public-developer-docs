@@ -11,6 +11,7 @@ const sidebarConfig = [
         label: 'Administration API Essentials',
       },
       'administration/docs/api-change-policy',
+      'administration/changelog',
     ],
   },
   {

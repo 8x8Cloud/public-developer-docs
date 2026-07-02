@@ -79,6 +79,10 @@ When a new API version is published:
 - **Continued operation** - Deprecated versions continue functioning during the notice period
 - **Retirement** - After the notice period expires, the deprecated version is retired
 
+## Change Log
+
+A complete, chronological history of changes to the Administration API Suite is published in the [Change Log](../changelog.mdx). Each entry records the affected API, the change type, and the version, and the list can be filtered by API.
+
 ## Change Notifications
 
 ### Non-Breaking Changes

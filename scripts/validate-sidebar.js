@@ -278,6 +278,53 @@ function getDocsFromFilesystem(category, subcategory) {
   const slugMismatches = [];
   const fileTypeMap = new Map(); // Maps docId to file type ('API', 'INFO', or null)
 
+  // Process a single .md/.mdx doc file into files / fileTypeMap / slugMismatches.
+  // `relPath` is the file path relative to its scan root (used for the
+  // filename-based id and mismatch reporting). `docIdMiddle` is the segment(s)
+  // between `category` and the doc's own path — the subcategory for nested docs,
+  // nothing for docs that live directly under docs/<category>/.
+  function processDocFile(entry, fullPath, relPath, docIdMiddle) {
+    // Generate filename-based ID (for comparison)
+    const filenameBasedId = relPath
+      .replace(/\.(api|info)\.mdx$/, '')
+      .replace(/\.(md|mdx)$/, '');
+
+    // Detect file type based on extension
+    let fileType = null;
+    if (entry.name.endsWith('.api.mdx') || entry.name.endsWith('.api.md')) {
+      fileType = 'API';
+    } else if (
+      entry.name.endsWith('.info.mdx') ||
+      entry.name.endsWith('.info.md')
+    ) {
+      fileType = 'INFO';
+    }
+
+    // Use frontmatter id if available, otherwise use filename
+    const frontmatterId = extractFrontmatterId(fullPath);
+    const actualDocPath = frontmatterId || filenameBasedId;
+    const docId = path.join(category, ...docIdMiddle, actualDocPath);
+
+    files.add(docId);
+    fileTypeMap.set(docId, fileType);
+
+    // Track mismatch if frontmatter id differs from filename
+    if (frontmatterId && frontmatterId !== filenameBasedId) {
+      slugMismatches.push({
+        filename: entry.name,
+        filenamePath: relPath,
+        frontmatterId,
+        fullPath,
+        fileType,
+      });
+    }
+  }
+
+  // Nested docs get a subcategory segment ('docs' for single-sidebar categories).
+  const subcategorySegment = SINGLE_SIDEBAR_CATEGORIES.includes(category)
+    ? 'docs'
+    : subcategory;
+
   function scanDirectory(dirPath, relativePath = '') {
     const entries = fs.readdirSync(dirPath, { withFileTypes: true });
 
@@ -295,59 +342,29 @@ function getDocsFromFilesystem(category, subcategory) {
       } else if (entry.isFile()) {
         // Include .md and .mdx files (including .api.mdx, .info.mdx)
         if (entry.name.endsWith('.md') || entry.name.endsWith('.mdx')) {
-          // Generate filename-based ID (for comparison)
-          let docPath = relPath
-            .replace(/\.(api|info)\.mdx$/, '')
-            .replace(/\.(md|mdx)$/, '');
-          const filenameBasedId = docPath;
-
-          // Detect file type based on extension
-          let fileType = null;
-          if (
-            entry.name.endsWith('.api.mdx') ||
-            entry.name.endsWith('.api.md')
-          ) {
-            fileType = 'API';
-          } else if (
-            entry.name.endsWith('.info.mdx') ||
-            entry.name.endsWith('.info.md')
-          ) {
-            fileType = 'INFO';
-          }
-
-          // Try to extract frontmatter id
-          const frontmatterId = extractFrontmatterId(fullPath);
-
-          // Use frontmatter id if available, otherwise use filename
-          const actualDocPath = frontmatterId || filenameBasedId;
-
-          const docId = path.join(
-            category,
-            SINGLE_SIDEBAR_CATEGORIES.includes(category) ? 'docs' : subcategory,
-            actualDocPath,
-          );
-
-          files.add(docId);
-
-          // Store file type for this docId
-          fileTypeMap.set(docId, fileType);
-
-          // Track mismatch if frontmatter id differs from filename
-          if (frontmatterId && frontmatterId !== filenameBasedId) {
-            slugMismatches.push({
-              filename: entry.name,
-              filenamePath: relPath,
-              frontmatterId: frontmatterId,
-              fullPath: fullPath,
-              fileType: fileType,
-            });
-          }
+          processDocFile(entry, fullPath, relPath, [subcategorySegment]);
         }
       }
     }
   }
 
   scanDirectory(docsPath);
+
+  // Also scan the category root for docs that live directly under docs/<category>/
+  // (e.g. docs/administration/changelog.mdx has sidebar id 'administration/changelog').
+  // These docs carry no subcategory segment, so they get an empty docIdMiddle;
+  // the scan is non-recursive because nested dirs are covered by scanDirectory above.
+  const categoryRootPath = path.join(DOCS_DIR, category);
+  if (fs.existsSync(categoryRootPath)) {
+    const rootEntries = fs.readdirSync(categoryRootPath, { withFileTypes: true });
+    for (const entry of rootEntries) {
+      if (entry.isFile() && (entry.name.endsWith('.md') || entry.name.endsWith('.mdx'))) {
+        const fullPath = path.join(categoryRootPath, entry.name);
+        processDocFile(entry, fullPath, entry.name, []);
+      }
+    }
+  }
+
   return { files, slugMismatches, fileTypeMap };
 }
 
@@ -704,10 +721,21 @@ function printResults(results) {
   if (allWithSlugMismatches.length > 0) {
     console.log('📝 SLUG MISMATCHES (Frontmatter ID ≠ Filename):\n');
 
+    // Dedupe by fullPath across all results to prevent category-root files
+    // from being reported once per subcategory (the category-root scan in
+    // getDocsFromFilesystem runs on every subcategory call for the same category).
+    const reportedMismatchPaths = new Set();
+
     for (const result of allWithSlugMismatches) {
+      const uniqueMismatches = result.slugMismatches.filter(
+        m => !reportedMismatchPaths.has(m.fullPath),
+      );
+      if (uniqueMismatches.length === 0) continue;
+
       console.log(`📁 ${result.category}/${result.subcategory}`);
 
-      for (const mismatch of result.slugMismatches) {
+      for (const mismatch of uniqueMismatches) {
+        reportedMismatchPaths.add(mismatch.fullPath);
         const badge = mismatch.fileType ? ` [${mismatch.fileType}]` : '';
         console.log(
           `   - ${mismatch.filename}${badge} → id: ${mismatch.frontmatterId}`,

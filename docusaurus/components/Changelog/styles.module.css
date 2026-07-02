@@ -1,0 +1,17 @@
+.filterBar { display: flex; align-items: center; gap: 0.5rem; margin: 1rem 0 2rem; }
+.filterLabel { font-weight: 600; }
+.filterControl { min-width: 260px; }
+.entry { padding: 1rem 0 1.25rem; border-bottom: 1px solid var(--ifm-color-emphasis-200); }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-size: 0.85rem; }
+.date { font-variant-numeric: tabular-nums; color: var(--ifm-color-emphasis-700); }
+.api { color: var(--ifm-color-emphasis-700); }
+.version { font-family: var(--ifm-font-family-monospace); color: var(--ifm-color-emphasis-800); }
+.title { margin: 0.5rem 0 0.5rem; }
+.body { font-size: 0.95rem; }
+.badge { padding: 0.1rem 0.5rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; }
+/* Infima semantic colour pairs adapt to light/dark theme automatically. */
+.badge_breaking { background: var(--ifm-color-danger-contrast-background); color: var(--ifm-color-danger-contrast-foreground); }
+.badge_non-breaking { background: var(--ifm-color-success-contrast-background); color: var(--ifm-color-success-contrast-foreground); }
+.badge_deprecation { background: var(--ifm-color-warning-contrast-background); color: var(--ifm-color-warning-contrast-foreground); }
+.badge_release { background: var(--ifm-color-info-contrast-background); color: var(--ifm-color-info-contrast-foreground); }
+.badge_docs { background: var(--ifm-color-primary-contrast-background); color: var(--ifm-color-primary-contrast-foreground); }

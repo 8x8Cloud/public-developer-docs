@@ -57,6 +57,10 @@ const config = {
           path: 'docs',
           sidebarPath: require.resolve('./docusaurus/sidebars/index.js'),
           breadcrumbs: false,
+          // Changelog entry files are data for the `changelog` plugin, not standalone
+          // pages. They live in an underscore-prefixed dir (docs/administration/_changelog/),
+          // so plugin-content-docs' default `exclude` (`**/_*/**`) already keeps them out of
+          // the docs route tree — no custom `exclude` override needed.
           // Required for docusaurus-theme-openapi-docs to render .api.mdx files.
           // This component detects the 'api:' frontmatter field and activates OpenAPI rendering.
           // Regular .md files render normally (backwards compatible).
@@ -129,6 +133,11 @@ const config = {
     path.resolve(__dirname, 'docusaurus/plugins/client-side-redirects'),
     // Custom plugin for Amplitude analytics (production-only page view tracking)
     path.resolve(__dirname, 'docusaurus/plugins/amplitude-analytics'),
+    // Aggregates Administration changelog entries for the in-place-filter renderer
+    [
+      path.resolve(__dirname, 'docusaurus/plugins/changelog'),
+      { path: 'docs/administration/_changelog' },
+    ],
     // Generate llms.txt and llms-full.txt for LLM/AI assistant discoverability
     'docusaurus-plugin-llms',
   ],
