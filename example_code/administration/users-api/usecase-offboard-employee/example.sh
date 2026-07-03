@@ -78,7 +78,7 @@ fi
 response=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X PUT "${BASE_URL}/users/${USER_ID}" \
   -H "x-api-key: ${API_KEY}" \
   -H "Accept: application/vnd.users.v1+json" \
-  -H "Content-Type: application/json" \
+  -H "Content-Type: application/vnd.users.v1+json" \
   -d "$updated_user")
 
 http_status=$(echo "$response" | grep "HTTP_STATUS:" | cut -d':' -f2)
@@ -122,7 +122,7 @@ fi
 response=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X PUT "${BASE_URL}/users/${USER_ID}" \
   -H "x-api-key: ${API_KEY}" \
   -H "Accept: application/vnd.users.v1+json" \
-  -H "Content-Type: application/json" \
+  -H "Content-Type: application/vnd.users.v1+json" \
   -d "$updated_user")
 
 http_status=$(echo "$response" | grep "HTTP_STATUS:" | cut -d':' -f2)

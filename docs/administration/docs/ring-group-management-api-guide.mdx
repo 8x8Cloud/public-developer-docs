@@ -70,7 +70,7 @@ Before using the Ring Group Management API, review the **[Administration API Ess
 - **Prerequisites**: Account requirements, API credential acquisition, technical requirements
 - **Getting Started**: Step-by-step credential setup and testing
 - **Authentication**: API key authentication with `x-api-key` header
-- **API Versioning**: Version negotiation with `Accept` header
+- **API Versioning**: Version negotiation via the `Content-Type` header (on writes) and the `Accept` header (on reads)
 - **Common Patterns**: Asynchronous operations, pagination, filtering, sorting
 - **Error Handling**: RFC 7807 format and common error scenarios
 - **Rate Limiting**: Request limits and handling strategies
@@ -80,11 +80,10 @@ Before using the Ring Group Management API, review the **[Administration API Ess
 
 ### Ring Group Management API Specifics
 
-**Accept Header** for this API:
+**Version header** for this API (see [API Versioning](./suite-common.mdx#api-versioning) for the full rule):
 
-```http
-Accept: application/vnd.ringgroups.v1+json
-```
+- Requests with a payload (`POST`, `PUT`) carry the version in `Content-Type: application/vnd.ringgroups.v1+json`
+- Requests that return data (`GET`) carry it in `Accept: application/vnd.ringgroups.v1+json`
 
 **Required API Products** (when creating API key in Admin Console):
 
@@ -346,16 +345,16 @@ For Ring Group Management API specifically:
 
 ```http
 x-api-key: your-api-key-here
-Accept: application/vnd.ringgroups.v1+json
-Content-Type: application/json  (for POST/PUT requests)
+Content-Type: application/vnd.ringgroups.v1+json   (on POST/PUT — carries the version)
+Accept: application/vnd.ringgroups.v1+json          (on GET)
 ```
 
-### Content Type
+### Version Media Type
 
-All requests and responses use:
+The version is carried in the `Content-Type` header on requests with a payload (`POST`, `PUT`) and in the `Accept` header on requests that return data (`GET`):
 
 ```text
-Content-Type: application/vnd.ringgroups.v1+json
+application/vnd.ringgroups.v1+json
 ```
 
 ### Important Parameters

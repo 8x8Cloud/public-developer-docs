@@ -51,16 +51,16 @@ Breaking changes modify existing behavior in ways that may disrupt current integ
 
 ### Version Format
 
-When breaking changes are necessary, we release a new API version. Versions are specified using the Accept header with vendor-specific media types:
+When breaking changes are necessary, we release a new API version. Versions are specified through a vendor-specific media type, sent in the `Content-Type` header for requests with a payload (`POST`, `PUT`) and in the `Accept` header for requests that return a payload (`GET`). See [API Versioning](./suite-common.mdx#api-versioning) for full details.
 
 ```text
-Accept: application/vnd.{resource}.v{major}+json
+application/vnd.{resource}.v{major}+json
 ```
 
 **Example:**
 
 ```text
-Accept: application/vnd.users.v1+json
+application/vnd.users.v1+json
 ```
 
 ### New Version Release Process
@@ -69,7 +69,7 @@ When a new API version is published:
 
 1. **Testing availability** - The new version becomes available for testing
 2. **Parallel operation** - Both old and new versions remain fully functional
-3. **Consumer control** - You control the transition by adjusting the Accept header in your requests
+3. **Consumer control** - You control the transition by adjusting the version media type (in the `Content-Type` or `Accept` header, depending on the endpoint) in your requests
 4. **No impact to current version** - Existing implementations continue working unchanged
 
 ### Version Support and Deprecation

@@ -48,12 +48,12 @@ This API is part of the Administration API Suite, which shares common patterns f
 
 ### API-Specific Versioning
 
-When making requests to the Site Management APIs, use these API-specific Accept headers:
+The Site Management APIs are versioned with these media types, carried in the `Content-Type` header on requests with a payload (`POST`, `PUT`) and in the `Accept` header on requests that return data (`GET`):
 
-- **Site API**: `Accept: application/vnd.sites.v1+json`
-- **Address API**: `Accept: application/vnd.addresses.v1+json`
+- **Site API**: `application/vnd.sites.v1+json`
+- **Address API**: `application/vnd.addresses.v1+json`
 
-See [API Versioning](./suite-common.mdx#api-versioning) in the common documentation for more details on how versioning works.
+The Site `DELETE` is asynchronous and returns an operation resource (versioned via `Accept`), whereas the Address `DELETE` is synchronous, returns no content, and is not versioned. See [API Versioning](./suite-common.mdx#api-versioning) in the common documentation for the full rule.
 
 ## Core Concepts
 
@@ -703,8 +703,9 @@ Accept: application/vnd.addresses.v1+json
 DELETE /addresses/{addressId} HTTP/1.1
 Host: api.8x8.com/admin-provisioning
 x-api-key: your-api-key-here
-Accept: application/vnd.addresses.v1+json
 ```
+
+The address `DELETE` is synchronous and returns no content (`204`), so it is **not versioned** — no version media type is required in `Content-Type` or `Accept`.
 
 **Response Example (Step 3)** (204 No Content):
 

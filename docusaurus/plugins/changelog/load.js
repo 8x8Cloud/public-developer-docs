@@ -15,6 +15,25 @@ function sortEntries(entries) {
 }
 
 /**
+ * Prepend Docusaurus's baseUrl to root-absolute links in rendered HTML.
+ *
+ * Entry bodies are rendered with `marked` and injected via
+ * dangerouslySetInnerHTML, so they never pass through Docusaurus's Link/MDX
+ * layer that normally applies baseUrl. Without this, a link like
+ * `/administration/docs/suite-common` resolves at the domain root and breaks
+ * on any non-root deploy (e.g. PR previews served under `/pr-273/`).
+ *
+ * Only root-absolute hrefs (`/...`) are rewritten. External (`https://…`),
+ * protocol-relative (`//…`) and pure-anchor (`#…`) links are left untouched.
+ * At baseUrl `/` the prefix is empty, so production output is unchanged.
+ */
+function withBaseUrl(html, baseUrl) {
+  const prefix = String(baseUrl || '/').replace(/\/$/, '');
+  if (!prefix) return html;
+  return html.replace(/href="\/(?!\/)/g, `href="${prefix}/`);
+}
+
+/**
  * Read + parse every *.md entry in dir into the global-data shape.
  * Body Markdown is rendered to HTML at build time (SSR-safe).
  *
@@ -22,7 +41,7 @@ function sortEntries(entries) {
  * (UTC midnight), not strings. We normalise to YYYY-MM-DD strings so that
  * sortEntries (lexical compare) and React rendering both work correctly.
  */
-function loadEntries(dir) {
+function loadEntries(dir, baseUrl = '/') {
   if (!fs.existsSync(dir)) return [];
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md'));
   const entries = files.map((file) => {
@@ -39,10 +58,10 @@ function loadEntries(dir) {
       version: data.version,
       previousVersion: data.previousVersion || null,
       title: data.title,
-      bodyHtml: marked.parse(content.trim()),
+      bodyHtml: withBaseUrl(marked.parse(content.trim()), baseUrl),
     };
   });
   return sortEntries(entries);
 }
 
-module.exports = { sortEntries, loadEntries };
+module.exports = { sortEntries, loadEntries, withBaseUrl };

@@ -155,7 +155,7 @@ All Administration API endpoints are accessed through this base URL.
 
 ## API Versioning
 
-Administration APIs use the `Accept` header for version negotiation. This approach allows the APIs to evolve while maintaining backward compatibility for existing integrations.
+Administration APIs use the `Content-Type` and `Accept` headers for version negotiation. This approach allows the APIs to evolve while maintaining backward compatibility for existing integrations.
 
 ### Version Format
 
@@ -163,38 +163,45 @@ Versions use **major version numbers only** (v1, v2, etc., not v1.4 or v1.2.3). 
 
 ### Specifying Version
 
-All Administration APIs use the `Accept` header with a consistent format pattern:
+The header used to specify the version depends on the nature of the endpoint:
+
+| Which endpoints? | Header |
+| :---- | :---- |
+| Any that take a request payload (e.g. `POST`, `PUT`) | `Content-Type` |
+| Any that return a response payload (e.g. `GET`) — optional where `Content-Type` is also provided, e.g. on `POST` | `Accept` |
+| Any that have neither a request nor a response payload (e.g. a synchronous `DELETE`) — these endpoints are not versioned | none |
+
+In all cases, regardless of whether you use the `Content-Type` or `Accept` header, the value follows this pattern:
 
 ```http
-Accept: application/vnd.{resource}.v{major}+json
+application/vnd.{resource}.v{major}+json
 ```
 
 Where:
 - `{resource}` is the API resource type (e.g., `users`, `ringgroups`)
-- `{major}` is the major version number (e.g., `v1`, `v2`)
+- `{major}` is the major version number (e.g., `1`, `2`)
 
 **Examples:**
 
-**User Management API**:
+**User Management API** — creating a user (request payload, so `Content-Type`):
 
 ```http
-Accept: application/vnd.users.v1+json
+Content-Type: application/vnd.users.v1+json
 ```
 
-**Ring Group Management API**:
+**Ring Group Management API** — listing ring groups (response payload, so `Accept`):
 
 ```http
 Accept: application/vnd.ringgroups.v1+json
 ```
 
-For other Administration APIs, check the specific API guide for its exact Accept header format.
+For other Administration APIs, check the specific API guide for its exact version header format.
 
 ### Backward Compatibility
 
-- Major versions are maintained for extended periods (typically 12-24 months after next version release)
-- Deprecated features are announced well in advance
 - Breaking changes only occur in major version increments
-- Minor enhancements and bug fixes are deployed to current major version
+- Non-breaking enhancements (see [Change Policy](./api-change-policy.md#change-categories)) and bug fixes are deployed to the current major version
+- Deprecated major versions are maintained for extended periods (typically 12 months after the next version release)
 
 ---
 
@@ -202,18 +209,25 @@ For other Administration APIs, check the specific API guide for its exact Accept
 
 ### Required Headers
 
-Every API request to Administration APIs must include:
+Every API request to Administration APIs must include your API key:
 
 ```http
 x-api-key: your-api-key-here
-Accept: application/vnd.{resource}.v{version}+json
 ```
 
-For requests that contain a payload (POST and PUT operations), also include:
+The API version is carried in a media-type header chosen by the operation (see [API Versioning](#api-versioning)):
 
-```http
-Content-Type: application/json
-```
+- **Requests with a payload** (`POST`, `PUT`) carry the version in `Content-Type`:
+
+  ```http
+  Content-Type: application/vnd.{resource}.v{major}+json
+  ```
+
+- **Requests that only retrieve data** (`GET`) carry the version in `Accept`:
+
+  ```http
+  Accept: application/vnd.{resource}.v{major}+json
+  ```
 
 ### Example Request
 
@@ -226,8 +240,7 @@ Accept: application/vnd.users.v1+json
 ```http
 POST https://api.8x8.com/admin-provisioning/users
 x-api-key: your-api-key-here
-Accept: application/vnd.users.v1+json
-Content-Type: application/json
+Content-Type: application/vnd.users.v1+json
 
 {
   "basicInfo": {

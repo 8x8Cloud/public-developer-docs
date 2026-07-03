@@ -11,7 +11,8 @@ const { loadEntries } = require('./load');
  * technical-notes/internal/changelog-mechanism.md for how a second suite could
  * opt in.
  *
- * @param {object} context - Docusaurus plugin context (provides siteDir).
+ * @param {object} context - Docusaurus plugin context (provides siteDir and
+ *   siteConfig.baseUrl).
  * @param {object} options - { path: entries dir relative to siteDir }.
  */
 module.exports = function changelogPlugin(context, options = {}) {
@@ -22,7 +23,7 @@ module.exports = function changelogPlugin(context, options = {}) {
     name: 'changelog',
 
     async loadContent() {
-      return { entries: loadEntries(entriesDir) };
+      return { entries: loadEntries(entriesDir, context.siteConfig.baseUrl) };
     },
 
     async contentLoaded({ content, actions }) {

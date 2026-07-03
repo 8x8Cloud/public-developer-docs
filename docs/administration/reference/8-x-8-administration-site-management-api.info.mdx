@@ -28,10 +28,11 @@ x-api-key: YOUR_API_KEY
 
 ## Versioning
 
-Specify the API version using the `Accept` header:
+The API version is specified through a vendor-specific media type. Send it in the `Content-Type` header for requests that carry a payload (such as `POST` and `PUT`) and in the `Accept` header for requests that return a payload (`GET`, and asynchronous `DELETE` operations that return an operation resource).
 
 ```
-Accept: application/vnd.sites.v1+json
+Content-Type: application/vnd.sites.v1+json   # on POST/PUT (request payload)
+Accept: application/vnd.sites.v1+json          # on GET (response payload)
 ```
 
 ## Base URL
