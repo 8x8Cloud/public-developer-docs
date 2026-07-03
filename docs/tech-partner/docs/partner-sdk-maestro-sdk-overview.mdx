@@ -54,6 +54,26 @@ Integrate the below Computer Telephony Integration (CTI) URL into your applicati
 
 ```https://cloud8.8x8.com/mashell/public/index.html?env=embeddable&nextgen=true```
 
+### Embedding Requirements (Microphone & Speaker Permissions)
+
+When embedding the Maestro SDK URL in an `<iframe>`, you must use the allow attribute to enable audio input and output. Specifically, include permissions for microphone and speaker-selection; simply loading the URL isn’t enough, as modern browsers require these declarations to grant access to the device’s microphone and speakers.
+
+`<iframe allow="microphone *; speaker-selection *;>`
+
+**Why this is required?**
+
+To support call and audio features in the embedded MaestroSDK:
+
+microphone * — allows the embedded app to request microphone access for capturing user audio. Without this, microphone input will be blocked by the browser.
+
+speaker-selection * — allows the embedded app to let users choose which audio output device (e.g., speakers, headphones) to use.
+
+![Maestro SDK Speaker Selection](../images/maestro-sdk-speaker-selection.png)
+
+Even with the appropriate iframe permissions, browsers like Google Chrome will still prompt the user to grant access to the microphone before audio capture can begin. The user must accept this browser permission prompt for audio features to work correctly.
+
+![Maestro SDK Microphone Permissions](../images/maestro-sdk-microphone.png)
+
 ### Overview of Embeddable events
 
 #### MaestroSDK Live Demo
