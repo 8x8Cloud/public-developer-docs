@@ -143,6 +143,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [User leaves conversation.](https://developer.8x8.com/actions-events/reference/userparticipantleavecctransaction.api): When user leave a conversation. It translates to a current interaction that is being terminated by the user.
 - [The endpoint used to validate that the webhook is working and reachable.](https://developer.8x8.com/actions-events/reference/verifywebhook-1.api): Validates the webhook URL endpoint from the connectivity point-of-view by sending a hello message and a 2xx success status code.
 - [The endpoint used to validate that the webhook is working and reachable.](https://developer.8x8.com/actions-events/reference/verifywebhook.api): Validates the webhook URL endpont from the connectivity point-of-view by sending a hello message and a 2xx success status code.
+- [Clarified API versioning header guidance](https://developer.8x8.com/administration/_changelog/2026-07-01-versioning-header-guidance): Clarified the [API Versioning](/administration/docs/suite-common#api-versioning) guidance for the
 - [Administration API Changelog](https://developer.8x8.com/administration/changelog): Change history for the Administration API Suite.
 - [API Change Policy](https://developer.8x8.com/administration/docs/api-change-policy): **Last Updated:** December 23, 2025
 - [Administration API Reference](https://developer.8x8.com/administration/docs/api-reference-overview): :::warning BETA - Limited Access

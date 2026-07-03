@@ -11,8 +11,8 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.d3db3184.css">
-<script src="/assets/js/runtime~main.94a1e830.js" defer="defer"></script>
-<script src="/assets/js/main.e7fb84de.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.fa4eb29c.js" defer="defer"></script>
+<script src="/assets/js/main.b9350cb8.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -62,16 +62,16 @@
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="api-versioning">API Versioning<a href="#api-versioning" class="hash-link" aria-label="Direct link to API Versioning" title="Direct link to API Versioning" translate="no">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="version-format">Version Format<a href="#version-format" class="hash-link" aria-label="Direct link to Version Format" title="Direct link to Version Format" translate="no">​</a></h3>
-<p>When breaking changes are necessary, we release a new API version. Versions are specified using the Accept header with vendor-specific media types:</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Accept: application/vnd.{resource}.v{major}+json</span><br></span></code></pre></div></div>
+<p>When breaking changes are necessary, we release a new API version. Versions are specified through a vendor-specific media type, sent in the <code>Content-Type</code> header for requests with a payload (<code>POST</code>, <code>PUT</code>) and in the <code>Accept</code> header for requests that return a payload (<code>GET</code>). See <a href="/administration/docs/suite-common#api-versioning">API Versioning</a> for full details.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">application/vnd.{resource}.v{major}+json</span><br></span></code></pre></div></div>
 <p><strong>Example:</strong></p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Accept: application/vnd.users.v1+json</span><br></span></code></pre></div></div>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">application/vnd.users.v1+json</span><br></span></code></pre></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-version-release-process">New Version Release Process<a href="#new-version-release-process" class="hash-link" aria-label="Direct link to New Version Release Process" title="Direct link to New Version Release Process" translate="no">​</a></h3>
 <p>When a new API version is published:</p>
 <ol>
 <li><strong>Testing availability</strong> - The new version becomes available for testing</li>
 <li><strong>Parallel operation</strong> - Both old and new versions remain fully functional</li>
-<li><strong>Consumer control</strong> - You control the transition by adjusting the Accept header in your requests</li>
+<li><strong>Consumer control</strong> - You control the transition by adjusting the version media type (in the <code>Content-Type</code> or <code>Accept</code> header, depending on the endpoint) in your requests</li>
 <li><strong>No impact to current version</strong> - Existing implementations continue working unchanged</li>
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="version-support-and-deprecation">Version Support and Deprecation<a href="#version-support-and-deprecation" class="hash-link" aria-label="Direct link to Version Support and Deprecation" title="Direct link to Version Support and Deprecation" translate="no">​</a></h3>

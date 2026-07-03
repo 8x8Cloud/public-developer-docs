@@ -32,7 +32,7 @@ async function offboardEmployee(
   const headers = {
     'x-api-key': apiKey,
     'Accept': 'application/vnd.users.v1+json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/vnd.users.v1+json'
   };
 
   const result = {};
