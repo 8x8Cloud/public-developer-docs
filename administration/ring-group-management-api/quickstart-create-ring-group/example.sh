@@ -3,6 +3,8 @@ set -e  # Exit on error
 
 # Create a ring group and poll until creation completes
 #
+# Requires: curl, jq (https://jqlang.github.io/jq/)
+#
 # Usage:
 #   API_KEY="your-key" BASE_URL="https://api.8x8.com/admin-provisioning" bash example.sh
 #
@@ -21,7 +23,6 @@ echo "Step 1: Creating ring group..."
 # Create ring group (async operation)
 CREATE_RESPONSE=$(curl -X POST "${BASE_URL}/ring-groups" \
   -H "X-API-Key: ${API_KEY}" \
-  -H "Accept: application/vnd.ringgroups.v1+json" \
   -H "Content-Type: application/vnd.ringgroups.v1+json" \
   -d "{
     \"name\": \"${RING_GROUP_NAME}\",
@@ -54,7 +55,7 @@ for ((i=1; i<=MAX_ATTEMPTS; i++)); do
 
   STATUS_RESPONSE=$(curl -X GET "${BASE_URL}/operations/${OPERATION_ID}" \
     -H "X-API-Key: ${API_KEY}" \
-    -H "Accept: application/vnd.ringgroups.v1+json" \
+    -H "Accept: application/vnd.operations.v1+json" \
     -s -S)
 
   STATUS=$(echo "$STATUS_RESPONSE" | grep -o '"status":"[^"]*"' | cut -d'"' -f4)

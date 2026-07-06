@@ -144,6 +144,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [The endpoint used to validate that the webhook is working and reachable.](https://developer.8x8.com/actions-events/reference/verifywebhook-1.api): Validates the webhook URL endpoint from the connectivity point-of-view by sending a hello message and a 2xx success status code.
 - [The endpoint used to validate that the webhook is working and reachable.](https://developer.8x8.com/actions-events/reference/verifywebhook.api): Validates the webhook URL endpont from the connectivity point-of-view by sending a hello message and a 2xx success status code.
 - [Clarified API versioning header guidance](https://developer.8x8.com/administration/_changelog/2026-07-01-versioning-header-guidance): Clarified the [API Versioning](/administration/docs/suite-common#api-versioning) guidance for the
+- [Targeted ring group membership updates](https://developer.8x8.com/administration/_changelog/2026-07-03-ring-group-membership-updates): The Ring Group Management API adds a new endpoint for targeted membership changes:
 - [Administration API Changelog](https://developer.8x8.com/administration/changelog): Change history for the Administration API Suite.
 - [API Change Policy](https://developer.8x8.com/administration/docs/api-change-policy): **Last Updated:** December 23, 2025
 - [Administration API Reference](https://developer.8x8.com/administration/docs/api-reference-overview): :::warning BETA - Limited Access
@@ -151,7 +152,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Contact Management](https://developer.8x8.com/administration/docs/create-contact): Our Contact API allows you to add new contacts into the system. This section guides you through the steps to create a contact. Before you start, ma...
 - [Introduction](https://developer.8x8.com/administration/docs/overview): :::warning BETA - Limited Access
 - [Phone Number Management API Guide](https://developer.8x8.com/administration/docs/phone-number-management-api-guide): import TabbedExternalCodeSample from '@site/docusaurus/components/TabbedExternalCodeSample';
-- [Ring Group Management API Guide](https://developer.8x8.com/administration/docs/ring-group-management-api-guide): **API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)
+- [Ring Group Management API Guide](https://developer.8x8.com/administration/docs/ring-group-management-api-guide): **API Version**: 1.0  |  **Last Updated**: July 1, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)
 - [Contact Search](https://developer.8x8.com/administration/docs/search-contacts): Customers who need to find specific contact information in our Contact Database can utilize the following endpoint. This is particularly useful for...
 - [Site Management API Guide](https://developer.8x8.com/administration/docs/site-management-api-guide): import TabbedExternalCodeSample from '@site/docusaurus/components/TabbedExternalCodeSample';
 - [Administration API Essentials](https://developer.8x8.com/administration/docs/suite-common): **Version**: 1.0  |  **Last Updated**: January 16, 2026  |  **Applies to**: All Administration API Suite APIs
@@ -181,6 +182,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [List ring groups](https://developer.8x8.com/administration/reference/list-ring-groups.api): List ring groups with optional filtering, sorting, and pagination.
 - [List sites](https://developer.8x8.com/administration/reference/list-sites.api): List sites with optional filtering, sorting, and pagination.
 - [List users](https://developer.8x8.com/administration/reference/list-users.api): List users with optional filtering, sorting, and infinite scroll pagination.
+- [Update ring group members](https://developer.8x8.com/administration/reference/update-ring-group-members.api): Atomically applies an add/update/remove delta to a ring group's member list.
 - [Update a ring group](https://developer.8x8.com/administration/reference/update-ring-group.api): Updates an existing ring group asynchronously. Returns an operation object to track the update progress.
 - [Update site](https://developer.8x8.com/administration/reference/update-site.api): Updates an existing site. Returns an Operation object that can be polled to track the update progress.
 - [Update user](https://developer.8x8.com/administration/reference/update-user.api): Update an existing user by their ID.

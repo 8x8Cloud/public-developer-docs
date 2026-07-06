@@ -23,7 +23,11 @@ async function deleteRingGroupWithVerification(
   ringGroupId,
   baseUrl = 'https://api.8x8.com/admin-provisioning'
 ) {
-  const headers = {
+  const operationsHeaders = {
+    'X-API-Key': apiKey,
+    'Accept': 'application/vnd.operations.v1+json'
+  };
+  const ringGroupHeaders = {
     'X-API-Key': apiKey,
     'Accept': 'application/vnd.ringgroups.v1+json'
   };
@@ -32,7 +36,7 @@ async function deleteRingGroupWithVerification(
     // Step 1: Verify ring group exists
     const response = await axios.get(
       `${baseUrl}/ring-groups/${ringGroupId}`,
-      { headers, timeout: 10000 }
+      { headers: ringGroupHeaders, timeout: 10000 }
     );
 
     const ringGroup = response.data;
@@ -41,7 +45,7 @@ async function deleteRingGroupWithVerification(
     // Step 2: Initiate deletion (async operation)
     const deleteResponse = await axios.delete(
       `${baseUrl}/ring-groups/${ringGroupId}`,
-      { headers, timeout: 10000 }
+      { headers: operationsHeaders, timeout: 10000 }
     );
 
     const operation = deleteResponse.data;
@@ -57,7 +61,7 @@ async function deleteRingGroupWithVerification(
 
       const statusResponse = await axios.get(
         `${baseUrl}/operations/${operationId}`,
-        { headers, timeout: 10000 }
+        { headers: operationsHeaders, timeout: 10000 }
       );
 
       const operationStatus = statusResponse.data;
@@ -70,7 +74,7 @@ async function deleteRingGroupWithVerification(
         try {
           await axios.get(
             `${baseUrl}/ring-groups/${ringGroupId}`,
-            { headers, timeout: 10000 }
+            { headers: ringGroupHeaders, timeout: 10000 }
           );
           console.log('Warning: Ring group still exists after deletion');
           return false;

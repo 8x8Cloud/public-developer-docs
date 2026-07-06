@@ -29,10 +29,17 @@ def create_ring_group_with_polling(
         if ring_group:
             print(f"Created ring group: {ring_group['name']} (ID: {ring_group['id']})")
     """
-    headers = {
+    write_headers = {
         'X-API-Key': api_key,
-        'Accept': 'application/vnd.ringgroups.v1+json',
         'Content-Type': 'application/vnd.ringgroups.v1+json'
+    }
+    operations_headers = {
+        'X-API-Key': api_key,
+        'Accept': 'application/vnd.operations.v1+json'
+    }
+    ring_group_headers = {
+        'X-API-Key': api_key,
+        'Accept': 'application/vnd.ringgroups.v1+json'
     }
 
     # Ring group payload with required fields
@@ -48,7 +55,7 @@ def create_ring_group_with_polling(
         # Step 1: Create ring group (async operation)
         response = requests.post(
             f'{base_url}/ring-groups',
-            headers=headers,
+            headers=write_headers,
             json=ring_group_data,
             timeout=10
         )
@@ -66,7 +73,7 @@ def create_ring_group_with_polling(
 
             status_response = requests.get(
                 f"{base_url}/operations/{operation_id}",
-                headers=headers,
+                headers=operations_headers,
                 timeout=10
             )
             status_response.raise_for_status()
@@ -84,7 +91,7 @@ def create_ring_group_with_polling(
                 # Step 3: Retrieve created ring group
                 ring_group_response = requests.get(
                     f"{base_url}/ring-groups/{ring_group_id}",
-                    headers=headers,
+                    headers=ring_group_headers,
                     timeout=10
                 )
                 ring_group_response.raise_for_status()
