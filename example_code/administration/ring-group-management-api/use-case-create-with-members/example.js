@@ -30,10 +30,17 @@ async function createRingGroupWithMembers(
   voicemailEmail = null,
   baseUrl = 'https://api.8x8.com/admin-provisioning'
 ) {
-  const headers = {
+  const writeHeaders = {
     'X-API-Key': apiKey,
-    'Accept': 'application/vnd.ringgroups.v1+json',
     'Content-Type': 'application/vnd.ringgroups.v1+json'
+  };
+  const operationsHeaders = {
+    'X-API-Key': apiKey,
+    'Accept': 'application/vnd.operations.v1+json'
+  };
+  const ringGroupHeaders = {
+    'X-API-Key': apiKey,
+    'Accept': 'application/vnd.ringgroups.v1+json'
   };
 
   // Build members array with sequence numbers
@@ -66,7 +73,7 @@ async function createRingGroupWithMembers(
     const response = await axios.post(
       `${baseUrl}/ring-groups`,
       ringGroupData,
-      { headers, timeout: 10000 }
+      { headers: writeHeaders, timeout: 10000 }
     );
 
     const operation = response.data;
@@ -83,7 +90,7 @@ async function createRingGroupWithMembers(
 
       const statusResponse = await axios.get(
         `${baseUrl}/operations/${operationId}`,
-        { headers, timeout: 10000 }
+        { headers: operationsHeaders, timeout: 10000 }
       );
 
       const operationStatus = statusResponse.data;
@@ -96,7 +103,7 @@ async function createRingGroupWithMembers(
         // Step 3: Retrieve ring group with members
         const ringGroupResponse = await axios.get(
           `${baseUrl}/ring-groups/${ringGroupId}`,
-          { headers, timeout: 10000 }
+          { headers: ringGroupHeaders, timeout: 10000 }
         );
 
         return ringGroupResponse.data;

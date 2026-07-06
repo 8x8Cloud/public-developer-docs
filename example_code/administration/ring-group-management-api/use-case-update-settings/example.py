@@ -32,17 +32,24 @@ def update_ring_group_settings(
         if updated_group:
             print(f"Updated ring group: {updated_group['name']}")
     """
-    headers = {
+    write_headers = {
         'X-API-Key': api_key,
-        'Accept': 'application/vnd.ringgroups.v1+json',
         'Content-Type': 'application/vnd.ringgroups.v1+json'
+    }
+    operations_headers = {
+        'X-API-Key': api_key,
+        'Accept': 'application/vnd.operations.v1+json'
+    }
+    ring_group_headers = {
+        'X-API-Key': api_key,
+        'Accept': 'application/vnd.ringgroups.v1+json'
     }
 
     try:
         # Step 1: Retrieve current ring group configuration
         response = requests.get(
             f'{base_url}/ring-groups/{ring_group_id}',
-            headers=headers,
+            headers=ring_group_headers,
             timeout=10
         )
         response.raise_for_status()
@@ -60,7 +67,7 @@ def update_ring_group_settings(
         # Step 3: Update ring group (async operation)
         update_response = requests.put(
             f'{base_url}/ring-groups/{ring_group_id}',
-            headers=headers,
+            headers=write_headers,
             json=ring_group,
             timeout=10
         )
@@ -78,7 +85,7 @@ def update_ring_group_settings(
 
             status_response = requests.get(
                 f"{base_url}/operations/{operation_id}",
-                headers=headers,
+                headers=operations_headers,
                 timeout=10
             )
             status_response.raise_for_status()
@@ -92,7 +99,7 @@ def update_ring_group_settings(
                 # Step 5: Retrieve updated ring group
                 final_response = requests.get(
                     f"{base_url}/ring-groups/{ring_group_id}",
-                    headers=headers,
+                    headers=ring_group_headers,
                     timeout=10
                 )
                 final_response.raise_for_status()

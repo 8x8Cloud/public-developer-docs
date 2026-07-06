@@ -1,83 +1,81 @@
 const axios = require('axios');
 
 /**
- * Add or remove members from a ring group.
+ * Apply a targeted add/update/remove delta to a ring group's members using
+ * POST /ring-groups/{ringGroupId}/update-members.
+ *
+ * Only the members you pass are changed; the rest of the ring group's membership
+ * and configuration is left untouched, and the whole delta is applied atomically.
+ * At least one of add/update/remove must be non-empty. Identify each member by
+ * either extensionId or extensionNumber, and never list the same member in more
+ * than one array.
+ *
+ * Requirements:
+ * - Node.js 14+
+ * - axios: npm install axios
  *
  * @param {string} apiKey - Your API authentication key
  * @param {string} ringGroupId - ID of the ring group to modify
- * @param {string[]} [addUserIds] - Array of user IDs to add as members
- * @param {string[]} [removeUserIds] - Array of user IDs to remove from ring group
+ * @param {Object} [modifications] - The membership delta
+ * @param {Object[]} [modifications.add] - New members to add
+ * @param {Object[]} [modifications.update] - Existing members to modify (omitted fields keep their current value)
+ * @param {Object[]} [modifications.remove] - Members to remove
  * @param {string} [baseUrl='https://api.8x8.com/admin-provisioning'] - API base URL
- * @returns {Promise<Object>} Updated ring group with members
- * @throws {Error} On HTTP or network errors
+ * @returns {Promise<Object>} The ring group after the delta is applied
+ * @throws {Error} On HTTP or network errors, or if no changes are provided
  *
  * @example
- * const updatedGroup = await manageRingGroupMembers(
- *   'your-api-key',
- *   'abc123',
- *   ['new_user_1', 'new_user_2'],
- *   ['old_user_1']
- * );
- * console.log(`Ring group now has ${updatedGroup.members?.length || 0} members`);
+ * const result = await updateRingGroupMembers('your-api-key', 'aeP9pOoDRbq8_KKiwtsXhQ', {
+ *   add: [{ extensionNumber: '1005', sequenceNumber: 4, voicemailAccessEnabled: true }],
+ *   update: [{ extensionNumber: '1002', sequenceNumber: 1 }],
+ *   remove: [{ extensionNumber: '1003' }]
+ * });
+ * console.log(`Ring group now has ${result.members?.length || 0} members`);
  */
-async function manageRingGroupMembers(
+async function updateRingGroupMembers(
   apiKey,
   ringGroupId,
-  addUserIds = null,
-  removeUserIds = null,
+  modifications = {},
   baseUrl = 'https://api.8x8.com/admin-provisioning'
 ) {
-  const headers = {
+  // Include only the arrays that were provided and are non-empty.
+  const payload = {};
+  if (modifications.add && modifications.add.length > 0) payload.add = modifications.add;
+  if (modifications.update && modifications.update.length > 0) payload.update = modifications.update;
+  if (modifications.remove && modifications.remove.length > 0) payload.remove = modifications.remove;
+
+  if (Object.keys(payload).length === 0) {
+    throw new Error("Provide at least one of 'add', 'update', or 'remove'");
+  }
+
+  // A write with a payload carries the version in Content-Type; no Accept is
+  // sent (the endpoint always returns an Operation). Reads (the polling GETs
+  // below) carry the version in Accept.
+  const writeHeaders = {
     'X-API-Key': apiKey,
-    'Accept': 'application/vnd.ringgroups.v1+json',
-    'Content-Type': 'application/vnd.ringgroups.v1+json'
+    'Content-Type': 'application/vnd.ringgroups.update-members.v1+json'
+  };
+  const operationsHeaders = {
+    'X-API-Key': apiKey,
+    'Accept': 'application/vnd.operations.v1+json'
+  };
+  const ringGroupHeaders = {
+    'X-API-Key': apiKey,
+    'Accept': 'application/vnd.ringgroups.v1+json'
   };
 
   try {
-    // Step 1: Retrieve current ring group with members
-    const response = await axios.get(
-      `${baseUrl}/ring-groups/${ringGroupId}`,
-      { headers, timeout: 10000 }
+    // Step 1: Submit the membership delta (async operation)
+    const response = await axios.post(
+      `${baseUrl}/ring-groups/${ringGroupId}/update-members`,
+      payload,
+      { headers: writeHeaders, timeout: 10000 }
     );
 
-    const ringGroup = response.data;
-    let currentMembers = ringGroup.members || [];
-    console.log(`Current members: ${currentMembers.length}`);
-
-    // Step 2: Remove specified members
-    if (removeUserIds && removeUserIds.length > 0) {
-      currentMembers = currentMembers.filter(m => !removeUserIds.includes(m.userId));
-      console.log(`Removed ${removeUserIds.length} members`);
-    }
-
-    // Step 3: Add new members
-    if (addUserIds && addUserIds.length > 0) {
-      const maxSequence = currentMembers.reduce((max, m) => Math.max(max, m.sequenceNumber || 0), 0);
-      addUserIds.forEach((userId, index) => {
-        currentMembers.push({
-          userId,
-          sequenceNumber: maxSequence + index + 1,
-          voicemailAccessEnabled: true
-        });
-      });
-      console.log(`Added ${addUserIds.length} new members`);
-    }
-
-    // Update ring group with modified members
-    ringGroup.members = currentMembers;
-
-    // Step 4: Submit update (async operation)
-    const updateResponse = await axios.put(
-      `${baseUrl}/ring-groups/${ringGroupId}`,
-      ringGroup,
-      { headers, timeout: 10000 }
-    );
-
-    const operation = updateResponse.data;
-    const operationId = operation.operationId;
+    const operationId = response.data.operationId;
     console.log(`Member update operation initiated (ID: ${operationId})`);
 
-    // Step 5: Poll operation status
+    // Step 2: Poll operation status until it reaches a terminal state
     const maxAttempts = 30;
     const pollInterval = 2000;
 
@@ -86,23 +84,24 @@ async function manageRingGroupMembers(
 
       const statusResponse = await axios.get(
         `${baseUrl}/operations/${operationId}`,
-        { headers, timeout: 10000 }
+        { headers: operationsHeaders, timeout: 10000 }
       );
 
-      const operationStatus = statusResponse.data;
-      const status = operationStatus.status;
+      const status = statusResponse.data.status;
 
       if (status === 'COMPLETED') {
-        // Retrieve updated ring group with members
+        // Step 3: Retrieve the ring group to confirm the applied delta
         const finalResponse = await axios.get(
           `${baseUrl}/ring-groups/${ringGroupId}`,
-          { headers, timeout: 10000 }
+          { headers: ringGroupHeaders, timeout: 10000 }
         );
-
         return finalResponse.data;
 
       } else if (status === 'FAILED') {
-        const errorMessage = operationStatus.error?.message || 'Unknown error';
+        // Validations that are race-condition-prone (member exists, resulting
+        // collection size) are performed asynchronously and surface here via
+        // the operation's error field.
+        const errorMessage = statusResponse.data.error?.message || 'Unknown error';
         throw new Error(`Member update failed: ${errorMessage}`);
       }
     }
@@ -121,4 +120,4 @@ async function manageRingGroupMembers(
   }
 }
 
-module.exports = { manageRingGroupMembers };
+module.exports = { updateRingGroupMembers };

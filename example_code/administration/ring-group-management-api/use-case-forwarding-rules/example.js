@@ -21,17 +21,24 @@ async function configureForwardingRules(
   ringGroupId,
   baseUrl = 'https://api.8x8.com/admin-provisioning'
 ) {
-  const headers = {
+  const writeHeaders = {
     'X-API-Key': apiKey,
-    'Accept': 'application/vnd.ringgroups.v1+json',
     'Content-Type': 'application/vnd.ringgroups.v1+json'
+  };
+  const operationsHeaders = {
+    'X-API-Key': apiKey,
+    'Accept': 'application/vnd.operations.v1+json'
+  };
+  const ringGroupHeaders = {
+    'X-API-Key': apiKey,
+    'Accept': 'application/vnd.ringgroups.v1+json'
   };
 
   try {
     // Step 1: Retrieve current ring group
     const response = await axios.get(
       `${baseUrl}/ring-groups/${ringGroupId}`,
-      { headers, timeout: 10000 }
+      { headers: ringGroupHeaders, timeout: 10000 }
     );
 
     const ringGroup = response.data;
@@ -74,7 +81,7 @@ async function configureForwardingRules(
     const updateResponse = await axios.put(
       `${baseUrl}/ring-groups/${ringGroupId}`,
       ringGroup,
-      { headers, timeout: 10000 }
+      { headers: writeHeaders, timeout: 10000 }
     );
 
     const operation = updateResponse.data;
@@ -90,7 +97,7 @@ async function configureForwardingRules(
 
       const statusResponse = await axios.get(
         `${baseUrl}/operations/${operationId}`,
-        { headers, timeout: 10000 }
+        { headers: operationsHeaders, timeout: 10000 }
       );
 
       const operationStatus = statusResponse.data;
@@ -102,7 +109,7 @@ async function configureForwardingRules(
         // Step 5: Retrieve updated ring group
         const finalResponse = await axios.get(
           `${baseUrl}/ring-groups/${ringGroupId}`,
-          { headers, timeout: 10000 }
+          { headers: ringGroupHeaders, timeout: 10000 }
         );
 
         return finalResponse.data;

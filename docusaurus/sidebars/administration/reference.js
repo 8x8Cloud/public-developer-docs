@@ -41,6 +41,7 @@ const sidebarConfig = [
           'administration/reference/create-ring-group',
           'administration/reference/get-ring-group',
           'administration/reference/update-ring-group',
+          'administration/reference/update-ring-group-members',
           'administration/reference/delete-ring-group',
         ],
       },

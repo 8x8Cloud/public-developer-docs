@@ -1,6 +1,6 @@
 # Ring Group Management API Guide
 
-**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)
+**API Version**: 1.0  |  **Last Updated**: July 1, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)
 
 import TabbedExternalCodeSample from '@site/docusaurus/components/TabbedExternalCodeSample';
 
@@ -38,7 +38,7 @@ The Ring Group Management API enables customers and partners to programmatically
 This API provides complete lifecycle management for ring groups, including:
 
 - Creating and configuring ring groups with custom routing patterns
-- Managing ring group memberships and member settings
+- Making targeted additions, updates, and removals to ring group membership without replacing the whole group
 - Configuring call forwarding rules and voicemail
 - Assigning phone numbers to ring groups
 - Searching and filtering ring groups with advanced query capabilities
@@ -168,6 +168,15 @@ Members are users assigned to receive calls distributed by the ring group. Each 
 - `loggedIn`: Current login status (if allowLogInLogOut is enabled)
 - `voicemailAccessEnabled`: Permission to access ring group voicemail
 
+**Targeted membership changes**: To add, update, or remove specific members without resending the entire ring group, use the dedicated `POST /ring-groups/{ringGroupId}/update-members` endpoint. It applies an atomic delta — an `add`, `update`, and/or `remove` list in a single request — so you don't have to read the current member list, mutate it, and write it back. Within a single request, each member is identified by either its `extensionId` or `extensionNumber`, and the same identifier cannot appear in more than one list. See [Use Case 4: Manage Ring Group Members](#use-case-4-manage-ring-group-members).
+
+**How `sequenceNumber` is resolved**: For ROUND_ROBIN and SEQUENTIAL patterns, `sequenceNumber` sets each member's position in the alerting order. When you add or update members through `update-members`, the service treats the values you supply as *desired positions* and reconciles them against the existing members:
+
+- The `sequenceNumber` values in a single request must be **unique within that request** — if two members in the same request request the same position, the additions are rejected.
+- A supplied `sequenceNumber` **may collide with an existing member's** position. The new or updated member is placed at that desired position and the existing members at or below it shuffle **down** to make space.
+- If you **omit `sequenceNumber` on an `add`**, the new member is appended to the **end** of the sequence.
+- The final order is always a **contiguous sequence starting at 1 with no gaps**. Removing members closes the gap — the members below shuffle **up** so the numbering stays contiguous.
+
 ### Caller ID Configuration
 
 The `inboundCallerIdFormat` property controls what caller ID information members see:
@@ -263,14 +272,57 @@ Be sure to familiarise yourself with the correct update pattern in the [Administ
 
 ### Use Case 4: Manage Ring Group Members
 
-When team composition changes, you need to add new members, remove departing members, or adjust member settings like sequence order or voicemail access.
+When team composition changes, you need to add new members, remove departing members, or adjust member settings like sequence order or voicemail access. Use the dedicated `POST /ring-groups/{ringGroupId}/update-members` endpoint to apply these changes as a **targeted, atomic delta** — you send only the members that are changing, not the entire ring group.
+
+This is the recommended way to modify membership. It avoids the read-modify-write cycle of a full-object `PUT`, and the whole delta is applied atomically: either every change in the request succeeds or none do.
 
 This use case demonstrates:
 
-- Adding new members to existing ring group
-- Removing members who have left the team
-- Updating member sequence numbers
-- Enabling/disabling voicemail access for members
+- Adding new members with `add` (sequence number, voicemail access)
+- Modifying existing members with `update` (for example, changing sequence order or voicemail access)
+- Removing departing members with `remove`
+- Combining all three in a single atomic request
+- Tracking the operation to completion (see [API Essentials - Async Operations](./suite-common.mdx#asynchronous-operations))
+
+:::info Request body and identifiers
+
+The request body carries up to three optional lists — `add`, `update`, and `remove` — and **at least one must be non-empty**. Each list accepts up to 200 members. Identify each member by either `extensionId` or `extensionNumber`; the same identifier must not appear in more than one list. This endpoint uses its own version media type: `Content-Type: application/vnd.ringgroups.update-members.v1+json`.
+
+:::
+
+A request body that adds one member, re-orders another, and removes a third looks like this:
+
+```json
+{
+  "add": [
+    { "extensionNumber": "1005", "sequenceNumber": 4, "voicemailAccessEnabled": true }
+  ],
+  "update": [
+    { "extensionNumber": "1002", "sequenceNumber": 1 }
+  ],
+  "remove": [
+    { "extensionNumber": "1003" }
+  ]
+}
+```
+
+Like the other write operations, the endpoint responds `202 Accepted` with an Operation resource (`operationType: UPDATE_MEMBERS`) that you poll to completion:
+
+```json
+{
+  "operationId": "op_123456789",
+  "status": "PENDING",
+  "customerId": "0012J00042NkZQIQA3",
+  "resourceType": "RING_GROUP",
+  "resourceId": "aeP9pOoDRbq8_KKiwtsXhQ",
+  "operationType": "UPDATE_MEMBERS",
+  "createdTime": "2025-01-01T01:02:03Z",
+  "_links": {
+    "self": { "href": "https://api.8x8.com/admin-provisioning/operations/op_123456789" },
+    "resource": { "href": "https://api.8x8.com/admin-provisioning/ring-groups/aeP9pOoDRbq8_KKiwtsXhQ" }
+  }
+}
+```
 
 <TabbedExternalCodeSample
   path="example_code/administration/ring-group-management-api/use-case-manage-members"
@@ -278,7 +330,13 @@ This use case demonstrates:
   languages={LANGUAGES}
 />
 
-**Expected outcome**: Ring group membership updated to reflect team changes with proper sequencing.
+**Expected outcome**: The specified members are added, updated, and/or removed atomically, and the rest of the ring group's membership and configuration is left untouched.
+
+:::note Replacing the entire member list
+
+If you genuinely need to replace the whole member list (or change other ring group settings at the same time), you can still send the complete `members` array via `PUT /ring-groups/{ringGroupId}` — see [Use Case 3: Update Ring Group Settings](#use-case-3-update-ring-group-settings) and the PUT-semantics guidance. For everyday membership changes, prefer `update-members`.
+
+:::
 
 ### Use Case 5: Configure Forwarding Rules
 
@@ -334,7 +392,8 @@ This use case demonstrates:
 | GET | `/ring-groups` | Search ring groups with filtering and pagination |
 | POST | `/ring-groups` | Create new ring group (async operation) |
 | GET | `/ring-groups/{ringGroupId}` | Retrieve specific ring group by ID |
-| PUT | `/ring-groups/{ringGroupId}` | Update ring group (async operation) |
+| PUT | `/ring-groups/{ringGroupId}` | Update ring group, replacing the full object (async operation) |
+| POST | `/ring-groups/{ringGroupId}/update-members` | Apply a targeted add/update/remove delta to ring group members (async operation) |
 | DELETE | `/ring-groups/{ringGroupId}` | Delete ring group (async operation) |
 
 ### Required Headers
@@ -345,9 +404,12 @@ For Ring Group Management API specifically:
 
 ```http
 x-api-key: your-api-key-here
-Content-Type: application/vnd.ringgroups.v1+json   (on POST/PUT — carries the version)
-Accept: application/vnd.ringgroups.v1+json          (on GET)
+Content-Type: application/vnd.ringgroups.v1+json                  (on POST /ring-groups and PUT — carries the version)
+Content-Type: application/vnd.ringgroups.update-members.v1+json   (on POST /ring-groups/{ringGroupId}/update-members only)
+Accept: application/vnd.ringgroups.v1+json                        (on GET)
 ```
+
+The `POST /ring-groups/{ringGroupId}/update-members` endpoint uses its own request media type (see below).
 
 ### Version Media Type
 
@@ -356,6 +418,14 @@ The version is carried in the `Content-Type` header on requests with a payload (
 ```text
 application/vnd.ringgroups.v1+json
 ```
+
+**Exception — `update-members`**: The `POST /ring-groups/{ringGroupId}/update-members` endpoint uses a distinct request media type for its delta payload:
+
+```text
+application/vnd.ringgroups.update-members.v1+json
+```
+
+Like the other async write operations, it returns an Operation resource (`application/vnd.operations.v1+json`).
 
 ### Important Parameters
 
@@ -510,6 +580,64 @@ This section covers error scenarios specific to the Ring Group Management API.
 
 **Resolution**: Verify resource ID is correct, check if resource exists in correct customer account.
 
+### Membership Update Errors (`update-members`)
+
+These errors are specific to `POST /ring-groups/{ringGroupId}/update-members`. The `400` cases below are synchronous request-validation failures — the payload is rejected before any work is done. The `409` signals a conflict detected while applying the delta (for example, a concurrent modification of the ring group or a conflict passed through from the downstream voice configuration service).
+
+**Empty delta (400)** — the request must change at least one member:
+
+```json
+{
+  "status": 400,
+  "title": "Invalid update-members request",
+  "errors": [
+    {
+      "code": "BAD_REQUEST",
+      "message": "At least one of 'add', 'update', or 'remove' must be non-empty"
+    }
+  ]
+}
+```
+
+**Resolution**: Include at least one member in `add`, `update`, or `remove`.
+
+**Duplicate identifier across lists (400)** — the same member appears in more than one list:
+
+```json
+{
+  "status": 400,
+  "title": "Invalid update-members request",
+  "errors": [
+    {
+      "code": "CONFLICTING_QUERY_PARAMETER",
+      "field": "remove[0].extensionId",
+      "message": "Identifier 'ext-1' appears in more than one array"
+    }
+  ]
+}
+```
+
+**Resolution**: Ensure each `extensionId` / `extensionNumber` appears in only one of `add`, `update`, or `remove`.
+
+**Conflict while applying the delta (409)** — a conflict was detected during processing (such as a concurrent modification or a downstream conflict):
+
+```json
+{
+  "status": 409,
+  "title": "Conflicting update-members request",
+  "errors": [
+    {
+      "code": "CONFLICT",
+      "message": "The ring group was modified concurrently; retry with the current member list"
+    }
+  ]
+}
+```
+
+**Resolution**: Re-fetch the ring group to get its current membership, rebuild your `add`/`update`/`remove` delta from that state, and resubmit.
+
+Note that some membership validations (for example, whether a member's extension actually exists, or whether the resulting member count is within limits) are performed asynchronously and surface via the operation's `error` field on a terminal status rather than in the initial `202` response — see [Operation Failures](#operation-failures).
+
 ### Operation Failures
 
 Poll operation status to get failure details. Common causes:
@@ -554,16 +682,18 @@ This section covers troubleshooting issues specific to the Ring Group Management
 
 **Debugging Steps**:
 
-1. Verify members were included in PUT request members array
-2. Check update operation status (should be COMPLETED)
-3. Ensure member user IDs are valid and users exist
-4. Retrieve ring group to see actual member list
-5. Check for validation errors in operation response
+1. Check the update operation status (should be COMPLETED, not FAILED)
+2. If you used `update-members`, confirm each member was placed in the intended `add`/`update`/`remove` list
+3. If you used a full-object `PUT`, verify members were included in the complete `members` array
+4. Ensure member `extensionId` / `extensionNumber` values are valid and the users exist
+5. Retrieve the ring group to see the actual member list
+6. Check the operation's `error` field for asynchronous validation failures
 
 **Resolution**:
 
-- Always include complete members array in PUT requests
-- Verify all member user IDs exist before submitting
+- For targeted changes, use `POST /ring-groups/{ringGroupId}/update-members` and send only the members that are changing
+- When using a full-object `PUT`, always include the complete `members` array (omitted members are removed)
+- Verify all member identifiers exist before submitting
 - Check operation error details for specific member issues
 
 ### Extension Number Conflicts
@@ -626,4 +756,4 @@ See [API Essentials - Troubleshooting - Async Operation Problems](./suite-common
 
 ---
 
-**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)  |  **Feedback**: Submit feedback via Admin Console
+**API Version**: 1.0  |  **Last Updated**: July 1, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)  |  **Feedback**: Submit feedback via Admin Console

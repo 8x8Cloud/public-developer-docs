@@ -26,7 +26,11 @@ def delete_ring_group_with_verification(
         if success:
             print("Ring group deleted successfully")
     """
-    headers = {
+    operations_headers = {
+        'X-API-Key': api_key,
+        'Accept': 'application/vnd.operations.v1+json'
+    }
+    ring_group_headers = {
         'X-API-Key': api_key,
         'Accept': 'application/vnd.ringgroups.v1+json'
     }
@@ -35,7 +39,7 @@ def delete_ring_group_with_verification(
         # Step 1: Verify ring group exists
         response = requests.get(
             f'{base_url}/ring-groups/{ring_group_id}',
-            headers=headers,
+            headers=ring_group_headers,
             timeout=10
         )
         response.raise_for_status()
@@ -45,7 +49,7 @@ def delete_ring_group_with_verification(
         # Step 2: Initiate deletion (async operation)
         delete_response = requests.delete(
             f'{base_url}/ring-groups/{ring_group_id}',
-            headers=headers,
+            headers=operations_headers,
             timeout=10
         )
         delete_response.raise_for_status()
@@ -62,7 +66,7 @@ def delete_ring_group_with_verification(
 
             status_response = requests.get(
                 f"{base_url}/operations/{operation_id}",
-                headers=headers,
+                headers=operations_headers,
                 timeout=10
             )
             status_response.raise_for_status()
@@ -77,7 +81,7 @@ def delete_ring_group_with_verification(
                 try:
                     verify_response = requests.get(
                         f"{base_url}/ring-groups/{ring_group_id}",
-                        headers=headers,
+                        headers=ring_group_headers,
                         timeout=10
                     )
                     verify_response.raise_for_status()

@@ -96,6 +96,12 @@ const sidebar: SidebarsConfig = {
           label: "Delete a ring group",
           className: "api-method delete",
         },
+        {
+          type: "doc",
+          id: "administration/reference/update-ring-group-members",
+          label: "Update ring group members",
+          className: "api-method post",
+        },
       ],
     },
     {
