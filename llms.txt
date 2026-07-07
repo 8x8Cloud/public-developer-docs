@@ -334,7 +334,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Dashboard](https://developer.8x8.com/connect/docs/dashboard): The dashboard page can only be accessed by agents with administrator or supervisor roles. The dashboard has three(3) sections
 - [Messaging Apps Delivery Receipt Error Codes](https://developer.8x8.com/connect/docs/delivery-error-codes): > ℹ️ **Troubleshooting tip**
 - [SMS Delivery Receipt Error Codes](https://developer.8x8.com/connect/docs/delivery-receipts-error-codes): > ℹ️ **Troubleshooting tip**
-- [Delivery receipts for Outbound Messaging Apps](https://developer.8x8.com/connect/docs/delivery-receipts-for-outbound-chatapps): **Delivery Report (DR)** are webhooks for Messaging Apps delivery statuses: `POST` requests sent by the 8x8 platform in `JSON` format to the callba...
+- [Delivery receipts for Outbound Messaging Apps](https://developer.8x8.com/connect/docs/delivery-receipts-for-outbound-chatapps): import Tabs from '@theme/Tabs';
 - [Delivery receipts for outbound SMS](https://developer.8x8.com/connect/docs/delivery-receipts-for-outbound-sms): Delivery Receipts (DR) are webhooks for delivery statuses: `POST` requests sent by 8x8 platform in `JSON` format to the delivery reports callback U...
 - [Details](https://developer.8x8.com/connect/docs/details): **Filling Up Details**
 - [Detrack - SMS Integration](https://developer.8x8.com/connect/docs/detrack): **Detrack** is a scalable, smart, and easy to use tracking service with automatic real-time notifications when orders are delivered.
@@ -359,7 +359,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [WhatsApp Template Validity Period (TTL)](https://developer.8x8.com/connect/docs/guide-whatsapp-template-validity-period-ttl): WhatsApp allows you to define a specific validity period or delivery window, also known **Time-To-Live (TTL)**, for **Utility** and **Authenticatio...
 - [Hangup](https://developer.8x8.com/connect/docs/hangup): This action should be used to hang up the incoming call.
 - [iframe integration](https://developer.8x8.com/connect/docs/iframe-integration): In order to provide a seamless experience to Agents, the Agent portal can be embedded in another web application.
-- [Inbound Messaging Apps message](https://developer.8x8.com/connect/docs/inbound-chatapps-message): Inbound Messages are messages sent to you by users, on one of the channels you linked with your 8x8 account. Once this happens, 8x8 sends you this ...
+- [Inbound Messaging Apps message](https://developer.8x8.com/connect/docs/inbound-chatapps-message): import Tabs from '@theme/Tabs';
 - [Inbound SMS](https://developer.8x8.com/connect/docs/inbound-sms): 8x8 SMS API exposes a webhook mechanism to let you receive Inbound SMS (SMS sent to your virtual numbers) on a callback URL of your choice.  
 - [Integrations Overview](https://developer.8x8.com/connect/docs/integrations-overview): | Integration | Link to Integration |
 - [IP address list](https://developer.8x8.com/connect/docs/ip-address-list): > 🚧 IP Address List
