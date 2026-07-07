@@ -152,7 +152,7 @@ To receive inbound messages from LINE users:
 
 When a LINE user sends a message to your LINE Official Account, 8x8 forwards it to your configured webhook URL.
 
-> 📘 You can configure your callback using the [Webhook Configuration API](/connect/reference/webhooks-configuration-api).
+> 📘 You can configure your callback using the [Webhook Configuration API](/connect/reference/add-webhooks-1).
 
 ### Inbound Webhook Format
 
