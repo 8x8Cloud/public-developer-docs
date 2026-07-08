@@ -89,6 +89,7 @@ const sidebarConfig = [
               'connect/docs/whatsapp/whatsapp-flows-best-practices',
             ],
           },
+          'connect/docs/whatsapp/whatsapp-business-scoped-user-ids',
           'connect/docs/whatsapp/advanced-capabilities',
           'connect/docs/whatsapp/scenarios-tutorials',
           'connect/docs/whatsapp/vertical-playbooks',

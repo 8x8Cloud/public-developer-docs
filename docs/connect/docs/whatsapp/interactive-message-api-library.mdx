@@ -19,6 +19,10 @@ import ProductListImg from '../../images/a32565d-image.png';
 
 This page provides a comprehensive library of WhatsApp interactive and freeform message API payloads. Unlike template messages, these do not require Meta approval and can be sent during active conversation windows.
 
+:::tip
+Every send payload below accepts `user.channelUserId` (BSUID) alongside `user.msisdn`. See [Business-Scoped User IDs](./whatsapp-business-scoped-user-ids.md) for how the two identifiers interact.
+:::
+
 <table>
 <colgroup>
 <col style={{width: '200px', minWidth: '200px', maxWidth: '200px'}} />
@@ -51,7 +55,8 @@ Sends a plain text message to the user.
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "text",
   "content": {
@@ -84,7 +89,8 @@ Sends an image from a URL with optional text caption.
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "Image",
   "content": {
@@ -118,7 +124,8 @@ Sends a video from a URL with optional text caption.
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "video",
   "content": {
@@ -152,7 +159,8 @@ Sends a document from a URL with optional filename and caption.
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "File",
   "content": {
@@ -186,7 +194,8 @@ Sends a location message with latitude, longitude, name, and address.
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "location",
   "content": {
@@ -224,7 +233,8 @@ Creates a list menu with multiple options organized in sections.
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "interactive",
   "content": {
@@ -304,7 +314,8 @@ Creates an interactive message with up to 3 reply buttons. Users can tap a butto
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "interactive",
   "content": {
@@ -374,7 +385,8 @@ Creates an interactive message with an image header and up to 3 reply buttons.
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "interactive",
   "content": {
@@ -427,7 +439,8 @@ Creates a message with a single CTA button that can open a URL or initiate a pho
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "interactive",
   "content": {
@@ -478,7 +491,8 @@ Sends an interactive message that opens a WhatsApp Flow when tapped. Flows enabl
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "Interactive",
   "content": {
@@ -533,7 +547,8 @@ Displays a single product from your WhatsApp Business catalog.
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "interactive",
   "content": {
@@ -578,7 +593,8 @@ Displays multiple products from your WhatsApp Business catalog in sections.
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "interactive",
   "content": {

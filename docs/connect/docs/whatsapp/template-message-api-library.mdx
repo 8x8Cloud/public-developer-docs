@@ -15,6 +15,10 @@ import ButtonCombinationTemplate from './images/WhatsApp Template - Rich Button.
 
 This page provides a comprehensive library of WhatsApp template API payloads for both creating and sending templates.
 
+:::tip
+Every send payload below accepts `user.channelUserId` (BSUID) alongside `user.msisdn`. See [Business-Scoped User IDs](./whatsapp-business-scoped-user-ids.md) for how the two identifiers interact.
+:::
+
 <table>
 <colgroup>
 <col style={{width: '200px', minWidth: '200px', maxWidth: '200px'}} />
@@ -84,7 +88,8 @@ Sends the template, populating the `body` parameter and the `copyCode` parameter
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {
@@ -196,7 +201,8 @@ Sends the template, providing the `url` for the image, the `text` for the body, 
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {
@@ -313,7 +319,8 @@ Sends the template, providing the `url` for the video and the `text` for the bod
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {
@@ -430,7 +437,8 @@ Sends the template, providing the `url` for the document and the `text` for the 
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {
@@ -554,7 +562,8 @@ Sends the template, providing the full `location` object (lat, lon, name, addres
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {
@@ -722,7 +731,8 @@ Sends the template, populating the main `body` parameters and the dynamic parame
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {
@@ -872,7 +882,8 @@ Sends the template with the Flow button. When users tap the button, the WhatsApp
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
     "content": {
@@ -1032,7 +1043,8 @@ Sends the template, providing the `url` for the image, the `text` for the body, 
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {

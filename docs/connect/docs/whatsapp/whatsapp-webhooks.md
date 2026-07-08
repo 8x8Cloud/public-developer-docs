@@ -589,5 +589,6 @@ The 8x8 Connect portal provides webhook delivery logs:
 ## Related Resources
 
 - [WhatsApp over 8x8 API](./whatsapp-over-8x8-api.md) - Main API guide
+- [WhatsApp Business-Scoped User IDs (BSUID)](./whatsapp-business-scoped-user-ids.md) - New DR v9 / MO v3 payload versions and the `user.channelUserId` field
 - [Operations, Monitoring & Troubleshooting](./operations-monitoring.md) - Error handling and debugging
 - [Governance, Security & Compliance](./governance-security.md) - Security best practices
