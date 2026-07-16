@@ -289,6 +289,7 @@
                               "cta_url",
                               "flow",
                               "call_permission_request",
+                              "request_contact_info",
                               "voice_call",
                               "location_request_message"
                             ],
@@ -528,7 +529,7 @@
                           },
                           "body": {
                             "type": "object",
-                            "description": "Optional for type 'product' and 'call_permission_request'. Required for other message types.\n\nAn object with the body of the message.",
+                            "description": "Optional for type 'product', 'call_permission_request', and 'request_contact_info'. Required for other message types.\n\nAn object with the body of the message.",
                             "properties": {
                               "text": {
                                 "type": "string",
@@ -622,14 +623,15 @@
                                 "type": {
                                   "type": "string",
                                   "default": "body",
-                                  "description": "Component type. Possible values are \"header\", \"footer\", \"body\", \"button\", \"carousel\", \"call_permission_request\"",
+                                  "description": "Component type. Possible values are \"header\", \"footer\", \"body\", \"button\", \"carousel\", \"call_permission_request\", \"request_contact_info\"",
                                   "enum": [
                                     "header",
                                     "footer",
                                     "body",
                                     "button",
                                     "carousel",
-                                    "call_permission_request"
+                                    "call_permission_request",
+                                    "request_contact_info"
                                   ]
                                 },
                                 "parameters": {
@@ -1595,6 +1597,21 @@
                     }
                   }
                 },
+                "whatsAppRequestContactInfoTemplate": {
+                  "summary": "WhatsApp Template Message - Request Contact Info",
+                  "value": {
+                    "user": {
+                      "channelUserId": "US.13491208655302741918"
+                    },
+                    "type": "template",
+                    "content": {
+                      "template": {
+                        "language": "en_US",
+                        "name": "<Insert Approved Request Contact Info Template Name>"
+                      }
+                    }
+                  }
+                },
                 "whatsAppVoiceCallTemplate": {
                   "summary": "WhatsApp Template Message - Voice Call Button",
                   "value": {
@@ -1982,6 +1999,23 @@
                         "type": "call_permission_request",
                         "body": {
                           "text": "We would like to call you to help support your query."
+                        }
+                      }
+                    }
+                  }
+                },
+                "whatsAppInteractiveMessageRequestContactInfo": {
+                  "summary": "WhatsApp Interactive Message - Request Contact Info",
+                  "value": {
+                    "user": {
+                      "channelUserId": "US.13491208655302741918"
+                    },
+                    "type": "interactive",
+                    "content": {
+                      "interactive": {
+                        "type": "request_contact_info",
+                        "body": {
+                          "text": "We request you to kindly share your contact info for further processing."
                         }
                       }
                     }
@@ -2571,7 +2605,7 @@
           },
           "description": "Messaging Apps API: request model for send single message"
         },
-        "description": "This endpoint is used to send Messaging Apps messages individually (1 request per message).\nIt is ideal to send single personalized messages for use-cases like notifications or alerting for example.\n\n**For WhatsApp:**\nWhen sending a 'text' type message, we will try to match it with registered WhatsApp templates under your account\nIf matching is successful, the message will be submitted as a template to WhatsApp, if not as a normal message\n\nTo bypass the template matching and send template only, you can select type 'template'\nIn this case, you need to provide template name, language and parameters\n\n**WhatsApp Call Permission Request:**\nYou can request permission to call a customer using either:\n- **Interactive message**: Set type to 'interactive' with interactive.type as 'call_permission_request'. The body field is optional.\n- **Template message**: Set type to 'template' with your approved Call Permission Request template name and language.\n\n\nMore examples on how this endpoint can be used are available here: [Usage examples](/connect/docs/usage-samples-whatsapp)",
+        "description": "This endpoint is used to send Messaging Apps messages individually (1 request per message).\nIt is ideal to send single personalized messages for use-cases like notifications or alerting for example.\n\n**For WhatsApp:**\nWhen sending a 'text' type message, we will try to match it with registered WhatsApp templates under your account\nIf matching is successful, the message will be submitted as a template to WhatsApp, if not as a normal message\n\nTo bypass the template matching and send template only, you can select type 'template'\nIn this case, you need to provide template name, language and parameters\n\n**WhatsApp Call Permission Request:**\nYou can request permission to call a customer using either:\n- **Interactive message**: Set type to 'interactive' with interactive.type as 'call_permission_request'. The body field is optional.\n- **Template message**: Set type to 'template' with your approved Call Permission Request template name and language.\n\n**WhatsApp Request Contact Info:**\nYou can request a customer to share their contact information using either:\n- **Interactive message**: Set type to 'interactive' with interactive.type as 'request_contact_info'. The body field is optional.\n- **Template message**: Set type to 'template' with your approved Request Contact Info template name and language.\n\n\nMore examples on how this endpoint can be used are available here: [Usage examples](/connect/docs/usage-samples-whatsapp)",
         "security": [
           {
             "apiKey": []
@@ -3662,7 +3696,8 @@
                             "FOOTER",
                             "BUTTONS",
                             "CAROUSEL",
-                            "CALL_PERMISSION_REQUEST"
+                            "CALL_PERMISSION_REQUEST",
+                            "REQUEST_CONTACT_INFO"
                           ]
                         },
                         "format": {
@@ -3698,7 +3733,8 @@
                                   "OTP",
                                   "COPY_CODE",
                                   "FLOW",
-                                  "VOICE_CALL"
+                                  "VOICE_CALL",
+                                  "REQUEST_CONTACT_INFO"
                                 ],
                                 "description": "Button type"
                               },
@@ -4078,6 +4114,28 @@
                       },
                       {
                         "type": "CALL_PERMISSION_REQUEST"
+                      }
+                    ]
+                  }
+                },
+                "whatsAppRequestContactInfoTemplate": {
+                  "summary": "Add WhatsApp Template with Request Contact Info",
+                  "value": {
+                    "name": "template_request_call_info_v001",
+                    "category": "UTILITY",
+                    "language": "en",
+                    "components": [
+                      {
+                        "type": "BODY",
+                        "text": "We request you to kindly share your contact info for further processing."
+                      },
+                      {
+                        "type": "BUTTONS",
+                        "buttons": [
+                          {
+                            "type": "REQUEST_CONTACT_INFO"
+                          }
+                        ]
                       }
                     ]
                   }
