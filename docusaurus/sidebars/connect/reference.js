@@ -341,6 +341,10 @@ const sidebarConfig = [
             type: 'doc',
             id: 'connect/docs/whatsapp-account-update-webhook',
           },
+          {
+            type: 'doc',
+            id: 'connect/docs/whatsapp-business-scoped-user-ids',
+          },
         ],
       },
       {
