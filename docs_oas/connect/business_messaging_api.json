@@ -110,7 +110,8 @@
                 "type": "object",
                 "example": {
                   "user": {
-                    "msisdn": "+6500000000"
+                    "msisdn": "+6500000000",
+                    "channelUserId": "US.13491208655302741918"
                   },
                   "clientMessageId": "1234_id",
                   "type": "Image",
@@ -145,6 +146,11 @@
                         "type": "string",
                         "description": "LINE user ID of the recipient. Use this instead of `msisdn` when sending messages to a LINE user via the Line Official Account channel.",
                         "example": "Ua12b345678c1de0fg1a1234567891011"
+                      },
+                      "channelUserId": {
+                        "type": "string",
+                        "description": "WhatsApp Business-Scoped User ID (BSUID) of the recipient. Format: `<ISO-3166-alpha-2-country-code>.<alphanumeric>` (country code must be uppercase). Can be used alongside `msisdn`; if both are provided, `msisdn` takes precedence.",
+                        "example": "US.13491208655302741918"
                       }
                     }
                   },
@@ -642,7 +648,7 @@
                                     "properties": {
                                       "type": {
                                         "type": "string",
-                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"gif\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only \u2014 overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
+                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"gif\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only — overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
                                         "enum": [
                                           "text",
                                           "image",
@@ -885,13 +891,19 @@
                           "cardOrientation": {
                             "type": "string",
                             "description": "Orientation of the card.",
-                            "enum": ["horizontal", "vertical"],
+                            "enum": [
+                              "horizontal",
+                              "vertical"
+                            ],
                             "example": "vertical"
                           },
                           "thumbnailImageAlignment": {
                             "type": "string",
                             "description": "Alignment of the thumbnail image. Applicable for horizontal cards.",
-                            "enum": ["left", "right"],
+                            "enum": [
+                              "left",
+                              "right"
+                            ],
                             "example": "right"
                           },
                           "title": {
@@ -916,7 +928,10 @@
                             }
                           }
                         },
-                        "required": ["cardOrientation", "media"]
+                        "required": [
+                          "cardOrientation",
+                          "media"
+                        ]
                       },
                       "carousel": {
                         "type": "object",
@@ -926,7 +941,10 @@
                           "cardWidth": {
                             "type": "string",
                             "description": "The width of the cards in the carousel.",
-                            "enum": ["small", "medium"],
+                            "enum": [
+                              "small",
+                              "medium"
+                            ],
                             "example": "medium"
                           },
                           "cards": {
@@ -960,11 +978,16 @@
                                   }
                                 }
                               },
-                              "required": ["media"]
+                              "required": [
+                                "media"
+                              ]
                             }
                           }
                         },
-                        "required": ["cardWidth", "cards"]
+                        "required": [
+                          "cardWidth",
+                          "cards"
+                        ]
                       },
                       "suggestions": {
                         "type": "array",
@@ -1229,7 +1252,8 @@
                   "summary": "WhatsApp Message - Text Message",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "content": {
                       "text": "Welcome to the world of 8x8 Messaging Apps APIs!\\nCommunications for the customer obsessed."
@@ -1241,7 +1265,8 @@
                   "summary": "WhatsApp Message - Image with Text",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "content": {
                       "url": "https://www.example.com/image.jpg",
@@ -1254,7 +1279,8 @@
                   "summary": "WhatsApp Template Message - Text",
                   "value": {
                     "user": {
-                      "msisdn": "+650000000"
+                      "msisdn": "+650000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1291,7 +1317,8 @@
                   "summary": "WhatsApp Template Message - Authentication",
                   "value": {
                     "user": {
-                      "msisdn": "+650000000"
+                      "msisdn": "+650000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1328,7 +1355,8 @@
                   "summary": "WhatsApp Template Message - Image",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1354,7 +1382,8 @@
                   "summary": "WhatsApp Template Message - Location",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1385,7 +1414,8 @@
                   "summary": "WhatsApp Template Message - Click to Action Button",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1431,7 +1461,8 @@
                   "summary": "WhatsApp Template Message - Coupon Code Button",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1459,7 +1490,8 @@
                   "summary": "WhatsApp Template Message - Quick Reply Button with payload",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1487,7 +1519,8 @@
                   "summary": "WhatsApp Template Message - Media Carousel with 2 cards",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1559,7 +1592,8 @@
                   "summary": "WhatsApp Template Message - Media Carousel with 2 cards",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1586,7 +1620,8 @@
                   "summary": "WhatsApp Template Message - Call Permission Request",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1616,7 +1651,8 @@
                   "summary": "WhatsApp Template Message - Voice Call Button",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "template",
                     "content": {
@@ -1648,7 +1684,8 @@
                   "summary": "WhatsApp Interactive Message - Quick Reply Buttons",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "content": {
@@ -1697,7 +1734,8 @@
                   "summary": "WhatsApp Interactive Message - Call-to-Action Url Button",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "content": {
@@ -1727,7 +1765,8 @@
                   "summary": "WhatsApp Direct Send - Text Message (Utility)",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "text",
                     "channels": [
@@ -1750,7 +1789,8 @@
                   "summary": "WhatsApp Direct Send - Interactive Message with CTA URL Button",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "channels": [
@@ -1790,7 +1830,8 @@
                   "summary": "WhatsApp Direct Send - Interactive Message with Reply Buttons",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "channels": [
@@ -1842,7 +1883,8 @@
                   "summary": "WhatsApp Interactive Message - Scheduling Menu",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "content": {
@@ -1901,7 +1943,8 @@
                   "summary": "WhatsApp Interactive Message - Single Product",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "content": {
@@ -1925,7 +1968,8 @@
                   "summary": "WhatsApp Interactive Message - Catalog of Products",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "content": {
@@ -1961,7 +2005,8 @@
                   "summary": "WhatsApp Interactive Message - Catalog of Products",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "content": {
@@ -1991,7 +2036,8 @@
                   "summary": "WhatsApp Interactive Message - Call Permission Request",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "content": {
@@ -2025,7 +2071,8 @@
                   "summary": "WhatsApp Interactive Message - Voice Call",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "content": {
@@ -2050,7 +2097,8 @@
                   "summary": "WhatsApp Interactive Message - Location Request Message",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "type": "interactive",
                     "content": {
@@ -2070,7 +2118,8 @@
                   "summary": "WhatsApp Message - Text Message With Contextual Reply",
                   "value": {
                     "user": {
-                      "msisdn": "+6500000000"
+                      "msisdn": "+6500000000",
+                      "channelUserId": "US.13491208655302741918"
                     },
                     "content": {
                       "text": "Yes bro, we see the chess board."
@@ -2175,7 +2224,7 @@
                     },
                     "type": "buttons",
                     "content": {
-                      "text": "\ud83c\udf89 Successful Purchase! \ud83c\udf89\\n\\nHello Ana,\\n\\nThank you for purchasing your Singapore OCBC Skyway ticket! Your ticket is now confirmed and ready for use.\\n\\n\ud83d\udcc5 Date: October 15, 2023\\n\u23f0 Time: 3:00 PM - 4:00 PM\\n\ud83c\udfab Ticket ID: SKY98723\\n\\nTo view your e-ticket, click the button below.",
+                      "text": "🎉 Successful Purchase! 🎉\\n\\nHello Ana,\\n\\nThank you for purchasing your Singapore OCBC Skyway ticket! Your ticket is now confirmed and ready for use.\\n\\n📅 Date: October 15, 2023\\n⏰ Time: 3:00 PM - 4:00 PM\\n🎫 Ticket ID: SKY98723\\n\\nTo view your e-ticket, click the button below.",
                       "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg",
                       "button": {
                         "caption": "View E-ticket",
@@ -2605,7 +2654,7 @@
           },
           "description": "Messaging Apps API: request model for send single message"
         },
-        "description": "This endpoint is used to send Messaging Apps messages individually (1 request per message).\nIt is ideal to send single personalized messages for use-cases like notifications or alerting for example.\n\n**For WhatsApp:**\nWhen sending a 'text' type message, we will try to match it with registered WhatsApp templates under your account\nIf matching is successful, the message will be submitted as a template to WhatsApp, if not as a normal message\n\nTo bypass the template matching and send template only, you can select type 'template'\nIn this case, you need to provide template name, language and parameters\n\n**WhatsApp Call Permission Request:**\nYou can request permission to call a customer using either:\n- **Interactive message**: Set type to 'interactive' with interactive.type as 'call_permission_request'. The body field is optional.\n- **Template message**: Set type to 'template' with your approved Call Permission Request template name and language.\n\n**WhatsApp Request Contact Info:**\nYou can request a customer to share their contact information using either:\n- **Interactive message**: Set type to 'interactive' with interactive.type as 'request_contact_info'. The body field is optional.\n- **Template message**: Set type to 'template' with your approved Request Contact Info template name and language.\n\n\nMore examples on how this endpoint can be used are available here: [Usage examples](/connect/docs/usage-samples-whatsapp)",
+        "description": "This endpoint is used to send Messaging Apps messages individually (1 request per message).\nIt is ideal to send single personalized messages for use-cases like notifications or alerting for example.\n\n**For WhatsApp:**\nWhen sending a 'text' type message, we will try to match it with registered WhatsApp templates under your account\nIf matching is successful, the message will be submitted as a template to WhatsApp, if not as a normal message\n\nTo bypass the template matching and send template only, you can select type 'template'\nIn this case, you need to provide template name, language and parameters\n\n**WhatsApp Call Permission Request:**\nYou can request permission to call a customer using either:\n- **Interactive message**: Set type to 'interactive' with interactive.type as 'call_permission_request'. The body field is optional.\n- **Template message**: Set type to 'template' with your approved Call Permission Request template name and language.\n\n**WhatsApp Request Contact Info:**\nYou can request a customer to share their contact information using either:\n- **Interactive message**: Set type to 'interactive' with interactive.type as 'request_contact_info'. The body field is optional.\n- **Template message**: Set type to 'template' with your approved Request Contact Info template name and language.\n\n**WhatsApp Business-Scoped User ID (BSUID):**\nYou can address a recipient using their `channelUserId` (BSUID) instead of, or alongside, their phone number (`msisdn`). Format: `<COUNTRY-CODE>.<alphanumeric>` where the country code is an uppercase ISO 3166-1 alpha-2 code (e.g. `US.13491208655302741918`). If both are provided, `msisdn` takes precedence.\n\n\nMore examples on how this endpoint can be used are available here: [Usage examples](/connect/docs/whatsapp/whatsapp-over-8x8-api)",
         "security": [
           {
             "apiKey": []
@@ -2988,6 +3037,11 @@
                         "maxLength": 2,
                         "description": "Default country code (like 'sg', 'uk') for  national phone numbers format. You don't need it if `msisdn` in E.164 format (with '+' sign at the beginning)",
                         "example": "SG"
+                      },
+                      "channelUserId": {
+                        "type": "string",
+                        "description": "WhatsApp Business-Scoped User ID (BSUID) of the recipient. Format: `<ISO-3166-alpha-2-country-code>.<alphanumeric>` (country code is uppercase).",
+                        "example": "US.13491208655302741918"
                       }
                     }
                   },
@@ -4446,7 +4500,9 @@
         "summary": "Submit WhatsApp Direct Send Sample",
         "operationId": "submit-whatsapp-direct-send-sample",
         "description": "This endpoint is used to submit a sample of a WhatsApp Direct Send message to Meta for review and classification.\n\nDirect Send auto-creates WhatsApp templates on the fly and matches incoming messages against them. Submitting sample messages will ensure that the messages you send through Direct Send are accurately classified and transformed into templates that are useful for your use cases.\n\nThe response indicates whether the sample was processed successfully and the category Meta assigned to it. Possible categories are `UTILITY`, `MARKETING`, and `AUTHENTICATION`.\n\nSamples can be of two types:\n* `text` — a plain text body.\n* `interactive` — an interactive message with a call-to-action URL (`cta_url`) or reply buttons (`button`).",
-        "tags": ["Management API"],
+        "tags": [
+          "Management API"
+        ],
         "parameters": [
           {
             "name": "subAccountId",
@@ -4474,18 +4530,25 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["type"],
+                "required": [
+                  "type"
+                ],
                 "properties": {
                   "type": {
                     "type": "string",
                     "description": "Sample type. Must be either `text` or `interactive`.",
-                    "enum": ["text", "interactive"],
+                    "enum": [
+                      "text",
+                      "interactive"
+                    ],
                     "example": "interactive"
                   },
                   "text": {
                     "type": "object",
                     "description": "Required when `type` is `text`.",
-                    "required": ["body"],
+                    "required": [
+                      "body"
+                    ],
                     "properties": {
                       "body": {
                         "type": "string",
@@ -4497,23 +4560,35 @@
                   "interactive": {
                     "type": "object",
                     "description": "Required when `type` is `interactive`.",
-                    "required": ["type", "body", "action"],
+                    "required": [
+                      "type",
+                      "body",
+                      "action"
+                    ],
                     "properties": {
                       "type": {
                         "type": "string",
                         "description": "Interactive type. Must be either `cta_url` (call-to-action URL) or `button` (reply buttons).",
-                        "enum": ["cta_url", "button"],
+                        "enum": [
+                          "cta_url",
+                          "button"
+                        ],
                         "example": "cta_url"
                       },
                       "header": {
                         "type": "object",
                         "description": "Optional header for the interactive message.",
-                        "required": ["type", "text"],
+                        "required": [
+                          "type",
+                          "text"
+                        ],
                         "properties": {
                           "type": {
                             "type": "string",
                             "description": "Header type. Only `text` is supported.",
-                            "enum": ["text"],
+                            "enum": [
+                              "text"
+                            ],
                             "example": "text"
                           },
                           "text": {
@@ -4527,7 +4602,9 @@
                       "body": {
                         "type": "object",
                         "description": "Body of the interactive message.",
-                        "required": ["text"],
+                        "required": [
+                          "text"
+                        ],
                         "properties": {
                           "text": {
                             "type": "string",
@@ -4540,7 +4617,9 @@
                       "footer": {
                         "type": "object",
                         "description": "Optional footer for the interactive message.",
-                        "required": ["text"],
+                        "required": [
+                          "text"
+                        ],
                         "properties": {
                           "text": {
                             "type": "string",
@@ -4557,13 +4636,18 @@
                           "name": {
                             "type": "string",
                             "description": "Required when `interactive.type` is `cta_url`. Must be `cta_url`.",
-                            "enum": ["cta_url"],
+                            "enum": [
+                              "cta_url"
+                            ],
                             "example": "cta_url"
                           },
                           "parameters": {
                             "type": "object",
                             "description": "Required when `interactive.type` is `cta_url`.",
-                            "required": ["display_text", "url"],
+                            "required": [
+                              "display_text",
+                              "url"
+                            ],
                             "properties": {
                               "display_text": {
                                 "type": "string",
@@ -4584,17 +4668,25 @@
                             "maxItems": 10,
                             "items": {
                               "type": "object",
-                              "required": ["type", "reply"],
+                              "required": [
+                                "type",
+                                "reply"
+                              ],
                               "properties": {
                                 "type": {
                                   "type": "string",
                                   "description": "Button type. Only `reply` is supported.",
-                                  "enum": ["reply"],
+                                  "enum": [
+                                    "reply"
+                                  ],
                                   "example": "reply"
                                 },
                                 "reply": {
                                   "type": "object",
-                                  "required": ["id", "title"],
+                                  "required": [
+                                    "id",
+                                    "title"
+                                  ],
                                   "properties": {
                                     "id": {
                                       "type": "string",
@@ -4705,7 +4797,11 @@
                     "category": {
                       "type": "string",
                       "description": "Category assigned by Meta to the submitted sample.",
-                      "enum": ["UTILITY", "MARKETING", "AUTHENTICATION"],
+                      "enum": [
+                        "UTILITY",
+                        "MARKETING",
+                        "AUTHENTICATION"
+                      ],
                       "example": "UTILITY"
                     }
                   }
@@ -6658,7 +6754,7 @@
                     },
                     "httpAuthorization": {
                       "type": "string",
-                      "description": "A static value sent as the HTTP `Authorization` header with every webhook request. Use this for static credentials such as API keys or pre-shared tokens.\n\n**Example \u2014 Basic Authorization:**\n- Encode `user:password` in base64 (e.g. `dXNlcjpwYXNzd29yZA==`)\n- Set this field to `Basic dXNlcjpwYXNzd29yZA==`\n\n> For OAuth 2.0 Client Credentials flow, leave this field empty and use the `oauth` property instead.",
+                      "description": "A static value sent as the HTTP `Authorization` header with every webhook request. Use this for static credentials such as API keys or pre-shared tokens.\n\n**Example — Basic Authorization:**\n- Encode `user:password` in base64 (e.g. `dXNlcjpwYXNzd29yZA==`)\n- Set this field to `Basic dXNlcjpwYXNzd29yZA==`\n\n> For OAuth 2.0 Client Credentials flow, leave this field empty and use the `oauth` property instead.",
                       "example": "Bearer 9QQhlsEb8VY"
                     },
                     "enabled": {
@@ -7469,7 +7565,9 @@
             "default": false
           }
         },
-        "required": ["fileUrl"]
+        "required": [
+          "fileUrl"
+        ]
       },
       "RcsCardMedia": {
         "type": "object",
@@ -7478,14 +7576,20 @@
           "height": {
             "type": "string",
             "description": "Height of the media within the card.",
-            "enum": ["short", "medium", "tall"],
+            "enum": [
+              "short",
+              "medium",
+              "tall"
+            ],
             "example": "short"
           },
           "contentInfo": {
             "$ref": "#/components/schemas/RcsContentInfo"
           }
         },
-        "required": ["contentInfo"]
+        "required": [
+          "contentInfo"
+        ]
       }
     },
     "parameters": {

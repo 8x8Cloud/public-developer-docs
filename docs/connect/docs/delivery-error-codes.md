@@ -86,7 +86,10 @@ Possible error codes returned in the Messaging Apps delivery receipts include:
 | 1048 | Unknown client-side issue  | Generic user error (WhatsApp: 135000)                                                             |
 | 1049 | Too many sync calls        | Synchronisation request limit exceeded (WhatsApp: 2593107)                                        |
 | 1050 | Sync time expired          | Synchronisation request outside allowed time window (WhatsApp: 2593108)                           |
-| 1051 | Message can't be delivered | The recipient has opted-out of receiving marketing messages from your business (WhatsApp: 131050) |
+| 1051 | Message can't be delivered          | The recipient has opted-out of receiving marketing messages from your business (WhatsApp: 131050)                                                                                                   |
+| 1052 | Permanent permission already exists | Call permission request cannot be sent because a permanent permission has already been approved by the user for this business account phone number. (WhatsApp: 138017)                              |
+| 1053 | Call permission limit reached       | Call Permission Request limit reached for this business–consumer pair. Further requests are temporarily blocked until a connected call occurs or the rate limit resets. (WhatsApp: 138009)          |
+| 1054 | BSUID Not Supported                 | Business-scoped User ID (BSUID) recipients are not supported for this message.                                                                                                                     |
 
 ## Viber Error Codes
 

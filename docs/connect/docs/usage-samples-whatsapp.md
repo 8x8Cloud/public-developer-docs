@@ -23,7 +23,8 @@ If you want to **send a text message**, your request will look like this:
 ```json
 {
     "user": {
-        "msisdn": "+65000000"
+        "msisdn": "+65000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "type": "text",
     "content": {
@@ -46,7 +47,8 @@ If you want to send an image with an optional `text`, your request will look lik
 ```json
 {
     "user": {
-        "msisdn": "+6500000000"
+        "msisdn": "+6500000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "content": {
         "url": "https://www.example.com/image.jpg",
@@ -74,7 +76,8 @@ This template has a single parameter where you can specify the actual OTP code i
 ```json
 {
     "user": {
-        "msisdn": "+65000000"
+        "msisdn": "+65000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "type": "template",
     "content": {
@@ -109,7 +112,8 @@ The user will receive this corresponding message:
 ```json
  {
             "user": {
-                "msisdn": "+65000000"
+                "msisdn": "+65000000",
+                "channelUserId": "US.13491208655302741918"
             },
             "content": {
                 "template": {
@@ -159,7 +163,8 @@ This template has 1 image header and a predefined text body.
 ```json
 {
     "user": {
-        "msisdn": "+650000000"
+        "msisdn": "+650000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "type": "template",
     "content": {
@@ -196,7 +201,8 @@ This template message allows you to send a document. In this example below we us
 ```json
 {
     "user": {
-        "msisdn": "+6500000000"
+        "msisdn": "+6500000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "type": "template",
     "content": {
@@ -239,7 +245,8 @@ This template is a location template and it allows you to specify a set of coord
 ```json
 {
     "user": {
-        "msisdn": "+65000000"
+        "msisdn": "+65000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "type": "template",
     "content": {
@@ -281,7 +288,8 @@ Below is an example of a Dynamic CTA Button Message with 2 CTA buttons. Please n
 ```json
 {
     "user": {
-        "msisdn": "+65000000"
+        "msisdn": "+65000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "content": {
         "template": {
@@ -338,7 +346,8 @@ Below is an example of a Coupon Code Template Message with 1 copy code button. Y
 ```json
 {
     "user": {
-        "msisdn": "+65000000"
+        "msisdn": "+65000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "type": "template",
     "content": {
@@ -377,7 +386,8 @@ This message type can support **up to 3 reply buttons**:
 ```json
 {
     "user": {
-        "msisdn": "+65000000"
+        "msisdn": "+65000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "type": "interactive",
     "content": {
@@ -438,7 +448,8 @@ If the user clicks on each button, it will send the corresponding reply.
 ```json
 {
   "user": {
-    "msisdn": "+65000000"
+    "msisdn": "+65000000",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "interactive",
   "content": {
@@ -530,7 +541,8 @@ This type of message will feature a single item from a business catalog, it will
 ```json
 {
     "user": {
-        "msisdn": "+65000000"
+        "msisdn": "+65000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "type": "interactive",
     "content": {
@@ -611,7 +623,8 @@ This option can send multiple product items from a business catalog to a custome
 ```json
 {
     "user": {
-        "msisdn": "+65000000"
+        "msisdn": "+65000000",
+        "channelUserId": "US.13491208655302741918"
     },
     "type": "interactive",
     "content": {
@@ -723,7 +736,8 @@ Below is an example of a batch of messages that are using a WhatsApp Template to
     "messages": [
         {
             "user": {
-                "msisdn": "+6511111111"
+                "msisdn": "+6511111111",
+                "channelUserId": "US.13491208655302741918"
             },
             "type": "template",
             "content": {
@@ -746,7 +760,8 @@ Below is an example of a batch of messages that are using a WhatsApp Template to
         },
         {
             "user": {
-                "msisdn": "+6522222222"
+                "msisdn": "+6522222222",
+                "channelUserId": "US.13491208655302741918"
             },
             "type": "template",
             "content": {
