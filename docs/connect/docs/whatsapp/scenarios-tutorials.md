@@ -6,6 +6,8 @@ sidebar_label: 'Scenarios & Tutorials'
 
 This section provides practical, step-by-step scenarios for solving common business problems using the 8x8 WhatsApp solution. These guides combine portal tools like the **Campaigns** and **Automation Builder** with concrete API concepts, including full JSON payloads for templates, message sending, and interactive replies.
 
+> **Note:** Every send payload below identifies the recipient in the `user` object. You can target the recipient by `msisdn`, by `channelUserId` (the WhatsApp Business-Scoped User ID, or BSUID), or both; if both are present, `msisdn` takes precedence. Inbound webhooks also carry the sender's `channelUserId`. See [Business-Scoped User IDs](./whatsapp-business-scoped-user-ids.md).
+
 ## Appointment Reminders via WhatsApp
 
 This scenario shows how to proactively send a reminder and automatically handle the customer's confirmation or reschedule request.
@@ -52,7 +54,8 @@ This scenario shows how to proactively send a reminder and automatically handle 
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "template",
         "content": {
@@ -99,7 +102,7 @@ This scenario shows how to proactively send a reminder and automatically handle 
         "timestamp": "2025-11-09T14:35:01.000Z",
         "user": {
           "msisdn": "+15551234567",
-          "channelUserId": "15551234567"
+          "channelUserId": "US.13491208655302741918"
         },
         "recipient": {
           "channel": "whatsapp",
@@ -122,7 +125,8 @@ This scenario shows how to proactively send a reminder and automatically handle 
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "text",
         "content": {
@@ -140,7 +144,8 @@ This scenario shows how to proactively send a reminder and automatically handle 
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "text",
         "content": {
@@ -207,7 +212,8 @@ This scenario details how to automatically send order updates from an e-commerce
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "template",
         "content": {
@@ -264,7 +270,8 @@ This scenario uses automation to answer common questions and escalate to a live 
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "interactive",
         "content": {
@@ -334,7 +341,8 @@ This scenario uses automation to answer common questions and escalate to a live 
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "interactive",
         "content": {
@@ -375,7 +383,8 @@ This scenario uses automation to answer common questions and escalate to a live 
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "text",
         "content": {
@@ -479,7 +488,8 @@ This scenario sends a promotional **Carousel Template** to a list of opted-in cu
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "template",
         "content": {
@@ -576,7 +586,8 @@ This is a complete, user-initiated bot that handles a specific request by callin
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "interactive",
         "content": {
@@ -617,7 +628,8 @@ This is a complete, user-initiated bot that handles a specific request by callin
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "text",
         "content": {
@@ -643,7 +655,8 @@ This is a complete, user-initiated bot that handles a specific request by callin
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "text",
         "content": {
@@ -661,7 +674,8 @@ This is a complete, user-initiated bot that handles a specific request by callin
     ```json
     {
         "user": {
-            "msisdn": "+15551234567"
+            "msisdn": "+15551234567",
+            "channelUserId": "US.13491208655302741918"
         },
         "type": "text",
         "content": {

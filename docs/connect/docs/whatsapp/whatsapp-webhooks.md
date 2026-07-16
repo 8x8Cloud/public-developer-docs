@@ -6,6 +6,10 @@ sidebar_label: 'Webhooks Reference'
 
 Webhooks enable real-time, event-driven communication between the 8x8 platform and your application. When specific events occur (such as receiving a message, delivery confirmation, or template status change), 8x8 sends an HTTP POST request to your configured webhook URL with event details in JSON format.
 
+> **Note: `channelUserId` is the BSUID**
+>
+> In the latest webhook versions (inbound MO v3, delivery-receipt DR v9), `user.channelUserId` carries the user's WhatsApp Business-Scoped User ID (BSUID), a stable per-business identifier in `<country>.<digits>` format. Earlier versions repeated the phone-number digits here instead, so the examples below show the BSUID form. See [Business-Scoped User IDs](./whatsapp-business-scoped-user-ids.md) for how BSUID works and which webhook versions and statuses surface it.
+
 ## Configuration
 
 You can configure your webhook URLs in the 8x8 Connect portal under [**Webhooks**](https://connect.8x8.com/webhooks).
@@ -50,7 +54,7 @@ The inbound message webhook structure varies based on the message type. Below ar
     "timestamp": "2025-12-02T07:05:51Z",
     "user": {
       "msisdn": "+15551234567",
-      "channelUserId": "15551234567",
+      "channelUserId": "US.13491208655302741918",
       "name": "<USER_NAME>"
     },
     "recipient": {
@@ -85,7 +89,7 @@ The inbound message webhook structure varies based on the message type. Below ar
     "timestamp": "2025-12-02T07:07:19Z",
     "user": {
       "msisdn": "+15551234567",
-      "channelUserId": "15551234567",
+      "channelUserId": "US.13491208655302741918",
       "name": "<USER_NAME>"
     },
     "recipient": {
@@ -129,7 +133,7 @@ When a user responds to an interactive button or list, the payload includes the 
     "timestamp": "2025-12-02T06:58:50Z",
     "user": {
       "msisdn": "+15551234567",
-      "channelUserId": "15551234567",
+      "channelUserId": "US.13491208655302741918",
       "name": "<USER_NAME>"
     },
     "recipient": {
@@ -181,7 +185,7 @@ When a user completes a WhatsApp Flow, the submission is delivered as a special 
     "timestamp": "2026-01-15T10:30:00.000Z",
     "user": {
       "msisdn": "+15551234567",
-      "channelUserId": "15551234567"
+      "channelUserId": "US.13491208655302741918"
     },
     "recipient": {
       "channel": "whatsapp",
@@ -239,7 +243,7 @@ These fields appear in every inbound message webhook:
 - `subAccountId`: Your subaccount identifier
 - `timestamp`: ISO 8601 timestamp when message was received
 - `user.msisdn`: Customer's phone number (E.164 format)
-- `user.channelUserId`: Customer's WhatsApp ID (phone without +)
+- `user.channelUserId`: Customer's WhatsApp Business-Scoped User ID (BSUID)
 - `user.name`: Customer's WhatsApp display name (if available)
 - `recipient.channel`: Always `"whatsapp"`
 - `recipient.channelId`: Your WhatsApp channel (phone number) ID
@@ -278,8 +282,8 @@ Fires when the status of an outbound message changes. Status updates include sen
     "subAccountId": "<SUBACCOUNT_ID>",
     "channel": "whatsapp",
     "user": {
-      "msisdn": "+6512345678",
-      "channelUserId": "6512345678"
+      "msisdn": "+15551234567",
+      "channelUserId": "US.13491208655302741918"
     },
     "status": {
       "state": "delivered",
@@ -302,8 +306,8 @@ Fires when the status of an outbound message changes. Status updates include sen
     "subAccountId": "<SUBACCOUNT_ID>",
     "channel": "whatsApp",
     "user": {
-      "msisdn": "+6512345678",
-      "channelUserId": "6512345678"
+      "msisdn": "+15551234567",
+      "channelUserId": "US.13491208655302741918"
     },
     "status": {
       "state": "read",
@@ -325,8 +329,8 @@ Fires when the status of an outbound message changes. Status updates include sen
     "subAccountId": "<SUBACCOUNT_ID>",
     "channel": "whatsapp",
     "user": {
-      "msisdn": "+6512345678",
-      "channelUserId": "+6512345678"
+      "msisdn": "+15551234567",
+      "channelUserId": "US.13491208655302741918"
     },
     "status": {
       "state": "undelivered",

@@ -57,7 +57,7 @@ Every WhatsApp template message request to the 8x8 API must include the followin
 
 ```json
 {
-  "user": { "msisdn": "{{recipientPhoneNumber}}" },
+  "user": { "msisdn": "{{recipientPhoneNumber}}", "channelUserId": "{{recipientBsuid}}" },
   "type": "template",
   "content": {
     "template": {
@@ -70,6 +70,7 @@ Every WhatsApp template message request to the 8x8 API must include the followin
 ```
 
 * `user.msisdn`: The recipient's phone number in E.164 format.
+* `user.channelUserId`: The recipient's WhatsApp Business-Scoped User ID (BSUID), for example `US.13491208655302741918`. Provide `msisdn`, `channelUserId`, or both; at least one is required, and if both are present, `msisdn` takes precedence. See [Business-Scoped User IDs](./whatsapp-business-scoped-user-ids.md).
 * `type`: Always `"template"` for template messages.
 * `content.template.name`: The template name as shown in your templates list.
 * `content.template.language`: The language code (e.g., `"en"`).
@@ -85,7 +86,7 @@ Below are examples of the full payload for different template types. Replace the
 
 ```json
 {
-  "user": { "msisdn": "{{recipientPhoneNumber}}" },
+  "user": { "msisdn": "{{recipientPhoneNumber}}", "channelUserId": "{{recipientBsuid}}" },
   "type": "template",
   "content": {
     "template": {
@@ -101,7 +102,7 @@ Below are examples of the full payload for different template types. Replace the
 
 ```json
 {
-  "user": { "msisdn": "{{recipientPhoneNumber}}" },
+  "user": { "msisdn": "{{recipientPhoneNumber}}", "channelUserId": "{{recipientBsuid}}" },
   "type": "template",
   "content": {
     "template": {
@@ -124,7 +125,7 @@ Below are examples of the full payload for different template types. Replace the
 
 ```json
 {
-  "user": { "msisdn": "{{recipientPhoneNumber}}" },
+  "user": { "msisdn": "{{recipientPhoneNumber}}", "channelUserId": "{{recipientBsuid}}" },
   "type": "template",
   "content": {
     "template": {
@@ -145,9 +146,11 @@ Below are examples of the full payload for different template types. Replace the
 
 #### AUTHENTICATION Template Example
 
+> **Important:** Authentication (OTP) templates must be delivered to a phone number, so keep `msisdn` populated for these sends. A request that identifies the recipient by `channelUserId` (BSUID) only, with no `msisdn`, is rejected with 8x8 error code `1054` (Meta `131062`). See [Business-Scoped User IDs](./whatsapp-business-scoped-user-ids.md).
+
 ```json
 {
-  "user": { "msisdn": "{{recipientPhoneNumber}}" },
+  "user": { "msisdn": "{{recipientPhoneNumber}}", "channelUserId": "{{recipientBsuid}}" },
   "type": "template",
   "content": {
     "template": {

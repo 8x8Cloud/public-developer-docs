@@ -80,7 +80,7 @@ While BSUID provides a reliable way to message masked users, design your workflo
 
 **Authentication Template Limitations**
 
-You cannot send zero-tap, one-tap, or copy-code authentication templates to a BSUID recipient. These OTP flows require a physical phone number. Attempting to send an authentication template to a payload containing only a BSUID (`channelUserId`) fails with 8x8 error code `1052` (mapped from Meta's `131062`): "Business-scoped User ID (BSUID) recipients are not supported for this message." Ensure you have collected and validated the customer's `msisdn` before triggering an authentication/OTP flow.
+You cannot send zero-tap, one-tap, or copy-code authentication templates to a BSUID recipient. These OTP flows require a physical phone number. Attempting to send an authentication template to a payload containing only a BSUID (`channelUserId`) fails with 8x8 error code `1054` (mapped from Meta's `131062`): "Business-scoped User ID (BSUID) recipients are not supported for this message." Ensure you have collected and validated the customer's `msisdn` before triggering an authentication/OTP flow.
 
 **Implementation Timeline**
 
@@ -147,7 +147,7 @@ Per [Meta's documentation](https://developers.facebook.com/documentation/busines
 ```json
 {
   "user": {
-    "msisdn": "+6512345678",
+    "msisdn": "+15551234567",
     "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
@@ -196,13 +196,13 @@ Each entry in the `messages[]` array accepts its own `user.channelUserId` and/or
     },
     {
       "user": {
-        "msisdn": "+6512345678"
+        "msisdn": "+15551234567"
       },
       "clientMessageId": "msg_002"
     },
     {
       "user": {
-        "msisdn": "+6512345680",
+        "msisdn": "+15551234567",
         "channelUserId": "SG.13491208655302741999"
       },
       "clientMessageId": "msg_003"
@@ -217,7 +217,7 @@ You cannot target a `channelUserId` with authentication templates (one-tap, zero
 
 | 8x8 Error Code | Meta Error Code | API / Webhook Message | Root Cause & Resolution |
 | --- | --- | --- | --- |
-| `1052` | `131062` | Business-scoped User ID (BSUID) recipients are not supported for this message. | OTP templates require phone-based routing. Send this template to the recipient's `msisdn` instead. If you only have a `channelUserId` on file, collect their phone number first (see [Phone Number Visibility & Retention Rules](#phone-number-visibility--retention-rules)) or use a non-authentication delivery path. |
+| `1054` | `131062` | Business-scoped User ID (BSUID) recipients are not supported for this message. | OTP templates require phone-based routing. Send this template to the recipient's `msisdn` instead. If you only have a `channelUserId` on file, collect their phone number first (see [Phone Number Visibility & Retention Rules](#phone-number-visibility--retention-rules)) or use a non-authentication delivery path. |
 
 > 📘 **Webhook Migration Guide**
 >
@@ -250,7 +250,7 @@ On DR v9, the BSUID appears in `user.channelUserId` when WhatsApp confirms the m
     "subAccountId": "<SUBACCOUNT_ID>",
     "channel": "whatsapp",
     "user": {
-      "msisdn": "+6512345678",
+      "msisdn": "+15551234567",
       "channelUserId": "US.13491208655302741918"
     },
     "status": {
@@ -288,7 +288,7 @@ When a WhatsApp user sends an inbound message to your business, the platform for
     "subAccountId": "<SUBACCOUNT_ID>",
     "timestamp": "2026-06-09T10:13:20.00Z",
     "user": {
-      "msisdn": "+6512345678",
+      "msisdn": "+15551234567",
       "channelUserId": "US.13491208655302741918",
       "name": "<USER_NAME>",
       "username": "<USERNAME>"
@@ -313,8 +313,8 @@ Complete these before 8x8 enables send-to-BSUID delivery (targeted for July 13, 
 - [ ] **Confirm you are receiving DR v9 and MO v3** (available on 8x8 from July 7, 2026). Check the `version` field on incoming events once migrated (`9` for DR, `3` for MO), using the [Webhook Configuration API](/connect/reference/get-webhooks-2) and [webhook object structure](/connect/docs/webhook-object-structure) reference.
 - [ ] **Stop treating `channelUserId` as a phone-number duplicate.** On DR v8 / MO v2, it just repeats the digits from `msisdn`. On v9 / v3, it is a real BSUID (`<country>.<digits>` format) and needs to be handled as a distinct identifier, not parsed as a phone number.
 - [ ] **Store `channelUserId` alongside `msisdn`** in your CRM or contact records as a stable per-user key. Do not assume every WhatsApp contact has a phone number on file.
-- [ ] **Keep authentication flows on phone numbers.** One-tap, zero-tap, and copy code authentication templates cannot target a `channelUserId` (8x8 error `1052`). Make sure any contact you might send an OTP to has an `msisdn` on file, or collect one before sending.
-- [ ] **Handle error `1052`** in your send pipeline by falling back to `msisdn` or requesting a phone number, rather than letting the send silently fail.
+- [ ] **Keep authentication flows on phone numbers.** One-tap, zero-tap, and copy code authentication templates cannot target a `channelUserId` (8x8 error `1054`). Make sure any contact you might send an OTP to has an `msisdn` on file, or collect one before sending.
+- [ ] **Handle error `1054`** in your send pipeline by falling back to `msisdn` or requesting a phone number, rather than letting the send silently fail.
 - [ ] **Plan and test your send path for `channelUserId` recipients** in a non-critical flow first, ready for 8x8's July 13, 2026 send-enablement target.
 
 ## Rollout Timeline

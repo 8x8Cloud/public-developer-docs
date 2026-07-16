@@ -268,7 +268,7 @@ When the transaction is initiated, your server generates a code and sends this A
 ```json
 {
     "user": {
-        "msisdn": "+15552223333"
+        "msisdn": "+15551234567"
     },
     "type": "template",
     "content": {
@@ -376,7 +376,7 @@ The driver's app calls an API endpoint that triggers this message.
 ```json
 {
     "user": {
-        "msisdn": "+15554445555"
+        "msisdn": "+15551234567"
     },
     "type": "template",
     "content": {
@@ -443,7 +443,7 @@ The automation replies with an **Interactive List Message** showing the next ava
 ```json
 {
     "user": {
-        "msisdn": "+15554445555"
+        "msisdn": "+15551234567"
     },
     "type": "interactive",
     "content": {
@@ -542,7 +542,7 @@ Your scheduling system triggers this API call 48 hours before the appointment.
 ```json
 {
     "user": {
-        "msisdn": "+15556667777"
+        "msisdn": "+15551234567"
     },
     "type": "template",
     "content": {
@@ -648,7 +648,7 @@ Your Student Information System (SIS) triggers this API call upon successful enr
 ```json
 {
     "user": {
-        "msisdn": "+15558889999"
+        "msisdn": "+15551234567"
     },
     "type": "template",
     "content": {

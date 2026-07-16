@@ -6,6 +6,10 @@ sidebar_label: 'WhatsApp SMS Fallback'
 
 Ensure your critical messages always reach customers by configuring SMS fallback for WhatsApp messages. When a WhatsApp message cannot be delivered, such as when a customer doesn't have WhatsApp installed or their device is offline, the message automatically falls back to SMS delivery.
 
+> **Important: SMS fallback requires a phone number (`msisdn`)**
+>
+> SMS fallback is delivered over SMS, which can only reach a phone number. Any message that relies on SMS fallback must include `user.msisdn`. You may also include `user.channelUserId` (the WhatsApp Business-Scoped User ID, or BSUID) to address the WhatsApp attempt, but if you send with **only** `channelUserId` and no `msisdn`, there is no phone number to fall back to and the SMS fallback fails. Always include `msisdn` on any message that uses SMS fallback. See [Business-Scoped User IDs](./whatsapp-business-scoped-user-ids.md) for how the two identifiers interact.
+
 ---
 
 ## Overview
@@ -51,7 +55,8 @@ To add SMS fallback to a WhatsApp template message, include the `fallbackText` a
 ```json
 {
   "user": {
-    "msisdn": "+6511111111"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {
@@ -106,7 +111,8 @@ Interactive WhatsApp messages (buttons, lists, location) can also have SMS fallb
 ```json
 {
   "user": {
-    "msisdn": "+6511111111"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "interactive",
   "content": {
@@ -134,7 +140,7 @@ Interactive WhatsApp messages (buttons, lists, location) can also have SMS fallb
         ]
       }
     },
-    "fallbackText": "Thank you for your order! Track your delivery: https://example.com/track or contact support: +6512345678",
+    "fallbackText": "Thank you for your order! Track your delivery: https://example.com/track or contact support: +15551234567",
     "sms": {
       "encoding": "AUTO",
       "source": "YourBrand"
@@ -148,7 +154,8 @@ Interactive WhatsApp messages (buttons, lists, location) can also have SMS fallb
 ```json
 {
   "user": {
-    "msisdn": "+6511111111"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "interactive",
   "content": {
@@ -231,7 +238,8 @@ Consider this scenario:
     }
   ],
   "user": {
-    "msisdn": "+6511111111"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {
@@ -301,7 +309,8 @@ For basic use cases where you want automatic SMS fallback without complex timing
 ```json
 {
   "user": {
-    "msisdn": "+6511111111"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {
@@ -437,6 +446,10 @@ Yes, this is possible if `fallbackAfter` is less than the template TTL. WhatsApp
 ### Can I configure fallback for session messages (non-template)?
 
 Yes. Session messages (sent within the 24-hour customer service window) can have SMS fallback configured the same way as template messages.
+
+### Can I use SMS fallback when addressing a recipient by their BSUID (`channelUserId`)?
+
+Only if you also include `msisdn`. SMS fallback is delivered as an SMS, which requires a phone number, so the message must carry `user.msisdn`. If you address a message using only `channelUserId` (the WhatsApp Business-Scoped User ID) with no `msisdn`, the WhatsApp attempt can still be made, but there is no phone number for the SMS fallback, so the fallback fails. Always include `msisdn` on any message that relies on SMS fallback.
 
 ---
 

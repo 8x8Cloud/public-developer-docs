@@ -150,6 +150,10 @@ This payload creates a `MARKETING` template with an image header, a variable in 
 
 Once a template is approved (status: `APPROVED`), you can send it to customers to initiate conversations.
 
+> **Note: Addressing recipients by BSUID**
+>
+> Every send payload identifies the recipient in the `user` object. You can target the recipient by `msisdn` (phone number), by `channelUserId` (the WhatsApp Business-Scoped User ID, or BSUID), or both. At least one is required. If both are present, `msisdn` takes precedence. See [Business-Scoped User IDs](./whatsapp-business-scoped-user-ids.md) for how the two identifiers interact.
+
 **Endpoint:**
 
 ```json
@@ -170,7 +174,8 @@ This payload sends the marketing template we created above, providing actual val
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "template",
   "content": {
@@ -274,7 +279,8 @@ Interactive buttons are the most common interactive message type. Send a message
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "interactive",
   "content": {
@@ -326,7 +332,7 @@ Interactive buttons are the most common interactive message type. Send a message
     "timestamp": "2025-12-02T06:58:50Z",
     "user": {
       "msisdn": "+15551234567",
-      "channelUserId": "15551234567",
+      "channelUserId": "US.13491208655302741918",
       "name": "<USER_NAME>"
     },
     "recipient": {
@@ -389,7 +395,8 @@ When a customer sends a text message, 8x8 posts to your webhook:
     "subAccountId": "SubAccount-1",
     "timestamp": "2016-01-01T14:34:56.017Z",
     "user": {
-      "msisdn": "+12025550023"
+      "msisdn": "+15551234567",
+      "channelUserId": "US.13491208655302741918"
     },
     "type": "Text",
     "content": {
@@ -452,7 +459,8 @@ Once uploaded, use the returned `url` in your message payloads:
 ```json
 {
   "user": {
-    "msisdn": "+15551234567"
+    "msisdn": "+15551234567",
+    "channelUserId": "US.13491208655302741918"
   },
   "type": "Image",
   "content": {
