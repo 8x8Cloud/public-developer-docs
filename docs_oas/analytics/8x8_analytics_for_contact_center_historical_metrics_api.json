@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.0.0",
+    "version": "4.1.0",
     "title": "8x8 Analytics for Contact Center Historical Metrics API",
     "contact": {
       "name": "Analytics Team",
@@ -48,13 +48,16 @@
         "security": [{ "bearerAuth": [] }],
         "tags": ["Report Access"],
         "summary": "Create Report",
-        "description": "This endpoint initializes Report Access. For step-by-step instructions on using the Historical Metrics API refer to the [CC Historical Analytics Summary Report](/analytics/docs/cc-historical-analytics-summary-report) Guide. A report can be either defined as grouping, filtering, metrics, time interval, or another type.",
+        "description": "This endpoint initializes Report Access. For step-by-step instructions on using the Historical Metrics API refer to the [CC Historical Analytics Summary Report](/analytics/docs/cc-historical-analytics-summary-report) Guide. A report can be either defined as grouping, filtering, metrics, time interval, or another type.\n\n**Script Paths variant** (`type: script-paths`, v8+) uses a dedicated request shape (`ScriptPathsReportDefinitionRequest`). See [Script Paths Report](/analytics/docs/cc-historical-analytics-summary-report#9-script-paths-report) in the guide for its request shape, restrictions, and CSV output format.",
         "operationId": "cc-historical-report-create",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReportDefinitionRequest"
+                "oneOf": [
+                  { "$ref": "#/components/schemas/ReportDefinitionRequest" },
+                  { "$ref": "#/components/schemas/ScriptPathsReportDefinitionRequest" }
+                ]
               }
             }
           },
@@ -176,7 +179,7 @@
         "security": [{ "bearerAuth": [] }],
         "tags": ["Report Access"],
         "summary": "Report Data",
-        "description": "This method returns the actual report data. The returned report is paginated and the data is returned if the report has a DONE status. The report page size and numbering can be specified.",
+        "description": "This method returns the actual report data. The returned report is paginated and the data is returned if the report has a DONE status. The report page size and numbering can be specified.\n\n**Not supported for `script-paths` reports** — such requests return **400 Bad Request**. Use `/{id}/download` instead.",
         "operationId": "cc-historical-report-data-by-id",
         "parameters": [
           {
@@ -237,7 +240,7 @@
         "security": [{ "bearerAuth": [] }],
         "tags": ["Report Access"],
         "summary": "Report Download",
-        "description": "This method returns report data as a downloadable file. Data can only be downloaded if the report has a DONE status. The first entry in the returned file specifies the names of the columns.",
+        "description": "This method returns report data as a downloadable file. Data can only be downloaded if the report has a DONE status. The first entry in the returned file specifies the names of the columns.\n\nFor `script-paths` reports, the response is CSV only (XLSX is not supported). Columns: `Path ID`, `Parent Path ID`, `Script ID`, `Script Name`, `Node Type`, `Node Label`, `Depth`, `Count`, `Terminal`.",
         "operationId": "cc-historical-report-download-by-id",
         "parameters": [
           {
@@ -273,7 +276,7 @@
         "security": [{ "bearerAuth": [] }],
         "tags": ["Report Access"],
         "summary": "Report Links",
-        "description": "This method returns all available links related to a previously created report. A link to the Report Status is always included in the return. If the status of the report is DONE, links to Report Data and Report Download are also included.",
+        "description": "This method returns all available links related to a previously created report. A link to the Report Status is always included in the return. If the status of the report is DONE, links to Report Data and Report Download are also included.\n\nFor `script-paths` reports, only the Report Download link is included when status is `DONE` (no Report Data link).",
         "operationId": "cc-historical-report-links-by-id",
         "parameters": [
           {
@@ -317,7 +320,7 @@
         "security": [{ "bearerAuth": [] }],
         "tags": ["Report Defintions"],
         "summary": "List Report Types",
-        "description": "This method obtains the list of valid report-types, along with the options for grouping, filtering, or applying metrics that are specific for each report type.",
+        "description": "This method obtains the list of valid report-types, along with the options for grouping, filtering, or applying metrics that are specific for each report type.\n\nThe list includes `script-paths` from v8 onward.",
         "operationId": "cc-historical-analytics-report-types",
         "responses": {
           "200": {
@@ -714,6 +717,78 @@
           "reportSettings": { "$ref": "#/components/schemas/ReportSettings" }
         },
         "title": "DetailedReportDefinitionRequest"
+      },
+      "ScriptPathsReportDefinitionRequest": {
+        "type": "object",
+        "required": ["type", "title", "dateRange", "timezone"],
+        "description": "Request shape for the Script Paths report (v8+). Returns a hierarchical view of the paths taken by interactions through an IVR script, as a downloadable CSV. The request MUST NOT include `groupBy`, `granularity`, `metrics`, `includeSubTotal`, `includeGrandTotal`, or `includeParticipants`; requests that include these fields are rejected. Results are retrieved via `/{id}/download` only; the `/{id}/data` endpoint is not available for this type and returns `400 Bad Request`.",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["script-paths"],
+            "example": "script-paths"
+          },
+          "title": {
+            "type": "string",
+            "example": "Script Paths Weekly Report"
+          },
+          "dateRange": { "$ref": "#/components/schemas/DateRange" },
+          "timezone": {
+            "type": "string",
+            "example": "Europe/Helsinki"
+          },
+          "intraDayTimeRange": { "$ref": "#/components/schemas/IntraDayTimeRange" },
+          "searchQuery": {
+            "type": "array",
+            "description": "Optional filters. Allowed `field` values are `script`, `queue`, `agent`, and `channel` (lowercase, case-sensitive). `operator` is `in`. `value` is an array of string IDs; see example.",
+            "items": { "$ref": "#/components/schemas/ScriptPathsSearchQuery" },
+            "example": [
+              {
+                "field": "agent",
+                "operator": "in",
+                "value": ["agfDAzC5NtSRuHol5GA4RT6A", "ag10000", "ag7sfo_qfaTXCvwb7MsSUStw"]
+              },
+              {
+                "field": "channel",
+                "operator": "in",
+                "value": ["1zkbCLd_R3ij4bC0T_hY7w", "ZOLa_Q-DSlSpdfq--H9vPQ", "ITPIhMTWQf-mpiQ_lahDQw"]
+              },
+              {
+                "field": "queue",
+                "operator": "in",
+                "value": ["169", "872"]
+              },
+              {
+                "field": "script",
+                "operator": "in",
+                "value": ["4163", "5471"]
+              }
+            ]
+          }
+        },
+        "title": "ScriptPathsReportDefinitionRequest"
+      },
+      "ScriptPathsSearchQuery": {
+        "type": "object",
+        "required": ["field", "operator", "value"],
+        "properties": {
+          "field": {
+            "type": "string",
+            "enum": ["script", "queue", "agent", "channel"],
+            "example": "agent"
+          },
+          "operator": {
+            "type": "string",
+            "enum": ["in"],
+            "example": "in"
+          },
+          "value": {
+            "type": "array",
+            "items": { "type": "string" },
+            "example": ["ag10000", "ag7sfo_qfaTXCvwb7MsSUStw"]
+          }
+        },
+        "title": "ScriptPathsSearchQuery"
       },
       "SearchQuery": {
         "type": "object",

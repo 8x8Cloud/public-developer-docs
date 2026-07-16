@@ -52,6 +52,12 @@ CC Historical Analytics allows the consumer to get a listing of the available re
 
 Additional information about each of the reports and detailed definitions of metrics can be found in the [Metrics Glossary](#8-metrics-glossary)
 
+> 📘 **Script Paths Report**
+>
+> The `script-paths` report is available **on v8+**. See [Script Paths Report](#9-script-paths-report) for its request shape, restrictions, and CSV output format.
+>
+>
+
 ### Parameters
 
 **Method: GET**
@@ -319,6 +325,12 @@ The result **will be different** for each report type.
 > 📘 **This sample is applicable to ALL summary report types**
 >
 > The values in passed in will be specific to the report-type but the concepts are applicable to all summary report types.
+>
+>
+
+> 📘 **Script Paths uses a different request shape**
+>
+> The `script-paths` type has its own request shape and additional constraints; see [Script Paths Report](#9-script-paths-report).
 >
 >
 
@@ -650,6 +662,12 @@ The Link header WILL ONLY be present if the report staus is `"DONE"`
 >
 >
 
+> 🚧 **Not supported for Script Paths reports**
+>
+> The `/data` endpoint is not available for Script Paths reports — the API returns **400 Bad Request**. Use [6b. Get Report Download](#6b-get-report-download-csvxlsx) instead.
+>
+>
+
 ### Parameters
 
 **Method:** GET
@@ -892,6 +910,12 @@ The body will be an array as shown below.
 >
 >
 
+> 📘 **Script Paths reports are CSV only**
+>
+> For Script Paths reports the download is always CSV — XLSX is not supported. See [Script Paths Report](#9-script-paths-report).
+>
+>
+
 ### Parameters
 
 **Method:** GET
@@ -1072,7 +1096,7 @@ Queue interactions metrics track how interactions flow through queues, including
 #### 8.2.1. Queue Interactions Summary
 
 <details>
-<summary>Click to expand Queue Interactions Summary Metrics (28 metrics)</summary>
+<summary>Click to expand Queue Interactions Summary Metrics (29 metrics)</summary>
 
 Report type: `queue-interactions-summary`
 
@@ -1101,6 +1125,7 @@ This report provides comprehensive queue performance metrics, tracking interacti
 | `longestWaitBeforeAcceptTime` | v7+ | Longest time an interaction spent in the queue from entry until it was accepted by an agent in the current aggregation interval |
 | `longestWaitTime` | v1+ | Longest wait in queue for interactions. Duration of the longest waiting interaction in the queue in the current aggregation interval |
 | `newInQueue` | v4+ | Interactions entering queue in the current aggregation interval only. Excludes interactions from previous intervals, showing only freshly entered interactions |
+| `parked` | v8+ | Number of interactions currently in parked state assigned to this queue at the end of the current aggregation interval. Snapshot-style (instantaneous) metric — only counts interactions still parked at interval end. Use with `accepted` to compute Parked %: `(parked / accepted) × 100` |
 | `processingTime` | v1+ | Total time agents spent in the Handling and Wrap Up states. Measured from when an interaction is accepted by an agent until it is wrapped up in the current aggregation interval |
 | `slaPercentage` | v1+ | Percentage of interactions answered before configured SLA time threshold relative to total entries, excluding short abandonments in the current aggregation interval |
 | `totalAbandonTime` | v2+ | Total cumulative time all abandoned interactions spent waiting in queue before abandonment in the current aggregation interval |
@@ -1331,7 +1356,7 @@ This report tracks agent time spent across different interaction processing stat
 #### 8.3.4. Agent Interactions Summary
 
 <details>
-<summary>Click to expand Agent Interactions Summary Metrics (34 metrics)</summary>
+<summary>Click to expand Agent Interactions Summary Metrics (36 metrics)</summary>
 
 Report type: `agent-interactions-summary`
 
@@ -1346,6 +1371,7 @@ This report provides a comprehensive overview of agent performance including int
 | `accepted` | v1+ | Total interactions answered by agents. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent in the current aggregation interval |
 | `acceptedPercentage` | v1+ | Percentage of interactions answered by agents over the total interactions presented in the current aggregation interval |
 | `alerting` | v1+ | Number of interactions currently being presented to agents via a queue or direct assignment in the current aggregation interval |
+| `assignedInteractions` | v8+ | Number of interactions assigned to the agent at the end of the current aggregation interval. Includes interactions in handling, wrap-up, and parked states; excludes offering. Snapshot-style (instantaneous) metric. Used as the denominator for client-computed Parked %: `(parked / assignedInteractions) × 100` |
 | `avgBusyTime` | v1+ | Average combined time in Offering, Handling, and Wrap Up states per interaction. Includes the full duration from when an interaction is offered, through handling, until all work is complete in the current aggregation interval |
 | `avgFocusTime` | v8+ | Average time agents spent with digital interactions (chat, email) in focus in the current aggregation interval. We consider that a digital interaction is in focus when an agent actively views and works on the interaction window, as opposed to switching to other tasks such as consulting knowledge bases or documentation |
 | `avgHandlingTime` | v1+ | Average time agents spend handling interactions including hold periods. Measured from when an agent accepts an interaction until they finish processing it, including any time the customer was placed on hold in the current aggregation interval |
@@ -1364,6 +1390,7 @@ This report provides a comprehensive overview of agent performance including int
 | `longestHoldTime` | v1+ | Maximum single continuous hold duration when agent placed customer on hold in the current aggregation interval |
 | `longestOfferingTime` | v1+ | Longest time to accept an interaction from the time it is offered to the time it is accepted or rejected by an agent in the current aggregation interval |
 | `offeringTime` | v1+ | Total duration from interaction presentation to acceptance or rejection in the current aggregation interval |
+| `parked` | v8+ | Number of interactions currently in parked state assigned to the agent / agent group at the end of the current aggregation interval. Snapshot-style (instantaneous) metric — only counts interactions still parked at interval end. Use with `assignedInteractions` to compute Parked %: `(parked / assignedInteractions) × 100` |
 | `presented` | v1+ | Total interactions presented to agents for acceptance or rejection. Includes interactions continuing from prior intervals in the current aggregation interval |
 | `processingTime` | v7+ | Total combined time in Handling and Wrap Up states per accepted interaction. This represents the total time from when an agent accepts an interaction through final completion, including wrap-up work in the current aggregation interval |
 | `rejectTimeout` | v1+ | Count of interactions automatically rejected when agent did not respond within configured timeout period in the current aggregation interval |
@@ -1385,7 +1412,7 @@ Digital channels metrics track performance for non-voice interactions such as em
 #### 8.4.1. Digital Channels Summary
 
 <details>
-<summary>Click to expand Digital Channels Summary Metrics (9 metrics)</summary>
+<summary>Click to expand Digital Channels Summary Metrics (10 metrics)</summary>
 
 Report type: `digital-channels-summary`
 
@@ -1400,9 +1427,186 @@ This report displays aggregate metrics for digital channels such as email and ch
 | `handlingDuration` | v1+ | Total time agents spend handling digital channel interactions. Measured from when an agent accepts an interaction until they finish processing it in the current aggregation interval |
 | `numberOfRepliedEmails` | v1+ | Total count of email interactions that received agent replies in the current aggregation interval                                                                                     |
 | `offeringDuration` | v1+ | Total duration digital channel interactions spent in Offering state waiting for agent acceptance or rejection in the current aggregation interval                                     |
+| `parkDuration` | v8+ | Total cumulative time digital channel interactions spent in parked state in the current aggregation interval. Parked duration is NOT included in `handlingDuration` |
 | `queueWaitDuration` | v1+ | Total cumulative time digital channel interactions spent waiting in queue in the current aggregation interval |
 | `scriptTreatmentDuration` | v1+ | Total time digital channel interactions spent in script treatment, excluding queue time in the current aggregation interval |
 | `totalInteractionsDuration` | v1+ | Total combined duration for digital channel interactions. Includes script treatment, queue wait, and handling time in the current aggregation interval |
 | `wrapUpDuration` | v1+ | Total time agents spend completing post-interaction administrative tasks for digital channel interactions. Measured from when an agent disconnects from customer until wrap-up is finalized in the current aggregation interval |
 
 </details>
+
+## 9. Script Paths Report
+
+The Script Paths report (**v8+**) provides a hierarchical view of the paths taken by interactions through an **IVR script** — showing how calls flow through scripts and IVR nodes, with a count of interactions per node. Results are delivered as a downloadable CSV.
+
+> 📘 **Differences from other summary reports**
+>
+> * Export format is CSV only — XLSX is not supported.
+> * Results are retrieved through [6b. Get Report Download](#6b-get-report-download-csvxlsx). The `/data` endpoint is not available for Script Paths reports — the API returns **400 Bad Request**.
+> * Only [`/{id}/download`](/analytics/reference/cc-historical-report-download-by-id) is returned in the links response when the report is `DONE` (no `/data` link).
+> * The request body MUST NOT include `groupBy`, `granularity`, `metrics`, `includeSubTotal`, `includeGrandTotal`, or `includeParticipants`.
+>
+>
+
+### 9.1. Create Script Paths Report
+
+**Method:** POST
+
+#### Headers
+
+| Name          | Required | Description                                                                                              | Example                              |
+| ------------- | -------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| Authorization | ✓        | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
+| Content-Type  | ✓        | Set Content-Type to application/json                                                                     | application/json                     |
+
+#### Path
+
+| Name    | Required | Description                 | Example |
+| ------- | -------- | --------------------------- | ------- |
+| version | ✓        | The current version is `v8` | v8      |
+
+#### Body
+
+| Name                    | Required | Description                                                                                                                                                                                                                                          | Example                   |
+| ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
+| type                    | ✓        | Must be `script-paths`.                                                                                                                                                                                                                              | script-paths              |
+| title                   | ✓        | The report title. Used as the downloaded file name.                                                                                                                                                                                                   | Script Paths Weekly       |
+| dateRange.start         | ✓        | Only interactions created on or after the specified date are included. The entered values should follow the ISO 8601 standard (YYYY-MM-DDTHH:MM:SS.SSSZ), for example 2026-04-01T00:00:00.000Z.                                                       | 2026-04-01T00:00:00.000Z  |
+| dateRange.end           | ✓        | Only interactions created on or before the specified date are included. The entered values should follow the ISO 8601 standard (YYYY-MM-DDTHH:MM:SS.SSSZ), for example 2026-04-08T00:00:00.000Z.                                                      | 2026-04-08T00:00:00.000Z  |
+| timezone                | ✓        | The desired timezone ([IANA Time Zones](https://www.iana.org/time-zones). Examples: `America/New_York`, `Europe/Helsinki`, see [Wikipedia Time Zone List](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)). Accepted values are those configured for the tenant. If no value is specified, the tenant's default timezone is used. | Europe/Helsinki           |
+| intraDayTimeRange.start | ☐        | See [IntraDayTimeRange](#intradaytimerange). The start time for the intraDayTimeRange. The format is hh:mm:ss                                                                                                                                         | 08:30:00                  |
+| intraDayTimeRange.end   | ☐        | See [IntraDayTimeRange](#intradaytimerange). The end time for the intraDayTimeRange. The format is hh:mm:ss                                                                                                                                           | 17:00:00                  |
+| searchQuery[]           | ☐        | Optional filters. Each entry has `field`, `operator`, and `value`. See [searchQuery](#searchquery-script-paths) below.                                                                                                                                | See below                 |
+
+##### searchQuery (Script Paths)
+
+* **`field`** — one of `script`, `queue`, `agent`, `channel` (lowercase; case-sensitive).
+* **`operator`** — `in`.
+* **`value`** — array of string IDs; see the example below.
+
+```json
+"searchQuery": [
+  {
+    "field": "agent",
+    "operator": "in",
+    "value": ["agfDAzC5NtSRuHol5GA4RT6A", "ag10000", "ag7sfo_qfaTXCvwb7MsSUStw"]
+  },
+  {
+    "field": "channel",
+    "operator": "in",
+    "value": ["1zkbCLd_R3ij4bC0T_hY7w", "ZOLa_Q-DSlSpdfq--H9vPQ", "ITPIhMTWQf-mpiQ_lahDQw"]
+  },
+  {
+    "field": "queue",
+    "operator": "in",
+    "value": ["169", "872"]
+  },
+  {
+    "field": "script",
+    "operator": "in",
+    "value": ["4163", "5471"]
+  }
+]
+```
+
+[API reference](/analytics/reference/cc-historical-report-create)
+
+#### Request
+
+```bash
+curl --location --request POST 'https://api.8x8.com/analytics/cc/v8/historical-metrics' \
+--header 'Authorization: Bearer {access_token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "type": "script-paths",
+    "title": "Script Paths Weekly",
+    "dateRange": {
+        "start": "2026-04-01T00:00:00.000Z",
+        "end":   "2026-04-08T00:00:00.000Z"
+    },
+    "timezone": "Europe/Helsinki",
+    "intraDayTimeRange": {
+        "start": "08:30:00",
+        "end":   "17:00:00"
+    },
+    "searchQuery": [
+        {
+            "field": "agent",
+            "operator": "in",
+            "value": ["agfDAzC5NtSRuHol5GA4RT6A", "ag10000", "ag7sfo_qfaTXCvwb7MsSUStw"]
+        },
+        {
+            "field": "channel",
+            "operator": "in",
+            "value": ["1zkbCLd_R3ij4bC0T_hY7w", "ZOLa_Q-DSlSpdfq--H9vPQ", "ITPIhMTWQf-mpiQ_lahDQw"]
+        },
+        {
+            "field": "queue",
+            "operator": "in",
+            "value": ["169", "872"]
+        },
+        {
+            "field": "script",
+            "operator": "in",
+            "value": ["4163", "5471"]
+        }
+    ]
+}'
+```
+
+#### Response
+
+The response shape is identical to other report types (returns an `id` and `status`). Poll `/status` until `DONE`, then download the CSV.
+
+### 9.2. Retrieving the Result
+
+1. Poll the status — see [5. Get Report Status](#5-get-report-status).
+2. When status is `DONE`, download the CSV — see [6b. Get Report Download](#6b-get-report-download-csvxlsx). The response is always CSV for this report type.
+3. The links endpoint ([7. Access Report Links](#7-access-report-links)) returns only the download link when `DONE`.
+
+### 9.3. CSV Column Reference
+
+<details>
+<summary>Click to expand Script Paths CSV Columns (9 columns)</summary>
+
+The downloaded CSV has the following columns, in order:
+
+| Column           | Type    | Description                                                                                                                                                                                                                          |
+| ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Path ID`        | string  | Unique identifier of the node in the path tree.                                                                                                                                                                                      |
+| `Parent Path ID` | string  | `Path ID` of the parent node. Empty only for the single entry-point root (`Node Type = ENTRY_POINT`).                                                                                                                                |
+| `Script ID`      | string  | Script identifier. Empty for the entry-point node.                                                                                                                                                                                   |
+| `Script Name`    | string  | Human-readable script name.                                                                                                                                                                                                          |
+| `Node Type`      | string  | Node kind. `ENTRY_POINT` is the root of the path tree (one per report); `SCRIPT` denotes an IVR script reached; other values are the IVR node type as defined in the IVR script (e.g. `TextSay`, `ForwardToQueue`, `GetDigit`, `Callback`), the corresponding node exit point (suffix `_ExitPoint`, e.g. `ForwardToQueue_ExitPoint`), or a terminal category such as `CustomerHangUp` or `AgentAccepted`. |
+| `Node Label`     | string  | Human-readable label of the node, as defined in the IVR script. May be empty for nodes that have no assigned label (e.g. `ENTRY_POINT`, `CustomerHangUp`).                                                                           |
+| `Depth`          | integer | Nesting depth in the path tree. `0` at the entry point.                                                                                                                                                                              |
+| `Count`          | integer | Number of interactions that traversed this node during the reporting window.                                                                                                                                                         |
+| `Terminal`       | boolean | `true` when the node is a leaf in the path tree — no child nodes followed it in the data. Marks the end of an IVR path taken by at least one interaction.                                                                           |
+
+</details>
+
+### 9.4. Reconstructing the Path Tree
+
+The CSV is flat but represents a tree. Each row has a `Path ID` (this node) and `Parent Path ID` (its parent). To rebuild the tree, index rows by `Path ID`, group children by `Parent Path ID`, then walk from the row whose `Parent Path ID` is empty (the `ENTRY_POINT`).
+
+```text
+nodes    = map()                       // "Path ID" -> row
+children = map(default: empty list)    // "Parent Path ID" -> [ "Path ID", ... ]
+root     = null
+
+for each row in csv:
+    nodes[row["Path ID"]] = row
+    if row["Parent Path ID"] is empty:
+        root = row["Path ID"]
+    else:
+        children[row["Parent Path ID"]].append(row["Path ID"])
+
+function walk(pathId, depth):
+    node = nodes[pathId]
+    print indent(depth), node["Node Type"], "—", node["Node Label"],
+          "(count=", node["Count"], ", terminal=", node["Terminal"], ")"
+    for each childId in children[pathId]:
+        walk(childId, depth + 1)
+
+walk(root, 0)
+```

@@ -468,6 +468,9 @@ curl --location --request GET 'https://api.8x8.com/analytics/cc/v<\<versionCCARe
 | Name | Required | Description | Example |
 | --- | --- | --- | --- |
 | queue-ids | ☐ | When not passed all queues are returned. Specifies the queue-ids of the queues to be returned. For multiple queues add multiple times. `&queue-ids=101&queue-ids=102`. Only valid queue-ids can be passed. Passing an invalid queue-id will result in a failure. | 103 |
+| showEnabledAgents | ☐ | When `true`, the response also includes agents assigned to the selected queues that are currently logged in (any status except `LoggedOut`), even if they have no current queue activity. These agents appear only in the top-level `agents` array with their full metrics; `queues[].agentMetrics` is not affected. Defaults to `false`. Available on v5 only. | true |
+
+When `showEnabledAgents=true`, an enabled-but-idle logged-in agent is added to the top-level `agents` array with the full metric set, while `queues[].agentMetrics` continues to list only agents with actual activity in that queue. `queues[].assignedAgents` is unchanged and already lists every agent assigned to the queue regardless of activity.
 
 Sample request limited to two queues and just three of the available metrics (Two agent related and one queue related)
 

@@ -1511,6 +1511,14 @@
             "required": false,
             "schema": { "type": "string" },
             "example": "Europe/Helsinki"
+          },
+          {
+            "name": "showEnabledAgents",
+            "in": "query",
+            "description": "When true, the response also includes agents assigned to the selected queues that are currently logged in (any status except `LoggedOut`), even if they have no current queue activity. These agents appear only in the top-level `agents` array with their full metrics; `queues[].agentMetrics` is not affected. Defaults to false.",
+            "required": false,
+            "allowEmptyValue": false,
+            "schema": { "type": "boolean", "default": false }
           }
         ],
         "responses": {
