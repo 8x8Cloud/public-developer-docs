@@ -2,15 +2,27 @@
 
 ## New Features
 
+### Recording & Transcription
+
+* Recording and transcription can now be started and stopped independently, with capability-aware buttons, dialogs, and nudges reflecting the available services
+
 ### Transcription
 
 * Async transcription now works with a single participant — sessions start immediately when transcribing is enabled, without requiring the minimum participant threshold (Jicofo)
+* New option to render speaker IDs in transcriptions
+
+### Subtitles
+
+* New `transcription.translationEnabled` config flag to control live translation
+* Subtitles can now be toggled directly when translation is disabled, and the closed captions button title stays in sync with state
+* Source-language subtitles are displayed on stage, with the on-stage speaker name resolved correctly
 
 ### Whiteboard
 
 * Whiteboard now auto-opens for remote participants when metadata propagates after a delay
 * Collaboration data is validated before opening the whiteboard, with a notification shown on failure
 * Non-moderators can now close the whiteboard
+* Image sharing is now supported on the inline web whiteboard
 * Prevented duplicate navigation when collaborating
 
 ### Virtual Background
@@ -25,6 +37,7 @@
 * Body element is no longer scrolled when iframe content programmatically scrolls into view
 * Shortcuts are shown in settings when present in the configured list
 * Invite dialog now reacts to `dialinEnabled` metadata changes while open
+* The screen stays awake while a participant is waiting in the lobby
 * Salesforce integration was overhauled
 
 ### Accessibility
