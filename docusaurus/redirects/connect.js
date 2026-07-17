@@ -597,4 +597,18 @@ module.exports = [
   // Voice error code reference pages moved to docs
   { from: '/connect/reference/voice-error-codes', to: '/connect/docs/voice/error-codes/voice-error-codes-reference' },
   { from: '/connect/reference/voice-status-codes', to: '/connect/docs/voice/error-codes/voice-status-codes-reference' },
+
+  // converse-overview path consolidated to /connect/docs/converse
+  { from: '/connect/docs/converse-overview', to: '/connect/docs/converse' },
+
+  // Moobidesk renamed to Converse
+  { from: '/connect/docs/moobidesk', to: '/connect/docs/converse' },
+  { from: '/connect/docs/moobidesk/getting-started', to: '/connect/docs/converse/getting-started' },
+  { from: '/connect/docs/moobidesk/user-roles', to: '/connect/docs/converse/user-roles' },
+  { from: '/connect/docs/moobidesk/contacts', to: '/connect/docs/converse/contacts' },
+  { from: '/connect/docs/moobidesk/agents', to: '/connect/docs/converse/agents' },
+  { from: '/connect/docs/moobidesk/queue', to: '/connect/docs/converse/queue' },
+  { from: '/connect/docs/moobidesk/conversations', to: '/connect/docs/converse/conversations' },
+  { from: '/connect/docs/moobidesk/reports', to: '/connect/docs/converse/reports' },
+  { from: '/connect/docs/moobidesk/settings', to: '/connect/docs/converse/settings' },
 ];

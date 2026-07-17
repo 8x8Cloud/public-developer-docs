@@ -292,24 +292,12 @@ const cards = [
     title: 'Converse',
     items: [
       {
-        label: '8x8 Converse - Overview',
-        link: '/connect/docs/converse-overview',
-      },
-      { label: 'Dashboard', link: '/connect/docs/dashboard' },
-      { label: 'My Conversations', link: '/connect/docs/my-conversations' },
-      { label: 'View More…', link: '/connect/docs/converse-overview' },
-    ],
-  },
-  {
-    title: 'Moobidesk',
-    items: [
-      {
         label: 'Overview',
-        link: '/connect/docs/moobidesk',
+        link: '/connect/docs/converse',
       },
-      { label: 'Getting Started', link: '/connect/docs/moobidesk/getting-started' },
-      { label: 'Conversations', link: '/connect/docs/moobidesk/conversations' },
-      { label: 'View More…', link: '/connect/docs/moobidesk' },
+      { label: 'Getting Started', link: '/connect/docs/converse/getting-started' },
+      { label: 'Conversations', link: '/connect/docs/converse/conversations' },
+      { label: 'View More…', link: '/connect/docs/converse' },
     ],
   },
   {
