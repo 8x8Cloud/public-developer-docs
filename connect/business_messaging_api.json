@@ -5999,6 +5999,11 @@
                     "type": "integer",
                     "description": "You also need to define if you would like to limit the number of records to fetch using the parameter ***limit*** and an integer value\n\nIf you do not want to put a limit on the number of records to retrieve, setting ***limit*** to 0 allows to set is as unlimited.\n\n- *NB: a longer time-span (eg: several months) and no limit on the records number will increase the time required to generate the logs file.*",
                     "default": 0
+                  },
+                  "channelUserId": {
+                    "type": "string",
+                    "description": "Channel user identifier. When provided, the export is filtered to messages associated with this user. For WhatsApp, this is the business-scoped user identifier (BSUID) and takes the format: ISO 3166 alpha-2 two-letter country code, followed by a period, followed by up to 128 alphanumeric characters (for example, `US.13491208655302741918`).",
+                    "example": "US.13491208655302741918"
                   }
                 }
               }
@@ -6008,7 +6013,8 @@
             "application/json": {
               "from": "2020-07-01",
               "to": "2020-08-01T13:15:00+08:00",
-              "limit": 500000
+              "limit": 500000,
+              "channelUserId": "US.13491208655302741918"
             }
           }
         },
@@ -6245,7 +6251,8 @@
                               },
                               "channelUserId": {
                                 "type": "string",
-                                "description": "Channel user identifier (obfuscated to protect sensitive data)."
+                                "description": "Channel user identifier (obfuscated to protect sensitive data). For WhatsApp messages, this is the business-scoped user identifier (BSUID).",
+                                "example": "PH.26717025731320236"
                               }
                             }
                           },
@@ -6320,7 +6327,8 @@
                           "step": 2,
                           "country": "SG",
                           "user": {
-                            "msisdn": "+63922110xxxx"
+                            "msisdn": "+63922110xxxx",
+                            "channelUserId": "PH.26717025731320236"
                           },
                           "content": "**MASKED**",
                           "clientMessageId": "client message id",
