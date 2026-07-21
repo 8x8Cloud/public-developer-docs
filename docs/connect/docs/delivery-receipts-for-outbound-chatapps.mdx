@@ -61,6 +61,7 @@ Payload object description
 | content         | object         | Message content. Structure varies based on the `type` field.<br/>Only present when `eventType=external_app_message`                                                 |
 | status          | object         | Current status of the message, please see [Message status reference](/connect/reference/message-status-references) for details.<br/>Only present when `eventType=outbound_message_status_changed` |
 | whatsapp        | object         | WhatsApp-specific information. Only present when `channel` is `whatsapp`. See below for details                                                                     |
+| outboundContent | object         | **New in v9.** A structured copy of the original outbound message this receipt refers to. WhatsApp only, and only present on the receipt that carries the delivered content (the `delivered_to_recipient` status). See [outboundContent object](#outboundcontent-object) below. |
 
 User information object description
 
@@ -93,6 +94,82 @@ WhatsApp object description
 > If the request you receive has a different structure from described in this document, please contact our support to activate the latest format for your account.
 >
 
+#### outboundContent object
+
+`outboundContent` is a structured, channel-normalized copy of the message you originally sent. It lets you reconcile a delivery receipt with the exact content that was delivered without keeping your own copy of the outbound payload.
+
+> 📘
+>
+> `outboundContent` is **WhatsApp only**. It is attached to the receipt that confirms delivery to the recipient (`delivered_to_recipient`) and is omitted from earlier receipts such as `queued` and `delivered_to_operator`. When the content cannot be reconstructed it is left out entirely.
+>
+
+| Parameter name | Parameter type | Description |
+| :------------- | :------------- | :---------- |
+| channel        | string         | Channel the content was sent on. Always `whatsapp`. |
+| contentType    | string         | Kind of content. See [contentType values](#contenttype-values) below. |
+| template       | object         | Template metadata. Only present when `contentType` is `template`, `template_auth`, or `carousel`. |
+| header         | object         | Message header (text, media, or location). Omitted when the message has no header, and for `carousel` (per-card headers are used instead). |
+| body           | object         | Message body text. |
+| footer         | object         | Message footer text. |
+| actions        | object         | Interactive elements (buttons, call-to-action, list, or flow). Omitted for `carousel` (per-card actions are used instead). |
+| cards          | array          | Carousel cards, in order. Only present when `contentType` is `carousel`. |
+| meta           | object         | Extra flags such as redaction status and interactive sub-type. |
+
+##### contentType values
+
+| Value           | Description |
+| :-------------- | :---------- |
+| `text`          | Freeform text message. |
+| `media`         | Freeform image, video, audio, or document. The media type is carried in `header.type`. |
+| `location`      | Freeform location message. |
+| `template`      | Standard (non-authentication) template message. |
+| `template_auth` | Authentication template. Its one-time code is redacted — see [Redaction](#redaction) below. |
+| `carousel`      | Carousel template. Content is carried per card in the `cards` array. |
+| `interactive`   | Interactive message (quick-reply buttons, list, call-to-action URL, or flow). The sub-type is in `meta.interactiveType`. |
+
+##### header object
+
+| Parameter name | Parameter type | Description |
+| :------------- | :------------- | :---------- |
+| type           | string         | One of `text`, `image`, `video`, `audio`, `document`, or `location`. |
+| text           | string         | Header text. Only present when `type` is `text`. |
+| media          | object         | Media descriptor. Only present for `image`, `video`, `audio`, and `document` headers. Contains `url`, and `filename` for documents. |
+| location       | object         | Location descriptor (`latitude`, `longitude`, and optionally `name` and `address`). Only present when `type` is `location`. |
+
+##### body / footer objects
+
+| Parameter name | Parameter type | Description |
+| :------------- | :------------- | :---------- |
+| text           | string         | The body or footer text. |
+
+##### actions object
+
+| Parameter name | Parameter type | Description |
+| :------------- | :------------- | :---------- |
+| buttons        | array          | Buttons, in order. Each has `type` (`url`, `quick_reply`, `copy_code`, `phone`, or `flow`), `label`, and `value` (`null` for buttons that carry no value, such as `quick_reply`). |
+| cta            | object         | Call-to-action URL button (`displayText`, `url`). |
+| list           | object         | List picker: `buttonLabel` plus `sections`, each with an optional `title` and a `rows` array (`id`, `title`, optional `description`). |
+| flow           | object         | WhatsApp Flow details (`flowId`, `cta`, `action`, `screen`). |
+
+##### cards array (carousel)
+
+Each entry has an `index` (zero-based position) and its own `header`, `body`, and `actions`, structured exactly as above.
+
+##### meta object
+
+| Parameter name  | Parameter type | Description |
+| :-------------- | :------------- | :---------- |
+| redacted        | boolean        | `true` when part of the content was masked. |
+| redactionReason | string         | Why the content was masked. |
+| interactiveType | string         | Sub-type of an interactive message: `button`, `list`, `cta_url`, or `flow`. |
+
+##### Redaction
+
+Some content is masked before it reaches your webhook, in which case `meta.redacted` is `true`:
+
+- **Authentication templates** (`contentType` is `template_auth`): the one-time code is replaced with `******` in the body and in any copy-code button. `meta.redactionReason` is `OTP codes are masked in agent-facing contexts`.
+- **PII masking** (when enabled on your sub-account): the content is withheld, leaving only `channel`, `contentType`, and `meta`. `meta.redactionReason` is `Content masked for PII compliance`.
+
 #### Sample payloads
 
 ##### WhatsApp — queued
@@ -122,9 +199,9 @@ Sent when the message is accepted by the 8x8 platform. In this example the messa
 
 ##### WhatsApp — delivered to recipient
 
-This receipt comes back from WhatsApp, so the `user` object includes the new `channelUserId` (BSUID).
+This receipt comes back from WhatsApp, so the `user` object includes the new `channelUserId` (BSUID). The `delivered_to_recipient` receipt also carries the `outboundContent` object — a structured copy of the message that was delivered. The examples below show the receipt for different content types; only the `outboundContent` object varies, the surrounding webhook body is the same in each case.
 
-```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, delivered to recipient"
+```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, delivered, freeform text"
 {
   "version": 9,
   "namespace": "ChatApps",
@@ -148,6 +225,141 @@ This receipt comes back from WhatsApp, so the `user` object includes the new `ch
     },
     "whatsapp": {
       "pricingCategory": "marketing"
+    },
+    "outboundContent": {
+      "channel": "whatsapp",
+      "contentType": "text",
+      "body": {
+        "text": "Welcome to 8x8 Inc.! We are the leading global provider of unified cloud communications, video collaboration, and contact center solutions."
+      }
+    }
+  }
+}
+```
+
+Template with an image header, a URL button, and a quick-reply button:
+
+```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, delivered, template"
+{
+  "version": 9,
+  "namespace": "ChatApps",
+  "eventType": "outbound_message_status_changed",
+  "description": "ChatApps outbound message delivery receipt",
+  "payload": {
+    "umid": <UNIQUE_MESSAGE_ID>,
+    "batchId": <BATCH_ID>,
+    "clientMessageId": <YOUR_MESSAGE_ID>,
+    "clientBatchId": <YOUR_BATCH_ID>,
+    "subAccountId": <SUBACCOUNT_ID>,
+    "channel": "whatsapp",
+    "user": {
+      "msisdn": <USER_PHONE_NUMBER>,
+      "channelUserId": <WHATSAPP_BSUID>
+    },
+    "status": {
+      "state": "delivered",
+      "detail": "delivered_to_recipient",
+      "timestamp": "2026-07-03T03:40:54.16Z"
+    },
+    "whatsapp": {
+      "pricingCategory": "marketing"
+    },
+    "outboundContent": {
+      "channel": "whatsapp",
+      "contentType": "template",
+      "template": {
+        "name": "marketing_welcome_template",
+        "language": "en_US",
+        "category": "MARKETING"
+      },
+      "header": {
+        "type": "image",
+        "media": {
+          "url": "<HEADER_IMAGE_URL>"
+        }
+      },
+      "body": {
+        "text": "Hi Jason, ready to elevate your customer communications? Discover the power of 8x8 CPaaS."
+      },
+      "footer": {
+        "text": "Powered by 8x8"
+      },
+      "actions": {
+        "buttons": [
+          {
+            "type": "url",
+            "label": "Discover all channels",
+            "value": "https://cpaas.8x8.com/en/products/omnichannel-messaging"
+          },
+          {
+            "type": "quick_reply",
+            "label": "Talk to Sales",
+            "value": null
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+Interactive list message (note `meta.interactiveType`):
+
+```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, delivered, interactive list"
+{
+  "version": 9,
+  "namespace": "ChatApps",
+  "eventType": "outbound_message_status_changed",
+  "description": "ChatApps outbound message delivery receipt",
+  "payload": {
+    "umid": <UNIQUE_MESSAGE_ID>,
+    "batchId": <BATCH_ID>,
+    "clientMessageId": <YOUR_MESSAGE_ID>,
+    "clientBatchId": <YOUR_BATCH_ID>,
+    "subAccountId": <SUBACCOUNT_ID>,
+    "channel": "whatsapp",
+    "user": {
+      "msisdn": <USER_PHONE_NUMBER>,
+      "channelUserId": <WHATSAPP_BSUID>
+    },
+    "status": {
+      "state": "delivered",
+      "detail": "delivered_to_recipient",
+      "timestamp": "2026-07-03T03:40:54.16Z"
+    },
+    "whatsapp": {
+      "pricingCategory": "marketing"
+    },
+    "outboundContent": {
+      "channel": "whatsapp",
+      "contentType": "interactive",
+      "header": {
+        "type": "text",
+        "text": "8x8 Customer Success personalized sessions"
+      },
+      "body": {
+        "text": "Looking for personalized assistance? Our Customer Success team has the following slots available. Tap to select a time."
+      },
+      "footer": {
+        "text": "For urgent inquiries, email cpaas-sales@8x8.com"
+      },
+      "actions": {
+        "list": {
+          "buttonLabel": "Book Slot",
+          "sections": [
+            {
+              "title": "Oct 9, 2024",
+              "rows": [
+                { "id": "slot-1", "title": "Monday, Oct 9", "description": "9:00 AM - 10:00 AM" },
+                { "id": "slot-2", "title": "Monday, Oct 9", "description": "2:00 PM - 3:00 PM" }
+              ]
+            }
+          ]
+        }
+      },
+      "meta": {
+        "interactiveType": "list"
+      }
     }
   }
 }
