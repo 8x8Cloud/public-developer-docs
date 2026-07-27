@@ -4,35 +4,6 @@
 const sidebarConfig = [
   {
     type: 'category',
-    label: 'Work Analytics Historical',
-    collapsed: true,
-    items: [
-      {
-        type: 'category',
-        label: 'Authentication',
-        collapsed: true,
-        items: ['analytics/reference/authentication-1'],
-      },
-      {
-        type: 'category',
-        label: 'Analytics',
-        collapsed: true,
-        items: [
-          'analytics/reference/call-detail-record-legs',
-          'analytics/reference/call-detail-records',
-          'analytics/reference/company-summary',
-          'analytics/reference/extension-summary-v-2',
-          'analytics/reference/ring-group-summary',
-          'analytics/reference/ring-group-members-summary',
-          'analytics/reference/extension-summary-deprecated',
-          'analytics/reference/call-detail-record-deprecated',
-          'analytics/reference/ring-group-summary-deprecated',
-        ],
-      },
-    ],
-  },
-  {
-    type: 'category',
     label: '8x8 Analytics for Contact Center Real-time Metrics API',
     collapsed: true,
     items: [
@@ -210,43 +181,6 @@ const sidebarConfig = [
   },
   {
     type: 'category',
-    label: 'Work Analytics Customer Data',
-    collapsed: true,
-    items: [
-      {
-        type: 'category',
-        label: 'Pbxes',
-        collapsed: true,
-        items: ['analytics/reference/get-pbxes'],
-      },
-      {
-        type: 'category',
-        label: 'Sites',
-        collapsed: true,
-        items: ['analytics/reference/get-pbx-sites'],
-      },
-      {
-        type: 'category',
-        label: 'Queues Per Site',
-        collapsed: true,
-        items: ['analytics/reference/get-pbx-site-queues'],
-      },
-      {
-        type: 'category',
-        label: 'Queues per PBX',
-        collapsed: true,
-        items: ['analytics/reference/get-pbx-queues'],
-      },
-      {
-        type: 'category',
-        label: 'Agents',
-        collapsed: true,
-        items: ['analytics/reference/get-pbx-agents'],
-      },
-    ],
-  },
-  {
-    type: 'category',
     label: 'Audit Records API',
     collapsed: true,
     items: [
@@ -272,6 +206,12 @@ const sidebarConfig = [
     label: 'Work Analytics',
     collapsed: true,
     items: [
+      {
+        type: 'category',
+        label: 'Authentication',
+        collapsed: true,
+        items: ['analytics/reference/authentication-1'],
+      },
       {
         type: 'category',
         label: 'Get Agent Activity Metrics per Queues',
@@ -301,6 +241,79 @@ const sidebarConfig = [
         label: 'Call Details',
         collapsed: true,
         items: ['analytics/reference/detailed'],
+      },
+      {
+        type: 'category',
+        label: 'Active Calls',
+        collapsed: true,
+        items: ['analytics/reference/get-active-calls'],
+      },
+      {
+        type: 'category',
+        label: 'Unreturned Calls',
+        collapsed: true,
+        items: [
+          'analytics/reference/get-unreturned-calls',
+          'analytics/reference/get-unreturned-callees',
+          'analytics/reference/get-unreturned-callers',
+          'analytics/reference/get-unreturned-detailed',
+          'analytics/reference/post-unreturned-detailed',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Ring Group Agent Activity',
+        collapsed: true,
+        items: [
+          'analytics/reference/get-ring-group-agent-activity',
+          'analytics/reference/get-ring-group-agent-activity-by-extension',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Analytics',
+        collapsed: true,
+        items: [
+          'analytics/reference/call-detail-record-legs',
+          'analytics/reference/call-detail-records',
+          'analytics/reference/company-summary',
+          'analytics/reference/extension-summary-v-2',
+          'analytics/reference/ring-group-summary',
+          'analytics/reference/ring-group-members-summary',
+          'analytics/reference/extension-summary-deprecated',
+          'analytics/reference/call-detail-record-deprecated',
+          'analytics/reference/ring-group-summary-deprecated',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Pbxes',
+        collapsed: true,
+        items: ['analytics/reference/get-pbxes'],
+      },
+      {
+        type: 'category',
+        label: 'Sites',
+        collapsed: true,
+        items: ['analytics/reference/get-pbx-sites'],
+      },
+      {
+        type: 'category',
+        label: 'Queues Per Site',
+        collapsed: true,
+        items: ['analytics/reference/get-pbx-site-queues'],
+      },
+      {
+        type: 'category',
+        label: 'Queues per PBX',
+        collapsed: true,
+        items: ['analytics/reference/get-pbx-queues'],
+      },
+      {
+        type: 'category',
+        label: 'Agents',
+        collapsed: true,
+        items: ['analytics/reference/get-pbx-agents'],
       },
     ],
   },

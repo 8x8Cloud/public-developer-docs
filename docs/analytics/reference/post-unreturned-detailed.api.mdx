@@ -1,0 +1,71 @@
+---
+id: post-unreturned-detailed
+title: "Get Detailed Unreturned Calls (POST)"
+description: "Same result as `GET /calls/unreturned/detailed`, but the filters, time range, sorting and paging are supplied in a JSON request body instead of query parameters — convenient when the caller-address list is long. Any value present in the body overrides the equivalent query parameter; query parameters supplied alongside the body are used only as fallbacks. Returns the same `DetailedUnreturnedCallsResponse` as the GET variant. The same endpoint is also served under `/v2`."
+sidebar_label: "Get Detailed Unreturned Calls (POST)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: analytics/reference/work-analytics
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Detailed Unreturned Calls (POST)"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v2/pbxes/{pbxId}/calls/unreturned/detailed"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Same result as `GET /calls/unreturned/detailed`, but the filters, time range, sorting and paging are supplied in a JSON request body instead of query parameters — convenient when the caller-address list is long. Any value present in the body overrides the equivalent query parameter; query parameters supplied alongside the body are used only as fallbacks. Returns the same `DetailedUnreturnedCallsResponse` as the GET variant. The same endpoint is also served under `/v2`.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"pbxId","in":"path","description":"Id of the PBX.","required":true,"schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":false,"content":{"application/json":{"schema":{"type":"object","description":"Request body for POST `/calls/unreturned/detailed`. Every field is optional in the body; a value present here overrides the equivalent query parameter.","properties":{"callerAddresses":{"type":"array","items":{"type":"string"},"description":"Caller addresses to drill into. At least one caller address must be supplied (via body or query)."},"calleeAddresses":{"type":"array","items":{"type":"string"},"description":"Restrict to specific callee addresses."},"fields":{"type":"array","items":{"type":"string"},"description":"Response fields to return. If omitted, all available fields are returned."},"search":{"type":"string","description":"Free-text search across caller/callee identity fields."},"startDate":{"type":"string","description":"Start of the historical window, in ISO 8601."},"endDate":{"type":"string","description":"End of the historical window, in ISO 8601."},"intraDayStart":{"type":"string","description":"Optional intra-day window start; only valid together with startDate/endDate."},"intraDayEnd":{"type":"string","description":"Optional intra-day window end; only valid together with startDate/endDate."},"timeZone":{"type":"string","description":"Time zone applied to the time filter."},"sortingField":{"type":"string","description":"Field to sort by."},"sortingDirection":{"type":"string","enum":["ASC","DESC"],"description":"Sort direction."},"limit":{"type":"integer","format":"int32","description":"Maximum number of records to return in the page."},"startingAfter":{"type":"string","description":"Cursor: record id to start the page after."},"latestSortingValue":{"type":"string","description":"The latest sorting value used to paginate results."}},"title":"DetailedUnreturnedCallsPostRequest"},"example":{"callerAddresses":["1006","1008"],"calleeAddresses":["1014"],"fields":["callId","callerName","calleeName","startTime","outcome"],"startDate":"2026-07-01T00:00:00Z","endDate":"2026-07-15T23:59:59Z","sortingField":"startTime","sortingDirection":"DESC","limit":50}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"OK","content":{"application/json":{"schema":{"type":"object","properties":{"records":{"type":"array","items":{"type":"object","properties":{"callId":{"type":"string","description":"Unique identifier of the call"},"transferToCallId":{"type":"string","description":"Identifier of the call this call was transferred to, if any"},"caller":{"type":"object","properties":{"id":{"type":"string","description":"Identifier of the calling party"},"address":{"type":"string","description":"Address or extension number of the caller"},"name":{"type":"string","description":"Name of the caller"},"deviceId":{"type":"string","description":"Unique identifier of the device used by the caller"},"deviceModel":{"type":"string","description":"Model of the device used by the caller"},"serviceName":{"type":"string","description":"Name of the service used by the caller"},"serviceType":{"type":"string","description":"Type of the service used by the caller"}},"title":"UnreturnedCaller"},"callee":{"type":"object","properties":{"address":{"type":"string","description":"Address or extension number of the callee"},"name":{"type":"string","description":"Name of the callee"},"deviceId":{"type":"string","description":"Unique identifier of the device used by the callee"},"deviceModel":{"type":"string","description":"Model of the device used by the callee"},"serviceName":{"type":"string","description":"Name of the service used by the callee"},"serviceType":{"type":"string","description":"Type of the service used by the callee"}},"title":"UnreturnedCallee"},"workGroup":{"type":"object","properties":{"id":{"type":"string","example":"LcfqMc30Ro2PWLSyYowS2g"},"extension":{"type":"string","example":"1028"},"groupType":{"type":"string","example":"CALL_QUEUE"}},"title":"WorkGroup"},"startTime":{"type":"integer","format":"int64","description":"Time the call started, in epoch milliseconds"},"totalDuration":{"type":"number","format":"double","description":"Total duration of the call"},"did":{"type":"string","description":"Direct inward dialing number associated with the call"},"outcome":{"type":"string","description":"Outcome classification of the unreturned call"},"labels":{"type":"array","items":{"type":"string"},"description":"Ordered list of states the call passed through"}},"title":"DetailedUnreturnedCallRecord"}}},"title":"DetailedUnreturnedCallsResponse"},"example":{"records":[{"callId":"1717751880000","transferToCallId":"1717751890000","caller":{"id":"Chay Hoss,1006","address":"1006","name":"Chay Hoss","deviceId":"d-1006","deviceModel":"voo8x8","serviceName":"Work","serviceType":"VOICE"},"callee":{"address":"1014","name":"Chandler Hollow","deviceId":"d-1014","deviceModel":"voo8x8","serviceName":"Work","serviceType":"VOICE"},"workGroup":{"id":"tqteLkZOScyi0Mai9ewUlA","extension":"1000","groupType":"CALL_QUEUE"},"startTime":1717751880000,"totalDuration":54.88,"did":"1000","outcome":"ABANDONED","labels":["WAITING","ALERTING","ABANDONED"]}]}}}},"401":{"description":"Unauthorized","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"error":{"type":"string","description":"type of  error","example":"invalid_token"},"error_description":{"type":"string","description":"Description of the error","example":"Access token expired: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9."}},"title":"401ErrorResponse"}}}},"403":{"description":"Forbidden","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"timestamp":{"type":"string","description":"Timestamp of the error","format":"date-time","example":"2023-01-05T12:04:59.100+0000"},"status":{"type":"integer","description":"HTTP status of the response","format":"int32"},"messages":{"type":"array","description":"List of business service error messages","items":{"type":"string"}},"path":{"type":"string","description":"Request path"}},"title":"ErrorResponse"},"examples":{"User Not Authorized":{"description":"User Not Authorized","value":{"timestamp":"2023-01-05T12:04:59.100+0000","status":403,"messages":["user [user_name] does not have access to pbxId [PBX_ID] to make this request."],"path":"/analytics/work/v2/pbxes/PBX_ID_VALUE/calls/unreturned/detailed"}}}}}},"404":{"description":"Not Found","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"timestamp":{"type":"string","description":"Timestamp of the error","format":"date-time","example":"2023-01-05T12:04:59.100+0000"},"status":{"type":"integer","description":"HTTP status of the response","format":"int32"},"messages":{"type":"array","description":"List of business service error messages","items":{"type":"string"}},"path":{"type":"string","description":"Request path"}},"title":"ErrorResponse"}}}},"409":{"description":"Conflict","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"timestamp":{"type":"string","description":"Timestamp of the error","format":"date-time","example":"2023-01-05T12:04:59.100+0000"},"status":{"type":"integer","description":"HTTP status of the response","format":"int32"},"messages":{"type":"array","description":"List of business service error messages","items":{"type":"string"}},"path":{"type":"string","description":"Request path"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

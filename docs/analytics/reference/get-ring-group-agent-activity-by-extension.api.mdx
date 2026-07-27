@@ -1,0 +1,71 @@
+---
+id: get-ring-group-agent-activity-by-extension
+title: "Get Ring Group Agent Activity by Extension"
+description: "Returns per-agent activity for the members of a ring group on the given PBX, identified by the ring group **extension** instead of its id. Behaves identically to `GET /ring-group-agent-activity/{ringGroupId}` and returns the same response shape."
+sidebar_label: "Get Ring Group Agent Activity by Extension"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: analytics/reference/work-analytics
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Ring Group Agent Activity by Extension"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v2/pbxes/{pbxId}/ring-group-agent-activity/by-extension/{ringGroupExtension}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Returns per-agent activity for the members of a ring group on the given PBX, identified by the ring group **extension** instead of its id. Behaves identically to `GET /ring-group-agent-activity/{ringGroupId}` and returns the same response shape.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"pbxId","in":"path","description":"Id of the PBX.","required":true,"schema":{"type":"string"}},{"name":"ringGroupExtension","in":"path","description":"Extension of the ring group whose agent activity is requested.","required":true,"schema":{"type":"string"}},{"name":"agentExtensions","in":"query","description":"Restrict to specific agent extensions within the ring group (comma-separated). If not passed, all agents in the ring group are returned.","required":false,"schema":{"type":"string"}},{"name":"startDate","in":"query","description":"Start of the historical window, in ISO 8601. Omit both `startDate` and `endDate` for the last 24 hours.","required":false,"schema":{"type":"string"}},{"name":"endDate","in":"query","description":"End of the historical window, in ISO 8601.","required":false,"schema":{"type":"string"}},{"name":"intraDayStart","in":"query","description":"Optional intra-day window start; only valid together with `startDate`/`endDate`.","required":false,"schema":{"type":"string"}},{"name":"intraDayEnd","in":"query","description":"Optional intra-day window end; only valid together with `startDate`/`endDate`.","required":false,"schema":{"type":"string"}},{"name":"metrics","in":"query","description":"Expected metrics in response. Multiple values can be passed separated by comma. If not passed, all available metrics are returned.\n\n**Values allowed and their description**\n\n| Metric | Description |\n| ------ | ----------- |\n| loggedInDuration | Total time the agent was logged in to the ring group during the reporting period, in milliseconds. |\n| loggedOutDuration | Total time the agent was logged out of the ring group during the reporting period, in milliseconds. |\n","required":false,"schema":{"type":"string"}},{"name":"sorting","in":"query","description":"Sort field and direction. Sortable field: `agentExtension`.","required":false,"schema":{"type":"object","example":{"value":{"sortingField":"handlingDuration","sortingDirection":"ASC","summary":"Example sorting by handling duration in ascending order"}},"properties":{"sortingField":{"type":"string","description":"field on which sorting is done, currently supported are callId,startTime,stopTime,handlingDuration"},"sortingDirection":{"type":"string"},"sortingDirectionValue":{"type":"string","enum":["ASC","DESC"]}},"title":"Sorting"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"OK","content":{"application/json":{"schema":{"type":"object","description":"Ring group agent activity response — one entry per agent in the ring group.","properties":{"ringGroupAgentActivity":{"type":"array","items":{"type":"object","description":"Activity of a single agent within a ring group.","properties":{"agentExtension":{"type":"string","description":"The phone extension of the agent."},"metrics":{"type":"object","additionalProperties":{"type":"object"},"description":"The requested metrics and their values for this agent (`loggedInDuration`, `loggedOutDuration`; durations in milliseconds)."}},"title":"RingGroupAgentActivity"},"description":"The per-agent activity rows for the ring group."}},"title":"RingGroupAgentActivityResponse"},"example":{"ringGroupAgentActivity":[{"agentExtension":"1014","metrics":{"loggedInDuration":25200000,"loggedOutDuration":3600000}}]}}}},"401":{"description":"Unauthorized","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"error":{"type":"string","description":"type of  error","example":"invalid_token"},"error_description":{"type":"string","description":"Description of the error","example":"Access token expired: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9."}},"title":"401ErrorResponse"}}}},"403":{"description":"Forbidden","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"timestamp":{"type":"string","description":"Timestamp of the error","format":"date-time","example":"2023-01-05T12:04:59.100+0000"},"status":{"type":"integer","description":"HTTP status of the response","format":"int32"},"messages":{"type":"array","description":"List of business service error messages","items":{"type":"string"}},"path":{"type":"string","description":"Request path"}},"title":"ErrorResponse"},"examples":{"User Not Authorized":{"description":"User Not Authorized","value":{"timestamp":"2023-01-05T12:04:59.100+0000","status":403,"messages":["user [user_name] does not have access to pbxId [PBX_ID] to make this request."],"path":"/analytics/work/v2/pbxes/PBX_ID_VALUE/ring-group-agent-activity/by-extension/RING_GROUP_EXTENSION"}}}}}},"404":{"description":"Not Found — the PBX was not found. An unknown ring group is not a 404: it returns 200 with an empty ringGroupAgentActivity list.","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"timestamp":{"type":"string","description":"Timestamp of the error","format":"date-time","example":"2023-01-05T12:04:59.100+0000"},"status":{"type":"integer","description":"HTTP status of the response","format":"int32"},"messages":{"type":"array","description":"List of business service error messages","items":{"type":"string"}},"path":{"type":"string","description":"Request path"}},"title":"ErrorResponse"}}}},"409":{"description":"Conflict","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"timestamp":{"type":"string","description":"Timestamp of the error","format":"date-time","example":"2023-01-05T12:04:59.100+0000"},"status":{"type":"integer","description":"HTTP status of the response","format":"int32"},"messages":{"type":"array","description":"List of business service error messages","items":{"type":"string"}},"path":{"type":"string","description":"Request path"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

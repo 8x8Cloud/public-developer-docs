@@ -1,0 +1,71 @@
+---
+id: get-unreturned-callers
+title: "Get Unreturned Call Callers"
+description: "Returns the distinct callers whose calls were not returned for the given PBX, optionally scoped to the callees they tried to reach. Useful for populating a caller filter on the unreturned-calls report. The same endpoint is also served under `/v2`."
+sidebar_label: "Get Unreturned Call Callers"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: analytics/reference/work-analytics
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Unreturned Call Callers"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v2/pbxes/{pbxId}/calls/unreturned/callers"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Returns the distinct callers whose calls were not returned for the given PBX, optionally scoped to the callees they tried to reach. Useful for populating a caller filter on the unreturned-calls report. The same endpoint is also served under `/v2`.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"pbxId","in":"path","description":"Id of the PBX.","required":true,"schema":{"type":"string"}},{"name":"siteIds","in":"query","description":"Restrict to specific sites (comma-separated).","required":false,"schema":{"type":"string"}},{"name":"calleeAddresses","in":"query","description":"Restrict to callers that tried to reach specific callee addresses (comma-separated).","required":false,"schema":{"type":"string"}},{"name":"search","in":"query","description":"Free-text search across caller name/address.","required":false,"schema":{"type":"string"}},{"name":"startDate","in":"query","description":"Start of the historical window, in ISO 8601. Omit both `startDate` and `endDate` for the last 24 hours.","required":false,"schema":{"type":"string"}},{"name":"endDate","in":"query","description":"End of the historical window, in ISO 8601.","required":false,"schema":{"type":"string"}},{"name":"intraDayStart","in":"query","description":"Optional intra-day window start; only valid together with `startDate`/`endDate`.","required":false,"schema":{"type":"string"}},{"name":"intraDayEnd","in":"query","description":"Optional intra-day window end; only valid together with `startDate`/`endDate`.","required":false,"schema":{"type":"string"}},{"name":"paging","in":"query","required":true,"schema":{"type":"object","properties":{"limit":{"minimum":1,"type":"integer","format":"int32","description":"The maximum number of items to return in the response.","example":20},"startingAfter":{"type":"string","description":"A cursor for use in pagination. `startingAfter` is an item ID that defines the point from which to start returning results.","example":"5f6e4a2b9f1a4d5e7c8b1234"},"latestSortingValue":{"type":"string","description":"The latest sorting value used to paginate results.","example":"45.79"}},"description":"Parameters for controlling pagination in API responses.","example":{"value":{"limit":10,"startingAfter":"5f6e4a2b9f1a4d5e7c8b1234","latestSortingValue":"45.79"},"summary":"Example of a pagination request where one wants to paginate obtain 10 calls per page sorted by handling duration, starting after callId  5f6e4a2b9f1a4d5e7c8b1234 which had the handling duration of 45.79"},"title":"Paging"}},{"name":"sorting","in":"query","required":true,"schema":{"type":"object","example":{"value":{"sortingField":"handlingDuration","sortingDirection":"ASC","summary":"Example sorting by handling duration in ascending order"}},"properties":{"sortingField":{"type":"string","description":"field on which sorting is done, currently supported are callId,startTime,stopTime,handlingDuration"},"sortingDirection":{"type":"string"},"sortingDirectionValue":{"type":"string","enum":["ASC","DESC"]}},"title":"Sorting"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"OK","content":{"application/json":{"schema":{"type":"object","properties":{"participants":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string","description":"Name of the participant"},"address":{"type":"string","description":"Address or extension number of the participant"}},"title":"UnreturnedCallParticipant"}}},"title":"UnreturnedCallParticipantResponse"},"example":{"participants":[{"name":"Chay Hoss","address":"1006"},{"name":"Jane Doe","address":"1008"}]}}}},"401":{"description":"Unauthorized","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"error":{"type":"string","description":"type of  error","example":"invalid_token"},"error_description":{"type":"string","description":"Description of the error","example":"Access token expired: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9."}},"title":"401ErrorResponse"}}}},"403":{"description":"Forbidden","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"timestamp":{"type":"string","description":"Timestamp of the error","format":"date-time","example":"2023-01-05T12:04:59.100+0000"},"status":{"type":"integer","description":"HTTP status of the response","format":"int32"},"messages":{"type":"array","description":"List of business service error messages","items":{"type":"string"}},"path":{"type":"string","description":"Request path"}},"title":"ErrorResponse"},"examples":{"User Not Authorized":{"description":"User Not Authorized","value":{"timestamp":"2023-01-05T12:04:59.100+0000","status":403,"messages":["user [user_name] does not have access to pbxId [PBX_ID] to make this request."],"path":"/analytics/work/v2/pbxes/PBX_ID_VALUE/calls/unreturned/callers"}}}}}},"404":{"description":"Not Found","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"timestamp":{"type":"string","description":"Timestamp of the error","format":"date-time","example":"2023-01-05T12:04:59.100+0000"},"status":{"type":"integer","description":"HTTP status of the response","format":"int32"},"messages":{"type":"array","description":"List of business service error messages","items":{"type":"string"}},"path":{"type":"string","description":"Request path"}},"title":"ErrorResponse"}}}},"409":{"description":"Conflict","content":{"application/json":{"schema":{"type":"object","description":"Error response","properties":{"timestamp":{"type":"string","description":"Timestamp of the error","format":"date-time","example":"2023-01-05T12:04:59.100+0000"},"status":{"type":"integer","description":"HTTP status of the response","format":"int32"},"messages":{"type":"array","description":"List of business service error messages","items":{"type":"string"}},"path":{"type":"string","description":"Request path"}},"title":"ErrorResponse"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

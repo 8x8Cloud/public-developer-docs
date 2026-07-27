@@ -16,9 +16,20 @@ const sidebarConfig = [
   },
   {
     type: 'category',
-    label: 'Work Historical Analytics',
+    label: 'Work Analytics',
     collapsed: true,
+    link: {
+      type: 'doc',
+      id: 'analytics/docs/work-analytics-queue-agent-reports',
+    },
     items: [
+      'analytics/docs/work-analytics-call-queues',
+      'analytics/docs/work-analytics-agent-activity',
+      'analytics/docs/work-analytics-queue-agent-activity',
+      'analytics/docs/work-analytics-ring-group-agent-activity',
+      'analytics/docs/work-analytics-aggregated-calls',
+      'analytics/docs/work-analytics-active-calls',
+      'analytics/docs/work-analytics-unreturned-calls',
       'analytics/docs/work-analytics-call-detail-records',
       'analytics/docs/work-analytics-call-legs',
       'analytics/docs/work-analytics-company-summary',

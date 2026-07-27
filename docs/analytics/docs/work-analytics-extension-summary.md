@@ -1,5 +1,7 @@
 # Extension Summary
 
+> 📘 Looking for live/real-time queue, agent or call-level data? See [Work Analytics — Overview](/analytics/docs/work-analytics-queue-agent-reports).
+
 [8x8 Work Analytics Historical](/analytics/reference/authentication-1) access is via this multi step process. For any of the endpoints the same process is followed.
 
 > 📘 **You will need a working API key to begin**
@@ -20,69 +22,7 @@ Use the following base URL during this process:
 
 * `https://api.8x8.com/analytics/work`
 
-## 1. Authenticate to retrieve access token
-
-You will use your API key combined with the user credentials of a user with permission and access to Work Analytics to authenticate, this user **does not need to be** the one who generated the API credentials
-
-> 🚧 **User must access Analytics at least once via browser**
->
-> The users credentials will not be able to leverage the API until they have used Work Analytics via browser at least once
->
->
-
-### Parameters
-
-**Method: POST**
-
-#### Headers
-
-| Name | Required | Description | Example |
-| --- | --- | --- | --- |
-| 8x8-apikey | ✓ | The 8x8-api key provided | test_key_kjdfidj238jf9123df221 |
-| Content-Type | ✓ | Set content type to form-urlencoded | application/x-www-form-urlencoded |
-
-#### Body
-
-| Name | Required | Description | Example |
-| --- | --- | --- | --- |
-| username | ✓ | The 8x8 username of a user with Work Analytics access privileges | [someuser@acme.fakeco](mailto:someuser@acme.fakeco) |
-| password | ✓ | The 8x8 password of the user with Work Analytics access privileges | Rrnp5QBW6dTbx^TP |
-
-### Authentication Request
-
-```bash
-curl --location --request POST 'https://api.8x8.com/analytics/work/v1/oauth/token' \
---header '8x8-apikey: {8x8-apikey input here}' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'username={8x8 username of user input here}' \
---data-urlencode 'password={8x8 password of user input here}'
-
-```
-
-### Authentication Response
-
-**Response**
-
-```json
-{
-    "access_token": "eyJhbGciOiJSUzI1NiJ9.yyyyyyyyyyy.zzzzzzzzzzzz",
-    "token_type": "bearer",
-    "expires_in": 1800
-
-```
-
-**Outputs For Next Step:**
-
-* access_token
-* expires_in
-
-The token will expire in the number of seconds specified in expires_in.
-
-The following steps will use the access_token as a Bearer Token form of authentication. This takes the form of the  
-
-`Authorization` header being set to `Bearer access_token` (Space between Bearer and the access_token)
-
-## 2. Run Report
+## Run Report
 
 ### Parameters
 

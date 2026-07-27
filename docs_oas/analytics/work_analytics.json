@@ -5,7 +5,7 @@
     "version": "8-x-8-Latest",
     "description": "The Work Analytics API provides metrics related to call queues activity as well as agent activity on queues.\n### **Time filtering**\nIf no time filtering is provided, the returned metrics reflect the agent activity in the last 24 hours. \\\nThe reports can be generated for a specific date range, specified using 'startDate' and 'endDate' parameters, in ISO 8601 format. If a specific intra day time range is desired, the 'intraDayStart' and 'intraDayEnd', in ISO 8601 format, must be used.\n### **Examples:**\n\n  - To obtain a full day report from 1st of May to 5th of May, in UTC, use startDate: 2023-05-01T00:00:00Z and endDate: 2023-05-05T00:00:00Z. \n  - To obtain a report from 1st of May to 5th of May, in a specific time zone, starting from 8 AM to 6 PM, use startDate: 2023-05-01T00:00:00-0700 and endDate: 2023-05-05T00:00:00-07000, intraDayStart: 08:00:00-0700, intraDayEnd: 18:00:00-0700."
   },
-  "servers": [{ "url": "https://api.8x8.com/analytics/work/" }],
+  "servers": [{ "url": "https://api.8x8.com/analytics/work" }],
   "security": [{ "8x8-apikey": [], "bearerAuth": [] }],
   "paths": {
     "/v2/pbxes/{pbxId}/queue-agent-activity": {
@@ -162,7 +162,7 @@
           {
             "name": "metrics",
             "in": "query",
-            "description": "Expected metrics in response. Multiple values can be passed separated by comma.\n**Values allowed and their description**\n| Name                                  | Description                                                                                                                                     |\n|---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|\n| missedInteractions                    | The number of interactions that were missed by the user.                                                                                        |\n| rejectedInteractions                  | The number of interactions that were rejected by the user.                                                                                      |\n| ongoingTalkingInteractions            | The number of interactions that are currently in the talking phase.                                                                             |\n| rejectedInteractionsPercentage        | The percentage of interactions that were rejected by the user.                                                                                  |\n| averageOnHoldInteractionsTime         | The average time that interactions were on hold.                                                                                                |\n| ongoingOnHoldInteractions             | The number of interactions that are currently on hold.                                                                                          |\n| userStatusTime                        | The total time the user has been in their current status.                                                                                       |\n| missedInteractionsPercentage          | The percentage of interactions that were missed by the user.                                                                                    |\n| ongoingWrapUpInteractionsTime         | The time spent on interactions that are currently in the wrap-up phase.                                                                         |\n| ongoingAvgTalkingInteractionsTime     | The average time spent on interactions that are currently in the talking phase.                                                                 |\n| enteredInteractions                   | The number of interactions that the user has entered into.                                                                                      |\n| ongoingTotalHandlingInteractionsTime  | The total time spent on interactions that are currently being handled.                                                                          |\n| acceptedInteractionsPercentage        | The percentage of interactions that were accepted by the user.                                                                                  |\n| averageTalkingInteractionsTime        | The average time spent on interactions during the talking phase.                                                                                |\n| totalInteractionTime                  | The total time spent on all interactions.                                                                                                       |\n| ongoingHandlingInteractions           | The number of interactions that are currently being handled by the user.                                                                        |\n| queueStatusTime                       | The total time the user has been in the queue status.                                                                                           |\n| ongoingWrapUpInteractions             | The number of interactions that are currently in the wrap-up phase.                                                                             |\n| ongoingAvgHandlingInteractionsTime    | The average time spent on interactions that are currently being handled.                                                                        |\n| ongoingOnHoldInteractionsTime         | The time spent on interactions that are currently on hold.                                                                                      |\n| ongoingTalkingInteractionsTime        | The time spent on interactions that are currently in the talking phase.                                                                         |\n| averageWrapUpTime                     | The average time spent on interactions during the wrap-up phase.                                                                                |\n| acceptedInteractions                  | The number of interactions that were accepted by the user.                                                                                      |\n| agentAverageTimeToAnswer              | The average time the agent takes to answer interactions in the queue after alerting begins (alerting duration). Returns null when the agent answered no interactions in the selected period. |\n",
+            "description": "Expected metrics in response. Multiple values can be passed separated by comma. Time and duration metrics are returned in **seconds**.\n**Values allowed and their description**\n| Name                                  | Description                                                                                                                                     |\n|---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|\n| missedInteractions                    | The number of interactions that were missed by the user.                                                                                        |\n| rejectedInteractions                  | The number of interactions that were rejected by the user.                                                                                      |\n| ongoingTalkingInteractions            | The number of interactions that are currently in the talking phase.                                                                             |\n| rejectedInteractionsPercentage        | The percentage of interactions that were rejected by the user.                                                                                  |\n| averageOnHoldInteractionsTime         | The average time that interactions were on hold.                                                                                                |\n| ongoingOnHoldInteractions             | The number of interactions that are currently on hold.                                                                                          |\n| userStatusTime                        | The total time the user has been in their current status.                                                                                       |\n| missedInteractionsPercentage          | The percentage of interactions that were missed by the user.                                                                                    |\n| ongoingWrapUpInteractionsTime         | The time spent on interactions that are currently in the wrap-up phase.                                                                         |\n| ongoingAvgTalkingInteractionsTime     | The average time spent on interactions that are currently in the talking phase.                                                                 |\n| enteredInteractions                   | The number of interactions that the user has entered into.                                                                                      |\n| ongoingTotalHandlingInteractionsTime  | The total time spent on interactions that are currently being handled.                                                                          |\n| acceptedInteractionsPercentage        | The percentage of interactions that were accepted by the user.                                                                                  |\n| averageTalkingInteractionsTime        | The average time spent on interactions during the talking phase.                                                                                |\n| agentTotalTalkTime                    | Cumulative duration of the talk time of all answered calls by this agent during the time period monitored                                       |\n| agentAverageTimeToAnswer              | The average time the agent takes to answer interactions in the queue after alerting begins (alerting duration). Returns null when the agent answered no interactions in the selected period. |\n| totalInteractionTime                  | The total time spent on all interactions.                                                                                                       |\n| ongoingHandlingInteractions           | The number of interactions that are currently being handled by the user.                                                                        |\n| queueStatusTime                       | The total time the user has been in the queue status.                                                                                           |\n| ongoingWrapUpInteractions             | The number of interactions that are currently in the wrap-up phase.                                                                             |\n| ongoingAvgHandlingInteractionsTime    | The average time spent on interactions that are currently being handled.                                                                        |\n| ongoingOnHoldInteractionsTime         | The time spent on interactions that are currently on hold.                                                                                      |\n| ongoingTalkingInteractionsTime        | The time spent on interactions that are currently in the talking phase.                                                                         |\n| averageWrapUpTime                     | The average time spent on interactions during the wrap-up phase.                                                                                |\n| acceptedInteractions                  | The number of interactions that were accepted by the user.                                                                                      |\n",
             "required": false,
             "schema": { "type": "string" }
           },
@@ -254,7 +254,7 @@
                               }
                             }
                           ],
-                          "metricsSummary": {
+                          "summary": {
                             "ongoingHandlingInteractions": 2,
                             "acceptedInteractions": 0,
                             "ongoingOnHoldInteractionsTime": 2599778,
@@ -474,7 +474,7 @@
           {
             "name": "metrics",
             "in": "query",
-            "description": "Expected metrics in response. Multiple values can be passed separated by comma.\n\n**Values allowed and their description**\n\n| Metric | Description | \n| -------| ----------- | \n| averageOnHoldInteractionsTime      | The average time an interaction spends on hold. |\n| enteredInteractions                | The number of interactions entered into the queue. |\n| rejectedInteractions               | The number of interactions rejected by the agent. |\n| missedInteractions                 | The number of interactions missed by the agent. |\n| rejectedInteractionsPercentage     | The percentage of interactions rejected by the agent. |\n| acceptedInteractions               | The number of interactions accepted by the agent. |\n| acceptedInteractionsPercentage     | The percentage of interactions accepted by the agent. |\n| ongoingHandlingInteractions        | The number of interactions currently being handled by the agent. |\n| ongoingAvgTalkingInteractionsTime  | The average time of ongoing talking interactions. |\n| ongoingAvgHandlingInteractionsTime | The average time of ongoing handling interactions. |\n| ongoingOnHoldInteractions          | The number of ongoing interactions currently on hold. |\n| ongoingTalkingInteractions         | The number of ongoing talking interactions. |\n| averageWrapUpTime                  | The average time taken to wrap up an interaction. |\n| missedInteractionsPercentage       | The percentage of interactions missed by the agent. |\n| averageTalkingInteractionsTime     | The average time of talking interactions. |\n| totalInteractionTime               | The total time spent on interactions. |\n| ongoingOnHoldInteractionsTime      | The total time of ongoing interactions currently on hold. |\n| ongoingTalkingInteractionsTime     | The total time of ongoing talking interactions. |\n| ongoingTotalHandlingInteractionsTime | The total time of ongoing handling interactions. |\n| userStatusTime                     | The total time the user has spent in their current status. |\n| ongoingWrapUpInteractionsTime      | The total time of ongoing wrap-up interactions. |\n| ongoingWrapUpInteractions          | The number of ongoing wrap-up interactions. |\n| agentAverageTimeToAnswer           | The average time the agent takes to answer interactions after alerting begins (alerting duration). Returns null when the agent answered no interactions in the selected period. |\n",
+            "description": "Expected metrics in response. Multiple values can be passed separated by comma. Time and duration metrics are returned in **seconds**.\n\n**Values allowed and their description**\n\n| Metric | Description | \n| -------| ----------- | \n| averageOnHoldInteractionsTime      | The average time an interaction spends on hold. |\n| enteredInteractions                | The number of interactions entered into the queue. |\n| rejectedInteractions               | The number of interactions rejected by the agent. |\n| missedInteractions                 | The number of interactions missed by the agent. |\n| rejectedInteractionsPercentage     | The percentage of interactions rejected by the agent. |\n| acceptedInteractions               | The number of interactions accepted by the agent. |\n| acceptedInteractionsPercentage     | The percentage of interactions accepted by the agent. |\n| ongoingHandlingInteractions        | The number of interactions currently being handled by the agent. |\n| ongoingAvgTalkingInteractionsTime  | The average time of ongoing talking interactions. |\n| ongoingAvgHandlingInteractionsTime | The average time of ongoing handling interactions. |\n| ongoingOnHoldInteractions          | The number of ongoing interactions currently on hold. |\n| ongoingTalkingInteractions         | The number of ongoing talking interactions. |\n| averageWrapUpTime                  | The average time taken to wrap up an interaction. |\n| missedInteractionsPercentage       | The percentage of interactions missed by the agent. |\n| averageTalkingInteractionsTime     | The average time of talking interactions. |\n| agentTotalTalkTime                 | Cumulative duration of the talk time of all answered calls by this agent during the time period monitored|\n| agentAverageTimeToAnswer           | The average time the agent takes to answer interactions after alerting begins (alerting duration). Returns null when the agent answered no interactions in the selected period. |\n| totalInteractionTime               | The total time spent on interactions. |\n| ongoingOnHoldInteractionsTime      | The total time of ongoing interactions currently on hold. |\n| ongoingTalkingInteractionsTime     | The total time of ongoing talking interactions. |\n| ongoingTotalHandlingInteractionsTime | The total time of ongoing handling interactions. |\n| userStatusTime                     | The total time the user has spent in their current status. |\n| ongoingWrapUpInteractionsTime      | The total time of ongoing wrap-up interactions. |\n| ongoingWrapUpInteractions          | The number of ongoing wrap-up interactions. |\n",
             "required": false,
             "schema": { "type": "string" }
           },
@@ -498,87 +498,75 @@
                   "All Metrics": {
                     "description": "metrics param not passed, all call queue metrics will be returned.",
                     "value": {
-                      "queuesAgentActivity": [
+                      "agentActivity": [
                         {
-                          "pbx": "testPbx",
-                          "site": "Test Site",
-                          "queueExtension": "6509967",
-                          "queueName": "Timoth",
-                          "autoLogin": false,
-                          "agentActivity": [
-                            {
-                              "userId": "user_1",
-                              "agentExtension": "2062112",
-                              "agentName": "John Doe",
-                              "loggedInQueues": ["1002", "2002"],
-                              "userStatus": "ON_CALL",
-                              "activityStatus": "NEW",
-                              "interaction": {
-                                "caller": "Caller",
-                                "address": "CallerPhone"
-                              },
-                              "metrics": {
-                                "ongoingHandlingInteractions": 1,
-                                "acceptedInteractions": 0,
-                                "ongoingOnHoldInteractionsTime": 0,
-                                "ongoingTalkingInteractions": 1,
-                                "ongoingWrapUpInteractionsTime": 0,
-                                "rejectedInteractions": 0,
-                                "userStatusTime": 2579000,
-                                "averageWrapUpTime": 0,
-                                "ongoingWrapUpInteractions": 0,
-                                "enteredInteractions": 0,
-                                "ongoingTalkingInteractionsTime": 2594778,
-                                "ongoingHandlingInteractionsTime": 2579000,
-                                "totalInteractionTime": 0,
-                                "ongoingOnHoldInteractions": 0
-                              }
-                            },
-                            {
-                              "userId": "user_2",
-                              "agentExtension": "5368894",
-                              "agentName": "Jane Doe",
-                              "loggedInQueues": ["1002", "2002"],
-                              "activityStatus": "AVAILABLE_IDLE",
-                              "interaction": {
-                                "caller": "Another Caller",
-                                "address": "AnotherCallerPhone"
-                              },
-                              "metrics": {
-                                "ongoingHandlingInteractions": 1,
-                                "acceptedInteractions": 0,
-                                "ongoingOnHoldInteractionsTime": 2599778,
-                                "ongoingTalkingInteractions": 0,
-                                "ongoingWrapUpInteractionsTime": 0,
-                                "rejectedInteractions": 0,
-                                "userStatusTime": 2615000,
-                                "averageWrapUpTime": 0,
-                                "ongoingWrapUpInteractions": 0,
-                                "enteredInteractions": 0,
-                                "ongoingTalkingInteractionsTime": 0,
-                                "ongoingHandlingInteractionsTime": 2615000,
-                                "totalInteractionTime": 0,
-                                "ongoingOnHoldInteractions": 1
-                              }
-                            }
-                          ],
-                          "metricsSummary": {
-                            "ongoingHandlingInteractions": 2,
+                          "userId": "user_1",
+                          "agentExtension": "2062112",
+                          "agentName": "John Doe",
+                          "loggedInQueues": ["1002", "2002"],
+                          "userStatus": "ON_CALL",
+                          "activityStatus": "HANDLING",
+                          "interaction": {
+                            "caller": "Caller",
+                            "address": "1006"
+                          },
+                          "metrics": {
+                            "ongoingHandlingInteractions": 1,
                             "acceptedInteractions": 0,
-                            "ongoingOnHoldInteractionsTime": 2599778,
+                            "ongoingOnHoldInteractionsTime": 0,
                             "ongoingTalkingInteractions": 1,
                             "ongoingWrapUpInteractionsTime": 0,
                             "rejectedInteractions": 0,
+                            "userStatusTime": 2579,
                             "averageWrapUpTime": 0,
                             "ongoingWrapUpInteractions": 0,
                             "enteredInteractions": 0,
-                            "ongoingTalkingInteractionsTime": 2594778,
-                            "ongoingHandlingInteractionsTime": 5195000,
+                            "ongoingTalkingInteractionsTime": 2594.78,
+                            "ongoingHandlingInteractionsTime": 2579,
+                            "totalInteractionTime": 0,
+                            "ongoingOnHoldInteractions": 0
+                          }
+                        },
+                        {
+                          "userId": "user_2",
+                          "agentExtension": "5368894",
+                          "agentName": "Jane Doe",
+                          "loggedInQueues": ["1002", "2002"],
+                          "userStatus": "AVAILABLE",
+                          "activityStatus": "AVAILABLE_IDLE",
+                          "metrics": {
+                            "ongoingHandlingInteractions": 1,
+                            "acceptedInteractions": 0,
+                            "ongoingOnHoldInteractionsTime": 2599.78,
+                            "ongoingTalkingInteractions": 0,
+                            "ongoingWrapUpInteractionsTime": 0,
+                            "rejectedInteractions": 0,
+                            "userStatusTime": 2615,
+                            "averageWrapUpTime": 0,
+                            "ongoingWrapUpInteractions": 0,
+                            "enteredInteractions": 0,
+                            "ongoingTalkingInteractionsTime": 0,
+                            "ongoingHandlingInteractionsTime": 2615,
                             "totalInteractionTime": 0,
                             "ongoingOnHoldInteractions": 1
                           }
                         }
-                      ]
+                      ],
+                      "summary": {
+                        "ongoingHandlingInteractions": 2,
+                        "acceptedInteractions": 0,
+                        "ongoingOnHoldInteractionsTime": 2599.78,
+                        "ongoingTalkingInteractions": 1,
+                        "ongoingWrapUpInteractionsTime": 0,
+                        "rejectedInteractions": 0,
+                        "averageWrapUpTime": 0,
+                        "ongoingWrapUpInteractions": 0,
+                        "enteredInteractions": 0,
+                        "ongoingTalkingInteractionsTime": 2594.78,
+                        "ongoingHandlingInteractionsTime": 5194,
+                        "totalInteractionTime": 0,
+                        "ongoingOnHoldInteractions": 1
+                      }
                     }
                   }
                 }
@@ -756,7 +744,7 @@
           {
             "name": "metrics",
             "in": "query",
-            "description": "Expected metrics in response. Multiple values can be passed separated by comma.\n\n**Values allowed and their description**\n\n| Metric | Description |\n| ---------------- | ------------|\n| abandonedInWaitingCalls | The total number of waiting interactions that ended up as being hung up by the customer |\n| abandonedInWaitingCallsPercentage | The total number of waiting calls that ended up as being hung up by the customer over the number of entered calls |\n| acceptedCalls | The total number of interactions answered by agents in the queue |\n| acceptedCallsPercentage | The total number of calls answered over the number of entered calls |\n| activeCalls | The number of calls still active at the end of the selected interval |\n| averageAnswerTime | Average time taken to answer a call after ringing begins |\n| averageHandlingTime | Average handling time for interactions in the specified time frame |\n| averageOnHoldTime | Average on hold time for finished calls |\n| averageTalkTime | Average talk time in the specified time frame |\n| averageTimeToAnswer | The average time agents take to answer calls (alerting duration) |\n| averageWaitingTime | Average waiting time for interactions in the specified time frame |\n| completedCalls | The number of calls completed at the end of the selected interval |\n| diverted | The total number of unique inbound calls that entered the queue and were routed to another destination by the system — such as voicemail, another queue, a ring group, or an external number — without ever being offered to any agent. The call never rang at any agent's device.<br><br>This metric helps distinguish between calls lost due to agent behavior (Missed, Rejected) and calls the system routed away before any agent was involved, which typically indicates a capacity, staffing, or routing configuration issue.<br><br>This metric is calculated after calls are completed, so ongoing calls are not included until they end. |\n| divertedCallsPercentage | The percentage of queue entries that were diverted by the system without ever being offered to an agent. Calculated as: (Diverted ÷ Queue Entries) × 100. If Queue Entries = 0, the value is 0%. |\n| enteredCalls | The total number of interactions that entered the queue |\n| forwardedToVoiceMail | The total number of interactions that were forwarded to voice mail |\n| longestHandlingTime | Longest handling time for interactions in the specified time frame |\n| longestOnHoldTime | Longest on hold time for finished calls |\n| longestTalkTime | Longest talk time in the specified time frame |\n| longestWaitingTime | Longest waiting time for interactions in the specified time frame |\n| ongoingAvailableAgents | Number of users assigned to the queue, logged in and in the Available status |\n| ongoingAvgHandlingTime | Average handling time |\n| ongoingAvgTalkingTime | Average talking time |\n| ongoingAvgWaitingTime | Average waiting time |\n| ongoingEligibleAgents | The number of primary and secondary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEligibleOverflowAgents | The number of secondary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEligiblePrimaryAgents | The number of primary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEnabledOverflowAgents | Number of enabled overflow agents |\n| ongoingEnabledPrimaryAgents | Number of enabled primary agents |\n| ongoingHandlingCalls | Handling calls |\n| ongoingLoggedOutAndDndAgents | Number of primary and secondary users in statuses: Offline, Logged out, Dnd |\n| ongoingLoggedOutAndDndOverflowAgents | Number of secondary users in statuses: Offline, Logged out, Dnd |\n| ongoingLongestHandlingTime | Longest handling time |\n| ongoingLongestOnHoldTime | Longest on hold time |\n| ongoingLongestTalkingTime | Longest talking time |\n| ongoingLongestWaitingTime | Longest waiting time |\n| ongoingOnHoldCalls | On hold calls |\n| ongoingOnHoldTime | On hold time |\n| ongoingOverflowAgents | Total number of secondary users assigned to the queue regardless of their available status |\n| ongoingOverflowWrappingUpAgents | The number of secondary users in Wrap-up state |\n| ongoingPrimaryWrappingUpAgents | The number of primary users in Wrap-up state |\n| ongoingTalkingCalls | Talking calls |\n| ongoingTalkingTime | Talking time |\n| ongoingTotalCalls | Total calls |\n| ongoingTotalHandlingTime | Total handling time |\n| ongoingWaitingCalls | Waiting calls |\n| ongoingWaitingTime | Waiting time |\n| ongoingWrappingUpAgents | The number of primary and secondary users in Wrap-up state |\n| totalHandlingTime | Total handling time for interactions in the specified time frame |\n| totalOnHoldTime | Total on hold time for interactions in the specified time frame |\n| totalTalkTime | Total talk time for calls in the specified time frame |\n| totalWaitingTime | Total waiting time for interactions in the specified time frame |\n| transferredToCallQueue | The total number of interactions that were transferred to a call queue |\n| transferredToCallQueuePercentage | The total number of calls that were transferred to a call queue over the number of entered calls |\n| transferredToExternalNumber | The total number of interactions that were transferred to an external number |\n| transferredToRingGroup | The total number of interactions that were transferred to a ring group |\n| transferredToRingGroupPercentage | The total number of calls that were transferred to a ring group over the number of entered calls |\n",
+            "description": "Expected metrics in response. Multiple values can be passed separated by comma. Time and duration metrics are returned in **seconds**.\n\n**Values allowed and their description**\n\n| Metric | Description |\n| ---------------- | ------------|\n| abandonedInWaitingCalls | The total number of waiting interactions that ended up as being hung up by the customer |\n| abandonedInWaitingCallsPercentage | The total number of waiting calls that ended up as being hung up by the customer over the number of entered calls |\n| abandonedInHandlingCalls | The total number of calls abandoned by the caller while being handled by an agent |\n| abandonedInHandlingCallsPercentage | The number of calls abandoned during handling over the number of entered calls |\n| acceptedCalls | The total number of interactions answered by agents in the queue |\n| acceptedCallsPercentage | The total number of calls answered over the number of entered calls |\n| activeCalls | The number of calls still active at the end of the selected interval |\n| averageHandlingTime | Average handling time for interactions in the specified time frame |\n| averageOnHoldTime | Average on hold time for finished calls |\n| averageTalkTime | Average talk time in the specified time frame |\n| averageTimeToAnswer | The average time agents take to answer calls (alerting duration) |\n| averageWaitingTime | Average waiting time for interactions in the specified time frame |\n| completedCalls | The number of calls completed at the end of the selected interval |\n| divertedCalls | The total number of unique inbound calls that entered the queue and were routed to another destination by the system — such as voicemail, another queue, a ring group, or an external number — without ever being offered to any agent. The call never rang at any agent's device.<br><br>This metric helps distinguish between calls lost due to agent behavior (Missed, Rejected) and calls the system routed away before any agent was involved, which typically indicates a capacity, staffing, or routing configuration issue.<br><br>This metric is calculated after calls are completed, so ongoing calls are not included until they end. |\n| divertedCallsPercentage | The percentage of queue entries that were diverted by the system without ever being offered to an agent. Calculated as: (Diverted ÷ Queue Entries) × 100. If Queue Entries = 0, the value is 0%. |\n| enteredCalls | The total number of interactions that entered the queue |\n| forwardedToVoiceMail | The total number of interactions that were forwarded to voice mail |\n| longestHandlingTime | Longest handling time for interactions in the specified time frame |\n| longestOnHoldTime | Longest on hold time for finished calls |\n| longestTalkTime | Longest talk time in the specified time frame |\n| longestWaitingTime | Longest waiting time for interactions in the specified time frame |\n| missedCalls | The total number of calls that alerted an agent but were not answered |\n| missedCallsPercentage | The number of missed calls over the number of entered calls |\n| ongoingAvailableAgents | Number of users assigned to the queue, logged in and in the Available status |\n| ongoingAvgHandlingTime | Average handling time |\n| ongoingAvgOnHoldTime | Average On Hold time |\n| ongoingAvgTalkingTime | Average talking time |\n| ongoingAvgWaitingTime | Average waiting time |\n| ongoingEligibleAgents | The number of primary and secondary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEligibleOverflowAgents | The number of secondary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEligiblePrimaryAgents | The number of primary users in the statuses: Available, Busy, Away, Appear Offline |\n| ongoingEnabledOverflowAgents | Number of enabled overflow agents |\n| ongoingEnabledPrimaryAgents | Number of enabled primary agents |\n| ongoingHandlingCalls | Handling calls |\n| ongoingLoggedOutAndDndAgents | Number of primary and secondary users in statuses: Offline, Logged out, Dnd |\n| ongoingLoggedOutAndDndOverflowAgents | Number of secondary users in statuses: Offline, Logged out, Dnd |\n| ongoingLongestHandlingTime | Longest handling time |\n| ongoingLongestOnHoldTime | Longest on hold time |\n| ongoingLongestTalkingTime | Longest talking time |\n| ongoingLongestWaitingTime | Longest waiting time |\n| ongoingOnHoldCalls | On hold calls |\n| ongoingOnHoldTime | On hold time |\n| ongoingOverflowAgents | Total number of secondary users assigned to the queue regardless of their available status |\n| ongoingOverflowWrappingUpAgents | The number of secondary users in Wrap-up state |\n| ongoingPrimaryWrappingUpAgents | The number of primary users in Wrap-up state |\n| ongoingTalkingCalls | Talking calls |\n| ongoingTalkingTime | Talking time |\n| ongoingTotalCalls | Total calls |\n| ongoingTotalHandlingTime | Total handling time |\n| ongoingWaitingCalls | Waiting calls |\n| ongoingWaitingTime | Waiting time |\n| ongoingWrappingUpAgents | The number of primary and secondary users in Wrap-up state |\n| totalHandlingTime | Total handling time for interactions in the specified time frame |\n| totalOnHoldTime | Total on hold time for interactions in the specified time frame |\n| totalTalkTime | Total talk time for calls in the specified time frame |\n| totalWaitingTime | Total waiting time for interactions in the specified time frame |\n| transferredToCallQueue | The total number of interactions that were transferred to a call queue |\n| transferredToCallQueuePercentage | The total number of calls that were transferred to a call queue over the number of entered calls |\n| transferredToExternalNumber | The total number of interactions that were transferred to an external number |\n| transferredToRingGroup | The total number of interactions that were transferred to a ring group |\n| transferredToRingGroupPercentage | The total number of calls that were transferred to a ring group over the number of entered calls |\n",
             "required": false,
             "schema": { "type": "string" }
           },
@@ -823,7 +811,7 @@
                         "totalOnHoldTime": 0,
                         "totalHandlingTime": 0,
                         "completedCalls": 0,
-                        "diverted": 0,
+                        "divertedCalls": 0,
                         "divertedCallsPercentage": 0,
                         "abandonedInWaitingCalls": 0,
                         "missedCallsPercentage": 0,
@@ -876,7 +864,7 @@
                         "transferredToExternalNumber": 0,
                         "missedCalls": 0,
                         "transferredToRingGroup": 0,
-                        "diverted": 0,
+                        "divertedCalls": 0,
                         "divertedCallsPercentage": 0
                       }
                     }
@@ -1023,13 +1011,6 @@
                 "value": "18:00:00Z"
               }
             }
-          },
-          {
-            "name": "metrics",
-            "in": "query",
-            "description": "Expected metrics in response. Multiple values can be passed separated by comma.   \n**Values allowed and their description**\n| Metric                            | Description                                                                 |\n|-----------------------------------|-----------------------------------------------------------------------------|\n| abandonedInHandlingCalls          | Number of calls abandoned during handling                                    |\n| abandonedInHandlingCallsPercentage| Percentage of calls abandoned during handling                                |\n| abandonedInWaitingCalls           | Number of calls abandoned while waiting                                      |\n| abandonedInWaitingCallsPercentage | Percentage of calls abandoned while waiting                                  |\n| acceptedCalls                     | Number of calls accepted by agents                                            |\n| activeCalls                       | The number of calls still active at the end of the selected interval                                      |\n| averageHandlingTime               | Average time spent handling calls                                             |\n| averageOnHoldTime                 | Average time callers are on hold                                              |\n| averageTalkTime                   | Average duration of talk time per call                                         |\n| averageWaitingTime                | Average time callers wait before being answered                              |\n| enteredCalls                      | Number of calls entered into the system                                        |\n| forwardedToVoiceMail              | Number of calls forwarded to voicemail                                         |\n| completedCalls                    | Number of calls successfully completed                                        |\n| longestHandlingTime               | Longest time taken to handle a call                                           |\n| longestOnHoldTime                 | Longest time a caller was on hold                                              |\n| longestTalkTime                   | Longest duration of talk time per call                                         |\n| longestWaitingTime                | Longest waiting time before a call is answered                                 |\n| missedCalls                       | Number of calls that were missed                                              |\n| missedCallsPercentage             | Percentage of missed calls                                                   |\n| rejectedCalls                     | Number of calls rejected by agents                                            |\n| rejectedCallsPercentage           | Percentage of calls rejected by agents                                         |\n| totalHandlingTime                 | Total time spent handling calls                                              |\n| totalOnHoldTime                   | Total time callers spent on hold                                               |\n| totalTalkTime                     | Total talk time across all calls                                               |\n| totalWaitingTime                  | Total waiting time for all calls                                               |\n| transferredToCallQueue            | Number of calls transferred to the call queue                                   |\n| transferredToExternalNumber       | Number of calls transferred to an external number                               |\n| transferredToRingGroup            | Number of calls transferred to a ring group                                      |\n| ongoingAvailableAgents            | Number of agents available to take calls                                         |\n| ongoingAvgHandlingTime           | Average handling time for ongoing calls                                        |\n| ongoingAvgTalkingTime            | Average talk time for ongoing calls                                            |\n| ongoingAvgWaitingTime            | Average waiting time for ongoing calls                                         |\n| ongoingEligibleAgents            | Number of eligible agents for handling calls                                   |\n| ongoingEligibleOverflowAgents    | Number of eligible overflow agents                                            |\n| ongoingEligiblePrimaryAgents     | Number of eligible primary agents                                             |\n| ongoingEnabledOverflowAgents     | Number of overflow agents currently enabled                                     |\n| ongoingEnabledPrimaryAgents      | Number of primary agents currently enabled                                      |\n| ongoingHandlingCalls             | Number of calls currently being handled                                        |\n| ongoingLoggedOutAndDndAgents      | Number of agents logged out or in Do Not Disturb mode                            |\n| ongoingLoggedOutAndDndOverflowAgents | Number of overflow agents logged out or in Do Not Disturb mode               |\n| ongoingLongestHandlingTime       | Longest handling time for ongoing calls                                        |\n| ongoingLongestOnHoldTime         | Longest hold time for ongoing calls                                             |\n| ongoingLongestTalkingTime        | Longest talk time for ongoing calls                                            |\n| ongoingLongestWaitingTime        | Longest waiting time for ongoing calls                                         |\n| ongoingOnHoldCalls               | Number of calls currently on hold                                              |\n| ongoingOnHoldTime                | Total on-hold time for ongoing calls                                            |\n| ongoingOverflowAgents            | Number of overflow agents available                                             |\n| ongoingOverflowWrappingUpAgents  | Number of overflow agents wrapping up calls                                     |\n| ongoingPrimaryWrappingUpAgents   | Number of primary agents wrapping up calls                                      |\n| ongoingTalkingCalls              | Number of calls currently being talked to                                       |\n| ongoingTalkingTime               | Total talk time for ongoing calls                                               |\n| ongoingTotalAgents               | Total number of agents currently active                                         |\n| ongoingTotalCalls                | Total number of ongoing calls                                                   |\n| ongoingTotalHandlingTime         | Total handling time for ongoing calls                                           |\n| ongoingWaitingCalls              | Number of calls currently waiting                                               |\n| ongoingWaitingTime               | Total waiting time for ongoing calls                                            |\n| ongoingWrappingUpAgents          | Number of agents currently wrapping up calls                                    |\n",
-            "required": false,
-            "schema": { "type": "string" }
           },
           {
             "name": "paging",
@@ -1425,6 +1406,1403 @@
           }
         }
       }
+    },
+    "/v2/pbxes/{pbxId}/calls/active": {
+      "get": {
+        "tags": [
+          "Active Calls"
+        ],
+        "operationId": "get-active-calls",
+        "summary": "Get Active Calls",
+        "description": "Returns the calls that are currently active (in progress) for the given PBX at the moment of the query. This is a real-time snapshot, so no date-range filtering applies. The same endpoint is also served under `/analytics/work/v2/pbxes/{pbxId}/calls/active`.",
+        "parameters": [
+          {
+            "name": "pbxId",
+            "in": "path",
+            "description": "Id of the PBX.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response fields to return. Multiple values can be passed separated by comma. If not passed, all available fields are returned.   \n**Values allowed and their description**\n| Field | Description |\n|-------|-------------|\n| callId | Unique identifier of the call |\n| startTime | Time the call started, in epoch milliseconds |\n| connectedTime | Time the call was answered/connected, in epoch milliseconds |\n| callerId | Identifier of the calling party |\n| callerAddress | Address or extension number of the caller |\n| callerName | Name of the caller |\n| callerDeviceId | Unique identifier of the device used by the caller |\n| callerDeviceModel | Model of the device used by the caller |\n| latestCalleeAddress | Address or extension number of the most recent callee |\n| latestCalleeName | Name of the most recent callee |\n| latestCalleeDeviceId | Unique identifier of the device used by the most recent callee |\n| latestCalleeDeviceModel | Model of the device used by the most recent callee |\n| direction | Direction of the call (INTERNAL, INBOUND or OUTBOUND) |\n| reference | Reference number associated with the call |\n| sip | SIP identifier of the call |\n| latestLabel | Most recent state label the call is currently in |\n| labels | Ordered list of states the call has passed through |\n| outcome | Current outcome classification of the call |\n| talkingDuration | Cumulative talk time on the call so far |\n| onHoldDuration | Cumulative on-hold time on the call so far |\n| waitingDuration | Cumulative waiting time on the call so far |\n| totalDuration | Total elapsed duration of the call so far |\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paging",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Paging"
+            }
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Sorting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveCallsResponse"
+                },
+                "example": {
+                  "calls": [
+                    {
+                      "callId": "1717751880000",
+                      "startTime": 1717751880000,
+                      "connectedTime": 1717751885000,
+                      "caller": {
+                        "id": "Chay Hoss,1006",
+                        "address": "1006",
+                        "name": "Chay Hoss",
+                        "deviceModel": "voo8x8"
+                      },
+                      "latestCallee": {
+                        "address": "1014",
+                        "name": "Chandler Hollow",
+                        "deviceModel": "voo8x8"
+                      },
+                      "direction": "INBOUND",
+                      "reference": "1000",
+                      "sip": "sip-1717751880000",
+                      "latestLabel": "TALKING",
+                      "labels": [
+                        "WAITING",
+                        "ALERTING",
+                        "TALKING"
+                      ],
+                      "outcome": "ONGOING",
+                      "talkingDuration": 42.38,
+                      "onHoldDuration": 0,
+                      "waitingDuration": 12.5,
+                      "totalDuration": 54.88
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "User Not Authorized": {
+                    "description": "User Not Authorized",
+                    "value": {
+                      "timestamp": "2023-01-05T12:04:59.100+0000",
+                      "status": 403,
+                      "messages": [
+                        "user [user_name] does not have access to pbxId [PBX_ID] to make this request."
+                      ],
+                      "path": "/analytics/work/v2/pbxes/PBX_ID_VALUE/calls/active"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/pbxes/{pbxId}/calls/unreturned": {
+      "get": {
+        "tags": [
+          "Unreturned Calls"
+        ],
+        "operationId": "get-unreturned-calls",
+        "summary": "Get Unreturned Calls",
+        "description": "Returns unreturned calls for the given PBX, aggregated per caller — calls into the PBX that were not answered and have not been called back. Each row groups a caller with the callee they last tried to reach, the number of unreturned attempts and the most recent attempt time. The same endpoint is also served under `/analytics/work/v2/pbxes/{pbxId}/calls/unreturned`.",
+        "parameters": [
+          {
+            "name": "pbxId",
+            "in": "path",
+            "description": "Id of the PBX.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "callerAddresses",
+            "in": "query",
+            "description": "Restrict to specific caller addresses (comma-separated).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "calleeAddresses",
+            "in": "query",
+            "description": "Restrict to specific callee addresses (comma-separated).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response fields to return. Multiple values can be passed separated by comma. If not passed, all available fields are returned.   \n**Values allowed and their description**\n| Field | Description |\n|-------|-------------|\n| callerId | Identifier of the calling party |\n| callerAddress | Address or extension number of the caller |\n| callerName | Name of the caller |\n| callerDeviceId | Unique identifier of the device used by the caller |\n| callerDeviceModel | Model of the device used by the caller |\n| callerServiceName | Name of the service used by the caller |\n| callerServiceType | Type of the service used by the caller |\n| calleeAddress | Address or extension number of the callee that was not returned to |\n| calleeName | Name of the callee |\n| calleeDeviceId | Unique identifier of the device used by the callee |\n| calleeDeviceModel | Model of the device used by the callee |\n| calleeServiceName | Name of the service used by the callee |\n| calleeServiceType | Type of the service used by the callee |\n| siteId | Identifier of the site the callee belongs to |\n| siteName | Name of the site the callee belongs to |\n| attempts | Number of unreturned call attempts made by the caller |\n| latestStartTime | Start time of the most recent unreturned call, in epoch milliseconds |\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Free-text search across caller/callee identity fields.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start of the historical window, in ISO 8601. Omit both `startDate` and `endDate` for the last 24 hours.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End of the historical window, in ISO 8601.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayStart",
+            "in": "query",
+            "description": "Optional intra-day window start; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayEnd",
+            "in": "query",
+            "description": "Optional intra-day window end; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Sorting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatedUnreturnedCallsResponse"
+                },
+                "example": {
+                  "calls": [
+                    {
+                      "caller": {
+                        "id": "Chay Hoss,1006",
+                        "address": "1006",
+                        "name": "Chay Hoss",
+                        "deviceId": "d-1006",
+                        "deviceModel": "voo8x8",
+                        "serviceName": "Work",
+                        "serviceType": "VOICE"
+                      },
+                      "calleeData": {
+                        "address": "1014",
+                        "name": "Chandler Hollow",
+                        "deviceId": "d-1014",
+                        "deviceModel": "voo8x8",
+                        "serviceName": "Work",
+                        "serviceType": "VOICE"
+                      },
+                      "siteData": {
+                        "id": "site-1",
+                        "name": "Headquarters"
+                      },
+                      "attempts": 3,
+                      "latestStartTime": 1717751880000
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "User Not Authorized": {
+                    "description": "User Not Authorized",
+                    "value": {
+                      "timestamp": "2023-01-05T12:04:59.100+0000",
+                      "status": 403,
+                      "messages": [
+                        "user [user_name] does not have access to pbxId [PBX_ID] to make this request."
+                      ],
+                      "path": "/analytics/work/v2/pbxes/PBX_ID_VALUE/calls/unreturned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/pbxes/{pbxId}/calls/unreturned/callees": {
+      "get": {
+        "tags": [
+          "Unreturned Calls"
+        ],
+        "operationId": "get-unreturned-callees",
+        "summary": "Get Unreturned Call Callees",
+        "description": "Returns the distinct callees (the parties that were called but not reached) that appear in the unreturned calls for the given PBX. Useful for populating a callee filter on the unreturned-calls report. The same endpoint is also served under `/v2`.",
+        "parameters": [
+          {
+            "name": "pbxId",
+            "in": "path",
+            "description": "Id of the PBX.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteIds",
+            "in": "query",
+            "description": "Restrict to specific sites (comma-separated).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Free-text search across callee name/address.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start of the historical window, in ISO 8601. Omit both `startDate` and `endDate` for the last 24 hours.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End of the historical window, in ISO 8601.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayStart",
+            "in": "query",
+            "description": "Optional intra-day window start; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayEnd",
+            "in": "query",
+            "description": "Optional intra-day window end; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paging",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Paging"
+            }
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Sorting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnreturnedCallParticipantResponse"
+                },
+                "example": {
+                  "participants": [
+                    {
+                      "name": "Chandler Hollow",
+                      "address": "1014"
+                    },
+                    {
+                      "name": "Support Queue",
+                      "address": "1000"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "User Not Authorized": {
+                    "description": "User Not Authorized",
+                    "value": {
+                      "timestamp": "2023-01-05T12:04:59.100+0000",
+                      "status": 403,
+                      "messages": [
+                        "user [user_name] does not have access to pbxId [PBX_ID] to make this request."
+                      ],
+                      "path": "/analytics/work/v2/pbxes/PBX_ID_VALUE/calls/unreturned/callees"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/pbxes/{pbxId}/calls/unreturned/callers": {
+      "get": {
+        "tags": [
+          "Unreturned Calls"
+        ],
+        "operationId": "get-unreturned-callers",
+        "summary": "Get Unreturned Call Callers",
+        "description": "Returns the distinct callers whose calls were not returned for the given PBX, optionally scoped to the callees they tried to reach. Useful for populating a caller filter on the unreturned-calls report. The same endpoint is also served under `/v2`.",
+        "parameters": [
+          {
+            "name": "pbxId",
+            "in": "path",
+            "description": "Id of the PBX.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteIds",
+            "in": "query",
+            "description": "Restrict to specific sites (comma-separated).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "calleeAddresses",
+            "in": "query",
+            "description": "Restrict to callers that tried to reach specific callee addresses (comma-separated).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Free-text search across caller name/address.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start of the historical window, in ISO 8601. Omit both `startDate` and `endDate` for the last 24 hours.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End of the historical window, in ISO 8601.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayStart",
+            "in": "query",
+            "description": "Optional intra-day window start; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayEnd",
+            "in": "query",
+            "description": "Optional intra-day window end; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paging",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Paging"
+            }
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Sorting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnreturnedCallParticipantResponse"
+                },
+                "example": {
+                  "participants": [
+                    {
+                      "name": "Chay Hoss",
+                      "address": "1006"
+                    },
+                    {
+                      "name": "Jane Doe",
+                      "address": "1008"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "User Not Authorized": {
+                    "description": "User Not Authorized",
+                    "value": {
+                      "timestamp": "2023-01-05T12:04:59.100+0000",
+                      "status": 403,
+                      "messages": [
+                        "user [user_name] does not have access to pbxId [PBX_ID] to make this request."
+                      ],
+                      "path": "/analytics/work/v2/pbxes/PBX_ID_VALUE/calls/unreturned/callers"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/pbxes/{pbxId}/calls/unreturned/detailed": {
+      "get": {
+        "tags": [
+          "Unreturned Calls"
+        ],
+        "operationId": "get-unreturned-detailed",
+        "summary": "Get Detailed Unreturned Calls",
+        "description": "Returns the individual unreturned call records for the given PBX and the requested caller addresses — the per-call drill-down behind the aggregated unreturned-calls view. The same endpoint is also served under `/v2`.",
+        "parameters": [
+          {
+            "name": "pbxId",
+            "in": "path",
+            "description": "Id of the PBX.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "callerAddresses",
+            "in": "query",
+            "description": "Caller addresses to drill into (comma-separated). Required — at least one caller address must be supplied.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "calleeAddresses",
+            "in": "query",
+            "description": "Restrict to specific callee addresses (comma-separated).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Response fields to return. Multiple values can be passed separated by comma. If not passed, all available fields are returned.   \n**Values allowed and their description**\n| Field | Description |\n|-------|-------------|\n| callId | Unique identifier of the call |\n| transferToCallId | Identifier of the call this call was transferred to, if any |\n| callerId | Identifier of the calling party |\n| callerAddress | Address or extension number of the caller |\n| callerName | Name of the caller |\n| callerDeviceId | Unique identifier of the device used by the caller |\n| callerDeviceModel | Model of the device used by the caller |\n| callerServiceName | Name of the service used by the caller |\n| callerServiceType | Type of the service used by the caller |\n| calleeName | Name of the callee |\n| calleeAddress | Address or extension number of the callee |\n| calleeDeviceId | Unique identifier of the device used by the callee |\n| calleeDeviceModel | Model of the device used by the callee |\n| calleeServiceName | Name of the service used by the callee |\n| calleeServiceType | Type of the service used by the callee |\n| workGroupId | Identifier of the queue or ring group the call went through |\n| workGroupExtension | Extension of the queue or ring group |\n| workGroupType | Type of the work group (e.g. CALL_QUEUE, RING_GROUP) |\n| startTime | Time the call started, in epoch milliseconds |\n| totalDuration | Total duration of the call |\n| did | Direct inward dialing number associated with the call |\n| outcome | Outcome classification of the unreturned call |\n| labels | Ordered list of states the call passed through |\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Free-text search across caller/callee identity fields.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start of the historical window, in ISO 8601. Omit both `startDate` and `endDate` for the last 24 hours.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End of the historical window, in ISO 8601.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayStart",
+            "in": "query",
+            "description": "Optional intra-day window start; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayEnd",
+            "in": "query",
+            "description": "Optional intra-day window end; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paging",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Paging"
+            }
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Sorting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailedUnreturnedCallsResponse"
+                },
+                "example": {
+                  "records": [
+                    {
+                      "callId": "1717751880000",
+                      "transferToCallId": "1717751890000",
+                      "caller": {
+                        "id": "Chay Hoss,1006",
+                        "address": "1006",
+                        "name": "Chay Hoss",
+                        "deviceId": "d-1006",
+                        "deviceModel": "voo8x8",
+                        "serviceName": "Work",
+                        "serviceType": "VOICE"
+                      },
+                      "callee": {
+                        "address": "1014",
+                        "name": "Chandler Hollow",
+                        "deviceId": "d-1014",
+                        "deviceModel": "voo8x8",
+                        "serviceName": "Work",
+                        "serviceType": "VOICE"
+                      },
+                      "workGroup": {
+                        "id": "tqteLkZOScyi0Mai9ewUlA",
+                        "extension": "1000",
+                        "groupType": "CALL_QUEUE"
+                      },
+                      "startTime": 1717751880000,
+                      "totalDuration": 54.88,
+                      "did": "1000",
+                      "outcome": "ABANDONED",
+                      "labels": [
+                        "WAITING",
+                        "ALERTING",
+                        "ABANDONED"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "User Not Authorized": {
+                    "description": "User Not Authorized",
+                    "value": {
+                      "timestamp": "2023-01-05T12:04:59.100+0000",
+                      "status": 403,
+                      "messages": [
+                        "user [user_name] does not have access to pbxId [PBX_ID] to make this request."
+                      ],
+                      "path": "/analytics/work/v2/pbxes/PBX_ID_VALUE/calls/unreturned/detailed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Unreturned Calls"
+        ],
+        "operationId": "post-unreturned-detailed",
+        "summary": "Get Detailed Unreturned Calls (POST)",
+        "description": "Same result as `GET /calls/unreturned/detailed`, but the filters, time range, sorting and paging are supplied in a JSON request body instead of query parameters — convenient when the caller-address list is long. Any value present in the body overrides the equivalent query parameter; query parameters supplied alongside the body are used only as fallbacks. Returns the same `DetailedUnreturnedCallsResponse` as the GET variant. The same endpoint is also served under `/v2`.",
+        "parameters": [
+          {
+            "name": "pbxId",
+            "in": "path",
+            "description": "Id of the PBX.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetailedUnreturnedCallsPostRequest"
+              },
+              "example": {
+                "callerAddresses": [
+                  "1006",
+                  "1008"
+                ],
+                "calleeAddresses": [
+                  "1014"
+                ],
+                "fields": [
+                  "callId",
+                  "callerName",
+                  "calleeName",
+                  "startTime",
+                  "outcome"
+                ],
+                "startDate": "2026-07-01T00:00:00Z",
+                "endDate": "2026-07-15T23:59:59Z",
+                "sortingField": "startTime",
+                "sortingDirection": "DESC",
+                "limit": 50
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailedUnreturnedCallsResponse"
+                },
+                "example": {
+                  "records": [
+                    {
+                      "callId": "1717751880000",
+                      "transferToCallId": "1717751890000",
+                      "caller": {
+                        "id": "Chay Hoss,1006",
+                        "address": "1006",
+                        "name": "Chay Hoss",
+                        "deviceId": "d-1006",
+                        "deviceModel": "voo8x8",
+                        "serviceName": "Work",
+                        "serviceType": "VOICE"
+                      },
+                      "callee": {
+                        "address": "1014",
+                        "name": "Chandler Hollow",
+                        "deviceId": "d-1014",
+                        "deviceModel": "voo8x8",
+                        "serviceName": "Work",
+                        "serviceType": "VOICE"
+                      },
+                      "workGroup": {
+                        "id": "tqteLkZOScyi0Mai9ewUlA",
+                        "extension": "1000",
+                        "groupType": "CALL_QUEUE"
+                      },
+                      "startTime": 1717751880000,
+                      "totalDuration": 54.88,
+                      "did": "1000",
+                      "outcome": "ABANDONED",
+                      "labels": [
+                        "WAITING",
+                        "ALERTING",
+                        "ABANDONED"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "User Not Authorized": {
+                    "description": "User Not Authorized",
+                    "value": {
+                      "timestamp": "2023-01-05T12:04:59.100+0000",
+                      "status": 403,
+                      "messages": [
+                        "user [user_name] does not have access to pbxId [PBX_ID] to make this request."
+                      ],
+                      "path": "/analytics/work/v2/pbxes/PBX_ID_VALUE/calls/unreturned/detailed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/pbxes/{pbxId}/ring-group-agent-activity/{ringGroupId}": {
+      "get": {
+        "tags": [
+          "Ring Group Agent Activity"
+        ],
+        "summary": "Get Ring Group Agent Activity",
+        "operationId": "get-ring-group-agent-activity",
+        "description": "Returns per-agent activity for the members of a ring group on the given PBX, identified by the ring group id. Each row reports an agent's extension and the requested metrics — how long the agent was logged in to, and logged out of, the ring group over the reporting window. If no date range is provided, the metrics reflect the last 24 hours.",
+        "parameters": [
+          {
+            "name": "pbxId",
+            "in": "path",
+            "description": "Id of the PBX.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ringGroupId",
+            "in": "path",
+            "description": "Id of the ring group whose agent activity is requested.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agentExtensions",
+            "in": "query",
+            "description": "Restrict to specific agent extensions within the ring group (comma-separated). If not passed, all agents in the ring group are returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start of the historical window, in ISO 8601. Omit both `startDate` and `endDate` for the last 24 hours.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End of the historical window, in ISO 8601.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayStart",
+            "in": "query",
+            "description": "Optional intra-day window start; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayEnd",
+            "in": "query",
+            "description": "Optional intra-day window end; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metrics",
+            "in": "query",
+            "description": "Expected metrics in response. Multiple values can be passed separated by comma. If not passed, all available metrics are returned.\n\n**Values allowed and their description**\n\n| Metric | Description |\n| ------ | ----------- |\n| loggedInDuration | Total time the agent was logged in to the ring group during the reporting period, in milliseconds. |\n| loggedOutDuration | Total time the agent was logged out of the ring group during the reporting period, in milliseconds. |\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "description": "Sort field and direction. Sortable field: `agentExtension`.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Sorting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RingGroupAgentActivityResponse"
+                },
+                "example": {
+                  "ringGroupAgentActivity": [
+                    {
+                      "agentExtension": "1014",
+                      "metrics": {
+                        "loggedInDuration": 25200000,
+                        "loggedOutDuration": 3600000
+                      }
+                    },
+                    {
+                      "agentExtension": "1006",
+                      "metrics": {
+                        "loggedInDuration": 18000000,
+                        "loggedOutDuration": 10800000
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "User Not Authorized": {
+                    "description": "User Not Authorized",
+                    "value": {
+                      "timestamp": "2023-01-05T12:04:59.100+0000",
+                      "status": 403,
+                      "messages": [
+                        "user [user_name] does not have access to pbxId [PBX_ID] to make this request."
+                      ],
+                      "path": "/analytics/work/v2/pbxes/PBX_ID_VALUE/ring-group-agent-activity/RING_GROUP_ID"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found — the PBX was not found. An unknown ring group is not a 404: it returns 200 with an empty ringGroupAgentActivity list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/pbxes/{pbxId}/ring-group-agent-activity/by-extension/{ringGroupExtension}": {
+      "get": {
+        "tags": [
+          "Ring Group Agent Activity"
+        ],
+        "summary": "Get Ring Group Agent Activity by Extension",
+        "operationId": "get-ring-group-agent-activity-by-extension",
+        "description": "Returns per-agent activity for the members of a ring group on the given PBX, identified by the ring group **extension** instead of its id. Behaves identically to `GET /ring-group-agent-activity/{ringGroupId}` and returns the same response shape.",
+        "parameters": [
+          {
+            "name": "pbxId",
+            "in": "path",
+            "description": "Id of the PBX.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ringGroupExtension",
+            "in": "path",
+            "description": "Extension of the ring group whose agent activity is requested.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agentExtensions",
+            "in": "query",
+            "description": "Restrict to specific agent extensions within the ring group (comma-separated). If not passed, all agents in the ring group are returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start of the historical window, in ISO 8601. Omit both `startDate` and `endDate` for the last 24 hours.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End of the historical window, in ISO 8601.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayStart",
+            "in": "query",
+            "description": "Optional intra-day window start; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intraDayEnd",
+            "in": "query",
+            "description": "Optional intra-day window end; only valid together with `startDate`/`endDate`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metrics",
+            "in": "query",
+            "description": "Expected metrics in response. Multiple values can be passed separated by comma. If not passed, all available metrics are returned.\n\n**Values allowed and their description**\n\n| Metric | Description |\n| ------ | ----------- |\n| loggedInDuration | Total time the agent was logged in to the ring group during the reporting period, in milliseconds. |\n| loggedOutDuration | Total time the agent was logged out of the ring group during the reporting period, in milliseconds. |\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sorting",
+            "in": "query",
+            "description": "Sort field and direction. Sortable field: `agentExtension`.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Sorting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RingGroupAgentActivityResponse"
+                },
+                "example": {
+                  "ringGroupAgentActivity": [
+                    {
+                      "agentExtension": "1014",
+                      "metrics": {
+                        "loggedInDuration": 25200000,
+                        "loggedOutDuration": 3600000
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "User Not Authorized": {
+                    "description": "User Not Authorized",
+                    "value": {
+                      "timestamp": "2023-01-05T12:04:59.100+0000",
+                      "status": 403,
+                      "messages": [
+                        "user [user_name] does not have access to pbxId [PBX_ID] to make this request."
+                      ],
+                      "path": "/analytics/work/v2/pbxes/PBX_ID_VALUE/ring-group-agent-activity/by-extension/RING_GROUP_EXTENSION"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found — the PBX was not found. An unknown ring group is not a 404: it returns 200 with an empty ringGroupAgentActivity list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1713,6 +3091,76 @@
           "rootCallId": { "type": "string" }
         }
       },
+      "ActiveCallsResponse": {
+        "type": "object",
+        "properties": {
+          "calls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActiveCall"
+            }
+          }
+        }
+      },
+      "ActiveCall": {
+        "type": "object",
+        "properties": {
+          "callId": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "connectedTime": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "caller": {
+            "$ref": "#/components/schemas/Caller"
+          },
+          "latestCallee": {
+            "$ref": "#/components/schemas/Callee"
+          },
+          "direction": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "sip": {
+            "type": "string"
+          },
+          "latestLabel": {
+            "type": "string"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "outcome": {
+            "type": "string"
+          },
+          "talkingDuration": {
+            "type": "number",
+            "format": "double"
+          },
+          "onHoldDuration": {
+            "type": "number",
+            "format": "double"
+          },
+          "waitingDuration": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalDuration": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
       "Callee": {
         "type": "object",
         "properties": {
@@ -1834,6 +3282,304 @@
             "type": "array",
             "items": { "$ref": "#/components/schemas/QueueActivity" },
             "description": "A list of queue activities, including details of each queue and associated agent activities."
+          }
+        }
+      },
+      "UnreturnedCaller": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the calling party"
+          },
+          "address": {
+            "type": "string",
+            "description": "Address or extension number of the caller"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the caller"
+          },
+          "deviceId": {
+            "type": "string",
+            "description": "Unique identifier of the device used by the caller"
+          },
+          "deviceModel": {
+            "type": "string",
+            "description": "Model of the device used by the caller"
+          },
+          "serviceName": {
+            "type": "string",
+            "description": "Name of the service used by the caller"
+          },
+          "serviceType": {
+            "type": "string",
+            "description": "Type of the service used by the caller"
+          }
+        }
+      },
+      "UnreturnedCallee": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Address or extension number of the callee"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the callee"
+          },
+          "deviceId": {
+            "type": "string",
+            "description": "Unique identifier of the device used by the callee"
+          },
+          "deviceModel": {
+            "type": "string",
+            "description": "Model of the device used by the callee"
+          },
+          "serviceName": {
+            "type": "string",
+            "description": "Name of the service used by the callee"
+          },
+          "serviceType": {
+            "type": "string",
+            "description": "Type of the service used by the callee"
+          }
+        }
+      },
+      "UnreturnedSiteData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the site the callee belongs to"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the site the callee belongs to"
+          }
+        }
+      },
+      "AggregatedUnreturnedCall": {
+        "type": "object",
+        "properties": {
+          "caller": {
+            "$ref": "#/components/schemas/UnreturnedCaller"
+          },
+          "calleeData": {
+            "$ref": "#/components/schemas/UnreturnedCallee"
+          },
+          "siteData": {
+            "$ref": "#/components/schemas/UnreturnedSiteData"
+          },
+          "attempts": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of unreturned call attempts made by the caller"
+          },
+          "latestStartTime": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Start time of the most recent unreturned call, in epoch milliseconds"
+          }
+        }
+      },
+      "AggregatedUnreturnedCallsResponse": {
+        "type": "object",
+        "properties": {
+          "calls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AggregatedUnreturnedCall"
+            }
+          }
+        }
+      },
+      "UnreturnedCallParticipant": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the participant"
+          },
+          "address": {
+            "type": "string",
+            "description": "Address or extension number of the participant"
+          }
+        }
+      },
+      "UnreturnedCallParticipantResponse": {
+        "type": "object",
+        "properties": {
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnreturnedCallParticipant"
+            }
+          }
+        }
+      },
+      "DetailedUnreturnedCallRecord": {
+        "type": "object",
+        "properties": {
+          "callId": {
+            "type": "string",
+            "description": "Unique identifier of the call"
+          },
+          "transferToCallId": {
+            "type": "string",
+            "description": "Identifier of the call this call was transferred to, if any"
+          },
+          "caller": {
+            "$ref": "#/components/schemas/UnreturnedCaller"
+          },
+          "callee": {
+            "$ref": "#/components/schemas/UnreturnedCallee"
+          },
+          "workGroup": {
+            "$ref": "#/components/schemas/WorkGroup"
+          },
+          "startTime": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Time the call started, in epoch milliseconds"
+          },
+          "totalDuration": {
+            "type": "number",
+            "format": "double",
+            "description": "Total duration of the call"
+          },
+          "did": {
+            "type": "string",
+            "description": "Direct inward dialing number associated with the call"
+          },
+          "outcome": {
+            "type": "string",
+            "description": "Outcome classification of the unreturned call"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ordered list of states the call passed through"
+          }
+        }
+      },
+      "DetailedUnreturnedCallsResponse": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetailedUnreturnedCallRecord"
+            }
+          }
+        }
+      },
+      "DetailedUnreturnedCallsPostRequest": {
+        "type": "object",
+        "description": "Request body for POST `/calls/unreturned/detailed`. Every field is optional in the body; a value present here overrides the equivalent query parameter.",
+        "properties": {
+          "callerAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Caller addresses to drill into. At least one caller address must be supplied (via body or query)."
+          },
+          "calleeAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Restrict to specific callee addresses."
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Response fields to return. If omitted, all available fields are returned."
+          },
+          "search": {
+            "type": "string",
+            "description": "Free-text search across caller/callee identity fields."
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start of the historical window, in ISO 8601."
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End of the historical window, in ISO 8601."
+          },
+          "intraDayStart": {
+            "type": "string",
+            "description": "Optional intra-day window start; only valid together with startDate/endDate."
+          },
+          "intraDayEnd": {
+            "type": "string",
+            "description": "Optional intra-day window end; only valid together with startDate/endDate."
+          },
+          "timeZone": {
+            "type": "string",
+            "description": "Time zone applied to the time filter."
+          },
+          "sortingField": {
+            "type": "string",
+            "description": "Field to sort by."
+          },
+          "sortingDirection": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "description": "Sort direction."
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of records to return in the page."
+          },
+          "startingAfter": {
+            "type": "string",
+            "description": "Cursor: record id to start the page after."
+          },
+          "latestSortingValue": {
+            "type": "string",
+            "description": "The latest sorting value used to paginate results."
+          }
+        }
+      },
+      "RingGroupAgentActivityResponse": {
+        "type": "object",
+        "description": "Ring group agent activity response — one entry per agent in the ring group.",
+        "properties": {
+          "ringGroupAgentActivity": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RingGroupAgentActivity"
+            },
+            "description": "The per-agent activity rows for the ring group."
+          }
+        }
+      },
+      "RingGroupAgentActivity": {
+        "type": "object",
+        "description": "Activity of a single agent within a ring group.",
+        "properties": {
+          "agentExtension": {
+            "type": "string",
+            "description": "The phone extension of the agent."
+          },
+          "metrics": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "description": "The requested metrics and their values for this agent (`loggedInDuration`, `loggedOutDuration`; durations in milliseconds)."
           }
         }
       }

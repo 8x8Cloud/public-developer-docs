@@ -520,6 +520,72 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Active Calls",
+      items: [
+        {
+          type: "doc",
+          id: "analytics/reference/get-active-calls",
+          label: "Get Active Calls",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Unreturned Calls",
+      items: [
+        {
+          type: "doc",
+          id: "analytics/reference/get-unreturned-calls",
+          label: "Get Unreturned Calls",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "analytics/reference/get-unreturned-callees",
+          label: "Get Unreturned Call Callees",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "analytics/reference/get-unreturned-callers",
+          label: "Get Unreturned Call Callers",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "analytics/reference/get-unreturned-detailed",
+          label: "Get Detailed Unreturned Calls",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "analytics/reference/post-unreturned-detailed",
+          label: "Get Detailed Unreturned Calls (POST)",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Ring Group Agent Activity",
+      items: [
+        {
+          type: "doc",
+          id: "analytics/reference/get-ring-group-agent-activity",
+          label: "Get Ring Group Agent Activity",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "analytics/reference/get-ring-group-agent-activity-by-extension",
+          label: "Get Ring Group Agent Activity by Extension",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Pbxes",
       items: [
         {
