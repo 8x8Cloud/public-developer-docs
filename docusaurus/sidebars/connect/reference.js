@@ -343,6 +343,10 @@ const sidebarConfig = [
           },
           {
             type: 'doc',
+            id: 'connect/docs/whatsapp-automatic-events-webhook',
+          },
+          {
+            type: 'doc',
             id: 'connect/docs/whatsapp-business-scoped-user-ids',
           },
         ],
