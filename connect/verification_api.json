@@ -184,18 +184,21 @@
                 "$ref": "#/components/schemas/VerifyRequestV2"
               },
               "examples": {
-                "Sample-Sms-Minimal": {
+                "smsMinimal": {
+                  "summary": "SMS — minimal request",
                   "value": {
                     "destination": "+19876543210"
                   }
                 },
-                "Sample-Voice-Minimal": {
+                "voiceMinimal": {
+                  "summary": "Voice — minimal request",
                   "value": {
                     "destination": "+19876543210",
                     "channel": "call"
                   }
                 },
-                "Sample-WhatsApp-Minimal": {
+                "whatsAppMinimal": {
+                  "summary": "WhatsApp — minimal request",
                   "value": {
                     "destination": "+19876543210",
                     "channel": "whatsapp",
@@ -204,7 +207,8 @@
                     }
                   }
                 },
-                "Sample-Sms": {
+                "sms": {
+                  "summary": "SMS — full request",
                   "value": {
                     "destination": "8765 4321",
                     "country": "SG",
@@ -220,7 +224,8 @@
                     }
                   }
                 },
-                "Sample-Voice": {
+                "voice": {
+                  "summary": "Voice — full request",
                   "value": {
                     "destination": "+65(876)54321",
                     "country": "SG",
@@ -237,7 +242,8 @@
                     }
                   }
                 },
-                "Sample-WhatsApp": {
+                "whatsApp": {
+                  "summary": "WhatsApp — full request",
                   "value": {
                     "destination": "+6587654321",
                     "codeLength": 5,
@@ -251,7 +257,8 @@
                     }
                   }
                 },
-                "Sample-Sma": {
+                "sma": {
+                  "summary": "SMA — Silent Mobile Authentication request",
                   "value": {
                     "destination": "+6587654321",
                     "channel": "sma"
@@ -579,6 +586,11 @@
           "template": {
             "type": "string",
             "description": "This parameter is not mandatory.\n- It is only used for `sms` and `call` channels.\n- It defines the content of your message, it can be customized for each request using the placeholders `{code}` and `{brand}`.\n- NB: if personalizing the text of the template, make sure to include the `{code}` placeholder or your Verify SMS/CALL will not contain any code. The same goes with the `{brand}` placeholder, if not provided but used in the template, it will be empty.\n- **Default text** (if no value is provided):\n  - If brand is specified: \n    - `{brand}: Your verification code is {code}`\n  - If brand is not specified: \n    - `Your verification code is {code}`"
+          },
+          "templateKey": {
+            "type": "string",
+            "example": "otp-template-simple",
+            "description": "This parameter is not mandatory.\n- It selects a pre-saved message template by its key, rather than supplying the message content inline.\n- The key must match the name of a template configured for your account in 8x8 Connect (for example, under Verify templates).\n- This differs from the `template` parameter: `template` defines inline message text with `{code}` and `{brand}` placeholders, whereas `templateKey` references an existing saved template.\n- When omitted, the account's default Verify template is used. If your account has multiple saved templates, you must provide `templateKey` to select a specific one; otherwise the default template is applied.\n- The referenced template is resolved for the requested `channel` and `language`. If no template matches the provided key for your account, the request fails with a `400` error."
           },
           "language": {
             "type": "string",
