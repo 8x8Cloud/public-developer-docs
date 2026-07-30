@@ -56,3 +56,10 @@ Once you have created the webchat script, when you select the code, it will look
 </script>
 
 ```
+
+:::note
+If your website enforces a Content Security Policy, see
+[Content Security Policy](./content-security-policy.md) for the directives the
+widget requires — a blank or unstyled widget is the usual symptom of a policy
+that blocks it.
+:::

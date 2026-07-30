@@ -9,3 +9,9 @@ When a colour is entered in, you can either use a word or hex colour, but using 
 Eg. `red` or `#FF0000`
 
 Nearly all of the components on the webchat, have been defined so you can change configurations in each area, however these are only configuration at a global level, within the theme property. To see the glossary of all items you can theme, go to all theming items. However, we are going to first cover some of the main usecases that customers want to cover
+
+:::note
+The widget injects its styles at runtime, so if your website enforces a Content
+Security Policy it must allow `style-src 'unsafe-inline'` or the widget renders
+unstyled. See [Content Security Policy](./content-security-policy.md).
+:::

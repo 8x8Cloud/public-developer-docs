@@ -126,6 +126,7 @@ const sidebarConfig = [
     collapsed: true,
     items: [
       'actions-events/docs/webchat-script',
+      'actions-events/docs/content-security-policy',
       'actions-events/docs/trigger-webchat',
       'actions-events/docs/end-chat',
       'actions-events/docs/customer-information',
