@@ -450,16 +450,22 @@ Then it opens and you can use the eye icon, then copy. . You DO NOT need the sec
 
 ## Primary and secondary buttons
 
-You can change both the primary and secondary colours on the chat button, either globally across each of the parts of the widget, invitation/form/window or configure each one differently.
+You can change both the primary and secondary colours on the chat widget, either globally across each of the parts of the widget — invitation/form/window — or configure each one differently.
 
-On the form below, there are just primary buttons (red arrow points to primary button)
+**Legend (default theme):** 🔵 blue = **primary** button · ⚫ black = **secondary** button
 
-![image](../images/bd5743f2d960d8527e7b651e584b9afbed6285aafbfbe7f5e4912a285dfb3946-image.png)
-  
-Then, for the web window, here you can see the primary buttons, but also the secondary buttons are both the quick replies, and cancel options. (Red arrow points to the primary button/blue to secondary button)
+### Prechat form
 
-![Chat Gateway flow](../images/119b36b205b29344f350cc515d8afb4a6f6cccd2036b13e92b663a84a7ff9d16-Button_theme.png "Chat Gateway flow.jpg")
-  
+The prechat form uses a **primary** button for its main call to action, **Start chat** (🔵).
+
+![Prechat form with the primary Start chat button](../images/webchat-theming-prechat.png)
+
+### Chat window
+
+In the chat window you can see both button types. Quick-reply options (here, **Yes / No** ⚫) and the **Cancel** action (⚫) are **secondary** buttons, while the message **send** action and **Ok** (🔵) are **primary** buttons.
+
+![Chat window with secondary quick-reply buttons and the primary send button](../images/webchat-theming-window.png) ![End conversation dialog with primary Ok and secondary Cancel buttons](../images/webchat-theming-end-chat.png)
+
 ## Button properties
 
 Below, is the table of configuration that you can use to change the button colours, the chat theme property is what is used to change the colour.
@@ -468,53 +474,19 @@ Below, is the table of configuration that you can use to change the button colou
 | --- | --- | --- |
 | buttonPrimaryTextColor | `#FFFFFF` | Changes the primary button text colour |
 | buttonPrimaryTextColorDisabled | `#888888` | Changes the primary button text colour when it's disabled |
-| buttonPrimaryBackgroundColor | `#00008B` | Changes the primary button background colour |
-| buttonPrimaryBackgroundColorHover | `#000099` | Changes the primary button background colour when it's hover |
-| buttonPrimaryBackgroundColorActive | `#000066` | Changes the primary button background colour when it's active |
-| buttonPrimaryBackgroundColorDisabled | `#FFFFFF` | Changes the primary button background colour when it's disabled |
-| buttonSecondaryTextColor | `#888888` | Changes the secondary button text colour |
-| buttonSecondaryTextColorDisabled | `#ADD8E6` | Changes the secondary button text colour when it's disabled |
+| buttonPrimaryBackgroundColor | `#000080` | Changes the primary button background colour |
+| buttonPrimaryBackgroundColorHover | `#00008B` | Changes the primary button background colour when it's hover |
+| buttonPrimaryBackgroundColorActive | `#000099` | Changes the primary button background colour when it's active |
+| buttonPrimaryBackgroundColorDisabled | `#000066` | Changes the primary button background colour when it's disabled |
+| buttonSecondaryTextColor | `#FFFFFF` | Changes the secondary button text colour |
+| buttonSecondaryTextColorDisabled | `#888888` | Changes the secondary button text colour when it's disabled |
+| buttonSecondaryBackgroundColor | `#ADD8E6` | Changes the secondary button background colour |
 | buttonSecondaryBackgroundColorHover | `#B0E0E6` | Changes the secondary button background colour when it's hover |
 | buttonSecondaryBackgroundColorActive | `#87CEEB` | Changes the secondary button background colour when it's active |
 | buttonSecondaryBackgroundColorDisabled | `#B0C4DE` | Changes the secondary button background colour when it's disabled |
 | buttonBorderRadius | `0px` | Changes the button rounding |
 
-Here is an example of where the customer information is being set, for this example, the customer is already logged into the website, so we are passing in the information to the agent, to let them know the customer's name and email address, and also that they have already been verified
-
-```javascript
- themeCustom: {
-    "buttonPrimaryTextColor": "#FFFFFF",
-    "buttonPrimaryTextColorDisabled": "#888888",
-    "buttonPrimaryBackgroundColor": "#000080",  // Navy Blue
-    "buttonPrimaryBackgroundColorHover": "#00008B",  // Darker Navy Blue
-    "buttonPrimaryBackgroundColorActive": "#000099",  // Active Navy Blue
-    "buttonPrimaryBackgroundColorDisabled": "#000066",  // Disabled Navy Blue
-    "buttonSecondaryTextColor": "#FFFFFF",
-    "buttonSecondaryTextColorDisabled": "#888888",
-    "buttonSecondaryBackgroundColor": "#ADD8E6",  // Light Blue
-    "buttonSecondaryBackgroundColorHover": "#B0E0E6",  // Powder Blue
-    "buttonSecondaryBackgroundColorActive": "#87CEEB",  // Sky Blue
-    "buttonSecondaryBackgroundColorDisabled": "#B0C4DE",  // Light Steel Blue
-    "buttonBorderRadius": "0px",
-    "headerBackgroundColor": "blue",// Header Background Color
-    },
-
-```
-
-To add this, you need to add it at the bottom of the script in this area here
-
-```javascript
-"__8x8-chat-button-container-script_1333070733643e5b8fa7a791.52161248",
-            align: "right",
-
-ADD THE THEMING CODE HERE
-        };
-
-        var url = new URL("https://cloud8-cc-geo.8x8.com/vcc-chat-channels/public/webchat/discovery");
-
-```
-
-Then, the full script will look like this
+To apply a theme, add a `themeCustom` object to the `config` block of your chat script, using the properties from the table above. The full script then looks like this — note the `themeCustom` object nested inside `config`:
 
 ```html
     <!-- Place this code snippet anywhere you want the button to appear in your page. If no button has been configured in the chat script, it will not show up nor take any space. -->
@@ -534,6 +506,22 @@ Then, the full script will look like this
             domain: "https://vcc-eu11.8x8.com",
             buttonContainerId: "__8x8-chat-button-container-script_1333070733643e5b8fa7a791.52161248",
             align: "right",
+            themeCustom: {
+                "buttonPrimaryTextColor": "#FFFFFF",
+                "buttonPrimaryTextColorDisabled": "#888888",
+                "buttonPrimaryBackgroundColor": "#000080",  // Navy Blue
+                "buttonPrimaryBackgroundColorHover": "#00008B",  // Darker Navy Blue
+                "buttonPrimaryBackgroundColorActive": "#000099",  // Active Navy Blue
+                "buttonPrimaryBackgroundColorDisabled": "#000066",  // Disabled Navy Blue
+                "buttonSecondaryTextColor": "#FFFFFF",
+                "buttonSecondaryTextColorDisabled": "#888888",
+                "buttonSecondaryBackgroundColor": "#ADD8E6",  // Light Blue
+                "buttonSecondaryBackgroundColorHover": "#B0E0E6",  // Powder Blue
+                "buttonSecondaryBackgroundColorActive": "#87CEEB",  // Sky Blue
+                "buttonSecondaryBackgroundColorDisabled": "#B0C4DE",  // Light Steel Blue
+                "buttonBorderRadius": "0px",
+                "headerBackgroundColor": "blue",  // Header Background Color
+            },
         };
 
         var url = new URL("https://cloud8-cc-geo.8x8.com/vcc-chat-channels/public/webchat/discovery");
@@ -580,9 +568,9 @@ Then, the full script will look like this
 
 ### Images with buttons changed
 
-Then, when this is ran, you can see how it looks on the chat widget, again the red arrow showing the primary and blue the secondary button. In this as well, the “buttonBorderRadius”a was set to “10px”, to make the buttons more rounded.
+Once applied, the theme properties above change the primary and secondary button colours across the widget. In the examples below the header is set to blue, the **primary** buttons (send, **Ok**) use navy blue, and the **secondary** buttons (**Cancel**) use light blue.
 
-![Workboard](../images/934851cd046dbd5390d60b3f93853c49f4cc3639351fc2043b7562f9efbcf0e8-Workboard.png "Chat Gateway flow.jpg")
+![Chat window with the custom theme applied](../images/webchat-theming-window-custom-theme.png) ![End conversation dialog with the custom theme applied](../images/webchat-theming-end-chat-custom-theme.png)
 
 ---
 
@@ -3533,6 +3521,116 @@ Then, a message can be sent back in, using the conversation ID,
 > [Tenant Schedule API](https://support.8x8.com/cloud-contact-center/8x8-contact-center/developers/what-is-the-8x8-contact-center-tenant-provisioning-api), to ensure the Contact Center is open and receiving queries before handing the query off to an agent.
 >
 >
+
+---
+
+## Content Security Policy
+
+
+CSP directives a customer's website needs to embed the 8x8 WebChat v2 widget.
+The widget runs in an `iframe srcdoc`, so **the embedding page's CSP applies**.
+
+## How the widget loads
+
+Why the policy looks the way it does:
+
+- **8x8 does not send a CSP of its own.** The widget is injected as a
+  **sandboxed `iframe srcdoc`**, with these sandbox permissions:
+  `allow-scripts allow-downloads allow-modals allow-popups allow-popups-to-escape-sandbox`.
+- Because the iframe is `srcdoc`, **your page's CSP is the only policy the
+  browser enforces on the widget** — you cannot relax it from inside the iframe.
+- All widget scripts load from **external files** (no inline `<script>` blocks),
+  so `script-src` needs neither `'unsafe-inline'` nor `'unsafe-eval'`.
+- The widget's styles are injected at runtime, which is why
+  `style-src 'unsafe-inline'` **is** required (see below).
+
+## Recommended policy (wildcards — stable across infrastructure changes)
+
+These directives are **additive** — merge them into your site's existing policy
+rather than using them as a complete policy on their own. Each directive keeps
+`'self'` for your own origin alongside the 8x8 hosts. Both policy blocks on this
+page are wrapped across lines for readability; a real `Content-Security-Policy`
+header value must be a **single line** (or use a
+`<meta http-equiv="Content-Security-Policy">` tag).
+
+```text
+script-src  'self' https://*.8x8.com;
+connect-src 'self' https://*.8x8.com wss://*.chalet.8x8.com;
+frame-src   'self' https://*.8x8.com;
+img-src     'self' data: blob: https://*.8x8.com;
+media-src   'self' blob: https://*.8x8.com;
+style-src   'self' 'unsafe-inline';
+font-src    'self' https://*.8x8.com;
+```
+
+If your site sets a restrictive `default-src` (for example `default-src 'none'`),
+remember that every directive you don't list falls back to it — so you must list
+each directive above explicitly, not rely on the fallback.
+
+**Why this is recommended:**
+
+- **`script-src`** — the widget runs **without** `'unsafe-inline'` and **without**
+  `'unsafe-eval'`. You do not need to add either; keep them out of your policy.
+- **`style-src`** — **`'unsafe-inline'` is required.** The widget is built with
+  [styled-components](https://styled-components.com/), which injects a `<style>`
+  tag into the document at runtime. Browsers treat this as inline CSS, so a strict
+  `style-src` without `'unsafe-inline'` blocks it and the widget renders unstyled.
+  Nonce-based CSS (`style-src 'nonce-…'`) is **not supported** — the widget does
+  not emit a nonce on its injected styles.
+- **Wildcard `*.8x8.com` and `*.chalet.8x8.com` cover all regions (UK, US-East, AP, CA) and
+  all 8x8 subdomains.** No updates needed if 8x8 changes cluster names, adds
+  regions, or reorganizes infrastructure — including cases where the exact host
+  *form* changes under a stable tenant.
+  The trade-off: `script-src https://*.8x8.com` grants script execution on your
+  page to **every** 8x8 subdomain, not just the chat hosts. If that is too broad
+  for your security review, use the strict alternative below.
+
+## Strict alternative (exact origins — for audits that disallow wildcards)
+
+:::warning
+Only use this if your audit explicitly forbids wildcards. Exact hosts are
+harder to maintain — if 8x8 changes cluster names or adds regions, you'll need
+to update the policy.
+:::
+
+**The exact hosts vary per tenant, so read them from your browser rather than
+copying the example verbatim.** Load your site with the widget, open DevTools →
+Network (or watch the CSP violation reports — see below), and note the actual
+`vcc-…`, `cloud8-…`, `api.…chalet` and `files.…chalet` origins the widget contacts.
+The example below shows the *shape* of the policy; substitute your own hosts.
+
+The hosts depend on tenant-specific values that are **not** interchangeable:
+
+- **`<cluster>`** — the chat/loader host, `vcc-<cluster>.8x8.com` (e.g. `eu11`).
+- **`<site>`** — the chat-processor host, `cloud8-<site>.8x8.com` (e.g. `uk`).
+  Often **different** from the cluster.
+- **`<region>`** — the chalet region, `api.<region>.chalet` / `files.<region>.chalet`.
+  Available regions are `uk` / `us-east` / `ap` / `ca` (there is no ES or DE region —
+  ES/DE tenants are normally served from `uk`, though this isn't guaranteed).
+
+The `vcc-<cluster>` and `cloud8-<site>` hosts **may or may not carry a `-cf`
+suffix** depending on how your tenant is fronted, and the bare host is also used
+as a live fallback when discovery is unavailable — so **list both forms**.
+`cloud8-cc-geo.8x8.com` (discovery) and `cloud8.8x8.com` (asset registry) are
+fixed global hosts, the same for every tenant.
+
+Roll this out under `Content-Security-Policy-Report-Only` first: a wrong host
+guess then shows up as a violation report instead of a dead widget.
+
+```text
+script-src  'self' https://vcc-<cluster>.8x8.com https://vcc-<cluster>-cf.8x8.com
+            https://cloud8.8x8.com https://vcc-assets.8x8.com;
+connect-src 'self' https://vcc-<cluster>.8x8.com https://vcc-<cluster>-cf.8x8.com
+            https://cloud8-<site>.8x8.com https://cloud8-<site>-cf.8x8.com
+            https://cloud8-cc-geo.8x8.com https://cloud8.8x8.com https://vcc-assets.8x8.com
+            https://api.global.chalet.8x8.com
+            https://api.<region>.chalet.8x8.com wss://api.<region>.chalet.8x8.com;
+frame-src   'self' https://vcc-<cluster>.8x8.com https://vcc-<cluster>-cf.8x8.com;
+img-src     'self' data: blob: https://vcc-<cluster>.8x8.com https://vcc-<cluster>-cf.8x8.com https://files.<region>.chalet.8x8.com;
+media-src   'self' blob: https://vcc-<cluster>.8x8.com https://vcc-<cluster>-cf.8x8.com;
+style-src   'self' 'unsafe-inline';
+font-src    'self' https://vcc-assets.8x8.com;
+```
 
 ---
 
@@ -10217,6 +10315,12 @@ Eg. `red` or `#FF0000`
 
 Nearly all of the components on the webchat, have been defined so you can change configurations in each area, however these are only configuration at a global level, within the theme property. To see the glossary of all items you can theme, go to all theming items. However, we are going to first cover some of the main usecases that customers want to cover
 
+:::note
+The widget injects its styles at runtime, so if your website enforces a Content
+Security Policy it must allow `style-src 'unsafe-inline'` or the widget renders
+unstyled. See [Content Security Policy](./content-security-policy.md).
+:::
+
 ---
 
 ## Trigger webchat
@@ -10864,6 +10968,13 @@ Once you have created the webchat script, when you select the code, it will look
 </script>
 
 ```
+
+:::note
+If your website enforces a Content Security Policy, see
+[Content Security Policy](./content-security-policy.md) for the directives the
+widget requires — a blank or unstyled widget is the usual symptom of a policy
+that blocks it.
+:::
 
 ---
 

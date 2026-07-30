@@ -8,7 +8,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 
 - [Contact Center Data Augmentation API](https://developer.8x8.com/actions-events/docs/8x8-contact-center-data-augmentation-api): The Data Augmentation API allows you to enrich interaction data with custom variables collected from web forms, IVR systems, CRM data, or any exter...
 - [API Key](https://developer.8x8.com/actions-events/docs/api-key): You can obtain an API key using your [8x8 Admin Console](https://admin.8x8.com/) implementation.
-- [Button theming](https://developer.8x8.com/actions-events/docs/button-theming): You can change both the primary and secondary colours on the chat button, either globally across each of the parts of the widget, invitation/form/w...
+- [Button theming](https://developer.8x8.com/actions-events/docs/button-theming): You can change both the primary and secondary colours on the chat widget, either globally across each of the parts of the widget — invitation/form/...
 - [Authentication](https://developer.8x8.com/actions-events/docs/cc-campaigns/authentication): :::warning BETA
 - [Add Records](https://developer.8x8.com/actions-events/docs/cc-campaigns/endpoints/add-records): :::warning BETA
 - [Modify Campaign](https://developer.8x8.com/actions-events/docs/cc-campaigns/endpoints/modify-campaign): :::warning BETA
@@ -28,6 +28,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Chat Language](https://developer.8x8.com/actions-events/docs/chat-language): Using the webchat, you may have a customer that is comforable speaking in their own language, so we offer realtime translation on this chat, you ca...
 - [Things you should know](https://developer.8x8.com/actions-events/docs/chat-things-you-should-know): Here are some things you should know about interacting with the Chat API:
 - [Workflow - Connecting 3rd party channel](https://developer.8x8.com/actions-events/docs/chat-workflow): To use the Chat Gateway you must have the following:
+- [Content Security Policy](https://developer.8x8.com/actions-events/docs/content-security-policy): CSP directives a customer's website needs to embed the 8x8 WebChat v2 widget.
 - [Conversation](https://developer.8x8.com/actions-events/docs/conversation): After you have created:
 - [Customer information](https://developer.8x8.com/actions-events/docs/customer-information): Using this option, customer specific information can be sent from a website, into the webchat widget, which can then be forwarded onto an agent, bu...
 - [Dark mode example](https://developer.8x8.com/actions-events/docs/dark-mode-example): Here, is a full script example, of where the colours have been configured so it shows in dark mode
