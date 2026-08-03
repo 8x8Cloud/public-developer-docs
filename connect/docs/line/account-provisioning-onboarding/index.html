@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-connect/docs/line/account-provisioning-onboarding" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">LINE Account Provisioning and Onboarding | 8x8 Developer Portal</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://developer.8x8.com/connect/docs/line/account-provisioning-onboarding"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="docs, developer, api, cpaas, jaas, sdk, actions, events, analytics, contact center, integrations"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="LINE Account Provisioning and Onboarding | 8x8 Developer Portal"><meta data-rh="true" name="description" content="This guide covers the complete path from &quot;we want LINE&quot; to &quot;we are sending production messages&quot;. It sets out the three provisioning routes, what you have to supply, the lead times to plan for, and how support works after go-live. Read The LINE Ecosystem and Account Model first, because the vocabulary there is what the provisioning form asks you for."><meta data-rh="true" property="og:description" content="This guide covers the complete path from &quot;we want LINE&quot; to &quot;we are sending production messages&quot;. It sets out the three provisioning routes, what you have to supply, the lead times to plan for, and how support works after go-live. Read The LINE Ecosystem and Account Model first, because the vocabulary there is what the provisioning form asks you for."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://developer.8x8.com/connect/docs/line/account-provisioning-onboarding"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/line/account-provisioning-onboarding" hreflang="en"><link data-rh="true" rel="alternate" href="https://developer.8x8.com/connect/docs/line/account-provisioning-onboarding" hreflang="x-default"><script src="https://cdn.amplitude.com/libs/analytics-browser-2.3.8-min.js.gz" async></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.d3db3184.css">
+<script src="/assets/js/runtime~main.1fb7f12e.js" defer="defer"></script>
+<script src="/assets/js/main.4b075b50.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/Logo8x8Dark.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/Logo8x8Dark.svg" alt="8x8" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Developer Portal</b></a><a class="navbar__item navbar__link" href="/actions-events">Actions &amp; Events</a><a class="navbar__item navbar__link" href="/analytics">Analytics</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/connect">CPaaS</a><a class="navbar__item navbar__link" href="/jaas">JaaS</a><a class="navbar__item navbar__link" href="/tech-partner">Tech Partners</a><a class="navbar__item navbar__link" href="/administration">Administration</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/8x8Cloud/public-developer-docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="section-navigation"><div class="section-navigation__container"><div class="section-navigation__tabs"><a class="section-navigation__tab icon-guides section-navigation__tab--active" href="/connect/docs">Guides</a><a class="section-navigation__tab icon-references" href="/connect/reference">API Reference</a><a href="https://support.cpaas.8x8.com/hc/en-us" target="_blank" rel="noopener noreferrer" class="section-navigation__tab icon-support">Support</a></div></div></div><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/connect/docs/8x8-cpaas-products"><span title="CPaaS: Connect &amp; Communication APIs" class="linkLabel_WmDU">CPaaS: Connect &amp; Communication APIs</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/getting-started"><span title="API Information" class="categoryLinkLabel_W154">API Information</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/send-sms-api-reference"><span title="SMS" class="categoryLinkLabel_W154">SMS</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/connect/docs/whatsapp/whatsapp-hub"><span title="Messaging Apps" class="categoryLinkLabel_W154">Messaging Apps</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/whatsapp/whatsapp-hub"><span title="WhatsApp" class="categoryLinkLabel_W154">WhatsApp</span></a><button aria-label="Expand sidebar category &#x27;WhatsApp&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/rcs/overview"><span title="RCS" class="categoryLinkLabel_W154">RCS</span></a><button aria-label="Expand sidebar category &#x27;RCS&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/connect/docs/line/line-hub"><span title="LINE" class="categoryLinkLabel_W154">LINE</span></a><button aria-label="Collapse sidebar category &#x27;LINE&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/line/concepts-fundamentals"><span title="LINE Ecosystem &amp; Accounts" class="linkLabel_WmDU">LINE Ecosystem &amp; Accounts</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/connect/docs/line/account-provisioning-onboarding"><span title="Account Provisioning &amp; Onboarding" class="linkLabel_WmDU">Account Provisioning &amp; Onboarding</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/line/getting-started"><span title="Getting Started" class="linkLabel_WmDU">Getting Started</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/line/loa-messaging"><span title="LINE Official Account (Two-way)" class="categoryLinkLabel_W154">LINE Official Account (Two-way)</span></a><button aria-label="Expand sidebar category &#x27;LINE Official Account (Two-way)&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/connect/docs/line/official-notification-lon"><span title="LINE Official Notification (One-way)" class="categoryLinkLabel_W154">LINE Official Notification (One-way)</span></a><button aria-label="Expand sidebar category &#x27;LINE Official Notification (One-way)&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/line/governance-security"><span title="Governance &amp; Security" class="linkLabel_WmDU">Governance &amp; Security</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/line/reference-resources"><span title="Reference &amp; Resources" class="linkLabel_WmDU">Reference &amp; Resources</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-viber"><span title="Viber" class="linkLabel_WmDU">Viber</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/connect/docs/usage-samples-zns"><span title="Zalo Notification Service (ZNS)" class="linkLabel_WmDU">Zalo Notification Service (ZNS)</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/voice/cpaas-voice-offerings"><span title="Voice" class="categoryLinkLabel_W154">Voice</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/connect-overview"><span title="Connect Portal" class="categoryLinkLabel_W154">Connect Portal</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/creating-a-contact"><span title="Contacts API Tutorials" class="categoryLinkLabel_W154">Contacts API Tutorials</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/adobe-campaigns"><span title="Integrations" class="categoryLinkLabel_W154">Integrations</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/converse"><span title="Converse" class="categoryLinkLabel_W154">Converse</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/vi-overview"><span title="Video Interaction" class="categoryLinkLabel_W154">Video Interaction</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/connect/docs/accessing-and-viewing-your-customer-list"><span title="Partner Hub" class="categoryLinkLabel_W154">Partner Hub</span></a></div></li></ul></nav><button type="button" title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width="20" height="20" aria-hidden="true" class="collapseSidebarButtonIcon_kv0_"><g fill="#7a7a7a"><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"></path><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"></path></g></svg></button></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_xLCN"><div class="docItemContainer_jfFK"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12 markdown"><header><h1>LINE Account Provisioning and Onboarding</h1></header>
+<p>This guide covers the complete path from &quot;we want LINE&quot; to &quot;we are sending production messages&quot;. It sets out the three provisioning routes, what you have to supply, the lead times to plan for, and how support works after go-live. Read <a href="/connect/docs/line/concepts-fundamentals">The LINE Ecosystem and Account Model</a> first, because the vocabulary there is what the provisioning form asks you for.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="choose-your-provisioning-path">Choose Your Provisioning Path<a href="#choose-your-provisioning-path" class="hash-link" aria-label="Direct link to Choose Your Provisioning Path" title="Direct link to Choose Your Provisioning Path" translate="no">​</a></h2>
+<p>There are three genuinely different journeys, depending on whether you already own a LINE Official Account and, if so, who currently manages it. Identify yours before you start, because the work, the owner, and the lead time all differ.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th><strong>Path A: New OA provisioned by 8x8</strong></th><th><strong>Path B: Bring your own OA</strong></th><th><strong>Path C: Migrate an OA from another provider</strong></th></tr></thead><tbody><tr><td><strong>Starting point</strong></td><td>You have no LINE Official Account</td><td>You already have an OA with the Messaging API available to you</td><td>You have an OA that another provider or agency manages</td></tr><tr><td><strong>Who creates the OA</strong></td><td>8x8, as a LINE-registered Agency (AGP) partner, on your behalf</td><td>You already did</td><td>LINE, via its provider migration process</td></tr><tr><td><strong>What you submit</strong></td><td>The provisioning information sheet, plus a profile image</td><td>Channel ID and Channel Secret from LINE Official Account Manager</td><td>A migration request, qualified with 8x8 first</td></tr><tr><td><strong>Who administers the OA afterwards</strong></td><td>8x8 manages the account as your agency partner</td><td>You retain administration in LINE Official Account Manager</td><td>Determined as part of the migration</td></tr><tr><td><strong>Main lead-time driver</strong></td><td>LINE verification, <strong>14 business days</strong></td><td>Your own console access</td><td>LINE&#x27;s migration process, about <strong>25 business days</strong></td></tr><tr><td><strong>Documented in</strong></td><td><a href="#what-you-need-to-provide">What You Need to Provide</a> and <a href="#the-onboarding-sequence">The Onboarding Sequence</a></td><td><a href="#connecting-your-oa-to-8x8">Connecting Your OA to 8x8</a></td><td>The note below</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="path-a-new-oa-provisioned-by-8x8">Path A: New OA provisioned by 8x8<a href="#path-a-new-oa-provisioned-by-8x8" class="hash-link" aria-label="Direct link to Path A: New OA provisioned by 8x8" title="Direct link to Path A: New OA provisioned by 8x8" translate="no">​</a></h3>
+<p>8x8 is a LINE-registered Agency (AGP) partner and can create and manage a LINE Official Account for you. You complete one information sheet per Official Account, 8x8 submits the provisioning request to LINE, and LINE runs its verification. This is the path most new customers take, and it is the one the rest of this page is organised around.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="path-b-bring-your-own-oa">Path B: Bring your own OA<a href="#path-b-bring-your-own-oa" class="hash-link" aria-label="Direct link to Path B: Bring your own OA" title="Direct link to Path B: Bring your own OA" translate="no">​</a></h3>
+<p>If you already have a LINE Official Account, you keep it. Enable the Messaging API on the account, retrieve the channel credentials from LINE Official Account Manager, and hand them to 8x8. See <a href="#connecting-your-oa-to-8x8">Connecting Your OA to 8x8</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="path-c-migrate-an-oa-from-another-provider">Path C: Migrate an OA from another provider<a href="#path-c-migrate-an-oa-from-another-provider" class="hash-link" aria-label="Direct link to Path C: Migrate an OA from another provider" title="Direct link to Path C: Migrate an OA from another provider" translate="no">​</a></h3>
+<blockquote>
+<p><strong>Important:</strong> If your Official Account is currently managed by another provider or agency, moving it to 8x8 means going through LINE&#x27;s provider migration process. LINE charges a fee for migration and the process takes about <strong>25 business days</strong>. Treat this as a qualification question, not a default: in some cases provisioning a new Official Account is faster and cheaper than migrating an existing one. Ask your 8x8 account manager for the current LINE migration fee before committing.</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-you-need-to-provide">What You Need to Provide<a href="#what-you-need-to-provide" class="hash-link" aria-label="Direct link to What You Need to Provide" title="Direct link to What You Need to Provide" translate="no">​</a></h2>
+<p>For Path A, LINE requires a defined set of information for every Official Account, covering the account&#x27;s name and handle, its category, its service language and country, its launch date, and its profile image. Contact your 8x8 account manager to obtain the provisioning information sheet and submit the required details.</p>
+<p>One field carries a cost consequence rather than a formatting one: setting the account&#x27;s <strong>push notification default</strong> to On applies a <strong>50% surcharge</strong>. Confirm the cost impact with your account manager before selecting it.</p>
+<p>Two rules worth restating, because they shape commercial planning:</p>
+<ul>
+<li><strong>One form per Official Account.</strong> Each account requires its own submission.</li>
+<li><strong>Each customer needs their own Official Account.</strong> 8x8 does not send from a shared Official Account, so provisioning is per customer, not per platform.</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>The <strong>OA ID</strong> field on the form is the account&#x27;s Premium ID, purchased from LINE. For what a Premium ID is and why a customer would want one, see <a href="/connect/docs/line/concepts-fundamentals#why-premium-id-is-meaningful">Why Premium ID Is Meaningful</a>. LINE&#x27;s own <a href="https://terms2.line.me/official_account_premiumid_terms_oth" target="_blank" rel="noopener noreferrer">Premium ID Terms of Use</a> carry the character limits, the annual fee, and the renewal rules.</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-onboarding-sequence">The Onboarding Sequence<a href="#the-onboarding-sequence" class="hash-link" aria-label="Direct link to The Onboarding Sequence" title="Direct link to The Onboarding Sequence" translate="no">​</a></h2>
+<p>Path A runs through eight steps. The owner changes as it progresses, so track it as a shared plan rather than a handoff.</p>
+<ol>
+<li><strong>Intake.</strong> You submit the provisioning information sheet, and email the profile image separately.
+<ul>
+<li><em>Owner:</em> you.</li>
+</ul>
+</li>
+<li><strong>Submission validated and provisioning request raised.</strong> 8x8 checks the submission for completeness and consistency against your business registration, then raises the provisioning request.
+<ul>
+<li><em>Owner:</em> 8x8 Operations.</li>
+</ul>
+</li>
+<li><strong>Provisioning with LINE.</strong> 8x8 submits the request to LINE as your Agency (AGP) partner. This creates the Official Account and applies the Premium ID and Verified Account application if you ordered them.
+<ul>
+<li><em>Owner:</em> 8x8 Operations, acting as your LINE agency.</li>
+</ul>
+</li>
+<li><strong>LINE verification.</strong> LINE reviews and verifies the account. This is the long pole in the whole process.
+<ul>
+<li><em>Owner:</em> LINE. <em>Lead time:</em> <strong>14 business days.</strong></li>
+</ul>
+</li>
+<li><strong>Channel connection and credential issuance.</strong> 8x8 links the Official Account to your 8x8 sub-account and issues your API credentials and webhook URL.
+<ul>
+<li><em>Owner:</em> 8x8 Operations and Platform Engineering.</li>
+</ul>
+</li>
+<li><strong>API integration.</strong> Your developers integrate: send and receive Text, Image, Video, Audio, and Location, and register your callback URL for the inbound message webhook.
+<ul>
+<li><em>Owner:</em> your development team. See <a href="/connect/docs/line/getting-started">Getting Started</a>.</li>
+</ul>
+</li>
+<li><strong>Converse setup (optional).</strong> If your plan includes agent-side handling of inbound LINE conversations, 8x8 provisions seats and inbox routing at this point.
+<ul>
+<li><em>Owner:</em> 8x8 Customer Success and you.</li>
+</ul>
+</li>
+<li><strong>Go-live and monitoring.</strong> First production message validated, delivery monitoring in place.
+<ul>
+<li><em>Owner:</em> 8x8 and you.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>Steps 6 and 4 can and should overlap. Nothing in the API integration work depends on LINE having finished verifying the account, so start intake early in the sales cycle and let verification run in parallel with development.</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="timeline-expectations">Timeline Expectations<a href="#timeline-expectations" class="hash-link" aria-label="Direct link to Timeline Expectations" title="Direct link to Timeline Expectations" translate="no">​</a></h2>
+<ul>
+<li><strong>Plan for roughly 3 to 4 weeks</strong> from intake to first production message.</li>
+<li><strong>Most of that is waiting on LINE, not on 8x8.</strong> The <strong>14-business-day</strong> LINE verification lead time dominates the schedule.</li>
+<li><strong>Start intake early.</strong> Because verification runs independently of your development work, submitting the information sheet early is the single most effective way to shorten the calendar.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="two-different-published-durations-measuring-two-different-things">Two different published durations, measuring two different things<a href="#two-different-published-durations-measuring-two-different-things" class="hash-link" aria-label="Direct link to Two different published durations, measuring two different things" title="Direct link to Two different published durations, measuring two different things" translate="no">​</a></h3>
+<p>You will encounter two numbers. They are not in conflict, because they do not measure the same thing:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Duration</th><th>What it measures</th><th>Who states it</th></tr></thead><tbody><tr><td><strong>14 business days</strong></td><td>The end-to-end lead time for an 8x8-managed Official Account provisioning request, from submission of materials to a provisioned account</td><td>8x8, based on LINE&#x27;s Official Account provisioning process</td></tr><tr><td><strong>About 10 business days</strong></td><td>LINE&#x27;s own Verified Account review, from application to completion</td><td>LINE, in its Official Account help centre</td></tr></tbody></table>
+<p>Quote the <strong>14 business days</strong> figure when setting expectations for an 8x8-provisioned account. Quote the <strong>10 business days</strong> figure only when the question is specifically about LINE&#x27;s Verified Account review. See <a href="/connect/docs/line/concepts-fundamentals#why-verified-account-matters">Why Verified Account Matters</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="connecting-your-oa-to-8x8">Connecting Your OA to 8x8<a href="#connecting-your-oa-to-8x8" class="hash-link" aria-label="Direct link to Connecting Your OA to 8x8" title="Direct link to Connecting Your OA to 8x8" translate="no">​</a></h2>
+<p>This section applies to Path B, and to the credential handover at step 5 of Path A.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="what-8x8-needs-from-you-path-b">What 8x8 Needs From You (Path B)<a href="#what-8x8-needs-from-you-path-b" class="hash-link" aria-label="Direct link to What 8x8 Needs From You (Path B)" title="Direct link to What 8x8 Needs From You (Path B)" translate="no">​</a></h3>
+<ol>
+<li>In <a href="https://manager.line.biz/" target="_blank" rel="noopener noreferrer">LINE Official Account Manager</a>, go to <strong>Settings</strong> &gt; <strong>Messaging API</strong> and enable it.</li>
+<li>On that same <strong>Messaging API</strong> settings page, retrieve:
+<ul>
+<li><strong>Channel ID:</strong> the unique identifier for your LINE channel.</li>
+<li><strong>Channel Secret:</strong> the secret key used to generate access tokens. Retrieving it requires Admin privileges on the channel.</li>
+</ul>
+</li>
+<li>Provide the Channel ID and Channel Secret to 8x8. Contact your account manager or <a href="mailto:cpaas-support@8x8.com" target="_blank" rel="noopener noreferrer">cpaas-support@8x8.com</a> to have the LINE channel configured on your sub-account.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="LINE Official Account Manager, Settings &amp;gt; Messaging API, showing Channel ID, Channel Secret, and Webhook URL" src="/assets/images/LINE Official Account Manager - Messaging API Settings-3fb65c99d5fe7064091bbd79c1a90a69.jpg" width="1982" height="1020" class="img_ev3q"></p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>The same Channel ID and Channel Secret are also visible from the LINE Developers Console, which LINE Official Account Manager links out to for more advanced channel settings. For what 8x8 needs, the Messaging API settings page above is enough.</p>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="what-8x8-configures-for-you">What 8x8 Configures For You<a href="#what-8x8-configures-for-you" class="hash-link" aria-label="Direct link to What 8x8 Configures For You" title="Direct link to What 8x8 Configures For You" translate="no">​</a></h3>
+<ul>
+<li><strong>A new sub-account.</strong> LINE requires a new sub-account ID. It <strong>cannot</strong> be an existing SMS sub-account.</li>
+<li><strong>The channel itself.</strong> 8x8 configures your LINE channel on that sub-account.</li>
+<li><strong>Any fallback chain.</strong> The 8x8 team sets up your account&#x27;s multi-channel fallback: which channels are used, in what order, and how long to wait before triggering the next one. The <code>line</code> channel reports <code>Accepted</code> and <code>Sent</code> delivery statuses, which the fallback chain can use. See <a href="/connect/docs/line/loa-webhook#delivery-receipts">Delivery Receipts</a>.</li>
+<li><strong>Your webhook URL.</strong> 8x8 issues the URL that LINE should post to. Contact <a href="mailto:cpaas-support@8x8.com" target="_blank" rel="noopener noreferrer">cpaas-support@8x8.com</a> to obtain the correct webhook URL for your account.</li>
+</ul>
+<p>Once the channel is live, generate your API key in the <a href="https://connect.8x8.com/" target="_blank" rel="noopener noreferrer">8x8 Connect portal</a>. See <a href="/connect/docs/line/getting-started#authentication">Authentication</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="configuring-your-webhook">Configuring Your Webhook<a href="#configuring-your-webhook" class="hash-link" aria-label="Direct link to Configuring Your Webhook" title="Direct link to Configuring Your Webhook" translate="no">​</a></h2>
+<p>Two separate webhook configurations are involved, and it is easy to conflate them. One points LINE at 8x8. The other points 8x8 at you.</p>
+<p><strong>1. Point LINE at 8x8.</strong> In <a href="https://manager.line.biz/" target="_blank" rel="noopener noreferrer">LINE Official Account Manager</a>, go to <strong>Settings</strong> &gt; <strong>Messaging API</strong>, set the <strong>Webhook URL</strong> field to the URL provided by 8x8, and click <strong>Save</strong>.</p>
+<p><img decoding="async" loading="lazy" alt="LINE Official Account Manager, Settings &amp;gt; Messaging API, showing the Webhook URL field and Save button" src="/assets/images/LINE Official Account Manager - Messaging API Settings-3fb65c99d5fe7064091bbd79c1a90a69.jpg" width="1982" height="1020" class="img_ev3q"></p>
+<p><strong>2. Point 8x8 at your application.</strong> Register your own callback URL with 8x8 using the <a href="/connect/reference/add-webhooks-1">Webhooks Configuration API</a>. One callback URL serves every Messaging Apps channel on the account, and the <code>channel</code> field in each payload tells you which channel a message came from. See <a href="/connect/docs/line/loa-webhook#configuring-your-webhook">Configuring Your Webhook</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="after-go-live">After Go-Live<a href="#after-go-live" class="hash-link" aria-label="Direct link to After Go-Live" title="Direct link to After Go-Live" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="what-lives-where">What lives where<a href="#what-lives-where" class="hash-link" aria-label="Direct link to What lives where" title="Direct link to What lives where" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Task</th><th>Where you do it</th></tr></thead><tbody><tr><td>Sending and receiving messages</td><td>8x8 Messaging Apps API</td></tr><tr><td>Inbound message webhooks, and LON delivery receipts</td><td>Your callback URL, registered with 8x8</td></tr><tr><td>Message volume reporting across channels</td><td><a href="/connect/docs/messaging-apps">Messaging Apps Analytics</a> in 8x8 Connect</td></tr><tr><td>API key generation and rotation</td><td><a href="https://connect.8x8.com/" target="_blank" rel="noopener noreferrer">8x8 Connect portal</a></td></tr><tr><td>Account profile, display name, and profile image</td><td>LINE Official Account Manager</td></tr><tr><td>Subscription plan and Premium ID purchase</td><td>LINE Official Account Manager</td></tr><tr><td>Search visibility toggle</td><td>LINE Official Account Manager</td></tr><tr><td>Administrator permissions</td><td>LINE Official Account Manager</td></tr><tr><td>LINE&#x27;s own account statistics (Insights)</td><td>LINE Official Account Manager</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="escalation">Escalation<a href="#escalation" class="hash-link" aria-label="Direct link to Escalation" title="Direct link to Escalation" translate="no">​</a></h3>
+<p>Account-level LINE issues, including verification problems, account suspension, and package changes, are escalated through the 8x8 agency relationship with LINE rather than raised by you directly with LINE. Raise them with 8x8 support and 8x8 escalates on your behalf.</p>
+<p>Message delivery and API issues follow the standard 8x8 CPaaS support process. Note that the <code>line</code> channel reports <code>Accepted</code> and <code>Sent</code> but not <code>Delivered</code> or <code>Read</code>. Build your monitoring around these statuses and the synchronous send response. See <a href="/connect/docs/line/loa-webhook#delivery-receipts">Delivery Receipts</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="next-steps">Next Steps<a href="#next-steps" class="hash-link" aria-label="Direct link to Next Steps" title="Direct link to Next Steps" translate="no">​</a></h2>
+<p><strong>For Business Users:</strong></p>
+<ul>
+<li><a href="/connect/docs/line/concepts-fundamentals">The LINE Ecosystem and Account Model</a> - What Verified Account and Premium ID actually mean before you order them</li>
+<li><a href="/connect/docs/line/governance-security">Governance, Security and Compliance</a> - LINE&#x27;s account rules and what happens if you break them</li>
+</ul>
+<p><strong>For Developers:</strong></p>
+<ul>
+<li><a href="/connect/docs/line/getting-started">Getting Started with LINE over the 8x8 API</a> - Authentication, base URLs, and your first send</li>
+<li><a href="/connect/docs/line/loa-webhook">LINE Official Account Webhooks</a> - Inbound messages, delivery receipts, and retry behaviour</li>
+</ul>
+<p><strong>Important Concepts:</strong></p>
+<ul>
+<li><a href="/connect/docs/line/loa-messaging#identifying-a-line-recipient">Identifying a LINE Recipient</a> - Why you cannot send to a phone number on this channel</li>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/connect/docs/line/concepts-fundamentals"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">LINE Ecosystem &amp; Accounts</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/connect/docs/line/getting-started"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Getting Started</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#choose-your-provisioning-path" class="table-of-contents__link toc-highlight">Choose Your Provisioning Path</a><ul><li><a href="#path-a-new-oa-provisioned-by-8x8" class="table-of-contents__link toc-highlight">Path A: New OA provisioned by 8x8</a></li><li><a href="#path-b-bring-your-own-oa" class="table-of-contents__link toc-highlight">Path B: Bring your own OA</a></li><li><a href="#path-c-migrate-an-oa-from-another-provider" class="table-of-contents__link toc-highlight">Path C: Migrate an OA from another provider</a></li></ul></li><li><a href="#what-you-need-to-provide" class="table-of-contents__link toc-highlight">What You Need to Provide</a></li><li><a href="#the-onboarding-sequence" class="table-of-contents__link toc-highlight">The Onboarding Sequence</a></li><li><a href="#timeline-expectations" class="table-of-contents__link toc-highlight">Timeline Expectations</a><ul><li><a href="#two-different-published-durations-measuring-two-different-things" class="table-of-contents__link toc-highlight">Two different published durations, measuring two different things</a></li></ul></li><li><a href="#connecting-your-oa-to-8x8" class="table-of-contents__link toc-highlight">Connecting Your OA to 8x8</a><ul><li><a href="#what-8x8-needs-from-you-path-b" class="table-of-contents__link toc-highlight">What 8x8 Needs From You (Path B)</a></li><li><a href="#what-8x8-configures-for-you" class="table-of-contents__link toc-highlight">What 8x8 Configures For You</a></li></ul></li><li><a href="#configuring-your-webhook" class="table-of-contents__link toc-highlight">Configuring Your Webhook</a></li><li><a href="#after-go-live" class="table-of-contents__link toc-highlight">After Go-Live</a><ul><li><a href="#what-lives-where" class="table-of-contents__link toc-highlight">What lives where</a></li><li><a href="#escalation" class="table-of-contents__link toc-highlight">Escalation</a></li></ul></li><li><a href="#next-steps" class="table-of-contents__link toc-highlight">Next Steps</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</body>
+</html>

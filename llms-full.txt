@@ -48866,6 +48866,2087 @@ These IPs are used for webhook deliveries from Voice products:
 
 ---
 
+## LINE Account Provisioning and Onboarding
+
+
+This guide covers the complete path from "we want LINE" to "we are sending production messages". It sets out the three provisioning routes, what you have to supply, the lead times to plan for, and how support works after go-live. Read [The LINE Ecosystem and Account Model](./concepts-fundamentals.md) first, because the vocabulary there is what the provisioning form asks you for.
+
+## Choose Your Provisioning Path
+
+There are three genuinely different journeys, depending on whether you already own a LINE Official Account and, if so, who currently manages it. Identify yours before you start, because the work, the owner, and the lead time all differ.
+
+| | **Path A: New OA provisioned by 8x8** | **Path B: Bring your own OA** | **Path C: Migrate an OA from another provider** |
+|---|---|---|---|
+| **Starting point** | You have no LINE Official Account | You already have an OA with the Messaging API available to you | You have an OA that another provider or agency manages |
+| **Who creates the OA** | 8x8, as a LINE-registered Agency (AGP) partner, on your behalf | You already did | LINE, via its provider migration process |
+| **What you submit** | The provisioning information sheet, plus a profile image | Channel ID and Channel Secret from LINE Official Account Manager | A migration request, qualified with 8x8 first |
+| **Who administers the OA afterwards** | 8x8 manages the account as your agency partner | You retain administration in LINE Official Account Manager | Determined as part of the migration |
+| **Main lead-time driver** | LINE verification, **14 business days** | Your own console access | LINE's migration process, about **25 business days** |
+| **Documented in** | [What You Need to Provide](#what-you-need-to-provide) and [The Onboarding Sequence](#the-onboarding-sequence) | [Connecting Your OA to 8x8](#connecting-your-oa-to-8x8) | The note below |
+
+### Path A: New OA provisioned by 8x8
+
+8x8 is a LINE-registered Agency (AGP) partner and can create and manage a LINE Official Account for you. You complete one information sheet per Official Account, 8x8 submits the provisioning request to LINE, and LINE runs its verification. This is the path most new customers take, and it is the one the rest of this page is organised around.
+
+### Path B: Bring your own OA
+
+If you already have a LINE Official Account, you keep it. Enable the Messaging API on the account, retrieve the channel credentials from LINE Official Account Manager, and hand them to 8x8. See [Connecting Your OA to 8x8](#connecting-your-oa-to-8x8).
+
+### Path C: Migrate an OA from another provider
+
+> **Important:** If your Official Account is currently managed by another provider or agency, moving it to 8x8 means going through LINE's provider migration process. LINE charges a fee for migration and the process takes about **25 business days**. Treat this as a qualification question, not a default: in some cases provisioning a new Official Account is faster and cheaper than migrating an existing one. Ask your 8x8 account manager for the current LINE migration fee before committing.
+
+## What You Need to Provide
+
+For Path A, LINE requires a defined set of information for every Official Account, covering the account's name and handle, its category, its service language and country, its launch date, and its profile image. Contact your 8x8 account manager to obtain the provisioning information sheet and submit the required details.
+
+One field carries a cost consequence rather than a formatting one: setting the account's **push notification default** to On applies a **50% surcharge**. Confirm the cost impact with your account manager before selecting it.
+
+Two rules worth restating, because they shape commercial planning:
+
+- **One form per Official Account.** Each account requires its own submission.
+- **Each customer needs their own Official Account.** 8x8 does not send from a shared Official Account, so provisioning is per customer, not per platform.
+
+> **Note**
+>
+> The **OA ID** field on the form is the account's Premium ID, purchased from LINE. For what a Premium ID is and why a customer would want one, see [Why Premium ID Is Meaningful](./concepts-fundamentals.md#why-premium-id-is-meaningful). LINE's own [Premium ID Terms of Use](https://terms2.line.me/official_account_premiumid_terms_oth) carry the character limits, the annual fee, and the renewal rules.
+
+## The Onboarding Sequence
+
+Path A runs through eight steps. The owner changes as it progresses, so track it as a shared plan rather than a handoff.
+
+1. **Intake.** You submit the provisioning information sheet, and email the profile image separately.
+   - *Owner:* you.
+2. **Submission validated and provisioning request raised.** 8x8 checks the submission for completeness and consistency against your business registration, then raises the provisioning request.
+   - *Owner:* 8x8 Operations.
+3. **Provisioning with LINE.** 8x8 submits the request to LINE as your Agency (AGP) partner. This creates the Official Account and applies the Premium ID and Verified Account application if you ordered them.
+   - *Owner:* 8x8 Operations, acting as your LINE agency.
+4. **LINE verification.** LINE reviews and verifies the account. This is the long pole in the whole process.
+   - *Owner:* LINE. *Lead time:* **14 business days.**
+5. **Channel connection and credential issuance.** 8x8 links the Official Account to your 8x8 sub-account and issues your API credentials and webhook URL.
+   - *Owner:* 8x8 Operations and Platform Engineering.
+6. **API integration.** Your developers integrate: send and receive Text, Image, Video, Audio, and Location, and register your callback URL for the inbound message webhook.
+   - *Owner:* your development team. See [Getting Started](./getting-started.md).
+7. **Converse setup (optional).** If your plan includes agent-side handling of inbound LINE conversations, 8x8 provisions seats and inbox routing at this point.
+   - *Owner:* 8x8 Customer Success and you.
+8. **Go-live and monitoring.** First production message validated, delivery monitoring in place.
+   - *Owner:* 8x8 and you.
+
+<!-- NEEDS SOURCE: N3. Step 7 deliberately makes no capability claim about LINE support in 8x8 Converse. The product definition flags Converse 2.0 LINE integration as an open assumption (A1) and there is no LINE mention anywhere in the live Converse documentation. Do not add a LINE-in-Converse claim, a screenshot, or a feature list here until engineering confirms it. -->
+
+> **Note**
+>
+> Steps 6 and 4 can and should overlap. Nothing in the API integration work depends on LINE having finished verifying the account, so start intake early in the sales cycle and let verification run in parallel with development.
+
+## Timeline Expectations
+
+- **Plan for roughly 3 to 4 weeks** from intake to first production message.
+- **Most of that is waiting on LINE, not on 8x8.** The **14-business-day** LINE verification lead time dominates the schedule.
+- **Start intake early.** Because verification runs independently of your development work, submitting the information sheet early is the single most effective way to shorten the calendar.
+
+### Two different published durations, measuring two different things
+
+You will encounter two numbers. They are not in conflict, because they do not measure the same thing:
+
+| Duration | What it measures | Who states it |
+|---|---|---|
+| **14 business days** | The end-to-end lead time for an 8x8-managed Official Account provisioning request, from submission of materials to a provisioned account | 8x8, based on LINE's Official Account provisioning process |
+| **About 10 business days** | LINE's own Verified Account review, from application to completion | LINE, in its Official Account help centre |
+
+Quote the **14 business days** figure when setting expectations for an 8x8-provisioned account. Quote the **10 business days** figure only when the question is specifically about LINE's Verified Account review. See [Why Verified Account Matters](./concepts-fundamentals.md#why-verified-account-matters).
+
+## Connecting Your OA to 8x8
+
+This section applies to Path B, and to the credential handover at step 5 of Path A.
+
+### What 8x8 Needs From You (Path B)
+
+1. In [LINE Official Account Manager](https://manager.line.biz/), go to **Settings** > **Messaging API** and enable it.
+2. On that same **Messaging API** settings page, retrieve:
+   - **Channel ID:** the unique identifier for your LINE channel.
+   - **Channel Secret:** the secret key used to generate access tokens. Retrieving it requires Admin privileges on the channel.
+3. Provide the Channel ID and Channel Secret to 8x8. Contact your account manager or [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) to have the LINE channel configured on your sub-account.
+
+![LINE Official Account Manager, Settings > Messaging API, showing Channel ID, Channel Secret, and Webhook URL](./images/LINE%20Official%20Account%20Manager%20-%20Messaging%20API%20Settings.jpg)
+
+> **Note**
+>
+> The same Channel ID and Channel Secret are also visible from the LINE Developers Console, which LINE Official Account Manager links out to for more advanced channel settings. For what 8x8 needs, the Messaging API settings page above is enough.
+
+### What 8x8 Configures For You
+
+- **A new sub-account.** LINE requires a new sub-account ID. It **cannot** be an existing SMS sub-account.
+- **The channel itself.** 8x8 configures your LINE channel on that sub-account.
+- **Any fallback chain.** The 8x8 team sets up your account's multi-channel fallback: which channels are used, in what order, and how long to wait before triggering the next one. The `line` channel reports `Accepted` and `Sent` delivery statuses, which the fallback chain can use. See [Delivery Receipts](./loa-webhook.md#delivery-receipts).
+- **Your webhook URL.** 8x8 issues the URL that LINE should post to. Contact [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) to obtain the correct webhook URL for your account.
+
+Once the channel is live, generate your API key in the [8x8 Connect portal](https://connect.8x8.com/). See [Authentication](./getting-started.md#authentication).
+
+## Configuring Your Webhook
+
+Two separate webhook configurations are involved, and it is easy to conflate them. One points LINE at 8x8. The other points 8x8 at you.
+
+**1. Point LINE at 8x8.** In [LINE Official Account Manager](https://manager.line.biz/), go to **Settings** > **Messaging API**, set the **Webhook URL** field to the URL provided by 8x8, and click **Save**.
+
+![LINE Official Account Manager, Settings > Messaging API, showing the Webhook URL field and Save button](./images/LINE%20Official%20Account%20Manager%20-%20Messaging%20API%20Settings.jpg)
+
+**2. Point 8x8 at your application.** Register your own callback URL with 8x8 using the [Webhooks Configuration API](/connect/reference/add-webhooks-1). One callback URL serves every Messaging Apps channel on the account, and the `channel` field in each payload tells you which channel a message came from. See [Configuring Your Webhook](./loa-webhook.md#configuring-your-webhook).
+
+## After Go-Live
+
+### What lives where
+
+| Task | Where you do it |
+|---|---|
+| Sending and receiving messages | 8x8 Messaging Apps API |
+| Inbound message webhooks, and LON delivery receipts | Your callback URL, registered with 8x8 |
+| Message volume reporting across channels | [Messaging Apps Analytics](/connect/docs/messaging-apps) in 8x8 Connect |
+| API key generation and rotation | [8x8 Connect portal](https://connect.8x8.com/) |
+| Account profile, display name, and profile image | LINE Official Account Manager |
+| Subscription plan and Premium ID purchase | LINE Official Account Manager |
+| Search visibility toggle | LINE Official Account Manager |
+| Administrator permissions | LINE Official Account Manager |
+| LINE's own account statistics (Insights) | LINE Official Account Manager |
+
+### Escalation
+
+Account-level LINE issues, including verification problems, account suspension, and package changes, are escalated through the 8x8 agency relationship with LINE rather than raised by you directly with LINE. Raise them with 8x8 support and 8x8 escalates on your behalf.
+
+Message delivery and API issues follow the standard 8x8 CPaaS support process. Note that the `line` channel reports `Accepted` and `Sent` but not `Delivered` or `Read`. Build your monitoring around these statuses and the synchronous send response. See [Delivery Receipts](./loa-webhook.md#delivery-receipts).
+
+## Next Steps
+
+**For Business Users:**
+
+- [The LINE Ecosystem and Account Model](./concepts-fundamentals.md) - What Verified Account and Premium ID actually mean before you order them
+- [Governance, Security and Compliance](./governance-security.md) - LINE's account rules and what happens if you break them
+
+**For Developers:**
+
+- [Getting Started with LINE over the 8x8 API](./getting-started.md) - Authentication, base URLs, and your first send
+- [LINE Official Account Webhooks](./loa-webhook.md) - Inbound messages, delivery receipts, and retry behaviour
+
+**Important Concepts:**
+
+- [Identifying a LINE Recipient](./loa-messaging.md#identifying-a-line-recipient) - Why you cannot send to a phone number on this channel
+
+---
+
+## The LINE Ecosystem and Account Model
+
+
+This page explains the LINE side of the account model: the console that sits above your account, what a LINE Official Account is and how one account can serve both LINE products on 8x8, the channel and credential objects that sit underneath it, the account tiers LINE offers and what each one unlocks, and the two decisions customers ask about most, applying for a Verified Account and buying a Premium ID. Read it before you decide what to order, because these are the rules that most often surprise a customer mid-onboarding.
+
+## LINE Official Account Manager
+
+**LINE Official Account Manager** is LINE's own console for an Official Account, available as a web application and as a mobile app. It sits at the top of the hierarchy: even when 8x8 drives all message traffic through the API, this console remains the place where account-level settings live.
+
+What you continue to do in LINE Official Account Manager:
+
+- **Manage the account profile,** including the profile visibility setting that controls whether a Verified Account appears in search results.
+- **Purchase and change the subscription plan,** purchase an OA Chat package subscription, and purchase a Premium ID.
+- **Register and change the payment method.**
+- **Manage administrator permissions.**
+- **View Insights,** LINE's own account statistics.
+
+## The LINE Official Account
+
+A **LINE Official Account (OA)** is the account entity that everything else hangs off. It is the identity users see, the thing they add as a friend, the thing an account type and a Premium ID attach to, and the thing 8x8 connects a channel to. One OA, one business identity on LINE.
+
+A single LINE Official Account can be used for both LINE products on 8x8 at the same time: two-way LINE Official Account (LOA) messaging and one-way LINE Official Notification (LON). You do not need a second OA for LON.
+
+What you do need is **two separate 8x8 sub-accounts**, one per product. The reason is how each product addresses a recipient:
+
+- **LOA addresses recipients by `channelUserId`,** the opaque LINE user ID.
+- **LON addresses recipients by `msisdn`,** a phone number.
+
+Because the two products address a recipient differently, 8x8 provisions one sub-account per product, each with its own API key. See [Sub-accounts and Authentication](./loa-messaging.md#sub-accounts-and-authentication) for the LOA side and [LINE Official Notification (LON)](./official-notification-lon.md) for LON's.
+
+> **Key Takeaway:** One LINE Official Account, two 8x8 sub-accounts. Ordering LON does not mean ordering a second Official Account, but it does mean a second sub-account and a second API key.
+
+### Channel Type Values
+
+Two channel type values in the 8x8 Messaging Apps platform are LINE products. The value identifies the channel in the webhooks that product produces, and it determines which endpoint you send on. The two products produce different webhooks, so each value surfaces in a different place.
+
+| Channel type value | Product | Send endpoint | Appears in |
+|---|---|---|---|
+| `line` | LINE Official Account | `POST /api/v1/subaccounts/{subAccountId}/messages` | `recipient.channel` on inbound messages and `channel` on delivery receipts. Reports Accepted and Sent |
+| `LineNotification` | LINE Official Notification | `POST /api/v1/subaccounts/{subAccountId}/lon` | `channel` on delivery receipts only. This channel has no inbound direction |
+
+Note the casing. `line` is lowercase, `LineNotification` is camel case with a capital L. In the separate `channels` fallback override array on the send request, the same channel is spelled `Line` with a capital L. Use each value exactly as documented for the field you are populating.
+
+### The Technical Building Blocks
+
+Underneath the Official Account sit the LINE objects that a Messaging API integration is built on. 8x8 operates the API path for you, so you will meet most of them in LINE's own console and during provisioning rather than in your own code, but they are the vocabulary LINE's documentation uses.
+
+1. **LINE Messaging API channel:** A channel is a communication path used to access features of the LINE Platform. LINE offers several channel types, including the Messaging API channel, the LINE Login channel, and the LINE MINI App channel. Enabling the Messaging API on your Official Account creates a Messaging API channel, and that channel is what 8x8 connects to.
+2. **Channel secret:** A private key known only to the LINE Platform and the developer, found on the channel's **Basic settings** tab in the LINE Developers Console. It is the hash key LINE uses to sign webhooks. Retrieving or reissuing it requires Admin privileges on the channel.
+3. **Channel access token:** An opaque string that proves an application is permitted to use the channel.
+4. **Provider:** The LINE entity that owns your channels. This matters for identity: LINE issues a **different** user ID for the same person under a different provider. Under the same provider the user ID is identical across channel types.
+
+LINE issues four kinds of channel access token, with different validity periods and per-channel issue limits:
+
+| Type | Validity period | Number of issues per channel |
+| :--- | :--- | :--- |
+| **Channel access token with a user-specified expiration** | Up to 30 days | 30 |
+| **Stateless channel access token** | 15 minutes | Limitless |
+| **Short-lived channel access token** | 30 days | 30 |
+| **Long-lived channel access token** | Indefinite | 1 |
+
+> **Note**
+>
+> You do not manage channel access tokens yourself when sending through 8x8. 8x8 authenticates to LINE on your behalf, and your application authenticates to 8x8 with an 8x8 API key. Channel access tokens matter only if you also operate your own LINE bot server directly against LINE's API.
+
+## Account Types
+
+LINE's Official Account Guidelines describe two account types that a customer can apply for, plus a third tier that LINE assigns at its own discretion.
+
+| Account type | Who can use it | Review required | In-app search | Badge |
+|---|---|---|---|---|
+| **Unverified Account** | Any company, organization, or individual | No | Does not appear in LINE in-app search results | No |
+| **Verified Account** | Only customers who pass LINE's screening | Yes | Appears in LINE in-app search results | Verified account badge |
+| **Premium Account** | Only customers who pass a screening process instituted by LINE | Yes | Not stated by LINE | Not stated by LINE |
+
+- **Unverified Account:** Available for use by any company, organization, or individual. These accounts have not been reviewed. LINE states that they do not appear in search results either on the internet or in the LINE app.
+- **Verified Account:** An account that has passed LINE's review process. Once reviewed, it is issued a Verified account badge and appears in LINE in-app search results.
+- **Premium Account:** LINE may set criteria for making an account into a Premium Account. LINE explicitly states that it **has no responsibility to disclose the criteria**. You cannot apply for a Premium Account the way you apply for a Verified Account.
+
+> **Note**
+>
+> Some LINE Messaging API features are gated on account type. The endpoints that return the user IDs of all your friends, and of all members of a group or multi-person chat, are available only to Verified or Premium accounts. Neither is exposed through the 8x8 API.
+
+## Why Verified Account Matters
+
+A Verified Account is the difference between an account customers can find and one they cannot. It carries the Verified account badge, and it appears in LINE in-app search results, which an Unverified Account never does regardless of any setting. If discovery inside the LINE app is part of your acquisition plan, verification is the mechanism.
+
+You cannot create a Verified Account directly. LINE requires you to create an Unverified Account first and then apply for verification. Accounts created in the LINE Official Account app are Unverified, and LINE states that Verified accounts cannot be created from that app at all.
+
+- **Where it is available:** Review applications are currently accepted **only for Japan, Taiwan, and Thailand**. LINE states that Verified accounts are not being issued for other countries or regions at this time.
+- **How long it takes:** From application to completion, LINE states the review process normally takes **about 10 business days**.
+- **Identity verification:** To verify your identity, LINE contacts you by phone or at the email address registered at the time of application. LINE states that the call will be recorded.
+- **No status visibility:** LINE states that it cannot provide details about the status of a pending review, and cannot reply to related inquiries.
+- **No explanation of the outcome:** LINE bears no obligation to explain the results of the screening process or the reasons behind any decision.
+- **Industry-based refusal:** Beyond the published rules, LINE may refuse to open a Verified Account on the grounds of the customer's industry or lines of business, at its sole discretion.
+
+### Verified Account name rules
+
+LINE requires Verified Account names to follow four rules. Names that infringe them may be subject to a request for amendment from LINE.
+
+1. Names **must** include the official name of the company, organization, or self-employed person, or the official name of the product or service they provide.
+2. Names **must not** imply the existence of companies, organizations, self-employed persons, products, or services which do not exist.
+3. Names **must not** include text strings which are non-factual or which may lead to erroneous inferences.
+4. Names **must not** imply that they pertain to products or services offered by LINE or its affiliated companies.
+
+> **Important:** LINE states that, in principle, it does **not** accept account name changes for Verified Accounts. If the company or service name has genuinely changed and you wish to change the account name, the account is subject to a **separate screening process**.
+
+## Why Premium ID Is Meaningful
+
+A **Premium ID** is a LINE Official Account ID of your own choosing, purchased from LINE to replace the basic ID that LINE assigns automatically. It is the customer-facing `@` handle for the account, so it is what a customer types, reads on a poster, or hears in a call centre script. A handle that matches your brand is easier to recognise, easier to remember, and easier to promote off-platform than a LINE-assigned string. On the 8x8 provisioning form, this is the **OA ID** field.
+
+LINE sets the commercial and character-set terms for a Premium ID, including the annual fee, the length and character limits, the renewal and refund rules, and the countries where it is not available. Those terms change, so take them from LINE's own contract rather than from this page: see [LINE Official Account Premium ID Terms of Use](https://terms2.line.me/official_account_premiumid_terms_oth).
+
+## Account Limits per Business ID
+
+LINE allows up to **100 accounts** per Business ID, whether Verified or Unverified. Plan your Business ID structure with that ceiling in mind if you expect to run many Official Accounts.
+
+## Account Deletion
+
+Deleting a LINE Official Account is not reversible in any practical sense. LINE states the following consequences, and they are worth reading before anyone clicks the button:
+
+- **You will not be able to use any features other than Insights and billing** once the account is deleted.
+- **All account information, including statistics, is permanently erased 30 days after deletion.**
+- **All of your friends are deleted.**
+- **There is no refund** if you delete the account in the middle of a month.
+- **Additional messages sent before deletion are still billed** on your next billing date.
+- **An iOS-purchased Premium ID subscription is not cancelled automatically.** You must cancel the subscription separately on the App Store.
+
+## Related Resources
+
+**8x8 Documentation:**
+
+- [Account Provisioning and Onboarding](./account-provisioning-onboarding.md) - The three provisioning paths, what you submit, and the lead times
+- [Governance, Security and Compliance](./governance-security.md) - LINE's prohibited content, enforcement model, and regional availability
+- [LINE Official Account: Behaviour, Messages, and Constraints](./loa-messaging.md) - How the two-way channel addresses a recipient, how LINE counts what you send, and a complete request body per supported type
+- [LINE Official Notification (LON)](./official-notification-lon.md) - The second product the same Official Account can serve
+
+**LINE's Own References:**
+
+- [LINE Official Account Guidelines](https://terms2.line.me/official_account_guideline_th?lang=en) - Account types, screening criteria, prohibited activities, and enforcement
+- [LINE Official Account Premium ID Terms of Use](https://terms2.line.me/official_account_premiumid_terms_oth) - Character limits, term, fees, and refund policy
+- [LINE Official Account Help Center (Thailand)](https://help2.line.me/official_account_th/web/categoryId/200000074/pc?lang=en) - Account types, account creation, review process, plans, and settings
+- [LINE Official Account Manager](https://manager.line.biz/) - The console itself
+- [LINE Official Account (Thailand)](https://lineforbusiness.com/th/service/line-oa-features/broadcast-message) - Thailand plans and pricing, published by LINE
+
+---
+
+## Getting Started with LINE over the 8x8 API
+
+
+This guide takes a developer who has been handed working credentials from nothing to a first LINE message accepted by the platform. It starts with what both LINE products share, authentication and the regional base URLs, then splits: one section for the two-way **LINE Official Account (LOA)** channel, and one for the one-way **LINE Official Notification (LON)** product. They use different endpoints and address recipients differently, so read the section for the product you are integrating.
+
+If you are still waiting on an Official Account, see [Account Provisioning and Onboarding](./account-provisioning-onboarding.md) instead.
+
+## Prerequisites & Checklist
+
+Before you begin, ensure you have the following:
+
+- **An 8x8 account with Messaging Apps enabled.** Contact your account manager to confirm the product is enabled on your account. Sign up at [connect.8x8.com](https://connect.8x8.com) if you do not have an account yet.
+- **A LINE sub-account.** LINE requires a **new sub-account ID**. It cannot be an existing SMS sub-account.
+- **An API key** generated in the 8x8 Connect portal, scoped to that sub-account.
+- **A LINE Official Account linked to the sub-account.** 8x8 configures the channel for you. See [Connecting Your OA to 8x8](./account-provisioning-onboarding.md#connecting-your-oa-to-8x8).
+- **A registered webhook.** On the LOA channel you cannot obtain a recipient's `channelUserId` without one, so this is a hard prerequisite rather than a later step. See [Configuring Your Webhook](./loa-webhook.md#configuring-your-webhook).
+- **A separate sub-account per product.** LOA and LON have different sending behaviour, so set up each in a different 8x8 sub-account.
+
+## Authentication
+
+The 8x8 Messaging Apps API accepts an **ApiKey Bearer Token** authentication method. Generate tokens from your customer portal at [https://connect.8x8.com/](https://connect.8x8.com/), then include the following header in every request:
+
+```http
+Authorization: Bearer {apiKey}
+```
+
+Replace `{apiKey}` with the key generated from the customer portal.
+
+> **Important:** The LINE Official Account sub-account token and the LINE Official Notification sub-account token are **separate**. A key that authorises a send on one will not authorise a send on the other.
+
+## Base URLs
+
+Use the base URL that matches the platform region your account is provisioned in. Sending to the wrong region will not reach your sub-account. Both LOA and LON use these same base URLs.
+
+| API Region | Base URL |
+| :--- | :--- |
+| Asia (default) | `https://chatapps.8x8.com` |
+| Europe | `https://chatapps.8x8.uk` |
+| North America | `https://chatapps.us.8x8.com` |
+| Indonesia | `https://chatapps.8x8.id` |
+
+For more information on platform regions, see [Platform Deployment Regions](/connect/docs/platform-deployment-regions#api-endpoints-and-platform-region).
+
+## Sending on LINE Official Account (LOA)
+
+This is the two-way `line` channel. It carries Text, Image, Video, Audio, and Location messages, and it addresses recipients by their LINE user ID.
+
+### The Send Endpoint
+
+One endpoint sends every LINE Official Account message type. The `type` field selects the content type, and only the `content` object changes with it.
+
+**Endpoint:**
+
+```json
+POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages
+```
+
+**Path Parameters:**
+
+- `{subAccountId}`: The sub-account that owns your LINE channel. 3 to 50 characters, restricted to letters, digits, and the characters `-`, `.`, `_`, and `&`.
+
+The `user`, `type`, and `content` properties are required in the request body.
+
+### Getting the channelUserId First
+
+You cannot send a LINE message to a phone number, and you cannot look a LINE user up. The identifier you need is issued by LINE and reaches you only through an inbound event.
+
+1. A LINE user adds your LINE Official Account as a friend, or sends it a message.
+2. LINE notifies 8x8, and 8x8 forwards an inbound message webhook to your registered callback URL.
+3. Read the LINE user ID from `payload.user.channelUserId` in that webhook.
+4. Store it. That value is what you put in `user.channelUserId` when you send.
+
+The format is `U[0-9a-f]{32}`: the letter `U` followed by exactly 32 lowercase hexadecimal characters. The same person has a **different** user ID under a different LINE provider, so an ID obtained through another integration is not usable in yours.
+
+> **Key Takeaway:** Until a user has interacted with your Official Account, you have no way to address them on the `line` channel. Design your onboarding around capturing `channelUserId` on first contact. See [Identifying a LINE Recipient](./loa-messaging.md#identifying-a-line-recipient).
+
+### Send Your First Message
+
+The minimum viable LINE send is a text message to one user.
+
+**Sample JSON Payload:**
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Text",
+  "content": {
+    "text": "Hello from 8x8 Messaging API"
+  },
+  "clientMessageId": "<YOUR_MESSAGE_ID>"
+}
+```
+
+**Key Fields:**
+
+- `user.channelUserId` (required): The LINE user ID of the recipient. Use this instead of `msisdn` when sending to a LINE user on the LINE Official Account channel.
+- `type` (required): The content type. Written in Title Case in every 8x8 LINE example: `Text`, `Image`, `Video`, `Audio`, `Location`.
+- `content.text` (required for `Text`): The message body.
+- `clientMessageId` (optional): Your own unique reference for the message, maximum 50 characters. It is echoed back in the send response and in delivery receipts.
+
+> **Note**
+>
+> LINE counts a text message in UTF-16 code units, with a maximum of 5,000 characters, and emoji count as more than one character. Per-type payloads and their full constraints are in [LINE Official Account: Behaviour, Messages, and Constraints](./loa-messaging.md).
+
+### The Response
+
+A successful send returns `200` with the message identifier and its initial status.
+
+**Response:**
+
+```json
+{
+  "umid": "<UNIQUE_MESSAGE_ID>",
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "clientMessageId": "<YOUR_MESSAGE_ID>",
+  "status": {
+    "state": "queued",
+    "timestamp": "2026-07-29T08:19:45.99Z"
+  }
+}
+```
+
+**Key Fields:**
+
+- `umid`: The unique message ID (a GUID) generated by the 8x8 platform on submission. It is the platform's identifier for this message, so persist it against your own record.
+- `user.channelUserId`: Echoes the recipient you submitted.
+- `status.state`: `queued` on a successful submission, meaning the request was accepted and queued for processing. It is not a delivery confirmation.
+- `status.timestamp`: UTC, ISO 8601.
+- `clientMessageId`: Your own reference, echoed back.
+
+> **Important:** The `line` channel reports **Accepted** and **Sent** delivery statuses but does not report **Delivered** or **Read**. After this synchronous response, delivery receipts will arrive at your callback URL as the message progresses. See [Delivery Receipts](./loa-webhook.md#delivery-receipts).
+
+<!-- SOURCE NOTE: this response section is grounded in the OpenAPI contract for POST /messages, not in captured traffic (the internal Postman collection has no saved example responses for any LINE request). The request/response field-name mismatch flagged in the previous pass is resolved: both the request and the response use user.channelUserId, per product owner confirmation on 2026-07-29. -->
+
+#### Error responses
+
+Failures at submission time come back synchronously with an error body:
+
+| HTTP status | Meaning | Example body |
+|---|---|---|
+| `400` | Bad request. A parameter is missing or invalid | `{"code": 1002, "message": "Invalid MSISDN format (not E.164 international number)", "errorId": "...", "timestamp": "..."}` |
+| `401` | The request was not authenticated | `{"code": 1200, "message": "Request was not authenticated properly", "errorId": "...", "timestamp": "..."}` |
+| `500` | Internal server error | `{"code": 2000, "message": "Internal server error", "errorId": "...", "timestamp": "..."}` |
+
+Failures after acceptance arrive asynchronously as delivery receipts with a failing `status.state`. See [Delivery Receipts](./loa-webhook.md#delivery-receipts).
+
+### Optional Request Options
+
+These properties are available on the LOA send request in addition to the required three.
+
+- `scheduled`: An ISO 8601 date-time at which delivery of the message should happen.
+- `expiry`: An ISO 8601 date-time after which the message should be discarded if it has not been delivered.
+- `dlrCallbackUrl`: A URI that overrides your account's default delivery receipt callback URL, for this message only. Use it to route delivery receipts for a specific message to a separate handler.
+- `clientMessageId`: Your own reference, maximum 50 characters.
+- `channels`: A channel fallback override array. Each entry takes:
+  - `channel` (required): One of `SMS`, `WhatsApp`, `Facebook`, `RCS`, `Viber`, `Line`, `WeChat`, `Zalo`, `Instagram`. Note the capital `L` in `Line` here, which differs from the `line` channel type value used in inbound webhooks.
+  - `fallbackAfter`: Seconds to wait before moving to the next channel. Minimum 10, maximum 86400 (one day).
+  - `successStatus`: One of `Accepted`, `Sent`, `Delivered`, `Read`. This is the status that counts as success on a fallback target, so set it only to a status the target channel actually reports. The `line` channel reports `Accepted` and `Sent`, so set `successStatus` to one of those values when `Line` is a fallback target.
+
+> **Note:** The fallback chain configured by 8x8 can use the Accepted or Sent status to evaluate whether to proceed to the next channel.
+
+> **Important:** The fallback chain for your account is normally configured by the 8x8 team, including which channels are used, in what order, and the delay between them. Use `channels` only to override that configuration for a specific message.
+
+> **Note**
+>
+> The `/messages` endpoint is shared across every Messaging Apps channel, so its schema carries `content.interactive`, `content.template`, `content.richCard`, and `content.carousel`. **None of these are supported on the `line` channel.** Do not treat the shared schema as the LINE surface. The supported set is listed in [Supported Types at a Glance](./loa-messaging.md#supported-types-at-a-glance).
+
+## Sending on LINE Official Notification (LON)
+
+LON is a separate product, not a message type on the `line` channel. It is strictly one-way, every message populates a template that LINE has pre-approved, and the recipient is a phone number rather than a LINE user ID. It also has its own sub-account and its own bearer token.
+
+**Endpoint:**
+
+```json
+POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/lon
+```
+
+**Path Parameters:**
+
+- `{subAccountId}`: The sub-account provisioned for LINE Official Notification. This is **not** the same sub-account as your LINE Official Account channel.
+
+The `user` and `content` properties are required in the request body.
+
+**Sample JSON Payload:**
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "clientMessageId": "<YOUR_MESSAGE_ID>",
+  "content": {
+    "title": "Event reminder",
+    "company": "8x8",
+    "icon": "calendarCheck",
+    "greeting": "Can't wait to see you there!",
+    "explanation": "Registration opens at 09:00. See you soon."
+  }
+}
+```
+
+**Key Fields:**
+
+- `user.msisdn` (required): The recipient's mobile number. International E.164 format with a leading `+` is preferred.
+- `content.title`: The message title.
+- `content.company`: The company name shown on the notification.
+- `content.icon`: The icon displayed on the notification, one of 38 documented values.
+- `content.greeting`: The greeting line.
+- `content.explanation`: The explanatory body text.
+
+That example is trimmed. The full content schema also carries an emphasised field, a label-and-value list, action buttons, and an `smsFallback` object. For every property, the complete 38-value icon enumeration, the 500-character template limit, and the response shape, see [LINE Official Notification (LON)](./official-notification-lon.md).
+
+> **Important:** You cannot compose freeform LON content at send time. Your template must be approved by LINE first, and templates are submitted through 8x8. See [Template Approval](./official-notification-lon.md#template-approval).
+
+## Next Steps
+
+**For Developers:**
+
+- [LINE Official Account: Behaviour, Messages, and Constraints](./loa-messaging.md) - How the channel addresses a recipient, a complete request body for each of the five supported types, and LINE's real limits
+- [LINE Official Account Webhooks](./loa-webhook.md) - Inbound messages, retry behaviour, and synchronous errors
+- [LINE Official Notification (LON)](./official-notification-lon.md) - The full one-way content schema, icon set, and character limits
+- [LON Delivery Receipts](./lon-webhook.md) - The only LINE delivery receipt on the platform, and what it reports
+
+**Important Concepts:**
+
+- [Identifying a LINE Recipient](./loa-messaging.md#identifying-a-line-recipient) - Why `channelUserId` and not `msisdn`
+- [Delivery Receipts](./loa-webhook.md#delivery-receipts) - What statuses the `line` channel reports and what it does not
+
+**API Reference:**
+
+- [Send Message](/connect/reference/send-message) - The generated reference for `POST /api/v1/subaccounts/{subAccountId}/messages`
+- [Send LON Message](/connect/reference/send-lon-message) - The generated reference for `POST /api/v1/subaccounts/{subAccountId}/lon`
+- [Getting started with Messaging API](/connect/docs/messaging-apps-api-get-started) - Cross-channel authentication and server regions
+
+---
+
+## LINE Governance, Security and Compliance
+
+
+LINE's Official Account Guidelines are unusually prescriptive, and enforcement is unilateral: LINE may refuse, suspend, or terminate an account and is under no obligation to explain why, offer compensation, or issue a refund. A team that reads only the API pages will not know this. This page states the rules that apply to your account, the enforcement model behind them, LINE's development obligations that survive the 8x8 abstraction, and the 8x8 platform controls available to you.
+
+Sections 1 through 5 are LINE's rules, not 8x8's. The authoritative text is LINE's [Official Account Guidelines](https://terms2.line.me/official_account_guideline_th?lang=en).
+
+## Account Eligibility
+
+LINE states that the service is **unavailable** to any company, organization, or individual it deems to fall into any of these categories:
+
+1. Providing a product or service which may be used for the purposes of criminal activity.
+2. Engaged in illegal or criminal activity, or facilitating it.
+3. Involved in the illegal or illicit sale or purchase of another individual's personal details, registration details, or usage history, or acting as an intermediary or agent for it.
+4. Committing acts in violation of laws and ordinances, or of standards of public order and decency, or which may be considered to be in violation of the same.
+5. Determined by LINE to have committed any prohibited act established in Article 17 of the Terms of Use.
+6. Determined by LINE to be inappropriate as a customer of the service for any other reason. LINE gives examples: parties which may confer any disadvantage to LINE users, may adversely affect trust in LINE's public image, or may involve LINE in complaints, claims for damages, or other conflicts.
+
+LINE separately publishes a list of product and service categories for which promotion via LINE is prohibited, and may reject, suspend, or nullify a contract on those grounds. The categories include adult products and services, dating and matchmaking services, get-rich-quick and easy-success marketing schemes, trading of virtual goods or game currency for real money, sale of social media accounts or followers, network marketing schemes, sales using fear or pressure tactics, sales claiming guaranteed outcomes, credit-card-limit cash conversion services, casinos and online casinos, sale or brokerage of personally identifying information, sale of counterfeit or pirated goods, and medical products not yet approved for use in Thailand.
+
+> **Important:** LINE states explicitly that this list is **not exhaustive**, and that the service may also be declined or suspended in cases other than those listed. Do not read the published list as a safe harbour. If your business sits near any of these categories, resolve it before provisioning rather than after.
+
+## Prohibited Content and Activities
+
+Irrespective of account type, it is your responsibility to ensure that nothing distributed from your account, including chats, posts, and auto-replies, and nothing in your account settings, involves any of the activities prohibited under Article 17 of LINE's Terms of Use. Condensed into the categories that most affect a messaging programme:
+
+1. **Illegality:**
+    - Activities that violate the law, court verdicts, resolutions, orders, or legally binding administrative measures.
+    - Illegal activities, or activities that aid or encourage illegal activity.
+2. **Third-party rights:**
+    - Activities that infringe intellectual property rights, including copyright, trademark, patent, fame, and privacy, whether LINE's or a third party's.
+    - Activities that illegally or improperly lead to the collection, disclosure, or provision of a third party's personal information, registered information, or user history.
+3. **Third-party advertising and user profiling:**
+    - **Using the account as an advertising medium for a third party is prohibited.**
+    - When delivering advertisements or messages that use deemed attributes, **identifying the attributes of the users who come into contact with them is prohibited.** LINE names two specific techniques: specifying individual transition destinations per attribute, and adding information to the destination URL that makes the transition path traceable. If your campaign design relies on per-segment landing pages or per-segment tracking parameters, it breaches this rule.
+4. **Misrepresentation and scope:**
+    - Activities that lead to misrepresentation of LINE or a third party, or that intentionally spread false information.
+    - **Distributing content unrelated to the business you declared at the time of application.** Your account must stay within the business it was approved for.
+5. **Harmful expression:**
+    - Violent or sexual expressions; expressions that discriminate by race, national origin, religion, gender, social status, or family origin; expressions that induce or encourage suicide, self-injury, or drug abuse; and anti-social expressions.
+    - Using the service for sexual or obscene purposes, for arranging sexual or romantic encounters, for harassment or libel against other users, or for purposes other than the service's main purpose.
+6. **Platform abuse:**
+    - Distributing content that may cause discomfort or inconvenience to users or third parties.
+    - Interfering with the service's servers or network systems, with LINE's operation of the service, or with users' use of it.
+    - Deliberately taking advantage of defects in the service.
+    - Making unreasonable inquiries or undue claims of LINE.
+7. **Other LINE terms:**
+    - Distributing content that contravenes the LY Corporation Common Terms of Use or the LINE Logo Usage Guidelines.
+    - Aiding or encouraging any of the above, or anything else LINE deems inappropriate.
+
+### Link and content precautions
+
+LINE publishes user-protection precautions that apply to everything distributed from an account, whether or not it is used commercially:
+
+- **No links that do not work on a smartphone.** LINE asks you to refrain from posting links that cannot be viewed or operated on iOS or Android, and recommends that every linked page display properly on a smartphone.
+- **Links must be related to the message.** Links to pages with no direct relationship to the text or creative content are prohibited, as are links to pages not under your practical control. The message title, the content, and the linked page must all be related and must not strike users as unnatural.
+- **No confusing or non-functional interface elements.** Unclear links, non-functional buttons or menus, and anything else that may confuse users or cause operational errors is prohibited.
+- **App download prompts.** Consult the App Store and Google Play regulations, alongside LINE's own terms, before inducing users to download an app. LINE also warns that if Apple or Google determines that significant ranking changes resulted from app notifications via LINE, the promoted app risks rejection for ranking manipulation.
+- **Corrections must be labelled as corrections,** and LINE charges a correction message at the same rate as a normal message.
+- **Icon image changes are rate-limited by LINE.** An icon image cannot be changed again for one hour after being changed. For accounts whose friend count exceeds a threshold, the icon cannot be changed unilaterally at all and a separate request must be filed. LINE asks you to avoid sudden or frequent changes.
+
+## Advertising and Promotion Rules
+
+- **The advertiser's name must be clearly displayed.** In images it must be displayed at a clearly visible size.
+- **Credit the rights holder.** When you use materials that do not belong to you, the rights holder's name must be displayed and the relationship between the rights holder and you clearly explained.
+- **Resale of advertising space to a third party is prohibited,** except where LINE specifically permits it. Advertisements for multiple entities, and purchase of advertising space by groups of entities, are not allowed. Using the account to release information about unrelated third parties is fundamentally prohibited on user-protection grounds.
+- **The three published exceptions** to the resale prohibition are: a clear controlling relationship between the two entities where users will not be confused or misled; a clear logical necessity for the two entities to produce a combined advertisement; or the two entities sharing a **Collaborative Account**, which LINE provides as a separate advertising menu.
+- **You may promote only your own products and services,** or those produced by an entity with whom you share a Collaborative Account.
+
+## Verified Account Naming Rules
+
+LINE requires Verified Account names to follow four rules:
+
+1. Names **must** include the official name of the company, organization, or self-employed person, or the official name of the product or service they provide.
+2. Names **must not** imply the existence of companies, organizations, self-employed persons, products, or services which do not exist.
+3. Names **must not** include text strings which are non-factual or which may lead to erroneous inferences.
+4. Names **must not** imply that they pertain to products or services offered by LINE or its affiliated companies.
+
+Names that infringe these rules may be subject to a request for amendment from LINE. LINE states that, in principle, it does **not** accept account name changes for Verified Accounts. Where the company or service name has genuinely changed, a name change request triggers a **separate screening process**. See [Why Verified Account Matters](./concepts-fundamentals.md#why-verified-account-matters).
+
+## Enforcement and Penalties
+
+LINE's enforcement model has four properties that materially affect risk planning:
+
+- **No pre-publication approval, but real-time monitoring.** LINE states that as a rule there are no pre-posting checks, but that it may monitor all transmissions in real time. Transmissions found to infringe the precautions may be deleted and the associated account suspended.
+- **Unilateral penalties.** Where LINE determines that content distributed from an account, or the account's settings, are inappropriate or breach the guidelines, LINE may impose any or all of the published penalties, or others of a similar type, including rejecting the opening of accounts, suspending accounts, and nullifying the contract.
+- **No obligation to explain.** LINE states it **shall not be required in any instance to provide reasons** for any penalty imposed.
+- **No liability, compensation, or refund.** LINE states it **shall not be subject to any liability, compensation, or refund** arising from a penalty.
+
+Two further operational facts belong here:
+
+- **A sent message cannot be recalled.** Once transmitted to users, messages **cannot be deleted or amended** by you or by LINE. There is no unsend, and no correction mechanism other than sending a further message clearly labelled as a correction.
+- **Guidelines and functionality can change without notice.** LINE states that the service's functionality, including the Official Account admin screen, and the content of the guidelines may be changed without prior notice, and that continued use after such a change constitutes your agreement to it.
+
+## Development Obligations
+
+These are LINE's own engineering rules for the Messaging API. They apply directly if you operate your own LINE bot server, and the principles behind them survive the 8x8 abstraction.
+
+### Prohibited by LINE
+
+- **Do not exceed LINE's rate limits.** Requests over the limit receive `429 Too Many Requests`. Limits are applied **per endpoint, per channel**, and an endpoint with a different HTTP method counts as a different endpoint. Most endpoints allow **2,000 requests per second**, but several are far lower, including 60 requests per hour for broadcast and narrowcast sends and for the statistics endpoints.
+- **Do not load test through the LINE Platform.** LINE offers no load-testing service and asks you to prepare a separate environment for load testing your own servers.
+- **Do not send mass messages to the same user.**
+- **Do not send requests to user IDs that do not exist.**
+- **Do not attempt to identify user attributes** for a specific user ID, including by using the audience management API or narrowcast messages to infer them.
+- **Do not restrict access by IP address** on servers that receive LINE webhooks. LINE does not disclose its platform IP addresses and they change without notice. Verify the signature instead.
+
+### Recommended by LINE
+
+- **Honour unsend events.** When a user unsends a message, LINE sends an unsend event. LINE asks you to respect the user's intent and handle the message so it cannot be seen or used in future.
+- **Verify webhook signatures** before processing any webhook event. See [If You Also Receive Webhooks Directly from LINE](./loa-webhook.md#if-you-also-receive-webhooks-directly-from-line).
+- **Assume non-breaking additions.** LINE may add endpoints, optional request parameters, response fields, webhook event properties, and new enumerated values without advance notice. Build so that none of those break you.
+- **Keep your own logs.** LINE states it does **not** provide logs for Messaging API requests or for webhooks it sent, even on request. LINE recommends logging the request ID, timestamp, HTTP method, endpoint, and status code for each API call, and the sender IP, timestamp, method, request path, and returned status code for each webhook received.
+
+> **Note**
+>
+> The rate limits above are LINE's, and they govern calls made directly to the LINE Platform. They are not the throughput of the 8x8 send endpoint. No LINE-specific send throughput limit is published for the 8x8 Messaging Apps API. For account-level protections against traffic abuse, see [Recommendations for securing your traffic](/connect/docs/recommendations-for-securing-your-traffic).
+
+<!-- NEEDS SOURCE: N8. No 8x8-side send throughput limit is documented for the LINE channel anywhere in the repo. LINE's own per-channel limit is published above and attributed to LINE. Do not assert an 8x8 LINE-specific rate limit without a source. -->
+
+## Data Protection
+
+- **Profile access requires consent, and without it a user is unaddressable.** If a user has not consented to allow access to their profile information, that information is omitted from webhook events, which means no user ID reaches you at all. See [Consent and Profile Information](./loa-messaging.md#consent-and-profile-information).
+- **LINE will not disclose friend or chat information.** LINE states that user information about the account's friends, including account name and LINE ID, and message information sent in chats by those friends, **cannot be disclosed by LINE under any circumstances**, with the exception of certain functions.
+- **Operator country must be registered and disclosed.** Following amendments to Japan's Act on the Protection of Personal Information that took effect on April 1, 2022, LINE requires the country or region of the account operator to be registered in LINE and disclosed on the account. For a corporation or sole proprietor, that is where the entity is located. For an individual, it is where the individual lives. Register it in LINE Official Account Manager under account details.
+- **Platform limits on non-smartphone devices.** LINE states that it is a service developed for smartphones, and that while it has minimum functionality for PCs and for smartphones on other operating systems, it cannot guarantee correct display of all Official Account functionality on such devices.
+
+## Regional Availability
+
+LINE restricts several parts of the product by country or region. All four of these are LINE's restrictions.
+
+| Restriction | Scope |
+|---|---|
+| **LINE Official Account is not available in the European Union** | The product itself |
+| **Verified Account review applications are accepted only for Japan, Taiwan, and Thailand** | Verified Accounts are not being issued for other countries or regions at this time |
+| **Premium IDs are not available in Indonesia, Singapore, and the United States** | Custom account handles |
+| **Only the Free plan is available for Indonesia, Singapore, and the United States** | Subscription plans |
+
+## 8x8 Platform Controls
+
+These are 8x8's controls, and they apply to the LINE channel the same way they apply to every Messaging Apps channel.
+
+- **API key handling.** Your API key is a bearer token and is your master credential for the sub-account. Generate and rotate keys in the [8x8 Connect portal](https://connect.8x8.com/). Never hard-code a key in application source; use environment variables or a secret store. Rotate immediately if you suspect a leak.
+- **Separate credentials per product.** The LINE Official Account channel and LINE Official Notification are separate sub-accounts with separate keys, which also means a compromised key has a smaller blast radius. See [Sub-accounts and Authentication](./loa-messaging.md#sub-accounts-and-authentication).
+- **Traffic protection.** See [Recommendations for securing your traffic](/connect/docs/recommendations-for-securing-your-traffic) for the account-level controls available to you.
+- **Portal access control.** See [Security (SSO)](/connect/docs/connect-security) for SAML-based single sign-on configuration on the 8x8 Connect portal.
+- **PII removal.** 8x8 provides a [PII Removal API](/connect/reference/delete-pii) for programmatically deleting personally identifiable information from 8x8's logs in line with your own retention policy.
+- **Data residency.** Choose the platform deployment region appropriate to your data residency obligations. See [Platform Deployment Regions](/connect/docs/platform-deployment-regions) and [Base URLs](./getting-started.md#base-urls).
+
+## References and Resources
+
+**LINE's Official Policies:**
+
+- [LINE Official Account Guidelines](https://terms2.line.me/official_account_guideline_th?lang=en) - Account types, screening criteria, prohibited activities, advertising rules, and penalties. The authoritative source for sections 1 through 5 of this page
+- [LINE Official Account Premium ID Terms of Use](https://terms2.line.me/official_account_premiumid_terms_oth) - Premium ID character rules, term, fees, and suspension grounds
+- [Messaging API development guidelines](https://developers.line.biz/en/docs/messaging-api/development-guidelines/) - LINE's prohibited and recommended engineering practices
+- [Messaging API rate limits](https://developers.line.biz/en/reference/messaging-api/#rate-limits) - Per-endpoint, per-channel limits
+- [Verify webhook signature](https://developers.line.biz/en/docs/messaging-api/verify-webhook-signature/) - HMAC-SHA256 signature verification
+- [Consent on getting user profile information](https://developers.line.biz/en/docs/messaging-api/user-consent/) - When profile information and user IDs are withheld
+- [LINE Official Account Help Center (Thailand)](https://help2.line.me/official_account_th/web/categoryId/200000074/pc?lang=en) - Regional availability, plans, and account settings
+
+**8x8 Documentation:**
+
+- [The LINE Ecosystem and Account Model](./concepts-fundamentals.md) - Account types, Verified Account review, and Premium ID
+- [Account Provisioning and Onboarding](./account-provisioning-onboarding.md) - Provisioning paths, what you submit, and escalation
+- [LINE Official Account Webhooks](./loa-webhook.md) - The inbound webhook contract and synchronous error handling
+- [LON Delivery Receipts](./lon-webhook.md) - What the one-way product reports back, and the only LINE delivery receipt on the platform
+- [Recommendations for securing your traffic](/connect/docs/recommendations-for-securing-your-traffic) - 8x8 account-level traffic protection
+- [PII Removal API](/connect/reference/delete-pii) - Programmatic deletion of personally identifiable information
+
+---
+
+## The 8x8 LINE Channel
+
+
+Welcome to the 8x8 integration for LINE. This documentation covers both LINE products available on the 8x8 Messaging Apps platform: the two-way **LINE Official Account** channel and the one-way **LINE Official Notification** channel.
+
+## Why Use LINE for Business?
+
+LINE is the most popular chat application in **Japan**, **Thailand**, and **Taiwan**. LINE Official Account is LINE's business messaging product. It lets a business hold the same kind of one-to-one conversation with a customer that the customer already has with their friends on LINE, and it is the only route to a LINE user for a business.
+
+- **Friend-based reach:** You exchange messages with users who have added your LINE Official Account as a friend, which means your audience has opted in by adding you.
+- **In-app discoverability:** Accounts that pass LINE's review receive a Verified account badge and appear in LINE in-app search results. Unverified accounts do not appear in search.
+- **Two-way conversations:** The LINE Official Account channel supports both inbound and outbound messages, so you can run support and service journeys, not just notifications.
+- **One API across channels:** LINE uses the same 8x8 Messaging Apps send endpoint and webhook envelope formats as SMS, WhatsApp, Viber, and RCS.
+
+<!-- NEEDS SOURCE: N1. A headline LINE reach figure for Thailand is deliberately absent from this page. The four-country popularity statement above is confirmed by the product owner. The only numeric reach figures available in this workspace come from internal strategy documents and are not attributable to a citable public source. Do not add one without a public citation. -->
+
+## What is the 8x8 Integration for LINE?
+
+8x8 connects your LINE Official Account to the 8x8 Messaging Apps platform, so your application sends and receives LINE messages through the same API and the same webhook you already use for other channels.
+
+8x8 is a LINE-registered Agency (AGP) partner and can provision and manage a LINE Official Account on your behalf. If you already own a LINE Official Account, 8x8 can connect that instead. Both routes are documented in [Account Provisioning and Onboarding](./account-provisioning-onboarding.md).
+
+You work with LINE on 8x8 through the **8x8 Messaging Apps API**: send and receive LINE messages programmatically from your own application, CRM, or backend system.
+
+## Two LINE Products on 8x8
+
+LINE appears twice in the 8x8 channel list, as two genuinely different products with different endpoints, different recipient keys, and different capabilities. Choose deliberately.
+
+| Feature | LINE Official Account | LINE Official Notification |
+|---|---|---|
+| **Channel type value** | `line` | `LineNotification` |
+| **Direction** | Inbound and outbound | Outbound only |
+| **Recipient keyed by** | `user.channelUserId` (LINE user ID) | `user.msisdn` (phone number) |
+| **Send endpoint** | `POST /api/v1/subaccounts/{subAccountId}/messages` | `POST /api/v1/subaccounts/{subAccountId}/lon` |
+| **Templates** | Not supported | Required, and must be pre-approved by LINE |
+| **Text limit** | 5,000 characters (LINE limit) | 500 characters per template |
+| **Content types** | Text, Image, Video, Audio, Location | Text and Button, inside an approved template |
+| **Delivery statuses reported** | Accepted, Sent | Accepted, Sent, Delivered |
+
+The last row is the one most likely to change your design. The `line` channel reports **Accepted** and **Sent** but not Delivered or Read, so you can confirm that a message was accepted by LINE but cannot confirm that the recipient's device received it. The `LineNotification` channel goes one step further and additionally reports **Delivered**. See [LOA Delivery Receipts](./loa-webhook.md#delivery-receipts) for details.
+
+> **Key Takeaway:** These are not two modes of one channel. They are two channels, each on its own 8x8 sub-account with its own bearer token, and they identify the recipient in incompatible ways. A phone number cannot be used to send on the `line` channel, and a LINE user ID cannot be used to send on `LineNotification`.
+
+## Where to Start
+
+**For All Users (Start Here)** Read the fundamentals first. LINE identifies recipients differently from every phone-number-based channel, and that difference shapes your data model.
+
+- **See:** [Identifying a LINE Recipient](./loa-messaging.md#identifying-a-line-recipient)
+- **See:** [The LINE Ecosystem and Account Model](./concepts-fundamentals.md) - Account types, Verified Account review, Premium ID, and LINE Official Account Manager
+
+**For Business and Operations Users** Learn what LINE requires before a single message can be sent, what information you have to supply, and how long it takes.
+
+- **See:** [Account Provisioning and Onboarding](./account-provisioning-onboarding.md) - The three provisioning paths, what you submit, and the lead times
+- **See:** [Governance, Security and Compliance](./governance-security.md) - LINE's account rules and enforcement model
+- **See:** [Messaging Apps Analytics](/connect/docs/messaging-apps) - Dashboard and reports, filterable by channel
+
+**For Developers and Integrators** Start with authentication and the send endpoint, then work through the payload catalogue and the webhook contract.
+
+- **See:** [Getting Started with LINE over the 8x8 API](./getting-started.md#authentication)
+- **See:** [LINE Official Account: Behaviour, Messages, and Constraints](./loa-messaging.md) - How the channel addresses a recipient, plus one complete request body per supported type
+- **See:** [LINE Official Notification (LON)](./official-notification-lon.md) - The separate one-way product, its full content schema, and its icon set
+- **See:** [LINE Official Account Webhooks](./loa-webhook.md) - Inbound messages, delivery receipts, and retry behaviour
+- **See:** [LON Delivery Receipts](./lon-webhook.md) - LON delivery receipts, which additionally report Delivered
+
+---
+
+## LINE Official Account: Behaviour, Messages, and Constraints
+
+
+This is the working reference for two-way conversation messaging on the LINE Official Account channel, `line`. It covers how the channel addresses a recipient, the consent that has to exist before you can address one, how LINE counts what you send, and then one complete request body per supported content type, each followed by its field explanations and its real constraints.
+
+The `line` channel supports no templates. If you need a pre-approved structured notification, that is a different product: see [LINE Official Notification (LON)](./official-notification-lon.md).
+
+## LOA Behaviour
+
+Three things decide the shape of an LOA integration: the identifier you address a recipient with, the consent that must exist before that identifier ever reaches you, and the sub-account the send is authenticated against. For the objects that sit underneath an Official Account and the channel type value that names each LINE product inside a payload, see [The Technical Building Blocks](./concepts-fundamentals.md#the-technical-building-blocks) and [Channel Type Values](./concepts-fundamentals.md#channel-type-values).
+
+### Identifying a LINE Recipient
+
+This is the single biggest difference between LINE and 8x8's phone-number channels. LINE users have no phone number that you can address, so LINE issues an opaque user ID instead.
+
+- **`user.channelUserId`** is the field you populate when sending on the LINE Official Account channel. Use it instead of `msisdn` to address the recipient.
+- **Format:** the LINE Platform issues user IDs as a string matching the regular expression `U[0-9a-f]{32}`. That is the letter `U` followed by exactly 32 lowercase hexadecimal characters.
+- **Scope:** the user ID is issued per provider. The same person has a different user ID under a different provider, so a user ID you obtained elsewhere is not portable into your LINE integration.
+- **The same field name carries it back to you.** `user.channelUserId` is also where the LINE user ID arrives on inbound message webhooks, so one field name covers both directions. `channelUserId` also appears in delivery receipts from this channel, which report `Accepted` and `Sent` statuses. See [Delivery Receipts](./loa-webhook.md#delivery-receipts).
+- **`user.msisdn` is absent for LINE on everything you receive.** The inbound webhook contract states that `msisdn` is left out for channels where users have no phone number, and names LINE as the example. When a `user` field has no value, it is left out of the JSON entirely rather than sent as null. There is also no reason to send `msisdn` on an LOA request: see the [Message API Library](./message-api-library.mdx) for the send payloads.
+
+#### How you obtain a channelUserId
+
+LINE sends the user ID to the bot server in a webhook when a user adds your LINE Official Account as a friend (a `follow` event) or sends it a message. On 8x8, that arrives at your registered callback URL as an inbound message webhook with the LINE user ID in `user.channelUserId`.
+
+LINE also publishes endpoints that return the user IDs of all of your friends, and of all members of a group or multi-person chat. Both are available **only to Verified or Premium accounts**, and neither is exposed through the 8x8 API.
+
+> **Key Takeaway:** You cannot send a first message to a LINE user from a phone number. The user must add your LINE Official Account as a friend and produce an inbound event first. Capture and store the `channelUserId` from that event, because it is the only address you will have for that user.
+
+### Consent and Profile Information
+
+To access a LINE user's profile information, the user must have consented to allow access to it. Users of LINE for iOS and LINE for Android consent when they begin using LINE. Users who have only ever used LINE for PC cannot consent, and since April 2020 it is no longer possible to create an account on LINE for PC.
+
+If a user has not consented, their profile information is omitted from the webhook event, which means **the webhook contains no user ID at all**. Practically, that user is unaddressable: they can add your Official Account as a friend and even send you messages, but you have no identifier to send back to.
+
+Other causes of a missing profile, per LINE, are that the user never added your Official Account as a friend, blocked it after adding it, or left the group chat it belongs to.
+
+### Sub-accounts and Authentication
+
+The `line` channel is provisioned on its own 8x8 sub-account and authenticated with that sub-account's own bearer token.
+
+- **Its own sub-account.** A LINE integration requires a new sub-account. It cannot be an existing SMS sub-account, and it is not the sub-account that serves LINE Official Notification. The `{subAccountId}` in the send URL is the LOA one.
+- **Its own bearer token.** The API key that authenticates an LOA send does not authenticate a LON send. Generate it in the 8x8 Connect portal, scoped to the LOA sub-account.
+- **Its own recipient key.** `/messages` on the `line` channel takes `user.channelUserId`. LON's `/lon` endpoint takes `user.msisdn` instead.
+
+One LINE Official Account can serve both products at the same time, but each product needs its own 8x8 sub-account. See [The LINE Official Account](./concepts-fundamentals.md#the-line-official-account) for the account-level view, and [LINE Official Notification (LON)](./official-notification-lon.md) for LON's side of the split.
+
+> **Important:** Confirm with your account manager which of these sub-accounts you have been provisioned, and which API key belongs to which. Sending a LINE Official Notification payload to `/messages`, or a LINE user ID to `/lon`, will not work.
+
+## Message Counting and Plan Quotas
+
+Your LINE Official Account sits on a LINE subscription plan with a monthly allowance of free messages. How LINE counts against that allowance is LINE's rule, not 8x8's, and it surprises people:
+
+- **LINE counts by recipient, not by message object.** A single request containing four message objects sent to a chatroom of five people counts as five messages. The number of message objects in a request does not affect the count.
+- **Messages that cannot be received are not counted.** If you send to a user who blocked your Official Account, or to a user ID that does not exist, that message is not counted.
+- **Not all sending methods count.** LINE counts push, multicast, broadcast, and narrowcast messages toward the plan allowance. Reply messages are not counted. The 8x8 send request has no reply-token field, so an 8x8 LINE send cannot be a LINE reply message.
+- **The hard stop is your total monthly ceiling, not the free allowance on its own.** LINE describes this under the heading "When you exceed the limit of free messages", but what it actually enforces is the limit of messages that can be sent in a month: once you exceed it, LINE returns an error response and the message is not sent. Plans that support additional messages let you send past the free allowance and pay per additional message, up to a **maximum number of additional messages** that you configure in LINE Official Account Manager. Your real ceiling on those plans is the free allowance plus that configured maximum. Plans that do not support additional messages have no such extension, so for them the free allowance is the ceiling.
+
+> **Note**
+>
+> Plan tiers, allowances, and additional-message pricing are LINE's, they are purchased in LINE Official Account Manager, and they vary by country. LINE publishes them itself: see [LINE Official Account (Thailand)](https://lineforbusiness.com/th/service/line-oa-features/broadcast-message). Talk to your 8x8 account manager about sizing the plan for your expected volume.
+
+<!-- NEEDS SOURCE: N2. Thailand-specific plan fees and free-message allowances are deliberately omitted. LINE's captured pricing page gives Japan examples only, and the Thailand figures available internally sit inside commercial rate cards that are not customer-facing. Link out to LINE rather than reproducing a number. -->
+
+## Supported Types at a Glance
+
+| Content type | Outbound | Inbound |
+|---|---|---|
+| **Text** | Yes | Yes |
+| **Image** | Yes | Yes |
+| **Video** | Yes | Yes |
+| **Audio** | Yes | Yes |
+| **Location** | Yes | Yes |
+| **File** | **No** | **Yes** |
+
+> **Important:** The asymmetry on **File** is real and it catches people out. A LINE user can send your Official Account a file, and you will receive it as an inbound `File` message. There is **no outbound File type** on this channel, so you cannot send one back.
+
+For the full inbound contract, including the envelope, the field-by-field description, and the 24-hour expiry on inbound media URLs, see [Inbound Messages](./loa-webhook.md#inbound-messages).
+
+For one complete request body per supported type, with screenshots and LINE's real limits, see [Message API Library](./message-api-library.mdx).
+
+## Related Resources
+
+**For Developers:**
+
+- [Getting Started with LINE over the 8x8 API](./getting-started.md) - Authentication, base URLs, and the optional request properties
+- [LINE Official Account Webhooks](./loa-webhook.md) - The full inbound contract for all six inbound types, delivery receipts, and retry behaviour
+- [LINE Official Notification (LON)](./official-notification-lon.md) - Pre-approved structured notifications, the one place LINE templates exist on 8x8
+
+**Important Concepts:**
+
+- [The LINE Ecosystem and Account Model](./concepts-fundamentals.md) - Account types, Verified Account review, Premium ID, what a single Official Account can serve, and the Messaging API channel and channel type values underneath it
+
+**Cross-channel References:**
+
+- [Supported Messaging Apps Content Types](/connect/docs/supported-chat-apps-content-type) - The per-channel content type matrix, including the content types the `line` channel does not support, and character limits
+- [Supported Messaging Apps](/connect/docs/list-of-supported-chatapps-channels) - Channel type values and supported directions
+- [Send Message](/connect/reference/send-message) - The generated API reference for the send endpoint
+
+**External:**
+
+- [LINE Messaging API: Message objects](https://developers.line.biz/en/reference/messaging-api/#message-objects) - LINE's own field-level specification and limits
+- [LINE Messaging API: Character counting in a text](https://developers.line.biz/en/docs/messaging-api/text-character-count/) - How LINE counts UTF-16 code units and emoji
+
+---
+
+## LINE Official Account Webhooks
+
+
+Everything that arrives at your callback URL for the two-way LINE Official Account channel: inbound messages and delivery receipts. The `line` channel reports **Accepted** and **Sent** delivery statuses but does not report **Delivered** or **Read**. This page documents the inbound contract in full, the delivery receipt contract, and the webhook mechanics both LINE products share.
+
+LINE Official Notification goes one step further and additionally reports **Delivered**. For that contract, see [LON Delivery Receipts](./lon-webhook.md).
+
+## Delivery Receipts
+
+The LINE Official Account channel reports two delivery statuses:
+
+| Status | Reported on `line` |
+|---|---|
+| **Accepted** | Yes |
+| **Sent** | Yes |
+| **Delivered** | **No** |
+| **Read** | **No** |
+
+After a successful send, delivery receipts arrive at your callback URL as the message progresses through `Accepted` and `Sent`. No receipt arrives for `Delivered` or `Read`, so do not build delivery-confirmation or read-rate reporting that depends on either.
+
+LINE Official Notification goes one step further and additionally reports `Delivered`. For that contract, see [LON Delivery Receipts](./lon-webhook.md).
+
+Delivery receipts arrive in the **v9** delivery receipt envelope, identical to the one documented in [Delivery receipts for Outbound Messaging Apps](/connect/docs/delivery-receipts-for-outbound-chatapps).
+
+**Sample JSON Payload:**
+
+```json
+{
+  "version": 9,
+  "namespace": "ChatApps",
+  "eventType": "outbound_message_status_changed",
+  "description": "ChatApps outbound message delivery receipt",
+  "payload": {
+    "umid": "<UNIQUE_MESSAGE_ID>",
+    "clientMessageId": "<YOUR_MESSAGE_ID>",
+    "subAccountId": "<SUBACCOUNT_ID>",
+    "channel": "line",
+    "user": {
+      "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+    },
+    "status": {
+      "state": "sent",
+      "detail": "delivered_to_operator",
+      "timestamp": "2026-07-29T08:19:47.12Z"
+    }
+  }
+}
+```
+
+**Key Fields:**
+
+- `version`: Equals `9` for this format.
+- `eventType`: `outbound_message_status_changed` for a delivery receipt.
+- `payload.umid`: The unique message ID returned by the send request. Match it to the `umid` from your send response.
+- `payload.channel`: `line` for the LINE Official Account channel.
+- `payload.user.channelUserId`: The LINE user ID of the recipient.
+- `payload.status.state`: One of `accepted`, `sent`, `rejected`, or `undelivered`. `delivered` and `read` are not reported on this channel.
+- `payload.status.detail`: Additional context for the status. See [Message status reference](/connect/reference/message-status-references).
+
+## Configuring Your Webhook
+
+One callback URL serves **every** Messaging Apps channel on your account. You do not register a separate URL for LINE, and you do not register a separate URL for LON.
+
+- Register your callback using the [Webhooks Configuration API](/connect/reference/add-webhooks-1).
+- Identify the source of each payload from the channel field. On inbound messages that is `payload.recipient.channel`. On delivery receipts it is `payload.channel`.
+- For the LINE Official Account channel the value is `line`. For LINE Official Notification it is `LineNotification`.
+- Respond with a `2XX` status. Anything else, including a timeout, triggers the retry sequence described in [Retry Behaviour](#retry-behaviour).
+
+One callback URL carries traffic for every channel on your account. You will receive both inbound messages (with `payload.recipient.channel` of `line`) and delivery receipts (with `payload.channel` of `line`) from the LINE Official Account channel, plus delivery receipts from LON (with `payload.channel` of `LineNotification`).
+
+If you are on Path B provisioning, remember there is a second, separate webhook configuration: the **Webhook URL** you set in LINE Official Account Manager, under **Settings** > **Messaging API**, which points LINE at 8x8. See [Configuring Your Webhook](./account-provisioning-onboarding.md#configuring-your-webhook).
+
+## Inbound Messages
+
+Inbound LINE messages arrive in the **v3** inbound Messaging Apps envelope. Every sample on this page uses v3. Only the LINE Official Account channel has an inbound direction; LON does not.
+
+The envelope is identical for all six inbound types. Only `payload.type` and `payload.content` change, so each sample below repeats the same envelope with the content object that type produces.
+
+> **Note**
+>
+> The currently published usage sample page for LINE, [Line usage samples](/connect/docs/usage-samples-line), shows these inbound webhooks in an **older, differently shaped envelope**: `eventType` of `inboundMessage`, `version` of `1`, flat top-level fields instead of a nested `payload` object, and `recipient.recipientId` instead of `recipient.channel` and `recipient.channelId`. This page uses the current canonical cross-channel v3 envelope documented in [Inbound Messaging Apps message](/connect/docs/inbound-chatapps-message), which every other channel's documentation also uses. **The two published artefacts disagree, and one of them is wrong.** Confirm the shape your account actually receives with a test send before writing your parser against either.
+
+<!-- NEEDS SOURCE: N12. Envelope version discrepancy, flagged for engineering and the docs team, not resolvable from available sources. The live page docs/connect/docs/usage-samples-line.md shows LINE inbound webhooks as eventType "inboundMessage", version 1, flat top-level fields (channel, umid, subAccountId, timestamp, type, content) with no nested payload object, and recipient.recipientId in place of recipient.channel plus recipient.channelId. This doc set uses the canonical v3 envelope instead, on the assessment made in an earlier pass that the v1 shape on that one page is a stale artifact superseded by the cross-channel v3 contract. That assessment is NOT confirmed by engineering. Reconcile it one way or the other: either update usage-samples-line.md to v3, or confirm v3 is not actually live for the `line` channel specifically, in which case this page must be reverted to the v1 shape. Do not leave both shapes published. -->
+
+### Text
+
+**Sample JSON Payload:**
+
+```json
+{
+  "version": 3,
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": "<UNIQUE_MESSAGE_ID>",
+    "subAccountId": "<SUBACCOUNT_ID>",
+    "timestamp": "2026-07-29T05:15:30.00Z",
+    "user": {
+      "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+    },
+    "recipient": {
+      "channel": "line",
+      "channelId": "<CHANNEL_ID>"
+    },
+    "type": "Text",
+    "content": {
+      "text": "Hello from LINE"
+    }
+  }
+}
+```
+
+**Key Fields:**
+
+- `version`: Equals `3` for this format.
+- `namespace`: Equals `ChatApps` for inbound Messaging Apps messages.
+- `eventType`: Equals `inbound_message_received`.
+- `payload.umid`: The unique message ID for the inbound message.
+- `payload.user.channelUserId`: **The LINE user ID of the sender.** This is the value you store and put back into `user.channelUserId` when you reply.
+- `payload.user.msisdn`: **Absent for LINE.** The contract states that `msisdn` is left out for channels where users have no phone number, and names LINE as the example. When a `user` field has no value it is omitted from the JSON entirely, not sent as null.
+- `payload.recipient.channel`: `line` for the LINE Official Account channel.
+- `payload.recipient.channelId`: The identifier of the channel that received the message.
+- `payload.type`: The inbound content type. For LINE: `Text`, `Image`, `Video`, `Audio`, `File`, or `Location`.
+- `payload.content.text`: The text the user sent.
+- `payload.timestamp`: UTC, ISO 8601.
+
+### Image
+
+**Sample JSON Payload:**
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "version": 3,
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": "<UNIQUE_MESSAGE_ID>",
+    "subAccountId": "<SUBACCOUNT_ID>",
+    "timestamp": "2026-07-29T05:16:10.00Z",
+    "user": {
+      "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+    },
+    "recipient": {
+      "channel": "line",
+      "channelId": "<CHANNEL_ID>"
+    },
+    "type": "Image",
+    "content": {
+      "url": "<PRESIGNED_MEDIA_URL>"
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `payload.type`: `"Image"`.
+- `payload.content.url`: The pre-signed URL of the image 8x8 has stored on your behalf. See [Inbound media URLs expire](#inbound-media-urls-expire).
+
+### Video
+
+**Sample JSON Payload:**
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "version": 3,
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": "<UNIQUE_MESSAGE_ID>",
+    "subAccountId": "<SUBACCOUNT_ID>",
+    "timestamp": "2026-07-29T05:16:40.63Z",
+    "user": {
+      "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+    },
+    "recipient": {
+      "channel": "line",
+      "channelId": "<CHANNEL_ID>"
+    },
+    "type": "Video",
+    "content": {
+      "url": "<PRESIGNED_MEDIA_URL>"
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `payload.type`: `"Video"`.
+- `payload.content.url`: The pre-signed URL of the video file. No duration, file size, or thumbnail is included on the inbound side.
+
+### Audio
+
+**Sample JSON Payload:**
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "version": 3,
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": "<UNIQUE_MESSAGE_ID>",
+    "subAccountId": "<SUBACCOUNT_ID>",
+    "timestamp": "2026-07-29T05:17:10.00Z",
+    "user": {
+      "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+    },
+    "recipient": {
+      "channel": "line",
+      "channelId": "<CHANNEL_ID>"
+    },
+    "type": "Audio",
+    "content": {
+      "url": "<PRESIGNED_MEDIA_URL>"
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `payload.type`: `"Audio"`.
+- `payload.content.url`: The pre-signed URL of the audio file. The `audio.duration` property that an outbound audio send requires has no inbound counterpart.
+
+### File
+
+**Sample JSON Payload:**
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "version": 3,
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": "<UNIQUE_MESSAGE_ID>",
+    "subAccountId": "<SUBACCOUNT_ID>",
+    "timestamp": "2026-07-29T05:17:30.00Z",
+    "user": {
+      "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+    },
+    "recipient": {
+      "channel": "line",
+      "channelId": "<CHANNEL_ID>"
+    },
+    "type": "File",
+    "content": {
+      "url": "<PRESIGNED_MEDIA_URL>"
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `payload.type`: `"File"`.
+- `payload.content.url`: The pre-signed URL of the file.
+
+> **Important:** `File` is **inbound only** on this channel. A LINE user can send your Official Account a file and you will receive it, but there is no outbound `File` type, so you cannot send one back. See [Supported Types at a Glance](./loa-messaging.md#supported-types-at-a-glance).
+
+### Location
+
+**Sample JSON Payload:**
+
+<details>
+<summary>View JSON</summary>
+
+```json
+{
+  "version": 3,
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": "<UNIQUE_MESSAGE_ID>",
+    "subAccountId": "<SUBACCOUNT_ID>",
+    "timestamp": "2026-07-29T05:17:55.35Z",
+    "user": {
+      "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+    },
+    "recipient": {
+      "channel": "line",
+      "channelId": "<CHANNEL_ID>"
+    },
+    "type": "Location",
+    "content": {
+      "location": {
+        "longitude": 103.846375,
+        "latitude": 1.289563,
+        "name": "Clarke Quay Riverside",
+        "address": "Clarke Quay, 179019"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `payload.type`: `"Location"`.
+- `payload.content.location.latitude`: Latitude, as a number.
+- `payload.content.location.longitude`: Longitude, as a number.
+- `payload.content.location.name`: The name or title of the location, as the user's LINE client sent it.
+- `payload.content.location.address`: The street address of the location.
+
+### Inbound media URLs expire
+
+> **Important:** Inbound media does not arrive as the sender's original URL. 8x8 hosts the file and gives you a **pre-signed URL that expires after 24 hours**. This applies to `Image`, `Video`, `Audio`, and `File`. Download and persist the file when the webhook arrives if you need it beyond that window, and do not store the URL as though it were permanent.
+
+### No LINE display name in the payload
+
+> **Note**
+>
+> `payload.user.name` and `payload.user.username` exist in the v3 contract but are WhatsApp profile fields. Do not expect a LINE display name in the inbound payload. `payload.user.channelUserId` is the only identity the inbound webhook carries for a LINE sender.
+
+For the complete field-by-field envelope description, including the `interactive` content sub-objects used by other channels, see [Inbound Messaging Apps message](/connect/docs/inbound-chatapps-message).
+
+## Retry Behaviour
+
+If 8x8 cannot deliver a webhook to your callback URL, it retries.
+
+- **Triggers:** a connection error, a timeout, or an HTTP response code in the `4XX` or `5XX` range.
+- **Intervals:** progressive retries at **1, 10, 30, and 90 seconds**.
+
+What this covers differs by product, because the two products produce different webhooks:
+
+- **On the LINE Official Account channel, retry behaviour applies to both inbound message webhooks and delivery receipts.**
+- **On LINE Official Notification, it only ever concerns delivery receipts.** LON has no inbound direction.
+
+Design your handler to be idempotent on `umid`, because a retry can result in the same message being delivered to you more than once.
+
+## Per-Message Callback Override
+
+Both LINE endpoints accept a `dlrCallbackUrl` property on the request body. It overrides your account's default delivery receipt callback URL for that one message. The value must be a URI.
+
+- **On LINE Official Notification:** `dlrCallbackUrl` on `POST /api/v1/subaccounts/{subAccountId}/lon`. Use it to route receipts for a particular notification campaign or test run to a separate handler. See [Per-Message Callback Override on /lon](./lon-webhook.md#per-message-callback-override-on-lon).
+- **On the LINE Official Account channel:** `dlrCallbackUrl` on `POST /api/v1/subaccounts/{subAccountId}/messages`. Use it to route delivery receipts for a specific LINE message to a separate handler, for example for campaign-level tracking.
+
+## Errors
+
+On the LINE Official Account channel, failures reach you in two ways: synchronously in the HTTP response to your send request, and asynchronously through delivery receipts.
+
+### Synchronous failures
+
+These come back in the HTTP response to your send request, before the message enters the platform. They are identical for `/messages` and `/lon`.
+
+| HTTP status | Meaning |
+|---|---|
+| `200` | The message was accepted. The body carries `umid` and `status.state` of `queued` |
+| `400` | Bad request. A parameter is missing or invalid |
+| `401` | The request was not authenticated |
+| `500` | Internal server error |
+
+The error body shape is consistent across all three failure codes:
+
+```json
+{
+  "code": 1002,
+  "message": "Invalid MSISDN format (not E.164 international number)",
+  "errorId": "<ERROR_ID>",
+  "timestamp": "2026-07-29T08:19:45.99Z"
+}
+```
+
+For the codes that appear in the `code` property of an API error body, see the [API Error Codes](/connect/reference/api-error-codes) reference.
+
+### Asynchronous failures
+
+Failures that occur after a message is accepted arrive as delivery receipts with a `status.state` of `rejected` or `undelivered`. These receipts reach your callback URL in the same v9 envelope described in [Delivery Receipts](#delivery-receipts), with the `status.detail` field carrying additional context. For the codes that can appear, see the [General Error Codes](/connect/reference/message-status-references).
+
+Because the `line` channel does not report `Delivered` or `Read`, you can confirm that a message was sent to the operator but not that the end user received or read it. Build delivery-confirmation and read-rate reporting on channels that support those statuses.
+
+LINE Official Notification additionally reports `Delivered`, giving more visibility into the delivery path. See [Asynchronous Failures](./lon-webhook.md#asynchronous-failures).
+
+## If You Also Receive Webhooks Directly from LINE
+
+This section applies **only** if you run your own LINE bot server alongside 8x8 and receive webhooks from the LINE Platform directly. It does not describe the 8x8 webhook covered above. If 8x8 is your only integration, skip it. Only the LINE Official Account channel has a bot-server relationship with LINE at all, so nothing here applies to LON.
+
+LINE signs the webhooks it sends to a bot server, and expects the bot server to verify that signature:
+
+- **Signature algorithm:** LINE generates a signature with **HMAC-SHA256**, using the webhook event body as the input data and the **channel secret** as the hash key.
+- **Header:** The signature is sent in the `x-line-signature` request header.
+- **Do not modify the body before verifying.** The signature is computed over the request body as sent.
+- **Where the channel secret comes from:** the channel's **Basic settings** tab in the [LINE Developers Console](https://developers.line.biz/console/). Admin privileges on the channel are required to retrieve or reissue it. Reissuing a channel secret immediately invalidates the current one, so assess the impact on anything already using it first.
+- **Do not allowlist by IP address.** LINE states that it does not disclose the IP addresses of the LINE Platform, and that they are subject to change without notice. Use signature validation instead.
+- **Keep your own logs.** LINE states that it does not provide logs for Messaging API requests or for webhooks it sent, even on request. You are responsible for saving them.
+
+For LINE's full description, see [Verify webhook signature](https://developers.line.biz/en/docs/messaging-api/verify-webhook-signature/) and [Messaging API development guidelines](https://developers.line.biz/en/docs/messaging-api/development-guidelines/).
+
+## Related Resources
+
+**For Developers:**
+
+- [Getting Started with LINE over the 8x8 API](./getting-started.md) - Authentication, base URLs, and the send response
+- [LINE Official Account: Behaviour, Messages, and Constraints](./loa-messaging.md) - Outbound payloads, addressing, consent, and message counting
+- [LON Delivery Receipts](./lon-webhook.md) - LON's extended delivery receipt coverage, including the Delivered status that the LINE Official Account channel does not report
+- [LINE Official Notification (LON)](./official-notification-lon.md) - The one-way product's request contract
+
+**Important Concepts:**
+
+- [Identifying a LINE Recipient](./loa-messaging.md#identifying-a-line-recipient) - Where `channelUserId` fits in your data model
+
+**Cross-channel References:**
+
+- [Inbound Messaging Apps message](/connect/docs/inbound-chatapps-message) - The canonical v3 inbound envelope
+- [Webhooks Configuration API](/connect/reference/add-webhooks-1) - Registering your callback URL
+- [API Error Codes](/connect/reference/api-error-codes) - The codes returned in a synchronous error body
+
+---
+
+## LINE Official Notification Delivery Receipts
+
+
+LINE Official Notification is outbound only, so the only webhook it produces is a delivery receipt. It is also the **only LINE product on 8x8 that produces a delivery receipt at all**: the two-way LINE Official Account channel has none. This page is therefore the single home for LINE delivery receipt content, covering the v9 envelope, the full status enumerations, asynchronous failures, and the one request property specific to the `/lon` endpoint.
+
+The mechanics that genuinely are shared between the two LINE products are documented once, on the [LOA webhook page](./loa-webhook.md), and linked from here rather than repeated.
+
+## Delivery Receipts for LON
+
+LON delivery receipts reach `Delivered`. They do not report `Read`.
+
+| Status | `LineNotification` (LON) |
+|---|---|
+| **Accepted** | Reported |
+| **Sent** | Reported |
+| **Delivered** | **Reported** |
+| **Read** | **Not reported** |
+
+The LINE Official Account channel (`line`) reports `Accepted` and `Sent` but not `Delivered` or `Read`. LON goes one step further, additionally reporting `Delivered`. See [Delivery Receipts](./loa-webhook.md#delivery-receipts) for the LOA delivery receipt contract.
+
+> **Important:** Read receipts are not available on either LINE product. Do not build reporting that promises a read rate for LINE. For the `line` channel, do not build delivery reporting at all, because nothing is reported.
+
+### The v9 payload
+
+LON receipts arrive in the same **v9** delivery receipt envelope as every other Messaging Apps channel that produces one.
+
+**Sample JSON Payload:**
+
+```json
+{
+  "version": 9,
+  "namespace": "ChatApps",
+  "eventType": "outbound_message_status_changed",
+  "description": "ChatApps outbound message delivery receipt",
+  "payload": {
+    "umid": "<UNIQUE_MESSAGE_ID>",
+    "clientMessageId": "<YOUR_MESSAGE_ID>",
+    "subAccountId": "<SUBACCOUNT_ID>",
+    "channel": "LineNotification",
+    "user": {
+      "msisdn": "+15551234567"
+    },
+    "status": {
+      "state": "delivered",
+      "detail": "delivered_to_recipient",
+      "timestamp": "2026-07-29T08:19:47.12Z"
+    }
+  }
+}
+```
+
+**Key Fields:**
+
+- `version`: Equals `9` for this format.
+- `eventType`: `outbound_message_status_changed` for a delivery receipt.
+- `payload.umid`: The unique message ID returned by the `/lon` send request. This is how you match a receipt to a notification.
+- `payload.clientMessageId`: The custom identifier you supplied on the send request.
+- `payload.channel`: `LineNotification` for LINE Official Notification.
+- `payload.user.msisdn`: The recipient phone number in E.164 format. LON keys the recipient by phone number, so this field is present.
+- `payload.user.channelUserId`: **Not sent for LON.** A LON receipt carries `msisdn`, not `channelUserId`. The LINE Official Account channel's own delivery receipts carry `channelUserId` instead.
+- `payload.status`: The message status object.
+
+### Status enumerations
+
+Both enumerations below are platform-wide and apply to every Messaging Apps channel that produces a delivery receipt, LON included.
+
+**Possible `status.state` Values:**
+
+- `queued`: The request is accepted and queued for processing.
+- `rejected`: The request has been rejected by 8x8.
+- `sent`: The message has been sent to the operator and no acknowledgment has been received yet.
+- `delivered`: The message has been delivered and confirmation was received from the operator.
+- `undelivered`: A delivery receipt was received indicating the message was not delivered.
+- `read`: The message was delivered and read.
+
+**Possible `status.detail` Values:**
+
+- `delivered_to_operator`: Delivered to the operator. Associated with the `delivered` state.
+- `delivered_to_recipient`: Delivered to the recipient. Associated with the `delivered` state.
+- `rejected_by_operator`: Rejected by the operator. Associated with the `undelivered` state.
+- `undelivered_to_recipient`: Delivered but rejected by the target device. Associated with the `undelivered` state.
+
+> **Note**
+>
+> The v9 payload carries channel-specific extensions for some channels: a `whatsapp` object, and a WhatsApp-only `outboundContent` object that reproduces the delivered message. **There is no LINE equivalent of either.** A LON delivery receipt carries no LINE-side error code, pricing category, or billable flag, and no copy of the notification content.
+
+For the complete envelope description, the other channels' sub-objects, and the older v8 format, see [Delivery receipts for Outbound Messaging Apps](/connect/docs/delivery-receipts-for-outbound-chatapps) and [Message status reference](/connect/reference/message-status-references).
+
+## Asynchronous Failures
+
+A failure that happens after the platform has accepted your `/lon` request arrives later, as a delivery receipt with a failing `status.state`. The `status` object carries two extra properties when the state is a failure:
+
+- `status.errorCode`: An integer error code, set only for errors.
+- `status.errorMessage`: A description of the error, set only for errors.
+
+**LON delivery receipts carry richer failure detail than LOA's.** The LINE Official Account channel reports `Accepted` and `Sent` but does not report `Delivered`, so its asynchronous failure surface is narrower. See [Asynchronous failures](./loa-webhook.md#asynchronous-failures).
+
+> 📘 **Error Code Reference**
+>
+> For the delivery receipt error codes, see the [Messaging Apps Delivery Error Codes](/connect/docs/delivery-error-codes#general-error-codes) reference. The **General Error Codes** section applies to LINE. Note that the reference currently has no LINE-specific section: only General, WhatsApp, and Viber sections exist.
+
+<!-- NEEDS SOURCE: N6. There is no LINE section in the live delivery error code reference, and no LINE-specific delivery error code table exists in any available source. Do not invent LINE error codes here. Revisit if engineering supplies a LINE code table, at which point this pointer should be updated to a #line-error-codes anchor. Relocated from loa-webhook.md on 2026-07-31, because LON is now the only LINE product that can produce a delivery receipt for an error code to arrive on. -->
+
+Several General error codes are directly relevant, including `15` (InvalidDestination: the destination is not valid for that channel or is part of a blacklist on Connect), `2` (ContentRelatedError: the content type is not supported by this channel), `36` (Expired: the message was not delivered at the requested time), and `46` (SubscriberNotReachable: the message was sent to the channel, but the user is not reachable for delivery).
+
+## Shared Webhook Mechanics
+
+These are identical for both LINE products and are documented once, on the LOA webhook page:
+
+- [Configuring Your Webhook](./loa-webhook.md#configuring-your-webhook) - One callback URL serves every Messaging Apps channel on your account, including LON. You do not register a separate URL for LON, and you identify a LON receipt from `payload.channel`.
+- [Retry Behaviour](./loa-webhook.md#retry-behaviour) - Retries on a connection error, a timeout, or a `4XX` or `5XX` response, at 1, 10, 30, and 90 seconds. On LON these apply to delivery receipts, since LON produces no other webhook.
+- [Synchronous failures](./loa-webhook.md#synchronous-failures) - The `400`, `401`, and `500` responses returned on the send request itself, which are the same for `/lon` as for `/messages`.
+
+Error handling is partly shared. The synchronous half above is common to both endpoints. Both products produce asynchronous failures via delivery receipts, but LON's receipts reach `Delivered` and carry richer error detail. LOA's asynchronous failures are documented in [Asynchronous failures](./loa-webhook.md#asynchronous-failures), and LON's are documented on this page in [Asynchronous Failures](#asynchronous-failures).
+
+## Per-Message Callback Override on /lon
+
+The `/lon` request body accepts a `dlrCallbackUrl` property, the same way the LOA `/messages` body does. It overrides your account's default delivery receipt callback URL for that one notification.
+
+- `dlrCallbackUrl` (optional): A URI. Applies to this message only, and does not change your account configuration.
+
+Use it to route receipts for a particular notification campaign or test run to a separate handler. For the property in the context of the full LON request body, see [Request Body](./official-notification-lon.md#request-body).
+
+> **Note**
+>
+> On the `line` channel the same property routes delivery receipts for that message to a separate handler, the same way it does on LON. See [Per-Message Callback Override](./loa-webhook.md#per-message-callback-override).
+
+## Related Resources
+
+**For Developers:**
+
+- [LINE Official Notification (LON)](./official-notification-lon.md) - The endpoint, the full content schema, the icon set, and the character limits
+- [LINE Official Account Webhooks](./loa-webhook.md) - The inbound message contract, delivery receipts, retry behaviour, and synchronous errors
+- [Getting Started with LINE over the 8x8 API](./getting-started.md#sending-on-line-official-notification-lon) - Authentication, base URLs, and a first LON send
+
+**Cross-channel References:**
+
+- [Delivery receipts for Outbound Messaging Apps](/connect/docs/delivery-receipts-for-outbound-chatapps) - The canonical v9 delivery receipt envelope
+- [Message status reference](/connect/reference/message-status-references) - The `status` object and its enumerations
+- [Supported Messaging Apps](/connect/docs/list-of-supported-chatapps-channels) - Channel type values and directions
+- [Messaging Apps Delivery Error Codes](/connect/docs/delivery-error-codes#general-error-codes) - Delivery receipt error codes
+
+---
+
+## LINE Message API Library
+
+import LineTextMsg from './images/line-text-message.png';
+import LineImageMsg from './images/line-image-message.png';
+import LineVideoMsg from './images/line-video-message.png';
+import LineAudioMsg from './images/line-audio-message.png';
+import LineLocationMsg from './images/line-location-message.png';
+
+This page provides a complete library of LINE Official Account message API payloads for every supported content type. For channel behaviour, recipient addressing, and message counting, see [LINE Official Account (Two-way)](./loa-messaging.md).
+
+> **Note**
+>
+> Every 8x8 LINE example writes `type` in **Title Case** (`Text`, `Image`, `Video`, `Audio`, `Location`). The shared `/messages` OpenAPI schema lists the enum in lowercase, but its own inline example uses Title Case. No available source states that the field is case-insensitive, so use Title Case exactly as shown.
+
+All character, count, and file-size limits on this page are **LINE's**. No available source states which of them the 8x8 platform pre-validates before forwarding a message to LINE.
+
+**Endpoint:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<colgroup>
+<col style={{width: '200px', minWidth: '200px', maxWidth: '200px'}} />
+<col />
+</colgroup>
+
+Message Type
+API Payload
+
+### Text
+
+<small>Source: LINE Developers</small>
+
+**Send:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Text",
+  "content": {
+    "text": "Hello from 8x8 Messaging API"
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `content.text` (required): The message body.
+
+**LINE Limits:**
+
+- Maximum **5,000 characters**.
+- LINE counts in **UTF-16 code units**. Emoji and some Kanji count as more than one character.
+- LINE emoji placeholders are replaced with alternative text when counting, so a message containing LINE emoji can exceed the limit unexpectedly.
+
+### Image
+
+<small>Source: LINE Developers</small>
+
+**Send:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Image",
+  "content": {
+    "url": "https://www.example.com/original.png",
+    "image": {
+      "thumbnail": "https://www.example.com/thumbnail.png"
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `content.url` (required): Public URL of the full-size image.
+- `content.image.thumbnail`: URL of the thumbnail preview image.
+
+**LINE Limits:**
+
+| Constraint | Full-size image | Preview image |
+|---|---|---|
+| **Format** | JPEG or PNG | JPEG or PNG |
+| **Max file size** | 10 MB | 1 MB |
+| **Protocol** | HTTPS (TLS 1.2+) | HTTPS (TLS 1.2+) |
+| **Max URL length** | 2,000 characters | 2,000 characters |
+
+> **Note:** LINE may use the full-size image as the preview instead of the thumbnail you supplied, depending on the device state.
+
+### Video
+
+<small>Source: LINE Developers</small>
+
+**Send:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Video",
+  "content": {
+    "url": "https://www.example.com/original.mp4",
+    "video": {
+      "thumbnail": "https://www.example.com/preview.jpg"
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `content.url` (required): Public URL of the video file.
+- `content.video.thumbnail`: URL of the preview image shown before playback.
+- `content.video.filesize` (optional): Video file size, in **bytes**.
+- `content.video.duration` (optional): Duration of the video, in **seconds**.
+
+**LINE Limits:**
+
+| Constraint | Video file | Preview image |
+|---|---|---|
+| **Format** | mp4 | JPEG or PNG |
+| **Max file size** | 200 MB | 1 MB |
+| **Protocol** | HTTPS (TLS 1.2+) | HTTPS (TLS 1.2+) |
+| **Max URL length** | 2,000 characters | 2,000 characters |
+
+> **Note:** LINE recommends the video and preview image share the same aspect ratio. A very wide or very tall video may be cropped during playback.
+
+### Audio
+
+<small>Source: LINE Developers</small>
+
+**Send:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Audio",
+  "content": {
+    "url": "https://www.example.com/original.mp3",
+    "audio": {
+      "duration": 300
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `content.url` (required): Public URL of the audio file.
+- `content.audio.duration` (**required**): Duration of the audio, in **seconds**.
+
+> **Important:** The 8x8 field is in **seconds**. LINE's native field is in **milliseconds** (LINE's example: `60000` for one minute). Do not copy a duration value from LINE's documentation into an 8x8 request.
+
+**LINE Limits:**
+
+- **Format:** mp3 or m4a.
+- **Max file size:** 200 MB.
+- **Protocol:** HTTPS (TLS 1.2 or later).
+- **Max URL length:** 2,000 characters.
+
+### Location
+
+<small>Source: LINE Developers</small>
+
+**Send:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Location",
+  "content": {
+    "location": {
+      "latitude": 1.285651,
+      "longitude": 103.847564,
+      "name": "8x8 Office Singapore",
+      "address": "One George Street, Singapore 049145"
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `content.location.latitude` (required): Latitude, as a number.
+- `content.location.longitude` (required): Longitude, as a number.
+- `content.location.name`: Location name (maps to LINE's `title`).
+- `content.location.address`: Street address.
+
+**LINE Limits:**
+
+- **Title:** maximum 100 characters.
+- **Address:** maximum 100 characters.
+
+> **Note:** The 8x8 schema marks only `latitude` and `longitude` as required, but LINE marks `title` and `address` as required too. Supply `name` and `address` on every location send.
+
+## Media Hosting
+
+Host your media yourself and pass a **publicly reachable HTTPS URL** in `content.url`. Every LINE send example, both in the published usage samples and in 8x8's internal test collection, references an external public URL.
+
+The URL must satisfy LINE's requirements: HTTPS with TLS 1.2 or later, percent-encoded using UTF-8, and no longer than 2,000 characters.
+
+## Related Resources
+
+**For Developers:**
+
+- [LINE Official Account (Two-way)](./loa-messaging.md) - How the channel addresses a recipient, consent, authentication, and message counting
+- [Getting Started with LINE over the 8x8 API](./getting-started.md) - Authentication, base URLs, and the optional request properties
+- [LINE Official Account Webhooks](./loa-webhook.md) - Inbound messages, delivery receipts, and retry behaviour
+
+**Cross-channel References:**
+
+- [Supported Messaging Apps Content Types](/connect/docs/supported-chat-apps-content-type) - The per-channel content type matrix
+- [Send Message](/connect/reference/send-message) - The generated API reference for the send endpoint
+
+**External:**
+
+- [LINE Messaging API: Message objects](https://developers.line.biz/en/reference/messaging-api/#message-objects) - LINE's own field-level specification and limits
+- [LINE Messaging API: Message types](https://developers.line.biz/en/docs/messaging-api/message-types/) - LINE's message type overview with screenshots
+
+---
+
+## LINE Official Notification (LON)
+
+
+LINE Official Notification is a separate product from the LINE Official Account channel, not a message type within it. It has its own endpoint, its own sub-account and bearer token, its own recipient key, its own template approval workflow, and, uniquely among the LINE products on 8x8, a delivery receipt. This page documents the complete request contract, including the full icon set and every content property. For what LON reports back after a send, see [LON Delivery Receipts](./lon-webhook.md).
+
+## How LON Differs from the LINE Official Account Channel
+
+| Feature | LINE Official Notification | LINE Official Account |
+|---|---|---|
+| **Channel type value** | `LineNotification` | `line` |
+| **Direction** | Outbound only, strictly one-way | Inbound and outbound |
+| **Recipient keyed by** | `user.msisdn` (phone number) | `user.channelUserId` (LINE user ID) |
+| **Endpoint** | `POST /api/v1/subaccounts/{subAccountId}/lon` | `POST /api/v1/subaccounts/{subAccountId}/messages` |
+| **Templates** | Required, and must be pre-approved by LINE | Not supported |
+| **Content types** | Text and Button, inside an approved template | Text, Image, Video, Audio, Location |
+| **Character limit** | 500 characters per template | 5,000 characters per text message |
+| **SMS fallback** | `smsFallback` object on the request body | `content.sms` on the shared request body |
+| **Delivery statuses reported** | Accepted, Sent, **Delivered** | Accepted, Sent |
+| **Sub-account and API token** | Its own | Its own |
+
+> **Note**
+>
+> LON identifies the recipient by **phone number**, while the LINE Official Account channel identifies them by **LINE user ID**. These are not interchangeable. Whether the LON service resolves a LINE recipient server-side from the phone number, and what happens when no LINE user matches, is not described in any available source. What is documented is the request contract: `/lon` accepts `user.msisdn`. One LINE Official Account can serve both products at once, but each product needs its own 8x8 sub-account, precisely because of this difference in addressing. See [The LINE Official Account](./concepts-fundamentals.md#the-line-official-account).
+
+<!-- NEEDS SOURCE: N5. The mechanism behind LON's phone-number keying is unconfirmed. Do not state or imply that LON performs a phone-number-to-LINE-user lookup, and do not describe fallback behaviour when no LINE user matches, until engineering confirms it. -->
+
+## Template Approval
+
+**LINE Official Notification is strictly one-way, and every template must be approved by LINE before it can be sent.**
+
+- You cannot compose freeform LON content at send time. You populate an approved template.
+- New templates are submitted through 8x8. Contact [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) to submit a template for LINE approval.
+- Plan template approval into your project schedule the same way you plan account verification. It is a dependency on LINE, not on 8x8.
+
+## Endpoint
+
+**Endpoint:**
+
+```json
+POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/lon
+```
+
+**Path Parameters:**
+
+- `{subAccountId}`: The sub-account provisioned for LINE Official Notification. 3 to 50 characters, restricted to letters, digits, and the characters `-`, `.`, `_`, and `&`. This is **not** the same sub-account as your LINE Official Account channel.
+
+Authenticate with `Authorization: Bearer {apiKey}`, using the API key for the LON sub-account. See [Authentication](./getting-started.md#authentication).
+
+The `user` and `content` properties are required in the request body.
+
+Adjust the base URL for your platform region. See [Base URLs](./getting-started.md#base-urls).
+
+## Request Body
+
+The example below populates every available component. Remove the components your approved template does not use.
+
+**Sample JSON Payload:**
+
+```json
+{
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "clientMessageId": "<YOUR_MESSAGE_ID>",
+  "content": {
+    "title": "Event reminder",
+    "company": "8x8",
+    "icon": "calendarCheck",
+    "greeting": "Can't wait to see you there!",
+    "emphasis": {
+      "label": "Event name",
+      "Content": "8x8 Conference"
+    },
+    "list": [
+      { "label": "Date:", "content": "Tue 26/09/2026" },
+      { "label": "Time:", "content": "09:00 - 16:00" },
+      { "label": "Venue:", "content": "8x8 Office, 17th Fl." },
+      { "label": "Seat:", "content": "A-07" }
+    ],
+    "explanation": "We would like to remind you about your reservation for tomorrow's event. Registration opens at 09:00. See you soon.",
+    "actions": [
+      { "title": "View agenda", "url": "https://www.example.com/agenda" },
+      { "title": "See directions", "url": "https://www.example.com/directions" }
+    ]
+  },
+  "smsFallback": {
+    "text": "Event reminder: 8x8 Conference on Tue 26/09/2026",
+    "source": "8x8 events",
+    "encoding": "AUTO"
+  }
+}
+```
+
+![Sample LON message with all components included](./images/LON%20Event%20Reminder.png)
+
+<!-- ASSET NOTE: this screenshot already exists in the repo at docs/connect/images/85b76de-LON_Event_Reminder.png. Copy it into this section's images/ directory as "LON Event Reminder.png" when these pages are moved into docs/connect/docs/line/. -->
+
+**Key Fields:**
+
+- `user.msisdn` (required): The recipient's mobile number. International E.164 format with a leading `+` is preferred. National format is also accepted if you set `user.country`.
+- `user.country` (optional): A two-character default country code, for example `TH`, used when `msisdn` is in national format. Not needed when `msisdn` is in E.164 format.
+- `clientMessageId` (optional): Your own unique reference for the message, maximum 50 characters. Echoed back in the response and in delivery receipts.
+- `dlrCallbackUrl` (optional): A URI that overrides your account's default delivery receipt callback URL, for this message only.
+- `content.title`: The message title.
+- `content.company`: The company name shown on the notification.
+- `content.icon`: The icon displayed on the notification. One of the 38 values listed in [Icon Values](#icon-values).
+- `content.greeting`: The greeting line.
+- `content.emphasis.label`: The label of the emphasised field, for example `Event name`.
+- `content.emphasis.Content`: The value of the emphasised field, for example `8x8 Conference`.
+- `content.list[].label`: The label of a list row, for example `Date:`.
+- `content.list[].content`: The value of a list row.
+- `content.explanation`: The explanatory body text.
+- `content.actions[].title`: The label on an action button.
+- `content.actions[].url`: The destination the action button opens.
+- `smsFallback.text`: The SMS body used if SMS fallback is triggered.
+- `smsFallback.source`: The SMS sender ID, the "From" field. Maximum 16 characters.
+- `smsFallback.encoding`: One of `AUTO`, `GSM7`, or `UCS2`.
+
+> **Important:** Use capital-C `Content` inside the `emphasis` object, as shown above. This matches the currently published usage sample and 8x8's internal test collection. Be aware that the API schema defines lowercase `content`, but the published samples consistently use `Content`.
+
+> **Note**
+>
+> Three further schema details worth knowing if you generate a client from the specification. First, `content.actions[].url` is the property name in the schema, and it is what both the published usage sample and 8x8's internal test collection use, but the schema's own inline example writes `content` instead of `url` for the link target. Use `url`. Second, the schema declares `format: uri` on `content.company`, while every example, including the schema's own, puts a plain company name there. Send the company name. Third, `smsFallback.encoding` is defined as an uppercase enum (`AUTO`, `GSM7`, `UCS2`) in the schema, but the published usage sample uses lowercase `auto`. Use the uppercase form shown above, since it matches the schema's enum exactly. The lowercase sample value may not validate.
+
+> **Note**
+>
+> The `user` object on `/lon` reuses the shared Messaging Apps user schema, so it also lists `channelUserId`, which is the recipient key on the LINE Official Account channel. Only `msisdn`, with optional `country`, is meaningful for LINE Official Notification.
+
+## Icon Values
+
+`content.icon` accepts exactly one of the following 38 values. This is the complete enumeration from the API schema.
+
+**Possible Icon Values:**
+
+- `userPlus`
+- `chatEllipsis`
+- `phone`
+- `note`
+- `gear`
+- `bell`
+- `checkCircle`
+- `slashCircle`
+- `search`
+- `link`
+- `wallet`
+- `store`
+- `mapMarker`
+- `idCard`
+- `utensils`
+- `medicalKit`
+- `train`
+- `planeDeparture`
+- `questionCircle`
+- `infoCircle`
+- `boxCheck`
+- `calendarCheck`
+- `calendar`
+- `file`
+- `envelope`
+- `usdCircle`
+- `thbCircle`
+- `usdCircleSend`
+- `thbCircleSend`
+- `invoice`
+- `couponStar`
+- `coupon`
+- `creditCard`
+- `starCard`
+- `shoppingBag`
+- `megaphone`
+- `shieldCheck`
+- `history`
+
+> **Note**
+>
+> No available source publishes a rendered preview of each icon. Pick the value whose name matches your notification's purpose, and confirm the rendering in a test send before going live.
+
+## Character Limits
+
+- **500 characters** per LINE Official Notification template.
+- **16 characters** maximum on `smsFallback.source`.
+
+The 500-character limit is a template-level limit, so it constrains the total content you can place across the title, greeting, emphasis, list, and explanation components of one notification.
+
+## Response
+
+A successful send returns `200`.
+
+**Response:**
+
+```json
+{
+  "umid": "<UNIQUE_MESSAGE_ID>",
+  "user": {
+    "msisdn": "+15551234567"
+  },
+  "clientMessageId": "<YOUR_MESSAGE_ID>",
+  "status": {
+    "state": "queued",
+    "timestamp": "2026-07-29T08:19:45.99Z"
+  }
+}
+```
+
+**Key Fields:**
+
+- `umid`: The unique message ID (a GUID) generated by the 8x8 platform on submission. This is the value that identifies the message in every subsequent delivery receipt.
+- `status.state`: `queued` on successful submission. This means the request was accepted and queued, not that the message was delivered.
+- `clientMessageId`: Your own reference, echoed back.
+- `user`: Echoes the recipient you submitted.
+
+The error responses are the same as for the LINE Official Account send endpoint: `400` for a bad request, `401` for a failed authentication, and `500` for an internal error. See [Error responses](./getting-started.md#error-responses).
+
+Delivery receipts for LON, which are the only LINE delivery receipts on the platform, are documented in [LON Delivery Receipts](./lon-webhook.md).
+
+## Related Resources
+
+**For Developers:**
+
+- [LON Delivery Receipts](./lon-webhook.md) - The v9 envelope, the status enumerations, asynchronous failures, and the `dlrCallbackUrl` override on `/lon`
+- [LINE Official Account Webhooks](./loa-webhook.md) - Callback registration, retry behaviour, and the synchronous error responses shared by both products
+- [Getting Started with LINE over the 8x8 API](./getting-started.md) - Authentication and base URLs, which apply to LON as well
+- [LINE Official Account: Behaviour, Messages, and Constraints](./loa-messaging.md) - The two-way channel and its payloads
+
+**Important Concepts:**
+
+- [Sub-accounts and Authentication](./loa-messaging.md#sub-accounts-and-authentication) - Why LON needs its own sub-account and key
+- [The LINE Ecosystem and Account Model](./concepts-fundamentals.md#the-line-official-account) - How one Official Account serves both products
+
+**Cross-channel References:**
+
+- [Supported Messaging Apps](/connect/docs/list-of-supported-chatapps-channels) - Channel type values and supported directions
+- [Supported Messaging Apps Content Types](/connect/docs/supported-chat-apps-content-type) - The per-channel content type matrix, including LON's 500-character limit
+- [Send LON Message](/connect/reference/send-lon-message) - The generated API reference for `POST /api/v1/subaccounts/{subAccountId}/lon`
+
+---
+
+## LINE Reference and Resources
+
+
+A lookup companion for the LINE section. LINE and 8x8 use different words for overlapping objects, and the object LINE calls a user ID is the field 8x8 calls `channelUserId`. This page gives you the vocabulary on both sides and the mapping between them.
+
+## Glossary: LINE Terms
+
+|Term|Definition|
+|---|---|
+|**LINE Official Account (OA)**|The LINE account that represents your business. Users add it as a friend, and messages are exchanged with those friends. On the 8x8 platform this is the `line` channel type value.|
+|**Unverified Account**|An Official Account that has not been reviewed by LINE. Available to any company, organization, or individual. Does not appear in LINE in-app search results.|
+|**Verified Account**|An Official Account that has passed LINE's review. Receives a Verified account badge and appears in LINE in-app search results. Review applications are accepted only for Japan, Taiwan, and Thailand, and take about 10 business days.|
+|**Premium Account**|A tier that LINE may assign against criteria it sets. LINE states it has no responsibility to disclose those criteria. You cannot apply for it the way you apply for a Verified Account.|
+|**Basic ID**|The account ID that LINE assigns to an Official Account automatically.|
+|**Premium ID**|A purchased account ID of your own choosing, replacing the basic ID. Up to 18 characters using half-width letters, numbers, dots, hyphens, and underscores. USD 12 per year, auto-renewing annually, non-refundable, and not changeable while in use. On the 8x8 provisioning form this is the **OA ID** field.|
+|**Business ID**|LINE's common login for its business and developer services, including LINE Official Account Manager and the LINE Developers Console. Up to 100 Official Accounts can be created under one Business ID.|
+|**Provider**|The LINE entity that owns your channels. Significant because LINE issues a **different** user ID for the same person under a different provider.|
+|**Channel**|A communication path used to access features of the LINE Platform. Types include the Messaging API channel, the LINE Login channel, and the LINE MINI App channel.|
+|**Messaging API channel**|The channel created when you enable the Messaging API on an Official Account. This is what 8x8 connects to.|
+|**Channel ID**|The unique identifier of a Messaging API channel, found in LINE Official Account Manager under Settings > Messaging API (also visible in the LINE Developers Console). Required by 8x8 when you bring your own Official Account.|
+|**Channel Secret**|A private key known only to LINE and the developer, found on the channel's Basic settings tab. LINE uses it as the hash key when signing webhooks. Admin privileges are required to retrieve or reissue it.|
+|**Channel access token**|An opaque string proving an application may use a channel. LINE issues four kinds, with lifetimes from 15 minutes to indefinite. 8x8 manages these on your behalf.|
+|**User ID**|LINE's opaque identifier for a user, format `U[0-9a-f]{32}`. Distinct from a display name and from the LINE ID a user registers to be searchable. On the 8x8 platform it is `channelUserId`, in both directions: you send to `user.channelUserId` and it arrives back in `payload.user.channelUserId`.|
+|**Friend**|A LINE user who has added your Official Account. Messages are exchanged with friends, and deleting the account deletes all of them.|
+|**Follow event**|LINE's webhook event fired when a user adds your Official Account as a friend. This is the moment a user ID first becomes available to you.|
+|**OA Chat package**|A separately purchased subscription add-on for an Official Account, bought in LINE Official Account Manager. If cancelled, it remains usable to the end of the current month, and tags and notes already created are not deleted.|
+|**LINE Official Account Manager**|LINE's own console for an Official Account. Where you enable the Messaging API and retrieve the Channel ID, Channel Secret, and Webhook URL for it, manage the profile and search visibility, purchase plans and Premium IDs, manage administrators, and view Insights.|
+|**LINE Developers Console**|LINE's advanced console for channels, also covering other channel types such as LINE Login and LINE MINI App. The Channel ID, Channel Secret, and Webhook URL for a Messaging API channel are visible here too, but LINE Official Account Manager's Messaging API settings page is the primary place 8x8 documentation points you to.|
+|**Insights**|LINE's own account statistics, inside LINE Official Account Manager. One of only two features that remain usable after an Official Account is deleted, the other being billing.|
+|**Collaborative Account**|An advertising menu LINE provides separately, which enables the narrow published exceptions to LINE's prohibition on advertising for third parties.|
+
+## Glossary: 8x8 Terms
+
+|Term|Definition|
+|---|---|
+|**8x8 Account**|Your primary customer account with 8x8.|
+|**Sub-account**|A logical grouping within your 8x8 Account that owns credentials and channels. All Messaging Apps calls are made in the context of a `subAccountId`. LINE requires a new sub-account, not an existing SMS sub-account, and LINE Official Notification requires its own sub-account separate from the LINE Official Account channel.|
+|**Channel type value**|The string that identifies a channel in the platform. `line` for the LINE Official Account channel, `LineNotification` for LINE Official Notification, and `Line` in the `channels` fallback override array.|
+|**API key**|The bearer token that authenticates a Messaging Apps request, generated per sub-account in the 8x8 Connect portal and sent as `Authorization: Bearer {apiKey}`.|
+|**`umid`**|The unique message ID, a GUID generated by the 8x8 platform when a message is submitted. Returned in the send response, and repeated in every delivery receipt on channels that produce one.|
+|**`clientMessageId`**|Your own reference for a message, maximum 50 characters. Echoed back in the send response, and in delivery receipts on channels that produce one.|
+|**`batchId` and `clientBatchId`**|The equivalent identifiers for a batch of messages, 8x8-generated and customer-supplied respectively. Present in delivery receipts for messages sent as a batch.|
+|**Delivery receipt (DR)**|A `POST` webhook the 8x8 platform sends to your callback URL when a message's status changes. Carries `eventType` of `outbound_message_status_changed`, currently in the v9 format. Both LINE products produce delivery receipts. The `line` channel reports Accepted and Sent. LINE Official Notification additionally reports Delivered.|
+|**Inbound message webhook**|A `POST` webhook the 8x8 platform sends to your callback URL when a user sends a message. Carries `eventType` of `inbound_message_received`, currently in the v3 format.|
+|**Callback URL**|The URL on your server where 8x8 delivers webhooks. One URL serves every Messaging Apps channel, and the channel field identifies the source. Registered with the Webhooks Configuration API, and overridable per message with `dlrCallbackUrl`.|
+|**Channel fallback**|A configured sequence of channels used to reach a recipient, with a wait time between each. Set up by the 8x8 team, and overridable per message with the `channels` array. The `line` channel reports Accepted and Sent, which the fallback chain can use to evaluate whether to proceed.|
+|**8x8 Connect**|The customer portal, where you generate API keys, manage sub-accounts, and view Messaging Apps analytics.|
+|**Messaging Apps**|The 8x8 product that provides messaging over LINE, WhatsApp, Viber, RCS, Zalo, and other chat channels.|
+
+## Term Mapping
+
+The same object often has one name in LINE's console and another in an 8x8 payload. This table is the bridge.
+
+| LINE term | Where it surfaces on 8x8 |
+|---|---|
+| **LINE user ID** | `user.channelUserId` on the send request, and `payload.user.channelUserId` on inbound messages. On delivery receipts from the `line` channel it appears as `payload.user.channelUserId`, and a LON receipt carries `msisdn` instead |
+| **LINE Official Account** | The `line` channel type value, and the channel configured on your sub-account |
+| **Messaging API channel** | `payload.recipient.channelId` on inbound messages |
+| **Channel ID and Channel Secret** | Supplied to 8x8 during provisioning. Not exposed in any 8x8 payload |
+| **Channel access token** | Not exposed. 8x8 authenticates to LINE for you; your application uses an 8x8 API key instead |
+| **Premium ID** | The **OA ID** field on the 8x8 provisioning information sheet |
+| **Basic ID** | No 8x8 equivalent. Assigned by LINE and visible in LINE Official Account Manager |
+| **LINE subscription plan and message allowance** | No 8x8 equivalent field. Managed in LINE Official Account Manager |
+| **LINE Insights** | No 8x8 equivalent. 8x8 volume reporting is separate, in [Messaging Apps Analytics](/connect/docs/messaging-apps) |
+| **Follow event** | Surfaces as an inbound message webhook carrying `channelUserId`. LINE's raw event types are not passed through |
+| **LINE audio `duration` (milliseconds)** | `content.audio.duration` in **seconds**. Do not copy a value across |
+| **LINE location `title`** | `content.location.name` |
+
+## API Reference Links
+
+This section documents guides and payload catalogues. For the complete generated specification, use the API reference.
+
+- **Send LINE Official Account message:** `POST /api/v1/subaccounts/{subAccountId}/messages`
+
+  - See: [Send Your First Message](./getting-started.md#send-your-first-message)
+  - See: [LINE Official Account: Behaviour, Messages, and Constraints](./loa-messaging.md)
+  - See: [Send Message API reference](/connect/reference/send-message)
+
+- **Send LINE Official Notification message:** `POST /api/v1/subaccounts/{subAccountId}/lon`
+
+  - See: [Request Body](./official-notification-lon.md#request-body)
+  - See: [Icon Values](./official-notification-lon.md#icon-values)
+  - See: [Send LON Message API reference](/connect/reference/send-lon-message)
+
+- **Register a webhook callback URL:** `POST /api/v1/accounts/{accountId}/webhooks`
+
+  - See: [Configuring Your Webhook](./loa-webhook.md#configuring-your-webhook)
+  - See: [Inbound Messages](./loa-webhook.md#inbound-messages)
+  - See: [LON Delivery Receipts](./lon-webhook.md)
+  - See: [Webhooks Configuration API reference](/connect/reference/add-webhooks-1)
+
+## Additional Resources
+
+**8x8 Cross-channel References:**
+
+- [Supported Messaging Apps](/connect/docs/list-of-supported-chatapps-channels) - Channel type values and supported directions
+- [Supported Messaging Apps Content Types](/connect/docs/supported-chat-apps-content-type) - Per-channel content types and character limits
+- [Inbound Messaging Apps message](/connect/docs/inbound-chatapps-message) - The canonical v3 inbound envelope
+- [Delivery receipts for Outbound Messaging Apps](/connect/docs/delivery-receipts-for-outbound-chatapps) - The canonical v9 delivery receipt envelope
+- [Message status reference](/connect/reference/message-status-references) - The `status` object and its enumerations
+- [Messaging Apps Delivery Error Codes](/connect/docs/delivery-error-codes#general-error-codes) - Delivery receipt error codes
+- [Getting started with Messaging API](/connect/docs/messaging-apps-api-get-started) - Cross-channel authentication and server regions
+
+**LINE's Own References:**
+
+- [LINE Messaging API reference](https://developers.line.biz/en/reference/messaging-api/) - Field-level specification, limits, and rate limits
+- [LINE Official Account Guidelines](https://terms2.line.me/official_account_guideline_th?lang=en) - Account types, screening, prohibited activities, and penalties
+- [LINE Official Account Premium ID Terms of Use](https://terms2.line.me/official_account_premiumid_terms_oth) - Premium ID rules and fees
+- [LINE Official Account Manager](https://manager.line.biz/) - The Official Account console
+- [LINE Developers Console](https://developers.line.biz/console/) - The channel console
+
+---
+
 ## Supported Messaging Apps
 
 
