@@ -1,0 +1,310 @@
+---
+title: LINE Message API Library
+sidebar_label: 'Message API Library'
+---
+
+import LineTextMsg from './images/line-text-message.png';
+import LineImageMsg from './images/line-image-message.png';
+import LineVideoMsg from './images/line-video-message.png';
+import LineAudioMsg from './images/line-audio-message.png';
+import LineLocationMsg from './images/line-location-message.png';
+
+This page provides a complete library of LINE Official Account message API payloads for every supported content type. For channel behaviour, recipient addressing, and message counting, see [LINE Official Account (Two-way)](./loa-messaging.md).
+
+> **Note**
+>
+> Every 8x8 LINE example writes `type` in **Title Case** (`Text`, `Image`, `Video`, `Audio`, `Location`). The shared `/messages` OpenAPI schema lists the enum in lowercase, but its own inline example uses Title Case. No available source states that the field is case-insensitive, so use Title Case exactly as shown.
+
+All character, count, and file-size limits on this page are **LINE's**. No available source states which of them the 8x8 platform pre-validates before forwarding a message to LINE.
+
+**Endpoint:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<table>
+<colgroup>
+<col style={{width: '200px', minWidth: '200px', maxWidth: '200px'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '200px'}}>Message Type</th>
+<th style={{verticalAlign: 'top'}}>API Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Text
+
+<img src={LineTextMsg} alt="LINE text message example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+<small>Source: <a href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Developers</a></small>
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Text",
+  "content": {
+    "text": "Hello from 8x8 Messaging API"
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `content.text` (required): The message body.
+
+**LINE Limits:**
+
+- Maximum **5,000 characters**.
+- LINE counts in **UTF-16 code units**. Emoji and some Kanji count as more than one character.
+- LINE emoji placeholders are replaced with alternative text when counting, so a message containing LINE emoji can exceed the limit unexpectedly.
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Image
+
+<img src={LineImageMsg} alt="LINE image message example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+<small>Source: <a href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Developers</a></small>
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Image",
+  "content": {
+    "url": "https://www.example.com/original.png",
+    "image": {
+      "thumbnail": "https://www.example.com/thumbnail.png"
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `content.url` (required): Public URL of the full-size image.
+- `content.image.thumbnail`: URL of the thumbnail preview image.
+
+**LINE Limits:**
+
+| Constraint | Full-size image | Preview image |
+|---|---|---|
+| **Format** | JPEG or PNG | JPEG or PNG |
+| **Max file size** | 10 MB | 1 MB |
+| **Protocol** | HTTPS (TLS 1.2+) | HTTPS (TLS 1.2+) |
+| **Max URL length** | 2,000 characters | 2,000 characters |
+
+> **Note:** LINE may use the full-size image as the preview instead of the thumbnail you supplied, depending on the device state.
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Video
+
+<img src={LineVideoMsg} alt="LINE video message example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+<small>Source: <a href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Developers</a></small>
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Video",
+  "content": {
+    "url": "https://www.example.com/original.mp4",
+    "video": {
+      "thumbnail": "https://www.example.com/preview.jpg"
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `content.url` (required): Public URL of the video file.
+- `content.video.thumbnail`: URL of the preview image shown before playback.
+- `content.video.filesize` (optional): Video file size, in **bytes**.
+- `content.video.duration` (optional): Duration of the video, in **seconds**.
+
+**LINE Limits:**
+
+| Constraint | Video file | Preview image |
+|---|---|---|
+| **Format** | mp4 | JPEG or PNG |
+| **Max file size** | 200 MB | 1 MB |
+| **Protocol** | HTTPS (TLS 1.2+) | HTTPS (TLS 1.2+) |
+| **Max URL length** | 2,000 characters | 2,000 characters |
+
+> **Note:** LINE recommends the video and preview image share the same aspect ratio. A very wide or very tall video may be cropped during playback.
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Audio
+
+<img src={LineAudioMsg} alt="LINE audio message example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+<small>Source: <a href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Developers</a></small>
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Audio",
+  "content": {
+    "url": "https://www.example.com/original.mp3",
+    "audio": {
+      "duration": 300
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `content.url` (required): Public URL of the audio file.
+- `content.audio.duration` (**required**): Duration of the audio, in **seconds**.
+
+> **Important:** The 8x8 field is in **seconds**. LINE's native field is in **milliseconds** (LINE's example: `60000` for one minute). Do not copy a duration value from LINE's documentation into an 8x8 request.
+
+**LINE Limits:**
+
+- **Format:** mp3 or m4a.
+- **Max file size:** 200 MB.
+- **Protocol:** HTTPS (TLS 1.2 or later).
+- **Max URL length:** 2,000 characters.
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Location
+
+<img src={LineLocationMsg} alt="LINE location message example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+<small>Source: <a href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Developers</a></small>
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "channelUserId": "U3d3edab4f36c6292e6d8a8131f141b8b"
+  },
+  "type": "Location",
+  "content": {
+    "location": {
+      "latitude": 1.285651,
+      "longitude": 103.847564,
+      "name": "8x8 Office Singapore",
+      "address": "One George Street, Singapore 049145"
+    }
+  }
+}
+```
+
+</details>
+
+**Key Fields:**
+
+- `content.location.latitude` (required): Latitude, as a number.
+- `content.location.longitude` (required): Longitude, as a number.
+- `content.location.name`: Location name (maps to LINE's `title`).
+- `content.location.address`: Street address.
+
+**LINE Limits:**
+
+- **Title:** maximum 100 characters.
+- **Address:** maximum 100 characters.
+
+> **Note:** The 8x8 schema marks only `latitude` and `longitude` as required, but LINE marks `title` and `address` as required too. Supply `name` and `address` on every location send.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Media Hosting
+
+Host your media yourself and pass a **publicly reachable HTTPS URL** in `content.url`. Every LINE send example, both in the published usage samples and in 8x8's internal test collection, references an external public URL.
+
+The URL must satisfy LINE's requirements: HTTPS with TLS 1.2 or later, percent-encoded using UTF-8, and no longer than 2,000 characters.
+
+## Related Resources
+
+**For Developers:**
+
+- [LINE Official Account (Two-way)](./loa-messaging.md) - How the channel addresses a recipient, consent, authentication, and message counting
+- [Getting Started with LINE over the 8x8 API](./getting-started.md) - Authentication, base URLs, and the optional request properties
+- [LINE Official Account Webhooks](./loa-webhook.md) - Inbound messages, delivery receipts, and retry behaviour
+
+**Cross-channel References:**
+
+- [Supported Messaging Apps Content Types](/connect/docs/supported-chat-apps-content-type) - The per-channel content type matrix
+- [Send Message](/connect/reference/send-message) - The generated API reference for the send endpoint
+
+**External:**
+
+- [LINE Messaging API: Message objects](https://developers.line.biz/en/reference/messaging-api/#message-objects) - LINE's own field-level specification and limits
+- [LINE Messaging API: Message types](https://developers.line.biz/en/docs/messaging-api/message-types/) - LINE's message type overview with screenshots

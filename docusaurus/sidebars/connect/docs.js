@@ -114,10 +114,40 @@ const sidebarConfig = [
           'connect/docs/rcs/billing',
         ],
       },
-      'connect/docs/usage-samples-line',
+      {
+        type: 'category',
+        label: 'LINE',
+        link: { type: 'doc', id: 'connect/docs/line/line-hub' },
+        collapsed: true,
+        items: [
+          'connect/docs/line/concepts-fundamentals',
+          'connect/docs/line/account-provisioning-onboarding',
+          'connect/docs/line/getting-started',
+          {
+            type: 'category',
+            label: 'LINE Official Account (Two-way)',
+            link: { type: 'doc', id: 'connect/docs/line/loa-messaging' },
+            collapsed: true,
+            items: [
+              'connect/docs/line/message-api-library',
+              'connect/docs/line/loa-webhook',
+            ],
+          },
+          {
+            type: 'category',
+            label: 'LINE Official Notification (One-way)',
+            link: { type: 'doc', id: 'connect/docs/line/official-notification-lon' },
+            collapsed: true,
+            items: [
+              'connect/docs/line/lon-webhook',
+            ],
+          },
+          'connect/docs/line/governance-security',
+          'connect/docs/line/reference-resources',
+        ],
+      },
       'connect/docs/usage-samples-viber',
       'connect/docs/usage-samples-zns',
-      'connect/docs/usage-samples-line-official-notification',
     ],
   },
   {
