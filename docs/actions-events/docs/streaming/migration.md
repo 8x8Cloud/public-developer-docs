@@ -34,9 +34,9 @@ Migrate to the new Pulsar API with native WebSocket protocol.
 - [Message Format](./message-format.mdx#payload-decoding) - How to decode Pulsar message wrappers
 - [Code Examples](./examples/golang.md) - Working implementations in Go, Java, Python, Node.js, and Browser
 
-### Option 2: Adapter Migration (Coming Soon)
+### Option 2: Adapter Migration
 
-Switch to the backwards-compatible adapter endpoint with no code changes.
+Switch to the backwards-compatible adapter endpoint with no code changes. The adapter is intended for existing integrations that cannot move to Pulsar directly — new integrations should use Option 1.
 
 **Benefits:**
 - **No code changes**: Existing clients work without modification
@@ -46,7 +46,9 @@ Switch to the backwards-compatible adapter endpoint with no code changes.
 **What's required:**
 - Update endpoint URL only
 
-**Endpoint:** `wss://[adapter-endpoint-tbd]/...` *(URL to be announced)*
+**Endpoint:** `wss://vcc-sapi-bridge-{region}.8x8.com/...` — for example, UK3 uses `wss://vcc-sapi-bridge-euw2.8x8.com/...`
+
+The adapter is deployed in the same regions as the Pulsar API and uses the same `{region}` suffixes — see [Regional Endpoints](./connection.md#regional-endpoints) for the region list. The URL path is unchanged from the legacy Streaming API, so existing clients only need the hostname replaced.
 
 ### Option 3: Stay on Legacy
 
@@ -57,7 +59,7 @@ Continue using the current legacy SAPI endpoint.
 - Security updates and critical bug fixes only
 - No new features or performance improvements
 
-**Endpoint:** `event-streaming.sapi.8x8.com`
+**Endpoint:** `wss://vcc-{cluster}.8x8.com/api/streaming/v1/clientconnect/subscribe/...` (see [Legacy Streaming API Documentation](../legacy-streaming-api-overview.md))
 
 ## Migration Timeline
 
