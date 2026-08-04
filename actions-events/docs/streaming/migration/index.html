@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.d3db3184.css">
-<script src="/assets/js/runtime~main.d67e238b.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.b0cf5dbf.js" defer="defer"></script>
 <script src="/assets/js/main.7f0b0d89.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -46,8 +46,8 @@
 <li><a href="/actions-events/docs/streaming/message-format#payload-decoding">Message Format</a> - How to decode Pulsar message wrappers</li>
 <li><a href="/actions-events/docs/streaming/examples/golang">Code Examples</a> - Working implementations in Go, Java, Python, Node.js, and Browser</li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="option-2-adapter-migration-coming-soon">Option 2: Adapter Migration (Coming Soon)<a href="#option-2-adapter-migration-coming-soon" class="hash-link" aria-label="Direct link to Option 2: Adapter Migration (Coming Soon)" title="Direct link to Option 2: Adapter Migration (Coming Soon)" translate="no">​</a></h3>
-<p>Switch to the backwards-compatible adapter endpoint with no code changes.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="option-2-adapter-migration">Option 2: Adapter Migration<a href="#option-2-adapter-migration" class="hash-link" aria-label="Direct link to Option 2: Adapter Migration" title="Direct link to Option 2: Adapter Migration" translate="no">​</a></h3>
+<p>Switch to the backwards-compatible adapter endpoint with no code changes. The adapter is intended for existing integrations that cannot move to Pulsar directly — new integrations should use Option 1.</p>
 <p><strong>Benefits:</strong></p>
 <ul>
 <li><strong>No code changes</strong>: Existing clients work without modification</li>
@@ -58,7 +58,8 @@
 <ul>
 <li>Update endpoint URL only</li>
 </ul>
-<p><strong>Endpoint:</strong> <code>wss://[adapter-endpoint-tbd]/...</code> <em>(URL to be announced)</em></p>
+<p><strong>Endpoint:</strong> <code>wss://vcc-sapi-bridge-{region}.8x8.com/...</code> — for example, UK3 uses <code>wss://vcc-sapi-bridge-euw2.8x8.com/...</code></p>
+<p>The adapter is deployed in the same regions as the Pulsar API and uses the same <code>{region}</code> suffixes — see <a href="/actions-events/docs/streaming/connection#regional-endpoints">Regional Endpoints</a> for the region list. The URL path is unchanged from the legacy Streaming API, so existing clients only need the hostname replaced.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="option-3-stay-on-legacy">Option 3: Stay on Legacy<a href="#option-3-stay-on-legacy" class="hash-link" aria-label="Direct link to Option 3: Stay on Legacy" title="Direct link to Option 3: Stay on Legacy" translate="no">​</a></h3>
 <p>Continue using the current legacy SAPI endpoint.</p>
 <p><strong>Status:</strong></p>
@@ -67,7 +68,7 @@
 <li>Security updates and critical bug fixes only</li>
 <li>No new features or performance improvements</li>
 </ul>
-<p><strong>Endpoint:</strong> <code>event-streaming.sapi.8x8.com</code></p>
+<p><strong>Endpoint:</strong> <code>wss://vcc-{cluster}.8x8.com/api/streaming/v1/clientconnect/subscribe/...</code> (see <a href="/actions-events/docs/legacy-streaming-api-overview">Legacy Streaming API Documentation</a>)</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="migration-timeline">Migration Timeline<a href="#migration-timeline" class="hash-link" aria-label="Direct link to Migration Timeline" title="Direct link to Migration Timeline" translate="no">​</a></h2>
 <p>There is <strong>no forced deadline</strong> for migration. The legacy API will continue to operate through a backwards-compatible adapter.</p>
 <p>However:</p>
@@ -80,6 +81,6 @@
 <ul>
 <li><a href="/actions-events/docs/legacy-streaming-api-overview">Legacy Streaming API Documentation</a></li>
 <li><a href="https://pulsar.apache.org/docs/" target="_blank" rel="noopener noreferrer">Apache Pulsar Documentation</a></li>
-</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/actions-events/docs/streaming/troubleshooting"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Troubleshooting</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/actions-events/docs/streaming/examples/golang"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Go Client Example</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#migration-options" class="table-of-contents__link toc-highlight">Migration Options</a><ul><li><a href="#option-1-full-migration-recommended" class="table-of-contents__link toc-highlight">Option 1: Full Migration (Recommended)</a></li><li><a href="#option-2-adapter-migration-coming-soon" class="table-of-contents__link toc-highlight">Option 2: Adapter Migration (Coming Soon)</a></li><li><a href="#option-3-stay-on-legacy" class="table-of-contents__link toc-highlight">Option 3: Stay on Legacy</a></li></ul></li><li><a href="#migration-timeline" class="table-of-contents__link toc-highlight">Migration Timeline</a></li><li><a href="#related-resources" class="table-of-contents__link toc-highlight">Related Resources</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/actions-events/docs/streaming/troubleshooting"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Troubleshooting</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/actions-events/docs/streaming/examples/golang"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Go Client Example</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#migration-options" class="table-of-contents__link toc-highlight">Migration Options</a><ul><li><a href="#option-1-full-migration-recommended" class="table-of-contents__link toc-highlight">Option 1: Full Migration (Recommended)</a></li><li><a href="#option-2-adapter-migration" class="table-of-contents__link toc-highlight">Option 2: Adapter Migration</a></li><li><a href="#option-3-stay-on-legacy" class="table-of-contents__link toc-highlight">Option 3: Stay on Legacy</a></li></ul></li><li><a href="#migration-timeline" class="table-of-contents__link toc-highlight">Migration Timeline</a></li><li><a href="#related-resources" class="table-of-contents__link toc-highlight">Related Resources</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
 </body>
 </html>
