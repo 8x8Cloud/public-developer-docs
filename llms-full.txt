@@ -45392,6 +45392,7 @@ WhatsApp object description
 | :---------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | providerErrorCode | string         | WhatsApp's own error code. Only present if there was an error                                                             |
 | pricingCategory   | string         | WhatsApp's pricing category as defined by Meta. Only included with sent status, and one of either delivered or read status |
+| templateId        | string         | Template ID used by WhatsApp to deliver the message. Only present for messages sent via the WhatsApp Direct Send API       |
 
 > 🚧
 >
@@ -45533,7 +45534,8 @@ This receipt comes back from WhatsApp, so the `user` object includes the new `ch
       "timestamp": "2026-07-03T03:40:54.16Z"
     },
     "whatsapp": {
-      "pricingCategory": "marketing"
+      "pricingCategory": "marketing",
+      "templateId": "1281032340757288"
     },
     "outboundContent": {
       "channel": "whatsapp",
@@ -45571,7 +45573,8 @@ Template with an image header, a URL button, and a quick-reply button:
       "timestamp": "2026-07-03T03:40:54.16Z"
     },
     "whatsapp": {
-      "pricingCategory": "marketing"
+      "pricingCategory": "marketing",
+      "templateId": "1281032340757288"
     },
     "outboundContent": {
       "channel": "whatsapp",
@@ -45637,7 +45640,8 @@ Interactive list message (note `meta.interactiveType`):
       "timestamp": "2026-07-03T03:40:54.16Z"
     },
     "whatsapp": {
-      "pricingCategory": "marketing"
+      "pricingCategory": "marketing",
+      "templateId": "1281032340757288"
     },
     "outboundContent": {
       "channel": "whatsapp",
@@ -45700,7 +45704,8 @@ This receipt also comes back from WhatsApp, so the `user` object includes `chann
       "timestamp": "2026-07-03T05:12:41.30Z"
     },
     "whatsapp": {
-      "pricingCategory": "marketing"
+      "pricingCategory": "marketing",
+      "templateId": "1281032340757288"
     }
   }
 }
