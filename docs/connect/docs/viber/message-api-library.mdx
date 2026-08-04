@@ -1,0 +1,372 @@
+---
+title: Promotional Message API Library
+sidebar_label: 'Promotional Message API Library'
+slug: /connect/docs/viber/message-types
+---
+
+import PromotionalImg from './images/Promotional Viber Business Messages.png';
+import TextMessageImg from './images/Text Message.png';
+import ImageMessageImg from './images/Image Message.png';
+import TextImageMessageImg from './images/Text Image Message.png';
+import VideoMessageImg from './images/Video Message.png';
+import TextVideoMessageImg from './images/Text Video Message.png';
+import FileMessageImg from './images/File Message.png';
+import TextButtonMessageImg from './images/Text Button Message.png';
+import TextImageButtonMessageImg from './images/Text Image Button Message.png';
+import TextVideoButtonMessageImg from './images/Text Video Button Message.png';
+
+<style>{`
+  .theme-code-block pre {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+`}</style>
+
+Promotional messages use free-form content: you compose the text, media, and buttons yourself and supply them in the request. No template or approval step is required. Each example targets `POST /api/v1/subaccounts/{subAccountId}/messages`.
+
+<img src={PromotionalImg} alt="Promotional Viber Business Messages showing marketing and campaign examples" style={{maxWidth: '100%', display: 'block', marginBottom: '1.5rem'}} />
+
+<small>Source: <a href="https://www.forbusiness.viber.com/en/blog/post/the-types-and-advantages-of-viber-business-messages/" target="_blank" rel="noopener noreferrer">Viber for Business: The Types and Advantages of Viber Business Messages</a></small>
+
+<table>
+<colgroup>
+<col style={{width: '200px', minWidth: '200px', maxWidth: '200px'}} />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th style={{verticalAlign: 'top', width: '200px'}}>Message Type</th>
+<th style={{verticalAlign: 'top'}}>API Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Text
+
+<img src={TextMessageImg} alt="Viber Text Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a plain text message using `type: "text"` with `content.text`. Limit of 1,000 characters. Supports bold, italic, strikethrough, and monospace formatting on Viber v14.6 or later.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "text",
+  "content": {
+    "text": "Here is your booking reference: ABC1234. For more information, visit https://8x8.com/1234!"
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Image
+
+<img src={ImageMessageImg} alt="Viber Image Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a single image using `type: "image"` with `content.url`. Accepted formats: jpg, jpeg, png. Maximum file size 10 MB.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "image",
+  "content": {
+    "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg"
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Text + Image
+
+<img src={TextImageMessageImg} alt="Viber Text and Image Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends an image with a text caption using `type: "image"` with `content.url` and `content.text`. Caption limit of 1,000 characters.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "image",
+  "content": {
+    "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg",
+    "text": "This is the text accompanying the image"
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Video
+
+<img src={VideoMessageImg} alt="Viber Video Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a video using `type: "video"` with `content.url` and `content.video` (filesize, duration, thumbnail). Accepted formats: 3gp, m4v, mov, mp4. Maximum file size 200 MB, duration up to 600 seconds.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "video",
+  "content": {
+    "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
+    "video": {
+      "filesize": "2700",
+      "duration": "5",
+      "thumbnail": "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg"
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Text + Video
+
+<img src={TextVideoMessageImg} alt="Viber Text and Video Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a video with a text caption using `type: "video"` with `content.url`, `content.text`, and `content.video`. Caption limit of 1,000 characters.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "video",
+  "content": {
+    "text": "this is accompanying text for the video",
+    "video": {
+      "filesize": "2700",
+      "duration": "5",
+      "thumbnail": "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg"
+    },
+    "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### File
+
+<img src={FileMessageImg} alt="Viber File Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a downloadable file using `type: "file"` with `content.url`. Accepted formats: doc, docx, pdf, xls, xlsx and others. Maximum file size 200 MB, filename up to 25 characters.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "file",
+  "content": {
+    "url": "https://www.clickdimensions.com/links/TestPDFfile.pdf"
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Text + Button
+
+<img src={TextButtonMessageImg} alt="Viber Text and Button Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a text message with a call-to-action button using `type: "buttons"` with `content.text` and `content.button` (caption + action URL). Button label limit of 30 characters, URL limit of 1,000 characters.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "buttons",
+  "content": {
+    "text": "Hello Jessie,\n\nYour order #420007 has been processed and is now ready for pickup at our MBS store. \n\nFor your convenience, the store is open from 9am to 9pm. We look forward to seeing you!\n\nBest,\nThe Snackbar Team",
+    "button": {
+      "caption": "Get Directions to Store",
+      "action": "https://maps.google.com/?q=Your+Store+Location"
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Text + Image + Button
+
+<img src={TextImageButtonMessageImg} alt="Viber Text, Image, and Button Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends an image with caption and a call-to-action button using `type: "buttons"` with `content.text`, `content.url` (image), and `content.button`. Combines text, image, and CTA button in a single rich message.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "buttons",
+  "content": {
+    "text": "🎉 Successful Purchase! 🎉\n\nHello Ana,\n\nThank you for purchasing your Singapore OCBC Skyway ticket! Your ticket is now confirmed and ready for use.\n\n📅 Date: October 15, 2023\n\n⏰ Time: 3:00 PM - 4:00 PM\n\n🎫 Ticket ID: SKY98723\n\nTo view your e-ticket, click the button below.",
+    "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg",
+    "button": {
+      "caption": "View E-ticket",
+      "action": "https://ocbcskyway.com/e-ticket/SKY1234"
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+<tr>
+<td style={{verticalAlign: 'top', width: '200px', minWidth: '200px', maxWidth: '200px'}}>
+
+### Text + Video + Button
+
+<img src={TextVideoButtonMessageImg} alt="Viber Text, Video, and Button Message Example" style={{width: '200px', maxWidth: '100%', display: 'block'}} />
+
+</td>
+<td style={{verticalAlign: 'top', wordWrap: 'break-word', overflowWrap: 'break-word'}}>
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a video with caption and a call-to-action button using `type: "video"` with `content.text`, `content.url`, `content.video`, and `content.button`. Combines text, video, and CTA button in a single rich message.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "video",
+  "content": {
+    "text": "This is the accompanying text for the video",
+    "video": {
+      "filesize": "2700",
+      "duration": "5",
+      "thumbnail": "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg"
+    },
+    "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
+    "button": {
+      "caption": "Get Directions to Store",
+      "action": "https://maps.google.com/?q=Your+Store+Location"
+    }
+  }
+}
+```
+
+</details>
+
+</td>
+</tr>
+</tbody>
+</table>

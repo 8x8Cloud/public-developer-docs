@@ -611,4 +611,5 @@ module.exports = [
   { from: '/connect/docs/moobidesk/conversations', to: '/connect/docs/converse/conversations' },
   { from: '/connect/docs/moobidesk/reports', to: '/connect/docs/converse/reports' },
   { from: '/connect/docs/moobidesk/settings', to: '/connect/docs/converse/settings' },
+  { from: '/connect/docs/usage-samples-viber', to: '/connect/docs/viber/viber-hub' },
 ];

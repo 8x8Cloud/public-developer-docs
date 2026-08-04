@@ -238,7 +238,7 @@ const cards = [
     items: [
       { label: 'WhatsApp', link: '/connect/docs/whatsapp/whatsapp-hub' },
       { label: 'RCS', link: '/connect/docs/guide-rcs' },
-      { label: 'Viber', link: '/connect/docs/usage-samples-viber' },
+      { label: 'Viber', link: '/connect/docs/viber/viber-hub' },
       { label: 'View More…', link: '/connect/docs/whatsapp/whatsapp-hub' },
     ],
   },
