@@ -42166,7 +42166,7 @@ Engage customers through the channels they already use and love.
   <Card
     title="Viber Business"
     description="Connect with customers through Viber Business Messages with rich media support."
-    link="/connect/docs/usage-samples-viber"
+    link="/connect/docs/viber/viber-hub"
   />
   <Card
     title="LINE Official"
@@ -61756,308 +61756,6 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 
 ---
 
-## Viber
-
-
-> 👍 **Please see [Messaging API](/connect/reference/send-message) for the full API reference.**
->
->
-
-## Sending a Text Message
-
-### Text only
-
-```json
-{
-    "user": {
-        "msisdn": "+6500000"
-    },
-    "type": "text",
-    "content": {
-        "text": "Here is your booking reference: ABC1234. For more information, visit https://8x8.com/1234!"
-    }
-}
-
-```
-
-The corresponding message the user will receive:
-
-![Viber text message including URL](../images/bc9e730-Viber_2.png)Viber text messages can include URL
-
----
-
-## Sending a Rich Media Message
-
-### Image only
-
-```json
-{
-    "user": {
-        "msisdn": "+6500000"
-    },
-    "type": "image",
-    "content": {
-        "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg"
-    }
-}
-
-```
-
-The corresponding message the user will receive:
-
-![Viber Rich Media: Image only message](../images/5d1713d-Image_only.png)Viber Rich Media: Image only message
-
----
-
-### Text + Image
-
-```json
-{
-  "user": {
-    "msisdn": "+650000000"
-  },
-  "type": "image",
-  "content": {
-    "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg",
-    "text": "This is the text accompanying the image"
-  }
-}
-
-```
-
-The corresponding message the user will receive:
-
-![Viber Rich Media: Text and Image](../images/33c00431b5dff03cb136d8e472fe85244fa5e586658232cf907a5ba786c87836-Viber_Text__Image.png)Viber Rich Media: Text and Image
-
----
-
-### Text + Image + Button
-
-```json
-{
-  "user": {
-    "msisdn": "+65000000"
-  },
-  "type": "buttons",
-  "content": {
-    "text": "🎉 Successful Purchase! 🎉\n\nHello Ana,\n\nThank you for purchasing your Singapore OCBC Skyway ticket! Your ticket is now confirmed and ready for use.\n\n📅 Date: October 15, 2023\n\n⏰ Time: 3:00 PM - 4:00 PM\n\n🎫 Ticket ID: SKY98723\n\nTo view your e-ticket, click the button below.",
-    "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg",
-    "button": {
-      "caption": "View E-ticket",
-      "action": "https://ocbcskyway.com/e-ticket/SKY1234"
-    }
-  }
-}
-
-```
-
-The corresponding message the user will receive:
-
-![Viber Rich Media: Text + Image + Button](../images/73fbe38850ffd0e3a157db293591b2a04b6ff8b35ea07712820ef447cffa62e8-Viber_Text__Image__Button.png)Viber Rich Media: Text + Image + Button
-
----
-
-### Video only
-
-Refer to [Supported Content Types](/connect/reference/supported-chat-apps-content-type) for more info on supported file formats and size limits.
-
-##### Sample Request
-
-```json
-{
-    "user": {
-        "msisdn": "+6500000"
-    },
-    "type": "video",
-    "content": {
-        "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
-        "video": {
-            "filesize": "2700",
-            "duration": "5",
-            "thumbnail": "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg"
-        }
-    }
-}
-
-```
-
-The corresponding message the user will receive:
-
-![Viber Rich Media: Video-only message](../images/6f354c1-Video_only.png)Viber Rich Media: Video-only message
-
----
-
-### Text + Video
-
-Refer to [Supported Content Types](/connect/reference/supported-chat-apps-content-type) for more info on supported file formats and size limits.
-
-```json
-{
-  "user": {
-    "msisdn": "+6500000"
-  },
-  "type": "video",
-  "content": {
-"text": "this is accompanying text for the video",
-    "video": {
-      "filesize": "2700",
-      "duration": "5",
-      "thumbnail": "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg"
-    },
-    "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
-  }
-}
-
-```
-
-The corresponding message the user will receive:
-
-![Viber Rich Media: Text + Video](../images/5564bfab7eaa59f777abac71bdeaedfb3cedf37cc7e92e7415ddc2524a6965ae-Text__Video.png)Viber Rich Media: Text + Video
-
----
-
-### Text + Video + Button
-
-```json
-{
-    "user": {
-        "msisdn": "+6500000000"
-    },
-    "type": "video",
-    "content": {
-        "text": "This is the accompanying text for the video",
-        "video": {
-            "filesize": "2700",
-            "duration": "5",
-            "thumbnail": "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg"
-        },
-        "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
-        "button": {
-            "caption": "Get Directions to Store",
-            "action": "https://maps.google.com/?q=Your+Store+Location"
-        }
-    }
-}
-
-```
-
-The corresponding message the user will receive:
-
-![Viber Rich Media: Text + Video + Image](../images/f4e5825435c46f57f53e3c458af313c50d89cac5d945bbb9c2fb4a241aec16be-Text__Video__Button.png)Viber Rich Media: Text + Video + Image
-
----
-
-### File only
-
-Refer to [Supported Content Types](/connect/reference/supported-chat-apps-content-type) for more info on supported file formats and size limits.
-
-##### Sample Request
-
-```json
-{
-    "user": {
-        "msisdn": "+6500000"
-    },
-    "type": "file",
-    "content": {
-        "url": "https://www.clickdimensions.com/links/TestPDFfile.pdf"
-    }
-}
-
-```
-
-The corresponding message the user will receive:
-
-![File](../images/b2535c2-File_only.png)Viber Rich Media: File-only message
-
----
-
-### Text + Button
-
-```json
-{
-    "user": {
-        "msisdn": "+6500000"
-    },
-    "type": "buttons",
-    "content": {
-        "text": "Hello Jessie,\n\nYour order #420007 has been processed and is now ready for pickup at our MBS store. \n\nFor your convenience, the store is open from 9am to 9pm. We look forward to seeing you!\n\nBest,\nThe Snackbar Team",
-        "button": {
-            "caption": "Get Directions to Store",
-            "action": "https://maps.google.com/?q=Your+Store+Location"
-        }
-    }
-}
-
-```
-
-The corresponding message the user will receive:
-
-![Viber Rich Media: text and call-to-action button](../images/8863a85-Viber_Text__Button.png)Viber Rich Media: text and call-to-action button
-
----
-
-### Text + Image (deprecated)
-
-```json
-{
-    "user": {
-        "msisdn": "+650000"
-    },
-    "type": "buttons",
-    "content": {
-        "text": "Hello Mr Jobs,\n\nDon't miss our upcoming summer sale! Starting next Monday, enjoy up to 20% off on selected apple-based products.\n\nBest,\nThe Grocerio Team",
-        "url": "https://www.abc.net.au/reslib/201408/r1320712_18276029.jpg",
-        "button": {
-            "caption": "",
-            "action": ""
-        }
-    }
-}
-
-```
-
-> 📘 **Button Object**
->
-> The button attribute is required but it will not show up in the message if the caption and action fields are blank.
->
-> This implementation has been updated. Please refer to [Text+Image](/connect/docs/usage-samples-viber#text--image) for latest API request format
->
->
-
-> 🚧 **Deprecated**
->
-> This API request format has been updated. Please refer to [Text+Image](/connect/docs/usage-samples-viber#text--image) for the latest latest API request format
->
->
-
-The corresponding message the user will receive:
-
-![Viber Rich Media message: Text and Image](../images/bd07ae3-a955628-TextImage.png)Viber Rich Media message: Text and Image
-
-## Optional: Adding SMS Fallback
-
-If you want to add a fallback to SMS, add the following fields to the "`content`" object in your existing JSON payload:
-
-```json
-{
-  "fallbackText": "Đây là OTP của bạn: 23124. Đừng chia sẻ nó với bất cứ ai.",
-  "sms": {
-    "encoding": "AUTO",
-    "source": "<senderId>"
-  }
-}
-
-```
-
-> 📘
->
-> You may find out more about SenderID [here](/connect/docs/getting-started#1-source-sms-senderid)
->
->
-
----
-
 ## Usage samples
 
 
@@ -63593,6 +63291,1856 @@ For a overview of video interaction, please see this video which will take you t
 ## API Docs
 
 For detailed information on Video Interaction's supporting API, please refer to this [link](https://8x8-enterprise-group.readme.io/connect/reference/vi-introduction).
+
+---
+
+## Account Onboarding
+
+
+Getting a Viber Business Account provisioned starts with your 8x8 account manager, not the API. This page lists everything 8x8 needs from you, what happens after you submit it, and how to move an existing Viber Business Account from another vendor to 8x8.
+
+---
+
+## Overview
+
+Viber is not self-serve. 8x8 provisions a Viber Business Account on your behalf: you submit your business information to your 8x8 account manager, 8x8 submits it to Viber for approval, and 8x8 provisions your channel once Viber approves it and assigns a Service ID.
+
+Start by gathering the information in **What You Need to Provide** below and sending it to your account manager. If you already operate a Viber Business Account through another vendor, see **Migrating from Another Vendor** below instead. Viber can move your existing account to 8x8 rather than provisioning you as a new sender.
+
+> 📘
+>
+> This page assumes you're familiar with terms like Viber channel, Service ID, and messaging subaccount. If they're new to you, see [Concepts & Fundamentals](/connect/docs/viber/concepts-fundamentals#account-structure) first.
+
+---
+
+## What You Need to Provide
+
+Gather the following before you contact your account manager. 8x8 uses it to submit your business for Viber approval and to provision your channel once approved.
+
+- **[8x8 account details](#8x8-account-details)**: your account and subaccount identifiers
+- **[Business identity](#business-identity)**: your brand name, address, and category
+- **[Channel configuration](#channel-configuration)**: where and how you plan to send
+- **[Contact person](#contact-person)**: who 8x8 and Viber can reach about this application
+- **[Brand assets](#brand-assets)**: your logo in six sizes
+- **[Documentation](#documentation)**: your signed Warranty Letter
+
+### 8x8 Account Details
+
+Identifies which 8x8 account and subaccount to provision the Viber channel under.
+
+| Field | Notes |
+| :--- | :--- |
+| `accountId` | Your 8x8 account identifier |
+| `subaccountId` | The subaccount where your Viber channel will be provisioned |
+
+> 🚧
+>
+> The subaccount must be a dedicated messaging subaccount. It cannot be an existing SMS subaccount.
+
+### Business Identity
+
+These details build your Viber Business Account profile. Some become part of your public profile once your account is live; others are for Viber's review only and are never shown to customers.
+
+| Field | Visibility | Notes |
+| :--- | :--- | :--- |
+| Display name | Public | Your brand name in its original language. This is the name customers see |
+| Business address | Public | |
+| Business phone number | Public | |
+| Business website | Public | |
+| Business category | Public | One of 14 categories, see below |
+| Business registration number | Internal | |
+| Headquarters address | Internal | Your headquarters' full address |
+
+Choose the business category that best describes you:
+
+- Media Agency
+- Financial Institution
+- Community Organization
+- Governmental/non-Governmental Organization
+- Publisher
+- Commerce
+- E-Commerce
+- Real estate and construction companies
+- IT and internet companies
+- Education
+- Healthcare
+- Transportations
+- Retail
+- Other (please specify)
+
+### Channel Configuration
+
+Where and how you plan to send.
+
+| Field | Notes |
+| :--- | :--- |
+| Registered country | The country your business is registered in |
+| Target launch date | |
+| Destination countries | The countries you plan to send Viber messages to |
+| Messaging direction | One-way only, or two-way |
+
+### Contact Person
+
+The person 8x8 and Viber can reach about this application.
+
+| Field | Notes |
+| :--- | :--- |
+| Name | |
+| Position | |
+| Email address | |
+| Phone number | |
+
+### Brand Assets
+
+Your logo, provided in six exact sizes.
+
+| Requirement | Detail |
+| :--- | :--- |
+| Format | PNG only |
+| Required sizes | 50x50, 65x65, 100x100, 130x130, 256x256, 360x280 |
+
+> 🚧
+>
+> All six sizes are required, in PNG format only. Other formats are not accepted.
+
+### Documentation
+
+The document 8x8 needs before it can submit your application to Viber.
+
+| Document | Notes |
+| :--- | :--- |
+| Signed Warranty Letter | Provided by 8x8. Sign it and include it with your submission |
+
+---
+
+## What Happens After You Submit
+
+Once your account manager has everything above:
+
+1. **8x8 submits your information to Viber.** Viber reviews it for approval.
+2. **Viber assigns a Service ID** to your business sender once approved.
+3. **8x8 provisions your Viber channel** on the subaccount you provided.
+4. **You receive your channel details** and can begin integration.
+
+> 🚧
+>
+> Approval timelines vary by market and by Viber's current review load. Contact your account manager for a current estimate before committing to a launch date.
+
+---
+
+## Migrating from Another Vendor
+
+If you already operate a Viber Business Account through a vendor other than 8x8, tell your account manager. Viber can facilitate migrating your existing Viber Business Account to 8x8 instead of provisioning you as a new sender.
+
+Migration runs through a quarterly window. To move on a given date, submit a completed Migration Request Letter to your account manager approximately 45 days beforehand:
+
+| Migration Date | Letter Deadline |
+| :--- | :--- |
+| 1st January | 17th November |
+| 1st April | 15th February |
+| 1st July | 17th May |
+| 1st October | 15th August |
+
+> 📘
+>
+> Contact your account manager as soon as you know you want to migrate. The dates above are deadlines for submitting the Migration Request Letter, not when to start the conversation.
+
+---
+
+## Next Steps
+
+| If you want to | Read |
+| :--- | :--- |
+| Send your first Viber message once your channel is provisioned | [Getting Started](/connect/docs/viber/getting-started) |
+| Understand Viber's content and sender rules before you launch | [Compliance Guidelines](/connect/docs/viber/compliance-guidelines) |
+| Revisit account structure terms like Service ID and channel | [Concepts & Fundamentals](/connect/docs/viber/concepts-fundamentals) |
+| Revisit the business case and full page map | [Viber Hub](/connect/docs/viber/viber-hub) |
+
+---
+
+## Billing(Viber)
+
+
+[Concepts & Fundamentals](/connect/docs/viber/concepts-fundamentals#message-categories) introduces Promotional, Transactional, and OTP as the three message categories that determine whether you need a template. Billing uses a related but distinct set of categories: Transactional, Promotional, and Session. OTP shares the Transactional rate, and an open session overrides whatever category the content would otherwise carry. This page covers how 8x8 arrives at that rating, what changed when Viber's template mandate took effect, and how session messaging and SMS fallback affect what you are charged.
+
+> 📘
+>
+> This page explains the rating model, not the prices. Rates are set per country and by domestic versus international routing. For your account's actual rates, see your rate card or contact your account manager.
+
+---
+
+## Rating Categories
+
+Every Viber message you send is rated as one of these three categories.
+
+| Category | Applies to |
+| :--- | :--- |
+| **Transactional** | Template messages (Transactional or OTP), and free-form file messages |
+| **Promotional** | Free-form text, image, video, or button content, sent with no open session |
+| **Session** | The first outbound message inside an open 24 hour session window |
+
+Template-based Transactional and OTP messages share the same rate. Inbound messages from customers carry no Viber message fee.
+
+---
+
+## How a Message Is Rated
+
+| What you send | Session open | Rated as |
+| :--- | :--- | :--- |
+| Template message (Transactional or OTP) | No | Transactional |
+| Free-form text, no template | No | Promotional |
+| Free-form file | No | Transactional |
+| Free-form image, video, or button | No | Promotional |
+| Any outbound message, first in the window | Yes | Session, charged once |
+| Any outbound message, later in the window | Yes | Session, no additional charge |
+
+Template sends are rated identically whether they target the recipient's primary device only or all their devices.
+
+> 🚧
+>
+> Free-form file breaks the pattern above: it is rated as Transactional even without a template, unlike free-form text. See [How 8x8 Classifies Viber Traffic](#how-8x8-classifies-viber-traffic) below for why.
+
+---
+
+## How 8x8 Classifies Viber Traffic
+
+Internally, 8x8's platform tags every Viber message you send with a Content Type, based on the message format and whether a session is open. That Content Type is what determines the rating category above. You do not set it directly, but it is useful for reconciling usage data against what you sent.
+
+| Content type | Billing category | Applies to |
+| :--- | :--- | :--- |
+| `OUT-TXT` | `ViberTransactional` | Text and file messages |
+| `OUT-MEDIA` | `ViberPromotional` | Image, button, and video messages |
+| `VBS-SES` | `ViberSession` | Any content sent inside an active session |
+| `OUT-TPL` | Template messages | Template type `1701` (OTP) or `1702` (Transactional) |
+
+### Raw Code Mapping
+
+8x8 differentiates free-form and session Viber messages at the platform level using a raw numeric code per message type. Each code resolves to one of the Content Types above. Template messages use the separate type codes shown above, `1701` and `1702`, instead of a code from the list below.
+
+| Raw code | Message type | Content type |
+| :--- | :--- | :--- |
+| `106` | `TxtOneWay` | `OUT-TXT` |
+| `206` | `TxtTwoWay` | `OUT-TXT` |
+| `220` | `FileTwoWay` | `OUT-TXT` |
+| `222` | `FileOneWay` | `OUT-TXT` |
+| `107` | `ImgOneWay` | `OUT-MEDIA` |
+| `207` | `ImgTwoWay` | `OUT-MEDIA` |
+| `108` | `TxtImgBtnOneWay` | `OUT-MEDIA` |
+| `208` | `TxtImgBtnTwoWay` | `OUT-MEDIA` |
+| `109` | `TxtBtnOneWay` | `OUT-MEDIA` |
+| `209` | `TxtBtnTwoWay` | `OUT-MEDIA` |
+| `230` | `VideoTwoWay` | `OUT-MEDIA` |
+| `231` | `VideoTextTwoWay` | `OUT-MEDIA` |
+| `233` | `VideoTextBtnTwoWay` | `OUT-MEDIA` |
+| `306` | `TxtSession` | `VBS-SES` |
+| `307` | `ImgSession` | `VBS-SES` |
+| `221` | `FileSession` | `VBS-SES` |
+
+- **File is billed as `OUT-TXT`, not `OUT-MEDIA`.** A free-form file message rates as text-type content, at the Transactional rate, even though it is not plain text.
+- **An open session always takes priority.** Content sent inside an active session is coded `VBS-SES` regardless of its format: a text message inside a session is `VBS-SES`, not `OUT-TXT`.
+- **The billing category comes from the Content Type and the session state together, not the raw code alone.** 8x8 resolves the raw code to a Content Type first, then applies session state to reach the final rating category.
+
+> 📘
+>
+> This mapping is for teams reconciling usage data against 8x8's platform codes. It does not change what you send: see [How a Message Is Rated](#how-a-message-is-rated) above for the categories that matter when you are planning a message.
+
+---
+
+## What Changed on July 16, 2026
+
+Viber's template mandate took effect on July 15, 2026. From July 16, free-form text is no longer rated as Transactional. It is rated as Promotional instead.
+
+| Traffic | Before July 15, 2026 | From July 16, 2026 |
+| :--- | :--- | :--- |
+| Free-form text | Transactional | Promotional |
+| Free-form file | Transactional | Transactional, unchanged |
+| Free-form image, video, or button | Promotional | Promotional, unchanged |
+| Template message | Not available | Transactional |
+
+> 🚧
+>
+> If you send transactional or OTP content as free-form text, it is now rated as Promotional. Registering that content as a template restores Transactional rating. See [Viber Templates: What Changed on July 15, 2026](/connect/docs/viber/templates#what-changed-on-july-15-2026).
+
+---
+
+## Sessions and Cost
+
+A session is charged once, on the first outbound message in the window. Every later outbound message in the same 24 hour window carries no additional Viber message fee, whatever its content or category.
+
+This is what makes support conversations practical on Viber: the cost of a conversation is largely independent of how many messages it takes to resolve. See [Conversational Messaging](/connect/docs/viber/sessions) for the full session model, limits, and how to enable sessions on your channel.
+
+---
+
+## SMS Fallback
+
+When a Viber send fails and your channel has SMS fallback configured, the fallback SMS is rated as SMS traffic, separately from the Viber attempt that failed.
+
+See [Concepts & Fundamentals: SMS Fallback](/connect/docs/viber/concepts-fundamentals#sms-fallback) for how fallback is configured.
+
+---
+
+## Seeing How a Message Was Rated
+
+> 🚧 **Coming soon**
+>
+> Delivery receipts will report the rating category and whether a specific message was billable, in a `viber` object with `pricingCategory` and `billable` fields. These fields are still in development and not yet present in delivery receipts.
+
+See [Webhooks and Delivery Receipts: Viber-Specific Receipt Fields](/connect/docs/viber/webhooks-delivery-receipts#viber-specific-receipt-fields) for the full field reference, and [Conversational Messaging: Identifying Session Messages in Delivery Receipts](/connect/docs/viber/sessions#identifying-session-messages-in-delivery-receipts) for how `billable` behaves inside a session.
+
+---
+
+## Next Steps
+
+| If you want to | Read |
+| :--- | :--- |
+| Review the message categories this page rates | [Concepts & Fundamentals: Message Categories](/connect/docs/viber/concepts-fundamentals#message-categories) |
+| Understand session limits, economics, and how to enable sessions | [Conversational Messaging](/connect/docs/viber/sessions) |
+| Move transactional or OTP content onto a template | [Viber Templates](/connect/docs/viber/templates) |
+| See the receipt fields that will report rating category and billable status | [Webhooks and Delivery Receipts: Viber-Specific Receipt Fields](/connect/docs/viber/webhooks-delivery-receipts#viber-specific-receipt-fields) |
+| Revisit the business case and full page map | [Viber Hub](/connect/docs/viber/viber-hub) |
+
+---
+
+## Compliance Guidelines
+
+
+Viber requires businesses to follow content and sender guidelines on every message sent through a Viber Business Account, whatever the category. This page covers opt-in, the rules specific to promotional, transactional, and conversational content, what content Viber restricts, the local regulations that add further requirements in some countries, and how auto-reply behaves on a one-way sender.
+
+[Concepts & Fundamentals](/connect/docs/viber/concepts-fundamentals) defines the message categories and terms this page assumes, and [Account Onboarding](/connect/docs/viber/account-onboarding) covers what Viber reviews about your business before it approves your sender in the first place.
+
+---
+
+## Overview
+
+Non-compliance with Viber's guidelines can result in your sender being blocked from sending, or suspended outright. A suspended sender cannot send any Viber traffic until reinstated, so treat the rules on this page as a condition of keeping your channel active, not optional style guidance.
+
+The sections below apply across all three message categories, plus the additional rules that come with conversational messaging inside a session. Where a rule is specific to one category, its section says so.
+
+> 🚧
+>
+> Many of the specific figures, thresholds, and country lists on this page are documented by Infobip, one of 8x8's Viber messaging partners, and are not independently republished on Viber's own site. Confirm a specific detail with your account manager before you rely on it for a launch decision.
+
+---
+
+## Opt-In Requirements
+
+You must have a recipient's consent before you send them a Viber message, whatever the category. Viber prohibits unsolicited messaging: a customer who has not consented to hear from your business is not a valid send target.
+
+- **First contact:** The first time a customer receives a message from your business, Viber shows them an overlay where they can accept or decline further messages from your sender.
+- **Ongoing consent:** Every message a customer receives from your business arrives in a branded chat that includes an Unsubscribe control, so they can block your sender at any time, for any reason.
+- **What blocking means:** Once a customer blocks your sender, further sends to them fail with error `2007` (User blocked). See [Delivery Error Codes](/connect/docs/delivery-error-codes#viber-error-codes) if you see this code. Stop retrying a recipient who has blocked you rather than continuing to attempt sends.
+
+---
+
+## Promotional Message Rules
+
+[Promotional content](/connect/docs/viber/concepts-fundamentals#message-categories) covers marketing offers, product promotions, and seasonal campaigns, sent as free-form text, media, and buttons composed at send time. It needs no template or approval, but the rules below still apply.
+
+**Not allowed as the first message.** Your first message to a new customer must not be promotional. Lead with something like an order update or an account notice, and save offers and campaigns for messages after that first contact.
+
+| First message | Category | Allowed as a first send |
+| :--- | :--- | :--- |
+| "Your order has shipped and will arrive within 3 business days." | Transactional | Yes |
+| "Flash sale: 20% off everything today only." | Promotional | No |
+
+**Frequency.** Viber does not publish a fixed cap on how often you can send promotional content. Sending too often is the fastest way to drive opt-outs and sender complaints, so keep your cadence proportionate to the value of the offer and stop sending to any customer who blocks you or stops engaging.
+
+**Content.** Promotional sends follow the same rules as any other Viber message; see [Content Restrictions](#content-restrictions) below. For the formats available to free-form content, see [Promotional Message API Library](/connect/docs/viber/message-types).
+
+---
+
+## Transactional Message Rules
+
+[Transactional content](/connect/docs/viber/concepts-fundamentals#message-categories) covers order confirmations, delivery updates, account notices, and payment reminders, sent using an approved [Transactional template](/connect/docs/viber/templates#utility-template).
+
+**Text only.** A Transactional template carries static text with placeholder values; it does not support images, video, files, or buttons. See [Template Rules](/connect/docs/viber/templates#template-rules) for the exact constraints on that text.
+
+**What does not qualify.** A template's category is fixed when you create it, and Viber's moderation reviews the body against that category. Keep a Transactional template limited to the update it exists to deliver: content that reads as promotional, for example an order update that also pitches an unrelated discount, risks the template being [declined](/connect/docs/viber/templates#lifecycle) at moderation even though you submitted it as Transactional.
+
+**Country-specific structure.** Some countries add further structure to transactional content. See [Local Regulations](#local-regulations) below.
+
+---
+
+## Conversational Message Rules
+
+Conversational rules govern two-way messaging inside an open [session](/connect/docs/viber/concepts-fundamentals#conversational), the 24 hour window that opens when a customer messages your business first.
+
+- **You cannot initiate a conversation.** A session only opens from a customer's inbound message. You cannot start a conversational exchange yourself.
+- **Consecutive message cap.** Inside an open session, Viber caps how many outbound messages you can send without a reply from the customer, currently 10; sending beyond it without a reply is blocked. See [Conversational Messaging: Limits](/connect/docs/viber/sessions#limits) for the exact figure and what happens if you exceed it.
+- **A new inbound message starts a new session.** If a customer messages you again after their previous session closed, that message opens a new session; it does not extend the old one.
+- **The same content rules apply.** Whatever you send inside a session, a session reply, a transactional template, or promotional content, still has to follow this page's [Content Restrictions](#content-restrictions).
+
+> 🚧
+>
+> As a best practice, keep conversations responsive rather than sending long unanswered bursts, well inside the platform's hard limit. This specific guidance is documented by Infobip rather than by Viber or 8x8 directly; confirm current thresholds with your account manager if consecutive-message behavior affects a bot or agent flow you are designing.
+
+---
+
+## Content Restrictions
+
+Viber reviews the content of every message and template against its own guidelines, independent of category. Content that breaks them can be declined at template moderation for a registered template, or contribute to the sender-level consequences described in [Overview](#overview) for any message.
+
+- **Regulated industries.** Businesses in industries such as gambling, microcredit, and lending receive additional scrutiny under Viber's terms for regulated traffic. If you operate in one of these industries, discuss your specific requirements with your account manager before you onboard or expand into it.
+- **Format restrictions.** Transactional and OTP templates carry text only, no images, video, files, or buttons; see [Transactional Message Rules](#transactional-message-rules) above. Free-form promotional content can use richer formats; see [Promotional Message API Library](/connect/docs/viber/message-types) for what each format supports.
+- **No formatting in templates.** The bold, italic, strikethrough, and monospace styling available in free-form text is not available in template bodies. See [Promotional Message API Library](/connect/docs/viber/message-types).
+- **Regional adaptations.** Some message elements can be adjusted to meet local content regulations. For example, carousel card buttons are optional and can be hidden where a market's data regulations require it.
+
+> 🚧
+>
+> Viber's full content policy, including specific prohibited categories or themes, is not published in 8x8's own materials; the points above reflect what Infobip documents. Before you launch a campaign in a sensitive category, confirm current content requirements with your account manager, or consult Viber's own [Business Messages Partners Guidelines](https://www.viber.com/en/terms/business-messages-partners-guidelines/).
+
+---
+
+## Local Regulations
+
+Some countries add requirements beyond Viber's global rules, affecting template content, sending windows, or which message categories you can use.
+
+**Russia, Belarus, and Ukraine.** If your business is registered in Russia, Belarus, or Ukraine and you want to send transactional content both to customers inside these three countries and to customers elsewhere, you need two separate Viber Business Accounts: one for customers within these three countries, and one for everyone else. Contact your account manager to set up the additional account.
+
+> 📘
+>
+> The template requirement itself, an approved template for all transactional content, no longer sets these three countries apart from anywhere else: see [What Changed on July 15, 2026](/connect/docs/viber/templates#what-changed-on-july-15-2026) for the mandate now in effect everywhere. The two-account requirement above is what remains specific to these three countries.
+
+**Sending windows.** Some countries restrict what times of day certain message categories can be delivered. If you send to a market with delivery-window restrictions, contact your account manager to discuss how your sends should be configured.
+
+**Other markets.** Viber applies additional criteria in some countries to using Viber as a channel at all, or to sending from that market to recipients elsewhere. 8x8's own materials do not enumerate every affected country.
+
+> 🚧
+>
+> The country list above reflects what Infobip documents; Viber may apply criteria in additional countries not enumerated in 8x8's own materials. Confirm the current requirements for your destination countries with your account manager as part of planning any new market.
+
+---
+
+## Auto-Reply Behavior
+
+Auto-reply applies to a Viber sender configured for one-way messaging, the [messaging direction](/connect/docs/viber/account-onboarding#channel-configuration) you choose at onboarding. Because a one-way sender does not process live replies, Viber automatically responds on your behalf whenever a customer messages it.
+
+A two-way sender does not need auto-reply: an inbound message opens a [session](/connect/docs/viber/concepts-fundamentals#conversational) instead, and you or your systems can reply to it directly.
+
+### Default Auto-Reply
+
+If you have not configured a custom message, Viber sends its own default reply to any inbound message:
+
+```text
+{Your business name} does not currently receive messages. Go to chat info for more contact information.
+```
+
+This default is localized automatically based on the customer's device language.
+
+### Custom Auto-Reply
+
+To replace the default with your own message, contact your account manager. Your custom message must follow these rules:
+
+| Rule | Requirement |
+| :--- | :--- |
+| Length | Up to 1,000 characters |
+| Encoding | UTF-8 |
+| Media URLs | HTTPS only |
+
+---
+
+## Next Steps
+
+| If you want to | Read |
+| :--- | :--- |
+| Review the message categories this page assumes | [Concepts & Fundamentals](/connect/docs/viber/concepts-fundamentals#message-categories) |
+| Set your channel's messaging direction and other sender details | [Account Onboarding](/connect/docs/viber/account-onboarding) |
+| Learn the template model these rules reference | [Viber Templates](/connect/docs/viber/templates) |
+| See the exact session limits referenced above | [Conversational Messaging](/connect/docs/viber/sessions#limits) |
+| Understand how compliant traffic is rated | [Billing](/connect/docs/viber/billing) |
+| Revisit the business case and full page map | [Viber Hub](/connect/docs/viber/viber-hub) |
+
+---
+
+## Concepts & Fundamentals
+
+
+Before you send a Viber message or register a template, it helps to understand how 8x8 structures a Viber account, how Viber classifies your traffic, and how sessions and SMS fallback change what happens after you send. This page defines those concepts once so the rest of this section can build on them without repeating itself. If you have not read the [Viber Hub](/connect/docs/viber/viber-hub), start there for the business case and a map of this section.
+
+---
+
+## Account Structure
+
+An 8x8 account set up for Viber has four levels. The first two are shared infrastructure across every channel on the 8x8 Messaging Apps API; the last two are specific to Viber:
+
+1. **8x8 Account:** Your top-level 8x8 Connect account.
+2. **Subaccount:** The subaccount where your Viber channel is provisioned. It must be a messaging subaccount, not an existing SMS subaccount.
+3. **Viber Channel:** The channel 8x8 provisions on that subaccount once Viber approves your business sender.
+4. **Viber Service ID:** The identifier Viber assigns to your business sender during onboarding. It identifies you as a Viber Business Account, and Viber-side limits, such as how many templates you can hold, are scoped to it.
+
+A subaccount is provisioned with one Viber channel, and that channel maps to one Viber Service ID.
+
+> 📘
+>
+> 8x8 provisions your Viber channel, but Viber itself reviews your business and assigns the Service ID. See [Account Onboarding](/connect/docs/viber/account-onboarding) for what to submit and what happens after you do.
+
+---
+
+## Message Categories
+
+Viber classifies every business message into one of three categories. The category determines how you compose the message, whether a template is required, and how the message is billed.
+
+| Category | How you send | Template required | Use cases | API library |
+| :--- | :--- | :--- | :--- | :--- |
+| **Promotional** | Free-form: you compose text, media, and buttons at send time | No | Marketing offers, product promotions, seasonal campaigns | [Promotional Message API Library](/connect/docs/viber/message-types) |
+| **Transactional** | Template: you reference a pre-approved template by name and supply placeholder values | Yes | **Utility:** order confirmations, delivery updates, account notices, payment reminders. **OTP:** verification codes and one-time passwords | [Transactional Message API Library](/connect/docs/viber/templates) |
+| **Conversational** | Free-form or template, inside a 24 hour session window opened by the customer | No (but template rules still apply if you send a template inside a session) | Customer support, two-way exchanges, multi-turn bot flows | [Conversational Messaging](/connect/docs/viber/sessions) |
+
+### Promotional
+
+You compose the content yourself, choosing from text, images, video, files, buttons, and carousel formats. No approval step is needed. See the [Promotional Message API Library](/connect/docs/viber/message-types) for every format with screenshots and payloads.
+
+### Transactional
+
+Transactional content requires a pre-approved template. You register the template wording in advance, Viber moderates it within 24 hours, and you reference it by name at send time. Transactional covers two use cases:
+
+- **Utility:** Order confirmations, delivery updates, account notices, and payment reminders. Templates can include up to 5 text placeholders.
+- **OTP:** Verification codes and one-time passwords. The template body must contain a `{{pin}}` placeholder. Viber renders OTP messages as a card with a Copy button for the recipient.
+
+Both use the same Create Template and Send Template API. See the [Transactional Message API Library](/connect/docs/viber/templates) for payloads, rules, and the full lifecycle.
+
+> 📘
+>
+> There is no promotional template category. Promotional content never goes through template approval; transactional and OTP content always does.
+
+### Conversational
+
+A conversational session is a 24 hour window that opens when a customer messages your business first. Outbound messages inside the window are rated as a single flat session fee instead of individually, giving back-and-forth conversations flat-fee economics.
+
+- **Opens when:** A customer sends an inbound message. You cannot open a session yourself.
+- **Lasts:** 24 hours from that inbound message.
+- **Consecutive outbound cap:** 10 messages without a customer reply. The count resets every time the customer replies.
+- **Integration impact:** None. You keep sending the same requests, and the platform detects and rates session messages automatically.
+
+> 🚧
+>
+> The 10-message cap is enforced by Viber, not by 8x8. Design bot and agent flows so a customer reply is expected before the tenth outbound message in a session.
+
+A message sent inside an open session is rated as a session message regardless of its content type. See [Conversational Messaging](/connect/docs/viber/sessions) for the full rating model, limits, and how to enable sessions on your channel.
+
+---
+
+## SMS Fallback
+
+If a Viber send fails, for example because the recipient is offline or does not have Viber installed, 8x8 can automatically send the same content as SMS instead so the message still reaches them.
+
+- **Configuration:** Set up by 8x8 as part of your channel configuration. Contact your account manager to enable it.
+- **What you provide:** A `fallbackText` value in your send request. This is the text 8x8 sends as SMS if the Viber attempt fails.
+- **How it's billed:** The fallback SMS is rated as SMS traffic, separately from the Viber send attempt.
+
+See [Getting Started](/connect/docs/viber/getting-started) for where `fallbackText` fits in a send request, and [Billing](/connect/docs/viber/billing) for how fallback traffic is rated.
+
+---
+
+## Delivery Tracking
+
+Every Viber message you send generates delivery events on your configured webhook as it moves toward the recipient.
+
+| Status | Meaning |
+| :--- | :--- |
+| `queued` | 8x8 accepted the message and queued it for delivery |
+| `sent` | Handed off to Viber |
+| `delivered` | Delivered to the recipient's device |
+| `read` | Opened by the recipient |
+| `undelivered` | Viber reported the message was not delivered |
+
+Viber reports read receipts as well as delivery, so you can track a message all the way from acceptance to open.
+
+Template approvals arrive the same way. When Viber moderates a template you registered, the resulting status, `Pending`, `Approved`, or `Declined`, is forwarded to your webhook too, so you do not need to poll for it.
+
+> 📘
+>
+> This page covers delivery tracking at a glance. For the full status enum, sample payloads, and the Viber-specific receipt fields still in development, see [Webhooks and Delivery Receipts](/connect/docs/viber/webhooks-delivery-receipts).
+
+---
+
+## Next Steps
+
+| If you want to | Read |
+| :--- | :--- |
+| Get a Viber Business Account provisioned | [Account Onboarding](/connect/docs/viber/account-onboarding) |
+| Send your first Viber message | [Getting Started](/connect/docs/viber/getting-started) |
+| Understand session limits and rating in full | [Conversational Messaging](/connect/docs/viber/sessions) |
+| Learn the template model, rules, and lifecycle | [Viber Templates](/connect/docs/viber/templates) |
+| See delivery statuses and template status events in detail | [Webhooks and Delivery Receipts](/connect/docs/viber/webhooks-delivery-receipts) |
+| Revisit the business case and full page map | [Viber Hub](/connect/docs/viber/viber-hub) |
+
+---
+
+## Getting Started(Viber)
+
+
+Once your Viber channel is provisioned, sending your first message takes an API key and one API call. This page covers authentication, the base URL for your platform region, and two working requests: a free-form text message and a template message.
+
+---
+
+## Prerequisites
+
+Viber is not self-serve. Confirm each of the following is in place before you send.
+
+| Requirement | How to get it |
+| :--- | :--- |
+| 8x8 Connect account | Sign up at [connect.8x8.com](https://connect.8x8.com) |
+| Messaging subaccount | Requested through your account manager. It must be a dedicated messaging subaccount, not an existing SMS subaccount |
+| Viber channel | Provisioned by 8x8 against a Viber Service ID once Viber approves your business sender. See [Account Onboarding](/connect/docs/viber/account-onboarding) for what to submit |
+| API key | Generated in the Customer Portal at [connect.8x8.com](https://connect.8x8.com) |
+| SMS fallback | Optional. Configured by 8x8 as part of channel setup, including channel order and retry timing. Contact your account manager to enable it |
+
+> 📘
+>
+> Already sending WhatsApp or RCS through the Messaging Apps API? The request envelope is identical here, only the `content` shape differs for Viber. Skip to [Send Your First Message](#send-your-first-message).
+
+---
+
+## Authentication
+
+The Messaging Apps API uses ApiKey Bearer Token authentication. Include your key on every request:
+
+```http
+Authorization: Bearer {apiKey}
+```
+
+Generate and rotate keys in the Customer Portal.
+
+---
+
+## Base URLs
+
+Use the base URL matching the platform deployment region your account is provisioned in. Sending to the wrong region fails authentication.
+
+| Platform region | Base URL |
+| :--- | :--- |
+| Asia (default) | `https://chatapps.8x8.com` |
+| Europe | `https://chatapps.8x8.uk` |
+| North America | `https://chatapps.us.8x8.com` |
+| Indonesia | `https://chatapps.8x8.id` |
+
+For more detail, see [Platform Deployment Regions](/connect/docs/platform-deployment-regions#api-endpoints-and-platform-region).
+
+---
+
+## Send Your First Message
+
+Send a free-form text message by posting to the messages endpoint for your subaccount:
+
+```bash
+curl -X POST "https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages" \
+  -H "Authorization: Bearer {apiKey}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user": {
+      "msisdn": "+6512345678"
+    },
+    "type": "text",
+    "content": {
+      "text": "Here is your booking reference: ABC1234."
+    }
+  }'
+```
+
+Replace `{subAccountId}` with your messaging subaccount and `{apiKey}` with your key.
+
+> 📘
+>
+> This free-form path is valid for promotional content. Transactional and OTP messages must use a registered template. See [Viber Templates](/connect/docs/viber/templates).
+
+---
+
+## Send a Template Message
+
+Transactional and OTP content must go through a registered template instead of free-form text. This example sends a one-time password using an approved `otp_login_en` template, with SMS fallback if the Viber send fails:
+
+```bash
+curl -X POST "https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages" \
+  -H "Authorization: Bearer {apiKey}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user": {
+      "msisdn": "+6512345678"
+    },
+    "type": "template",
+    "content": {
+      "template": {
+        "name": "otp_login_en",
+        "language": "en",
+        "components": [
+          {
+            "type": "body",
+            "parameters": [
+              { "type": "text", "name": "pin", "text": "1234" }
+            ]
+          }
+        ]
+      },
+      "fallbackText": "Your code is 1234. Team 8x8",
+      "sms": {
+        "source": "8x8"
+      }
+    },
+    "channels": [
+      { "channel": "Viber", "channelId": "{viberChannelId}" }
+    ]
+  }'
+```
+
+Replace `{subAccountId}`, `{apiKey}`, and `{viberChannelId}` with your own values, and `otp_login_en` with the name of a template you registered on this channel.
+
+> 🚧
+>
+> Template send is rolling out and may not yet be available on your account. Contact your account manager to confirm availability. Before you send, confirm the template's status is `Approved`: a `Pending` or `Declined` template fails validation before 8x8 forwards the request to Viber. See [Viber Templates](/connect/docs/viber/templates).
+
+---
+
+## Where to Go Next
+
+| If you want to | Read |
+| :--- | :--- |
+| See all promotional message formats with screenshots and payloads | [Promotional Message API Library](/connect/docs/viber/message-types) |
+| Send transactional or OTP traffic | [Transactional Message API Library](/connect/docs/viber/templates) |
+| Receive replies and delivery receipts | [Webhooks and Delivery Receipts](/connect/docs/viber/webhooks-delivery-receipts) |
+| Understand how traffic is rated | [Billing](/connect/docs/viber/billing) |
+| Revisit the business case and full page map | [Viber Hub](/connect/docs/viber/viber-hub) |
+
+---
+
+## Promotional Message API Library
+
+import PromotionalImg from './images/Promotional Viber Business Messages.png';
+import TextMessageImg from './images/Text Message.png';
+import ImageMessageImg from './images/Image Message.png';
+import TextImageMessageImg from './images/Text Image Message.png';
+import VideoMessageImg from './images/Video Message.png';
+import TextVideoMessageImg from './images/Text Video Message.png';
+import FileMessageImg from './images/File Message.png';
+import TextButtonMessageImg from './images/Text Button Message.png';
+import TextImageButtonMessageImg from './images/Text Image Button Message.png';
+import TextVideoButtonMessageImg from './images/Text Video Button Message.png';
+
+<style>{`
+  .theme-code-block pre {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+`}</style>
+
+Promotional messages use free-form content: you compose the text, media, and buttons yourself and supply them in the request. No template or approval step is required. Each example targets `POST /api/v1/subaccounts/{subAccountId}/messages`.
+
+<small>Source: Viber for Business: The Types and Advantages of Viber Business Messages</small>
+
+<colgroup>
+<col style={{width: '200px', minWidth: '200px', maxWidth: '200px'}} />
+<col />
+</colgroup>
+
+Message Type
+API Payload
+
+### Text
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a plain text message using `type: "text"` with `content.text`. Limit of 1,000 characters. Supports bold, italic, strikethrough, and monospace formatting on Viber v14.6 or later.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "text",
+  "content": {
+    "text": "Here is your booking reference: ABC1234. For more information, visit https://8x8.com/1234!"
+  }
+}
+```
+
+</details>
+
+### Image
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a single image using `type: "image"` with `content.url`. Accepted formats: jpg, jpeg, png. Maximum file size 10 MB.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "image",
+  "content": {
+    "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg"
+  }
+}
+```
+
+</details>
+
+### Text + Image
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends an image with a text caption using `type: "image"` with `content.url` and `content.text`. Caption limit of 1,000 characters.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "image",
+  "content": {
+    "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg",
+    "text": "This is the text accompanying the image"
+  }
+}
+```
+
+</details>
+
+### Video
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a video using `type: "video"` with `content.url` and `content.video` (filesize, duration, thumbnail). Accepted formats: 3gp, m4v, mov, mp4. Maximum file size 200 MB, duration up to 600 seconds.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "video",
+  "content": {
+    "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
+    "video": {
+      "filesize": "2700",
+      "duration": "5",
+      "thumbnail": "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg"
+    }
+  }
+}
+```
+
+</details>
+
+### Text + Video
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a video with a text caption using `type: "video"` with `content.url`, `content.text`, and `content.video`. Caption limit of 1,000 characters.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "video",
+  "content": {
+    "text": "this is accompanying text for the video",
+    "video": {
+      "filesize": "2700",
+      "duration": "5",
+      "thumbnail": "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg"
+    },
+    "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
+  }
+}
+```
+
+</details>
+
+### File
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a downloadable file using `type: "file"` with `content.url`. Accepted formats: doc, docx, pdf, xls, xlsx and others. Maximum file size 200 MB, filename up to 25 characters.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "file",
+  "content": {
+    "url": "https://www.clickdimensions.com/links/TestPDFfile.pdf"
+  }
+}
+```
+
+</details>
+
+### Text + Button
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a text message with a call-to-action button using `type: "buttons"` with `content.text` and `content.button` (caption + action URL). Button label limit of 30 characters, URL limit of 1,000 characters.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "buttons",
+  "content": {
+    "text": "Hello Jessie,\n\nYour order #420007 has been processed and is now ready for pickup at our MBS store. \n\nFor your convenience, the store is open from 9am to 9pm. We look forward to seeing you!\n\nBest,\nThe Snackbar Team",
+    "button": {
+      "caption": "Get Directions to Store",
+      "action": "https://maps.google.com/?q=Your+Store+Location"
+    }
+  }
+}
+```
+
+</details>
+
+### Text + Image + Button
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends an image with caption and a call-to-action button using `type: "buttons"` with `content.text`, `content.url` (image), and `content.button`. Combines text, image, and CTA button in a single rich message.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "buttons",
+  "content": {
+    "text": "🎉 Successful Purchase! 🎉\n\nHello Ana,\n\nThank you for purchasing your Singapore OCBC Skyway ticket! Your ticket is now confirmed and ready for use.\n\n📅 Date: October 15, 2023\n\n⏰ Time: 3:00 PM - 4:00 PM\n\n🎫 Ticket ID: SKY98723\n\nTo view your e-ticket, click the button below.",
+    "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg",
+    "button": {
+      "caption": "View E-ticket",
+      "action": "https://ocbcskyway.com/e-ticket/SKY1234"
+    }
+  }
+}
+```
+
+</details>
+
+### Text + Video + Button
+
+**Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Sends a video with caption and a call-to-action button using `type: "video"` with `content.text`, `content.url`, `content.video`, and `content.button`. Combines text, video, and CTA button in a single rich message.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "video",
+  "content": {
+    "text": "This is the accompanying text for the video",
+    "video": {
+      "filesize": "2700",
+      "duration": "5",
+      "thumbnail": "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg"
+    },
+    "url": "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
+    "button": {
+      "caption": "Get Directions to Store",
+      "action": "https://maps.google.com/?q=Your+Store+Location"
+    }
+  }
+}
+```
+
+</details>
+
+---
+
+## Sending Viber Messages over API
+
+
+API reference for sending Viber messages through the 8x8 Messaging Apps API. This page covers the endpoint, request envelope, response format, validation, error codes, and rate limits. For promotional message payloads with screenshots, see the [Promotional Message API Library](/connect/docs/viber/message-types). For template create and send payloads, see the [Transactional Message API Library](/connect/docs/viber/templates). For a quick-start guide with curl examples, see [Getting Started](/connect/docs/viber/getting-started).
+
+> 🚧 **Availability**
+>
+> Template creation and template send are rolling out. Listing and deleting templates are not yet available. Contact your account manager to confirm availability on your account before you build against this page.
+
+---
+
+## Endpoint
+
+All Viber sends use the same messages endpoint, whether free-form or template:
+
+**Endpoint:**
+
+```http
+POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages
+Authorization: Bearer {apiKey}
+Content-Type: application/json
+```
+
+**Path Parameters:**
+
+- `{subAccountId}`: Your messaging subaccount ID. Must be a dedicated messaging subaccount, not an existing SMS subaccount
+
+Replace the base URL if your account is provisioned in a different platform region. Sending to the wrong region fails authentication.
+
+| Platform region | Base URL |
+| :--- | :--- |
+| Asia (default) | `https://chatapps.8x8.com` |
+| Europe | `https://chatapps.8x8.uk` |
+| North America | `https://chatapps.us.8x8.com` |
+| Indonesia | `https://chatapps.8x8.id` |
+
+For more detail, see [Platform Deployment Regions](/connect/docs/platform-deployment-regions#api-endpoints-and-platform-region).
+
+---
+
+## Request Structure
+
+Every send request shares the same outer envelope. The `content` object changes by message type; the outer fields stay the same.
+
+```json
+{
+  "user": {
+    "msisdn": "<RECIPIENT_PHONE>"
+  },
+  "type": "<MESSAGE_TYPE>",
+  "content": {
+  },
+  "channels": [
+    { "channel": "Viber", "channelId": "<CHANNEL_ID>" }
+  ]
+}
+```
+
+**Key Fields:**
+
+- `user.msisdn`: Recipient phone number in E.164 format, for example `"+6512345678"`
+- `type`: The message type. Confirmed values: `"text"` for free-form text, `"template"` for template sends
+- `content`: Message body. Structure varies by `type`; see the [Promotional Message API Library](/connect/docs/viber/message-types) and [Transactional Message API Library](/connect/docs/viber/templates)
+- `channels`: Array identifying the Viber channel. Required for template sends. The confirmed free-form text example does not include it; it may be optional when the subaccount maps to a single channel
+
+**Response:**
+
+A successful send returns:
+
+```json
+{
+  "state": "queued"
+}
+```
+
+The message enters the delivery pipeline. Track its progress through [Webhooks and Delivery Receipts](/connect/docs/viber/webhooks-delivery-receipts).
+
+---
+
+## Template Management API
+
+### Create a Template
+
+Template creation uses the shared Messaging Apps templates endpoint. The channel type is derived from `{channelId}`, so the same path serves WhatsApp and Viber.
+
+**Endpoint:**
+
+```http
+POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates
+Authorization: Bearer {apiKey}
+Content-Type: application/json
+```
+
+**Path Parameters:**
+
+- `{accountId}`: Your 8x8 account ID
+- `{channelId}`: The Viber channel to register the template against
+
+For the full request body and example payloads, see the [Transactional Message API Library](/connect/docs/viber/templates).
+
+**Response Codes:**
+
+`200 OK` with an empty body. The template is stored with status `Pending` and enters Viber's moderation queue.
+
+| Status | Cause |
+| :--- | :--- |
+| `200` | Accepted and queued for moderation |
+| `400` | Validation failure, including an invalid template name or a body that breaks the structural rules |
+| `409` | A template with this name and language already exists on the channel |
+| `401` / `403` | Missing or insufficient credentials. Creation requires an admin role |
+| `500` | Unexpected error. The template is not stored |
+
+> 📘
+>
+> A `200` means Viber accepted the submission, not that the template is usable. Wait for the approval event before sending. See [Template Status Events](#template-status-events).
+
+### Template Status Events
+
+Viber moderates within 24 hours and notifies 8x8, which forwards the result to your webhook. You do not poll.
+
+The event carries the template **name** you chose, not Viber's internal identifier.
+
+| Result | Template status becomes |
+| :--- | :--- |
+| Created and queued | `Pending` |
+| Approved | `Approved` |
+| Rejected | `Declined` |
+
+A `Declined` template cannot be sent. Correct the wording, then create a replacement. See [Templates Cannot Be Edited](/connect/docs/viber/templates#templates-cannot-be-edited).
+
+For the webhook payload shape and configuration, see [Webhooks and Delivery Receipts](/connect/docs/viber/webhooks-delivery-receipts).
+
+---
+
+## Validation Before Send
+
+8x8 checks the request against the stored template before calling Viber. These failures come back immediately as a synchronous error rather than as a Viber error code in a delivery receipt:
+
+- The template name does not resolve on this channel
+- The template is not `Approved`
+- The template has been deleted
+- Supplied parameters do not match the template's declared placeholders
+- An `OTP` template was sent without a `pin` value
+
+---
+
+## Error Codes
+
+Template-related failures that pass 8x8 validation but fail at Viber surface in your delivery receipt using 8x8 error codes. The Viber code each one maps to is shown for reference when comparing against Viber's own documentation.
+
+| 8x8 Code | Reason | Meaning | Viber Code |
+| :--- | :--- | :--- | :--- |
+| `2020` | Template ID not found | The template does not exist, was deleted, or does not belong to this service | `38` |
+| `2021` | Template validation failed | Supplied parameters did not pass Viber's validation | `39` |
+| `2006` | Timeout | Viber server timeout. Viber also returns this when an OTP template is sent without a `pin` value | `7` |
+
+> 🚧
+>
+> Code `2006` has two meanings. A genuine timeout and a missing OTP `pin` produce the same code. 8x8 rejects a missing `pin` before the send to avoid this ambiguity, but a Viber-side timeout still surfaces as `2006`.
+
+Any non-success response from Viber triggers SMS fallback if you configured it, regardless of which code came back. The fallback body is `content.fallbackText`.
+
+> 📘 **Error Code Reference**
+>
+> For the complete list of all Viber error codes and their meanings, see [Delivery Error Codes](/connect/docs/delivery-error-codes#viber-error-codes).
+
+---
+
+## Rate Limits
+
+| Operation | Limit |
+| :--- | :--- |
+| Create template | 50 per second |
+| Approval time | Up to 24 hours |
+| Templates per Viber Service ID | 2,000, counting every status |
+
+---
+
+## Not Yet Available
+
+| Operation | Status |
+| :--- | :--- |
+| List templates | In development. Until then, track your registered names and their statuses on your side |
+| Delete a template | In development. Deleting at Viber is permanent |
+| Retrieve a single template | Not planned as a public endpoint |
+| Update a template | Not possible. Viber templates are immutable. See [Templates Cannot Be Edited](/connect/docs/viber/templates#templates-cannot-be-edited) |
+
+---
+
+## Next Steps
+
+| If you want to | Read |
+| :--- | :--- |
+| Send your first message with working curl examples | [Getting Started](/connect/docs/viber/getting-started) |
+| See all promotional message formats with screenshots and payloads | [Promotional Message API Library](/connect/docs/viber/message-types) |
+| See template create and send payloads | [Transactional Message API Library](/connect/docs/viber/templates) |
+| Handle delivery receipts and inbound messages | [Webhooks and Delivery Receipts](/connect/docs/viber/webhooks-delivery-receipts) |
+| Look up a specific error code | [Delivery Error Codes](/connect/docs/delivery-error-codes#viber-error-codes) |
+| Understand how traffic is rated | [Billing](/connect/docs/viber/billing) |
+
+---
+
+## Conversational Messaging
+
+
+![Conversational Viber Business Messages showing two-way customer support exchanges](./images/Conversational%20Viber%20Business%20Messages.png)
+
+*Source: [Viber for Business: The Types and Advantages of Viber Business Messages](https://www.forbusiness.viber.com/en/blog/post/the-types-and-advantages-of-viber-business-messages/)*
+
+Conversational messaging is Viber's category for two-way customer interactions. When a customer messages your business, Viber opens a 24 hour session window. Outbound messages you send inside that window are billed as a single flat session fee instead of individually, making multi-message support conversations financially viable.
+
+Your integration does not change. You send the same free-form messages using the same API. Viber manages the session lifecycle on its side: when your outbound message falls within an active session, Viber returns a session ID in its response, and 8x8 processes that signal and bills the message at the session rate. If no session is active, the message is sent and billed at the regular promotional rate.
+
+---
+
+## When to Use Conversational Messaging
+
+Conversational messaging is valuable whenever a customer's inbound message leads to a back-and-forth exchange rather than a single outbound reply. Because the session fee covers all outbound messages in the window, a conversation that takes ten replies to resolve costs the same as one that takes two.
+
+Common use cases:
+
+- **Pre-sales inquiries:** a customer asks about a product, you respond with details, images, or video, and the conversation continues until they are ready to buy.
+- **Post-purchase support:** a customer asks about their order, assembly instructions, or a booking confirmation, and resolution takes several exchanges.
+- **Customer service:** a customer reports an issue, you troubleshoot, share files or documents, and close the ticket, all within one conversation.
+- **Multi-turn bot or agent flows:** automated flows that ask follow-up questions, wait for replies, and branch based on the customer's response.
+
+Conversational messaging cannot help with business-initiated outbound messages. A session only opens when the customer messages first. Anything you send without a prior inbound from that customer, such as an order confirmation, delivery update, or OTP, is never inside a session and is billed at the regular per-message rate.
+
+---
+
+## How a Session Works
+
+![Viber session lifecycle flow showing how sessions open, limit consecutive messages, and close](./images/Viber%20Session%20Lifecycle%20Flow.png)
+
+A session is managed entirely by Viber. 8x8 processes the session signals Viber returns and handles billing accordingly.
+
+1. **You send an outbound message (no session).** Without a prior inbound from the customer, there is no active session. The message is sent and billed at the regular per-message rate (promotional or transactional depending on content type).
+2. **The customer replies.** This inbound message triggers Viber to open a 24 hour session window. Viber assigns a session ID.
+3. **You reply within the session window.** Viber recognizes your outbound message falls within an active session and returns the session ID in its response. 8x8 processes this signal and bills the message at the flat session rate. This first outbound message in the window carries the session fee.
+4. **You continue the conversation.** Further outbound messages within the same session carry no additional Viber message fee. You can send up to 10 consecutive outbound messages without a customer reply, and up to 60 outbound messages total per session.
+5. **The customer replies again.** Each customer reply resets the 10-message consecutive counter, allowing you to send another 10 outbound messages before needing a reply.
+6. **The session closes.** The session ends when the 24 hour window expires or the 60-message outbound limit is reached, whichever comes first. After the session closes, the next inbound message from the customer opens a new session with a new session ID.
+
+> 📘
+>
+> A business cannot open a session. Only an inbound message from the customer triggers Viber to start the window.
+
+---
+
+## What You Can Send in a Session
+
+You send the same free-form messages you would send outside a session. The API request is identical. Viber determines whether the message qualifies for session billing based on whether an active session exists for that customer.
+
+Session-eligible message types are **text**, **image**, and **file**. When sent within an active session, these are billed at the flat session rate.
+
+Other message types (video, buttons, carousel) can still be sent during an open session window, but Viber bills them at their regular promotional rate, not the session rate. This means a single conversation can contain a mix of session-rated and per-message-rated content.
+
+If no active session exists when you send a message, it goes through as a regular promotional or transactional message and is billed accordingly.
+
+---
+
+## Limits
+
+| Limit | Value | What happens at the limit |
+| :--- | :--- | :--- |
+| Session duration | 24 hours from the opening inbound message | The session closes. Later outbound messages are billed at the regular per-message rate |
+| Total outbound messages per session | 60 | The session ends. A new session begins if the customer sends another inbound message |
+| Consecutive outbound messages without a customer reply | 10 | The 11th message fails with error `2014` (Viber error 21: `SRVC_WAIT_FOR_USER_RESPONSE`). The message is not sent |
+
+The consecutive-message limit resets each time the customer replies. A back-and-forth conversation never approaches it; a one-sided burst of replies does.
+
+> 🚧
+>
+> Both the 60-message total and 10-message consecutive limits are enforced by Viber, not by 8x8. Design your agent or bot flows so that a customer reply is expected before the tenth consecutive outbound message. See [Delivery Error Codes](/connect/docs/delivery-error-codes#viber-error-codes).
+
+---
+
+## How Session Messages Are Rated
+
+| Situation | Rating |
+| :--- | :--- |
+| First outbound message inside an open session (text, image, or file) | Flat session fee, charged once |
+| Later outbound messages inside the same session (text, image, or file) | No additional Viber message fee |
+| Video, button, or carousel sent during an open session window | Billed at the regular promotional rate, not the session rate |
+| Outbound message with no open session | Billed at the regular per-message rate (promotional or transactional depending on content type) |
+| Inbound messages | No Viber message fee |
+
+Because the session fee covers up to 60 outbound messages over 24 hours, a long support conversation costs roughly the same as a short one. Session rates are set per country. See [Billing](/connect/docs/viber/billing) for how Viber traffic is rated overall.
+
+---
+
+## Enabling Conversational Messaging
+
+Conversational messaging is enabled per channel by 8x8. Contact your account manager to have it turned on for your Viber channel.
+
+Until it is enabled, all outbound Viber traffic is billed per message at the regular rate.
+
+---
+
+## Identifying Session Messages in Delivery Receipts
+
+> 🚧 **Coming soon**
+>
+> The fields below are not yet present in delivery receipts. They are in development. Until they ship, delivery receipts do not distinguish session traffic from per-message traffic.
+
+Once available, delivery receipts for Viber will carry a `viber` object describing how the message was rated:
+
+```json
+{
+  "viber": {
+    "providerErrorCode": "",
+    "pricingCategory": "session",
+    "billable": true
+  }
+}
+```
+
+| Field | Values | Meaning |
+| :--- | :--- | :--- |
+| `providerErrorCode` | Viber error code, or empty | The raw code Viber returned, when one was provided |
+| `pricingCategory` | `session`, `transactional`, `promotional` | How the message was rated |
+| `billable` | `true`, `false` | Whether this specific message carried a charge |
+
+Within a session, the first outbound message returns `billable: true` and later messages return `billable: false`. Outside a session, every message returns `billable: true`.
+
+---
+
+## Next Steps
+
+| If you want to | Read |
+| :--- | :--- |
+| Understand how Viber traffic is rated overall | [Billing](/connect/docs/viber/billing) |
+| Receive the inbound messages that open a session | [Webhooks and Delivery Receipts](/connect/docs/viber/webhooks-delivery-receipts) |
+| See all promotional message formats with screenshots and payloads | [Promotional Message API Library](/connect/docs/viber/message-types) |
+| Send transactional or OTP content that requires a template | [Transactional Message API Library](/connect/docs/viber/templates) |
+| Review message categories | [Concepts & Fundamentals](/connect/docs/viber/concepts-fundamentals#conversational) |
+| Revisit the business case and full page map | [Viber Hub](/connect/docs/viber/viber-hub) |
+
+---
+
+## Transactional Message API Library
+
+import TransactionalImg from './images/Transactional Viber Business Messages.png';
+
+<style>{`
+  .theme-code-block pre {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+`}</style>
+
+Viber requires pre-approved templates for all Transactional and OTP content. Each entry below shows both the Create Template and Send Template payloads. Template rules, lifecycle, and the July 2026 migration guide follow the table.
+
+<small>Source: Viber for Business: The Types and Advantages of Viber Business Messages</small>
+
+<colgroup>
+<col style={{width: '200px', minWidth: '200px', maxWidth: '200px'}} />
+<col />
+</colgroup>
+
+Template Type
+API Payloads
+
+### Utility Template
+
+**Create Template:** `POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates`
+
+Register a transactional template with up to 5 text placeholders. The body must start and end with static text, and consecutive placeholders are not allowed.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "name": "order_confirmation_en",
+  "category": "TRANSACTIONAL",
+  "language": "en",
+  "text": "Hi {{name}}, your order {{orderId}} has been confirmed. Expected delivery: {{date}}.",
+  "params": [
+    { "name": "name", "type": "TEXT" },
+    { "name": "orderId", "type": "TEXT" },
+    { "name": "date", "type": "TEXT" }
+  ],
+  "varExample": [
+    { "name": "name", "example": "Ana" },
+    { "name": "orderId", "example": "ORD-12345" },
+    { "name": "date", "example": "15 Aug 2026" }
+  ]
+}
+```
+
+</details>
+
+**Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Send the approved template by name and language. Provide parameter values in `content.template.components[].parameters[]`. Include `fallbackText` and `sms.source` for SMS fallback.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "template",
+  "content": {
+    "template": {
+      "name": "order_confirmation_en",
+      "language": "en",
+      "components": [
+        {
+          "type": "body",
+          "parameters": [
+            { "type": "text", "name": "name", "text": "Ana" },
+            { "type": "text", "name": "orderId", "text": "ORD-12345" },
+            { "type": "text", "name": "date", "text": "15 Aug 2026" }
+          ]
+        }
+      ]
+    },
+    "fallbackText": "Hi Ana, your order ORD-12345 has been confirmed. Expected delivery: 15 Aug 2026.",
+    "sms": {
+      "source": "8x8"
+    }
+  },
+  "channels": [
+    {
+      "channel": "Viber",
+      "channelId": "{viberChannelId}"
+    }
+  ]
+}
+```
+
+</details>
+
+### OTP Template
+
+**Create Template:** `POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates`
+
+Register an OTP template. The body must contain the `{{pin}}` placeholder. Viber renders OTP messages as a card with a Copy button for the recipient.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "name": "otp_login_en",
+  "category": "OTP",
+  "language": "en",
+  "text": "Your code is {{pin}}. Team 8x8",
+  "params": [
+    { "name": "pin", "type": "TEXT" }
+  ],
+  "varExample": [
+    { "name": "pin", "example": "1234" }
+  ]
+}
+```
+
+</details>
+
+**Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
+
+Send the approved OTP template with the generated pin value. The same send structure applies. Include SMS fallback for delivery assurance.
+
+<details open>
+<summary>View JSON</summary>
+
+```json
+{
+  "user": {
+    "msisdn": "+6512345678"
+  },
+  "type": "template",
+  "content": {
+    "template": {
+      "name": "otp_login_en",
+      "language": "en",
+      "components": [
+        {
+          "type": "body",
+          "parameters": [
+            { "type": "text", "name": "pin", "text": "1234" }
+          ]
+        }
+      ]
+    },
+    "fallbackText": "Your code is 1234. Team 8x8",
+    "sms": {
+      "source": "8x8"
+    }
+  },
+  "channels": [
+    {
+      "channel": "Viber",
+      "channelId": "{viberChannelId}"
+    }
+  ]
+}
+```
+
+</details>
+
+---
+
+## Template Rules
+
+Viber rejects a template at submission if its body breaks any of these rules. These are structural validation failures, not moderation decisions, so 8x8 returns them immediately rather than waiting on Viber's review.
+
+| Rule | Detail |
+| :--- | :--- |
+| Length | 1 to 875 characters |
+| Must start with static text | `{{name}}, hello` is rejected |
+| Must end with static text | `Your code is {{pin}}` is rejected. Add a trailing word, sign-off, or period |
+| No consecutive placeholders | `{{first}} {{last}}` is rejected. Put static text between them |
+| OTP needs a pin | An `OTP` template whose body has no `{{pin}}` placeholder is rejected |
+
+---
+
+## Naming and Identification
+
+Viber identifies each template internally by a UUID it generates. 8x8 layers a friendlier identity on top: you choose a **name**, and a template is uniquely identified by that name plus its **language**, scoped to your channel.
+
+You use the name everywhere in your integration: creating, sending, and deleting. 8x8 stores the mapping to Viber's UUID and resolves it internally, so the UUID never appears in your requests.
+
+Because one template holds exactly one language, supporting English, Thai, and Indonesian for the same message means registering three templates: the same name, a different `language` value on each. At send time, you select between them by supplying that `language` value.
+
+---
+
+## Limits
+
+These limits apply to every template, regardless of category.
+
+| Limit | Value |
+| :--- | :--- |
+| Placeholders per template | 5 |
+| Placeholder type | `TEXT` only |
+| Placeholder name | 50 characters, English characters only |
+| Example value | 100 characters |
+| Languages per template | 1 |
+| Templates per Viber Service ID | 2,000, counting every status |
+| Value length at send time | 25 characters per placeholder |
+| URLs in placeholder values | Not permitted. Hard-code any URL into the body |
+| Approval time | Up to 24 hours |
+
+> **Note** A URL cannot be passed as a placeholder value. If your message needs a link that varies per recipient, that content cannot be sent as a Viber template. Static links must be written into the template body and approved with it.
+
+---
+
+## Lifecycle
+
+```text
+Submit  ->  Pending  ->  Approved
+                     ->  Declined
+```
+
+| Status | Meaning |
+| :--- | :--- |
+| `Pending` | Submitted and queued for moderation. Cannot be used to send |
+| `Approved` | Moderated and usable in send requests |
+| `Declined` | Rejected during moderation, commonly for a content policy breach. Cannot be used to send |
+
+Approval takes up to 24 hours. Viber reports the outcome to 8x8, which forwards the event to your webhook, identifying the template by the **name** you chose rather than Viber's internal identifier, so you do not need to poll. See [Webhooks and Delivery Receipts](/connect/docs/viber/webhooks-delivery-receipts).
+
+A `Declined` template cannot be corrected in place. See [Templates Cannot Be Edited](#templates-cannot-be-edited) for what to do next.
+
+---
+
+## Templates Cannot Be Edited
+
+Viber templates are immutable once created. There is no update operation, at Viber or through 8x8: to change any part of a template, including fixing a typo, you delete it and create a replacement. The replacement goes back through moderation and waits up to 24 hours before it can send.
+
+> **Note** Template deletion through the 8x8 API is still rolling out. See [Sending Viber Messages over API](/connect/docs/viber/sending-viber-messages-api) for current availability, and contact your account manager if you need a template removed in the meantime.
+
+Plan for this:
+
+- **Build approval time into your release cycle.** A template needed for tonight's traffic cannot be created this afternoon.
+- **Treat wording changes as a scheduled change, not a hotfix.**
+- **Recreate under the same name and language.** Because you address templates by name rather than Viber's UUID, a replacement with the same name and language keeps your send code unchanged.
+
+---
+
+## What Changed on July 15, 2026
+
+On July 15, 2026, Viber made pre-approved templates mandatory for Transactional and OTP content. Free-form text is no longer accepted for either category; if you send it anyway, Viber rates it as Promotional instead. Promotional content itself is unaffected and continues to use free-form content as before.
+
+| Area | Before | Now |
+| :--- | :--- | :--- |
+| Sending transactional content | Free-form text composed per send | A registered template referenced by name, with values for its placeholders |
+| Rating of free-form text | Transactional | Promotional |
+| Time to launch a new message | Immediate | Up to 24 hours for template moderation |
+| Changing wording | Edit the text in your send call | Delete the template and create a replacement |
+| OTP presentation | Plain text | Card layout with a Copy button |
+| Multi-language | One send call, different text | One template per language |
+
+This section is for teams already sending Viber traffic through 8x8 who need to move existing transactional and OTP messages onto templates.
+
+### Who Is Affected
+
+You are affected if you send any of the following over Viber:
+
+- One-time passwords and verification codes
+- Order confirmations, dispatch and delivery updates
+- Account notices, payment reminders, appointment confirmations
+
+You are not affected if you send only Promotional content. Promotional messages do not use templates and continue to work unchanged.
+
+### How to Migrate
+
+1. **Inventory your transactional messages.** List every distinct Transactional and OTP message shape you send, grouped by wording rather than recipient. Two messages that differ only in a name, a code, or an order number are one template with placeholders. Work out which parts vary; those become placeholders, and everything else is static text locked in at approval.
+2. **Check each message against the rules.** See [Template Rules](#template-rules) and [Limits](#limits) above for the complete constraints on length, placeholders, and send-time values. A message that needs a link which varies per recipient cannot be sent as a template; a fixed link can be written into the body and approved with it.
+3. **Register your templates.** Create each template through the [Template Management API](/connect/docs/viber/sending-viber-messages-api#template-management-api), choosing a name you will reuse in your send calls. Register one template per language: the same name, a different `language` value on each. Submit well ahead of when you need to send; moderation takes up to 24 hours.
+4. **Switch your send calls.** Change Transactional and OTP sends from free-form content to a template send, supplying the template name, its language, and a value for each placeholder. The endpoint, authentication, and subaccount stay the same. Keep your SMS fallback configured: any failed Viber send still falls back to SMS using `fallbackText`.
+5. **Verify.** Send to a test recipient and confirm the rendered text matches what you expect, the OTP Copy button appears where it should, and the delivery receipt shows a successful send.
+
+### Common Errors During Migration
+
+| Symptom | Likely cause |
+| :--- | :--- |
+| Send rejected before reaching Viber | The template name does not resolve, is not yet `Approved`, or the supplied placeholders do not match the definition |
+| Error `2020` | Template not found, deleted, or not owned by this service |
+| Error `2021` | Supplied parameters do not match the template definition |
+| Error `2006` | A genuine Viber timeout, or an OTP template sent without a `pin` value; both surface as the same code |
+| Template declined at moderation | The wording breached Viber's content policy. Revise and create a replacement |
+
+See [Delivery Error Codes](/connect/docs/delivery-error-codes#viber-error-codes) for the full list.
+
+### Planning Notes
+
+- **Approval time is up to 24 hours.** Register templates as part of the change that introduces them, not on the day you need them.
+- **Templates cannot be edited.** Correcting wording means deleting and recreating under the same name and language; see [Templates Cannot Be Edited](#templates-cannot-be-edited).
+- **Each Viber Service ID holds up to 2,000 templates, counting every status.** Prune templates you no longer send as you migrate.
+
+Contact your account manager if you need help scoping which of your traffic is affected or getting template registration enabled on your account.
+
+---
+
+## The 8x8 Viber Business Messages Platform
+
+
+![Viber Business Message Categories: Transactional, Conversational, and Promotional](./images/Viber%20Business%20Message%20Categories.png)
+
+*Source: [Viber for Business: The Types and Advantages of Viber Business Messages](https://www.forbusiness.viber.com/en/blog/post/the-types-and-advantages-of-viber-business-messages/)*
+
+Welcome to the 8x8 Viber documentation. This section shows you how to reach customers on Viber Business Messages through the 8x8 Messaging Apps API, whether you send campaigns and manage templates from the 8x8 Connect portal or build directly against the API.
+
+> 🚧 This section covers Viber Business Messages, sent through the 8x8 Messaging Apps API. Viber Bots and Viber Business Calls are separate Viber products and are not covered here.
+
+## Why Viber
+
+Viber gives your business direct access to a messaging app your customers are already likely to have installed, with the reach, richness, and reliability to carry marketing, transactional, and verification traffic in one channel.
+
+- **Massive, active reach:** Rakuten Viber has surpassed 1 billion downloads and operates in over 190 countries, with 3 million users active on the app every minute. Your messages land on a channel customers already check.
+- **Rich messaging formats:** Viber messages go well beyond plain text. Send up to 1,000 characters of formatted text, plus images, video, and files, add call-to-action buttons, and use carousel messages to showcase multiple products or offers in a single send.
+- **Trusted brand presence:** Every Viber sender operates from a verified Business Account. Approved accounts receive a blue tick, are discoverable in Viber search, and message customers from a dedicated business inbox, separate from personal chats, so your business reads as an official, trusted sender rather than an unknown number.
+- **SMS fallback for reliability:** When a Viber send cannot reach a customer, for example because they are offline or do not have Viber installed, 8x8 can automatically fall back to SMS so your message still gets through. See [Billing](/connect/docs/viber/billing) for how fallback traffic is rated.
+
+## What 8x8 Provides
+
+8x8 is an official Viber messaging partner, bringing Viber Business Messages to 8x8 Connect through the same Messaging Apps API you already use for WhatsApp, RCS, and LINE. Integrate once, then add Viber as another channel without learning a new API shape.
+
+You can reach your Viber channel two ways: through the 8x8 Connect portal for sending campaigns and managing templates, or by building directly against the Messaging Apps API for full programmatic control.
+
+Both paths give you the same platform features: [template management](/connect/docs/viber/templates) for transactional and OTP content, delivery receipts that include read status, [session messaging](/connect/docs/viber/sessions) for flat-fee two-way conversations, automatic SMS fallback, and inbound messages delivered to your webhook.
+
+> 📘 **Already sending WhatsApp, RCS, or LINE with 8x8?**
+>
+> Viber runs on the same 8x8 Messaging Apps API. If you already have one of these channels integrated, adding Viber means configuring a new channel, not learning a new integration. Start at [Getting Started](/connect/docs/viber/getting-started).
+
+## Key Capabilities
+
+| Capability | Support | Notes |
+| :--- | :--- | :--- |
+| Outbound messages | Yes | Text, image, video, file, and call-to-action buttons |
+| Inbound messages | Yes | Delivered to your configured webhook |
+| Delivery receipts | `queued`, `sent`, `delivered`, `read`, `undelivered` | Read receipts are supported |
+| Templates | Yes | Required for transactional and OTP traffic |
+| Session messaging | Yes | 24 hour window opened by an inbound message; outbound messages inside the window are rated as one flat session fee |
+| SMS fallback | Yes | Configured by 8x8 as part of channel setup |
+
+## Where to Start
+
+**New to Viber?** Learn the account structure, message categories, and how sessions and SMS fallback fit together before you integrate.
+
+- **See:** [Concepts & Fundamentals](/connect/docs/viber/concepts-fundamentals)
+
+**Ready to set up your Viber Business Account?** Find out what information 8x8 needs from you to provision a channel, and what happens after you submit it.
+
+- **See:** [Account Onboarding](/connect/docs/viber/account-onboarding)
+
+**Already have an account and want to send your first message?** Get your API key, find your base URL, and send your first Viber message.
+
+- **See:** [Getting Started](/connect/docs/viber/getting-started)
+
+**Migrating from another vendor?** Viber facilitates vendor migration through a quarterly window. Find out what to submit and when.
+
+- **See:** [Account Onboarding: Migrating from another vendor](/connect/docs/viber/account-onboarding#migrating-from-another-vendor)
+
+**Already integrated and need the API reference?** Go straight to endpoints, request and response payloads, template management, and error codes.
+
+- **See:** [Sending Viber Messages over API](/connect/docs/viber/sending-viber-messages-api)
+
+## In This Section
+
+| Page | What it covers |
+| :--- | :--- |
+| [Concepts & Fundamentals](/connect/docs/viber/concepts-fundamentals) | Account structure, message categories, and the mental model behind sessions and templates |
+| [Account Onboarding](/connect/docs/viber/account-onboarding) | What to submit to provision a Viber Business Account through 8x8, including vendor migration |
+| [Getting Started](/connect/docs/viber/getting-started) | Prerequisites, authentication, base URLs, and your first API send |
+| [Viber over 8x8 API](/connect/docs/viber/sending-viber-messages-api) | API reference: endpoints, request structure, error codes, and rate limits |
+| [Promotional Message API Library](/connect/docs/viber/message-types) | Every free-form message format with screenshots and API payloads |
+| [Transactional Message API Library](/connect/docs/viber/templates) | Template create and send payloads for utility and OTP use cases, rules, lifecycle, and migration guide |
+| [Conversational Messaging](/connect/docs/viber/sessions) | The 24 hour session window, limits, and how sessions are rated |
+| [Webhooks and Delivery Receipts](/connect/docs/viber/webhooks-delivery-receipts) | Inbound messages, delivery statuses, and template status events |
+| [Compliance Guidelines](/connect/docs/viber/compliance-guidelines) | Viber's content policies, sender rules, and local regulations |
+| [Billing](/connect/docs/viber/billing) | How Viber traffic is rated |
+
+---
+
+## Webhooks and Delivery Receipts
+
+
+Viber sends three kinds of event to your webhook: inbound messages from customers, delivery receipts for messages you sent, and template status changes. All three arrive on the callback URL configured for your account.
+
+This page covers what is Viber-specific: the receipt statuses Viber reports, the fields unique to a Viber receipt, and how template moderation results reach you. The shared payload structure, retry behavior, and versioning that apply across every Messaging Apps channel are documented in [Delivery receipts for Outbound Messaging Apps](/connect/docs/delivery-receipts-for-outbound-chatapps) and [Inbound Messaging Apps message](/connect/docs/inbound-chatapps-message). For the request payloads that generate these receipts, see [Sending Viber Messages over API](/connect/docs/viber/sending-viber-messages-api).
+
+---
+
+## Configuring Your Webhook
+
+Register your callback URL with the [Webhooks Configuration API](/connect/reference/add-webhooks-1). One URL serves every Messaging Apps channel on the account, and the `channel` field on each payload tells you which channel the event came from. For Viber, that value is `viber`.
+
+---
+
+## Delivery Receipt Statuses
+
+Viber reports read receipts in addition to delivery, so you can track a message all the way from acceptance to open. The value arrives in `status.state`.
+
+| `status.state` | Meaning |
+| :--- | :--- |
+| `queued` | 8x8 accepted the message and queued it for delivery |
+| `sent` | Handed off to Viber |
+| `delivered` | Delivered. `status.detail` distinguishes `delivered_to_operator` from `delivered_to_recipient` |
+| `read` | Opened by the recipient |
+| `undelivered` | Viber reported the message was not delivered. `status.errorCode` carries the 8x8 error code |
+
+For the complete enum and every `status.detail` value, see [Message status reference](/connect/docs/message-status-references).
+
+If the recipient does not read the message promptly, 8x8 keeps checking for a read receipt for up to 10 days.
+
+### Sample Delivery Receipt
+
+```json
+{
+  "version": 9,
+  "namespace": "ChatApps",
+  "eventType": "outbound_message_status_changed",
+  "description": "ChatApps outbound message delivery receipt",
+  "payload": {
+    "umid": "9f1c2e7a-6b40-4de1-8a2c-1f0d9e7c5b31",
+    "subAccountId": "{subAccountId}",
+    "channel": "viber",
+    "user": {
+      "msisdn": "+6512345678"
+    },
+    "status": {
+      "state": "delivered",
+      "detail": "delivered_to_operator",
+      "timestamp": "2026-07-03T03:21:26.06Z"
+    }
+  }
+}
+```
+
+**Key Fields:**
+
+- `umid`: The message identifier 8x8 returned when you sent the message
+- `channel`: `viber`
+- `user.msisdn`: The recipient's phone number
+- `status.state` and `status.detail`: Together, these describe how far the message got
+
+Viber identifies recipients purely by phone number, so delivery receipts carry no `channelUserId`.
+
+---
+
+## Viber-Specific Receipt Fields
+
+> 🚧 **Coming soon**
+>
+> The `viber` object described here is in development and is not yet present in delivery receipts.
+
+Delivery receipts for Viber will carry a `viber` object alongside the standard payload:
+
+```json
+{
+  "viber": {
+    "providerErrorCode": "",
+    "pricingCategory": "session",
+    "billable": true
+  }
+}
+```
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `providerErrorCode` | string | The raw error code returned by Viber. Empty when Viber provided none |
+| `pricingCategory` | string | How the message was rated: `session`, `transactional`, or `promotional` |
+| `billable` | boolean | Whether this message carried a charge. Within a session, only the first message is billable |
+
+See [Conversational Messaging](/connect/docs/viber/sessions#how-session-messages-are-rated) for how these values are derived.
+
+---
+
+## Inbound Messages
+
+An inbound Viber message arrives with `channel` set to `viber` and opens a [24 hour session window](/connect/docs/viber/sessions#how-a-session-works) for that customer. The payload structure matches other Messaging Apps channels, documented in [Inbound Messaging Apps message](/connect/docs/inbound-chatapps-message).
+
+Inbound messages are not charged a Viber message fee.
+
+---
+
+## Template Status Events
+
+When you register a Viber template, Viber moderates it within 24 hours and reports the outcome. 8x8 receives that callback, updates the stored template, and forwards the event to your webhook so you do not have to poll.
+
+| Outcome | Resulting template status |
+| :--- | :--- |
+| Received and queued for moderation | `Pending` |
+| Approved by Viber | `Approved` |
+| Rejected by Viber | `Declined` |
+
+These three statuses are the same lifecycle described in [Viber Templates](/connect/docs/viber/templates#lifecycle); this page covers how the transition reaches your webhook, not the rules Viber applies to reach it.
+
+The forwarded event identifies the template by the **name** you chose at creation, not Viber's internal identifier.
+
+> 📘
+>
+> A template must reach `Approved` before you can send with it. Sending against a `Pending` or `Declined` template is rejected before the request reaches Viber.
+
+See [Transactional Message API Library](/connect/docs/viber/templates) for the creation flow.
+
+---
+
+## Errors
+
+Viber send failures surface as delivery receipt errors. Codes specific to template traffic are listed in [Sending Viber Messages over API](/connect/docs/viber/sending-viber-messages-api#error-codes).
+
+> 📘 **Error Code Reference**
+>
+> For the complete list of all Viber error codes and their meanings, see [Delivery Error Codes](/connect/docs/delivery-error-codes#viber-error-codes).
+
+Any non-success response from Viber triggers SMS fallback when your channel is configured for it, regardless of which error code was returned.
+
+---
+
+## Next Steps
+
+| If you want to | Read |
+| :--- | :--- |
+| Send messages and see the request payloads that generate these receipts | [Sending Viber Messages over API](/connect/docs/viber/sending-viber-messages-api) |
+| Understand the session model behind the `pricingCategory` and `billable` fields | [Conversational Messaging](/connect/docs/viber/sessions#how-session-messages-are-rated) |
+| Review the template lifecycle these status events report on | [Viber Templates](/connect/docs/viber/templates#lifecycle) |
+| Look up a specific delivery or template error code | [Delivery Error Codes](/connect/docs/delivery-error-codes#viber-error-codes) |
+| Revisit the business case and full page map | [Viber Hub](/connect/docs/viber/viber-hub) |
 
 ---
 
@@ -70922,7 +72470,7 @@ Use this guide to select the best tool for your use case:
 
 ---
 
-## Concepts & Fundamentals
+## Concepts & Fundamentals(Whatsapp)
 
 
 Before you send your first message, it's essential to understand the core concepts and rules of the WhatsApp Business Platform. These rules govern how you can interact with customers, what you can send, how you are billed, and how your account's reputation is managed.
