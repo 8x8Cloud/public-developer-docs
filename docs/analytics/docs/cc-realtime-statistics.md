@@ -1532,7 +1532,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 | `accepted.int-15m.inQueue`                     | v1+     | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 15-minutes) |
 | `accepted.int-30m.inQueue`                     | v1+     | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 30-minutes) |
 | `accepted.today.inQueue`                       | v1+     | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (current day) |
-| `alerting.rt`                                  | v1+     | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
+| `alerting.rt`                                  | v1+     | Number of interactions from the current queue currently being presented to the agent, awaiting acceptance or rejection. Note that although this metric has no `.inQueue` suffix it is scoped to the current queue: it excludes internal agent-to-agent calls and chats, and interactions presented to the agent from other queues or by direct assignment (currently) |
 | `availableTime.int-15m`                        | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
 | `availableTime.int-30m`                        | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
 | `availableTime.today`                          | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
@@ -1693,7 +1693,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 | `activeDirections.rt`                  | v1+     | List of interaction directions (Inbound, Outbound) with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing direction and count of such interactions in each direction (currently) |
 | `activeInteractionsCount.rt`           | v1+     | Total number of interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state) across all queues, channels, and directions (currently) |
 | `activeQueues.rt`                      | v1+     | List of queues with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing queue name and count of such interactions in each queue (currently) |
-| `alerting.rt`                          | v1+     | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
+| `alerting.rt`                          | v1+     | Number of interactions currently being presented to the agent, awaiting acceptance or rejection, across all of the agent's queues and including direct assignments. Excludes internal agent-to-agent calls and chats (currently) |
 | `availableTime.int-15m`                | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
 | `availableTime.int-30m`                | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
 | `availableTime.today`                  | v1+     | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
@@ -1854,7 +1854,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 | `activeDirections.rt`                  | v5+ | List of interaction directions (Inbound, Outbound) with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing direction and count of such interactions in each direction (currently) |
 | `activeInteractionsCount.rt`           | v5+ | Total number of interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state) across all queues, channels, and directions (currently) |
 | `activeQueues.rt`                      | v5+ | List of queues with interactions where the agent is actively engaged (Offering, Handling, or Wrap Up state), showing queue name and count of such interactions in each queue (currently) |
-| `alerting.rt`                          | v5+ | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
+| `alerting.rt`                          | v5+ | Number of interactions currently being presented to the agent, awaiting acceptance or rejection, across all of the agent's queues and including direct assignments. Excludes internal agent-to-agent calls and chats (currently) |
 | `availableTime.int-15m`                | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
 | `availableTime.int-30m`                | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
 | `availableTime.today`                  | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
@@ -2012,7 +2012,7 @@ This glossary provides comprehensive definitions for all metrics available when 
 | `accepted.int-15m.inQueue`                     | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 15-minutes) |
 | `accepted.int-30m.inQueue`                     | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (last 30-minutes) |
 | `accepted.today.inQueue`                       | v5+ | Total interactions answered by the agent. Represents every call, chat, email or other interaction that was successfully connected to and handled by an agent (current day) |
-| `alerting.rt`                                  | v5+ | Number of interactions currently being presented to the agent via a queue or direct assignment (currently) |
+| `alerting.rt`                                  | v5+ | Number of interactions currently being presented to the agent, awaiting acceptance or rejection, across all of the agent's queues — including queues not named in the request — and including direct assignments. Excludes internal agent-to-agent calls and chats (currently) |
 | `availableTime.int-15m`                        | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 15-minutes) |
 | `availableTime.int-30m`                        | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (last 30-minutes) |
 | `availableTime.today`                          | v5+ | Total time the agent spent in Available state, ready to receive incoming interactions (current day) |
