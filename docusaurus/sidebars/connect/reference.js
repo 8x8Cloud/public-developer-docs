@@ -206,16 +206,23 @@ const sidebarConfig = [
         collapsed: true,
         items: [
           {
-            type: 'doc',
-            id: 'connect/reference/get-whatsapp-templates',
-          },
-          {
-            type: 'doc',
-            id: 'connect/reference/add-whatsapp-template',
-          },
-          {
-            type: 'doc',
-            id: 'connect/reference/remove-wa-template',
+            type: 'category',
+            label: 'WhatsApp Template Management',
+            collapsed: true,
+            items: [
+              {
+                type: 'doc',
+                id: 'connect/reference/get-whatsapp-templates',
+              },
+              {
+                type: 'doc',
+                id: 'connect/reference/add-whatsapp-template',
+              },
+              {
+                type: 'doc',
+                id: 'connect/reference/remove-wa-template',
+              },
+            ],
           },
           {
             type: 'doc',
@@ -261,6 +268,17 @@ const sidebarConfig = [
               {
                 type: 'doc',
                 id: 'connect/reference/delete-whatsapp-flow',
+              },
+            ],
+          },
+          {
+            type: 'category',
+            label: 'Viber Template Management',
+            collapsed: true,
+            items: [
+              {
+                type: 'doc',
+                id: 'connect/reference/add-viber-template',
               },
             ],
           },

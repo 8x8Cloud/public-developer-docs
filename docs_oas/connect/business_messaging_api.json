@@ -4327,6 +4327,222 @@
         }
       ]
     },
+    "/api/v1/accounts/{accountId}/viber/channels/{channelId}/templates": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Template created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/400"
+          },
+          "401": {
+            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
+          },
+          "500": {
+            "$ref": "#/paths/~1files~1%7Bfilename%7D/get/responses/500"
+          }
+        },
+        "summary": "Add Viber template",
+        "operationId": "add-viber-template",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "test_order_confirmation_001",
+                    "description": "A unique name for the template. Use lowercase letters, numbers, and underscores only."
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "Template category.",
+                    "example": "Transactional",
+                    "enum": [
+                      "Transactional",
+                      "OTP"
+                    ]
+                  },
+                  "language": {
+                    "type": "string",
+                    "example": "en",
+                    "description": "Language code for the template (e.g., `en` for English, `id` for Indonesian)."
+                  },
+                  "text": {
+                    "type": "string",
+                    "example": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
+                    "description": "The template message text. Use `{{parameter_name}}` syntax for dynamic parameters."
+                  },
+                  "params": {
+                    "type": "array",
+                    "description": "List of parameter definitions used in the template text. Each parameter referenced in the `text` field must have a corresponding entry here.",
+                    "items": {
+                      "type": "object",
+                      "title": "Template parameter",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "The parameter name, matching the placeholder in the template text.",
+                          "example": "customer_name"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "The parameter type.",
+                          "example": "TEXT",
+                          "enum": [
+                            "TEXT"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "type"
+                      ]
+                    }
+                  },
+                  "varExample": {
+                    "type": "array",
+                    "description": "Example values for each parameter, used during the template review process. Each entry must correspond to a parameter defined in the `params` array.",
+                    "items": {
+                      "type": "object",
+                      "title": "Parameter example value",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "The parameter name, matching a `params` entry.",
+                          "example": "customer_name"
+                        },
+                        "example": {
+                          "type": "string",
+                          "description": "An example value for the parameter.",
+                          "example": "John"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "example"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "name",
+                  "category",
+                  "language",
+                  "text",
+                  "params",
+                  "varExample"
+                ],
+                "title": "Register Viber template request",
+                "description": "Register Viber template request"
+              },
+              "examples": {
+                "viberTransactionalTemplate": {
+                  "summary": "Add Viber Transactional Template",
+                  "value": {
+                    "name": "test_order_confirmation_001",
+                    "category": "Transactional",
+                    "language": "en",
+                    "text": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
+                    "params": [
+                      {
+                        "name": "customer_name",
+                        "type": "TEXT"
+                      },
+                      {
+                        "name": "order_id",
+                        "type": "TEXT"
+                      },
+                      {
+                        "name": "delivery_date",
+                        "type": "TEXT"
+                      }
+                    ],
+                    "varExample": [
+                      {
+                        "name": "customer_name",
+                        "example": "John"
+                      },
+                      {
+                        "name": "order_id",
+                        "example": "ORD-12345"
+                      },
+                      {
+                        "name": "delivery_date",
+                        "example": "2026-08-01"
+                      }
+                    ]
+                  }
+                },
+                "viberOtpTemplate": {
+                  "summary": "Add Viber OTP Template",
+                  "value": {
+                    "name": "otp_login_en",
+                    "category": "OTP",
+                    "language": "en",
+                    "text": "Your verification code is {{pin}}. Valid for 5 minutes. Team 8x8",
+                    "params": [
+                      {
+                        "name": "pin",
+                        "type": "TEXT"
+                      }
+                    ],
+                    "varExample": [
+                      {
+                        "name": "pin",
+                        "example": "123456"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Management API"
+        ],
+        "description": "This endpoint is used to register a new Viber message template.\n\nViber message templates are pre-approved message formats for sending transactional messages and OTPs to customers via Viber. Templates support dynamic parameters using the `{{parameter_name}}` syntax that can be substituted at send time.\n\nCurrently, only `Transactional` and `OTP` categories are supported.\n\nCreating Viber templates requires an admin role on the account.",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "accountId",
+          "in": "path",
+          "description": "You must replace *{accountId}* with the accountid that you want to use.",
+          "required": true,
+          "schema": {
+            "maxLength": 36,
+            "minLength": 32,
+            "pattern": "^[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}$",
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "channelId",
+          "required": true,
+          "description": "Viber channel identifier",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
     "/api/v1/whatsapp/subaccounts/{subAccountId}/channels/{channelId}/callPermissions": {
       "get": {
         "summary": "Get Call Permission Status",

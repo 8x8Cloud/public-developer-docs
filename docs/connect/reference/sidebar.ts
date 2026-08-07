@@ -86,6 +86,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "connect/reference/add-viber-template",
+          label: "Add Viber template",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "connect/reference/get-call-permission-status",
           label: "Get Call Permission Status",
           className: "api-method get",

@@ -137,6 +137,7 @@ const sidebarConfig = [
           },
           'connect/docs/viber/billing',
           'connect/docs/viber/compliance-guidelines',
+          'connect/docs/viber-templates-management',
         ],
       },
       {
