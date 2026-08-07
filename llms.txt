@@ -487,6 +487,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Transactional Message API Library](https://developer.8x8.com/connect/docs/viber/template-message-api-library): import TransactionalImg from './images/Transactional Viber Business Messages.png';
 - [The 8x8 Viber Business Messages Platform](https://developer.8x8.com/connect/docs/viber/viber-hub): ![Viber Business Message Categories: Transactional, Conversational, and Promotional](./images/Viber%20Business%20Message%20Categories.png)
 - [Webhooks and Delivery Receipts](https://developer.8x8.com/connect/docs/viber/webhooks-delivery-receipts): Viber sends three kinds of event to your webhook: inbound messages from customers, delivery receipts for messages you sent, and template status cha...
+- [Viber Templates Management](https://developer.8x8.com/connect/docs/viber-templates-management): Viber message templates allow you to create pre-approved message formats for sending transactional messages and OTPs to your customers via Viber. T...
 - [Video Interaction Analytics](https://developer.8x8.com/connect/docs/video-interaction-analytics): The Video Interaction Analytics are covered in the Video Interaction section [here](vi-administrator-interface).
 - [Voice API – Introduction](https://developer.8x8.com/connect/docs/voice/api-introduction): The 8x8 Voice API lets you programmatically **make and control calls** using **JSON callflows**.
 - [Number Masking Error Codes](https://developer.8x8.com/connect/docs/voice/error-codes/number-masking-error-codes): Number Masking error codes are reported in Number Masking-specific callbacks and session summaries when errors occur during call bridging sessions....
@@ -574,6 +575,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Zendesk Support](https://developer.8x8.com/connect/docs/zendesk-support): [Zendesk](https://www.zendesk.com/) is a customer support system for tracking, prioritizing, and solving support tickets.
 - [8x8 Connect](https://developer.8x8.com/connect): import ConnectCards from '@site/docusaurus/components/ConnectCards';
 - [Add a contact to a group](https://developer.8x8.com/connect/reference/add-contacts-to-group.api): Add a contact to a group
+- [Add Viber template](https://developer.8x8.com/connect/reference/add-viber-template.api): This endpoint is used to register a new Viber message template.
 - [Create or Replace webhooks](https://developer.8x8.com/connect/reference/add-webhooks-1.api): Sending a POST request on this endpoint allows to **add a new webhook for an account or modify the configuration of an existing one** .
 - [Create or Replace webhooks](https://developer.8x8.com/connect/reference/add-webhooks-2.api): Sending a POST request on this endpoint allows to **add a new webhook for an account or modify the configuration of an existing one** .
 - [Create or Replace webhooks](https://developer.8x8.com/connect/reference/add-webhooks.api): Sending a POST request on this endpoint allows to **add a new webhook for an account or modify the configuration of an existing one** .
