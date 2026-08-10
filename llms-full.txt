@@ -8944,9 +8944,29 @@ The `participatingAgents` field contains semicolon-separated agent IDs that are 
 
 **Note:** In some events, this may appear as comma-separated instead of semicolon-separated, depending on the transformation stage.
 
-### Boolean String Representation
+### JSON Types Are Not Fixed Per Field {#boolean-string-representation}
 
-Boolean values in events are represented as strings (`"true"`, `"false"`) rather than native JSON booleans:
+For compatibility with the legacy Streaming API, a field's JSON type is not guaranteed to be
+the same in every message. Do not bind event fields to a fixed type, and parse defensively.
+
+Two separate behaviours cause this.
+
+**1. Values that look like a boolean or a number lose their quotes**
+
+A text value is emitted without quotes whenever the value itself reads as a JSON boolean or
+number. This is decided per value, not per field, so the same field can arrive as a string in
+one message and as a boolean or number in the next:
+
+| Underlying value | Appears in the event as |
+|------------------|-------------------------|
+| `resume`         | `"resume"`              |
+| `true`           | `true`                  |
+| `0`              | `0`                     |
+| `0123`           | `"0123"`                |
+
+A leading zero keeps its quotes, as `0123` is not a valid JSON number.
+
+This is why boolean-like fields vary between representations:
 
 ```json
 {
@@ -8957,7 +8977,28 @@ Boolean values in events are represented as strings (`"true"`, `"false"`) rather
 }
 ```
 
-This is due to the internal message format constraints. When consuming events, be prepared to handle both boolean and string representations.
+**2. Some fields mean different things in different events**
+
+A field's type can also depend on which event carries it. `status` is the clearest example:
+
+| Event                              | `status`                                        |
+|------------------------------------|-------------------------------------------------|
+| `LineHoldStatus`, `LineMuteStatus` | Boolean - `true` or `false`                     |
+| `RecordingStatus`                  | Text - `"pause"`, `"resume"` and similar values |
+
+A consumer that assumes `status` is always boolean will fail when a `RecordingStatus` event
+arrives with `"resume"`. Check the `event` field before interpreting values whose meaning
+depends on it.
+
+**Handling this**
+
+- Accept both quoted and unquoted forms for any field that can be boolean-like or numeric -
+  for example, treat `true` and `"true"` as the same value.
+- Read values as text first and convert afterwards, rather than binding directly to a boolean
+  or numeric type.
+- Do not let one unparseable value stop your consumer. If you use the Consumer API and a
+  message fails to deserialize without being acknowledged, it will be redelivered and your
+  client can loop on the same message.
 
 ### Timestamp Formats
 
