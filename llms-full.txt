@@ -5900,7 +5900,9 @@ flowchart TD
 **Key Fields to Track:**
 - `interactionGUID`: Unique identifier to correlate all events for this interaction
 - `callState`: Current state in the lifecycle
-- `eventTS` or `interactionEventTS`: When each transition occurred
+- `interactionEventTS`: When each transition occurred. Not `eventTS`, which is the time the
+  interaction was offered and is the same on every event (see
+  [Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp))
 - `agentId`: Which agent handled the interaction (from InteractionAssigned onward)
 
 ## Outbound Call Lifecycle
@@ -5987,11 +5989,16 @@ To track a complete interaction from start to finish:
 
 1. **Use `interactionGUID`** as the correlation key across all events
 2. **Track state transitions** via `callState` field
-3. **Monitor timestamps** using `eventTS` or `interactionEventTS` to calculate durations:
-   - **Queue time**: InteractionQueued.eventTS → InteractionAssigned.eventTS
-   - **Ring time**: InteractionAssigned.eventTS → InteractionAccepted.eventTS
-   - **Talk time**: InteractionAccepted.eventTS → InteractionPostProcess.eventTS
-   - **Wrap-up time**: InteractionPostProcess.eventTS → InteractionEndPostProcess.eventTS
+3. **Monitor timestamps** using `interactionEventTS` to calculate durations:
+   - **Queue time**: InteractionQueued.interactionEventTS → InteractionAssigned.interactionEventTS
+   - **Ring time**: InteractionAssigned.interactionEventTS → InteractionAccepted.interactionEventTS
+   - **Talk time**: InteractionAccepted.interactionEventTS → InteractionPostProcess.interactionEventTS
+   - **Wrap-up time**: InteractionPostProcess.interactionEventTS → InteractionEndPostProcess.interactionEventTS
+
+   Use `interactionEventTS` for these, not `eventTS`. `eventTS` records when the interaction
+   was offered, so it is identical on every event for that interaction and each of the
+   subtractions above would evaluate to zero. See
+   [Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp).
 4. **Capture outcome** from InteractionDeleted:
    - `hangupInitiator`: Who ended the call
    - `callHangupReason`: Why the call ended
@@ -6018,20 +6025,28 @@ type InteractionTimeline struct {
 }
 
 func (t *InteractionTimeline) ProcessEvent(event Event) {
+    // interactionEventTS is absent on some event types, where it unmarshals to 0.
+    // Leave eventTime as the zero Time so the IsZero() guards below catch it -
+    // time.Unix(0, 0) is 1970, which is NOT IsZero() and would slip through.
+    var eventTime time.Time
+    if event.InteractionEventTS > 0 {
+        eventTime = time.Unix(event.InteractionEventTS, 0)
+    }
+
     switch event.Event {
     case "InteractionCreated":
         t.InteractionGUID = event.InteractionGUID
-        t.Created = time.Unix(event.EventTS, 0)
+        t.Created = eventTime
     case "InteractionQueued":
-        t.Queued = time.Unix(event.EventTS, 0)
+        t.Queued = eventTime
         t.QueueID = event.QueueID
     case "InteractionAssigned":
-        t.Assigned = time.Unix(event.EventTS, 0)
+        t.Assigned = eventTime
         t.AgentID = event.AgentID
     case "InteractionAccepted", "InteractionCustomerAccepted":
-        t.Connected = time.Unix(event.EventTS, 0)
+        t.Connected = eventTime
     case "InteractionDeleted":
-        t.Disconnected = time.Unix(event.EventTS, 0)
+        t.Disconnected = eventTime
         t.HangupReason = event.CallHangupReason
     }
 }
@@ -6074,19 +6089,24 @@ class InteractionTimeline:
     def process_event(self, event: dict):
         event_type = event.get('event')
 
+        # interactionEventTS is absent on some event types - leave the time as None
+        # rather than defaulting to 0, which would decode as 1970
+        event_ts = event.get('interactionEventTS')
+        event_time = datetime.fromtimestamp(event_ts) if event_ts else None
+
         if event_type == 'InteractionCreated':
             self.interaction_guid = event['interactionGUID']
-            self.created = datetime.fromtimestamp(event['eventTS'])
+            self.created = event_time
         elif event_type == 'InteractionQueued':
-            self.queued = datetime.fromtimestamp(event['eventTS'])
+            self.queued = event_time
             self.queue_id = event.get('queueId')
         elif event_type == 'InteractionAssigned':
-            self.assigned = datetime.fromtimestamp(event['eventTS'])
+            self.assigned = event_time
             self.agent_id = event.get('agentId')
         elif event_type in ['InteractionAccepted', 'InteractionCustomerAccepted']:
-            self.connected = datetime.fromtimestamp(event['eventTS'])
+            self.connected = event_time
         elif event_type == 'InteractionDeleted':
-            self.disconnected = datetime.fromtimestamp(event['eventTS'])
+            self.disconnected = event_time
             self.hangup_reason = event.get('callHangupReason')
 
     def queue_duration(self) -> Optional[float]:
@@ -6118,25 +6138,31 @@ class InteractionTimeline {
     }
 
     processEvent(event) {
+        // interactionEventTS is absent on some event types - leave the time as null
+        // rather than defaulting to 0, which would decode as 1970
+        const eventTime = event.interactionEventTS
+            ? new Date(event.interactionEventTS * 1000)
+            : null;
+
         switch (event.event) {
             case 'InteractionCreated':
                 this.interactionGUID = event.interactionGUID;
-                this.created = new Date(event.eventTS * 1000);
+                this.created = eventTime;
                 break;
             case 'InteractionQueued':
-                this.queued = new Date(event.eventTS * 1000);
+                this.queued = eventTime;
                 this.queueId = event.queueId;
                 break;
             case 'InteractionAssigned':
-                this.assigned = new Date(event.eventTS * 1000);
+                this.assigned = eventTime;
                 this.agentId = event.agentId;
                 break;
             case 'InteractionAccepted':
             case 'InteractionCustomerAccepted':
-                this.connected = new Date(event.eventTS * 1000);
+                this.connected = eventTime;
                 break;
             case 'InteractionDeleted':
-                this.disconnected = new Date(event.eventTS * 1000);
+                this.disconnected = eventTime;
                 this.hangupReason = event.callHangupReason;
                 break;
         }
@@ -6177,7 +6203,10 @@ class InteractionTimeline {
 
 ### Metric Calculation
 
-- **Use event timestamps** (`eventTS` or `interactionEventTS`) for accurate duration calculations
+- **Use `interactionEventTS`** for duration calculations - not `eventTS`, which does not advance
+  between events (see [Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp))
+- **Handle events with no `interactionEventTS`** - use `msgInfo.timestamp` rather than
+  defaulting a missing value to 0
 - **Account for holds** - `LineHoldStatus` events affect talk time calculations
 - **Consider time zones** - timestamps are in UTC, convert as needed for reporting
 
@@ -6207,54 +6236,57 @@ The 8x8 Event Streaming service provides the following event types:
 
 ### Agent Events
 
-| Event Type          | Call State | Description                                              |
-|---------------------|------------|----------------------------------------------------------|
-| `AgentStatusChange` | N/A        | Indicates the current status of the monitored agent      |
-| `AgentProvChange`   | N/A        | Indicates a change to the agent profile (skills, etc.)   |
-| `AgentSkillCreated` | N/A        | Indicates a new agent skill has been created             |
+| Event Type          | Call State | Description                                                   |
+|---------------------|------------|---------------------------------------------------------------|
+| `AgentStatusChange` | N/A        | Indicates the current status of the monitored agent           |
+| `AgentProvChange`   | N/A        | Indicates a change to the agent profile (skills, etc.)        |
+| `AgentSkillCreated` | N/A        | Indicates a new agent skill has been created                  |
 | `AgentSkillChanged` | N/A        | Indicates an agent skill has been modified (enabled/disabled) |
 
 ### Interaction Events
 
-| Event Type                           | Call State                  | Description                                                        |
-|--------------------------------------|-----------------------------|--------------------------------------------------------------------|
-| `InteractionCreated`                 | CS_IDLECS_QUEUED          | Indicates a new outbound or inbound interaction creation          |
-| `InteractionQueued`                  | CS_QUEUED                   | Indicates an interaction waiting to be assigned to an agent       |
-| `InteractionAssigned`                | CS_INPROGRESS               | Indicates an interaction assigned to an available agent           |
-| `InteractionAccepted`                | CS_INPROGRESSCS_CONNECTED | Indicates an interaction accepted by an agent                     |
-| `InteractionCustomerAccepted`        | CS_CONNECTED                | Indicates a ringing outbound call answered by the customer        |
-| `InteractionRejected`                | CS_QUEUED                   | Indicates an agent rejected an offered interaction                |
-| `InteractionUnqueued`                | CS_IDLECS_QUEUED          | Indicates an interaction removed from queue before assignment     |
-| `LineHoldStatus`                     | CS_HOLDCS_CONNECTED       | Indicates hold status change for an ongoing call                  |
-| `LineMuteStatus`                     | CS_CONNECTED                | Indicates mute status change for an ongoing call                  |
-| `InteractionRecordingStarted`        | N/A                         | Indicates the system has started recording a call leg             |
-| `RecordingStatus`                    | N/A                         | Indicates a recording status change (pause/resume)                |
-| `InteractionPostProcess`             | CS_DISCONNECTED             | Indicates the start of interaction wrap-up                        |
-| `InteractionRecordingReady`          | N/A                         | Indicates an interaction recording is ready for retrieval         |
-| `InteractionEndPostProcess`          | CS_DISCONNECTED             | Indicates the conclusion of interaction wrap-up                   |
-| `InteractionDeassigned`              | CS_DISCONNECTED             | Indicates an interaction deassigned from an agent                 |
-| `InteractionTransferRequest`         | N/A                         | Indicates a transfer request for an interaction                   |
-| `InteractionReconnect`               | N/A                         | Indicates an interaction reconnect event                          |
-| `InteractionParticipantChange`       | CS_DISCONNECTED             | Indicates participant changes (conference, supervisor join, etc.) |
-| `InteractionParticipantRemovedByHost`| N/A                         | Indicates a participant removed from interaction by host          |
-| `InteractionJoinLinesRequest`        | N/A                         | Indicates a request to join multiple lines                        |
-| `InteractionJoined`                  | N/A                         | Indicates multiple lines have been joined                         |
-| `InteractionChanged`                 | N/A                         | Indicates interaction properties have changed                     |
-| `InteractionQueueTimeout`            | N/A                         | Indicates an interaction timed out in queue                       |
-| `InteractionDeleted`                 | CS_DISCONNECTED             | Indicates interaction ended or call leg left conference           |
+| Event Type                            | Call State                      | Description                                                       |
+|---------------------------------------|---------------------------------|-------------------------------------------------------------------|
+| `InteractionCreated`                  | CS_IDLECS_QUEUED          | Indicates a new outbound or inbound interaction creation          |
+| `InteractionQueued`                   | CS_QUEUED                       | Indicates an interaction waiting to be assigned to an agent       |
+| `InteractionAssigned`                 | CS_INPROGRESS                   | Indicates an interaction assigned to an available agent           |
+| `InteractionAccepted`                 | CS_INPROGRESSCS_CONNECTED | Indicates an interaction accepted by an agent                     |
+| `InteractionCustomerAccepted`         | CS_CONNECTED                    | Indicates a ringing outbound call answered by the customer        |
+| `InteractionRejected`                 | CS_QUEUED                       | Indicates an agent rejected an offered interaction                |
+| `InteractionUnqueued`                 | CS_IDLECS_QUEUED          | Indicates an interaction removed from queue before assignment     |
+| `LineHoldStatus`                      | CS_HOLDCS_CONNECTED       | Indicates hold status change for an ongoing call                  |
+| `LineMuteStatus`                      | CS_CONNECTED                    | Indicates mute status change for an ongoing call                  |
+| `InteractionRecordingStarted`         | N/A                             | Indicates the system has started recording a call leg             |
+| `RecordingStatus`                     | N/A                             | Indicates a recording status change (pause/resume)                |
+| `InteractionPostProcess`              | CS_DISCONNECTED                 | Indicates the start of interaction wrap-up                        |
+| `InteractionRecordingReady`           | N/A                             | Indicates an interaction recording is ready for retrieval         |
+| `InteractionEndPostProcess`           | CS_DISCONNECTED                 | Indicates the conclusion of interaction wrap-up                   |
+| `InteractionDeassigned`               | CS_DISCONNECTED                 | Indicates an interaction deassigned from an agent                 |
+| `InteractionTransferRequest`          | N/A                             | Indicates a transfer request for an interaction                   |
+| `InteractionReconnect`                | N/A                             | Indicates an interaction reconnect event                          |
+| `InteractionParticipantChange`        | CS_DISCONNECTED                 | Indicates participant changes (conference, supervisor join, etc.) |
+| `InteractionParticipantRemovedByHost` | N/A                             | Indicates a participant removed from interaction by host          |
+| `InteractionJoinLinesRequest`         | N/A                             | Indicates a request to join multiple lines                        |
+| `InteractionJoined`                   | N/A                             | Indicates multiple lines have been joined                         |
+| `InteractionChanged`                  | N/A                             | Indicates interaction properties have changed                     |
+| `InteractionQueueTimeout`             | N/A                             | Indicates an interaction timed out in queue                       |
+| `InteractionDeleted`                  | CS_DISCONNECTED                 | Indicates interaction ended or call leg left conference           |
 
 ### Digital Channel Events
 
-| Event Type     | Description                                           |
-|----------------|-------------------------------------------------------|
-| `GuestChatEnd` | Indicates a guest chat session has ended              |
+| Event Type     | Description                              |
+|----------------|------------------------------------------|
+| `GuestChatEnd` | Indicates a guest chat session has ended |
+
+`GuestChatEnd` carries no `interactionEventTS`. Use `msgInfo.timestamp` for its time - see
+[Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp).
 
 ### Media/Proxy Events
 
-| Event Type          | Description                                     |
-|---------------------|-------------------------------------------------|
-| `MediaProxyAdded`   | Indicates a media proxy has been added          |
-| `MediaProxyRemoved` | Indicates a media proxy has been removed        |
+| Event Type          | Description                              |
+|---------------------|------------------------------------------|
+| `MediaProxyAdded`   | Indicates a media proxy has been added   |
+| `MediaProxyRemoved` | Indicates a media proxy has been removed |
 
 ## Event Payload Examples
 
@@ -6384,7 +6416,9 @@ This event indicates a change to agent provisioning, such as skills being added,
 - `queueId`: Numeric queue identifier
 - `queueList`: Queue list identifier
 - `queueTime`: Time when interaction entered queue (seconds since epoch)
-- `eventTS`: Event timestamp (seconds since epoch)
+- `eventTS`: When the interaction was offered (seconds since epoch). The same on every event
+  for this interaction - use `interactionEventTS` for the time this event occurred (see
+  [Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp))
 - `transactionNum`: Transaction number
 - `callerPermission`: Whether caller granted recording permission
 - `overrideAutoInteractionRecording`: Recording override setting
@@ -8508,105 +8542,105 @@ The `attachedData` field can contain a wide variety of keys depending on the int
 
 ### Basic Interaction Fields
 
-| Key                  | Type   | Description                                          |
-|----------------------|--------|------------------------------------------------------|
-| `phoneNum`           | number | Primary phone number for the interaction             |
-| `pho`                | mixed  | Phone number (short key)                             |
-| `callingName`        | mixed  | Caller's name or calling number                      |
-| `callerId`           | number | Caller ID number                                     |
-| `@pri`               | number | Priority value                                       |
-| `priority`           | number | Queue priority (50 is standard)                      |
-| `med`                | string | Media type code"T" for phone"C" for chat/SMS   |
-| `cha`                | mixed  | Channel identifier                                   |
-| `channelName`        | mixed  | Channel/queue name                                   |
-| `cnt`                | number | Counter field                                        |
-| `con`                | number | Contact/record ID                                    |
-| `tok`                | number | Token identifier                                     |
+| Key           | Type   | Description                                              |
+|---------------|--------|----------------------------------------------------------|
+| `phoneNum`    | number | Primary phone number for the interaction                 |
+| `pho`         | mixed  | Phone number (short key)                                 |
+| `callingName` | mixed  | Caller's name or calling number                          |
+| `callerId`    | number | Caller ID number                                         |
+| `@pri`        | number | Priority value                                           |
+| `priority`    | number | Queue priority (50 is standard)                          |
+| `med`         | string | Media type code"T" for phone"C" for chat/SMS |
+| `cha`         | mixed  | Channel identifier                                       |
+| `channelName` | mixed  | Channel/queue name                                       |
+| `cnt`         | number | Counter field                                            |
+| `con`         | number | Contact/record ID                                        |
+| `tok`         | number | Token identifier                                         |
 
 ### Queue and Routing Fields
 
-| Key                  | Type   | Description                                          |
-|----------------------|--------|------------------------------------------------------|
-| `que`                | string | Queue identifier (format: `tenant~~queue~~media~~id`) |
-| `oqu`                | string | Original queue before transfer                       |
-| `queueDirection`     | string | "in" (inbound)"out" (outbound)                   |
-| `tenantName`         | string | Tenant name                                          |
-| `tenantSkillName`    | string | Skill/queue name                                     |
+| Key               | Type   | Description                                           |
+|-------------------|--------|-------------------------------------------------------|
+| `que`             | string | Queue identifier (format: `tenant~~queue~~media~~id`) |
+| `oqu`             | string | Original queue before transfer                        |
+| `queueDirection`  | string | "in" (inbound)"out" (outbound)                  |
+| `tenantName`      | string | Tenant name                                           |
+| `tenantSkillName` | string | Skill/queue name                                      |
 
 ### Timing Fields
 
-| Key                              | Type   | Description                                   |
-|----------------------------------|--------|-----------------------------------------------|
-| `tim`                            | number | Timestamp (seconds since epoch)               |
-| `otim`                           | number | Original/queue entry time (seconds)           |
-| `waitTime`                       | number | Wait time in seconds                          |
-| `callAnsweredTime`               | number | Call answered timestamp (milliseconds)        |
-| `callHangupTime`                 | number | Call hangup timestamp (milliseconds)          |
-| `callAnsweredTenantTT`           | string | Answered time formatted in tenant timezone    |
-| `callHangupTenantTT`             | string | Hangup time formatted in tenant timezone      |
-| `callDuration`                   | string | Call duration formatted (HH:MM:SS)            |
-| `callDurationSec`                | number | Call duration in seconds                      |
-| `phoneQueueInteractionStartTime` | number | Phone queue interaction start (seconds)       |
+| Key                              | Type   | Description                                |
+|----------------------------------|--------|--------------------------------------------|
+| `tim`                            | number | Timestamp (seconds since epoch)            |
+| `otim`                           | number | Original/queue entry time (seconds)        |
+| `waitTime`                       | number | Wait time in seconds                       |
+| `callAnsweredTime`               | number | Call answered timestamp (milliseconds)     |
+| `callHangupTime`                 | number | Call hangup timestamp (milliseconds)       |
+| `callAnsweredTenantTT`           | string | Answered time formatted in tenant timezone |
+| `callHangupTenantTT`             | string | Hangup time formatted in tenant timezone   |
+| `callDuration`                   | string | Call duration formatted (HH:MM:SS)         |
+| `callDurationSec`                | number | Call duration in seconds                   |
+| `phoneQueueInteractionStartTime` | number | Phone queue interaction start (seconds)    |
 
 ### Recording Fields
 
-| Key                 | Type   | Description                                         |
-|---------------------|--------|-----------------------------------------------------|
-| `tenantRecServer`   | string | Recording server name (e.g., "eu10nfs01")          |
-| `aAgtCallRec`       | string | Agent call recording setting"yes""no"          |
-| `agtInitVR`         | string | Agent initiated recording"NotSet"etc.         |
-| `callerPerm`        | string | Caller permission for recording"yes""no"       |
-| `vRecP`             | number | Recording parameter                                 |
+| Key               | Type   | Description                                          |
+|-------------------|--------|------------------------------------------------------|
+| `tenantRecServer` | string | Recording server name (e.g., "eu10nfs01")            |
+| `aAgtCallRec`     | string | Agent call recording setting"yes""no"    |
+| `agtInitVR`       | string | Agent initiated recording"NotSet"etc.    |
+| `callerPerm`      | string | Caller permission for recording"yes""no" |
+| `vRecP`           | number | Recording parameter                                  |
 
 ### Outbound and Campaign Fields
 
-| Key                     | Type    | Description                                      |
-|-------------------------|---------|--------------------------------------------------|
-| `ctl_transType`         | string  | Transaction type"agentdial""campaign"etc. |
-| `destType`              | string  | Destination type"external"etc.              |
-| `outboundTclItemId`     | mixed   | Outbound transaction code list item ID           |
-| `outboundTclListId`     | mixed   | Outbound transaction code list ID                |
-| `outboundTclShortCode`  | string  | Outbound TCL short code                          |
-| `campId`                | number  | Campaign ID                                       |
-| `campName`              | string  | Campaign name                                     |
-| `dialMode`              | string  | Dial mode"preview""progressive"etc.        |
-| `extRecordId`           | number  | External record ID                                |
-| `extRecordType`         | string  | External record type"customer"etc.           |
-| `phoneList`             | string  | Phone list for campaign                           |
-| `previewTimeout`        | string  | Preview timeout setting                           |
-| `rejectOnPreviewTimeout`| boolean | Whether to reject on preview timeout              |
-| `retry_count`           | number  | Retry count for outbound call                     |
-| `showSkipButton`        | boolean | Whether skip button is shown                      |
+| Key                      | Type    | Description                                                 |
+|--------------------------|---------|-------------------------------------------------------------|
+| `ctl_transType`          | string  | Transaction type"agentdial""campaign"etc. |
+| `destType`               | string  | Destination type"external"etc.                  |
+| `outboundTclItemId`      | mixed   | Outbound transaction code list item ID                      |
+| `outboundTclListId`      | mixed   | Outbound transaction code list ID                           |
+| `outboundTclShortCode`   | string  | Outbound TCL short code                                     |
+| `campId`                 | number  | Campaign ID                                                 |
+| `campName`               | string  | Campaign name                                               |
+| `dialMode`               | string  | Dial mode"preview""progressive"etc.       |
+| `extRecordId`            | number  | External record ID                                          |
+| `extRecordType`          | string  | External record type"customer"etc.              |
+| `phoneList`              | string  | Phone list for campaign                                     |
+| `previewTimeout`         | string  | Preview timeout setting                                     |
+| `rejectOnPreviewTimeout` | boolean | Whether to reject on preview timeout                        |
+| `retry_count`            | number  | Retry count for outbound call                               |
+| `showSkipButton`         | boolean | Whether skip button is shown                                |
 
 ### Transfer and Original Interaction Fields
 
-| Key                       | Type   | Description                                    |
-|---------------------------|--------|------------------------------------------------|
-| `originalInteractionGuid` | string | GUID of original interaction before transfer   |
-| `originalTokenId`         | number | Token ID of original interaction               |
-| `originalTransactionId`   | number | Transaction ID of original interaction         |
+| Key                       | Type   | Description                                  |
+|---------------------------|--------|----------------------------------------------|
+| `originalInteractionGuid` | string | GUID of original interaction before transfer |
+| `originalTokenId`         | number | Token ID of original interaction             |
+| `originalTransactionId`   | number | Transaction ID of original interaction       |
 
 ### Transaction Codes and Disposition
 
-| Key                | Type   | Description                                                                                                             |
-|--------------------|--------|-------------------------------------------------------------------------------------------------------------------------|
+| Key                | Type   | Description                                                                                                                                            |
+|--------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `tclSelectedItems` | string | Selected transaction codes in format "listId\|itemId,listId\|itemId" - see [Transaction Codes](#transaction-codes-and-disposition) section for details |
 
 ### Digital Channel Fields (Chat, SMS, Email)
 
-| Key                             | Type    | Description                                      |
-|---------------------------------|---------|--------------------------------------------------|
-| `chaletChat`                    | boolean | Whether this is a Chalet chat                    |
-| `chaletRoom`                    | string  | Chalet room identifier                           |
-| `channelId`                     | string  | Channel ID (short form)                          |
-| `createInteractionTimestampNanos` | number | Creation timestamp in nanoseconds              |
-| `customerLanguage`              | string  | Customer language code (e.g., "en")              |
-| `extTransactionData`            | string  | External transaction data (formatted string)     |
-| `extTransactionDataID`          | string  | External transaction data ID                     |
-| `sessionId`                     | string  | Session identifier                               |
-| `timezoneOffset`                | number  | Timezone offset                                  |
-| `type`                          | string  | Interaction type (e.g., "SMS")                   |
-| `nam`                           | string  | Name field for digital channels                  |
+| Key                               | Type    | Description                                  |
+|-----------------------------------|---------|----------------------------------------------|
+| `chaletChat`                      | boolean | Whether this is a Chalet chat                |
+| `chaletRoom`                      | string  | Chalet room identifier                       |
+| `channelId`                       | string  | Channel ID (short form)                      |
+| `createInteractionTimestampNanos` | number  | Creation timestamp in nanoseconds            |
+| `customerLanguage`                | string  | Customer language code (e.g., "en")          |
+| `extTransactionData`              | string  | External transaction data (formatted string) |
+| `extTransactionDataID`            | string  | External transaction data ID                 |
+| `sessionId`                       | string  | Session identifier                           |
+| `timezoneOffset`                  | number  | Timezone offset                              |
+| `type`                            | string  | Interaction type (e.g., "SMS")               |
+| `nam`                             | string  | Name field for digital channels              |
 
 ### Remote Participant Fields
 
@@ -8617,13 +8651,13 @@ The `attachedData` field can contain a wide variety of keys depending on the int
 
 ### Advanced/System Fields
 
-| Key                  | Type   | Description                                         |
-|----------------------|--------|-----------------------------------------------------|
-| `ctl_userdata`       | string | Control user data                                   |
-| `externalUserData`   | string | External user data string                           |
-| `carrierCallBlockingCheck` | number | Carrier call blocking check result            |
-| `record_phone_index` | number | Phone record index                                  |
-| `schema_user`        | string | Database schema user                                |
+| Key                        | Type   | Description                        |
+|----------------------------|--------|------------------------------------|
+| `ctl_userdata`             | string | Control user data                  |
+| `externalUserData`         | string | External user data string          |
+| `carrierCallBlockingCheck` | number | Carrier call blocking check result |
+| `record_phone_index`       | number | Phone record index                 |
+| `schema_user`              | string | Database schema user               |
 
 **Note:** Not all keys will be present in every event. The keys present depend on:
 - Media type (phone, chat, email, SMS)
@@ -8639,13 +8673,13 @@ Many fields in event payloads use numeric ordinal values to represent states, mo
 
 The `resourceType` field indicates the media channel type:
 
-| Code | Media Type | Description                    |
-|------|------------|--------------------------------|
-| 0    | Phone      | Voice call interaction         |
-| 1    | Email      | Email interaction              |
-| 2    | Chat       | Chat or messaging interaction  |
-| 3    | SMS        | SMS text message interaction   |
-| 4    | Video      | Video call interaction         |
+| Code | Media Type | Description                   |
+|------|------------|-------------------------------|
+| 0    | Phone      | Voice call interaction        |
+| 1    | Email      | Email interaction             |
+| 2    | Chat       | Chat or messaging interaction |
+| 3    | SMS        | SMS text message interaction  |
+| 4    | Video      | Video call interaction        |
 
 **Example:**
 
@@ -8681,14 +8715,14 @@ The `recordingMode` field indicates the recording state:
 
 The `callState` field indicates the current state of an interaction throughout its lifecycle:
 
-| Code              | Description                                                                                     | Typical Events                                    |
-|-------------------|-------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| `CS_IDLE`         | Initial state - interaction created but not yet queued                                          | InteractionCreated                                |
-| `CS_QUEUED`       | Interaction waiting in queue to be assigned to an agent                                         | InteractionQueued, InteractionUnqueued            |
-| `CS_INPROGRESS`   | Interaction assigned to agent but not yet connected (ringing/alerting)                          | InteractionAssigned                               |
-| `CS_CONNECTED`    | Active interaction - agent and customer are connected                                           | InteractionAccepted, InteractionCustomerAccepted  |
-| `CS_HOLD`         | Interaction is on hold                                                                          | LineHoldStatus (status: true)                     |
-| `CS_DISCONNECTED` | Interaction has ended - one or more parties disconnected                                        | InteractionDeleted, InteractionPostProcess        |
+| Code              | Description                                                            | Typical Events                                   |
+|-------------------|------------------------------------------------------------------------|--------------------------------------------------|
+| `CS_IDLE`         | Initial state - interaction created but not yet queued                 | InteractionCreated                               |
+| `CS_QUEUED`       | Interaction waiting in queue to be assigned to an agent                | InteractionQueued, InteractionUnqueued           |
+| `CS_INPROGRESS`   | Interaction assigned to agent but not yet connected (ringing/alerting) | InteractionAssigned                              |
+| `CS_CONNECTED`    | Active interaction - agent and customer are connected                  | InteractionAccepted, InteractionCustomerAccepted |
+| `CS_HOLD`         | Interaction is on hold                                                 | LineHoldStatus (status: true)                    |
+| `CS_DISCONNECTED` | Interaction has ended - one or more parties disconnected               | InteractionDeleted, InteractionPostProcess       |
 
 **State Transitions:**
 
@@ -8744,18 +8778,18 @@ Agent-related events use numeric codes for states and presence:
 
 #### Login State
 
-| Code | State       | Description                  |
-|------|-------------|------------------------------|
-| 0    | LOGGED_OUT  | Agent is logged out          |
-| 1    | LOGGED_IN   | Agent is logged in           |
+| Code | State      | Description         |
+|------|------------|---------------------|
+| 0    | LOGGED_OUT | Agent is logged out |
+| 1    | LOGGED_IN  | Agent is logged in  |
 
 #### Presence
 
-| Code | Presence | Description                      |
-|------|----------|----------------------------------|
-| 0    | Offline  | Agent is offline                 |
-| 1    | Online   | Agent is online and available    |
-| 2    | DND      | Do Not Disturb (busy/unavailable)|
+| Code | Presence | Description                       |
+|------|----------|-----------------------------------|
+| 0    | Offline  | Agent is offline                  |
+| 1    | Online   | Agent is online and available     |
+| 2    | DND      | Do Not Disturb (busy/unavailable) |
 
 **Example from AgentStatusChange event:**
 
@@ -8771,39 +8805,39 @@ Agent-related events use numeric codes for states and presence:
 
 The `rejectReason` field (in `InteractionRejected` events) indicates why an interaction was rejected:
 
-| Code | Reason        | Description                                 |
-|------|---------------|---------------------------------------------|
-| 0    | Unknown       | Rejection reason not specified              |
-| 1    | Timeout       | Agent did not respond in time               |
-| 2    | Agent Reject  | Agent explicitly rejected the interaction   |
+| Code | Reason       | Description                               |
+|------|--------------|-------------------------------------------|
+| 0    | Unknown      | Rejection reason not specified            |
+| 1    | Timeout      | Agent did not respond in time             |
+| 2    | Agent Reject | Agent explicitly rejected the interaction |
 
 ### Hangup Reason Codes
 
 The `callHangupReason` field (in `InteractionDeleted` events) indicates why a call ended. This provides detailed information about call termination beyond just who initiated the hangup.
 
-| Code                          | Category      | Description                                                                 | Common Scenarios                                      |
-|-------------------------------|---------------|-----------------------------------------------------------------------------|-------------------------------------------------------|
-| `CEC_NONE`                    | Normal        | No specific reason provided                                                 | Default value, generic termination                    |
-| `CEC_DISCONNECT_NORMAL`       | Normal        | Normal call termination - call completed successfully                       | Customer and agent finished conversation              |
-| `CEC_DISCONNECT_BUSY`         | Failed        | Called number was busy                                                      | Outbound call to busy number                          |
-| `CEC_DISCONNECT_BADADDRESS`   | Failed        | Invalid phone number or unreachable destination                             | Malformed number, disconnected number                 |
-| `CEC_DISCONNECT_NOANSWER`     | Failed        | Called party did not answer                                                 | Outbound call rang but no answer                      |
-| `CEC_DISCONNECT_CANCELLED`    | Cancelled     | Call was cancelled before connection                                        | Agent or customer cancelled during ring               |
-| `CEC_DISCONNECT_REJECTED`     | Rejected      | Call was rejected by the called party or system                             | Customer/system declined call                         |
-| `CEC_DISCONNECT_FAILED`       | Failed        | Call failed due to system or network error                                  | Network issues, system errors                         |
-| `CEC_DISCONNECT_BLOCKED`      | Blocked       | Call was blocked (e.g., by spam filter, DNC list)                           | Compliance blocking, spam detection                   |
+| Code                        | Category  | Description                                           | Common Scenarios                         |
+|-----------------------------|-----------|-------------------------------------------------------|------------------------------------------|
+| `CEC_NONE`                  | Normal    | No specific reason provided                           | Default value, generic termination       |
+| `CEC_DISCONNECT_NORMAL`     | Normal    | Normal call termination - call completed successfully | Customer and agent finished conversation |
+| `CEC_DISCONNECT_BUSY`       | Failed    | Called number was busy                                | Outbound call to busy number             |
+| `CEC_DISCONNECT_BADADDRESS` | Failed    | Invalid phone number or unreachable destination       | Malformed number, disconnected number    |
+| `CEC_DISCONNECT_NOANSWER`   | Failed    | Called party did not answer                           | Outbound call rang but no answer         |
+| `CEC_DISCONNECT_CANCELLED`  | Cancelled | Call was cancelled before connection                  | Agent or customer cancelled during ring  |
+| `CEC_DISCONNECT_REJECTED`   | Rejected  | Call was rejected by the called party or system       | Customer/system declined call            |
+| `CEC_DISCONNECT_FAILED`     | Failed    | Call failed due to system or network error            | Network issues, system errors            |
+| `CEC_DISCONNECT_BLOCKED`    | Blocked   | Call was blocked (e.g., by spam filter, DNC list)     | Compliance blocking, spam detection      |
 
 **Usage with hangupInitiator:**
 
 The `callHangupReason` works in conjunction with `hangupInitiator` to provide complete termination information:
 
-| hangupInitiator | callHangupReason              | Interpretation                                    |
-|-----------------|-------------------------------|---------------------------------------------------|
-| `CUSTOMER`      | `CEC_DISCONNECT_NORMAL`       | Customer hung up normally                         |
-| `AGENT`         | `CEC_DISCONNECT_NORMAL`       | Agent hung up normally                            |
-| `SYSTEM`        | `CEC_DISCONNECT_NOANSWER`     | System terminated - customer didn't answer        |
-| `SYSTEM`        | `CEC_DISCONNECT_FAILED`       | System terminated - technical failure             |
-| `SYSTEM`        | `CEC_DISCONNECT_BLOCKED`      | System terminated - call blocked                  |
+| hangupInitiator | callHangupReason          | Interpretation                             |
+|-----------------|---------------------------|--------------------------------------------|
+| `CUSTOMER`      | `CEC_DISCONNECT_NORMAL`   | Customer hung up normally                  |
+| `AGENT`         | `CEC_DISCONNECT_NORMAL`   | Agent hung up normally                     |
+| `SYSTEM`        | `CEC_DISCONNECT_NOANSWER` | System terminated - customer didn't answer |
+| `SYSTEM`        | `CEC_DISCONNECT_FAILED`   | System terminated - technical failure      |
+| `SYSTEM`        | `CEC_DISCONNECT_BLOCKED`  | System terminated - call blocked           |
 
 **Example in InteractionDeleted event:**
 
@@ -8929,12 +8963,49 @@ This is due to the internal message format constraints. When consuming events, b
 
 Events include timestamps in multiple formats:
 
-| Field Name           | Format                        | Example        | Description                      |
-|----------------------|-------------------------------|----------------|----------------------------------|
-| `eventTS`            | Seconds since epoch (integer) | 1744819217     | Event occurrence time            |
-| `interactionEventTS` | Seconds since epoch (integer) | 1744819217     | Interaction-specific event time  |
-| `queueTime`          | Seconds since epoch (integer) | 1744819217     | Time entered queue               |
-| `msgInfo.timestamp`  | Milliseconds since epoch      | 1744819217000  | Message metadata timestamp       |
+| Field Name           | Format                        | Example       | Description                                                                            |
+|----------------------|-------------------------------|---------------|----------------------------------------------------------------------------------------|
+| `interactionEventTS` | Seconds since epoch (integer) | 1744819274    | When this event occurred. Not present on every event type (see below)                  |
+| `eventTS`            | Seconds since epoch (integer) | 1744819217    | When the interaction was offered (entered the queue). Does not advance as events occur |
+| `queueTime`          | Seconds since epoch (integer) | 1744819217    | Time entered queue                                                                     |
+| `msgInfo.timestamp`  | Milliseconds since epoch      | 1744819274183 | When 8x8 published the message. Present on every event                                 |
+
+### Choosing a Timestamp
+
+The two event-level timestamps answer different questions and are not interchangeable:
+
+- **`interactionEventTS` — when the event happened.** Use this to order events and to measure
+  durations between them.
+- **`eventTS` — when the interaction was offered.** This describes the interaction, not the
+  event, so every event for a given interaction carries the same value. Subtracting one
+  event's `eventTS` from another's yields zero. Use it only when you want the offer time
+  itself. It is also absent from many events, including most `InteractionCreated` events, so
+  do not rely on it being present.
+- **`msgInfo.timestamp` — when 8x8 published the message.** Present on every event type
+  without exception, and in milliseconds. Use it for staleness and freshness checks. The
+  `publishTime` in the Pulsar message metadata serves the same purpose.
+
+**Events without an event timestamp**
+
+`interactionEventTS` is not present on every event. It is absent from:
+
+| Event type         | Carries                 |
+|--------------------|-------------------------|
+| `GuestChatEnd`     | `eventTS` only          |
+| `AgentUpdate`      | No timestamp of its own |
+| `AgentLoginUpdate` | No timestamp of its own |
+| `AgentProvChange`  | No timestamp of its own |
+
+Handle the absence explicitly rather than letting it default. A missing value treated as `0`
+decodes to 1 January 1970, which makes a current event appear arbitrarily old. Use
+`msgInfo.timestamp` for these event types.
+
+**Resolution**
+
+`interactionEventTS`, `eventTS` and `statusEventTS` are whole seconds, and the value is
+truncated rather than rounded. A duration derived from them can be up to one second longer
+than the true figure, so they are not suitable for sub-second latency measurement. Where that
+precision matters, use `msgInfo.timestamp`, which is in milliseconds.
 
 **Converting to Date/Time:**
 
@@ -8942,10 +9013,15 @@ Events include timestamps in multiple formats:
 <TabItem value="go" label="Go">
 
 ```go
-// From seconds
-eventTime := time.Unix(event.EventTS, 0)
+// From seconds - the time the event occurred. interactionEventTS is absent on
+// some event types, where it unmarshals to 0; fall back to the publish time
+// rather than decoding 1970.
+eventTime := time.UnixMilli(event.MsgInfo.Timestamp)
+if event.InteractionEventTS > 0 {
+    eventTime = time.Unix(event.InteractionEventTS, 0)
+}
 
-// From milliseconds
+// From milliseconds - the time 8x8 published the message
 msgTime := time.UnixMilli(event.MsgInfo.Timestamp)
 ```
 
@@ -8953,10 +9029,14 @@ msgTime := time.UnixMilli(event.MsgInfo.Timestamp)
 <TabItem value="java" label="Java">
 
 ```java
-// From seconds
-Instant eventTime = Instant.ofEpochSecond(event.getEventTS());
+// From seconds - the time the event occurred. interactionEventTS is absent on
+// some event types, so fall back to the publish time rather than decoding 1970.
+Long eventTS = event.getInteractionEventTS();
+Instant eventTime = (eventTS != null && eventTS > 0)
+    ? Instant.ofEpochSecond(eventTS)
+    : Instant.ofEpochMilli(event.getMsgInfo().getTimestamp());
 
-// From milliseconds
+// From milliseconds - the time 8x8 published the message
 Instant msgTime = Instant.ofEpochMilli(event.getMsgInfo().getTimestamp());
 ```
 
@@ -8966,10 +9046,16 @@ Instant msgTime = Instant.ofEpochMilli(event.getMsgInfo().getTimestamp());
 ```python
 from datetime import datetime
 
-# From seconds
-event_time = datetime.fromtimestamp(event['eventTS'])
+# From seconds - the time the event occurred. interactionEventTS is absent on
+# some event types; treat missing, null or empty as absent and fall back to the
+# publish time rather than decoding 1970.
+event_ts = event.get('interactionEventTS')
+if event_ts:
+    event_time = datetime.fromtimestamp(event_ts)
+else:
+    event_time = datetime.fromtimestamp(event['msgInfo']['timestamp'] / 1000)
 
-# From milliseconds
+# From milliseconds - the time 8x8 published the message
 msg_time = datetime.fromtimestamp(event['msgInfo']['timestamp'] / 1000)
 ```
 
@@ -8977,10 +9063,14 @@ msg_time = datetime.fromtimestamp(event['msgInfo']['timestamp'] / 1000)
 <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-// From seconds
-const eventTime = new Date(event.eventTS * 1000);
+// From seconds - the time the event occurred. interactionEventTS is absent on
+// some event types; treat missing, null or empty as absent and fall back to the
+// publish time rather than decoding 1970.
+const eventTime = event.interactionEventTS
+    ? new Date(event.interactionEventTS * 1000)
+    : new Date(event.msgInfo.timestamp);
 
-// From milliseconds
+// From milliseconds - the time 8x8 published the message
 const msgTime = new Date(event.msgInfo.timestamp);
 ```
 
@@ -9110,18 +9200,18 @@ The `attachedData` object contains an array of key-value pairs. Many of these ke
 
 The following table shows how nested `userData` fields are extracted and mapped:
 
-| userData Key            | Output Field                           | Description                                           | Example Value                 |
-|-------------------------|----------------------------------------|-------------------------------------------------------|-------------------------------|
-| `userData.otim`         | `eventTS`                              | Original/queue entry timestamp (seconds since epoch)  | 1744819217                    |
-| `userData.tclSelectedItems` | attachedData: `tclSelectedItems`   | Transaction code list (format: listId\|itemId,...)    | "5\|12,6\|45,8\|99"           |
-| `userData.queueDirection` | `direction`                          | Queue direction (inbound/outbound)                    | "in", "out"                   |
-| `userData.cha`          | `inboundChannelid`                     | Inbound channel identifier                            | 441733968848                  |
-| `userData.que`          | `queueId`                              | Queue ID (parsed from `~~` separated format)          | 1162                          |
-| `userData.tim`          | `queueTime`                            | Time when interaction entered queue (seconds)         | 1744819217                    |
-| `userData.ema`          | `emailSourceAddress`                   | Email source address (for email interactions)         | `user@example.com`            |
-| `userData.aAgtCallRec`  | `overrideAutoInteractionRecording`     | Override auto recording setting                       | "yes", "no"                   |
-| `userData.agtCallRec`   | `allowAgentOverrideInteractionRecording` | Allow agent to override recording                   | "yes", "no"                   |
-| `userData.callerPerm`   | `callerPermission`                     | Caller permission for recording                       | "yes", "no"                   |
+| userData Key                | Output Field                             | Description                                          | Example Value       |
+|-----------------------------|------------------------------------------|------------------------------------------------------|---------------------|
+| `userData.otim`             | `eventTS`                                | Original/queue entry timestamp (seconds since epoch) | 1744819217          |
+| `userData.tclSelectedItems` | attachedData: `tclSelectedItems`         | Transaction code list (format: listId\|itemId,...)   | "5\|12,6\|45,8\|99" |
+| `userData.queueDirection`   | `direction`                              | Queue direction (inbound/outbound)                   | "in", "out"         |
+| `userData.cha`              | `inboundChannelid`                       | Inbound channel identifier                           | 441733968848        |
+| `userData.que`              | `queueId`                                | Queue ID (parsed from `~~` separated format)         | 1162                |
+| `userData.tim`              | `queueTime`                              | Time when interaction entered queue (seconds)        | 1744819217          |
+| `userData.ema`              | `emailSourceAddress`                     | Email source address (for email interactions)        | `user@example.com`  |
+| `userData.aAgtCallRec`      | `overrideAutoInteractionRecording`       | Override auto recording setting                      | "yes", "no"         |
+| `userData.agtCallRec`       | `allowAgentOverrideInteractionRecording` | Allow agent to override recording                    | "yes", "no"         |
+| `userData.callerPerm`       | `callerPermission`                       | Caller permission for recording                      | "yes", "no"         |
 
 ### How Extraction Works
 
@@ -9319,13 +9409,13 @@ Messages received via the WebSocket connection follow the Pulsar WebSocket messa
 
 ### Field Descriptions
 
-| Field              | Type   | Description                                                    |
-|--------------------|--------|----------------------------------------------------------------|
-| `messageId`        | string | Unique identifier for this message (base64 encoded)            |
-| `payload`          | string | The actual event data (base64 encoded JSON)                    |
-| `properties`       | object | Optional metadata key-value pairs                              |
-| `publishTime`      | string | Timestamp when the message was published (ISO 8601 format)     |
-| `redeliveryCount`  | number | Number of times this message has been redelivered              |
+| Field             | Type   | Description                                                |
+|-------------------|--------|------------------------------------------------------------|
+| `messageId`       | string | Unique identifier for this message (base64 encoded)        |
+| `payload`         | string | The actual event data (base64 encoded JSON)                |
+| `properties`      | object | Optional metadata key-value pairs                          |
+| `publishTime`     | string | Timestamp when the message was published (ISO 8601 format) |
+| `redeliveryCount` | number | Number of times this message has been redelivered          |
 
 ## Payload Decoding
 
@@ -9342,12 +9432,12 @@ After decoding the base64 payload, you'll receive a JSON object representing the
 
 Most events include these common fields:
 
-| Field                | Type   | Description                                                |
-|----------------------|--------|------------------------------------------------------------|
+| Field                | Type   | Description                                                  |
+|----------------------|--------|--------------------------------------------------------------|
 | `msgInfo`            | object | Metadata about the event (instanceId, sequenceId, timestamp) |
-| `msgInfo.instanceId` | string | Server instance identifier                                  |
-| `msgInfo.sequenceId` | number | Event sequence number for ordering                          |
-| `msgInfo.timestamp`  | number | Event timestamp in milliseconds since epoch                 |
+| `msgInfo.instanceId` | string | Server instance identifier                                   |
+| `msgInfo.sequenceId` | number | Event sequence number for ordering                           |
+| `msgInfo.timestamp`  | number | Event timestamp in milliseconds since epoch                  |
 
 **Note:** The `msgInfo` object provides important context about the event source and sequencing.
 
@@ -9355,30 +9445,30 @@ Most events include these common fields:
 
 Interaction events (phone calls, chats, etc.) include additional common fields:
 
-| Field                  | Type    | Description                                                   |
-|------------------------|---------|---------------------------------------------------------------|
-| `event`                | string  | Event type name (e.g., "InteractionCreated")                 |
-| `interactionGUID`      | string  | Unique identifier for this interaction                        |
-| `interactionEventTS`   | number  | Interaction event timestamp (seconds since epoch)             |
-| `callState`            | string  | Current call state (see Call States table below)             |
-| `mediaType`            | string  | Communication channel"phone""chat""email"etc.        |
-| `direction`            | string  | Interaction direction"in" (inbound)"out" (outbound)    |
-| `attachedData`         | object  | Additional metadata as key-value pairs                        |
-| `resourceType`         | number  | Numeric resource type identifier                              |
-| `agentId`              | string  | Agent identifier (when agent is involved)                     |
-| `agentGUID`            | string  | Full agent GUID (when agent is involved)                      |
-| `participatingAgents`  | string  | Comma-separated list of participating agent IDs               |
-| `queueId`              | number  | Queue identifier                                              |
-| `queueList`            | number  | Queue list identifier                                         |
-| `queueTime`            | number  | Time when interaction entered queue (seconds since epoch)     |
-| `eventTS`              | number  | Event timestamp (seconds since epoch)                         |
-| `transactionNum`       | number  | Transaction number                                            |
-| `recordingMode`        | string  | Recording mode ("yes", "no")                                  |
-| `isAgentInitiated`     | boolean | Whether interaction was initiated by agent                    |
-| `isDirectAccess`       | boolean | Whether this is direct access interaction                     |
-| `isExternal`           | boolean | Whether interaction involves external party                   |
-| `inboundChannelid`     | mixed   | Inbound channel identifier (number or "N/A" for outbound)     |
-| `isOutboundCall`       | boolean | Whether this is an outbound call                              |
+| Field                 | Type    | Description                                                                                      |
+|-----------------------|---------|--------------------------------------------------------------------------------------------------|
+| `event`               | string  | Event type name (e.g., "InteractionCreated")                                                     |
+| `interactionGUID`     | string  | Unique identifier for this interaction                                                           |
+| `interactionEventTS`  | number  | When this event occurred (seconds since epoch). Absent on some event types                       |
+| `callState`           | string  | Current call state (see Call States table below)                                                 |
+| `mediaType`           | string  | Communication channel"phone""chat""email"etc.                            |
+| `direction`           | string  | Interaction direction"in" (inbound)"out" (outbound)                                  |
+| `attachedData`        | object  | Additional metadata as key-value pairs                                                           |
+| `resourceType`        | number  | Numeric resource type identifier                                                                 |
+| `agentId`             | string  | Agent identifier (when agent is involved)                                                        |
+| `agentGUID`           | string  | Full agent GUID (when agent is involved)                                                         |
+| `participatingAgents` | string  | Comma-separated list of participating agent IDs                                                  |
+| `queueId`             | number  | Queue identifier                                                                                 |
+| `queueList`           | number  | Queue list identifier                                                                            |
+| `queueTime`           | number  | Time when interaction entered queue (seconds since epoch)                                        |
+| `eventTS`             | number  | When the interaction was offered (seconds since epoch). Same on every event for that interaction |
+| `transactionNum`      | number  | Transaction number                                                                               |
+| `recordingMode`       | string  | Recording mode ("yes", "no")                                                                     |
+| `isAgentInitiated`    | boolean | Whether interaction was initiated by agent                                                       |
+| `isDirectAccess`      | boolean | Whether this is direct access interaction                                                        |
+| `isExternal`          | boolean | Whether interaction involves external party                                                      |
+| `inboundChannelid`    | mixed   | Inbound channel identifier (number or "N/A" for outbound)                                        |
+| `isOutboundCall`      | boolean | Whether this is an outbound call                                                                 |
 
 For detailed information about specific fields, see the [Field Reference](./field-reference.mdx).
 
@@ -9386,14 +9476,14 @@ For detailed information about specific fields, see the [Field Reference](./fiel
 
 Interaction events use these call state values:
 
-| Call State        | Description                                       |
-|-------------------|---------------------------------------------------|
-| `CS_IDLE`         | Call created, not yet in progress                 |
-| `CS_QUEUED`       | Call waiting in queue for an available agent      |
-| `CS_INPROGRESS`   | Call in progress (ringing or connecting)          |
-| `CS_CONNECTED`    | Call connected and active                         |
-| `CS_HOLD`         | Call on hold (music playing)                      |
-| `CS_DISCONNECTED` | Call ended or hung up                             |
+| Call State        | Description                                  |
+|-------------------|----------------------------------------------|
+| `CS_IDLE`         | Call created, not yet in progress            |
+| `CS_QUEUED`       | Call waiting in queue for an available agent |
+| `CS_INPROGRESS`   | Call in progress (ringing or connecting)     |
+| `CS_CONNECTED`    | Call connected and active                    |
+| `CS_HOLD`         | Call on hold (music playing)                 |
+| `CS_DISCONNECTED` | Call ended or hung up                        |
 
 For comprehensive call state documentation including transitions, see [Field Reference - Call State Codes](./field-reference.mdx#call-state-codes).
 
@@ -9404,7 +9494,8 @@ Events for an interaction are correlated using the `interactionGUID` field. To u
 **Key points for event correlation:**
 - Use `interactionGUID` to group all events for a single interaction
 - Track `callState` to monitor state transitions
-- Calculate durations using `eventTS` or `interactionEventTS` timestamps
+- Calculate durations using `interactionEventTS`, not `eventTS` (see
+  [Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp))
 - Check `hangupInitiator` and `callHangupReason` in InteractionDeleted to understand outcomes
 
 ## Attached Data Structure
@@ -9581,43 +9672,43 @@ Understanding the sequence of events for common call scenarios helps when buildi
 
 ### Inbound Call
 
-| Step | Action                                                                           | Event Type                      | Call State            |
-|------|----------------------------------------------------------------------------------|--------------------------------|-----------------------|
-| 1    | An incoming call from a customer                                                 | `InteractionCreated`           | `CS_QUEUED`           |
-| 2    | The call goes into queue and is waiting to be assigned to an agent               | `InteractionQueued`            | `CS_QUEUED`           |
-| 3    | The call is assigned to an agent                                                 | `InteractionAssigned`          | `CS_QUEUED`           |
-| 4    | The agent accepts the call and speaks with the customer                          | `InteractionAccepted`          | `CS_CONNECTED`        |
-| 5    | Automatic post processing starts (conclusion/wrapping up of call)                | `InteractionPostProcess`       | `CS_DISCONNECTED`     |
-| 6    | Automatic post processing concludes                                              | `InteractionEndPostProcess`    | `CS_DISCONNECTED`     |
-| 7    | The customer ends the call                                                       | `InteractionDeassigned`        | `CS_DISCONNECTED`     |
-| 8    | The agent ends the call                                                          | `InteractionDeassigned`        | `CS_DISCONNECTED`     |
+| Step | Action                                                             | Event Type                  | Call State        |
+|------|--------------------------------------------------------------------|-----------------------------|-------------------|
+| 1    | An incoming call from a customer                                   | `InteractionCreated`        | `CS_QUEUED`       |
+| 2    | The call goes into queue and is waiting to be assigned to an agent | `InteractionQueued`         | `CS_QUEUED`       |
+| 3    | The call is assigned to an agent                                   | `InteractionAssigned`       | `CS_QUEUED`       |
+| 4    | The agent accepts the call and speaks with the customer            | `InteractionAccepted`       | `CS_CONNECTED`    |
+| 5    | Automatic post processing starts (conclusion/wrapping up of call)  | `InteractionPostProcess`    | `CS_DISCONNECTED` |
+| 6    | Automatic post processing concludes                                | `InteractionEndPostProcess` | `CS_DISCONNECTED` |
+| 7    | The customer ends the call                                         | `InteractionDeassigned`     | `CS_DISCONNECTED` |
+| 8    | The agent ends the call                                            | `InteractionDeassigned`     | `CS_DISCONNECTED` |
 
 ### Outbound Call (No Queue)
 
-| Step | Action                                                                           | Event Type                      | Call State            |
-|------|----------------------------------------------------------------------------------|--------------------------------|-----------------------|
-| 1    | An outbound call is created                                                      | `InteractionCreated`           | `CS_IDLE`             |
-| 2    | The call is assigned to an agent                                                 | `InteractionAssigned`          | `CS_IDLE`             |
-| 3    | System starts recording the call leg                                             | `InteractionRecordingStarted`  | N/A                   |
-| 4    | Call is in progress, ringing at destination                                      | `InteractionAccepted`          | `CS_INPROGRESS`       |
-| 5    | Customer answers the call                                                        | `InteractionCustomerAccepted`  | `CS_CONNECTED`        |
-| 6    | Call wrap-up process concludes                                                   | `InteractionEndPostProcess`    | `CS_DISCONNECTED`     |
-| 7    | Call is reassigned from agent                                                    | `InteractionDeassigned`        | `CS_DISCONNECTED`     |
+| Step | Action                                      | Event Type                    | Call State        |
+|------|---------------------------------------------|-------------------------------|-------------------|
+| 1    | An outbound call is created                 | `InteractionCreated`          | `CS_IDLE`         |
+| 2    | The call is assigned to an agent            | `InteractionAssigned`         | `CS_IDLE`         |
+| 3    | System starts recording the call leg        | `InteractionRecordingStarted` | N/A               |
+| 4    | Call is in progress, ringing at destination | `InteractionAccepted`         | `CS_INPROGRESS`   |
+| 5    | Customer answers the call                   | `InteractionCustomerAccepted` | `CS_CONNECTED`    |
+| 6    | Call wrap-up process concludes              | `InteractionEndPostProcess`   | `CS_DISCONNECTED` |
+| 7    | Call is reassigned from agent               | `InteractionDeassigned`       | `CS_DISCONNECTED` |
 
 ### Call Transfer to Another Agent
 
-| Step | Action                                                                           | Event Type                      | Call State            |
-|------|----------------------------------------------------------------------------------|--------------------------------|-----------------------|
-| 1    | Original call in progress                                                        | `InteractionCreated`           | `CS_IDLE`             |
-| 2    | First agent connected with customer                                              | `InteractionAccepted`          | `CS_CONNECTED`        |
-| 3    | First agent calls second agent (line 2)                                          | `InteractionCreated`           | `CS_IDLE`             |
-| 4    | Second agent's phone rings                                                       | `InteractionAssigned`          | `CS_IDLE`             |
-| 5    | Second agent answers                                                             | `InteractionAccepted`          | `CS_INPROGRESS`       |
-| 6    | First agent transfers call to second agent                                       | `InteractionTransferRequest`   | N/A                   |
-| 7    | First agent's wrap-up starts                                                     | `InteractionPostProcess`       | `CS_DISCONNECTED`     |
-| 8    | Second agent joins the call                                                      | `InteractionParticipantChange` | `CS_CONNECTED`        |
-| 9    | First agent's wrap-up concludes                                                  | `InteractionEndPostProcess`    | `CS_DISCONNECTED`     |
-| 10   | First agent deassigned                                                           | `InteractionDeassigned`        | `CS_DISCONNECTED`     |
+| Step | Action                                     | Event Type                     | Call State        |
+|------|--------------------------------------------|--------------------------------|-------------------|
+| 1    | Original call in progress                  | `InteractionCreated`           | `CS_IDLE`         |
+| 2    | First agent connected with customer        | `InteractionAccepted`          | `CS_CONNECTED`    |
+| 3    | First agent calls second agent (line 2)    | `InteractionCreated`           | `CS_IDLE`         |
+| 4    | Second agent's phone rings                 | `InteractionAssigned`          | `CS_IDLE`         |
+| 5    | Second agent answers                       | `InteractionAccepted`          | `CS_INPROGRESS`   |
+| 6    | First agent transfers call to second agent | `InteractionTransferRequest`   | N/A               |
+| 7    | First agent's wrap-up starts               | `InteractionPostProcess`       | `CS_DISCONNECTED` |
+| 8    | Second agent joins the call                | `InteractionParticipantChange` | `CS_CONNECTED`    |
+| 9    | First agent's wrap-up concludes            | `InteractionEndPostProcess`    | `CS_DISCONNECTED` |
+| 10   | First agent deassigned                     | `InteractionDeassigned`        | `CS_DISCONNECTED` |
 
 > 📘 **Note**
 >

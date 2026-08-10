@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.d3db3184.css">
-<script src="/assets/js/runtime~main.85dffbce.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.820fd95e.js" defer="defer"></script>
 <script src="/assets/js/main.063e7c78.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -201,6 +201,8 @@
 
 
 <table><thead><tr><th>Event Type</th><th>Description</th></tr></thead><tbody><tr><td><code>GuestChatEnd</code></td><td>Indicates a guest chat session has ended</td></tr></tbody></table>
+<p><code>GuestChatEnd</code> carries no <code>interactionEventTS</code>. Use <code>msgInfo.timestamp</code> for its time - see
+<a href="/actions-events/docs/streaming/field-reference#choosing-a-timestamp">Choosing a Timestamp</a>.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="mediaproxy-events">Media/Proxy Events<a href="#mediaproxy-events" class="hash-link" aria-label="Direct link to Media/Proxy Events" title="Direct link to Media/Proxy Events" translate="no">​</a></h3>
 
 
@@ -255,7 +257,9 @@
 <li><code>queueId</code>: Numeric queue identifier</li>
 <li><code>queueList</code>: Queue list identifier</li>
 <li><code>queueTime</code>: Time when interaction entered queue (seconds since epoch)</li>
-<li><code>eventTS</code>: Event timestamp (seconds since epoch)</li>
+<li><code>eventTS</code>: When the interaction was offered (seconds since epoch). The same on every event
+for this interaction - use <code>interactionEventTS</code> for the time this event occurred (see
+<a href="/actions-events/docs/streaming/field-reference#choosing-a-timestamp">Choosing a Timestamp</a>)</li>
 <li><code>transactionNum</code>: Transaction number</li>
 <li><code>callerPermission</code>: Whether caller granted recording permission</li>
 <li><code>overrideAutoInteractionRecording</code>: Recording override setting</li>
