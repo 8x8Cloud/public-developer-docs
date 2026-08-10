@@ -15,105 +15,105 @@ The `attachedData` field can contain a wide variety of keys depending on the int
 
 ### Basic Interaction Fields
 
-| Key                  | Type   | Description                                          |
-|----------------------|--------|------------------------------------------------------|
-| `phoneNum`           | number | Primary phone number for the interaction             |
-| `pho`                | mixed  | Phone number (short key)                             |
-| `callingName`        | mixed  | Caller's name or calling number                      |
-| `callerId`           | number | Caller ID number                                     |
-| `@pri`               | number | Priority value                                       |
-| `priority`           | number | Queue priority (50 is standard)                      |
-| `med`                | string | Media type code<br />"T" for phone<br />"C" for chat/SMS   |
-| `cha`                | mixed  | Channel identifier                                   |
-| `channelName`        | mixed  | Channel/queue name                                   |
-| `cnt`                | number | Counter field                                        |
-| `con`                | number | Contact/record ID                                    |
-| `tok`                | number | Token identifier                                     |
+| Key           | Type   | Description                                              |
+|---------------|--------|----------------------------------------------------------|
+| `phoneNum`    | number | Primary phone number for the interaction                 |
+| `pho`         | mixed  | Phone number (short key)                                 |
+| `callingName` | mixed  | Caller's name or calling number                          |
+| `callerId`    | number | Caller ID number                                         |
+| `@pri`        | number | Priority value                                           |
+| `priority`    | number | Queue priority (50 is standard)                          |
+| `med`         | string | Media type code<br />"T" for phone<br />"C" for chat/SMS |
+| `cha`         | mixed  | Channel identifier                                       |
+| `channelName` | mixed  | Channel/queue name                                       |
+| `cnt`         | number | Counter field                                            |
+| `con`         | number | Contact/record ID                                        |
+| `tok`         | number | Token identifier                                         |
 
 ### Queue and Routing Fields
 
-| Key                  | Type   | Description                                          |
-|----------------------|--------|------------------------------------------------------|
-| `que`                | string | Queue identifier (format: `tenant~~queue~~media~~id`) |
-| `oqu`                | string | Original queue before transfer                       |
-| `queueDirection`     | string | "in" (inbound)<br />"out" (outbound)                   |
-| `tenantName`         | string | Tenant name                                          |
-| `tenantSkillName`    | string | Skill/queue name                                     |
+| Key               | Type   | Description                                           |
+|-------------------|--------|-------------------------------------------------------|
+| `que`             | string | Queue identifier (format: `tenant~~queue~~media~~id`) |
+| `oqu`             | string | Original queue before transfer                        |
+| `queueDirection`  | string | "in" (inbound)<br />"out" (outbound)                  |
+| `tenantName`      | string | Tenant name                                           |
+| `tenantSkillName` | string | Skill/queue name                                      |
 
 ### Timing Fields
 
-| Key                              | Type   | Description                                   |
-|----------------------------------|--------|-----------------------------------------------|
-| `tim`                            | number | Timestamp (seconds since epoch)               |
-| `otim`                           | number | Original/queue entry time (seconds)           |
-| `waitTime`                       | number | Wait time in seconds                          |
-| `callAnsweredTime`               | number | Call answered timestamp (milliseconds)        |
-| `callHangupTime`                 | number | Call hangup timestamp (milliseconds)          |
-| `callAnsweredTenantTT`           | string | Answered time formatted in tenant timezone    |
-| `callHangupTenantTT`             | string | Hangup time formatted in tenant timezone      |
-| `callDuration`                   | string | Call duration formatted (HH:MM:SS)            |
-| `callDurationSec`                | number | Call duration in seconds                      |
-| `phoneQueueInteractionStartTime` | number | Phone queue interaction start (seconds)       |
+| Key                              | Type   | Description                                |
+|----------------------------------|--------|--------------------------------------------|
+| `tim`                            | number | Timestamp (seconds since epoch)            |
+| `otim`                           | number | Original/queue entry time (seconds)        |
+| `waitTime`                       | number | Wait time in seconds                       |
+| `callAnsweredTime`               | number | Call answered timestamp (milliseconds)     |
+| `callHangupTime`                 | number | Call hangup timestamp (milliseconds)       |
+| `callAnsweredTenantTT`           | string | Answered time formatted in tenant timezone |
+| `callHangupTenantTT`             | string | Hangup time formatted in tenant timezone   |
+| `callDuration`                   | string | Call duration formatted (HH:MM:SS)         |
+| `callDurationSec`                | number | Call duration in seconds                   |
+| `phoneQueueInteractionStartTime` | number | Phone queue interaction start (seconds)    |
 
 ### Recording Fields
 
-| Key                 | Type   | Description                                         |
-|---------------------|--------|-----------------------------------------------------|
-| `tenantRecServer`   | string | Recording server name (e.g., "eu10nfs01")          |
-| `aAgtCallRec`       | string | Agent call recording setting<br />"yes"<br />"no"          |
-| `agtInitVR`         | string | Agent initiated recording<br />"NotSet"<br />etc.         |
-| `callerPerm`        | string | Caller permission for recording<br />"yes"<br />"no"       |
-| `vRecP`             | number | Recording parameter                                 |
+| Key               | Type   | Description                                          |
+|-------------------|--------|------------------------------------------------------|
+| `tenantRecServer` | string | Recording server name (e.g., "eu10nfs01")            |
+| `aAgtCallRec`     | string | Agent call recording setting<br />"yes"<br />"no"    |
+| `agtInitVR`       | string | Agent initiated recording<br />"NotSet"<br />etc.    |
+| `callerPerm`      | string | Caller permission for recording<br />"yes"<br />"no" |
+| `vRecP`           | number | Recording parameter                                  |
 
 ### Outbound and Campaign Fields
 
-| Key                     | Type    | Description                                      |
-|-------------------------|---------|--------------------------------------------------|
-| `ctl_transType`         | string  | Transaction type<br />"agentdial"<br />"campaign"<br />etc. |
-| `destType`              | string  | Destination type<br />"external"<br />etc.              |
-| `outboundTclItemId`     | mixed   | Outbound transaction code list item ID           |
-| `outboundTclListId`     | mixed   | Outbound transaction code list ID                |
-| `outboundTclShortCode`  | string  | Outbound TCL short code                          |
-| `campId`                | number  | Campaign ID                                       |
-| `campName`              | string  | Campaign name                                     |
-| `dialMode`              | string  | Dial mode<br />"preview"<br />"progressive"<br />etc.        |
-| `extRecordId`           | number  | External record ID                                |
-| `extRecordType`         | string  | External record type<br />"customer"<br />etc.           |
-| `phoneList`             | string  | Phone list for campaign                           |
-| `previewTimeout`        | string  | Preview timeout setting                           |
-| `rejectOnPreviewTimeout`| boolean | Whether to reject on preview timeout              |
-| `retry_count`           | number  | Retry count for outbound call                     |
-| `showSkipButton`        | boolean | Whether skip button is shown                      |
+| Key                      | Type    | Description                                                 |
+|--------------------------|---------|-------------------------------------------------------------|
+| `ctl_transType`          | string  | Transaction type<br />"agentdial"<br />"campaign"<br />etc. |
+| `destType`               | string  | Destination type<br />"external"<br />etc.                  |
+| `outboundTclItemId`      | mixed   | Outbound transaction code list item ID                      |
+| `outboundTclListId`      | mixed   | Outbound transaction code list ID                           |
+| `outboundTclShortCode`   | string  | Outbound TCL short code                                     |
+| `campId`                 | number  | Campaign ID                                                 |
+| `campName`               | string  | Campaign name                                               |
+| `dialMode`               | string  | Dial mode<br />"preview"<br />"progressive"<br />etc.       |
+| `extRecordId`            | number  | External record ID                                          |
+| `extRecordType`          | string  | External record type<br />"customer"<br />etc.              |
+| `phoneList`              | string  | Phone list for campaign                                     |
+| `previewTimeout`         | string  | Preview timeout setting                                     |
+| `rejectOnPreviewTimeout` | boolean | Whether to reject on preview timeout                        |
+| `retry_count`            | number  | Retry count for outbound call                               |
+| `showSkipButton`         | boolean | Whether skip button is shown                                |
 
 ### Transfer and Original Interaction Fields
 
-| Key                       | Type   | Description                                    |
-|---------------------------|--------|------------------------------------------------|
-| `originalInteractionGuid` | string | GUID of original interaction before transfer   |
-| `originalTokenId`         | number | Token ID of original interaction               |
-| `originalTransactionId`   | number | Transaction ID of original interaction         |
+| Key                       | Type   | Description                                  |
+|---------------------------|--------|----------------------------------------------|
+| `originalInteractionGuid` | string | GUID of original interaction before transfer |
+| `originalTokenId`         | number | Token ID of original interaction             |
+| `originalTransactionId`   | number | Transaction ID of original interaction       |
 
 ### Transaction Codes and Disposition
 
-| Key                | Type   | Description                                                                                                             |
-|--------------------|--------|-------------------------------------------------------------------------------------------------------------------------|
+| Key                | Type   | Description                                                                                                                                            |
+|--------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `tclSelectedItems` | string | Selected transaction codes in format "listId\|itemId,listId\|itemId" - see [Transaction Codes](#transaction-codes-and-disposition) section for details |
 
 ### Digital Channel Fields (Chat, SMS, Email)
 
-| Key                             | Type    | Description                                      |
-|---------------------------------|---------|--------------------------------------------------|
-| `chaletChat`                    | boolean | Whether this is a Chalet chat                    |
-| `chaletRoom`                    | string  | Chalet room identifier                           |
-| `channelId`                     | string  | Channel ID (short form)                          |
-| `createInteractionTimestampNanos` | number | Creation timestamp in nanoseconds              |
-| `customerLanguage`              | string  | Customer language code (e.g., "en")              |
-| `extTransactionData`            | string  | External transaction data (formatted string)     |
-| `extTransactionDataID`          | string  | External transaction data ID                     |
-| `sessionId`                     | string  | Session identifier                               |
-| `timezoneOffset`                | number  | Timezone offset                                  |
-| `type`                          | string  | Interaction type (e.g., "SMS")                   |
-| `nam`                           | string  | Name field for digital channels                  |
+| Key                               | Type    | Description                                  |
+|-----------------------------------|---------|----------------------------------------------|
+| `chaletChat`                      | boolean | Whether this is a Chalet chat                |
+| `chaletRoom`                      | string  | Chalet room identifier                       |
+| `channelId`                       | string  | Channel ID (short form)                      |
+| `createInteractionTimestampNanos` | number  | Creation timestamp in nanoseconds            |
+| `customerLanguage`                | string  | Customer language code (e.g., "en")          |
+| `extTransactionData`              | string  | External transaction data (formatted string) |
+| `extTransactionDataID`            | string  | External transaction data ID                 |
+| `sessionId`                       | string  | Session identifier                           |
+| `timezoneOffset`                  | number  | Timezone offset                              |
+| `type`                            | string  | Interaction type (e.g., "SMS")               |
+| `nam`                             | string  | Name field for digital channels              |
 
 ### Remote Participant Fields
 
@@ -124,13 +124,13 @@ The `attachedData` field can contain a wide variety of keys depending on the int
 
 ### Advanced/System Fields
 
-| Key                  | Type   | Description                                         |
-|----------------------|--------|-----------------------------------------------------|
-| `ctl_userdata`       | string | Control user data                                   |
-| `externalUserData`   | string | External user data string                           |
-| `carrierCallBlockingCheck` | number | Carrier call blocking check result            |
-| `record_phone_index` | number | Phone record index                                  |
-| `schema_user`        | string | Database schema user                                |
+| Key                        | Type   | Description                        |
+|----------------------------|--------|------------------------------------|
+| `ctl_userdata`             | string | Control user data                  |
+| `externalUserData`         | string | External user data string          |
+| `carrierCallBlockingCheck` | number | Carrier call blocking check result |
+| `record_phone_index`       | number | Phone record index                 |
+| `schema_user`              | string | Database schema user               |
 
 **Note:** Not all keys will be present in every event. The keys present depend on:
 - Media type (phone, chat, email, SMS)
@@ -146,13 +146,13 @@ Many fields in event payloads use numeric ordinal values to represent states, mo
 
 The `resourceType` field indicates the media channel type:
 
-| Code | Media Type | Description                    |
-|------|------------|--------------------------------|
-| 0    | Phone      | Voice call interaction         |
-| 1    | Email      | Email interaction              |
-| 2    | Chat       | Chat or messaging interaction  |
-| 3    | SMS        | SMS text message interaction   |
-| 4    | Video      | Video call interaction         |
+| Code | Media Type | Description                   |
+|------|------------|-------------------------------|
+| 0    | Phone      | Voice call interaction        |
+| 1    | Email      | Email interaction             |
+| 2    | Chat       | Chat or messaging interaction |
+| 3    | SMS        | SMS text message interaction  |
+| 4    | Video      | Video call interaction        |
 
 **Example:**
 
@@ -188,14 +188,14 @@ The `recordingMode` field indicates the recording state:
 
 The `callState` field indicates the current state of an interaction throughout its lifecycle:
 
-| Code              | Description                                                                                     | Typical Events                                    |
-|-------------------|-------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| `CS_IDLE`         | Initial state - interaction created but not yet queued                                          | InteractionCreated                                |
-| `CS_QUEUED`       | Interaction waiting in queue to be assigned to an agent                                         | InteractionQueued, InteractionUnqueued            |
-| `CS_INPROGRESS`   | Interaction assigned to agent but not yet connected (ringing/alerting)                          | InteractionAssigned                               |
-| `CS_CONNECTED`    | Active interaction - agent and customer are connected                                           | InteractionAccepted, InteractionCustomerAccepted  |
-| `CS_HOLD`         | Interaction is on hold                                                                          | LineHoldStatus (status: true)                     |
-| `CS_DISCONNECTED` | Interaction has ended - one or more parties disconnected                                        | InteractionDeleted, InteractionPostProcess        |
+| Code              | Description                                                            | Typical Events                                   |
+|-------------------|------------------------------------------------------------------------|--------------------------------------------------|
+| `CS_IDLE`         | Initial state - interaction created but not yet queued                 | InteractionCreated                               |
+| `CS_QUEUED`       | Interaction waiting in queue to be assigned to an agent                | InteractionQueued, InteractionUnqueued           |
+| `CS_INPROGRESS`   | Interaction assigned to agent but not yet connected (ringing/alerting) | InteractionAssigned                              |
+| `CS_CONNECTED`    | Active interaction - agent and customer are connected                  | InteractionAccepted, InteractionCustomerAccepted |
+| `CS_HOLD`         | Interaction is on hold                                                 | LineHoldStatus (status: true)                    |
+| `CS_DISCONNECTED` | Interaction has ended - one or more parties disconnected               | InteractionDeleted, InteractionPostProcess       |
 
 **State Transitions:**
 
@@ -251,18 +251,18 @@ Agent-related events use numeric codes for states and presence:
 
 #### Login State
 
-| Code | State       | Description                  |
-|------|-------------|------------------------------|
-| 0    | LOGGED_OUT  | Agent is logged out          |
-| 1    | LOGGED_IN   | Agent is logged in           |
+| Code | State      | Description         |
+|------|------------|---------------------|
+| 0    | LOGGED_OUT | Agent is logged out |
+| 1    | LOGGED_IN  | Agent is logged in  |
 
 #### Presence
 
-| Code | Presence | Description                      |
-|------|----------|----------------------------------|
-| 0    | Offline  | Agent is offline                 |
-| 1    | Online   | Agent is online and available    |
-| 2    | DND      | Do Not Disturb (busy/unavailable)|
+| Code | Presence | Description                       |
+|------|----------|-----------------------------------|
+| 0    | Offline  | Agent is offline                  |
+| 1    | Online   | Agent is online and available     |
+| 2    | DND      | Do Not Disturb (busy/unavailable) |
 
 **Example from AgentStatusChange event:**
 
@@ -278,39 +278,39 @@ Agent-related events use numeric codes for states and presence:
 
 The `rejectReason` field (in `InteractionRejected` events) indicates why an interaction was rejected:
 
-| Code | Reason        | Description                                 |
-|------|---------------|---------------------------------------------|
-| 0    | Unknown       | Rejection reason not specified              |
-| 1    | Timeout       | Agent did not respond in time               |
-| 2    | Agent Reject  | Agent explicitly rejected the interaction   |
+| Code | Reason       | Description                               |
+|------|--------------|-------------------------------------------|
+| 0    | Unknown      | Rejection reason not specified            |
+| 1    | Timeout      | Agent did not respond in time             |
+| 2    | Agent Reject | Agent explicitly rejected the interaction |
 
 ### Hangup Reason Codes
 
 The `callHangupReason` field (in `InteractionDeleted` events) indicates why a call ended. This provides detailed information about call termination beyond just who initiated the hangup.
 
-| Code                          | Category      | Description                                                                 | Common Scenarios                                      |
-|-------------------------------|---------------|-----------------------------------------------------------------------------|-------------------------------------------------------|
-| `CEC_NONE`                    | Normal        | No specific reason provided                                                 | Default value, generic termination                    |
-| `CEC_DISCONNECT_NORMAL`       | Normal        | Normal call termination - call completed successfully                       | Customer and agent finished conversation              |
-| `CEC_DISCONNECT_BUSY`         | Failed        | Called number was busy                                                      | Outbound call to busy number                          |
-| `CEC_DISCONNECT_BADADDRESS`   | Failed        | Invalid phone number or unreachable destination                             | Malformed number, disconnected number                 |
-| `CEC_DISCONNECT_NOANSWER`     | Failed        | Called party did not answer                                                 | Outbound call rang but no answer                      |
-| `CEC_DISCONNECT_CANCELLED`    | Cancelled     | Call was cancelled before connection                                        | Agent or customer cancelled during ring               |
-| `CEC_DISCONNECT_REJECTED`     | Rejected      | Call was rejected by the called party or system                             | Customer/system declined call                         |
-| `CEC_DISCONNECT_FAILED`       | Failed        | Call failed due to system or network error                                  | Network issues, system errors                         |
-| `CEC_DISCONNECT_BLOCKED`      | Blocked       | Call was blocked (e.g., by spam filter, DNC list)                           | Compliance blocking, spam detection                   |
+| Code                        | Category  | Description                                           | Common Scenarios                         |
+|-----------------------------|-----------|-------------------------------------------------------|------------------------------------------|
+| `CEC_NONE`                  | Normal    | No specific reason provided                           | Default value, generic termination       |
+| `CEC_DISCONNECT_NORMAL`     | Normal    | Normal call termination - call completed successfully | Customer and agent finished conversation |
+| `CEC_DISCONNECT_BUSY`       | Failed    | Called number was busy                                | Outbound call to busy number             |
+| `CEC_DISCONNECT_BADADDRESS` | Failed    | Invalid phone number or unreachable destination       | Malformed number, disconnected number    |
+| `CEC_DISCONNECT_NOANSWER`   | Failed    | Called party did not answer                           | Outbound call rang but no answer         |
+| `CEC_DISCONNECT_CANCELLED`  | Cancelled | Call was cancelled before connection                  | Agent or customer cancelled during ring  |
+| `CEC_DISCONNECT_REJECTED`   | Rejected  | Call was rejected by the called party or system       | Customer/system declined call            |
+| `CEC_DISCONNECT_FAILED`     | Failed    | Call failed due to system or network error            | Network issues, system errors            |
+| `CEC_DISCONNECT_BLOCKED`    | Blocked   | Call was blocked (e.g., by spam filter, DNC list)     | Compliance blocking, spam detection      |
 
 **Usage with hangupInitiator:**
 
 The `callHangupReason` works in conjunction with `hangupInitiator` to provide complete termination information:
 
-| hangupInitiator | callHangupReason              | Interpretation                                    |
-|-----------------|-------------------------------|---------------------------------------------------|
-| `CUSTOMER`      | `CEC_DISCONNECT_NORMAL`       | Customer hung up normally                         |
-| `AGENT`         | `CEC_DISCONNECT_NORMAL`       | Agent hung up normally                            |
-| `SYSTEM`        | `CEC_DISCONNECT_NOANSWER`     | System terminated - customer didn't answer        |
-| `SYSTEM`        | `CEC_DISCONNECT_FAILED`       | System terminated - technical failure             |
-| `SYSTEM`        | `CEC_DISCONNECT_BLOCKED`      | System terminated - call blocked                  |
+| hangupInitiator | callHangupReason          | Interpretation                             |
+|-----------------|---------------------------|--------------------------------------------|
+| `CUSTOMER`      | `CEC_DISCONNECT_NORMAL`   | Customer hung up normally                  |
+| `AGENT`         | `CEC_DISCONNECT_NORMAL`   | Agent hung up normally                     |
+| `SYSTEM`        | `CEC_DISCONNECT_NOANSWER` | System terminated - customer didn't answer |
+| `SYSTEM`        | `CEC_DISCONNECT_FAILED`   | System terminated - technical failure      |
+| `SYSTEM`        | `CEC_DISCONNECT_BLOCKED`  | System terminated - call blocked           |
 
 **Example in InteractionDeleted event:**
 
@@ -436,12 +436,49 @@ This is due to the internal message format constraints. When consuming events, b
 
 Events include timestamps in multiple formats:
 
-| Field Name           | Format                        | Example        | Description                      |
-|----------------------|-------------------------------|----------------|----------------------------------|
-| `eventTS`            | Seconds since epoch (integer) | 1744819217     | Event occurrence time            |
-| `interactionEventTS` | Seconds since epoch (integer) | 1744819217     | Interaction-specific event time  |
-| `queueTime`          | Seconds since epoch (integer) | 1744819217     | Time entered queue               |
-| `msgInfo.timestamp`  | Milliseconds since epoch      | 1744819217000  | Message metadata timestamp       |
+| Field Name           | Format                        | Example       | Description                                                                            |
+|----------------------|-------------------------------|---------------|----------------------------------------------------------------------------------------|
+| `interactionEventTS` | Seconds since epoch (integer) | 1744819274    | When this event occurred. Not present on every event type (see below)                  |
+| `eventTS`            | Seconds since epoch (integer) | 1744819217    | When the interaction was offered (entered the queue). Does not advance as events occur |
+| `queueTime`          | Seconds since epoch (integer) | 1744819217    | Time entered queue                                                                     |
+| `msgInfo.timestamp`  | Milliseconds since epoch      | 1744819274183 | When 8x8 published the message. Present on every event                                 |
+
+### Choosing a Timestamp
+
+The two event-level timestamps answer different questions and are not interchangeable:
+
+- **`interactionEventTS` — when the event happened.** Use this to order events and to measure
+  durations between them.
+- **`eventTS` — when the interaction was offered.** This describes the interaction, not the
+  event, so every event for a given interaction carries the same value. Subtracting one
+  event's `eventTS` from another's yields zero. Use it only when you want the offer time
+  itself. It is also absent from many events, including most `InteractionCreated` events, so
+  do not rely on it being present.
+- **`msgInfo.timestamp` — when 8x8 published the message.** Present on every event type
+  without exception, and in milliseconds. Use it for staleness and freshness checks. The
+  `publishTime` in the Pulsar message metadata serves the same purpose.
+
+**Events without an event timestamp**
+
+`interactionEventTS` is not present on every event. It is absent from:
+
+| Event type         | Carries                 |
+|--------------------|-------------------------|
+| `GuestChatEnd`     | `eventTS` only          |
+| `AgentUpdate`      | No timestamp of its own |
+| `AgentLoginUpdate` | No timestamp of its own |
+| `AgentProvChange`  | No timestamp of its own |
+
+Handle the absence explicitly rather than letting it default. A missing value treated as `0`
+decodes to 1 January 1970, which makes a current event appear arbitrarily old. Use
+`msgInfo.timestamp` for these event types.
+
+**Resolution**
+
+`interactionEventTS`, `eventTS` and `statusEventTS` are whole seconds, and the value is
+truncated rather than rounded. A duration derived from them can be up to one second longer
+than the true figure, so they are not suitable for sub-second latency measurement. Where that
+precision matters, use `msgInfo.timestamp`, which is in milliseconds.
 
 **Converting to Date/Time:**
 
@@ -449,10 +486,15 @@ Events include timestamps in multiple formats:
 <TabItem value="go" label="Go">
 
 ```go
-// From seconds
-eventTime := time.Unix(event.EventTS, 0)
+// From seconds - the time the event occurred. interactionEventTS is absent on
+// some event types, where it unmarshals to 0; fall back to the publish time
+// rather than decoding 1970.
+eventTime := time.UnixMilli(event.MsgInfo.Timestamp)
+if event.InteractionEventTS > 0 {
+    eventTime = time.Unix(event.InteractionEventTS, 0)
+}
 
-// From milliseconds
+// From milliseconds - the time 8x8 published the message
 msgTime := time.UnixMilli(event.MsgInfo.Timestamp)
 ```
 
@@ -460,10 +502,14 @@ msgTime := time.UnixMilli(event.MsgInfo.Timestamp)
 <TabItem value="java" label="Java">
 
 ```java
-// From seconds
-Instant eventTime = Instant.ofEpochSecond(event.getEventTS());
+// From seconds - the time the event occurred. interactionEventTS is absent on
+// some event types, so fall back to the publish time rather than decoding 1970.
+Long eventTS = event.getInteractionEventTS();
+Instant eventTime = (eventTS != null && eventTS > 0)
+    ? Instant.ofEpochSecond(eventTS)
+    : Instant.ofEpochMilli(event.getMsgInfo().getTimestamp());
 
-// From milliseconds
+// From milliseconds - the time 8x8 published the message
 Instant msgTime = Instant.ofEpochMilli(event.getMsgInfo().getTimestamp());
 ```
 
@@ -473,10 +519,16 @@ Instant msgTime = Instant.ofEpochMilli(event.getMsgInfo().getTimestamp());
 ```python
 from datetime import datetime
 
-# From seconds
-event_time = datetime.fromtimestamp(event['eventTS'])
+# From seconds - the time the event occurred. interactionEventTS is absent on
+# some event types; treat missing, null or empty as absent and fall back to the
+# publish time rather than decoding 1970.
+event_ts = event.get('interactionEventTS')
+if event_ts:
+    event_time = datetime.fromtimestamp(event_ts)
+else:
+    event_time = datetime.fromtimestamp(event['msgInfo']['timestamp'] / 1000)
 
-# From milliseconds
+# From milliseconds - the time 8x8 published the message
 msg_time = datetime.fromtimestamp(event['msgInfo']['timestamp'] / 1000)
 ```
 
@@ -484,10 +536,14 @@ msg_time = datetime.fromtimestamp(event['msgInfo']['timestamp'] / 1000)
 <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-// From seconds
-const eventTime = new Date(event.eventTS * 1000);
+// From seconds - the time the event occurred. interactionEventTS is absent on
+// some event types; treat missing, null or empty as absent and fall back to the
+// publish time rather than decoding 1970.
+const eventTime = event.interactionEventTS
+    ? new Date(event.interactionEventTS * 1000)
+    : new Date(event.msgInfo.timestamp);
 
-// From milliseconds
+// From milliseconds - the time 8x8 published the message
 const msgTime = new Date(event.msgInfo.timestamp);
 ```
 
@@ -617,18 +673,18 @@ The `attachedData` object contains an array of key-value pairs. Many of these ke
 
 The following table shows how nested `userData` fields are extracted and mapped:
 
-| userData Key            | Output Field                           | Description                                           | Example Value                 |
-|-------------------------|----------------------------------------|-------------------------------------------------------|-------------------------------|
-| `userData.otim`         | `eventTS`                              | Original/queue entry timestamp (seconds since epoch)  | 1744819217                    |
-| `userData.tclSelectedItems` | attachedData: `tclSelectedItems`   | Transaction code list (format: listId\|itemId,...)    | "5\|12,6\|45,8\|99"           |
-| `userData.queueDirection` | `direction`                          | Queue direction (inbound/outbound)                    | "in", "out"                   |
-| `userData.cha`          | `inboundChannelid`                     | Inbound channel identifier                            | 441733968848                  |
-| `userData.que`          | `queueId`                              | Queue ID (parsed from `~~` separated format)          | 1162                          |
-| `userData.tim`          | `queueTime`                            | Time when interaction entered queue (seconds)         | 1744819217                    |
-| `userData.ema`          | `emailSourceAddress`                   | Email source address (for email interactions)         | `user@example.com`            |
-| `userData.aAgtCallRec`  | `overrideAutoInteractionRecording`     | Override auto recording setting                       | "yes", "no"                   |
-| `userData.agtCallRec`   | `allowAgentOverrideInteractionRecording` | Allow agent to override recording                   | "yes", "no"                   |
-| `userData.callerPerm`   | `callerPermission`                     | Caller permission for recording                       | "yes", "no"                   |
+| userData Key                | Output Field                             | Description                                          | Example Value       |
+|-----------------------------|------------------------------------------|------------------------------------------------------|---------------------|
+| `userData.otim`             | `eventTS`                                | Original/queue entry timestamp (seconds since epoch) | 1744819217          |
+| `userData.tclSelectedItems` | attachedData: `tclSelectedItems`         | Transaction code list (format: listId\|itemId,...)   | "5\|12,6\|45,8\|99" |
+| `userData.queueDirection`   | `direction`                              | Queue direction (inbound/outbound)                   | "in", "out"         |
+| `userData.cha`              | `inboundChannelid`                       | Inbound channel identifier                           | 441733968848        |
+| `userData.que`              | `queueId`                                | Queue ID (parsed from `~~` separated format)         | 1162                |
+| `userData.tim`              | `queueTime`                              | Time when interaction entered queue (seconds)        | 1744819217          |
+| `userData.ema`              | `emailSourceAddress`                     | Email source address (for email interactions)        | `user@example.com`  |
+| `userData.aAgtCallRec`      | `overrideAutoInteractionRecording`       | Override auto recording setting                      | "yes", "no"         |
+| `userData.agtCallRec`       | `allowAgentOverrideInteractionRecording` | Allow agent to override recording                    | "yes", "no"         |
+| `userData.callerPerm`       | `callerPermission`                       | Caller permission for recording                      | "yes", "no"         |
 
 ### How Extraction Works
 

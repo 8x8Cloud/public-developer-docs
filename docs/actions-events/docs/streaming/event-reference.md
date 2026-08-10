@@ -12,54 +12,57 @@ The 8x8 Event Streaming service provides the following event types:
 
 ### Agent Events
 
-| Event Type          | Call State | Description                                              |
-|---------------------|------------|----------------------------------------------------------|
-| `AgentStatusChange` | N/A        | Indicates the current status of the monitored agent      |
-| `AgentProvChange`   | N/A        | Indicates a change to the agent profile (skills, etc.)   |
-| `AgentSkillCreated` | N/A        | Indicates a new agent skill has been created             |
+| Event Type          | Call State | Description                                                   |
+|---------------------|------------|---------------------------------------------------------------|
+| `AgentStatusChange` | N/A        | Indicates the current status of the monitored agent           |
+| `AgentProvChange`   | N/A        | Indicates a change to the agent profile (skills, etc.)        |
+| `AgentSkillCreated` | N/A        | Indicates a new agent skill has been created                  |
 | `AgentSkillChanged` | N/A        | Indicates an agent skill has been modified (enabled/disabled) |
 
 ### Interaction Events
 
-| Event Type                           | Call State                  | Description                                                        |
-|--------------------------------------|-----------------------------|--------------------------------------------------------------------|
-| `InteractionCreated`                 | CS_IDLE<br />CS_QUEUED          | Indicates a new outbound or inbound interaction creation          |
-| `InteractionQueued`                  | CS_QUEUED                   | Indicates an interaction waiting to be assigned to an agent       |
-| `InteractionAssigned`                | CS_INPROGRESS               | Indicates an interaction assigned to an available agent           |
-| `InteractionAccepted`                | CS_INPROGRESS<br />CS_CONNECTED | Indicates an interaction accepted by an agent                     |
-| `InteractionCustomerAccepted`        | CS_CONNECTED                | Indicates a ringing outbound call answered by the customer        |
-| `InteractionRejected`                | CS_QUEUED                   | Indicates an agent rejected an offered interaction                |
-| `InteractionUnqueued`                | CS_IDLE<br />CS_QUEUED          | Indicates an interaction removed from queue before assignment     |
-| `LineHoldStatus`                     | CS_HOLD<br />CS_CONNECTED       | Indicates hold status change for an ongoing call                  |
-| `LineMuteStatus`                     | CS_CONNECTED                | Indicates mute status change for an ongoing call                  |
-| `InteractionRecordingStarted`        | N/A                         | Indicates the system has started recording a call leg             |
-| `RecordingStatus`                    | N/A                         | Indicates a recording status change (pause/resume)                |
-| `InteractionPostProcess`             | CS_DISCONNECTED             | Indicates the start of interaction wrap-up                        |
-| `InteractionRecordingReady`          | N/A                         | Indicates an interaction recording is ready for retrieval         |
-| `InteractionEndPostProcess`          | CS_DISCONNECTED             | Indicates the conclusion of interaction wrap-up                   |
-| `InteractionDeassigned`              | CS_DISCONNECTED             | Indicates an interaction deassigned from an agent                 |
-| `InteractionTransferRequest`         | N/A                         | Indicates a transfer request for an interaction                   |
-| `InteractionReconnect`               | N/A                         | Indicates an interaction reconnect event                          |
-| `InteractionParticipantChange`       | CS_DISCONNECTED             | Indicates participant changes (conference, supervisor join, etc.) |
-| `InteractionParticipantRemovedByHost`| N/A                         | Indicates a participant removed from interaction by host          |
-| `InteractionJoinLinesRequest`        | N/A                         | Indicates a request to join multiple lines                        |
-| `InteractionJoined`                  | N/A                         | Indicates multiple lines have been joined                         |
-| `InteractionChanged`                 | N/A                         | Indicates interaction properties have changed                     |
-| `InteractionQueueTimeout`            | N/A                         | Indicates an interaction timed out in queue                       |
-| `InteractionDeleted`                 | CS_DISCONNECTED             | Indicates interaction ended or call leg left conference           |
+| Event Type                            | Call State                      | Description                                                       |
+|---------------------------------------|---------------------------------|-------------------------------------------------------------------|
+| `InteractionCreated`                  | CS_IDLE<br />CS_QUEUED          | Indicates a new outbound or inbound interaction creation          |
+| `InteractionQueued`                   | CS_QUEUED                       | Indicates an interaction waiting to be assigned to an agent       |
+| `InteractionAssigned`                 | CS_INPROGRESS                   | Indicates an interaction assigned to an available agent           |
+| `InteractionAccepted`                 | CS_INPROGRESS<br />CS_CONNECTED | Indicates an interaction accepted by an agent                     |
+| `InteractionCustomerAccepted`         | CS_CONNECTED                    | Indicates a ringing outbound call answered by the customer        |
+| `InteractionRejected`                 | CS_QUEUED                       | Indicates an agent rejected an offered interaction                |
+| `InteractionUnqueued`                 | CS_IDLE<br />CS_QUEUED          | Indicates an interaction removed from queue before assignment     |
+| `LineHoldStatus`                      | CS_HOLD<br />CS_CONNECTED       | Indicates hold status change for an ongoing call                  |
+| `LineMuteStatus`                      | CS_CONNECTED                    | Indicates mute status change for an ongoing call                  |
+| `InteractionRecordingStarted`         | N/A                             | Indicates the system has started recording a call leg             |
+| `RecordingStatus`                     | N/A                             | Indicates a recording status change (pause/resume)                |
+| `InteractionPostProcess`              | CS_DISCONNECTED                 | Indicates the start of interaction wrap-up                        |
+| `InteractionRecordingReady`           | N/A                             | Indicates an interaction recording is ready for retrieval         |
+| `InteractionEndPostProcess`           | CS_DISCONNECTED                 | Indicates the conclusion of interaction wrap-up                   |
+| `InteractionDeassigned`               | CS_DISCONNECTED                 | Indicates an interaction deassigned from an agent                 |
+| `InteractionTransferRequest`          | N/A                             | Indicates a transfer request for an interaction                   |
+| `InteractionReconnect`                | N/A                             | Indicates an interaction reconnect event                          |
+| `InteractionParticipantChange`        | CS_DISCONNECTED                 | Indicates participant changes (conference, supervisor join, etc.) |
+| `InteractionParticipantRemovedByHost` | N/A                             | Indicates a participant removed from interaction by host          |
+| `InteractionJoinLinesRequest`         | N/A                             | Indicates a request to join multiple lines                        |
+| `InteractionJoined`                   | N/A                             | Indicates multiple lines have been joined                         |
+| `InteractionChanged`                  | N/A                             | Indicates interaction properties have changed                     |
+| `InteractionQueueTimeout`             | N/A                             | Indicates an interaction timed out in queue                       |
+| `InteractionDeleted`                  | CS_DISCONNECTED                 | Indicates interaction ended or call leg left conference           |
 
 ### Digital Channel Events
 
-| Event Type     | Description                                           |
-|----------------|-------------------------------------------------------|
-| `GuestChatEnd` | Indicates a guest chat session has ended              |
+| Event Type     | Description                              |
+|----------------|------------------------------------------|
+| `GuestChatEnd` | Indicates a guest chat session has ended |
+
+`GuestChatEnd` carries no `interactionEventTS`. Use `msgInfo.timestamp` for its time - see
+[Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp).
 
 ### Media/Proxy Events
 
-| Event Type          | Description                                     |
-|---------------------|-------------------------------------------------|
-| `MediaProxyAdded`   | Indicates a media proxy has been added          |
-| `MediaProxyRemoved` | Indicates a media proxy has been removed        |
+| Event Type          | Description                              |
+|---------------------|------------------------------------------|
+| `MediaProxyAdded`   | Indicates a media proxy has been added   |
+| `MediaProxyRemoved` | Indicates a media proxy has been removed |
 
 ## Event Payload Examples
 
@@ -189,7 +192,9 @@ This event indicates a change to agent provisioning, such as skills being added,
 - `queueId`: Numeric queue identifier
 - `queueList`: Queue list identifier
 - `queueTime`: Time when interaction entered queue (seconds since epoch)
-- `eventTS`: Event timestamp (seconds since epoch)
+- `eventTS`: When the interaction was offered (seconds since epoch). The same on every event
+  for this interaction - use `interactionEventTS` for the time this event occurred (see
+  [Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp))
 - `transactionNum`: Transaction number
 - `callerPermission`: Whether caller granted recording permission
 - `overrideAutoInteractionRecording`: Recording override setting

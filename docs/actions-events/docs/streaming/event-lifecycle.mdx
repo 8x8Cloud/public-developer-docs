@@ -40,7 +40,9 @@ flowchart TD
 **Key Fields to Track:**
 - `interactionGUID`: Unique identifier to correlate all events for this interaction
 - `callState`: Current state in the lifecycle
-- `eventTS` or `interactionEventTS`: When each transition occurred
+- `interactionEventTS`: When each transition occurred. Not `eventTS`, which is the time the
+  interaction was offered and is the same on every event (see
+  [Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp))
 - `agentId`: Which agent handled the interaction (from InteractionAssigned onward)
 
 ## Outbound Call Lifecycle
@@ -127,11 +129,16 @@ To track a complete interaction from start to finish:
 
 1. **Use `interactionGUID`** as the correlation key across all events
 2. **Track state transitions** via `callState` field
-3. **Monitor timestamps** using `eventTS` or `interactionEventTS` to calculate durations:
-   - **Queue time**: InteractionQueued.eventTS → InteractionAssigned.eventTS
-   - **Ring time**: InteractionAssigned.eventTS → InteractionAccepted.eventTS
-   - **Talk time**: InteractionAccepted.eventTS → InteractionPostProcess.eventTS
-   - **Wrap-up time**: InteractionPostProcess.eventTS → InteractionEndPostProcess.eventTS
+3. **Monitor timestamps** using `interactionEventTS` to calculate durations:
+   - **Queue time**: InteractionQueued.interactionEventTS → InteractionAssigned.interactionEventTS
+   - **Ring time**: InteractionAssigned.interactionEventTS → InteractionAccepted.interactionEventTS
+   - **Talk time**: InteractionAccepted.interactionEventTS → InteractionPostProcess.interactionEventTS
+   - **Wrap-up time**: InteractionPostProcess.interactionEventTS → InteractionEndPostProcess.interactionEventTS
+
+   Use `interactionEventTS` for these, not `eventTS`. `eventTS` records when the interaction
+   was offered, so it is identical on every event for that interaction and each of the
+   subtractions above would evaluate to zero. See
+   [Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp).
 4. **Capture outcome** from InteractionDeleted:
    - `hangupInitiator`: Who ended the call
    - `callHangupReason`: Why the call ended
@@ -158,20 +165,28 @@ type InteractionTimeline struct {
 }
 
 func (t *InteractionTimeline) ProcessEvent(event Event) {
+    // interactionEventTS is absent on some event types, where it unmarshals to 0.
+    // Leave eventTime as the zero Time so the IsZero() guards below catch it -
+    // time.Unix(0, 0) is 1970, which is NOT IsZero() and would slip through.
+    var eventTime time.Time
+    if event.InteractionEventTS > 0 {
+        eventTime = time.Unix(event.InteractionEventTS, 0)
+    }
+
     switch event.Event {
     case "InteractionCreated":
         t.InteractionGUID = event.InteractionGUID
-        t.Created = time.Unix(event.EventTS, 0)
+        t.Created = eventTime
     case "InteractionQueued":
-        t.Queued = time.Unix(event.EventTS, 0)
+        t.Queued = eventTime
         t.QueueID = event.QueueID
     case "InteractionAssigned":
-        t.Assigned = time.Unix(event.EventTS, 0)
+        t.Assigned = eventTime
         t.AgentID = event.AgentID
     case "InteractionAccepted", "InteractionCustomerAccepted":
-        t.Connected = time.Unix(event.EventTS, 0)
+        t.Connected = eventTime
     case "InteractionDeleted":
-        t.Disconnected = time.Unix(event.EventTS, 0)
+        t.Disconnected = eventTime
         t.HangupReason = event.CallHangupReason
     }
 }
@@ -214,19 +229,24 @@ class InteractionTimeline:
     def process_event(self, event: dict):
         event_type = event.get('event')
 
+        # interactionEventTS is absent on some event types - leave the time as None
+        # rather than defaulting to 0, which would decode as 1970
+        event_ts = event.get('interactionEventTS')
+        event_time = datetime.fromtimestamp(event_ts) if event_ts else None
+
         if event_type == 'InteractionCreated':
             self.interaction_guid = event['interactionGUID']
-            self.created = datetime.fromtimestamp(event['eventTS'])
+            self.created = event_time
         elif event_type == 'InteractionQueued':
-            self.queued = datetime.fromtimestamp(event['eventTS'])
+            self.queued = event_time
             self.queue_id = event.get('queueId')
         elif event_type == 'InteractionAssigned':
-            self.assigned = datetime.fromtimestamp(event['eventTS'])
+            self.assigned = event_time
             self.agent_id = event.get('agentId')
         elif event_type in ['InteractionAccepted', 'InteractionCustomerAccepted']:
-            self.connected = datetime.fromtimestamp(event['eventTS'])
+            self.connected = event_time
         elif event_type == 'InteractionDeleted':
-            self.disconnected = datetime.fromtimestamp(event['eventTS'])
+            self.disconnected = event_time
             self.hangup_reason = event.get('callHangupReason')
 
     def queue_duration(self) -> Optional[float]:
@@ -258,25 +278,31 @@ class InteractionTimeline {
     }
 
     processEvent(event) {
+        // interactionEventTS is absent on some event types - leave the time as null
+        // rather than defaulting to 0, which would decode as 1970
+        const eventTime = event.interactionEventTS
+            ? new Date(event.interactionEventTS * 1000)
+            : null;
+
         switch (event.event) {
             case 'InteractionCreated':
                 this.interactionGUID = event.interactionGUID;
-                this.created = new Date(event.eventTS * 1000);
+                this.created = eventTime;
                 break;
             case 'InteractionQueued':
-                this.queued = new Date(event.eventTS * 1000);
+                this.queued = eventTime;
                 this.queueId = event.queueId;
                 break;
             case 'InteractionAssigned':
-                this.assigned = new Date(event.eventTS * 1000);
+                this.assigned = eventTime;
                 this.agentId = event.agentId;
                 break;
             case 'InteractionAccepted':
             case 'InteractionCustomerAccepted':
-                this.connected = new Date(event.eventTS * 1000);
+                this.connected = eventTime;
                 break;
             case 'InteractionDeleted':
-                this.disconnected = new Date(event.eventTS * 1000);
+                this.disconnected = eventTime;
                 this.hangupReason = event.callHangupReason;
                 break;
         }
@@ -317,7 +343,10 @@ class InteractionTimeline {
 
 ### Metric Calculation
 
-- **Use event timestamps** (`eventTS` or `interactionEventTS`) for accurate duration calculations
+- **Use `interactionEventTS`** for duration calculations - not `eventTS`, which does not advance
+  between events (see [Choosing a Timestamp](./field-reference.mdx#choosing-a-timestamp))
+- **Handle events with no `interactionEventTS`** - use `msgInfo.timestamp` rather than
+  defaulting a missing value to 0
 - **Account for holds** - `LineHoldStatus` events affect talk time calculations
 - **Consider time zones** - timestamps are in UTC, convert as needed for reporting
 
