@@ -306,7 +306,7 @@ Together, a single message can expose up to **11** suggestions (4 in-card + 7 me
 | `thumbnailImageAlignment` | string | Horizontal cards only. `left` or `right` — positions the media relative to the text block. |
 | `title` | string | Card headline. Max 200 characters. |
 | `description` | string | Supporting body text. Max 2 000 characters. |
-| `media.height` | string | `SHORT`, `MEDIUM`, or `TALL`. Vertical cards only. |
+| `media.height` | string | `SHORT`, `MEDIUM`, or `TALL`. Vertical cards only. Optional — defaults to `SHORT` when omitted. |
 | `media.contentInfo.fileUrl` | string (URL) | Public URL of the image or video asset. |
 | `media.contentInfo.thumbnailUrl` | string (URL) | Public URL of the thumbnail (used for video). |
 | `media.contentInfo.forceRefresh` | boolean | If `true`, the carrier re-fetches the media instead of serving a cached copy. |

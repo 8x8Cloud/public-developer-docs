@@ -7799,12 +7799,13 @@
         "properties": {
           "height": {
             "type": "string",
-            "description": "Height of the media within the card.",
+            "description": "Height of the media within the card. Optional; defaults to short when omitted.",
             "enum": [
               "short",
               "medium",
               "tall"
             ],
+            "default": "short",
             "example": "short"
           },
           "contentInfo": {
