@@ -2233,6 +2233,70 @@
                     }
                   }
                 },
+                "viberTemplateMessage": {
+                  "summary": "Viber Template Message - Text",
+                  "value": {
+                    "user": {
+                      "msisdn": "+6500000"
+                    },
+                    "type": "template",
+                    "content": {
+                      "template": {
+                        "name": "<Insert Template Name>",
+                        "language": "en",
+                        "components": [
+                          {
+                            "type": "body",
+                            "parameters": [
+                              {
+                                "type": "text",
+                                "name": "name",
+                                "text": "Ana"
+                              },
+                              {
+                                "type": "text",
+                                "name": "orderId",
+                                "text": "ORD-12345"
+                              },
+                              {
+                                "type": "text",
+                                "name": "date",
+                                "text": "15 Aug 2026"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "viberTemplateOTPMessage": {
+                  "summary": "Viber Template Message - OTP",
+                  "value": {
+                    "user": {
+                      "msisdn": "+6500000"
+                    },
+                    "type": "template",
+                    "content": {
+                      "template": {
+                        "name": "<Insert Template Name>",
+                        "language": "en",
+                        "components": [
+                          {
+                            "type": "body",
+                            "parameters": [
+                              {
+                                "type": "text",
+                                "name": "pin",
+                                "text": "1234"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
                 "zaloNotificationSampleMessage": {
                   "summary": "Zalo Template Message - Text",
                   "value": {
