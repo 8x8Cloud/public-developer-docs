@@ -65408,6 +65408,89 @@ curl -X POST \
 }'
 ```
 
+## Retrieving Templates via API
+
+To list the Viber templates registered for a channel, along with their current approval status, send a `GET` request to the following endpoint:
+
+```http
+GET /api/v1/accounts/{accountId}/viber/channels/{viberChannelId}/templates
+```
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `accountId` | string | Yes | Your account ID. |
+| `viberChannelId` | string | Yes | The Viber channel ID whose templates you want to retrieve. |
+
+### Response
+
+The response includes a `templates` array, with one entry per template/language combination:
+
+```json
+{
+  "templates": [
+    {
+      "templateId": "vb_tmpl_9f21c7",
+      "name": "test_order_confirmation_001",
+      "text": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
+      "language": "en",
+      "category": "Transactional",
+      "params": [
+        { "name": "customer_name", "type": "TEXT" },
+        { "name": "order_id", "type": "TEXT" },
+        { "name": "delivery_date", "type": "TEXT" }
+      ],
+      "status": "Approved",
+      "createdAt": "2026-08-01T10:15:00Z",
+      "updatedAt": "2026-08-05T09:30:00Z"
+    },
+    {
+      "templateId": "vb_tmpl_4a88e2",
+      "name": "otp_login_en",
+      "text": "Your verification code is {{pin}}. Valid for 5 minutes. Team 8x8",
+      "language": "en",
+      "category": "OTP",
+      "params": [{ "name": "pin", "type": "TEXT" }],
+      "status": "Pending",
+      "createdAt": "2026-08-10T08:00:00Z",
+      "updatedAt": "2026-08-10T08:00:00Z"
+    }
+  ]
+}
+```
+
+The `status` field reflects Viber's current approval state for the template: `Approved`, `Pending`, or `Rejected`.
+
+## Deleting a Template via API
+
+To delete a Viber template, send a `DELETE` request to the following endpoint:
+
+```http
+DELETE /api/v1/accounts/{accountId}/viber/channels/{viberChannelId}/templates/{templateName}?language={language}
+```
+
+Because each language variant of a Viber template is stored as its own template, you must specify the `language` query parameter to identify which variant to delete.
+
+### Path and Query Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `accountId` | string | Yes | Your account ID. |
+| `viberChannelId` | string | Yes | The Viber channel ID the template belongs to. |
+| `templateName` | string | Yes | The name of the template to delete. |
+| `language` | string (query) | Yes | The language code of the template variant to delete (e.g. `en`). |
+
+### Example
+
+```bash
+curl -X DELETE \
+  'https://connect.8x8.com/api/v1/accounts/{accountId}/channels/{viberChannelId}/templates/otp_login_en?language=en' \
+  -H 'Authorization: Bearer {your_api_key}'
+```
+
+A successful deletion returns `200 OK` with an empty body. If the template/language pair doesn't exist, the endpoint returns `404 Not Found`.
+
 ## Template Parameters
 
 Parameters allow you to insert dynamic content into your template messages at send time. Each parameter in the template text must:
@@ -65430,7 +65513,7 @@ Parameters allow you to insert dynamic content into your template messages at se
 
 ## API Reference
 
-For the full API specification, see the [Add Viber Template](/connect/reference/add-viber-template) API reference.
+For the full API specification, see the [Add Viber Template](/connect/reference/add-viber-template), [Get Viber Templates](/connect/reference/get-viber-templates), and [Delete Viber Template](/connect/reference/delete-viber-template) API references.
 
 ---
 
@@ -89374,6 +89457,68 @@ Delete single contact by id
 
 ---
 
+## Delete Viber template
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete Viber template"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/api/v1/accounts/{accountId}/viber/channels/{channelId}/templates/{templateName}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+This endpoint deletes a Viber message template, removing it from both the 8x8 platform and Viber.
+
+Each language variant of a Viber template is stored as its own template, so you must specify the `language` query parameter to identify which variant to delete.
+
+Deleting Viber templates requires an admin role on the account.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"accountId","in":"path","description":"You must replace *{accountId}* with the accountid that you want to use.","required":true,"schema":{"maxLength":36,"minLength":32,"pattern":"^[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}$","type":"string"}},{"in":"path","name":"channelId","required":true,"description":"Viber channel identifier","schema":{"type":"string"}},{"in":"path","name":"templateName","required":true,"description":"The name of the Viber template to delete.","schema":{"type":"string"}},{"in":"query","name":"language","required":true,"description":"Language code of the template variant to delete (e.g. `en`). Required because each Viber template language variant is stored as its own template.","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Template deleted successfully","content":{"application/json":{"schema":{"type":"object","properties":{}}}}},"400":{"description":"Bad request error response","content":{"application/json":{"schema":{"title":"ErrorResponse","required":["code","errorId","timestamp"],"type":"object","properties":{"code":{"type":"integer","description":"Error code"},"message":{"type":"string","description":"Error description"},"errorId":{"type":"string","description":"Unique id of error. You can use it as reference when sending enquiries to 8x8 support","format":"uuid"},"timestamp":{"type":"string","description":"Data and time of the error occurence","format":"date-time"}},"description":"Response in case of error","example":{"code":1001,"message":"Provided subAccountId doesn't belongs to your account","errorId":"91b106f0-c0da-4aba-a43a-7af9c5893a80","timestamp":"2017-04-19T02:31:19.4297387+00:00"}},"example":{"code":4002,"message":"Invalid 'language' field. A language is required to identify the template variant to delete.","errorId":"b4478860-b76c-e811-814e-022a35cc1c71","timestamp":"2018-08-04T09:25:40.9235752+00:00"}}}},"401":{"description":"Request was not authenticated response","content":{"application/json":{"schema":{"title":"ErrorResponse","required":["code","errorId","timestamp"],"type":"object","properties":{"code":{"type":"integer","description":"Error code"},"message":{"type":"string","description":"Error description"},"errorId":{"type":"string","description":"Unique id of error. You can use it as reference when sending enquiries to 8x8 support","format":"uuid"},"timestamp":{"type":"string","description":"Data and time of the error occurence","format":"date-time"}},"description":"Response in case of error","example":{"code":1001,"message":"Provided subAccountId doesn't belongs to your account","errorId":"91b106f0-c0da-4aba-a43a-7af9c5893a80","timestamp":"2017-04-19T02:31:19.4297387+00:00"}},"example":{"code":1200,"message":"Request was not authenticated properly","errorId":"db9dced4-3534-4d86-9d18-6b448af0d621","timestamp":"2018-08-02T09:42:38.8988997+00:00"}}}},"403":{"description":"Request was not authorized","content":{"application/json":{"schema":{"title":"ErrorResponse","required":["code","errorId","timestamp"],"type":"object","properties":{"code":{"type":"integer","description":"Error code"},"message":{"type":"string","description":"Error description"},"errorId":{"type":"string","description":"Unique id of error. You can use it as reference when sending enquiries to 8x8 support","format":"uuid"},"timestamp":{"type":"string","description":"Data and time of the error occurence","format":"date-time"}},"description":"Response in case of error","example":{"code":1001,"message":"Provided subAccountId doesn't belongs to your account","errorId":"91b106f0-c0da-4aba-a43a-7af9c5893a80","timestamp":"2017-04-19T02:31:19.4297387+00:00"}},"example":{"code":1201,"message":"You do not have permission to manage Viber templates","errorId":"db9dced4-3534-4d86-9d18-6b448af0d621","timestamp":"2018-08-02T09:42:38.8988997+00:00"}}}},"404":{"description":"The template doesn't exist","content":{"application/json":{"schema":{"title":"ErrorResponse","required":["code","errorId","timestamp"],"type":"object","properties":{"code":{"type":"integer","description":"Error code"},"message":{"type":"string","description":"Error description"},"errorId":{"type":"string","description":"Unique id of error. You can use it as reference when sending enquiries to 8x8 support","format":"uuid"},"timestamp":{"type":"string","description":"Data and time of the error occurence","format":"date-time"}},"description":"Response in case of error","example":{"code":1001,"message":"Provided subAccountId doesn't belongs to your account","errorId":"91b106f0-c0da-4aba-a43a-7af9c5893a80","timestamp":"2017-04-19T02:31:19.4297387+00:00"}},"example":{"code":3038,"message":"Template not found","errorId":"aa400d4b-fffe-ea11-8277-00155d4ff7ed","timestamp":"2020-09-25T07:18:22.78Z"}}}},"429":{"description":"Rate limiting quota exceeded error","content":{"application/json":{"schema":{"title":"ErrorResponse","required":["code","errorId","timestamp"],"type":"object","properties":{"code":{"type":"integer","description":"Error code"},"message":{"type":"string","description":"Error description"},"errorId":{"type":"string","description":"Unique id of error. You can use it as reference when sending enquiries to 8x8 support","format":"uuid"},"timestamp":{"type":"string","description":"Data and time of the error occurence","format":"date-time"}},"description":"Response in case of error","example":{"code":1001,"message":"Provided subAccountId doesn't belongs to your account","errorId":"91b106f0-c0da-4aba-a43a-7af9c5893a80","timestamp":"2017-04-19T02:31:19.4297387+00:00"}},"example":{"code":2012,"message":"Viber API rate limit exceeded. Please try again later.","errorId":"c8a41b47-57bf-ea11-8273-00155d466a31","timestamp":"2020-07-06T07:07:00.30Z"}}}},"500":{"description":"Internal server error","content":{"application/json":{"schema":{"title":"ErrorResponse","required":["code","errorId","timestamp"],"type":"object","properties":{"code":{"type":"integer","description":"Error code"},"message":{"type":"string","description":"Error description"},"errorId":{"type":"string","description":"Unique id of error. You can use it as reference when sending enquiries to 8x8 support","format":"uuid"},"timestamp":{"type":"string","description":"Data and time of the error occurence","format":"date-time"}},"description":"Response in case of error","example":{"code":1001,"message":"Provided subAccountId doesn't belongs to your account","errorId":"91b106f0-c0da-4aba-a43a-7af9c5893a80","timestamp":"2017-04-19T02:31:19.4297387+00:00"}},"example":{"code":2000,"message":"Internal server error","errorId":"db9dced4-3534-4d86-9d18-6b448af0d621","timestamp":"2018-07-02T09:42:38.8988997+00:00"}}}}}}
+>
+  
+</StatusCodes>
+
+---
+
 ## Delete webhooks
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
@@ -91046,6 +91191,66 @@ API which can be used to fetch usage and billing-related information for Automat
   id={undefined}
   label={undefined}
   responses={{"200":{"description":"List of supported functions.","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","required":["accountId"],"properties":{"accountId":{"type":"string","description":"8x8 AccountId."}},"title":"usage"}},"examples":{"usage":{"value":{"allowedWorkflowCount":50000,"allowedOverage":true,"overagePrice":0.005,"executedWorkflowCount":1200,"countStartedMonth":7,"countStartedYear":2022}}}}}}}}
+>
+  
+</StatusCodes>
+
+---
+
+## Get Viber templates
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get Viber templates"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/v1/accounts/{accountId}/viber/channels/{channelId}/templates"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+This endpoint returns the Viber message templates registered for the channel, along with their current approval status with Viber.
+
+Retrieving Viber templates requires an admin role on the account.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"accountId","in":"path","description":"You must replace *{accountId}* with the accountid that you want to use.","required":true,"schema":{"maxLength":36,"minLength":32,"pattern":"^[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}$","type":"string"}},{"in":"path","name":"channelId","required":true,"description":"Viber channel identifier","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Templates retrieved successfully","content":{"application/json":{"schema":{"type":"object","title":"Get Viber templates response","properties":{"templates":{"type":"array","description":"The Viber templates registered for the channel.","items":{"type":"object","title":"Viber template","properties":{"templateId":{"type":"string","example":"abc123def456","description":"Viber's internal identifier for this template."},"name":{"type":"string","example":"test_order_confirmation_001","description":"The template name."},"text":{"type":"string","example":"Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!","description":"The template message text."},"language":{"type":"string","example":"en","description":"Language code for the template."},"category":{"type":"string","example":"Transactional","description":"Template category."},"params":{"type":"array","description":"List of parameter definitions used in the template text.","items":{"type":"object","title":"Template parameter","properties":{"name":{"type":"string","example":"customer_name","description":"The parameter name, matching the placeholder in the template text."},"type":{"type":"string","example":"TEXT","enum":["TEXT"],"description":"The parameter type."}}}},"status":{"type":"string","example":"Pending","enum":["Approved","Pending","Rejected"],"description":"The template's current approval status with Viber."},"createdAt":{"type":"string","format":"date-time","example":"2026-08-01T10:15:00Z","description":"When the template was created."},"updatedAt":{"type":"string","format":"date-time","example":"2026-08-05T09:30:00Z","description":"When the template was last updated."}}}}}},"example":{"templates":[{"templateId":"vb_tmpl_9f21c7","name":"test_order_confirmation_001","text":"Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!","language":"en","category":"Transactional","params":[{"name":"customer_name","type":"TEXT"},{"name":"order_id","type":"TEXT"},{"name":"delivery_date","type":"TEXT"}],"status":"Approved","createdAt":"2026-08-01T10:15:00Z","updatedAt":"2026-08-05T09:30:00Z"},{"templateId":"vb_tmpl_4a88e2","name":"otp_login_en","text":"Your verification code is {{pin}}. Valid for 5 minutes. Team 8x8","language":"en","category":"OTP","params":[{"name":"pin","type":"TEXT"}],"status":"Pending","createdAt":"2026-08-10T08:00:00Z","updatedAt":"2026-08-10T08:00:00Z"}]}}}},"400":{"description":"Bad request error response","content":{"application/json":{"schema":{"title":"ErrorResponse","required":["code","errorId","timestamp"],"type":"object","properties":{"code":{"type":"integer","description":"Error code"},"message":{"type":"string","description":"Error description"},"errorId":{"type":"string","description":"Unique id of error. You can use it as reference when sending enquiries to 8x8 support","format":"uuid"},"timestamp":{"type":"string","description":"Data and time of the error occurence","format":"date-time"}},"description":"Response in case of error","example":{"code":1001,"message":"Provided subAccountId doesn't belongs to your account","errorId":"91b106f0-c0da-4aba-a43a-7af9c5893a80","timestamp":"2017-04-19T02:31:19.4297387+00:00"}},"example":{"code":1002,"message":"Invalid MSISDN format (not E.164 international number)","errorId":"b4478860-b76c-e811-814e-022a35cc1c71","timestamp":"2018-08-04T09:25:40.9235752+00:00"}}}},"401":{"description":"Request was not authenticated response","content":{"application/json":{"schema":{"title":"ErrorResponse","required":["code","errorId","timestamp"],"type":"object","properties":{"code":{"type":"integer","description":"Error code"},"message":{"type":"string","description":"Error description"},"errorId":{"type":"string","description":"Unique id of error. You can use it as reference when sending enquiries to 8x8 support","format":"uuid"},"timestamp":{"type":"string","description":"Data and time of the error occurence","format":"date-time"}},"description":"Response in case of error","example":{"code":1001,"message":"Provided subAccountId doesn't belongs to your account","errorId":"91b106f0-c0da-4aba-a43a-7af9c5893a80","timestamp":"2017-04-19T02:31:19.4297387+00:00"}},"example":{"code":1200,"message":"Request was not authenticated properly","errorId":"db9dced4-3534-4d86-9d18-6b448af0d621","timestamp":"2018-08-02T09:42:38.8988997+00:00"}}}},"403":{"description":"Request was not authorized","content":{"application/json":{"schema":{"title":"ErrorResponse","required":["code","errorId","timestamp"],"type":"object","properties":{"code":{"type":"integer","description":"Error code"},"message":{"type":"string","description":"Error description"},"errorId":{"type":"string","description":"Unique id of error. You can use it as reference when sending enquiries to 8x8 support","format":"uuid"},"timestamp":{"type":"string","description":"Data and time of the error occurence","format":"date-time"}},"description":"Response in case of error","example":{"code":1001,"message":"Provided subAccountId doesn't belongs to your account","errorId":"91b106f0-c0da-4aba-a43a-7af9c5893a80","timestamp":"2017-04-19T02:31:19.4297387+00:00"}},"example":{"code":1201,"message":"You do not have permission to manage Viber templates","errorId":"db9dced4-3534-4d86-9d18-6b448af0d621","timestamp":"2018-08-02T09:42:38.8988997+00:00"}}}},"500":{"description":"Internal server error","content":{"application/json":{"schema":{"title":"ErrorResponse","required":["code","errorId","timestamp"],"type":"object","properties":{"code":{"type":"integer","description":"Error code"},"message":{"type":"string","description":"Error description"},"errorId":{"type":"string","description":"Unique id of error. You can use it as reference when sending enquiries to 8x8 support","format":"uuid"},"timestamp":{"type":"string","description":"Data and time of the error occurence","format":"date-time"}},"description":"Response in case of error","example":{"code":1001,"message":"Provided subAccountId doesn't belongs to your account","errorId":"91b106f0-c0da-4aba-a43a-7af9c5893a80","timestamp":"2017-04-19T02:31:19.4297387+00:00"}},"example":{"code":2000,"message":"Internal server error","errorId":"db9dced4-3534-4d86-9d18-6b448af0d621","timestamp":"2018-07-02T09:42:38.8988997+00:00"}}}}}}
 >
   
 </StatusCodes>

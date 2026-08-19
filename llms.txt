@@ -617,6 +617,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Remove Personally Identifiable Information (PII)](https://developer.8x8.com/connect/reference/delete-pii.api): Remove Personally Identifiable Information (PII) for particular message from 8x8 SMS database.
 - [Delete recording push config](https://developer.8x8.com/connect/reference/delete-recording-push-config.api): Delete recording push config
 - [Delete single contact](https://developer.8x8.com/connect/reference/delete-single-contact.api): Delete single contact by id
+- [Delete Viber template](https://developer.8x8.com/connect/reference/delete-viber-template.api): This endpoint deletes a Viber message template, removing it from both the 8x8 platform and Viber.
 - [Delete webhooks](https://developer.8x8.com/connect/reference/delete-webhooks-1.api): Sending a DELETE request on this endpoint allows to **remove a configured webhook for an account or a subaccount** .
 - [Delete webhooks](https://developer.8x8.com/connect/reference/delete-webhooks-2.api): Sending a DELETE request on this endpoint allows to **remove a configured webhook for an account or a subaccount** .
 - [Delete webhooks](https://developer.8x8.com/connect/reference/delete-webhooks.api): Sending a DELETE request on this endpoint allows to **remove a configured webhook for an account or a subaccount** .
@@ -645,6 +646,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Retrieve a list of supported time zones](https://developer.8x8.com/connect/reference/get-timezones.api): Use this resource to explore supported time zones. Time zones are used as parameters in some of our time related JavaScript helper functions like `...
 - [Retrieve a list of executed workflow counts by yearly](https://developer.8x8.com/connect/reference/get-usage-history.api): API which can be used to fetch usage historical data for Automation service
 - [Retrieve the allowed workflow counts and current usage](https://developer.8x8.com/connect/reference/get-usage.api): API which can be used to fetch usage and billing-related information for Automation service
+- [Get Viber templates](https://developer.8x8.com/connect/reference/get-viber-templates.api): This endpoint returns the Viber message templates registered for the channel, along with their current approval status with Viber.
 - [Get My Virtual Numbers](https://developer.8x8.com/connect/reference/get-virtual-numbers.api): The Number Health Service provides insights about the reachability/availability for the numbers assigned to your subaccount.
 - [Get log export job result](https://developer.8x8.com/connect/reference/get-voice-log-export-job-result.api): * Sending a **GET** request on this endpoint allows to **check the status of an Voice Logs export job** and to **get a download link** if its gener...
 - [Get speech profiles for your account](https://developer.8x8.com/connect/reference/get-voice-profile-information.api): Get speech profiles for your account
