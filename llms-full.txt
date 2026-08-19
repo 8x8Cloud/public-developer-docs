@@ -45504,7 +45504,7 @@ Payload object description
 | content         | object         | Message content. Structure varies based on the `type` field.Only present when `eventType=external_app_message`                                                 |
 | status          | object         | Current status of the message, please see [Message status reference](/connect/reference/message-status-references) for details.Only present when `eventType=outbound_message_status_changed` |
 | whatsapp        | object         | WhatsApp-specific information. Only present when `channel` is `whatsapp`. See below for details                                                                     |
-| outboundContent | object         | **New in v9.** A structured copy of the original outbound message this receipt refers to. WhatsApp only, and only present on the receipt that carries the delivered content (the `delivered_to_recipient` status). See [outboundContent object](#outboundcontent-object) below. |
+| outboundContent | object         | **New in v9.** A structured copy of the original outbound message this receipt refers to. WhatsApp only, and only present on the first receipt for the message (the `queued` status). See [outboundContent object](#outboundcontent-object) below. |
 
 User information object description
 
@@ -45544,7 +45544,7 @@ WhatsApp object description
 
 > 📘
 >
-> `outboundContent` is **WhatsApp only**. It is attached to the receipt that confirms delivery to the recipient (`delivered_to_recipient`) and is omitted from earlier receipts such as `queued` and `delivered_to_operator`. When the content cannot be reconstructed it is left out entirely.
+> `outboundContent` is **WhatsApp only**. It is attached to the first receipt for the message, when `state` is `queued`, and is omitted from all subsequent receipts (`delivered_to_operator`, `delivered_to_recipient`, `read`, etc). When the content cannot be reconstructed it is left out entirely.
 >
 
 | Parameter name | Parameter type | Description |
@@ -45618,9 +45618,9 @@ Some content is masked before it reaches your webhook, in which case `meta.redac
 
 ##### WhatsApp — queued
 
-Sent when the message is accepted by the 8x8 platform. In this example the message was sent using the phone number (`msisdn`); since this status does not come back from WhatsApp, `channelUserId` is not included.
+Sent when the message is accepted by the 8x8 platform. In this example the message was sent using the phone number (`msisdn`); since this status does not come back from WhatsApp, `channelUserId` is not included. This is also the receipt that carries the `outboundContent` object — a structured copy of the message that was sent. The examples below show the receipt for different content types; only the `outboundContent` object varies, the surrounding webhook body is the same in each case.
 
-```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, queued"
+```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, queued, freeform text"
 {
   "version": 9,
   "namespace": "ChatApps",
@@ -45636,40 +45636,6 @@ Sent when the message is accepted by the 8x8 platform. In this example the messa
     "status": {
       "state": "queued",
       "timestamp": "2026-07-03T03:23:21.90Z"
-    }
-  }
-}
-```
-
-##### WhatsApp — delivered to recipient
-
-This receipt comes back from WhatsApp, so the `user` object includes the new `channelUserId` (BSUID). The `delivered_to_recipient` receipt also carries the `outboundContent` object — a structured copy of the message that was delivered. The examples below show the receipt for different content types; only the `outboundContent` object varies, the surrounding webhook body is the same in each case.
-
-```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, delivered, freeform text"
-{
-  "version": 9,
-  "namespace": "ChatApps",
-  "eventType": "outbound_message_status_changed",
-  "description": "ChatApps outbound message delivery receipt",
-  "payload": {
-    "umid": <UNIQUE_MESSAGE_ID>,
-    "batchId": <BATCH_ID>,
-    "clientMessageId": <YOUR_MESSAGE_ID>,
-    "clientBatchId": <YOUR_BATCH_ID>,
-    "subAccountId": <SUBACCOUNT_ID>,
-    "channel": "whatsapp",
-    "user": {
-      "msisdn": <USER_PHONE_NUMBER>,
-      "channelUserId": <WHATSAPP_BSUID>
-    },
-    "status": {
-      "state": "delivered",
-      "detail": "delivered_to_recipient",
-      "timestamp": "2026-07-03T03:40:54.16Z"
-    },
-    "whatsapp": {
-      "pricingCategory": "marketing",
-      "templateId": "1281032340757288"
     },
     "outboundContent": {
       "channel": "whatsapp",
@@ -45684,7 +45650,7 @@ This receipt comes back from WhatsApp, so the `user` object includes the new `ch
 
 Template with an image header, a URL button, and a quick-reply button:
 
-```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, delivered, template"
+```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, queued, template"
 {
   "version": 9,
   "namespace": "ChatApps",
@@ -45692,23 +45658,14 @@ Template with an image header, a URL button, and a quick-reply button:
   "description": "ChatApps outbound message delivery receipt",
   "payload": {
     "umid": <UNIQUE_MESSAGE_ID>,
-    "batchId": <BATCH_ID>,
-    "clientMessageId": <YOUR_MESSAGE_ID>,
-    "clientBatchId": <YOUR_BATCH_ID>,
     "subAccountId": <SUBACCOUNT_ID>,
     "channel": "whatsapp",
     "user": {
-      "msisdn": <USER_PHONE_NUMBER>,
-      "channelUserId": <WHATSAPP_BSUID>
+      "msisdn": <USER_PHONE_NUMBER>
     },
     "status": {
-      "state": "delivered",
-      "detail": "delivered_to_recipient",
-      "timestamp": "2026-07-03T03:40:54.16Z"
-    },
-    "whatsapp": {
-      "pricingCategory": "marketing",
-      "templateId": "1281032340757288"
+      "state": "queued",
+      "timestamp": "2026-07-03T03:23:21.90Z"
     },
     "outboundContent": {
       "channel": "whatsapp",
@@ -45751,7 +45708,7 @@ Template with an image header, a URL button, and a quick-reply button:
 
 Interactive list message (note `meta.interactiveType`):
 
-```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, delivered, interactive list"
+```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, queued, interactive list"
 {
   "version": 9,
   "namespace": "ChatApps",
@@ -45759,23 +45716,14 @@ Interactive list message (note `meta.interactiveType`):
   "description": "ChatApps outbound message delivery receipt",
   "payload": {
     "umid": <UNIQUE_MESSAGE_ID>,
-    "batchId": <BATCH_ID>,
-    "clientMessageId": <YOUR_MESSAGE_ID>,
-    "clientBatchId": <YOUR_BATCH_ID>,
     "subAccountId": <SUBACCOUNT_ID>,
     "channel": "whatsapp",
     "user": {
-      "msisdn": <USER_PHONE_NUMBER>,
-      "channelUserId": <WHATSAPP_BSUID>
+      "msisdn": <USER_PHONE_NUMBER>
     },
     "status": {
-      "state": "delivered",
-      "detail": "delivered_to_recipient",
-      "timestamp": "2026-07-03T03:40:54.16Z"
-    },
-    "whatsapp": {
-      "pricingCategory": "marketing",
-      "templateId": "1281032340757288"
+      "state": "queued",
+      "timestamp": "2026-07-03T03:23:21.90Z"
     },
     "outboundContent": {
       "channel": "whatsapp",
@@ -45807,6 +45755,40 @@ Interactive list message (note `meta.interactiveType`):
       "meta": {
         "interactiveType": "list"
       }
+    }
+  }
+}
+```
+
+##### WhatsApp — delivered to recipient
+
+This receipt comes back from WhatsApp, so the `user` object includes the new `channelUserId` (BSUID). It does **not** carry `outboundContent` — that object is only present on the earlier `queued` receipt.
+
+```json title="Outbound delivery receipt webhook body (v9) — WhatsApp, delivered to recipient"
+{
+  "version": 9,
+  "namespace": "ChatApps",
+  "eventType": "outbound_message_status_changed",
+  "description": "ChatApps outbound message delivery receipt",
+  "payload": {
+    "umid": <UNIQUE_MESSAGE_ID>,
+    "batchId": <BATCH_ID>,
+    "clientMessageId": <YOUR_MESSAGE_ID>,
+    "clientBatchId": <YOUR_BATCH_ID>,
+    "subAccountId": <SUBACCOUNT_ID>,
+    "channel": "whatsapp",
+    "user": {
+      "msisdn": <USER_PHONE_NUMBER>,
+      "channelUserId": <WHATSAPP_BSUID>
+    },
+    "status": {
+      "state": "delivered",
+      "detail": "delivered_to_recipient",
+      "timestamp": "2026-07-03T03:40:54.16Z"
+    },
+    "whatsapp": {
+      "pricingCategory": "marketing",
+      "templateId": "1281032340757288"
     }
   }
 }
