@@ -278,7 +278,15 @@ const sidebarConfig = [
             items: [
               {
                 type: 'doc',
+                id: 'connect/reference/get-viber-templates',
+              },
+              {
+                type: 'doc',
                 id: 'connect/reference/add-viber-template',
+              },
+              {
+                type: 'doc',
+                id: 'connect/reference/delete-viber-template',
               },
             ],
           },

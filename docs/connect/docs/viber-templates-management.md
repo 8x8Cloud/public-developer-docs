@@ -140,6 +140,89 @@ curl -X POST \
 }'
 ```
 
+## Retrieving Templates via API
+
+To list the Viber templates registered for a channel, along with their current approval status, send a `GET` request to the following endpoint:
+
+```http
+GET /api/v1/accounts/{accountId}/viber/channels/{viberChannelId}/templates
+```
+
+### Path Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `accountId` | string | Yes | Your account ID. |
+| `viberChannelId` | string | Yes | The Viber channel ID whose templates you want to retrieve. |
+
+### Response
+
+The response includes a `templates` array, with one entry per template/language combination:
+
+```json
+{
+  "templates": [
+    {
+      "templateId": "vb_tmpl_9f21c7",
+      "name": "test_order_confirmation_001",
+      "text": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
+      "language": "en",
+      "category": "Transactional",
+      "params": [
+        { "name": "customer_name", "type": "TEXT" },
+        { "name": "order_id", "type": "TEXT" },
+        { "name": "delivery_date", "type": "TEXT" }
+      ],
+      "status": "Approved",
+      "createdAt": "2026-08-01T10:15:00Z",
+      "updatedAt": "2026-08-05T09:30:00Z"
+    },
+    {
+      "templateId": "vb_tmpl_4a88e2",
+      "name": "otp_login_en",
+      "text": "Your verification code is {{pin}}. Valid for 5 minutes. Team 8x8",
+      "language": "en",
+      "category": "OTP",
+      "params": [{ "name": "pin", "type": "TEXT" }],
+      "status": "Pending",
+      "createdAt": "2026-08-10T08:00:00Z",
+      "updatedAt": "2026-08-10T08:00:00Z"
+    }
+  ]
+}
+```
+
+The `status` field reflects Viber's current approval state for the template: `Approved`, `Pending`, or `Rejected`.
+
+## Deleting a Template via API
+
+To delete a Viber template, send a `DELETE` request to the following endpoint:
+
+```http
+DELETE /api/v1/accounts/{accountId}/viber/channels/{viberChannelId}/templates/{templateName}?language={language}
+```
+
+Because each language variant of a Viber template is stored as its own template, you must specify the `language` query parameter to identify which variant to delete.
+
+### Path and Query Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `accountId` | string | Yes | Your account ID. |
+| `viberChannelId` | string | Yes | The Viber channel ID the template belongs to. |
+| `templateName` | string | Yes | The name of the template to delete. |
+| `language` | string (query) | Yes | The language code of the template variant to delete (e.g. `en`). |
+
+### Example
+
+```bash
+curl -X DELETE \
+  'https://connect.8x8.com/api/v1/accounts/{accountId}/channels/{viberChannelId}/templates/otp_login_en?language=en' \
+  -H 'Authorization: Bearer {your_api_key}'
+```
+
+A successful deletion returns `200 OK` with an empty body. If the template/language pair doesn't exist, the endpoint returns `404 Not Found`.
+
 ## Template Parameters
 
 Parameters allow you to insert dynamic content into your template messages at send time. Each parameter in the template text must:
@@ -162,4 +245,4 @@ Parameters allow you to insert dynamic content into your template messages at se
 
 ## API Reference
 
-For the full API specification, see the [Add Viber Template](/connect/reference/add-viber-template) API reference.
+For the full API specification, see the [Add Viber Template](/connect/reference/add-viber-template), [Get Viber Templates](/connect/reference/get-viber-templates), and [Delete Viber Template](/connect/reference/delete-viber-template) API references.
