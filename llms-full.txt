@@ -98842,6 +98842,60 @@ There are a some important conditions surrounding this feature.
 * IF the region you chose to use is completely down for some reason (this has never happened, the whole DC (AWS/OCI) would need to be unavailable) then it will then get re-directed to another regional DC.
 * For customers who absolutely cannot use a DC other than the chosen one, even in the above 2 circumstances, we are actively working to expose a new API call that will enable customers like yourself to query the DC where the conference is taking place. By using this API call as the conference is initiated, if the conference does start in another region you can detect it and immediately end the conference. You can then destroy the iFrame and display your own suitable message to the user/s and/or then re-attempt to create the conference in the preferred cluster location. The logic in your app is yours to control in that regard.
 
+### Can we restrict the TURN relay to a specific region? [turn / relay / ice / network]
+
+Pinning the meeting to a regional DC (see above) controls where the media bridge (JVB) lives. Separately, when a participant cannot reach the bridge directly (for example behind a restrictive firewall) their media is routed through a TURN relay. By default JaaS returns the relays it considers optimal for that participant. If you need every relayed connection to go through the relay in a specific region, you can override the ICE/TURN server configuration from the iFrame API.
+
+This is done with the experimental `iceServers` option passed to the `JitsiMeetExternalAPI` constructor. It takes a list of `replace` rules; each rule matches the existing ICE servers by `targetType` (`stun`, `turn` or `turns`) and replaces their `urls`. To pin the relay to EU-Central-1 (Frankfurt), point the `turn` and `turns` entries at `prod-8x8-eu-central-1-turnrelay-oracle.jitsi.net`:
+
+```javascript
+window.onload = () => {
+    const api = new JitsiMeetExternalAPI("8x8.vc", {
+        roomName: "vpaas-magic-cookie-YOUR_APP_ID/YOUR_ROOM",
+        jwt: "YOUR_JWT",
+        parentNode: document.querySelector('#jaas-container'),
+
+        // Experimental: override the ICE/TURN server configuration.
+        iceServers: {
+            replace: [
+                {
+                    targetType: 'turn',
+                    urls: 'turn:prod-8x8-eu-central-1-turnrelay-oracle.jitsi.net:443?transport=udp'
+                },
+                {
+                    targetType: 'turns',
+                    urls: 'turns:prod-8x8-eu-central-1-turnrelay-oracle.jitsi.net:443?transport=tcp'
+                }
+            ]
+        }
+    });
+};
+```
+
+Each `replace` rule behaves as follows:
+
+* `targetType` – which ICE server entry to match: `stun`, `turn` (UDP/TCP) or `turns` (TLS).
+* `urls` – the value the matched entry's URL(s) will be set to. May be a single string or an array of strings. Set it to `null` to remove that entry entirely.
+* `username` / `credential` – optionally replace the matched entry's credentials. Set to `null` to remove the field, or omit to leave it unchanged. Leave these unchanged so the relay keeps using the short-lived credentials JaaS issues for the meeting.
+
+The regional relay hostnames you can point to are:
+
+| Region                              | TURN relay hostname                                    |
+| ----------------------------------- | ------------------------------------------------------ |
+| AP-Northeast-1 (Tokyo, Japan)       | `prod-8x8-ap-ne-1-turnrelay-oracle.jitsi.net`          |
+| AP-South-1 (Mumbai, India)          | `prod-8x8-ap-south-1-turnrelay-oracle.jitsi.net`       |
+| AP-Southeast-2 (Sydney, Australia)  | `prod-8x8-ap-se-2-turnrelay-oracle.jitsi.net`          |
+| CA-Central-1 (Central, Canada)      | `prod-8x8-ca-central-1-turnrelay-oracle.jitsi.net`     |
+| EU-Central-1 (Frankfurt, Germany)   | `prod-8x8-eu-central-1-turnrelay-oracle.jitsi.net`     |
+| EU-West-2 (London, U.K.)            | `prod-8x8-eu-west-2-turnrelay-oracle.jitsi.net`        |
+| ME-South-1 (Bahrain)               | `prod-8x8-me-south-1-turnrelay-oracle.jitsi.net`       |
+| SA-East-1 (São Paulo, Brazil)       | `prod-8x8-sa-east-1-turnrelay-oracle.jitsi.net`        |
+| US-East-1 (N. Virginia, U.S.)       | `prod-8x8-us-east-1-turnrelay-oracle.jitsi.net`        |
+| US-West-2 (Oregon, U.S.)            | `prod-8x8-us-west-2-turnrelay-oracle.jitsi.net`        |
+
+> 📘 **Note**
+> The `iceServers` option is experimental and only takes effect when Jitsi Meet is embedded in an iframe (i.e. via the JaaS iFrame API). It may change or be removed in a future release. It overrides the relay host only — the TURN credentials continue to be issued by JaaS, so the relay you point to must be one operated by 8x8. Use the regional hostname that matches the DC you are targeting, for example `prod-8x8-eu-central-1-turnrelay-oracle.jitsi.net` for EU-Central-1 (Frankfurt).
+
 ### How does JaaS perform in terms of security compliance? [security / HIPAA]
 
 8x8, including JaaS, has received third-party validation of its HIPAA compliance and offers business associate agreements ([BAAs](https://www.aptible.com/hipaa/what-is-a-baa/#what-is-a-baa)). Learn more about [8x8 security](https://www.8x8.com/why-8x8/security).
