@@ -1,0 +1,117 @@
+/* Release-note detail page — Oxygen design tokens (see styles.module.css). */
+
+.back {
+  display: inline-block;
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+  margin-bottom: var(--spacing05);
+  border-radius: 6px;
+}
+.back:focus-visible {
+  outline: 2px solid var(--focus01);
+  outline-offset: 2px;
+}
+
+/* Product dot colour comes from the inline --rn-pc custom property the component
+   sets per product (see Detail.js), reading the Oxygen categorical palette —
+   same mechanism as the feed, so no per-position classes to duplicate here. */
+
+.card {
+  background: var(--ui12);
+  border: 1px solid var(--ui01);
+  border-left: 4px solid var(--ui03);
+  border-radius: 6px;
+  padding: var(--spacing06) var(--spacing06);
+  box-shadow: var(--shadow-low);
+}
+.type_Added {
+  border-left-color: var(--rn-stripe-added);
+}
+.type_Changed {
+  border-left-color: var(--rn-stripe-changed);
+}
+.type_Fixed {
+  border-left-color: var(--rn-stripe-fixed);
+}
+.type_Deprecated {
+  border-left-color: var(--rn-stripe-deprecated);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing03);
+  margin-bottom: var(--spacing03);
+}
+.prod {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing02);
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+  color: var(--text-color01);
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--rn-pc, var(--ui03));
+}
+.channel {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+  background: var(--ui02);
+  border: 1px solid var(--ui01);
+  border-radius: 6px;
+  padding: 0 var(--spacing03);
+}
+.type {
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+}
+.t_Added {
+  color: var(--rn-label-added);
+}
+.t_Changed {
+  color: var(--rn-label-changed);
+}
+.t_Fixed {
+  color: var(--rn-label-fixed);
+}
+.t_Deprecated {
+  color: var(--rn-label-deprecated);
+}
+.date {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+}
+
+.title {
+  font-family: var(--heading02-font-family);
+  font-size: var(--heading02-font-size);
+  line-height: var(--heading02-line-height);
+  font-weight: var(--heading02-font-weight);
+  margin: var(--spacing02) 0 var(--spacing04);
+  color: var(--text-color01);
+}
+.body {
+  font-size: var(--body02-font-size);
+  color: var(--text-color01);
+}
+.body > :last-child {
+  margin-bottom: 0;
+}
+.docBtn {
+  margin-top: var(--spacing05);
+  text-decoration: none;
+}
+
+.fallbackNote {
+  margin-top: var(--spacing05);
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+}

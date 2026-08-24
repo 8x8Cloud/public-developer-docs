@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build && node scripts/fix-llms-urls.js",
+    "build": "yarn validate:release-notes && docusaurus build && node scripts/fix-llms-urls.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -20,6 +20,8 @@
     "lint:mdx": "markdownlint-cli2 --config mdx.markdownlint-cli2.jsonc",
     "validate:content": "node scripts/validate-content.js",
     "validate:changelog": "node scripts/validate-changelog.js",
+    "validate:release-notes": "node scripts/validate-release-notes.js",
+    "test": "node scripts/lib/changelog-entry.test.js && node scripts/lib/release-notes-entry.test.js && node docusaurus/plugins/changelog/load.test.js && node docusaurus/plugins/release-notes/load.test.js",
     "validate:links": "node scripts/analyze-broken-links.js",
     "validate:md": "yarn lint:md && yarn lint:mdx",
     "validate:oas": "redocly lint \"docs_oas/**/*.{json,yaml,yml}\"",
@@ -30,8 +32,10 @@
     "generate-events-overview": "node scripts/generate-events-overview.js"
   },
   "dependencies": {
+    "@8x8/oxygen-button": "2.103.1",
     "@8x8/oxygen-config": "^2.103.1",
     "@8x8/oxygen-constants": "^2.103.1",
+    "@8x8/oxygen-icon": "2.103.1",
     "@8x8/oxygen-loaders": "^2.103.1",
     "@8x8/oxygen-select": "2.103.1",
     "@8x8/oxygen-tabs": "^2.103.1",

@@ -2,36 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 const { marked } = require('marked');
-
-/**
- * Sort entries newest-first, breaking ties by title ascending.
- * Pure; returns a new array.
- */
-function sortEntries(entries) {
-  return entries.slice().sort((a, b) => {
-    if (a.date !== b.date) return a.date < b.date ? 1 : -1;
-    return String(a.title).localeCompare(String(b.title));
-  });
-}
-
-/**
- * Prepend Docusaurus's baseUrl to root-absolute links in rendered HTML.
- *
- * Entry bodies are rendered with `marked` and injected via
- * dangerouslySetInnerHTML, so they never pass through Docusaurus's Link/MDX
- * layer that normally applies baseUrl. Without this, a link like
- * `/administration/docs/suite-common` resolves at the domain root and breaks
- * on any non-root deploy (e.g. PR previews served under `/pr-273/`).
- *
- * Only root-absolute hrefs (`/...`) are rewritten. External (`https://…`),
- * protocol-relative (`//…`) and pure-anchor (`#…`) links are left untouched.
- * At baseUrl `/` the prefix is empty, so production output is unchanged.
- */
-function withBaseUrl(html, baseUrl) {
-  const prefix = String(baseUrl || '/').replace(/\/$/, '');
-  if (!prefix) return html;
-  return html.replace(/href="\/(?!\/)/g, `href="${prefix}/`);
-}
+const { sortEntries, withBaseUrl } = require('../lib/entries');
 
 /**
  * Read + parse every *.md entry in dir into the global-data shape.

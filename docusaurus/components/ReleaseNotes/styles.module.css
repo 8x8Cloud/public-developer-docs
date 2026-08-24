@@ -1,0 +1,549 @@
+/* Release Notes — portfolio-wide feed.
+   Styled with Oxygen design tokens (exposed in docusaurus/css/custom.css) so the
+   surface matches the design system and adapts to light/dark automatically:
+   - product identity → Oxygen categorical palette (--data01…--data11), via .pc1…pc11;
+   - change-type accents → Oxygen RAG tokens (--success01/--warning01/--data-status03/--error01);
+   - surfaces, text, spacing, typography, shadow and focus → --ui, --text-color,
+     --spacing, --body, --heading, --shadow-low, --action01, --focus01. */
+
+.root {
+  margin: var(--spacing05) 0 var(--spacing07);
+}
+
+/* Product identity colour comes from the Oxygen categorical palette
+   (--data01…--data11), mapped by the product's registry position. The component
+   sets the --rn-pc custom property inline on each dot (see Entry.js), so there's
+   no per-position class here to keep in sync with detail.module.css; an
+   unregistered product sets nothing and the dot falls back to --ui03. */
+
+/* Shared focus ring for the controls not provided by Oxygen components. */
+.search:focus-visible,
+.segment:focus-visible,
+.tocItem:focus-visible,
+.pageBtn:focus-visible,
+.pageDot:focus-visible {
+  outline: 2px solid var(--focus01);
+  outline-offset: 2px;
+}
+
+/* ---- Controls (sticky) ---- */
+.controls {
+  position: sticky;
+  top: var(--ifm-navbar-height, 60px);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing03);
+  padding: var(--spacing04) 0;
+  margin-bottom: var(--spacing06);
+  background: var(--ui06);
+  border-bottom: 1px solid var(--ui01);
+}
+.primaryControls {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) auto;
+  gap: var(--spacing05);
+  align-items: end;
+}
+.filterControls {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(220px, 1fr) auto;
+  gap: var(--spacing05);
+  align-items: end;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing02);
+  min-width: 0;
+}
+
+.search {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  flex: none;
+  font-family: var(--body01-font-family);
+  font-size: var(--body01-font-size);
+  color: var(--text-color01);
+  background: var(--ui05);
+  border: 1px solid var(--ui01);
+  border-radius: 6px;
+  padding: var(--spacing03) var(--spacing04);
+}
+.search::placeholder {
+  color: var(--text-color02);
+}
+
+.segmented {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(104px, 1fr);
+  align-items: center;
+  min-width: 224px;
+  height: 40px;
+  padding: var(--spacing01);
+  background: var(--ui02);
+  border: 1px solid var(--ui01);
+  border-radius: 6px;
+}
+.segment {
+  height: 32px;
+  padding: 0 var(--spacing04);
+  font-family: var(--body01-font-family);
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+  color: var(--text-color02);
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    color 150ms,
+    background-color 150ms;
+}
+.segment:hover {
+  color: var(--text-color01);
+  background: var(--ui03);
+}
+.segment[aria-checked='true'] {
+  color: var(--text-color04);
+  background: var(--action02);
+}
+.segment[aria-checked='true']:hover {
+  color: var(--text-color04);
+  background: var(--hover02);
+}
+.filterSelect {
+  width: 100%;
+}
+.filterSelect svg[data-id^='SELECT_ARROW_'] {
+  flex: none;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  min-height: 20px;
+  fill: currentColor;
+}
+.selectValue {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  height: 24px;
+  margin-right: var(--spacing02);
+  padding-left: var(--spacing03);
+  color: var(--text-color01);
+  background: var(--ui03);
+  border-radius: 4px;
+}
+.selectValueLabel {
+  overflow: hidden;
+  font-size: var(--body01-font-size);
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.selectValueRemove {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  color: var(--text-color02);
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.selectValueRemove:hover {
+  color: var(--text-color01);
+  background: var(--hover05);
+}
+.selectValueRemove:focus-visible {
+  outline: 2px solid var(--focus01);
+  outline-offset: -2px;
+}
+
+.flabel {
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+  color: var(--text-color02);
+}
+.filterStatus {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing03);
+  min-height: 40px;
+  white-space: nowrap;
+}
+.count {
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Two-column layout: feed + sticky ToC on the right (matches doc pages) ---- */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 210px;
+  gap: var(--spacing08);
+  align-items: start;
+}
+
+.toc {
+  grid-column: 2;
+  grid-row: 1;
+  position: sticky;
+  top: calc(
+    var(--ifm-navbar-height, 60px) + var(--rn-controls-h, 130px) +
+      var(--spacing05)
+  );
+  align-self: start;
+  max-height: calc(
+    100vh - var(--ifm-navbar-height, 60px) - var(--rn-controls-h, 130px) -
+      var(--spacing07)
+  );
+  overflow-y: auto;
+}
+.tocTitle {
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+  color: var(--text-color02);
+  margin-bottom: var(--spacing03);
+}
+.toc nav {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--ui01);
+}
+.tocItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing03);
+  font-family: var(--body01-font-family);
+  font-size: var(--body01-font-size);
+  text-align: left;
+  text-decoration: none;
+  color: var(--text-color02);
+  background: none;
+  border: none;
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+  padding: var(--spacing02) 0 var(--spacing02) var(--spacing03);
+  cursor: pointer;
+  transition:
+    color 0.12s,
+    border-color 0.12s;
+}
+.tocItem:hover {
+  color: var(--text-color01);
+  text-decoration: none;
+}
+.tocActive {
+  color: var(--action01);
+  border-left-color: var(--action01);
+  font-weight: 600;
+}
+.tocOffpage {
+  opacity: 0.55;
+}
+.tocDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--rn-pc, var(--ui03));
+}
+.tocLabel {
+  flex: 1;
+}
+.tocCount {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+}
+.tocPage {
+  margin-top: var(--spacing03);
+  padding-left: var(--spacing03);
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+}
+
+.feed {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+/* ---- Groups ---- */
+.group {
+  margin-bottom: var(--spacing07);
+  scroll-margin-top: calc(
+    var(--ifm-navbar-height, 60px) + var(--rn-controls-h, 130px) +
+      var(--spacing06)
+  );
+}
+/* The section is a programmatic focus target for ToC navigation (tabindex=-1);
+   its heading provides the visible cue, so suppress the focus ring on the box. */
+.group:focus,
+.group:focus-visible {
+  outline: none;
+}
+.groupHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing03);
+  padding-bottom: var(--spacing03);
+  margin-bottom: var(--spacing04);
+  border-bottom: 1px solid var(--ui01);
+}
+/* Group heading is an <h2>; use the Oxygen heading token at the feed scale. */
+.gt {
+  font-family: var(--heading01-font-family);
+  font-size: var(--heading01-font-size);
+  font-weight: var(--heading01-font-weight);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing03);
+  color: var(--text-color01);
+}
+.gdot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--rn-pc, var(--ui03));
+}
+.gn {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+}
+.permalink {
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+  margin-left: auto;
+}
+
+/* ---- Entry cards ---- */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing03);
+}
+.entry {
+  background: var(--ui12);
+  border: 1px solid var(--ui01);
+  border-left: 3px solid var(--ui03);
+  border-radius: 6px;
+  padding: var(--spacing04) var(--spacing05);
+  box-shadow: var(--shadow-low);
+}
+.type_Added {
+  border-left-color: var(--rn-stripe-added);
+}
+.type_Changed {
+  border-left-color: var(--rn-stripe-changed);
+}
+.type_Fixed {
+  border-left-color: var(--rn-stripe-fixed);
+}
+.type_Deprecated {
+  border-left-color: var(--rn-stripe-deprecated);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing03);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing02);
+}
+.product {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing02);
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+  color: var(--text-color01);
+  text-decoration: none;
+}
+.product:hover {
+  color: var(--action01);
+  text-decoration: none;
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--rn-pc, var(--ui03));
+}
+.channel {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+  background: var(--ui02);
+  border: 1px solid var(--ui01);
+  border-radius: 6px;
+  padding: 0 var(--spacing03);
+}
+.metaRight {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing03);
+}
+/* Change type: a quiet coloured label beside the date. Colours are the shared
+   --rn-label-* tokens (docusaurus/css/custom.css), which carry WCAG-safe,
+   theme-aware values for all four states — the detail page reuses the same
+   tokens. */
+.clabel {
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+}
+.c_Added {
+  color: var(--rn-label-added);
+}
+.c_Changed {
+  color: var(--rn-label-changed);
+}
+.c_Fixed {
+  color: var(--rn-label-fixed);
+}
+.c_Deprecated {
+  color: var(--rn-label-deprecated);
+}
+.date {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+}
+
+.title {
+  margin: var(--spacing01) 0 var(--spacing02);
+  font-size: var(--body02-font-size);
+  line-height: var(--body02-line-height);
+}
+.titleLink {
+  color: var(--text-color01);
+  text-decoration: none;
+  font-weight: 600;
+}
+.titleLink:hover {
+  color: var(--action01);
+  text-decoration: none;
+}
+.body {
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+  /* Clamp the card preview to 5 lines; the full article lives on the entry page. */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing04);
+  margin-top: var(--spacing03);
+}
+.docLink {
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+}
+.readMore {
+  margin-left: auto;
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---- Pager ---- */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing05);
+  margin-top: var(--spacing06);
+  padding-top: var(--spacing05);
+  border-top: 1px solid var(--ui01);
+}
+.pageBtn {
+  font-family: var(--body01-font-family);
+  font-size: var(--body01-font-size);
+  font-weight: 600;
+  color: var(--action01);
+  background: var(--ui12);
+  border: 1px solid var(--ui01);
+  border-radius: 6px;
+  padding: var(--spacing02) var(--spacing04);
+  cursor: pointer;
+}
+.pageBtn:disabled {
+  color: var(--text-color02);
+  opacity: 0.6;
+  cursor: default;
+}
+.pageInfo {
+  font-size: var(--body01-font-size);
+  color: var(--text-color02);
+  font-variant-numeric: tabular-nums;
+}
+.pageDots {
+  display: flex;
+  gap: var(--spacing03);
+}
+.pageDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ui03);
+  cursor: pointer;
+  padding: 0;
+}
+.pageDotActive {
+  background: var(--action01);
+}
+
+/* ---- Empty state ---- */
+.empty {
+  text-align: center;
+  padding: var(--spacing09) var(--spacing05);
+  color: var(--text-color02);
+}
+.emptyBig {
+  font-size: var(--body02-font-size);
+  font-weight: 600;
+  color: var(--text-color01);
+  margin-bottom: var(--spacing02);
+}
+
+@media (max-width: 996px) {
+  .primaryControls,
+  .filterControls {
+    grid-template-columns: 1fr;
+    gap: var(--spacing04);
+  }
+  .segmented {
+    width: 100%;
+    min-width: 0;
+  }
+  .filterStatus {
+    justify-content: space-between;
+  }
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .toc {
+    display: none;
+  }
+  .controls {
+    position: static;
+  }
+}

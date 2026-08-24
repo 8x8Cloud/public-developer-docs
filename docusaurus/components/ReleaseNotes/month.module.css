@@ -1,0 +1,15 @@
+/* Month / product permalink pages — Oxygen design tokens (see styles.module.css). */
+
+.back { display: inline-block; font-size: var(--body01-font-size); font-weight: 600; margin-bottom: var(--spacing05); border-radius: 6px; }
+.back:focus-visible { outline: 2px solid var(--focus01); outline-offset: 2px; }
+.head { margin-bottom: var(--spacing06); }
+.badge {
+  display: inline-block; font-size: var(--body01-font-size); font-weight: 600;
+  color: var(--text-color04); background: var(--action01);
+  border-radius: 6px; padding: var(--spacing01) var(--spacing03); margin-bottom: var(--spacing03);
+}
+.title { font-family: var(--heading02-font-family); font-size: var(--heading02-font-size); line-height: var(--heading02-line-height); font-weight: var(--heading02-font-weight); margin: var(--spacing01) 0 var(--spacing03); color: var(--text-color01); }
+.sub { font-size: var(--body02-font-size); color: var(--text-color02); margin: 0; }
+.foot { margin-top: var(--spacing06); padding-top: var(--spacing04); border-top: 1px solid var(--ui01); font-size: var(--body01-font-size); color: var(--text-color02); }
+.monthGroup { margin-bottom: var(--spacing06); }
+.monthHead { font-family: var(--heading01-font-family); font-size: var(--heading01-font-size); font-weight: var(--heading01-font-weight); margin: 0 0 var(--spacing04); padding-bottom: var(--spacing02); border-bottom: 1px solid var(--ui01); color: var(--text-color01); }

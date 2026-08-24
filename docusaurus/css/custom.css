@@ -308,6 +308,26 @@
   --ifm-menu-color-background-active: var(--ui02);
   --ifm-menu-link-padding-horizontal: 14px;
   --ifm-color-content-secondary: var(--text-color01);
+
+  /* Release Notes — change-type accents (docusaurus/components/ReleaseNotes).
+     Single source of truth for both the feed and the detail page, so the colour
+     lives in one place instead of being repeated across styles.module.css and
+     detail.module.css. Two roles per change type:
+       • --rn-stripe-* — the card's left border (decorative, no contrast rule);
+       • --rn-label-*  — the text label beside the date.
+     Added/Deprecated labels use the Oxygen success/error tokens, which clear the
+     WCAG 1.4.3 4.5:1 small-text ratio on the card surface. Changed/Fixed need
+     explicit values: the Oxygen amber (--warning01) and blue (--data-status03)
+     don't reach 4.5:1 as text, so the label carries a darkened per-theme colour
+     while the stripe keeps the bright Oxygen token. */
+  --rn-stripe-added: var(--success01);
+  --rn-stripe-changed: var(--warning01);
+  --rn-stripe-fixed: var(--data-status03);
+  --rn-stripe-deprecated: var(--error01);
+  --rn-label-added: var(--success01);
+  --rn-label-changed: #846a00; /* 5.19:1 on --ui12 #ffffff */
+  --rn-label-fixed: #1c7791; /* 5.13:1 on --ui12 #ffffff */
+  --rn-label-deprecated: var(--error01);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -557,6 +577,12 @@
   --warning01: #f8ae1a;
   --warning02: #f8ae1a;
   --warning03: #9f701c;
+
+  /* Release Notes — brighter Changed/Fixed labels on the dark card (--ui12
+     #212124). The stripe tokens and the Added/Deprecated labels reference Oxygen
+     tokens that already theme-switch, so only these two need a dark override. */
+  --rn-label-changed: #f2b705; /* 8.83:1 on --ui12 #212124 */
+  --rn-label-fixed: #5ec5e0; /* 8.06:1 on --ui12 #212124 */
 }
 
 @media (min-width: 997px) {

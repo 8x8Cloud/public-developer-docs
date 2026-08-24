@@ -270,6 +270,35 @@ module.exports = [
   // { from: '/connect/docs/guides/error-handling', to: '/connect/docs/guides/error-handling' },
   // { from: '/connect/docs/guides/best-practices', to: '/connect/docs/guides/best-practices' },
 
+  // ============================================================================
+  // Channel / sub-module landing redirects (DOC-64)
+  // Make /connect/docs/<module> and /connect/docs/<module>/overview resolve to
+  // the module's first working page, so release-notes and nav links stay stable
+  // even before each module gets a dedicated overview page.
+  // ============================================================================
+  { from: '/connect/docs/whatsapp', to: '/connect/docs/whatsapp/whatsapp-hub' },
+  { from: '/connect/docs/whatsapp/overview', to: '/connect/docs/whatsapp/whatsapp-hub' },
+  // Point straight at the final page rather than chaining through
+  // /whatsapp-calling-introduction (itself a redirect, line ~569) which then
+  // chains again (line ~612) — one hop instead of three.
+  { from: '/connect/docs/whatsapp-calling', to: '/connect/docs/voice/whatsapp-business-calling/overview' },
+  { from: '/connect/docs/whatsapp-calling/overview', to: '/connect/docs/voice/whatsapp-business-calling/overview' },
+  { from: '/connect/docs/rcs', to: '/connect/docs/rcs/overview' },
+  { from: '/connect/docs/viber', to: '/connect/docs/viber/viber-hub' },
+  { from: '/connect/docs/viber/overview', to: '/connect/docs/viber/viber-hub' },
+  { from: '/connect/docs/line', to: '/connect/docs/line/line-hub' },
+  { from: '/connect/docs/line/overview', to: '/connect/docs/line/line-hub' },
+  { from: '/connect/docs/voice', to: '/connect/docs/voice/cpaas-voice-offerings' },
+  { from: '/connect/docs/voice/overview', to: '/connect/docs/voice/cpaas-voice-offerings' },
+  { from: '/connect/docs/converse/overview', to: '/connect/docs/converse' },
+  // Video Interaction module + its short/top-level paths.
+  { from: '/connect/docs/vi', to: '/connect/docs/vi-overview' },
+  { from: '/connect/docs/vi/overview', to: '/connect/docs/vi-overview' },
+  { from: '/vi', to: '/connect/docs/vi-overview' },
+  { from: '/video-interaction', to: '/connect/docs/vi-overview' },
+  // Converse owns its own /converse path (still resolves into the Connect docs).
+  { from: '/converse', to: '/connect/docs/converse' },
+
   // WhatsApp specific redirects - DISABLED (target pages don't exist)
   // { from: '/connect/docs/whatsapp', to: '/connect/docs/channels/whatsapp/overview' },
   // { from: '/connect/docs/whatsapp/overview', to: '/connect/docs/channels/whatsapp/overview' },

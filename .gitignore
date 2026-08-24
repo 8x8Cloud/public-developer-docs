@@ -40,3 +40,4 @@ private/
 /static/
 docusaurus/static/resolve-pages/
 .DS_Store
+.playwright-mcp/

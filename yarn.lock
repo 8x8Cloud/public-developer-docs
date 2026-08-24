@@ -9,8 +9,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@8x8/developer-docs@workspace:."
   dependencies:
+    "@8x8/oxygen-button": "npm:2.103.1"
     "@8x8/oxygen-config": "npm:^2.103.1"
     "@8x8/oxygen-constants": "npm:^2.103.1"
+    "@8x8/oxygen-icon": "npm:2.103.1"
     "@8x8/oxygen-loaders": "npm:^2.103.1"
     "@8x8/oxygen-select": "npm:2.103.1"
     "@8x8/oxygen-tabs": "npm:^2.103.1"

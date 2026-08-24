@@ -138,8 +138,23 @@ const config = {
       path.resolve(__dirname, 'docusaurus/plugins/changelog'),
       { path: 'docs/administration/_changelog' },
     ],
-    // Generate llms.txt and llms-full.txt for LLM/AI assistant discoverability
-    'docusaurus-plugin-llms',
+    // Aggregates portfolio-wide Release Notes entries for the <ReleaseNotes> renderer
+    [
+      path.resolve(__dirname, 'docusaurus/plugins/release-notes'),
+      { path: 'docs/_release-notes' },
+    ],
+    // Generate llms.txt and llms-full.txt for LLM/AI assistant discoverability.
+    // ignoreFiles skips underscore-prefixed data directories (e.g. docs/_release-notes,
+    // docs/administration/_changelog): their entries are aggregated into React routes by
+    // dedicated plugins and are not standalone pages, so emitting /_release-notes/<id>
+    // URLs here would list non-routable paths in the AI index.
+    // The spurious leading /docs/ this plugin emits (it hardcodes pathPrefix='docs'
+    // while the site uses routeBasePath '/') is corrected post-build by
+    // scripts/fix-llms-urls.js, which also fixes the /release-notes URL.
+    [
+      'docusaurus-plugin-llms',
+      { ignoreFiles: ['**/_*/**'] },
+    ],
   ],
 
   staticDirectories: [
@@ -245,6 +260,11 @@ const config = {
           to: '/administration',
           position: 'left',
           label: 'Administration',
+        },
+        {
+          to: '/release-notes',
+          position: 'right',
+          label: 'Release Notes',
         },
         {
           href: 'https://github.com/8x8Cloud/public-developer-docs',
