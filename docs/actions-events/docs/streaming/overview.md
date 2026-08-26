@@ -46,7 +46,7 @@ The 8x8 Event Streaming service is built on [Apache Pulsar](https://pulsar.apach
 
 If you're currently using the legacy Streaming API (SAPI), this Apache Pulsar-based service is the recommended platform for all new integrations and future development.
 
-- **Migration is optional**: The legacy API continues to work through a backwards-compatible adapter
+- **Automatic migration**: Existing customers will be automatically migrated to the new platform on a rolling schedule
 - **Recommended for all new integrations**: New customers should use this Pulsar-based API
 - **Better performance and reliability**: Improved scalability, message durability, and connection stability
 - **Future features**: New capabilities and enhancements will only be available on this platform
@@ -81,3 +81,5 @@ Connect to the endpoint that corresponds to your 8x8 Contact Center deployment r
 
 - [Apache Pulsar Documentation](https://pulsar.apache.org/docs/)
 - [Apache Pulsar WebSocket API](https://pulsar.apache.org/docs/client-libraries-websocket/)
+
+*Apache Pulsar is a trademark of the Apache Software Foundation.*

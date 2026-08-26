@@ -8,7 +8,7 @@ This guide helps you transition from the legacy Streaming API (SAPI) to the new 
 
 ## Migration Options
 
-You have three options for using the 8x8 Event Streaming service:
+All existing customers will be automatically migrated to the 8x8 Event Streaming service. If you would like to take a more direct path or access additional features before your migration date, there are two options:
 
 ### Option 1: Full Migration (Recommended)
 
@@ -50,22 +50,15 @@ Switch to the backwards-compatible adapter endpoint with no code changes. The ad
 
 The adapter is deployed in the same regions as the Pulsar API and uses the same `{region}` suffixes — see [Regional Endpoints](./connection.md#regional-endpoints) for the region list. The URL path is unchanged from the legacy Streaming API, so existing clients only need the hostname replaced.
 
-### Option 3: Stay on Legacy
+## What Happens If You Do Nothing
 
-Continue using the current legacy SAPI endpoint.
-
-**Status:**
-- Still operational
-- Security updates and critical bug fixes only
-- No new features or performance improvements
-
-**Endpoint:** `wss://vcc-{cluster}.8x8.com/api/streaming/v1/clientconnect/subscribe/...` (see [Legacy Streaming API Documentation](../legacy-streaming-api-overview.md))
+Your integration will be automatically migrated to the new platform via a backwards-compatible adapter. No action is required on your side — your existing code will continue to work. You will receive advance notice with your migration date before this happens.
 
 ## Migration Timeline
 
-There is **no forced deadline** for migration. The legacy API will continue to operate through a backwards-compatible adapter.
+Existing customers will be migrated to the new platform on a rolling schedule, with advance notice sent before each cluster migration. Your integration will continue to work automatically via a backwards-compatible adapter — no code changes required. If you would like to take advantage of the full platform before your migration date, see Options 1 and 2 above.
 
-However:
+Regardless of your migration date:
 
 - **New features** will only be available on the Pulsar-based platform
 - **Performance improvements** are focused on the new infrastructure
@@ -75,3 +68,5 @@ However:
 
 - [Legacy Streaming API Documentation](../legacy-streaming-api-overview.md)
 - [Apache Pulsar Documentation](https://pulsar.apache.org/docs/)
+
+*Apache Pulsar is a trademark of the Apache Software Foundation.*
