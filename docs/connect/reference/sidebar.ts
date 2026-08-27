@@ -86,24 +86,6 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "connect/reference/get-viber-templates",
-          label: "Get Viber templates",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "connect/reference/add-viber-template",
-          label: "Add Viber template",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "connect/reference/delete-viber-template",
-          label: "Delete Viber template",
-          className: "api-method delete",
-        },
-        {
-          type: "doc",
           id: "connect/reference/get-call-permission-status",
           label: "Get Call Permission Status",
           className: "api-method get",
@@ -161,6 +143,24 @@ const sidebar: SidebarsConfig = {
           id: "connect/reference/deprecate-whatsapp-flow",
           label: "Deprecate WhatsApp Flow",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "connect/reference/get-viber-templates",
+          label: "Get Viber templates",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "connect/reference/add-viber-template",
+          label: "Add Viber template",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "connect/reference/delete-viber-template",
+          label: "Delete Viber template",
+          className: "api-method delete",
         },
         {
           type: "doc",

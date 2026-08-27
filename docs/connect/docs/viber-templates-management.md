@@ -61,7 +61,7 @@ This example creates an order confirmation template with three dynamic parameter
 
 ```bash
 curl -X POST \
-  'https://connect.8x8.com/api/v1/accounts/{accountId}/channels/{viberChannelId}/templates' \
+  'https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{viberChannelId}/templates' \
   -H 'Authorization: Bearer {your_api_key}' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -117,7 +117,7 @@ This example creates a simple OTP verification template:
 
 ```bash
 curl -X POST \
-  'https://connect.8x8.com/api/v1/accounts/{accountId}/channels/{viberChannelId}/templates' \
+  'https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{viberChannelId}/templates' \
   -H 'Authorization: Bearer {your_api_key}' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -145,7 +145,7 @@ curl -X POST \
 To list the Viber templates registered for a channel, along with their current approval status, send a `GET` request to the following endpoint:
 
 ```http
-GET /api/v1/accounts/{accountId}/viber/channels/{viberChannelId}/templates
+GET /api/v1/accounts/{accountId}/channels/{viberChannelId}/templates
 ```
 
 ### Path Parameters
@@ -199,7 +199,7 @@ The `status` field reflects Viber's current approval state for the template: `Ap
 To delete a Viber template, send a `DELETE` request to the following endpoint:
 
 ```http
-DELETE /api/v1/accounts/{accountId}/viber/channels/{viberChannelId}/templates/{templateName}?language={language}
+DELETE /api/v1/accounts/{accountId}/channels/{viberChannelId}/templates/{templateName}?language={language}
 ```
 
 Because each language variant of a Viber template is stored as its own template, you must specify the `language` query parameter to identify which variant to delete.
@@ -217,7 +217,7 @@ Because each language variant of a Viber template is stored as its own template,
 
 ```bash
 curl -X DELETE \
-  'https://connect.8x8.com/api/v1/accounts/{accountId}/channels/{viberChannelId}/templates/otp_login_en?language=en' \
+  'https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{viberChannelId}/templates/otp_login_en?language=en' \
   -H 'Authorization: Bearer {your_api_key}'
 ```
 

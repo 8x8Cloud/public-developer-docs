@@ -175,6 +175,7 @@ Any non-success response from Viber triggers SMS fallback if you configured it, 
 | Operation | Limit |
 | :--- | :--- |
 | Create template | 50 per second |
+| Delete template | 20 requests per minute per partner |
 | Approval time | Up to 24 hours |
 | Templates per Viber Service ID | 2,000, counting every status |
 
