@@ -1,5 +1,5 @@
 ---
-slug: /connect/docs/converse/queue
+slug: /converse/docs/queue
 ---
 
 # Queue Management
@@ -10,7 +10,7 @@ The Queue module controls how incoming conversations are distributed to availabl
 
 ### Queue List View
 
-![Queue Management](../../images/converse/queue-overview.png)
+![Queue Management](../images/queue-overview.png)
 
 Each queue contains the following configurations:
 - **Queue Name**: Unique identifier for the queue

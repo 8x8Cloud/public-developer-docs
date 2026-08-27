@@ -117,6 +117,22 @@ const BASE_SECTION_NAV_CONFIG = {
       },
     ],
   },
+  converse: {
+    tabs: [
+      {
+        label: TAB_LABELS.GUIDES,
+        path: '/converse/docs',
+        iconClass: ICON_CLASSES.GUIDES,
+        sidebar: 'sidebarConverseDocs',
+      },
+      {
+        label: TAB_LABELS.API_REFERENCE,
+        path: '/converse/reference',
+        iconClass: ICON_CLASSES.REFERENCES,
+        sidebar: 'sidebarConverseReference',
+      },
+    ],
+  },
   contactcenter: {
     tabs: [
       {

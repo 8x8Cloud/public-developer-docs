@@ -507,18 +507,20 @@ const sidebarConfig = [
     collapsed: true,
     items: [
       {
-        type: 'doc',
-        id: 'connect/docs/converse-overview',
+        type: 'link',
         label: 'Overview',
+        href: '/converse',
       },
-      'connect/docs/converse/getting-started',
-      'connect/docs/converse/user-roles',
-      'connect/docs/converse/contacts',
-      'connect/docs/converse/agents',
-      'connect/docs/converse/queue',
-      'connect/docs/converse/conversations',
-      'connect/docs/converse/reports',
-      'connect/docs/converse/settings',
+      {
+        type: 'link',
+        label: 'Product guides',
+        href: '/converse/docs/getting-started',
+      },
+      {
+        type: 'link',
+        label: 'Converse 2.0 APIs',
+        href: '/converse/docs/api-overview',
+      },
     ],
   },
   {

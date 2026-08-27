@@ -257,7 +257,7 @@ This scenario details how to automatically send order updates from an e-commerce
 
 This scenario uses automation to answer common questions and escalate to a live agent. This flow is **user-initiated**, so no template is required to start.
 
-**Tools Used:** **[8x8 Automation Builder](/connect/docs/automation-builder)** + **[8x8 Converse](/connect/docs/converse-overview)**
+**Tools Used:** **[8x8 Automation Builder](/connect/docs/automation-builder)** + **[8x8 Converse](/converse)**
 
 #### The Flow
 
@@ -573,7 +573,7 @@ This scenario sends a promotional **Carousel Template** to a list of opted-in cu
 
 This is a complete, user-initiated bot that handles a specific request by calling an external API.
 
-**Tools Used:** **[8x8 Automation Builder](/connect/docs/automation-builder)** + **[8x8 Converse](/connect/docs/converse-overview)**
+**Tools Used:** **[8x8 Automation Builder](/connect/docs/automation-builder)** + **[8x8 Converse](/converse)**
 
 #### The Flow
 

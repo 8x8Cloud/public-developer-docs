@@ -18,7 +18,7 @@ Steps allow you to create custom workflow definitions that can perform different
 | Voice Message | Send a Voice Call to a number | Play a voice message to a specified phone number with a reminder. |
 | HTTP Request | Send an HTTP request to an endpoint. Useful for integrating with APIs. | This may be useful to query an HTTP endpoint and use the value returned as part of the flow. For example you can query the Google Calendar API for available meeting slots and use the slots as part of a message response for a user. |
 | Jump To | Skip to another step in the workflow definition. This is often useful to better organise your workflow definition. | For example there may be a menu with many options and some of them refer to the same message such as:<br>1) Office Hours of Restaurant Location 1<br>2) Office Hours of Restaurant Location 2<br>3) Office Hours of Restaurant Location 3<br>If 1+2 are the same, you can use a Jump Step to point to a message that would contain the same message. |
-| Send to Converse | Send the current conversation to [Converse](/connect/docs/converse-overview) for an agent to take over. | As part of a menu, you can give the option for the user to escalate to a live agent. |
+| Send to Converse | Send the current conversation to [Converse](/converse) for an agent to take over. | As part of a menu, you can give the option for the user to escalate to a live agent. |
 
 ## Step Descriptions
 
@@ -212,7 +212,7 @@ Skip to another step in the workflow definition. This is often useful to better 
 
 ### Send to Converse
 
-Send the current conversation to [Converse](/connect/docs/converse-overview) for an agent to take over.
+Send the current conversation to [Converse](/converse) for an agent to take over.
 
 ![image](../images/df2ca45-image.png)
 

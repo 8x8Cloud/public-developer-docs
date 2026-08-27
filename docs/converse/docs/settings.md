@@ -1,5 +1,5 @@
 ---
-slug: /connect/docs/converse/settings
+slug: /converse/docs/settings
 ---
 
 # Settings & Configuration
@@ -59,7 +59,7 @@ Define reasons for agent unavailability:
 
 ## Canned Messages
 
-![Canned Messages Settings](../../images/converse/page65_img1.png)
+![Canned Messages Settings](../images/page65_img1.png)
 
 ### Creating Templates
 

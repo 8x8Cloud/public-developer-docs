@@ -40,7 +40,7 @@ Essentially, 8x8 provides the tools (both UI and API) and infrastructure to easi
 
 - **Integrate Your Tools:** Connect WhatsApp to your CRM and support desks, with support for Zendesk, Salesforce, Zapier, and Workato.
 
-- **Handle Two-Way Conversations:** Receive and respond to customer messages in real-time using webhooks or through agent tools like [8x8 Converse](/connect/docs/converse-overview).
+- **Handle Two-Way Conversations:** Receive and respond to customer messages in real-time using webhooks or through agent tools like [8x8 Converse](/converse).
 
 ## Where to Start
 

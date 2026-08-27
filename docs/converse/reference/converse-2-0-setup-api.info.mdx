@@ -1,0 +1,77 @@
+---
+id: converse-2-0-setup-api
+title: "Converse 2.0 Setup API"
+description: "Retrieve the tenant configuration values that every other Converse 2.0 API needs, and check"
+sidebar_label: Introduction
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+---
+
+import ApiLogo from "@theme/ApiLogo";
+import Heading from "@theme/Heading";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+import Export from "@theme/ApiExplorer/Export";
+
+<span
+  className={"theme-doc-version-badge badge badge--secondary"}
+  children={"Version: 1.0"}
+>
+</span>
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Converse 2.0 Setup API"}
+>
+</Heading>
+
+
+
+Retrieve the tenant configuration values that every other Converse 2.0 API needs, and check
+a queue's business hours.
+
+Converse 2.0 was formerly known as Moobidesk Enterprise. Hostnames still use the
+`moobidesk.com` domain.
+
+## Start here
+
+Most Converse 2.0 operations require a UUID that nothing else can give you —
+`channelAccountUUID` to send a message, `dispositionUUID` to close a conversation,
+`queueUUID` and `agentUUID` to transfer one. **This API is where those UUIDs come from**,
+so it is usually the first API a new integration calls.
+
+## Authentication
+
+Every request is authenticated with an `apiKey` / `apiSecret` pair issued by 8x8 for your
+account. Both are sent as properties of the JSON request body, not as headers.
+
+## One operation here writes
+
+**Add a disposition to a queue** creates configuration rather than reading it. Everything
+else in this API is read-only.
+
+## Response envelope
+
+```json
+{ "status": "Ok",     "message": "Success", "data": [ ... ] }
+{ "status": "Failed", "message": "<error_message>" }
+```
+
+A failed request is still returned with HTTP 200 and `status: "Failed"` — check the
+`status` property rather than relying on the HTTP status code alone.
+
+
+<div
+  style={{"display":"flex","flexDirection":"column","marginBottom":"var(--ifm-paragraph-margin-bottom)"}}
+>
+  <h3
+    style={{"marginBottom":"0.25rem"}}
+  >
+    Contact
+  </h3><span>
+    8x8 Converse 2.0: [cpaas-sales@8x8.com](mailto:cpaas-sales@8x8.com)
+  </span>
+</div>
+      

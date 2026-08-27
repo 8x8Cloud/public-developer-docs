@@ -1,0 +1,582 @@
+openapi: 3.0.3
+info:
+  title: Converse 2.0 Reporting API
+  version: "1.6"
+  description: |
+    Export conversation, message and agent data from Converse 2.0.
+
+    Converse 2.0 was formerly known as Moobidesk Enterprise. Hostnames still use the
+    `moobidesk.com` domain.
+
+    ## These are also the only read APIs
+
+    Converse 2.0 has no "get conversation" or "list messages" operation. If you need to read
+    conversation history — not just report on it — these operations are the way to do it.
+    **Get conversations data** and **Get chats data** together give you the conversation and
+    its messages.
+
+    ## Authentication
+
+    Every request is authenticated with an `apiKey` / `apiSecret` pair issued by 8x8 for your
+    account. Both are sent as properties of the JSON request body, not as headers.
+
+    ## Paging
+
+    All operations page at **100 records per page**. Send `page: 1` for the first page, and
+    read `data.lastPage` from the response to discover how many pages exist.
+
+    ## Response envelope
+
+    ```json
+    { "status": "Ok",     "message": "Success", "data": { ... } }
+    { "status": "Failed", "message": "<error_message>" }
+    ```
+
+    A failed request is still returned with HTTP 200 and `status: "Failed"` — check the
+    `status` property rather than relying on the HTTP status code alone.
+  contact:
+    name: 8x8 Converse 2.0
+    email: cpaas-sales@8x8.com
+servers:
+  - url: https://api18.moobidesk.com
+    description: Production
+tags:
+  - name: Converse 2.0 Reporting API
+    description: Export conversation, message and agent data.
+paths:
+  /rest/report/conversations:
+    post:
+      security: []
+      operationId: get-conversations-report
+      summary: Get conversations data
+      tags:
+        - Converse 2.0 Reporting API
+      description: |
+        Returns conversation-level records whose **update** time falls inside the given date
+        range.
+
+        To fetch the individual messages of these conversations, pass their UUIDs to **Get
+        chats data**.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Credentials"
+                - type: object
+                  properties:
+                    from:
+                      type: string
+                      description: |
+                        Start of the date range, as an ISO 8601 timestamp with offset — for
+                        example `2026-06-06T00:00:00+0800`. Filters on conversation update
+                        time.
+                    to:
+                      type: string
+                      description: End of the date range, as an ISO 8601 timestamp with offset.
+                    page:
+                      type: integer
+                      description: Page number. 100 records per page.
+                      default: 1
+                  required:
+                    - from
+                    - to
+                    - page
+            example:
+              apiKey: d2f91886-your-api-key
+              apiSecret: aadeff71-your-api-secret
+              from: "2026-06-06T00:00:00+0800"
+              to: "2026-06-06T23:59:59+0800"
+              page: 1
+      responses:
+        "200":
+          description: A page of conversation records.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/Page"
+                          - type: object
+                            properties:
+                              conversations:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/ConversationRecord"
+              example:
+                status: Ok
+                message: Success
+                data:
+                  count: 318
+                  limit: 100
+                  currentPage: 1
+                  lastPage: 4
+                  conversations:
+                    - uuid: 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
+                      type: WhatsApp
+                      contact:
+                        key: "6596270000"
+                        name: Joseph Lim
+                        mobile: "6596270000"
+                      conversationStatus: closed
+                      queue: Support
+                      agent: agent@example.com
+                      disposition: General
+                      channelAccountId: "6598765432"
+                      channelAccountType: WhatsApp
+                      createdAt: "2026-06-06T01:12:04.000Z"
+                      updatedAt: "2026-06-06T02:41:55.000Z"
+  /rest/report/chats:
+    post:
+      security: []
+      operationId: get-chats-report
+      summary: Get chats data
+      tags:
+        - Converse 2.0 Reporting API
+      description: |
+        Returns the individual messages of up to **10 conversations** at a time, together with
+        the conversation records they belong to.
+
+        Obtain the conversation UUIDs from **Get conversations data**.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Credentials"
+                - type: object
+                  properties:
+                    conversations:
+                      type: array
+                      description: Conversation UUIDs to fetch messages for. Maximum 10.
+                      maxItems: 10
+                      items:
+                        type: string
+                    page:
+                      type: integer
+                      description: Page number. 100 records per page.
+                      default: 1
+                  required:
+                    - conversations
+                    - page
+            example:
+              apiKey: d2f91886-your-api-key
+              apiSecret: aadeff71-your-api-secret
+              conversations:
+                - 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
+                - 0a4d6ad7-2a2d-5bdc-b7e5-3c4d5e6f7a8b
+              page: 1
+      responses:
+        "200":
+          description: A page of message records, plus the conversations they belong to.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - $ref: "#/components/schemas/Page"
+                          - type: object
+                            properties:
+                              chats:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/ChatRecord"
+                              conversations:
+                                type: array
+                                description: The conversation records the messages belong to.
+                                items:
+                                  $ref: "#/components/schemas/ConversationRecord"
+              example:
+                status: Ok
+                message: Success
+                data:
+                  count: 24
+                  limit: 100
+                  currentPage: 1
+                  lastPage: 1
+                  chats:
+                    - uuid: 9c4bf769-8879-4e6e-96b7-1a2b3c4d5e6f
+                      message: Hi, can I ask more about your ongoing promotion?
+                      channel: WhatsApp
+                      direction: in
+                      type: chat
+                      conversation: 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
+                      channelAccountId: "6598765432"
+                      channelAccountType: WhatsApp
+                    - uuid: 66777f4a-fcd7-4d1a-98fb-2b3c4d5e6f70
+                      message: Conversation closed by agent@example.com
+                      channel: WhatsApp
+                      direction: out
+                      type: closed
+                      disposition: General
+                      conversation: 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
+  /rest/report/agents:
+    post:
+      security: []
+      operationId: get-agents-report
+      summary: Get agent data
+      tags:
+        - Converse 2.0 Reporting API
+      description: |
+        Returns agent records, including each agent's channels, manager, supervisor and
+        status.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Credentials"
+                - type: object
+                  properties:
+                    page:
+                      type: integer
+                      description: Page number.
+                      default: 1
+                    limit:
+                      type: integer
+                      description: Records per page.
+                      default: 100
+                    status:
+                      type: string
+                      description: Which agents to return.
+                      enum:
+                        - active
+                        - inactive
+                      default: active
+                  required:
+                    - page
+            example:
+              apiKey: d2f91886-your-api-key
+              apiSecret: aadeff71-your-api-secret
+              page: 1
+              limit: 100
+              status: active
+      responses:
+        "200":
+          description: |
+            A page of agent records.
+
+            Note the agents array is nested one level deeper than in the other operations —
+            `data.data.agents`, not `data.agents`.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          data:
+                            type: object
+                            properties:
+                              agents:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/AgentRecord"
+              example:
+                status: Ok
+                message: Success
+                data:
+                  data:
+                    agents:
+                      - uuid: 7b3cd796-7e74-48af-83e6-2c9a7b1e4d55
+                        user:
+                          username: agent@example.com
+                          name: Amelia Ong
+                        channelTypes:
+                          - WhatsApp
+                          - Email
+                        manager: manager@example.com
+                        supervisor: supervisor@example.com
+                        status: active
+                        type: human
+                        remarks: ""
+                        createdAt: "2025-11-02T04:15:00.000Z"
+                        updatedAt: "2026-06-01T09:22:31.000Z"
+  # ---------------------------------------------------------------------------
+  # After-Call Work (ACW) report — HIDDEN: still under development.
+  #
+  # Commented out rather than deleted so it can be restored in place once the
+  # endpoint is confirmed. Uncommenting this block is all that is needed; the
+  # sidebar entry in docusaurus/sidebars/converse/reference.js must be restored
+  # too (converse/reference/get-acw-report), and the Reporting API description
+  # above should mention ACW again.
+  # ---------------------------------------------------------------------------
+  # /rest/report/acwconversations:
+  #   post:
+  #     security: []
+  #     operationId: get-acw-report
+  #     summary: Get After-Call Work (ACW) report
+  #     tags:
+  #       - Converse 2.0 Reporting API
+  #     description: |
+  #       Generates an After-Call Work (ACW) report for conversations **created** inside the
+  #       given date range.
+  #
+  #       Unlike the other operations, this one does not return the records themselves — it
+  #       returns a `data.url` pointing at a generated CSV file. Download that URL to read the
+  #       report.
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             allOf:
+  #               - $ref: "#/components/schemas/Credentials"
+  #               - type: object
+  #                 properties:
+  #                   from:
+  #                     type: string
+  #                     description: |
+  #                       Start of the date range, as an ISO 8601 timestamp with offset. Filters
+  #                       on conversation creation time.
+  #                   to:
+  #                     type: string
+  #                     description: End of the date range, as an ISO 8601 timestamp with offset.
+  #                   page:
+  #                     type: integer
+  #                     description: Page number. 100 records per page.
+  #                     default: 1
+  #                 required:
+  #                   - from
+  #                   - to
+  #           example:
+  #             apiKey: d2f91886-your-api-key
+  #             apiSecret: aadeff71-your-api-secret
+  #             from: "2026-06-06T00:00:00+0800"
+  #             to: "2026-06-06T23:59:59+0800"
+  #             page: 1
+  #     responses:
+  #       "200":
+  #         description: A URL to the generated CSV report.
+  #         content:
+  #           application/json:
+  #             schema:
+  #               allOf:
+  #                 - $ref: "#/components/schemas/Envelope"
+  #                 - type: object
+  #                   properties:
+  #                     data:
+  #                       allOf:
+  #                         - $ref: "#/components/schemas/Page"
+  #                         - type: object
+  #                           properties:
+  #                             url:
+  #                               type: string
+  #                               format: uri
+  #                               description: URL of the generated CSV report.
+  #             example:
+  #               status: Ok
+  #               message: Success
+  #               data:
+  #                 count: 318
+  #                 limit: 100
+  #                 currentPage: 1
+  #                 lastPage: 4
+  #                 url: https://example.com/acwreports/report.csv
+components:
+  schemas:
+    Envelope:
+      type: object
+      description: Standard Converse 2.0 response envelope.
+      properties:
+        status:
+          type: string
+          description: "`Ok` when the request succeeded, `Failed` when it did not."
+          enum:
+            - Ok
+            - Failed
+        message:
+          type: string
+          description: "`Success`, or the error message when `status` is `Failed`."
+      required:
+        - status
+        - message
+    Credentials:
+      type: object
+      description: Service credentials, sent in the request body.
+      properties:
+        apiKey:
+          type: string
+          description: Your service API key, issued by 8x8. Treat as a secret.
+        apiSecret:
+          type: string
+          description: Your service API secret, issued by 8x8. Treat as a secret.
+      required:
+        - apiKey
+        - apiSecret
+    Page:
+      type: object
+      description: Paging metadata.
+      properties:
+        count:
+          type: integer
+          description: Total number of records matching the request, across all pages.
+        limit:
+          type: integer
+          description: Records per page.
+        currentPage:
+          type: integer
+          description: The page returned.
+        lastPage:
+          type: integer
+          description: Number of the last page available.
+    ConversationRecord:
+      type: object
+      description: One conversation.
+      properties:
+        uuid:
+          type: string
+          description: UUID of the conversation.
+        type:
+          type: string
+          description: Channel the conversation took place on.
+        contact:
+          type: object
+          description: The contact the conversation is with.
+          properties:
+            key:
+              type: string
+              description: The contact's channel identifier.
+            name:
+              type: string
+            mobile:
+              type: string
+        conversationStatus:
+          type: string
+          description: Status of the conversation.
+          enum:
+            - open
+            - assigned
+            - read
+            - responded
+            - closed
+        queue:
+          type: string
+          description: Queue the conversation sits in.
+        agent:
+          type: string
+          description: Agent assigned to the conversation.
+        disposition:
+          type: string
+          description: Disposition the conversation was closed with.
+        channelAccountId:
+          type: string
+          description: Identifier of the channel account.
+        channelAccountType:
+          type: string
+          description: Channel type of the channel account.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ChatRecord:
+      type: object
+      description: One message within a conversation.
+      properties:
+        uuid:
+          type: string
+          description: UUID of the message.
+        message:
+          type: string
+          description: Text of the message.
+        channel:
+          type: string
+          description: Channel the message was sent on.
+        direction:
+          type: string
+          description: "`in` from the customer, `out` to the customer."
+          enum:
+            - in
+            - out
+        type:
+          type: string
+          description: |
+            What kind of record this is.
+
+            | Value | Meaning |
+            |-------|---------|
+            | `chat` | A text message from the customer or the agent |
+            | `note` | An internal note added by an agent |
+            | `assigned` | The conversation was assigned — adds `assignedQueue` and `assignedAgent` |
+            | `closed` | The conversation was closed — adds `disposition` |
+          enum:
+            - chat
+            - note
+            - assigned
+            - closed
+        assignedQueue:
+          type: string
+          description: Queue assigned to. Present when `type` is `assigned`.
+        assignedAgent:
+          type: string
+          description: Agent assigned to. Present when `type` is `assigned`.
+        disposition:
+          type: string
+          description: Closing disposition. Present when `type` is `closed`.
+        attachments:
+          type: array
+          description: Attachments carried by the message.
+          items:
+            type: object
+        conversation:
+          type: string
+          description: UUID of the conversation this message belongs to.
+        channelAccountId:
+          type: string
+        channelAccountType:
+          type: string
+    AgentRecord:
+      type: object
+      description: One agent.
+      properties:
+        uuid:
+          type: string
+          description: UUID of the agent.
+        user:
+          type: object
+          properties:
+            username:
+              type: string
+            name:
+              type: string
+        channelTypes:
+          type: array
+          description: Channels the agent handles.
+          items:
+            type: string
+        manager:
+          type: string
+        supervisor:
+          type: string
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+        type:
+          type: string
+          description: Whether the agent is a human or a bot.
+        remarks:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time

@@ -106,6 +106,13 @@ const config = {
               groupPathsBy: 'tag',
             },
           },
+          converseApis: {
+            specPath: 'docs_oas/converse',
+            outputDir: 'docs/converse/reference',
+            sidebarOptions: {
+              groupPathsBy: 'tag',
+            },
+          },
           connectApis: {
             specPath: 'docs_oas/connect',
             outputDir: 'docs/connect/reference',

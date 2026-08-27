@@ -1,5 +1,5 @@
 ---
-slug: /connect/docs/converse/reports
+slug: /converse/docs/reports
 ---
 
 # Reports & Statistics
@@ -10,7 +10,7 @@ Converse provides comprehensive analytics across conversations, agent performanc
 
 ### Dashboard Overview
 
-![Statistics Dashboard](../../images/converse/statistic.png)
+![Statistics Dashboard](../images/statistic.png)
 
 The Statistics module provides a visual summary of conversation activity and performance based on selected filters such as date range, agent, queue, and conversation tags.
 

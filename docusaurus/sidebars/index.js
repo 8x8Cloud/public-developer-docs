@@ -18,6 +18,8 @@ import sidebarAnalyticsDocs from './analytics/docs';
 import sidebarAnalyticsReference from './analytics/reference';
 import sidebarConnectDocs from './connect/docs';
 import sidebarConnectReference from './connect/reference';
+import sidebarConverseDocs from './converse/docs';
+import sidebarConverseReference from './converse/reference';
 import sidebarContactCenterDocs from './contactcenter/docs';
 import sidebarContactCenterReference from './contactcenter/reference';
 import sidebarJaas from './jaas';
@@ -33,6 +35,8 @@ const index = {
   sidebarAnalyticsReference,
   sidebarConnectDocs,
   sidebarConnectReference,
+  sidebarConverseDocs,
+  sidebarConverseReference,
   sidebarContactCenterDocs,
   sidebarContactCenterReference,
   sidebarJaas,

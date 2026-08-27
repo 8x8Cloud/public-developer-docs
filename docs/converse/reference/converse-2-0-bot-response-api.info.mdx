@@ -1,0 +1,91 @@
+---
+id: converse-2-0-bot-response-api
+title: "Converse 2.0 Bot Response API"
+description: "Lets a bot reply to a customer, transfer the conversation, close it, or look up the values"
+sidebar_label: Introduction
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+---
+
+import ApiLogo from "@theme/ApiLogo";
+import Heading from "@theme/Heading";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+import Export from "@theme/ApiExplorer/Export";
+
+<span
+  className={"theme-doc-version-badge badge badge--secondary"}
+  children={"Version: 1.0"}
+>
+</span>
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Converse 2.0 Bot Response API"}
+>
+</Heading>
+
+
+
+Lets a bot reply to a customer, transfer the conversation, close it, or look up the values
+needed to do so.
+
+Converse 2.0 was formerly known as Moobidesk Enterprise. Hostnames still use the
+`moobidesk.com` domain.
+
+## This is the second half of a two-part integration
+
+1. **Inbound notification** — Converse 2.0 → your bot. One `POST` per inbound message,
+   carrying the message and a set of callback URLs. It is a webhook, so it is documented
+   in the Bot integration guide rather than as an operation here.
+2. **Response API** — your bot → Converse 2.0. The four operations below.
+
+Read the Bot integration guide first. It also explains the *other* bot model, in which
+your bot holds long-lived credentials and calls the MT, Transfer and Close APIs directly.
+Which model applies to your bot is configured by 8x8.
+
+## Authentication
+
+**The `{token}` in the URL is the credential.** There is no API key, secret or header.
+
+One token is issued per inbound message and is embedded in the `responseUrl`, `closeUrl`
+and `transferUrl` delivered with the notification. Use those URLs exactly as given rather
+than assembling them yourself.
+
+Treat the callback URLs as secrets — do not log or forward them.
+
+## Token validity
+
+The rules below are the most common source of integration failures, so plan the bot's
+turn around them:
+
+* The token is valid for **48 hours** from the time the notification is sent.
+* The **first** call made with the token opens a **15-minute window**. Every further call
+  with that token must be made inside that window.
+* Calls made after the window has closed are rejected with `403`.
+
+In practice: any lookups, the reply, and a close or transfer should all happen within 15
+minutes of the bot's first call.
+
+Requests are limited to **100 per minute per source IP address**.
+
+## Getting the List URL
+
+The notification does not carry a URL for **List**. To call it, take the `responseUrl` you
+received and replace `reply` with `list` — the token is the same.
+
+
+<div
+  style={{"display":"flex","flexDirection":"column","marginBottom":"var(--ifm-paragraph-margin-bottom)"}}
+>
+  <h3
+    style={{"marginBottom":"0.25rem"}}
+  >
+    Contact
+  </h3><span>
+    8x8 Converse 2.0: [cpaas-sales@8x8.com](mailto:cpaas-sales@8x8.com)
+  </span>
+</div>
+      

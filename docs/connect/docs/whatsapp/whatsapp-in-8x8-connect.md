@@ -4,7 +4,7 @@ sidebar_label: 'WhatsApp in 8x8 Connect'
 
 # WhatsApp in 8x8 Connect
 
-Beyond the API, the 8x8 Connect portal offers three powerful, ready-to-use solutions to manage your WhatsApp communications. This section provides an overview of how to use **Campaigns** for bulk messaging, **[8x8 Converse](/connect/docs/converse-overview)** for agent-based support, and the **[Automation Builder](/connect/docs/automation-builder)** for creating no-code workflows.
+Beyond the API, the 8x8 Connect portal offers three powerful, ready-to-use solutions to manage your WhatsApp communications. This section provides an overview of how to use **Campaigns** for bulk messaging, **[8x8 Converse](/converse)** for agent-based support, and the **[Automation Builder](/connect/docs/automation-builder)** for creating no-code workflows.
 
 ## Campaigns (formerly MCS) with WhatsApp
 
@@ -56,7 +56,7 @@ Sending WhatsApp Messages through Campaigns follows a simple, step-by-step proce
 
 ## WhatsApp in 8x8 Converse (Agent Experience)
 
-**[8x8 Converse](/connect/docs/converse-overview)** is a chat-based customer service platform that allows your support agents to manage two-way conversations with customers across multiple channels, including WhatsApp.
+**[8x8 Converse](/converse)** is a chat-based customer service platform that allows your support agents to manage two-way conversations with customers across multiple channels, including WhatsApp.
 
 ### How it Works
 

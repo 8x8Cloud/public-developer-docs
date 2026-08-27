@@ -13,7 +13,7 @@
 
 const PRODUCTS = [
   { name: 'Connect', doc: '/connect/docs', group: 'CPaaS' },
-  { name: 'Converse', doc: '/connect/docs/converse', group: 'CPaaS' },
+  { name: 'Converse', doc: '/converse', group: 'CPaaS' },
   { name: 'Video Interaction', doc: '/connect/docs/vi-overview', group: 'CPaaS' },
   { name: 'APIs', doc: '/connect/reference', group: 'CPaaS' },
   { name: 'Integration', doc: '/connect/docs/integrations-overview', group: 'CPaaS' },

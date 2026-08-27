@@ -1,5 +1,5 @@
 ---
-slug: /connect/docs/converse/contacts
+slug: /converse/docs/contacts
 ---
 
 # Contact Management
@@ -10,7 +10,7 @@ The Contacts module provides a unified customer database with interaction histor
 
 ### Contact List View
 
-![Contact List](../../images/converse/contact-list.png)
+![Contact List](../images/contact-list.png)
 
 The main contact list displays:
 - **Name**: Customer full name
@@ -34,7 +34,7 @@ The main contact list displays:
 
 ### Profile Information
 
-![Contact Details](../../images/converse/contact-profile-information.png)
+![Contact Details](../images/contact-profile-information.png)
 
 Each contact record contains:
 - **Basic Info**: Name, phone, email

@@ -1,5 +1,5 @@
 ---
-slug: /connect/docs/converse/conversations
+slug: /converse/docs/conversations
 ---
 
 # Conversations
@@ -10,7 +10,7 @@ The Conversations (Chats) module is the core workspace where agents engage with 
 
 ### Layout
 
-![Conversation Interface](../../images/converse/page34_img1.png)
+![Conversation Interface](../images/page34_img1.png)
 
 The conversation workspace consists of three panels:
 
@@ -82,7 +82,7 @@ The conversation workspace consists of three panels:
 
 #### Canned Messages
 
-![Canned Messages](../../images/converse/page40_img1.png)
+![Canned Messages](../images/page40_img1.png)
 
 Use pre-written templates for common responses:
 1. Click canned message icon (or type `#`)

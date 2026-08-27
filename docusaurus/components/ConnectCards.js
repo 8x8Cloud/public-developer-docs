@@ -289,18 +289,6 @@ const cards = [
     ],
   },
   {
-    title: 'Converse',
-    items: [
-      {
-        label: 'Overview',
-        link: '/connect/docs/converse',
-      },
-      { label: 'Getting Started', link: '/connect/docs/converse/getting-started' },
-      { label: 'Conversations', link: '/connect/docs/converse/conversations' },
-      { label: 'View More…', link: '/connect/docs/converse' },
-    ],
-  },
-  {
     title: 'Video Interaction',
     items: [
       { label: 'Overview', link: '/connect/docs/vi-overview' },
@@ -310,6 +298,16 @@ const cards = [
         link: '/connect/docs/vi-customer-interface',
       },
       { label: 'View More…', link: '/connect/docs/vi-overview' },
+    ],
+  },
+  {
+    title: 'Converse',
+    items: [
+      { label: 'Overview', link: '/converse' },
+      { label: 'Getting Started', link: '/converse/docs/getting-started' },
+      { label: 'Conversations', link: '/converse/docs/conversations' },
+      { label: 'Converse 2.0 API', link: '/converse/docs/api-overview' },
+      { label: 'View More…', link: '/converse' },
     ],
   },
 ];

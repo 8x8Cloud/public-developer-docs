@@ -1,0 +1,465 @@
+openapi: 3.0.3
+info:
+  title: Converse 2.0 MT Messaging API
+  version: "1.0"
+  description: |
+    Send an outbound message to a customer through Converse 2.0. The message is delivered over
+    the channel of the channel account you send it from — WhatsApp, SMS, Email, Viber and
+    others.
+
+    Converse 2.0 was formerly known as Moobidesk Enterprise. Hostnames still use the
+    `moobidesk.com` domain.
+
+    ## MT is one half of a pair
+
+    * **MT** (this API) — your system sends a message *to* a customer.
+    * **MO** — Converse 2.0 pushes a customer's inbound message *to* a URL you register.
+
+    A working two-way integration needs both. MO is a webhook rather than an endpoint you call,
+    and its payload format is provided by 8x8 when your destination URL is registered.
+
+    ## Authentication
+
+    Your `apiKey` is a **path parameter** and your `apiSecret` is a **body property**:
+
+    ```
+    POST /outgoing/v1/mt/{apiKey}/{channelAccountUUID}
+    { "apiSecret": "your-api-secret", ... }
+    ```
+
+    Because the key travels in the URL it can be captured by proxy and server access logs.
+    Restrict who can read logs for systems that call this API, and treat both values as
+    secrets.
+
+    ## Choosing what to send
+
+    Exactly one of `message`, `attachments`, `messageKeyword` or `type` must be present:
+
+    | To send | Use |
+    |---------|-----|
+    | Free text | `message` |
+    | Files, images, audio or video | `attachments` |
+    | A pre-approved canned or template message | `messageKeyword` (+ `parameters`) |
+    | A rich interactive or template message | `type` + `interactive` / `template` |
+
+    ## Response envelope
+
+    ```json
+    { "status": "Ok",     "message": "Success" }
+    { "status": "Failed", "message": "<error_message>", "data": { "code": 500 } }
+    ```
+
+    A rejected message is still returned with HTTP 200 and `status: "Failed"` — check the
+    `status` property rather than relying on the HTTP status code alone.
+  contact:
+    name: 8x8 Converse 2.0
+    email: cpaas-sales@8x8.com
+servers:
+  - url: https://e18.moobidesk.com
+    description: Production
+tags:
+  - name: Converse 2.0 MT Messaging API
+    description: Send outbound messages to customers.
+paths:
+  /outgoing/v1/mt/{apiKey}/{channelAccountUUID}:
+    post:
+      security: []
+      operationId: send-mt-message
+      summary: Send a message to a customer
+      tags:
+        - Converse 2.0 MT Messaging API
+      description: |
+        Sends an outbound message to a customer over the channel of the given channel
+        account.
+
+        ### Preconditions
+
+        * The conversation must not be `closed`, and must already be assigned to an agent.
+        * The acting agent must own the conversation, or be a supervisor in the same campaign.
+        * On Facebook Messenger and Instagram, `replyTo` is required.
+
+        ### Validation of the `to` field
+
+        * `conversationUUID` and `contactUUID` must be 20–100 characters long.
+        * SMS and WhatsApp — `{channelId}` must match the contact's `mobile`, `mobile2` or `mobile3`.
+        * Email and Web Chat — `{channelId}` must match the contact's `email`, `email2` or `email3`.
+        * Line — `{channelId}` must match the contact's `lineId`.
+      parameters:
+        - name: apiKey
+          in: path
+          required: true
+          description: |
+            Your service API key, issued by 8x8. Sent as a path segment rather than a header
+            or body property — see Authentication.
+          schema:
+            type: string
+        - name: channelAccountUUID
+          in: path
+          required: true
+          description: |
+            UUID of the channel account to send from. Retrieve it with the Converse 2.0 Setup
+            API's **List channel accounts** operation.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendMessageRequest"
+            examples:
+              text:
+                summary: Text message, addressed by your own contact reference id
+                value:
+                  apiSecret: 271bcd5e-your-api-secret
+                  agentUUID: 37f1f33f-1285-4ea8-b8d4-1a2b3c4d5e6f
+                  to: contact:refId:86fee4a2-cf24d8f0-8fde61b76c19/contact:SMS:6592570000
+                  contactDetails:
+                    name: Joseph Lim
+                    gender: Male
+                    notes: VIP customer.
+                    mobile: "6592570000"
+                    tags:
+                      - vip
+                      - c20200110
+                    specialDates:
+                      - name: birthday
+                        date: 20/12/1990
+                  message: Hi Joseph, good to hear back from you.
+                  refId: 9c4bf769-8879-4e6e-96b7-1a2b3c4d5e6f
+              attachment:
+                summary: WhatsApp image in an existing conversation
+                value:
+                  apiSecret: 271bcd5e-your-api-secret
+                  agentUsername: agent@example.com
+                  to: conversation:uuid:8d874712-7f3b-5a26-a848-9e0c1b2a3d4f/contact:WhatsApp:6592570000
+                  attachments:
+                    - contentType: image
+                      url: https://example.com/assets/sample.jpg
+                      refId: ff9d8420-4a92-5125-bd1c-77e0a5c3b8d4
+              cannedWithParameters:
+                summary: Canned message with placeholder substitution
+                description: |
+                  Template `promo20260310` reads
+                  `"Hi {{name}}, the promotion will last until {{date}}…"`, so the customer
+                  receives `"Hi Amelia, the promotion will last until 17/03/2026…"`.
+                value:
+                  apiSecret: 271bcd5e-your-api-secret
+                  agentUsername: agent@example.com
+                  to: contact:refId:4ac464a2-c714d8f0-c3b874ac6c19/contact:SMS:6583550000
+                  contactDetails:
+                    name: Amelia Ong
+                    mobile: "6583550000"
+                  messageKeyword: promo20260310
+                  parameters:
+                    - key: name
+                      value: Amelia
+                    - key: date
+                      value: 17/03/2026
+              facebookReply:
+                summary: Facebook Messenger reply — replyTo is required
+                value:
+                  apiSecret: 271bcd5e-your-api-secret
+                  agentUUID: 37f1f33f-1285-4ea8-b8d4-1a2b3c4d5e6f
+                  to: contact:uuid:0f569790-4c71-11ea-ad41-0a1b2c3d4e5f/contact:Facebook Messenger:fhjal9ujeoli2y93i3138k
+                  message: Hi, thanks for connecting with us through Facebook!
+                  replyTo: 66777f4a-fcd7-4d1a-98fb-2b3c4d5e6f70
+              emailWithAttachments:
+                summary: Email reply with two attachments
+                value:
+                  apiSecret: 271bcd5e-your-api-secret
+                  agentUsername: agent@example.com
+                  to: conversation:uuid:0a4d6ad7-2a2d-5bdc-b7e5-3c4d5e6f7a8b/contact:Email:customer@example.com
+                  subject: "Re: Enquiry About Order #2003-923468"
+                  message: <p>Thanks for getting in touch — your order summary is attached.</p>
+                  attachments:
+                    - contentType: file
+                      url: https://example.com/assets/sample.pdf
+                      caption: ordersummary.pdf
+                    - contentType: image
+                      url: https://example.com/assets/sample.jpg
+                      caption: orderreceipt.jpg
+              interactiveButtons:
+                summary: WhatsApp interactive buttons with header and footer
+                value:
+                  apiSecret: 271bcd5e-your-api-secret
+                  agentUUID: 37f1f33f-1285-4ea8-b8d4-1a2b3c4d5e6f
+                  to: conversation:uuid:8d874712-7f3b-5a26-a848-9e0c1b2a3d4f/contact:WhatsApp:6592570000
+                  type: interactive
+                  interactive:
+                    type: button
+                    header:
+                      type: text
+                      text: "Order #2003-923468"
+                    body:
+                      text: Pick an option below
+                    footer:
+                      text: Reply STOP to opt out
+                    action:
+                      buttons:
+                        - type: reply
+                          reply:
+                            id: track
+                            title: Track order
+                        - type: reply
+                          reply:
+                            id: cancel
+                            title: Cancel order
+      responses:
+        "200":
+          description: |
+            The standard Converse 2.0 envelope. A rejected message is also returned with HTTP 200
+            and `status: "Failed"`.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        description: Present on failure.
+                        properties:
+                          code:
+                            type: integer
+                            description: Internal error code.
+              examples:
+                success:
+                  summary: Success
+                  value:
+                    status: Ok
+                    message: Success
+                failure:
+                  summary: Failure
+                  value:
+                    status: Failed
+                    message: Conversation is already closed
+                    data:
+                      code: 500
+components:
+  schemas:
+    Envelope:
+      type: object
+      description: Standard Converse 2.0 response envelope.
+      properties:
+        status:
+          type: string
+          description: "`Ok` when the message was accepted, `Failed` when it was not."
+          enum:
+            - Ok
+            - Failed
+        message:
+          type: string
+          description: "`Success`, or the error message when `status` is `Failed`."
+      required:
+        - status
+        - message
+    SendMessageRequest:
+      type: object
+      description: |
+        Exactly one of `message`, `attachments`, `messageKeyword` or `type` must be present.
+        One of `agentUUID` or `agentUsername` must be present.
+      properties:
+        apiSecret:
+          type: string
+          description: Your service API secret, issued by 8x8. Treat as a secret.
+        agentUUID:
+          type: string
+          description: |
+            UUID of the sending agent. Supply either `agentUUID` or `agentUsername`.
+        agentUsername:
+          type: string
+          description: |
+            Username of the sending agent. Supply either `agentUUID` or `agentUsername`.
+        to:
+          type: string
+          description: |
+            The destination, as a compound string. Literal prefixes are case-sensitive; the
+            `{channel}` value is not. One of:
+
+            * `conversation:uuid:{conversationUUID}/contact:{channel}:{channelId}` — when you know the conversation
+            * `contact:uuid:{contactUUID}/contact:{channel}:{channelId}` — when you know the contact
+            * `contact:refId:{refId}/contact:{channel}:{channelId}` — when you know only your own reference id
+
+            `{channel}` accepts: `SMS`, `Email`, `WhatsApp`, `Viber`, `Web Chat`, `WeChat`,
+            `Telegram`, `Line`, `Facebook Messenger`, `Facebook Wall`, `Zumata`.
+        queueUUID:
+          type: string
+          description: Queue to associate the conversation with, where applicable.
+        contactDetails:
+          $ref: "#/components/schemas/ContactDetails"
+        message:
+          type: string
+          description: |
+            The message body. HTML is allowed. Required when `attachments`, `messageKeyword`
+            and `type` are all absent.
+        subject:
+          type: string
+          description: Email subject line. Email channel only.
+        attachments:
+          type: array
+          description: |
+            Files to send. Required when `message`, `messageKeyword` and `type` are all
+            absent.
+          items:
+            $ref: "#/components/schemas/Attachment"
+        messageKeyword:
+          type: string
+          description: |
+            Keyword of a pre-approved canned or template message. Required when `message`,
+            `attachments` and `type` are all absent.
+        parameters:
+          type: array
+          description: |
+            Replacement values for a canned message's placeholders. Each `{{key}}` in the
+            template is replaced with the matching `value`.
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: Placeholder name, without the braces.
+              value:
+                type: string
+                description: Value to substitute in.
+        replyTo:
+          type: string
+          description: |
+            UUID of the message being replied to, within the same conversation. Required on
+            Facebook Messenger and Instagram, where it identifies the post being replied to.
+            Optional on WhatsApp, where it produces an in-thread reply. Ignored on other
+            channels.
+        type:
+          type: string
+          description: Selects the rich-message flow.
+          enum:
+            - interactive
+            - template
+        interactive:
+          type: object
+          description: |
+            The interactive message. Required when `type` is `interactive`. May carry
+            `header`, `body`, `footer` and `action`. When `message` is omitted,
+            `interactive.body.text` is used as the message text.
+
+            `header`, `footer` and `action` are forwarded to the channel on **WhatsApp** and
+            **Viber** only, and ignored elsewhere.
+        template:
+          type: object
+          description: |
+            The template message. Required when `type` is `template`. Must carry `altText`
+            and a `type` of `buttons`, `confirm`, `carousel` or `image_carousel`. When
+            `message` is omitted, `altText` is used as the message text.
+
+            `header`, `footer` and `action` are forwarded to the channel on **WhatsApp** and
+            **Viber** only, and ignored elsewhere.
+        actions:
+          type: array
+          description: Optional channel-specific actions.
+          items:
+            type: object
+        skipSendMessage:
+          type: boolean
+          description: |
+            When `true` the message is recorded against the conversation but not actually
+            delivered to the customer.
+          default: false
+        receivedAt:
+          type: string
+          format: date-time
+          description: When set, used as the message's creation timestamp instead of now.
+        refId:
+          type: string
+          description: Your own reference id, stored for mapping purposes.
+      required:
+        - apiSecret
+        - to
+    ContactDetails:
+      type: object
+      description: |
+        Contact attributes to create or update as part of sending. Any `_id`, `uuid` or
+        `service` properties are ignored.
+      properties:
+        name:
+          type: string
+          description: Contact's name. An empty string is ignored.
+        image:
+          type: string
+          format: uri
+          description: Publicly reachable URL of the contact's profile picture.
+        gender:
+          type: string
+        notes:
+          type: string
+        homeAddress:
+          type: string
+        homePhone:
+          type: string
+        mobile:
+          type: string
+        mobile2:
+          type: string
+        mobile3:
+          type: string
+        email:
+          type: string
+        email2:
+          type: string
+        email3:
+          type: string
+        tags:
+          type: array
+          description: |
+            Tags to set on the contact. Each tag may contain alphanumeric characters and
+            underscores only — no whitespace.
+          items:
+            type: string
+        specialDates:
+          type: array
+          description: Dates of note for the contact.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Which date this is.
+                enum:
+                  - birthday
+                  - weddingDate
+                  - firstPurchaseDate
+                  - membershipDate
+              date:
+                type: string
+                description: The date, formatted `DD/MM/YYYY`.
+    Attachment:
+      type: object
+      description: |
+        A file to send. Note this object uses `contentType` with a coarse content group.
+        Inbound webhooks use a different field name and a full MIME type.
+      properties:
+        contentType:
+          type: string
+          description: Coarse content group of the attachment.
+          enum:
+            - image
+            - video
+            - audio
+            - file
+        url:
+          type: string
+          format: uri
+          description: Publicly reachable URL of the attachment.
+        caption:
+          type: string
+          description: Caption, or file name.
+        thumbUrl:
+          type: string
+          format: uri
+          description: Publicly reachable URL of a thumbnail image. Used for videos.
+        refId:
+          type: string
+          description: Your own reference id, echoed back for mapping purposes.
+      required:
+        - contentType
+        - url

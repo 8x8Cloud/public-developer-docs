@@ -290,14 +290,15 @@ module.exports = [
   { from: '/connect/docs/line/overview', to: '/connect/docs/line/line-hub' },
   { from: '/connect/docs/voice', to: '/connect/docs/voice/cpaas-voice-offerings' },
   { from: '/connect/docs/voice/overview', to: '/connect/docs/voice/cpaas-voice-offerings' },
-  { from: '/connect/docs/converse/overview', to: '/connect/docs/converse' },
+  // Converse moved to its own top-level /converse section (see ./converse.js);
+  // point straight at the final page rather than chaining through
+  // /connect/docs/converse, which is itself a redirect there.
+  { from: '/connect/docs/converse/overview', to: '/converse' },
   // Video Interaction module + its short/top-level paths.
   { from: '/connect/docs/vi', to: '/connect/docs/vi-overview' },
   { from: '/connect/docs/vi/overview', to: '/connect/docs/vi-overview' },
   { from: '/vi', to: '/connect/docs/vi-overview' },
   { from: '/video-interaction', to: '/connect/docs/vi-overview' },
-  // Converse owns its own /converse path (still resolves into the Connect docs).
-  { from: '/converse', to: '/connect/docs/converse' },
 
   // WhatsApp specific redirects - DISABLED (target pages don't exist)
   // { from: '/connect/docs/whatsapp', to: '/connect/docs/channels/whatsapp/overview' },
@@ -627,18 +628,8 @@ module.exports = [
   { from: '/connect/reference/voice-error-codes', to: '/connect/docs/voice/error-codes/voice-error-codes-reference' },
   { from: '/connect/reference/voice-status-codes', to: '/connect/docs/voice/error-codes/voice-status-codes-reference' },
 
-  // converse-overview path consolidated to /connect/docs/converse
-  { from: '/connect/docs/converse-overview', to: '/connect/docs/converse' },
+  // Converse / Moobidesk redirects live in ./converse.js — Converse moved out of
+  // the Connect area into its own top-level /converse section.
 
-  // Moobidesk renamed to Converse
-  { from: '/connect/docs/moobidesk', to: '/connect/docs/converse' },
-  { from: '/connect/docs/moobidesk/getting-started', to: '/connect/docs/converse/getting-started' },
-  { from: '/connect/docs/moobidesk/user-roles', to: '/connect/docs/converse/user-roles' },
-  { from: '/connect/docs/moobidesk/contacts', to: '/connect/docs/converse/contacts' },
-  { from: '/connect/docs/moobidesk/agents', to: '/connect/docs/converse/agents' },
-  { from: '/connect/docs/moobidesk/queue', to: '/connect/docs/converse/queue' },
-  { from: '/connect/docs/moobidesk/conversations', to: '/connect/docs/converse/conversations' },
-  { from: '/connect/docs/moobidesk/reports', to: '/connect/docs/converse/reports' },
-  { from: '/connect/docs/moobidesk/settings', to: '/connect/docs/converse/settings' },
   { from: '/connect/docs/usage-samples-viber', to: '/connect/docs/viber/viber-hub' },
 ];

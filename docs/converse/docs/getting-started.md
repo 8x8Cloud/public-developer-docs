@@ -1,5 +1,5 @@
 ---
-slug: /connect/docs/converse/getting-started
+slug: /converse/docs/getting-started
 ---
 
 # Getting Started
@@ -57,6 +57,6 @@ Converse supports multi-channel engagement:
 
 ## Next Steps
 
-- Set up your [agent profile and availability](/connect/docs/converse/agents)
-- Learn about [conversation management](/connect/docs/converse/conversations)
-- Configure [queue routing rules](/connect/docs/converse/queue)
+- Set up your [agent profile and availability](/converse/docs/agents)
+- Learn about [conversation management](/converse/docs/conversations)
+- Configure [queue routing rules](/converse/docs/queue)

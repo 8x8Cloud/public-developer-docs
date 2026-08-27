@@ -1,0 +1,647 @@
+openapi: 3.0.3
+info:
+  title: Converse 2.0 Bot Response API
+  version: "1.0"
+  description: |
+    Lets a bot reply to a customer, transfer the conversation, close it, or look up the values
+    needed to do so.
+
+    Converse 2.0 was formerly known as Moobidesk Enterprise. Hostnames still use the
+    `moobidesk.com` domain.
+
+    ## This is the second half of a two-part integration
+
+    1. **Inbound notification** — Converse 2.0 → your bot. One `POST` per inbound message,
+       carrying the message and a set of callback URLs. It is a webhook, so it is documented
+       in the Bot integration guide rather than as an operation here.
+    2. **Response API** — your bot → Converse 2.0. The four operations below.
+
+    Read the Bot integration guide first. It also explains the *other* bot model, in which
+    your bot holds long-lived credentials and calls the MT, Transfer and Close APIs directly.
+    Which model applies to your bot is configured by 8x8.
+
+    ## Authentication
+
+    **The `{token}` in the URL is the credential.** There is no API key, secret or header.
+
+    One token is issued per inbound message and is embedded in the `responseUrl`, `closeUrl`
+    and `transferUrl` delivered with the notification. Use those URLs exactly as given rather
+    than assembling them yourself.
+
+    Treat the callback URLs as secrets — do not log or forward them.
+
+    ## Token validity
+
+    The rules below are the most common source of integration failures, so plan the bot's
+    turn around them:
+
+    * The token is valid for **48 hours** from the time the notification is sent.
+    * The **first** call made with the token opens a **15-minute window**. Every further call
+      with that token must be made inside that window.
+    * Calls made after the window has closed are rejected with `403`.
+
+    In practice: any lookups, the reply, and a close or transfer should all happen within 15
+    minutes of the bot's first call.
+
+    Requests are limited to **100 per minute per source IP address**.
+
+    ## Getting the List URL
+
+    The notification does not carry a URL for **List**. To call it, take the `responseUrl` you
+    received and replace `reply` with `list` — the token is the same.
+  contact:
+    name: 8x8 Converse 2.0
+    email: cpaas-sales@8x8.com
+servers:
+  - url: https://e18.moobidesk.com
+    description: Production
+tags:
+  - name: Converse 2.0 Bot Response API
+    description: Reply, transfer, close, and look up values — from your bot.
+paths:
+  /response/reply/{token}:
+    post:
+      security: []
+      operationId: bot-response-reply
+      summary: Reply to the customer
+      tags:
+        - Converse 2.0 Bot Response API
+      description: |
+        Sends a message to the customer in the conversation the token belongs to.
+
+        Use the `responseUrl` from the inbound notification, which already contains the token.
+
+        A reply is either **plain text** or a **structured message** — reply buttons, a list, a
+        URL button and so on. Structured messages are supported on **WhatsApp and Viber only**.
+
+        ### Interactive messages
+
+        Set `type` to `interactive` and put the payload in `interactive`. The payload follows
+        WhatsApp's own interactive message format, so an existing WhatsApp payload can be used
+        as-is. Every payload carries its own `type` — the *subtype* — plus `body.text` and an
+        `action`:
+
+        | Subtype | What the customer sees |
+        |---------|------------------------|
+        | `button` | Up to three tappable reply buttons |
+        | `list` | A menu of rows, grouped into sections, opened from a single button |
+        | `cta_url` | A single button that opens a URL |
+        | `location_request_message` | A prompt asking the customer to share their location |
+        | `call_permission_request` | A prompt asking the customer's permission to be called |
+        | `voice_call` | An offer to start a WhatsApp voice call |
+        | `flow` | Launches a WhatsApp Flow |
+
+        Either `interactive.body.text` or a top-level `message` must be present — that text is
+        what is stored against the conversation and shown in the agent console.
+
+        Subtypes are **not validated** by this API; they are passed through to the channel. Which
+        ones you can actually send depends on the channel and on your WhatsApp Business account.
+        For a subtype without an example below, such as `flow`, build the payload to WhatsApp's
+        own spec and send it in the same envelope.
+
+        On **Viber** a URL button uses the `button` subtype with the same parameters, and has no
+        `name` and no `footer`.
+
+        ### Template messages
+
+        Set `type` to `template` and put the payload in `template`. `template.type` must be one
+        of `buttons`, `confirm`, `carousel` or `image_carousel`, and `template.altText` is
+        required — it is the fallback text where the template cannot be rendered, and the text
+        stored against the conversation. Template support varies by channel; check with 8x8 that
+        your channel account can send templates before building against this.
+
+        ### Reply errors
+
+        Returned as `400` with the reason in `error`:
+
+        | Condition | `error` |
+        |-----------|---------|
+        | No `message` and no `type` | `Message in request body is required` |
+        | `interactive` or `template` sent without `type` | `type is required when an interactive or template payload is provided` |
+        | `type` is not `interactive` or `template` | `type must be 'interactive' or 'template'` |
+        | `type` set but the matching payload object missing | `interactive is required when type is 'interactive'` / `template is required when type is 'template'` |
+        | The payload has no subtype | `interactive.type is required` / `template.type is required` |
+        | `template` without `altText` | `template.altText is required` |
+        | `template.type` not one of the four | `template.type must be one of buttons, confirm, carousel, image_carousel` |
+        | `type: interactive` with neither `message` nor `interactive.body.text` | `interactive.body.text or message is required` |
+        | `type` set on a channel other than WhatsApp or Viber | `interactive and template messages are only supported on WhatsApp and Viber` |
+
+        The channel check is the **only** one of these made *after* the token is used, so a
+        structured reply sent to the wrong channel consumes a token use. The others are returned
+        before the token is touched. Either way the 15-minute window stays open, so the call can
+        be corrected and retried.
+      parameters:
+        - $ref: "#/components/parameters/Token"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: |
+                `message` is required unless `type` is given. `interactive` and `template` are
+                only read when `type` is set — sending one without `type` is rejected with `400`
+                rather than silently delivered as text.
+              properties:
+                message:
+                  type: string
+                  description: |
+                    The text to send to the customer. Required unless `type` is given. When
+                    `type` is given the text is taken from the structured payload instead,
+                    though a top-level `message` may still be supplied to set the text stored
+                    against the conversation.
+                type:
+                  type: string
+                  description: |
+                    Set to send a structured message. Omit for a plain-text reply.
+                  enum:
+                    - interactive
+                    - template
+                interactive:
+                  type: object
+                  description: |
+                    The interactive payload. Required when `type` is `interactive`. Carries its
+                    own `type` (the subtype), `body.text`, an `action` whose shape depends on the
+                    subtype, and optionally `header` and `footer` (`footer` is WhatsApp only).
+                template:
+                  type: object
+                  description: |
+                    The template payload. Required when `type` is `template`. Must carry `type`
+                    and `altText`.
+            examples:
+              text:
+                summary: Plain text
+                value:
+                  message: Your order #987-65432 was shipped yesterday and arrives on Friday.
+              interactiveButtons:
+                summary: Reply buttons — up to three
+                value:
+                  type: interactive
+                  interactive:
+                    type: button
+                    body:
+                      text: Your order #987-65432 arrives Friday. Anything else?
+                    action:
+                      buttons:
+                        - type: reply
+                          reply:
+                            id: btn-0
+                            title: Track it
+                        - type: reply
+                          reply:
+                            id: btn-1
+                            title: Talk to an agent
+                        - type: reply
+                          reply:
+                            id: btn-2
+                            title: No thanks
+              interactiveList:
+                summary: List menu with sections
+                value:
+                  type: interactive
+                  interactive:
+                    type: list
+                    header:
+                      type: text
+                      text: How can we help?
+                    body:
+                      text: Pick the topic closest to your question.
+                    footer:
+                      text: Reply anytime to talk to an agent.
+                    action:
+                      button: View options
+                      sections:
+                        - title: Orders
+                          rows:
+                            - id: order-status
+                              title: Order status
+                              description: Where is my order?
+                            - id: order-change
+                              title: Change my order
+                        - title: Billing
+                          rows:
+                            - id: refund
+                              title: Request a refund
+              interactiveCtaUrl:
+                summary: URL button (WhatsApp) — cta_url
+                value:
+                  type: interactive
+                  interactive:
+                    type: cta_url
+                    body:
+                      text: You can follow your delivery here.
+                    action:
+                      name: cta_url
+                      parameters:
+                        display_text: Track order
+                        url: https://example.com/track/987-65432
+              interactiveCtaUrlViber:
+                summary: URL button (Viber) — button subtype, no name or footer
+                value:
+                  type: interactive
+                  interactive:
+                    type: button
+                    body:
+                      text: You can follow your delivery here.
+                    action:
+                      parameters:
+                        display_text: Track order
+                        url: https://example.com/track/987-65432
+              interactiveLocationRequest:
+                summary: Ask the customer to share their location
+                value:
+                  type: interactive
+                  interactive:
+                    type: location_request_message
+                    body:
+                      text: Share your location and we'll find the nearest store.
+                    action:
+                      name: location_request_message
+              interactiveCallPermission:
+                summary: Ask permission to call the customer
+                value:
+                  type: interactive
+                  interactive:
+                    type: call_permission_request
+                    body:
+                      text: May we call you about this order?
+                    action:
+                      name: call_permission_request
+              interactiveVoiceCall:
+                summary: Offer a WhatsApp voice call
+                value:
+                  type: interactive
+                  interactive:
+                    type: voice_call
+                    body:
+                      text: Would you like to speak to us now?
+                    action:
+                      name: voice_call
+                      parameters:
+                        display_text: Call us
+                        ttlMinutes: 10080
+              template:
+                summary: Template message — buttons
+                value:
+                  type: template
+                  template:
+                    type: buttons
+                    altText: Your order #987-65432 arrives Friday.
+                    text: Your order #987-65432 arrives Friday. Anything else?
+                    actions:
+                      - type: message
+                        label: Track it
+                        text: Track it
+                      - type: uri
+                        label: View receipt
+                        uri: https://example.com/r/987-65432
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "502":
+          $ref: "#/components/responses/LookupFailed"
+  /response/transfer/{token}:
+    post:
+      security: []
+      operationId: bot-response-transfer
+      summary: Transfer the conversation
+      tags:
+        - Converse 2.0 Bot Response API
+      description: |
+        Transfers the conversation to a queue or to a specific agent — for example when the
+        bot cannot answer and a human should take over.
+
+        At least one of `queueUUID` or `agentUUID` is required. **If both are given, the
+        transfer goes to the queue.**
+
+        Obtain valid values with **List** — `queues-of-campaign` for queues,
+        `agents-of-campaign` or `agents-of-queue` for agents.
+      parameters:
+        - $ref: "#/components/parameters/Token"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: At least one of `queueUUID` or `agentUUID` is required.
+              properties:
+                queueUUID:
+                  type: string
+                  description: |
+                    The queue to transfer to. Required if `agentUUID` is not given. The queue
+                    *name* is also accepted and is resolved to the queue.
+                agentUUID:
+                  type: string
+                  description: |
+                    The agent to transfer to. Required if `queueUUID` is not given.
+                transferNote:
+                  type: string
+                  description: Note to attach to the transfer.
+                transferAttachments:
+                  type: array
+                  description: Attachments to attach to the transfer.
+                  items:
+                    $ref: "#/components/schemas/Attachment"
+            examples:
+              toQueue:
+                summary: Hand off to a queue by name
+                value:
+                  queueUUID: Sales
+                  transferNote: Customer asked about enterprise pricing — bot cannot quote.
+              toAgent:
+                summary: Hand off to a specific agent
+                value:
+                  agentUUID: 7b3cd796-7e74-48af-83e6-2c9a7b1e4d55
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "502":
+          $ref: "#/components/responses/LookupFailed"
+  /response/close/{token}:
+    post:
+      security: []
+      operationId: bot-response-close
+      summary: Close the conversation
+      tags:
+        - Converse 2.0 Bot Response API
+      description: |
+        Closes the conversation with a disposition.
+
+        Obtain valid dispositions with **List** using `type: dispositions`.
+      parameters:
+        - $ref: "#/components/parameters/Token"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dispositionUUID:
+                  type: string
+                  description: |
+                    The disposition to close the conversation with. The disposition *name* is
+                    also accepted and is resolved to the disposition.
+                closingNote:
+                  type: string
+                  description: Note to attach to the closure.
+                closingAttachments:
+                  type: array
+                  description: Attachments to attach to the closure.
+                  items:
+                    $ref: "#/components/schemas/Attachment"
+              required:
+                - dispositionUUID
+            example:
+              dispositionUUID: Resolved by bot
+              closingNote: Customer confirmed the tracking link answered their question.
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "502":
+          $ref: "#/components/responses/LookupFailed"
+  /response/list/{token}:
+    post:
+      security: []
+      operationId: bot-response-list
+      summary: Look up queues, agents and dispositions
+      tags:
+        - Converse 2.0 Bot Response API
+      description: |
+        Looks up the values needed by **Transfer** and **Close**. All results are scoped to
+        the conversation the token belongs to.
+
+        The notification does not carry a URL for this operation — take the `responseUrl` you
+        received and replace `reply` with `list`.
+
+        Each item returned carries a `uuid` and a `name`. Pass the `uuid` to Transfer or
+        Close.
+      parameters:
+        - $ref: "#/components/parameters/Token"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: |
+                    What to look up.
+
+                    | Value | Returns |
+                    |-------|---------|
+                    | `dispositions` | The dispositions available for the conversation's current queue. Use with Close. |
+                    | `queues-of-campaign` | The other queues the conversation can be transferred to. The current queue is excluded, as are queues that do not serve the conversation's channel. Use with Transfer. |
+                    | `agents-of-campaign` | The agents in the account. Use with Transfer. |
+                    | `agents-of-queue` | The agents in the conversation's current queue. Use with Transfer. |
+                    | `queues-of-agent` | The queues a given agent belongs to. Requires `agentUUID`. |
+                  enum:
+                    - dispositions
+                    - queues-of-campaign
+                    - agents-of-campaign
+                    - agents-of-queue
+                    - queues-of-agent
+                agentUUID:
+                  type: string
+                  description: |
+                    The agent whose queues are returned. Required only for
+                    `queues-of-agent`.
+              required:
+                - type
+            examples:
+              dispositions:
+                summary: Dispositions available before closing
+                value:
+                  type: dispositions
+              queuesForTransfer:
+                summary: Queues the conversation may be transferred to
+                value:
+                  type: queues-of-campaign
+              queuesOfAgent:
+                summary: Queues a specific agent belongs to
+                value:
+                  type: queues-of-agent
+                  agentUUID: 7b3cd796-7e74-48af-83e6-2c9a7b1e4d55
+      responses:
+        "200":
+          description: The requested values.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/CommonResponse"
+                  - type: object
+                    properties:
+                      items:
+                        type: array
+                        description: The values found. Pass an item's `uuid` to Transfer or Close.
+                        items:
+                          type: object
+                          properties:
+                            uuid:
+                              type: string
+                              description: UUID to pass to Transfer or Close.
+                            name:
+                              type: string
+                              description: Human-readable name.
+              example:
+                success: true
+                requestId: 4f2c8a91-6d3e-4b7a-9c15-8e0f1a2b3c4d
+                timestamp: "2026-08-04T02:41:11.000Z"
+                items:
+                  - uuid: 7db68cd3-9f21-4c07-a3e8-51b6d0c7f9a2
+                    name: General
+                  - uuid: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                    name: Resolved by bot
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "502":
+          $ref: "#/components/responses/LookupFailed"
+components:
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      description: |
+        The single-use conversation token, taken from the callback URL in the inbound
+        notification. This is the credential — treat it as a secret.
+      schema:
+        type: string
+  responses:
+    Success:
+      description: The request was accepted and carried out.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CommonResponse"
+          example:
+            success: true
+            requestId: 4f2c8a91-6d3e-4b7a-9c15-8e0f1a2b3c4d
+            timestamp: "2026-08-04T02:41:11.000Z"
+    BadRequest:
+      description: A required field is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CommonResponse"
+    Forbidden:
+      description: |
+        The token is invalid, or expired. Either the 48-hour lifetime has elapsed, or the
+        15-minute window opened by the first call has closed.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CommonResponse"
+    NotFound:
+      description: The conversation referenced by the token no longer exists.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CommonResponse"
+    ServerError:
+      description: The request could not be completed.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CommonResponse"
+    LookupFailed:
+      description: A lookup required to complete the request failed.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CommonResponse"
+  schemas:
+    CommonResponse:
+      type: object
+      description: |
+        Returned by every operation in this API. Individual operations add their own
+        properties — Reply adds `mtApiResult`, Transfer adds `queueUUID`, `agentUUID` and
+        `transferResult`, Close adds `closeResult`, and List adds `items`.
+      properties:
+        success:
+          type: boolean
+          description: Whether the request was carried out.
+        message:
+          type: string
+          description: |
+            Human-readable outcome, for example `Response received and message sent`.
+        conversationUUID:
+          type: string
+          description: The conversation the call acted on.
+        error:
+          type: string
+          description: |
+            The reason the request was rejected. Present on `400` — see the per-operation error
+            tables.
+        requestId:
+          type: string
+          description: |
+            Identifier for this request, of the form `<action>-<epoch_ms>-<random>`. Quote it
+            when reporting a problem.
+        timestamp:
+          type: string
+          format: date-time
+          description: When the response was produced.
+    Attachment:
+      type: object
+      description: A file to attach to the transfer or closure.
+      properties:
+        contentType:
+          type: string
+          description: Coarse content group of the attachment.
+          enum:
+            - image
+            - video
+            - audio
+            - file
+        url:
+          type: string
+          format: uri
+          description: Publicly reachable URL of the attachment.
+        caption:
+          type: string
+          description: Caption, or file name.
+        thumbUrl:
+          type: string
+          format: uri
+          description: Publicly reachable URL of a thumbnail image. Used for videos.
+        refId:
+          type: string
+          description: Your own reference id, echoed back for mapping purposes.
+      required:
+        - contentType
+        - url

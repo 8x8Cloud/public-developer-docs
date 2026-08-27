@@ -1,5 +1,5 @@
 ---
-slug: /connect/docs/converse/agents
+slug: /converse/docs/agents
 ---
 
 # Agent Management
@@ -10,7 +10,7 @@ The Agents module provides real-time visibility into agent availability, perform
 
 ### Agent List View
 
-![Agent List](../../images/converse/page20_img1.png)
+![Agent List](../images/page20_img1.png)
 
 The main agent view displays:
 - **Name**: Agent full name

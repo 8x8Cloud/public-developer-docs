@@ -1,5 +1,5 @@
 ---
-slug: /connect/docs/converse/user-roles
+slug: /converse/docs/user-roles
 ---
 
 # User Roles & Permissions
