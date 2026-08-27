@@ -1,0 +1,456 @@
+openapi: 3.0.3
+info:
+  title: Converse 2.0 Setup API
+  version: "1.0"
+  description: |
+    Retrieve the tenant configuration values that every other Converse 2.0 API needs, and check
+    a queue's business hours.
+
+    Converse 2.0 was formerly known as Moobidesk Enterprise. Hostnames still use the
+    `moobidesk.com` domain.
+
+    ## Start here
+
+    Most Converse 2.0 operations require a UUID that nothing else can give you —
+    `channelAccountUUID` to send a message, `dispositionUUID` to close a conversation,
+    `queueUUID` and `agentUUID` to transfer one. **This API is where those UUIDs come from**,
+    so it is usually the first API a new integration calls.
+
+    ## Authentication
+
+    Every request is authenticated with an `apiKey` / `apiSecret` pair issued by 8x8 for your
+    account. Both are sent as properties of the JSON request body, not as headers.
+
+    ## One operation here writes
+
+    **Add a disposition to a queue** creates configuration rather than reading it. Everything
+    else in this API is read-only.
+
+    ## Response envelope
+
+    ```json
+    { "status": "Ok",     "message": "Success", "data": [ ... ] }
+    { "status": "Failed", "message": "<error_message>" }
+    ```
+
+    A failed request is still returned with HTTP 200 and `status: "Failed"` — check the
+    `status` property rather than relying on the HTTP status code alone.
+  contact:
+    name: 8x8 Converse 2.0
+    email: cpaas-sales@8x8.com
+servers:
+  - url: https://api18.moobidesk.com
+    description: Production
+tags:
+  - name: Converse 2.0 Setup API
+    description: Look up channel accounts, agents, queues and dispositions.
+paths:
+  /rest/api/channelaccounts:
+    post:
+      security: []
+      operationId: list-channel-accounts
+      summary: List channel accounts
+      tags:
+        - Converse 2.0 Setup API
+      description: |
+        Returns the channel accounts configured for your tenant — the WhatsApp numbers, email
+        addresses and other channel identities you can send from.
+
+        The `uuid` of a channel account is the `channelAccountUUID` path parameter of the MT
+        Messaging API.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CredentialsOnly"
+            example:
+              apiKey: 58449c15-your-api-key
+              apiSecret: 271bcd5e-your-api-secret
+      responses:
+        "200":
+          description: The tenant's channel accounts.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/ChannelAccount"
+              example:
+                status: Ok
+                message: Success
+                data:
+                  - uuid: 8abc8cde-196e-5d95-9210-3f7b2c1d6e88
+                    accountId: "6598765432"
+                    channelType:
+                      uuid: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                      name: WhatsApp
+  /rest/api/agents:
+    post:
+      security: []
+      operationId: list-agents
+      summary: List agents
+      tags:
+        - Converse 2.0 Setup API
+      description: |
+        Returns the agents configured for your tenant, including bot agents.
+
+        An agent's `uuid` is the `agentUUID` accepted by the Conversation and MT Messaging
+        APIs; `user.username` is the `agentUsername` alternative.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CredentialsOnly"
+            example:
+              apiKey: 58449c15-your-api-key
+              apiSecret: 271bcd5e-your-api-secret
+      responses:
+        "200":
+          description: The tenant's agents.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Agent"
+              example:
+                status: Ok
+                message: Success
+                data:
+                  - uuid: 7b3cd796-7e74-48af-83e6-2c9a7b1e4d55
+                    concurrent: 5
+                    type: human
+                    user:
+                      username: agent@example.com
+                      name: Amelia Ong
+                      profileImage: https://example.com/contact/profile.jpg
+  /rest/api/queues:
+    post:
+      security: []
+      operationId: list-queues
+      summary: List queues
+      tags:
+        - Converse 2.0 Setup API
+      description: |
+        Returns the queues configured for your tenant.
+
+        Send `disposition: true` to include each queue's dispositions in the response. This is
+        how you obtain the `dispositionUUID` required to close a conversation — dispositions
+        belong to a queue, so read them from the queue the conversation sits in.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Credentials"
+                - type: object
+                  properties:
+                    disposition:
+                      type: boolean
+                      description: |
+                        When `true`, each queue also carries its `dispositions` array.
+                      default: false
+            examples:
+              queuesOnly:
+                summary: Queues only
+                value:
+                  apiKey: 58449c15-your-api-key
+                  apiSecret: 271bcd5e-your-api-secret
+              withDispositions:
+                summary: Queues with their dispositions
+                value:
+                  apiKey: 58449c15-your-api-key
+                  apiSecret: 271bcd5e-your-api-secret
+                  disposition: true
+      responses:
+        "200":
+          description: The tenant's queues.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - type: object
+                    properties:
+                      timestamp:
+                        type: integer
+                        format: int64
+                        description: Epoch milliseconds at which the response was produced.
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Queue"
+              example:
+                status: Ok
+                message: Success
+                timestamp: 1648095341474
+                data:
+                  - uuid: c09b09f3-7a1e-4d6b-91c2-3d4e5f6a7b8c
+                    name: Support
+                    dispositions:
+                      - uuid: 7db68cd3-9f21-4c07-a3e8-51b6d0c7f9a2
+                        name: General
+                        key: general
+                        system: false
+  /rest/api/queues/add_disposition:
+    post:
+      security: []
+      operationId: add-queue-disposition
+      summary: Add a disposition to a queue
+      tags:
+        - Converse 2.0 Setup API
+      description: |
+        Creates a new disposition on a queue and returns it.
+
+        Unlike everything else in this API, this operation **changes your tenant's
+        configuration**. Calling it expecting a lookup will add a disposition.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Credentials"
+                - type: object
+                  properties:
+                    queueUuid:
+                      type: string
+                      description: |
+                        UUID of the queue to add the disposition to. Note the lower-case
+                        `uuid` spelling of this property, which differs from the `queueUUID`
+                        used elsewhere.
+                    disposition:
+                      type: string
+                      description: Name of the new disposition.
+                  required:
+                    - queueUuid
+                    - disposition
+            example:
+              apiKey: 58449c15-your-api-key
+              apiSecret: 271bcd5e-your-api-secret
+              queueUuid: c09b09f3-7a1e-4d6b-91c2-3d4e5f6a7b8c
+              disposition: Resolved by bot
+      responses:
+        "200":
+          description: The disposition that was created.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Disposition"
+              example:
+                status: Ok
+                message: Success
+                data:
+                  uuid: 1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d
+                  name: Resolved by bot
+                  key: resolvedbybot
+                  system: false
+  /rest/api/conversation/autoresponder:
+    post:
+      security: []
+      operationId: check-autoresponder
+      summary: Check business hours and get the autoresponder message
+      tags:
+        - Converse 2.0 Setup API
+      description: |
+        Reports whether a queue is inside Business Hours (BH) or After-Business Hours (ABH) at
+        a given time.
+
+        When the queue is in ABH **and** an autoresponder message is configured, the message
+        template is returned so you can send it yourself.
+
+        Note this operation returns its result at the top level rather than inside `data`, and
+        does not use the `status` / `message` envelope of the other operations.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Credentials"
+                - type: object
+                  properties:
+                    queueUUID:
+                      type: string
+                      description: UUID of the queue to check.
+                    channelAccountUUID:
+                      type: string
+                      description: UUID of the channel account to check.
+                    timestamp:
+                      type: string
+                      format: date-time
+                      description: |
+                        The time to evaluate against, as an ISO 8601 timestamp. Defaults to
+                        now.
+                  required:
+                    - queueUUID
+                    - channelAccountUUID
+            example:
+              apiKey: 58449c15-your-api-key
+              apiSecret: 271bcd5e-your-api-secret
+              queueUUID: c09b09f3-7a1e-4d6b-91c2-3d4e5f6a7b8c
+              channelAccountUUID: 8abc8cde-196e-5d95-9210-3f7b2c1d6e88
+              timestamp: "2026-08-04T21:30:00.000Z"
+      responses:
+        "200":
+          description: Whether the queue is open, and the autoresponder message if applicable.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isOpen:
+                    type: boolean
+                    description: |
+                      `true` when the queue is inside Business Hours, `false` when it is in
+                      After-Business Hours.
+                  message:
+                    type: string
+                    description: |
+                      The configured autoresponder message. Populated only when `isOpen` is
+                      `false` and a message is configured; otherwise empty.
+              examples:
+                afterHours:
+                  summary: After business hours, with a message configured
+                  value:
+                    isOpen: false
+                    message: Thanks for getting in touch — our team replies from 9am.
+                openNow:
+                  summary: Inside business hours
+                  value:
+                    isOpen: true
+                    message: ""
+components:
+  schemas:
+    Envelope:
+      type: object
+      description: Standard Converse 2.0 response envelope.
+      properties:
+        status:
+          type: string
+          description: "`Ok` when the request succeeded, `Failed` when it did not."
+          enum:
+            - Ok
+            - Failed
+        message:
+          type: string
+          description: "`Success`, or the error message when `status` is `Failed`."
+      required:
+        - status
+        - message
+    Credentials:
+      type: object
+      description: Service credentials, sent in the request body.
+      properties:
+        apiKey:
+          type: string
+          description: Your service API key, issued by 8x8. Treat as a secret.
+        apiSecret:
+          type: string
+          description: Your service API secret, issued by 8x8. Treat as a secret.
+      required:
+        - apiKey
+        - apiSecret
+    CredentialsOnly:
+      allOf:
+        - $ref: "#/components/schemas/Credentials"
+    ChannelAccount:
+      type: object
+      description: A channel identity you can send messages from.
+      properties:
+        uuid:
+          type: string
+          description: |
+            UUID of the channel account. This is the `channelAccountUUID` used by the MT
+            Messaging API.
+        accountId:
+          type: string
+          description: |
+            The channel's own identifier — a mobile number for WhatsApp and SMS, an address
+            for Email.
+        channelType:
+          type: object
+          description: The channel this account belongs to.
+          properties:
+            uuid:
+              type: string
+            name:
+              type: string
+              description: Channel name, for example `WhatsApp`.
+    Agent:
+      type: object
+      description: An agent, human or bot.
+      properties:
+        uuid:
+          type: string
+          description: UUID of the agent, used as `agentUUID` elsewhere.
+        concurrent:
+          type: integer
+          description: How many conversations the agent may handle at once.
+        type:
+          type: string
+          description: Whether the agent is a human or a bot.
+        user:
+          type: object
+          properties:
+            username:
+              type: string
+              description: Used as `agentUsername` elsewhere.
+            name:
+              type: string
+            profileImage:
+              type: string
+              format: uri
+    Queue:
+      type: object
+      description: A queue that conversations are routed to.
+      properties:
+        uuid:
+          type: string
+          description: UUID of the queue, used as `queueUUID` elsewhere.
+        name:
+          type: string
+          description: Name of the queue.
+        dispositions:
+          type: array
+          description: |
+            The queue's dispositions. Present only when the request set
+            `disposition: true`.
+          items:
+            $ref: "#/components/schemas/Disposition"
+    Disposition:
+      type: object
+      description: A closing reason available on a queue.
+      properties:
+        uuid:
+          type: string
+          description: |
+            UUID of the disposition, used as `dispositionUUID` when closing a conversation.
+        name:
+          type: string
+          description: Display name.
+        key:
+          type: string
+          description: Machine-readable key.
+        system:
+          type: boolean
+          description: |
+            `true` for dispositions built into Converse 2.0, `false` for ones your tenant added.

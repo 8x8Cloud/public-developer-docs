@@ -334,15 +334,6 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Security (SSO)](https://developer.8x8.com/connect/docs/connect-security): This assumes that you already have an SSO application that will be used to configure your SSO. If you do not have one yet, you might want to check ...
 - [Contact Management](https://developer.8x8.com/connect/docs/contact-management): Contact Management is a feature inside Connect that allows you to manage your contacts in bulk whether you will use them to send messages or for Co...
 - [Context & Scripting](https://developer.8x8.com/connect/docs/context-scripting): > 🚧 **[BETA]**
-- [Agent Management](https://developer.8x8.com/connect/docs/converse/agents): The Agents module provides real-time visibility into agent availability, performance, and workload distribution.
-- [Contact Management](https://developer.8x8.com/connect/docs/converse/contacts): The Contacts module provides a unified customer database with interaction history across all communication channels.
-- [Conversations](https://developer.8x8.com/connect/docs/converse/conversations): The Conversations (Chats) module is the core workspace where agents engage with customers across WhatsApp, Email, and Facebook Messenger.
-- [Getting Started](https://developer.8x8.com/connect/docs/converse/getting-started): :::note
-- [Queue Management](https://developer.8x8.com/connect/docs/converse/queue): The Queue module controls how incoming conversations are distributed to available agents based on routing rules, priority, and agent availability.
-- [Reports & Statistics](https://developer.8x8.com/connect/docs/converse/reports): Converse provides comprehensive analytics across conversations, agent performance, queue efficiency, and customer satisfaction.
-- [Settings & Configuration](https://developer.8x8.com/connect/docs/converse/settings): The Settings module provides system-wide configuration for administrators to customize Converse for their organization's needs.
-- [User Roles & Permissions](https://developer.8x8.com/connect/docs/converse/user-roles): Converse provides role-based access control with two distinct user types, each with specific capabilities and access levels.
-- [Converse](https://developer.8x8.com/connect/docs/converse-overview): Converse is a unified conversational platform that enables omnichannel customer engagement across WhatsApp, Email, and Facebook Messenger. The plat...
 - [Create a group and add a contact to that group](https://developer.8x8.com/connect/docs/create-a-group-and-add-a-contact-to-that-group): > 👍
 - [Creating a contact](https://developer.8x8.com/connect/docs/creating-a-contact): > 👍
 - [Messaging Apps Delivery Receipt Error Codes](https://developer.8x8.com/connect/docs/delivery-error-codes): > ℹ️ **Troubleshooting tip**
@@ -731,6 +722,39 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Update ChatAPI channel by Id.](https://developer.8x8.com/contactcenter/reference/updatechatapichannel.api): Update ChatAPI channel by Id.
 - [Updates the full webhook resource by Id.](https://developer.8x8.com/contactcenter/reference/updatewebhook.api): Updates the full webhook resource by Id.
 - [The endpoint used to validate that the webhook is working and reachable.](https://developer.8x8.com/contactcenter/reference/verifywebhook.api): Validates the webhook URL endpont from the connectivity point-of-view by sending a hello message and a 2xx success status code.
+- [Agent Management](https://developer.8x8.com/converse/docs/agents): The Agents module provides real-time visibility into agent availability, performance, and workload distribution.
+- [Converse 2.0 APIs](https://developer.8x8.com/converse/docs/api-overview): **Converse 2.0** is 8x8's omnichannel conversation platform for contact centres. Its APIs let an external system or bot close and transfer conversa...
+- [Converse 2.0 Bot integration](https://developer.8x8.com/converse/docs/bot-integration): Converse 2.0 can route a conversation to a **bot agent** instead of a human. When it does, it notifies your bot of each inbound message and gives i...
+- [Contact Management](https://developer.8x8.com/converse/docs/contacts): The Contacts module provides a unified customer database with interaction history across all communication channels.
+- [Converse 2.0 Conversation Status Update Notification](https://developer.8x8.com/converse/docs/conversation-status-update-notification): The **Conversation Status Update Notification** is a webhook. Whenever a conversation changes to a status you have subscribed to, Converse 2.0 call...
+- [Conversations](https://developer.8x8.com/converse/docs/conversations): The Conversations (Chats) module is the core workspace where agents engage with customers across WhatsApp, Email, and Facebook Messenger.
+- [Getting Started](https://developer.8x8.com/converse/docs/getting-started): :::note
+- [Queue Management](https://developer.8x8.com/converse/docs/queue): The Queue module controls how incoming conversations are distributed to available agents based on routing rules, priority, and agent availability.
+- [Reports & Statistics](https://developer.8x8.com/converse/docs/reports): Converse provides comprehensive analytics across conversations, agent performance, queue efficiency, and customer satisfaction.
+- [Settings & Configuration](https://developer.8x8.com/converse/docs/settings): The Settings module provides system-wide configuration for administrators to customize Converse for their organization's needs.
+- [User Roles & Permissions](https://developer.8x8.com/converse/docs/user-roles): Converse provides role-based access control with two distinct user types, each with specific capabilities and access levels.
+- [Converse](https://developer.8x8.com/connect/docs/converse/overview): Converse is a unified conversational platform that enables omnichannel customer engagement across WhatsApp, Email, and Facebook Messenger. The plat...
+- [Add a disposition to a queue](https://developer.8x8.com/converse/reference/add-queue-disposition.api): Creates a new disposition on a queue and returns it.
+- [Close the conversation](https://developer.8x8.com/converse/reference/bot-response-close.api): Closes the conversation with a disposition.
+- [Look up queues, agents and dispositions](https://developer.8x8.com/converse/reference/bot-response-list.api): Looks up the values needed by **Transfer** and **Close**. All results are scoped to
+- [Reply to the customer](https://developer.8x8.com/converse/reference/bot-response-reply.api): Sends a message to the customer in the conversation the token belongs to.
+- [Transfer the conversation](https://developer.8x8.com/converse/reference/bot-response-transfer.api): Transfers the conversation to a queue or to a specific agent — for example when the
+- [Check business hours and get the autoresponder message](https://developer.8x8.com/converse/reference/check-autoresponder.api): Reports whether a queue is inside Business Hours (BH) or After-Business Hours (ABH) at
+- [Close a conversation](https://developer.8x8.com/converse/reference/close-conversation.api): Closes a specific conversation with a disposition, and optionally attaches a closing
+- [Converse 2.0 Bot Response API](https://developer.8x8.com/converse/reference/converse-2-0-bot-response-api.info): Lets a bot reply to a customer, transfer the conversation, close it, or look up the values
+- [Converse 2.0 Conversation API](https://developer.8x8.com/converse/reference/converse-2-0-conversation-api.info): Close, transfer and look up Converse 2.0 conversations.
+- [Converse 2.0 MT Messaging API](https://developer.8x8.com/converse/reference/converse-2-0-mt-messaging-api.info): Send an outbound message to a customer through Converse 2.0. The message is delivered over
+- [Converse 2.0 Reporting API](https://developer.8x8.com/converse/reference/converse-2-0-reporting-api.info): Export conversation, message and agent data from Converse 2.0.
+- [Converse 2.0 Setup API](https://developer.8x8.com/converse/reference/converse-2-0-setup-api.info): Retrieve the tenant configuration values that every other Converse 2.0 API needs, and check
+- [Get agent data](https://developer.8x8.com/converse/reference/get-agents-report.api): Returns agent records, including each agent's channels, manager, supervisor and
+- [Get chats data](https://developer.8x8.com/converse/reference/get-chats-report.api): Returns the individual messages of up to **10 conversations** at a time, together with
+- [Get conversations data](https://developer.8x8.com/converse/reference/get-conversations-report.api): Returns conversation-level records whose **update** time falls inside the given date
+- [List a contact's active conversations](https://developer.8x8.com/converse/reference/list-active-conversations-by-contact.api): Returns the active conversations of one contact, each with its first and last
+- [List agents](https://developer.8x8.com/converse/reference/list-agents.api): Returns the agents configured for your tenant, including bot agents.
+- [List channel accounts](https://developer.8x8.com/converse/reference/list-channel-accounts.api): Returns the channel accounts configured for your tenant — the WhatsApp numbers, email
+- [List queues](https://developer.8x8.com/converse/reference/list-queues.api): Returns the queues configured for your tenant.
+- [Send a message to a customer](https://developer.8x8.com/converse/reference/send-mt-message.api): Sends an outbound message to a customer over the channel of the given channel
+- [Transfer a conversation](https://developer.8x8.com/converse/reference/transfer-conversation.api): Transfers a conversation to another queue or to a specific agent, optionally
 - [Index](https://developer.8x8.com/actions-events/docs): import Hero, { Logo } from '@site/docusaurus/components/Hero';
 - [14 December 2021 Release](https://developer.8x8.com/jaas/docs/14-december-2021-release): **New features**
 - [14 October 2021 Release](https://developer.8x8.com/jaas/docs/14-october-2021-release): **UX improvements**
