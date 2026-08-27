@@ -196,7 +196,7 @@
                         "properties": {
                           "directSend": {
                             "type": "object",
-                            "description": "WhatsApp Direct Send settings. When this object is present, the message is sent using the WhatsApp Direct Send API instead of a pre-created template. Direct Send allows you to send business-initiated utility messages without pre-creating a template; matching templates are auto-generated and managed on your behalf.\n\nDirect Send supports the following message subset:\n- `text` messages.\n- `interactive` messages of type `cta_url`, with a single Call-to-Action URL button defined via `interactive.action.parameters`.\n- `interactive` messages of type `button` (Reply Buttons), with 1–3 buttons.\n- For `interactive` messages, only `text` headers are supported.",
+                            "description": "WhatsApp Direct Send settings. When this object is present, the message is sent using the WhatsApp Direct Send API instead of a pre-created template. Direct Send allows you to send business-initiated utility messages without pre-creating a template; matching templates are auto-generated and managed on your behalf.\n\nDirect Send supports the following message subset:\n- `text` messages.\n- `interactive` messages of type `cta_url`, with a single Call-to-Action URL button defined via `interactive.action.parameters`.\n- `interactive` messages of type `button` (Reply Buttons), with 1\u20133 buttons.\n- For `interactive` messages, only `text` headers are supported.",
                             "title": "WhatsApp Direct Send settings",
                             "properties": {
                               "category": {
@@ -648,7 +648,7 @@
                                     "properties": {
                                       "type": {
                                         "type": "string",
-                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"gif\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only — overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
+                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"gif\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only \u2014 overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
                                         "enum": [
                                           "text",
                                           "image",
@@ -2224,7 +2224,7 @@
                     },
                     "type": "buttons",
                     "content": {
-                      "text": "🎉 Successful Purchase! 🎉\\n\\nHello Ana,\\n\\nThank you for purchasing your Singapore OCBC Skyway ticket! Your ticket is now confirmed and ready for use.\\n\\n📅 Date: October 15, 2023\\n⏰ Time: 3:00 PM - 4:00 PM\\n🎫 Ticket ID: SKY98723\\n\\nTo view your e-ticket, click the button below.",
+                      "text": "\ud83c\udf89 Successful Purchase! \ud83c\udf89\\n\\nHello Ana,\\n\\nThank you for purchasing your Singapore OCBC Skyway ticket! Your ticket is now confirmed and ready for use.\\n\\n\ud83d\udcc5 Date: October 15, 2023\\n\u23f0 Time: 3:00 PM - 4:00 PM\\n\ud83c\udfab Ticket ID: SKY98723\\n\\nTo view your e-ticket, click the button below.",
                       "url": "https://www.redbrick.sg/wp-content/uploads/2020/04/coleen-rivas-OZ2rS2zCjNo-unsplash-1125x1500.jpg",
                       "button": {
                         "caption": "View E-ticket",
@@ -2536,7 +2536,7 @@
                     "content": {
                       "richCard": {
                         "cardOrientation": "vertical",
-                        "title": "Hey Melissa! New year, new shoes? 👟",
+                        "title": "Hey Melissa! New year, new shoes? \ud83d\udc5f",
                         "description": "Check out our latest arrivals, including the AirPulse, perfect for your next run! Plus, get a free gait analysis with any purchase this week.",
                         "media": {
                           "height": "short",
@@ -2549,19 +2549,19 @@
                         "suggestions": [
                           {
                             "reply": {
-                              "text": "🛍️ View new arrivals",
+                              "text": "\ud83d\udecd\ufe0f View new arrivals",
                               "postbackData": "view_new_arrivals"
                             }
                           },
                           {
                             "reply": {
-                              "text": "📋 Book Gait Analysis",
+                              "text": "\ud83d\udccb Book Gait Analysis",
                               "postbackData": "book_gait_analysis"
                             }
                           },
                           {
                             "action": {
-                              "text": "👗 Shop now",
+                              "text": "\ud83d\udc57 Shop now",
                               "postbackData": "shop_now",
                               "openUrlAction": {
                                 "url": "https://example.com",
@@ -2602,7 +2602,7 @@
                         "cardOrientation": "horizontal",
                         "thumbnailImageAlignment": "right",
                         "title": "Your reservation at Ebi",
-                        "description": "We're springing into action to get your table ready for 5:00 PM! 🕔 Have any questions before you arrive?",
+                        "description": "We're springing into action to get your table ready for 5:00 PM! \ud83d\udd54 Have any questions before you arrive?",
                         "media": {
                           "contentInfo": {
                             "fileUrl": "https://www.example.com/image.jpg",
@@ -4391,538 +4391,6 @@
         }
       ]
     },
-    "/api/v1/accounts/{accountId}/viber/channels/{channelId}/templates": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Templates retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "Get Viber templates response",
-                  "properties": {
-                    "templates": {
-                      "type": "array",
-                      "description": "The Viber templates registered for the channel.",
-                      "items": {
-                        "type": "object",
-                        "title": "Viber template",
-                        "properties": {
-                          "templateId": {
-                            "type": "string",
-                            "example": "abc123def456",
-                            "description": "Viber's internal identifier for this template."
-                          },
-                          "name": {
-                            "type": "string",
-                            "example": "test_order_confirmation_001",
-                            "description": "The template name."
-                          },
-                          "text": {
-                            "type": "string",
-                            "example": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
-                            "description": "The template message text."
-                          },
-                          "language": {
-                            "type": "string",
-                            "example": "en",
-                            "description": "Language code for the template."
-                          },
-                          "category": {
-                            "type": "string",
-                            "example": "Transactional",
-                            "description": "Template category."
-                          },
-                          "params": {
-                            "type": "array",
-                            "description": "List of parameter definitions used in the template text.",
-                            "items": {
-                              "type": "object",
-                              "title": "Template parameter",
-                              "properties": {
-                                "name": {
-                                  "type": "string",
-                                  "example": "customer_name",
-                                  "description": "The parameter name, matching the placeholder in the template text."
-                                },
-                                "type": {
-                                  "type": "string",
-                                  "example": "TEXT",
-                                  "enum": [
-                                    "TEXT"
-                                  ],
-                                  "description": "The parameter type."
-                                }
-                              }
-                            }
-                          },
-                          "status": {
-                            "type": "string",
-                            "example": "Pending",
-                            "enum": [
-                              "Approved",
-                              "Pending",
-                              "Rejected"
-                            ],
-                            "description": "The template's current approval status with Viber."
-                          },
-                          "createdAt": {
-                            "type": "string",
-                            "format": "date-time",
-                            "example": "2026-08-01T10:15:00Z",
-                            "description": "When the template was created."
-                          },
-                          "updatedAt": {
-                            "type": "string",
-                            "format": "date-time",
-                            "example": "2026-08-05T09:30:00Z",
-                            "description": "When the template was last updated."
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "example": {
-                  "templates": [
-                    {
-                      "templateId": "vb_tmpl_9f21c7",
-                      "name": "test_order_confirmation_001",
-                      "text": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
-                      "language": "en",
-                      "category": "Transactional",
-                      "params": [
-                        {
-                          "name": "customer_name",
-                          "type": "TEXT"
-                        },
-                        {
-                          "name": "order_id",
-                          "type": "TEXT"
-                        },
-                        {
-                          "name": "delivery_date",
-                          "type": "TEXT"
-                        }
-                      ],
-                      "status": "Approved",
-                      "createdAt": "2026-08-01T10:15:00Z",
-                      "updatedAt": "2026-08-05T09:30:00Z"
-                    },
-                    {
-                      "templateId": "vb_tmpl_4a88e2",
-                      "name": "otp_login_en",
-                      "text": "Your verification code is {{pin}}. Valid for 5 minutes. Team 8x8",
-                      "language": "en",
-                      "category": "OTP",
-                      "params": [
-                        {
-                          "name": "pin",
-                          "type": "TEXT"
-                        }
-                      ],
-                      "status": "Pending",
-                      "createdAt": "2026-08-10T08:00:00Z",
-                      "updatedAt": "2026-08-10T08:00:00Z"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/400"
-          },
-          "401": {
-            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
-          },
-          "403": {
-            "description": "Request was not authorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages~1%7Bumid%7D/delete/responses/400/content/application~1json/schema"
-                },
-                "example": {
-                  "code": 1201,
-                  "message": "You do not have permission to manage Viber templates",
-                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
-                  "timestamp": "2018-08-02T09:42:38.8988997+00:00"
-                }
-              }
-            }
-          },
-          "500": {
-            "$ref": "#/paths/~1files~1%7Bfilename%7D/get/responses/500"
-          }
-        },
-        "description": "This endpoint returns the Viber message templates registered for the channel, along with their current approval status with Viber.\n\nRetrieving Viber templates requires an admin role on the account.",
-        "summary": "Get Viber templates",
-        "security": [
-          {
-            "apiKey": []
-          }
-        ],
-        "operationId": "get-viber-templates",
-        "tags": [
-          "Management API"
-        ]
-      },
-      "post": {
-        "responses": {
-          "200": {
-            "description": "Template created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/400"
-          },
-          "401": {
-            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
-          },
-          "500": {
-            "$ref": "#/paths/~1files~1%7Bfilename%7D/get/responses/500"
-          }
-        },
-        "summary": "Add Viber template",
-        "operationId": "add-viber-template",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "test_order_confirmation_001",
-                    "description": "A unique name for the template. Use lowercase letters, numbers, and underscores only."
-                  },
-                  "category": {
-                    "type": "string",
-                    "description": "Template category.",
-                    "example": "Transactional",
-                    "enum": [
-                      "Transactional",
-                      "OTP"
-                    ]
-                  },
-                  "language": {
-                    "type": "string",
-                    "example": "en",
-                    "description": "Language code for the template (e.g., `en` for English, `id` for Indonesian)."
-                  },
-                  "text": {
-                    "type": "string",
-                    "example": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
-                    "description": "The template message text. Use `{{parameter_name}}` syntax for dynamic parameters."
-                  },
-                  "params": {
-                    "type": "array",
-                    "description": "List of parameter definitions used in the template text. Each parameter referenced in the `text` field must have a corresponding entry here.",
-                    "items": {
-                      "type": "object",
-                      "title": "Template parameter",
-                      "properties": {
-                        "name": {
-                          "type": "string",
-                          "description": "The parameter name, matching the placeholder in the template text.",
-                          "example": "customer_name"
-                        },
-                        "type": {
-                          "type": "string",
-                          "description": "The parameter type.",
-                          "example": "TEXT",
-                          "enum": [
-                            "TEXT"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "name",
-                        "type"
-                      ]
-                    }
-                  },
-                  "varExample": {
-                    "type": "array",
-                    "description": "Example values for each parameter, used during the template review process. Each entry must correspond to a parameter defined in the `params` array.",
-                    "items": {
-                      "type": "object",
-                      "title": "Parameter example value",
-                      "properties": {
-                        "name": {
-                          "type": "string",
-                          "description": "The parameter name, matching a `params` entry.",
-                          "example": "customer_name"
-                        },
-                        "example": {
-                          "type": "string",
-                          "description": "An example value for the parameter.",
-                          "example": "John"
-                        }
-                      },
-                      "required": [
-                        "name",
-                        "example"
-                      ]
-                    }
-                  }
-                },
-                "required": [
-                  "name",
-                  "category",
-                  "language",
-                  "text",
-                  "params",
-                  "varExample"
-                ],
-                "title": "Register Viber template request",
-                "description": "Register Viber template request"
-              },
-              "examples": {
-                "viberTransactionalTemplate": {
-                  "summary": "Add Viber Transactional Template",
-                  "value": {
-                    "name": "test_order_confirmation_001",
-                    "category": "Transactional",
-                    "language": "en",
-                    "text": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
-                    "params": [
-                      {
-                        "name": "customer_name",
-                        "type": "TEXT"
-                      },
-                      {
-                        "name": "order_id",
-                        "type": "TEXT"
-                      },
-                      {
-                        "name": "delivery_date",
-                        "type": "TEXT"
-                      }
-                    ],
-                    "varExample": [
-                      {
-                        "name": "customer_name",
-                        "example": "John"
-                      },
-                      {
-                        "name": "order_id",
-                        "example": "ORD-12345"
-                      },
-                      {
-                        "name": "delivery_date",
-                        "example": "2026-08-01"
-                      }
-                    ]
-                  }
-                },
-                "viberOtpTemplate": {
-                  "summary": "Add Viber OTP Template",
-                  "value": {
-                    "name": "otp_login_en",
-                    "category": "OTP",
-                    "language": "en",
-                    "text": "Your verification code is {{pin}}. Valid for 5 minutes. Team 8x8",
-                    "params": [
-                      {
-                        "name": "pin",
-                        "type": "TEXT"
-                      }
-                    ],
-                    "varExample": [
-                      {
-                        "name": "pin",
-                        "example": "123456"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Management API"
-        ],
-        "description": "This endpoint is used to register a new Viber message template.\n\nViber message templates are pre-approved message formats for sending transactional messages and OTPs to customers via Viber. Templates support dynamic parameters using the `{{parameter_name}}` syntax that can be substituted at send time.\n\nCurrently, only `Transactional` and `OTP` categories are supported.\n\nCreating Viber templates requires an admin role on the account.",
-        "security": [
-          {
-            "apiKey": []
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "name": "accountId",
-          "in": "path",
-          "description": "You must replace *{accountId}* with the accountid that you want to use.",
-          "required": true,
-          "schema": {
-            "maxLength": 36,
-            "minLength": 32,
-            "pattern": "^[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}$",
-            "type": "string"
-          }
-        },
-        {
-          "in": "path",
-          "name": "channelId",
-          "required": true,
-          "description": "Viber channel identifier",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
-    },
-    "/api/v1/accounts/{accountId}/viber/channels/{channelId}/templates/{templateName}": {
-      "delete": {
-        "responses": {
-          "200": {
-            "description": "Template deleted successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request error response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages~1%7Bumid%7D/delete/responses/400/content/application~1json/schema"
-                },
-                "example": {
-                  "code": 4002,
-                  "message": "Invalid 'language' field. A language is required to identify the template variant to delete.",
-                  "errorId": "b4478860-b76c-e811-814e-022a35cc1c71",
-                  "timestamp": "2018-08-04T09:25:40.9235752+00:00"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/paths/~1api~1v1~1accounts~1%7BaccountId%7D~1webhooks/get/responses/401"
-          },
-          "403": {
-            "description": "Request was not authorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages~1%7Bumid%7D/delete/responses/400/content/application~1json/schema"
-                },
-                "example": {
-                  "code": 1201,
-                  "message": "You do not have permission to manage Viber templates",
-                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
-                  "timestamp": "2018-08-02T09:42:38.8988997+00:00"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The template doesn't exist",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages~1%7Bumid%7D/delete/responses/400/content/application~1json/schema"
-                },
-                "example": {
-                  "code": 3038,
-                  "message": "Template not found",
-                  "errorId": "aa400d4b-fffe-ea11-8277-00155d4ff7ed",
-                  "timestamp": "2020-09-25T07:18:22.78Z"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Rate limiting quota exceeded error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1api~1v1~1subaccounts~1%7BsubAccountId%7D~1messages~1%7Bumid%7D/delete/responses/400/content/application~1json/schema"
-                },
-                "example": {
-                  "code": 2012,
-                  "message": "Viber API rate limit exceeded. Please try again later.",
-                  "errorId": "c8a41b47-57bf-ea11-8273-00155d466a31",
-                  "timestamp": "2020-07-06T07:07:00.30Z"
-                }
-              }
-            }
-          },
-          "500": {
-            "$ref": "#/paths/~1files~1%7Bfilename%7D/get/responses/500"
-          }
-        },
-        "description": "This endpoint deletes a Viber message template, removing it from both the 8x8 platform and Viber.\n\nEach language variant of a Viber template is stored as its own template, so you must specify the `language` query parameter to identify which variant to delete.\n\nDeleting Viber templates requires an admin role on the account.",
-        "summary": "Delete Viber template",
-        "security": [
-          {
-            "apiKey": []
-          }
-        ],
-        "operationId": "delete-viber-template",
-        "tags": [
-          "Management API"
-        ]
-      },
-      "parameters": [
-        {
-          "name": "accountId",
-          "in": "path",
-          "description": "You must replace *{accountId}* with the accountid that you want to use.",
-          "required": true,
-          "schema": {
-            "maxLength": 36,
-            "minLength": 32,
-            "pattern": "^[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}$",
-            "type": "string"
-          }
-        },
-        {
-          "in": "path",
-          "name": "channelId",
-          "required": true,
-          "description": "Viber channel identifier",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "in": "path",
-          "name": "templateName",
-          "required": true,
-          "description": "The name of the Viber template to delete.",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "in": "query",
-          "name": "language",
-          "required": true,
-          "description": "Language code of the template variant to delete (e.g. `en`). Required because each Viber template language variant is stored as its own template.",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ]
-    },
     "/api/v1/whatsapp/subaccounts/{subAccountId}/channels/{channelId}/callPermissions": {
       "get": {
         "summary": "Get Call Permission Status",
@@ -5095,7 +4563,7 @@
       "post": {
         "summary": "Submit WhatsApp Direct Send Sample",
         "operationId": "submit-whatsapp-direct-send-sample",
-        "description": "This endpoint is used to submit a sample of a WhatsApp Direct Send message to Meta for review and classification.\n\nDirect Send auto-creates WhatsApp templates on the fly and matches incoming messages against them. Submitting sample messages will ensure that the messages you send through Direct Send are accurately classified and transformed into templates that are useful for your use cases.\n\nThe response indicates whether the sample was processed successfully and the category Meta assigned to it. Possible categories are `UTILITY`, `MARKETING`, and `AUTHENTICATION`.\n\nSamples can be of two types:\n* `text` — a plain text body.\n* `interactive` — an interactive message with a call-to-action URL (`cta_url`) or reply buttons (`button`).",
+        "description": "This endpoint is used to submit a sample of a WhatsApp Direct Send message to Meta for review and classification.\n\nDirect Send auto-creates WhatsApp templates on the fly and matches incoming messages against them. Submitting sample messages will ensure that the messages you send through Direct Send are accurately classified and transformed into templates that are useful for your use cases.\n\nThe response indicates whether the sample was processed successfully and the category Meta assigned to it. Possible categories are `UTILITY`, `MARKETING`, and `AUTHENTICATION`.\n\nSamples can be of two types:\n* `text` \u2014 a plain text body.\n* `interactive` \u2014 an interactive message with a call-to-action URL (`cta_url`) or reply buttons (`button`).",
         "tags": [
           "Management API"
         ],
@@ -7358,7 +6826,7 @@
                     },
                     "httpAuthorization": {
                       "type": "string",
-                      "description": "A static value sent as the HTTP `Authorization` header with every webhook request. Use this for static credentials such as API keys or pre-shared tokens.\n\n**Example — Basic Authorization:**\n- Encode `user:password` in base64 (e.g. `dXNlcjpwYXNzd29yZA==`)\n- Set this field to `Basic dXNlcjpwYXNzd29yZA==`\n\n> For OAuth 2.0 Client Credentials flow, leave this field empty and use the `oauth` property instead.",
+                      "description": "A static value sent as the HTTP `Authorization` header with every webhook request. Use this for static credentials such as API keys or pre-shared tokens.\n\n**Example \u2014 Basic Authorization:**\n- Encode `user:password` in base64 (e.g. `dXNlcjpwYXNzd29yZA==`)\n- Set this field to `Basic dXNlcjpwYXNzd29yZA==`\n\n> For OAuth 2.0 Client Credentials flow, leave this field empty and use the `oauth` property instead.",
                       "example": "Bearer 9QQhlsEb8VY"
                     },
                     "enabled": {

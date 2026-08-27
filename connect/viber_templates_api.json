@@ -1,0 +1,1270 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Viber Templates API",
+    "version": "1",
+    "description": "Manage Viber message templates: register, list, and delete pre-approved message formats for sending transactional messages and OTPs via Viber.\n\nThese operations share the same endpoint as WhatsApp template management (see the Business Messaging API); the channel type is derived from `{channelId}`.",
+    "contact": {
+      "name": "8x8 Inc",
+      "url": "https://cpaas.8x8.com",
+      "email": "cpaas-support@8x8.com"
+    },
+    "termsOfService": "https://cpaas.8x8.com/sg/terms-and-conditions/"
+  },
+  "servers": [
+    {
+      "url": "https://chatapps.8x8.com",
+      "description": "Asia-Pacific region"
+    },
+    {
+      "url": "https://chatapps.us.8x8.com",
+      "description": "North America region"
+    },
+    {
+      "url": "https://chatapps.8x8.uk",
+      "description": "Europe region"
+    },
+    {
+      "url": "https://chatapps.8x8.id",
+      "description": "Indonesia region"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Viber Templates"
+    }
+  ],
+  "paths": {
+    "/api/v1/accounts/{accountId}/channels/{channelId}/templates": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Templates retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Get Viber templates response",
+                  "properties": {
+                    "templates": {
+                      "type": "array",
+                      "description": "The Viber templates registered for the channel.",
+                      "items": {
+                        "type": "object",
+                        "title": "Viber template",
+                        "properties": {
+                          "templateId": {
+                            "type": "string",
+                            "example": "abc123def456",
+                            "description": "Viber's internal identifier for this template."
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "test_order_confirmation_001",
+                            "description": "The template name."
+                          },
+                          "text": {
+                            "type": "string",
+                            "example": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
+                            "description": "The template message text."
+                          },
+                          "language": {
+                            "type": "string",
+                            "example": "en",
+                            "description": "Language code for the template."
+                          },
+                          "category": {
+                            "type": "string",
+                            "example": "Transactional",
+                            "description": "Template category."
+                          },
+                          "params": {
+                            "type": "array",
+                            "description": "List of parameter definitions used in the template text.",
+                            "items": {
+                              "type": "object",
+                              "title": "Template parameter",
+                              "properties": {
+                                "name": {
+                                  "type": "string",
+                                  "example": "customer_name",
+                                  "description": "The parameter name, matching the placeholder in the template text."
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "example": "TEXT",
+                                  "enum": [
+                                    "TEXT"
+                                  ],
+                                  "description": "The parameter type."
+                                }
+                              }
+                            }
+                          },
+                          "status": {
+                            "type": "string",
+                            "example": "Pending",
+                            "enum": [
+                              "Approved",
+                              "Pending",
+                              "Rejected"
+                            ],
+                            "description": "The template's current approval status with Viber."
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2026-08-01T10:15:00Z",
+                            "description": "When the template was created."
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2026-08-05T09:30:00Z",
+                            "description": "When the template was last updated."
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "templates": [
+                    {
+                      "templateId": "vb_tmpl_9f21c7",
+                      "name": "test_order_confirmation_001",
+                      "text": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
+                      "language": "en",
+                      "category": "Transactional",
+                      "params": [
+                        {
+                          "name": "customer_name",
+                          "type": "TEXT"
+                        },
+                        {
+                          "name": "order_id",
+                          "type": "TEXT"
+                        },
+                        {
+                          "name": "delivery_date",
+                          "type": "TEXT"
+                        }
+                      ],
+                      "status": "Approved",
+                      "createdAt": "2026-08-01T10:15:00Z",
+                      "updatedAt": "2026-08-05T09:30:00Z"
+                    },
+                    {
+                      "templateId": "vb_tmpl_4a88e2",
+                      "name": "otp_login_en",
+                      "text": "Your verification code is {{pin}}. Valid for 5 minutes. Team 8x8",
+                      "language": "en",
+                      "category": "OTP",
+                      "params": [
+                        {
+                          "name": "pin",
+                          "type": "TEXT"
+                        }
+                      ],
+                      "status": "Pending",
+                      "createdAt": "2026-08-10T08:00:00Z",
+                      "updatedAt": "2026-08-10T08:00:00Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 1002,
+                  "message": "Invalid MSISDN format (not E.164 international number)",
+                  "errorId": "b4478860-b76c-e811-814e-022a35cc1c71",
+                  "timestamp": "2018-08-04T09:25:40.9235752+00:00"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Request was not authenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 1200,
+                  "message": "Request was not authenticated properly",
+                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
+                  "timestamp": "2018-08-02T09:42:38.8988997+00:00"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Request was not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 1201,
+                  "message": "You do not have permission to manage Viber templates",
+                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
+                  "timestamp": "2018-08-02T09:42:38.8988997+00:00"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limiting quota exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 2012,
+                  "message": "Viber API rate limit exceeded. Please try again later.",
+                  "errorId": "c8a41b47-57bf-ea11-8273-00155d466a31",
+                  "timestamp": "2020-07-06T07:07:00.30Z"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 2000,
+                  "message": "Internal server error",
+                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
+                  "timestamp": "2018-07-02T09:42:38.8988997+00:00"
+                }
+              }
+            }
+          }
+        },
+        "description": "This endpoint returns the Viber message templates registered for the channel, along with their current approval status with Viber.\n\nRetrieving Viber templates requires an admin role on the account.",
+        "summary": "Get Viber templates",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "operationId": "get-viber-templates",
+        "tags": [
+          "Management API"
+        ]
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Template created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 1002,
+                  "message": "Invalid MSISDN format (not E.164 international number)",
+                  "errorId": "b4478860-b76c-e811-814e-022a35cc1c71",
+                  "timestamp": "2018-08-04T09:25:40.9235752+00:00"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Request was not authenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 1200,
+                  "message": "Request was not authenticated properly",
+                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
+                  "timestamp": "2018-08-02T09:42:38.8988997+00:00"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Request was not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 1201,
+                  "message": "You do not have permission to manage Viber templates",
+                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
+                  "timestamp": "2018-08-02T09:42:38.8988997+00:00"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limiting quota exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 2012,
+                  "message": "Viber API rate limit exceeded. Please try again later.",
+                  "errorId": "c8a41b47-57bf-ea11-8273-00155d466a31",
+                  "timestamp": "2020-07-06T07:07:00.30Z"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 2000,
+                  "message": "Internal server error",
+                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
+                  "timestamp": "2018-07-02T09:42:38.8988997+00:00"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Add Viber template",
+        "operationId": "add-viber-template",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "test_order_confirmation_001",
+                    "description": "A unique name for the template. Use lowercase letters, numbers, and underscores only."
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "Template category.",
+                    "example": "Transactional",
+                    "enum": [
+                      "Transactional",
+                      "OTP"
+                    ]
+                  },
+                  "language": {
+                    "type": "string",
+                    "example": "en",
+                    "description": "Language code for the template (e.g., `en` for English, `id` for Indonesian)."
+                  },
+                  "text": {
+                    "type": "string",
+                    "example": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
+                    "description": "The template message text. Use `{{parameter_name}}` syntax for dynamic parameters."
+                  },
+                  "params": {
+                    "type": "array",
+                    "description": "List of parameter definitions used in the template text. Each parameter referenced in the `text` field must have a corresponding entry here.",
+                    "items": {
+                      "type": "object",
+                      "title": "Template parameter",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "The parameter name, matching the placeholder in the template text.",
+                          "example": "customer_name"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "The parameter type.",
+                          "example": "TEXT",
+                          "enum": [
+                            "TEXT"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "type"
+                      ]
+                    }
+                  },
+                  "varExample": {
+                    "type": "array",
+                    "description": "Example values for each parameter, used during the template review process. Each entry must correspond to a parameter defined in the `params` array.",
+                    "items": {
+                      "type": "object",
+                      "title": "Parameter example value",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "The parameter name, matching a `params` entry.",
+                          "example": "customer_name"
+                        },
+                        "example": {
+                          "type": "string",
+                          "description": "An example value for the parameter.",
+                          "example": "John"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "example"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "name",
+                  "category",
+                  "language",
+                  "text",
+                  "params",
+                  "varExample"
+                ],
+                "title": "Register Viber template request",
+                "description": "Register Viber template request"
+              },
+              "examples": {
+                "viberTransactionalTemplate": {
+                  "summary": "Add Viber Transactional Template",
+                  "value": {
+                    "name": "test_order_confirmation_001",
+                    "category": "Transactional",
+                    "language": "en",
+                    "text": "Hello {{customer_name}}, your order {{order_id}} has been confirmed. Estimated delivery: {{delivery_date}}. Thank you!",
+                    "params": [
+                      {
+                        "name": "customer_name",
+                        "type": "TEXT"
+                      },
+                      {
+                        "name": "order_id",
+                        "type": "TEXT"
+                      },
+                      {
+                        "name": "delivery_date",
+                        "type": "TEXT"
+                      }
+                    ],
+                    "varExample": [
+                      {
+                        "name": "customer_name",
+                        "example": "John"
+                      },
+                      {
+                        "name": "order_id",
+                        "example": "ORD-12345"
+                      },
+                      {
+                        "name": "delivery_date",
+                        "example": "2026-08-01"
+                      }
+                    ]
+                  }
+                },
+                "viberOtpTemplate": {
+                  "summary": "Add Viber OTP Template",
+                  "value": {
+                    "name": "otp_login_en",
+                    "category": "OTP",
+                    "language": "en",
+                    "text": "Your verification code is {{pin}}. Valid for 5 minutes. Team 8x8",
+                    "params": [
+                      {
+                        "name": "pin",
+                        "type": "TEXT"
+                      }
+                    ],
+                    "varExample": [
+                      {
+                        "name": "pin",
+                        "example": "123456"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Management API"
+        ],
+        "description": "This endpoint is used to register a new Viber message template.\n\nViber message templates are pre-approved message formats for sending transactional messages and OTPs to customers via Viber. Templates support dynamic parameters using the `{{parameter_name}}` syntax that can be substituted at send time.\n\nCurrently, only `Transactional` and `OTP` categories are supported.\n\nCreating Viber templates requires an admin role on the account.",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "accountId",
+          "in": "path",
+          "description": "You must replace *{accountId}* with the accountid that you want to use.",
+          "required": true,
+          "schema": {
+            "maxLength": 36,
+            "minLength": 32,
+            "pattern": "^[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}$",
+            "type": "string"
+          },
+          "example": "ec36a867-3dd4-e911-814a-02d85f55fce8"
+        },
+        {
+          "in": "path",
+          "name": "channelId",
+          "required": true,
+          "description": "Viber channel identifier",
+          "schema": {
+            "type": "string"
+          },
+          "example": "9f21c7a4-4a88-4e2b-9c31-7f0e5a2d1b6c"
+        }
+      ]
+    },
+    "/api/v1/accounts/{accountId}/channels/{channelId}/templates/{templateName}": {
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "Template deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 4002,
+                  "message": "Invalid 'language' field. A language is required to identify the template variant to delete.",
+                  "errorId": "b4478860-b76c-e811-814e-022a35cc1c71",
+                  "timestamp": "2018-08-04T09:25:40.9235752+00:00"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Request was not authenticated response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 1200,
+                  "message": "Request was not authenticated properly",
+                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
+                  "timestamp": "2018-08-02T09:42:38.8988997+00:00"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Request was not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 1201,
+                  "message": "You do not have permission to manage Viber templates",
+                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
+                  "timestamp": "2018-08-02T09:42:38.8988997+00:00"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The template doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 3038,
+                  "message": "Template not found",
+                  "errorId": "aa400d4b-fffe-ea11-8277-00155d4ff7ed",
+                  "timestamp": "2020-09-25T07:18:22.78Z"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limiting quota exceeded error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 2012,
+                  "message": "Viber API rate limit exceeded. Please try again later.",
+                  "errorId": "c8a41b47-57bf-ea11-8273-00155d466a31",
+                  "timestamp": "2020-07-06T07:07:00.30Z"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ErrorResponse",
+                  "required": [
+                    "code",
+                    "errorId",
+                    "timestamp"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "Error code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "errorId": {
+                      "type": "string",
+                      "description": "Unique id of error. You can use it as reference when sending enquiries to 8x8 support",
+                      "format": "uuid"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "description": "Data and time of the error occurence",
+                      "format": "date-time"
+                    }
+                  },
+                  "description": "Response in case of error",
+                  "example": {
+                    "code": 1001,
+                    "message": "Provided subAccountId doesn't belongs to your account",
+                    "errorId": "91b106f0-c0da-4aba-a43a-7af9c5893a80",
+                    "timestamp": "2017-04-19T02:31:19.4297387+00:00"
+                  }
+                },
+                "example": {
+                  "code": 2000,
+                  "message": "Internal server error",
+                  "errorId": "db9dced4-3534-4d86-9d18-6b448af0d621",
+                  "timestamp": "2018-07-02T09:42:38.8988997+00:00"
+                }
+              }
+            }
+          }
+        },
+        "description": "This endpoint deletes a Viber message template, removing it from both the 8x8 platform and Viber.\n\nEach language variant of a Viber template is stored as its own template, so you must specify the `language` query parameter to identify which variant to delete.\n\nDeleting Viber templates requires an admin role on the account.",
+        "summary": "Delete Viber template",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "operationId": "delete-viber-template",
+        "tags": [
+          "Management API"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "accountId",
+          "in": "path",
+          "description": "You must replace *{accountId}* with the accountid that you want to use.",
+          "required": true,
+          "schema": {
+            "maxLength": 36,
+            "minLength": 32,
+            "pattern": "^[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}$",
+            "type": "string"
+          },
+          "example": "ec36a867-3dd4-e911-814a-02d85f55fce8"
+        },
+        {
+          "in": "path",
+          "name": "channelId",
+          "required": true,
+          "description": "Viber channel identifier",
+          "schema": {
+            "type": "string"
+          },
+          "example": "9f21c7a4-4a88-4e2b-9c31-7f0e5a2d1b6c"
+        },
+        {
+          "in": "path",
+          "name": "templateName",
+          "required": true,
+          "description": "The name of the Viber template to delete.",
+          "schema": {
+            "type": "string"
+          },
+          "example": "otp_login_en"
+        },
+        {
+          "in": "query",
+          "name": "language",
+          "required": true,
+          "description": "Language code of the template variant to delete (e.g. `en`). Required because each Viber template language variant is stored as its own template.",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "* 8x8 SMS API accepts an **ApiKey Bearer Token** authentication method.\n\n* You can generate  tokens from your customer portal  [https://connect.8x8.com/](https://connect.8x8.com/)\n\n* You need to include the following header in your requests: `Authorization: Bearer {apiKey}`\n\n> **Note**: Replace the `{apiKey}` placeholder with the key generated from the customer portal.\n---\nIf you haven't created your account yet, please go to 8x8 website [https://connect.8x8.com](https://connect.8x8.com) to sign up.\n"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
+}

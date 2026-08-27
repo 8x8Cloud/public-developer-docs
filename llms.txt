@@ -694,6 +694,7 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Upload file](https://developer.8x8.com/connect/reference/upload-file.api): Upload file
 - [Verification API](https://developer.8x8.com/connect/reference/verification-api.info): Verification API supports phone number verification through OTP delivery via SMS, WhatsApp, Viber, or voice call, and silent mobile authentication,...
 - [Initiate verification](https://developer.8x8.com/connect/reference/verify-request-v-2.api): This method allows you to:
+- [Viber Templates API](https://developer.8x8.com/connect/reference/viber-templates-api.info): Manage Viber message templates: register, list, and delete pre-approved message formats for sending transactional messages and OTPs via Viber.
 - [Video Interaction API](https://developer.8x8.com/connect/reference/video-interaction-api.info): This is the API to integrate 8x8 Video Interaction product.
 - [Voice API](https://developer.8x8.com/connect/reference/voice-api.info): Voice API documentation
 - [Migrate from version 1 to version 2](https://developer.8x8.com/contactcenter/changelog/migrate-from-version-1-to-version-2): If you used [Chat API V1](/contactcenter/docs/getting-started) you can still use it as [Chat API V2](/contactcenter/v2.0/docs) comes out, version 1...
