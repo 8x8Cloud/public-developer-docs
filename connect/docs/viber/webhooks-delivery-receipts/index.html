@@ -12,8 +12,8 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.230e7913.css">
-<script src="/assets/js/runtime~main.4bdc1514.js" defer="defer"></script>
-<script src="/assets/js/main.4829d958.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.73cd8ac5.js" defer="defer"></script>
+<script src="/assets/js/main.d27ee874.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -133,12 +133,13 @@
 
 
 
-<table><thead><tr><th style="text-align:left">Outcome</th><th style="text-align:left">Resulting template status</th></tr></thead><tbody><tr><td style="text-align:left">Received and queued for moderation</td><td style="text-align:left"><code>Pending</code></td></tr><tr><td style="text-align:left">Approved by Viber</td><td style="text-align:left"><code>Approved</code></td></tr><tr><td style="text-align:left">Rejected by Viber</td><td style="text-align:left"><code>Declined</code></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">Outcome</th><th style="text-align:left">Resulting template status</th></tr></thead><tbody><tr><td style="text-align:left">Received and queued for moderation</td><td style="text-align:left"><code>PENDING</code></td></tr><tr><td style="text-align:left">Approved by Viber</td><td style="text-align:left"><code>APPROVED</code></td></tr><tr><td style="text-align:left">Rejected by Viber</td><td style="text-align:left"><code>REJECTED</code></td></tr></tbody></table>
 <p>These three statuses are the same lifecycle described in <a href="/connect/docs/viber/templates#lifecycle">Viber Templates</a>; this page covers how the transition reaches your webhook, not the rules Viber applies to reach it.</p>
-<p>The forwarded event identifies the template by the <strong>name</strong> you chose at creation, not Viber&#x27;s internal identifier.</p>
+<p>The forwarded event identifies the template by the <strong>name</strong> you chose at creation — Viber&#x27;s internal template identifier is not included in the payload. If the identifier from Viber&#x27;s callback can&#x27;t be matched to a template 8x8 has stored (for example, one created directly on Viber outside 8x8), no status update or webhook is sent for that event.</p>
+<p>For the full payload format and field reference, see <a href="/connect/docs/viber-template-status-webhook">Viber Template Status Webhook</a>.</p>
 <blockquote>
 <p>📘</p>
-<p>A template must reach <code>Approved</code> before you can send with it. Sending against a <code>Pending</code> or <code>Declined</code> template is rejected before the request reaches Viber.</p>
+<p>A template must reach <code>APPROVED</code> before you can send with it. Sending against a <code>PENDING</code> or <code>REJECTED</code> template is rejected before the request reaches Viber.</p>
 </blockquote>
 <p>See <a href="/connect/docs/viber/templates">Transactional Message API Library</a> for the creation flow.</p>
 <hr>
