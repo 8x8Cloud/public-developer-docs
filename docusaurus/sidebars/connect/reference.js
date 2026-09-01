@@ -375,6 +375,10 @@ const sidebarConfig = [
             type: 'doc',
             id: 'connect/docs/whatsapp-business-scoped-user-ids',
           },
+          {
+            type: 'doc',
+            id: 'connect/docs/viber-template-status-webhook',
+          },
         ],
       },
       {

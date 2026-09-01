@@ -110,17 +110,19 @@ When you register a Viber template, Viber moderates it within 24 hours and repor
 
 | Outcome | Resulting template status |
 | :--- | :--- |
-| Received and queued for moderation | `Pending` |
-| Approved by Viber | `Approved` |
-| Rejected by Viber | `Declined` |
+| Received and queued for moderation | `PENDING` |
+| Approved by Viber | `APPROVED` |
+| Rejected by Viber | `REJECTED` |
 
 These three statuses are the same lifecycle described in [Viber Templates](/connect/docs/viber/templates#lifecycle); this page covers how the transition reaches your webhook, not the rules Viber applies to reach it.
 
-The forwarded event identifies the template by the **name** you chose at creation, not Viber's internal identifier.
+The forwarded event identifies the template by the **name** you chose at creation — Viber's internal template identifier is not included in the payload. If the identifier from Viber's callback can't be matched to a template 8x8 has stored (for example, one created directly on Viber outside 8x8), no status update or webhook is sent for that event.
+
+For the full payload format and field reference, see [Viber Template Status Webhook](/connect/docs/viber-template-status-webhook).
 
 > 📘
 >
-> A template must reach `Approved` before you can send with it. Sending against a `Pending` or `Declined` template is rejected before the request reaches Viber.
+> A template must reach `APPROVED` before you can send with it. Sending against a `PENDING` or `REJECTED` template is rejected before the request reaches Viber.
 
 See [Transactional Message API Library](/connect/docs/viber/templates) for the creation flow.
 
