@@ -33,6 +33,8 @@ When a voice session ends, the 8x8 platform will POST a JSON object to your VSS 
 | endTime | String | End time of the Voice Messaging session (ISO 8601 format) |
 | lastAction | String | The last callflow action executed during the session (e.g., `MAKE_CALL`, `SAY`, `PLAY_FILE`) |
 | callCount | Integer | Number of call legs bridged in the session |
+| clientRequestId | String | (Optional) A user-supplied identifier for this request. Echoed back in the webhook to allow correlation with the original request |
+| clientBatchId | String | (Optional) A user-supplied identifier for a group of related requests. Echoed back in the webhook so calls sent as one batch can be aggregated |
 | errorDetails | Object | (Optional) Contains error information when sessionStatus is `ERROR`. Includes `errorMsg` (String) and `errorCode` (Integer) |
 | details | Object | Contains information about individual call legs in the session |
 
