@@ -1496,7 +1496,7 @@
                       "url": {
                         "type": "string",
                         "format": "uri",
-                        "example": "http://example.com",
+                        "example": "https://example.com",
                         "description": "The `url` to use for the webhook (8x8 platform will send events to this URL)."
                       },
                       "httpAuthorization": {
@@ -1553,7 +1553,7 @@
                     "value": [
                       {
                         "subAccountId": "Onion_Marketing",
-                        "url": "http://example.com/dr/marketing",
+                        "url": "https://example.com/dr/marketing",
                         "enabled": true,
                         "oauth": {
                           "url": "https://auth.example.com/oauth/token",
@@ -1565,18 +1565,18 @@
                       },
                       {
                         "subAccountId": "Onion_Marketing",
-                        "url": "http://example.com/dr/sales",
+                        "url": "https://example.com/dr/sales",
                         "enabled": true,
                         "httpAuthorization": "***"
                       },
                       {
                         "subAccountId": "*",
-                        "url": "http://example.com/dr/general",
+                        "url": "https://example.com/dr/general",
                         "enabled": true
                       },
                       {
                         "subAccountId": "*",
-                        "url": "http://example.com/mo/general",
+                        "url": "https://example.com/mo/general",
                         "enabled": false
                       }
                     ]
@@ -1640,7 +1640,7 @@
                     "url": {
                       "type": "string",
                       "format": "uri",
-                      "example": "http://example.com",
+                      "example": "https://example.com",
                       "description": "The `url` to use for the webhook (8x8 platform will send events to this URL)."
                     },
                     "httpAuthorization": {
@@ -1698,12 +1698,12 @@
                   "value": [
                     {
                       "subAccountId": "Onion_Marketing",
-                      "url": "http://example.com/DR/marketing",
+                      "url": "https://example.com/DR/marketing",
                       "enabled": true
                     },
                     {
                       "subAccountId": "*",
-                      "url": "http://example.com/mo/general",
+                      "url": "https://example.com/mo/general",
                       "enabled": true
                     }
                   ]
@@ -1713,7 +1713,7 @@
                   "value": [
                     {
                       "subAccountId": "Onion_Marketing",
-                      "url": "http://example.com/DR/marketing",
+                      "url": "https://example.com/DR/marketing",
                       "enabled": true,
                       "httpAuthorization": "Basic dXNlcjpwYXNzd29yZA=="
                     }
@@ -1724,7 +1724,7 @@
                   "value": [
                     {
                       "subAccountId": "Onion_Marketing",
-                      "url": "http://example.com/DR/marketing",
+                      "url": "https://example.com/DR/marketing",
                       "enabled": true,
                       "oauth": {
                         "url": "https://auth.example.com/oauth/token",
@@ -2184,7 +2184,7 @@
           "source": "YourBrand",
           "clientMessageId": "ABC1000",
           "encoding": "AUTO",
-          "dlrCallbackUrl": "http://example.com/8x8/webhook"
+          "dlrCallbackUrl": "https://example.com/8x8/webhook"
         }
       },
       "SurveyTemplate": {

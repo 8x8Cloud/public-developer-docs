@@ -225,13 +225,13 @@
                         "type": "string",
                         "description": "Public URL of where the rich content is stored.",
                         "format": "uri",
-                        "example": "http://example.com"
+                        "example": "https://example.com"
                       },
                       "fallbackText": {
                         "type": "string",
                         "description": "In case SMS fallback is triggered, message body - the text of the message",
                         "maxLength": 35000,
-                        "example": "you can check your account by http://example.com"
+                        "example": "you can check your account by https://example.com"
                       },
                       "sms": {
                         "type": "object",
@@ -563,7 +563,7 @@
                         "properties": {
                           "thumbnail": {
                             "type": "string",
-                            "example": "http://example.com/video.jpg",
+                            "example": "https://example.com/video.jpg",
                             "description": "ThumbNail"
                           },
                           "filesize": {
@@ -670,7 +670,7 @@
                                       "url": {
                                         "type": "string",
                                         "description": "Required for \"image\", \"gif\", \"video\", \"document\" parameter types.\n\nResource URL.<br/>Note: For type = gif, the url must point to a [Video file type](/connect/docs/supported-chat-apps-content-type), not a .gif.",
-                                        "example": "http://example.com"
+                                        "example": "https://example.com"
                                       },
                                       "location": {
                                         "type": "object",
@@ -815,7 +815,7 @@
                                                   "url": {
                                                     "type": "string",
                                                     "description": "Required for \"image\", \"video\", \"document\" parameter types.\n\nResource URL.",
-                                                    "example": "http://example.com"
+                                                    "example": "https://example.com"
                                                   },
                                                   "location": {
                                                     "type": "object",
@@ -2816,7 +2816,7 @@
                         "type": "string",
                         "format": "uri",
                         "description": "Override default DR callback URL for message",
-                        "example": "http://example.com"
+                        "example": "https://example.com"
                       },
                       "channels": {
                         "type": "array",
@@ -6634,7 +6634,7 @@
                       "url": {
                         "type": "string",
                         "format": "uri",
-                        "example": "http://example.com",
+                        "example": "https://example.com",
                         "description": "The `url` to use for the webhook (8x8 platform will send events to this URL)."
                       },
                       "httpAuthorization": {
@@ -6655,7 +6655,7 @@
                           "url": {
                             "type": "string",
                             "format": "uri",
-                            "description": "The token endpoint URL used to obtain the OAuth access token.",
+                            "description": "The token endpoint URL used to obtain the OAuth access token. Must use the `https` scheme; `http` URLs are rejected.",
                             "example": "https://auth.example.com/oauth/token"
                           },
                           "clientId": {
@@ -6703,7 +6703,7 @@
                       {
                         "type": "CADR",
                         "subAccountId": "Onion_Marketing",
-                        "url": "http://example.com/dr/marketing",
+                        "url": "https://example.com/dr/marketing",
                         "enabled": true,
                         "oauth": {
                           "url": "https://auth.example.com/oauth/token",
@@ -6716,20 +6716,20 @@
                       {
                         "type": "MSG",
                         "subAccountId": "Onion_Marketing",
-                        "url": "http://example.com/dr/sales",
+                        "url": "https://example.com/dr/sales",
                         "enabled": true,
                         "httpAuthorization": "***"
                       },
                       {
                         "type": "MSG",
                         "subAccountId": "*",
-                        "url": "http://example.com/dr/general",
+                        "url": "https://example.com/dr/general",
                         "enabled": true
                       },
                       {
                         "type": "CABM",
                         "subAccountId": "*",
-                        "url": "http://example.com/mo/general",
+                        "url": "https://example.com/mo/general",
                         "enabled": false
                       }
                     ]
@@ -6821,7 +6821,7 @@
                     "url": {
                       "type": "string",
                       "format": "uri",
-                      "example": "http://example.com",
+                      "example": "https://example.com",
                       "description": "The `url` to use for the webhook (8x8 platform will send events to this URL)."
                     },
                     "httpAuthorization": {
@@ -6851,7 +6851,7 @@
                         "url": {
                           "type": "string",
                           "format": "uri",
-                          "description": "The token endpoint URL used to obtain the OAuth access token.",
+                          "description": "The token endpoint URL used to obtain the OAuth access token. Must use the `https` scheme; `http` URLs are rejected.",
                           "example": "https://auth.example.com/oauth/token"
                         },
                         "clientId": {
@@ -6899,12 +6899,12 @@
                   "value": [
                     {
                       "subAccountId": "Onion_Marketing",
-                      "url": "http://example.com/DR/marketing",
+                      "url": "https://example.com/DR/marketing",
                       "enabled": true
                     },
                     {
                       "subAccountId": "*",
-                      "url": "http://example.com/mo/general",
+                      "url": "https://example.com/mo/general",
                       "enabled": true,
                       "type": "MSG"
                     }
@@ -6915,7 +6915,7 @@
                   "value": [
                     {
                       "subAccountId": "Onion_Marketing",
-                      "url": "http://example.com/DR/marketing",
+                      "url": "https://example.com/DR/marketing",
                       "enabled": true,
                       "httpAuthorization": "Basic dXNlcjpwYXNzd29yZA=="
                     }
@@ -6926,7 +6926,7 @@
                   "value": [
                     {
                       "subAccountId": "Onion_Marketing",
-                      "url": "http://example.com/DR/marketing",
+                      "url": "https://example.com/DR/marketing",
                       "enabled": true,
                       "oauth": {
                         "url": "https://auth.example.com/oauth/token",
