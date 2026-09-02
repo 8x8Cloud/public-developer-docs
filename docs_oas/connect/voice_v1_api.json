@@ -272,9 +272,11 @@
                                 }
                               },
                               "example": {
-                                "destination": "621234567890",
-                                "fileUrl": "https://filebin.redpill-linpro.com/iy5u4qhut4urszlm/sample4.mp3",
-                                "repetition": 2
+                                "action": "playFile",
+                                "params": {
+                                  "fileUrl": "https://example.com/audio/notification.mp3",
+                                  "repetition": 2
+                                }
                               }
                             },
                             {
