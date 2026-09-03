@@ -105446,7 +105446,7 @@ For complete access to all JaaS services, the cloudflare IP ranges should also b
 
 #### Video Bridges
 
-JVB video bridges require TCP port 443 and UDP port 10000:
+JVB video bridges require UDP port 10000:
 
 * Australia (Sydney): 168.138.111.128/25
 * Brazil (São Paulo): 168.138.245.0/25, 129.148.18.0/26, 129.148.18.64/26
