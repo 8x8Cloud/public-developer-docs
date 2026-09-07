@@ -90,6 +90,7 @@ const sidebarConfig = [
             ],
           },
           'connect/docs/whatsapp/whatsapp-business-scoped-user-ids',
+          'connect/docs/whatsapp/whatsapp-business-app-coexistence',
           'connect/docs/whatsapp/advanced-capabilities',
           'connect/docs/whatsapp/scenarios-tutorials',
           'connect/docs/whatsapp/vertical-playbooks',
