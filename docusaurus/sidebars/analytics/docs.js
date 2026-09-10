@@ -70,9 +70,14 @@ const sidebarConfig = [
     type: 'category',
     label: 'Cloud Storage Service',
     collapsed: true,
+    link: {
+      type: 'doc',
+      id: 'analytics/docs/cloud-storage-service',
+    },
     items: [
-      'analytics/docs/cloud-storage-service-bulk-download',
+      'analytics/docs/cloud-storage-service-regions',
       'analytics/docs/cloud-storage-service-objects',
+      'analytics/docs/cloud-storage-service-bulk-download',
     ],
   },
   {

@@ -154,6 +154,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Regions",
+      items: [
+        {
+          type: "doc",
+          id: "analytics/reference/getregions",
+          label: "List available regions.",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Objects",
       items: [
         {
@@ -165,19 +177,43 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "analytics/reference/getobject",
-          label: "Find an object by it's ID.",
+          label: "Find an object by its ID.",
           className: "api-method get",
         },
         {
           type: "doc",
           id: "analytics/reference/downloadmetadata",
-          label: "Download content for the given metadata.",
+          label: "Download metadata for the given object.",
           className: "api-method get",
         },
         {
           type: "doc",
           id: "analytics/reference/downloadobject",
-          label: "Download content for the given metadata.",
+          label: "Download content for the given object.",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "analytics/reference/restoreobject",
+          label: "Restore an archived object.",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Buckets",
+      items: [
+        {
+          type: "doc",
+          id: "analytics/reference/searchbucket",
+          label: "Search all buckets.",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "analytics/reference/getbucket",
+          label: "Returns the content of a specified bucket.",
           className: "api-method get",
         },
       ],
@@ -188,15 +224,9 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "analytics/reference/removecontent",
-          label: "Remove existing objects.",
-          className: "api-method delete",
-        },
-        {
-          type: "doc",
           id: "analytics/reference/cancelbulkdownload",
           label: "Cancel a running bulk download job by zip file name.",
-          className: "api-method post",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -232,19 +262,13 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Buckets",
+      label: "Bulk Delete",
       items: [
         {
           type: "doc",
-          id: "analytics/reference/searchbucket",
-          label: "Search all buckets.",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "analytics/reference/getbucket",
-          label: "Returns the content of a specified bucket.",
-          className: "api-method get",
+          id: "analytics/reference/removecontent",
+          label: "Remove existing objects.",
+          className: "api-method delete",
         },
       ],
     },

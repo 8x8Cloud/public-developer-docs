@@ -12,7 +12,7 @@ Customers looking to download content in bulk from [Cloud Storage Service](/anal
 
 For interacting with Cloud Storage Service `https://api.8x8.com/storage/{region}/v{version}/`
 
-* {region} to be replaced by a valid region based on region discovery
+* {region} to be replaced by a valid region based on [region discovery](/analytics/docs/cloud-storage-service-regions)
 * {version} to be replaced by current Version. Currently 3 resulting in /v3/
 
 ## 1. Authenticate to retrieve access token
@@ -30,59 +30,7 @@ The following steps will use the access_token as a Bearer Token form of authenti
 
 ## 2. Get My Regions
 
-8x8 Cloud Storage Service persists data regionally based on the customer locations/setup. For many customers this may be a single region for others this can be a number of regions. Each Region contains it's metadata/database and storage only. You cannot search in "us-east" and find items in "uk" since this could involve data export.
-
-### Parameters
-
-**Method: GET**
-
-#### Headers
-
-| Name | Required | Description | Example |
-| --- | --- | --- | --- |
-| Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
-
-#### Path
-
-| Name | Required | Description | Example |
-| --- | --- | --- | --- |
-| region | ✓ | Pass any valid region in for the discovery process. `us-east` or `uk` (The region does not need to be one of your regions for this request | `us-east` |
-| version | ✓ | The current version is `v3` | v3 |
-
-### My Regions Request
-
-genericus-eastuk
-
-```bash
-curl --location --request GET 'https://api.8x8.com/storage/{region}/v3/regions' \
---header 'Accept: application/json' \
---header 'Authorization: Bearer {access_token}'
-
-```
-
-```bash
-curl --location --request GET 'https://api.8x8.com/storage/us-east/v3/regions' \
---header 'Accept: application/json' \
---header 'Authorization: Bearer {access_token}'
-
-```
-
-```bash
-curl --location --request GET 'https://api.8x8.com/storage/uk/v3/regions' \
---header 'Accept: application/json' \
---header 'Authorization: Bearer {access_token}'
-
-```
-
-### Regions Response
-
-```json
-[
-    "us-east",
-    "uk"
-]
-
-```
+8x8 Cloud Storage Service stores your data regionally. Before downloading, discover which regions are provisioned for your account and pick the one that holds the objects you want. See [Find My Regions](/analytics/docs/cloud-storage-service-regions) for the full request and response.
 
 **Outputs For Next Step:**
 
@@ -334,7 +282,7 @@ Check for the download status until the status equals DONE (or an error status..
 
 ### Parameters
 
-**Method: POST**
+**Method: GET**
 
 #### Headers
 
@@ -380,7 +328,7 @@ Once the status is `DONE` then we can download the content
 
 ### Parameters
 
-**Method: POST**
+**Method: GET**
 
 #### Headers
 

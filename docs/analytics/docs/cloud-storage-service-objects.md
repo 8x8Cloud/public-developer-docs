@@ -1,5 +1,10 @@
 # Cloud Storage Service Objects
 
+For interacting with Cloud Storage Service `https://api.8x8.com/storage/{region}/v{version}/`
+
+* {region} to be replaced by a valid region based on [region discovery](/analytics/docs/cloud-storage-service-regions)
+* {version} to be replaced by current Version. Currently 3 resulting in /v3/
+
 ## Filtering by time
 
 Filtering by the date when objects where created or when objects were last updated can be done by using *createdTime* or *updatedTime* in the *filter* parameter. These parameters must be specified as unix timestamp in milliseconds.
@@ -11,6 +16,46 @@ filter=type==callcenterrecording;**createdTime**=ge=1725148800000;**createdTime*
 or, for getting same recordings but specifying the time when were last updated
 
 filter=type==callcenterrecording;**updatedTime**=ge=1725148800000;**updatedTime**=le=1727740800000
+
+> 📘 **Tip: use smaller time intervals for faster searches**
+>
+> Narrowing the *createdTime* or *updatedTime* range returns results faster. If a search is slow or spans many pages, split it into smaller time windows.
+
+## Filtering by object state
+
+Every object has an *objectState*. By default a search returns only *AVAILABLE* objects. To search for objects in another state, set *objectState* in the *filter*.
+
+Objects that have been moved to cold storage have the state *ARCHIVED*. To find them:
+
+filter=objectState==ARCHIVED
+
+You can combine the state with a type, for example to find all archived contact center recordings:
+
+filter=objectState==ARCHIVED;type==callcenterrecording
+
+To search across more than one state, use the *=in=* operator with a comma-separated list. For example, to find objects that are either archived or available:
+
+filter=objectState=in=(ARCHIVED,AVAILABLE)
+
+This is equivalent to joining the states with the OR operator ( *,* ):
+
+filter=objectState==ARCHIVED,objectState==AVAILABLE
+
+You can combine either form with other criteria, for example archived or available contact center recordings:
+
+filter=objectState=in=(ARCHIVED,AVAILABLE);type==callcenterrecording
+
+> 📘 **Restore archived objects before downloading**
+>
+> *ARCHIVED* objects cannot be downloaded directly. Restore them first with the [Restore an archived object](/analytics/reference/restoreobject) endpoint. Restore is asynchronous and does not complete immediately: it can take several hours (up to 24 hours) for the object to become *AVAILABLE*. Once it is *AVAILABLE*, download its content as usual. The restored copy is temporary and is removed after the number of days set by *expirationDays*.
+>
+>
+
+## Pagination
+
+Results are returned in pages. Use *limit* to set the page size (1 to 100, default 100) and *pageKey* to choose where to start (the first page is 0).
+
+Each response includes the *pageKey* to use for the next page and a *lastPage* flag. To retrieve all results, repeat the request with *pageKey* set to the value returned in the previous response, until *lastPage* is `true`.
 
 ## Work - Unified Communications
 

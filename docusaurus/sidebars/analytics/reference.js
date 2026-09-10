@@ -82,6 +82,12 @@ const sidebarConfig = [
     items: [
       {
         type: 'category',
+        label: 'Regions',
+        collapsed: true,
+        items: ['analytics/reference/getregions'],
+      },
+      {
+        type: 'category',
         label: 'Objects',
         collapsed: true,
         items: [
@@ -89,20 +95,7 @@ const sidebarConfig = [
           'analytics/reference/getobject',
           'analytics/reference/downloadmetadata',
           'analytics/reference/downloadobject',
-        ],
-      },
-      {
-        type: 'category',
-        label: 'Bulk Downloads',
-        collapsed: true,
-        items: [
-          'analytics/reference/removecontent',
-          'analytics/reference/cancelbulkdownload',
-          'analytics/reference/cleardownloads',
-          'analytics/reference/startdownload',
-          'analytics/reference/downloadstatuses',
-          'analytics/reference/downloadstatus',
-          'analytics/reference/downloadbulk',
+          'analytics/reference/restoreobject',
         ],
       },
       {
@@ -113,6 +106,25 @@ const sidebarConfig = [
           'analytics/reference/searchbucket',
           'analytics/reference/getbucket',
         ],
+      },
+      {
+        type: 'category',
+        label: 'Bulk Downloads',
+        collapsed: true,
+        items: [
+          'analytics/reference/startdownload',
+          'analytics/reference/downloadstatuses',
+          'analytics/reference/downloadstatus',
+          'analytics/reference/downloadbulk',
+          'analytics/reference/cancelbulkdownload',
+          'analytics/reference/cleardownloads',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Bulk Delete',
+        collapsed: true,
+        items: ['analytics/reference/removecontent'],
       },
     ],
   },
