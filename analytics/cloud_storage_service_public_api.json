@@ -5,7 +5,7 @@
     "title": "Cloud Storage Service Public API",
     "contact": { "name": "Recordings Team", "email": "ro-rec@8x8.com" },
     "termsOfService": "https://www.8x8.com/terms-and-conditions",
-    "description": "8x8’s Cloud Storage Service (CSS) offers you a single point of access for Virtual Office PBX telephone, Virtual Contact Center call recordings, Virtual Contact Center screen recordings and Virtual Meetings. You can access and download these data objects for your further analysis and use. You can also embed your data in other interfaces without a requirement to copy or move the underlying data.\n\nFor example:\n* Make collected data available to customers in your client portal\n* Integrate call recording data into CRM applications to associate with customer interaction records\n* Enable deletion of media (and or metadata) to allow customers to meet internal requirements to cap data retention based on workflows, policies, or compliance needs\n\nYou can obtain your stored data by either:\n* Querying for, and then downloading individual data objects\n* Bulk downloading all of your data using a Zip file utility (Note that the limit on bulk file downloads is 2 GB.)\n***Note: This page is in the Beta stage. Contact your [8x8 representative](mailto:ro-rec@8x8.com) for more information on API use.***\n# **Authentication**\nYou can try out this API through request authentication using your client credentials. Refer to [Client Credentials](/analytics/docs/how-to-get-api-keys) on the [Getting Started](/tech-partner/docs/getting-started) page for more information.\n\nAll requests must be made over HTTPS - calls made over HTTP will fail.\n# **Regions**\nAPI resources are available for each geographical region in which they are provisioned. The base URLs for select regions are:\n<table> <tr> <td><b>URL</b></td> <td><b>Region</b></td> </tr> <tr> <td><b><a href='https://api.8x8.com/storage/us-west/v1'>https://api.8x8.com/storage/us-west/v1</a></b></td><td>Western US</td></tr><tr> <td><b><a href='https://api.8x8.com/storage/us-east/v1'>https://api.8x8.com/storage/us-east/v1</a></b></td><td>Eastern US</td></tr><tr> <td><b><a href='https://api.8x8.com/storage/uk/v1'>https://api.8x8.com/storage/uk/v1</a></b></td><td>United Kingdom</td></tr><tr> <td><b><a href='https://api.8x8.com/storage/ap/v1'>https://api.8x8.com/storage/ap/v1</a></b></td><td>Australia</td> </tr> <tr> <td><b><a href='https://api.8x8.com/storage/ca/v1'>https://api.8x8.com/storage/ca/v1</a></b></td><td>Canada</td> </tr> </table>"
+    "description": "8x8’s Cloud Storage Service (CSS) offers you a single point of access for Virtual Office PBX telephone, Virtual Contact Center call recordings, Virtual Contact Center screen recordings and Virtual Meetings. You can access and download these data objects for your further analysis and use. You can also embed your data in other interfaces without a requirement to copy or move the underlying data.\n\nFor example:\n* Make collected data available to customers in your client portal\n* Integrate call recording data into CRM applications to associate with customer interaction records\n* Enable deletion of media (and or metadata) to allow customers to meet internal requirements to cap data retention based on workflows, policies, or compliance needs\n\nYou can obtain your stored data by either:\n* Querying for, and then downloading individual data objects\n* Bulk downloading all of your data using a Zip file utility (Note that the limit on bulk file downloads is 2 GB.)\n***Contact your [8x8 representative](mailto:ro-rec@8x8.com) for more information on API use.***\n## **Authentication**\nYou can try out this API through request authentication using your client credentials. Refer to [Client Credentials](/analytics/docs/how-to-get-api-keys) on the [Getting Started](/tech-partner/docs/getting-started) page for more information.\n\nAll requests must be made over HTTPS - calls made over HTTP will fail.\n## **Regions**\nAPI resources are available for each geographical region in which they are provisioned. The base URLs for select regions are:\n<table> <tr> <td><b>URL</b></td> <td><b>Region</b></td> </tr> <tr> <td><b><a href='https://api.8x8.com/storage/us-west/v3'>https://api.8x8.com/storage/us-west/v3</a></b></td><td>Western US</td></tr><tr> <td><b><a href='https://api.8x8.com/storage/us-east/v3'>https://api.8x8.com/storage/us-east/v3</a></b></td><td>Eastern US</td></tr><tr> <td><b><a href='https://api.8x8.com/storage/uk/v3'>https://api.8x8.com/storage/uk/v3</a></b></td><td>United Kingdom</td></tr><tr> <td><b><a href='https://api.8x8.com/storage/ap/v3'>https://api.8x8.com/storage/ap/v3</a></b></td><td>Australia</td> </tr> <tr> <td><b><a href='https://api.8x8.com/storage/ca/v3'>https://api.8x8.com/storage/ca/v3</a></b></td><td>Canada</td> </tr> </table>"
   },
   "servers": [
     {
@@ -21,12 +21,41 @@
     }
   ],
   "tags": [
+    { "name": "Regions", "description": "Discover regions" },
     { "name": "Objects", "description": "Manage objects" },
-    { "name": "Bulk Downloads", "description": "Bulk content operations" },
-    { "name": "Buckets", "description": "Manage buckets" }
+    { "name": "Buckets", "description": "Manage buckets" },
+    { "name": "Bulk Downloads", "description": "Bulk download operations" },
+    { "name": "Bulk Delete", "description": "Bulk delete operations" }
   ],
   "security": [{ "bearerAuth": [] }],
   "paths": {
+    "/regions": {
+      "get": {
+        "x-publish-public": true,
+        "description": "Returns the regions provisioned for your account.  Data is stored per region, and a search only returns objects held in the region you call.  You can use any valid region in the base URL for this discovery call, then use one of the returned regions for your subsequent requests.",
+        "tags": ["Regions"],
+        "summary": "List available regions.",
+        "operationId": "getregions",
+        "responses": {
+          "200": {
+            "description": "The list of regions available for your account.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "type": "string", "example": "us-east" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/unauthorized" },
+          "403": { "$ref": "#/components/responses/forbidden" },
+          "404": { "$ref": "#/components/responses/notFound" },
+          "default": { "$ref": "#/components/responses/internalServerError" }
+        },
+        "deprecated": false
+      }
+    },
     "/objects": {
       "get": {
         "x-publish-public": true,
@@ -47,7 +76,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "\nThis API is designed with filtering capabilities using Feed Item Query Language (FIQL) filter expressions. <br> FIQL introduces simple and composite operators which can be used to build basic and complex queries. <br> If the *filter* is not specified, all objects are returned.\nThe following are basic FIQL operators:\n* **`==`** - Equal to\n* **`!=`** - Not equal to\n* **`=gt=`** - Greater than\n* **`=ge=`** - Greater or equal to\n* **`=lt=`** - Less than\n* **`=le=`** - Less or equal to\nThese six operators can be used to different types of simple queries. For example:\n* **`name==MyRecording**` - Finds all items with name **`MyRecording`**\n* **`type!=callrecording`** - Finds all items which are not **`callrecording`**\n* **`size=gt=1024`** - Finds all items with size bigger than 1024\n* **`size=le=1024`** - Finds all items with size smaller or equal with 1024\nFIQL joining operators consist of the following:\n* **`;`** = AND\n* **`,`** = OR\nThese two operators can be used to join simple queries and build more complex queries. For example:\n* **`name==MyRecording,name==YourRecording`** - Find all items with name **`MyRecording`** or with name **`YourRecording`**\n* **`type==callrecording;size=gt=1024`** - Find all **`callrecording`** items with size greather than 1024\n* **`type==callrecording;(name==MyRecording,name==YourRecording)`** - Find all **`callrecording`** items with name **`MyRecording`** or with name **`YourRecording`**\n",
+            "description": "\nThis API is designed with filtering capabilities using Feed Item Query Language (FIQL) filter expressions. <br> FIQL introduces simple and composite operators which can be used to build basic and complex queries. <br> If the *filter* is not specified, all objects are returned.\nThe following are basic FIQL operators:\n* **`==`** - Equal to\n* **`!=`** - Not equal to\n* **`=gt=`** - Greater than\n* **`=ge=`** - Greater or equal to\n* **`=lt=`** - Less than\n* **`=le=`** - Less or equal to\n* **`=in=`** - In a list of values, e.g. **`objectState=in=(ARCHIVED,AVAILABLE)`**\n* **`=out=`** - Not in a list of values\nThese operators can be used to different types of simple queries. For example:\n* **`name==MyRecording**` - Finds all items with name **`MyRecording`**\n* **`type!=callrecording`** - Finds all items which are not **`callrecording`**\n* **`size=gt=1024`** - Finds all items with size bigger than 1024\n* **`size=le=1024`** - Finds all items with size smaller or equal with 1024\nFIQL joining operators consist of the following:\n* **`;`** = AND\n* **`,`** = OR\nThese two operators can be used to join simple queries and build more complex queries. For example:\n* **`name==MyRecording,name==YourRecording`** - Find all items with name **`MyRecording`** or with name **`YourRecording`**\n* **`type==callrecording;size=gt=1024`** - Find all **`callrecording`** items with size greather than 1024\n* **`type==callrecording;(name==MyRecording,name==YourRecording)`** - Find all **`callrecording`** items with name **`MyRecording`** or with name **`YourRecording`**\n",
             "style": "form",
             "explode": true,
             "schema": { "type": "string", "example": "type!=callrecording" }
@@ -55,10 +84,10 @@
           {
             "name": "pageKey",
             "in": "query",
-            "description": "This parameter indicates the page number to begin your query.",
+            "description": "The record offset to start from, not a page number.  The first page starts at 0; the next page is the previous `pageKey` plus `limit`.",
             "style": "form",
             "explode": true,
-            "schema": { "type": "number", "format": "integer", "example": 1 }
+            "schema": { "type": "number", "format": "integer", "example": 0 }
           },
           {
             "name": "limit",
@@ -87,13 +116,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the filtered or unfiltered list of object metadata.",
+            "description": "Returns the filtered or unfiltered page of object metadata.",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": { "$ref": "#/components/schemas/ResponsePage" }
-                }
+                "schema": { "$ref": "#/components/schemas/ResponsePage" }
               }
             }
           },
@@ -112,7 +138,7 @@
         "x-publish-public": true,
         "description": "Use this method to retrieve an object by its ID.",
         "tags": ["Objects"],
-        "summary": "Find an object by it's ID.",
+        "summary": "Find an object by its ID.",
         "operationId": "getobject",
         "parameters": [
           {
@@ -147,7 +173,7 @@
         "x-publish-public": true,
         "description": "This method retrieves an object using the objectId specification for a given record.",
         "tags": ["Objects"],
-        "summary": "Download content for the given metadata.",
+        "summary": "Download metadata for the given object.",
         "operationId": "downloadmetadata",
         "parameters": [
           {
@@ -185,7 +211,7 @@
         "x-publish-public": true,
         "description": "This method retrieves an object using the **`objectId`** specification for a given record.",
         "tags": ["Objects"],
-        "summary": "Download content for the given metadata.",
+        "summary": "Download content for the given object.",
         "operationId": "downloadobject",
         "parameters": [
           {
@@ -225,11 +251,58 @@
         "deprecated": false
       }
     },
+    "/objects/{objectId}/restore": {
+      "post": {
+        "x-publish-public": true,
+        "description": "Restore an archived object from cold storage.  Objects in the `ARCHIVED` state must be restored before their content can be downloaded.  This operation requires an API key with edit access to objects; a read-only or download-only key returns a `403`.  Restore is asynchronous: it does not complete immediately and can take several hours (up to 24 hours) for the object to become `AVAILABLE`.  A restored copy is temporary and is removed after the number of days set by **`expirationDays`**.",
+        "tags": ["Objects"],
+        "summary": "Restore an archived object.",
+        "operationId": "restoreobject",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "The ID of the archived object to restore.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "FKC4RF6OXNMGGUW4LIFSWVLEIVJ54JBTVAD3SQYKNFK2ATUQCMAA----"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RestoreRequest" }
+            }
+          },
+          "description": "Optional restore options.",
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "The restore request was accepted.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/RestoreRequest" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/badRequest" },
+          "401": { "$ref": "#/components/responses/unauthorized" },
+          "403": { "$ref": "#/components/responses/forbidden" },
+          "404": { "$ref": "#/components/responses/notFound" },
+          "405": { "$ref": "#/components/responses/methodNotAllowed" },
+          "default": { "$ref": "#/components/responses/internalServerError" }
+        },
+        "deprecated": false
+      }
+    },
     "/bulk": {
       "delete": {
-        "x-public-public": true,
-        "description": "This method enables you to bulk delete object metadata along with associated content.",
-        "tags": ["Bulk Downloads"],
+        "x-publish-public": true,
+        "description": "This method enables you to bulk delete object metadata along with the associated content.  Provide the object IDs in the request body.  Deletion is performed synchronously in a single request, so there is no separate status, cancel, or clear operation.",
+        "tags": ["Bulk Delete"],
         "summary": "Remove existing objects.",
         "operationId": "removecontent",
         "responses": {
@@ -256,12 +329,12 @@
               }
             }
           },
-          "description": "Use this request to bulk remove metadata and content for the provided object IDs."
+          "description": "The list of object IDs to remove.  Metadata and content are deleted for each object ID provided."
         }
       }
     },
     "/bulk/download/cancel/{zipName}": {
-      "post": {
+      "put": {
         "x-publish-public": true,
         "description": "This method cancels a running bulk download job by the zip file name.",
         "tags": ["Bulk Downloads"],
@@ -278,7 +351,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Cancelled a running bulk download by it's zip file name.",
+            "description": "Cancelled a running bulk download by its zip file name.",
             "content": {
               "application/json": {
                 "schema": {
@@ -310,7 +383,7 @@
         "operationId": "cleardownloads",
         "responses": {
           "200": {
-            "description": "Cancel a running bulk download by it's zip file name.",
+            "description": "Removes tasks from a download request.",
             "content": {
               "application/json": {
                 "schema": {
@@ -344,12 +417,7 @@
             "description": "Start a bulk download.",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/downloadContentStatus"
-                  }
-                }
+                "schema": { "$ref": "#/components/schemas/downloadContentStatus" }
               }
             }
           },
@@ -436,12 +504,7 @@
             "description": "The bulk download task status for a given .zip file name.",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/downloadContentStatus"
-                  }
-                }
+                "schema": { "$ref": "#/components/schemas/downloadContentStatus" }
               }
             }
           },
@@ -473,13 +536,8 @@
           "200": {
             "description": "Retrieves the bulk download data for a given .zip file name.",
             "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/downloadContentStatus"
-                  }
-                }
+              "application/octet-stream": {
+                "schema": { "type": "string", "format": "binary" }
               }
             }
           },
@@ -498,12 +556,54 @@
         "tags": ["Buckets"],
         "summary": "Search all buckets.",
         "operationId": "searchbucket",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "\nFilter buckets using Feed Item Query Language (FIQL) filter expressions, in the same way as the [object search](/analytics/reference/searchobject).  If the *filter* is not specified, all buckets are returned.\nThe following bucket fields can be filtered:\n* **`id`**\n* **`userId`**\n* **`name`**\n* **`createdTime`**\n* **`updatedTime`**\n* bucket tag key and value\n\nFor example:\n* **`name==MyBucket`** - Finds all buckets with name **`MyBucket`**\n* **`createdTime=ge=1725148800000`** - Finds all buckets created on or after the given timestamp\n",
+            "style": "form",
+            "explode": true,
+            "schema": { "type": "string", "example": "name==MyBucket" }
+          },
+          {
+            "name": "pageKey",
+            "in": "query",
+            "description": "The record offset to start from, not a page number.  The first page starts at 0; the next page is the previous `pageKey` plus `limit`.",
+            "style": "form",
+            "explode": true,
+            "schema": { "type": "number", "format": "integer", "example": 0 }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "This parameter indicates the page size to begin your query with.  A value between 1 and 100 is supported.",
+            "style": "form",
+            "explode": true,
+            "schema": { "type": "number", "format": "integer", "example": 10 }
+          },
+          {
+            "name": "sortField",
+            "in": "query",
+            "description": "The field used for sorting, for example `createdTime` or `name`.",
+            "style": "form",
+            "explode": true,
+            "schema": { "type": "string", "example": "createdTime" }
+          },
+          {
+            "name": "sortDirection",
+            "in": "query",
+            "description": "This field describes the sorting direction. Sorting can be specified as 'ASC' for ascending or 'DESC' for descending.",
+            "style": "form",
+            "explode": true,
+            "schema": { "type": "string", "example": "DESC" }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Returns a list of all of the objects inside accessible buckets.",
+            "description": "Returns a page of buckets.",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/BucketResponse" }
+                "schema": { "$ref": "#/components/schemas/BucketResponsePage" }
               }
             }
           },
@@ -583,7 +683,7 @@
         "properties": {
           "createdTime": {
             "type": "string",
-            "example": "2019-05-11T00:55:24",
+            "example": "2026-05-11T00:55:24",
             "description": "The ISO 8601 timestamp for when the object record was created."
           },
           "customerId": {
@@ -606,7 +706,7 @@
           },
           "updatedTime": {
             "type": "string",
-            "example": "2019-05-11T00:55:24",
+            "example": "2026-05-11T00:55:24",
             "description": "The ISO 8601 timestamp when the object record was last updated."
           },
           "userId": {
@@ -688,20 +788,20 @@
           },
           "objectState": {
             "type": "string",
-            "description": "\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n",
-            "enum": ["PENDING", "AVAILABLE", "REVOKED", "DELETED", "FAILED"],
+            "description": "\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.  `ARCHIVED` objects must be restored before their content can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | ARCHIVED  | The object has been moved to cold storage.  Restore it before downloading. |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n",
+            "enum": ["PENDING", "AVAILABLE", "ARCHIVED", "REVOKED", "DELETED", "FAILED"],
             "example": "AVAILABLE"
           },
           "createdTime": {
             "type": "string",
-            "example": "2019-05-11T00:55:24",
+            "example": "2026-05-11T00:55:24",
             "description": "The ISO 8601 timestamp when this object record was created."
           },
           "updatedTime": {
             "type": "string",
             "format": "int64",
             "description": "The UNIX time for when the object record was last updated.",
-            "example": "2019-05-11T00:55:24"
+            "example": "2026-05-11T00:55:24"
           },
           "storedBytes": {
             "type": "string",
@@ -757,6 +857,55 @@
           }
         },
         "title": "Response Page."
+      },
+      "BucketResponsePage": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/BucketResponse" }
+          },
+          "lastPage": {
+            "type": "boolean",
+            "description": "This response indicates if this page is the last one in the set.",
+            "example": true
+          },
+          "pageKey": {
+            "type": "integer",
+            "format": "int64",
+            "description": "This response indicates the page number of the current page in the set.",
+            "example": 0
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int64",
+            "description": "This response indicates the number of records per page. A value of 0 to 100 is supported.",
+            "example": 100
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64",
+            "description": "This response indicates the total number of available pages for the request.",
+            "example": 100
+          }
+        },
+        "title": "Bucket Response Page."
+      },
+      "RestoreRequest": {
+        "type": "object",
+        "description": "Options for restoring an archived object from cold storage.",
+        "properties": {
+          "expirationDays": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 10,
+            "default": 7,
+            "description": "The number of days a restored copy is kept before it is removed.  If no value is specified, 7 days is used.",
+            "example": 7
+          }
+        },
+        "title": "Restore Request."
       },
       "TagResponse": {
         "type": "object",

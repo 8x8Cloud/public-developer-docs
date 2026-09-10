@@ -29884,7 +29884,7 @@ Customers looking to download content in bulk from [Cloud Storage Service](/anal
 
 For interacting with Cloud Storage Service `https://api.8x8.com/storage/{region}/v{version}/`
 
-* {region} to be replaced by a valid region based on region discovery
+* {region} to be replaced by a valid region based on [region discovery](/analytics/docs/cloud-storage-service-regions)
 * {version} to be replaced by current Version. Currently 3 resulting in /v3/
 
 ## 1. Authenticate to retrieve access token
@@ -29902,59 +29902,7 @@ The following steps will use the access_token as a Bearer Token form of authenti
 
 ## 2. Get My Regions
 
-8x8 Cloud Storage Service persists data regionally based on the customer locations/setup. For many customers this may be a single region for others this can be a number of regions. Each Region contains it's metadata/database and storage only. You cannot search in "us-east" and find items in "uk" since this could involve data export.
-
-### Parameters
-
-**Method: GET**
-
-#### Headers
-
-| Name | Required | Description | Example |
-| --- | --- | --- | --- |
-| Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
-
-#### Path
-
-| Name | Required | Description | Example |
-| --- | --- | --- | --- |
-| region | ✓ | Pass any valid region in for the discovery process. `us-east` or `uk` (The region does not need to be one of your regions for this request | `us-east` |
-| version | ✓ | The current version is `v3` | v3 |
-
-### My Regions Request
-
-genericus-eastuk
-
-```bash
-curl --location --request GET 'https://api.8x8.com/storage/{region}/v3/regions' \
---header 'Accept: application/json' \
---header 'Authorization: Bearer {access_token}'
-
-```
-
-```bash
-curl --location --request GET 'https://api.8x8.com/storage/us-east/v3/regions' \
---header 'Accept: application/json' \
---header 'Authorization: Bearer {access_token}'
-
-```
-
-```bash
-curl --location --request GET 'https://api.8x8.com/storage/uk/v3/regions' \
---header 'Accept: application/json' \
---header 'Authorization: Bearer {access_token}'
-
-```
-
-### Regions Response
-
-```json
-[
-    "us-east",
-    "uk"
-]
-
-```
+8x8 Cloud Storage Service stores your data regionally. Before downloading, discover which regions are provisioned for your account and pick the one that holds the objects you want. See [Find My Regions](/analytics/docs/cloud-storage-service-regions) for the full request and response.
 
 **Outputs For Next Step:**
 
@@ -30206,7 +30154,7 @@ Check for the download status until the status equals DONE (or an error status..
 
 ### Parameters
 
-**Method: POST**
+**Method: GET**
 
 #### Headers
 
@@ -30252,7 +30200,7 @@ Once the status is `DONE` then we can download the content
 
 ### Parameters
 
-**Method: POST**
+**Method: GET**
 
 #### Headers
 
@@ -30303,6 +30251,11 @@ Example file names within zip file:
 ## Cloud Storage Service Objects
 
 
+For interacting with Cloud Storage Service `https://api.8x8.com/storage/{region}/v{version}/`
+
+* {region} to be replaced by a valid region based on [region discovery](/analytics/docs/cloud-storage-service-regions)
+* {version} to be replaced by current Version. Currently 3 resulting in /v3/
+
 ## Filtering by time
 
 Filtering by the date when objects where created or when objects were last updated can be done by using *createdTime* or *updatedTime* in the *filter* parameter. These parameters must be specified as unix timestamp in milliseconds.
@@ -30314,6 +30267,46 @@ filter=type==callcenterrecording;**createdTime**=ge=1725148800000;**createdTime*
 or, for getting same recordings but specifying the time when were last updated
 
 filter=type==callcenterrecording;**updatedTime**=ge=1725148800000;**updatedTime**=le=1727740800000
+
+> 📘 **Tip: use smaller time intervals for faster searches**
+>
+> Narrowing the *createdTime* or *updatedTime* range returns results faster. If a search is slow or spans many pages, split it into smaller time windows.
+
+## Filtering by object state
+
+Every object has an *objectState*. By default a search returns only *AVAILABLE* objects. To search for objects in another state, set *objectState* in the *filter*.
+
+Objects that have been moved to cold storage have the state *ARCHIVED*. To find them:
+
+filter=objectState==ARCHIVED
+
+You can combine the state with a type, for example to find all archived contact center recordings:
+
+filter=objectState==ARCHIVED;type==callcenterrecording
+
+To search across more than one state, use the *=in=* operator with a comma-separated list. For example, to find objects that are either archived or available:
+
+filter=objectState=in=(ARCHIVED,AVAILABLE)
+
+This is equivalent to joining the states with the OR operator ( *,* ):
+
+filter=objectState==ARCHIVED,objectState==AVAILABLE
+
+You can combine either form with other criteria, for example archived or available contact center recordings:
+
+filter=objectState=in=(ARCHIVED,AVAILABLE);type==callcenterrecording
+
+> 📘 **Restore archived objects before downloading**
+>
+> *ARCHIVED* objects cannot be downloaded directly. Restore them first with the [Restore an archived object](/analytics/reference/restoreobject) endpoint. Restore is asynchronous and does not complete immediately: it can take several hours (up to 24 hours) for the object to become *AVAILABLE*. Once it is *AVAILABLE*, download its content as usual. The restored copy is temporary and is removed after the number of days set by *expirationDays*.
+>
+>
+
+## Pagination
+
+Results are returned in pages. Use *limit* to set the page size (1 to 100, default 100) and *pageKey* to choose where to start (the first page is 0).
+
+Each response includes the *pageKey* to use for the next page and a *lastPage* flag. To retrieve all results, repeat the request with *pageKey* set to the value returned in the previous response, until *lastPage* is `true`.
 
 ## Work - Unified Communications
 
@@ -31212,6 +31205,113 @@ filter=type==summary
 }
 
 ```
+
+---
+
+## Find My Regions
+
+
+8x8 Cloud Storage Service stores your data regionally, based on your account setup. Some accounts use a single region, others use several. Each region holds its own metadata and storage only: you cannot search in one region (for example `us-east`) and find objects held in another (for example `uk`), because that would involve a data export.
+
+Use this call to discover which regions are provisioned for your account. Run it once, then use one of the returned regions as the `{region}` in the base URL for your object, download and delete requests.
+
+> 📘 **You will need an access token**
+>
+> Use [OAuth Authentication for 8x8 XCaaS APIs](/analytics/docs/oauth-authentication-for-8x8-xcaas-apis) to get a temporary `access_token`, and pass it as a Bearer token on the request below.
+
+## Parameters
+
+**Method: GET**
+
+#### Headers
+
+| Name | Required | Description | Example |
+| --- | --- | --- | --- |
+| Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer kfjdfi3jfopajdkf93fa9pjfdoiap |
+
+#### Path
+
+| Name | Required | Description | Example |
+| --- | --- | --- | --- |
+| region | ✓ | Pass any valid region for the discovery process, for example `us-east` or `uk`. The region does not need to be one of your regions for this request. | `us-east` |
+| version | ✓ | The current version is `v3` | v3 |
+
+## Regions Request
+
+```bash
+curl --location --request GET 'https://api.8x8.com/storage/{region}/v3/regions' \
+--header 'Accept: application/json' \
+--header 'Authorization: Bearer {access_token}'
+```
+
+## Regions Response
+
+```json
+[
+    "us-east",
+    "uk"
+]
+```
+
+> 📘 **Only one region can be searched at a time.**
+>
+> If your use case spans multiple regions, repeat your object, download or delete steps once per region.
+
+For the full endpoint details, see [List available regions](/analytics/reference/getregions) in the API reference.
+
+---
+
+## Cloud Storage Service Overview
+
+
+8x8 Cloud Storage Service (CSS) gives you a single point of access to your stored 8x8 data objects: 8x8 Work call recordings, Contact Center call and screen recordings, voicemails, transcripts, meeting recordings and more. You can search for objects, download them individually or in bulk, restore archived objects from cold storage, and delete objects you no longer need.
+
+> 📘 **You will need a working API key to begin**
+>
+> [How to get API Keys](/analytics/docs/how-to-get-api-keys)
+>
+> To create "Call Recording & Storage" API keys, the user must first have the 'Cloud Storage API' assignment. This assignment must be granted by the Super Admin.
+>
+>
+
+## Base URL
+
+Every request uses a regional base URL:
+
+* `https://api.8x8.com/storage/{region}/v{version}/`
+
+Where:
+
+* `{region}` is one of your provisioned regions. Discover them with the [Find My Regions](/analytics/docs/cloud-storage-service-regions) request. Data is stored per region, so a search only returns objects held in that region.
+* `{version}` is the current API version. This is currently `3`, resulting in `/v3/`.
+
+## Authentication
+
+Requests are authenticated with a Bearer `access_token`. See [OAuth Authentication for 8x8 XCaaS APIs](/analytics/docs/oauth-authentication-for-8x8-xcaas-apis) for how to obtain one. All requests must be made over HTTPS.
+
+## Object states and archived objects
+
+Each object has an `objectState`. A search returns only `AVAILABLE` objects unless you request another state in the `filter`. Objects moved to cold storage have the state `ARCHIVED` and cannot be downloaded directly: restore them first with the [Restore an archived object](/analytics/reference/restoreobject) endpoint. Restore is asynchronous and can take several hours (up to 24 hours) to complete; once the object is `AVAILABLE` again, download its content. See [Cloud Storage Service Objects](/analytics/docs/cloud-storage-service-objects) for filter examples.
+
+## Guides in this section
+
+| Guide | Description |
+| --- | --- |
+| [Find My Regions](/analytics/docs/cloud-storage-service-regions) | Discover which regions hold your data before searching or downloading. |
+| [Cloud Storage Service Objects](/analytics/docs/cloud-storage-service-objects) | Object types and FIQL filter examples for searching your stored data. |
+| [Cloud Storage Service Bulk Download](/analytics/docs/cloud-storage-service-bulk-download) | Step-by-step flow for downloading many objects in a single Zip file. |
+
+## API reference
+
+The full endpoint reference is in the [Cloud Storage Service Public API](/analytics/reference/cloud-storage-service-public-api) section:
+
+| Group | Operations |
+| --- | --- |
+| [Regions](/analytics/reference/getregions) | Discover the regions provisioned for your account. |
+| [Objects](/analytics/reference/searchobject) | Search, retrieve, download metadata and content, and restore archived objects. |
+| [Buckets](/analytics/reference/searchbucket) | Search buckets and retrieve the contents of a bucket. |
+| [Bulk Downloads](/analytics/reference/startdownload) | Start a bulk download, poll its status, and download the resulting Zip file. |
+| [Bulk Delete](/analytics/reference/removecontent) | Delete objects and their content in bulk. |
 
 ---
 
@@ -36835,7 +36935,7 @@ import Heading from "@theme/Heading";
 </Heading>
 
 <MethodEndpoint
-  method={"post"}
+  method={"put"}
   path={"/bulk/download/cancel/{zipName}"}
   context={"endpoint"}
 >
@@ -36868,7 +36968,7 @@ This method cancels a running bulk download job by the zip file name.
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"Cancelled a running bulk download by it's zip file name.","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","description":"\nA detailed status is available for the data transfer.  There are several different status messages which indicate to the user the progress of their download request.\n\nThe following status messages are available:\n\n| Status       | Description                                     |\n|--------------|-------------------------------------------------|\n| NOT_STARTED  | No request has been made to transfer this file. |\n| IN_PROGRESS  | The file transfer is in progress.               |\n| DONE         | The file transfer is complete.                  |\n| FAILED       | The file transfer has failed.                   |\n| CANCELLED    | The user has cancelled the transfer request.    |\n| PARTIAL_DONE | A partial transfer request has been completed.  |\n","properties":{"content":{"type":"array","description":"A list which contains the objectId and status for the file transfer request.","items":{"type":"string"}},"status":{"type":"string","example":"DONE","enum":["NOT_STARTED","IN_PROGRESS","DONE","FAILED","CANCELLED","PARTIAL_DONE"]},"url":{"type":"string","description":"The presigned URL for content.","example":"https://api.8x8.com/storage/us-west/cloud-storage-service.s3.us-west-2.amazonaws.com/content/EPS/0011D00000LvBSaQAN/FGNEmsxXTQmuYMA2EtFUpA/ac46adbf-15cc-49bf-9d87-c0945c1ddd03?response-content-disposition =attachment%3B%20filename%3D%22%3D%3FUTF-8%3Fb%3FU25ha2VfUml2ZXJfKDVtYikuanBn%3F%3D%22&X-Amz-Security-Tok=AgoJb3JpZ2luX2VjELn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIEf1S0SkgwFrQoR6D71p76zyHePbF5C2zFqSSnSwDMDuAiBA0suixm9m5baxo8Wye9WsGziPcgFBcw2%2BCjEFnwTx3SraAwhCEAAaDDA1NzY1NjM2Mzk4Ni IMGUzfDjk2xWj88d%2FPKrcDKHisme41JCS%2F4rwNXL Y2HK%2FtWrieubWvo9Hzu2BfHdpqrjbPNBuRo%2BFArxHQX6t1gtizv2NXhOZwALMU0OY6KWQy0JdIWSkvBZbn%2B2tmubsA3wCdCV8jqUJi0Lh5DjT8iaK3O63lrHTJjiCrYgqaBRH0J2qYz0fAUTJ%2BPWE8XRuPn3O50vY6CrRrHR60SdfBsxOAoaUZMz9tr SLZ7CpYXwDj7LITad7BfEuS4d2QUe0lVj42TFswW%2 BtsHEVQ%2Fff2ZjXnwSulXnw705Kb6e0QVYzzPSfQpFOYQ5mylrB7lqxGkR2atWQqyyNCnHEti4xrBFoTS7VID%2BFF7KYOHm8kflsGdOboelcr1HECeBYVxHN6ho%2FHHs9gSek%2B%2BlKyGQJDIgJdkeWVYCj0FtL%2F%2FXtX1R194h1QYx8k0gmgVOk93d uA8IiuFgeRhQHSe5f3QixofHfKg5YPcqRE287mOCKy SibWSuoJck7PtqfPZIBPwn7QnZiZHPojVXf2WB%2F6orB49EcJxK80pVnZPIHl2q2Iwm5PUtDpsm8z%2F32d2oMQa%2BquQ9T1yTYyNZvpBQCnIyPTHndAIT2DgjDn%2FaTqBTq1Adoy%2Fz6z0zqrwjkN5KgQsPegYCKKg%2BKiKB%2BI19MGnoR17rcyhxvsD dirpeAEgwxz6gh%2BF9im00Mf3VIZ1meMSuxByw2Y6 1LqQto9pnAXTzdkDziatTY1RkSAAwm1rT8FUxB4GJa3mU8bh6AGXSDM5WUhc7%2BQEsgiCxw9SYZcF2d3du00EF4Z3MkxZj53Q%2Bm%2Fe4UT6P36pF9%2Bv79dL7XKbyXzXFr%2Byc60h4p8DHC3MC1GfYD5CQA%3D&X-Amz-Algorithm=AWS4-HMAC-SHA25 6&X-Amz-Date=20190806T102429Z&X-Amz-Signed Headers=host&X-Amz-Expires=1800&X-Amz-Credential=ASIAQ23EWJPJHUEPD6NF%2F20190806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e3438487031096ec438f8aaa6052a8311caf7fb94bd4a93c56871e0e4380d69d"},"zipName":{"type":"string"}},"title":"The download content status."}}}}},"201":{"description":"The response given when a resource is created.  This response can vary depending on the request given."},"204":{"description":"The response given when a successful request was completed, but did not have content to return."},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+  responses={{"200":{"description":"Cancelled a running bulk download by its zip file name.","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","description":"\nA detailed status is available for the data transfer.  There are several different status messages which indicate to the user the progress of their download request.\n\nThe following status messages are available:\n\n| Status       | Description                                     |\n|--------------|-------------------------------------------------|\n| NOT_STARTED  | No request has been made to transfer this file. |\n| IN_PROGRESS  | The file transfer is in progress.               |\n| DONE         | The file transfer is complete.                  |\n| FAILED       | The file transfer has failed.                   |\n| CANCELLED    | The user has cancelled the transfer request.    |\n| PARTIAL_DONE | A partial transfer request has been completed.  |\n","properties":{"content":{"type":"array","description":"A list which contains the objectId and status for the file transfer request.","items":{"type":"string"}},"status":{"type":"string","example":"DONE","enum":["NOT_STARTED","IN_PROGRESS","DONE","FAILED","CANCELLED","PARTIAL_DONE"]},"url":{"type":"string","description":"The presigned URL for content.","example":"https://api.8x8.com/storage/us-west/cloud-storage-service.s3.us-west-2.amazonaws.com/content/EPS/0011D00000LvBSaQAN/FGNEmsxXTQmuYMA2EtFUpA/ac46adbf-15cc-49bf-9d87-c0945c1ddd03?response-content-disposition =attachment%3B%20filename%3D%22%3D%3FUTF-8%3Fb%3FU25ha2VfUml2ZXJfKDVtYikuanBn%3F%3D%22&X-Amz-Security-Tok=AgoJb3JpZ2luX2VjELn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIEf1S0SkgwFrQoR6D71p76zyHePbF5C2zFqSSnSwDMDuAiBA0suixm9m5baxo8Wye9WsGziPcgFBcw2%2BCjEFnwTx3SraAwhCEAAaDDA1NzY1NjM2Mzk4Ni IMGUzfDjk2xWj88d%2FPKrcDKHisme41JCS%2F4rwNXL Y2HK%2FtWrieubWvo9Hzu2BfHdpqrjbPNBuRo%2BFArxHQX6t1gtizv2NXhOZwALMU0OY6KWQy0JdIWSkvBZbn%2B2tmubsA3wCdCV8jqUJi0Lh5DjT8iaK3O63lrHTJjiCrYgqaBRH0J2qYz0fAUTJ%2BPWE8XRuPn3O50vY6CrRrHR60SdfBsxOAoaUZMz9tr SLZ7CpYXwDj7LITad7BfEuS4d2QUe0lVj42TFswW%2 BtsHEVQ%2Fff2ZjXnwSulXnw705Kb6e0QVYzzPSfQpFOYQ5mylrB7lqxGkR2atWQqyyNCnHEti4xrBFoTS7VID%2BFF7KYOHm8kflsGdOboelcr1HECeBYVxHN6ho%2FHHs9gSek%2B%2BlKyGQJDIgJdkeWVYCj0FtL%2F%2FXtX1R194h1QYx8k0gmgVOk93d uA8IiuFgeRhQHSe5f3QixofHfKg5YPcqRE287mOCKy SibWSuoJck7PtqfPZIBPwn7QnZiZHPojVXf2WB%2F6orB49EcJxK80pVnZPIHl2q2Iwm5PUtDpsm8z%2F32d2oMQa%2BquQ9T1yTYyNZvpBQCnIyPTHndAIT2DgjDn%2FaTqBTq1Adoy%2Fz6z0zqrwjkN5KgQsPegYCKKg%2BKiKB%2BI19MGnoR17rcyhxvsD dirpeAEgwxz6gh%2BF9im00Mf3VIZ1meMSuxByw2Y6 1LqQto9pnAXTzdkDziatTY1RkSAAwm1rT8FUxB4GJa3mU8bh6AGXSDM5WUhc7%2BQEsgiCxw9SYZcF2d3du00EF4Z3MkxZj53Q%2Bm%2Fe4UT6P36pF9%2Bv79dL7XKbyXzXFr%2Byc60h4p8DHC3MC1GfYD5CQA%3D&X-Amz-Algorithm=AWS4-HMAC-SHA25 6&X-Amz-Date=20190806T102429Z&X-Amz-Signed Headers=host&X-Amz-Expires=1800&X-Amz-Credential=ASIAQ23EWJPJHUEPD6NF%2F20190806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e3438487031096ec438f8aaa6052a8311caf7fb94bd4a93c56871e0e4380d69d"},"zipName":{"type":"string"}},"title":"The download content status."}}}}},"201":{"description":"The response given when a resource is created.  This response can vary depending on the request given."},"204":{"description":"The response given when a successful request was completed, but did not have content to return."},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
@@ -38022,7 +38122,7 @@ This method clears your task queue for bulk download requests.
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"Cancel a running bulk download by it's zip file name.","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","description":"\nA detailed status is available for the data transfer.  There are several different status messages which indicate to the user the progress of their download request.\n\nThe following status messages are available:\n\n| Status       | Description                                     |\n|--------------|-------------------------------------------------|\n| NOT_STARTED  | No request has been made to transfer this file. |\n| IN_PROGRESS  | The file transfer is in progress.               |\n| DONE         | The file transfer is complete.                  |\n| FAILED       | The file transfer has failed.                   |\n| CANCELLED    | The user has cancelled the transfer request.    |\n| PARTIAL_DONE | A partial transfer request has been completed.  |\n","properties":{"content":{"type":"array","description":"A list which contains the objectId and status for the file transfer request.","items":{"type":"string"}},"status":{"type":"string","example":"DONE","enum":["NOT_STARTED","IN_PROGRESS","DONE","FAILED","CANCELLED","PARTIAL_DONE"]},"url":{"type":"string","description":"The presigned URL for content.","example":"https://api.8x8.com/storage/us-west/cloud-storage-service.s3.us-west-2.amazonaws.com/content/EPS/0011D00000LvBSaQAN/FGNEmsxXTQmuYMA2EtFUpA/ac46adbf-15cc-49bf-9d87-c0945c1ddd03?response-content-disposition =attachment%3B%20filename%3D%22%3D%3FUTF-8%3Fb%3FU25ha2VfUml2ZXJfKDVtYikuanBn%3F%3D%22&X-Amz-Security-Tok=AgoJb3JpZ2luX2VjELn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIEf1S0SkgwFrQoR6D71p76zyHePbF5C2zFqSSnSwDMDuAiBA0suixm9m5baxo8Wye9WsGziPcgFBcw2%2BCjEFnwTx3SraAwhCEAAaDDA1NzY1NjM2Mzk4Ni IMGUzfDjk2xWj88d%2FPKrcDKHisme41JCS%2F4rwNXL Y2HK%2FtWrieubWvo9Hzu2BfHdpqrjbPNBuRo%2BFArxHQX6t1gtizv2NXhOZwALMU0OY6KWQy0JdIWSkvBZbn%2B2tmubsA3wCdCV8jqUJi0Lh5DjT8iaK3O63lrHTJjiCrYgqaBRH0J2qYz0fAUTJ%2BPWE8XRuPn3O50vY6CrRrHR60SdfBsxOAoaUZMz9tr SLZ7CpYXwDj7LITad7BfEuS4d2QUe0lVj42TFswW%2 BtsHEVQ%2Fff2ZjXnwSulXnw705Kb6e0QVYzzPSfQpFOYQ5mylrB7lqxGkR2atWQqyyNCnHEti4xrBFoTS7VID%2BFF7KYOHm8kflsGdOboelcr1HECeBYVxHN6ho%2FHHs9gSek%2B%2BlKyGQJDIgJdkeWVYCj0FtL%2F%2FXtX1R194h1QYx8k0gmgVOk93d uA8IiuFgeRhQHSe5f3QixofHfKg5YPcqRE287mOCKy SibWSuoJck7PtqfPZIBPwn7QnZiZHPojVXf2WB%2F6orB49EcJxK80pVnZPIHl2q2Iwm5PUtDpsm8z%2F32d2oMQa%2BquQ9T1yTYyNZvpBQCnIyPTHndAIT2DgjDn%2FaTqBTq1Adoy%2Fz6z0zqrwjkN5KgQsPegYCKKg%2BKiKB%2BI19MGnoR17rcyhxvsD dirpeAEgwxz6gh%2BF9im00Mf3VIZ1meMSuxByw2Y6 1LqQto9pnAXTzdkDziatTY1RkSAAwm1rT8FUxB4GJa3mU8bh6AGXSDM5WUhc7%2BQEsgiCxw9SYZcF2d3du00EF4Z3MkxZj53Q%2Bm%2Fe4UT6P36pF9%2Bv79dL7XKbyXzXFr%2Byc60h4p8DHC3MC1GfYD5CQA%3D&X-Amz-Algorithm=AWS4-HMAC-SHA25 6&X-Amz-Date=20190806T102429Z&X-Amz-Signed Headers=host&X-Amz-Expires=1800&X-Amz-Credential=ASIAQ23EWJPJHUEPD6NF%2F20190806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e3438487031096ec438f8aaa6052a8311caf7fb94bd4a93c56871e0e4380d69d"},"zipName":{"type":"string"}},"title":"The download content status."}}}}},"201":{"description":"The response given when a resource is created.  This response can vary depending on the request given."},"204":{"description":"The response given when a successful request was completed, but did not have content to return."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+  responses={{"200":{"description":"Removes tasks from a download request.","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","description":"\nA detailed status is available for the data transfer.  There are several different status messages which indicate to the user the progress of their download request.\n\nThe following status messages are available:\n\n| Status       | Description                                     |\n|--------------|-------------------------------------------------|\n| NOT_STARTED  | No request has been made to transfer this file. |\n| IN_PROGRESS  | The file transfer is in progress.               |\n| DONE         | The file transfer is complete.                  |\n| FAILED       | The file transfer has failed.                   |\n| CANCELLED    | The user has cancelled the transfer request.    |\n| PARTIAL_DONE | A partial transfer request has been completed.  |\n","properties":{"content":{"type":"array","description":"A list which contains the objectId and status for the file transfer request.","items":{"type":"string"}},"status":{"type":"string","example":"DONE","enum":["NOT_STARTED","IN_PROGRESS","DONE","FAILED","CANCELLED","PARTIAL_DONE"]},"url":{"type":"string","description":"The presigned URL for content.","example":"https://api.8x8.com/storage/us-west/cloud-storage-service.s3.us-west-2.amazonaws.com/content/EPS/0011D00000LvBSaQAN/FGNEmsxXTQmuYMA2EtFUpA/ac46adbf-15cc-49bf-9d87-c0945c1ddd03?response-content-disposition =attachment%3B%20filename%3D%22%3D%3FUTF-8%3Fb%3FU25ha2VfUml2ZXJfKDVtYikuanBn%3F%3D%22&X-Amz-Security-Tok=AgoJb3JpZ2luX2VjELn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIEf1S0SkgwFrQoR6D71p76zyHePbF5C2zFqSSnSwDMDuAiBA0suixm9m5baxo8Wye9WsGziPcgFBcw2%2BCjEFnwTx3SraAwhCEAAaDDA1NzY1NjM2Mzk4Ni IMGUzfDjk2xWj88d%2FPKrcDKHisme41JCS%2F4rwNXL Y2HK%2FtWrieubWvo9Hzu2BfHdpqrjbPNBuRo%2BFArxHQX6t1gtizv2NXhOZwALMU0OY6KWQy0JdIWSkvBZbn%2B2tmubsA3wCdCV8jqUJi0Lh5DjT8iaK3O63lrHTJjiCrYgqaBRH0J2qYz0fAUTJ%2BPWE8XRuPn3O50vY6CrRrHR60SdfBsxOAoaUZMz9tr SLZ7CpYXwDj7LITad7BfEuS4d2QUe0lVj42TFswW%2 BtsHEVQ%2Fff2ZjXnwSulXnw705Kb6e0QVYzzPSfQpFOYQ5mylrB7lqxGkR2atWQqyyNCnHEti4xrBFoTS7VID%2BFF7KYOHm8kflsGdOboelcr1HECeBYVxHN6ho%2FHHs9gSek%2B%2BlKyGQJDIgJdkeWVYCj0FtL%2F%2FXtX1R194h1QYx8k0gmgVOk93d uA8IiuFgeRhQHSe5f3QixofHfKg5YPcqRE287mOCKy SibWSuoJck7PtqfPZIBPwn7QnZiZHPojVXf2WB%2F6orB49EcJxK80pVnZPIHl2q2Iwm5PUtDpsm8z%2F32d2oMQa%2BquQ9T1yTYyNZvpBQCnIyPTHndAIT2DgjDn%2FaTqBTq1Adoy%2Fz6z0zqrwjkN5KgQsPegYCKKg%2BKiKB%2BI19MGnoR17rcyhxvsD dirpeAEgwxz6gh%2BF9im00Mf3VIZ1meMSuxByw2Y6 1LqQto9pnAXTzdkDziatTY1RkSAAwm1rT8FUxB4GJa3mU8bh6AGXSDM5WUhc7%2BQEsgiCxw9SYZcF2d3du00EF4Z3MkxZj53Q%2Bm%2Fe4UT6P36pF9%2Bv79dL7XKbyXzXFr%2Byc60h4p8DHC3MC1GfYD5CQA%3D&X-Amz-Algorithm=AWS4-HMAC-SHA25 6&X-Amz-Date=20190806T102429Z&X-Amz-Signed Headers=host&X-Amz-Expires=1800&X-Amz-Credential=ASIAQ23EWJPJHUEPD6NF%2F20190806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e3438487031096ec438f8aaa6052a8311caf7fb94bd4a93c56871e0e4380d69d"},"zipName":{"type":"string"}},"title":"The download content status."}}}}},"201":{"description":"The response given when a resource is created.  This response can vary depending on the request given."},"204":{"description":"The response given when a successful request was completed, but did not have content to return."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
@@ -38054,14 +38154,14 @@ For example:
 You can obtain your stored data by either:
 * Querying for, and then downloading individual data objects
 * Bulk downloading all of your data using a Zip file utility (Note that the limit on bulk file downloads is 2 GB.)
-***Note: This page is in the Beta stage. Contact your [8x8 representative](mailto:ro-rec@8x8.com) for more information on API use.***
-# **Authentication**
+***Contact your [8x8 representative](mailto:ro-rec@8x8.com) for more information on API use.***
+## **Authentication**
 You can try out this API through request authentication using your client credentials. Refer to [Client Credentials](/analytics/docs/how-to-get-api-keys) on the [Getting Started](/tech-partner/docs/getting-started) page for more information.
 
 All requests must be made over HTTPS - calls made over HTTP will fail.
-# **Regions**
+## **Regions**
 API resources are available for each geographical region in which they are provisioned. The base URLs for select regions are:
-  URL Region   https://api.8x8.com/storage/us-west/v1Western US https://api.8x8.com/storage/us-east/v1Eastern US https://api.8x8.com/storage/uk/v1United Kingdom https://api.8x8.com/storage/ap/v1Australia   https://api.8x8.com/storage/ca/v1Canada  
+  URL Region   https://api.8x8.com/storage/us-west/v3Western US https://api.8x8.com/storage/us-east/v3Eastern US https://api.8x8.com/storage/uk/v3United Kingdom https://api.8x8.com/storage/ap/v3Australia   https://api.8x8.com/storage/ca/v3Canada  
 
   <Heading
     id={"authentication"}
@@ -38523,14 +38623,14 @@ This method enables access to a single zipped file that was generated from a bul
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"Retrieves the bulk download data for a given .zip file name.","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","description":"\nA detailed status is available for the data transfer.  There are several different status messages which indicate to the user the progress of their download request.\n\nThe following status messages are available:\n\n| Status       | Description                                     |\n|--------------|-------------------------------------------------|\n| NOT_STARTED  | No request has been made to transfer this file. |\n| IN_PROGRESS  | The file transfer is in progress.               |\n| DONE         | The file transfer is complete.                  |\n| FAILED       | The file transfer has failed.                   |\n| CANCELLED    | The user has cancelled the transfer request.    |\n| PARTIAL_DONE | A partial transfer request has been completed.  |\n","properties":{"content":{"type":"array","description":"A list which contains the objectId and status for the file transfer request.","items":{"type":"string"}},"status":{"type":"string","example":"DONE","enum":["NOT_STARTED","IN_PROGRESS","DONE","FAILED","CANCELLED","PARTIAL_DONE"]},"url":{"type":"string","description":"The presigned URL for content.","example":"https://api.8x8.com/storage/us-west/cloud-storage-service.s3.us-west-2.amazonaws.com/content/EPS/0011D00000LvBSaQAN/FGNEmsxXTQmuYMA2EtFUpA/ac46adbf-15cc-49bf-9d87-c0945c1ddd03?response-content-disposition =attachment%3B%20filename%3D%22%3D%3FUTF-8%3Fb%3FU25ha2VfUml2ZXJfKDVtYikuanBn%3F%3D%22&X-Amz-Security-Tok=AgoJb3JpZ2luX2VjELn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIEf1S0SkgwFrQoR6D71p76zyHePbF5C2zFqSSnSwDMDuAiBA0suixm9m5baxo8Wye9WsGziPcgFBcw2%2BCjEFnwTx3SraAwhCEAAaDDA1NzY1NjM2Mzk4Ni IMGUzfDjk2xWj88d%2FPKrcDKHisme41JCS%2F4rwNXL Y2HK%2FtWrieubWvo9Hzu2BfHdpqrjbPNBuRo%2BFArxHQX6t1gtizv2NXhOZwALMU0OY6KWQy0JdIWSkvBZbn%2B2tmubsA3wCdCV8jqUJi0Lh5DjT8iaK3O63lrHTJjiCrYgqaBRH0J2qYz0fAUTJ%2BPWE8XRuPn3O50vY6CrRrHR60SdfBsxOAoaUZMz9tr SLZ7CpYXwDj7LITad7BfEuS4d2QUe0lVj42TFswW%2 BtsHEVQ%2Fff2ZjXnwSulXnw705Kb6e0QVYzzPSfQpFOYQ5mylrB7lqxGkR2atWQqyyNCnHEti4xrBFoTS7VID%2BFF7KYOHm8kflsGdOboelcr1HECeBYVxHN6ho%2FHHs9gSek%2B%2BlKyGQJDIgJdkeWVYCj0FtL%2F%2FXtX1R194h1QYx8k0gmgVOk93d uA8IiuFgeRhQHSe5f3QixofHfKg5YPcqRE287mOCKy SibWSuoJck7PtqfPZIBPwn7QnZiZHPojVXf2WB%2F6orB49EcJxK80pVnZPIHl2q2Iwm5PUtDpsm8z%2F32d2oMQa%2BquQ9T1yTYyNZvpBQCnIyPTHndAIT2DgjDn%2FaTqBTq1Adoy%2Fz6z0zqrwjkN5KgQsPegYCKKg%2BKiKB%2BI19MGnoR17rcyhxvsD dirpeAEgwxz6gh%2BF9im00Mf3VIZ1meMSuxByw2Y6 1LqQto9pnAXTzdkDziatTY1RkSAAwm1rT8FUxB4GJa3mU8bh6AGXSDM5WUhc7%2BQEsgiCxw9SYZcF2d3du00EF4Z3MkxZj53Q%2Bm%2Fe4UT6P36pF9%2Bv79dL7XKbyXzXFr%2Byc60h4p8DHC3MC1GfYD5CQA%3D&X-Amz-Algorithm=AWS4-HMAC-SHA25 6&X-Amz-Date=20190806T102429Z&X-Amz-Signed Headers=host&X-Amz-Expires=1800&X-Amz-Credential=ASIAQ23EWJPJHUEPD6NF%2F20190806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e3438487031096ec438f8aaa6052a8311caf7fb94bd4a93c56871e0e4380d69d"},"zipName":{"type":"string"}},"title":"The download content status."}}}}},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+  responses={{"200":{"description":"Retrieves the bulk download data for a given .zip file name.","content":{"application/octet-stream":{"schema":{"type":"string","format":"binary"}}}},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
 
 ---
 
-## Download content for the given metadata.
+## Download metadata for the given object.
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -38543,7 +38643,7 @@ import Heading from "@theme/Heading";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Download content for the given metadata."}
+  children={"Download metadata for the given object."}
 >
 </Heading>
 
@@ -38581,14 +38681,14 @@ This method retrieves an object using the objectId specification for a given rec
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"Returns the requested object record details.","content":{"application/json":{"schema":{"type":"object","description":"The information associated with the stored object.","properties":{"id":{"type":"string","description":"The unique identifier of the object.","example":"0ca4c747-6256-4023-a335-53a46449871a"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"userId":{"type":"string","description":"The unique 8x8 system user identifier.","example":"b4ZRdTEnToOh6vRAq79U_g"},"type":{"type":"string","description":"The source system which created this object.","enum":["callrecording","callcenterrecording","meeting"],"example":"callrecording"},"mimeType":{"type":"string","description":"The MIME (Multipurpose Internet Mail Extensions) type of the object content associated with this object.","example":"audio/mpeg"},"objectName":{"type":"string","description":"The filename of the associated object.","example":"ipbx:demo:callrecording:users:1000:1554901130738-1553527036518-x1000u1-15617142314_E.mp3"},"objectState":{"type":"string","description":"\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n","enum":["PENDING","AVAILABLE","REVOKED","DELETED","FAILED"],"example":"AVAILABLE"},"createdTime":{"type":"string","example":"2019-05-11T00:55:24","description":"The ISO 8601 timestamp when this object record was created."},"updatedTime":{"type":"string","format":"int64","description":"The UNIX time for when the object record was last updated.","example":"2019-05-11T00:55:24"},"storedBytes":{"type":"string","description":"The size of the data stored in bytes.","example":23661},"checksum":{"type":"string","description":"The computed checksum value of the object.","example":"3dda71c7a10536f6a59c17a4062163b6"},"checksumType":{"type":"string","example":"MD5","description":"This API uses MD5 checksum values to ensure data integrity."},"tags":{"type":"array","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}}},"title":"Object Response."}}}},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+  responses={{"200":{"description":"Returns the requested object record details.","content":{"application/json":{"schema":{"type":"object","description":"The information associated with the stored object.","properties":{"id":{"type":"string","description":"The unique identifier of the object.","example":"0ca4c747-6256-4023-a335-53a46449871a"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"userId":{"type":"string","description":"The unique 8x8 system user identifier.","example":"b4ZRdTEnToOh6vRAq79U_g"},"type":{"type":"string","description":"The source system which created this object.","enum":["callrecording","callcenterrecording","meeting"],"example":"callrecording"},"mimeType":{"type":"string","description":"The MIME (Multipurpose Internet Mail Extensions) type of the object content associated with this object.","example":"audio/mpeg"},"objectName":{"type":"string","description":"The filename of the associated object.","example":"ipbx:demo:callrecording:users:1000:1554901130738-1553527036518-x1000u1-15617142314_E.mp3"},"objectState":{"type":"string","description":"\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.  `ARCHIVED` objects must be restored before their content can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | ARCHIVED  | The object has been moved to cold storage.  Restore it before downloading. |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n","enum":["PENDING","AVAILABLE","ARCHIVED","REVOKED","DELETED","FAILED"],"example":"AVAILABLE"},"createdTime":{"type":"string","example":"2026-05-11T00:55:24","description":"The ISO 8601 timestamp when this object record was created."},"updatedTime":{"type":"string","format":"int64","description":"The UNIX time for when the object record was last updated.","example":"2026-05-11T00:55:24"},"storedBytes":{"type":"string","description":"The size of the data stored in bytes.","example":23661},"checksum":{"type":"string","description":"The computed checksum value of the object.","example":"3dda71c7a10536f6a59c17a4062163b6"},"checksumType":{"type":"string","example":"MD5","description":"This API uses MD5 checksum values to ensure data integrity."},"tags":{"type":"array","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}}},"title":"Object Response."}}}},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
 
 ---
 
-## Download content for the given metadata.(Reference)
+## Download content for the given object.
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -38601,7 +38701,7 @@ import Heading from "@theme/Heading";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Download content for the given metadata."}
+  children={"Download content for the given object."}
 >
 </Heading>
 
@@ -38697,7 +38797,7 @@ This method returns the status of a single bulk download job request by zip file
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"The bulk download task status for a given .zip file name.","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","description":"\nA detailed status is available for the data transfer.  There are several different status messages which indicate to the user the progress of their download request.\n\nThe following status messages are available:\n\n| Status       | Description                                     |\n|--------------|-------------------------------------------------|\n| NOT_STARTED  | No request has been made to transfer this file. |\n| IN_PROGRESS  | The file transfer is in progress.               |\n| DONE         | The file transfer is complete.                  |\n| FAILED       | The file transfer has failed.                   |\n| CANCELLED    | The user has cancelled the transfer request.    |\n| PARTIAL_DONE | A partial transfer request has been completed.  |\n","properties":{"content":{"type":"array","description":"A list which contains the objectId and status for the file transfer request.","items":{"type":"string"}},"status":{"type":"string","example":"DONE","enum":["NOT_STARTED","IN_PROGRESS","DONE","FAILED","CANCELLED","PARTIAL_DONE"]},"url":{"type":"string","description":"The presigned URL for content.","example":"https://api.8x8.com/storage/us-west/cloud-storage-service.s3.us-west-2.amazonaws.com/content/EPS/0011D00000LvBSaQAN/FGNEmsxXTQmuYMA2EtFUpA/ac46adbf-15cc-49bf-9d87-c0945c1ddd03?response-content-disposition =attachment%3B%20filename%3D%22%3D%3FUTF-8%3Fb%3FU25ha2VfUml2ZXJfKDVtYikuanBn%3F%3D%22&X-Amz-Security-Tok=AgoJb3JpZ2luX2VjELn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIEf1S0SkgwFrQoR6D71p76zyHePbF5C2zFqSSnSwDMDuAiBA0suixm9m5baxo8Wye9WsGziPcgFBcw2%2BCjEFnwTx3SraAwhCEAAaDDA1NzY1NjM2Mzk4Ni IMGUzfDjk2xWj88d%2FPKrcDKHisme41JCS%2F4rwNXL Y2HK%2FtWrieubWvo9Hzu2BfHdpqrjbPNBuRo%2BFArxHQX6t1gtizv2NXhOZwALMU0OY6KWQy0JdIWSkvBZbn%2B2tmubsA3wCdCV8jqUJi0Lh5DjT8iaK3O63lrHTJjiCrYgqaBRH0J2qYz0fAUTJ%2BPWE8XRuPn3O50vY6CrRrHR60SdfBsxOAoaUZMz9tr SLZ7CpYXwDj7LITad7BfEuS4d2QUe0lVj42TFswW%2 BtsHEVQ%2Fff2ZjXnwSulXnw705Kb6e0QVYzzPSfQpFOYQ5mylrB7lqxGkR2atWQqyyNCnHEti4xrBFoTS7VID%2BFF7KYOHm8kflsGdOboelcr1HECeBYVxHN6ho%2FHHs9gSek%2B%2BlKyGQJDIgJdkeWVYCj0FtL%2F%2FXtX1R194h1QYx8k0gmgVOk93d uA8IiuFgeRhQHSe5f3QixofHfKg5YPcqRE287mOCKy SibWSuoJck7PtqfPZIBPwn7QnZiZHPojVXf2WB%2F6orB49EcJxK80pVnZPIHl2q2Iwm5PUtDpsm8z%2F32d2oMQa%2BquQ9T1yTYyNZvpBQCnIyPTHndAIT2DgjDn%2FaTqBTq1Adoy%2Fz6z0zqrwjkN5KgQsPegYCKKg%2BKiKB%2BI19MGnoR17rcyhxvsD dirpeAEgwxz6gh%2BF9im00Mf3VIZ1meMSuxByw2Y6 1LqQto9pnAXTzdkDziatTY1RkSAAwm1rT8FUxB4GJa3mU8bh6AGXSDM5WUhc7%2BQEsgiCxw9SYZcF2d3du00EF4Z3MkxZj53Q%2Bm%2Fe4UT6P36pF9%2Bv79dL7XKbyXzXFr%2Byc60h4p8DHC3MC1GfYD5CQA%3D&X-Amz-Algorithm=AWS4-HMAC-SHA25 6&X-Amz-Date=20190806T102429Z&X-Amz-Signed Headers=host&X-Amz-Expires=1800&X-Amz-Credential=ASIAQ23EWJPJHUEPD6NF%2F20190806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e3438487031096ec438f8aaa6052a8311caf7fb94bd4a93c56871e0e4380d69d"},"zipName":{"type":"string"}},"title":"The download content status."}}}}},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+  responses={{"200":{"description":"The bulk download task status for a given .zip file name.","content":{"application/json":{"schema":{"type":"object","description":"\nA detailed status is available for the data transfer.  There are several different status messages which indicate to the user the progress of their download request.\n\nThe following status messages are available:\n\n| Status       | Description                                     |\n|--------------|-------------------------------------------------|\n| NOT_STARTED  | No request has been made to transfer this file. |\n| IN_PROGRESS  | The file transfer is in progress.               |\n| DONE         | The file transfer is complete.                  |\n| FAILED       | The file transfer has failed.                   |\n| CANCELLED    | The user has cancelled the transfer request.    |\n| PARTIAL_DONE | A partial transfer request has been completed.  |\n","properties":{"content":{"type":"array","description":"A list which contains the objectId and status for the file transfer request.","items":{"type":"string"}},"status":{"type":"string","example":"DONE","enum":["NOT_STARTED","IN_PROGRESS","DONE","FAILED","CANCELLED","PARTIAL_DONE"]},"url":{"type":"string","description":"The presigned URL for content.","example":"https://api.8x8.com/storage/us-west/cloud-storage-service.s3.us-west-2.amazonaws.com/content/EPS/0011D00000LvBSaQAN/FGNEmsxXTQmuYMA2EtFUpA/ac46adbf-15cc-49bf-9d87-c0945c1ddd03?response-content-disposition =attachment%3B%20filename%3D%22%3D%3FUTF-8%3Fb%3FU25ha2VfUml2ZXJfKDVtYikuanBn%3F%3D%22&X-Amz-Security-Tok=AgoJb3JpZ2luX2VjELn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIEf1S0SkgwFrQoR6D71p76zyHePbF5C2zFqSSnSwDMDuAiBA0suixm9m5baxo8Wye9WsGziPcgFBcw2%2BCjEFnwTx3SraAwhCEAAaDDA1NzY1NjM2Mzk4Ni IMGUzfDjk2xWj88d%2FPKrcDKHisme41JCS%2F4rwNXL Y2HK%2FtWrieubWvo9Hzu2BfHdpqrjbPNBuRo%2BFArxHQX6t1gtizv2NXhOZwALMU0OY6KWQy0JdIWSkvBZbn%2B2tmubsA3wCdCV8jqUJi0Lh5DjT8iaK3O63lrHTJjiCrYgqaBRH0J2qYz0fAUTJ%2BPWE8XRuPn3O50vY6CrRrHR60SdfBsxOAoaUZMz9tr SLZ7CpYXwDj7LITad7BfEuS4d2QUe0lVj42TFswW%2 BtsHEVQ%2Fff2ZjXnwSulXnw705Kb6e0QVYzzPSfQpFOYQ5mylrB7lqxGkR2atWQqyyNCnHEti4xrBFoTS7VID%2BFF7KYOHm8kflsGdOboelcr1HECeBYVxHN6ho%2FHHs9gSek%2B%2BlKyGQJDIgJdkeWVYCj0FtL%2F%2FXtX1R194h1QYx8k0gmgVOk93d uA8IiuFgeRhQHSe5f3QixofHfKg5YPcqRE287mOCKy SibWSuoJck7PtqfPZIBPwn7QnZiZHPojVXf2WB%2F6orB49EcJxK80pVnZPIHl2q2Iwm5PUtDpsm8z%2F32d2oMQa%2BquQ9T1yTYyNZvpBQCnIyPTHndAIT2DgjDn%2FaTqBTq1Adoy%2Fz6z0zqrwjkN5KgQsPegYCKKg%2BKiKB%2BI19MGnoR17rcyhxvsD dirpeAEgwxz6gh%2BF9im00Mf3VIZ1meMSuxByw2Y6 1LqQto9pnAXTzdkDziatTY1RkSAAwm1rT8FUxB4GJa3mU8bh6AGXSDM5WUhc7%2BQEsgiCxw9SYZcF2d3du00EF4Z3MkxZj53Q%2Bm%2Fe4UT6P36pF9%2Bv79dL7XKbyXzXFr%2Byc60h4p8DHC3MC1GfYD5CQA%3D&X-Amz-Algorithm=AWS4-HMAC-SHA25 6&X-Amz-Date=20190806T102429Z&X-Amz-Signed Headers=host&X-Amz-Expires=1800&X-Amz-Credential=ASIAQ23EWJPJHUEPD6NF%2F20190806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e3438487031096ec438f8aaa6052a8311caf7fb94bd4a93c56871e0e4380d69d"},"zipName":{"type":"string"}},"title":"The download content status."}}}},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
@@ -40216,14 +40316,14 @@ This method returns all of the contents contained within a specific bucket.
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"Returns a list of all objects inside a specified bucket.","content":{"application/json":{"schema":{"type":"object","description":"Objects can be grouped into buckets.  This is useful for records which may have many different types of objects which are associated.","properties":{"createdTime":{"type":"string","example":"2019-05-11T00:55:24","description":"The ISO 8601 timestamp for when the object record was created."},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"objectList":{"type":"array","items":{"type":"object","description":"The information associated with the stored object.","properties":{"id":{"type":"string","description":"The unique identifier of the object.","example":"0ca4c747-6256-4023-a335-53a46449871a"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"userId":{"type":"string","description":"The unique 8x8 system user identifier.","example":"b4ZRdTEnToOh6vRAq79U_g"},"type":{"type":"string","description":"The source system which created this object.","enum":["callrecording","callcenterrecording","meeting"],"example":"callrecording"},"mimeType":{"type":"string","description":"The MIME (Multipurpose Internet Mail Extensions) type of the object content associated with this object.","example":"audio/mpeg"},"objectName":{"type":"string","description":"The filename of the associated object.","example":"ipbx:demo:callrecording:users:1000:1554901130738-1553527036518-x1000u1-15617142314_E.mp3"},"objectState":{"type":"string","description":"\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n","enum":["PENDING","AVAILABLE","REVOKED","DELETED","FAILED"],"example":"AVAILABLE"},"createdTime":{"type":"string","example":"2019-05-11T00:55:24","description":"The ISO 8601 timestamp when this object record was created."},"updatedTime":{"type":"string","format":"int64","description":"The UNIX time for when the object record was last updated.","example":"2019-05-11T00:55:24"},"storedBytes":{"type":"string","description":"The size of the data stored in bytes.","example":23661},"checksum":{"type":"string","description":"The computed checksum value of the object.","example":"3dda71c7a10536f6a59c17a4062163b6"},"checksumType":{"type":"string","example":"MD5","description":"This API uses MD5 checksum values to ensure data integrity."},"tags":{"type":"array","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}}},"title":"Object Response."}},"tags":{"description":"Buckets enable you to create tags.  You can create tags to describe objects or for filtering.","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}},"updatedTime":{"type":"string","example":"2019-05-11T00:55:24","description":"The ISO 8601 timestamp when the object record was last updated."},"userId":{"type":"string","example":"b4ZRdTEnToOh6vRAq79U_g","title":"Bucket Response."}},"title":"BucketResponse"}}}},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+  responses={{"200":{"description":"Returns a list of all objects inside a specified bucket.","content":{"application/json":{"schema":{"type":"object","description":"Objects can be grouped into buckets.  This is useful for records which may have many different types of objects which are associated.","properties":{"createdTime":{"type":"string","example":"2026-05-11T00:55:24","description":"The ISO 8601 timestamp for when the object record was created."},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"objectList":{"type":"array","items":{"type":"object","description":"The information associated with the stored object.","properties":{"id":{"type":"string","description":"The unique identifier of the object.","example":"0ca4c747-6256-4023-a335-53a46449871a"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"userId":{"type":"string","description":"The unique 8x8 system user identifier.","example":"b4ZRdTEnToOh6vRAq79U_g"},"type":{"type":"string","description":"The source system which created this object.","enum":["callrecording","callcenterrecording","meeting"],"example":"callrecording"},"mimeType":{"type":"string","description":"The MIME (Multipurpose Internet Mail Extensions) type of the object content associated with this object.","example":"audio/mpeg"},"objectName":{"type":"string","description":"The filename of the associated object.","example":"ipbx:demo:callrecording:users:1000:1554901130738-1553527036518-x1000u1-15617142314_E.mp3"},"objectState":{"type":"string","description":"\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.  `ARCHIVED` objects must be restored before their content can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | ARCHIVED  | The object has been moved to cold storage.  Restore it before downloading. |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n","enum":["PENDING","AVAILABLE","ARCHIVED","REVOKED","DELETED","FAILED"],"example":"AVAILABLE"},"createdTime":{"type":"string","example":"2026-05-11T00:55:24","description":"The ISO 8601 timestamp when this object record was created."},"updatedTime":{"type":"string","format":"int64","description":"The UNIX time for when the object record was last updated.","example":"2026-05-11T00:55:24"},"storedBytes":{"type":"string","description":"The size of the data stored in bytes.","example":23661},"checksum":{"type":"string","description":"The computed checksum value of the object.","example":"3dda71c7a10536f6a59c17a4062163b6"},"checksumType":{"type":"string","example":"MD5","description":"This API uses MD5 checksum values to ensure data integrity."},"tags":{"type":"array","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}}},"title":"Object Response."}},"tags":{"description":"Buckets enable you to create tags.  You can create tags to describe objects or for filtering.","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}},"updatedTime":{"type":"string","example":"2026-05-11T00:55:24","description":"The ISO 8601 timestamp when the object record was last updated."},"userId":{"type":"string","example":"b4ZRdTEnToOh6vRAq79U_g","title":"Bucket Response."}},"title":"BucketResponse"}}}},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
 
 ---
 
-## Find an object by it's ID.
+## Find an object by its ID.
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -40236,7 +40336,7 @@ import Heading from "@theme/Heading";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Find an object by it's ID."}
+  children={"Find an object by its ID."}
 >
 </Heading>
 
@@ -40274,7 +40374,57 @@ Use this method to retrieve an object by its ID.
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"Returns the requested object record details","content":{"application/json":{"schema":{"type":"object","description":"The information associated with the stored object.","properties":{"id":{"type":"string","description":"The unique identifier of the object.","example":"0ca4c747-6256-4023-a335-53a46449871a"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"userId":{"type":"string","description":"The unique 8x8 system user identifier.","example":"b4ZRdTEnToOh6vRAq79U_g"},"type":{"type":"string","description":"The source system which created this object.","enum":["callrecording","callcenterrecording","meeting"],"example":"callrecording"},"mimeType":{"type":"string","description":"The MIME (Multipurpose Internet Mail Extensions) type of the object content associated with this object.","example":"audio/mpeg"},"objectName":{"type":"string","description":"The filename of the associated object.","example":"ipbx:demo:callrecording:users:1000:1554901130738-1553527036518-x1000u1-15617142314_E.mp3"},"objectState":{"type":"string","description":"\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n","enum":["PENDING","AVAILABLE","REVOKED","DELETED","FAILED"],"example":"AVAILABLE"},"createdTime":{"type":"string","example":"2019-05-11T00:55:24","description":"The ISO 8601 timestamp when this object record was created."},"updatedTime":{"type":"string","format":"int64","description":"The UNIX time for when the object record was last updated.","example":"2019-05-11T00:55:24"},"storedBytes":{"type":"string","description":"The size of the data stored in bytes.","example":23661},"checksum":{"type":"string","description":"The computed checksum value of the object.","example":"3dda71c7a10536f6a59c17a4062163b6"},"checksumType":{"type":"string","example":"MD5","description":"This API uses MD5 checksum values to ensure data integrity."},"tags":{"type":"array","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}}},"title":"Object Response."}}}},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+  responses={{"200":{"description":"Returns the requested object record details","content":{"application/json":{"schema":{"type":"object","description":"The information associated with the stored object.","properties":{"id":{"type":"string","description":"The unique identifier of the object.","example":"0ca4c747-6256-4023-a335-53a46449871a"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"userId":{"type":"string","description":"The unique 8x8 system user identifier.","example":"b4ZRdTEnToOh6vRAq79U_g"},"type":{"type":"string","description":"The source system which created this object.","enum":["callrecording","callcenterrecording","meeting"],"example":"callrecording"},"mimeType":{"type":"string","description":"The MIME (Multipurpose Internet Mail Extensions) type of the object content associated with this object.","example":"audio/mpeg"},"objectName":{"type":"string","description":"The filename of the associated object.","example":"ipbx:demo:callrecording:users:1000:1554901130738-1553527036518-x1000u1-15617142314_E.mp3"},"objectState":{"type":"string","description":"\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.  `ARCHIVED` objects must be restored before their content can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | ARCHIVED  | The object has been moved to cold storage.  Restore it before downloading. |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n","enum":["PENDING","AVAILABLE","ARCHIVED","REVOKED","DELETED","FAILED"],"example":"AVAILABLE"},"createdTime":{"type":"string","example":"2026-05-11T00:55:24","description":"The ISO 8601 timestamp when this object record was created."},"updatedTime":{"type":"string","format":"int64","description":"The UNIX time for when the object record was last updated.","example":"2026-05-11T00:55:24"},"storedBytes":{"type":"string","description":"The size of the data stored in bytes.","example":23661},"checksum":{"type":"string","description":"The computed checksum value of the object.","example":"3dda71c7a10536f6a59c17a4062163b6"},"checksumType":{"type":"string","example":"MD5","description":"This API uses MD5 checksum values to ensure data integrity."},"tags":{"type":"array","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}}},"title":"Object Response."}}}},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+>
+  
+</StatusCodes>
+
+---
+
+## List available regions.
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List available regions."}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/regions"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+Returns the regions provisioned for your account.  Data is stored per region, and a search only returns objects held in the region you call.  You can use any valid region in the base URL for this discovery call, then use one of the returned regions for your subsequent requests.
+
+<ParamsDetails
+  parameters={undefined}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"The list of regions available for your account.","content":{"application/json":{"schema":{"type":"array","items":{"type":"string","example":"us-east"}}}}},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
@@ -40945,7 +41095,7 @@ import Heading from "@theme/Heading";
   
 </MethodEndpoint>
 
-This method enables you to bulk delete object metadata along with associated content.
+This method enables you to bulk delete object metadata along with the associated content.  Provide the object IDs in the request body.  Deletion is performed synchronously in a single request, so there is no separate status, cancel, or clear operation.
 
 <Heading
   id={"request"}
@@ -40963,7 +41113,7 @@ This method enables you to bulk delete object metadata along with associated con
 
 <RequestSchema
   title={"Body"}
-  body={{"content":{"application/json":{"schema":{"type":"array","items":{"type":"string","example":"3613ea7c-2033-11eb-adc1-0242ac120002"}}}},"description":"Use this request to bulk remove metadata and content for the provided object IDs."}}
+  body={{"content":{"application/json":{"schema":{"type":"array","items":{"type":"string","example":"3613ea7c-2033-11eb-adc1-0242ac120002"}}}},"description":"The list of object IDs to remove.  Metadata and content are deleted for each object ID provided."}}
 >
   
 </RequestSchema>
@@ -40972,6 +41122,64 @@ This method enables you to bulk delete object metadata along with associated con
   id={undefined}
   label={undefined}
   responses={{"200":{"description":"OK"},"204":{"description":"The response given when a successful request was completed, but did not have content to return."},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"500":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+>
+  
+</StatusCodes>
+
+---
+
+## Restore an archived object.
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Restore an archived object."}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/objects/{objectId}/restore"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+Restore an archived object from cold storage.  Objects in the `ARCHIVED` state must be restored before their content can be downloaded.  This operation requires an API key with edit access to objects; a read-only or download-only key returns a `403`.  Restore is asynchronous: it does not complete immediately and can take several hours (up to 24 hours) for the object to become `AVAILABLE`.  A restored copy is temporary and is removed after the number of days set by **`expirationDays`**.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"objectId","in":"path","description":"The ID of the archived object to restore.","required":true,"schema":{"type":"string","example":"FKC4RF6OXNMGGUW4LIFSWVLEIVJ54JBTVAD3SQYKNFK2ATUQCMAA----"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","description":"Options for restoring an archived object from cold storage.","properties":{"expirationDays":{"type":"integer","format":"int32","minimum":1,"maximum":10,"default":7,"description":"The number of days a restored copy is kept before it is removed.  If no value is specified, 7 days is used.","example":7}},"title":"Restore Request."}}},"description":"Optional restore options.","required":false}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"The restore request was accepted.","content":{"application/json":{"schema":{"type":"object","description":"Options for restoring an archived object from cold storage.","properties":{"expirationDays":{"type":"integer","format":"int32","minimum":1,"maximum":10,"default":7,"description":"The number of days a restored copy is kept before it is removed.  If no value is specified, 7 days is used.","example":7}},"title":"Restore Request."}}}},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
@@ -41185,8 +41393,16 @@ import Heading from "@theme/Heading";
 
 A bucket is a resource that is used to store data objects and their associated metadata. This method returns all content within existing buckets.
 
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
 <ParamsDetails
-  parameters={undefined}
+  parameters={[{"name":"filter","in":"query","description":"\nFilter buckets using Feed Item Query Language (FIQL) filter expressions, in the same way as the [object search](/analytics/reference/searchobject).  If the *filter* is not specified, all buckets are returned.\nThe following bucket fields can be filtered:\n* **`id`**\n* **`userId`**\n* **`name`**\n* **`createdTime`**\n* **`updatedTime`**\n* bucket tag key and value\n\nFor example:\n* **`name==MyBucket`** - Finds all buckets with name **`MyBucket`**\n* **`createdTime=ge=1725148800000`** - Finds all buckets created on or after the given timestamp\n","style":"form","explode":true,"schema":{"type":"string","example":"name==MyBucket"}},{"name":"pageKey","in":"query","description":"The record offset to start from, not a page number.  The first page starts at 0; the next page is the previous `pageKey` plus `limit`.","style":"form","explode":true,"schema":{"type":"number","format":"integer","example":0}},{"name":"limit","in":"query","description":"This parameter indicates the page size to begin your query with.  A value between 1 and 100 is supported.","style":"form","explode":true,"schema":{"type":"number","format":"integer","example":10}},{"name":"sortField","in":"query","description":"The field used for sorting, for example `createdTime` or `name`.","style":"form","explode":true,"schema":{"type":"string","example":"createdTime"}},{"name":"sortDirection","in":"query","description":"This field describes the sorting direction. Sorting can be specified as 'ASC' for ascending or 'DESC' for descending.","style":"form","explode":true,"schema":{"type":"string","example":"DESC"}}]}
 >
   
 </ParamsDetails>
@@ -41201,7 +41417,7 @@ A bucket is a resource that is used to store data objects and their associated m
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"Returns a list of all of the objects inside accessible buckets.","content":{"application/json":{"schema":{"type":"object","description":"Objects can be grouped into buckets.  This is useful for records which may have many different types of objects which are associated.","properties":{"createdTime":{"type":"string","example":"2019-05-11T00:55:24","description":"The ISO 8601 timestamp for when the object record was created."},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"objectList":{"type":"array","items":{"type":"object","description":"The information associated with the stored object.","properties":{"id":{"type":"string","description":"The unique identifier of the object.","example":"0ca4c747-6256-4023-a335-53a46449871a"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"userId":{"type":"string","description":"The unique 8x8 system user identifier.","example":"b4ZRdTEnToOh6vRAq79U_g"},"type":{"type":"string","description":"The source system which created this object.","enum":["callrecording","callcenterrecording","meeting"],"example":"callrecording"},"mimeType":{"type":"string","description":"The MIME (Multipurpose Internet Mail Extensions) type of the object content associated with this object.","example":"audio/mpeg"},"objectName":{"type":"string","description":"The filename of the associated object.","example":"ipbx:demo:callrecording:users:1000:1554901130738-1553527036518-x1000u1-15617142314_E.mp3"},"objectState":{"type":"string","description":"\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n","enum":["PENDING","AVAILABLE","REVOKED","DELETED","FAILED"],"example":"AVAILABLE"},"createdTime":{"type":"string","example":"2019-05-11T00:55:24","description":"The ISO 8601 timestamp when this object record was created."},"updatedTime":{"type":"string","format":"int64","description":"The UNIX time for when the object record was last updated.","example":"2019-05-11T00:55:24"},"storedBytes":{"type":"string","description":"The size of the data stored in bytes.","example":23661},"checksum":{"type":"string","description":"The computed checksum value of the object.","example":"3dda71c7a10536f6a59c17a4062163b6"},"checksumType":{"type":"string","example":"MD5","description":"This API uses MD5 checksum values to ensure data integrity."},"tags":{"type":"array","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}}},"title":"Object Response."}},"tags":{"description":"Buckets enable you to create tags.  You can create tags to describe objects or for filtering.","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}},"updatedTime":{"type":"string","example":"2019-05-11T00:55:24","description":"The ISO 8601 timestamp when the object record was last updated."},"userId":{"type":"string","example":"b4ZRdTEnToOh6vRAq79U_g","title":"Bucket Response."}},"title":"BucketResponse"}}}},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+  responses={{"200":{"description":"Returns a page of buckets.","content":{"application/json":{"schema":{"type":"object","properties":{"content":{"type":"array","items":{"type":"object","description":"Objects can be grouped into buckets.  This is useful for records which may have many different types of objects which are associated.","properties":{"createdTime":{"type":"string","example":"2026-05-11T00:55:24","description":"The ISO 8601 timestamp for when the object record was created."},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"objectList":{"type":"array","items":{"type":"object","description":"The information associated with the stored object.","properties":{"id":{"type":"string","description":"The unique identifier of the object.","example":"0ca4c747-6256-4023-a335-53a46449871a"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"userId":{"type":"string","description":"The unique 8x8 system user identifier.","example":"b4ZRdTEnToOh6vRAq79U_g"},"type":{"type":"string","description":"The source system which created this object.","enum":["callrecording","callcenterrecording","meeting"],"example":"callrecording"},"mimeType":{"type":"string","description":"The MIME (Multipurpose Internet Mail Extensions) type of the object content associated with this object.","example":"audio/mpeg"},"objectName":{"type":"string","description":"The filename of the associated object.","example":"ipbx:demo:callrecording:users:1000:1554901130738-1553527036518-x1000u1-15617142314_E.mp3"},"objectState":{"type":"string","description":"\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.  `ARCHIVED` objects must be restored before their content can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | ARCHIVED  | The object has been moved to cold storage.  Restore it before downloading. |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n","enum":["PENDING","AVAILABLE","ARCHIVED","REVOKED","DELETED","FAILED"],"example":"AVAILABLE"},"createdTime":{"type":"string","example":"2026-05-11T00:55:24","description":"The ISO 8601 timestamp when this object record was created."},"updatedTime":{"type":"string","format":"int64","description":"The UNIX time for when the object record was last updated.","example":"2026-05-11T00:55:24"},"storedBytes":{"type":"string","description":"The size of the data stored in bytes.","example":23661},"checksum":{"type":"string","description":"The computed checksum value of the object.","example":"3dda71c7a10536f6a59c17a4062163b6"},"checksumType":{"type":"string","example":"MD5","description":"This API uses MD5 checksum values to ensure data integrity."},"tags":{"type":"array","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}}},"title":"Object Response."}},"tags":{"description":"Buckets enable you to create tags.  You can create tags to describe objects or for filtering.","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}},"updatedTime":{"type":"string","example":"2026-05-11T00:55:24","description":"The ISO 8601 timestamp when the object record was last updated."},"userId":{"type":"string","example":"b4ZRdTEnToOh6vRAq79U_g","title":"Bucket Response."}},"title":"BucketResponse"}},"lastPage":{"type":"boolean","description":"This response indicates if this page is the last one in the set.","example":true},"pageKey":{"type":"integer","format":"int64","description":"This response indicates the page number of the current page in the set.","example":0},"pageSize":{"type":"integer","format":"int64","description":"This response indicates the number of records per page. A value of 0 to 100 is supported.","example":100},"total":{"type":"integer","format":"int64","description":"This response indicates the total number of available pages for the request.","example":100}},"title":"Bucket Response Page."}}}},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
@@ -41305,7 +41521,7 @@ The tag types vary depending on the provider.
 </Heading>
 
 <ParamsDetails
-  parameters={[{"name":"Content-Type","in":"header","description":"This parameter indicates the type of content.  Currently only `application/json` is supported.","required":true,"style":"simple","explode":false,"schema":{"type":"string","example":"application/json"}},{"name":"filter","in":"query","description":"\nThis API is designed with filtering capabilities using Feed Item Query Language (FIQL) filter expressions.  FIQL introduces simple and composite operators which can be used to build basic and complex queries.  If the *filter* is not specified, all objects are returned.\nThe following are basic FIQL operators:\n* **`==`** - Equal to\n* **`!=`** - Not equal to\n* **`=gt=`** - Greater than\n* **`=ge=`** - Greater or equal to\n* **`=lt=`** - Less than\n* **`=le=`** - Less or equal to\nThese six operators can be used to different types of simple queries. For example:\n* **`name==MyRecording**` - Finds all items with name **`MyRecording`**\n* **`type!=callrecording`** - Finds all items which are not **`callrecording`**\n* **`size=gt=1024`** - Finds all items with size bigger than 1024\n* **`size=le=1024`** - Finds all items with size smaller or equal with 1024\nFIQL joining operators consist of the following:\n* **`;`** = AND\n* **`,`** = OR\nThese two operators can be used to join simple queries and build more complex queries. For example:\n* **`name==MyRecording,name==YourRecording`** - Find all items with name **`MyRecording`** or with name **`YourRecording`**\n* **`type==callrecording;size=gt=1024`** - Find all **`callrecording`** items with size greather than 1024\n* **`type==callrecording;(name==MyRecording,name==YourRecording)`** - Find all **`callrecording`** items with name **`MyRecording`** or with name **`YourRecording`**\n","style":"form","explode":true,"schema":{"type":"string","example":"type!=callrecording"}},{"name":"pageKey","in":"query","description":"This parameter indicates the page number to begin your query.","style":"form","explode":true,"schema":{"type":"number","format":"integer","example":1}},{"name":"limit","in":"query","description":"This parameter indicates the page size to begin your query with.  A value between 1 and 100 is supported.","style":"form","explode":true,"schema":{"type":"number","format":"integer","example":10}},{"name":"sortField","in":"query","description":"The field used for sorting. Content and Tag fields are supported.","style":"form","explode":true,"schema":{"type":"string","example":"objectId"}},{"name":"sortDirection","in":"query","description":"This field describes the sorting direction. Sorting can be specified as 'ASC' for ascending or 'DESC' for descending.","style":"form","explode":true,"schema":{"type":"string","example":"DESC"}}]}
+  parameters={[{"name":"Content-Type","in":"header","description":"This parameter indicates the type of content.  Currently only `application/json` is supported.","required":true,"style":"simple","explode":false,"schema":{"type":"string","example":"application/json"}},{"name":"filter","in":"query","description":"\nThis API is designed with filtering capabilities using Feed Item Query Language (FIQL) filter expressions.  FIQL introduces simple and composite operators which can be used to build basic and complex queries.  If the *filter* is not specified, all objects are returned.\nThe following are basic FIQL operators:\n* **`==`** - Equal to\n* **`!=`** - Not equal to\n* **`=gt=`** - Greater than\n* **`=ge=`** - Greater or equal to\n* **`=lt=`** - Less than\n* **`=le=`** - Less or equal to\n* **`=in=`** - In a list of values, e.g. **`objectState=in=(ARCHIVED,AVAILABLE)`**\n* **`=out=`** - Not in a list of values\nThese operators can be used to different types of simple queries. For example:\n* **`name==MyRecording**` - Finds all items with name **`MyRecording`**\n* **`type!=callrecording`** - Finds all items which are not **`callrecording`**\n* **`size=gt=1024`** - Finds all items with size bigger than 1024\n* **`size=le=1024`** - Finds all items with size smaller or equal with 1024\nFIQL joining operators consist of the following:\n* **`;`** = AND\n* **`,`** = OR\nThese two operators can be used to join simple queries and build more complex queries. For example:\n* **`name==MyRecording,name==YourRecording`** - Find all items with name **`MyRecording`** or with name **`YourRecording`**\n* **`type==callrecording;size=gt=1024`** - Find all **`callrecording`** items with size greather than 1024\n* **`type==callrecording;(name==MyRecording,name==YourRecording)`** - Find all **`callrecording`** items with name **`MyRecording`** or with name **`YourRecording`**\n","style":"form","explode":true,"schema":{"type":"string","example":"type!=callrecording"}},{"name":"pageKey","in":"query","description":"The record offset to start from, not a page number.  The first page starts at 0; the next page is the previous `pageKey` plus `limit`.","style":"form","explode":true,"schema":{"type":"number","format":"integer","example":0}},{"name":"limit","in":"query","description":"This parameter indicates the page size to begin your query with.  A value between 1 and 100 is supported.","style":"form","explode":true,"schema":{"type":"number","format":"integer","example":10}},{"name":"sortField","in":"query","description":"The field used for sorting. Content and Tag fields are supported.","style":"form","explode":true,"schema":{"type":"string","example":"objectId"}},{"name":"sortDirection","in":"query","description":"This field describes the sorting direction. Sorting can be specified as 'ASC' for ascending or 'DESC' for descending.","style":"form","explode":true,"schema":{"type":"string","example":"DESC"}}]}
 >
   
 </ParamsDetails>
@@ -41320,7 +41536,7 @@ The tag types vary depending on the provider.
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"Returns the filtered or unfiltered list of object metadata.","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"content":{"type":"array","items":{"type":"object","description":"The information associated with the stored object.","properties":{"id":{"type":"string","description":"The unique identifier of the object.","example":"0ca4c747-6256-4023-a335-53a46449871a"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"userId":{"type":"string","description":"The unique 8x8 system user identifier.","example":"b4ZRdTEnToOh6vRAq79U_g"},"type":{"type":"string","description":"The source system which created this object.","enum":["callrecording","callcenterrecording","meeting"],"example":"callrecording"},"mimeType":{"type":"string","description":"The MIME (Multipurpose Internet Mail Extensions) type of the object content associated with this object.","example":"audio/mpeg"},"objectName":{"type":"string","description":"The filename of the associated object.","example":"ipbx:demo:callrecording:users:1000:1554901130738-1553527036518-x1000u1-15617142314_E.mp3"},"objectState":{"type":"string","description":"\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n","enum":["PENDING","AVAILABLE","REVOKED","DELETED","FAILED"],"example":"AVAILABLE"},"createdTime":{"type":"string","example":"2019-05-11T00:55:24","description":"The ISO 8601 timestamp when this object record was created."},"updatedTime":{"type":"string","format":"int64","description":"The UNIX time for when the object record was last updated.","example":"2019-05-11T00:55:24"},"storedBytes":{"type":"string","description":"The size of the data stored in bytes.","example":23661},"checksum":{"type":"string","description":"The computed checksum value of the object.","example":"3dda71c7a10536f6a59c17a4062163b6"},"checksumType":{"type":"string","example":"MD5","description":"This API uses MD5 checksum values to ensure data integrity."},"tags":{"type":"array","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}}},"title":"Object Response."}},"lastPage":{"type":"boolean","description":"This response indicates if this page is the last one in the set.","example":true},"pageKey":{"type":"integer","format":"int64","description":"This response indicates the page number of the current page in the set.","example":0},"pageSize":{"type":"integer","format":"int64","description":"This response indicates the number of records per page. A value of 0 to 100 is supported.","example":100},"total":{"type":"integer","format":"int64","description":"This response indicates the total number of available pages for the request.","example":100}},"title":"Response Page."}}}}},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+  responses={{"200":{"description":"Returns the filtered or unfiltered page of object metadata.","content":{"application/json":{"schema":{"type":"object","properties":{"content":{"type":"array","items":{"type":"object","description":"The information associated with the stored object.","properties":{"id":{"type":"string","description":"The unique identifier of the object.","example":"0ca4c747-6256-4023-a335-53a46449871a"},"bucketId":{"type":"string","description":"The unique 8x8 system generated bucket ID.","example":"3314J06662K7SOEQD5"},"customerId":{"type":"string","description":"The unique 8x8 customer account identifier.","example":"0012J00002K7SOFQA3"},"userId":{"type":"string","description":"The unique 8x8 system user identifier.","example":"b4ZRdTEnToOh6vRAq79U_g"},"type":{"type":"string","description":"The source system which created this object.","enum":["callrecording","callcenterrecording","meeting"],"example":"callrecording"},"mimeType":{"type":"string","description":"The MIME (Multipurpose Internet Mail Extensions) type of the object content associated with this object.","example":"audio/mpeg"},"objectName":{"type":"string","description":"The filename of the associated object.","example":"ipbx:demo:callrecording:users:1000:1554901130738-1553527036518-x1000u1-15617142314_E.mp3"},"objectState":{"type":"string","description":"\nThe current state of the object.  Only `AVAILABLE` objects can be downloaded.  `ARCHIVED` objects must be restored before their content can be downloaded.\n\n The following states are supported:\n \n | State     | Description                                                         |\n |-----------|---------------------------------------------------------------------|\n | PENDING   | The operation is pending.  Check back shortly for an updated state. |\n | AVAILABLE | The object is available and ready for use.                          |\n | ARCHIVED  | The object has been moved to cold storage.  Restore it before downloading. |\n | REVOKED   | The object has been deleted.                                        |\n | DELETED   | The object has been purged from the system.                         |\n | FAILED    | Requested operation has failed.                                     |\n","enum":["PENDING","AVAILABLE","ARCHIVED","REVOKED","DELETED","FAILED"],"example":"AVAILABLE"},"createdTime":{"type":"string","example":"2026-05-11T00:55:24","description":"The ISO 8601 timestamp when this object record was created."},"updatedTime":{"type":"string","format":"int64","description":"The UNIX time for when the object record was last updated.","example":"2026-05-11T00:55:24"},"storedBytes":{"type":"string","description":"The size of the data stored in bytes.","example":23661},"checksum":{"type":"string","description":"The computed checksum value of the object.","example":"3dda71c7a10536f6a59c17a4062163b6"},"checksumType":{"type":"string","example":"MD5","description":"This API uses MD5 checksum values to ensure data integrity."},"tags":{"type":"array","items":{"type":"object","description":"Tags are either systematically generated or are user created. This allows for flexibility in creating filterable, descriptive labels.","properties":{"id":{"type":"string","description":"The tag identifier.","example":"100"},"key":{"type":"string","description":"A label which is either systematically assigned by the content creator or manually assigned by the CSS user.","example":"callerId"},"value":{"type":"string","description":"The key data value.","example":"15615551212"}},"title":"Tag Response"}}},"title":"Object Response."}},"lastPage":{"type":"boolean","description":"This response indicates if this page is the last one in the set.","example":true},"pageKey":{"type":"integer","format":"int64","description":"This response indicates the page number of the current page in the set.","example":0},"pageSize":{"type":"integer","format":"int64","description":"This response indicates the number of records per page. A value of 0 to 100 is supported.","example":100},"total":{"type":"integer","format":"int64","description":"This response indicates the total number of available pages for the request.","example":100}},"title":"Response Page."}}}},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"405":{"description":"This method is not allowed or a validation exception has occurred."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
@@ -41378,7 +41594,7 @@ This method starts downloading multiple objects in bulk. The objects are zipped 
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"200":{"description":"Start a bulk download.","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","description":"\nA detailed status is available for the data transfer.  There are several different status messages which indicate to the user the progress of their download request.\n\nThe following status messages are available:\n\n| Status       | Description                                     |\n|--------------|-------------------------------------------------|\n| NOT_STARTED  | No request has been made to transfer this file. |\n| IN_PROGRESS  | The file transfer is in progress.               |\n| DONE         | The file transfer is complete.                  |\n| FAILED       | The file transfer has failed.                   |\n| CANCELLED    | The user has cancelled the transfer request.    |\n| PARTIAL_DONE | A partial transfer request has been completed.  |\n","properties":{"content":{"type":"array","description":"A list which contains the objectId and status for the file transfer request.","items":{"type":"string"}},"status":{"type":"string","example":"DONE","enum":["NOT_STARTED","IN_PROGRESS","DONE","FAILED","CANCELLED","PARTIAL_DONE"]},"url":{"type":"string","description":"The presigned URL for content.","example":"https://api.8x8.com/storage/us-west/cloud-storage-service.s3.us-west-2.amazonaws.com/content/EPS/0011D00000LvBSaQAN/FGNEmsxXTQmuYMA2EtFUpA/ac46adbf-15cc-49bf-9d87-c0945c1ddd03?response-content-disposition =attachment%3B%20filename%3D%22%3D%3FUTF-8%3Fb%3FU25ha2VfUml2ZXJfKDVtYikuanBn%3F%3D%22&X-Amz-Security-Tok=AgoJb3JpZ2luX2VjELn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIEf1S0SkgwFrQoR6D71p76zyHePbF5C2zFqSSnSwDMDuAiBA0suixm9m5baxo8Wye9WsGziPcgFBcw2%2BCjEFnwTx3SraAwhCEAAaDDA1NzY1NjM2Mzk4Ni IMGUzfDjk2xWj88d%2FPKrcDKHisme41JCS%2F4rwNXL Y2HK%2FtWrieubWvo9Hzu2BfHdpqrjbPNBuRo%2BFArxHQX6t1gtizv2NXhOZwALMU0OY6KWQy0JdIWSkvBZbn%2B2tmubsA3wCdCV8jqUJi0Lh5DjT8iaK3O63lrHTJjiCrYgqaBRH0J2qYz0fAUTJ%2BPWE8XRuPn3O50vY6CrRrHR60SdfBsxOAoaUZMz9tr SLZ7CpYXwDj7LITad7BfEuS4d2QUe0lVj42TFswW%2 BtsHEVQ%2Fff2ZjXnwSulXnw705Kb6e0QVYzzPSfQpFOYQ5mylrB7lqxGkR2atWQqyyNCnHEti4xrBFoTS7VID%2BFF7KYOHm8kflsGdOboelcr1HECeBYVxHN6ho%2FHHs9gSek%2B%2BlKyGQJDIgJdkeWVYCj0FtL%2F%2FXtX1R194h1QYx8k0gmgVOk93d uA8IiuFgeRhQHSe5f3QixofHfKg5YPcqRE287mOCKy SibWSuoJck7PtqfPZIBPwn7QnZiZHPojVXf2WB%2F6orB49EcJxK80pVnZPIHl2q2Iwm5PUtDpsm8z%2F32d2oMQa%2BquQ9T1yTYyNZvpBQCnIyPTHndAIT2DgjDn%2FaTqBTq1Adoy%2Fz6z0zqrwjkN5KgQsPegYCKKg%2BKiKB%2BI19MGnoR17rcyhxvsD dirpeAEgwxz6gh%2BF9im00Mf3VIZ1meMSuxByw2Y6 1LqQto9pnAXTzdkDziatTY1RkSAAwm1rT8FUxB4GJa3mU8bh6AGXSDM5WUhc7%2BQEsgiCxw9SYZcF2d3du00EF4Z3MkxZj53Q%2Bm%2Fe4UT6P36pF9%2Bv79dL7XKbyXzXFr%2Byc60h4p8DHC3MC1GfYD5CQA%3D&X-Amz-Algorithm=AWS4-HMAC-SHA25 6&X-Amz-Date=20190806T102429Z&X-Amz-Signed Headers=host&X-Amz-Expires=1800&X-Amz-Credential=ASIAQ23EWJPJHUEPD6NF%2F20190806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e3438487031096ec438f8aaa6052a8311caf7fb94bd4a93c56871e0e4380d69d"},"zipName":{"type":"string"}},"title":"The download content status."}}}}},"201":{"description":"The response given when a resource is created.  This response can vary depending on the request given."},"204":{"description":"The response given when a successful request was completed, but did not have content to return."},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
+  responses={{"200":{"description":"Start a bulk download.","content":{"application/json":{"schema":{"type":"object","description":"\nA detailed status is available for the data transfer.  There are several different status messages which indicate to the user the progress of their download request.\n\nThe following status messages are available:\n\n| Status       | Description                                     |\n|--------------|-------------------------------------------------|\n| NOT_STARTED  | No request has been made to transfer this file. |\n| IN_PROGRESS  | The file transfer is in progress.               |\n| DONE         | The file transfer is complete.                  |\n| FAILED       | The file transfer has failed.                   |\n| CANCELLED    | The user has cancelled the transfer request.    |\n| PARTIAL_DONE | A partial transfer request has been completed.  |\n","properties":{"content":{"type":"array","description":"A list which contains the objectId and status for the file transfer request.","items":{"type":"string"}},"status":{"type":"string","example":"DONE","enum":["NOT_STARTED","IN_PROGRESS","DONE","FAILED","CANCELLED","PARTIAL_DONE"]},"url":{"type":"string","description":"The presigned URL for content.","example":"https://api.8x8.com/storage/us-west/cloud-storage-service.s3.us-west-2.amazonaws.com/content/EPS/0011D00000LvBSaQAN/FGNEmsxXTQmuYMA2EtFUpA/ac46adbf-15cc-49bf-9d87-c0945c1ddd03?response-content-disposition =attachment%3B%20filename%3D%22%3D%3FUTF-8%3Fb%3FU25ha2VfUml2ZXJfKDVtYikuanBn%3F%3D%22&X-Amz-Security-Tok=AgoJb3JpZ2luX2VjELn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIEf1S0SkgwFrQoR6D71p76zyHePbF5C2zFqSSnSwDMDuAiBA0suixm9m5baxo8Wye9WsGziPcgFBcw2%2BCjEFnwTx3SraAwhCEAAaDDA1NzY1NjM2Mzk4Ni IMGUzfDjk2xWj88d%2FPKrcDKHisme41JCS%2F4rwNXL Y2HK%2FtWrieubWvo9Hzu2BfHdpqrjbPNBuRo%2BFArxHQX6t1gtizv2NXhOZwALMU0OY6KWQy0JdIWSkvBZbn%2B2tmubsA3wCdCV8jqUJi0Lh5DjT8iaK3O63lrHTJjiCrYgqaBRH0J2qYz0fAUTJ%2BPWE8XRuPn3O50vY6CrRrHR60SdfBsxOAoaUZMz9tr SLZ7CpYXwDj7LITad7BfEuS4d2QUe0lVj42TFswW%2 BtsHEVQ%2Fff2ZjXnwSulXnw705Kb6e0QVYzzPSfQpFOYQ5mylrB7lqxGkR2atWQqyyNCnHEti4xrBFoTS7VID%2BFF7KYOHm8kflsGdOboelcr1HECeBYVxHN6ho%2FHHs9gSek%2B%2BlKyGQJDIgJdkeWVYCj0FtL%2F%2FXtX1R194h1QYx8k0gmgVOk93d uA8IiuFgeRhQHSe5f3QixofHfKg5YPcqRE287mOCKy SibWSuoJck7PtqfPZIBPwn7QnZiZHPojVXf2WB%2F6orB49EcJxK80pVnZPIHl2q2Iwm5PUtDpsm8z%2F32d2oMQa%2BquQ9T1yTYyNZvpBQCnIyPTHndAIT2DgjDn%2FaTqBTq1Adoy%2Fz6z0zqrwjkN5KgQsPegYCKKg%2BKiKB%2BI19MGnoR17rcyhxvsD dirpeAEgwxz6gh%2BF9im00Mf3VIZ1meMSuxByw2Y6 1LqQto9pnAXTzdkDziatTY1RkSAAwm1rT8FUxB4GJa3mU8bh6AGXSDM5WUhc7%2BQEsgiCxw9SYZcF2d3du00EF4Z3MkxZj53Q%2Bm%2Fe4UT6P36pF9%2Bv79dL7XKbyXzXFr%2Byc60h4p8DHC3MC1GfYD5CQA%3D&X-Amz-Algorithm=AWS4-HMAC-SHA25 6&X-Amz-Date=20190806T102429Z&X-Amz-Signed Headers=host&X-Amz-Expires=1800&X-Amz-Credential=ASIAQ23EWJPJHUEPD6NF%2F20190806%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=e3438487031096ec438f8aaa6052a8311caf7fb94bd4a93c56871e0e4380d69d"},"zipName":{"type":"string"}},"title":"The download content status."}}}},"201":{"description":"The response given when a resource is created.  This response can vary depending on the request given."},"204":{"description":"The response given when a successful request was completed, but did not have content to return."},"400":{"description":"The received request was malformed resulting in form validation errors."},"401":{"description":"Unauthorized: Invalid or no authentication details were provided."},"403":{"description":"The authentication was successful, but the authenticated user does not have access to the resource."},"404":{"description":"The requested resource was not found."},"default":{"description":"An internal server error has occurred. Please contact your 8x8 support resource."}}}
 >
   
 </StatusCodes>
