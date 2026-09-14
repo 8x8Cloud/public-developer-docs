@@ -96222,149 +96222,103 @@ Validates the webhook URL endpont from the connectivity point-of-view by sending
 ## Agent Management
 
 
-The Agents module provides real-time visibility into agent availability, performance, and workload distribution.
+The Agents page displays all agent accounts in your Converse organization.
 
-## Agent Dashboard
+## Agent List
 
-### Agent List View
+![Agent list](../images/agent-list.png)
 
-![Agent List](../images/page20_img1.png)
+Each agent card shows:
 
-The main agent view displays:
-- **Name**: Agent full name
-- **Status**: Available, Busy, Away, Offline
-- **Active Chats**: Number of current conversations
-- **Max Capacity**: Configured concurrent conversation limit
-- **Skill Sets**: Assigned expertise areas
-- **Aux Code**: Current auxiliary status reason
+- **Name and profile picture**
+- **Availability** — current active conversations out of the agent's maximum concurrent limit (e.g. `0/15`)
+- **Status bar** — the agent's current status (Available, Away, Offline)
+- **Skillset** — all skill tags assigned to the agent
+- **Queue** — all queues the agent is eligible for, based on matching skill sets
+
+Use the search bar to find an agent by name, or the **All Skillsets** dropdown to filter the list to agents with a specific skill set.
 
 ### Status Indicators
 
 | Status | Description | Chat Assignment |
 |--------|-------------|-----------------|
 | **Available** | Ready to receive conversations | Enabled |
-| **Busy** | At capacity or in wrap-up | Disabled |
-| **Away** | Temporarily unavailable | Disabled |
+| **Away** | Any Aux Code selected — whether it's the default "Away" or a custom aux code created by a Manager (e.g. "Busy", "Lunch", "Training") | Disabled |
 | **Offline** | Not logged in | Disabled |
 
-## Agent Configuration
+## Creating an Agent
 
-### Creating Agents
+1. Navigate to **Agents → Add Agent**.
+2. Choose **Normal Agent** or **AI Agent** using the toggle.
+3. Enter the agent's **Full Name** and **Email**.
+4. Set **Number of Concurrent Conversations** — the maximum number of conversations the agent can handle at the same time.
+5. Optionally add **Remarks**.
+6. Under **Select Skillset**, check all skill tags that apply to the agent.
+7. Click **Create**.
 
-Administrators can create agent accounts:
-1. Navigate to Agents → Add Agent
-2. Enter agent details (name, email, username)
-3. Assign role (Agent)
-4. Set max concurrent conversations (default: 5)
-5. Assign skill sets and proficiency levels
-6. Assign to queues
-7. Save configuration
+![Add Agent form](../images/add-agent-form.png)
 
-### Agent Capacity
+## Editing an Agent
 
-Configure maximum concurrent conversations per agent:
-- **Default**: 5 conversations
-- **Range**: 1-20 conversations
-- **Recommended**: 3-5 for quality service
-- Adjust based on channel complexity and agent experience
+Select an agent from the list to open their profile. Editable fields include:
 
-## Skill Sets
+- Full Name, Email, Number of Concurrent Conversations, Remarks
+- **Select Skillset** — the skill tags assigned to the agent
+- **Select Privilege** — individual permission checkboxes controlling what the agent can do (see below)
 
-### Overview
+Click **Update** to save changes, or **Delete** to remove the agent entirely.
 
-Skill sets enable intelligent conversation routing based on agent expertise.
+![Edit Agent page](../images/edit-agent-page.png)
 
-### Configuring Skills
+### Select Privilege
 
-Administrators define skill categories:
-- **Examples**: Technical Support, Billing, Sales, Spanish Language, VIP Customer Care
-- Assign to agents with proficiency levels (1-5)
-- Higher proficiency agents receive priority routing
+The privilege checkboxes on the Edit Agent page control what an agent with the Agent role can see and do. Some privileges depend on others being enabled to actually display their related controls in the interface.
 
-## Auxiliary (Aux) Codes
+#### Default Additional Privileges
 
-### Purpose
+- **Search** — Lets the agent use the conversation search feature.
+- **Broadcast** — Lets the agent access the Broadcast menu.
+- **Assign My Conversation** — Lets the agent assign their own conversations to another agent or queue. To actually display the assignment options on the conversation page, one or more of the following must also be enabled:
+  - **Release Conversation to Queue** — Shows or hides the "Release to queue" option.
+  - **Transfer Conversation to Agent** — Shows or hides the "Assign to agent" option.
+  - **Transfer Conversation to Queue** — Shows or hides the "Assign to queue" option.
+- **Show Unassigned tab** — Lets the agent view the "Unassigned" folder on the Conversations page.
+- **Show Assigned tab** — Lets the agent view the "Assigned" folder on the Conversations page.
+- **Show Closed tab** — Lets the agent view the "Closed" folder on the Conversations page.
 
-Aux codes track time agents spend on non-conversation activities.
+#### Other Additional Privileges
 
-### Common Aux Codes
+- **Batch Assign Conversations** — Lets the agent multi-select conversations for bulk assignment.
+- **Assign Others Conversation** — Lets the agent reassign conversations from another agent (within the "Assigned" folder) to another agent or queue via bulk assignment. This requires **Batch Assign Conversations** to be enabled, along with one or more of the following to display the bulk assignment options:
+  - **Transfer Conversation to Queue** — Shows or hides the "Assign to queue" option after selecting conversations.
+  - **Transfer Conversation to Agent** — Shows or hides the "Assign to agent" option after selecting conversations.
+  - **Release Conversation to Queue** — Shows or hides the "Release to queue" option after selecting conversations.
+- **Batch Close My Conversations** — Lets the agent bulk close their own conversations.
+- **Claim Unassigned Conversation** — Lets the agent claim conversations from the "Unassigned" folder.
+- **Create and Update Reminder to My Conversation** — Lets the agent create and update reminders on their own conversations. To display the reminder options, one or more of the following must also be enabled:
+  - **Create Reminder** — Shows or hides the "Reminder" option.
+  - **Edit Reminder** — Shows or hides the "Edit" option on an existing reminder.
+  - **Delete Reminder** — Shows or hides the "Delete" option on an existing reminder.
+- **Create and Update Reminder to Others Conversation** — Lets the agent update reminders on conversations assigned to other agents.
+- **View Report Page** — Lets the agent access the Reports page.
+- **View Conversation Report** — Grants access to the Conversation Report tab under Reports.
+- **View Transcript Report** — Grants access to the Transcript Report tab under Reports.
+- **View Agent Report** — Grants access to the Agent Report tab under Reports.
+- **View Agent Auxcode Report** — Grants access to the Agent Auxcode Report tab under Reports.
+- **Statistic** — Lets the agent access the Statistics page.
+- **View Setting Page** — Lets the agent access the Settings page.
 
-| Code | Description | Availability |
-|------|-------------|--------------|
-| **Break** | Scheduled break | Away |
-| **Lunch** | Meal break | Away |
-| **Training** | Learning activities | Away |
-| **Meeting** | Team or client meetings | Away |
-| **Technical Issue** | System problems | Away |
-| **Wrap-up** | Post-conversation documentation | Busy |
+## Skill Sets & Aux Codes
 
-### Usage
-
-Agents select aux codes when changing status:
-1. Click status dropdown
-2. Select "Away" or "Busy"
-3. Choose applicable aux code
-4. System tracks time spent in each aux code for reporting
-
-## Agent Actions
-
-### Transferring Conversations
-
-**Transfer to Agent**:
-1. Open conversation
-2. Select "Transfer"
-3. Choose destination agent
-4. Add transfer notes (optional)
-5. Confirm transfer
-
-**Transfer to Queue**:
-1. Open conversation
-2. Select "Transfer to Queue"
-3. Choose destination queue
-4. Conversation re-enters routing logic
-
-### Using Canned Messages
-
-1. In conversation window, click canned message icon
-2. Search or browse available templates
-3. Select message - auto-populates with contact variables
-4. Edit if needed and send
-
-### Applying Tags & Labels
-
-Tag conversations for categorization:
-1. Open conversation
-2. Select tag icon
-3. Choose from predefined tags or create custom
-4. Apply multiple tags as needed
-5. Tags appear in conversation history and reports
+Available skill set and aux code options are configured under **Settings → Skill Sets** and **Settings → Aux Codes** — see [Settings & Configuration](/converse/docs/settings). For how skill sets determine which agents can be added to a queue, see [Queue Management](/converse/docs/queue).
 
 ## Performance Monitoring
 
-### Real-Time Metrics
+Supervisors and Managers can view agent performance in:
 
-Supervisors and Managers can view:
-- **Current Status**: Live agent availability
-- **Active Conversations**: Ongoing chats per agent
-- **Average Response Time**: Speed of agent replies
-- **Conversations Handled**: Total for current session
-
-### Agent Reports
-
-Generate performance reports:
-- **Conversation Volume**: Total handled by time period
-- **Response Time**: First response and average response metrics
-- **SLA Compliance**: Percentage meeting service level targets
-- **Aux Code Time**: Breakdown of non-conversation time
-
-## Best Practices
-
-- Set realistic agent capacity based on channel mix (chat vs email)
-- Use skill-based routing for specialized inquiries
-- Monitor aux code usage to identify process bottlenecks
-- Provide agents access to comprehensive canned message library
-- Review agent performance metrics weekly for coaching opportunities
-- Balance workload across team to prevent burnout
+- **Statistics** — Real-time agent activity
+- **Agent Report** — Conversations handled, closed, occupancy rate, average handling time
+- **Agent Auxcode Report** — Breakdown of time spent in each aux code
 
 ---
 
@@ -96573,137 +96527,97 @@ The notification does not carry a URL for **List**. To call it, take the `respon
 ## Contact Management(3)
 
 
-The Contacts module provides a unified customer database with interaction history across all communication channels.
+The Contacts page displays all contacts stored in your Converse account.
 
-## Contact Overview
+## Contact List View
 
-### Contact List View
+![Contacts list](../images/contacts-list.png)
 
-![Contact List](../images/contact-list.png)
+The contact list includes the following controls:
 
-The main contact list displays:
-- **Name**: Customer full name
-- **Phone**: Primary contact number
-- **Email**: Email address
-- **Source**: Channel of first contact (WhatsApp, Email, Facebook)
-- **Last Interaction**: Most recent conversation timestamp
-- **Status**: Active, Inactive, or Blocked
+- **Sort By** — Sort contacts alphabetically, by Recently Added, or by Recently Updated.
+- **Total Contacts** — Total number of contacts stored.
+- **Select All** — Select all displayed contacts for bulk actions (delete or export).
+- **Search** — Search by contact name, mobile number, or email.
+- **Contact Tags filter** — Shows tags with counts. Click a tag to filter the list. Selecting multiple tags shows contacts matching all selected tags.
+- **Contact card** — Each card shows: name, mobile number, email, communication channel, last updated by, and last update timestamp.
+- **Pagination** — Navigate through multiple pages.
 
-### Search & Filter
+## Adding a Contact
 
-**Quick Search**: Search by name, phone, email, or any custom attribute
+1. Click the **Add Contact** icon.
+2. Fill in the contact's details and click **Create**.
 
-**Advanced Filters**:
-- Channel source
-- Date range of last contact
-- Custom attribute values
-- Conversation status
+![Add Contact form](../images/add-contact-form.png)
 
-## Contact Details
+## Editing a Contact
 
-### Profile Information
+1. Click the **Edit** icon on the contact card.
+2. Update the contact's details and click **Update**.
 
-![Contact Details](../images/contact-profile-information.png)
+## Exporting Contacts
 
-Each contact record contains:
-- **Basic Info**: Name, phone, email
-- **Channel Identifiers**: WhatsApp number, Facebook ID, Email address
-- **Custom Attributes**: Organization-defined fields (e.g., Account ID, Customer Tier, Region)
-- **Tags**: Categorical labels for segmentation
-- **Notes**: Internal agent comments and context
+1. Select the contacts to export, or click **Select All**.
+2. Click the **Export Contact** icon.
+3. Choose the fields to export (or select **All Fields**) and click **Submit**.
+4. A download link will be sent to your email.
 
-### Interaction History
+## Importing Contacts
 
-View complete conversation timeline:
-- All messages across channels
-- Agent assignments
-- Conversation status changes
-- Tags and labels applied
-- Timestamps for all interactions
+Converse uses a specific CSV template for contact imports. Do not remove or rename any column headers.
 
-## Managing Contacts
+### Step 1 — Download the template
 
-### Creating Contacts
+1. Click the **Import Contact** icon.
+2. Click **Download the CSV template** to save it locally.
 
-Contacts are automatically created when:
-- A customer initiates a conversation
-- An agent starts an outbound conversation
-- Contacts are imported via bulk upload
+### Step 2 — Fill in the template
 
-**Manual Creation**:
-1. Navigate to Contacts → Add Contact
-2. Enter required fields (name, channel identifier)
-3. Add optional custom attributes
-4. Save contact record
+| Field | Description | Example |
+|-------|-------------|---------|
+| `salutation` | Title (Mr, Mrs, Ms, Miss) | Mr |
+| `first_name` | First name | John |
+| `last_name` | Last name | Doe |
+| `ref_id` | Unique identifier for future updates | cc658e381ffb6bdf8628 |
+| `image` | HTTPS URL to profile image (leave blank for default) | `https://…` |
+| `mobile` | Primary mobile — country code required, no spaces or special characters | 6599998888 |
+| `mobile2` | Secondary mobile | 6598887777 |
+| `mobile3` | Tertiary mobile | 6591239876 |
+| `email` | Primary email | `johndoe@gmail.com` |
+| `email2` | Secondary email | — |
+| `email3` | Tertiary email | — |
+| `tags` | Contact tag | vip |
+| `notes` | Additional notes | Overseas Travel |
+| `company_name` | Company name | GovCMS |
+| `account_number` | Account number | P273-222-9012 |
+| `home_address` | Home address | 123 Ang Mo Kio Ave 7 |
+| `home_phone` | Home phone | 6566667777 |
+| `birthday` | Birthday (DD/MM/YYYY) | 12/12/1980 |
+| `wedding_anniversary` | Wedding date | 02/05/2016 |
+| `first_purchase_anniversary` | First purchase date | 06/01/2018 |
+| `membership_date` | Membership date | 06/01/2018 |
+| `data1` – `data10` | Custom additional fields | Preferred customer |
 
-### Updating Contacts
+### Step 3 — Upload the file
 
-- Edit any field directly from the contact detail view
-- Update custom attributes as new information becomes available
-- Add internal notes for agent reference
+1. Click **Select File** and choose the completed template.
+2. If the format is invalid, an error message will appear — correct the file and retry.
+3. If the format is valid, a preview is shown. Click **Submit** to import or **Cancel** to abort.
 
-### Merging Contacts
+![Import preview](../images/import-preview.png)
 
-When duplicate records exist:
-1. Select the duplicate contacts
-2. Choose "Merge Contacts"
-3. Select the primary record to retain
-4. Confirm merge - interaction history will be consolidated
+## Deleting Contacts
 
-### Blocking Contacts
+### Delete a single contact
 
-Block contacts to prevent future conversations:
-1. Open contact record
-2. Select "Block Contact"
-3. Blocked contacts cannot initiate new conversations
-4. Unblock at any time to restore access
+1. Click the **Delete** icon on the contact card.
+2. Confirm by clicking **Delete** in the prompt, or **Cancel** to abort.
 
-## Custom Attributes
+### Delete multiple contacts
 
-### Attribute Configuration
-
-Administrators can define custom contact fields:
-- **Text**: Free-form text input
-- **Number**: Numeric values
-- **Date**: Date picker
-- **Dropdown**: Predefined value list
-- **Boolean**: Yes/No toggle
-
-### Use Cases
-
-- Customer segmentation for targeted broadcasts
-- Personalized conversation routing
-- Advanced reporting and analytics
-- CRM data synchronization
-
-## Contact Import/Export
-
-### Bulk Import
-
-Import contacts via CSV:
-1. Download CSV template
-2. Populate contact data (name, phone, email, custom attributes)
-3. Upload file via Contacts → Import
-4. Review validation errors and reupload if needed
-
-**CSV Format Requirements**:
-- Phone numbers in E.164 format (+1234567890)
-- Valid email addresses
-- Custom attributes must match configured field names
-
-### Export
-
-Export contact lists for external analysis:
-1. Apply desired filters
-2. Select "Export Contacts"
-3. Download CSV with all visible fields
-
-## Privacy & Compliance
-
-- Contact data is encrypted at rest and in transit
-- Access is restricted by user role permissions
-- Audit logs track all contact modifications
-- Support GDPR data deletion requests through Administrator actions
+1. Select multiple contacts by clicking their contact cards.
+2. Click the **Bulk Delete** icon.
+3. Confirm deletion in the prompt.
 
 ---
 
@@ -96828,235 +96742,134 @@ Return HTTP 200 to acknowledge the notification.
 ## Conversations
 
 
-The Conversations (Chats) module is the core workspace where agents engage with customers across WhatsApp, Email, and Facebook Messenger.
+The Conversations (Chats) page is the main workspace for sending and receiving messages across all supported channels — WhatsApp, SMS, Viber, Email, Line, Webchat, Facebook Messenger, and Instagram Messaging. It is the default landing page for all user roles.
 
-## Conversation Interface
+## Conversation Folders & Interface
 
-### Layout
+![Conversations page](../images/conversations-page.png)
 
-![Conversation Interface](../images/page34_img1.png)
+| Folder | Description |
+|--------|-------------|
+| **Unassigned** | New conversations not yet assigned to any agent. Behavior depends on routing mode — see below. |
+| **Assigned** | All conversations assigned to any agent. |
+| **Assigned to Me** | Conversations assigned to the current agent. |
+| **Sub-Tabs (Queue)** | Selecting a queue sub-tab filters to conversations in that queue. |
+| **Closed** | Completed conversations. |
+| **Spam** | Conversations marked as spam. To remove, open the conversation and click the unspam option. |
+| **My Reminders** | Upcoming reminders you have set on conversations. |
 
-The conversation workspace consists of three panels:
+### Routing Modes
 
-**Left Panel - Conversation List**:
-- Active conversations assigned to agent
-- Queued conversations awaiting assignment
-- Filter by channel, status, or tag
-- Search by contact name or content
+- **Pick-Me**: New conversations land in the Unassigned folder. Agents preview and manually claim a conversation to assign it to themselves.
+- **Round-Robin**: New conversations are automatically assigned to the next available agent. The Unassigned folder is view-only in this mode.
 
-**Center Panel - Message Thread**:
-- Full conversation history
-- Real-time message exchange
-- Rich media support (images, videos, documents)
-- Typing indicators
-- Read receipts (WhatsApp)
+Each open conversation provides:
 
-**Right Panel - Contact Details**:
-- Customer profile information
-- Custom attributes
-- Conversation tags and labels
-- Internal notes
-- Interaction history
+- **Conversation ID** — A unique ID (e.g. `#123`) shown at the top of the chat
+- **Channel indicator** — Icon showing which channel (WhatsApp, Email, Facebook, etc.) is in use
+- **Agent name** — Name of the agent currently handling the conversation
+- **SLA timer** — Color-coded timer for each stage and overall SLA (🟢 within SLA, 🟡 approaching SLA limit, 🔴 SLA exceeded)
+- **Conversation label** — Click "No Label" to assign a label from the list
+- **Concurrent conversation counter** — Shows current active count and maximum (e.g. `2/5`)
 
-### Conversation States
+## Starting a Conversation
 
-| State | Description | Agent Action |
-|-------|-------------|--------------|
-| **Unassigned (Open)** | New conversations that have not been assigned to any agent | Claim (Pick-Me) or auto-assigned by system (Round-Robin) |
-| **Assigned** | Conversations assigned to an agent | View and manage the conversation |
-| **Read** | Conversation has been viewed by the agent | Prepare and respond to the customer |
-| **Responded** | Agent has replied to the customer | Continue conversation or wait for customer reply |
-| **Closed** | Conversation has been completed and closed | No further action required |
+1. Click the **New Conversation** icon in the conversation list column.
+2. Select the channel account to send from.
+3. Enter the recipient's number.
+4. Type your message or retrieve a canned message by typing `#` followed by a keyword.
 
-## Managing Conversations
+![Start a new conversation](../images/start-a-new-conversation.png)
 
-### Accepting Conversations
+## Replying to Conversations
 
-**From Queue**:
-1. View available conversations in queue panel
-2. Click conversation to review details
-3. Click "Accept" to assign to yourself
-4. Conversation moves to your active list
+- Type in the response box and click **Send** or press **Enter**.
+- Retrieve canned messages by typing `#` followed by the associated keyword.
+- For the Email channel, a **Signature** selector appears at the bottom of the message field.
+- Messages are auto-saved as drafts locally in your browser until sent.
 
-**Auto-Assignment**:
-- System automatically routes based on queue rules
-- Notification alert when new conversation assigned
-- Appears immediately in active conversation list
+![Response box (WhatsApp channels)](../images/response-box-whatsapp.png)
 
-### Responding to Messages
+### WhatsApp Delivery Status
 
-#### Text Messages
+| Indicator | Meaning |
+|-----------|---------|
+| Single grey tick | Sent from Converse but not yet delivered to recipient |
+| Double grey tick | Delivered to recipient's device (not yet read, or read receipts off) |
+| Double blue tick | Read by recipient (only if read receipts are on) |
+| Exclamation mark | Delivery failed — click for failure reason |
 
-1. Type response in message input field
-2. Press Enter or click Send
-3. Message delivered via customer's channel (WhatsApp, Email, Facebook)
+## Actions (Three-Dots Menu)
 
-#### Rich Media
+![Three-dots menu](../images/three-dots-menu.png)
 
-**Sending Images/Documents**:
-1. Click attachment icon
-2. Select file from computer
-3. Add caption (optional)
-4. Send - file uploaded and delivered
+### Create a Note
 
-**Supported File Types**:
-- Images: JPG, PNG, GIF (max 5MB)
-- Documents: PDF, DOC, XLS (max 10MB)
-- Videos: MP4 (max 16MB) - WhatsApp only
+Add an internal comment visible only to agents — never sent to the customer. Notes can include images, videos, audio, or documents, and appear alongside the conversation thread.
 
-#### Canned Messages
+### Add Conversation Tags
 
-![Canned Messages](../images/page40_img1.png)
+Search and select existing tags, or type a new tag name and press **Enter** to create it. Multiple tags can be added per conversation. Click the blue arrow to save or **X** to cancel.
 
-Use pre-written templates for common responses:
-1. Click canned message icon (or type `#`)
-2. Search by keyword or browse categories
-3. Select template
-4. Auto-populates with contact variables: `{{first_name}}`, `{{email}}`, etc.
-5. Edit if needed and send
+### Set a Reminder
 
-**Example Canned Message**:
+Set a reminder to follow up on a conversation at a later time. Once set, the reminder appears in the **My Reminders** folder, and an email will be sent to the agent at the scheduled time.
 
-```text
-Hi {{first_name}}, thanks for contacting us! I'm {{agent_name}}
-and I'll be happy to help you today.
-```
+### Assign to Agent
 
-### Transferring Conversations
+1. Click **Assign Agent**.
+2. Select the destination agent and click **Next**.
+3. Select the queue to group the conversation under and confirm.
 
-#### Transfer to Agent
+### Assign to Queue
 
-1. Click transfer icon
-2. View available agents with current capacity
-3. Select destination agent
-4. Add transfer notes: "Customer needs Spanish support"
-5. Confirm - conversation immediately moves to recipient agent
+1. Click **Assign Queue**.
+2. Select the destination queue and click **Next**.
+3. Add a note and click **Assign**.
 
-#### Transfer to Queue
+### Close Conversation
 
-1. Click "Transfer to Queue"
-2. Select destination queue
-3. Conversation re-enters routing logic
-4. Next available agent in that queue receives it
+1. Click **Close Conversation**.
+2. Select a **Disposition** category.
+3. Optionally enter a note.
+4. Click **Close**.
 
-### Internal Notes
+![Close Conversation](../images/close-conversation.png)
 
-Add context for other agents without sending to customer:
-1. Click notes icon in right panel
-2. Type internal comment: "Customer called earlier, promised callback"
-3. Save note
-4. Appears in conversation history with "Internal Note" label
-5. Visible to all agents, never sent to customer
+## Message-Level Actions
 
-### Tagging Conversations
+Click the three-dots icon next to any individual message to:
 
-Categorize for reporting and analysis:
-1. Click tag icon
-2. Select from predefined tags: "Billing Issue", "Product Question", "Complaint"
-3. Create custom tags as needed
-4. Apply multiple tags per conversation
-5. Tags appear in reports and searchable
+- **Reply** — Reply directly to that message.
+- **Delete** — Remove the message from the Converse interface only. The message remains visible to the customer.
 
-### Conversation Labels
+## Icon Reference
 
-Use labels for workflow management:
-- **Follow-up Required**: Needs future action
-- **Escalated**: Requires manager attention
-- **Bug Report**: Technical issue identified
-- **Feature Request**: Customer suggestion
+| Icon | Action |
+|------|--------|
+| Search (conversation list) | Search by phone number, name, or other info |
+| Search (in-conversation) | Search message history by keyword within the current conversation |
+| Spam | Mark conversation as spam |
+| Edit (pencil) | Edit contact information or add tags/notes to the contact |
+| Release | Release conversation back to the queue |
+| Information | Show/hide the contact information and audit trail panel |
 
-**Applying Labels**:
-1. Right-click conversation in list
-2. Select "Add Label"
-3. Choose label
-4. Labeled conversations highlighted in list
+## Bulk Actions
 
-## Resolving Conversations
+### Bulk Assign / Release
 
-### Marking as Resolved
+1. Go to the **Assigned** folder.
+2. Select all conversations (checkbox at top) or individual conversations.
+3. Click the three-dots icon and choose: **Assign to Queue**, **Assign to Agent**, or **Release to Queue**.
 
-When customer issue is complete:
-1. Click "Resolve" button
-2. Add resolution notes (optional): "Refund processed"
-3. Confirm closure
-4. Conversation moves to resolved state
-5. Customer can re-open by sending new message
+![Bulk assign / release](../images/bulk-assign-release.png)
 
-### Auto-Resolution
+### Bulk Close
 
-System automatically resolves conversations:
-- **24 hours** of customer inactivity (configurable)
-- Agent explicitly closes conversation
-- Customer sends "resolved" or "thanks" (if configured)
-
-### Re-opening Resolved Conversations
-
-If customer replies to resolved conversation:
-- System creates new conversation linked to previous
-- Maintains full history
-- Re-enters queue routing
-
-## Multi-Channel Considerations
-
-### WhatsApp
-
-- **24-Hour Window**: After customer message, business has 24 hours to respond freely
-- **Template Messages**: Outside 24-hour window, must use pre-approved templates
-- **Read Receipts**: Blue checkmarks indicate customer has read message
-- **Media**: Full support for images, videos, documents, audio
-
-### Email
-
-- **Subject Line**: Displayed in conversation list
-- **Threading**: All replies grouped under original email
-- **CC/BCC**: Not supported - direct communication only
-- **Attachments**: Full support for all document types
-
-### Facebook Messenger
-
-- **Response Time**: 24-hour response window for promotional content
-- **Standard Messaging**: No time limit for customer service responses
-- **Rich Features**: Quick replies, buttons, carousels supported
-- **Media**: Images and documents supported
-
-## Search & Filters
-
-### Quick Search
-
-Search across all conversations by:
-- Contact name
-- Phone or email
-- Message content
-- Conversation ID
-
-## Best Practices
-
-### Response Time
-
-- Acknowledge new conversations within 30 seconds
-- Set expectations: "Let me look into this, I'll have an answer in 5 minutes"
-- Use auto-responders during off-hours
-
-### Message Quality
-
-- Use customer's name for personalization
-- Keep messages concise and scannable
-- Use canned messages for consistency
-- Proofread before sending
-
-### Conversation Management
-
-- Tag all conversations for accurate reporting
-- Add internal notes for continuity
-- Transfer promptly when you can't resolve
-- Resolve conversations only when fully complete
-
-### Workload Management
-
-- Accept conversations within your capacity
-- Use "Busy" status when at max capacity
-- Take breaks to prevent burnout
-- Communicate delays to customers proactively
+1. Go to a queue under **Assigned to Me**.
+2. Select conversations using their checkboxes.
+3. Click the three-dots icon and choose **Close Conversation**.
+4. Select a **Disposition**, optionally add a note, and click **Close**.
 
 ---
 
@@ -97075,49 +96888,75 @@ Access Converse through your organization's URL:
 https://e18.moobidesk.com
 ```
 
-Use the credentials provided by your system administrator to log in.
+Enter your registered email address and password, then click **Sign In**.
+
+![Login page](../images/login-page.png)
+
+### Forgot your password?
+
+1. Click **Forgot Password?** on the login page.
+2. Enter the email address associated with your Converse account and click **Submit**.
+3. A password reset link will be sent to your email.
+4. Click the link to open the reset page, then enter and confirm your new password.
+
+![Password reset](../images/password-reset.png)
+
+## Logging Out
+
+Always log out when you finish your session to ensure new messages are not routed to you.
+
+1. Click your profile picture in the top-right corner of the page.
+2. Select **Logout** from the dropdown menu.
 
 ## Dashboard Overview
 
-The Converse dashboard provides real-time visibility into your contact center operations.
+The main navigation sidebar provides quick access to all feature areas:
 
-### Main Navigation
+![Dashboard sidebar](../images/dashboard-sidebar.png)
 
-- **Contacts**: Customer profile and interaction history
-- **Agents**: Agent status, availability, and performance
-- **Queue**: Conversation routing and distribution
-- **Chats**: Active conversation management
-- **Broadcast**: WhatsApp campaign management
-- **Reports**: Historical analytics and insights
-- **Statistics**: Real-time performance metrics
-- **Settings**: System configuration and preferences
+| Module | Description |
+|--------|-------------|
+| **Channels** | Communication channels integrated into Converse |
+| **Contacts** | Customer contact database |
+| **Agents** | Agent management and configuration |
+| **Queue** | Conversation routing queues |
+| **Chats** | Active conversation management (default landing page) |
+| **Broadcast** | WhatsApp broadcast campaigns |
+| **Reports** | Downloadable performance reports |
+| **Statistics** | Real-time conversation analytics |
+| **Settings** | System configuration |
 
-## User Interface
+## Status & Capacity Indicator
 
-### Header Bar
+The top-right corner of the header bar displays:
 
-- **Search**: Global search across contacts and conversations
-- **Status Selector**: Set agent availability (Available, Busy, Away, Offline)
-- **Notifications**: System alerts and updates
-- **Profile Menu**: User settings and logout
+- Your current availability status (Available, Busy, Away, or a custom Aux Code), shown beneath your name. Click to change status.
+- Your concurrent conversation count and the maximum you can handle — e.g. `1/15`.
 
-### Quick Actions
+![Header status indicator](../images/header-status-indicator.png)
 
-- **New Conversation**: Initiate outbound contact
-- **View Queue**: Monitor pending conversations
-- **Access Reports**: Generate performance insights
+## Browser & Device Requirements
+
+- **Desktop browsers**: Chrome (recommended), Firefox, Safari
+- **Mobile**: iOS (Apple App Store) and Android (Google Play Store)
 
 ## Channel Support
 
-Converse supports multi-channel engagement:
-- **WhatsApp**: Full Business API integration
-- **Email**: Unified inbox management
-- **Facebook Messenger**: Social media customer service
+Converse supports multi-channel engagement across:
+
+- WhatsApp
+- SMS
+- Viber
+- Email
+- Line
+- Webchat
+- Facebook Messenger
+- Instagram Messaging
 
 ## Next Steps
 
-- Set up your [agent profile and availability](/converse/docs/agents)
-- Learn about [conversation management](/converse/docs/conversations)
+- Learn about [user roles & permissions](/converse/docs/user-roles)
+- Set up your [agents](/converse/docs/agents)
 - Configure [queue routing rules](/converse/docs/queue)
 
 ---
@@ -97125,551 +96964,241 @@ Converse supports multi-channel engagement:
 ## Queue Management
 
 
-The Queue module controls how incoming conversations are distributed to available agents based on routing rules, priority, and agent availability.
+Converse uses queues to control how conversations reach agents. Every conversation lives in exactly one queue at a time, and every service has one routing model that decides how conversations inside any queue get assigned to agents.
 
-## Queue Overview
+![Queue list](../images/queue-list.png)
 
-### Queue List View
+## Queue Types
 
-![Queue Management](../images/queue-overview.png)
+There are three types of queue:
 
-Each queue contains the following configurations:
-- **Queue Name**: Unique identifier for the queue
-- **Queue Type**: Defines the queue's purpose and usage
-- **Assigned Channels**: Communication channels linked to the queue
-- **Skillsets**: Required agent capabilities for handling conversations
-- **Assigned Agents**: Agents allocated to handle conversations in the queue
-- **Routing Priority**: Determines how conversations are distributed among agents
-- **SLA Settings**: Defines response time targets for conversations
+| Type | Purpose |
+|------|---------|
+| **General Enquiry** | The entry point for every new inbound conversation. Every new conversation lands here first, then is assigned to any available agent in the queue. |
+| **Regular / Destination Queue** | Used to hand a conversation to a specific team — for department- or skill-based handling. Conversations only reach these queues when transferred here from another queue. |
+| **Outbound** | Required for an agent to start a conversation with a customer. Only agents assigned to an Outbound queue can initiate outbound conversations. |
 
-### Queue Types
+## How a Conversation Reaches a Queue
 
-| Type | Purpose | Routing Logic |
-|------|---------|---------------|
-| **General** | Default queue for handling incoming conversations | Conversations are routed to available agents within the queue |
-| **Non-General** | Queue configured for specific channels, skillsets, or use cases | Conversations are routed based on configured channels and skillset matching |
-| **Outbound** | Used for agent-initiated conversations | Conversations are initiated by agents and assigned directly |
+1. A customer sends a message to a connected channel account.
+2. If they already have an active conversation, the message is appended to it — no new queue routing happens.
+3. If not, a new conversation is created in the **General Enquiry** queue.
+4. The service's routing model (Round Robin or Pick-Me) takes over from there to get it to an agent.
 
-## Creating Queues
+From General Enquiry, a conversation can be transferred to a Regular / Destination Queue — for example, to route it to a specialized team. Once it lands in a queue, the same routing model applies again to assign it to an agent there.
 
-Managers can create and configure queues to manage conversation routing:
+## Routing Models
 
-1. Navigate to Queues → Add Queue
-2. Enter queue details:
-   - **Queue Name**: Unique identifier for the queue
-   - **Queue Type**: Select the queue type (e.g., General, Non-General, Outbound)
-   - **Assigned Channels**: Select communication channels for the queue (e.g., WhatsApp, Email)
-   - **Skillsets**: Define required skillsets for agents handling this queue
-3. Configure queue settings:
-   - **Assigned Agents**
-   - **Routing Priority**: Define agent priority within the queue (used for distribution)
-   - **SLA Settings**: Configure response time targets (Assigned, Read, Responded, Closed)
-4. Save configuration
+A service is configured with exactly one routing model — Round Robin or Pick-Me — and every queue in that service follows it.
 
-## Routing Methods
+### Round Robin
 
-### Round-Robin
+Conversations are automatically assigned to eligible agents during business hours. Outside business hours, a conversation stays Unassigned and is picked up automatically once business hours reopen.
 
-Distributes conversations sequentially to agents in rotation.
+To be eligible for automatic assignment, an agent must:
 
-**Best For**: Balanced workload distribution, general inquiries
+- Have their status set to **Available**
+- Be within their maximum concurrent conversation limit
+- Share the queue's assigned skill set (see below)
+
+Within a queue, agents can also be given a priority from 1 (highest) to 5 (lowest). Converse checks for an eligible agent starting at Priority 1, then works down through 2, 3, 4, and 5. If no eligible agent is found at any level, the conversation remains Unassigned.
 
 ### Pick-Me
 
-New conversations are placed in the Unassigned queue. Agents manually select and claim conversations from the queue.
+Conversations stay in the Unassigned folder with no automatic distribution — an agent claims one manually by opening Unassigned and clicking **Claim**.
 
-**Best For**: Flexible conversation handling, Teams that prefer manual assignment, Low to moderate conversation volume
+![Claiming a conversation](../images/claiming-a-conversation.png)
 
-## Priority Management
+## Skill Sets
 
-### Queue Priority
+A skill set is what links agents to queues. It's attached to an agent when the agent is created, and to a queue when the queue is created — so when you go to add agents to a queue, only agents sharing that skill set are selectable. This is the mechanism that keeps, say, a "Technical Support" queue staffed only by agents equipped to handle it.
 
-Queues can be configured with agent priority levels to control how conversations are distributed.
+## Creating a Queue
 
-- Priority levels range from 1 (highest) to 5 (lowest)
-- Agents with higher priority receive conversations first
-- Agents with the same priority level receive conversations in a round-robin approach
+1. Navigate to **Queues → Add Queue**.
+2. Enter the **Queue Name** and select the **Queue Type**.
+3. Select the **Assigned Channels** and the required **Skill Set**.
+4. Click **Create**.
 
-### Assignment Logic
+![Add Queue form](../images/add-queue-form.png)
 
-- The system evaluates agents starting from Priority 1 to Priority 5
-- Only eligible agents are considered for assignment
-- If no eligible agents are available, the conversation remains Unassigned
+Once created, open the queue to configure it further across four tabs: **Agents**, **Priority Listing**, **Disposition**, and **SLA**.
 
-### Agent Eligibility
+![Queue configuration tabs](../images/queue-configuration-tabs.png)
 
-To receive a conversation, an agent must:
-- Be in Available status
-- Not exceed the maximum concurrent conversation limit
+- **Agents** — Assign agents to the queue. Only agents sharing the queue's skill set will appear.
+- **Priority Listing** — Set each assigned agent's priority.
+- **Disposition** — Set the disposition (category) options available when agents close conversations in this queue.
+- **SLA** — Set the SLA for each channel account assigned to the queue. Each queue can have its own SLA targets:
+  - **Assigned** — Time to assign the conversation to an agent
+  - **Read** — Time for the agent to read it
+  - **Responded** — Time for the agent to respond
+  - **Closed** — Total time from assignment to closure (must be ≥ the sum of the other three)
 
-## SLA (Service Level Agreement)
+Conversations are color-coded against these targets:
 
-### Configuring SLAs
-
-SLA defines the expected response time for handling conversations within a queue.
-
-The following SLA parameters can be configured:
-- **Assigned**: Time taken for a conversation to be assigned to an agent
-- **Read**: Time taken for the agent to read the conversation
-- **Responded**: Time taken for the agent to respond
-- **Closed**: Total time from assignment to closure
-
-The Closed SLA must be equal to or greater than the total of the other SLA durations.
-
-### SLA Monitoring
-
-SLA performance is tracked within the conversation interface and reports.
-
-- SLA timers are displayed during conversation handling
-- Indicators show whether response time is within SLA limits
-- SLA data is available in reporting modules
-
-### SLA Status
-
-SLA status is visually indicated using color indicators:
-- **Green**: Within SLA
-- **Yellow**: Approaching SLA limit
-- **Red**: SLA exceeded
-
-## Agent Assignment
-
-### Manual Assignment
-
-Supervisors can manually route conversations:
-1. View queue list
-2. Select waiting conversation
-3. Click "Assign to Agent"
-4. Choose specific agent
-5. Conversation immediately appears in agent's chat panel
-
-### Bulk Assignment
-
-Assign multiple conversations simultaneously:
-1. Filter queue by criteria (channel, tag, time range)
-2. Select multiple conversations
-3. Choose "Bulk Assign"
-4. Select destination agents or queue
-5. Confirm assignment
-
-## Queue Transfers
-
-### Automatic Overflow
-
-Configure overflow routing:
-1. Set maximum wait time threshold (e.g., 180 seconds)
-2. Designate backup queue
-3. When threshold exceeded, conversation auto-transfers
-4. Transfer logged in conversation history
-
-### Manual Queue Transfer
-
-Agents can transfer conversations between queues:
-1. Open conversation
-2. Select "Transfer to Queue"
-3. Choose destination queue
-4. Add transfer reason (optional)
-5. Conversation re-enters routing logic
-
-## Best Practices
-
-### Queue Design
-
-- Create queues aligned to business functions (Sales, Support, Billing)
-- Limit to 5-7 queues to avoid agent confusion
-- Use clear, descriptive queue names
-
-### Routing Optimization
-
-- Set realistic SLA targets based on historical data
-- Use skill-based routing for 20% of inquiries (specialized cases)
-- Configure overflow for high-traffic periods
-
-### Agent Allocation
-
-- Assign agents to 2-3 queues maximum
-- Balance experienced and new agents across queues
-- Adjust assignments based on real-time demand
-
-### Monitoring
-
-- Review queue performance daily during ramp-up
-- Adjust routing rules based on SLA trends
-- Investigate frequent queue transfers for process improvements
+- 🟢 **Green** — Within SLA
+- 🟡 **Yellow** — Approaching SLA limit
+- 🔴 **Red** — SLA exceeded
 
 ---
 
 ## Reports & Statistics
 
 
-Converse provides comprehensive analytics across conversations, agent performance, queue efficiency, and customer satisfaction.
+Converse provides four downloadable historical reports and a real-time statistics dashboard.
 
-## Historical Reports
+## Statistics Dashboard
 
-### Dashboard Overview
+The Statistics page shows a visual overview of conversation activity for any selected date range.
 
-![Statistics Dashboard](../images/statistic.png)
+![Statistics dashboard](../images/statistics-dashboard.png)
 
-The Statistics module provides a visual summary of conversation activity and performance based on selected filters such as date range, agent, queue, and conversation tags.
+Available filters: **Date Range**, **Agent**, **Queue**, **Conversation Tag**.
 
-**Statistic Filtering:**
-- Date Range
-- Agent
-- Queue
-- Conversation Tag
+### Metrics Displayed
 
-**Time metrics:**
+- **Time metrics** — Resolution Time and Waiting Time, each showing Average, Longest, and Shortest values.
+- **Conversation Trends** — Total conversation volume over time in a trend chart, comparable across queues.
+- **Conversation Breakdowns** — By Status, Channel, Disposition, Queue, and SLA Result (Passed vs Failed).
 
-The dashboard displays key time-based performance metrics:
-- **Resolution Time**: Time taken to complete a conversation (Average, Longest, Shortest)
-- **Waiting Time**: Time taken before a conversation is handled (Average, Longest, Shortest)
+## Downloadable Reports
 
-**Conversation Trends:**
-- **Total Conversation**: Displays conversation volume over time in a trend chart
-- Allows comparison across queues
+Navigate to the Reports page. Four report types are available under separate tabs.
 
-**Conversation Breakdown:**
-
-Statistics include visual breakdowns of conversations by:
-- **Status** (e.g., Assigned, Closed, Read)
-- **Channel** (e.g., Email, WhatsApp)
-- **Disposition** (e.g., General, Transfer)
-- **Queue**
-- **SLA Result** (Passed vs Failed)
+![Reports page](../images/reports-page.png)
 
 ### Conversation Report
 
-Provides insight into:
-- Total conversations within the selected period
-- SLA compliance
-- Assignment and resolution timing
+Filter by: queue and date range. Tracks:
+
+- Communication Channel · Message Received time
+- First Assigned and First Responded timestamps
+- Closed time · Disposition · Handling Agent name
+- Total Wait time · SLA compliance result (Met / Missed)
 
 ### Transcript Report
 
-Displays total inbound and outbound message volume within the selected period.
+Filter by: case ID and date range. Captures all incoming and outgoing messages exchanged between agents and customers.
 
 ### Agent Report
 
-Provides agent-level performance metrics, including:
-- Total conversations assigned
-- Response time
-- Resolution performance
+Filter by: queue and date range. Tracks per agent:
+
+- Total conversations assigned · Total conversations closed
+- Occupancy rate · Average handling time
 
 ### Agent Auxcode Report
 
-Provides a log of agent status (Auxcode) activity within a selected period.
+Filter by: agent name, auxcode, and date range. Tracks each agent's away status activity.
 
-## Data Export
+## Exporting Report Data
 
-### Export Format
-
-- **CSV**: Raw data format for spreadsheet or external processing
-
-### Export Process
-
-To export report data:
-1. Navigate to the desired report (e.g., Conversation Report, Transcript Report, Agent Report, Agent Auxcode Report)
-2. Select the required filters (e.g., date range)
-3. Click Download
-4. A download link will be sent to your email once the export is ready
-
-## Analytics Best Practices
-
-### Monitoring Frequency
-
-**Daily**: Agent performance, queue status, SLA compliance
-**Weekly**: Conversation volume trends, CSAT trends, broadcast performance
-**Monthly**: Strategic metrics, capacity planning, process improvements
-
-### Key Performance Indicators (KPIs)
-
-**Efficiency**:
-- Average handle time: Target <8 minutes
-- First response time: Target <30 seconds
-- SLA compliance: Target >95%
-
-**Quality**:
-- CSAT score: Target >4.5/5
-- Abandon rate: Target <5%
-- Transfer rate: Target <10%
-
-**Productivity**:
-- Conversations per agent per hour: Target 6-8
-- Concurrent conversations: Target 3-5
-- Utilization rate: Target 70-85%
-
-### Actionable Insights
-
-Use reports to drive improvements:
-- **High transfer rates**: Provide additional agent training
-- **Long handle times**: Review conversation efficiency, update canned messages
-- **Low CSAT in specific queue**: Investigate root cause, adjust staffing
-- **High abandon rates**: Add agents during peak hours
-- **SLA breaches by time of day**: Adjust shift schedules
-
-### Data-Driven Decisions
-
-Leverage analytics for:
-- **Capacity Planning**: Forecast staffing needs based on trends
-- **Training Needs**: Identify skill gaps from performance data
-- **Process Optimization**: Find bottlenecks in conversation flow
-- **Customer Experience**: Improve based on CSAT feedback themes
+1. Navigate to the desired report tab.
+2. Apply the required filters.
+3. Select records using the checkboxes.
+4. Click **Download Report** to save to your local directory, or **Download to Email** to receive a download link by email.
+5. Download progress is shown in the bottom-right corner.
+6. Files download as a ZIP archive containing summary and detail files where applicable.
 
 ---
 
 ## Settings & Configuration
 
 
-The Settings module provides system-wide configuration for administrators to customize Converse for their organization's needs.
+The Settings page lets you configure Skill Sets, Aux Codes, Canned Messages, Conversation Tags, Conversation Labels, and Email Signatures.
 
 ## Skill Sets
 
-### Defining Skills
+A skill set is the mapping between agents and queues: it's attached to an agent when the agent is created, and to a queue when the queue is created. When adding agents to a queue, only agents sharing that queue's skill set appear as selectable. See [Queue Management](/converse/docs/queue) for how this fits into queue setup.
 
-Create skill categories for intelligent routing:
+![Skill Sets](../images/skill-sets.png)
 
-1. Navigate to Settings → Skills → Add Skill
-2. Enter skill name (e.g., "Spanish Language", "Technical Support", "VIP Handling")
-3. Add description for internal reference
-4. Save skill
+### Adding a Skill Set
 
-### Assigning Skills to Agents
+1. Navigate to **Settings → Skill Sets**.
+2. Enter the skill name in the **Add Skill** field.
+3. Click **Save**.
 
-1. Select agent in User Management
-2. Navigate to Skills tab
-3. Add skills with proficiency levels:
-   - **1**: Beginner
-   - **2**: Basic
-   - **3**: Intermediate
-   - **4**: Advanced
-   - **5**: Expert
-
-**Routing Logic**: Higher proficiency agents receive priority for skill-based queues
+Skill sets can be archived rather than permanently deleted. View archived items by selecting the **ARCHIVED** filter.
 
 ## Auxiliary (Aux) Codes
 
-### Creating Aux Codes
+An aux code is a named status indicating that an agent is temporarily unavailable to receive messages.
 
-Define reasons for agent unavailability:
+![Aux Codes](../images/aux-codes.png)
 
-1. Navigate to Settings → Aux Codes → Add Code
-2. Configure code:
-   - **Code Name**: "Break", "Lunch", "Training", "Technical Issue"
-   - **Status**: Away or Busy
-   - **Paid/Unpaid**: For payroll integration
-   - **Color**: Visual identifier in dashboards
-
-3. Save code
-
-### Common Aux Codes
-
-| Code | Status | Use Case |
-|------|--------|----------|
-| Break | Away | Scheduled 15-minute breaks |
-| Lunch | Away | Meal breaks |
-| Training | Away | Learning activities |
-| Meeting | Away | Team or client meetings |
-| Technical Issue | Away | System problems |
-| Wrap-up | Busy | Post-conversation documentation |
-| Admin | Busy | Administrative tasks |
+1. Navigate to **Settings → Aux Codes**.
+2. Select a color from the dropdown.
+3. Enter a name in the **Add Away Aux Code** field.
+4. Click **Save**.
 
 ## Canned Messages
 
-![Canned Messages Settings](../images/page65_img1.png)
+Use this page to create and manage pre-written response templates, including WhatsApp template messages.
 
-### Creating Templates
+![Canned Messages](../images/canned-messages.png)
 
-Build pre-written message library:
+### Adding a Canned Message
 
-1. Navigate to Settings → Canned Messages → Add Message
-2. Configure template:
-   - **Title**: Internal reference name
-   - **Category**: Group similar messages (Greetings, FAQs, Closings)
-   - **Shortcut**: Quick trigger (e.g., `/greeting`, `/refund`)
-   - **Message**: Template content with variables
-   - **Channels**: WhatsApp, Email, Facebook, or All
+1. Click the **+** icon.
+2. Enter the message text.
+3. Assign one or more keywords.
+4. Click **Create**.
 
-3. Save template
+### Retrieving Canned Messages in Conversations
 
-### Variable Substitution
+In the conversation reply box, type `#` followed by a keyword associated with the canned message to retrieve it instantly.
 
-Use placeholders for personalization:
-- `{{first_name}}`: Contact first name
-- `{{last_name}}`: Contact last name
-- `{{email}}`: Contact email
-- `{{phone}}`: Contact phone number
-- `{{agent_name}}`: Current agent name
-- `{{agent_email}}`: Current agent email
-- `{{queue_name}}`: Current queue
-- Custom attributes: `{{custom_field_name}}`
+### WhatsApp Template Messages
 
-**Example**:
-
-```text
-Hi {{first_name}}, I'm {{agent_name}} from the {{queue_name}} team.
-How can I help you today?
-```
-
-### Categories
-
-Organize templates by purpose:
-- **Greetings**: Welcome messages
-- **Information**: Product details, policies
-- **Troubleshooting**: Step-by-step instructions
-- **Apologies**: Service recovery
-- **Closings**: End conversation messages
+WhatsApp template messages must be approved by Meta before use. Submit your templates through your company's Meta Business Account for approval. Once approved, they will be automatically synced into your canned messages every hour.
 
 ## Conversation Tags
 
-### Creating Tags
+Conversation tags help categorize and filter conversations.
 
-Categorize conversations for reporting:
+![Conversation Tags](../images/conversation-tags.png)
 
-1. Navigate to Settings → Tags → Add Tag
-2. Enter tag name (e.g., "Billing Issue", "Product Question", "Complaint")
-3. Select color for visual identification
-4. Save tag
-
-### Tag Categories
-
-**Issue Types**:
-- Billing Issue
-- Technical Problem
-- Account Question
-- Product Inquiry
-
-**Resolution Types**:
-- Resolved - First Contact
-- Escalated
-- Follow-up Required
-- Cannot Resolve
-
-**Customer Types**:
-- VIP Customer
-- New Customer
-- Returning Customer
-- At-Risk Customer
-
-**Use in Reports**: Filter and segment conversation analytics by tags
+- **Add**: Enter the desired tag name in the **Add Conversation Tag** field and click **Save**.
+- **Edit**: Click the pencil icon next to the tag, update the name, and click **Save**.
+- **Delete**: Click the **X** icon next to the tag and confirm deletion.
 
 ## Conversation Labels
 
-### Creating Labels
+Conversation labels provide a workflow management marker for conversations.
 
-Workflow management markers:
+![Conversation Labels](../images/conversation-labels.png)
 
-1. Navigate to Settings → Labels → Add Label
-2. Configure label:
-   - **Name**: "Follow-up Required", "Escalated", "Bug Report"
-   - **Color**: Visual indicator
-   - **Auto-Apply Rules**: Automatically label based on conditions (optional)
-
-3. Save label
-
-### Label Automation
-
-Configure automatic labeling:
-- **Keyword Triggers**: Label if message contains "refund", "cancel", "broken"
-- **SLA Breach**: Auto-label when SLA exceeded
-- **Transfer Count**: Label after 2+ transfers
-- **Customer Sentiment**: Label based on negative keywords
+- **Add**: Enter the desired label name in the **Add Conversation Label** field and click **Save**.
+- **Edit**: Click the pencil icon next to the label, update the name, and click **Save**.
+- **Delete**: Click the **X** icon next to the label and confirm deletion.
 
 ## Email Signatures
 
-### Creating Signatures
+Manage email channel signatures on this page. Multiple signatures can be created, and one can be set as the default.
 
-Configure agent email signatures:
+![Email Signatures list](../images/email-signatures-list.png)
 
-1. Navigate to Settings → Signatures → Add Signature
-2. Enter signature content (supports HTML):
+### Creating an Email Signature
 
-   ```html
-   Best regards,
-   {{agent_name}}
-   {{queue_name}} Team
+1. Click **New Signature** (or the **+** icon).
+2. Fill in the following fields:
 
-   Email: {{agent_email}}
-   Phone: +1-800-XXX-XXXX
-   ```
+| Field | Description |
+|-------|-------------|
+| **Signature Name** | Label shown in the signature selector when composing an email |
+| **Signature Body** | The text content appended to the bottom of outgoing emails |
+| **Choose File** | Upload an image to include below the signature text |
+| **Set as Default** | Enable to automatically apply this signature to outgoing messages |
 
-3. Assign to users or queues
-4. Save signature
+3. Click **Submit** to save, or **Cancel** to discard.
 
-**Variables**: Same as canned messages
+### Managing Existing Signatures
 
-### Default Signatures
-
-- Set default signature for all agents
-- Override with queue-specific signatures
-- Agent-specific signatures take highest priority
-
-## Data & Privacy
-
-### Data Retention
-
-Configure data storage policies:
-
-1. Navigate to Settings → Data & Privacy → Retention
-2. Set retention periods:
-   - **Conversations**: 90 days, 1 year, 3 years, Indefinitely
-   - **Attachments**: Same as conversations or separate
-   - **Logs**: 30 days, 90 days, 1 year
-
-3. Configure auto-deletion for expired data
-
-### GDPR Compliance
-
-Tools for privacy regulation adherence:
-
-**Data Export**: Generate complete contact data export on request
-**Right to Deletion**: Permanently delete contact and all associated data
-**Audit Logs**: Track all data access and modifications
-
-## Backup & Restore
-
-### Automated Backups
-
-System automatically backs up:
-- All conversations and messages
-- Contact database
-- System configuration
-- Frequency: Daily (retained for 30 days)
-
-### Manual Backup
-
-Create on-demand backup before major changes:
-1. Navigate to Settings → Backup
-2. Click "Create Backup"
-3. Download backup file
-4. Store securely offline
-
-### Restore
-
-Restore from backup:
-1. Navigate to Settings → Restore
-2. Select backup date
-3. Choose restore scope (Full system, Contacts only, Conversations only)
-4. Confirm restore (overwrites current data)
-
-## Best Practices
-
-### Initial Setup Checklist
-
-- Create user accounts for all agents
-- Configure queues aligned to business functions
-- Set up skill sets for specialized routing
-- Create canned message library
-- Define aux codes
-- Configure business hours and SLA targets
-- Test channel integrations
-
-### Ongoing Maintenance
-
-- Review and update canned messages monthly
-- Audit user access quarterly
-- Optimize queue routing based on performance data
-- Keep skill assignments current as agents develop
-- Archive inactive users promptly
-- Back up configuration before major changes
+- Click **Set as Default** to make a signature the default for all outgoing emails.
+- Click the **Edit** button to update content, then **Submit** to save.
+- Click the **Delete** button to remove a signature.
 
 ---
 
@@ -97743,12 +97272,12 @@ Supervisors oversee agent teams and ensure service quality.
 ## Converse
 
 
-Converse is a unified conversational platform that enables omnichannel customer engagement across WhatsApp, Email, and Facebook Messenger. The platform provides comprehensive contact center capabilities including conversation management, queue routing, broadcast messaging, and real-time analytics.
+Converse is an omnichannel customer engagement platform that brings popular communication channels — including WhatsApp, SMS, Viber, Email, Line, Webchat, Facebook Messenger, and Instagram Messaging — together into a single, intuitive dashboard. The platform streamlines customer interactions and offers a rich set of configurable features and reports to meet your organization's unique requirements.
 
 To get access to Converse, please reach out to your account manager ([cpaas-sales@8x8.com](mailto:cpaas-sales@8x8.com)).
 
 * [Getting Started](/converse/docs/getting-started)
-* [User Roles & Dashboard](/converse/docs/user-roles)
+* [User Roles & Permissions](/converse/docs/user-roles)
 * [Contact Management](/converse/docs/contacts)
 * [Agent Management](/converse/docs/agents)
 * [Queue Management](/converse/docs/queue)
