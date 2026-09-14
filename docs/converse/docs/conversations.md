@@ -4,232 +4,131 @@ slug: /converse/docs/conversations
 
 # Conversations
 
-The Conversations (Chats) module is the core workspace where agents engage with customers across WhatsApp, Email, and Facebook Messenger.
+The Conversations (Chats) page is the main workspace for sending and receiving messages across all supported channels — WhatsApp, SMS, Viber, Email, Line, Webchat, Facebook Messenger, and Instagram Messaging. It is the default landing page for all user roles.
 
-## Conversation Interface
+## Conversation Folders & Interface
 
-### Layout
+![Conversations page](../images/conversations-page.png)
 
-![Conversation Interface](../images/page34_img1.png)
+| Folder | Description |
+|--------|-------------|
+| **Unassigned** | New conversations not yet assigned to any agent. Behavior depends on routing mode — see below. |
+| **Assigned** | All conversations assigned to any agent. |
+| **Assigned to Me** | Conversations assigned to the current agent. |
+| **Sub-Tabs (Queue)** | Selecting a queue sub-tab filters to conversations in that queue. |
+| **Closed** | Completed conversations. |
+| **Spam** | Conversations marked as spam. To remove, open the conversation and click the unspam option. |
+| **My Reminders** | Upcoming reminders you have set on conversations. |
 
-The conversation workspace consists of three panels:
+### Routing Modes
 
-**Left Panel - Conversation List**:
-- Active conversations assigned to agent
-- Queued conversations awaiting assignment
-- Filter by channel, status, or tag
-- Search by contact name or content
+- **Pick-Me**: New conversations land in the Unassigned folder. Agents preview and manually claim a conversation to assign it to themselves.
+- **Round-Robin**: New conversations are automatically assigned to the next available agent. The Unassigned folder is view-only in this mode.
 
-**Center Panel - Message Thread**:
-- Full conversation history
-- Real-time message exchange
-- Rich media support (images, videos, documents)
-- Typing indicators
-- Read receipts (WhatsApp)
+Each open conversation provides:
 
-**Right Panel - Contact Details**:
-- Customer profile information
-- Custom attributes
-- Conversation tags and labels
-- Internal notes
-- Interaction history
+- **Conversation ID** — A unique ID (e.g. `#123`) shown at the top of the chat
+- **Channel indicator** — Icon showing which channel (WhatsApp, Email, Facebook, etc.) is in use
+- **Agent name** — Name of the agent currently handling the conversation
+- **SLA timer** — Color-coded timer for each stage and overall SLA (🟢 within SLA, 🟡 approaching SLA limit, 🔴 SLA exceeded)
+- **Conversation label** — Click "No Label" to assign a label from the list
+- **Concurrent conversation counter** — Shows current active count and maximum (e.g. `2/5`)
 
-### Conversation States
+## Starting a Conversation
 
-| State | Description | Agent Action |
-|-------|-------------|--------------|
-| **Unassigned (Open)** | New conversations that have not been assigned to any agent | Claim (Pick-Me) or auto-assigned by system (Round-Robin) |
-| **Assigned** | Conversations assigned to an agent | View and manage the conversation |
-| **Read** | Conversation has been viewed by the agent | Prepare and respond to the customer |
-| **Responded** | Agent has replied to the customer | Continue conversation or wait for customer reply |
-| **Closed** | Conversation has been completed and closed | No further action required |
+1. Click the **New Conversation** icon in the conversation list column.
+2. Select the channel account to send from.
+3. Enter the recipient's number.
+4. Type your message or retrieve a canned message by typing `#` followed by a keyword.
 
-## Managing Conversations
+![Start a new conversation](../images/start-a-new-conversation.png)
 
-### Accepting Conversations
+## Replying to Conversations
 
-**From Queue**:
-1. View available conversations in queue panel
-2. Click conversation to review details
-3. Click "Accept" to assign to yourself
-4. Conversation moves to your active list
+- Type in the response box and click **Send** or press **Enter**.
+- Retrieve canned messages by typing `#` followed by the associated keyword.
+- For the Email channel, a **Signature** selector appears at the bottom of the message field.
+- Messages are auto-saved as drafts locally in your browser until sent.
 
-**Auto-Assignment**:
-- System automatically routes based on queue rules
-- Notification alert when new conversation assigned
-- Appears immediately in active conversation list
+![Response box (WhatsApp channels)](../images/response-box-whatsapp.png)
 
-### Responding to Messages
+### WhatsApp Delivery Status
 
-#### Text Messages
+| Indicator | Meaning |
+|-----------|---------|
+| Single grey tick | Sent from Converse but not yet delivered to recipient |
+| Double grey tick | Delivered to recipient's device (not yet read, or read receipts off) |
+| Double blue tick | Read by recipient (only if read receipts are on) |
+| Exclamation mark | Delivery failed — click for failure reason |
 
-1. Type response in message input field
-2. Press Enter or click Send
-3. Message delivered via customer's channel (WhatsApp, Email, Facebook)
+## Actions (Three-Dots Menu)
 
-#### Rich Media
+![Three-dots menu](../images/three-dots-menu.png)
 
-**Sending Images/Documents**:
-1. Click attachment icon
-2. Select file from computer
-3. Add caption (optional)
-4. Send - file uploaded and delivered
+### Create a Note
 
-**Supported File Types**:
-- Images: JPG, PNG, GIF (max 5MB)
-- Documents: PDF, DOC, XLS (max 10MB)
-- Videos: MP4 (max 16MB) - WhatsApp only
+Add an internal comment visible only to agents — never sent to the customer. Notes can include images, videos, audio, or documents, and appear alongside the conversation thread.
 
-#### Canned Messages
+### Add Conversation Tags
 
-![Canned Messages](../images/page40_img1.png)
+Search and select existing tags, or type a new tag name and press **Enter** to create it. Multiple tags can be added per conversation. Click the blue arrow to save or **X** to cancel.
 
-Use pre-written templates for common responses:
-1. Click canned message icon (or type `#`)
-2. Search by keyword or browse categories
-3. Select template
-4. Auto-populates with contact variables: `{{first_name}}`, `{{email}}`, etc.
-5. Edit if needed and send
+### Set a Reminder
 
-**Example Canned Message**:
+Set a reminder to follow up on a conversation at a later time. Once set, the reminder appears in the **My Reminders** folder, and an email will be sent to the agent at the scheduled time.
 
-```text
-Hi {{first_name}}, thanks for contacting us! I'm {{agent_name}}
-and I'll be happy to help you today.
-```
+### Assign to Agent
 
-### Transferring Conversations
+1. Click **Assign Agent**.
+2. Select the destination agent and click **Next**.
+3. Select the queue to group the conversation under and confirm.
 
-#### Transfer to Agent
+### Assign to Queue
 
-1. Click transfer icon
-2. View available agents with current capacity
-3. Select destination agent
-4. Add transfer notes: "Customer needs Spanish support"
-5. Confirm - conversation immediately moves to recipient agent
+1. Click **Assign Queue**.
+2. Select the destination queue and click **Next**.
+3. Add a note and click **Assign**.
 
-#### Transfer to Queue
+### Close Conversation
 
-1. Click "Transfer to Queue"
-2. Select destination queue
-3. Conversation re-enters routing logic
-4. Next available agent in that queue receives it
+1. Click **Close Conversation**.
+2. Select a **Disposition** category.
+3. Optionally enter a note.
+4. Click **Close**.
 
-### Internal Notes
+![Close Conversation](../images/close-conversation.png)
 
-Add context for other agents without sending to customer:
-1. Click notes icon in right panel
-2. Type internal comment: "Customer called earlier, promised callback"
-3. Save note
-4. Appears in conversation history with "Internal Note" label
-5. Visible to all agents, never sent to customer
+## Message-Level Actions
 
-### Tagging Conversations
+Click the three-dots icon next to any individual message to:
 
-Categorize for reporting and analysis:
-1. Click tag icon
-2. Select from predefined tags: "Billing Issue", "Product Question", "Complaint"
-3. Create custom tags as needed
-4. Apply multiple tags per conversation
-5. Tags appear in reports and searchable
+- **Reply** — Reply directly to that message.
+- **Delete** — Remove the message from the Converse interface only. The message remains visible to the customer.
 
-### Conversation Labels
+## Icon Reference
 
-Use labels for workflow management:
-- **Follow-up Required**: Needs future action
-- **Escalated**: Requires manager attention
-- **Bug Report**: Technical issue identified
-- **Feature Request**: Customer suggestion
+| Icon | Action |
+|------|--------|
+| Search (conversation list) | Search by phone number, name, or other info |
+| Search (in-conversation) | Search message history by keyword within the current conversation |
+| Spam | Mark conversation as spam |
+| Edit (pencil) | Edit contact information or add tags/notes to the contact |
+| Release | Release conversation back to the queue |
+| Information | Show/hide the contact information and audit trail panel |
 
-**Applying Labels**:
-1. Right-click conversation in list
-2. Select "Add Label"
-3. Choose label
-4. Labeled conversations highlighted in list
+## Bulk Actions
 
-## Resolving Conversations
+### Bulk Assign / Release
 
-### Marking as Resolved
+1. Go to the **Assigned** folder.
+2. Select all conversations (checkbox at top) or individual conversations.
+3. Click the three-dots icon and choose: **Assign to Queue**, **Assign to Agent**, or **Release to Queue**.
 
-When customer issue is complete:
-1. Click "Resolve" button
-2. Add resolution notes (optional): "Refund processed"
-3. Confirm closure
-4. Conversation moves to resolved state
-5. Customer can re-open by sending new message
+![Bulk assign / release](../images/bulk-assign-release.png)
 
-### Auto-Resolution
+### Bulk Close
 
-System automatically resolves conversations:
-- **24 hours** of customer inactivity (configurable)
-- Agent explicitly closes conversation
-- Customer sends "resolved" or "thanks" (if configured)
-
-### Re-opening Resolved Conversations
-
-If customer replies to resolved conversation:
-- System creates new conversation linked to previous
-- Maintains full history
-- Re-enters queue routing
-
-## Multi-Channel Considerations
-
-### WhatsApp
-
-- **24-Hour Window**: After customer message, business has 24 hours to respond freely
-- **Template Messages**: Outside 24-hour window, must use pre-approved templates
-- **Read Receipts**: Blue checkmarks indicate customer has read message
-- **Media**: Full support for images, videos, documents, audio
-
-### Email
-
-- **Subject Line**: Displayed in conversation list
-- **Threading**: All replies grouped under original email
-- **CC/BCC**: Not supported - direct communication only
-- **Attachments**: Full support for all document types
-
-### Facebook Messenger
-
-- **Response Time**: 24-hour response window for promotional content
-- **Standard Messaging**: No time limit for customer service responses
-- **Rich Features**: Quick replies, buttons, carousels supported
-- **Media**: Images and documents supported
-
-## Search & Filters
-
-### Quick Search
-
-Search across all conversations by:
-- Contact name
-- Phone or email
-- Message content
-- Conversation ID
-
-## Best Practices
-
-### Response Time
-
-- Acknowledge new conversations within 30 seconds
-- Set expectations: "Let me look into this, I'll have an answer in 5 minutes"
-- Use auto-responders during off-hours
-
-### Message Quality
-
-- Use customer's name for personalization
-- Keep messages concise and scannable
-- Use canned messages for consistency
-- Proofread before sending
-
-### Conversation Management
-
-- Tag all conversations for accurate reporting
-- Add internal notes for continuity
-- Transfer promptly when you can't resolve
-- Resolve conversations only when fully complete
-
-### Workload Management
-
-- Accept conversations within your capacity
-- Use "Busy" status when at max capacity
-- Take breaks to prevent burnout
-- Communicate delays to customers proactively
+1. Go to a queue under **Assigned to Me**.
+2. Select conversations using their checkboxes.
+3. Click the three-dots icon and choose **Close Conversation**.
+4. Select a **Disposition**, optionally add a note, and click **Close**.

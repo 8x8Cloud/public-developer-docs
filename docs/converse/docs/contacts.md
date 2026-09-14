@@ -4,134 +4,94 @@ slug: /converse/docs/contacts
 
 # Contact Management
 
-The Contacts module provides a unified customer database with interaction history across all communication channels.
+The Contacts page displays all contacts stored in your Converse account.
 
-## Contact Overview
+## Contact List View
 
-### Contact List View
+![Contacts list](../images/contacts-list.png)
 
-![Contact List](../images/contact-list.png)
+The contact list includes the following controls:
 
-The main contact list displays:
-- **Name**: Customer full name
-- **Phone**: Primary contact number
-- **Email**: Email address
-- **Source**: Channel of first contact (WhatsApp, Email, Facebook)
-- **Last Interaction**: Most recent conversation timestamp
-- **Status**: Active, Inactive, or Blocked
+- **Sort By** — Sort contacts alphabetically, by Recently Added, or by Recently Updated.
+- **Total Contacts** — Total number of contacts stored.
+- **Select All** — Select all displayed contacts for bulk actions (delete or export).
+- **Search** — Search by contact name, mobile number, or email.
+- **Contact Tags filter** — Shows tags with counts. Click a tag to filter the list. Selecting multiple tags shows contacts matching all selected tags.
+- **Contact card** — Each card shows: name, mobile number, email, communication channel, last updated by, and last update timestamp.
+- **Pagination** — Navigate through multiple pages.
 
-### Search & Filter
+## Adding a Contact
 
-**Quick Search**: Search by name, phone, email, or any custom attribute
+1. Click the **Add Contact** icon.
+2. Fill in the contact's details and click **Create**.
 
-**Advanced Filters**:
-- Channel source
-- Date range of last contact
-- Custom attribute values
-- Conversation status
+![Add Contact form](../images/add-contact-form.png)
 
-## Contact Details
+## Editing a Contact
 
-### Profile Information
+1. Click the **Edit** icon on the contact card.
+2. Update the contact's details and click **Update**.
 
-![Contact Details](../images/contact-profile-information.png)
+## Exporting Contacts
 
-Each contact record contains:
-- **Basic Info**: Name, phone, email
-- **Channel Identifiers**: WhatsApp number, Facebook ID, Email address
-- **Custom Attributes**: Organization-defined fields (e.g., Account ID, Customer Tier, Region)
-- **Tags**: Categorical labels for segmentation
-- **Notes**: Internal agent comments and context
+1. Select the contacts to export, or click **Select All**.
+2. Click the **Export Contact** icon.
+3. Choose the fields to export (or select **All Fields**) and click **Submit**.
+4. A download link will be sent to your email.
 
-### Interaction History
+## Importing Contacts
 
-View complete conversation timeline:
-- All messages across channels
-- Agent assignments
-- Conversation status changes
-- Tags and labels applied
-- Timestamps for all interactions
+Converse uses a specific CSV template for contact imports. Do not remove or rename any column headers.
 
-## Managing Contacts
+### Step 1 — Download the template
 
-### Creating Contacts
+1. Click the **Import Contact** icon.
+2. Click **Download the CSV template** to save it locally.
 
-Contacts are automatically created when:
-- A customer initiates a conversation
-- An agent starts an outbound conversation
-- Contacts are imported via bulk upload
+### Step 2 — Fill in the template
 
-**Manual Creation**:
-1. Navigate to Contacts → Add Contact
-2. Enter required fields (name, channel identifier)
-3. Add optional custom attributes
-4. Save contact record
+| Field | Description | Example |
+|-------|-------------|---------|
+| `salutation` | Title (Mr, Mrs, Ms, Miss) | Mr |
+| `first_name` | First name | John |
+| `last_name` | Last name | Doe |
+| `ref_id` | Unique identifier for future updates | cc658e381ffb6bdf8628 |
+| `image` | HTTPS URL to profile image (leave blank for default) | `https://…` |
+| `mobile` | Primary mobile — country code required, no spaces or special characters | 6599998888 |
+| `mobile2` | Secondary mobile | 6598887777 |
+| `mobile3` | Tertiary mobile | 6591239876 |
+| `email` | Primary email | `johndoe@gmail.com` |
+| `email2` | Secondary email | — |
+| `email3` | Tertiary email | — |
+| `tags` | Contact tag | vip |
+| `notes` | Additional notes | Overseas Travel |
+| `company_name` | Company name | GovCMS |
+| `account_number` | Account number | P273-222-9012 |
+| `home_address` | Home address | 123 Ang Mo Kio Ave 7 |
+| `home_phone` | Home phone | 6566667777 |
+| `birthday` | Birthday (DD/MM/YYYY) | 12/12/1980 |
+| `wedding_anniversary` | Wedding date | 02/05/2016 |
+| `first_purchase_anniversary` | First purchase date | 06/01/2018 |
+| `membership_date` | Membership date | 06/01/2018 |
+| `data1` – `data10` | Custom additional fields | Preferred customer |
 
-### Updating Contacts
+### Step 3 — Upload the file
 
-- Edit any field directly from the contact detail view
-- Update custom attributes as new information becomes available
-- Add internal notes for agent reference
+1. Click **Select File** and choose the completed template.
+2. If the format is invalid, an error message will appear — correct the file and retry.
+3. If the format is valid, a preview is shown. Click **Submit** to import or **Cancel** to abort.
 
-### Merging Contacts
+![Import preview](../images/import-preview.png)
 
-When duplicate records exist:
-1. Select the duplicate contacts
-2. Choose "Merge Contacts"
-3. Select the primary record to retain
-4. Confirm merge - interaction history will be consolidated
+## Deleting Contacts
 
-### Blocking Contacts
+### Delete a single contact
 
-Block contacts to prevent future conversations:
-1. Open contact record
-2. Select "Block Contact"
-3. Blocked contacts cannot initiate new conversations
-4. Unblock at any time to restore access
+1. Click the **Delete** icon on the contact card.
+2. Confirm by clicking **Delete** in the prompt, or **Cancel** to abort.
 
-## Custom Attributes
+### Delete multiple contacts
 
-### Attribute Configuration
-
-Administrators can define custom contact fields:
-- **Text**: Free-form text input
-- **Number**: Numeric values
-- **Date**: Date picker
-- **Dropdown**: Predefined value list
-- **Boolean**: Yes/No toggle
-
-### Use Cases
-
-- Customer segmentation for targeted broadcasts
-- Personalized conversation routing
-- Advanced reporting and analytics
-- CRM data synchronization
-
-## Contact Import/Export
-
-### Bulk Import
-
-Import contacts via CSV:
-1. Download CSV template
-2. Populate contact data (name, phone, email, custom attributes)
-3. Upload file via Contacts → Import
-4. Review validation errors and reupload if needed
-
-**CSV Format Requirements**:
-- Phone numbers in E.164 format (+1234567890)
-- Valid email addresses
-- Custom attributes must match configured field names
-
-### Export
-
-Export contact lists for external analysis:
-1. Apply desired filters
-2. Select "Export Contacts"
-3. Download CSV with all visible fields
-
-## Privacy & Compliance
-
-- Contact data is encrypted at rest and in transit
-- Access is restricted by user role permissions
-- Audit logs track all contact modifications
-- Support GDPR data deletion requests through Administrator actions
+1. Select multiple contacts by clicking their contact cards.
+2. Click the **Bulk Delete** icon.
+3. Confirm deletion in the prompt.

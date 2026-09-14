@@ -4,173 +4,79 @@ slug: /converse/docs/queue
 
 # Queue Management
 
-The Queue module controls how incoming conversations are distributed to available agents based on routing rules, priority, and agent availability.
+Converse uses queues to control how conversations reach agents. Every conversation lives in exactly one queue at a time, and every service has one routing model that decides how conversations inside any queue get assigned to agents.
 
-## Queue Overview
+![Queue list](../images/queue-list.png)
 
-### Queue List View
+## Queue Types
 
-![Queue Management](../images/queue-overview.png)
+There are three types of queue:
 
-Each queue contains the following configurations:
-- **Queue Name**: Unique identifier for the queue
-- **Queue Type**: Defines the queue's purpose and usage
-- **Assigned Channels**: Communication channels linked to the queue
-- **Skillsets**: Required agent capabilities for handling conversations
-- **Assigned Agents**: Agents allocated to handle conversations in the queue
-- **Routing Priority**: Determines how conversations are distributed among agents
-- **SLA Settings**: Defines response time targets for conversations
+| Type | Purpose |
+|------|---------|
+| **General Enquiry** | The entry point for every new inbound conversation. Every new conversation lands here first, then is assigned to any available agent in the queue. |
+| **Regular / Destination Queue** | Used to hand a conversation to a specific team — for department- or skill-based handling. Conversations only reach these queues when transferred here from another queue. |
+| **Outbound** | Required for an agent to start a conversation with a customer. Only agents assigned to an Outbound queue can initiate outbound conversations. |
 
-### Queue Types
+## How a Conversation Reaches a Queue
 
-| Type | Purpose | Routing Logic |
-|------|---------|---------------|
-| **General** | Default queue for handling incoming conversations | Conversations are routed to available agents within the queue |
-| **Non-General** | Queue configured for specific channels, skillsets, or use cases | Conversations are routed based on configured channels and skillset matching |
-| **Outbound** | Used for agent-initiated conversations | Conversations are initiated by agents and assigned directly |
+1. A customer sends a message to a connected channel account.
+2. If they already have an active conversation, the message is appended to it — no new queue routing happens.
+3. If not, a new conversation is created in the **General Enquiry** queue.
+4. The service's routing model (Round Robin or Pick-Me) takes over from there to get it to an agent.
 
-## Creating Queues
+From General Enquiry, a conversation can be transferred to a Regular / Destination Queue — for example, to route it to a specialized team. Once it lands in a queue, the same routing model applies again to assign it to an agent there.
 
-Managers can create and configure queues to manage conversation routing:
+## Routing Models
 
-1. Navigate to Queues → Add Queue
-2. Enter queue details:
-   - **Queue Name**: Unique identifier for the queue
-   - **Queue Type**: Select the queue type (e.g., General, Non-General, Outbound)
-   - **Assigned Channels**: Select communication channels for the queue (e.g., WhatsApp, Email)
-   - **Skillsets**: Define required skillsets for agents handling this queue
-3. Configure queue settings:
-   - **Assigned Agents**
-   - **Routing Priority**: Define agent priority within the queue (used for distribution)
-   - **SLA Settings**: Configure response time targets (Assigned, Read, Responded, Closed)
-4. Save configuration
+A service is configured with exactly one routing model — Round Robin or Pick-Me — and every queue in that service follows it.
 
-## Routing Methods
+### Round Robin
 
-### Round-Robin
+Conversations are automatically assigned to eligible agents during business hours. Outside business hours, a conversation stays Unassigned and is picked up automatically once business hours reopen.
 
-Distributes conversations sequentially to agents in rotation.
+To be eligible for automatic assignment, an agent must:
 
-**Best For**: Balanced workload distribution, general inquiries
+- Have their status set to **Available**
+- Be within their maximum concurrent conversation limit
+- Share the queue's assigned skill set (see below)
+
+Within a queue, agents can also be given a priority from 1 (highest) to 5 (lowest). Converse checks for an eligible agent starting at Priority 1, then works down through 2, 3, 4, and 5. If no eligible agent is found at any level, the conversation remains Unassigned.
 
 ### Pick-Me
 
-New conversations are placed in the Unassigned queue. Agents manually select and claim conversations from the queue.
+Conversations stay in the Unassigned folder with no automatic distribution — an agent claims one manually by opening Unassigned and clicking **Claim**.
 
-**Best For**: Flexible conversation handling, Teams that prefer manual assignment, Low to moderate conversation volume
+![Claiming a conversation](../images/claiming-a-conversation.png)
 
-## Priority Management
+## Skill Sets
 
-### Queue Priority
+A skill set is what links agents to queues. It's attached to an agent when the agent is created, and to a queue when the queue is created — so when you go to add agents to a queue, only agents sharing that skill set are selectable. This is the mechanism that keeps, say, a "Technical Support" queue staffed only by agents equipped to handle it.
 
-Queues can be configured with agent priority levels to control how conversations are distributed.
+## Creating a Queue
 
-- Priority levels range from 1 (highest) to 5 (lowest)
-- Agents with higher priority receive conversations first
-- Agents with the same priority level receive conversations in a round-robin approach
+1. Navigate to **Queues → Add Queue**.
+2. Enter the **Queue Name** and select the **Queue Type**.
+3. Select the **Assigned Channels** and the required **Skill Set**.
+4. Click **Create**.
 
-### Assignment Logic
+![Add Queue form](../images/add-queue-form.png)
 
-- The system evaluates agents starting from Priority 1 to Priority 5
-- Only eligible agents are considered for assignment
-- If no eligible agents are available, the conversation remains Unassigned
+Once created, open the queue to configure it further across four tabs: **Agents**, **Priority Listing**, **Disposition**, and **SLA**.
 
-### Agent Eligibility
+![Queue configuration tabs](../images/queue-configuration-tabs.png)
 
-To receive a conversation, an agent must:
-- Be in Available status
-- Not exceed the maximum concurrent conversation limit
+- **Agents** — Assign agents to the queue. Only agents sharing the queue's skill set will appear.
+- **Priority Listing** — Set each assigned agent's priority.
+- **Disposition** — Set the disposition (category) options available when agents close conversations in this queue.
+- **SLA** — Set the SLA for each channel account assigned to the queue. Each queue can have its own SLA targets:
+  - **Assigned** — Time to assign the conversation to an agent
+  - **Read** — Time for the agent to read it
+  - **Responded** — Time for the agent to respond
+  - **Closed** — Total time from assignment to closure (must be ≥ the sum of the other three)
 
-## SLA (Service Level Agreement)
+Conversations are color-coded against these targets:
 
-### Configuring SLAs
-
-SLA defines the expected response time for handling conversations within a queue.
-
-The following SLA parameters can be configured:
-- **Assigned**: Time taken for a conversation to be assigned to an agent
-- **Read**: Time taken for the agent to read the conversation
-- **Responded**: Time taken for the agent to respond
-- **Closed**: Total time from assignment to closure
-
-The Closed SLA must be equal to or greater than the total of the other SLA durations.
-
-### SLA Monitoring
-
-SLA performance is tracked within the conversation interface and reports.
-
-- SLA timers are displayed during conversation handling
-- Indicators show whether response time is within SLA limits
-- SLA data is available in reporting modules
-
-### SLA Status
-
-SLA status is visually indicated using color indicators:
-- **Green**: Within SLA
-- **Yellow**: Approaching SLA limit
-- **Red**: SLA exceeded
-
-## Agent Assignment
-
-### Manual Assignment
-
-Supervisors can manually route conversations:
-1. View queue list
-2. Select waiting conversation
-3. Click "Assign to Agent"
-4. Choose specific agent
-5. Conversation immediately appears in agent's chat panel
-
-### Bulk Assignment
-
-Assign multiple conversations simultaneously:
-1. Filter queue by criteria (channel, tag, time range)
-2. Select multiple conversations
-3. Choose "Bulk Assign"
-4. Select destination agents or queue
-5. Confirm assignment
-
-## Queue Transfers
-
-### Automatic Overflow
-
-Configure overflow routing:
-1. Set maximum wait time threshold (e.g., 180 seconds)
-2. Designate backup queue
-3. When threshold exceeded, conversation auto-transfers
-4. Transfer logged in conversation history
-
-### Manual Queue Transfer
-
-Agents can transfer conversations between queues:
-1. Open conversation
-2. Select "Transfer to Queue"
-3. Choose destination queue
-4. Add transfer reason (optional)
-5. Conversation re-enters routing logic
-
-## Best Practices
-
-### Queue Design
-
-- Create queues aligned to business functions (Sales, Support, Billing)
-- Limit to 5-7 queues to avoid agent confusion
-- Use clear, descriptive queue names
-
-### Routing Optimization
-
-- Set realistic SLA targets based on historical data
-- Use skill-based routing for 20% of inquiries (specialized cases)
-- Configure overflow for high-traffic periods
-
-### Agent Allocation
-
-- Assign agents to 2-3 queues maximum
-- Balance experienced and new agents across queues
-- Adjust assignments based on real-time demand
-
-### Monitoring
-
-- Review queue performance daily during ramp-up
-- Adjust routing rules based on SLA trends
-- Investigate frequent queue transfers for process improvements
+- 🟢 **Green** — Within SLA
+- 🟡 **Yellow** — Approaching SLA limit
+- 🔴 **Red** — SLA exceeded

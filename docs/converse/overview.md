@@ -4,12 +4,12 @@ slug: /converse
 
 # Converse
 
-Converse is a unified conversational platform that enables omnichannel customer engagement across WhatsApp, Email, and Facebook Messenger. The platform provides comprehensive contact center capabilities including conversation management, queue routing, broadcast messaging, and real-time analytics.
+Converse is an omnichannel customer engagement platform that brings popular communication channels — including WhatsApp, SMS, Viber, Email, Line, Webchat, Facebook Messenger, and Instagram Messaging — together into a single, intuitive dashboard. The platform streamlines customer interactions and offers a rich set of configurable features and reports to meet your organization's unique requirements.
 
 To get access to Converse, please reach out to your account manager ([cpaas-sales@8x8.com](mailto:cpaas-sales@8x8.com)).
 
 * [Getting Started](/converse/docs/getting-started)
-* [User Roles & Dashboard](/converse/docs/user-roles)
+* [User Roles & Permissions](/converse/docs/user-roles)
 * [Contact Management](/converse/docs/contacts)
 * [Agent Management](/converse/docs/agents)
 * [Queue Management](/converse/docs/queue)
