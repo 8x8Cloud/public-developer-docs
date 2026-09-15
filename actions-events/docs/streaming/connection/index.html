@@ -11,9 +11,9 @@
 
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.230e7913.css">
-<script src="/assets/js/runtime~main.06d64813.js" defer="defer"></script>
-<script src="/assets/js/main.cec468d0.js" defer="defer"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.f6a08750.css">
+<script src="/assets/js/runtime~main.0dfa02bb.js" defer="defer"></script>
+<script src="/assets/js/main.b6acd011.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -25,72 +25,20 @@
 <p>The WebSocket connection URL follows this structure:</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">wss://{host}/ws/v2/reader/persistent/{tenant}/{namespace}/{topic}</span><br></span></code></pre></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="url-components">URL Components<a href="#url-components" class="hash-link" aria-label="Direct link to URL Components" title="Direct link to URL Components" translate="no">​</a></h3>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <table><thead><tr><th>Component</th><th>Description</th><th>Example</th></tr></thead><tbody><tr><td><code>host</code></td><td>WebSocket proxy server hostname (see <a href="#regional-endpoints">Regional Endpoints</a>)</td><td><code>pulsar-ws-euw2.8x8.com</code></td></tr><tr><td><code>tenant</code></td><td>Your 8x8 tenant name</td><td><code>my-tenant</code></td></tr><tr><td><code>namespace</code></td><td>Pulsar namespace (typically <code>event-v1</code>)</td><td><code>event-v1</code></td></tr><tr><td><code>topic</code></td><td>Topic name (typically <code>all</code> for all events)</td><td><code>all</code></td></tr></tbody></table>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="example-url">Example URL<a href="#example-url" class="hash-link" aria-label="Direct link to Example URL" title="Direct link to Example URL" translate="no">​</a></h3>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">wss://pulsar-ws-euw2.8x8.com/ws/v2/reader/persistent/my-tenant/event-v1/all</span><br></span></code></pre></div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="regional-endpoints">Regional Endpoints<a href="#regional-endpoints" class="hash-link" aria-label="Direct link to Regional Endpoints" title="Direct link to Regional Endpoints" translate="no">​</a></h2>
 <p>The 8x8 Event Streaming service is available in multiple AWS regions. Connect to the endpoint that corresponds to your 8x8 Contact Center deployment region.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="find-your-endpoint">Find Your Endpoint<a href="#find-your-endpoint" class="hash-link" aria-label="Direct link to Find Your Endpoint" title="Direct link to Find Your Endpoint" translate="no">​</a></h3>
+<p>Your Contact Center cluster is the <code>vcc-&lt;cluster&gt;.8x8.com</code> host you see when accessing Configuration Manager. Select it below to get the WebSocket hostname for your region.</p>
+<div class="picker_i3o8"><div class="filterBar_zg2V"><label for="cc-cluster-picker" class="filterLabel_vrnU">Your CC cluster:</label><div class="filterControl_yT7k"><div aria-hidden="false" data-test-id="SELECT_CONTAINER" data-id="SELECT_CONTAINER" class="sc-VigVT bsQMGE"><style data-emotion="css b62m3t-container">.css-b62m3t-container{position:relative;box-sizing:border-box;}</style><div class="css-b62m3t-container"><style data-emotion="css 7pg0cj-a11yText">.css-7pg0cj-a11yText{z-index:9999;border:0;clip:rect(1px, 1px, 1px, 1px);height:1px;width:1px;position:absolute;overflow:hidden;padding:0;white-space:nowrap;}</style><span id="react-select-2-live-region" class="css-7pg0cj-a11yText"></span><span aria-live="polite" aria-atomic="false" aria-relevant="additions text" role="log" class="css-7pg0cj-a11yText"></span><style data-emotion="css 1022yu2-control">.css-1022yu2-control{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;cursor:pointer;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;min-height:40px;outline:0!important;position:relative;-webkit-transition:all 100ms;transition:all 100ms;background-color:hsl(0, 0%, 100%);border-color:#F4F3EE;border-radius:6px;border-style:solid;border-width:2px;box-sizing:border-box;background:#F4F3EE;}.css-1022yu2-control:hover{border-color:hsl(0, 0%, 70%);}.css-1022yu2-control:hover{background:#F4F3EE;border-color:#F4F3EE;}</style><div class="css-1022yu2-control"><style data-emotion="css 11gaaxa">.css-11gaaxa{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex:1;-ms-flex:1;flex:1;-webkit-box-flex-wrap:nowrap;-webkit-flex-wrap:nowrap;-ms-flex-wrap:nowrap;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;position:relative;overflow:hidden;padding:0 0 0 16px;box-sizing:border-box;max-width:100%;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;}</style><div class="css-11gaaxa"><div data-test-id="SELECT_VALUE_CONTAINER" data-id="SELECT_VALUE_CONTAINER" class="sc-kGXeez exIxGA"><style data-emotion="css 9wpq43-placeholder">.css-9wpq43-placeholder{grid-area:1/1/2/3;color:#6C6862;margin-left:0;margin-right:0;box-sizing:border-box;font-size:0.875rem;top:0;-webkit-transform:0;-moz-transform:0;-ms-transform:0;transform:0;position:absolute;display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;}</style><div class="css-9wpq43-placeholder" id="react-select-2-placeholder">Search for a cluster, e.g. EU4 or vcc-eu4</div><style data-emotion="css 7ujcws">.css-7ujcws{visibility:visible;-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;display:inline-grid;grid-area:1/1/2/3;grid-template-columns:0 min-content;margin:0;padding-bottom:0;padding-top:0;color:#26252A;box-sizing:border-box;}.css-7ujcws:after{content:attr(data-value) " ";visibility:hidden;white-space:pre;grid-area:1/2;font:inherit;min-width:2px;border:0;margin:0;outline:0;padding:0;}</style><div class="css-7ujcws" data-value=""><input class="" style="label:input;color:inherit;background:0;opacity:1;width:100%;grid-area:1 / 2;font:inherit;min-width:2px;border:0;margin:0;outline:0;padding:0" autocapitalize="none" autocomplete="off" autocorrect="off" id="cc-cluster-picker" spellcheck="false" tabindex="0" type="text" aria-autocomplete="list" aria-expanded="false" aria-haspopup="true" aria-label="Search for a cluster, e.g. EU4 or vcc-eu4" role="combobox" aria-activedescendant="" aria-describedby="react-select-2-placeholder" value=""></div></div></div><style data-emotion="css 1x9ng80">.css-1x9ng80{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-align-self:center;-ms-flex-item-align:center;align-self:center;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;box-sizing:border-box;padding:6px 8px;}</style><div class="css-1x9ng80"><style data-emotion="css 15hsmyt-indicatorSeparator">.css-15hsmyt-indicatorSeparator{-webkit-align-self:stretch;-ms-flex-item-align:stretch;align-self:stretch;width:1px;background-color:hsl(0, 0%, 80%);margin-bottom:0;margin-top:0;box-sizing:border-box;display:none;}</style><span class="css-15hsmyt-indicatorSeparator"></span><style data-emotion="css 1htfiqu-indicatorContainer">.css-1htfiqu-indicatorContainer{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-transition:color 150ms;transition:color 150ms;color:#26252A;padding:0;box-sizing:border-box;}.css-1htfiqu-indicatorContainer:hover{color:hsl(0, 0%, 60%);}</style><div class="css-1htfiqu-indicatorContainer" aria-hidden="true"><svg role="presentation" color="#26252A" data-test-id="SELECT_ARROW_DOWN_SOLID_ICON" data-id="SELECT_ARROW_DOWN_SOLID_ICON" viewBox="0 0 24 24" class="sc-htpNat htYtJQ"><g><path fill-rule="evenodd" d="M3.9697 7.7197a.75.75 0 0 1 1.0606 0L12 14.6893l6.9697-6.9696a.75.75 0 0 1 1.0606 1.0607l-7.5 7.4999a.75.75 0 0 1-1.0606 0l-7.5-7.5a.75.75 0 0 1 0-1.0606Z" clip-rule="evenodd"></path></g></svg></div></div></div></div></div></div></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="available-regions">Available Regions<a href="#available-regions" class="hash-link" aria-label="Direct link to Available Regions" title="Direct link to Available Regions" translate="no">​</a></h3>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>8x8 Region</th><th>Hostname</th><th>Availability</th></tr></thead><tbody><tr><td>UK3</td><td><code>pulsar-ws-euw2.8x8.com</code></td><td>Available</td></tr><tr><td>US1</td><td><code>pulsar-ws-use1.8x8.com</code></td><td>Available</td></tr><tr><td>US2</td><td><code>pulsar-ws-usw2.8x8.com</code></td><td>Available</td></tr></tbody></table>
+<table><thead><tr><th>8x8 Region</th><th>CC Cluster</th><th>Hostname</th><th>Availability</th></tr></thead><tbody><tr><td>UK3</td><td>EU4, EU5, EU6, EU7, EU8, EU9, EU10, EU11, EU12, EU13, EU14</td><td><code>pulsar-ws-euw2.8x8.com</code></td><td>Available</td></tr><tr><td>US1</td><td>NA1, NA2, NA3, NA4, NA5, NA6, NA11, NA12, NA13, NA14, NA15, NA16, SB1</td><td><code>pulsar-ws-use1.8x8.com</code></td><td>Available</td></tr><tr><td>US2</td><td>NA7, NA8, NA9, NA10, NA17, NA18, NA19, NA20, NA27, NA28, NA29, NA30, NA37, NA38, NA39</td><td><code>pulsar-ws-usw2.8x8.com</code></td><td>Available</td></tr><tr><td>HK1</td><td>AP1</td><td>N/A</td><td>Pending</td></tr><tr><td>HK2</td><td>AP21</td><td>N/A</td><td>Pending</td></tr><tr><td>LH1</td><td>EU21</td><td>N/A</td><td>Pending</td></tr><tr><td>ON1</td><td>BC1, BC2, BC3</td><td>N/A</td><td>Pending</td></tr><tr><td>PA1</td><td>EU31</td><td>N/A</td><td>Pending</td></tr><tr><td>SK1</td><td>CA1, CA2</td><td>N/A</td><td>Pending</td></tr><tr><td>SY1</td><td>AU1, AU2</td><td>N/A</td><td>Pending</td></tr></tbody></table>
 <blockquote>
 <p>📘 <strong>Finding Your Region</strong></p>
 <p>Your region is determined by your Contact Center deployment location. If you&#x27;re unsure which region to use, contact 8x8 Support or check your Admin Console settings.</p>
-<p><strong>Note:</strong> Additional regions are being deployed progressively. This table will be updated as new regions become available.</p>
+<p><strong>Note:</strong> Regions marked <strong>Pending</strong> are being deployed progressively and have no endpoint yet. This table will be updated as each region becomes available.</p>
 </blockquote>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="using-regional-endpoints">Using Regional Endpoints<a href="#using-regional-endpoints" class="hash-link" aria-label="Direct link to Using Regional Endpoints" title="Direct link to Using Regional Endpoints" translate="no">​</a></h3>
 <p>Use the hostname from the table above for your region:</p>
@@ -170,41 +118,6 @@
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="query-parameters">Query Parameters<a href="#query-parameters" class="hash-link" aria-label="Direct link to Query Parameters" title="Direct link to Query Parameters" translate="no">​</a></h2>
 <p>You can append query parameters to the WebSocket URL to configure the reader:</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <table><thead><tr><th>Parameter</th><th>Description</th><th>Values</th><th>Default</th></tr></thead><tbody><tr><td><code>x-api-key</code></td><td>API key for authentication</td><td>Your API key</td><td>-</td></tr><tr><td><code>messageId</code></td><td>Starting position for reading messages</td><td><code>earliest</code>, <code>latest</code>, or message ID</td><td><code>latest</code></td></tr><tr><td><code>readerName</code></td><td>Optional identifier for this reader</td><td>Any string</td><td>-</td></tr><tr><td><code>receiverQueueSize</code></td><td>Size of the internal receiver queue</td><td>Integer &gt; 0</td><td>1000</td></tr></tbody></table>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="example-with-query-parameters">Example with Query Parameters<a href="#example-with-query-parameters" class="hash-link" aria-label="Direct link to Example with Query Parameters" title="Direct link to Example with Query Parameters" translate="no">​</a></h3>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">wss://pulsar-ws-euw2.8x8.com/ws/v2/reader/persistent/my-company/event-v1/all?x-api-key=YOUR_KEY&amp;messageId=earliest</span><br></span></code></pre></div></div>
@@ -258,6 +171,6 @@ starts using a real message ID returned by a previous message.</p>
 <li><a href="/actions-events/docs/streaming/authentication">Authentication Guide</a> - Learn about authentication methods</li>
 <li><a href="/actions-events/docs/streaming/message-format">Message Format</a> - Understand the message structure</li>
 <li><a href="/actions-events/docs/streaming/examples/golang">Code Examples</a> - See complete working implementations</li>
-</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/actions-events/docs/streaming/authentication"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Authentication</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/actions-events/docs/streaming/message-format"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Message Format</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#websocket-url-format" class="table-of-contents__link toc-highlight">WebSocket URL Format</a><ul><li><a href="#url-components" class="table-of-contents__link toc-highlight">URL Components</a></li><li><a href="#example-url" class="table-of-contents__link toc-highlight">Example URL</a></li></ul></li><li><a href="#regional-endpoints" class="table-of-contents__link toc-highlight">Regional Endpoints</a><ul><li><a href="#available-regions" class="table-of-contents__link toc-highlight">Available Regions</a></li><li><a href="#using-regional-endpoints" class="table-of-contents__link toc-highlight">Using Regional Endpoints</a></li></ul></li><li><a href="#available-topics" class="table-of-contents__link toc-highlight">Available Topics</a><ul><li><a href="#all-events-topic" class="table-of-contents__link toc-highlight">All Events Topic</a></li><li><a href="#event-type-topics" class="table-of-contents__link toc-highlight">Event Type Topics</a></li><li><a href="#agent-specific-topics" class="table-of-contents__link toc-highlight">Agent-Specific Topics</a></li><li><a href="#topic-naming-convention" class="table-of-contents__link toc-highlight">Topic Naming Convention</a></li></ul></li><li><a href="#reader-vs-consumer-api" class="table-of-contents__link toc-highlight">Reader vs Consumer API</a><ul><li><a href="#reader-api" class="table-of-contents__link toc-highlight">Reader API</a></li><li><a href="#consumer-api" class="table-of-contents__link toc-highlight">Consumer API</a></li></ul></li><li><a href="#query-parameters" class="table-of-contents__link toc-highlight">Query Parameters</a><ul><li><a href="#example-with-query-parameters" class="table-of-contents__link toc-highlight">Example with Query Parameters</a></li><li><a href="#url-encoding-important" class="table-of-contents__link toc-highlight">URL-encoding (important)</a></li></ul></li><li><a href="#authentication" class="table-of-contents__link toc-highlight">Authentication</a></li><li><a href="#message-reading-position" class="table-of-contents__link toc-highlight">Message Reading Position</a><ul><li><a href="#latest-default" class="table-of-contents__link toc-highlight">Latest (Default)</a></li><li><a href="#earliest" class="table-of-contents__link toc-highlight">Earliest</a></li><li><a href="#specific-message-id" class="table-of-contents__link toc-highlight">Specific Message ID</a></li></ul></li><li><a href="#connection-timeout" class="table-of-contents__link toc-highlight">Connection Timeout</a></li><li><a href="#keepalive-and-heartbeat" class="table-of-contents__link toc-highlight">Keepalive and Heartbeat</a></li><li><a href="#graceful-disconnection" class="table-of-contents__link toc-highlight">Graceful Disconnection</a></li><li><a href="#next-steps" class="table-of-contents__link toc-highlight">Next Steps</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
+</ul></div></div></div><div class="row"><div class="col col--12"></div></div></article><div class="row"><div class="col col--12"><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/actions-events/docs/streaming/authentication"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Authentication</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/actions-events/docs/streaming/message-format"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Message Format</div></a></nav></div></div></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#websocket-url-format" class="table-of-contents__link toc-highlight">WebSocket URL Format</a><ul><li><a href="#url-components" class="table-of-contents__link toc-highlight">URL Components</a></li><li><a href="#example-url" class="table-of-contents__link toc-highlight">Example URL</a></li></ul></li><li><a href="#regional-endpoints" class="table-of-contents__link toc-highlight">Regional Endpoints</a><ul><li><a href="#find-your-endpoint" class="table-of-contents__link toc-highlight">Find Your Endpoint</a></li><li><a href="#available-regions" class="table-of-contents__link toc-highlight">Available Regions</a></li><li><a href="#using-regional-endpoints" class="table-of-contents__link toc-highlight">Using Regional Endpoints</a></li></ul></li><li><a href="#available-topics" class="table-of-contents__link toc-highlight">Available Topics</a><ul><li><a href="#all-events-topic" class="table-of-contents__link toc-highlight">All Events Topic</a></li><li><a href="#event-type-topics" class="table-of-contents__link toc-highlight">Event Type Topics</a></li><li><a href="#agent-specific-topics" class="table-of-contents__link toc-highlight">Agent-Specific Topics</a></li><li><a href="#topic-naming-convention" class="table-of-contents__link toc-highlight">Topic Naming Convention</a></li></ul></li><li><a href="#reader-vs-consumer-api" class="table-of-contents__link toc-highlight">Reader vs Consumer API</a><ul><li><a href="#reader-api" class="table-of-contents__link toc-highlight">Reader API</a></li><li><a href="#consumer-api" class="table-of-contents__link toc-highlight">Consumer API</a></li></ul></li><li><a href="#query-parameters" class="table-of-contents__link toc-highlight">Query Parameters</a><ul><li><a href="#example-with-query-parameters" class="table-of-contents__link toc-highlight">Example with Query Parameters</a></li><li><a href="#url-encoding-important" class="table-of-contents__link toc-highlight">URL-encoding (important)</a></li></ul></li><li><a href="#authentication" class="table-of-contents__link toc-highlight">Authentication</a></li><li><a href="#message-reading-position" class="table-of-contents__link toc-highlight">Message Reading Position</a><ul><li><a href="#latest-default" class="table-of-contents__link toc-highlight">Latest (Default)</a></li><li><a href="#earliest" class="table-of-contents__link toc-highlight">Earliest</a></li><li><a href="#specific-message-id" class="table-of-contents__link toc-highlight">Specific Message ID</a></li></ul></li><li><a href="#connection-timeout" class="table-of-contents__link toc-highlight">Connection Timeout</a></li><li><a href="#keepalive-and-heartbeat" class="table-of-contents__link toc-highlight">Keepalive and Heartbeat</a></li><li><a href="#graceful-disconnection" class="table-of-contents__link toc-highlight">Graceful Disconnection</a></li><li><a href="#next-steps" class="table-of-contents__link toc-highlight">Next Steps</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://www.8x8.com/terms-and-conditions/api-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 API License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><span class="footer__link-separator">·</span><a href="https://www.8x8.com/terms-and-conditions/software-development-kit-license-agreement" target="_blank" rel="noopener noreferrer" class="footer__link-item">8x8 SDK License Agreement<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">© 2026 by 8x8. All rights reserved.</div></div></div></footer></div>
 </body>
 </html>

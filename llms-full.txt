@@ -5580,7 +5580,7 @@ const ws = new WebSocket(wsURL);
 
 ## Next Steps
 
-- [Connection Guide](./connection.md) - Learn about establishing connections
+- [Connection Guide](./connection.mdx) - Learn about establishing connections
 - [Message Format](./message-format.mdx) - Understand event structure
 - [Code Examples](./examples/golang.md) - See authentication in action
 
@@ -5588,6 +5588,9 @@ const ws = new WebSocket(wsURL);
 
 ## Connection Guide
 
+import StreamingRegionPicker from '@site/docusaurus/components/StreamingRegionPicker';
+
+# Connection Guide
 
 Connect to the 8x8 Event Streaming service using WebSocket.
 
@@ -5618,19 +5621,32 @@ wss://pulsar-ws-euw2.8x8.com/ws/v2/reader/persistent/my-tenant/event-v1/all
 
 The 8x8 Event Streaming service is available in multiple AWS regions. Connect to the endpoint that corresponds to your 8x8 Contact Center deployment region.
 
+### Find Your Endpoint
+
+Your Contact Center cluster is the `vcc-<cluster>.8x8.com` host you see when accessing Configuration Manager. Select it below to get the WebSocket hostname for your region.
+
+<StreamingRegionPicker />
+
 ### Available Regions
 
-| 8x8 Region | Hostname                 | Availability |
-|------------|--------------------------|--------------|
-| UK3        | `pulsar-ws-euw2.8x8.com` | Available    |
-| US1        | `pulsar-ws-use1.8x8.com` | Available    |
-| US2        | `pulsar-ws-usw2.8x8.com` | Available    |
+| 8x8 Region | CC Cluster | Hostname | Availability |
+|------------|------------|----------|--------------|
+| UK3 | EU4, EU5, EU6, EU7, EU8, EU9, EU10, EU11, EU12, EU13, EU14 | `pulsar-ws-euw2.8x8.com` | Available |
+| US1 | NA1, NA2, NA3, NA4, NA5, NA6, NA11, NA12, NA13, NA14, NA15, NA16, SB1 | `pulsar-ws-use1.8x8.com` | Available |
+| US2 | NA7, NA8, NA9, NA10, NA17, NA18, NA19, NA20, NA27, NA28, NA29, NA30, NA37, NA38, NA39 | `pulsar-ws-usw2.8x8.com` | Available |
+| HK1 | AP1 | N/A | Pending |
+| HK2 | AP21 | N/A | Pending |
+| LH1 | EU21 | N/A | Pending |
+| ON1 | BC1, BC2, BC3 | N/A | Pending |
+| PA1 | EU31 | N/A | Pending |
+| SK1 | CA1, CA2 | N/A | Pending |
+| SY1 | AU1, AU2 | N/A | Pending |
 
 > 📘 **Finding Your Region**
 >
 > Your region is determined by your Contact Center deployment location. If you're unsure which region to use, contact 8x8 Support or check your Admin Console settings.
 >
-> **Note:** Additional regions are being deployed progressively. This table will be updated as new regions become available.
+> **Note:** Regions marked **Pending** are being deployed progressively and have no endpoint yet. This table will be updated as each region becomes available.
 
 ### Using Regional Endpoints
 
@@ -6621,7 +6637,7 @@ Fill in your region, tenant name, and API key (see [Authentication Guide](../aut
 - [Java Client Example](./java.md) - For Java-based applications
 - [Python Client Example](./python.mdx) - For Python-based applications
 - [Node.js Client Example](./nodejs.mdx) - For JavaScript/Node.js applications
-- [Connection Guide](../connection.md) - Learn more about WebSocket connections
+- [Connection Guide](../connection.mdx) - Learn more about WebSocket connections
 - [Message Format](../message-format.mdx) - Understanding event structure
 
 ---
@@ -9402,15 +9418,15 @@ Pipe output to tools like `jq` for filtering and processing:
 
 The quick start client requires your **tenant name** and **API key**. The service connects to:
 
-- **Host**: Regional endpoint (e.g., `pulsar-ws-euw2.8x8.com` for UK3) - see [Regional Endpoints](./connection.md#regional-endpoints)
+- **Host**: Regional endpoint (e.g., `pulsar-ws-euw2.8x8.com` for UK3) - see [Regional Endpoints](./connection.mdx#regional-endpoints)
 - **Namespace**: `event-v1`
 - **Topic**: `all` (receives all event types)
 
-For complete connection details including all available topics, query parameters, and URL construction, see the [Connection Guide](./connection.md).
+For complete connection details including all available topics, query parameters, and URL construction, see the [Connection Guide](./connection.mdx).
 
 ## Next Steps
 
-- **[Connection details](./connection.md)** - WebSocket connection details
+- **[Connection details](./connection.mdx)** - WebSocket connection details
 - **[Authentication options](./authentication.mdx)** - Authentication methods
 - **[Message format](./message-format.mdx)** - Event structure
 - **[Code examples](./examples/golang.md)** - Complete working examples
@@ -9961,11 +9977,11 @@ Migrate to the new Pulsar API with native WebSocket protocol.
 - Update endpoint URL
 - Add Pulsar message wrapper handling (base64 decode)
 
-**Endpoint:** `wss://pulsar-ws-{region}.8x8.com/ws/v2/reader/...` (see [Regional Endpoints](./connection.md#regional-endpoints))
+**Endpoint:** `wss://pulsar-ws-{region}.8x8.com/ws/v2/reader/...` (see [Regional Endpoints](./connection.mdx#regional-endpoints))
 
 **Documentation:**
 - [Getting Started](./getting-started.mdx) - Quick start guide with complete examples
-- [Connection Guide](./connection.md) - WebSocket connection details and available topics
+- [Connection Guide](./connection.mdx) - WebSocket connection details and available topics
 - [Message Format](./message-format.mdx#payload-decoding) - How to decode Pulsar message wrappers
 - [Code Examples](./examples/golang.md) - Working implementations in Go, Java, Python, Node.js, and Browser
 
@@ -9983,7 +9999,7 @@ Switch to the backwards-compatible adapter endpoint with no code changes. The ad
 
 **Endpoint:** `wss://vcc-sapi-bridge-{region}.8x8.com/...` — for example, UK3 uses `wss://vcc-sapi-bridge-euw2.8x8.com/...`
 
-The adapter is deployed in the same regions as the Pulsar API and uses the same `{region}` suffixes — see [Regional Endpoints](./connection.md#regional-endpoints) for the region list. The URL path is unchanged from the legacy Streaming API, so existing clients only need the hostname replaced.
+The adapter is deployed in the same regions as the Pulsar API and uses the same `{region}` suffixes — see [Regional Endpoints](./connection.mdx#regional-endpoints) for the region list. The URL path is unchanged from the legacy Streaming API, so existing clients only need the hostname replaced.
 
 ## What Happens If You Do Nothing
 
@@ -10065,7 +10081,7 @@ See the [Migration Guide](./migration.md) for detailed information on transition
 To consume events from 8x8 Event Streaming:
 
 1. **[Set up authentication](./authentication.mdx)** - Configure API credentials
-2. **[Establish a connection](./connection.md)** - Connect to the WebSocket endpoint
+2. **[Establish a connection](./connection.mdx)** - Connect to the WebSocket endpoint
 3. **[Process messages](./message-format.mdx)** - Parse and handle incoming events
 4. **[Review examples](./examples/golang.md)** - Working code samples
 
@@ -10074,14 +10090,14 @@ To consume events from 8x8 Event Streaming:
 The 8x8 Event Streaming service is available in multiple AWS regions worldwide:
 
 - **Protocol**: WebSocket Secure (WSS)
-- **Regional Endpoints**: See [Regional Endpoints](./connection.md#regional-endpoints) for hostname mapping
+- **Regional Endpoints**: See [Regional Endpoints](./connection.mdx#regional-endpoints) for hostname mapping
 
 Connect to the endpoint that corresponds to your 8x8 Contact Center deployment region.
 
 ## Next Steps
 
 - [Getting Started Guide](./getting-started.mdx) - Quick start
-- [Connection Guide](./connection.md) - Connection details
+- [Connection Guide](./connection.mdx) - Connection details
 - [Code Examples](./examples/golang.md) - Code samples
 
 ## Related Resources
@@ -10193,7 +10209,7 @@ Common issues when connecting to the 8x8 Event Streaming service.
 
 1. **Verify you're using the correct regional endpoint:**
    - Check your Contact Center deployment region
-   - See [Regional Endpoints](./connection.md#regional-endpoints) for hostname mapping
+   - See [Regional Endpoints](./connection.mdx#regional-endpoints) for hostname mapping
    - Example: If your Contact Center is in UK3, use `pulsar-ws-euw2.8x8.com`
 
 2. **Confirm your region with 8x8 Support** if unsure
