@@ -26,11 +26,11 @@ Migrate to the new Pulsar API with native WebSocket protocol.
 - Update endpoint URL
 - Add Pulsar message wrapper handling (base64 decode)
 
-**Endpoint:** `wss://pulsar-ws-{region}.8x8.com/ws/v2/reader/...` (see [Regional Endpoints](./connection.md#regional-endpoints))
+**Endpoint:** `wss://pulsar-ws-{region}.8x8.com/ws/v2/reader/...` (see [Regional Endpoints](./connection.mdx#regional-endpoints))
 
 **Documentation:**
 - [Getting Started](./getting-started.mdx) - Quick start guide with complete examples
-- [Connection Guide](./connection.md) - WebSocket connection details and available topics
+- [Connection Guide](./connection.mdx) - WebSocket connection details and available topics
 - [Message Format](./message-format.mdx#payload-decoding) - How to decode Pulsar message wrappers
 - [Code Examples](./examples/golang.md) - Working implementations in Go, Java, Python, Node.js, and Browser
 
@@ -48,7 +48,7 @@ Switch to the backwards-compatible adapter endpoint with no code changes. The ad
 
 **Endpoint:** `wss://vcc-sapi-bridge-{region}.8x8.com/...` — for example, UK3 uses `wss://vcc-sapi-bridge-euw2.8x8.com/...`
 
-The adapter is deployed in the same regions as the Pulsar API and uses the same `{region}` suffixes — see [Regional Endpoints](./connection.md#regional-endpoints) for the region list. The URL path is unchanged from the legacy Streaming API, so existing clients only need the hostname replaced.
+The adapter is deployed in the same regions as the Pulsar API and uses the same `{region}` suffixes — see [Regional Endpoints](./connection.mdx#regional-endpoints) for the region list. The URL path is unchanged from the legacy Streaming API, so existing clients only need the hostname replaced.
 
 ## What Happens If You Do Nothing
 

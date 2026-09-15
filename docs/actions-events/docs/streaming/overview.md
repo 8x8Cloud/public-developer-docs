@@ -58,7 +58,7 @@ See the [Migration Guide](./migration.md) for detailed information on transition
 To consume events from 8x8 Event Streaming:
 
 1. **[Set up authentication](./authentication.mdx)** - Configure API credentials
-2. **[Establish a connection](./connection.md)** - Connect to the WebSocket endpoint
+2. **[Establish a connection](./connection.mdx)** - Connect to the WebSocket endpoint
 3. **[Process messages](./message-format.mdx)** - Parse and handle incoming events
 4. **[Review examples](./examples/golang.md)** - Working code samples
 
@@ -67,14 +67,14 @@ To consume events from 8x8 Event Streaming:
 The 8x8 Event Streaming service is available in multiple AWS regions worldwide:
 
 - **Protocol**: WebSocket Secure (WSS)
-- **Regional Endpoints**: See [Regional Endpoints](./connection.md#regional-endpoints) for hostname mapping
+- **Regional Endpoints**: See [Regional Endpoints](./connection.mdx#regional-endpoints) for hostname mapping
 
 Connect to the endpoint that corresponds to your 8x8 Contact Center deployment region.
 
 ## Next Steps
 
 - [Getting Started Guide](./getting-started.mdx) - Quick start
-- [Connection Guide](./connection.md) - Connection details
+- [Connection Guide](./connection.mdx) - Connection details
 - [Code Examples](./examples/golang.md) - Code samples
 
 ## Related Resources

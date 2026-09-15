@@ -1,0 +1,25 @@
+.picker { margin: 1.5rem 0 2rem; }
+.filterBar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.filterLabel { font-weight: 600; }
+.filterControl { min-width: 320px; flex: 1 1 320px; }
+.result {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 1.25rem;
+  margin: 1rem 0 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+  background: var(--ifm-color-emphasis-100);
+}
+.result dt { font-weight: 600; }
+.result dd { margin: 0; min-width: 0; }
+.url { overflow-wrap: anywhere; }
+.badge { padding: 0.1rem 0.5rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; }
+/* Infima semantic colour pairs adapt to light/dark theme automatically. */
+.badgeAvailable { background: var(--ifm-color-success-contrast-background); color: var(--ifm-color-success-contrast-foreground); }
+.badgePending { background: var(--ifm-color-warning-contrast-background); color: var(--ifm-color-warning-contrast-foreground); }
+@media (max-width: 576px) {
+  .result { grid-template-columns: 1fr; gap: 0.15rem; }
+  .result dd { margin-bottom: 0.6rem; }
+}

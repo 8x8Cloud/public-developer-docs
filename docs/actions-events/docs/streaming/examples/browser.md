@@ -22,5 +22,5 @@ Fill in your region, tenant name, and API key (see [Authentication Guide](../aut
 - [Java Client Example](./java.md) - For Java-based applications
 - [Python Client Example](./python.mdx) - For Python-based applications
 - [Node.js Client Example](./nodejs.mdx) - For JavaScript/Node.js applications
-- [Connection Guide](../connection.md) - Learn more about WebSocket connections
+- [Connection Guide](../connection.mdx) - Learn more about WebSocket connections
 - [Message Format](../message-format.mdx) - Understanding event structure

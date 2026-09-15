@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "yarn validate:release-notes && docusaurus build && node scripts/fix-llms-urls.js",
+    "build": "yarn validate:release-notes && yarn validate:streaming-regions && docusaurus build && node scripts/fix-llms-urls.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -29,6 +29,8 @@
     "validate:sidebar": "node scripts/validate-sidebar.js",
     "format:check": "prettier --check \"**/*.{js,jsx,json}\"",
     "format:write": "prettier --write \"**/*.{js,jsx,json}\"",
+    "generate-streaming-regions": "node scripts/generate-streaming-regions.js",
+    "validate:streaming-regions": "node scripts/generate-streaming-regions.js --check",
     "generate-events-overview": "node scripts/generate-events-overview.js"
   },
   "dependencies": {
