@@ -94,7 +94,7 @@ const sidebarConfig = [
   },
   {
     type: 'category',
-    label: 'CIDP',
+    label: 'Journey Analytics',
     collapsed: true,
     items: ['analytics/docs/end-to-end-journey-api'],
   },
