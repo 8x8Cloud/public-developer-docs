@@ -5,11 +5,7 @@ title: WhatsApp Business Calling Overview
 
 ## Introduction
 
-WhatsApp Business Calling allows businesses and customers to connect via voice calls directly within the WhatsApp app. This feature provides a seamless, familiar communication channel that customers already use daily, eliminating the need for them to switch apps or use traditional phone networks.
-
-### WhatsApp Business Calling API Overview
-
-Watch this overview by Guilherme Gribeler, Partner Engineer at Meta, who introduces the WhatsApp Business Calling API. He covers requirements, initial setup, and dives deep into the two main use cases: User-Initiated Calling and Business-Initiated Calling.
+WhatsApp Business Calling lets businesses and customers connect via voice calls directly inside the WhatsApp app, using the messaging channel your customers already know.
 
 **Additional Resource:** [WhatsApp Business Calling API Developer Documentation](https://bit.ly/4lAV02c)
 
@@ -27,211 +23,151 @@ Watch this overview by Guilherme Gribeler, Partner Engineer at Meta, who introdu
   </iframe>
 </div>
 
-## Key Benefits
+## Topology
 
-WhatsApp Business Calling offers significant advantages for both businesses and customers:
-
-### For Customers
-
-- **Seamless in-app experience** – No need to switch to a phone dialer; calls happen directly in WhatsApp
-- **No additional cost** – Calls use data/WiFi, so customers don't incur phone charges
-- **Familiar interface** – Uses the WhatsApp app they already know and trust
-- **End-to-end encrypted** – Secure communication protected by WhatsApp's encryption
-- **Wide availability** – Available in most regions where WhatsApp Cloud API is supported (see geographic limitations below)
-
-### For Businesses
-
-- **Branded caller ID** – Display your verified WhatsApp Business profile when calling
-- **Higher answer rates** – Customers more likely to answer calls from verified businesses
-- **Reduced telephony costs** – Lower cost compared to traditional PSTN calls
-- **Integrated communication** – Combine messaging and voice in a single customer journey
-- **Rich context** – Access to conversation history when calls are placed
-
-## 8x8 Implementation
-
-8x8 delivers WhatsApp Business Calling through **SIP integration only**, providing a bridge between WhatsApp's VoIP infrastructure and your existing voice systems.
-
-### How it works
+8x8 interconnects with Meta over SIP and bridges the call to the customer's SIP endpoint over SIP. There is no Meta Cloud API in the calling path, and there is no 8x8 API for placing a call.
 
 ```text
-Customer (WhatsApp) ⟷ Meta Cloud API ⟷ 8x8 Platform ⟷ SIP ⟷ Your Contact Center/PBX
+WhatsApp user  →  Meta  —SIP→  8x8 CPaaS  —SIP→  Customer SBC / PBX / Contact Center
 ```
 
-- **WhatsApp voice leg terminates on 8x8** – The VoIP call from WhatsApp ends at the 8x8 platform
-- **8x8 bridges to your SIP infrastructure** – 8x8 initiates a SIP call to your configured endpoint
-- **Treat it like any inbound/outbound SIP call** – Use your existing IVR, routing, queuing, and agent systems
+### When is SIP used, and when are REST APIs used?
 
-This architecture means you can leverage your existing contact center infrastructure, routing rules, and agent workflows without major changes.
+Two different planes — do not conflate them.
 
-## Call Types Supported
+| Plane | Protocol | When it applies |
+|-------|----------|-----------------|
+| **Voice / media** | **SIP end-to-end** | Every call, every path (Direct SIP, Converse, Genesys, VCC). Meta ↔ 8x8 and 8x8 ↔ customer are both SIP. |
+| **Permission & template lifecycle** | **REST APIs** on `chatapps.8x8.com` (+ MO and CABM webhooks) | **Only Direct SIP + BIC.** Converse handles this natively; Genesys/VCC don't offer BIC today. UIC needs neither. |
 
-WhatsApp Business Calling supports two types of calls:
+There is **no** REST API to place a call. Calls are always triggered from the customer's SIP endpoint (or handled by Converse). See [business-initiated calling](/connect/docs/voice/whatsapp-business-calling/business-initiated) for the Direct SIP + BIC API walkthrough.
 
-### ✅ User-initiated (Customer-to-Business)
+## Choose your integration path
 
-Customers can call your business directly from your WhatsApp Business profile or an active conversation. This requires no special permission – customers can call during your advertised business hours.
+WhatsApp Calling on 8x8 is delivered through one of four paths. All paths are configured with your 8x8 account manager during onboarding — none are fully self-service.
 
-**Use cases:**
-- Customer support inquiries
-- Sales questions
-- Order status checks
-- General information requests
+| Path | Calling today | Permissions & templates |
+|------|---------------|-------------------------|
+| **Direct SIP** | UIC and BIC | Customer builds against the 8x8 ChatApps API (see [business-initiated calling](/connect/docs/voice/whatsapp-business-calling/business-initiated)) |
+| **8x8 Converse** | UIC and BIC | Template send and permission-webhook handling are baked into the Converse integration — the customer does not build against the ChatApps API |
+| **Genesys** | UIC only (BIC to be worked in) | Not applicable while UIC only |
+| **VCC via AI Studio** | UIC only | Not applicable |
 
-[Learn more about user-initiated calling →](/connect/docs/voice/whatsapp-business-calling/user-initiated)
-
-### ✅ Business-initiated (Business-to-Customer)
-
-Your business can initiate calls to customers via WhatsApp, but only after the customer grants explicit permission through a WhatsApp template message.
-
-**Use cases:**
-- Appointment reminders with callback option
-- Delivery notifications with live agent connection
-- Sales follow-ups
-- Support callbacks for open tickets
-
-[Learn more about business-initiated calling →](/connect/docs/voice/whatsapp-business-calling/business-initiated)
-
-## High-Level Architecture
-
-The following diagram illustrates the call flow:
-
-```mermaid
-graph LR
-    A[Customer WhatsApp App] <-->|VoIP Call| B[Meta Cloud API]
-    B <-->|Webhook + Media| C[8x8 Platform]
-    C <-->|SIP INVITE| D[Your SIP Endpoint]
-    D -->|Route| E[IVR / Queue / Agent]
-```
-
-**Flow:**
-1. Customer initiates or receives a call in WhatsApp
-2. Meta's Cloud API handles the WhatsApp VoIP leg
-3. 8x8 receives webhooks and media from Meta
-4. 8x8 initiates SIP call to your configured endpoint
-5. Your system routes the call (IVR, queue, agent)
-6. When answered, media is bridged end-to-end
-7. Call ends when either party hangs up
+Identify your path before reading the business-initiated page — a Converse customer does not need the permission-database and API build described there; Converse already handles it.
 
 ## Prerequisites
 
-Before implementing WhatsApp Business Calling with 8x8, ensure you have:
+**8x8 packaging:**
 
-### WhatsApp Requirements
+- **WhatsApp Messaging must be active first.** 8x8 bundles WA Calling with WA Messaging — Calling cannot be enabled standalone.
+- 8x8 Connect account with the WA Calling entitlement.
 
-- **WhatsApp Business Platform account** (Cloud API or via BSP)
-- **Verified WhatsApp Business phone number** enabled for calling
-- **WhatsApp Business profile** with complete information and verification
+**Meta requirements:**
 
-### 8x8 Requirements
+- WhatsApp Business phone number in use with **Cloud API** (not the WhatsApp Business app).
+- **Meta Business Portfolio** set up with the WABA and phone number, and **business verification completed**.
+- **Minimum daily messaging tier of 2,000 unique recipients** on the WhatsApp number. This is Meta's calling gate — reaching this tier requires business verification and healthy messaging quality signals, so verification is a *de facto* prerequisite even though Meta's calling FAQ notes it isn't a formal calling-only requirement.
+- **Credit line attached to the WABA** — required for BIC billing (see [Pricing](#pricing)).
 
-- **8x8 Connect / CPaaS account** with WhatsApp calling feature enabled
-- **API credentials** for authentication
-- **Webhook endpoint** to receive call events (optional, for advanced scenarios)
+8x8 is listed on Meta's [WhatsApp Business partner showcase](https://business.facebook.com/messaging/partner-showcase/?search=8x8) as a WhatsApp Calling-capable partner. See also [Meta's calling FAQ](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/faq) for platform-level rules.
 
-### Infrastructure Requirements
+## Enabling WhatsApp Calling
 
-- **SIP endpoint** – One of the following:
-  - Contact center platform (e.g., Five9, Genesys, NICE inContact)
-  - PBX / SBC (e.g., Cisco, Avaya, AudioCodes)
-  - Cloud communications platform with SIP support
-- **SIP trunk configuration** – Ability to receive SIP calls from 8x8
-- **Network access** – Firewall rules to allow 8x8 SIP IPs
+WA Calling is enabled through **8x8 Connect**. Once requested, 8x8 kicks off an internal onboarding process. When onboarding completes, Connect shows WA Calling as enabled on the channel.
 
-### Technical Knowledge
+## Call types
 
-- Familiarity with **WhatsApp Business Cloud API** concepts
-- Understanding of **SIP protocol** and call routing
-- Basic webhook handling (for receiving call events)
+### User-initiated (UIC) — Customer-to-Business
 
-## Geographic Availability
+Customers call your business from a chat, from the business profile, from a `VOICE_CALL` button in a template, or from a `wa.me/call/` deep link. UIC calls are **free**. See [user-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated).
 
-WhatsApp Business Calling availability varies by call type and region. Please review these restrictions before implementation:
+### Business-initiated (BIC) — Business-to-Customer
+
+Your business calls the customer via WhatsApp after they grant calling permission. BIC availability, template flow, and permission handling depend on your integration path. See [business-initiated calling](/connect/docs/voice/whatsapp-business-calling/business-initiated).
+
+## Reporting and post-call
+
+- **8x8 Converse:** reporting is available in the Converse reporting module.
+- **Voice Session Summary (VSS)** can be configured on demand — discuss with your account manager before enabling.
+- **Call recording** and the **Voice Recording Uploaded (VRU) webhook** are available for configuration through your account manager.
+
+## Geographic availability
 
 ### Business-Initiated Calls (BIC)
 
-**NOT available** in the following countries:
-- 🇺🇸 United States
-- 🇨🇦 Canada
-- 🇹🇷 Turkey
-- 🇪🇬 Egypt
-- 🇻🇳 Vietnam
-- 🇳🇬 Nigeria
+**NOT available** in:
+- 🇺🇸 United States, 🇨🇦 Canada, 🇹🇷 Turkey, 🇪🇬 Egypt, 🇻🇳 Vietnam, 🇳🇬 Nigeria
 
 ### User-Initiated Calls (UIC)
 
 Available in most regions where the WhatsApp Cloud API is supported.
 
-### Sanctioned Countries
+### Sanctioned countries (all features blocked)
 
-All WhatsApp Business Calling features are unavailable in:
-- 🇨🇺 Cuba
-- 🇮🇷 Iran
-- 🇰🇵 North Korea
-- 🇸🇾 Syria
-- 🇺🇦 Ukraine (Crimea, Donetsk, Luhansk regions)
-
-### Business Phone Number Requirements
-
-- Your business phone number must have a country code from a supported country
-- Customer phone numbers can be from any country where Cloud API is available
-- Internet connectivity (WiFi or mobile data) required for all calls
+🇨🇺 Cuba, 🇮🇷 Iran, 🇰🇵 North Korea, 🇸🇾 Syria, 🇺🇦 Ukraine (Crimea, Donetsk, Luhansk regions)
 
 :::info Note
-Geographic restrictions are determined by Meta's WhatsApp Business Platform policies and may change over time. Always verify current availability in [Meta's official documentation](https://developers.facebook.com/docs/whatsapp/cloud-api/calls).
+Geographic restrictions follow Meta's WhatsApp Business Platform policies and may change. Verify with your account manager and Meta's documentation.
 :::
 
-## Getting Started
+## Pricing
 
-To implement WhatsApp Business Calling:
+| Item | Detail |
+|------|--------|
+| User-initiated calls | **Free** |
+| Business-initiated calls | Charged on duration in **6-second pulses**, by destination country code, tiered by monthly volume |
+| Fractional pulses | Rounded up (a 56-second call = 10 pulses) |
+| Calls crossing a volume tier | Priced entirely at the higher-volume rate |
+| Call permission request messages | Billed as messages under standard per-message pricing |
+| Prerequisite | Valid payment method and a credit line attached to the WABA |
 
-1. **Review call types** – Understand [user-initiated](/connect/docs/voice/whatsapp-business-calling/user-initiated) and [business-initiated](/connect/docs/voice/whatsapp-business-calling/business-initiated) calling
-2. **Choose your scenario** – Determine how you'll route calls ([supported scenarios](/connect/docs/voice/whatsapp-business-calling/scenarios))
-3. **Configure WhatsApp** – Set up calling on Meta's WhatsApp Business Platform
-4. **Configure 8x8** – Link your WhatsApp number and configure SIP delivery
-5. **Configure your SIP endpoint** – Set up inbound routing for WhatsApp calls
-6. **Test end-to-end** – Verify calls flow from WhatsApp to your agents
+Calling also affects the 24-hour customer service window: it starts or refreshes when a user calls the business (whether or not the business accepts) and when a user accepts a business-initiated call.
 
-## Important Considerations
+Call analytics (including cost and average duration) come from the WABA API with `?fields=call_analytics`. See [Meta pricing docs](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/pricing).
 
-### Compliance and Privacy
+## Operational limits
 
-- Follow **WhatsApp Business Terms** and **Platform Policies**
-- Obtain proper consent for business-initiated calls
-- Respect customer opt-out requests immediately
-- Handle customer data according to GDPR, CCPA, and local regulations
+| Item | Value |
+|------|-------|
+| Concurrent calls per business number | 1000 |
+| Call duration limit | None |
+| Codecs | OPUS, PCMA, PCMU |
+| Bandwidth per call | ~60 kbps (OPUS), ~84 kbps (G.711) |
+| Client support (BIC & permission requests) | WhatsApp 2.24.14.x and later (Android, iOS) |
+| Client support (voice call button) | Android 2.24.1 and later |
+| Call configuration propagation | Up to 7 days to reflect on clients |
+| WhatsApp Web / Desktop | Business calls not supported for end users |
 
-### Quality and Performance
+Hitting the 100 connected calls / 24 hours limit does **not** revoke permission — it is a rate limit; the permission endpoint indicates when the next call is allowed. A connected call resets the permission-request rate limits. BIC calls bypass the user's Silence Unknown Callers setting.
 
-- Ensure adequate **network bandwidth** for VoIP quality
-- Monitor **call success rates** and **audio quality**
-- Test from various network conditions (WiFi, 4G, 5G)
-- Have fallback options for failed calls
+## Getting started
 
-### Operational Best Practices
+1. Confirm prerequisites (WA Messaging active, Meta business portfolio, payment method for BIC).
+2. Contact your 8x8 account manager to request WA Calling enablement and choose an integration path.
+3. Complete onboarding.
+4. For Direct SIP + BIC, build against the ChatApps API — see [business-initiated calling](/connect/docs/voice/whatsapp-business-calling/business-initiated).
 
-- Staff agents during advertised calling hours
-- Set clear expectations in your WhatsApp Business profile
-- Provide voicemail or IVR options when agents unavailable
-- Track metrics: answer rate, AHT, customer satisfaction
+## Next steps
 
-## Next Steps
+- [User-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated)
+- [Business-initiated calling](/connect/docs/voice/whatsapp-business-calling/business-initiated)
+- [Supported calling scenarios](/connect/docs/voice/whatsapp-business-calling/scenarios)
 
-Explore the detailed guides for each call type:
+## Related 8x8 API references and guides
 
-- **[User-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated)** – Learn how customers can call your business
-- **[Business-initiated calling](/connect/docs/voice/whatsapp-business-calling/business-initiated)** – Learn how to call customers with permission
-- **[Supported calling scenarios](/connect/docs/voice/whatsapp-business-calling/scenarios)** – Explore different routing and integration options
+- [Add WhatsApp template](/connect/reference/add-whatsapp-template)
+- [Get call permission status](/connect/reference/get-call-permission-status)
+- [WhatsApp webhooks](/connect/docs/whatsapp/whatsapp-webhooks)
+- [WhatsApp over 8x8 API](/connect/docs/whatsapp/whatsapp-over-8x8-api)
 
-## Additional Resources
+## Meta reference
 
-- **Meta Documentation:**
-  - [WhatsApp Cloud API – User-initiated calls](https://developers.facebook.com/docs/whatsapp/cloud-api/calls/user-initiated-calls)
-  - [WhatsApp Cloud API – Call settings](https://developers.facebook.com/docs/whatsapp/cloud-api/calls/call-settings)
-  - [WhatsApp Cloud API – Business-initiated calls](https://developers.facebook.com/docs/whatsapp/cloud-api/calls/business-initiated-calls)
-- **8x8 Documentation:**
-  - [Voice API Introduction](/connect/docs/voice/api-introduction)
-  - [IVR Introduction](/connect/docs/voice/ivr/ivr-introduction)
-  - [WhatsApp Business Hub](/connect/docs/whatsapp/whatsapp-hub)
+- [Pricing](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/pricing)
+- [FAQ](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/faq)
+- [User call permissions](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/user-call-permissions)
+- [Call button messages and deep links](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/call-button-messages-deep-links)
+- [Call settings](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/call-settings)
+- [Troubleshooting and error codes](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/troubleshooting)
 
 ## Support Channels
 

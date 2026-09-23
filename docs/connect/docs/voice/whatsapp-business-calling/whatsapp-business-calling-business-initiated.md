@@ -5,461 +5,278 @@ title: Business-initiated calling
 
 ## What is Business-initiated Calling?
 
-Business-initiated calling allows your business to initiate voice calls to customers via WhatsApp. Unlike user-initiated calls where the customer starts the conversation, business-initiated calls are outbound from your perspective – you're calling the customer through their WhatsApp app.
+Business-initiated calling (BIC) lets your business call a customer via WhatsApp. The customer must have granted calling permission first.
 
-**Important:** Meta's WhatsApp policies require that customers **explicitly grant permission** before your business can call them. This protects customers from unwanted calls and ensures compliance with WhatsApp's platform rules.
+**BIC availability by integration path:**
 
-## Opt-in Requirement
+| Path | BIC supported today | Who handles templates and permissions |
+|------|---------------------|---------------------------------------|
+| **Direct SIP** | Yes | Customer builds against the 8x8 ChatApps API — see [Direct SIP integration](#direct-sip-integration) |
+| **8x8 Converse** | Yes | Template send and permission-webhook handling are baked into the Converse integration — the customer does not build against the ChatApps API |
+| **Genesys** | Not today (planned) | — |
+| **VCC via AI Studio** | Not today | — |
 
-### Meta's Call Permission Policy
+If you are on Converse, most of this page is background reading — Converse manages the permission lifecycle for you. If you are on Direct SIP, follow the five-step integration below.
 
-Before you can call a customer via WhatsApp, they must:
+---
 
-1. **Receive a permission request** via WhatsApp template message
-2. **Tap "Allow"** to grant calling permission
-3. **Have an active permission window** (permissions can expire)
+## Topology
 
-This is different from messaging, where customers opt in by messaging you first. For calling, you must explicitly request permission even if you already have a messaging conversation.
+```text
+WhatsApp user  ←  Meta  —SIP←  8x8 CPaaS  —SIP←  Your SBC / PBX / Contact Center
+```
 
-### Permission Validity
+The Meta ↔ 8x8 leg and the 8x8 ↔ customer leg are both SIP. There is no 8x8 API for placing a call — your system triggers the outbound leg through the delivery path (Direct SIP endpoint, Converse, etc.).
 
-**IMPORTANT:** Call permissions are time-limited and must be carefully managed.
+---
 
-Call permissions are valid for:
+## Permission model
 
-- **24-hour window** from the moment the customer grants permission (not from when you request it)
-- Permissions can be **revoked** by the customer at any time through WhatsApp settings
-- You must **request permission again** after the 24-hour period expires
-- **One permission = one call opportunity** - don't assume you can make multiple calls on the same permission
+### Two states
 
-**Best practice:** Request permission immediately before you intend to call (within minutes), not hours or days in advance. This ensures:
-- Permission hasn't expired when you actually call
-- Customer expects the call and is more likely to answer
-- Better compliance with Meta's policies
+| State | Duration | How acquired |
+|-------|----------|--------------|
+| **Temporary** | 7 calendar days (168 hours) from approval | User grants in response to a permission request, or via the auto-shown permission prompt, or by calling the business when callback is enabled (`responseSource: automatic`) |
+| **Permanent** | Does not expire until revoked (released 3 November 2025) | User grants from the business profile, or in response to a permission request |
 
-### Geographic Availability
+The **user** chooses permanent or temporary — the business cannot request one or the other. The permission-request payload is identical either way.
 
-**⚠️ Important:** Business-initiated calling has significant geographic restrictions set by Meta.
+`expirationTimestamp` is omitted for permanent permissions — its absence is meaningful.
 
-**Business-initiated calls (BIC) are NOT available in:**
-- 🇺🇸 United States
-- 🇨🇦 Canada
-- 🇹🇷 Turkey
-- 🇪🇬 Egypt
-- 🇻🇳 Vietnam
-- 🇳🇬 Nigeria
+### Rate limits and revocation
 
-**All calling features are blocked in sanctioned countries:**
-- 🇨🇺 Cuba, 🇮🇷 Iran, 🇰🇵 North Korea, 🇸🇾 Syria
-- 🇺🇦 Ukraine (Crimea, Donetsk, Luhansk regions)
+| Rule | Value |
+|------|-------|
+| Permission requests per user | 1 per 24 hours, 2 per 7 days (reset by any connected call) |
+| Connected calls per business phone number | 100 per 24 hours (rate limit; does not revoke permission) |
+| Consecutive unanswered calls → system message | 2 |
+| Consecutive unanswered calls → permission auto-revoked | 4 |
+| Error `138017` | Returned if you send a permission request when a permanent permission already exists |
 
-**Business phone number requirements:**
-- Your business phone number must have a country code from a BIC-supported country
-- Customer phone numbers can be from any country where Cloud API is available
-- Internet connectivity (WiFi or mobile data) required for all calls
+**There is no webhook when a temporary permission expires.** Check `callPermissions` before every call.
 
-**Important considerations:**
-- Voice quality depends on customer's network connection
-- Local telecommunications regulations may impose additional restrictions
-- Geographic restrictions are subject to change based on Meta's policies
+Business-initiated calls bypass the user's Silence Unknown Callers setting.
 
-:::warning Critical
-If your business operates in or serves customers in USA, Canada, Turkey, Egypt, Vietnam, or Nigeria, you CANNOT use business-initiated calling. Consider [user-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated) instead, which has broader availability.
+---
+
+## Geographic availability
+
+:::warning BIC is NOT available in
+🇺🇸 United States, 🇨🇦 Canada, 🇹🇷 Turkey, 🇪🇬 Egypt, 🇻🇳 Vietnam, 🇳🇬 Nigeria
+
+If you serve customers in these regions, use [user-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated) instead.
 :::
 
-**To verify current availability:**
-- Check Meta's [WhatsApp Cloud API documentation](https://developers.facebook.com/docs/whatsapp/cloud-api/calls) for latest updates
-- Consult with your 8x8 account manager for specific regional considerations
+Sanctioned countries (all features blocked): 🇨🇺 Cuba, 🇮🇷 Iran, 🇰🇵 North Korea, 🇸🇾 Syria, 🇺🇦 Ukraine (Crimea, Donetsk, Luhansk).
 
-## How to Request Call Permission
+Voice quality depends on the customer's network. Local telecom regulations may impose further restrictions.
 
-### Step 1: Create Permission Request Template
+---
 
-In Meta's WhatsApp Business Manager, create a template message specifically for requesting call permission. Templates must be approved by Meta before use.
+## Direct SIP integration
 
-**Template category:** `UTILITY` or `MARKETING` (depending on use case)
+Five steps. Skip this section if you are on Converse — Converse handles all of it.
 
-**Template example 1: Generic call permission**
+### Step 1: Create the call permission template
 
 ```text
-Name: call_permission_request
-Category: UTILITY
-Language: en_US
-
-Message:
-Hello {{1}},
-
-We'd like to call you via WhatsApp to discuss {{2}}. This will be a free call over data/WiFi.
-
-Would you like to allow us to call you?
-
-Buttons:
-- [Quick Reply] Allow calls
-- [Quick Reply] Not now
+POST https://chatapps.8x8.com/api/v1/accounts/{accountId}/channels/{channelId}/templates
 ```
 
-**Variables:**
-- `{{1}}`: Customer's name
-- `{{2}}`: Call purpose (e.g., "your recent order", "your support ticket")
+```json
+{
+  "name": "cpr_template_sample",
+  "category": "MARKETING|UTILITY",
+  "language": "en",
+  "components": [
+    { "type": "HEADER", "text": "Customer Service Request" },
+    { "type": "BODY", "text": "We would like to call you to help resolve your recent inquiry faster and provide personalized assistance." },
+    { "type": "FOOTER", "text": "Talk to you soon!" },
+    { "type": "CALL_PERMISSION_REQUEST" }
+  ]
+}
+```
 
-**Template example 2: Appointment reminder with callback**
+- Category must be `MARKETING` or `UTILITY`. Use `UTILITY` for transactional calls.
+- The `BODY` text is required and must not be empty.
+- `CALL_PERMISSION_REQUEST` cannot be combined with other interactive components.
+- Approval takes up to 24 hours. Track approval status with `template_status_update` on the **CABM** webhook rather than polling.
+
+See [Add WhatsApp template](/connect/reference/add-whatsapp-template) for the full API reference.
+
+### Step 2: Send the approved template
 
 ```text
-Name: appointment_callback_request
-Category: UTILITY
-Language: en_US
-
-Message:
-Hi {{1}},
-
-Your appointment is scheduled for {{2}} at {{3}}.
-
-Would you like us to call you to confirm the details?
-
-Buttons:
-- [Quick Reply] Yes, call me
-- [Quick Reply] No, thanks
+POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages
 ```
 
-**Variables:**
-- `{{1}}`: Customer's name
-- `{{2}}`: Date (e.g., "tomorrow", "January 15th")
-- `{{3}}`: Time (e.g., "2:00 PM")
+See [WhatsApp over 8x8 API](/connect/docs/whatsapp/whatsapp-over-8x8-api) for the send-message payload shape.
 
-**Template example 3: Support callback offer**
+### Step 3: Receive the reply on the inbound-message webhook
+
+The reply comes from 8x8, not from Meta. Nothing is configured on the Meta side.
+
+```json
+{
+  "version": 3,
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": "<UNIQUE_MESSAGE_ID>",
+    "subAccountId": "<SUBACCOUNT_ID>",
+    "timestamp": "2026-01-22T22:51:55.00Z",
+    "user": {
+      "msisdn": "<USER_PHONE_NUMBER>",
+      "channelUserId": "<WHATSAPP_BSUID>"
+    },
+    "recipient": {
+      "channel": "whatsapp",
+      "channelId": "<CHANNEL_ID>"
+    },
+    "type": "Interactive",
+    "content": {
+      "interactive": {
+        "type": "callPermissionReply",
+        "callPermissionReply": {
+          "response": "accept",
+          "isPermanent": false,
+          "expirationTimestamp": "2026-01-23T06:51:55.00Z",
+          "responseSource": "user_action"
+        }
+      }
+    }
+  }
+}
+```
+
+| Field | Values | Notes |
+|-------|--------|-------|
+| `response` | `accept`, `reject` | The user's decision |
+| `isPermanent` | `true`, `false` | `true` when the user allowed calls permanently |
+| `expirationTimestamp` | ISO 8601 | Temporary only; omitted for permanent |
+| `responseSource` | `user_action`, `automatic` | `automatic` covers callback-permission and auto-revocation |
+
+**Watch for `responseSource: automatic`.** A handler that only expects `user_action` will miss auto-revocation and keep calling a user whose permission is gone.
+
+Endpoint requirements: HTTPS, HTTP 200 within 5 seconds, exponential-backoff retries, deduplicate on `umid`.
+
+Store the reply against the user. Do not build a hourly expiry job — poll `callPermissions` before every call instead (Step 4).
+
+### Step 4: Check permission before every call — and before every request
 
 ```text
-Name: support_callback_request
-Category: UTILITY
-Language: en_US
-
-Message:
-Hello {{1}},
-
-We see you have a question about {{2}}. Our support team can call you on WhatsApp to help.
-
-Would you like a callback?
-
-Buttons:
-- [Quick Reply] Yes, please call
-- [Quick Reply] No, I'll wait for chat
+GET /api/v1/whatsapp/subaccounts/{subAccountId}/channels/{channelId}/callPermissions?destination=+6500000000
 ```
 
-**Variables:**
-- `{{1}}`: Customer's name
-- `{{2}}`: Issue description (e.g., "your recent order", "account setup")
+| Field | Description |
+|-------|-------------|
+| `status` | `temporary`, `permanent`, or `not_granted` |
+| `actions[]` | For `send_call_permission_request` and `start_call`: `canPerformAction` plus `limits` (`timePeriod`, `maxAllowed`, `currentUsage`) |
+| `expirationTime` | When the permission expires |
 
-**Template guidelines:**
-- Keep messages concise and clear about why you want to call
-- Explicitly mention it's a WhatsApp call (free, over data/WiFi)
-- Provide context about what the call will cover
-- Always include clear "Allow" and "Decline" options
-- Use `UTILITY` category for transactional calls (appointments, support)
-- Use `MARKETING` category for promotional/sales calls (requires 24-hour messaging window)
+Two uses:
 
-### Step 2: Send Permission Request
+- **Before placing a call.** `not_granted` covers declined, expired, and revoked alike — it is the single gate. If not granted, do not call. Because no webhook fires when a temporary permission lapses, this check is not optional.
+- **Before sending a permission request.** Error `138017` is returned when a permanent permission already exists, so checking first avoids generating errors against your best-converted users.
 
-Use the WhatsApp Business API (Meta Cloud API) to send the template message to your customer. Include the customer's name and the specific purpose of the call in the template parameters.
+See [Get call permission status](/connect/reference/get-call-permission-status) for the full API reference.
 
-### Step 3: Handle Customer Response
+### Step 5: Place the call
 
-When the customer receives the permission request, they'll see your message with buttons to grant or decline permission:
+Your system triggers the outbound call through your SIP endpoint. 8x8 delivers the call over SIP, exactly as for UIC.
 
-![WhatsApp permission request showing Allow calls and Not now buttons](../../whatsapp-calling/images/business-initiated-permission.png)
+---
 
-When the customer responds to the permission request, you'll receive a webhook from Meta's Cloud API. The webhook will indicate whether the customer:
-- **Granted permission** - They tapped "Allow calls"
-- **Declined permission** - They tapped "Not now" or ignored the request
+## Webhooks
 
-Store the permission status in your system with a timestamp and expiry time (typically 24 hours from when granted).
+Two separate configurations. Do not conflate them.
 
-## How It Works
+| Webhook | Type | Carries |
+|---------|------|---------|
+| Inbound message | MO | `inbound_message_received`, including `callPermissionReply` |
+| Business Management Updates | CABM | `template_status_update`, quality and account events |
 
-### Step-by-Step Call Flow
+See [WhatsApp webhooks](/connect/docs/whatsapp/whatsapp-webhooks) for setup.
 
-1. **Send permission request template**
-   - Your system sends WhatsApp template via Meta's API
-   - Template asks customer for call permission
+---
 
-2. **Customer grants permission**
-   - Customer taps "Allow" button in WhatsApp
-   - Meta sends webhook to your system with permission confirmation
+## Best practices
 
-3. **Your system triggers outbound call**
-   - Your backend makes API request to 8x8
-   - Request includes customer's WhatsApp number and call parameters
+### Only call when the customer expects it
 
-4. **8x8 signals Meta Cloud API**
-   - 8x8 initiates the call through Meta's Cloud API
-   - Meta validates that customer has granted permission
+- Request permission immediately before calling (within minutes).
+- State the specific purpose in the request.
+- Call within the promised time frame.
+- Don't request permission for undefined "future calls".
+- Don't reuse a permission for a different purpose than stated.
 
-5. **Customer's WhatsApp rings**
-   - Customer sees incoming call with your branded business name
-   - Call uses VoIP (data/WiFi), not cellular network
+### Respect opt-out immediately
 
-6. **Customer answers**
-   - When customer picks up, call is established
-   - Media path is created through Meta → 8x8 → Your SIP endpoint
+When the customer revokes or declines, stop calling and cancel any pending calls.
 
-7. **8x8 bridges media to your SIP endpoint**
-   - 8x8 initiates SIP call to your configured contact center/PBX
-   - Your system routes to agent or IVR
-   - Agent/system answers, two-way audio flows
+### Provide value in every call
 
-8. **Call proceeds normally**
-   - Agent speaks with customer
-   - Call is recorded/logged as per your policies
-   - Either party can hang up
+Voice should add something a message cannot — actionable resolution, immediate assistance, or a real conversation.
 
-9. **Call ends**
-   - CDRs generated on both 8x8 and your platform
-   - Webhooks sent for call completion
-   - Analytics updated
+### Track and optimize
 
-### Visual Call Flow
-
-```mermaid
-sequenceDiagram
-    participant B as Your<br/>Backend
-    participant P as 8x8<br/>Platform
-    participant W as WhatsApp<br/>Cloud API
-    participant C as Customer<br/>(WhatsApp)
-    participant S as Your<br/>SIP/Agent
-
-    B->>P: API: Initiate call
-    P->>W: Request outbound call
-    W->>C: Ring customer's WhatsApp
-    C->>W: Answer call
-    W->>P: Call accepted
-    P->>S: SIP INVITE
-    S->>P: SIP 200 OK (answered)
-    P->>W: Media ready
-    Note over C,S: Two-way audio bridged
-    C->>W: Hang up
-    W->>P: Call ended
-    P->>S: SIP BYE
-    P->>B: Webhook: call.ended
-```
-
-## Use Cases
-
-### 1. Appointment Reminders with Callback
-
-**Scenario:** Medical office wants to confirm appointments
-
-**Flow:**
-1. Send permission request 24 hours before appointment
-2. Customer grants permission
-3. Call customer 1 hour before appointment
-4. Automated message confirms appointment
-5. Option to speak with receptionist if needed
-
-**Benefits:**
-- Reduces no-shows
-- Provides personal touch
-- Allows for last-minute rescheduling
-
-### 2. Delivery Updates with Live Agent
-
-**Scenario:** Package delivery running late, customer needs update
-
-**Flow:**
-1. Detect delayed delivery in system
-2. Send permission request to customer
-3. Customer grants permission
-4. Call customer to explain delay
-5. Agent provides ETA and resolution
-
-**Benefits:**
-- Proactive communication
-- Reduces support ticket volume
-- Improves customer satisfaction
-
-### 3. Sales Follow-ups
-
-**Scenario:** Customer inquired about product, needs follow-up
-
-**Flow:**
-1. Customer chats with sales bot on WhatsApp
-2. Bot requests call permission for detailed discussion
-3. Customer grants permission
-4. Sales rep calls within 5 minutes
-5. Close sale or schedule demo
-
-**Benefits:**
-- Faster sales cycle
-- Higher conversion rates
-- Better lead qualification
-
-### 4. Support Callbacks
-
-**Scenario:** Customer has complex issue, chat isn't sufficient
-
-**Flow:**
-1. Customer struggling with chat-based support
-2. Agent requests permission to call
-3. Customer grants permission
-4. Agent calls to screen-share or troubleshoot
-5. Issue resolved faster
-
-**Benefits:**
-- Improved first-call resolution
-- Reduced handling time
-- Better customer experience
-
-## Permission Management
-
-### Tracking Opt-ins
-
-Your system should track customer call permissions in a database with the following information:
-- Customer phone number
-- Permission granted status (yes/no)
-- When permission was granted
-- When permission expires
-- Whether permission was revoked
-- Number of permission requests sent
-- Last request timestamp
-
-**Key considerations:**
-- Limit permission requests to avoid spamming customers (e.g., max 3 requests)
-- Store expiry timestamp when permission is granted (typically 24 hours)
-- Immediately revoke permission when customer opts out
-
-### Permission Expiry
-
-Implement a scheduled job (run hourly) to automatically expire permissions that have passed their validity period. Mark expired permissions as inactive in your database.
-
-### Permission Revocation
-
-Monitor your WhatsApp webhook for opt-out keywords (e.g., "stop calls", "no calls") and immediately:
-- Revoke the customer's call permission
-- Add them to a do-not-call list
-- Cancel any pending calls
-- Send confirmation that they've been removed from the call list
-
-## Best Practices
-
-### 1. Only Call When Customer Expects It
-
-**Good practices:**
-- ✅ Request permission immediately before calling (within minutes)
-- ✅ State the specific purpose in permission request
-- ✅ Call within the time frame you promised
-- ✅ Limit to use cases where voice adds value over chat
-
-**Bad practices:**
-- ❌ Request permission for "future calls" without specific purpose
-- ❌ Call hours or days after permission granted
-- ❌ Use permission for different purposes than stated
-- ❌ Make multiple calls on same permission
-
-### 2. Respect Opt-out Requests Immediately
-
-When a customer opts out of calls:
-- Revoke their permission immediately
-- Add them to your do-not-call list
-- Cancel any pending calls scheduled for them
-- Log the opt-out event for compliance
-
-**Response time:**
-- Process opt-out within 1 minute
-- Cancel calls scheduled within next hour
-- Never call after opt-out (obvious but critical)
-
-### 3. Provide Value in Every Call
-
-**Checklist before calling:**
-- [ ] Is the information too complex for a message?
-- [ ] Does the customer need immediate assistance?
-- [ ] Will a voice conversation save time for both parties?
-- [ ] Do you have something actionable to discuss?
-
-**Examples:**
-
-✅ **Good:** "Your package was delayed. Let's reschedule delivery for a time that works for you."
-
-❌ **Bad:** "Just checking if you received our message about..."
-
-✅ **Good:** "You have an appointment in 1 hour. Would you like directions or need to reschedule?"
-
-❌ **Bad:** Generic "How was your experience?" calls
-
-### 4. Track and Optimize
-
-**Metrics to monitor:**
+Metrics worth monitoring — surface them from your delivery path's native reporting (Converse reporting module, Genesys reporting, or VCC reporting). VSS (configured on demand via your account manager) gives you the per-session end-of-call record on the 8x8 side.
 
 | Metric | Target | Insight |
 |--------|--------|---------|
-| Permission grant rate | > 60% | How well your request message resonates |
-| Call answer rate | > 75% | If customers want to talk after granting permission |
-| Call completion rate | > 90% | Technical quality and customer engagement |
-| Customer satisfaction | > 4.0/5 | Overall experience with business-initiated calls |
-| Opt-out rate | < 5% | If you're respecting customer preferences |
+| Permission grant rate | > 60% | How well your request template resonates |
+| Call answer rate | > 75% | Customer intent after granting permission |
+| Call completion rate | > 90% | Technical quality and engagement |
+| Customer satisfaction | > 4.0/5 | Overall experience |
+| Opt-out rate | < 5% | Whether you're respecting preferences |
 
-**A/B testing ideas:**
-- Different permission request templates
-- Timing between permission grant and call
-- Agent introduction scripts
-- Call purposes (transactional vs. promotional)
+### Maintain compliance
 
-### 5. Maintain Compliance
+Follow **TCPA** (US), **GDPR** (EU), and local telemarketing law. Keep an audit trail of permissions, calls, and opt-outs.
 
-**Regulatory requirements:**
-- Follow **TCPA** (US), **GDPR** (EU), and local telemarketing laws
-- Keep records of permissions for audit trail
-- Honor Do Not Call lists
-- Provide clear opt-out mechanisms
-
-**Audit trail requirements:**
-
-Maintain detailed logs of all permission-related events for each customer:
-- When permission was requested and for what purpose
-- When permission was granted or denied
-- Permission expiry timestamp
-- When calls were initiated and completed
-- Call duration and outcome
-- Any opt-out or revocation events
+---
 
 ## Troubleshooting
 
-### Common Issues
+**Error `138017` when sending a permission request**
+The user already has a permanent permission. Skip the request and call directly.
 
-**Problem: Call fails with "permission denied"**
-- Verify customer has granted permission in your database
-- Check permission hasn't expired (< 24 hours old)
-- Confirm customer hasn't revoked permission
-- Ensure you're using correct customer WhatsApp number
+**Call fails with `not_granted`**
+Permission has been declined, revoked, or expired (temporary). Do not retry until the user grants again.
 
-**Problem: Customer doesn't receive permission request**
-- Verify template is approved by Meta
-- Check customer's WhatsApp number is correct and active
-- Ensure you have an active 24-hour messaging window
-- Review template message delivery status
+**Customer doesn't receive the permission-request template**
+- Verify the template is approved (check `template_status_update` on CABM).
+- Verify the customer's WhatsApp number is correct and active.
+- Verify you have an active 24-hour messaging window (for `MARKETING` category).
 
-**Problem: Low permission grant rate**
-- Make the value proposition clear in permission request
-- State specific reason for call (not generic)
-- Send request at appropriate time (not late night)
-- Test different template wording
+**High opt-out rate**
+- Confirm calls match the stated purpose.
+- Reduce frequency.
+- Ensure agents provide value in the conversation.
 
-**Problem: High opt-out rate**
-- Review if calls match stated purpose
-- Check call timing (not too frequent)
-- Ensure agents provide value in conversation
-- Survey customers who opt out for feedback
+---
 
-## Next Steps
+## Next steps
 
-- **[User-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated)** – Learn about inbound calls from customers
-- **[Supported calling scenarios](/connect/docs/voice/whatsapp-business-calling/scenarios)** – Explore routing and integration options
-- **[Voice API Introduction](/connect/docs/voice/api-introduction)** – Understand 8x8's voice capabilities
+- [User-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated)
+- [Supported calling scenarios](/connect/docs/voice/whatsapp-business-calling/scenarios)
+- [Overview](/connect/docs/voice/whatsapp-business-calling/overview)
 
-## Additional Resources
+## Related 8x8 API references and guides
 
-- [Meta – Business-initiated calls](https://developers.facebook.com/docs/whatsapp/cloud-api/calls/business-initiated-calls)
-- [Meta – WhatsApp Platform Policy](https://developers.facebook.com/docs/whatsapp/policy/)
-- [8x8 Voice API Introduction](/connect/docs/voice/api-introduction)
-- [WhatsApp Business Terms](https://www.whatsapp.com/legal/business-terms/)
+- [Add WhatsApp template](/connect/reference/add-whatsapp-template)
+- [Get call permission status](/connect/reference/get-call-permission-status)
+- [WhatsApp webhooks](/connect/docs/whatsapp/whatsapp-webhooks)
+- [WhatsApp over 8x8 API](/connect/docs/whatsapp/whatsapp-over-8x8-api)
+
+## Meta reference
+
+- [User call permissions](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/user-call-permissions)
+- [Call settings](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/call-settings)
+- [Troubleshooting and error codes](https://developers.facebook.com/documentation/business-messaging/whatsapp/calling/troubleshooting)
+
+---
 
 ## Support Channels
 
