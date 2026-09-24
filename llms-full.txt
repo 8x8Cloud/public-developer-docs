@@ -45463,6 +45463,7 @@ Payload object description
 | status          | object         | Current status of the message, please see [Message status reference](/connect/reference/message-status-references) for details.                             |
 | price           | object         | Price information of the message, this field is optional in the response if there is no charge incurred. Please see [Price object reference](/connect/reference/price-object-reference) for details |
 | smsCount        | integer        | Number of SMS segment in the message                                                                                                                                                 |
+| outboundContent | object         | A structured copy of the original outbound message this receipt refers to. Only present on the `queued` receipt sent when the message is accepted for processing — other `queued` receipts (for example, scheduled messages) do not include it. See [outboundContent object](#outboundcontent-object) below. |
 
 > 🚧
 >
@@ -45473,6 +45474,37 @@ Payload object description
 >
 > If the request you receive has a different structure from described in this document, please contact our support to activate the latest format for your account.
 >
+
+#### outboundContent object
+
+`outboundContent` is a structured copy of the message you originally sent. It lets you reconcile a delivery receipt with the exact content that was sent without keeping your own copy of the outbound payload.
+
+> 📘
+>
+> `outboundContent` is attached only to the `queued` receipt sent when the message is accepted for processing, and only when the original message body is still available. Other `queued` receipts — for example, for scheduled messages — do not include it, and it is omitted from every other status (`sent`, `delivered`, `undelivered`, etc.).
+>
+> `outboundContent` also requires delivery receipt format V7 or later. If your account is on an earlier format, contact support to activate the latest version.
+>
+
+| Parameter name | Parameter type | Description |
+| :------------- | :------------- | :---------- |
+| channel        | string         | Channel the content was sent on. Always `sms`. |
+| contentType    | string         | Kind of content. Always `text` — SMS has no media, template, or interactive content types. |
+| body           | object         | Message body text. Omitted when the content is masked (see `meta`). |
+| meta           | object         | Extra flags such as redaction status. Only present when the content is masked. |
+
+##### body object
+
+| Parameter name | Parameter type | Description |
+| :------------- | :------------- | :---------- |
+| text           | string         | The message body text. |
+
+##### meta object
+
+| Parameter name  | Parameter type | Description |
+| :-------------- | :------------- | :---------- |
+| redacted        | boolean        | `true` when the content was masked. |
+| redactionReason | string         | Why the content was masked, e.g. `Content masked for PII compliance` (when PII masking is enabled for your sub-account or destination country). |
 
 ### Sample delivery receipt for outbound SMS
 
@@ -45535,6 +45567,77 @@ Payload object description
     <smsCount>3</smsCount>
   </payload>
 </root>
+```
+
+### Sample delivery receipt with outboundContent
+
+This receipt has `status.state` of `queued`, so it carries the `outboundContent` object.
+
+```json
+{
+  "namespace": "SMS",
+  "eventType": "outbound_message_status_changed",
+  "description": "SMS outbound message delivery receipt",
+  "payload": {
+    "umid": "9e09ac86-bd74-5465-851d-1eb5a5fdbb9a",
+    "subAccountId": "SubAccount-1",
+    "source": "8x8",
+    "destination": "+12025550199",
+    "status": {
+      "state": "queued",
+      "timestamp": "2026-09-17T05:54:55.72Z"
+    },
+    "price": {
+      "total": 0,
+      "perSms": 0,
+      "currency": "EUR"
+    },
+    "smsCount": 1,
+    "outboundContent": {
+      "channel": "sms",
+      "contentType": "text",
+      "body": {
+        "text": "Hello World"
+      }
+    }
+  }
+}
+```
+
+### Sample delivery receipt with masked outboundContent
+
+When PII masking applies to the sub-account or destination country, `body` is omitted and `meta` describes the redaction instead.
+
+```json
+{
+  "namespace": "SMS",
+  "eventType": "outbound_message_status_changed",
+  "description": "SMS outbound message delivery receipt",
+  "payload": {
+    "umid": "9e09ac86-bd74-5465-851d-1eb5a5fdbb9a",
+    "subAccountId": "SubAccount-1",
+    "source": "8x8",
+    "destination": "+12025550199",
+    "status": {
+      "state": "queued",
+      "timestamp": "2026-09-17T05:54:55.72Z"
+    },
+    "price": {
+      "total": 0,
+      "perSms": 0,
+      "currency": "EUR"
+    },
+    "smsCount": 1,
+    "outboundContent": {
+      "channel": "sms",
+      "contentType": "text",
+      "meta": {
+        "redacted": true,
+        "redactionReason": "Content masked for PII compliance"
+      }
+    }
+  }
+}
 ```
 
 ---
@@ -71202,7 +71305,7 @@ Depending on your configuration:
 
 1. **Call icon** in the WhatsApp chat header or business profile — enabled once calling is on the number.
 2. **`VOICE_CALL` button** on a message template — see [user-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated#voice_call-button-on-a-template).
-3. **`wa.me/call/` deep link** — see [user-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated#wame-call-deep-links).
+3. **`wa.me/call/` deep link** — see [user-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated#wamecall-deep-links).
 
 ---
 
