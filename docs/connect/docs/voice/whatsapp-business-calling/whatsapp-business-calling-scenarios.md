@@ -40,7 +40,7 @@ Depending on your configuration:
 
 1. **Call icon** in the WhatsApp chat header or business profile — enabled once calling is on the number.
 2. **`VOICE_CALL` button** on a message template — see [user-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated#voice_call-button-on-a-template).
-3. **`wa.me/call/` deep link** — see [user-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated#wame-call-deep-links).
+3. **`wa.me/call/` deep link** — see [user-initiated calling](/connect/docs/voice/whatsapp-business-calling/user-initiated#wamecall-deep-links).
 
 ---
 
