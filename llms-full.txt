@@ -31768,16 +31768,20 @@ Survey-summary PCS reports are automatically grouped by survey, and question-sum
 
 ---
 
-## [Beta] End-to-End Journeys
+## End-to-End Journeys
 
+
+:::warning BETA
+
+**The Journey API is currently in Beta.** To join the Beta and start receiving data through the API, install the JourneyIQ application from the 8x8 App Store. Installing the application provisions your account for journey data collection, so journeys are available through the API only from the moment it is installed.
+
+:::
 
 ## Introduction
 
 The Journey API provides a consolidated view of customer interactions belonging to the same journey. These interactions may happen on one or multiple 8x8 products, including Contact Center, Unified Communications, AI Studio, and Engage. Using the API users can retrieve journey data and detailed transition information, enabling end-to-end tracking of customer journeys regardless of transfers between systems or agents.
 
 This API is particularly valuable for organizations with complex flows that span multiple systems, where customers may be transferred between formal contact center agents and back-office operations.
-
-The Journey API is currently in Beta. To join the Beta and start receiving data through the API, install the JourneyIQ application from the 8x8 App Store. Installing the application provisions your account for journey data collection, so journeys are available through the API only from the moment it is installed.
 
 ## Business Value
 
