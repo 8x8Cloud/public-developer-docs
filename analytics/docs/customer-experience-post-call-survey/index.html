@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.f6a08750.css">
-<script src="/assets/js/runtime~main.7caea86e.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.4dbaadcf.js" defer="defer"></script>
 <script src="/assets/js/main.640bb159.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -86,10 +86,14 @@
 
 
 
-<table><thead><tr><th>Field name</th><th>Definition</th></tr></thead><tbody><tr><td>Offered</td><td>The survey/question was presented to the user by IVR</td></tr><tr><td>OptedIn</td><td>The user affirmatively interacted with the IVR to start the survey</td></tr><tr><td>Started</td><td>Some amount of the survey/question audio was presented to the user</td></tr><tr><td>Completed</td><td>The user has completed the question interaction, or in the context of a survey, completed all questions and any final script segments</td></tr></tbody></table>
+<table><thead><tr><th>Field name</th><th>Definition</th></tr></thead><tbody><tr><td>Offered</td><td>The survey/question was presented to the user</td></tr><tr><td>OptedIn</td><td>The user chose to take the survey</td></tr><tr><td>Started</td><td>Some amount of the survey/question audio was presented to the user</td></tr><tr><td>Completed</td><td>The user has completed the question interaction, or in the context of a survey, completed all questions and any final script segments</td></tr></tbody></table>
 <blockquote>
 <p>📘 <strong>Agent-assisted surveys</strong></p>
-<p>For agent assisted surveys and standalone surveys (surveys with no IVR component), we are not able to offer metrics for <code>Offered</code> or <code>OptedIn</code>, because there was no IVR interaction, which is how we detect these states.</p>
+<p>For agent assisted surveys and standalone surveys (surveys with no IVR component), there is no IVR interaction to detect these states from. Any such survey that is started is therefore counted as <code>Offered</code> and <code>OptedIn</code> at the point it starts, whether or not the IVR Post Call Survey node was used.</p>
+</blockquote>
+<blockquote>
+<p>📘 <strong>Multiple surveys in one interaction</strong></p>
+<p>If more than one survey is offered during an interaction, only the last survey generates metrics.</p>
 </blockquote>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="question-metrics">Question metrics<a href="#question-metrics" class="hash-link" aria-label="Direct link to Question metrics" title="Direct link to Question metrics" translate="no">​</a></h3>
 <p>In the question-summary report, we collect data on how users specifically interact with individual questions.</p>
