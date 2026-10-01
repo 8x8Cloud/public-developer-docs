@@ -34,15 +34,19 @@ Surveys go through many states as customers interact with them. We track those s
 
 | Field name | Definition |
 | --- | --- |
-| Offered | The survey/question was presented to the user by IVR |
-| OptedIn | The user affirmatively interacted with the IVR to start the survey |
+| Offered | The survey/question was presented to the user |
+| OptedIn | The user chose to take the survey |
 | Started | Some amount of the survey/question audio was presented to the user |
 | Completed | The user has completed the question interaction, or in the context of a survey, completed all questions and any final script segments |
 
 > 📘 **Agent-assisted surveys**
 >
-> For agent assisted surveys and standalone surveys (surveys with no IVR component), we are not able to offer metrics for `Offered` or `OptedIn`, because there was no IVR interaction, which is how we detect these states.
+> For agent assisted surveys and standalone surveys (surveys with no IVR component), there is no IVR interaction to detect these states from. Any such survey that is started is therefore counted as `Offered` and `OptedIn` at the point it starts, whether or not the IVR Post Call Survey node was used.
 >
+
+> 📘 **Multiple surveys in one interaction**
+>
+> If more than one survey is offered during an interaction, only the last survey generates metrics.
 >
 
 ### Question metrics
