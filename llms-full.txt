@@ -21600,7 +21600,7 @@ PUT /resources/{id} with COMPLETE modified resource object
 ## User Management API Guide
 
 
-**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)
+**API Version**: 1.0  |  **Last Updated**: October 2, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)
 
 import TabbedExternalCodeSample from '@site/docusaurus/components/TabbedExternalCodeSample';
 
@@ -21635,6 +21635,7 @@ The 8x8 User Management API provides programmatic access to user lifecycle manag
 - Search and filter users using powerful RSQL query syntax
 - Update user details, assignments, and service configurations
 - Delete users when they leave your organization
+- **Not currently supported**: managing CC (Contact Center) attributes for users, with the exception of `serviceInfo.extensions[].displayInDirectory` (see [Business Rules - Directory Visibility](#directory-visibility)) — other CC attributes (`extensionType = "CC"`) cannot be created or updated through this API
 
 ### Primary Use Cases
 
@@ -21916,6 +21917,8 @@ Service assignments and configurations:
   - Caller ID settings
   - Recording preferences
   - Emergency address information
+
+> **Note**: This API supports UC attributes only. Contact Center (CC) attributes (`extensionType = "CC"`) are not currently supported, with the exception of `extensions[].displayInDirectory` (see [Business Rules - Directory Visibility](#directory-visibility)).
 
 #### 4. assignmentInfo (Optional)
 
@@ -22618,7 +22621,7 @@ This section covers troubleshooting issues specific to the User Management API.
 
 ---
 
-**API Version**: 1.0  |  **Last Updated**: January 15, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)  |  **Feedback**: Submit feedback via Admin Console
+**API Version**: 1.0  |  **Last Updated**: October 2, 2026  |  **Part of**: [Administration API Suite](./suite-common.mdx)  |  **Feedback**: Submit feedback via Admin Console
 
 ---
 
