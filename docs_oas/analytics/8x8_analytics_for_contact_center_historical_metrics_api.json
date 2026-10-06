@@ -545,12 +545,14 @@
           "start": {
             "type": "string",
             "format": "date-time",
-            "example": "2018-10-06T14:57:33.410Z"
+            "description": "The start of the report period, as a local date and time in `timezone`. Write it with the trailing `Z`, which does not mean UTC here. Summary reports include only whole 15-minute intervals, so use a value on a 15-minute boundary.",
+            "example": "2019-12-01T00:00:00.000Z"
           },
           "end": {
             "type": "string",
             "format": "date-time",
-            "example": "2019-12-05T14:57:33.410Z"
+            "description": "The end of the report period, as a local date and time in `timezone`. Write it with the trailing `Z`, which does not mean UTC here. Summary reports include only whole 15-minute intervals, so use a value on a 15-minute boundary, and the next midnight to include a whole day.",
+            "example": "2019-12-08T00:00:00.000Z"
           }
         },
         "title": "DateRange"
