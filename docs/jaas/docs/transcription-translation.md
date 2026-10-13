@@ -36,7 +36,7 @@ This is a companion video demo of transcription and translation.
 
 ## Using Transcription / Translation
 
-In order to use the Transcription feature, navigate to the **Triple Dot Menu / More Options Button** then the **Subtitles** option within that menu. This only turns on translation for the current user. Other users will have to enable subtitles through the same process. Whenever any participant speaks in the room, a subtitle will appear at the bottom for the users who have enabled the feature.
+In order to use the Transcription feature, navigate to the **Triple Dot Menu / More Options Button** then the **Subtitles** option within that menu. This only turns on transcription for the current user. Other users will have to enable subtitles through the same process. Whenever any participant speaks in the room, a subtitle will appear at the bottom for the users who have enabled the feature.
 
 ![image](../images/4c56586-image.png)
 By default the transcription will be in the same language as your interface, however you can choose to change it to a different language within the same **Subtitles** menu.

@@ -438,7 +438,6 @@ Before every meeting the registered `URL` will be called using a `POST` request 
   "passcode": "0000",
   "lobbyType": "WAIT_FOR_APPROVAL",
   "maxOccupants": 4,
-  "transcriberType": "EGHT_WHISPER",
   "participantsSoftLimit": 3,
   "visitorsEnabled": true,
   "hideDisplayName": "GUEST"
@@ -449,7 +448,6 @@ Before every meeting the registered `URL` will be called using a `POST` request 
 - **`passcode`** (string: digits only): The passcode that the meeting will start with. If `empty` or the field is `missing` the meeting will start without a passcode.
 - **`lobbyType`** (string (optional): **`WAIT_FOR_APPROVAL`** \| **`WAIT_FOR_MODERATOR`**): if `WAIT_FOR_MODERATOR` is returned the lobby is automatically disabled after the first moderator joins. If `WAIT_FOR_APPROVAL` is returned or the `lobbyType` field is missing, non-moderator participants must ask to join and be approved by a moderator from the room.
 - **`maxOccupants`** (integer (optional)): The maximum number of participants that can be at the same time in a meeting. Should be a value between 2 and 500.
-- **`transcriberType`** (string (optional)): **`GOOGLE`** \| **`ORACLE_CLOUD_AI_SPEECH`** \| **`EGHT_WHISPER`**: if the field is missing, it will default to the option selected in the JaaS Admin Panel under the AI Services section.
 - **`participantsSoftLimit`** (number (optional)): the number of spots available for participants. Anyone joining after that will be considered a visitor, if the visitor functionality is enabled (see below). Otherwise, the field will be ignored.
 - **`visitorsEnabled`** (boolean (optional)): whether the visitor functionality is enabled. The feature is disabled by default.
 - **`hideDisplayName`** (string (optional)): **`GUEST`** : when specified, it will hide the participant names for non-moderators.

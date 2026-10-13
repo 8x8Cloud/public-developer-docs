@@ -105,7 +105,6 @@ const sidebarConfig = [
       'jaas/docs/jaas-console-webhooks',
       'jaas/docs/jaas-console-branding',
       'jaas/docs/releases',
-      'jaas/docs/ai-services',
       'jaas/docs/jaas-console-team-management',
       'jaas/docs/jaas-console-plans-and-subscriptions',
       'jaas/docs/jaas-console-billing',

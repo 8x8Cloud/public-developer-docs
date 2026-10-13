@@ -268,7 +268,7 @@ Find answers to questions about using and managing meetings in Jitsi.
 
 ### Does JaaS support real-time transcription? [transcription]
 
-Yes. JaaS can send the audio captured from all participants in the room to an external speech-to-text service. Currently, only the Google Cloud Speech-to-Text API is supported. This service is charged separately.
+Yes. JaaS can send the audio captured from all participants in the room to an external speech-to-text service. The current default provider is xAI. This service is charged separately.
 
 >
 > Note: All subscriptions support transcriptions as long as there is a valid credit card attached and the JWT token used as moderator has transcription enabled - see [API keys](/jaas/docs/jaas-console-api-keys).
@@ -298,11 +298,7 @@ The transcriber reliably accepts only the first language set at the beginning of
 
 ### Why doesn’t the transcriber update to the new language immediately?
 
-The transcriber maintains a long-running connection with Google and Oracle backends, setting the transcription language when the connection is first established. If an admin changes the language after the connection is active, the transcriber will continue using the original language until it reconnects. A reconnect only occurs after a period of inactivity (e.g., no audio sent for about 10 seconds).
-
-### Does Whisper support multiple languages?
-
-At the moment, Whisper only supports English.
+The transcriber maintains a long-running connection with backends, setting the transcription language when the connection is first established. If an admin changes the language after the connection is active, the transcriber will continue using the original language until it reconnects. A reconnect only occurs after a period of inactivity (e.g., no audio sent for about 10 seconds).
 
 ### Is it possible to turn on and save transcriptions for every call programatically without the user selecting them?
 
