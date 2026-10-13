@@ -42869,7 +42869,7 @@ Engage customers through the channels they already use and love.
   <Card
     title="LINE Official"
     description="Send notifications and messages through LINE Official Account platform."
-    link="/connect/docs/usage-samples-line-official-notification"
+    link="/connect/docs/line/line-hub"
   />
   <Card
     title="Zalo (ZNS)"
@@ -44870,7 +44870,7 @@ WhatsApp object description
 | Parameter name    | Parameter type | Description                                                                                                               |
 | :---------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | providerErrorCode | string         | WhatsApp's own error code. Only present if there was an error                                                             |
-| pricingCategory   | string         | WhatsApp's pricing category as defined by Meta. Only included with sent status, and one of either delivered or read status |
+| pricingCategory   | string         | WhatsApp's pricing category, the same value Meta returns: `marketing`, `utility`, `authentication`, `authentication_international`, or `service` (non-template messages). Only included with sent status, and one of either delivered or read status |
 | templateId        | string         | Template ID used by WhatsApp to deliver the message. Only present for messages sent via the WhatsApp Direct Send API       |
 
 > 🚧
@@ -45172,6 +45172,39 @@ This receipt also comes back from WhatsApp, so the `user` object includes `chann
 }
 ```
 
+##### WhatsApp: service message, delivered
+
+A non-template reply sent inside the customer service window reports `service` as its pricing category. There is no `templateId`, because no template was used.
+
+```json title="Outbound delivery receipt webhook body (v9), WhatsApp service message, delivered"
+{
+  "version": 9,
+  "namespace": "ChatApps",
+  "eventType": "outbound_message_status_changed",
+  "description": "ChatApps outbound message delivery receipt",
+  "payload": {
+    "umid": <UNIQUE_MESSAGE_ID>,
+    "batchId": <BATCH_ID>,
+    "clientMessageId": <YOUR_MESSAGE_ID>,
+    "clientBatchId": <YOUR_BATCH_ID>,
+    "subAccountId": <SUBACCOUNT_ID>,
+    "channel": "whatsapp",
+    "user": {
+      "msisdn": <USER_PHONE_NUMBER>,
+      "channelUserId": <WHATSAPP_BSUID>
+    },
+    "status": {
+      "state": "delivered",
+      "detail": "delivered_to_recipient",
+      "timestamp": "2026-10-05T08:14:22.51Z"
+    },
+    "whatsapp": {
+      "pricingCategory": "service"
+    }
+  }
+}
+```
+
 ##### Viber — delivered to recipient
 
 For Viber and RCS there is no `channelUserId`: these channels identify the recipient purely by phone number, so only `user.msisdn` is sent.
@@ -45306,7 +45339,7 @@ WhatsApp object description
 | Parameter name    | Parameter type | Description                                                                                                               |
 | :---------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | providerErrorCode | string         | WhatsApp's own error code. Only present if there was an error                                                             |
-| pricingCategory   | string         | WhatsApp's pricing category as defined by Meta. Only included with sent status, and one of either delivered or read status |
+| pricingCategory   | string         | WhatsApp's pricing category, the same value Meta returns: `marketing`, `utility`, `authentication`, `authentication_international`, or `service` (non-template messages). Only included with sent status, and one of either delivered or read status |
 
 > 🚧
 >
@@ -50914,8 +50947,8 @@ The WhatsApp Conversations Report will show the type of conversations you are ha
 This gives insights into the following information for WhatsApp messages.
 
 * **Total:** This is the total messages sent.
-* **Chargeable:** The conversations that are chargeable
-* **Free:** This applies to the messages WhatsApp gives 1000 free Service conversations each month. They are refreshed at the beginning of each month. Please note that a free tier applies only to Service conversations.
+* **Chargeable:** Messages that are charged.
+* **Free:** Messages that are not charged. This includes service messages within the monthly free tier of 1,000 service messages per business phone number, which resets each month, and messages sent during a free entry point window.
 * **Customer Initiated:** Messages that are sent from the customer at the beginning of a 24-hour window.
 * **Business Initiated Messages:** Messages that are sent from the business at the beginning of a 24-hour window.
 * **Message Category:** As covered earlier, this is the official message categories from WhatsApp
@@ -61332,7 +61365,7 @@ Suggestions in RCS Business Messaging provide interactive buttons, chips, or qui
 >
 > WhatsApp only allows freeform text messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
 >
-> This customer service window lasts 24 hours, and lasts 72 hours if the customer service window is initiated via a [click-to-whatsapp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp).  
+> This customer service window lasts 24 hours. If the customer messages you from a [Click-to-WhatsApp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp), a free entry point window of up to 7 days also opens, and messages you send during it are free. You can still only send non-template messages while the 24-hour customer service window is open. See [Concepts & Fundamentals](/connect/docs/whatsapp/concepts-fundamentals#user-initiated-conversations-inbound).  
 >
 > Outside of the customer service window, only pre-approved WhatsApp templates can be sent to users.
 >
@@ -61860,7 +61893,7 @@ This type of message will feature a single item from a business catalog, it will
 >
 > WhatsApp only allows catalog messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
 >
-> This customer service window lasts 24 hours, and lasts 72 hours if the customer service window is initiated via a [click-to-whatsapp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp).  
+> This customer service window lasts 24 hours. If the customer messages you from a [Click-to-WhatsApp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp), a free entry point window of up to 7 days also opens, and messages you send during it are free. You can still only send non-template messages while the 24-hour customer service window is open. See [Concepts & Fundamentals](/connect/docs/whatsapp/concepts-fundamentals#user-initiated-conversations-inbound).  
 >
 > Outside of the customer service window, only pre-approved WhatsApp templates can be sent to users.
 >
@@ -61940,9 +61973,9 @@ This option can send multiple product items from a business catalog to a custome
 
 > ❗️ **Customer Service Window**
 >
-> WhatsaApp only allows catalog messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
+> WhatsApp only allows catalog messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
 >
-> This customer service window lasts 24 hours, and lasts 72 hours if the customer service window is initiated via a [click-to-whatsapp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp).  
+> This customer service window lasts 24 hours. If the customer messages you from a [Click-to-WhatsApp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp), a free entry point window of up to 7 days also opens, and messages you send during it are free. You can still only send non-template messages while the 24-hour customer service window is open. See [Concepts & Fundamentals](/connect/docs/whatsapp/concepts-fundamentals#user-initiated-conversations-inbound).  
 >
 > Outside of the customer service window, only pre-approved WhatsApp templates can be sent to users.
 >
@@ -72140,7 +72173,7 @@ To initiate a conversation, you **must** use a **Template Message**.
 
 - **Content:** Can include text, media (image, video, document, location), and interactive buttons (Quick Reply, Call to Action, Copy Code).
 
-- **Impact:** Sending a template message opens a new, 24-hour template-based conversation, which is billed according to its category. If the customer replies, they open a 24-hour Customer Service Window.
+- **Impact:** Each template message is charged per delivered message, at the rate for its category and the recipient's market. If the customer replies, they open a 24-hour Customer Service Window.
 
 ### 2. Template Categories
 
@@ -72158,7 +72191,7 @@ A user-initiated conversation occurs when a customer sends your business a messa
 
 To receive inbound messages from customers, you need to configure webhooks. See [Webhooks Reference](./whatsapp-webhooks.md) for setup and payload details.
 
-**Regarding July 1, 2025 Pricing Changes:** Under the per-message pricing model, understanding these windows is essential to utilizing free messaging tiers.
+**How Meta charges for messages in these windows:** Under the per-message pricing model, Meta charges for each message delivered. As of October 1, 2026, this includes non-template (freeform) replies and Utility templates sent inside an open Customer Service Window, which were previously free. Understanding which window is open tells you which messages are charged and which are free.
 
 ### 1. The 24-Hour Customer Service Window (CSW)
 
@@ -72175,43 +72208,61 @@ While this window is open, the following rules apply:
 
 | Message Type | Delivery Status | Cost |
 | :--- | :--- | :--- |
-| **Non-Template** (Text, Image, Audio) | Allowed | **Free** |
-| **Utility Templates** | Allowed | **Free** |
+| **Non-Template** (Text, Image, Audio) | Allowed | **Paid** (Service message rate, after the monthly free tier) |
+| **Utility Templates** | Allowed | **Paid** (Standard Utility rate) |
 | **Marketing / Auth Templates** | Allowed | **Paid** (Standard Rates) |
 
-> **Key Takeaway:** To minimize costs, maximize the use of freeform text and Utility templates while the customer is actively conversing with you.
+#### Service Message Charging (Effective October 1, 2026)
 
-### 2. The 72-Hour Free Entry Point (FEP) Window
+A **service message** is any non-template message you send in an open Customer Service Window, whether a person or a third-party AI agent writes it. Meta did not charge for these messages from November 1, 2024. From October 1, 2026, Meta charges for them as follows:
 
-The Free Entry Point window is a special promotional period triggered by specific Meta advertising interactions. It offers the widest range of free messaging.
+- **Charged per delivered message:** Each service message is one chargeable message, the same way a template message is.
+- **Rate:** For each market, the service message rate is the same as that market's Utility and Authentication rate.
+- **No volume tiers:** Service messages do not qualify for volume tiers, so every chargeable service message is charged at the flat market rate. Utility and Authentication messages keep their volume tiers.
+- **Monthly free tier:** Each business phone number gets 1,000 free service messages per month, and 8x8 passes this free tier on to you. Unused messages do not roll over, and the count resets monthly. Charging starts from the 1,001st service message in the month.
+- **One charge per message:** A message has only one category. A non-template message that contains promotional content is still a service message, and Meta does not add a Marketing charge.
 
-- **How it starts:** This window opens **only** when a user messages your business through:
-  - A Meta **Click-to-WhatsApp Ad**.
-  - A Facebook Page **Call-to-Action (CTA)** button.
-- **Activation Requirement (Critical):** The FEP window does **not** open immediately upon the user's message. To activate the 72-hour free window, **you must reply to the user's message within 24 hours.**
-  - *If you reply within 24 hours:* The 72-hour FEP window activates immediately upon your reply delivery.
-  - *If you do NOT reply within 24 hours:* The opportunity is lost. Any subsequent message you send must be a paid Template Message, and it will not trigger the 72-hour free window.
+#### Utility Templates inside the CSW (Effective October 1, 2026)
 
-- **Duration:** Once activated, it lasts for a fixed **72 hours**.
-- **Reset Rules:** Unlike the CSW, this timer **does not reset** if the customer replies. It is a single, continuous 72-hour window.
+Utility templates sent inside an open Customer Service Window were free from July 1, 2025. From October 1, 2026, Meta charges for each one at the Utility rate for the recipient's market. Utility templates sent to open a conversation, outside the window, were already charged.
+
+#### How Charging Is Reported
+
+Service messages are reported under the `service` pricing category. In 8x8 delivery receipts, the `pricingCategory` field returns the same value as Meta's pricing category, so service messages report `service` and Utility templates report `utility`. The category is the same whether or not a message was charged, so delivery receipts do not tell you if an individual message was free. To see how many messages in each category were free or charged in a closed billing period, use the [Message Usage API](/connect/reference/get-message-usage), which returns `free` and `charged` counts by pricing category. See [Delivery Receipts for Outbound ChatApps](/connect/docs/delivery-receipts-for-outbound-chatapps).
+
+**Rates:** Meta publishes its rate cards by market and currency on the [WhatsApp Business Platform pricing page](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing#rate-cards-and-volume-tiers). The rates you pay are set by your 8x8 pricing plan, so contact your 8x8 account manager for your rates.
+
+> **Key Takeaway:** Inside an open Customer Service Window, freeform replies and Utility templates are no longer free, so replies from agents and automated flows add to your messaging cost. The exception is the Free Entry Point window described below.
+
+### 2. The Free Entry Point (FEP) Window
+
+The Free Entry Point window is a special promotional period triggered by a specific Meta advertising interaction. It offers the widest range of free messaging, and it is not affected by the October 1, 2026 change to service messages and Utility templates.
+
+- **How it starts:** This window opens **only** when a user messages your business through a Meta **Click-to-WhatsApp Ad**, using the WhatsApp Android or iOS app. Meta does not support the desktop and web apps for this window.
+- **Activation Requirement (Critical):** The FEP window does **not** open immediately upon the user's message. To activate the free window, **you must reply to the user's message within the Customer Service Window (24 hours).**
+  - *If you reply within 24 hours:* The reply is free, and the FEP window opens from the time you replied.
+  - *If you do NOT reply within 24 hours:* The opportunity is lost. Any subsequent message you send must be a paid Template Message, and it will not trigger the free window.
+
+- **Duration:** Once activated, it can remain open for up to **7 days**.
+- **Reset Rules:** Unlike the CSW, this timer **does not reset** if the customer replies.
 
 #### Pricing & Capabilities within the FEP
 
-During this 72-hour period, standard pricing is overridden:
+While the FEP window is open, standard pricing is overridden:
 
-- **All Messages are Free:** This includes non-template messages and **all categories** of Template Messages (including Marketing, Authentication and Utility).
+- **All Messages are Free:** This includes service messages (non-template) and **all categories** of Template Messages (including Marketing, Authentication and Utility). Utility and Authentication messages sent in an open FEP window do not count toward volume tiers, because only charged messages count.
 - **Interaction with the CSW:**
   - The FEP and the 24-hour CSW run in parallel.
-  - If the standard 24-hour CSW closes (e.g., the customer hasn't replied in 24 hours) but the 72-hour FEP is still active, you can **still send Template Messages for free**.
+  - If the standard 24-hour CSW closes (e.g., the customer hasn't replied in 24 hours) but the FEP window is still open, you can **still send Template Messages for free**.
 
 ### Summary of Windows
 
-| Feature | Customer Service Window (24h) | Free Entry Point Window (72h) |
+| Feature | Customer Service Window (24h) | Free Entry Point Window (up to 7 days) |
 | :--- | :--- | :--- |
-| **Trigger** | Any incoming user message/reply | Click-to-WhatsApp Ad or Page CTA |
-| **Duration** | 24 hours (Resets on new message) | 72 hours (Fixed, does not reset) |
-| **Freeform Messages** | **Allowed & Free** | **Free** (Must be within active CSW) |
-| **Utility Templates** | **Free** | **Free** |
+| **Trigger** | Any incoming user message/reply | Click-to-WhatsApp Ad |
+| **Duration** | 24 hours (Resets on new message) | Up to 7 days (Does not reset) |
+| **Freeform Messages** | **Allowed & Paid** (Service message rate, no volume tiers, after the monthly free tier) | **Free** (Must be within active CSW) |
+| **Utility Templates** | **Paid** (Utility rate) | **Free** |
 | **Marketing/Auth Templates** | Paid | **Free** |
 
 ### 3. Interactive (Freeform) Messages
@@ -73804,11 +73855,11 @@ The **Dashboard** provides a high-level, filterable view of your key metrics, in
 
 - **Received Messages:** See the volume of inbound messages from users.
 
-- **WhatsApp Conversations:** View a breakdown of conversations by Meta's categories (Authentication, Utility, Service, Marketing).
+- **WhatsApp Conversations:** View a breakdown of messages by Meta's pricing categories (Authentication, Utility, Service, Marketing).
 
 ### 2. Reports
 
-The **Reports** tab provides a detailed, exportable breakdown of your WhatsApp conversation usage and costs, filterable by subaccount, channel, and date range.
+The **Reports** tab provides a detailed, exportable breakdown of your WhatsApp message usage and costs, filterable by subaccount, channel, and date range.
 
 ### 3. Logs
 
@@ -73949,19 +74000,20 @@ This webhook alerts you to changes in your portfolio's messaging limit (e.g., an
 
 ## WhatsApp Pricing Model (PMP)
 
-WhatsApp Business pricing is based on a **Per-Message Pricing (PMP)** model. Charges are applied when a **template message** is delivered.
+WhatsApp Business pricing is based on a **Per-Message Pricing (PMP)** model. Charges are applied when a message is delivered: a **template message**, or, as of October 1, 2026, a non-template **service message**.
 
 ### Pricing Model and Chargeable Events
 
-- **Per-Message Pricing (PMP):** As of July 1, 2025, charges apply only when a template message (type: "template") is delivered.
+- **Per-Message Pricing (PMP):** As of July 1, 2025, charges apply per delivered message rather than per conversation. Until September 30, 2026, only template messages (type: "template") were charged, except Utility templates sent inside an open 24-hour customer service window, which were free.
+- **Service Messages and In-Window Utility Templates:** As of October 1, 2026, Meta also charges per message for service messages (non-template replies sent in an open customer service window) and for Utility templates sent inside an open customer service window. The rate for a service message is the same as the market's Utility and Authentication rate. Messages sent in an open free entry point window remain free. See [Concepts & Fundamentals](./concepts-fundamentals.md#pricing--capabilities-within-the-csw).
 
 - **Rate Drivers:** Charges vary by two factors:
 
-    1. The template's **category** (`marketing`, `utility`, `authentication`).
+    1. The message's **category** (`marketing`, `utility`, `authentication`, or `service` for non-template messages).
 
     2. The recipient's WhatsApp phone number **country calling code**.
 
-- **Volume Tiers:** Volume discounts are available for `utility` and `authentication` categories. As your monthly message volume increases, you move into higher tiers with lower per-message rates.
+- **Volume Tiers:** Volume discounts are available for `utility` and `authentication` categories. They are not available for `service` messages. As your monthly message volume increases, you move into higher tiers with lower per-message rates.
 
 ---
 
@@ -73999,7 +74051,10 @@ A quick reference for the common terminology used in this documentation.
 |**MM Lite API**|A specialized, high-throughput Meta API for marketing messages. This is a separate Meta product and is **not** part of the 8x8 integration described in this documentation.|
 |**Template Message**|A pre-approved message (in a specific `category`) required to initiate a conversation with a user or reply outside the 24-hour window.|
 |**Interactive Message**|A "freeform" (non-template) message that can only be sent *inside* the 24-hour window. Includes text, media, buttons, and lists.|
-|**Customer Service Window**|The 24-hour period after a user sends a message, during which you can reply with freeform Interactive Messages.|
+|**Customer Service Window**|The 24-hour period after a user sends a message, during which you can reply with freeform Interactive Messages. From October 1, 2026, these replies are charged as service messages, after the monthly free tier.|
+|**Service Message**|Any non-template message sent inside an open Customer Service Window, whether a person or an AI agent writes it. Charged per delivered message at the market's Utility and Authentication rate, after 1,000 free service messages per business phone number per month.|
+|**Free Entry Point (FEP) Window**|A free messaging window that opens when a user messages you from a Click-to-WhatsApp ad and you reply within 24 hours. It can remain open for up to 7 days, and all messages sent during it are free.|
+|**Volume Tier**|A lower per-message rate that applies as your monthly volume grows in a market. Available for Utility and Authentication messages, not for Marketing or service messages.|
 |**Authentication Template**|A template category for sending One-Time Passcodes (OTPs).|
 |**Marketing Template**|A template category for any promotional content or offers.|
 |**Utility Template**|A template category for non-promotional, transactional updates (e.g., order confirmation, shipping alert).|
@@ -77408,7 +77463,7 @@ The [24-hour customer service window](/connect/docs/whatsapp/concepts-fundamenta
 | :--- | :--- |
 | Template message sent through Cloud API (platform or API) | **Yes.** Charged at standard WhatsApp rates for its category. |
 | Message sent manually from the WhatsApp Business app | **No.** Messages sent from the app remain free. |
-| Freeform message sent through Cloud API inside an open customer service window | Follows the standard [pricing rules for the customer service window](/connect/docs/whatsapp/concepts-fundamentals#pricing--capabilities-within-the-csw). |
+| Freeform message sent through Cloud API inside an open customer service window | **Yes.** Charged as a service message, after the monthly free tier. See the [pricing rules for the customer service window](/connect/docs/whatsapp/concepts-fundamentals#pricing--capabilities-within-the-csw). |
 
 Charging and invoicing are identical to an existing WhatsApp Cloud API account: a prepaid account needs sufficient balance to send, and a postpaid account receives a monthly invoice.
 
@@ -77870,6 +77925,465 @@ The July dates below are 8x8's own engineering targets. The username wave rollou
 **External:**
 
 - [Meta: Business-scoped user IDs](https://developers.facebook.com/documentation/business-messaging/whatsapp/business-scoped-user-ids/) - Meta's own reference, including the full document changelog.
+
+---
+
+## WhatsApp Direct Send API
+
+
+WhatsApp requires every business-initiated message to be sent against an approved template. Direct Send removes the template-creation step for utility messages: you send the message content directly, and WhatsApp generates, classifies, and manages the matching template on your behalf.
+
+This page covers the concepts behind Direct Send, then the exact API and webhook details for using it on the 8x8 platform, an integration checklist, and the limits that apply.
+
+## Conceptual Foundation & Core Architecture
+
+### Template-First vs Direct Send
+
+Under the standard model, you create a template, wait for it to be approved, and only then send against it. Direct Send changes the order of those steps:
+
+- **Standard Template Messaging:** you create and submit the template, wait for approval, then reference it by name in each send request.
+- **Direct Send:** you send the content with a `directSend` object. WhatsApp matches or creates the template for you, so there is nothing to create or approve before the first send.
+
+**The Key Concept**
+
+Direct Send does not remove templates. Every Direct Send message is still delivered against a template, and the same integrity rules apply to it. The difference is that WhatsApp creates and maintains that template, and you can trace every message back to it.
+
+### How Template Matching Works
+
+For each Direct Send message, WhatsApp follows this sequence:
+
+1. **Match:** it checks whether the message matches an existing template. If it does, that template is used to send the message.
+2. **Fall back:** if no template matches, the message is still sent, using a fallback onboarding template.
+3. **Create:** when there is no match, WhatsApp asynchronously creates a new template from the message, so future matching messages use it. The content is redacted for personal information and its language is detected before the template is created.
+4. **Report:** the delivery receipt carries the `templateId` of the template that was used.
+
+### Platform Send Behavior
+
+The `content.whatsApp.directSend` object decides which path a WhatsApp message takes on the 8x8 platform.
+
+| Request Scenario | 8x8 Behavior |
+| --- | --- |
+| `directSend` present | Sent through Direct Send. WhatsApp matches or creates a template. Charged at utility rates. |
+| `directSend` omitted | Sent as a standard WhatsApp message. Follows the normal rules for [freeform and template messages](./concepts-fundamentals.md). |
+
+### Supported Features
+
+Direct Send on 8x8 supports the following. Any message type, button format, header type, or category not listed here is not supported with Direct Send.
+
+| Feature | Supported | Details |
+| --- | --- | --- |
+| **Category** | `utility` only | Charged at utility rates. |
+| **Text messages** | Yes | Set `type` to `text`. |
+| **Interactive CTA URL messages** | Yes | One Call-to-Action URL button. Set `interactive.type` to `cta_url`. |
+| **Interactive reply button messages** | Yes | 1 to 3 reply buttons. Set `interactive.type` to `button`. |
+| **Interactive headers** | Text only | Image, video, and document headers are not supported. |
+| **Time-to-live (TTL)** | Yes | `ttlSeconds`, from 30 to 43200 seconds. |
+| **Recipient by phone number or BSUID** | Yes | Use `msisdn` or `channelUserId`. |
+
+### Key Platform Limitations & Constraints
+
+Design your workflows around the following limitations.
+
+**Utility Category Only**
+
+Direct Send accepts only `"category": "utility"`. Marketing and authentication messages cannot be sent with Direct Send on 8x8. Send them as [template messages](./whatsapp-over-8x8-api.md) instead.
+
+**No Template Naming**
+
+You cannot set the name of the template Direct Send creates. 8x8 matches or creates templates automatically, and the request has no field for a template name.
+
+**Generated Templates Are Managed by WhatsApp**
+
+- **Names:** generated template names start with `auto_generated`, for example `auto_generated_1234567890`.
+- **No edits:** you cannot edit or delete a template generated by Direct Send.
+- **Cleanup:** templates that were created but never used are deleted after 24 hours. Templates that were used but have been inactive for a while are archived.
+
+**Language Support**
+
+All WhatsApp Cloud API languages are supported. If you send in an unsupported language, the message is still delivered, but WhatsApp uses the onboarding templates instead of creating one. That message has no classification, integrity checks, or metrics.
+
+**Link Previews**
+
+Link previews are not rendered for messages sent with Direct Send. Use a CTA URL button when you want the recipient to open a link.
+
+**Sample Submission**
+
+Direct Send messages do not require a sample submission step. You can send as soon as your request is ready.
+
+**Pricing**
+
+Direct Send messages are charged at utility rates. A utility message opens a 24-hour utility conversation if one is not already open between you and the recipient. Utility conversations are separate from service conversations and are billed independently.
+
+## 8x8 Developer & API Reference
+
+8x8 exposes Direct Send through the `content.whatsApp.directSend` object on the existing Send Message endpoint. No separate endpoint or setup call is required.
+
+### Sending a Direct Send Message
+
+**Endpoint:**
+
+```http
+POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages
+```
+
+**Path Parameters:**
+
+- `{subAccountId}`: the ID of the subaccount you send from.
+
+Authenticate as described in [WhatsApp over 8x8 API](./whatsapp-over-8x8-api.md#authentication). The complete request and response schema is in the [Send Message API reference](/connect/reference/send-message).
+
+**The `directSend` Object**
+
+- `content.whatsApp.directSend.category` (required): the category of the message. The only supported value is `utility`.
+- `content.whatsApp.directSend.ttlSeconds` (optional): how long, in seconds, the message stays eligible for delivery. See [Time-to-Live](#time-to-live).
+
+**Example A: Text Message**
+
+```json
+{
+  "user": {
+    "msisdn": "+6500000000"
+  },
+  "type": "text",
+  "channels": [
+    {
+      "channel": "WhatsApp"
+    }
+  ],
+  "content": {
+    "text": "Hi Jane, your order #12345 has been shipped and is expected to arrive on March 20.",
+    "whatsApp": {
+      "directSend": {
+        "category": "utility",
+        "ttlSeconds": 600
+      }
+    }
+  }
+}
+```
+
+**Key Fields:**
+
+- `type`: `"text"`
+- `content.text`: the message body.
+- `content.whatsApp.directSend.category`: `"utility"`
+- `content.whatsApp.directSend.ttlSeconds`: optional. In this example, the message expires after 600 seconds (10 minutes) if it cannot be delivered.
+
+**Example B: Interactive Message with a CTA URL Button**
+
+```json
+{
+  "user": {
+    "msisdn": "+6500000000"
+  },
+  "type": "interactive",
+  "channels": [
+    {
+      "channel": "WhatsApp"
+    }
+  ],
+  "content": {
+    "interactive": {
+      "type": "cta_url",
+      "header": {
+        "type": "text",
+        "text": "Order #12345"
+      },
+      "body": {
+        "text": "Your order has been shipped. Tap below to track your package."
+      },
+      "footer": {
+        "text": "Thank you for shopping with 8x8."
+      },
+      "action": {
+        "parameters": {
+          "display_text": "Track Order",
+          "url": "https://www.example.com/track/12345"
+        }
+      }
+    },
+    "whatsApp": {
+      "directSend": {
+        "category": "utility"
+      }
+    }
+  }
+}
+```
+
+**Key Fields:**
+
+- `type`: `"interactive"`
+- `content.interactive.type`: `"cta_url"`
+- `content.interactive.header`: optional. Must be `"type": "text"`.
+- `content.interactive.body.text`: the message body.
+- `content.interactive.footer.text`: optional footer text.
+- `content.interactive.action.parameters.display_text`: the button label.
+- `content.interactive.action.parameters.url`: the URL the button opens.
+
+**Example C: Interactive Message with Reply Buttons**
+
+```json
+{
+  "user": {
+    "msisdn": "+6500000000"
+  },
+  "type": "interactive",
+  "channels": [
+    {
+      "channel": "WhatsApp"
+    }
+  ],
+  "content": {
+    "interactive": {
+      "type": "button",
+      "header": {
+        "type": "text",
+        "text": "Appointment Reminder"
+      },
+      "body": {
+        "text": "Your appointment is scheduled for tomorrow at 3 PM. Would you like to confirm or reschedule?"
+      },
+      "footer": {
+        "text": "Reply within 24 hours."
+      },
+      "action": {
+        "buttons": [
+          {
+            "type": "reply",
+            "reply": {
+              "id": "confirm",
+              "title": "Confirm"
+            }
+          },
+          {
+            "type": "reply",
+            "reply": {
+              "id": "reschedule",
+              "title": "Reschedule"
+            }
+          }
+        ]
+      }
+    },
+    "whatsApp": {
+      "directSend": {
+        "category": "utility"
+      }
+    }
+  }
+}
+```
+
+**Key Fields:**
+
+- `content.interactive.type`: `"button"`
+- `content.interactive.header`: optional. Must be `"type": "text"`.
+- `content.interactive.action.buttons`: 1 to 3 reply buttons.
+- `content.interactive.action.buttons[].reply.id`: the identifier returned to you in the inbound message when the recipient taps the button.
+- `content.interactive.action.buttons[].reply.title`: the button label.
+
+**Success Response**
+
+A successful request returns the standard Send Message response, and the message is queued for delivery.
+
+```json
+{
+  "umid": "82188ee0-109f-e811-8150-020897df5459",
+  "user": {
+    "msisdn": "+6512341234"
+  },
+  "clientMessageId": "1234_id",
+  "status": {
+    "state": "queued",
+    "timestamp": "2021-01-04T08:19:45.99Z"
+  }
+}
+```
+
+### Addressing the Recipient
+
+Direct Send accepts both recipient identifiers in the `user` object.
+
+| Recipient Identifier Scenario | 8x8 Routing Behavior |
+| --- | --- |
+| `msisdn` only | Delivered via standard phone routing. |
+| `channelUserId` only | Delivered to the matching [Business-Scoped User ID](./whatsapp-business-scoped-user-ids.md). |
+| Both identifiers provided | `msisdn` takes precedence. To send using only the BSUID, omit `msisdn` from the request. |
+
+### Time-to-Live
+
+`ttlSeconds` sets how long the message stays eligible for delivery. If the message cannot be delivered within this window, it is dropped.
+
+| Setting | Value |
+| --- | --- |
+| **Default** | 30 days (when `ttlSeconds` is omitted) |
+| **Minimum** | 30 seconds |
+| **Maximum** | 43200 seconds (12 hours) |
+
+> **Important: TTL Applies to Direct Send Only**
+>
+> WhatsApp rejects a TTL value on a message that is not a Direct Send message. Set `ttlSeconds` only inside `content.whatsApp.directSend`. Values below 30 or above 43200 are also rejected.
+
+<!-- NEEDS SOURCE: the exact 8x8 API error response (HTTP status, code, message) returned when ttlSeconds is out of range. -->
+
+For TTL on pre-approved templates, see [Template Validity Period (TTL)](/connect/docs/guide-whatsapp-template-validity-period-ttl).
+
+### Delivery Receipts
+
+Delivery receipts for Direct Send messages follow the standard [format for outbound Chat Apps](/connect/docs/delivery-receipts-for-outbound-chatapps). One field is specific to Direct Send.
+
+| Field Path | Standard Message | Direct Send Message |
+| --- | --- | --- |
+| `whatsapp.templateId` | Not present | String. The ID of the template WhatsApp used to deliver the message |
+
+```json
+"whatsapp": {
+  "pricingCategory": "utility",
+  "templateId": "1281032340757288"
+}
+```
+
+Use `templateId` to identify which template a message used, to find that template in your template list, and to match receipts to template-level reporting.
+
+> **Note**
+>
+> A message whose TTL elapses before delivery is dropped and not delivered.
+
+### Template Pauses
+
+WhatsApp pauses templates that receive low-quality feedback, and the same rule applies to templates generated by Direct Send. If you send a message that matches a paused template, the message fails and the failed delivery receipt carries WhatsApp error code `132015` in `providerErrorCode`.
+
+A paused template also raises a `template_status_update` event with `status` set to `PAUSED` on the [WhatsApp Template Change webhook](/connect/docs/whatsapp-template-change-webhook).
+
+To avoid pauses, send messages only to recipients who expect them, and write content they recognize as expected, such as an appointment reminder.
+
+### Category Misuse Detection
+
+WhatsApp monitors how Direct Send messages are categorized. When it detects that a message looks like marketing content, a `template_correct_category_detection` event is sent to the [WhatsApp Template Change webhook](/connect/docs/whatsapp-template-change-webhook).
+
+```json
+{
+    "eventId": "0f88f5c4-fae7-4dcf-8ff2-b2990133edea",
+    "timestamp": "2025-01-01T00:00:00.00Z",
+    "provider": "WhatsApp",
+    "businessAccountId": "<BUSINESS_ACCOUNT_ID>",
+    "accountId": "<ACCOUNT_ID>",
+    "eventType": "template_correct_category_detection",
+    "eventDetails": {
+      "templateId": "<TEMPLATE_ID>",
+      "templateName": "<TEMPLATE_NAME>",
+      "templateLanguage": "<TEMPLATE_LANGUAGE>",
+      "meta": {
+        "category": "UTILITY",
+        "correctCategory": "MARKETING"
+      }
+    }
+}
+```
+
+**Key Fields:**
+
+- `eventDetails.meta.category`: the category the message was sent under, for example `UTILITY`.
+- `eventDetails.meta.correctCategory`: the category WhatsApp detected, `MARKETING` or `AUTHENTICATION`.
+
+Review the content of every flagged template. If you believe a flag is a mistake, request a review from WhatsApp support by email, including the IDs or names of the flagged templates. Persistent misuse leads to restrictions on Direct Send.
+
+### Account Restrictions
+
+Persistent category misuse escalates in stages. Each stage is delivered as an `ACCOUNT_RESTRICTION` event on the [WhatsApp Account Update webhook](/connect/docs/whatsapp-account-update-webhook), in `violationInfo.violationType`.
+
+| Stage | `violationType` | Effect |
+| --- | --- | --- |
+| **Warning** | `DIRECT_SEND_UTILITY_CATEGORY_ABUSE_WARN` | Notification only. No restriction is applied. |
+| **Strike 1** | `DIRECT_SEND_UTILITY_CATEGORY_ABUSE_STRIKE_1` | Direct Send is restricted for 7 days. |
+| **Strike 2** | `DIRECT_SEND_UTILITY_CATEGORY_ABUSE_STRIKE_2` | Direct Send is restricted for 30 days. |
+| **Offboard** | `DIRECT_SEND_UTILITY_CATEGORY_ABUSE_OFFBOARD` | Direct Send is permanently restricted. |
+| **Unban** | `DIRECT_SEND_UTILITY_CATEGORY_ABUSE_UNBAN` | The restriction is lifted. |
+
+For strike and offboard events, `restrictionInfo` contains a `restrictionType` of `RESTRICTED_DIRECT_SEND_UTILITY_TEMPLATES` and the `expiration` time of the restriction.
+
+**Example Payload: Strike 1 Restriction**
+
+```json
+{
+    "eventId": "9ac6f2cb-abb7-43e6-b533-b3d7017846fd",
+    "timestamp": "2026-01-19T13:50:20.00Z",
+    "provider": "WhatsApp",
+    "businessAccountId": "950523421983857",
+    "accountId": "IntegrationTestCampaign",
+    "eventDetails": {
+        "event": "ACCOUNT_RESTRICTION",
+        "violationInfo": {
+            "violationType": "DIRECT_SEND_UTILITY_CATEGORY_ABUSE_STRIKE_1"
+        },
+        "restrictionInfo": [
+            {
+                "restrictionType": "RESTRICTED_DIRECT_SEND_UTILITY_TEMPLATES",
+                "expiration": "2026-01-26T13:50:20.00Z"
+            }
+        ]
+    }
+}
+```
+
+> **Important: Restrictions Apply per WhatsApp Business Account**
+>
+> A restriction applies to the WhatsApp Business Account (WABA) that triggered it. Other WABAs are not affected.
+
+<!-- NEEDS SOURCE: what the Send Message API returns for a Direct Send request while a restriction is active (WhatsApp error 139200 at the platform layer is recorded in the PRD only), and the 24-hour limit behavior for error 131064. -->
+
+<!-- NEEDS SOURCE: how auto-generated templates appear in the 8x8 Connect Templates table and the 8x8 template list API (labels, filters). -->
+
+### Message Limits
+
+Direct Send messages follow the WhatsApp limits for business-initiated template messages.
+
+| Element | Limit |
+| --- | --- |
+| **Body text** | 1024 characters |
+| **Header text** | 60 characters |
+| **Footer text** | 60 characters |
+| **Button text** | 20 characters |
+| **Reply buttons** | 3 (8x8 maximum) |
+| **CTA URL buttons** | 1 (8x8 maximum) |
+| **Throughput** | Standard WhatsApp Cloud API throughput |
+
+## Integration Checklist
+
+Complete these before you send Direct Send messages in production.
+
+- [ ] **Use the utility category only.** Direct Send accepts `"category": "utility"`. Route marketing and authentication messages through template messages.
+- [ ] **Subscribe to the [WhatsApp Template Change webhook](/connect/docs/whatsapp-template-change-webhook).** It delivers template pauses and category misuse events, which are your earliest signals that content needs review.
+- [ ] **Subscribe to the [WhatsApp Account Update webhook](/connect/docs/whatsapp-account-update-webhook).** It delivers the warning, strike, offboard, and unban events for Direct Send restrictions.
+- [ ] **Store `whatsapp.templateId` from delivery receipts.** It is the only link between a message and the template that carried it.
+- [ ] **Handle error `132015` in your send pipeline.** A message that matches a paused template fails, so retry later or adjust the content rather than letting the send silently fail.
+- [ ] **Set `ttlSeconds` for time-sensitive messages.** Without it, a message stays eligible for delivery for 30 days.
+- [ ] **Keep content utility-only.** Review order, shipping, and appointment content so it does not read as marketing, to avoid category misuse flags.
+- [ ] **Test your send path in a non-critical flow first,** covering text, CTA URL, and reply button messages.
+
+## Related Resources
+
+**API Reference:**
+
+- [Send Message API](/connect/reference/send-message) - Full request and response schema, including the Direct Send examples.
+- [WhatsApp over 8x8 API](./whatsapp-over-8x8-api.md) - Authentication, endpoints, and the rest of the Send Message payloads.
+
+**Webhooks:**
+
+- [Delivery Receipts for Outbound Chat Apps](/connect/docs/delivery-receipts-for-outbound-chatapps) - Receipt fields, including `templateId`.
+- [WhatsApp Template Change Webhook](/connect/docs/whatsapp-template-change-webhook) - Template pauses and category misuse events.
+- [WhatsApp Account Update Webhook](/connect/docs/whatsapp-account-update-webhook) - Direct Send restriction events.
+
+**Conceptual Foundation:**
+
+- [Concepts & Fundamentals](./concepts-fundamentals.md) - How conversations and message categories work.
+- [Message Types & Templates](./message-types-templates.md) - Pre-approved template messages.
+- [Business-Scoped User IDs](./whatsapp-business-scoped-user-ids.md) - Addressing recipients by `channelUserId`.
+
+**External:**
+
+- [Meta: Direct Send API](https://developers.facebook.com/documentation/business-messaging/whatsapp/direct-send) - Meta's own reference.
 
 ---
 
