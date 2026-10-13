@@ -779,7 +779,6 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [6 April 2022 Release](https://developer.8x8.com/jaas/docs/6-april-2022-release): **Highlights**
 - [6 May 2022 Release](https://developer.8x8.com/jaas/docs/6-may-2022-release): **Highlights**
 - [9 September 2021 Release](https://developer.8x8.com/jaas/docs/9-september-2021-release): **Improvements**
-- [AI Services](https://developer.8x8.com/jaas/docs/ai-services): The **AI Services** page enables JaaS admins to configure the default Transcriber for their meetings.
 - [Backend integration tutorials & samples](https://developer.8x8.com/jaas/docs/api-key-backend): Please check below jwt generation samples for various programming languages:
 - [Generating and adding your JaaS API key](https://developer.8x8.com/jaas/docs/api-keys-generate-add): Your uploaded public key is used to authenticate generated JWT tokens using the Private Key of the specific key pair. When the Jitsi IFrame connect...
 - [The Jitsi JSON Web Token (JWT)](https://developer.8x8.com/jaas/docs/api-keys-jwt): For each user endpoint you enable for a meeting, you must generate a JWT token and sign it with a Private Key.

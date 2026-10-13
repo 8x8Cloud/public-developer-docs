@@ -100484,13 +100484,6 @@ Follow us on [Twitter](https://twitter.com/JaaSOfficial) to get the news about o
 
 ---
 
-## AI Services
-
-
-The **AI Services** page enables JaaS admins to configure the default Transcriber for their meetings.
-
----
-
 ## Backend integration tutorials & samples
 
 
@@ -101349,7 +101342,7 @@ Find answers to questions about using and managing meetings in Jitsi.
 
 ### Does JaaS support real-time transcription? [transcription]
 
-Yes. JaaS can send the audio captured from all participants in the room to an external speech-to-text service. Currently, only the Google Cloud Speech-to-Text API is supported. This service is charged separately.
+Yes. JaaS can send the audio captured from all participants in the room to an external speech-to-text service. The current default provider is xAI. This service is charged separately.
 
 >
 > Note: All subscriptions support transcriptions as long as there is a valid credit card attached and the JWT token used as moderator has transcription enabled - see [API keys](/jaas/docs/jaas-console-api-keys).
@@ -101379,11 +101372,7 @@ The transcriber reliably accepts only the first language set at the beginning of
 
 ### Why doesn’t the transcriber update to the new language immediately?
 
-The transcriber maintains a long-running connection with Google and Oracle backends, setting the transcription language when the connection is first established. If an admin changes the language after the connection is active, the transcriber will continue using the original language until it reconnects. A reconnect only occurs after a period of inactivity (e.g., no audio sent for about 10 seconds).
-
-### Does Whisper support multiple languages?
-
-At the moment, Whisper only supports English.
+The transcriber maintains a long-running connection with backends, setting the transcription language when the connection is first established. If an admin changes the language after the connection is active, the transcriber will continue using the original language until it reconnects. A reconnect only occurs after a period of inactivity (e.g., no audio sent for about 10 seconds).
 
 ### Is it possible to turn on and save transcriptions for every call programatically without the user selecting them?
 
@@ -106816,7 +106805,7 @@ This is a companion video demo of transcription and translation.
 
 ## Using Transcription / Translation
 
-In order to use the Transcription feature, navigate to the **Triple Dot Menu / More Options Button** then the **Subtitles** option within that menu. This only turns on translation for the current user. Other users will have to enable subtitles through the same process. Whenever any participant speaks in the room, a subtitle will appear at the bottom for the users who have enabled the feature.
+In order to use the Transcription feature, navigate to the **Triple Dot Menu / More Options Button** then the **Subtitles** option within that menu. This only turns on transcription for the current user. Other users will have to enable subtitles through the same process. Whenever any participant speaks in the room, a subtitle will appear at the bottom for the users who have enabled the feature.
 
 ![image](../images/4c56586-image.png)
 By default the transcription will be in the same language as your interface, however you can choose to change it to a different language within the same **Subtitles** menu.
@@ -107786,7 +107775,6 @@ Before every meeting the registered `URL` will be called using a `POST` request 
   "passcode": "0000",
   "lobbyType": "WAIT_FOR_APPROVAL",
   "maxOccupants": 4,
-  "transcriberType": "EGHT_WHISPER",
   "participantsSoftLimit": 3,
   "visitorsEnabled": true,
   "hideDisplayName": "GUEST"
@@ -107797,7 +107785,6 @@ Before every meeting the registered `URL` will be called using a `POST` request 
 - **`passcode`** (string: digits only): The passcode that the meeting will start with. If `empty` or the field is `missing` the meeting will start without a passcode.
 - **`lobbyType`** (string (optional): **`WAIT_FOR_APPROVAL`** \| **`WAIT_FOR_MODERATOR`**): if `WAIT_FOR_MODERATOR` is returned the lobby is automatically disabled after the first moderator joins. If `WAIT_FOR_APPROVAL` is returned or the `lobbyType` field is missing, non-moderator participants must ask to join and be approved by a moderator from the room.
 - **`maxOccupants`** (integer (optional)): The maximum number of participants that can be at the same time in a meeting. Should be a value between 2 and 500.
-- **`transcriberType`** (string (optional)): **`GOOGLE`** \| **`ORACLE_CLOUD_AI_SPEECH`** \| **`EGHT_WHISPER`**: if the field is missing, it will default to the option selected in the JaaS Admin Panel under the AI Services section.
 - **`participantsSoftLimit`** (number (optional)): the number of spots available for participants. Anyone joining after that will be considered a visitor, if the visitor functionality is enabled (see below). Otherwise, the field will be ignored.
 - **`visitorsEnabled`** (boolean (optional)): whether the visitor functionality is enabled. The feature is disabled by default.
 - **`hideDisplayName`** (string (optional)): **`GUEST`** : when specified, it will hide the participant names for non-moderators.
