@@ -32084,7 +32084,7 @@ Same structure as Journeys endpoint, but with transition-specific filters.
       "transitions": [
         {
           "time": "2025-05-21T12:09:23.312+03:00",
-          "name":"STARTED",
+          "name": "STARTED",
           "interactionId": "int-196f21ac6ef-d5eed30bc738045-phone-02-8x8",
           "agents": [],
           "previousAgents": [],
@@ -32092,14 +32092,16 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "previousRingGroup": null,
           "queue": null,
           "ringGroup": null,
+          "autoAttendant": null,
           "duration": 0,
           "externalNumber": null,
           "channel": null,
+          "scripts": [],
           "mediaType": "Phone"
         },
         {
           "time": "2025-05-21T12:09:23.312+03:00",
-          "name":"IN_SCRIPT",
+          "name": "IN_SCRIPT",
           "interactionId": "int-196f21ac6ef-d5eed30bc738045-phone-02-8x8",
           "agents": [],
           "previousAgents": [],
@@ -32107,6 +32109,7 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "previousRingGroup": null,
           "queue": null,
           "ringGroup": null,
+          "autoAttendant": null,
           "duration": 9206,
           "externalNumber": null,
           "channel": null,
@@ -32121,7 +32124,7 @@ Same structure as Journeys endpoint, but with transition-specific filters.
         },
         {
           "time": "2025-05-21T12:10:12.143+03:00",
-          "name":"TRANSFER",
+          "name": "TRANSFER",
           "interactionId": "int-196f21ac6ef-d5eed30bc738045-phone-02-8x8",
           "agents": [
             {
@@ -32131,6 +32134,7 @@ Same structure as Journeys endpoint, but with transition-specific filters.
               "loginId": "jpott",
               "department": "Technical Support",
               "group": null,
+              "site": null,
               "type": "HUMAN"
             }
           ],
@@ -32142,17 +32146,20 @@ Same structure as Journeys endpoint, but with transition-specific filters.
               "loginId": "mmellow",
               "department": "Customer Support",
               "group": null,
+              "site": null,
               "type": "HUMAN"
             }
           ],
           "previousQueue": {
             "id": "queue-101",
             "name": "Service Client",
-            "extension": "2001"
+            "extension": "2001",
+            "site": null
           },
           "previousRingGroup": null,
           "queue": null,
           "ringGroup": null,
+          "autoAttendant": null,
           "duration": 0,
           "externalNumber": "+441138413014",
           "channel": {
@@ -32160,6 +32167,7 @@ Same structure as Journeys endpoint, but with transition-specific filters.
             "name": "Voice",
             "tenantId": "cexpbx01"
           },
+          "scripts": [],
           "mediaType": "Phone"
         }
       ]
@@ -32411,7 +32419,7 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 | `forwardedToRingGroup` | int                  | Number of automated forwards to a Ring Group during the journey                                                                                                                                                                                                                  |
 | `forwardedToScript`    | int                  | Number of automated forwards to a Unified Communications auto attendant or Contact Center script/IVR                                                                                                                                                                             |
 | `holdDuration`         | long                 | Total hold time in milliseconds                                                                                                                                                                                                                                                  |
-| `mediaTypes`           | string\[]            | Media of the interactions in the journey. Values: `Phone`, `Chat`, `Email`                                                                                                                                                                                                                                                                               |
+| `mediaTypes`           | string\[]            | Media of the interactions in the journey. Values: `Phone`, `Chat`, `Email`, `VoiceMail`. `VoiceMail` is reported for a Contact Center voicemail interaction, see [Contact Center Voicemail Follow-Up Tracking](#4-contact-center-voicemail-follow-up-tracking)                                                                                                                                                                                                                                                                               |
 | `origin`               | origin               | Origin object identifying the 8x8 user who initiated an outbound journey. `null` for inbound and internal journeys.                                                                                                                                                              |
 | `direction`            | string               | Direction of the journey. One of `Inbound`, the contact called into your organization; `Outbound`, an 8x8 user called the contact; or `Internal`, the interaction took place between 8x8 users of your organization.                                                              |
 | `pbxNames`             | string\[]            | PBX names                                                                                                                                                                                                                                                                        |
@@ -32764,7 +32772,7 @@ the exact journey path. Journeys are identified with the *journeyId*. Each trans
 | `externalNumber`    | string       | External number (if applicable)                                                                                                           |
 | `channel`           | Channel      | Contact Center channel the interaction was routed to, on `FORWARD` and `TRANSFER` transitions. `null` on every other transition. See [Channel Object](#channel-object). |
 | `scripts`           | Script\[]    | Ordered list of Contact Center IVR scripts visited by the interaction. Populated only on `IN_SCRIPT` transitions. See [Script Object](#script-object). |
-| `mediaType`         | string       | Media type of the interaction. Values: `Phone`, `Chat`, `Email`                                                                           |
+| `mediaType`         | string       | Media type of the interaction. Values: `Phone`, `Chat`, `Email`, `VoiceMail`. `VoiceMail` is reported for a Contact Center voicemail interaction, see [Contact Center Voicemail Follow-Up Tracking](#4-contact-center-voicemail-follow-up-tracking)                                                                           |
 
 #### AutoAttendant Object
 
@@ -32772,12 +32780,12 @@ The AutoAttendant object identifies a Unified Communications auto attendant invo
 
 ```json
 {
-  "id": "string",
-  "name": "string",
-  "extension": "string",
+  "id": "aa-123",
+  "name": "Main Auto Attendant",
+  "extension": "1040",
   "site": {
-    "id": "string",
-    "name": "string"
+    "id": "site-123",
+    "name": "London Office"
   }
 }
 ```
@@ -32788,6 +32796,36 @@ The AutoAttendant object identifies a Unified Communications auto attendant invo
 | `name`      | string | Display name of the auto attendant                  |
 | `extension` | string | Auto attendant extension number                     |
 | `site`      | Site   | Site (branch/office) the auto attendant belongs to. |
+
+On an `IN_SCRIPT` transition running on an auto attendant, `autoAttendant` is the only routing object populated and `scripts` stays empty, since the script is an auto attendant and not a Contact Center IVR script:
+
+```json
+{
+  "time": "2025-05-21T07:36:58.801+02:00",
+  "name": "IN_SCRIPT",
+  "interactionId": "1747644958218",
+  "agents": [],
+  "previousAgents": [],
+  "previousQueue": null,
+  "previousRingGroup": null,
+  "queue": null,
+  "ringGroup": null,
+  "autoAttendant": {
+    "id": "aa-123",
+    "name": "Main Auto Attendant",
+    "extension": "1040",
+    "site": {
+      "id": "site-123",
+      "name": "London Office"
+    }
+  },
+  "duration": 5013,
+  "externalNumber": null,
+  "channel": null,
+  "scripts": [],
+  "mediaType": "Phone"
+}
+```
 
 #### Channel Object
 
@@ -33155,6 +33193,114 @@ POST /v1/transitions/search
 }
 ```
 
+The response for a journey where an agent processed the message, with the transitions before `VOICEMAIL` omitted:
+
+```json
+{
+  "data": [
+    {
+      "journeyId": "4f8e1c2a9b7d3e6f0a1b2c3d4e5f6a7b",
+      "transitions": [
+        {
+          "time": "2025-05-19T14:43:59.691+02:00",
+          "name": "VOICEMAIL",
+          "interactionId": "int-19fadd030e2-d5eed30bc738045-phone-01-cexpbx01",
+          "agents": [],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": null,
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 4727,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "Phone"
+        },
+        {
+          "time": "2025-05-19T14:44:04.418+02:00",
+          "name": "FOLLOWUP_PENDING",
+          "interactionId": "int-19fadd0b3c5-7c1e94a0b25d3f6-vmail-01-cexpbx01",
+          "agents": [],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": {
+            "id": "queue-voicemail-123",
+            "name": "voicemail-support",
+            "extension": null,
+            "site": null
+          },
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 51179,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "VoiceMail"
+        },
+        {
+          "time": "2025-05-19T14:44:55.597+02:00",
+          "name": "PROCESSING",
+          "interactionId": "int-19fadd0b3c5-7c1e94a0b25d3f6-vmail-01-cexpbx01",
+          "agents": [
+            {
+              "id": "ag-789",
+              "name": "Jane Smith",
+              "email": "jane.smith@example.com",
+              "loginId": "jsmith",
+              "department": "Sales",
+              "group": null,
+              "site": {
+                "id": "site-123",
+                "name": "London Office"
+              },
+              "type": "HUMAN"
+            }
+          ],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": {
+            "id": "queue-voicemail-123",
+            "name": "voicemail-support",
+            "extension": null,
+            "site": null
+          },
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 15712,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "VoiceMail"
+        },
+        {
+          "time": "2025-05-19T14:45:11.309+02:00",
+          "name": "FINISHED",
+          "interactionId": null,
+          "agents": [],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": null,
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 0,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "VoiceMail"
+        }
+      ]
+    }
+  ],
+  "nextPageCursor": null,
+  "totalElements": 1
+}
+```
+
 2. Find which journeys a given agent processed a voicemail for, by combining the state with the
    agent. The state is what makes this different from ordinary talk time, since the agent filter
    alone would also match live conversations:
@@ -33209,6 +33355,9 @@ POST /v1/journeys/search
   transferred the interaction to a destination that ended in voicemail, where that first agent had
   already handled the journey. In both cases the outcome is `Handled` and the `VOICEMAIL` transition
   stays on the timeline.
+- **The follow-up is reported on the voicemail interaction.** `FOLLOWUP_PENDING` and `PROCESSING`
+  carry the voicemail interaction's `interactionId`, not the original call's, and their `mediaType`
+  is `VoiceMail`, which also appears in the journey's `mediaTypes`.
 
 ### 5. Contact Center Queue Callback Tracking
 
@@ -33266,6 +33415,215 @@ POST /v1/transitions/search
   ],
   "displayTimezone": "Europe/Paris",
   "limit": 100
+}
+```
+
+The response for a callback that reached the customer, from the original call's `WAITING` onward. The callback is its own interaction, so from `FOLLOWUP_PENDING` onward the `interactionId` differs from the original call's:
+
+```json
+{
+  "data": [
+    {
+      "journeyId": "9c3d7e1f5a2b8c4d6e0f1a2b3c4d5e6f",
+      "transitions": [
+        {
+          "time": "2025-05-19T12:15:16.807+02:00",
+          "name": "WAITING",
+          "interactionId": "int-1a04275f9d7-d5eed30bc738045-phone-01-cexpbx01",
+          "agents": [],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": {
+            "id": "queue-101",
+            "name": "support",
+            "extension": null,
+            "site": null
+          },
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 28584,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "Phone"
+        },
+        {
+          "time": "2025-05-19T12:15:45.391+02:00",
+          "name": "FOLLOWUP_PENDING",
+          "interactionId": "int-1a042767b9a-7c1e94a0b25d3f6-phone-01-cexpbx01",
+          "agents": [],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": {
+            "id": "queue-callback-123",
+            "name": "callback-support",
+            "extension": null,
+            "site": null
+          },
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 13066,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "Phone"
+        },
+        {
+          "time": "2025-05-19T12:15:58.457+02:00",
+          "name": "OUTBOUND_STARTED",
+          "interactionId": "int-1a042767b9a-7c1e94a0b25d3f6-phone-01-cexpbx01",
+          "agents": [
+            {
+              "id": "ag-789",
+              "name": "Jane Smith",
+              "email": "jane.smith@example.com",
+              "loginId": "jsmith",
+              "department": "Sales",
+              "group": null,
+              "site": {
+                "id": "site-123",
+                "name": "London Office"
+              },
+              "type": "HUMAN"
+            }
+          ],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": {
+            "id": "queue-callback-123",
+            "name": "callback-support",
+            "extension": null,
+            "site": null
+          },
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 3954,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "Phone"
+        },
+        {
+          "time": "2025-05-19T12:16:02.411+02:00",
+          "name": "TALKING",
+          "interactionId": "int-1a042767b9a-7c1e94a0b25d3f6-phone-01-cexpbx01",
+          "agents": [
+            {
+              "id": "ag-789",
+              "name": "Jane Smith",
+              "email": "jane.smith@example.com",
+              "loginId": "jsmith",
+              "department": "Sales",
+              "group": null,
+              "site": {
+                "id": "site-123",
+                "name": "London Office"
+              },
+              "type": "HUMAN"
+            }
+          ],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": {
+            "id": "queue-callback-123",
+            "name": "callback-support",
+            "extension": null,
+            "site": null
+          },
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 6040,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "Phone"
+        },
+        {
+          "time": "2025-05-19T12:16:08.451+02:00",
+          "name": "FINISHED",
+          "interactionId": null,
+          "agents": [],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": null,
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 0,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "Phone"
+        }
+      ]
+    }
+  ],
+  "nextPageCursor": null,
+  "totalElements": 1
+}
+```
+
+The response for a callback that is still waiting, from the original call's `WAITING` onward. The pending `FOLLOWUP_PENDING` reports the callback queue id with a `null` name and a `duration` of `0` in this capture, and no `FINISHED` follows:
+
+```json
+{
+  "data": [
+    {
+      "journeyId": "2e6a9f0b4c8d1e5f7a3b6c9d0e2f4a8b",
+      "transitions": [
+        {
+          "time": "2025-05-19T13:31:59.534+02:00",
+          "name": "WAITING",
+          "interactionId": "int-1a042f926bf-d5eed30bc738045-phone-01-cexpbx01",
+          "agents": [],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": {
+            "id": "queue-101",
+            "name": "support",
+            "extension": null,
+            "site": null
+          },
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 25741,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "Phone"
+        },
+        {
+          "time": "2025-05-19T13:32:25.275+02:00",
+          "name": "FOLLOWUP_PENDING",
+          "interactionId": "int-1a042f99c81-7c1e94a0b25d3f6-phone-01-cexpbx01",
+          "agents": [],
+          "previousAgents": [],
+          "previousQueue": null,
+          "previousRingGroup": null,
+          "queue": {
+            "id": "queue-callback-123",
+            "name": null,
+            "extension": null,
+            "site": null
+          },
+          "ringGroup": null,
+          "autoAttendant": null,
+          "duration": 0,
+          "externalNumber": null,
+          "channel": null,
+          "scripts": [],
+          "mediaType": "Phone"
+        }
+      ]
+    }
+  ],
+  "nextPageCursor": null,
+  "totalElements": 1
 }
 ```
 
