@@ -4,7 +4,7 @@
 >
 > WhatsApp only allows freeform text messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
 >
-> This customer service window lasts 24 hours, and lasts 72 hours if the customer service window is initiated via a [click-to-whatsapp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp).  
+> This customer service window lasts 24 hours. If the customer messages you from a [Click-to-WhatsApp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp), a free entry point window of up to 7 days also opens, and messages you send during it are free. You can still only send non-template messages while the 24-hour customer service window is open. See [Concepts & Fundamentals](/connect/docs/whatsapp/concepts-fundamentals#user-initiated-conversations-inbound).  
 >
 > Outside of the customer service window, only pre-approved WhatsApp templates can be sent to users.
 >
@@ -532,7 +532,7 @@ This type of message will feature a single item from a business catalog, it will
 >
 > WhatsApp only allows catalog messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
 >
-> This customer service window lasts 24 hours, and lasts 72 hours if the customer service window is initiated via a [click-to-whatsapp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp).  
+> This customer service window lasts 24 hours. If the customer messages you from a [Click-to-WhatsApp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp), a free entry point window of up to 7 days also opens, and messages you send during it are free. You can still only send non-template messages while the 24-hour customer service window is open. See [Concepts & Fundamentals](/connect/docs/whatsapp/concepts-fundamentals#user-initiated-conversations-inbound).  
 >
 > Outside of the customer service window, only pre-approved WhatsApp templates can be sent to users.
 >
@@ -612,9 +612,9 @@ This option can send multiple product items from a business catalog to a custome
 
 > ❗️ **Customer Service Window**
 >
-> WhatsaApp only allows catalog messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
+> WhatsApp only allows catalog messages to be sent once a [customer service window](https://developers.facebook.com/docs/whatsapp/pricing/#customer-service-windows) has started. A customer service window starts when a user initiates a conversation or when a user replies to a pre-approved template sent by the business.  
 >
-> This customer service window lasts 24 hours, and lasts 72 hours if the customer service window is initiated via a [click-to-whatsapp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp).  
+> This customer service window lasts 24 hours. If the customer messages you from a [Click-to-WhatsApp ad](https://business.whatsapp.com/products/ads-that-click-to-whatsapp), a free entry point window of up to 7 days also opens, and messages you send during it are free. You can still only send non-template messages while the 24-hour customer service window is open. See [Concepts & Fundamentals](/connect/docs/whatsapp/concepts-fundamentals#user-initiated-conversations-inbound).  
 >
 > Outside of the customer service window, only pre-approved WhatsApp templates can be sent to users.
 >

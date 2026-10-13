@@ -82,7 +82,7 @@ WhatsApp object description
 | Parameter name    | Parameter type | Description                                                                                                               |
 | :---------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | providerErrorCode | string         | WhatsApp's own error code. Only present if there was an error                                                             |
-| pricingCategory   | string         | WhatsApp's pricing category as defined by Meta. Only included with sent status, and one of either delivered or read status |
+| pricingCategory   | string         | WhatsApp's pricing category, the same value Meta returns: `marketing`, `utility`, `authentication`, `authentication_international`, or `service` (non-template messages). Only included with sent status, and one of either delivered or read status |
 | templateId        | string         | Template ID used by WhatsApp to deliver the message. Only present for messages sent via the WhatsApp Direct Send API       |
 
 > 🚧
@@ -384,6 +384,39 @@ This receipt also comes back from WhatsApp, so the `user` object includes `chann
 }
 ```
 
+##### WhatsApp: service message, delivered
+
+A non-template reply sent inside the customer service window reports `service` as its pricing category. There is no `templateId`, because no template was used.
+
+```json title="Outbound delivery receipt webhook body (v9), WhatsApp service message, delivered"
+{
+  "version": 9,
+  "namespace": "ChatApps",
+  "eventType": "outbound_message_status_changed",
+  "description": "ChatApps outbound message delivery receipt",
+  "payload": {
+    "umid": <UNIQUE_MESSAGE_ID>,
+    "batchId": <BATCH_ID>,
+    "clientMessageId": <YOUR_MESSAGE_ID>,
+    "clientBatchId": <YOUR_BATCH_ID>,
+    "subAccountId": <SUBACCOUNT_ID>,
+    "channel": "whatsapp",
+    "user": {
+      "msisdn": <USER_PHONE_NUMBER>,
+      "channelUserId": <WHATSAPP_BSUID>
+    },
+    "status": {
+      "state": "delivered",
+      "detail": "delivered_to_recipient",
+      "timestamp": "2026-10-05T08:14:22.51Z"
+    },
+    "whatsapp": {
+      "pricingCategory": "service"
+    }
+  }
+}
+```
+
 ##### Viber — delivered to recipient
 
 For Viber and RCS there is no `channelUserId`: these channels identify the recipient purely by phone number, so only `user.msisdn` is sent.
@@ -518,7 +551,7 @@ WhatsApp object description
 | Parameter name    | Parameter type | Description                                                                                                               |
 | :---------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | providerErrorCode | string         | WhatsApp's own error code. Only present if there was an error                                                             |
-| pricingCategory   | string         | WhatsApp's pricing category as defined by Meta. Only included with sent status, and one of either delivered or read status |
+| pricingCategory   | string         | WhatsApp's pricing category, the same value Meta returns: `marketing`, `utility`, `authentication`, `authentication_international`, or `service` (non-template messages). Only included with sent status, and one of either delivered or read status |
 
 > 🚧
 >

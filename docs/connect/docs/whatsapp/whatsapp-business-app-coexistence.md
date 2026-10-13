@@ -130,7 +130,7 @@ The [24-hour customer service window](/connect/docs/whatsapp/concepts-fundamenta
 | :--- | :--- |
 | Template message sent through Cloud API (platform or API) | **Yes.** Charged at standard WhatsApp rates for its category. |
 | Message sent manually from the WhatsApp Business app | **No.** Messages sent from the app remain free. |
-| Freeform message sent through Cloud API inside an open customer service window | Follows the standard [pricing rules for the customer service window](/connect/docs/whatsapp/concepts-fundamentals#pricing--capabilities-within-the-csw). |
+| Freeform message sent through Cloud API inside an open customer service window | **Yes.** Charged as a service message, after the monthly free tier. See the [pricing rules for the customer service window](/connect/docs/whatsapp/concepts-fundamentals#pricing--capabilities-within-the-csw). |
 
 Charging and invoicing are identical to an existing WhatsApp Cloud API account: a prepaid account needs sufficient balance to send, and a postpaid account receives a monthly invoice.
 

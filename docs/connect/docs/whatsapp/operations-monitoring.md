@@ -20,11 +20,11 @@ The **Dashboard** provides a high-level, filterable view of your key metrics, in
 
 - **Received Messages:** See the volume of inbound messages from users.
 
-- **WhatsApp Conversations:** View a breakdown of conversations by Meta's categories (Authentication, Utility, Service, Marketing).
+- **WhatsApp Conversations:** View a breakdown of messages by Meta's pricing categories (Authentication, Utility, Service, Marketing).
 
 ### 2. Reports
 
-The **Reports** tab provides a detailed, exportable breakdown of your WhatsApp conversation usage and costs, filterable by subaccount, channel, and date range.
+The **Reports** tab provides a detailed, exportable breakdown of your WhatsApp message usage and costs, filterable by subaccount, channel, and date range.
 
 ### 3. Logs
 
@@ -165,17 +165,18 @@ This webhook alerts you to changes in your portfolio's messaging limit (e.g., an
 
 ## WhatsApp Pricing Model (PMP)
 
-WhatsApp Business pricing is based on a **Per-Message Pricing (PMP)** model. Charges are applied when a **template message** is delivered.
+WhatsApp Business pricing is based on a **Per-Message Pricing (PMP)** model. Charges are applied when a message is delivered: a **template message**, or, as of October 1, 2026, a non-template **service message**.
 
 ### Pricing Model and Chargeable Events
 
-- **Per-Message Pricing (PMP):** As of July 1, 2025, charges apply only when a template message (type: "template") is delivered.
+- **Per-Message Pricing (PMP):** As of July 1, 2025, charges apply per delivered message rather than per conversation. Until September 30, 2026, only template messages (type: "template") were charged, except Utility templates sent inside an open 24-hour customer service window, which were free.
+- **Service Messages and In-Window Utility Templates:** As of October 1, 2026, Meta also charges per message for service messages (non-template replies sent in an open customer service window) and for Utility templates sent inside an open customer service window. The rate for a service message is the same as the market's Utility and Authentication rate. Messages sent in an open free entry point window remain free. See [Concepts & Fundamentals](./concepts-fundamentals.md#pricing--capabilities-within-the-csw).
 
 - **Rate Drivers:** Charges vary by two factors:
 
-    1. The template's **category** (`marketing`, `utility`, `authentication`).
+    1. The message's **category** (`marketing`, `utility`, `authentication`, or `service` for non-template messages).
 
     2. The recipient's WhatsApp phone number **country calling code**.
 
-- **Volume Tiers:** Volume discounts are available for `utility` and `authentication` categories. As your monthly message volume increases, you move into higher tiers with lower per-message rates.
+- **Volume Tiers:** Volume discounts are available for `utility` and `authentication` categories. They are not available for `service` messages. As your monthly message volume increases, you move into higher tiers with lower per-message rates.
   

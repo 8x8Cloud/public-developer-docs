@@ -36,7 +36,7 @@ To initiate a conversation, you **must** use a **Template Message**.
 
 - **Content:** Can include text, media (image, video, document, location), and interactive buttons (Quick Reply, Call to Action, Copy Code).
 
-- **Impact:** Sending a template message opens a new, 24-hour template-based conversation, which is billed according to its category. If the customer replies, they open a 24-hour Customer Service Window.
+- **Impact:** Each template message is charged per delivered message, at the rate for its category and the recipient's market. If the customer replies, they open a 24-hour Customer Service Window.
 
 ### 2. Template Categories
 
@@ -54,7 +54,7 @@ A user-initiated conversation occurs when a customer sends your business a messa
 
 To receive inbound messages from customers, you need to configure webhooks. See [Webhooks Reference](./whatsapp-webhooks.md) for setup and payload details.
 
-**Regarding July 1, 2025 Pricing Changes:** Under the per-message pricing model, understanding these windows is essential to utilizing free messaging tiers.
+**How Meta charges for messages in these windows:** Under the per-message pricing model, Meta charges for each message delivered. As of October 1, 2026, this includes non-template (freeform) replies and Utility templates sent inside an open Customer Service Window, which were previously free. Understanding which window is open tells you which messages are charged and which are free.
 
 ### 1. The 24-Hour Customer Service Window (CSW)
 
@@ -71,43 +71,61 @@ While this window is open, the following rules apply:
 
 | Message Type | Delivery Status | Cost |
 | :--- | :--- | :--- |
-| **Non-Template** (Text, Image, Audio) | Allowed | **Free** |
-| **Utility Templates** | Allowed | **Free** |
+| **Non-Template** (Text, Image, Audio) | Allowed | **Paid** (Service message rate, after the monthly free tier) |
+| **Utility Templates** | Allowed | **Paid** (Standard Utility rate) |
 | **Marketing / Auth Templates** | Allowed | **Paid** (Standard Rates) |
 
-> **Key Takeaway:** To minimize costs, maximize the use of freeform text and Utility templates while the customer is actively conversing with you.
+#### Service Message Charging (Effective October 1, 2026)
 
-### 2. The 72-Hour Free Entry Point (FEP) Window
+A **service message** is any non-template message you send in an open Customer Service Window, whether a person or a third-party AI agent writes it. Meta did not charge for these messages from November 1, 2024. From October 1, 2026, Meta charges for them as follows:
 
-The Free Entry Point window is a special promotional period triggered by specific Meta advertising interactions. It offers the widest range of free messaging.
+- **Charged per delivered message:** Each service message is one chargeable message, the same way a template message is.
+- **Rate:** For each market, the service message rate is the same as that market's Utility and Authentication rate.
+- **No volume tiers:** Service messages do not qualify for volume tiers, so every chargeable service message is charged at the flat market rate. Utility and Authentication messages keep their volume tiers.
+- **Monthly free tier:** Each business phone number gets 1,000 free service messages per month, and 8x8 passes this free tier on to you. Unused messages do not roll over, and the count resets monthly. Charging starts from the 1,001st service message in the month.
+- **One charge per message:** A message has only one category. A non-template message that contains promotional content is still a service message, and Meta does not add a Marketing charge.
 
-- **How it starts:** This window opens **only** when a user messages your business through:
-  - A Meta **Click-to-WhatsApp Ad**.
-  - A Facebook Page **Call-to-Action (CTA)** button.
-- **Activation Requirement (Critical):** The FEP window does **not** open immediately upon the user's message. To activate the 72-hour free window, **you must reply to the user's message within 24 hours.**
-  - *If you reply within 24 hours:* The 72-hour FEP window activates immediately upon your reply delivery.
-  - *If you do NOT reply within 24 hours:* The opportunity is lost. Any subsequent message you send must be a paid Template Message, and it will not trigger the 72-hour free window.
+#### Utility Templates inside the CSW (Effective October 1, 2026)
 
-- **Duration:** Once activated, it lasts for a fixed **72 hours**.
-- **Reset Rules:** Unlike the CSW, this timer **does not reset** if the customer replies. It is a single, continuous 72-hour window.
+Utility templates sent inside an open Customer Service Window were free from July 1, 2025. From October 1, 2026, Meta charges for each one at the Utility rate for the recipient's market. Utility templates sent to open a conversation, outside the window, were already charged.
+
+#### How Charging Is Reported
+
+Service messages are reported under the `service` pricing category. In 8x8 delivery receipts, the `pricingCategory` field returns the same value as Meta's pricing category, so service messages report `service` and Utility templates report `utility`. The category is the same whether or not a message was charged, so delivery receipts do not tell you if an individual message was free. To see how many messages in each category were free or charged in a closed billing period, use the [Message Usage API](/connect/reference/get-message-usage), which returns `free` and `charged` counts by pricing category. See [Delivery Receipts for Outbound ChatApps](/connect/docs/delivery-receipts-for-outbound-chatapps).
+
+**Rates:** Meta publishes its rate cards by market and currency on the [WhatsApp Business Platform pricing page](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing#rate-cards-and-volume-tiers). The rates you pay are set by your 8x8 pricing plan, so contact your 8x8 account manager for your rates.
+
+> **Key Takeaway:** Inside an open Customer Service Window, freeform replies and Utility templates are no longer free, so replies from agents and automated flows add to your messaging cost. The exception is the Free Entry Point window described below.
+
+### 2. The Free Entry Point (FEP) Window
+
+The Free Entry Point window is a special promotional period triggered by a specific Meta advertising interaction. It offers the widest range of free messaging, and it is not affected by the October 1, 2026 change to service messages and Utility templates.
+
+- **How it starts:** This window opens **only** when a user messages your business through a Meta **Click-to-WhatsApp Ad**, using the WhatsApp Android or iOS app. Meta does not support the desktop and web apps for this window.
+- **Activation Requirement (Critical):** The FEP window does **not** open immediately upon the user's message. To activate the free window, **you must reply to the user's message within the Customer Service Window (24 hours).**
+  - *If you reply within 24 hours:* The reply is free, and the FEP window opens from the time you replied.
+  - *If you do NOT reply within 24 hours:* The opportunity is lost. Any subsequent message you send must be a paid Template Message, and it will not trigger the free window.
+
+- **Duration:** Once activated, it can remain open for up to **7 days**.
+- **Reset Rules:** Unlike the CSW, this timer **does not reset** if the customer replies.
 
 #### Pricing & Capabilities within the FEP
 
-During this 72-hour period, standard pricing is overridden:
+While the FEP window is open, standard pricing is overridden:
 
-- **All Messages are Free:** This includes non-template messages and **all categories** of Template Messages (including Marketing, Authentication and Utility).
+- **All Messages are Free:** This includes service messages (non-template) and **all categories** of Template Messages (including Marketing, Authentication and Utility). Utility and Authentication messages sent in an open FEP window do not count toward volume tiers, because only charged messages count.
 - **Interaction with the CSW:**
   - The FEP and the 24-hour CSW run in parallel.
-  - If the standard 24-hour CSW closes (e.g., the customer hasn't replied in 24 hours) but the 72-hour FEP is still active, you can **still send Template Messages for free**.
+  - If the standard 24-hour CSW closes (e.g., the customer hasn't replied in 24 hours) but the FEP window is still open, you can **still send Template Messages for free**.
 
 ### Summary of Windows
 
-| Feature | Customer Service Window (24h) | Free Entry Point Window (72h) |
+| Feature | Customer Service Window (24h) | Free Entry Point Window (up to 7 days) |
 | :--- | :--- | :--- |
-| **Trigger** | Any incoming user message/reply | Click-to-WhatsApp Ad or Page CTA |
-| **Duration** | 24 hours (Resets on new message) | 72 hours (Fixed, does not reset) |
-| **Freeform Messages** | **Allowed & Free** | **Free** (Must be within active CSW) |
-| **Utility Templates** | **Free** | **Free** |
+| **Trigger** | Any incoming user message/reply | Click-to-WhatsApp Ad |
+| **Duration** | 24 hours (Resets on new message) | Up to 7 days (Does not reset) |
+| **Freeform Messages** | **Allowed & Paid** (Service message rate, no volume tiers, after the monthly free tier) | **Free** (Must be within active CSW) |
+| **Utility Templates** | **Paid** (Utility rate) | **Free** |
 | **Marketing/Auth Templates** | Paid | **Free** |
 
 ### 3. Interactive (Freeform) Messages

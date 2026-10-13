@@ -89,8 +89,8 @@ The WhatsApp Conversations Report will show the type of conversations you are ha
 This gives insights into the following information for WhatsApp messages.
 
 * **Total:** This is the total messages sent.
-* **Chargeable:** The conversations that are chargeable
-* **Free:** This applies to the messages WhatsApp gives 1000 free Service conversations each month. They are refreshed at the beginning of each month. Please note that a free tier applies only to Service conversations.
+* **Chargeable:** Messages that are charged.
+* **Free:** Messages that are not charged. This includes service messages within the monthly free tier of 1,000 service messages per business phone number, which resets each month, and messages sent during a free entry point window.
 * **Customer Initiated:** Messages that are sent from the customer at the beginning of a 24-hour window.
 * **Business Initiated Messages:** Messages that are sent from the business at the beginning of a 24-hour window.
 * **Message Category:** As covered earlier, this is the official message categories from WhatsApp

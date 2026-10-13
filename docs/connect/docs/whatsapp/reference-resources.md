@@ -35,7 +35,10 @@ A quick reference for the common terminology used in this documentation.
 |**MM Lite API**|A specialized, high-throughput Meta API for marketing messages. This is a separate Meta product and is **not** part of the 8x8 integration described in this documentation.|
 |**Template Message**|A pre-approved message (in a specific `category`) required to initiate a conversation with a user or reply outside the 24-hour window.|
 |**Interactive Message**|A "freeform" (non-template) message that can only be sent *inside* the 24-hour window. Includes text, media, buttons, and lists.|
-|**Customer Service Window**|The 24-hour period after a user sends a message, during which you can reply with freeform Interactive Messages.|
+|**Customer Service Window**|The 24-hour period after a user sends a message, during which you can reply with freeform Interactive Messages. From October 1, 2026, these replies are charged as service messages, after the monthly free tier.|
+|**Service Message**|Any non-template message sent inside an open Customer Service Window, whether a person or an AI agent writes it. Charged per delivered message at the market's Utility and Authentication rate, after 1,000 free service messages per business phone number per month.|
+|**Free Entry Point (FEP) Window**|A free messaging window that opens when a user messages you from a Click-to-WhatsApp ad and you reply within 24 hours. It can remain open for up to 7 days, and all messages sent during it are free.|
+|**Volume Tier**|A lower per-message rate that applies as your monthly volume grows in a market. Available for Utility and Authentication messages, not for Marketing or service messages.|
 |**Authentication Template**|A template category for sending One-Time Passcodes (OTPs).|
 |**Marketing Template**|A template category for any promotional content or offers.|
 |**Utility Template**|A template category for non-promotional, transactional updates (e.g., order confirmation, shipping alert).|
