@@ -35898,6 +35898,11 @@ For details on the company summary metrics please refer to [Company Summary Glos
 ## Extension Summary
 
 
+This page covers two operations:
+
+* `GET /v2/extsum` — call statistics per extension. See [Run Report](#run-report).
+* `GET /v4/extsum/unused` — the extensions that had no call activity in the requested range. See [Extensions with no call activity](#extensions-with-no-call-activity).
+
 > 📘 Looking for live/real-time queue, agent or call-level data? See [Work Analytics — Overview](/analytics/docs/work-analytics-queue-agent-reports).
 
 [8x8 Work Analytics Historical](/analytics/reference/authentication-1) access is via this multi step process. For any of the endpoints the same process is followed.
@@ -36077,6 +36082,155 @@ Fields not defined in glossary
 |----------|--------------------------------------------------------------|
 | UserName | 8x8 username of the user, or "N/A" for non users             |
 | Email    | Configured email address of the user, or "N/A" for non users |
+
+## Extensions with no call activity
+
+Lists the extensions on a PBX that had **no call activity** in the requested range — user extensions, ring groups, call queues and auto attendants. Use it to find extensions that are configured but not in use.
+
+The report is based on the PBX's extensions as they are today, so the range must end today.
+
+### Parameters
+
+**Method:** GET
+
+#### Headers
+
+| Name | Required | Description | Example |
+| --- | --- | --- | --- |
+| 8x8-apikey | ✓ | The 8x8-api key provided | test_key_kjdfidj238jf9123df221 |
+| Authorization | ✓ | Pass the access_token returned from the authentication request as a Bearer token `Bearer {access_token}` | Bearer eyJhbGciOiJSUzI1NiJ9.yyyyyyyyyyy.zzzzzzzzzzzz |
+
+#### Query
+
+| Name | Required | Description | Example |
+| --- | --- | --- | --- |
+| pbxId | ✓ | Pass the pbxId (PBX Name) of a single pbx. `allpbxes` and comma separated lists of pbxIds are not supported. PBX names can be found [here in Admin Console](https://admin.8x8.com/company/pbx) | acmecorp |
+| startTime | ✓ | The interval start time - the format is YYYY-MM-DD HH:MM:SS. Must be no earlier than two months before today. | 2026-08-10 00:00:00 |
+| endTime | ✓ | The interval end time - the format is YYYY-MM-DD HH:MM:SS. Must fall on today's date in `timeZone`. | 2026-10-09 23:59:59 |
+| timeZone | ✓ | [IANA Time Zones](https://www.iana.org/time-zones). Examples America/New_York, Europe/London [Wikipedia Time Zone List](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | America/New_York |
+
+> 📘 **How this differs from the Extension Summary**
+>
+> * One pbx per request — `allpbxes` and comma separated lists are rejected.
+> * The range must end today and start no more than two months ago. The 2-year note above does not apply.
+> * Only the four query parameters above are accepted. Any other query parameter, for example `isCollapsed`, is rejected with HTTP 400.
+>
+>
+
+### Extensions with no call activity Request
+
+```bash
+curl --location --request GET 'https://api.8x8.com/analytics/work/v4/extsum/unused?pbxId={pbxId here}&startTime=2026-08-10 00:00:00&endTime=2026-10-09 23:59:59&timeZone=America/New_York' \
+--header 'Authorization: Bearer {access_token here}' \
+--header '8x8-apikey: {8x8-apikey input here}'
+
+```
+
+### Extensions with no call activity Response
+
+Each row has the same fields as the Extension Summary response; see the [Extension Summary Glossary](https://docs.8x8.com/8x8WebHelp/8x8analytics-virtual-office/Content/VOA/extensions-summary-beta.htm#Glossary) and the "Fields not defined in glossary" table above. Every metric is `0`. `Email` is always `N/A`, even for users, because this report does not include email addresses. An empty array `[]` means every extension on the pbx had call activity in the range.
+
+```json
+[
+    {
+        "PbxId": "acmecorp",
+        "Extension": "8890",
+        "FirstName": "Maria",
+        "LastName": "Lopez",
+        "Branch": "East Coast",
+        "Department": "Sales",
+        "External_Inbound_Total": 0,
+        "External_Inbound_Answered": 0,
+        "External_Inbound_Abandoned": 0,
+        "Percent_External_Inbound_Answered": 0,
+        "External_Inbound_Missed": 0,
+        "External_Outbound_Total": 0,
+        "External_Outbound_Answered": 0,
+        "Percent_External_Outbound_Answered": 0,
+        "External_Outbound_Abandoned": 0,
+        "Internal_Inbound_Total": 0,
+        "Internal_Inbound_Answered": 0,
+        "Internal_Inbound_Abandoned": 0,
+        "Internal_Inbound_Missed": 0,
+        "Internal_Outbound_Total": 0,
+        "Internal_Outbound_Answered": 0,
+        "Internal_Outbound_Abandoned": 0,
+        "Inbound_Total": 0,
+        "Inbound_Answered": 0,
+        "Inbound_Abandoned": 0,
+        "Inbound_Missed": 0,
+        "Total_Calls_To_VM": 0,
+        "Outbound_Total": 0,
+        "Outbound_Answered": 0,
+        "Outbound_Abandoned": 0,
+        "Total_Answered": 0,
+        "Total_Abandoned": 0,
+        "Total_Missed": 0,
+        "Total_Ring_Time": 0,
+        "Total_Talk_Time": 0,
+        "Total_Abandoned_Time": 0,
+        "Total_Call_Time": 0,
+        "Avg_Ring_Time": 0,
+        "Avg_Talk_Time": 0,
+        "Inbound_Talk_Time": 0,
+        "Outbound_Talk_Time": 0,
+        "Avg_Abandoned_Time": 0,
+        "Email": "N/A",
+        "UserName": "maria.lopez",
+        "ServiceType": "UE",
+        "Total_Ended_By_AA": 0
+    },
+    {
+        "PbxId": "acmecorp",
+        "Extension": "7000",
+        "FirstName": "Sales Ring Group",
+        "LastName": "N/A",
+        "Branch": "East Coast",
+        "Department": "N/A",
+        "External_Inbound_Total": 0,
+        "External_Inbound_Answered": 0,
+        "External_Inbound_Abandoned": 0,
+        "Percent_External_Inbound_Answered": 0,
+        "External_Inbound_Missed": 0,
+        "External_Outbound_Total": 0,
+        "External_Outbound_Answered": 0,
+        "Percent_External_Outbound_Answered": 0,
+        "External_Outbound_Abandoned": 0,
+        "Internal_Inbound_Total": 0,
+        "Internal_Inbound_Answered": 0,
+        "Internal_Inbound_Abandoned": 0,
+        "Internal_Inbound_Missed": 0,
+        "Internal_Outbound_Total": 0,
+        "Internal_Outbound_Answered": 0,
+        "Internal_Outbound_Abandoned": 0,
+        "Inbound_Total": 0,
+        "Inbound_Answered": 0,
+        "Inbound_Abandoned": 0,
+        "Inbound_Missed": 0,
+        "Total_Calls_To_VM": 0,
+        "Outbound_Total": 0,
+        "Outbound_Answered": 0,
+        "Outbound_Abandoned": 0,
+        "Total_Answered": 0,
+        "Total_Abandoned": 0,
+        "Total_Missed": 0,
+        "Total_Ring_Time": 0,
+        "Total_Talk_Time": 0,
+        "Total_Abandoned_Time": 0,
+        "Total_Call_Time": 0,
+        "Avg_Ring_Time": 0,
+        "Avg_Talk_Time": 0,
+        "Inbound_Talk_Time": 0,
+        "Outbound_Talk_Time": 0,
+        "Avg_Abandoned_Time": 0,
+        "Email": "N/A",
+        "UserName": "N/A",
+        "ServiceType": "RG",
+        "Total_Ended_By_AA": 0
+    }
+]
+
+```
 
 ---
 
