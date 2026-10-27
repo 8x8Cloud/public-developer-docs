@@ -32227,7 +32227,7 @@ Filter values are matched exactly and are case-sensitive. Use the value exactly 
 | `outboundPhoneCodes.listName`  | Filter by outbound phone code list name  | `["JohnDoeInbound"]`                                                   |
 | `outboundPhoneCodes.name`      | Filter by outbound phone code name       | `["No queue"]`                                                         |
 | `outboundPhoneCodes.shortCode` | Filter by outbound phone code short code | `["Unt1"]`                                                             |
-| `outcome`                      | Filter by journey outcome                | `["Handled", "Abandoned", "EndedInScript", "ForwardedToExternalNumber", "Voicemail", "CallbackRequested", "CallbackNoAnswer", "CallbackExpired", "Other", "UnknownOutcome"]` |
+| `outcome`                      | Filter by journey outcome                | `["Handled", "Abandoned", "EndedInScript", "ForwardedToExternalNumber", "Voicemail", "CallbackRequested", "CallbackNoAnswer", "CallbackExpired", "OutboundNoAnswer", "Other", "UnknownOutcome"]` |
 | `pbxNames`                     | Filter by PBX names                      | `["pbx1", "pbx2"]`                                                     |
 | `queues.extension`             | Filter by queue extension                | `["2001"]`                                                             |
 | `queues.id`                    | Filter by queue ID                       | `["queue-123"]`                                                        |
@@ -32449,6 +32449,7 @@ journey progresses. An outcome being present therefore does not mean the journey
 | `CallbackRequested` | This outcome exists only on active journeys. It is set when no agent has been involved and the journey is currently waiting for a callback. When the journey finishes the outcome becomes `Handled` if an agent interacted with the customer, or `CallbackNoAnswer` or `CallbackExpired` otherwise. See [Contact Center Queue Callback Tracking](#5-contact-center-queue-callback-tracking). |
 | `CallbackNoAnswer` | No agent handled the journey. The customer requested a callback, and the callback was attempted one or more times without the customer answering. |
 | `CallbackExpired` | No agent handled the journey. The customer requested a callback, and the callback expired before any attempt was made to reach the customer. |
+| `OutboundNoAnswer` | No agent handled the journey. An 8x8 user (a Contact Center agent or a Unified Communications user) placed an outbound call to the contact, and the contact never answered: the call was rejected, rang out, failed to connect, or the caller hung up while it was still ringing. The journey goes `OUTBOUND_STARTED` straight to `FINISHED`. Only outbound journeys get this outcome. Journeys recorded before the release keep `Abandoned`. An answered outbound call, including one answered by the contact's voicemail, is `Handled`, and an unanswered Contact Center queue callback stays `CallbackNoAnswer`. |
 | `Other`          | The journey ended with an outcome not covered by the above categories.                  |
 | `UnknownOutcome` | The outcome could not be determined from the available data.                            |
 
