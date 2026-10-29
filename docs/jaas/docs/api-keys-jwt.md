@@ -106,7 +106,7 @@ This value is hardcoded in the body
   * #### **`room`**
   
    (optional) The configuration at the room level.
-  * **`regex`**: If the value is **`true`** the room field from below can be a regex otherwise a literal match between the room name and the room claim from jwt will be performed.
+  * **`regex`**: If the value is **`true`**, the `room` field below is a pattern with one **`.*`** or less. Otherwise, the room name must be equal to the `room` field.
 
 * #### **`exp`**
 
@@ -122,7 +122,18 @@ The time before which the JWT must not be accepted for processing
 
 * #### **`room`**
 
- This field is the meeting room name if a literal comparision is needed, a regex if the condition from above is met or a wildcard (**“\*”**) if the token is issued for all rooms. Please review the `string.match()` method described in the [PatternsTutorial](http://lua-users.org/wiki/PatternsTutorial) for regex usage. Note the use of special symbols such as **“-”** that must be escaped with **“%”**.
+ This field is one of:
+
+ * The meeting room name, for a literal match.
+ * A pattern, if `context.room.regex` is **`true`**.
+ * A wildcard (**“\*”**), if the token gives access to all rooms.
+
+ A pattern can contain at most one **`.*`**. The `.*` matches any sequence of characters, including an empty one. All other characters must match literally. The pattern must match the whole room name. The match is not case-sensitive. For example:
+
+ * `team_42.*` matches `team_42`, `team_42_standup` and `team_420`. It does not match `myteam_42`.
+ * `team_.*_standup` matches `team_42_standup`. It does not match `team_42_standup_2`.
+
+ The token is not accepted if the pattern contains a second `.*`, or any of the characters `^ $ ( ) % . [ ] * + - ?` outside the `.*`. For a room name that contains one of these characters, use a literal match or the wildcard.
 
 * #### **`sub`**
 
