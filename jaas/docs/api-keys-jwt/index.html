@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"><link rel="stylesheet" href="/assets/css/styles.f6a08750.css">
-<script src="/assets/js/runtime~main.456d06e8.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.aaae0d33.js" defer="defer"></script>
 <script src="/assets/js/main.907eb6b7.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -152,7 +152,7 @@
 </ul>
 <p>(optional) The configuration at the room level.</p>
 <ul>
-<li><strong><code>regex</code></strong>: If the value is <strong><code>true</code></strong> the room field from below can be a regex otherwise a literal match between the room name and the room claim from jwt will be performed.</li>
+<li><strong><code>regex</code></strong>: If the value is <strong><code>true</code></strong>, the <code>room</code> field below is a pattern with one <strong><code>.*</code></strong> or less. Otherwise, the room name must be equal to the <code>room</code> field.</li>
 </ul>
 </li>
 <li>
@@ -177,7 +177,18 @@
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="room-1"><strong><code>room</code></strong><a href="#room-1" class="hash-link" aria-label="Direct link to room-1" title="Direct link to room-1" translate="no">​</a></h4>
 </li>
 </ul>
-<p>This field is the meeting room name if a literal comparision is needed, a regex if the condition from above is met or a wildcard (<strong>“*”</strong>) if the token is issued for all rooms. Please review the <code>string.match()</code> method described in the <a href="http://lua-users.org/wiki/PatternsTutorial" target="_blank" rel="noopener noreferrer">PatternsTutorial</a> for regex usage. Note the use of special symbols such as <strong>“-”</strong> that must be escaped with <strong>“%”</strong>.</p>
+<p>This field is one of:</p>
+<ul>
+<li>The meeting room name, for a literal match.</li>
+<li>A pattern, if <code>context.room.regex</code> is <strong><code>true</code></strong>.</li>
+<li>A wildcard (<strong>“*”</strong>), if the token gives access to all rooms.</li>
+</ul>
+<p>A pattern can contain at most one <strong><code>.*</code></strong>. The <code>.*</code> matches any sequence of characters, including an empty one. All other characters must match literally. The pattern must match the whole room name. The match is not case-sensitive. For example:</p>
+<ul>
+<li><code>team_42.*</code> matches <code>team_42</code>, <code>team_42_standup</code> and <code>team_420</code>. It does not match <code>myteam_42</code>.</li>
+<li><code>team_.*_standup</code> matches <code>team_42_standup</code>. It does not match <code>team_42_standup_2</code>.</li>
+</ul>
+<p>The token is not accepted if the pattern contains a second <code>.*</code>, or any of the characters <code>^ $ ( ) % . [ ] * + - ?</code> outside the <code>.*</code>. For a room name that contains one of these characters, use a literal match or the wildcard.</p>
 <ul>
 <li>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="sub"><strong><code>sub</code></strong><a href="#sub" class="hash-link" aria-label="Direct link to sub" title="Direct link to sub" translate="no">​</a></h4>
