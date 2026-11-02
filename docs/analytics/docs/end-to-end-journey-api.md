@@ -881,7 +881,7 @@ The `type` field in the entryPoint object is an enum that identifies the type of
 - **ring-group**: The inbound interaction enters through a ring group
 - **auto-attendant**: The inbound interaction enters through a unified communication auto-attendant
 - **user**: The inbound interaction targets a unified communication user directly, bypassing contact center channels. Entry points of this type include additional user details (`email`, `loginId`, `department`) reflecting current Admin Console configuration
-- **ai-studio**: The inbound interaction enters through an AI Studio deploy surface (the customer dialed a number answered by AI Studio). `id` and `phoneNumber` are both the dialed number, mirroring `cc-channel`; `name` is the AI Studio deployment label once AI Studio forwards it (null until then). The answering AI agent is reported in `agents` (type `AI`), not on the entry point
+- **ai-studio**: The inbound interaction enters through an AI Studio deploy surface (the customer dialed a number answered by AI Studio). `id` and `phoneNumber` are both the dialed number, mirroring `cc-channel`. `name` is the name of the voice connector the customer dialed, as shown in AI Studio under Deploy > Voice Connectors (for example `Sales Line`, or the default `8x8 Phone`), as it was at the time of the call: renaming a voice connector changes the name on new journeys only. `null` for journeys recorded before AI Studio started reporting the name, or when the dialed number does not match a voice connector. The answering AI agent is reported in `agents` (type `AI`), not on the entry point
 
 #### origin Object
 
