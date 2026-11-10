@@ -894,6 +894,11 @@ const sidebarConfig = [
         id: 'connect/docs/api-error-codes',
       },
       {
+        type: 'link',
+        label: 'Connect portal error types',
+        href: '/connect/errors',
+      },
+      {
         type: 'doc',
         id: 'connect/docs/message-status-references',
       },

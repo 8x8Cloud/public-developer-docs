@@ -418,7 +418,8 @@ module.exports = [
   // { from: '/connect/docs/auth', to: '/connect/docs/guides/authentication-setup' },
   
   // Error handling redirects
-  // { from: '/connect/errors', to: '/connect/api-reference/errors' },
+  // Never redirect /connect/errors or any path under it: those URLs are the problem type
+  // identifiers the 8x8 Connect portal API returns, and their pages live at those paths.
   // { from: '/connect/docs/errors', to: '/connect/docs/guides/error-handling' },
   
   // Rate limiting redirects
