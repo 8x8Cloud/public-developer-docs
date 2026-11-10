@@ -99,6 +99,22 @@
                       "errorId": "b4478860-b76c-e811-814e-022a35cc1c71",
                       "timestamp": "2025-12-18T09:25:40.9235752+00:00"
                     }
+                  },
+                  "consentRefChannelError": {
+                    "value": {
+                      "code": 1000,
+                      "message": "ConsentRef is only supported for the sma channel.",
+                      "errorId": "2d5c8a4e-6f0b-4b7e-9a35-1c7f0e8d4b21",
+                      "timestamp": "2025-12-18T09:27:12.5120418+00:00"
+                    }
+                  },
+                  "consentRefFormatError": {
+                    "value": {
+                      "code": 1000,
+                      "message": "ConsentRef must be 1-128 characters of letters, digits, '.', '_' or '-'.",
+                      "errorId": "7e1b3f90-a2c4-4d68-8b15-3f9a6c0d2e47",
+                      "timestamp": "2025-12-18T09:28:03.7741296+00:00"
+                    }
                   }
                 }
               }
@@ -262,6 +278,14 @@
                   "value": {
                     "destination": "+6587654321",
                     "channel": "sma"
+                  }
+                },
+                "smaWithConsent": {
+                  "summary": "SMA — request with consent reference",
+                  "value": {
+                    "destination": "+66812345678",
+                    "channel": "sma",
+                    "consentRef": "consent-7f3a9c21"
                   }
                 }
               }
@@ -626,6 +650,13 @@
           "clientIp": {
             "type": "string",
             "description": "Optional parameter.\n- For OTP-based channels, this value is used to apply rate limiting based on the client IP address.\n- For the SMA channel, this value may be used to immediately validate the request when the IP address belongs to a supported mobile network gateway.\n- If the request is forwarded by one or more proxies, you should extract the original client IP from the X-Forwarded-For header and provide it in this field.\n- Refer to [IP Spoofing](/connect/reference/security) for additional details."
+          },
+          "consentRef": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]{1,128}$",
+            "maxLength": 128,
+            "example": "consent-7f3a9c21",
+            "description": "Optional parameter.\n- Your own reference to the record of the end user's consent to have their phone number verified. Typically your user id or consent record id.\n- Only supported when `channel` is `sma`. Sending it with any other channel is rejected with a `400` error (code `1000`).\n- It is forwarded to mobile network operators that require a consent reference. For other operators it is accepted and not used.\n- 8x8 does not interpret this value and does not store consent. You remain responsible for capturing the end user's consent and for being able to produce it when the operator or 8x8 asks.\n- Must be an opaque identifier and **must not contain personal data** such as an email address or phone number.\n- Allowed characters are letters, digits, `.`, `_` and `-`, up to 128 characters. A value containing any other character (including spaces) or longer than 128 characters is rejected with a `400` error (code `1000`).\n- An empty or whitespace-only value is treated as if the parameter was not provided."
           }
         },
         "required": ["destination"]
