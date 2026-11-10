@@ -87267,6 +87267,1315 @@ This example trigger will set all tickets tagged with ChatApps to pending for ex
 
 ---
 
+## Account suspended
+
+The 8x8 Connect portal API returns this problem when a user signs in to an account that is suspended. The API returns it only after the user's credentials have been verified.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/account-suspended` |
+| `title` | `Account suspended` |
+| `code` | `account_suspended` |
+| `status` | `422` or `401` |
+
+---
+
+## What causes it
+
+The account is suspended, and the sign-in has already verified the user's credentials:
+
+| When it happens | Status | Checked |
+| --- | --- | --- |
+| Signing in with an email address and password | `422` or `401` | After the password is accepted |
+| Completing a social sign-in | `422` | After the social sign-in is verified |
+| Two-factor sign-in (requesting or entering a verification code) | `401` | After the credentials were verified earlier in the sign-in |
+
+> 📘
+>
+> The HTTP status can be `422` or `401`, even for the same sign-in step. Identify this problem by its `code` or `type`, not by the status.
+
+---
+
+## What to do
+
+1. Stop the sign-in and do not retry. The API returns the same answer until the account is reinstated.
+2. Tell the user that the account is suspended and that they should contact their workspace administrator.
+3. If the user is the workspace administrator, they should contact 8x8 support at [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com).
+
+---
+
+## Example response
+
+For a sign-in with an email address and password, the API can return this problem with HTTP `422` and the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/account-suspended",
+  "title": "Account suspended",
+  "status": 422,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "account_suspended"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`. The same problem can also arrive with `status` `401`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Invalid credentials](/connect/errors/invalid-credentials)
+- [No access to this application](/connect/errors/no-application-access)
+- [Session expired](/connect/errors/session-expired)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Security check required
+
+The 8x8 Connect portal API returns this problem when a request that is protected by a security check (reCAPTCHA) does not pass that check. The API refuses the request before it acts on it, so the request has no effect.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/captcha-required` |
+| `title` | `Security check required` |
+| `code` | `captcha_required` |
+| `status` | `400` |
+
+---
+
+## What causes it
+
+The 8x8 Connect portal runs a security check in the browser before some steps, such as signing in with an email address and password, signing up, setting up the account after sign-up, requesting a password reset email, requesting a verification code and setting up two-factor authentication. The request for that step carries the token from the check in its `gToken` field. The API returns this problem with status `400` when:
+
+- The token is missing, invalid or expired. A token expires a short time after the check runs.
+- The token was already used. Each token is valid for one request only.
+- The security check did not pass.
+
+The API checks the token before it acts on the request, so problems such as wrong credentials are reported only after the check passes. A request that leaves out the token entirely can instead fail field validation with status `422`.
+
+---
+
+## What to do
+
+1. Run the security check again to get a new token, right before you send the request. Never reuse a token.
+2. Send the request again, once, with the new token.
+3. If the request is refused again, wait a few minutes before you try again. Do not retry in a loop.
+
+The security check is designed for people who use the 8x8 Connect portal in a browser. Scripts and other automated clients should expect to fail it.
+
+---
+
+## Example response
+
+A sign-in with an email address and password whose token does not pass the check returns HTTP `400` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/captcha-required",
+  "title": "Security check required",
+  "status": 400,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "captcha_required"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Invalid credentials](/connect/errors/invalid-credentials)
+- [Too many attempts](/connect/errors/too-many-attempts)
+- [Sign-up not allowed](/connect/errors/signup-not-allowed)
+- [Verification code not sent](/connect/errors/code-send-failed)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Verification code not sent
+
+The 8x8 Connect portal API returns this problem when it cannot send a two-factor sign-in code by SMS. The response does not describe the cause, which is often temporary.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/code-send-failed` |
+| `title` | `Verification code not sent` |
+| `code` | `code_send_failed` |
+| `status` | `422` |
+
+---
+
+## What causes it
+
+When a verification code is requested by SMS during two-factor sign-in, the API returns this problem after the request passes the security check, when:
+
+- the sign-in reference (`refId`) in the request cannot be read, for example because it was changed or cut short
+- 8x8 cannot load the user's verification settings
+- the SMS cannot be sent, or sending it does not finish in time
+- another temporary service problem stops the request
+
+A request that fails the security check gets [Security check required](/connect/errors/captcha-required) instead.
+
+> 📘
+>
+> The status is `422`, but this problem is often temporary, so a later request can succeed. Decide whether to retry from the `code` or `type`, not from the status.
+
+---
+
+## What to do
+
+1. Wait a few seconds, then request the code again. Send a new security-check token with each request.
+2. Do not retry in a tight loop. If a few requests in a row fail, start the sign-in again to get a new sign-in reference.
+3. If the `TwoFA` list in the sign-in response includes `AUTHENTICATOR_APP`, the user can verify with their authenticator app instead. No SMS needs to be sent.
+4. If the problem continues, contact 8x8 support at [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) and quote the `errorId` from the response. Support can use it to find the cause.
+
+---
+
+## Example response
+
+A request for a verification code that cannot be sent returns HTTP `422` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/code-send-failed",
+  "title": "Verification code not sent",
+  "status": 422,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "code_send_failed"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Mobile number missing](/connect/errors/mobile-number-missing)
+- [Invalid verification code](/connect/errors/invalid-verification-code)
+- [Security check required](/connect/errors/captcha-required)
+- [Session expired](/connect/errors/session-expired)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Disposable email address
+
+The 8x8 Connect portal API returns this problem when a sign-up uses an email address from a disposable (temporary) email service. 8x8 Connect does not create accounts for these addresses. The sign-up stops before anything is created, and no verification email is sent.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/disposable-email` |
+| `title` | `Disposable email address` |
+| `code` | `disposable_email` |
+| `status` | `400` |
+
+---
+
+## What causes it
+
+This problem is returned when a user signs up with an email address that belongs to a disposable email service.
+
+---
+
+## What to do
+
+1. Do not resend the sign-up with the same email address. It gets the same answer.
+2. Ask the user for a permanent email address that they can receive mail at, such as their work address.
+3. Start the sign-up again with that address.
+
+---
+
+## Example response
+
+Signing up with a disposable email address returns HTTP `400` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/disposable-email",
+  "title": "Disposable email address",
+  "status": 400,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "disposable_email"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Sign-up not allowed](/connect/errors/signup-not-allowed)
+- [Security check required](/connect/errors/captcha-required)
+- [Verification link invalid](/connect/errors/verification-token-invalid)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Connect portal error types
+
+The 8x8 Connect web portal works through its own API, the portal API. When the portal API cannot complete a request, it returns the error as problem details: a JSON object in the format that [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) defines, with the media type `application/problem+json`. Each problem type listed on this page has its own page that explains what causes it and what to do.
+
+These pages are for developers and support engineers who handle or troubleshoot these responses, for example when a sign-in, a sign-up or a password reset fails. The public 8x8 messaging and voice APIs report errors in other formats: see [API error codes](/connect/docs/api-error-codes) for the messaging APIs and [Voice status codes and status messages](/connect/docs/voice/error-codes/voice-status-codes) for voice.
+
+---
+
+## Response format
+
+Responses for the types listed on this page carry the following members. The first six are always present.
+
+| Member | Description |
+| --- | --- |
+| `type` | The identifier of the problem type, a URI such as `https://developer.8x8.com/connect/errors/session-expired`. It never changes, and it is also the address of the type's page. |
+| `title` | A short summary of the problem type in English, such as `Session expired`. It is stable, but do not parse it or branch on it. |
+| `status` | The HTTP status code, as a number. It always equals the HTTP status of the response. |
+| `code` | The problem type's code, such as `session_expired`. It is present for every type on this page, and it matches the last segment of `type`, with underscores in place of hyphens. |
+| `instance` | The path of the request that failed, without the query string. |
+| `timestamp` | When the problem occurred, in ISO 8601 format in UTC, with milliseconds. |
+| `errorId` | An identifier for this occurrence of the problem, present on most responses. Quote it when you contact 8x8 support. If a response has no `errorId`, quote the value of its `X-Request-ID` response header instead. Treat it as an opaque string, because its format varies. |
+| `error` | A legacy member that older clients read. Its value can differ between responses of the same type, so never use it for branching. |
+
+For example, a request whose signed-in session is no longer valid gets HTTP status `401` and this body:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/session-expired",
+  "title": "Session expired",
+  "status": 401,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "session_expired"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+When `type` is `about:blank`, the problem has no listed type and no page here: the HTTP status carries the information, and `title` is the standard reason phrase for that status, such as `Bad Request`.
+
+---
+
+## Handling these errors
+
+- Check that the response's media type is `application/problem+json` before you read these members.
+- Identify the problem by its `type` or its `code`. Compare `type` as an exact string (type URIs have no trailing slash), or compare `code` with the values listed on this page.
+- Never branch on `title` or on the legacy `error` member.
+- Do not identify the problem by its HTTP status alone. Several types share a status, and some types are returned with more than one status. For example, not every `401` means that the session has expired.
+- Handle an `about:blank` problem, or a `type` that you do not recognize, by its HTTP status. Such a response can carry a `code` member with a value that is not listed on this page. Treat it like any other problem without a listed type.
+- Do not fetch type URIs at runtime. A type URI identifies the problem, and the page at that address is written for people. RFC 9457 advises clients not to dereference type URIs automatically.
+- Ignore members that you do not recognize.
+- Retry only when the type's page says so, and follow its guidance on when and how often. Most of these problems are not temporary, so resending the same request usually gets the same answer. Never retry in a tight loop, and send a new security-check token with each attempt at a request that needs one.
+
+---
+
+## Problem types
+
+These tables list every problem type that has a page, grouped by the flow in which it usually occurs. Some types also occur in other flows, and each type's page describes when it happens.
+
+### Sign-in
+
+Returned when a sign-in is refused, for example after the user enters an email address and password.
+
+| Problem type | `code` | HTTP status |
+| --- | --- | --- |
+| [Invalid credentials](/connect/errors/invalid-credentials) | `invalid_credentials` | `400`, `401` |
+| [Account suspended](/connect/errors/account-suspended) | `account_suspended` | `401`, `422` |
+| [No access to this application](/connect/errors/no-application-access) | `no_application_access` | `401` |
+| [Password expired](/connect/errors/password-expired) | `password_expired` | `400` |
+
+### Session
+
+Returned when a request needs a signed-in session, or a sign-in in progress, that is no longer valid.
+
+| Problem type | `code` | HTTP status |
+| --- | --- | --- |
+| [Session expired](/connect/errors/session-expired) | `session_expired` | `401` |
+
+### Two-factor verification
+
+Returned during two-factor sign-in, when the user requests a verification code or enters one.
+
+| Problem type | `code` | HTTP status |
+| --- | --- | --- |
+| [Mobile number missing](/connect/errors/mobile-number-missing) | `mobile_number_missing` | `422` |
+| [Verification code not sent](/connect/errors/code-send-failed) | `code_send_failed` | `422` |
+| [Invalid verification code](/connect/errors/invalid-verification-code) | `invalid_verification_code` | `422` |
+
+### Password reset and change
+
+Returned when a user sets a new password from an emailed link, such as a password reset link, or changes the password while signed in.
+
+| Problem type | `code` | HTTP status |
+| --- | --- | --- |
+| [Reset link invalid](/connect/errors/reset-token-invalid) | `reset_token_invalid` | `400`, `422` |
+| [Password does not meet policy](/connect/errors/password-policy-violation) | `password_policy_violation` | `422` |
+| [Password recently used](/connect/errors/password-recently-used) | `password_recently_used` | `422` |
+
+### Sign-up
+
+Returned while someone signs up for 8x8 Connect, from starting the sign-up to verifying the email address and activating the account.
+
+| Problem type | `code` | HTTP status |
+| --- | --- | --- |
+| [Disposable email address](/connect/errors/disposable-email) | `disposable_email` | `400` |
+| [Sign-up not allowed](/connect/errors/signup-not-allowed) | `signup_not_allowed` | `400`, `401` |
+| [Verification link invalid](/connect/errors/verification-token-invalid) | `verification_token_invalid` | `400` |
+| [Registration failed](/connect/errors/registration-failed) | `registration_failed` | `400` |
+
+### Single sign-on
+
+Returned when a user signs in with single sign-on.
+
+| Problem type | `code` | HTTP status |
+| --- | --- | --- |
+| [Single sign-on request failed](/connect/errors/sso-request-failed) | `sso_request_failed` | `400` |
+
+If the email address is not accepted for single sign-on, the answer is [Invalid credentials](/connect/errors/invalid-credentials) with status `400` instead.
+
+### Security checks and limits
+
+Returned when a request does not pass the security check that protects it, or when sign-in is blocked after too many failed attempts.
+
+| Problem type | `code` | HTTP status |
+| --- | --- | --- |
+| [Security check required](/connect/errors/captcha-required) | `captcha_required` | `400` |
+| [Too many attempts](/connect/errors/too-many-attempts) | `too_many_attempts` | `401` |
+
+---
+
+## Invalid credentials
+
+The 8x8 Connect portal API returns this problem when it refuses a sign-in because the email address or password was not accepted. The response is the same whether the email address is not recognized or the password is wrong, and it does not say which.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/invalid-credentials` |
+| `title` | `Invalid credentials` |
+| `code` | `invalid_credentials` |
+| `status` | `401`, or `400` when a single sign-on (SAML) sign-in cannot start |
+
+---
+
+## What causes it
+
+| When it happens | Status | Cause |
+| --- | --- | --- |
+| Signing in with an email address and password | `401` | The email address and password were not accepted. |
+| Completing a social sign-in | `401` | The social sign-in was verified, but the account cannot sign in. |
+| Signing in with single sign-on | `400` | The email address was not accepted for single sign-on. |
+| Two-factor sign-in (requesting or entering a verification code) | `401` | Rarely, the sign-in can no longer be completed. |
+
+> 📘
+>
+> The HTTP status alone does not identify this problem. It is `400` when signing in with single sign-on and `401` in the other cases, and other problem types use the same statuses. Identify it by its `code` or `type`.
+
+---
+
+## What to do
+
+1. Do not resend the same credentials.
+2. Ask the user to check the email address and password, then try again. Each new sign-in attempt needs a new security-check token; see [Security check required](/connect/errors/captcha-required).
+3. If the user does not remember the password, have them reset it with **Forgot Password** on the 8x8 Connect sign-in page.
+4. For a single sign-on sign-in, ask the user to check the email address.
+5. If the user is sure that the details are correct, they should contact their workspace administrator.
+6. If the problem came from a two-factor step, start the sign-in again from the email and password step.
+
+> 🚧
+>
+> Repeated failed sign-ins can block further sign-ins to the account, answered with [Too many attempts](/connect/errors/too-many-attempts). Never retry a refused sign-in automatically or in a loop.
+
+---
+
+## Example response
+
+For a sign-in with an email address and password, the API returns this problem with HTTP `401` and the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/invalid-credentials",
+  "title": "Invalid credentials",
+  "status": 401,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "invalid_credentials"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Account suspended](/connect/errors/account-suspended)
+- [No access to this application](/connect/errors/no-application-access)
+- [Password expired](/connect/errors/password-expired)
+- [Too many attempts](/connect/errors/too-many-attempts)
+- [Security check required](/connect/errors/captcha-required)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Invalid verification code
+
+The 8x8 Connect portal API returns this problem when the code submitted to finish a two-factor sign-in is not accepted. The code may be wrong or no longer valid, and the response does not say which.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/invalid-verification-code` |
+| `title` | `Invalid verification code` |
+| `code` | `invalid_verification_code` |
+| `status` | `422` |
+
+---
+
+## What causes it
+
+During two-factor sign-in, the API returns this problem when the sign-in is waiting for a verification code and the code that the user enters is not accepted:
+
+| Verification method | `otpType` | Cause |
+| --- | --- | --- |
+| Authenticator app | `AUTHENTICATOR_APP` | The code is not the current code from the authenticator app that is set up for the user. |
+| SMS | `SMS_OTP` | The code does not match the most recent code sent by SMS, or that code is no longer valid. |
+
+The API checks that the sign-in is still pending before it checks the code. If the sign-in is no longer pending, the response is [Session expired](/connect/errors/session-expired) instead.
+
+---
+
+## What to do
+
+1. Ask the user to check the code and enter it again. Sending a code that was already refused gets the same answer.
+2. For SMS, if the code may have expired, request a new verification code. Each request needs a new security-check token. Ask the user to enter the code from the newest message.
+3. For an authenticator app, ask the user to enter the code that the app shows now, before it changes. If codes from the app keep failing, check that the date and time on the user's device are set automatically.
+4. If the response is [Session expired](/connect/errors/session-expired), start the sign-in again from the first step.
+
+---
+
+## Example response
+
+A code that is not accepted during two-factor sign-in returns HTTP `422` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/invalid-verification-code",
+  "title": "Invalid verification code",
+  "status": 422,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "invalid_verification_code"
+}
+```
+
+The response can carry other members, such as the legacy `error` member, whose value differs between verification methods, and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Verification code not sent](/connect/errors/code-send-failed)
+- [Mobile number missing](/connect/errors/mobile-number-missing)
+- [Session expired](/connect/errors/session-expired)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Mobile number missing
+
+The 8x8 Connect portal API returns this problem when a two-factor sign-in code is requested by SMS for a user who has no mobile number on file. 8x8 cannot send the code, so the user must verify another way.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/mobile-number-missing` |
+| `title` | `Mobile number missing` |
+| `code` | `mobile_number_missing` |
+| `status` | `422` |
+
+---
+
+## What causes it
+
+When a verification code is requested by SMS during two-factor sign-in, the API returns this problem if the user needs two-factor verification and has no mobile number on file. It does so whether or not the user has set up another verification method.
+
+The sign-in response lists the methods that the user can verify with in `TwoFA`, and it includes `SMS_OTP` only when a mobile number is on file. So this problem usually means that a client requested an SMS code that the sign-in response did not offer, or that the mobile number was removed after the sign-in started.
+
+---
+
+## What to do
+
+1. Request an SMS code only when the `TwoFA` list in the sign-in response includes `SMS_OTP`.
+2. If the list includes `AUTHENTICATOR_APP`, ask the user for the code from their authenticator app, and submit it to complete the two-factor sign-in with `otpType` set to `AUTHENTICATOR_APP`. No SMS needs to be sent.
+3. If the user has no other method, they cannot finish signing in until a mobile number is added to their account. Ask them to contact 8x8 support at [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com).
+
+Do not retry the request. The API returns the same answer until a mobile number is on the account.
+
+---
+
+## Example response
+
+A request for an SMS code for a user with no mobile number on file returns HTTP `422` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/mobile-number-missing",
+  "title": "Mobile number missing",
+  "status": 422,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "mobile_number_missing"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Verification code not sent](/connect/errors/code-send-failed)
+- [Invalid verification code](/connect/errors/invalid-verification-code)
+- [Session expired](/connect/errors/session-expired)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## No access to this application
+
+The 8x8 Connect portal API can return this problem when a user signs in with an account that does not have access to this application. The API returns it only after the user's credentials have been verified.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/no-application-access` |
+| `title` | `No access to this application` |
+| `code` | `no_application_access` |
+| `status` | `401` |
+
+---
+
+## What causes it
+
+The account is not enabled for this application. The API checks this only after the sign-in has verified the user's credentials, and can return this problem at these steps:
+
+| When it happens | Status | Checked |
+| --- | --- | --- |
+| Signing in with an email address and password | `401` | After the password is accepted |
+| Two-factor sign-in (requesting or entering a verification code) | `401` | After the credentials were verified earlier in the sign-in |
+
+---
+
+## What to do
+
+1. Stop the sign-in and do not retry. The API returns the same answer until access is enabled for the account.
+2. Tell the user that the account does not have access to this application and that they should contact their workspace administrator.
+3. Access is enabled by 8x8, so the workspace administrator should contact 8x8 support at [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) to request it.
+
+---
+
+## Example response
+
+The API returns this problem with HTTP `401` and the content type `application/problem+json`, for example when a user enters a verification code during two-factor sign-in:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/no-application-access",
+  "title": "No access to this application",
+  "status": 401,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "no_application_access"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Account suspended](/connect/errors/account-suspended)
+- [Invalid credentials](/connect/errors/invalid-credentials)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Password expired
+
+The 8x8 Connect portal API can return this problem when a user signs in with the correct password, but the password has expired. The user needs to reset the password, then sign in with the new one.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/password-expired` |
+| `title` | `Password expired` |
+| `code` | `password_expired` |
+| `status` | `400` |
+
+---
+
+## What causes it
+
+When a user signs in with an email address and password, the API can return this problem with status `400`. The email address and password are correct, but the password is past its expiry date.
+
+---
+
+## What to do
+
+1. Do not retry the sign-in with the same password. Reset the password first.
+2. Have the user select **Forgot Password** on the 8x8 Connect sign-in page and follow the link in the email they receive.
+3. Have the user choose a new password that meets the password requirements and was not used recently.
+4. Sign in with the new password.
+
+---
+
+## Example response
+
+When a user signs in with an email address and password, the API can return this problem with HTTP `400` and the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/password-expired",
+  "title": "Password expired",
+  "status": 400,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "password_expired"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Invalid credentials](/connect/errors/invalid-credentials)
+- [Reset link invalid](/connect/errors/reset-token-invalid)
+- [Password does not meet policy](/connect/errors/password-policy-violation)
+- [Password recently used](/connect/errors/password-recently-used)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Password does not meet policy
+
+The 8x8 Connect portal API returns this problem when a new password does not meet the password requirements. The response does not say which requirement the password missed.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/password-policy-violation` |
+| `title` | `Password does not meet policy` |
+| `code` | `password_policy_violation` |
+| `status` | `422` |
+
+---
+
+## What causes it
+
+The API returns this problem in these flows when the new password does not meet the password requirements:
+
+| When it happens | Status |
+| --- | --- |
+| Resetting a password from an emailed link | `422` |
+| Activating an invited account, when the user sets their first password from the invitation email | `422` |
+| Changing the password while signed in | `422` |
+
+A password meets the requirements when it:
+
+- is at least 8 characters long
+- contains an uppercase letter (`A` to `Z`)
+- contains a lowercase letter (`a` to `z`)
+- contains a number (`0` to `9`)
+- contains a special character, which is any other character, such as `!`, `#` or `%`
+
+When the password is set from a password reset link or an invitation link, a password shorter than 8 or longer than 50 characters fails request validation first. That response is a `422` problem with the `type` `about:blank`, not this problem.
+
+---
+
+## What to do
+
+1. Check the new password against every requirement before you send it, because the response does not say which one failed.
+2. Ask the user for a password that meets all of the requirements, then send it again. When the password is set from a password reset link or an invitation link, the user can submit the new password with the same link while that link is still valid.
+
+---
+
+## Example response
+
+A new password that does not meet the requirements returns HTTP `422` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/password-policy-violation",
+  "title": "Password does not meet policy",
+  "status": 422,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "password_policy_violation"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`, but it does not list the requirements that failed. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Password recently used](/connect/errors/password-recently-used)
+- [Reset link invalid](/connect/errors/reset-token-invalid)
+- [Password expired](/connect/errors/password-expired)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Password recently used
+
+The 8x8 Connect portal API returns this problem when a user tries to set a new password that matches a password they have used recently. The password is not changed, and the response does not say which password it matched.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/password-recently-used` |
+| `title` | `Password recently used` |
+| `code` | `password_recently_used` |
+| `status` | `422` |
+
+---
+
+## What causes it
+
+| When it happens | Status | Cause |
+| --- | --- | --- |
+| Setting a new password from an emailed link, such as a password reset link | `422` | The new password matches a password that the account has used recently. |
+| Changing the password while signed in | `422` | The new password matches one of the account's previous passwords. |
+
+---
+
+## What to do
+
+1. Do not resend the same password. It gets the same answer.
+2. Ask the user to choose a password that they have not used on 8x8 Connect before. Make sure that it also meets the password requirements; see [Password does not meet policy](/connect/errors/password-policy-violation).
+3. Submit the new password. During a password reset, the user can try again from the same link while it is still valid. If the link is no longer valid, the request is refused with [Reset link invalid](/connect/errors/reset-token-invalid), and the user needs a new link from **Forgot Password** on the 8x8 Connect sign-in page.
+
+---
+
+## Example response
+
+A new password that matches a recently used password returns HTTP `422` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/password-recently-used",
+  "title": "Password recently used",
+  "status": 422,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "password_recently_used"
+}
+```
+
+The response can carry other members, such as the legacy `error` member, whose value differs between the two cases above, and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Password does not meet policy](/connect/errors/password-policy-violation)
+- [Reset link invalid](/connect/errors/reset-token-invalid)
+- [Password expired](/connect/errors/password-expired)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Registration failed
+
+The 8x8 Connect portal API returns this problem when it cannot set up the new account while completing an account activation. The response does not say which step failed or why.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/registration-failed` |
+| `title` | `Registration failed` |
+| `code` | `registration_failed` |
+| `status` | `400` |
+
+---
+
+## What causes it
+
+When a user completes an account activation, 8x8 Connect creates and sets up the new account and its first user from the activation details. This problem is returned when any part of that fails.
+
+---
+
+## What to do
+
+1. Do not resend the request automatically or in a loop.
+2. Wait a few minutes, then try once more. Each attempt needs a new security-check token; see [Security check required](/connect/errors/captcha-required).
+3. If it fails again, contact 8x8 support at [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) and quote the `errorId` and `timestamp` of each failed response.
+
+---
+
+## Example response
+
+An account activation that cannot set up the new account returns HTTP `400` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/registration-failed",
+  "title": "Registration failed",
+  "status": 400,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "registration_failed"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Verification link invalid](/connect/errors/verification-token-invalid)
+- [Security check required](/connect/errors/captcha-required)
+- [Sign-up not allowed](/connect/errors/signup-not-allowed)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Reset link invalid
+
+The 8x8 Connect portal API returns this problem when a password reset link, or the invitation link that an invited user opens to set their first password, cannot be used. The link may have expired, may already have been used, or may never have been valid. All of these cases return this same problem type.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/reset-token-invalid` |
+| `title` | `Reset link invalid` |
+| `code` | `reset_token_invalid` |
+| `status` | `400` when the link is checked, `422` when the new password is submitted |
+
+---
+
+## What causes it
+
+The token from the link is not valid. This happens when resetting a password from an emailed link, and when activating an invited account, because the invitation email carries the same kind of link. The token is checked at two steps:
+
+| When it happens | Status |
+| --- | --- |
+| Opening the link, when it is checked before the user chooses a password | `400` |
+| Submitting the new password with the token from the link | `422` |
+
+Both steps return this problem for an expired link, a used link and an unknown link. When the new password is submitted, a token in an unexpected format fails request validation first. That response is a `422` problem with the `type` `about:blank`, not this problem.
+
+> 📘
+>
+> The HTTP status differs between the two steps. Identify this problem by its `code` or `type`, not by the status.
+
+---
+
+## What to do
+
+1. Do not retry with the same link. It gets the same answer every time.
+2. For a password reset, ask the user to request a new link with **Forgot Password** on the 8x8 Connect sign-in page. Requesting a reset link needs a security-check token.
+3. For an invitation, ask an administrator of the 8x8 Connect account to resend the invitation.
+4. Ask the user to open the link in the newest email. Links in older emails may no longer work.
+
+---
+
+## Example response
+
+A link that cannot be used returns HTTP `400` when it is checked and HTTP `422` when the new password is submitted, both with the content type `application/problem+json`. This is the response to the check:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/reset-token-invalid",
+  "title": "Reset link invalid",
+  "status": 400,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "reset_token_invalid"
+}
+```
+
+The response can carry other members, such as the legacy `error` member, whose value varies, and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Password does not meet policy](/connect/errors/password-policy-violation)
+- [Password recently used](/connect/errors/password-recently-used)
+- [Password expired](/connect/errors/password-expired)
+- [Security check required](/connect/errors/captcha-required)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Session expired
+
+The 8x8 Connect portal API returns this problem when a request that needs a signed-in session does not carry a valid one. Every invalid session gets the same `code` and `type`, whatever the reason that the session is no longer valid.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/session-expired` |
+| `title` | `Session expired` |
+| `code` | `session_expired` |
+| `status` | `401` |
+
+---
+
+## What causes it
+
+- A request that needs a signed-in session carries no session token, or a token that the API no longer accepts, for example because it expired or the user signed out.
+- During two-factor sign-in (requesting or entering a verification code), the pending sign-in for the sign-in reference (`refId`) no longer exists. It expired, it was already completed, or a newer sign-in for the same user replaced it. When the user enters a code sent by SMS, the answer is the same if there is no current code request for the sign-in reference.
+
+> 📘
+>
+> Not every `401` means that the session has expired. Treat a response as an expired session only when its `code` is `session_expired` or its `type` is the type URI above. Other `401` responses to signed-in requests, such as an action that the user's role does not allow, have a different `type` and do not mean that the session has ended.
+
+---
+
+## What to do
+
+1. Discard the stored session token. Requests that carry it keep failing.
+2. Sign the user in again.
+3. Repeat the original request once, with the new session token.
+
+During two-factor sign-in, start again from the email and password step to get a new sign-in reference and a new code.
+
+If the request that failed was a sign-out, discard the stored token. There is no need to sign in again.
+
+---
+
+## Example response
+
+When a request carries a session token that the API no longer accepts, the API returns this problem with HTTP `401` and the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/session-expired",
+  "title": "Session expired",
+  "status": 401,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "session_expired"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Invalid credentials](/connect/errors/invalid-credentials)
+- [Invalid verification code](/connect/errors/invalid-verification-code)
+- [Verification code not sent](/connect/errors/code-send-failed)
+- [Account suspended](/connect/errors/account-suspended)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Sign-up not allowed
+
+The 8x8 Connect portal API returns this problem when it cannot accept a request to start a sign-up. The response does not say why the request was refused. No sign-up is started, and no verification email is sent.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/signup-not-allowed` |
+| `title` | `Sign-up not allowed` |
+| `code` | `signup_not_allowed` |
+| `status` | `400` or `401` |
+
+---
+
+## What causes it
+
+| When it happens | Status | Cause |
+| --- | --- | --- |
+| Signing up | `400` | 8x8 Connect does not accept sign-ups from where the request was sent. |
+| Signing up | `401` | The sign-up request could not be recorded, for example because too many sign-up requests were made. |
+
+> 📘
+>
+> The `401` here does not mean that a session has expired. Identify this problem by its `code` or `type`, not by the status.
+
+---
+
+## What to do
+
+1. Do not resend the same request. It gets the same answer.
+2. Start the sign-up from the 8x8 Connect sign-up page in a web browser.
+3. If the problem continues on the sign-up page, try again later. If it still fails, contact 8x8 support at [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) and quote the `errorId` from the response.
+
+---
+
+## Example response
+
+A sign-up that 8x8 Connect does not accept from where it was sent returns HTTP `400` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/signup-not-allowed",
+  "title": "Sign-up not allowed",
+  "status": 400,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "signup_not_allowed"
+}
+```
+
+The response can carry other members, such as the legacy `error` member, whose value differs between the two cases above, and an `errorId`. Branch only on `code` or `type`. When the sign-up request could not be recorded, the same problem arrives with `status` `401`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Disposable email address](/connect/errors/disposable-email)
+- [Security check required](/connect/errors/captcha-required)
+- [Registration failed](/connect/errors/registration-failed)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Single sign-on request failed
+
+The 8x8 Connect portal API returns this problem when it cannot start a single sign-on (SSO) sign-in. The request was well formed, but the API could not prepare the sign-in request for the identity provider.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/sso-request-failed` |
+| `title` | `Single sign-on request failed` |
+| `code` | `sso_request_failed` |
+| `status` | `400` |
+
+---
+
+## What causes it
+
+Signing in with single sign-on returns this problem with status `400` when the API cannot prepare the sign-in request for the identity provider. It happens at the start of the sign-in, before the user is sent to the identity provider. The response does not say why. The cause can be temporary, or it can persist until it is fixed.
+
+Other refusals at the start of a single sign-on sign-in are reported differently:
+
+- If the email address is not accepted for single sign-on, the API returns [Invalid credentials](/connect/errors/invalid-credentials) with the same status, and does not say why.
+- If the email address is missing or malformed, the request fails field validation with status `422`.
+
+---
+
+## What to do
+
+1. Wait a short time, then try again. Retry a few times at most.
+2. If the problem continues, ask the workspace administrator to check that single sign-on is set up correctly for the organization.
+3. If the problem persists, contact 8x8 support at [cpaas-support@8x8.com](mailto:cpaas-support@8x8.com) and quote the `errorId` from the response.
+
+---
+
+## Example response
+
+A single sign-on sign-in that cannot start returns HTTP `400` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/sso-request-failed",
+  "title": "Single sign-on request failed",
+  "status": 400,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "sso_request_failed"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Invalid credentials](/connect/errors/invalid-credentials)
+- [Security (SSO)](/connect/docs/connect-security), which explains how an administrator sets up single sign-on for 8x8 Connect
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Too many attempts
+
+The 8x8 Connect portal API returns this problem when it refuses a sign-in with an email address and password because too many failed attempts were made. While the block lasts, every new sign-in attempt is refused, so sending more of them does not help.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/too-many-attempts` |
+| `title` | `Too many attempts` |
+| `code` | `too_many_attempts` |
+| `status` | `401` |
+
+---
+
+## What causes it
+
+Signing in with an email address and password returns this problem with status `401` when sign-in is blocked after too many failed attempts. The block takes one of two forms:
+
+- It is temporary and ends on its own after a while.
+- It stays in place until the password is reset.
+
+Both forms return the same `code` and `type`, so the steps below cover both. The response has no `Retry-After` header.
+
+> 📘
+>
+> A response with status `429` (Too Many Requests) is a rate limit, not this problem, even when its legacy `error` member reads `too_many_attempts`. Identify this problem by its `code` or `type`. After a `429`, wait before you send the request again, and honor the `Retry-After` header when the response has one.
+
+---
+
+## What to do
+
+1. Stop sending sign-in requests. Never retry a refused sign-in automatically or in a loop.
+2. Wait a few minutes, then let the user sign in again.
+3. If the sign-in is still refused, have the user reset the password with **Forgot Password** on the 8x8 Connect sign-in page, then sign in with the new password.
+
+---
+
+## Example response
+
+A sign-in with an email address and password that is refused while the block lasts returns HTTP `401` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/too-many-attempts",
+  "title": "Too many attempts",
+  "status": 401,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "too_many_attempts"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Invalid credentials](/connect/errors/invalid-credentials)
+- [Security check required](/connect/errors/captcha-required)
+- [Password expired](/connect/errors/password-expired)
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
+## Verification link invalid
+
+The 8x8 Connect portal API returns this problem when the verification link from a sign-up email cannot be used to verify the email address. The answer is the same for every reason the link cannot be used, so the response does not say which reason applies.
+
+For the response format and the other problem types that the portal API returns, see [Connect portal error types](/connect/errors).
+
+| Member | Value |
+| --- | --- |
+| `type` | `https://developer.8x8.com/connect/errors/verification-token-invalid` |
+| `title` | `Verification link invalid` |
+| `code` | `verification_token_invalid` |
+| `status` | `400` |
+
+---
+
+## What causes it
+
+This problem is returned when a user verifies their email address after signing up, and the token from the verification link:
+
+- has expired, because verification links are valid for a limited time
+- was already used to finish a sign-up
+- was not issued by 8x8 Connect, for example because the link was cut short when it was copied
+- is sent with a different email address from the one the link was sent to
+
+---
+
+## What to do
+
+1. Do not retry with the same link. It gets the same answer.
+2. Ask the user to request a new verification email: select **Request a new link** on the 8x8 Connect verification page, or start the sign-up again from the 8x8 Connect sign-up page with the same email address.
+3. Ask the user to open the link in the newest email and to finish the sign-up soon after, because links are valid for a limited time.
+4. If the user has already finished the sign-up, they should sign in to 8x8 Connect instead.
+
+---
+
+## Example response
+
+Verifying the email address with a link that cannot be used returns HTTP `400` with the content type `application/problem+json`:
+
+```json
+{
+  "type": "https://developer.8x8.com/connect/errors/verification-token-invalid",
+  "title": "Verification link invalid",
+  "status": 400,
+  "instance": "/api/…",
+  "timestamp": "2026-10-26T03:14:15.926Z",
+  "code": "verification_token_invalid"
+}
+```
+
+The response can carry other members, such as the legacy `error` member and an `errorId`. Branch only on `code` or `type`.
+
+---
+
+## Related
+
+- [Connect portal error types](/connect/errors)
+- [Registration failed](/connect/errors/registration-failed)
+- [Disposable email address](/connect/errors/disposable-email)
+- [Reset link invalid](/connect/errors/reset-token-invalid), for a password reset link that cannot be used
+- [API error codes](/connect/docs/api-error-codes) for the 8x8 messaging APIs, which use a different response format
+
+---
+
 ## 8x8 Connect
 
 import ConnectCards from '@site/docusaurus/components/ConnectCards';
