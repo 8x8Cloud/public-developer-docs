@@ -69,8 +69,9 @@ Payload object description
 | Parameter name | Parameter type | Description |
 | :------------- | :------------- | :---------- |
 | channel        | string         | Channel the content was sent on. Always `sms`. |
-| contentType    | string         | Kind of content. Always `text` — SMS has no media, template, or interactive content types. |
-| body           | object         | Message body text. Omitted when the content is masked (see `meta`). |
+| contentType    | string         | Kind of content. Always `text` — SMS has no template or interactive content types. |
+| body           | object         | Message body text. Omitted when the content is masked (see `meta`), or when an MMS was sent with media only and no text. |
+| mediaUrls      | array          | Media (MMS) URLs originally sent with the message. Only present for MMS; omitted for plain SMS and when the content is masked. |
 | meta           | object         | Extra flags such as redaction status. Only present when the content is masked. |
 
 ##### body object
@@ -85,6 +86,13 @@ Payload object description
 | :-------------- | :------------- | :---------- |
 | redacted        | boolean        | `true` when the content was masked. |
 | redactionReason | string         | Why the content was masked, e.g. `Content masked for PII compliance` (when PII masking is enabled for your sub-account or destination country). |
+
+### Delivery receipts for MMS
+
+A message sent with `mediaUrls` (see [mediaUrls](/connect/docs/send-sms-api-reference#mediaurls)) receives the same delivery receipts as an SMS: they are posted to the same callback URL, with `namespace` `SMS` and `eventType` `outbound_message_status_changed`. There is no separate event type for MMS.
+
+- The `queued` receipt includes `outboundContent` with the `mediaUrls` from your send request, under the same conditions as for SMS (see [outboundContent object](#outboundcontent-object)). If the MMS was sent with media only and no text, `outboundContent` is still included, with `mediaUrls` and without `body`.
+- Later receipts report the delivery progress in `status` only and carry neither `outboundContent` nor the media URLs. For example, `delivered` with detail `delivered_to_operator` or `delivered_to_recipient`, or `undelivered` with detail `rejected_by_operator` and the error details in `status`. See [Message status reference](/connect/reference/message-status-references) for all values.
 
 ### Sample delivery receipt for outbound SMS
 
@@ -179,6 +187,42 @@ This receipt has `status.state` of `queued`, so it carries the `outboundContent`
       "body": {
         "text": "Hello World"
       }
+    }
+  }
+}
+```
+
+### Sample delivery receipt with outboundContent for MMS
+
+This `queued` receipt is for a message sent with `mediaUrls`, so `outboundContent` also lists the media URLs that were sent.
+
+```json
+{
+  "namespace": "SMS",
+  "eventType": "outbound_message_status_changed",
+  "description": "SMS outbound message delivery receipt",
+  "payload": {
+    "umid": "9e09ac86-bd74-5465-851d-1eb5a5fdbb9a",
+    "subAccountId": "SubAccount-1",
+    "source": "8x8",
+    "destination": "+12025550199",
+    "status": {
+      "state": "queued",
+      "timestamp": "2026-09-17T05:54:55.72Z"
+    },
+    "price": {
+      "total": 0,
+      "perSms": 0,
+      "currency": "EUR"
+    },
+    "smsCount": 1,
+    "outboundContent": {
+      "channel": "sms",
+      "contentType": "text",
+      "body": {
+        "text": "Hello World"
+      },
+      "mediaUrls": ["https://example.com/pic.jpg"]
     }
   }
 }

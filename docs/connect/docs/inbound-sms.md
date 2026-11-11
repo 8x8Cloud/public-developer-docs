@@ -51,6 +51,7 @@ Payload object description
 | encoding       | string         | The encoding used in the SMS body (GSM7 / UCS2)                                                               |
 | smsCount       | integer        | Number of SMS segment in the message                                                                          |
 | price          | object         | Price information of the message, please see [Price object reference](/connect/reference/price-object-reference) for details |
+| mediaUrls      | array          | Links to the media (image, audio, video, etc.) sent with an inbound MMS. Only present for MMS; omitted for plain SMS. See [Inbound MMS](#inbound-mms). |
 
 > ❗️
 >
@@ -77,6 +78,59 @@ Payload object description
       "perSms": 0.0446592,
       "currency": "EUR"
     }
+  }
+}
+```
+
+### Inbound MMS
+
+When a user sends an MMS (a message with media such as an image, audio or video) to one of your virtual numbers, you receive it on the same callback URL, with the same `namespace` (`SMS`) and `eventType` (`inbound_message_received`) as an inbound SMS. The payload carries the message text in `body`, and an additional `mediaUrls` array with one link per media file.
+
+- If the user sent media without any text, `body` is empty.
+- `mediaUrls` is not the carrier's link to the media. 8x8 copies each media file into its own storage and gives you a time-limited, pre-signed URL to it.
+- The order of `mediaUrls` matches the order of the media in the original MMS.
+- If 8x8 cannot copy a media file, you still receive the message, with its text and any media that was copied successfully.
+- Media whose content type a browser could execute or render as a page (for example HTML, SVG or scripts) is served as `application/octet-stream`.
+
+> 🚧 **Media URLs expire**
+>
+> Each URL in `mediaUrls` is valid for 1 day (24 hours) by default. Download and store the media when the webhook arrives if you need it after that, and do not keep the URL as though it were permanent.
+>
+>
+
+> 📘 **Availability**
+>
+> Inbound MMS is currently available on MMS-enabled US/Canada virtual numbers, the same coverage as [sending MMS](/connect/docs/send-sms-api-reference#mediaurls). Contact your account manager to check whether your virtual number supports MMS.
+>
+> Media is only delivered with the latest inbound SMS format described on this page. If the request you receive has a different structure, contact our support to activate the latest format for your account. Sub-accounts that receive inbound SMS through the [Inbound ChatApps message](/connect/docs/inbound-chatapps-message) webhook receive the text of an inbound MMS only, without its media.
+>
+>
+
+### Sample inbound MMS callback body
+
+```json Inbound MMS webhook body
+{
+  "namespace": "SMS",
+  "eventType": "inbound_message_received",
+  "description": "SMS inbound message",
+  "payload": {
+    "umid": "4b2c1d7e-9f0a-4c3b-8e6d-2a1f0e9d8c7b",
+    "subAccountId": "SubAccount-1",
+    "timestamp": "2026-10-27T09:15:42.31Z",
+    "source": "+12125559999",
+    "destination": "+12025550308",
+    "body": "Check out this photo!",
+    "encoding": "GSM7",
+    "smsCount": 1,
+    "price": {
+      "total": 0.0446592,
+      "perSms": 0.0446592,
+      "currency": "EUR"
+    },
+    "mediaUrls": [
+      "<PRESIGNED_MEDIA_URL_1>",
+      "<PRESIGNED_MEDIA_URL_2>"
+    ]
   }
 }
 ```

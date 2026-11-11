@@ -46,16 +46,19 @@ its messages.
 Every request is authenticated with an `apiKey` / `apiSecret` pair issued by 8x8 for your
 account. Both are sent as properties of the JSON request body, not as headers.
 
+Request properties are case sensitive.
+
 ## Paging
 
-All operations page at **100 records per page**. Send `page: 1` for the first page, and
-read `data.lastPage` from the response to discover how many pages exist.
+Results are returned at up to **100 records per page**. Send `page: 1` for the first page,
+and read `lastPage` from the response to discover how many pages exist. If `page` is not
+set, it defaults to `1`.
 
 ## Response envelope
 
 ```json
-{ "status": "Ok",     "message": "Success", "data": { ... } }
-{ "status": "Failed", "message": "<error_message>" }
+{ "status": "Ok",     "message": "Success", "timestamp": 1560849826203, "data": { ... } }
+{ "status": "Failed", "message": "<error_message>", "timestamp": 1560849826203 }
 ```
 
 A failed request is still returned with HTTP 200 and `status: "Failed"` — check the

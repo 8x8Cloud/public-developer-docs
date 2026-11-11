@@ -15,6 +15,7 @@ The JSON object has the following properties:
 | scheduled       | string        | `timestamp`, Pre-defined date and time for this SMS to be sent in the future.                                       |
 | expiry          | string        | `timestamp`, Maximum date and time for this SMS to be sent at                                                       |
 | dlrCallbackUrl  | string        | `uri`, Webhook URL where delivery status for the SMS will be posted (*Overwrites your default account callback URL* |
+| mediaUrls       | array         | Optional list of HTTPS URLs for media to send with the message (MMS). Up to 10 URLs, each up to 4096 characters.    |
 
 ## Parameters overview
 
@@ -105,6 +106,28 @@ Example: `2016-11-07T19:20:30+08:00`
 > We strongly recommend setting a default webhook (a.k.a callback URL) for your account using a [Webhooks Configuration API](/connect/reference/add-webhooks-2)
 >
 >
+
+### mediaUrls
+
+* This property is optional.
+* Use `mediaUrls` to send media (image, audio, video, etc.) along with the message as an MMS. Each entry must be an HTTPS URL, up to 4096 characters, and you can include up to 10 URLs per message.
+
+> 🚧 **Carrier support**
+>
+> MMS is currently supported for US/Canada destinations only. For destinations where MMS isn't supported, `mediaUrls` is ignored and the message is sent as a plain SMS.
+>
+>
+
+Example request with media:
+
+```json
+{
+  "source": "AwesomeName",
+  "destination": "12025550308",
+  "text": "Check out this photo!",
+  "mediaUrls": ["https://example.com/pic.jpg"]
+}
+```
 
 ## Response
 

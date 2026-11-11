@@ -20,16 +20,19 @@ info:
     Every request is authenticated with an `apiKey` / `apiSecret` pair issued by 8x8 for your
     account. Both are sent as properties of the JSON request body, not as headers.
 
+    Request properties are case sensitive.
+
     ## Paging
 
-    All operations page at **100 records per page**. Send `page: 1` for the first page, and
-    read `data.lastPage` from the response to discover how many pages exist.
+    Results are returned at up to **100 records per page**. Send `page: 1` for the first page,
+    and read `lastPage` from the response to discover how many pages exist. If `page` is not
+    set, it defaults to `1`.
 
     ## Response envelope
 
     ```json
-    { "status": "Ok",     "message": "Success", "data": { ... } }
-    { "status": "Failed", "message": "<error_message>" }
+    { "status": "Ok",     "message": "Success", "timestamp": 1560849826203, "data": { ... } }
+    { "status": "Failed", "message": "<error_message>", "timestamp": 1560849826203 }
     ```
 
     A failed request is still returned with HTTP 200 and `status: "Failed"` — check the
@@ -52,11 +55,41 @@ paths:
       tags:
         - Converse 2.0 Reporting API
       description: |
-        Returns conversation-level records whose **update** time falls inside the given date
-        range.
+        Returns conversation-level records whose **creation** time falls inside the given date
+        range. The range between `from` and `to` must be within **30 days**. Conversations are
+        returned in order of creation time, oldest first.
 
         To fetch the individual messages of these conversations, pass their UUIDs to **Get
         chats data**.
+
+        ## Filters
+
+        `queues` and `conversationStatus` are optional. Requests without them return the same
+        report as before. When both are sent, a conversation must match both — for example,
+        open conversations in the Sales queue.
+
+        - `queues` filters on the conversation's **current (latest)** queue. A conversation
+          transferred from queue A to queue B is returned when filtering by B, not by A.
+        - Queues that have since been deleted can still be used, so older conversations remain
+          reportable.
+        - Every queue UUID must belong to your account. If any UUID is not recognised, the
+          request fails and the error lists the UUID(s).
+        - `conversationStatus` values are case sensitive — `Open` is rejected.
+        - Conversations without a status are only included when `conversationStatus` is not
+          sent.
+        - A single value can be sent as a plain string instead of an array, for example
+          `"queues": "<QUEUE_UUID>"` or `"conversationStatus": "closed"`.
+
+        ## Errors
+
+        | Situation | `message` |
+        |:---|:---|
+        | `from` or `to` missing | `From date is required.` / `To date is required.` |
+        | Date range longer than 30 days | `Date range has to be within 30 days` |
+        | A `conversationStatus` value is not allowed, or the list is empty | `Invalid conversationStatus. Allowed values: initialized, open, assigned, read, responded, closed` |
+        | A queue UUID is not recognised for your account | `Unknown queues: <QUEUE_UUID>, ...` |
+        | `queues` is empty or contains a non-text value | `Invalid queues` |
+        | More than 50 queues | `maximum queues to be queried is 50.` |
       requestBody:
         required: true
         content:
@@ -70,28 +103,73 @@ paths:
                       type: string
                       description: |
                         Start of the date range, as an ISO 8601 timestamp with offset — for
-                        example `2026-06-06T00:00:00+0800`. Filters on conversation update
-                        time.
+                        example `2026-10-01T00:00:00+0800`. Conversations created on or after
+                        this time are returned.
                     to:
                       type: string
-                      description: End of the date range, as an ISO 8601 timestamp with offset.
+                      description: |
+                        End of the date range, as an ISO 8601 timestamp with offset.
+                        Conversations created on or before this time are returned. Must be
+                        within 30 days of `from`.
                     page:
                       type: integer
                       description: Page number. 100 records per page.
                       default: 1
+                    queues:
+                      description: |
+                        A queue UUID, or an array of up to 50 queue UUIDs. Only conversations
+                        whose current queue is one of these are returned. Use the same value
+                        as the `queue` property in the response.
+                      oneOf:
+                        - type: string
+                        - type: array
+                          minItems: 1
+                          maxItems: 50
+                          items:
+                            type: string
+                    conversationStatus:
+                      description: |
+                        A status, or an array of statuses, in lower case. Only conversations
+                        in these statuses are returned.
+
+                        Besides the five statuses a conversation record can carry, this filter
+                        also accepts `initialized` — a short-lived state while a conversation
+                        is being created.
+                      oneOf:
+                        - $ref: "#/components/schemas/ConversationStatusFilter"
+                        - type: array
+                          minItems: 1
+                          items:
+                            $ref: "#/components/schemas/ConversationStatusFilter"
                   required:
                     - from
                     - to
                     - page
-            example:
-              apiKey: d2f91886-your-api-key
-              apiSecret: aadeff71-your-api-secret
-              from: "2026-06-06T00:00:00+0800"
-              to: "2026-06-06T23:59:59+0800"
-              page: 1
+            examples:
+              dateRange:
+                summary: All conversations in a date range
+                value:
+                  apiKey: d2f91886-your-api-key
+                  apiSecret: aadeff71-your-api-secret
+                  from: "2026-10-01T00:00:00+0800"
+                  to: "2026-10-01T23:59:59+0800"
+                  page: 1
+              filtered:
+                summary: Only open or assigned conversations in one queue
+                value:
+                  apiKey: d2f91886-your-api-key
+                  apiSecret: aadeff71-your-api-secret
+                  from: "2026-10-01T00:00:00+0800"
+                  to: "2026-10-15T23:59:59+0800"
+                  page: 1
+                  queues:
+                    - 0302116a-6b1d-4f8e-9c37-2d5a8e0b7c44
+                  conversationStatus:
+                    - open
+                    - assigned
       responses:
         "200":
-          description: A page of conversation records.
+          description: A page of conversation records, oldest first.
           content:
             application/json:
               schema:
@@ -108,29 +186,52 @@ paths:
                                 type: array
                                 items:
                                   $ref: "#/components/schemas/ConversationRecord"
-              example:
-                status: Ok
-                message: Success
-                data:
-                  count: 318
-                  limit: 100
-                  currentPage: 1
-                  lastPage: 4
-                  conversations:
-                    - uuid: 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
-                      type: WhatsApp
-                      contact:
-                        key: "6596270000"
-                        name: Joseph Lim
-                        mobile: "6596270000"
-                      conversationStatus: closed
-                      queue: Support
-                      agent: agent@example.com
-                      disposition: General
-                      channelAccountId: "6598765432"
-                      channelAccountType: WhatsApp
-                      createdAt: "2026-06-06T01:12:04.000Z"
-                      updatedAt: "2026-06-06T02:41:55.000Z"
+              examples:
+                success:
+                  summary: Success
+                  value:
+                    status: Ok
+                    message: Success
+                    timestamp: 1760500000000
+                    data:
+                      count: 318
+                      limit: 100
+                      currentPage: 1
+                      lastPage: 4
+                      conversations:
+                        - uuid: 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
+                          key: 3545
+                          type: inbound
+                          contact:
+                            key: 1cf2ed48-b259-483d-d065-3a7b9c0d1e2f
+                            name: Joseph Lim
+                            mobile: "6596270000"
+                          conversationStatus: closed
+                          status: active
+                          queue: 0302116a-6b1d-4f8e-9c37-2d5a8e0b7c44
+                          agent: 7b3cd796-7e74-48af-83e6-2c9a7b1e4d55
+                          disposition: General
+                          lastMessageTo: "6596270000"
+                          abandoned: false
+                          isCallback: false
+                          responded: true
+                          creator: System
+                          updater: agent@example.com
+                          channelAccountId: "6598765432"
+                          channelAccountType: WhatsApp
+                          firstRespondedSla: true
+                          openAssignedSla: false
+                          assignedReadSla: true
+                          openClosedSla: true
+                          closedTimestamp: "2026-10-01T02:41:55.000Z"
+                          createdAt: "2026-10-01T01:12:04.000Z"
+                          updatedAt: "2026-10-01T02:41:55.000Z"
+                unknownQueue:
+                  summary: Failure — unknown queue
+                  value:
+                    status: Failed
+                    message: "Unknown queues: 0302116a-6b1d-4f8e-9c37-2d5a8e0b7c44"
+                    timestamp: 1760500000000
   /rest/report/chats:
     post:
       security: []
@@ -143,6 +244,16 @@ paths:
         the conversation records they belong to.
 
         Obtain the conversation UUIDs from **Get conversations data**.
+
+        Each message record has a `type`, which decides what `message` holds and which extra
+        properties are present:
+
+        | `type` | `message` holds | Extra properties |
+        |:---|:---|:---|
+        | `chat` | What the customer or agent typed in the conversation | — |
+        | `note` | What the agent typed in an internal note | — |
+        | `assigned` | What the agent typed in the transfer note | `assignedQueue`, `assignedAgent` |
+        | `closed` | A system-generated message, for example `Agent <AGENT_NAME> closed` | `disposition` |
       requestBody:
         required: true
         content:
@@ -199,6 +310,7 @@ paths:
               example:
                 status: Ok
                 message: Success
+                timestamp: 1760500000000
                 data:
                   count: 24
                   limit: 100
@@ -206,20 +318,73 @@ paths:
                   lastPage: 1
                   chats:
                     - uuid: 9c4bf769-8879-4e6e-96b7-1a2b3c4d5e6f
+                      conversation: 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
+                      conversationKey: "3545"
+                      type: chat
+                      direction: in
                       message: Hi, can I ask more about your ongoing promotion?
                       channel: WhatsApp
-                      direction: in
-                      type: chat
-                      conversation: 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
                       channelAccountId: "6598765432"
                       channelAccountType: WhatsApp
-                    - uuid: 66777f4a-fcd7-4d1a-98fb-2b3c4d5e6f70
-                      message: Conversation closed by agent@example.com
-                      channel: WhatsApp
-                      direction: out
-                      type: closed
-                      disposition: General
+                      contact:
+                        key: 1cf2ed48-b259-483d-d065-3a7b9c0d1e2f
+                        name: Joseph Lim
+                        mobile: "6596270000"
+                      hasAttachments: false
+                      attachments: []
+                      assignedAgent: null
+                      assignedQueue: null
+                      status: active
+                      createdAt: "2026-10-01T01:12:04.000Z"
+                      updatedAt: "2026-10-01T01:12:04.000Z"
+                    - uuid: 1d2e3f40-5a6b-4c7d-8e9f-0a1b2c3d4e5f
                       conversation: 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
+                      conversationKey: "3545"
+                      type: chat
+                      direction: out
+                      message: Here is our latest brochure.
+                      channel: WhatsApp
+                      channelAccountId: "6598765432"
+                      channelAccountType: WhatsApp
+                      hasAttachments: true
+                      attachments:
+                        - type: image/jpeg
+                          url: https://example.com/attachments/brochure.jpg
+                          thumbUrl: https://example.com/attachments/brochure-thumbnail.jpg
+                          caption: brochure.jpg
+                      assignedAgent: null
+                      assignedQueue: null
+                      status: active
+                      createdAt: "2026-10-01T01:14:21.000Z"
+                      updatedAt: "2026-10-01T01:14:26.000Z"
+                    - uuid: 66777f4a-fcd7-4d1a-98fb-2b3c4d5e6f70
+                      conversation: 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
+                      conversationKey: "3545"
+                      type: closed
+                      direction: out
+                      message: Agent Amelia Ong closed
+                      disposition: General
+                      channel: WhatsApp
+                      status: active
+                      createdAt: "2026-10-01T02:41:55.000Z"
+                      updatedAt: "2026-10-01T02:41:55.000Z"
+                  conversations:
+                    - uuid: 7ae6c41a-6fe4-4b5b-8b6d-21a3c4d5e6f7
+                      key: 3545
+                      type: inbound
+                      contact:
+                        key: 1cf2ed48-b259-483d-d065-3a7b9c0d1e2f
+                        name: Joseph Lim
+                        mobile: "6596270000"
+                      conversationStatus: closed
+                      status: active
+                      agent: 7b3cd796-7e74-48af-83e6-2c9a7b1e4d55
+                      disposition: General
+                      lastMessageTo: "6596270000"
+                      channelAccountId: "6598765432"
+                      channelAccountType: WhatsApp
+                      createdAt: "2026-10-01T01:12:04.000Z"
+                      updatedAt: "2026-10-01T02:41:55.000Z"
   /rest/report/agents:
     post:
       security: []
@@ -228,8 +393,8 @@ paths:
       tags:
         - Converse 2.0 Reporting API
       description: |
-        Returns agent records, including each agent's channels, manager, supervisor and
-        status.
+        Returns agent records, including each agent's channels, whether they are a manager or
+        supervisor, and their status.
       requestBody:
         required: true
         content:
@@ -267,8 +432,8 @@ paths:
           description: |
             A page of agent records.
 
-            Note the agents array is nested one level deeper than in the other operations —
-            `data.data.agents`, not `data.agents`.
+            Note the paging metadata and the agents array are nested one level deeper than in
+            the other operations — `data.data.agents`, not `data.agents`.
           content:
             application/json:
               schema:
@@ -280,17 +445,24 @@ paths:
                         type: object
                         properties:
                           data:
-                            type: object
-                            properties:
-                              agents:
-                                type: array
-                                items:
-                                  $ref: "#/components/schemas/AgentRecord"
+                            allOf:
+                              - $ref: "#/components/schemas/Page"
+                              - type: object
+                                properties:
+                                  agents:
+                                    type: array
+                                    items:
+                                      $ref: "#/components/schemas/AgentRecord"
               example:
                 status: Ok
                 message: Success
+                timestamp: 1760500000000
                 data:
                   data:
+                    count: 2
+                    limit: 100
+                    currentPage: 1
+                    lastPage: 1
                     agents:
                       - uuid: 7b3cd796-7e74-48af-83e6-2c9a7b1e4d55
                         user:
@@ -299,13 +471,26 @@ paths:
                         channelTypes:
                           - WhatsApp
                           - Email
-                        manager: manager@example.com
-                        supervisor: supervisor@example.com
+                        manager: false
+                        supervisor: false
                         status: active
-                        type: human
-                        remarks: ""
+                        type: user
+                        remarks: Role Agent
                         createdAt: "2025-11-02T04:15:00.000Z"
                         updatedAt: "2026-06-01T09:22:31.000Z"
+                      - uuid: 2c8e1f0a-3b4d-4e5f-9a6b-7c8d9e0f1a2b
+                        user:
+                          username: supervisor@example.com
+                          name: Daniel Tan
+                        channelTypes:
+                          - WhatsApp
+                        manager: false
+                        supervisor: true
+                        status: active
+                        type: user
+                        remarks: Role Supervisor
+                        createdAt: "2025-11-02T04:20:00.000Z"
+                        updatedAt: "2026-05-14T03:10:12.000Z"
   # ---------------------------------------------------------------------------
   # After-Call Work (ACW) report — HIDDEN: still under development.
   #
@@ -402,6 +587,10 @@ components:
         message:
           type: string
           description: "`Success`, or the error message when `status` is `Failed`."
+        timestamp:
+          type: integer
+          format: int64
+          description: Epoch milliseconds at which the response was produced.
       required:
         - status
         - message
@@ -424,7 +613,9 @@ components:
       properties:
         count:
           type: integer
-          description: Total number of records matching the request, across all pages.
+          description: |
+            Total number of records matching the request — including any filters sent —
+            across all pages.
         limit:
           type: integer
           description: Records per page.
@@ -434,6 +625,31 @@ components:
         lastPage:
           type: integer
           description: Number of the last page available.
+    ConversationStatusFilter:
+      type: string
+      description: A conversation status accepted by the `conversationStatus` filter.
+      enum:
+        - initialized
+        - open
+        - assigned
+        - read
+        - responded
+        - closed
+    Contact:
+      type: object
+      description: The contact the conversation or message is with.
+      properties:
+        key:
+          type: string
+          description: UUID of the contact.
+        name:
+          type: string
+          description: |
+            Name of the contact. Until the name has been set, this holds the contact's mobile
+            number or e-mail address, depending on the channel the conversation started on.
+        mobile:
+          type: string
+          description: Mobile number of the contact.
     ConversationRecord:
       type: object
       description: One conversation.
@@ -441,50 +657,136 @@ components:
         uuid:
           type: string
           description: UUID of the conversation.
+        key:
+          type: integer
+          description: Running number of the conversation within its queue.
         type:
           type: string
-          description: Channel the conversation took place on.
+          description: |
+            Kind of conversation.
+
+            | Value | Meaning |
+            |:---|:---|
+            | `inbound` | Any conversation on any channel, except an outbound voice call |
+            | `outbound_conversation` | An outbound voice call |
+          enum:
+            - inbound
+            - outbound_conversation
         contact:
-          type: object
-          description: The contact the conversation is with.
-          properties:
-            key:
-              type: string
-              description: The contact's channel identifier.
-            name:
-              type: string
-            mobile:
-              type: string
+          $ref: "#/components/schemas/Contact"
         conversationStatus:
           type: string
-          description: Status of the conversation.
+          description: |
+            Current status of the conversation.
+
+            | Value | Meaning |
+            |:---|:---|
+            | `open` | The conversation is open |
+            | `assigned` | The conversation was assigned to an agent when a message was received |
+            | `read` | The assigned agent read the latest incoming message |
+            | `responded` | The agent sent a reply successfully |
+            | `closed` | The agent closed the conversation |
           enum:
             - open
             - assigned
             - read
             - responded
             - closed
+        status:
+          type: string
+          description: |
+            Record status, used as a system indicator. It does not describe conversation
+            activity — use `conversationStatus` for that.
+          enum:
+            - active
+            - inactive
         queue:
           type: string
-          description: Queue the conversation sits in.
+          description: |
+            UUID of the conversation's current (latest) queue. This is the value to use in the
+            `queues` filter.
         agent:
           type: string
-          description: Agent assigned to the conversation.
+          description: UUID of the agent assigned to the conversation.
         disposition:
           type: string
-          description: Disposition the conversation was closed with.
+          description: Name of the disposition category the conversation was closed with.
+        lastMessageTo:
+          type: string
+          description: Mobile number or e-mail address the agent last messaged the contact on.
+        abandoned:
+          type: boolean
+          description: Voice only. `true` when an incoming call was not picked up by an agent.
+          default: false
+        isCallback:
+          type: boolean
+          description: Voice only. `true` when the conversation is a callback.
+          default: false
+        responded:
+          type: boolean
+          description: Whether an agent has responded to the contact.
+        creator:
+          type: string
+          description: User who created the conversation — `System` for inbound conversations.
+        updater:
+          type: string
+          description: User who last updated the conversation.
         channelAccountId:
           type: string
-          description: Identifier of the channel account.
+          description: |
+            Channel account last used by the agent or the contact — for example `6560000000`
+            or `sales@example.com`.
         channelAccountType:
           type: string
-          description: Channel type of the channel account.
+          description: |
+            Channel type of that channel account — for example `WhatsApp`, `Email`, `SMS` or
+            `Voice`.
+        firstRespondedSla:
+          type: boolean
+          description: SLA indicator for the first agent response.
+        openAssignedSla:
+          type: boolean
+          description: SLA indicator for the open → assigned stage.
+        assignedReadSla:
+          type: boolean
+          description: SLA indicator for the assigned → read stage.
+        openClosedSla:
+          type: boolean
+          description: SLA indicator for the open → closed stage.
+        closedTimestamp:
+          type: string
+          format: date-time
+          description: When the conversation was closed.
         createdAt:
           type: string
           format: date-time
+          description: When the conversation was created.
         updatedAt:
           type: string
           format: date-time
+          description: When the conversation was last updated.
+    Attachment:
+      type: object
+      description: One attachment carried by a message.
+      properties:
+        type:
+          type: string
+          description: File type of the attachment, for example `image/jpeg`.
+        url:
+          type: string
+          description: URL of the original file.
+        thumbUrl:
+          type: string
+          description: URL of a resized thumbnail image.
+        caption:
+          type: string
+          description: Caption of the attachment.
+        lat:
+          type: string
+          description: Latitude, when the attachment is a location.
+        lng:
+          type: string
+          description: Longitude, when the attachment is a location.
     ChatRecord:
       type: object
       description: One message within a conversation.
@@ -492,26 +794,20 @@ components:
         uuid:
           type: string
           description: UUID of the message.
-        message:
+        conversation:
           type: string
-          description: Text of the message.
-        channel:
+          description: UUID of the conversation this message belongs to.
+        conversationKey:
           type: string
-          description: Channel the message was sent on.
-        direction:
-          type: string
-          description: "`in` from the customer, `out` to the customer."
-          enum:
-            - in
-            - out
+          description: Running number of the conversation within its queue.
         type:
           type: string
           description: |
             What kind of record this is.
 
             | Value | Meaning |
-            |-------|---------|
-            | `chat` | A text message from the customer or the agent |
+            |:---|:---|
+            | `chat` | A message from the customer or the agent |
             | `note` | An internal note added by an agent |
             | `assigned` | The conversation was assigned — adds `assignedQueue` and `assignedAgent` |
             | `closed` | The conversation was closed — adds `disposition` |
@@ -520,27 +816,67 @@ components:
             - note
             - assigned
             - closed
-        assignedQueue:
+        direction:
           type: string
-          description: Queue assigned to. Present when `type` is `assigned`.
-        assignedAgent:
+          description: "`in` from the contact, `out` from the agent."
+          enum:
+            - in
+            - out
+        message:
           type: string
-          description: Agent assigned to. Present when `type` is `assigned`.
-        disposition:
+          description: Text of the message. What it holds depends on `type`.
+        channel:
           type: string
-          description: Closing disposition. Present when `type` is `closed`.
+          description: Channel type the message was sent on, for example `WhatsApp`, `SMS` or `Email`.
+        channelAccountId:
+          type: string
+          description: |
+            Channel account last used by the agent or the contact — for example `6560000000`
+            or `sales@example.com`.
+        channelAccountType:
+          type: string
+          description: Channel type of that channel account.
+        contact:
+          $ref: "#/components/schemas/Contact"
+        hasAttachments:
+          type: boolean
+          description: Whether the message carries attachments.
         attachments:
           type: array
           description: Attachments carried by the message.
           items:
-            type: object
-        conversation:
+            $ref: "#/components/schemas/Attachment"
+        assignedQueue:
           type: string
-          description: UUID of the conversation this message belongs to.
-        channelAccountId:
+          nullable: true
+          description: UUID of the queue assigned to. `null` unless `type` is `assigned`.
+        assignedAgent:
           type: string
-        channelAccountType:
+          nullable: true
+          description: UUID of the agent assigned to. `null` unless `type` is `assigned`.
+        disposition:
           type: string
+          description: Closing disposition. Present when `type` is `closed`.
+        status:
+          type: string
+          description: Record status, used as a system indicator.
+          enum:
+            - active
+            - inactive
+        creator:
+          type: string
+          description: User who requested the message be sent.
+        updater:
+          type: string
+          description: User who last updated the message.
+        createdAt:
+          type: string
+          format: date-time
+          description: When the message was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the message was last updated.
     AgentRecord:
       type: object
       description: One agent.
@@ -553,30 +889,38 @@ components:
           properties:
             username:
               type: string
+              description: Username of the agent.
             name:
               type: string
+              description: Name of the agent.
         channelTypes:
           type: array
           description: Channels the agent handles.
           items:
             type: string
         manager:
-          type: string
+          type: boolean
+          description: "`true` if the agent is a manager."
         supervisor:
-          type: string
+          type: boolean
+          description: "`true` if the agent is a supervisor."
         status:
           type: string
+          description: Record status, used as a system indicator.
           enum:
             - active
             - inactive
         type:
           type: string
-          description: Whether the agent is a human or a bot.
+          description: User type of the agent, for example `user`.
         remarks:
           type: string
+          description: Remarks about the agent.
         createdAt:
           type: string
           format: date-time
+          description: When the agent was created.
         updatedAt:
           type: string
           format: date-time
+          description: When the agent was last updated.
