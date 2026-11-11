@@ -771,9 +771,9 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Converse 2.0 MT Messaging API](https://developer.8x8.com/converse/reference/converse-2-0-mt-messaging-api.info): Send an outbound message to a customer through Converse 2.0. The message is delivered over
 - [Converse 2.0 Reporting API](https://developer.8x8.com/converse/reference/converse-2-0-reporting-api.info): Export conversation, message and agent data from Converse 2.0.
 - [Converse 2.0 Setup API](https://developer.8x8.com/converse/reference/converse-2-0-setup-api.info): Retrieve the tenant configuration values that every other Converse 2.0 API needs, and check
-- [Get agent data](https://developer.8x8.com/converse/reference/get-agents-report.api): Returns agent records, including each agent's channels, manager, supervisor and
+- [Get agent data](https://developer.8x8.com/converse/reference/get-agents-report.api): Returns agent records, including each agent's channels, whether they are a manager or
 - [Get chats data](https://developer.8x8.com/converse/reference/get-chats-report.api): Returns the individual messages of up to **10 conversations** at a time, together with
-- [Get conversations data](https://developer.8x8.com/converse/reference/get-conversations-report.api): Returns conversation-level records whose **update** time falls inside the given date
+- [Get conversations data](https://developer.8x8.com/converse/reference/get-conversations-report.api): Returns conversation-level records whose **creation** time falls inside the given date
 - [List a contact's active conversations](https://developer.8x8.com/converse/reference/list-active-conversations-by-contact.api): Returns the active conversations of one contact, each with its first and last
 - [List agents](https://developer.8x8.com/converse/reference/list-agents.api): Returns the agents configured for your tenant, including bot agents.
 - [List channel accounts](https://developer.8x8.com/converse/reference/list-channel-accounts.api): Returns the channel accounts configured for your tenant — the WhatsApp numbers, email

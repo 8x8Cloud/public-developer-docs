@@ -108,6 +108,26 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/SmsRequest"
+              },
+              "examples": {
+                "sms": {
+                  "summary": "SMS - Text only",
+                  "value": {
+                    "source": "AwesomeName",
+                    "destination": "6500000000",
+                    "text": "Hello world!",
+                    "clientMessageId": "1234"
+                  }
+                },
+                "mms": {
+                  "summary": "MMS - Text with media (US/Canada only)",
+                  "value": {
+                    "source": "AwesomeName",
+                    "destination": "12025550308",
+                    "text": "Check out this photo!",
+                    "mediaUrls": ["https://example.com/pic.jpg"]
+                  }
+                }
               }
             }
           }
@@ -1813,12 +1833,6 @@
         "title": "SmsRequest",
         "type": "object",
         "description": "Request object to send one SMS",
-        "example": {
-          "source": "AwesomeName",
-          "destination": "6500000000",
-          "text": "Hello world!",
-          "clientMessageId": "1234"
-        },
         "properties": {
           "destination": {
             "pattern": "^\\+{0,1}[1-9]{1}[0-9]{6,14}$",
@@ -1864,6 +1878,16 @@
             "type": "string",
             "description": "Webhook URL where delivery status for the SMS will be posted (Overwrites your default account callback URL).",
             "format": "uri"
+          },
+          "mediaUrls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 4096,
+              "format": "uri"
+            },
+            "maxItems": 10,
+            "description": "Optional list of HTTPS URLs for media to send with the message (MMS). Up to 10 URLs, each up to 4096 characters.\\\nMMS is currently supported for US/Canada destinations only. For destinations where MMS isn't supported, `mediaUrls` is ignored and the message is sent as a plain SMS."
           },
           "clientIp": {
             "type": "string",
@@ -2039,6 +2063,16 @@
             "type": "string",
             "description": "Webhook URL where delivery status for the SMS will be posted (Overwrites your default account callback URL).",
             "format": "uri"
+          },
+          "mediaUrls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 4096,
+              "format": "uri"
+            },
+            "maxItems": 10,
+            "description": "Default media (MMS) URLs applied to every message in the batch that doesn't set its own `mediaUrls`. See the `mediaUrls` field on the single-send request for format and support details."
           }
         },
         "example": {
