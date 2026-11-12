@@ -32,6 +32,7 @@ const sidebarConfig = [
       'connect/docs/tutorial-mobile-verification',
       'connect/docs/tutorial-sms-engage',
       'connect/docs/tutorial-sms-feedback-api',
+      'connect/docs/sms-test-program-us',
     ],
   },
   {
