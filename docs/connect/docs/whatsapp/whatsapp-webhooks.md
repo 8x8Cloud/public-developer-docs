@@ -145,8 +145,8 @@ When a user responds to an interactive button or list, the payload includes the 
       "interactive": {
         "type": "button_reply",
         "button_reply": {
-          "id": "option-2",
-          "title": "FAQ"
+          "id": "faq_session_61094",
+          "title": "faq"
         }
       }
     },

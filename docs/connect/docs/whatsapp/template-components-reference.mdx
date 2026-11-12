@@ -478,7 +478,7 @@ Sends a predefined text string back to your business when tapped.
 
 **Text Length:** Max 25 characters.
 
-**Response:** User tap sends button text to your webhook.
+**Response:** A tap sends a `Buttons` message to your webhook. `content.text` holds the button label, and `content.payload` holds the `payload` you set for the button when sending the template. See [Inbound Messaging Apps message](../inbound-chatapps-message.mdx).
 
 **Use Case:** Menu options, confirmation (Yes/No), feedback.
 

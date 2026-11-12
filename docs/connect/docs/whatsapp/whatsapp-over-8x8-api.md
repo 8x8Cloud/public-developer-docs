@@ -166,7 +166,7 @@ POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages
 
 **Standard Example (Sending the Marketing Template Above):**
 
-This payload sends the marketing template we created above, providing actual values for the header image, body variable, and button URL parameter.
+This payload sends the marketing template we created above, providing actual values for the header image, body variable, button URL parameter, and the payload for the **Talk to Sales** quick-reply button.
 
 <details>
 <summary>View JSON</summary>
@@ -203,12 +203,23 @@ This payload sends the marketing template we created above, providing actual val
         },
         {
           "type": "button",
-          "index": "0",
+          "index": 0,
           "subType": "url",
           "parameters": [
             {
               "type": "text",
               "text": "omnichannel-messaging"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "index": 1,
+          "subType": "quickReply",
+          "parameters": [
+            {
+              "type": "payload",
+              "payload": "talk_to_sales_lead_10482"
             }
           ]
         }
@@ -226,6 +237,7 @@ This payload sends the marketing template we created above, providing actual val
 - Use the exact `name` and `language` from your approved template
 - Header media requires `url` parameter pointing to uploaded file
 - Button parameters use `index` to specify which button (0-based)
+- Quick-reply buttons take their `payload` when you send the template, not when you create it. A quick-reply button component must include a non-empty `payload`. When the customer taps the button, the payload comes back in the inbound webhook's `content.payload` (with the button label in `content.text`), so use a value that tells your system what the tap means. Because the payload is set on each send, you can give every recipient of the same template a different value, such as `talk_to_sales_lead_10482`, which identifies both the button and the lead it belongs to. See [Inbound Messaging Apps message](../inbound-chatapps-message.mdx).
 - Footer component is not included in send payload (static text from template)
 
 **For complete send examples** (all template types with exact payload structures), see:
@@ -271,7 +283,7 @@ POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages
 
 ### Example: Interactive Buttons
 
-Interactive buttons are the most common interactive message type. Send a message with up to 3 quick-reply buttons. When the user taps a button, you receive the button's `title` as a text reply via webhook.
+Interactive buttons are the most common interactive message type. Send a message with up to 3 reply buttons. When the user taps a button, your webhook receives an `Interactive` message: `content.interactive.button_reply.id` is the `id` you set on that button, and `replyToUmid` is the UMID of your interactive message. Because you set the `id` on each send, you can make it unique per send with a reference your system tracks, such as `issue_resolved_yes_case_58213` for support case 58213.
 
 <details>
 <summary>View JSON</summary>
@@ -294,14 +306,14 @@ Interactive buttons are the most common interactive message type. Send a message
           {
             "type": "reply",
             "reply": {
-              "id": "yes-1",
+              "id": "issue_resolved_yes_case_58213",
               "title": "Yes"
             }
           },
           {
             "type": "reply",
             "reply": {
-              "id": "no-1",
+              "id": "issue_resolved_no_case_58213",
               "title": "No"
             }
           }
@@ -344,7 +356,7 @@ Interactive buttons are the most common interactive message type. Send a message
       "interactive": {
         "type": "button_reply",
         "button_reply": {
-          "id": "yes-1",
+          "id": "issue_resolved_yes_case_58213",
           "title": "Yes"
         }
       }
@@ -360,8 +372,9 @@ Interactive buttons are the most common interactive message type. Send a message
 
 - `type`: `"Interactive"` (not `"Text"`)
 - `content.interactive.type`: `"button_reply"`
-- `content.interactive.button_reply.id`: The button ID you defined ("yes-1")
+- `content.interactive.button_reply.id`: The button ID you defined ("issue_resolved_yes_case_58213")
 - `content.interactive.button_reply.title`: The button text displayed to user ("Yes")
+- `replyToUmid`: The UMID of the interactive message the user replied to
 
 **For complete webhook documentation**, see: [Webhooks Reference - Inbound Messages](./whatsapp-webhooks.md#inbound-messages)
 

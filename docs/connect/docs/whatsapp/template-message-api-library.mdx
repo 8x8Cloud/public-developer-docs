@@ -193,7 +193,7 @@ Creates a `MARKETING` template with an `IMAGE` header and a dynamic `URL` button
 
 **Send Template:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
-Sends the template, providing the `url` for the image, the `text` for the body, and the dynamic part of the `url` button.
+Sends the template, providing the `url` for the image, the `text` for the body, the dynamic part of the `url` button, and a `payload` for the **Talk to Sales** quick-reply button. Because the payload is set on each send, every recipient of the same template can get a different value, such as one that carries their lead ID. When the customer taps **Talk to Sales**, your webhook receives a `Buttons` message with `content.payload` set to `talk_to_sales_lead_10482` and `content.text` set to `Talk to Sales`.
 
 <details>
 <summary>View JSON</summary>
@@ -230,12 +230,23 @@ Sends the template, providing the `url` for the image, the `text` for the body, 
         },
         {
           "type": "button",
-          "index": "0",
+          "index": 0,
           "subType": "url",
           "parameters": [
             {
               "type": "text",
               "text": "omnichannel-messaging"
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "index": 1,
+          "subType": "quickReply",
+          "parameters": [
+            {
+              "type": "payload",
+              "payload": "talk_to_sales_lead_10482"
             }
           ]
         }

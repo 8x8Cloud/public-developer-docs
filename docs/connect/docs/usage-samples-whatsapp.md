@@ -398,21 +398,21 @@ This message type can support **up to 3 reply buttons**:
                         "type": "reply",
                         "reply": {
                             "title": "contact-us",
-                            "id": "option-1"
+                            "id": "contact_us_session_61094"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
                             "title": "faq",
-                            "id": "option-2"
+                            "id": "faq_session_61094"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
                             "title": "office",
-                            "id": "option-3"
+                            "id": "office_session_61094"
                         }
                     }
                 ]
@@ -460,12 +460,12 @@ If the user clicks on each button, it will send the corresponding reply.
           {
             "rows": [
               {
-                "id": "slot-1",
+                "id": "slot_oct09_0900_cust_44817",
                 "title": "Monday, Oct 9",
                 "description": "9:00 AM - 10:00 AM"
               },
               {
-                "id": "slot-2",
+                "id": "slot_oct09_1100_cust_44817",
                 "title": "Monday, Oct 9",
                 "description": "11:00 AM - 12:00 PM"
               }
@@ -475,12 +475,12 @@ If the user clicks on each button, it will send the corresponding reply.
           {
             "rows": [
               {
-                "id": "slot-3",
+                "id": "slot_oct10_1400_cust_44817",
                 "title": "Tuesday, Oct 10",
                 "description": "2:00 PM - 3:00 PM"
               },
               {
-                "id": "slot-4",
+                "id": "slot_oct10_1600_cust_44817",
                 "title": "Tuesday, Oct 10",
                 "description": "4:00 PM - 5:00 PM"
               }

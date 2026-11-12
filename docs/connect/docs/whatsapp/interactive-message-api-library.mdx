@@ -225,7 +225,7 @@ Sends a location message with latitude, longitude, name, and address.
 
 **Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
-Creates a list menu with multiple options organized in sections.
+Creates a list menu with multiple options organized in sections. The selected row's `id` comes back in the inbound webhook's `content.interactive.list_reply.id`. Because you set it on each send, it can identify both the slot and the customer, such as `slot_oct09_0900_cust_44817`.
 
 <details>
 <summary>View JSON</summary>
@@ -257,12 +257,12 @@ Creates a list menu with multiple options organized in sections.
             "title": "Oct 9, 2024",
             "rows": [
               {
-                "id": "slot-1",
+                "id": "slot_oct09_0900_cust_44817",
                 "title": "Monday, Oct 9",
                 "description": "9:00 AM - 10:00 AM"
               },
               {
-                "id": "slot-2",
+                "id": "slot_oct09_1100_cust_44817",
                 "title": "Monday, Oct 9",
                 "description": "11:00 AM - 12:00 PM"
               }
@@ -272,12 +272,12 @@ Creates a list menu with multiple options organized in sections.
             "title": "Oct 10, 2024",
             "rows": [
               {
-                "id": "slot-3",
+                "id": "slot_oct10_1400_cust_44817",
                 "title": "Tuesday, Oct 10",
                 "description": "2:00 PM - 3:00 PM"
               },
               {
-                "id": "slot-4",
+                "id": "slot_oct10_1600_cust_44817",
                 "title": "Tuesday, Oct 10",
                 "description": "4:00 PM - 5:00 PM"
               }
@@ -306,7 +306,7 @@ Creates a list menu with multiple options organized in sections.
 
 **Send Message:** `POST https://chatapps.8x8.com/api/v1/subaccounts/{subAccountId}/messages`
 
-Creates an interactive message with up to 3 reply buttons. Users can tap a button to send a quick reply.
+Creates an interactive message with up to 3 reply buttons. Users can tap a button to send a quick reply. The tapped button's `id` comes back in the inbound webhook's `content.interactive.button_reply.id`. Because you set it on each send, it can identify both the option and the conversation, such as `faq_session_61094`.
 
 <details>
 <summary>View JSON</summary>
@@ -337,21 +337,21 @@ Creates an interactive message with up to 3 reply buttons. Users can tap a butto
             "type": "reply",
             "reply": {
               "title": "contact-us",
-              "id": "option-1"
+              "id": "contact_us_session_61094"
             }
           },
           {
             "type": "reply",
             "reply": {
               "title": "faq",
-              "id": "option-2"
+              "id": "faq_session_61094"
             }
           },
           {
             "type": "reply",
             "reply": {
               "title": "office",
-              "id": "option-3"
+              "id": "office_session_61094"
             }
           }
         ]

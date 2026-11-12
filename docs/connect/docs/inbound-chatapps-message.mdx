@@ -59,7 +59,7 @@ Payload object description
 | recipient | object | Recipient information, see below |
 | type | string | Inbound message type. Possible values:<br/>- `None`<br/>- `Text`<br/>- `Audio`<br/>- `Video`<br/>- `Image`<br/>- `Location`<br/>- `File`<br/>- `Carousel`<br/>- `List`<br/>- `Buttons`<br/>- `Template`<br/>- `Interactive` |
 | content | object | Message content |
-| replyToUmid | uuid | Optional context data, if this inbound message is referring to a previous inbound message (ex, quoted messages on WhatsApp). |
+| replyToUmid | uuid | Optional. UMID of the earlier message this inbound message replies to, for example when the user taps a button on a template or interactive message you sent, or quotes a message on WhatsApp. Present only when the original message went through 8x8. Use it to link a reply to the outbound message, and therefore the campaign, it answers. |
 
 User information object description
 
@@ -85,9 +85,9 @@ Content information object description
 
 | Parameter name | Parameter type | Description                                                |
 | :------------- | :------------- | :--------------------------------------------------------- |
-| text           | string         | Message text (for payload with type = `Text`)              |
+| text           | string         | Message text (for payload with type = `Text`). For type = `Buttons`, the label of the tapped quick-reply button. |
 | url            | string         | The URL of the media attachment (rich content) if any      |
-| payload        | string         | Content payload (for interactive messages)                 |
+| payload        | string         | Button payload (for payload with type = `Buttons`). When the user taps a quick-reply button on a template message, this is the `payload` parameter you set for that button when sending the template. Interactive reply ids arrive in `interactive.button_reply.id` instead. |
 | location       | object         | Location object (for payload with type = `Location`)       |
 | interactive    | object         | Interactive object (for payload with type = `Interactive`) |
 
@@ -103,7 +103,7 @@ Interactive information object description
 | Parameter name | Parameter type | Description                                                                                                                  |
 |----------------| --- |------------------------------------------------------------------------------------------------------------------------------|
 | type           | string | Type of the message. Possible values:<br/>- `button_reply`<br/>- `list_reply`<br/>- `nfmReply`<br/>- `callPermissionReply`                                  |
-| button\_reply  | object | Button reply object. Sent when a customer clicks a button.                                                                   |
+| button\_reply  | object | Button reply object. Sent when a customer taps a reply button on an interactive message (`interactive.type` = `button`).    |
 | list\_reply    | object | List reply object. Sent when a customer selects an item from a list.                                                         |
 | nfmReply       | object | Flow reply object. Sent when a customer completes or submits a WhatsApp Flow. Contains flow response data in `responseJson`. |
 | callPermissionReply       | object | Call permission reply object. Sent when a customer responds to a call permission request on WhatsApp. Contains the user's permission decision and related metadata. |
@@ -112,7 +112,7 @@ Button reply information object description
 
 | Parameter name | Parameter type | Description            |
 | :------------- | :------------- | :--------------------- |
-| id             | string         | Unique ID of a button. |
+| id             | string         | The `id` you set on the button (`action.buttons[].reply.id`, up to 256 characters) when sending the interactive message. Use it rather than `title` to identify which button was tapped. |
 | title          | string         | Title of a button.     |
 
 List reply information object description
@@ -202,6 +202,77 @@ For msisdn-based channels (Viber, RCS, SMS) the `user` object contains only `msi
     "content": {
       "text": "Viber inbound message"
     }
+  }
+}
+```
+
+##### Reply button tap — WhatsApp interactive message
+
+Sent when a customer taps a reply button on an interactive message (`interactive.type` = `button`) you sent. The `id` you set on the button comes back in `interactive.button_reply.id`, and `replyToUmid` is the UMID of the interactive message. `content.text` is not set; the button label is in `button_reply.title`.
+
+```json title="Reply button tap webhook body (v3)"
+{
+  "version": 3,
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": <UNIQUE_MESSAGE_ID>,
+    "subAccountId": <SUBACCOUNT_ID>,
+    "timestamp": "2026-10-16T14:42:20.00Z",
+    "user": {
+      "msisdn": <USER_PHONE_NUMBER>,
+      "channelUserId": <WHATSAPP_BSUID>,
+      "name": <WHATSAPP_USER_PROFILE_NAME>
+    },
+    "recipient": {
+      "channel": "whatsapp",
+      "channelId": <CHANNEL_ID>
+    },
+    "type": "Interactive",
+    "content": {
+      "interactive": {
+        "type": "button_reply",
+        "button_reply": {
+          "id": "issue_resolved_yes_case_58213",
+          "title": "Yes"
+        }
+      }
+    },
+    "replyToUmid": <INTERACTIVE_MESSAGE_UMID>
+  }
+}
+```
+
+##### Template quick-reply tap — WhatsApp template message
+
+Sent when a customer taps a quick-reply button on a template message. The message arrives with type `Buttons`. `content.payload` holds the `payload` parameter you set for that button when sending the template, `content.text` holds the button label, and `replyToUmid` is the UMID of the template message.
+
+```json title="Template quick-reply tap webhook body (v3)"
+{
+  "version": 3,
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": <UNIQUE_MESSAGE_ID>,
+    "subAccountId": <SUBACCOUNT_ID>,
+    "timestamp": "2026-10-16T14:33:33.00Z",
+    "user": {
+      "msisdn": <USER_PHONE_NUMBER>,
+      "channelUserId": <WHATSAPP_BSUID>,
+      "name": <WHATSAPP_USER_PROFILE_NAME>
+    },
+    "recipient": {
+      "channel": "whatsapp",
+      "channelId": <CHANNEL_ID>
+    },
+    "type": "Buttons",
+    "content": {
+      "text": "Talk to Sales",
+      "payload": "talk_to_sales_lead_10482"
+    },
+    "replyToUmid": <TEMPLATE_MESSAGE_UMID>
   }
 }
 ```
@@ -302,7 +373,7 @@ Payload object description
 | recipient | object | Recipient information, see below |
 | type | string | Inbound message type. Possible values:<br/>- `None`<br/>- `Text`<br/>- `Audio`<br/>- `Video`<br/>- `Image`<br/>- `Location`<br/>- `File`<br/>- `Carousel`<br/>- `List`<br/>- `Buttons`<br/>- `Template`<br/>- `Interactive` |
 | content | object | Message content |
-| replyToUmid | uuid | Optional context data, if this inbound message is referring to a previous inbound message (ex, quoted messages on WhatsApp). |
+| replyToUmid | uuid | Optional. UMID of the earlier message this inbound message replies to, for example when the user taps a button on a template or interactive message you sent, or quotes a message on WhatsApp. Present only when the original message went through 8x8. Use it to link a reply to the outbound message, and therefore the campaign, it answers. |
 
 User information object description
 
@@ -325,9 +396,9 @@ Content information object description
 
 | Parameter name | Parameter type | Description                                                |
 | :------------- | :------------- | :--------------------------------------------------------- |
-| text           | string         | Message text (for payload with type = `Text`)              |
+| text           | string         | Message text (for payload with type = `Text`). For type = `Buttons`, the label of the tapped quick-reply button. |
 | url            | string         | The URL of the media attachment (rich content) if any      |
-| payload        | string         | Content payload (for interactive messages)                 |
+| payload        | string         | Button payload (for payload with type = `Buttons`). When the user taps a quick-reply button on a template message, this is the `payload` parameter you set for that button when sending the template. Interactive reply ids arrive in `interactive.button_reply.id` instead. |
 | location       | object         | Location object (for payload with type = `Location`)       |
 | interactive    | object         | Interactive object (for payload with type = `Interactive`) |
 
@@ -343,7 +414,7 @@ Interactive information object description
 | Parameter name | Parameter type | Description                                                                                                                  |
 |----------------| --- |------------------------------------------------------------------------------------------------------------------------------|
 | type           | string | Type of the message. Possible values:<br/>- `button_reply`<br/>- `list_reply`<br/>- `nfmReply`<br/>- `callPermissionReply`                                  |
-| button\_reply  | object | Button reply object. Sent when a customer clicks a button.                                                                   |
+| button\_reply  | object | Button reply object. Sent when a customer taps a reply button on an interactive message (`interactive.type` = `button`).    |
 | list\_reply    | object | List reply object. Sent when a customer selects an item from a list.                                                         |
 | nfmReply       | object | Flow reply object. Sent when a customer completes or submits a WhatsApp Flow. Contains flow response data in `responseJson`. |
 | callPermissionReply       | object | Call permission reply object. Sent when a customer responds to a call permission request on WhatsApp. Contains the user's permission decision and related metadata. |
@@ -352,7 +423,7 @@ Button reply information object description
 
 | Parameter name | Parameter type | Description            |
 | :------------- | :------------- | :--------------------- |
-| id             | string         | Unique ID of a button. |
+| id             | string         | The `id` you set on the button (`action.buttons[].reply.id`, up to 256 characters) when sending the interactive message. Use it rather than `title` to identify which button was tapped. |
 | title          | string         | Title of a button.     |
 
 List reply information object description
