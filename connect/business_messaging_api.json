@@ -648,7 +648,7 @@
                                     "properties": {
                                       "type": {
                                         "type": "string",
-                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"gif\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only \u2014 overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
+                                        "description": "Parameter type.\nPossible values are \"text\", \"image\", \"gif\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\", \"action\", \"ttlMinutes\".\n\nUse \"payload\" type for quick-reply buttons. The value is returned in the inbound webhook's `content.payload` when the customer taps the button.\nUse \"action\" type for Flow button parameters.\nUse \"ttlMinutes\" for VoiceCall button only \u2014 overrides the template-level TTL at send time. Using ttlMinutes on any other subtype returns an error.\n",
                                         "enum": [
                                           "text",
                                           "image",
@@ -700,7 +700,7 @@
                                       },
                                       "payload": {
                                         "type": "string",
-                                        "description": "Required for \"payload\" type.\n\nCustomer-defined payload that will be returned when the button in the interactive message is clicked."
+                                        "description": "Required for \"payload\" type. Required for quick-reply buttons.\n\nCustomer-defined payload that is returned in the inbound webhook's `content.payload` when the customer taps the button."
                                       },
                                       "couponCode": {
                                         "type": "string",
@@ -796,7 +796,7 @@
                                                 "properties": {
                                                   "type": {
                                                     "type": "string",
-                                                    "description": "Parameter type.\nPossible values are \"text\", \"image\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\".\n\nUse \"payload\" type to define the payload that will be returned when the button in the interactive message is clicked.\n",
+                                                    "description": "Parameter type.\nPossible values are \"text\", \"image\", \"video\", \"document\", \"location\", \"payload\", \"couponCode\".\n\nUse \"payload\" type for quick-reply buttons. The value is returned in the inbound webhook's `content.payload` when the customer taps the button.\n",
                                                     "enum": [
                                                       "text",
                                                       "image",
@@ -845,7 +845,7 @@
                                                   },
                                                   "payload": {
                                                     "type": "string",
-                                                    "description": "Required for \"payload\" type.\n\nCustomer-defined payload that will be returned when the button in the interactive message is clicked."
+                                                    "description": "Required for \"payload\" type. Required for quick-reply buttons.\n\nCustomer-defined payload that is returned in the inbound webhook's `content.payload` when the customer taps the button."
                                                   },
                                                   "couponCode": {
                                                     "type": "string",
@@ -1472,7 +1472,7 @@
                         "components": [
                           {
                             "type": "button",
-                            "index": "0",
+                            "index": 0,
                             "subType": "copyCode",
                             "parameters": [
                               {
@@ -1501,12 +1501,12 @@
                         "components": [
                           {
                             "type": "button",
-                            "index": "0",
+                            "index": 0,
                             "subType": "quickreply",
                             "parameters": [
                               {
                                 "type": "payload",
-                                "payload": "sample-payload"
+                                "payload": "talk_to_sales_lead_10482"
                               }
                             ]
                           }
@@ -1696,21 +1696,21 @@
                               "type": "reply",
                               "reply": {
                                 "title": "contact-us",
-                                "id": "option-1"
+                                "id": "contact_us_session_61094"
                               }
                             },
                             {
                               "type": "reply",
                               "reply": {
                                 "title": "faq",
-                                "id": "option-2"
+                                "id": "faq_session_61094"
                               }
                             },
                             {
                               "type": "reply",
                               "reply": {
                                 "title": "office",
-                                "id": "option-3"
+                                "id": "office_session_61094"
                               }
                             }
                           ]
@@ -1895,12 +1895,12 @@
                             {
                               "rows": [
                                 {
-                                  "id": "slot-1",
+                                  "id": "slot_oct09_0900_cust_44817",
                                   "title": "Monday, Oct 9",
                                   "description": "9:00 AM - 10:00 AM"
                                 },
                                 {
-                                  "id": "slot-2",
+                                  "id": "slot_oct09_1100_cust_44817",
                                   "title": "Monday, Oct 9",
                                   "description": "11:00 AM - 12:00 PM"
                                 }
@@ -1910,12 +1910,12 @@
                             {
                               "rows": [
                                 {
-                                  "id": "slot-3",
+                                  "id": "slot_oct10_1400_cust_44817",
                                   "title": "Tuesday, Oct 10",
                                   "description": "2:00 PM - 3:00 PM"
                                 },
                                 {
-                                  "id": "slot-4",
+                                  "id": "slot_oct10_1600_cust_44817",
                                   "title": "Tuesday, Oct 10",
                                   "description": "4:00 PM - 5:00 PM"
                                 }
