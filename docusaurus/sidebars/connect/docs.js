@@ -29,6 +29,7 @@ const sidebarConfig = [
       'connect/docs/send-sms-api-reference',
       'connect/docs/tutorial-single-sms',
       'connect/docs/tutorial-batch-sms',
+      'connect/docs/guide-mms',
       'connect/docs/tutorial-mobile-verification',
       'connect/docs/tutorial-sms-engage',
       'connect/docs/tutorial-sms-feedback-api',
