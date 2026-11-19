@@ -159,6 +159,10 @@ Retrieves journey data based on the specified criteria.
             "id": "101",
             "name": "ungroup"
           },
+          "site": {
+            "id": "site-123",
+            "name": "London Office"
+          },
           "type": "HUMAN"
         }
       ],
@@ -350,7 +354,7 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "previousQueue": {
             "id": "queue-101",
             "name": "Service Client",
-            "extension": "2001",
+            "extension": null,
             "site": null
           },
           "previousRingGroup": null,
@@ -358,7 +362,7 @@ Same structure as Journeys endpoint, but with transition-specific filters.
           "ringGroup": null,
           "autoAttendant": null,
           "duration": 0,
-          "externalNumber": "+441138413014",
+          "externalNumber": null,
           "channel": {
             "id": "ch-voice-1",
             "name": "Voice",
@@ -424,7 +428,7 @@ Filter values are matched exactly and are case-sensitive. Use the value exactly 
 | `outboundPhoneCodes.listName`  | Filter by outbound phone code list name  | `["JohnDoeInbound"]`                                                   |
 | `outboundPhoneCodes.name`      | Filter by outbound phone code name       | `["No queue"]`                                                         |
 | `outboundPhoneCodes.shortCode` | Filter by outbound phone code short code | `["Unt1"]`                                                             |
-| `outcome`                      | Filter by journey outcome                | `["Handled", "Abandoned", "EndedInScript", "ForwardedToExternalNumber", "Voicemail", "CallbackRequested", "CallbackNoAnswer", "CallbackExpired", "OutboundNoAnswer", "Other", "UnknownOutcome"]` |
+| `outcome`                      | Filter by journey outcome. All values are listed in [Journey Outcomes](#journey-outcomes) | `["Handled", "Abandoned", "Voicemail", "CallbackNoAnswer", "CallbackExpired"]` |
 | `pbxNames`                     | Filter by PBX names                      | `["pbx1", "pbx2"]`                                                     |
 | `queues.extension`             | Filter by queue extension                | `["2001"]`                                                             |
 | `queues.id`                    | Filter by queue ID                       | `["queue-123"]`                                                        |
@@ -617,6 +621,7 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 | `forwardedToScript`    | int                  | Number of automated forwards to a Unified Communications auto attendant or Contact Center script/IVR                                                                                                                                                                             |
 | `holdDuration`         | long                 | Total hold time in milliseconds                                                                                                                                                                                                                                                  |
 | `mediaTypes`           | string\[]            | Media of the interactions in the journey. Values: `Phone`, `Chat`, `Email`, `VoiceMail`. `VoiceMail` is reported for a Contact Center voicemail interaction, see [Contact Center Voicemail Follow-Up Tracking](#4-contact-center-voicemail-follow-up-tracking)                                                                                                                                                                                                                                                                               |
+| `outcome`              | string               | Result of the journey. One of the values listed in [Journey Outcomes](#journey-outcomes). |
 | `origin`               | origin               | Origin object identifying the 8x8 user who initiated an outbound journey. `null` for inbound and internal journeys.                                                                                                                                                              |
 | `direction`            | string               | Direction of the journey. One of `Inbound`, the contact called into your organization; `Outbound`, an 8x8 user called the contact; or `Internal`, the interaction took place between 8x8 users of your organization.                                                              |
 | `pbxNames`             | string\[]            | PBX names                                                                                                                                                                                                                                                                        |
@@ -708,7 +713,7 @@ journey progresses. An outcome being present therefore does not mean the journey
 | `email`      | string     | Email address of the agent/user. May be `null` if user data enrichment is unavailable or disabled.                          |
 | `loginId`    | string     | Login ID of the agent/user. May be `null` if user data enrichment is unavailable or disabled.                               |
 | `department` | string     | Department of the agent/user. May be `null` or an empty string when no department is set or user data enrichment is unavailable.                             |
-| `group`      | AgentGroup | Agent group the agent belongs to. This is currently the user group attached to the user in the 8x8 Admin Console. May be `null` when the user has no group. |
+| `group`      | AgentGroup | Agent group the agent belongs to. This is currently the user group attached to the user in the 8x8 Admin Console. May be `null` when the user has no group. See [AgentGroup Object](#agentgroup-object). |
 | `site`       | Site       | Site (branch/office) the agent/user belongs to. May be `null` if the agent has no site assigned. See [Site Object](#site-object). |
 | `type`       | string     | Agent type. `HUMAN` for 8x8 users, `AI` for AI Studio agents.                                                              |
 
@@ -720,6 +725,22 @@ An agent is rolled up from a transition into the journey `agents` array only whe
 
 The journey `agents` array is returned by the Journeys endpoint and a transition's `agents` array by the Transitions endpoint. Use the `agents.name` filter to find the journeys an agent handled, and the `transitions.agents.name` filter to find every journey an agent was involved in.
 
+#### AgentGroup Object
+
+The user group attached to the agent or user in the 8x8 Admin Console.
+
+```json
+{
+  "id": "string",
+  "name": "string"
+}
+```
+
+| Field  | Type   | Description                    |
+|--------|--------|--------------------------------|
+| `id`   | string | Unique identifier of the group |
+| `name` | string | Display name of the group      |
+
 #### Contact Object
 
 ```json
@@ -729,6 +750,12 @@ The journey `agents` array is returned by the Journeys endpoint and a transition
   "email": "string"
 }
 ```
+
+| Field         | Type   | Description                                                                                       |
+|---------------|--------|---------------------------------------------------------------------------------------------------|
+| `name`        | string | Name of the contact as reported by the source system: the CRM name for a Contact Center contact stored in the CRM, otherwise the name the phone system reports for the caller on an inbound call, or for the called party on an outbound call. `null` if no name is reported. |
+| `phoneNumber` | string | Phone number of the contact                                                                       |
+| `email`       | string | Email address of the contact                                                                      |
 
 #### Queue Object
 
@@ -951,12 +978,12 @@ AI Studio usage aggregated over the whole journey. The property is **omitted** f
 ### Transition Data Model
 
 The Transitions Endpoint provides detailed information about each state change within a journey, allowing users to track
-the exact journey path. Journeys are identified with the *journeyId*. Each transition record includes:
+the exact journey path. Each entry in `data` holds the `journeyId` of one journey and a `transitions` array with every
+transition of that journey. Each transition in the array includes:
 
 | Field               | Type         | Description                                                                                                                               |
 |---------------------|--------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `time`              | ISO8601 date | When the transition occurred                                                                                                              |
-| `journeyId`         | string       | ID of the parent journey                                                                                                                  |
 | `name`              | string       | Name of the transition (e.g., WAITING, TALKING, TRANSFER)                                                                                 |
 | `interactionId`     | string       | ID of the interaction                                                                                                                     |
 | `agents`            | Agent\[]     | Array of agent objects (if applicable)                                                                                                    |
