@@ -93,11 +93,19 @@ Retrieves journey data based on the specified criteria.
 >
 > **Example**: If you search for journeys between 9:00 AM and 10:00 AM, you'll get all journeys that started in that hour, along with ALL their transitions - even if some transitions happened at 11:00 AM or later.
 
-> ⚠️ **Timerange Limit**
+> ⚠️ **Date range limit**
 >
-> **Note:** The maximum allowed timerange for journey-search and transition-search requests is **60 days**.
+> `dateRange` can span at most **60 days**, for both journey and transition searches. A wider range is rejected with HTTP 400 and error code `maxInterval` (see [Error Codes](#error-codes)).
 >
-> For best performance, keep each request to a timerange of 1 day or less. To analyze a longer period, break the work into consecutive requests of that size.
+> `start` and `end` are both inclusive, and journey times have millisecond precision. A journey that starts exactly on the boundary between two consecutive ranges is returned by both requests.
+
+> **Data availability**
+>
+> Journey data starts on the date the End-to-End Journey API was enabled for your account. Journeys are not built retroactively, so no data exists from before that date. Each request can cover up to 60 days.
+
+> **Data freshness**
+>
+> Journeys are built continuously from the events that make them up. A journey appears, and is updated, shortly after those events occur. When upstream systems are delayed it can take longer. A journey that has just ended can therefore still show as active (`finishedTime: null`) for a short time.
 
 #### Example Request
 
@@ -260,7 +268,7 @@ Same structure as Journeys endpoint, but with transition-specific filters.
 {
   "dateRange": {
     "start": "2025-05-21T00:00:00+03:00",
-    "end": "2025-05-21T23:59:59+03:00"
+    "end": "2025-05-21T23:59:59.999+03:00"
   },
   "filters": [
     {
@@ -529,6 +537,10 @@ The API uses cursor-based pagination to efficiently navigate through large resul
 3. To retrieve the next page, include the `nextPageCursor` in your next request body
 4. Continue this process until `nextPageCursor` is null, indicating no more pages
 
+**Pagination and changing data**
+
+Results are sorted by `time` and then by journey, and each page continues after the last journey of the previous page. Each page shows the data as it is when that page is requested, so a journey on a later page can be in a later state than one on an earlier page, and `totalElements` can change between pages. While a journey is active, its `time` can move slightly earlier as more of its data arrives. A walk in progress can then return that journey twice or miss it; later requests return it in its corrected position. Once a journey has ended, its `time` no longer changes.
+
 ### Pagination Example
 
 Initial request:
@@ -537,7 +549,7 @@ Initial request:
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00Z",
-    "end": "2025-05-19T23:59:59Z"
+    "end": "2025-05-19T23:59:59.999Z"
   },
   "displayTimezone": "UTC",
   "limit": 100
@@ -560,7 +572,7 @@ Next page request:
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00Z",
-    "end": "2025-05-19T23:59:59Z"
+    "end": "2025-05-19T23:59:59.999Z"
   },
   "displayTimezone": "UTC",
   "limit": 100,
@@ -592,7 +604,7 @@ Example:
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00Z",
-    "end": "2025-05-19T23:59:59Z"
+    "end": "2025-05-19T23:59:59.999Z"
   },
   "displayTimezone": "UTC",
   "sortField": "TIME",
@@ -609,7 +621,7 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 | Field                  | Type                 | Description                                                                                                                                                                                                                                                                      |
 |------------------------|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `time`                 | ISO8601 date         | When the journey started.                                                                                                                                                                                                                                                        |
-| `finishedTime`         | ISO8601 date         | When the journey ended. `null` if the journey is still in progress. Do not treat `null` as short-lived, and do not use it to infer recency: filtering and sorting are always on `time` (the journey start), never on `finishedTime`. Inbound journeys routed to a Contact Center voicemail queue or callback queue stay in progress for as long as the interaction sits in that queue, which can be hours or days. |
+| `finishedTime`         | ISO8601 date         | When the journey ended. `null` while the journey is active, which can last hours or days; see [Active Journeys](#active-journeys). |
 | `journeyId`            | string               | The journeyId field returned by the Journeys Endpoint uniquely identifies and aggregates all interactions associated with a particular customer journey across all platforms. Use this journeyId to correlate and analyze comprehensive interaction data for a specific journey. |
 | `interactions`         | Interaction\[]       | Array of interaction objects representing the interactions belonging to the journey. These interactions can originate from Contact Center, Unified Communications, AI Studio or Engage.                                                                                          |
 | `agents`               | Agent\[]             | Array of agent objects who handled the journey. An agent handled the journey if they appear on a `TALKING` transition, meaning they talked to the contact, or on a `PROCESSING` transition, meaning they processed the contact's voicemail offline. An agent who was only rung, or who dialed without reaching the contact, is not listed. |
@@ -637,7 +649,7 @@ The Journeys Endpoint provides a consolidated view of all customer interactions 
 #### Journey Outcomes
 
 The `outcome` field in the Journeys API response summarizes the result of a customer journey. Every
-journey has an outcome, including journeys that are still in progress, and the value is updated as the
+journey has an outcome, including journeys that are still active, and the value is updated as the
 journey progresses. An outcome being present therefore does not mean the journey has finished; check
 `finishedTime` for that.
 
@@ -774,7 +786,7 @@ The user group attached to the agent or user in the 8x8 Admin Console.
 | Field       | Type   | Description                                                                                                                                                                                     |
 |-------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `id`        | string | Unique identifier of the queue                                                                                                                                                                  |
-| `name`      | string | Display name of the queue. `null` for a Contact Center queue callback that is still pending, and populated once the callback interaction reports.                                             |
+| `name`      | string | Display name of the queue. `null` for a Contact Center queue callback that is still pending, on the transition and in the journey's `queues[]` alike, and populated once the callback interaction reports. |
 | `extension` | string | Queue extension number. **Note:** Contact Center queues do not have extensions, so this field is `null` for Contact Center queues. Only Unified Communications queues have extension values. |
 | `site`      | Site   | Site (branch/office) the queue belongs to.                                                                                                                                                      |
 
@@ -1105,6 +1117,59 @@ A journey can progress through multiple transition states:
 - **PROCESSING**: An agent processed the customer's voicemail offline, wrap-up included. The agent is listed in `agents`. See [Contact Center Voicemail Follow-Up Tracking](#4-contact-center-voicemail-follow-up-tracking).
 - **FINISHED**: The customer journey has ended.
 
+## Active Journeys
+
+The API returns each journey as it is at the moment of the request. A journey that has not ended yet is **active**: its data changes as it progresses, so a later request can return different values for the same `journeyId`.
+
+### Identifying an active journey
+
+A journey is active while `finishedTime` is `null`. When the journey ends, `finishedTime` is set to the time it ended. A journey that has just ended can still show `finishedTime: null` for a short time; see **Data freshness** under [Journeys Endpoint](#journeys-endpoint).
+
+### What can change while a journey is active
+
+- `outcome`: every journey has an outcome, including active ones. It reflects what has happened so far and is final only once `finishedTime` is set.
+- `finishedTime`: set when the journey ends.
+- `queues` and `agents`: grow as the journey reaches new queues and agents.
+- Transitions: new transitions are added, and the duration of the last step is not final. Judge whether a journey is active by `finishedTime` only.
+
+### Types of active journeys
+
+**Calls in progress.** The customer is still on the call: in the IVR, waiting in a queue, or talking to an agent. The journey ends when the call ends.
+
+**Contact Center voicemails waiting to be processed.** The customer left a voicemail on a Contact Center voicemail queue, and no agent has processed it yet. This can last hours or days.
+
+```text
+STARTED → IN_SCRIPT → FORWARD → WAITING → VOICEMAIL → FOLLOWUP_PENDING
+outcome: Voicemail          finishedTime: null
+```
+
+`FOLLOWUP_PENDING` carries the voicemail queue. The journey ends when an agent processes the voicemail (`… → PROCESSING → FINISHED`, outcome `Handled`), or when the voicemail is deleted or expires (`… → FOLLOWUP_PENDING → FINISHED`, outcome stays `Voicemail`). A voicemail that the queue emails and deletes straight away does not leave the journey active: it reads `… → VOICEMAIL → FINISHED`. See [Contact Center Voicemail Follow-Up Tracking](#4-contact-center-voicemail-follow-up-tracking).
+
+**Contact Center queue callbacks waiting to be made.** The customer asked for a callback instead of waiting in the queue, and the callback hasn't been completed yet. It stays active until the callback is answered, or until it expires as set in the IVR script.
+
+```text
+STARTED → IN_SCRIPT → FORWARD → WAITING → FOLLOWUP_PENDING
+outcome: CallbackRequested  finishedTime: null
+```
+
+`FOLLOWUP_PENDING` carries the callback queue's `id`; its `name` is `null` until the callback is picked up. The journey ends with outcome `Handled` if the customer was reached, `CallbackNoAnswer` if they were dialed but never answered, or `CallbackExpired` if the callback expired before any dial attempt. If the customer had already spoken to an agent before asking for the callback, the outcome is `Handled` while the callback is pending. To find every pending callback, look for `finishedTime: null` with a `FOLLOWUP_PENDING` transition on the callback queue, matched by `transitions.queue.id` because the queue's `name` is `null` until the callback is picked up. Don't rely on the outcome alone. A pending voicemail also ends on `FOLLOWUP_PENDING`, so the queue is what tells the two apart. See [Contact Center Queue Callback Tracking](#5-contact-center-queue-callback-tracking).
+
+### How long a journey can stay active
+
+A journey stays active for at most a fixed time after it starts (`time`), depending on what it is waiting for:
+
+| Journey | Maximum time active |
+|---|---|
+| Calls | 8 hours |
+| Contact Center queue callbacks waiting to be made | 30 days |
+| Contact Center voicemails waiting to be processed | 30 days |
+
+When that time is reached, the journey stops updating.
+
+### Getting the latest state
+
+Journeys are filtered and sorted only on `time`, the journey start. There is no `updatedTime` field and no "modified since" filter. To get the current state of an active journey, request its original time window again and match it by `journeyId`.
+
 ## Error Handling
 
 The API returns standard HTTP status codes and an error response body:
@@ -1180,8 +1245,7 @@ This error is raised when a date does not conform to the ISO 8601 format with a 
 
 ### Max Interval {#maxInterval}
 
-This error indicates that the interval between the start and end dates exceeds the maximum allowed period. The user
-should specify a smaller date range to process the request successfully.
+Returned when `dateRange` spans more than 60 days. Narrow the range, or split the period into several requests.
 
 ### Filter Values Not Empty {#filterValuesNotEmpty}
 
@@ -1242,8 +1306,19 @@ Please ensure you are using the correct HTTP method (e.g., POST) as specified in
 
 ## Rate Limiting
 
-The API implements rate limiting to protect system resources.
-By default up to 10 hits are allowed within a 60 seconds sliding window. When rate limits are exceeded, the API returns a 429 status code with a Retry-After header indicating when you can try again.
+Your account can make up to **30 requests in any 60-second period** (sliding window). The limit applies to your account as a whole, across all API keys, and is shared between journey search and transition search.
+
+Every response reports where you stand against the limit:
+
+| Header | Meaning |
+|---|---|
+| `RateLimit-Limit` | Requests allowed in the window (30) |
+| `RateLimit-Remaining` | Requests left in the current window |
+| `RateLimit-Reset` | Seconds until the current window resets |
+
+`X-RateLimit-Limit-Minute` and `X-RateLimit-Remaining-Minute` carry the same limit and remaining count.
+
+A request over the limit receives `429 Too Many Requests` with a `Retry-After` header giving the number of seconds to wait before retrying.
 
 ## Use Cases
 
@@ -1320,7 +1395,7 @@ POST /v1/transitions/search
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00+03:00",
-    "end": "2025-05-19T23:59:59+03:00"
+    "end": "2025-05-19T23:59:59.999+03:00"
   },
   "filters": [
     {
@@ -1351,7 +1426,7 @@ POST /v1/journeys/search
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00+03:00",
-    "end": "2025-05-19T23:59:59+03:00"
+    "end": "2025-05-19T23:59:59.999+03:00"
   },
   "filters": [
     {
@@ -1402,7 +1477,7 @@ POST /v1/transitions/search
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00+03:00",
-    "end": "2025-05-19T23:59:59+03:00"
+    "end": "2025-05-19T23:59:59.999+03:00"
   },
   "filters": [
     {
@@ -1534,7 +1609,7 @@ The response for a journey where an agent processed the message, with the transi
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00+03:00",
-    "end": "2025-05-19T23:59:59+03:00"
+    "end": "2025-05-19T23:59:59.999+03:00"
   },
   "filters": [
     { "name": "transitions.name", "values": ["PROCESSING"] },
@@ -1545,9 +1620,11 @@ The response for a journey where an agent processed the message, with the transi
 }
 ```
 
-3. At journey level, the voicemail queue and the processing agent are rolled up into the journey's
-   `queues[]` and `agents[]`, so the ordinary journey filters find them. Using `queues.name` with
-   the voicemail queue returns both processed and still-pending voicemail journeys. This is specific to voicemail, whose queue is reported in full from the moment the message enters it; a callback that is still waiting rolls up nothing, as described in the callback section:
+3. At journey level, the voicemail queue is rolled up into the journey's `queues[]` from the moment
+   the message is waiting on it, and the processing agent into `agents[]` once the message has been
+   processed, so the ordinary journey filters find them. Using `queues.name` with the voicemail queue
+   returns both processed and still-pending voicemail journeys. A callback that is still waiting is
+   rolled up the same way, but by id only until it reports, as described in the callback section:
 
 ```http
 POST /v1/journeys/search
@@ -1557,7 +1634,7 @@ POST /v1/journeys/search
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00+03:00",
-    "end": "2025-05-19T23:59:59+03:00"
+    "end": "2025-05-19T23:59:59.999+03:00"
   },
   "filters": [
     { "name": "queues.name", "values": ["voicemail-support"] }
@@ -1567,11 +1644,13 @@ POST /v1/journeys/search
 }
 ```
 
+4. To find the voicemails still waiting, keep the journeys from step 3 whose `finishedTime` is
+   `null`. Page through all the results, because `finishedTime` can't be used as a filter.
+
 **What to expect when consuming these journeys:**
 
-- **Journeys still awaiting processing are in progress**, so `finishedTime` is `null`, possibly for
-  days. Filtering and sorting use `time` (the journey start), so such a journey is found by the day
-  the customer called, not by when the voicemail was processed.
+- **Journeys still awaiting processing are active**, possibly for days. See
+  [Active Journeys](#active-journeys).
 - **The outcome follows the same rules as any other journey.** An agent processing the voicemail
   resolves the journey to `Handled`, while expiry and email delivery keep `Voicemail`.
 - **A journey can be `Handled` and still contain a `VOICEMAIL` transition.** This happens two ways:
@@ -1632,7 +1711,7 @@ POST /v1/transitions/search
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00+03:00",
-    "end": "2025-05-19T23:59:59+03:00"
+    "end": "2025-05-19T23:59:59.999+03:00"
   },
   "filters": [
     { "name": "transitions.name", "values": ["FOLLOWUP_PENDING", "OUTBOUND_STARTED", "TALKING"] },
@@ -1862,7 +1941,7 @@ POST /v1/journeys/search
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00+03:00",
-    "end": "2025-05-19T23:59:59+03:00"
+    "end": "2025-05-19T23:59:59.999+03:00"
   },
   "filters": [
     { "name": "outcome", "values": ["CallbackNoAnswer", "CallbackExpired"] }
@@ -1872,17 +1951,20 @@ POST /v1/journeys/search
 }
 ```
 
-3. List the callbacks still outstanding, which are the journeys that are still in progress and carry
-   the `CallbackRequested` outcome:
+3. List the callbacks still outstanding: filter on the callback queue with `queues.id`, and keep
+   the journeys whose `finishedTime` is `null`. Filter by id, not name, because a waiting
+   callback's queue has a `null` name. Don't filter on the `CallbackRequested` outcome alone: it
+   misses a pending callback whose customer had already spoken to an agent, which is already
+   `Handled`.
 
 ```json
 {
   "dateRange": {
     "start": "2025-05-19T00:00:00+03:00",
-    "end": "2025-05-19T23:59:59+03:00"
+    "end": "2025-05-19T23:59:59.999+03:00"
   },
   "filters": [
-    { "name": "outcome", "values": ["CallbackRequested"] }
+    { "name": "queues.id", "values": ["queue-callback-123"] }
   ],
   "displayTimezone": "Europe/Paris",
   "limit": 100
@@ -1891,40 +1973,38 @@ POST /v1/journeys/search
 
 **What to expect when consuming these journeys:**
 
-- **An outstanding callback journey is in progress and carries `CallbackRequested`.** That value is
+- **An outstanding callback journey is active and carries `CallbackRequested`.** That value is
   set only when no agent talked to the customer before the callback was requested; if one had, the
-  journey is already `Handled` and stays that way. `finishedTime` is `null` while the callback is
-  outstanding, and the outcome changes to `Handled`, `CallbackNoAnswer` or `CallbackExpired` once it
-  resolves. Filtering and sorting use `time` (the journey start), so the journey is found by the day
-  the customer called in, not by when the callback resolved.
+  journey is already `Handled` and stays that way. The journey stays active until the callback
+  resolves; see [Active Journeys](#active-journeys).
 - **A callback that reached the customer is `Handled`.** There is no `CallbackHandled` value, so a
   filter built only from the three `Callback*` values returns the callbacks that never reached the
   customer, not all of them.
-- **At journey level the callback queue and the answering agent are rolled up** into the journey's
-  `queues[]` and `agents[]` once the callback has been picked up, so `queues.name` with the callback
-  queue, or `agents.name`, finds callback journeys. A callback that is still waiting is the
-  exception: its queue is not rolled up yet, because the pending wait is synthesized from the originating leg before the callback interaction has reported anything. That is also why the queue carries no name. Listing journeys waiting on a callback queue therefore requires
-  the transition-level `transitions.queue.id` filter, and the id rather than the name, because a
-  still-pending callback's `queue` carries the id with a `null` name.
+- **At journey level the callback queue is rolled up** into the journey's `queues[]` from the moment
+  the callback is waiting on it, and **the answering agent** into `agents[]` once the callback has
+  been picked up, so `queues.name` with the callback queue, or `agents.name`, finds callback
+  journeys. While the callback is still waiting its queue carries the id with a `null` name, on the
+  transition and in `queues[]` alike, because the callback interaction has not reported anything
+  yet. There is one `queues[]` entry per queue: when the callback reports, the named entry replaces
+  the id-only one rather than being added next to it. Listing journeys waiting on a callback queue
+  therefore uses the journey-level `queues.id` filter (or the transition-level
+  `transitions.queue.id`), by id rather than by name.
 - **An unanswered callback has no journey `agents`, but it does have `queues`.** When every dial attempt goes unanswered (`CallbackNoAnswer`), the dialing agent never spoke to the customer and so is not listed at journey level, while the callback queue still is. Such a journey is not returned by an `agents.name` filter; find it with `queues.name` or `transitions.agents.name`.
 - **`OUTBOUND_STARTED` is not exclusive to callbacks.** It has always been emitted for ordinary
   outbound calls, so filtering on it alone will also return those.
 
 ## Best Practices
 
-1. **Use appropriate date ranges**: The maximum allowed timerange is 60 days. For best performance, keep each
-   request to 1 day or less and break longer analysis into consecutive requests of that size.
+1. **Apply relevant filters**: Use filters to narrow down results and improve response times.
 
-2. **Apply relevant filters**: Use filters to narrow down results and improve response times.
+2. **Handle pagination properly**: Always check for the `nextPageCursor` and fetch all pages when needed.
 
-3. **Handle pagination properly**: Always check for the `nextPageCursor` and fetch all pages when needed.
+3. **Respect rate limits**: Implement appropriate retry mechanisms with backoff when encountering rate limiting.
 
-4. **Respect rate limits**: Implement appropriate retry mechanisms with backoff when encountering rate limiting.
-
-5. **Cache results when appropriate**: For frequently accessed data that doesn't change often, consider caching on your
+4. **Cache results when appropriate**: For frequently accessed data that doesn't change often, consider caching on your
    side.
 
-6. **Handle errors gracefully**: Check for error responses and retry with backoff for transient errors.
+5. **Handle errors gracefully**: Check for error responses and retry with backoff for transient errors.
 
 ## API Glossary
 
