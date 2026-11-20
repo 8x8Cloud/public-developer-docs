@@ -149,6 +149,7 @@ const sidebarConfig = [
     collapsed: true,
     items: [
       'jaas/docs/mobile-sdk-release-notes',
+      'jaas/docs/release-7290',
       'jaas/docs/release-7068',
       'jaas/docs/release-6869',
       'jaas/docs/release-6741',
