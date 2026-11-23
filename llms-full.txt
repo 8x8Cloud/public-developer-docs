@@ -34,14 +34,25 @@ Authorization: Basic {base64encode(tenantId:actionToken)}
 ## **Base URL**
 
 ```text
-https://{cluster}.8x8.com/api/v1/interaction/data
+https://{cluster}.8x8.com/api/tstats/interaction/data
 ```
 
-| Region        | Cluster  | Example URL                                        |
-| ------------- | -------- | -------------------------------------------------- |
-| North America | vcc-na12 | <https://vcc-na12.8x8.com/api/v1/interaction/data> |
-| Europe        | vcc-eu1  | <https://vcc-eu1.8x8.com/api/v1/interaction/data>  |
-| Sandbox       | vcc-sb1  | <https://vcc-sb1.8x8.com/api/v1/interaction/data>  |
+| Region        | Cluster  | Example URL                                            |
+| ------------- | -------- | ------------------------------------------------------ |
+| North America | vcc-na12 | <https://vcc-na12.8x8.com/api/tstats/interaction/data> |
+| Europe        | vcc-eu1  | <https://vcc-eu1.8x8.com/api/tstats/interaction/data>  |
+| Sandbox       | vcc-sb1  | <https://vcc-sb1.8x8.com/api/tstats/interaction/data>  |
+
+***
+
+## **Identifying the Interaction**
+
+Each endpoint takes the interaction in its path, in one of two forms:
+
+| Path               | Identifier                                             |
+| ------------------ | ------------------------------------------------------ |
+| `/guid/{guid}`     | The interaction GUID, such as `int-1628bb9dbf7-ABC123` |
+| `/callId/{callId}` | The SIP Call-ID of the call                            |
 
 ***
 
@@ -49,7 +60,9 @@ https://{cluster}.8x8.com/api/v1/interaction/data
 
 ### **Set Interaction Variables**
 
-**POST** `/api/v1/interaction/data/{identifier}`
+**POST** `/api/tstats/interaction/data/guid/{guid}`
+
+**POST** `/api/tstats/interaction/data/callId/{callId}`
 
 Add or update custom variables for a specific interaction.
 
@@ -72,6 +85,8 @@ Add or update custom variables for a specific interaction.
 }
 ```
 
+Put all variables in one object inside `data`. Only the first element of the `data` array is read; variables in any further element are ignored, and the request still returns `202`.
+
 #### **Variable Properties**
 
 | Property      | Type    | Required | Description             | Constraints                                      |
@@ -84,40 +99,107 @@ Add or update custom variables for a specific interaction.
 | `dataType`    | string  | No       | Data type hint          | text, number, phone, date, time, currency        |
 | `privacy`     | boolean | No       | Mask sensitive data     | Default: false                                   |
 
-#### **Success Response (200 OK)**
+#### **Responses**
+
+The API waits up to **2 seconds** for 8x8 Contact Center to confirm the variables were set before it answers. Set your HTTP client's timeout above 2 seconds.
+
+| Status                      | When                                                                  |
+| --------------------------- | --------------------------------------------------------------------- |
+| `202 Accepted`              | The variables were set, or no confirmation arrived within 2 seconds   |
+| `404 Not Found`             | The interaction doesn't exist, for example because the call has ended |
+| `500 Internal Server Error` | The variables couldn't be set                                         |
+
+**202 Accepted**
 
 ```json
 {
-  "status": "success",
-  "message": "Variables successfully set",
-  "interactionId": "int-1628bb9dbf7-ABC123",
-  "variablesSet": 3
+  "code": "correlationId",
+  "value": "c0a8012e-3f4b-4d6a-9b1e-7a2f5c8d9e10"
+}
+```
+
+`value` identifies the request; quote it when you contact support about this request. A `202` returned without confirmation, after the 2 seconds, doesn't guarantee that the variables were set.
+
+**404 Not Found**
+
+```json
+{
+  "code": "resource.not_found",
+  "message": "Interaction not found",
+  "httpStatus": 404
+}
+```
+
+The variables were not set.
+
+**500 Internal Server Error**
+
+```json
+{
+  "code": "server.error",
+  "message": "Failed to set interaction data",
+  "httpStatus": 500
 }
 ```
 
 ### **Get Interaction Data**
 
-**GET** `/api/v1/interaction/data/{identifier}`
+**GET** `/api/tstats/interaction/data/guid/{guid}`
 
-Retrieve all context data and variables for a specific interaction.
+**GET** `/api/tstats/interaction/data/callId/{callId}`
+
+Retrieve the context data of a specific interaction and the variables set on it with `ivr: true`.
 
 #### **Success Response (200 OK)**
 
 ```json
 {
-  "interactionId": "int-1628bb9dbf7-ABC123",
-  "channel": "18005551234",
-  "createTime": "2024-01-15T10:30:00Z",
-  "ani": "16175551234",
-  "callerName": "John Doe",
-  "variables": [
-    {
-      "name": "_customerId",
-      "value": "CUST-123456",
-      "display": true,
-      "displayName": "Customer ID"
-    }
-  ]
+  "InteractionId": "int-1628bb9dbf7-ABC123",
+  "Channel": "18005551234",
+  "CreateTime": "1705314600",
+  "ANI": "16175551234",
+  "CallerName": "John Doe",
+  "QueueId": "101",
+  "QueueTime": "1705314612",
+  "AgentId": "jdoe",
+  "sipId": "a84b4c76e66710@pc33.example.com",
+  "userInput": "[{\"_customerTier\":\"VIP\"},{\"_paymentDue\":\"true\"}]"
+}
+```
+
+| Field           | Description                                                                                          |
+| --------------- | ---------------------------------------------------------------------------------------------------- |
+| `InteractionId` | The interaction GUID                                                                                 |
+| `Channel`       | The number the customer called; inbound calls only                                                   |
+| `CreateTime`    | When the interaction was created, in seconds since the Unix epoch                                    |
+| `ANI`           | The caller's phone number                                                                            |
+| `CallerName`    | The caller's name, when known                                                                        |
+| `QueueId`       | The queue the interaction was routed to                                                              |
+| `QueueTime`     | When the interaction was queued, in seconds since the Unix epoch                                     |
+| `AgentId`       | The agent handling the interaction, if any                                                           |
+| `sipId`         | The SIP Call-ID of the call                                                                          |
+| `inboundSipId`  | The SIP Call-ID of the inbound leg; only when there is one                                           |
+| `sessionId`     | The session ID of the interaction; only when there is one                                            |
+| `userInput`     | A string holding a JSON array, with one `{"name": "value"}` object per variable set with `ivr: true` |
+
+All values are strings, and a field without a value is left out. Variables set only with `display: true` are not returned.
+
+#### **Errors**
+
+| Status                      | `message`                                                             | When                                                                  |
+| --------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `404 Not Found`             | `Interaction not found`                                               | The interaction doesn't exist, for example because the call has ended |
+| `404 Not Found`             | `Interaction has no customer channel`                                 | The interaction has no customer leg, such as an agent-to-agent call   |
+| `500 Internal Server Error` | `Failed to read interaction data`                                     | The interaction data couldn't be read                                 |
+| `503 Service Unavailable`   | `Server is currently experiencing high load. Please try again later.` | 8x8 Contact Center didn't answer within 10 seconds; retry later       |
+
+A `404` is returned at once:
+
+```json
+{
+  "code": "resource.not_found",
+  "message": "Interaction not found",
+  "httpStatus": 404
 }
 ```
 
@@ -139,7 +221,7 @@ Custom variables can be used with the existing **Test Variable** node in IVR scr
 ```shell
 # Set VIP status via API
 curl -X POST \
-  'https://vcc-na12.8x8.com/api/v1/interaction/data/int-123456' \
+  'https://vcc-na12.8x8.com/api/tstats/interaction/data/guid/int-123456' \
   -H 'Authorization: Basic {credentials}' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -265,7 +347,7 @@ Variables with `display: true` appear in the Agent Workspace, providing valuable
 
 ```shell
 curl -X POST \
-  'https://vcc-na12.8x8.com/api/v1/interaction/data/int-987654' \
+  'https://vcc-na12.8x8.com/api/tstats/interaction/data/guid/int-987654' \
   -H 'Authorization: Basic {credentials}' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -323,25 +405,26 @@ curl -X POST \
 
 ## **Error Responses**
 
-| Code | Description  | Example Response                                                                                   |
-| ---- | ------------ | -------------------------------------------------------------------------------------------------- |
-| 400  | Bad Request  | `{"status": "error", "code": 400, "message": "Invalid variable name: must start with underscore"}` |
-| 401  | Unauthorized | `{"status": "error", "code": 401, "message": "Authentication failed"}`                             |
-| 404  | Not Found    | `{"status": "error", "code": 404, "message": "Interaction not found"}`                             |
-| 429  | Rate Limited | `{"status": "error", "code": 429, "message": "Rate limit exceeded"}`                               |
-| 500  | Server Error | `{"status": "error", "code": 500, "message": "Internal server error"}`                             |
+| Code | When                                                                        | Example Response                                                                                                                       |
+| ---- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| 400  | The `Content-Type` of a SET isn't `application/json`                        | `<API><Error>400 - Bad request.</Error></API>` (XML)                                                                                   |
+| 401  | The tenant ID or token is wrong, or the tenant doesn't exist or is disabled | No JSON body; the response carries a `WWW-Authenticate: Basic` header                                                                  |
+| 404  | The interaction doesn't exist                                               | `{"code": "resource.not_found", "message": "Interaction not found", "httpStatus": 404}`                                                |
+| 429  | Too many of the tenant's requests are in progress at once                   | `{"reasons": ["No permits available for {cluster}-{tenantId}"], "message": "Too Many Requests"}`                                       |
+| 500  | The variables couldn't be set, or the interaction data couldn't be read     | `{"code": "server.error", "message": "Failed to set interaction data", "httpStatus": 500}`                                             |
+| 503  | A GET got no answer within 10 seconds                                       | `{"code": "service.unavailable", "message": "Server is currently experiencing high load. Please try again later.", "httpStatus": 503}` |
 
 ***
 
 ## **API Limits**
 
-| Limit                 | Value           |
-| --------------------- | --------------- |
-| Requests per minute   | 100 per tenant  |
-| Variables per request | 50              |
-| Variable name length  | 25 characters   |
-| Variable value length | 1000 characters |
-| Display name length   | 30 characters   |
+| Limit                 | Value                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------- |
+| Concurrent requests   | 100 per tenant by default; a request waits up to 5 seconds for a free slot, then gets `429` |
+| Variables per request | 50                                                                                          |
+| Variable name length  | 25 characters                                                                               |
+| Variable value length | 1000 characters                                                                             |
+| Display name length   | 30 characters                                                                               |
 
 ***
 
@@ -358,7 +441,8 @@ curl -X POST \
 - **Variable Naming**: Always start with underscore (`_customerId`)
 - **Data Types**: Use appropriate `dataType` for formatting
 - **Agent Display**: Limit to essential information for better UX
-- **Error Handling**: Implement retry logic for 429/500 errors
+- **Error Handling**: Implement retry logic for 429/500/503 errors. A `404` usually means the interaction has ended, so retrying won't help; only a request made in the first moments of an interaction can get a `404` that a retry fixes
+- **Timeouts**: Setting variables can take up to 2 seconds; set your HTTP client's timeout above that
 - **Testing**: Use sandbox environment for development
 
 ### **Variable Naming Rules**
