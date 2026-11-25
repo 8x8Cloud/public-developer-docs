@@ -48702,6 +48702,7 @@ Payload object description
 | type | string | Inbound message type. Possible values:- `None`- `Text`- `Audio`- `Video`- `Image`- `Location`- `File`- `Carousel`- `List`- `Buttons`- `Template`- `Interactive` |
 | content | object | Message content |
 | replyToUmid | uuid | Optional. UMID of the earlier message this inbound message replies to, for example when the user taps a button on a template or interactive message you sent, or quotes a message on WhatsApp. Present only when the original message went through 8x8. Use it to link a reply to the outbound message, and therefore the campaign, it answers. |
+| referral | object | Optional. WhatsApp only. Included on the message a user sends right after tapping a Click-to-WhatsApp ad or a Facebook or Instagram post, see below. Messages that don't follow an ad tap leave it out. |
 
 User information object description
 
@@ -48713,6 +48714,24 @@ User information object description
 | username       | string         | **New in v3.** The WhatsApp username |
 
 When a `user` field has no value, it is simply left out of the JSON.
+
+Referral information object description
+
+Included on the message a user sends right after tapping a Click-to-WhatsApp ad or post. Messages that don't follow an ad tap leave it out. To tag the whole conversation as an ad lead, store it on your side when it arrives. Fields that WhatsApp does not send are left out.
+
+| Parameter name | Parameter type | Description |
+| :------------- | :------------- | :---------- |
+| sourceType     | string         | Where the click came from: `ad` or `post`. |
+| sourceId       | string         | Meta ID of the ad or post. |
+| sourceUrl      | string         | URL of the ad or post the user tapped. |
+| headline       | string         | Headline of the ad or post. |
+| body           | string         | Body text of the ad or post. |
+| mediaType      | string         | Media shown in the ad: `image` or `video`. |
+| imageUrl       | string         | URL of the ad image, when `mediaType` is `image`. |
+| videoUrl       | string         | URL of the ad video, when `mediaType` is `video`. |
+| thumbnailUrl   | string         | URL of the video thumbnail, when `mediaType` is `video`. |
+| ctwaClid       | string         | Click ID Meta assigns to the ad click. Use it to attribute conversions to the ad. Matches `ctwa_clid` in [WhatsApp Automatic Events](/connect/docs/whatsapp-automatic-events-webhook). |
+| welcomeMessage | string         | Welcome message text configured on the ad, if any. |
 
 #### Common object definitions
 
@@ -48814,6 +48833,47 @@ A WhatsApp text message showing all the v3 `user` fields: the BSUID in `channelU
     "type": "Text",
     "content": {
       "text": "WhatsApp inbound message"
+    }
+  }
+}
+```
+
+##### Inbound message — WhatsApp, from a Click-to-WhatsApp ad
+
+The WhatsApp message a user sends right after tapping a Click-to-WhatsApp ad. The `referral` object describes the ad.
+
+```json title="Inbound WhatsApp message webhook body (v3) — Click-to-WhatsApp referral"
+{
+  "version": 3,
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": <UNIQUE_MESSAGE_ID>,
+    "subAccountId": <SUBACCOUNT_ID>,
+    "timestamp": "2026-11-16T09:12:45.00Z",
+    "user": {
+      "msisdn": <USER_PHONE_NUMBER>,
+      "channelUserId": <WHATSAPP_BSUID>
+    },
+    "recipient": {
+      "channel": "whatsapp",
+      "channelId": <CHANNEL_ID>
+    },
+    "type": "Text",
+    "content": {
+      "text": "Hi, I'd like to know more about this offer"
+    },
+    "referral": {
+      "sourceType": "ad",
+      "sourceId": <AD_ID>,
+      "sourceUrl": "https://fb.me/<AD_SHORT_LINK>",
+      "headline": "Get a free quote today",
+      "body": "Chat with us on WhatsApp for a personalised quote.",
+      "mediaType": "image",
+      "imageUrl": <AD_IMAGE_URL>,
+      "ctwaClid": <CTWA_CLICK_ID>,
+      "welcomeMessage": "Hi! Thanks for reaching out. How can we help?"
     }
   }
 }
@@ -49016,6 +49076,7 @@ Payload object description
 | type | string | Inbound message type. Possible values:- `None`- `Text`- `Audio`- `Video`- `Image`- `Location`- `File`- `Carousel`- `List`- `Buttons`- `Template`- `Interactive` |
 | content | object | Message content |
 | replyToUmid | uuid | Optional. UMID of the earlier message this inbound message replies to, for example when the user taps a button on a template or interactive message you sent, or quotes a message on WhatsApp. Present only when the original message went through 8x8. Use it to link a reply to the outbound message, and therefore the campaign, it answers. |
+| referral | object | Optional. WhatsApp only. Included on the message a user sends right after tapping a Click-to-WhatsApp ad or a Facebook or Instagram post, see below. Messages that don't follow an ad tap leave it out. |
 
 User information object description
 
@@ -49024,6 +49085,24 @@ User information object description
 | msisdn         | string         | Phone number expressed in E.164 international format.                  |
 | channelUserId  | string         | Id of the user in the channel. Always the phone number digits (same value as `msisdn`). |
 | name           | string         | User's name in the channel. For example, username of the WhatsApp user |
+
+Referral information object description
+
+Included on the message a user sends right after tapping a Click-to-WhatsApp ad or post. Messages that don't follow an ad tap leave it out. To tag the whole conversation as an ad lead, store it on your side when it arrives. Fields that WhatsApp does not send are left out.
+
+| Parameter name | Parameter type | Description |
+| :------------- | :------------- | :---------- |
+| sourceType     | string         | Where the click came from: `ad` or `post`. |
+| sourceId       | string         | Meta ID of the ad or post. |
+| sourceUrl      | string         | URL of the ad or post the user tapped. |
+| headline       | string         | Headline of the ad or post. |
+| body           | string         | Body text of the ad or post. |
+| mediaType      | string         | Media shown in the ad: `image` or `video`. |
+| imageUrl       | string         | URL of the ad image, when `mediaType` is `image`. |
+| videoUrl       | string         | URL of the ad video, when `mediaType` is `video`. |
+| thumbnailUrl   | string         | URL of the video thumbnail, when `mediaType` is `video`. |
+| ctwaClid       | string         | Click ID Meta assigns to the ad click. Use it to attribute conversions to the ad. Matches `ctwa_clid` in [WhatsApp Automatic Events](/connect/docs/whatsapp-automatic-events-webhook). |
+| welcomeMessage | string         | Welcome message text configured on the ad, if any. |
 
 #### Common object definitions
 
@@ -49124,6 +49203,46 @@ A WhatsApp text message in the v2 format: no `version` field, and `channelUserId
       "text": "Test message"
     },
     "replyToUmid": <REPLIED_MESSAGE_UMID>
+  }
+}
+```
+
+##### Inbound message — WhatsApp, from a Click-to-WhatsApp ad
+
+The WhatsApp message a user sends right after tapping a Click-to-WhatsApp ad. The `referral` object describes the ad.
+
+```json title="Inbound WhatsApp message webhook body (v2) — Click-to-WhatsApp referral"
+{
+  "namespace": "ChatApps",
+  "eventType": "inbound_message_received",
+  "description": "ChatApps inbound message",
+  "payload": {
+    "umid": <UNIQUE_MESSAGE_ID>,
+    "subAccountId": <SUBACCOUNT_ID>,
+    "timestamp": "2026-11-16T09:12:45.00Z",
+    "user": {
+      "msisdn": <USER_PHONE_NUMBER>,
+      "channelUserId": <USER_PHONE_NUMBER>
+    },
+    "recipient": {
+      "channel": "whatsapp",
+      "channelId": <CHANNEL_ID>
+    },
+    "type": "Text",
+    "content": {
+      "text": "Hi, I'd like to know more about this offer"
+    },
+    "referral": {
+      "sourceType": "ad",
+      "sourceId": <AD_ID>,
+      "sourceUrl": "https://fb.me/<AD_SHORT_LINK>",
+      "headline": "Get a free quote today",
+      "body": "Chat with us on WhatsApp for a personalised quote.",
+      "mediaType": "image",
+      "imageUrl": <AD_IMAGE_URL>,
+      "ctwaClid": <CTWA_CLICK_ID>,
+      "welcomeMessage": "Hi! Thanks for reaching out. How can we help?"
+    }
   }
 }
 ```
