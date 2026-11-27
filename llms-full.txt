@@ -111256,12 +111256,33 @@ Every customer-visible change on the developer portal, across Connect, Converse,
 
 ---
 
+## Analytics and the audit trail
+
+import ClickThroughTour from '@site/docusaurus/components/ClickThroughTour';
+import { chapters, steps } from '../tours/analytics-tour';
+
+# Analytics and the audit trail
+
+Click through 8x8 Resolve analytics: tenant-wide reports and exports, the record for a single incident, and what happened in each scenario run. Use **Next** and **Back**, or the arrow keys, to move between steps. Choose **Full screen** to see the screenshots at a larger size.
+
+<ClickThroughTour title="Analytics and the audit trail" imageAltPrefix="8x8 Resolve screen" chapters={chapters} steps={steps} />
+
+## Learn more
+
+- [Analytics](./analytics.md)
+- [Incidents](./incidents.md)
+- [Scenarios](./scenarios.md)
+
+---
+
 ## Analytics(Docs)
 
 
 ← [Back to Overview](./overview.md)
 
 The Analytics page shows how your alerting is performing over time — delivery, response, and channel effectiveness across all your incidents. Use it to spot which channels reach people, how quickly recipients respond, and which departments are slow to acknowledge.
+
+To see it step by step, take the [analytics tour](./analytics-tour.mdx).
 
 ![8x8 Resolve Analytics](../images/analytics.png)
 
@@ -111284,7 +111305,7 @@ The top of the page summarises performance across the selected period:
 | **Responses over time** | Response volume across the period, so you can see trends and spikes. |
 | **Responses by department** | How responsiveness breaks down across departments. |
 | **Incidents by Priority** | The split of incidents by severity (Critical, Medium, Low). |
-| **Channel effectiveness** | A channel-by-channel **Channel breakdown** of **Sent**, **Delivered**, **Failed**, **Responses**, and **Read** counts across SMS, Email, Voice, 8x8 Work Desktop, 8x8 Work Mobile Notification, and WhatsApp — use it to compare how each channel performs. |
+| **Channel effectiveness** | A channel-by-channel **Channel breakdown** of **Sent**, **Delivered**, **Failed**, **Responses**, and **Read** counts for each channel your organisation has enabled, such as Email, 8x8 Work Messages, and 8x8 Work Mobile Notification — use it to compare how each channel performs. |
 
 ## Incidents performance
 
@@ -111294,7 +111315,7 @@ Below the charts, the **Incidents performance** table lists each incident with i
 | --- | --- |
 | **Incident** | The incident title and when it was sent. |
 | **Severity** | Critical, Medium, or Low. |
-| **Source** | Manual or Automation. |
+| **Source** | How the incident was created, for example **Manual**. |
 | **Recipients** | Number of people targeted. |
 | **Response rate** | Percentage of recipients who responded. |
 | **Status** | Active or Resolved. |
@@ -111313,50 +111334,124 @@ Your contacts are the people who can receive incidents. You can manage them manu
 
 ## View your contacts
 
-Navigate to **Contacts** from the left menu. The **All Contacts** tab opens by default and shows your full contact list; the **Integrations** tab is where you [connect an HR system](#integrations).
+Navigate to **Contacts** from the left menu. The **All contacts** tab opens by default and shows your full contact list; the **Integrations** tab is where you [connect a directory or HR system](#integrations), and the **Malformed numbers** tab lists contacts whose phone numbers need [fixing](#fix-malformed-phone-numbers).
+
+The number of active contacts is shown above the table, for example *12 active contacts*. Turn on **Archived contacts** next to it to see the contacts you've archived instead (see [Archive contacts](#archive-contacts)). The table has these columns:
 
 | Column | Description |
 | --- | --- |
-| **Name** | The contact's full name. |
-| **Email** | Their email address. |
-| **Mobile Phone** | Their mobile number. Shows "–" if not set. |
-| **Source** | Where the contact was imported from (e.g., 8x8 Work, Google Workspace). |
-| **Actions** | Click the eye icon to view full contact details. |
+| **Name** | The contact's full name, with their email address underneath. |
+| **Phone** | Their phone numbers: **P** marks the personal number and **W** the work number. Shows "-" if neither is set. |
+| **Department** | The contact's department. |
+| **Role** | The contact's role or job title. |
+| **Location** | The contact's office or site. |
+| **Source** | Where the contact came from, for example **Manual** (added by hand or from a CSV file) or an integration such as Google Workspace. |
 
-The total contact count is shown above the table and updates when you apply filters.
+Click a column heading, such as **Name**, **Department**, **Role**, or **Location**, to sort by it. Use **Rows per page** and the page controls at the bottom of the table to move through a long list.
 
 ## Search and filter
 
-- **Search** — Enter a name or email address to filter the list as you type.
-- **Department** — Filter by the contact's department.
-- **Role** — Filter by the contact's role.
-- **Location** — Filter by the contact's office or site.
+- **Search** — Type in **Search contacts...** to filter the list as you type.
+- **Filters** — Click the filter icon next to the search box and choose values for contact attributes, such as department, role, or location. Click **Apply** to filter the list, or **Reset** to clear the filters.
 
-Select your filter values and click **Apply**. Click **Reset** to clear all filters and show the full list again.
-
-> 📘 **Tip**
->
-> You can combine the search field with filters. For example, search for "John" and filter by Department: "Engineering" to find a specific contact quickly.
+You can combine the search box with filters.
 
 ## Add a contact manually
 
-1. Click **Add Contact**.
-2. Fill in the required fields.
-3. Click **Save**. The contact appears in the list immediately.
+1. Click **Add contact**.
+2. Fill in the contact's details: **First name**, **Last name**, **Email**, **Work phone**, **Personal phone**, **Role**, **Department**, and **Location**. No single field is required, but you need to fill in at least one.
+3. Click **Add contact**. The contact appears in the list immediately.
 
 ## Upload contacts from a CSV
 
-1. Click the dropdown arrow next to **Add Contact**.
+1. Click the dropdown arrow next to **Add contact**.
 2. Select **Upload contacts**.
 3. Choose your CSV file and start the upload. A progress bar shows you how the import is going.
 
-## View contact details
+The CSV file must be UTF-8 encoded, no larger than 10 MB, and contain no more than 50,000 rows. Enter phone numbers in international format with the country code (for example, `+12094370088`). Numbers without a country code are treated as US numbers. If a number isn't valid that way either, the contact is listed on the [Malformed numbers](#fix-malformed-phone-numbers) tab.
 
-Click the **View** (eye) icon on a row — or click anywhere on the contact's row — to open that contact's details page. From there you can review and **edit the contact's properties** (name, email, phone, department, location, and group).
+To start from the right columns, click **Download CSV Template** in the upload dialog.
+
+### Replace your contacts with a CSV file
+
+By default, an upload adds new contacts and updates the ones already in Resolve. To make the file your complete contact list instead, select **Overwrite existing contacts** before you click **Upload**:
+
+- Contacts in the file are added or updated.
+- Every contact you added manually or from an earlier CSV file that isn't in the file is archived. Archived contacts can't be chosen as recipients, and you can restore them from [Archived contacts](#view-and-restore-archived-contacts).
+
+Resolve asks you to confirm. Click **Overwrite contacts** to go ahead.
+
+![Overwrite existing contacts option in the CSV upload dialog](../images/contacts-csv-overwrite.png)
+
+> 📘 **Only without an integration**
+>
+> **Overwrite existing contacts** appears only when no directory or HR system is connected, including 8x8 Contacts. Contacts that come from an integration are never archived by a CSV upload.
+
+## Fix malformed phone numbers
+
+Resolve stores phone numbers in international format, with the country code, so it can send SMS, voice, and WhatsApp alerts. When a contact's number can't be read that way, usually because it's a local number without a country code from a CSV file or an integration, the contact is listed on the **Malformed numbers** tab. The tab shows how many contacts need attention, and their numbers are shown in red.
+
+To fix them, tell Resolve which country the numbers belong to:
+
+1. Go to **Contacts** → **Malformed numbers**.
+2. Select the contacts whose numbers are from the same country. To select every contact on the tab, select **Select all *N* malformed**.
+3. Under **Select region**, choose the country, for example **United Kingdom (GB)**.
+4. Click **Normalize**.
+
+![Malformed numbers tab with two London contacts selected and United Kingdom chosen](../images/contacts-malformed.png)
+
+Normalizing runs in the background, and Resolve shows how many numbers it fixed, for example *Normalized 1 of 2 number(s)*. Then:
+
+- Contacts whose numbers are valid for that country leave the list. Resolve keeps the number as it was entered and uses the international version for alerts. For example, `020 7946 0958` with **United Kingdom (GB)** becomes `+442079460958`.
+- A number that still isn't valid for that country stays on the list, with the country shown in the **Region** column. This is also what usually happens if you choose the wrong country. Check the number at its source, such as the CSV file or your directory, and correct it there.
+
+Resolve remembers the country you chose for each contact, so later syncs from an integration fix that contact's number automatically.
+
+## Edit a contact
+
+Click a contact's row to open **Edit contact**. Each field shows where its value came from, such as **(Manual)** or the logo of the integration that synced it. Change the details and click **Save changes**. To remove the contact from your list, click **Archive** (see [Archive contacts](#archive-contacts)).
+
+![Edit contact dialog](../images/contacts-edit.png)
+
+> 📘 **Synced contacts are read-only**
+>
+> You can edit contacts that you added manually or uploaded from a CSV file. Contacts that come from an integration are read-only in Resolve: **Edit contact** shows that the contact is managed by an external source. Update them in the source system and they change in Resolve at the next sync. You can still archive a synced contact.
+
+## Archive contacts
+
+Archive contacts who shouldn't receive alerts any more, such as people who have left or seasonal staff. Archived contacts disappear from **All contacts** and can't be chosen as recipients, but Resolve keeps their details and history, so you can restore them later. You can archive contacts from any source: added manually, uploaded from a CSV file, or synced from an integration.
+
+**Archive one contact:** click the contact's row, click **Archive** in **Edit contact**, and confirm.
+
+**Archive several contacts:**
+
+1. Select the checkboxes next to the contacts. To select every contact on the page, select the checkbox in the header.
+2. To include contacts on other pages too, click **Select all *N* contacts** in the banner that appears. This selects every contact that matches your current search and filters, not just the ones on the page.
+3. Click **Archive** and confirm.
+
+![Contacts selected for archiving, with the Select all banner](../images/contacts-select-all.png)
+
+You can select up to 500 contacts at a time; to archive more, use **Select all**. Archiving runs in the background, and the list updates when it finishes. You can run one archive or restore at a time.
+
+> 📘 **Archiving synced contacts**
+>
+> When you archive a contact that comes from an integration, Resolve also stops syncing that person, so the next sync doesn't bring them back. Restoring the contact turns syncing back on.
+
+### View and restore archived contacts
+
+1. Turn on **Archived contacts** above the table. The table lists your archived contacts, and the count above it shows how many there are.
+2. Select the contacts you want back, or select all of them.
+3. Click **Restore contact** (or **Restore contacts**) and confirm.
+
+Restored contacts reappear in **All contacts**, and contacts from an integration start syncing again.
+
+![Archived contacts with one contact selected for restore](../images/contacts-archived.png)
+
+Contacts that an integration archived because their account was disabled in the source system can't be restored by hand. They come back automatically at the next sync after the account is enabled again.
 
 ## Integrations
 
-Connect your HR system to 8x8 Resolve from the **Integrations** tab and your contacts stay in sync automatically. When an employee's department, location, or phone number changes in your HR system, Resolve picks it up — so your incident targeting is always accurate.
+Connect 8x8 Contacts or your directory or HR system to 8x8 Resolve from the **Integrations** tab and your contacts stay in sync automatically. When an employee's department, location, or phone number changes in the source system, Resolve picks it up — so your incident targeting is always accurate.
 
 ![8x8 Resolve Contact Integrations](../images/contact-integrations.png)
 
@@ -111364,21 +111459,64 @@ Each sync maps the contact's **Name, Email, Phone, Department, Location, and Gro
 
 Supported sources:
 
-- **8x8 Contacts App** — contacts already held in your 8x8 account.
-- [Microsoft Entra ID](#microsoft-entra-id) (Azure Active Directory)
+- **8x8 Contacts** — employees, groups, and metadata from your 8x8 Work account.
 - [Google Workspace](#google-workspace)
-- [Okta](#okta)
+- [Microsoft Entra ID](#microsoft-entra-id) (Azure Active Directory)
 - [Workday](#workday)
+- [Okta](#okta)
 
 ### Connect an integration
 
-1. Navigate to **Contacts** → **Integrations** tab.
-2. Find the card for your HR system and click **Connect**.
-3. Enter the required credentials for your system (see the sections below).
-4. Click **Test Connection** to verify everything is working.
-5. Click **Connect** to save. Your integration appears in the connected platforms list.
+To start, go to **Contacts** → **Integrations**, find your system under **Available platforms**, and click **Connect**. A wizard opens with four steps: **Connect**, **Sync filters**, **Map fields**, and **Done**. The screenshots below show Microsoft Entra ID; the steps are the same for every system.
 
-Once connected, click **Manage** on the integration card to view sync history or trigger a manual sync.
+#### Step 1: Connect
+
+Read **Before you start**: it lists what to set up in your system first, such as the permissions to grant. Then enter the credentials for your system (see [Google Workspace](#google-workspace), [Microsoft Entra ID](#microsoft-entra-id), [Okta](#okta), or [Workday](#workday) below) and click **Test connection**. When **Connection successful** appears, click **Next: Sync filters**.
+
+For **8x8 Contacts**, there's nothing to enter: the step shows the 8x8 tenant your account is linked to and which details are synced (names, roles, departments, locations, and phone numbers). Click **Test connection**, then **Next: Sync filters**.
+
+Credentials are stored encrypted and are never shown again after you save them.
+
+![Connect step for Microsoft Entra ID](../images/contacts-integration-connect.png)
+
+#### Step 2: Sync filters
+
+Choose which people are synced. Without filters, everyone in your directory is synced.
+
+1. Click **Add filter rules**.
+2. Choose a field from your directory, such as **Department**, **Office Location**, or **Account Enabled**, then an operator, then type a value. The operators are **equals**, **not equals**, **starts with**, **ends with**, **contains**, **is null**, and **is not null**.
+3. To narrow the list, click **+ AND** to add another rule to the group: a person must match every rule in the group. To widen it, click **+ OR** to add another group: a person can match any group.
+
+As you build the rules, the step shows roughly how many contacts match (for example, *~12 contacts matched*) and a sample of matching people, so you can check the result before you go on. For Microsoft Entra ID, the filter runs in Microsoft Graph, so data about people you exclude never leaves your directory. Click **Next: Map fields**.
+
+![Sync filters step with an Account Enabled rule](../images/contacts-integration-sync-filters.png)
+
+#### Step 3: Map fields
+
+Tell Resolve which field in your directory fills each contact field. Click **Add mapping**, choose the field in your system on the left and the Resolve field on the right, and repeat for each field:
+
+| Resolve field | Example source field (Microsoft Entra ID) |
+| --- | --- |
+| **Personal phone** (required) | Mobile Phone |
+| **Work phone** | Business Phone |
+| **Email** | Mail |
+| **First Name** / **Last Name** | First Name / Last Name |
+| **Role** | Job Title |
+| **Department** | Department |
+| **Location** | Office Location |
+| **Custom property** | Any other field. Enter a name for the property. |
+
+Each field can be mapped only once. You must map **Personal phone** before you can continue, because Resolve uses it for SMS and voice alerts. To remove a mapping, click its trash icon. Click **Save & continue**.
+
+![Map fields step](../images/contacts-integration-map-fields.png)
+
+#### Step 4: Done
+
+Review the summary: **Credentials** (**Verified**), **Sync frequency** (**Every 24 hours**), **Sync filters** with the number of matched contacts, and **Field mapping**. Click **Activate integration**. The integration appears in your connected platforms and the first sync starts shortly afterwards.
+
+![Done step with the integration summary](../images/contacts-integration-done.png)
+
+You can change the sync filters and field mappings later: click **Manage** on the integration. From there you can also view sync history and start a sync straight away.
 
 ### Target contact groups
 
@@ -111402,7 +111540,9 @@ Click **Sync now** in the integration panel to trigger an immediate sync outside
 
 ### Remove an integration
 
-In the **Manage** panel, click **Remove integration**. A confirmation dialog shows how many contacts will be deleted. Confirm to remove the integration and all contacts it imported.
+In the **Manage** panel, click **Remove integration** and confirm. The contacts that the integration imported are removed from your contact list. Contacts you added manually or uploaded from a CSV file aren't affected.
+
+When a person is removed from your source system, Resolve archives their contact at the next sync rather than deleting it, so past incident records stay complete.
 
 ---
 
@@ -111412,8 +111552,8 @@ In the **Manage** panel, click **Remove integration**. A confirmation dialog sho
 
 | Credential | Description |
 | --- | --- |
-| **Credentials JSON** | A JSON credentials file for a Google Service Account with delegated Domain Wide Authority. |
-| **Email Address** | The email address of the workspace admin who created the service account. |
+| **Service Account Email** | The email address of the Google service account. |
+| **Credentials JSON** | A JSON credentials file for the service account, with delegated Domain Wide Authority. |
 
 **How to set it up:**
 
@@ -111423,7 +111563,7 @@ In the **Manage** panel, click **Remove integration**. A confirmation dialog sho
    - `https://www.googleapis.com/auth/admin.directory.group.readonly`
    - `https://www.googleapis.com/auth/admin.directory.orgunit.readonly`
 3. Download the JSON credentials file.
-4. Paste the JSON and your admin email address into the Resolve integration form.
+4. Enter the service account email and paste the JSON into the Resolve integration form.
 
 ---
 
@@ -111433,9 +111573,9 @@ In the **Manage** panel, click **Remove integration**. A confirmation dialog sho
 
 | Credential | Description |
 | --- | --- |
-| **Tenant ID** | The tenant ID of the account that will read your user directory. |
-| **Client ID** | The client ID of your registered application. |
-| **Client Secret** | The client secret of your registered application. |
+| **Directory (Tenant) ID** | The tenant ID of the account that will read your user directory. |
+| **Application (Client) ID** | The client ID of your registered application. |
+| **Client Secret Value** | The value of your registered application's client secret. |
 
 **How to set it up:**
 
@@ -111449,7 +111589,7 @@ In the **Manage** panel, click **Remove integration**. A confirmation dialog sho
    | `Group.Read.All` | Application | Admin approval required |
    | `Directory.Read.All` | Application | Admin approval required |
 
-4. Copy the Tenant ID, Client ID, and Client Secret into the Resolve integration form.
+4. Copy the Directory (Tenant) ID, the Application (Client) ID, and the client secret's value into the Resolve integration form. Use the secret's **Value**, which Microsoft shows only once when you create it, not its **Secret ID**.
 
 > 🚧 **Client secret expiry**
 >
@@ -111540,37 +111680,36 @@ The dashboard is the first thing you see after you log in. It gives you a live s
 The top section (**Active incidents**) shows a card for each incident that's still active. Each card tells you:
 
 - **Title** and **severity** (Critical, Medium, or Low)
-- The **owner** of the incident
-- When it was sent and the **number of messages** in the thread
+- Who launched the incident, and when
 - A preview of the message that was sent
-- The **acknowledgement** percentage so far
+- **Responses** — the percentage of recipients who responded so far. If the incident didn't ask for a response, the card shows **Delivered** instead.
 - Number of recipients targeted
 - **Duration** — how long the incident has been active
 
-Click any card to open the full **Incident Details** page.
+Click any card to open the incident details page.
 
 ## Analytics
 
-Below the incident cards, the **Analytics — last 30 days** section summarises recent performance:
+Below the incident cards, the **Analytics · last 30 days** section summarises recent performance:
 
 | Metric | What it measures |
 | --- | --- |
 | **Total Incidents** | Number of incidents sent in the last 30 days. |
 | **Delivery rate** | Percentage of sent messages successfully delivered to recipients. |
-| **Acknowledgement rate** | Percentage of recipients who acknowledged. |
-| **Time to acknowledge** | Average time between sending an incident and a recipient responding. |
+| **Response rate** | Percentage of recipients who responded. |
+| **Time to respond** | Average time between sending an incident and a recipient responding. |
 
 For trends, channel effectiveness, and per-incident breakdowns over any period, see the [Analytics](./analytics.md) page.
 
-## Recent Incidents table
+## Recent incidents table
 
-Scroll to the bottom of the dashboard to find the **Recent Incidents** table — your most recent incidents at a glance, without navigating to the full Incidents page. It shows these columns:
+Scroll to the bottom of the dashboard to find the **Recent incidents** table — your most recent incidents at a glance, without navigating to the full Incidents page. It shows these columns:
 
 | Column | Description |
 | --- | --- |
 | **Incident** | The incident title. |
 | **Severity** | Critical, Medium, or Low. |
-| **Source** | Manual (created by a user) or Automation (triggered by a scenario). |
+| **Source** | How the incident was created, for example **Manual** for an incident created from the **Create incident** panel. |
 | **Recipients** | Number of people targeted. |
 | **Response rate** | Percentage of recipients who responded. |
 | **Status** | Active or Resolved. |
@@ -111578,12 +111717,18 @@ Scroll to the bottom of the dashboard to find the **Recent Incidents** table —
 
 Click **View all** to open the full [Incidents](./incidents.md) page.
 
+> 📘 **Where scenario alerts appear**
+>
+> The dashboard and the Incidents page list incidents created from the **Create incident** panel. To see what a scenario sent, open the scenario's runs from the [Scenarios](./scenarios.md) page.
+
 ## Navigation bar
 
 Two quick-action buttons are always available in the top navigation bar, no matter which page you're on:
 
-- **+ Create Incident** — Opens the incident creation drawer immediately.
-- **Launch Scenario** — Runs a saved automation scenario on demand.
+- **+ Create incident** — Opens the incident creation panel.
+- **Launch scenario** — Runs a saved scenario on demand.
+
+Your user menu (your initials, top right) lets you switch the **Theme** between System, Light, and Dark, and log out.
 
 ---
 
@@ -111592,13 +111737,13 @@ Two quick-action buttons are always available in the top navigation bar, no matt
 
 ← [Back to Overview](./overview.md)
 
-An incident is an alert you send to a group of recipients through one or more communication channels. You can create one manually at any time, or trigger one automatically through a [Scenario](./scenarios.md).
+An incident is an alert you send to a group of recipients through one or more communication channels. You can create one at any time from the **Create incident** panel. To send alerts automatically, use a [Scenario](./scenarios.md).
 
 ![8x8 Resolve Incidents](../images/incidents.png)
 
 ## Create an incident
 
-1. Click **+ Create Incident** in the navigation bar. The Create Incident panel opens on the right.
+1. Click **+ Create incident** in the navigation bar. The **Create incident** panel opens on the right.
 2. Fill in the incident details:
 
    | Field | Description |
@@ -111607,17 +111752,26 @@ An incident is an alert you send to a group of recipients through one or more co
    | **Severity** | The incident's impact level — **Critical** (red), **Medium** (amber), or **Low**. This drives the visual indicators in the incident list. |
    | **Channels** | A multi-select of delivery channels — pick any combination (see [Delivery channels](#delivery-channels)). Selected channels appear as tags inline in the field. |
    | **Template** | A predefined message template. The message body auto-populates below the selector and is editable before sending; it supports variables such as `{{firstName}}`. Use the ✕ button to reset the selection. |
-   | **WhatsApp Template** | A separate WhatsApp-specific template (used when WhatsApp is a selected channel), with an inline preview of the formatted message and any template buttons. Clear it with the ✕ button. |
+   | **WhatsApp Template** | A separate WhatsApp-specific template (used when WhatsApp is a selected channel), with an inline preview of the formatted message and any template buttons. If the template has dynamic fields, fill each one under **Map the dynamic fields** with a variable or your own text, and set a **Fallback if empty** value. You can't send until every field is mapped. Clear the template with the ✕ button. |
    | **Recipients** | Click **Select recipients** (the button shows a live count) to choose who receives the alert. See [Target specific recipients](#target-specific-recipients). |
    | **Ask for response** | Optional toggle to collect replies from recipients. See [Ask for response](#ask-for-response). |
 
-3. Click **Create and Send** to dispatch the alert immediately, or **Cancel** to discard it.
+3. Optionally, click **Preview** to check the message before you send it. See [Preview the message](#preview-the-message).
+4. Click **Create and send** to dispatch the alert immediately, or **Cancel** to discard it.
 
 > 📘 **Required fields**
 >
-> Title, Channels, and a Template are required. If you click **Create and Send** without filling them in, each empty field shows a red border and a "Field is required" message.
+> Fields marked with an asterisk (*) are required. If you click **Create and send** without filling them in, each empty field shows a red border and a "Field is required" message.
 
-![Create Incident drawer](../images/incidents-create.png)
+![Create incident panel](../images/incidents-create.png)
+
+### Preview the message
+
+Click **Preview** at the bottom of the panel to open **Channel preview**. It has a tab for each selected channel and shows the message as the recipient will see it, including the response instructions that Resolve adds — for example, *Reply 1 to acknowledge the message* for a keyword reply.
+
+For SMS, the preview also shows the character count and how many SMS messages the text uses (for example, *159/160 characters · 1 SMS*). Longer messages are split into several SMS messages, and emoji or other special characters reduce how many characters fit in each one.
+
+![Channel preview showing an SMS](../images/incidents-preview.png)
 
 ## Delivery channels
 
@@ -111625,24 +111779,28 @@ You can send an incident over any combination of these channels:
 
 | Channel | How it reaches the recipient |
 | --- | --- |
-| **8x8 Work Desktop** | Notification in the 8x8 Work desktop app. |
+| **8x8 Work Messages** | Notification in the 8x8 Work desktop or web apps, delivered as a message. |
 | **8x8 Work Mobile Notification** | High-priority push notification via the 8x8 Work / Resolve mobile app, delivered even when the app is in the background or the screen is locked. |
 | **Email** | Email to their address. |
 | **SMS** | Text message to their mobile number. |
-| **Voice** | Automated voice call to their phone. |
+| **Voice** | Automated text-to-voice call placed to their phone. |
 | **WhatsApp** | Message to their WhatsApp number, sent using the selected **WhatsApp Template**. |
 
-Selected channels are shown as tags inline within the **Channels** field; you can pick all of them or any individual combination.
+Selected channels are shown as tags inline within the **Channels** field. Choose **All channels** to select every channel, or pick any combination.
+
+> 📘 **Each channel is sent independently**
+>
+> An incident sends on every selected channel at once. When a recipient responds on one channel, their other channels aren't stopped. To send on one channel and fall back to another only when there's no response, use a [Scenario](./scenarios.md).
 
 ## Target specific recipients
 
-Use the **Recipients** section to send the incident to a subset of your contacts. Filter by:
+Click **Select recipients** to choose who receives the incident:
 
-- **Department** (e.g., Finance)
-- **Location** (e.g., New York Office)
-- **Role** (e.g., Supervisor)
+- **All recipients** — Send to every contact. You can then exclude individual people.
+- **Specific people** — Search for and select contacts by name.
+- **Filters** — Click **+ Add filter** and choose a contact attribute, such as **Department** (for example, Finance), **Location** (for example, New York Office), or **Role** (for example, Supervisor). Combine filters to narrow the list; the incident goes only to recipients who match all of them.
 
-Click **Add filter** to combine multiple criteria. The incident goes only to recipients who match all of the filters you've applied.
+The button shows a live count of the selected recipients.
 
 ## Ask for response
 
@@ -111652,7 +111810,7 @@ Enable the **Ask for response** toggle to prompt recipients to reply to the inci
 
 | Type | Behaviour |
 | --- | --- |
-| **Standard** | Pre-set, read-only options: **I acknowledge** and **I need help**. |
+| **Standard** | Pre-set, read-only options: **I acknowledge** (keyword `1`) and **I need help** (keyword `2`). |
 | **Custom poll** | Define your own options — up to five label/keyword pairs. Add them with **+ Add option**, delete any individually, and use **Preview** to check how they'll look. |
 
 **Method** — how recipients submit their response:
@@ -111662,7 +111820,13 @@ Enable the **Ask for response** toggle to prompt recipients to reply to the inci
 | **Web link** | Recipients respond via a web-based link. |
 | **Keyword reply** | Recipients respond by replying with the defined keyword (for example, over SMS). |
 
-**Response options** displays the configured choices — the read-only *I acknowledge* / *I need help* for Standard, or your label/keyword pairs for a Custom poll.
+**Response options** displays the configured choices — the read-only *I acknowledge* / *I need help* for Standard, or your label/keyword pairs for a Custom poll. With **Keyword reply**, recipients answer a Standard response by replying `1` to acknowledge or `2` if they need help.
+
+When a recipient sends a valid response, they get a confirmation that their response was recorded. Response links stay valid for as long as the incident is active.
+
+> 📘 **WhatsApp-only incidents**
+>
+> **Ask for response** isn't available when WhatsApp is the only selected channel. Recipients respond with the buttons in the WhatsApp template instead, and those button taps count as responses.
 
 You can track response rates in real time from the incident details page and the dashboard.
 
@@ -111725,29 +111889,33 @@ Navigate to **Incidents** from the left menu to see all your past and active inc
 
 ### Active incident cards
 
-The top of the page shows a card for each incident that's still active. Each card shows the title, severity, message preview, acknowledgement percentage, recipient count, and duration.
+The top of the page shows a card for each incident that's still active. Each card shows the title, severity, who launched it, a message preview, the response percentage, recipient count, and duration.
 
 ### Incidents history table
 
-Below the cards, the history table lists every incident with these columns:
+Below the cards, the **Incidents history** table lists your incidents with these columns:
 
 | Column | Description |
 | --- | --- |
 | **Incident** | The incident title. |
-| **Severity** | Critical or Medium. |
-| **Source** | Manual (created by a user) or Automation (triggered by a scenario). |
+| **Severity** | Critical, Medium, or Low. |
+| **Source** | How the incident was created, for example **Manual** for an incident created from the **Create incident** panel. |
 | **Recipients** | Number of people targeted. |
-| **Ack rate** | Percentage of recipients who acknowledged. |
+| **Response rate** | Percentage of recipients who responded. |
 | **Status** | Active or Resolved. |
 | **Date** | When the incident was created. |
 | **Actions** | Open the incident details. |
 
+> 📘 **Scenario alerts**
+>
+> Alerts sent by scenarios aren't listed in the Incidents history. To see what a scenario sent, open the scenario's runs from the [Scenarios](./scenarios.md) page.
+
 ### Search, filter, and sort
 
-- **Search** — Type a keyword to filter the table instantly.
+- **Search** — Type a keyword in **Search incidents** to filter the table instantly.
 - **Date range** — Show only incidents from a selected period.
-- **Severity** — Filter by Critical or Medium.
-- **Source** — Filter by Manual or Automation.
+- **Severity** — Filter by Critical, Medium, or Low.
+- **Source** — Filter by Manual or System.
 - **Status** — Filter by Active or Resolved.
 
 Combine as many filters as you need, then click **Apply**. To start fresh, click **Reset** — this clears all filters and restores the full list.
@@ -111756,29 +111924,73 @@ Combine as many filters as you need, then click **Apply**. To start fresh, click
 >
 > Your active filters stay in place when you open an incident and come back. You won't lose your filter state just by navigating away.
 
+### Incident details
+
+Click an incident, on its card or in the **Incidents history** table, to open its details page. The header shows the title, who launched it and when, and a refresh icon that reloads the latest figures. While the incident is active, the header also has **Send update** and **Resolve**.
+
+The page shows:
+
+- **Summary** — The severity, the channels the incident was sent on, and the message.
+- **Total recipients** and **Responses** — How many people the incident targeted and how many have responded.
+- **Delivery rate**, **Response rate**, **Time to first response**, and **Avg. time to respond** — How well the incident is reaching people and how fast they're responding.
+- **Responses over time** and **Responses by channel** — Charts of when responses came in and which channels they came from.
+- The recipient list and the **Communications timeline** of every update, further down the page.
+
+![Details page of an active incident](../images/incident-details-active.png)
+
+### Send an update
+
+While an incident is active, you can send a follow-up to its recipients — for example, when the situation changes or the issue is fixed.
+
+1. Open the incident and click **Send update**. The **Send update** panel opens with the incident's channels, recipients, and response settings already filled in.
+2. Enter the **Message update**.
+3. Optionally, change the **Channels** or the **Recipients**. By default, the update goes to **All incident recipients**.
+4. Optionally, turn **Ask for response** on or off and change the **Response type** and **Method**. Each update can ask for its own response.
+5. Click **Preview** to check the message on each channel, then click **Send update**.
+
+The update appears in the incident's **Communications timeline**, and responses to it are tracked on the incident details page.
+
+![Send update panel](../images/incidents-send-update.png)
+
 ### Resolve an incident
 
-Open an incident and click **Resolve**. The status in the history table updates to **Resolved** straight away. The incident details page shows the full picture — delivery and response metrics, the recipient list, and a communications timeline of every update through to resolution.
+Open an incident and click **Resolve**. The status in the history table updates to **Resolved** straight away, and the incident details page shows when it was resolved. The page shows the full picture — delivery and response metrics, the recipient list, and a communications timeline of every update through to resolution.
 
 ![Resolved incident details](../images/incident-details.png)
+
+### Export an incident
+
+Once an incident is resolved, click **Export PDF** on its details page to download a report. To download the data instead, click the arrow next to the button and choose **Export CSV**.
 
 ---
 
 ## 8x8 Resolve
 
 
-8x8 Resolve is a critical communications platform that helps your organisation reach the right people instantly during an incident. Send targeted alerts across SMS, email, voice, WhatsApp, and mobile push — then track who acknowledged and who needs help, all in real time.
+8x8 Resolve is a critical communications platform that helps your organisation reach the right people instantly during an incident. Send targeted alerts across 8x8 Work, mobile push, email, SMS, voice, and WhatsApp — then track who responded and who needs help, all in real time.
+
+> 📘 **8x8 Resolve is in beta**
+>
+> The free beta includes 8x8 Work Mobile push notifications, 8x8 Work Messages, and email. SMS, voice, and WhatsApp aren't part of the free beta. Pages that describe these channels apply only if your organisation has them enabled.
 
 ![8x8 Resolve](../images/dashboard.png)
 
 ## What you can do
 
 - **Create and send incidents** — Dispatch an alert to your entire organisation or a specific group in seconds.
-- **Automate workflows** — Build scenarios that trigger on a schedule, branch on acknowledgement status, and escalate automatically.
-- **Sync your contacts** — Keep your recipient list up to date by connecting your HR system (Google Workspace, Microsoft Entra ID, Okta, or Workday).
-- **Monitor delivery** — Track delivery rates, acknowledgement rates, and response times from the dashboard.
+- **Automate workflows** — Build scenarios that trigger on a schedule, a webhook, or an inbound message, branch on responses, and escalate automatically.
+- **Sync your contacts** — Keep your recipient list up to date by connecting 8x8 Contacts or your directory or HR system (Google Workspace, Microsoft Entra ID, Okta, or Workday).
+- **Monitor delivery** — Track delivery rates, response rates, and response times from the dashboard.
+
+## Who signs in
+
+Only the administrators you invite sign in to 8x8 Resolve at `resolve.8x8.com`. The people you alert are contacts: they receive incidents on their channels and respond from there, without signing in.
+
+For help, open **Help** in the left menu and choose **Contact support**.
 
 ## Get started
+
+New to 8x8 Resolve? Click through the [quick tour](./quick-tour.mdx) to see each area and create an incident, or take the [analytics tour](./analytics-tour.mdx).
 
 | Guide | What you'll learn |
 | --- | --- |
@@ -111788,6 +112000,28 @@ Open an incident and click **Resolve**. The status in the history table updates 
 | [Contacts](./contacts.md) | Add, search, and manage recipients, and connect an HR system via the Integrations tab. |
 | [Analytics](./analytics.md) | Track delivery, response rates, and channel effectiveness over time. |
 | [Settings](./settings.md) | Manage message templates, channels, and sender identities. |
+
+---
+
+## Quick tour of 8x8 Resolve
+
+import ClickThroughTour from '@site/docusaurus/components/ClickThroughTour';
+import { chapters, steps } from '../tours/quick-tour';
+
+# Quick tour of 8x8 Resolve
+
+Click through the six areas of 8x8 Resolve, then follow the steps to create an incident. Use **Next** and **Back**, or the arrow keys, to move between steps. Choose **Full screen** to see the screenshots at a larger size.
+
+<ClickThroughTour title="Quick tour of 8x8 Resolve" imageAltPrefix="8x8 Resolve screen" chapters={chapters} steps={steps} />
+
+## Learn more
+
+- [Dashboard](./dashboard.md)
+- [Incidents](./incidents.md)
+- [Scenarios](./scenarios.md)
+- [Contacts](./contacts.md)
+- [Analytics](./analytics.md)
+- [Settings](./settings.md)
 
 ---
 
@@ -111809,69 +112043,43 @@ Each row in the table shows:
 | Column | Description |
 | --- | --- |
 | **Scenario Name** | The name, with a short description beneath. |
-| **Trigger** | How the scenario fires: **Webhook**, **Scheduled**, or **Inbound message**. |
+| **Trigger** | How the scenario fires: **Schedule**, **Webhook**, **Message** (SMS), or **WhatsApp**. |
 | **Recipients** | Number of recipients targeted by default. |
-| **Status** | Run history and schedule (e.g., "8 runs – Last on Jan 1, 2026" or "Never ran – Starts on Feb 23, 2026"). |
-| **Created by** / **Last edited by** | The user and date. |
+| **Status** | Run history (for example, "2 runs · Last run: Nov 26, 2026"), or **Never ran**. Click the run count to open the scenario's runs. |
+| **Created by** / **Edited by** | The user and date. |
 | **Enabled** | Toggle to activate or disable the scenario. When off, the play and edit actions are greyed out. |
 
-Per-row actions: **▷ Play** to launch immediately, **✏️ Edit** to open the three-step editor, and **⋮ More** for **Duplicate**, **Download**, or **Delete**.
+Per-row actions: **▷ Play** to launch immediately, **✏️ Edit** to open the scenario editor, and **⋮ More** for **Duplicate**, **Download**, or **Delete**.
+
+> 📘 **Turning a scenario off**
+>
+> Turning off **Enabled** stops scheduled and inbound-message triggers, but a request to the scenario's webhook URL still starts a run. Changes you save to a scenario don't affect runs that are already in progress.
 
 ## Create a scenario
 
-Click **+ Create scenario** (top right of the list) and choose one of two options:
+Click **+ Create scenario** (top right of the list) to open the scenario editor. To import a scenario file you downloaded earlier, click the arrow next to the button and choose **Upload scenario**.
 
-- **Create scenario** — starts the three-step guided workflow described below.
-- **Upload scenario** — imports a previously downloaded scenario file.
+The editor is a single page:
 
-A progress bar across the top tracks the three steps. You can **Cancel** at any time, or use **← Back to all scenarios** to exit without saving.
+- **Header** — **Exit** returns to the Scenarios list. Click the name (**Untitled scenario** for a new scenario) to rename it, and use the severity chip to choose **Critical**, **Medium**, or **Low**. The severity applies to every alert the scenario sends. **Save** saves your changes, and **Activate** turns the scenario on.
+- **Left panel** — Where you choose and configure what's selected on the canvas. A new scenario opens on **Start building**; choose **Start from scratch** to build the flow step by step.
+- **Canvas** — The flow, from top to bottom: a **Trigger**, an **Audience**, a **Dispatch** step, the actions you add, and **End**. Use the controls in the top-right corner to zoom in, zoom out, tidy the layout, and expand the canvas.
 
-### Step 1: Description
-
-Give your scenario a **Name** (required) and a **Severity** — **Critical**, **Medium**, or **Low** — plus an optional **Description**. The severity applies to any incident this scenario creates when it runs.
-
-![Create scenario — Step 1: Description](../images/scenarios-create-1.png)
-
-Click **Next: Recipients** when you're ready.
-
-### Step 2: Recipients
-
-Select the contacts who will receive alerts when this scenario fires. Search by name or select from the list. The count updates as you select.
-
-![Create scenario — Step 2: Recipients](../images/scenarios-create-2.png)
-
-Click **Next: Automations** to build the workflow.
-
-### Step 3: Automations
-
-Choose a pre-built automation template to get started quickly, or click **Start from scratch** to build your own.
-
-![Create scenario — Step 3: Automations template picker](../images/scenarios-create-3.png)
-
-When building from scratch, add nodes to the canvas in sequence: start with a **Trigger**, then add **Actions**, **Delays**, and **Conditions** as needed.
-
-![Automation workflow canvas](../images/scenarios-workflow.png)
+![Scenario editor for a new scenario](../images/scenarios-create-1.png)
 
 ## Building the workflow
 
-The builder is a split view: a **left panel** for selecting and configuring nodes, and a **right canvas** that shows the automation as a connected graph.
+1. **Choose a trigger.** Click **Select a trigger** on the canvas and pick one of the [triggers](#triggers) in the left panel, then configure it.
+2. **Set the audience.** Click the **Audience** step and click **Select recipients** to choose who receives the scenario's alerts. Every action below the audience inherits it. Click **Apply**. The step then shows how many people it reaches today, for example *Recipients · 3 recipients today*.
+3. **Choose a dispatch mode.** Click the **Dispatch** step to choose how the audience is contacted: everyone at once, one person at a time, or everyone until the first person claims the alert. See [Dispatch mode](#dispatch-mode). New scenarios start with **All at once**.
+4. **Add actions.** Add the [actions](#actions) the scenario takes, such as sending an 8x8 Work Mobile Notification, and add [delays](#delays) and [conditions](#conditions) as needed.
+5. **Save and activate.** Click **Save**, then **Activate**.
 
-The canvas starts with two nodes joined by a line:
+![Audience panel in the scenario editor](../images/scenarios-audience.png)
 
-- **Trigger** node (bolt icon) — labelled *Select a trigger* until you choose one.
-- **End** node (flag icon) — marks the end of the flow.
+When you open an existing scenario, the header shows its status and when it was last saved (for example, *Active · saved 5 min ago*), and **Activate** becomes **Deactivate**.
 
-Click the **Trigger** node to open *Select a trigger* in the left panel, pick a trigger, configure it, and click **Apply** — the node updates to show the configured trigger. Once a trigger is applied, an **Action** node appears between the trigger and the end; click it to open *Select an action*, choose an action, and configure it.
-
-Each node has inline controls:
-
-| Control | What it does |
-| --- | --- |
-| **Replace (↺)** | Swap the node for a different trigger or action. |
-| **Code (`</>`)** | View the node's raw configuration. |
-| **Delete (🗑)** | Remove the node. Action, Delay, and Condition nodes can be deleted; the Trigger node cannot. |
-
-Use the canvas controls (zoom in/out, fit to screen, expand) to navigate larger workflows. Click **Create Scenario** (or **Update Scenario** when editing) to save.
+![POS System Failure scenario in the editor](../images/scenarios-workflow.png)
 
 ---
 
@@ -111887,8 +112095,9 @@ Fires the scenario at a specific date and time.
 | --- | --- |
 | **Start date/time** | When the scenario first runs. |
 | **Repeat** | Toggle on to repeat the trigger on a schedule. |
-| **Repeat every** | How often to repeat — set a number and choose minutes, hours, or days. |
-| **End** | When to stop repeating: **Never**, **On a specific date**, or **After a maximum number of occurrences**. |
+| **Repeat every** | How often to repeat — set a number and choose minutes, hours, weeks, or months. |
+| **Repeat on** | For monthly schedules, choose a day of the month (for example, the 1st) or a weekday in the month (for example, the first Monday). |
+| **End** | When to stop repeating: **Never**, **On a specific date**, or **After maximum repeats**. |
 
 ### Message received
 
@@ -111907,28 +112116,122 @@ Fires when a **WhatsApp** message arrives on a Resolve WhatsApp channel. It offe
 
 ### Webhook received
 
-Fires when a POST request is sent to the scenario's auto-generated webhook URL (copyable from the trigger configuration). Use this to trigger scenarios from external systems. You can define the expected request body (JSON) so the payload is available to later steps in the automation.
+Fires when an external system, such as a monitoring tool, sends a POST request to the scenario's webhook URL.
+
+| Option | Description |
+| --- | --- |
+| **Webhook URL** | The endpoint to call. Copy it into the system that triggers the scenario. |
+| **Bearer Token** | Required. Resolve generates a token for each scenario; use **Copy token** to copy it and **Regenerate token** to replace it. Regenerating stops the old token from working. |
+| **Request body (optional)** | Map fields from the request's JSON body to variables that later steps can use. Add each **Mapping** as a source field (for example, `user.email`) and a target variable name. To start from an example, click **Use sample JSON** or drop a JSON file. |
+
+The calling system sends the token in the `Authorization` header:
+
+```http
+POST <webhook URL>
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{ "store": "Fresno Store 3", "system": "POS" }
+```
+
+A request with a missing or wrong token is rejected with `401 Unauthorized`. Each token accepts up to one request per second.
+
+If a webhook request arrives while the scenario is already running, the new run is queued and shows as **Queued** on the [Scenario Runs](#scenario-runs) page. Up to 256 runs can wait in the queue; after that, requests are rejected with `429` (**Trigger Queue Full**) until the queue drains. Scheduled and inbound-message triggers that fire while a run is in progress are skipped rather than queued.
+
+---
+
+## Dispatch mode
+
+The **Dispatch** step sits below the audience and decides how the audience is contacted when the scenario runs. Click it, choose a mode, and click **Apply**. The step then shows the mode and the number of recipients, for example *All at once • 3 recipients*.
+
+| Mode | How recipients are contacted | Best for |
+| --- | --- | --- |
+| **All at once** | Everyone in the audience is contacted at the same time. This is the default. | Alerts that everyone needs to see, such as an evacuation. |
+| **Sequential failover** | One person at a time, in order. If the current person doesn't respond, the scenario moves on to the next person, until someone confirms. | On-call rotations and tiered escalation, where you want one owner at each step. |
+| **Broadcast claim** | Everyone at the same time. The first person to respond claims the alert, and the notifications still pending for everyone else are cancelled. | Tasks that any one person in a group can handle, such as filling a shift or sending someone to a store. |
+
+![Dispatch mode options in the scenario editor](../images/scenarios-dispatch-mode.png)
+
+### Sequential failover
+
+With **Sequential failover**, the scenario's actions run for one recipient at a time. How long Resolve waits before moving on to the next person is the **Timeout** you set on each message action's **Ask for response**, so turn on **Ask for response** for the actions in the flow.
+
+#### Who's contacted first
+
+You don't set the order by hand, and the order you pick people in the **Audience** step doesn't matter. Instead, Resolve spreads the work fairly: each scenario keeps its own history of who it has asked and who has confirmed, and every run starts with the person whose turn is longest overdue. **Next up** in the dispatch panel shows who's asked first on the next run.
+
+When a run starts, Resolve:
+
+1. Takes everyone in the audience at that moment. People added to the audience later join from the next run.
+2. Puts first the people this scenario has never contacted, then everyone else, ordered by how long ago it was their turn — longest ago first. What counts as "their turn" depends on **When someone is skipped**:
+   - **Keep their place** (default) — The last time they **confirmed**. Someone who was asked but didn't respond keeps their place near the front, so they're asked early again next time. Only confirming sends a person to the back.
+   - **Pass their turn** — The last time they were **asked**, whether or not they confirmed. Anyone who was asked moves to the back.
+3. Breaks ties (for example, on the scenario's first run, when nobody has any history) in a fixed internal order, which isn't alphabetical.
+
+The order is fixed for the length of the run. Each person goes through the actions up to the condition that checks the dispatch outcome, and Resolve moves on to the next person when the current person's **Timeout** runs out or a message to them can't be delivered.
+
+> 📘 **Example**
+>
+> The *Store Opening Cover* scenario reaches James Wilson, Maya Chen, and Chris Bradley. Suppose its first run asks James, who doesn't respond, then Maya, who confirms. Chris isn't asked.
+>
+> - With **Keep their place**, the next run asks James and Chris first, because neither has confirmed yet, and Maya last.
+> - With **Pass their turn**, the next run asks Chris first (never asked), then James, then Maya.
+
+If everyone in the list has been asked and nobody confirmed, the dispatch outcome is **Nobody confirmed**. If the **Nobody confirmed** branch of a later condition sends more messages, for example an SMS escalation, Resolve goes through the list again from the top with those actions.
+
+To act on the result, add a [condition](#conditions) after the actions and check the dispatch **Outcome**: **Confirmed** or **Nobody confirmed**.
+
+### Broadcast claim
+
+With **Broadcast claim**, as soon as one person responds, the alert is theirs and the others stop receiving it. If nobody responds before the timeout, the step ends without a claim. A later [condition](#conditions) can branch on the **Claim status** (**claimed** or **timed out**) or on who claimed it.
 
 ---
 
 ## Actions
 
-After the trigger, add one or more action nodes. Actions fall into two groups — **Notifications** and **Integrations**:
+After the dispatch step, add one or more action nodes. Actions fall into two groups — **Notifications** and **Integrations**:
 
 | Action | What it does |
 | --- | --- |
-| **Send 8x8 Work Message** | Sends a message via 8x8 Work. |
-| **Send 8x8 Work Mobile Push Notification** | Sends a push notification through the 8x8 Work mobile app. |
-| **Send an Email** | Sends an email to the recipients. |
-| **Send an SMS** | Sends an SMS to the recipients' mobile numbers. |
-| **Send Voice call** | Places an automated voice call to the recipients. |
-| **Send WhatsApp message** | Sends a WhatsApp message through a Resolve WhatsApp channel. |
-| **Send HTTP request** *(Integrations)* | Makes an outbound HTTP request to an external system. |
+| **8x8 Work Message** | Sends a message via 8x8 Work. |
+| **8x8 Work Mobile Push Notification** | Sends a push notification through the 8x8 Work mobile app. |
+| **Email** | Sends an email to the recipients. |
+| **SMS** | Sends an SMS to the recipients' mobile numbers. |
+| **Voice call** | Places an automated voice call to the recipients. |
+| **WhatsApp message** | Sends a WhatsApp message through a Resolve WhatsApp channel. |
+| **HTTP request** *(Integrations)* | Makes an outbound HTTPS request to an external system. |
 
 For message actions you can also set:
 
 - **Ask for response** — Toggle on to request a reply from recipients.
 - **Timeout** — How long (in minutes or hours) to wait for a response before the workflow continues.
+
+### HTTP request
+
+Use an **HTTP request** action to call another system, for example to open a ticket in your service desk:
+
+| Option | Description |
+| --- | --- |
+| **URL** | The endpoint to call. It must start with `https://` and can include [variables](#variables), such as `https://example.com/tickets/{{trigger.store}}`. |
+| **Method** | **POST**, **GET**, **PUT**, **PATCH**, or **DELETE**. |
+| **Headers** | Key and value pairs, such as an `Authorization` header for the other system. |
+| **Request body (JSON)** | The JSON to send. It can include variables. |
+
+The response's status code, body, and headers become the step's output. A later [condition](#conditions) can branch on them, for example to escalate when the call doesn't return `200`, and each run shows the response on the [Scenario Runs](#scenario-runs) page.
+
+### Variables
+
+Message text, HTTP request URLs, and request bodies can include variables. Type `{{` to open a list of the variables you can use at that point in the flow:
+
+| Variable | Replaced with |
+| --- | --- |
+| Contact fields, such as `{{firstName}}` or `{{department}}` | The recipient's details. See [Placeholders](./templates.md#placeholders). |
+| `{{trigger.<field>}}` | A field from the trigger — for a webhook, a variable you mapped from the request body. |
+| Reply keyword / reply label | The keyword or label a recipient replied with in an earlier step. Choose the step from the `{{` list. |
+| Earlier step outputs | For example, the status code or body of an earlier HTTP request. |
+| `{{dispatch.<field>}}` | With **Sequential failover** or **Broadcast claim**, the dispatch result, such as the name of the person who confirmed. |
+
+A variable that doesn't match anything is sent as literal text, so check spelling before you activate the scenario.
 
 ---
 
@@ -111945,18 +112248,24 @@ Add a **Delay** node between steps to pause before the next action runs. Two mod
 
 ## Conditions
 
-Add a **Condition** node to branch the workflow based on whether a previous action was acknowledged.
+Add a **Condition** node to branch the workflow based on the result of an earlier step.
 
 - **Then** path — Followed when the condition is met.
 - **Else** path — Followed when the condition is not met. Use this to escalate through a different channel.
 
-The condition checks the output of a prior action node. The observable values are:
+The condition checks the output of an earlier step. For a message action, choose one or more values under **Where result**:
 
 | Value | When it triggers |
 | --- | --- |
 | **Responded** | The recipient replied within the timeout window. |
 | **Not responded (timeout)** | The timeout elapsed with no reply received. |
 | **Failed to deliver** | The message could not be delivered to the recipient. |
+
+With a [dispatch mode](#dispatch-mode) other than **All at once**, you can also check the dispatch result: the **Outcome** (**Confirmed** or **Nobody confirmed**), the **Claimant name**, or their **Reply** for **Sequential failover**, and the **Claim status** (**claimed** or **timed out**) for **Broadcast claim**.
+
+You can also compare a variable or an HTTP response — for example, the reply keyword, a field from the webhook request, the HTTP status code, or a **Body path** in the response — using these operators: **is**, **is not**, **contains**, **does not contain**, **starts with**, **ends with**, **is empty**, and **is not empty**.
+
+Conditions can be nested: add another Condition inside a **Then** or **Else** path to branch again.
 
 > 📘 **Example**
 >
@@ -111968,9 +112277,47 @@ The condition checks the output of a prior action node. The observable values ar
 
 ## Save and launch
 
-Click **Save scenario** at the end of the wizard. Your new scenario appears in the scenarios table with its name, trigger type, recipient count, and enabled/disabled status.
+Click **Save** in the editor header to save the scenario, and **Activate** to turn it on. Your scenario appears in the scenarios table with its name, trigger type, recipient count, and enabled/disabled status.
 
-To run a scenario immediately without waiting for its scheduled trigger, click **Launch Scenario** in the navigation bar and select the scenario you want to run.
+To run a scenario immediately without waiting for its scheduled trigger, click **Launch scenario** in the navigation bar and select the scenario you want to run.
+
+Each run is listed on the scenario's [Scenario Runs](#scenario-runs) page.
+
+---
+
+## Scenario runs
+
+Every time a scenario runs, Resolve records the run. To see a scenario's runs, click the run count (for example, **2 runs**) in the **Status** column of the Scenarios list.
+
+![Scenario Runs page](../images/scenario-runs.png)
+
+The **Run History** tab lists each run:
+
+| Column | Description |
+| --- | --- |
+| **Run** | The run ID. Click it to open the run's details. |
+| **Recipients** | Number of people the run reached out to. |
+| **Trigger** | What started the run, such as **Manual**, **Scheduled**, or **Webhook**. |
+| **Status** | **Completed**, **Failed**, **In progress**, or **Queued**. |
+| **Started** / **Completed** | When the run began and finished. |
+| **Duration** | How long the run took. |
+| **Script Version** | The version of the scenario that ran. |
+
+The **Analytics** tab summarises the scenario's runs: **Total runs**, **Run success rate**, **Avg recipients / run**, **Total recipients**, and **Avg duration**, with **Run outcomes**, **Runs by trigger**, and **Run history over time** charts.
+
+![Scenario Runs — Analytics tab](../images/scenario-runs-analytics.png)
+
+Click **Export PDF** to download the runs as a report, or click the arrow next to it and choose CSV for the data. A CSV export is emailed to you when it's ready.
+
+### Run details
+
+Click a run ID to open **Run ID Details**. It shows:
+
+- A read-only view of the flow as it ran. Click a step to see its configuration and how many recipients went through it.
+- An **Overview** of the run: status, trigger, start and end times, duration, and how many recipients were **Reached**, **Unreachable**, and **Responded**.
+- A list of recipients. Filter it by status or channel, and expand a recipient to see each send on each channel and its delivery history — including the response to an HTTP request.
+
+Click **Export .csv** to download the run's details.
 
 ---
 
@@ -111988,25 +112335,48 @@ Settings is organised into tabs:
 | Tab | What it's for |
 | --- | --- |
 | **General Templates** | Reusable message templates with dynamic placeholders. See [Templates](./templates.md). |
-| **WhatsApp Templates** | WhatsApp-specific message templates, selected when WhatsApp is a delivery channel on an incident. |
-| **Channels** | Configure the delivery channels available to your organisation. |
-| **Sender Identities** | Manage the sender IDs and numbers your messages are sent from. |
+| **WhatsApp Templates** | The WhatsApp templates available to your organisation, selected when WhatsApp is a delivery channel on an incident. |
+| **Channels** | Turn the delivery channels available to your organisation on or off. |
+| **Sender Identities** | See the sender IDs and numbers your messages are sent from. |
 
 ## General Templates
 
-The **General Templates** tab manages reusable message templates — give a template a title and body, drop in placeholders such as `{{firstName}}`, and reuse it when creating incidents and scenarios. For the full workflow, placeholders, and validation rules, see the [Templates](./templates.md) page.
+The **General Templates** tab manages reusable message templates — give a template a name and message, drop in placeholders such as `{{firstName}}`, and reuse it when creating incidents and scenarios. For the full workflow, placeholders, and validation rules, see the [Templates](./templates.md) page.
 
 ## WhatsApp Templates
 
-WhatsApp requires pre-registered message templates. The **WhatsApp Templates** tab is where those templates are managed; you pick one in the **WhatsApp Template** field of the [Create Incident panel](./incidents.md#create-an-incident) when WhatsApp is a selected channel.
+WhatsApp requires pre-registered message templates. The **WhatsApp Templates** tab lists the templates available to your organisation, with these columns:
+
+| Column | Description |
+| --- | --- |
+| **Name** | The template name. |
+| **Message** | The template text. |
+| **Status** | Whether WhatsApp has approved the template: **Approved**, **Pending**, **Rejected**, or **Pending deletion**. |
+| **Created** | When the template was created. |
+
+The list is read-only: WhatsApp templates are created and registered in 8x8 Connect, not in Resolve. You pick an approved template in the **WhatsApp Template** field of the [Create incident panel](./incidents.md#create-an-incident) when WhatsApp is a selected channel.
 
 ## Channels
 
-The **Channels** tab is where the delivery channels your organisation can send through (such as SMS and messaging apps) are configured.
+The **Channels** tab lists the delivery channels set up for your organisation, such as 8x8 Work Messages, 8x8 Work Mobile Notification, and Email. Use the toggle next to each channel to turn it on (**Enabled**) or off.
+
+8x8 sets up your channels and their names. To add a channel, contact 8x8 support from **Help → Contact support**.
+
+![Settings — Channels tab](../images/settings-channels.png)
 
 ## Sender Identities
 
-The **Sender Identities** tab manages the sender IDs and phone numbers that outbound messages are sent from.
+The **Sender Identities** tab lists the sender IDs and phone numbers that outbound SMS and voice messages are sent from:
+
+| Column | Description |
+| --- | --- |
+| **Sender Identity** | The sender ID or phone number. |
+| **Countries/Default** | The countries the sender identity is used for, or whether it's the default. |
+| Toggle | Whether the sender identity is **Active**. |
+
+Email doesn't need a sender identity. 8x8 sets up your sender identities; to add one, contact 8x8 support from **Help → Contact support**.
+
+![Settings — Sender Identities tab](../images/settings-sender-identities.png)
 
 ---
 
@@ -112034,37 +112404,48 @@ The **General Templates** tab lists your existing templates:
 
 ## Create a template
 
-Go to **Settings → Templates** and click **Create Template**. The Create Template dialog has two required fields:
+Go to **Settings → General Templates** and click **Create Template**. The **Create Template** dialog has two required fields:
 
 | Field | Description |
 | --- | --- |
-| **Title** | The name of the template. Must be unique. |
-| **Message Template** | The message body. Type your text and insert any of the placeholders below. |
+| **Template name** | The name of the template. Must be unique. |
+| **Message** | The message body. Type your text and insert any of the placeholders below. |
 
-The available placeholders are listed below the message box. Click **Create** to save — the template then appears in your Templates list and is available when creating incidents and scenarios.
+The available placeholders are listed under **Dynamic variables** below the message box; when you write a message elsewhere in Resolve, typing `{{` opens a list of variables to choose from. Click **Create** to save — the template then appears in your templates list and is available when creating incidents and scenarios.
 
 ## Placeholders
 
-Placeholders are replaced with live values when the message is sent:
+Placeholders are replaced with live values when the message is sent.
+
+**Recipient details:**
+
+| Placeholder | Replaced with |
+| --- | --- |
+| `{{firstName}}` | The recipient's first name. |
+| `{{lastName}}` | The recipient's last name. |
+| `{{contactName}}` | The recipient's full name. |
+| `{{email}}` | The recipient's email address. |
+| `{{personalPhoneNumber}}` | The recipient's personal phone number. |
+| `{{department}}` | The recipient's department. |
+| `{{jobTitle}}` | The recipient's job title. |
+| `{{location}}` | The recipient's location, for example their office or store. |
+
+**Incident details:**
 
 | Placeholder | Replaced with |
 | --- | --- |
 | `{{incidentTitle}}` | The incident's title. |
-| `{{location}}` | The location associated with the incident. |
 | `{{severity}}` | The incident severity (Critical, Medium, or Low). |
 | `{{scenario}}` | The scenario that triggered the incident. |
 | `{{timestamp}}` | The time the message is sent. |
-| `{{contactName}}` | The recipient's full name. |
-| `{{firstName}}` | The recipient's first name. |
-| `{{lastName}}` | The recipient's last name. |
 
 ## Validation
 
-- **Title** and **Message Template** are both required — leaving either empty shows an inline validation message.
-- Template names must be unique; a duplicate title prompts you to choose another.
+- **Template name** and **Message** are both required — leaving either empty shows an inline validation message.
+- Template names must be unique; a duplicate name prompts you to choose another.
 - If a server or network error occurs while saving, a general error notification appears.
 
-Once saved, a template persists under **Settings → Templates** and can be reused whenever you create an incident or scenario.
+Once saved, a template persists under **Settings → General Templates** and can be reused whenever you create an incident or scenario.
 
 ---
 
