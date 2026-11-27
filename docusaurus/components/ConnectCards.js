@@ -310,6 +310,16 @@ const cards = [
       { label: 'View More…', link: '/converse' },
     ],
   },
+  {
+    title: '8x8 Resolve',
+    items: [
+      { label: 'Overview', link: '/resolve/docs/overview' },
+      { label: 'Incidents', link: '/resolve/docs/incidents' },
+      { label: 'Scenarios', link: '/resolve/docs/scenarios' },
+      { label: 'Contacts', link: '/resolve/docs/contacts' },
+      { label: 'View More…', link: '/resolve/docs/quick-tour' },
+    ],
+  },
 ];
 
 export default function ConnectCards() {

@@ -23,6 +23,7 @@ import sidebarConverseReference from './converse/reference';
 import sidebarContactCenterDocs from './contactcenter/docs';
 import sidebarContactCenterReference from './contactcenter/reference';
 import sidebarJaas from './jaas';
+import sidebarResolveDocs from './resolve/docs';
 import sidebarTechPartner from './tech-partner';
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
@@ -40,6 +41,7 @@ const index = {
   sidebarContactCenterDocs,
   sidebarContactCenterReference,
   sidebarJaas,
+  sidebarResolveDocs,
   sidebarTechPartner,
 };
 

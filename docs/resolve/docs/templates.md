@@ -26,34 +26,45 @@ The **General Templates** tab lists your existing templates:
 
 ## Create a template
 
-Go to **Settings → Templates** and click **Create Template**. The Create Template dialog has two required fields:
+Go to **Settings → General Templates** and click **Create Template**. The **Create Template** dialog has two required fields:
 
 | Field | Description |
 | --- | --- |
-| **Title** | The name of the template. Must be unique. |
-| **Message Template** | The message body. Type your text and insert any of the placeholders below. |
+| **Template name** | The name of the template. Must be unique. |
+| **Message** | The message body. Type your text and insert any of the placeholders below. |
 
-The available placeholders are listed below the message box. Click **Create** to save — the template then appears in your Templates list and is available when creating incidents and scenarios.
+The available placeholders are listed under **Dynamic variables** below the message box; when you write a message elsewhere in Resolve, typing `{{` opens a list of variables to choose from. Click **Create** to save — the template then appears in your templates list and is available when creating incidents and scenarios.
 
 ## Placeholders
 
-Placeholders are replaced with live values when the message is sent:
+Placeholders are replaced with live values when the message is sent.
+
+**Recipient details:**
+
+| Placeholder | Replaced with |
+| --- | --- |
+| `{{firstName}}` | The recipient's first name. |
+| `{{lastName}}` | The recipient's last name. |
+| `{{contactName}}` | The recipient's full name. |
+| `{{email}}` | The recipient's email address. |
+| `{{personalPhoneNumber}}` | The recipient's personal phone number. |
+| `{{department}}` | The recipient's department. |
+| `{{jobTitle}}` | The recipient's job title. |
+| `{{location}}` | The recipient's location, for example their office or store. |
+
+**Incident details:**
 
 | Placeholder | Replaced with |
 | --- | --- |
 | `{{incidentTitle}}` | The incident's title. |
-| `{{location}}` | The location associated with the incident. |
 | `{{severity}}` | The incident severity (Critical, Medium, or Low). |
 | `{{scenario}}` | The scenario that triggered the incident. |
 | `{{timestamp}}` | The time the message is sent. |
-| `{{contactName}}` | The recipient's full name. |
-| `{{firstName}}` | The recipient's first name. |
-| `{{lastName}}` | The recipient's last name. |
 
 ## Validation
 
-- **Title** and **Message Template** are both required — leaving either empty shows an inline validation message.
-- Template names must be unique; a duplicate title prompts you to choose another.
+- **Template name** and **Message** are both required — leaving either empty shows an inline validation message.
+- Template names must be unique; a duplicate name prompts you to choose another.
 - If a server or network error occurs while saving, a general error notification appears.
 
-Once saved, a template persists under **Settings → Templates** and can be reused whenever you create an incident or scenario.
+Once saved, a template persists under **Settings → General Templates** and can be reused whenever you create an incident or scenario.

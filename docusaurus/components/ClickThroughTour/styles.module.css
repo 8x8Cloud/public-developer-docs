@@ -1,0 +1,235 @@
+/* Click-through tour: a screenshot with a spotlight and callout, chapter tabs
+   above and Back/Next below. Colours, spacing and type come from the Oxygen
+   tokens in docusaurus/css/custom.css, so the tour follows the light and dark
+   themes. Tabs and buttons are Oxygen components and style themselves. */
+
+.tourWrap {
+  margin: var(--spacing06) 0 var(--spacing07);
+}
+
+.tour {
+  --tour-ring: var(--highlight01);
+  /* --overlay01 (75% opacity) hides too much of the screenshot around the
+     spotlight, so the dim is that token at 70% of its opacity. */
+  --tour-dim: color-mix(in srgb, var(--overlay01) 70%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing04);
+}
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing03);
+}
+
+/* Oxygen Tabs is full width by default. Share the row with Full screen. */
+.topBar > .chapters {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+}
+
+.fullscreenBtn {
+  margin-left: auto;
+}
+
+.dot:focus-visible {
+  outline: 2px solid var(--focus01);
+  outline-offset: 0;
+}
+
+.stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ifm-global-radius);
+  border: 1px solid var(--ui01);
+  background: var(--ui02);
+}
+
+.shot {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.spot {
+  position: absolute;
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px var(--tour-ring), 0 0 0 9999px var(--tour-dim);
+  transition: left 0.35s ease, top 0.35s ease, width 0.35s ease,
+    height 0.35s ease;
+  pointer-events: none;
+}
+
+.spot::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 12px;
+  border: 2px solid var(--tour-ring);
+  opacity: 0;
+  animation: tourPulse 1.8s ease-out infinite;
+}
+
+@keyframes tourPulse {
+  0% {
+    opacity: 0.8;
+    inset: -2px;
+  }
+  100% {
+    opacity: 0;
+    inset: -14px;
+  }
+}
+
+.tip,
+.panel {
+  background: var(--ui12);
+  color: var(--text-color01);
+  border-radius: var(--ifm-global-radius);
+}
+
+.tip {
+  position: absolute;
+  width: min(340px, 42%);
+  padding: var(--spacing04) var(--spacing05);
+  box-shadow: var(--shadow-high);
+  transition: left 0.35s ease, top 0.35s ease;
+}
+
+.panel {
+  padding: var(--spacing04) var(--spacing05);
+  border: 1px solid var(--ui01);
+}
+
+.kicker {
+  font-family: var(--label-bold01-font-family);
+  font-size: var(--label-bold01-font-size);
+  font-weight: var(--label-bold01-font-weight);
+  line-height: var(--label-bold01-line-height);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--action01);
+}
+
+.title {
+  margin: var(--spacing01) 0 var(--spacing02);
+  font-family: var(--body-bold02-font-family);
+  font-size: var(--body-bold02-font-size);
+  font-weight: var(--body-bold02-font-weight);
+  line-height: var(--body-bold02-line-height);
+}
+
+.body {
+  margin: 0;
+  font-family: var(--body01-font-family);
+  font-size: var(--body01-font-size);
+  font-weight: var(--body01-font-weight);
+  line-height: var(--body01-line-height);
+}
+
+.note {
+  margin: var(--spacing03) 0 0;
+  font-family: var(--label01-font-family);
+  font-size: var(--label01-font-size);
+  line-height: var(--label01-line-height);
+  color: var(--text-color02);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing04);
+  flex-wrap: wrap;
+}
+
+/* Each dot is a 24×24 px target (WCAG 2.5.8) around a 9 px visible dot.
+   The targets sit edge to edge, which leaves 15 px between visible dots. */
+.dots {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-width: 0;
+}
+
+.dot {
+  box-sizing: content-box;
+  width: 9px;
+  height: 9px;
+  padding: 7.5px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ui03);
+  background-clip: content-box;
+  cursor: pointer;
+}
+
+/* The current dot is also larger, so it doesn't rely on colour alone. */
+.dotOn {
+  width: 13px;
+  height: 13px;
+  padding: 5.5px;
+  background-color: var(--action01);
+}
+
+.count {
+  font-family: var(--label01-font-family);
+  font-size: var(--label01-font-size);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-color02);
+}
+
+/* Full screen: fit the screenshot to the viewport height. 9rem leaves room
+   for the chapter tabs, the Back/Next row, the gaps between them and the
+   padding below. --tour-aspect is the screenshot's width / height, set by
+   the component once the image loads. */
+.isFullscreen {
+  justify-content: center;
+  padding: var(--spacing06);
+  background: var(--ifm-background-color);
+  overflow: auto;
+}
+
+.isFullscreen .topBar,
+.isFullscreen .stage,
+.isFullscreen .panel,
+.isFullscreen .controls {
+  width: min(100%, calc((100vh - 9rem) * var(--tour-aspect)));
+  margin: 0 auto;
+}
+
+.transcript {
+  margin-top: var(--spacing05);
+  font-size: var(--body01-font-size);
+}
+
+.transcriptChapter {
+  margin: var(--spacing04) 0 var(--spacing02);
+  font-weight: var(--body-bold02-font-weight);
+}
+
+.transcript ol {
+  margin-bottom: 0;
+}
+
+@media (max-width: 576px) {
+  .count {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spot,
+  .tip {
+    transition: none;
+  }
+
+  .spot::after {
+    animation: none;
+  }
+}

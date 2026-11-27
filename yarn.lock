@@ -9,6 +9,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@8x8/developer-docs@workspace:."
   dependencies:
+    "@8x8/oxygen-accordion": "npm:2.103.1"
     "@8x8/oxygen-button": "npm:2.103.1"
     "@8x8/oxygen-config": "npm:^2.103.1"
     "@8x8/oxygen-constants": "npm:^2.103.1"
@@ -45,6 +46,24 @@ __metadata:
     styled-components: "npm:^4.4.1"
   languageName: unknown
   linkType: soft
+
+"@8x8/oxygen-accordion@npm:2.103.1":
+  version: 2.103.1
+  resolution: "@8x8/oxygen-accordion@npm:2.103.1::__archiveUrl=https%3A%2F%2Fartifactory.es.8x8.com%2Fartifactory%2Fapi%2Fnpm%2Fnpm-repository%2F%408x8%2Foxygen-accordion%2F-%2F%408x8%2Foxygen-accordion-2.103.1.tgz"
+  dependencies:
+    "@8x8/oxygen-button": "npm:2.103.1"
+    "@8x8/oxygen-constants": "npm:2.103.1"
+    "@8x8/oxygen-icon": "npm:2.103.1"
+    "@8x8/oxygen-theme": "npm:2.103.1"
+    polished: "npm:4.2.2"
+    uuid: "npm:9.0.0"
+  peerDependencies:
+    "@8x8/oxygen-config": ^2.103.1 || >=2.103.1
+    react: ^16.8.2 || ^17 || ^18
+    styled-components: ^4.1.2 || >=4.1.2
+  checksum: 10c0/ab55f309b6c08aa4a86933fca5ad51e23c83d306f282616a5073eb34d270f80f94bfb56985e79ba1391eb44f1acf266adec994052a26e09fdd6a5490baafd3cf
+  languageName: node
+  linkType: hard
 
 "@8x8/oxygen-avatar@npm:2.103.1":
   version: 2.103.1
